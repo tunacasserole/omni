@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      omni/cost:  'Model'
+    attributes:
+      omni/cost:
+        cost_id:                           'Cost'
+        display:                           'Display'
+        short_name:                        'Short Name'
+        description:                       'Description'
+        is_active:                         'Is Active'
+        is_destroyed:                      'Is Destroyed'

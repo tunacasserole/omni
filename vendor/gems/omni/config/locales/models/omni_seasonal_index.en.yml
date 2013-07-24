@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      omni/seasonal_index: 'SeasonalIndex'
+    attributes:
+      omni/seasonal_index:
+        seasonal_index_id:               Seasonal Index
+        display:                         Display
+        seasonal_index_name:             Seasonal Index Name
+        is_destroyed:                    Deleted
+

@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      omni/sku_substitute: 'SkuSubstitute'
+    attributes:
+      omni/sku_substitute:
+        sku_substitute_id:               SKU Substitute
+        display:                         Display
+        sku_display:                     Sku
+        sku_id:                          SKU
+        substitute_sku_display:          Substitute Sku
+        substitute_sku_id:               Substitute SKU
+        sku_substitute_type:             Substitute Type
+        effective_date:                  Effective Date
+        end_date:                        Ending Date
+        priority:                        Priority
+        is_destroyed:                    Deleted
+

@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    models:
+      omni/tax_authority_rate: 'TaxAuthorityRate'
+    attributes:
+      omni/tax_authority_rate:
+        tax_authority_rate_id:           Tax Authority Rate
+        display:                         Display
+        tax_authority_display:           Tax Authority
+        tax_authority_id:                Tax Authority
+        effective_date:                  Tax Rate Effective Date
+        end_date:                        Tax Rate Ending Date
+        tax_percent:                     Sales Tax Percent
+        is_destroyed:                    Deleted
+

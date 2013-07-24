@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      omni/mark_web_style:  'Model'
+    attributes:
+      omni/mark_web_style:
+        styleid:                           'Styleid'
+        description:                       'Description'
+        keyword:                           'Keyword'
+        id:                                'Id'
+        image:                             'Image'
+        size_chart_id:                     'Size Chart'

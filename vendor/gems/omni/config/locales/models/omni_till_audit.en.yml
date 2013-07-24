@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    models:
+      omni/till_audit: 'TillAudit'
+    attributes:
+      omni/till_audit:
+        till_audit_id:                   Till Audit
+        display:                         Display
+        till_display:                    Till
+        till_id:                         Till
+        audit_date:                      Audit Date
+        tender_display:                  Tender
+        tender_id:                       Tender
+        system_count:                    System Count
+        system_amount:                   System Amount
+        audit_count:                     Audit Count
+        audit_amount:                    Audit Amount
+        gl_interface_date:               G/L Interface Date
+        is_destroyed:                    Deleted
+

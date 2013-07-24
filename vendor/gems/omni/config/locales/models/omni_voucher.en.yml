@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      omni/voucher: 'Voucher'
+    attributes:
+      omni/voucher:
+        voucher_id:                      Voucher
+        display:                         Display
+        customer_display:                Customer
+        customer_id:                     Customer
+        voucher_nbr:                     Voucher Nbr
+        voucher_type:                    Voucher Type
+        initial_balance:                 Initial Balance
+        current_balance:                 Current Balance
+        issue_date:                      Issue Date
+        expiration_date:                 Expiration Date
+        state:                           Voucher State
+        is_destroyed:                    Deleted
+

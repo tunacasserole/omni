@@ -1,0 +1,39 @@
+.banner .x-btn.activate .x-btn-inner {
+  background-color: #1B68E2;
+  background-image: url(/assets/omni/desktop/icons/actions/activate.png);
+}
+.banner .x-btn.approve .x-btn-inner {
+  background-color: #1B68E2;
+  background-image: url(/assets/omni/desktop/icons/actions/approve.png);
+}
+.banner .x-btn.deactivate .x-btn-inner {
+  background-color: #1B68E2;
+  background-image: url(/assets/omni/desktop/icons/actions/deactivate.png);
+}
+
+.banner .x-btn.reject .x-btn-inner {
+  background-color: #1B68E2;
+  background-image: url(/assets/omni/desktop/icons/actions/reject.png);
+}
+
+.banner .x-btn.submit .x-btn-inner {
+  background-color: #1B68E2;
+  background-image: url(/assets/omni/desktop/icons/actions/submit.png);
+}
+
+.banner .x-btn.ship .x-btn-inner {
+  background-color: #1B68E2;
+  background-image: url(/assets/omni/desktop/icons/actions/ship.png);
+}
+
+.banner .x-btn.duplicate .x-btn-inner {
+  background-color: #1B68E2;
+  background-image: url(/assets/omni/desktop/icons/actions/duplicate.png);
+}
+
+
+.banner .x-btn.close-event .x-btn-inner {
+  background-color: #1B68E2;
+  background-image: url(/assets/omni/desktop/icons/actions/close-event.png);
+}
+

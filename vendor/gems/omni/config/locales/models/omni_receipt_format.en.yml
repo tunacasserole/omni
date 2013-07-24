@@ -1,0 +1,40 @@
+en:
+  activerecord:
+    models:
+      omni/receipt_format: 'ReceiptFormat'
+    attributes:
+      omni/receipt_format:
+        receipt_format_id:               Receipt Format
+        display:                         Display
+        description:                     Description
+        icon_url:                        Icon URL
+        icon_width:                      Icon Width
+        paper_width:                     Paper Width
+        top_name:                        Display
+        feedback_message:                Feedback Message
+        return_policy:                   Return Policy
+        website_message:                 Website Message
+        promotional_message:             Promotional Message
+        message_separator:               Message Separator
+        is_date_in_header:               Print Date In Header
+        is_time_in_header:               Print Time In Header
+        is_location_name_in_header:      Print Location Name In Header
+        is_location_number_in_header:    Print Location Number In Header
+        is_order_number_in_header:       Print Order Number In Header
+        is_cashier_name_in_header:       Print Cashier Name In Header
+        is_cashier_number_in_header:     Print Cashier Number In Header
+        is_salesperson_name_in_header:   Print Salesperson Name In Header
+        is_salesperson_number_in_header: Print Salesperson Number In Header
+        is_customer_name_in_header:      Print Customer Name In Header
+        is_date_in_footer:               Print Date In Footer
+        is_time_in_footer:               Print Time In Footer
+        is_location_name_in_footer:      Print Location Name In Footer
+        is_location_number_in_footer:    Print Location Number In Footer
+        is_order_number_in_footer:       Print Order Number In Footer
+        is_cashier_name_in_footer:       Print Cashier Name In Footer
+        is_cashier_number_in_footer:     Print Cashier Number In Footer
+        is_salesperson_name_in_footer:   Print Salesperson Name In Footer
+        is_salesperson_number_in_footer: Print Salesperson Number In Footer
+        is_customer_name_in_footer:      Print Customer Name In Footer
+        is_destroyed:                    Deleted
+

@@ -1,0 +1,46 @@
+en:
+  activerecord:
+    models:
+      omni/style_supplier: 'StyleSupplier'
+    attributes:
+      omni/style_supplier:
+        style_supplier_id:               Style Supplier
+        display:                         Display
+        style_display:                   Style
+        style_id:                        Style
+        supplier_display:                Supplier
+        supplier_id:                     Supplier
+        description:                     Description
+        is_primary_supplier:             Primary Supplier
+        is_manufacturer:                 Manufacturer
+        is_discontinued:                 Discontinued
+        supplier_cost_units:             Cost Per
+        supplier_cost:                   Supplier Cost
+        master_pack_units:               Master Pack Units
+        master_pack_uom_code:            Master Pack UOM
+        master_pack_length:              Master PackLength
+        master_pack_height:              Master PackHeight
+        master_pack_width:               Master Pack Width
+        master_pack_weight:              Master Pack Weight
+        inner_pack_units:                Inner Pack Units
+        inner_pack_uom_code:             Inner Pack UOM
+        inner_pack_length:               Inner PackLength
+        inner_pack_height:               Inner PackHeight
+        inner_pack_width:                Inner Pack Width
+        inner_pack_weight:               Inner Pack Weight
+        pack_type:                       Order Pack Type
+        minimum_order_units:             Minimum Order Units
+        minimum_order_value:             Minimum Order Value
+        minimum_order_weight:            Minimum Order Weight
+        minimum_order_cube:              Minimum Order Cube
+        order_multiple_type:             Order Multiple Type
+        extra_cost:                      Extra Cost
+        is_included_extra_cost:          Include Extra Cost in Average Cost
+        origin_country:                  Country of Origin
+        freight_term:                    Freight Terms
+        is_conveyable_master_pack:       Master Pack Conveyable
+        is_conveyable_inner_pack:        Inner Pack Conveyable
+        pallet_tie:                      Pallet Tie
+        pallet_high:                     Pallet Hight
+        is_destroyed:                    Deleted
+

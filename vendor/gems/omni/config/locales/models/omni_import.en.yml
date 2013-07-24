@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      omni/import:  'Model'
+    attributes:
+      omni/import:
+        import_id:                         'Import'
+        department_id:                     'Department'
+        department_display:                'department_display'
+        display:                           'Display'
+        data_source:                       'Data Source'
+        table_name:                        'Table Name'
+        model_name:                        'Model Name'        
+        file_name:                         'File Name'
+        file_path:                         'File Path'
+        job_type:                          'Job Type'        
+        start_date:                        'Start Date'
+        end_date:                          'End Date'
+        argument_hash:                     'Argument Hash'
+        state:                             'State'
+        is_drop_data:                      'Drop existing data prior to import'
+        is_destroyed:                      'Is Destryoed'

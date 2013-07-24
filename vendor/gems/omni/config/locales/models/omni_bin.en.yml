@@ -1,0 +1,39 @@
+en:
+  activerecord:
+    models:
+      omni/bin: 'Bin'
+    attributes:
+      omni/bin:
+        bin_id:                          Bin
+        display:                         Display
+        location_display:                Location
+        location_id:                     Location Id
+        area_display:                    Area
+        area_id:                         Area ID
+        area_short_name:                 Area
+        aisle:                           Aisle
+        section:                         Section
+        level:                           Level
+        position:                        Position
+        bin_nbr:                         Bin Number
+        bin_code:                        Quick Code
+        description:                     Description
+        bin_type:                        Bin Type
+        last_activity_date:              Last Activity Date
+        is_many_sku_per_bin:             Holds Multiple SKUs
+        pick_sequence:                   Picking Sequence
+        zone:                            Zone
+        pick_zone:                       Pick Zone
+        cube_capacity:                   Cube Capacity
+        is_area:                         Bin is Entire Area
+        is_count_cartons:                Count Cartons in this Bin
+        is_empty:                        Empty Bin
+        carton_count:                    Count of Cartons in this Bin
+        on_hand_cube:                    Cube On Hand
+        due_in_cube:                     Cube Due In
+        due_out_cube:                    Cube Due Out
+        is_request_label_print:          Print Bin Label
+        bin_label_type:                  Bin Label Type
+        is_enabled:                      Bin Active
+        is_destroyed:                    Deleted
+

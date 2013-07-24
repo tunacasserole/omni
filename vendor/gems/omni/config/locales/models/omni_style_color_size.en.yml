@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    models:
+      omni/style_color_size: 'StyleColorSize'
+    attributes:
+      omni/style_color_size:
+        style_color_size_id:             Style Color Size
+        display:                         Display
+        style_color_display:             Style Color
+        style_color_id:                  Style Color
+        size_display:                    Size
+        size_id:                         Size
+        sku_display:                     Sku
+        sku_id:                          SKU
+        sku_name:                        SKU Name
+        pos_name:                        Receipt Name
+        is_special_order:                Special Order
+        is_not_available:                Unavailable
+        fabric_bom_adjust_percent:       Fabric Adjust Percent
+        state:                           State
+        is_destroyed:                    Deleted
+        style_id:                        Style
+        color_id:                        Color
+

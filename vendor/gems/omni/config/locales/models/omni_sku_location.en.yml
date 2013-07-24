@@ -1,0 +1,44 @@
+en:
+  activerecord:
+    models:
+      omni/sku_location: 'SkuLocation'
+    attributes:
+      omni/sku_location:
+        sku_location_id:                 SKU Locatino
+        display:                         Display
+        sku_display:                     Sku
+        sku_id:                          SKU
+        location_display:                Location
+        location_id:                     Location
+        is_authorized:                   Authorized for Sale
+        is_taxable:                      Taxable
+        is_special_order:                Special Order
+        is_discontinued:                 Discontinued
+        replenishment_method:            Replenishment Method
+        replenishment_source:            Replenishment Source
+        supplier_display:                Supplier
+        supplier_id:                     Primary Supplier
+        safety_stock_units:              Safety Stock Units
+        safety_stock_days:               Safety Stock Days
+        is_override_demand_exception:    Override Demand Filter
+        smoothing_factor:                Smoothing Factor
+        forecast_profile_display:        Forecast Profile
+        forecast_profile_id:             Demand Forecast Profile
+        is_soq_override:                 SOQ Override
+        minimum_units:                   Minimum Units On Hand
+        maximum_units:                   Maximum Units On Hand
+        seasonal_index_display:          Seasonal Index
+        seasonal_index_id:               Seasonal Index
+        forecast:                        Average Weekly Demand
+        economic_order:                  Ecomonic Order Quantity
+        demand_filter_count:             Demand Filter Trips
+        tracking_signal_count:           Tracking Signal Trips
+        tracking_signal:                 Tracking Signal
+        tracking_signal_signed_deviation: Tracking Signal Signed Dev
+        tracking_signal_absolute_deviation: Tracking Signal Absolute Dev
+        next_review_date:                Next Review Date
+        velocity_code:                   Velocity Code
+        standard_deviation:              Mean Absolute Deviation
+        order_point:                     Order Point
+        is_destroyed:                    Deleted
+

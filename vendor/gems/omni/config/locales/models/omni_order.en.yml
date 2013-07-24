@@ -1,0 +1,28 @@
+en:
+  activerecord:
+    models:
+      omni/order: 'Order'
+    attributes:
+      omni/order:
+        order_id:                        Order
+        display:                         Display
+        location_display:                Location
+        location_id:                     Location
+        terminal_display:                Terminal
+        terminal_id:                     Terminal
+        customer_order_nbr:              Customer Order Nbr
+        customer_display:                Customer
+        customer_id:                     Customer
+        order_start_date:                Order Start Date
+        order_date:                      Order Date
+        price_lookup_date:               Price Lookup Date
+        user_display:                    User
+        user_id:                         Cashier
+        order_source:                    Customer Order Source
+        is_tax_exempt_date:              Tax Exempt Date
+        is_tax_exempt_customer:          Tax Exempt Customer
+        is_trade_discount_order:         Trade Discount
+        order_total:                     Order Total
+        state:                           Order State
+        is_destroyed:                    Deleted
+

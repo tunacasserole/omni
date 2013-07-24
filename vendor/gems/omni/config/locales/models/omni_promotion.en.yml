@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      omni/promotion: 'Promotion'
+    attributes:
+      omni/promotion:
+        promotion_id:                    Promotion
+        display:                         Display
+        is_destroyed:                    Deleted
+

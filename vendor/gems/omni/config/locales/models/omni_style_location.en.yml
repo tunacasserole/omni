@@ -1,0 +1,34 @@
+en:
+  activerecord:
+    models:
+      omni/style_location: 'StyleLocation'
+    attributes:
+      omni/style_location:
+        style_location_id:               Style Location
+        display:                         Display
+        style_display:                   Style
+        style_id:                        Style
+        location_display:                Location
+        location_id:                     Location
+        is_authorized:                   Authorized for Sale
+        is_taxable:                      Taxable
+        is_special_order:                Special Order
+        is_discontinued:                 Discontinued
+        replenishment_method:            Replenishement Method
+        replenishment_source:            Replenishment Source
+        supplier_display:                Supplier
+        supplier_id:                     Primary Supplier
+        safety_stock_units:              Safety Stock Units
+        safety_stock_days:               Safety Stock Days
+        is_override_demand_exception:    Override Demand Filter
+        smoothing_factor:                Smoothing Factor
+        forecast_profile_display:        Forecast Profile
+        forecast_profile_id:             Demand Forecast Profile
+        is_soq_override:                 SOQ Override
+        minimum_units:                   Minimum Units On Hand
+        maximum_units:                   Maximum Units On Hand
+        seasonal_index_display:          Seasonal Index
+        seasonal_index_id:               Seasonal Index
+        state:                           State                
+        is_destroyed:                    Deleted
+

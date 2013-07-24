@@ -1,0 +1,1078 @@
+/*
+---------------------------------------------------------------------------------------
+   allocations - blue1 / blue - 002B82 / 0058DA
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.allocations .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/allocations-26.png);
+  background-color: #002B82;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.allocations.active .x-panel-body .logo, .inspector .tab.allocations .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/allocations-26.png);
+  background-color: #002B82;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.allocations.active .x-panel-body, .inspector .tab.allocations.active .x-panel-body:hover, .inspector .tab.allocations .x-panel-body:hover {
+  background: #0058DA;
+}
+
+/* Tile */
+.tile.allocations {
+  background-image: url(/assets/omni/omni_icons/allocations-60.png);
+  background-color: #002B82 !important;
+}
+
+.tile.allocations:hover {
+  background-color: #0058DA !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   costs - blue2 / blue - 105F86 / 0058DA
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.costs .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/costs-26.png);
+  background-color: #105F86;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.costs.active .x-panel-body .logo, .inspector .tab.costs .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/costs-26.png);
+  background-color: #105F86;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.costs.active .x-panel-body, .inspector .tab.costs.active .x-panel-body:hover, .inspector .tab.costs .x-panel-body:hover {
+  background: #0058DA;
+}
+
+/* Tile */
+.tile.costs {
+  background-image: url(/assets/omni/omni_icons/costs-60.png);
+  background-color: #105F86 !important;
+}
+
+.tile.costs:hover {
+  background-color: #0058DA !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   purchases - blue3 / blue - 756BF9 / 0058DA
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.purchases .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/purchases-26.png);
+  background-color: #756BF9;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.purchases.active .x-panel-body .logo, .inspector .tab.purchases .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/purchases-26.png);
+  background-color: #756BF9;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.purchases.active .x-panel-body, .inspector .tab.purchases.active .x-panel-body:hover, .inspector .tab.purchases .x-panel-body:hover {
+  background: #0058DA;
+}
+
+/* Tile */
+.tile.purchases {
+  background-image: url(/assets/omni/omni_icons/purchases-60.png);
+  background-color: #756BF9 !important;
+}
+
+.tile.purchases:hover {
+  background-color: #0058DA !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   projections - pink - C3004D
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.projections .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/projections-26.png);
+  background-color: #C3004D;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.projections.active .x-panel-body .logo, .inspector .tab.projections .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/projections-26.png);
+  background-color: #AF0044;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.projections.active .x-panel-body, .inspector .tab.projections.active .x-panel-body:hover, .inspector .tab.projections .x-panel-body:hover {
+  background: #C3004D;
+}
+
+/* Tile */
+.tile.projections {
+  background-image: url(/assets/omni/omni_icons/projections-60.png);
+  background-color: #C3004D !important;
+}
+
+.tile.projections:hover {
+  background-color: #AF0044 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   period_results - pink - C3004D
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.period_results .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/period_results-26.png);
+  background-color: #A200FF;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.period_results.active .x-panel-body .logo, .inspector .tab.period_results .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/period_results-26.png);
+  background-color: #AF0044;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.period_results.active .x-panel-body, .inspector .tab.period_results.active .x-panel-body:hover, .inspector .tab.period_results .x-panel-body:hover {
+  background: #A200FF;
+}
+
+/* Tile */
+.tile.period_results {
+  background-image: url(/assets/omni/omni_icons/period_results-60.png);
+  background-color: #A200FF !important;
+}
+
+.tile.period_results:hover {
+  background-color: #AF0044 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   skus - pink - 009999
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.skus .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/skus-26.png);
+  background-color: #009999;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.skus.active .x-panel-body .logo, .inspector .tab.skus .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/skus-26.png);
+  background-color: #AF0044;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.skus.active .x-panel-body, .inspector .tab.skus.active .x-panel-body:hover, .inspector .tab.skus .x-panel-body:hover {
+  background: #009999;
+}
+
+/* Tile */
+.tile.skus {
+  background-image: url(/assets/omni/omni_icons/skus-60.png);
+  background-color: #009999 !important;
+}
+
+.tile.skus:hover {
+  background-color: #AF0044 !important;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   styles - pink - 015965 / 770060
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.styles .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/styles-26.png);
+  background-color: #015965;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.styles.active .x-panel-body .logo, .inspector .tab.styles .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/styles-26.png);
+  background-color: #AF0044;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.styles.active .x-panel-body, .inspector .tab.styles.active .x-panel-body:hover, .inspector .tab.styles .x-panel-body:hover {
+  background: #015965;
+}
+
+/* Tile */
+.tile.styles {
+  background-image: url(/assets/omni/omni_icons/styles-60.png);
+  background-color: #015965 !important;
+}
+
+.tile.styles:hover {
+  background-color: #AF0044 !important;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   classifications - pink - E671B8
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.classifications .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/classifications.png);
+  background-color: #E671B8;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.classifications.active .x-panel-body .logo, .inspector .tab.classifications .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/classifications.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.classifications.active .x-panel-body, .inspector .tab.classifications.active .x-panel-body:hover, .inspector .tab.classifications .x-panel-body:hover {
+  background: #E671B8;
+}
+
+/* Tile */
+.tile.classifications {
+	background-image: url(/assets/omni/omni_icons/classifications.png);
+	background-color: #E671B8 !important;
+}
+
+.tile.classifications:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   categories - maroon1 - 990000
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.categories .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/colorgroups52x52.png);
+  background-color: #990000;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.categories.active .x-panel-body .logo, .inspector .tab.categories .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/colorgroups52x52.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.categories.active .x-panel-body, .inspector .tab.categories.active .x-panel-body:hover, .inspector .tab.categories .x-panel-body:hover {
+  background: #990000;
+}
+
+/* Tile */
+.tile.categories {
+	background-image: url(/assets/omni/omni_icons/colorgroups52x52.png);
+	background-color: #990000 !important;
+}
+
+.tile.categories:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   omni-colors - light blue - 1F92C2
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.omni-colors .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/omni-colors.png);
+  background-color: #1F92C2;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.omni-colors.active .x-panel-body .logo, .inspector .tab.omni-colors .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/omni-colors.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.omni-colors.active .x-panel-body, .inspector .tab.omni-colors.active .x-panel-body:hover, .inspector .tab.omni-colors .x-panel-body:hover {
+  background: #1F92C2;
+}
+
+/* Tile */
+.tile.omni-colors {
+	background-image: url(/assets/omni/omni_icons/omni-colors.png);
+	background-color: #1F92C2 !important;
+}
+
+.tile.omni-colors:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   departments - dark blue - 276DA5
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.departments .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/departments.png);
+  background-color: #276DA5;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.departments.active .x-panel-body .logo, .inspector .tab.departments .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/departments.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.departments.active .x-panel-body, .inspector .tab.departments.active .x-panel-body:hover, .inspector .tab.departments .x-panel-body:hover {
+  background: #276DA5;
+}
+
+/* Tile */
+.tile.departments {
+	background-image: url(/assets/omni/omni_icons/departments1.png);
+	background-color: #276DA5 !important;
+}
+
+.tile.departments:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   products - F09609
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.products .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/products.png);
+  background-color: #F09609;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.products.active .x-panel-body .logo, .inspector .tab.products .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/products.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.products.active .x-panel-body, .inspector .tab.products.active .x-panel-body:hover, .inspector .tab.products .x-panel-body:hover {
+  background: #F09609;
+}
+
+/* Tile */
+.tile.products {
+	background-image: url(/assets/omni/omni_icons/products.png);
+	background-color: #F09609 !important;
+}
+
+.tile.products:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   product_types - brown - A05000
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.product_types .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/product_types.png);
+  background-color: #A05000;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.product_types.active .x-panel-body .logo, .inspector .tab.product_types .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/product_types.png);
+  background-color: #A05000;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.product_types.active .x-panel-body, .inspector .tab.product_types.active .x-panel-body:hover, .inspector .tab.product_types .x-panel-body:hover {
+  background: #A05000;
+}
+
+/* Tile */
+.tile.product_types {
+	background-image: url(/assets/omni/omni_icons/product_types.png);
+	background-color: #A05000 !important;
+}
+
+.tile.product_types:hover {
+	background-color: #A05000 !important;
+}
+/*
+---------------------------------------------------------------------------------------
+   subclasses - purple 2 - BD47FF
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.subclasses .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/subclasses.png);
+  background-color: #BD47FF;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.subclasses.active .x-panel-body .logo, .inspector .tab.subclasses .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/subclasses.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.subclasses.active .x-panel-body, .inspector .tab.subclasses.active .x-panel-body:hover, .inspector .tab.subclasses .x-panel-body:hover {
+  background: #BD47FF;
+}
+
+/* Tile */
+.tile.subclasses {
+	background-image: url(/assets/omni/omni_icons/subclasses.png);
+	background-color: #8900AF !important;
+}
+
+.tile.subclasses:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   sizes - purple - 6900A4
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.sizes .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/sizes.png);
+  background-color: #6900A4;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.sizes.active .x-panel-body .logo, .inspector .tab.sizes .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/sizes.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.sizes.active .x-panel-body, .inspector .tab.sizes.active .x-panel-body:hover, .inspector .tab.sizes .x-panel-body:hover {
+  background: #6900A4;
+}
+
+/* Tile */
+.tile.sizes {
+	background-image: url(/assets/omni/omni_icons/sizes.png);
+	background-color: #6900A4 !important;
+}
+
+.tile.sizes:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   size_groups - F0A6D2
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.size_groups .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/size_groups.png);
+  background-color: #F0A6D2;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.size_groups.active .x-panel-body .logo, .inspector .tab.size_groups .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/size_groups.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.size_groups.active .x-panel-body, .inspector .tab.size_groups.active .x-panel-body:hover, .inspector .tab.size_groups .x-panel-body:hover {
+  background: #F0A6D2;
+}
+
+/* Tile */
+.tile.size_groups {
+	background-image: url(/assets/omni/omni_icons/size_groups.png);
+	background-color: #F0A6D2 !important;
+}
+
+.tile.size_groups:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   size_group_details - teal1 - 007976
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.size_group_details .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/size_group_details.png);
+  background-color: #007976;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.size_group_details.active .x-panel-body .logo, .inspector .tab.size_group_details .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/size_group_details.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.size_group_details.active .x-panel-body, .inspector .tab.size_group_details.active .x-panel-body:hover, .inspector .tab.size_group_details .x-panel-body:hover {
+  background: #007976;
+}
+
+/* Tile */
+.tile.size_group_details {
+	background-image: url(/assets/omni/omni_icons/size_group_details.png);
+	background-color: #007976 !important;
+}
+
+.tile.size_group_details:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   classifications - green - 103210
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.classifications .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/classifications.png);
+  background-color: #103210;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.classifications.active .x-panel-body .logo, .inspector .tab.classifications .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/classifications.png);
+  background-color: #600079;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.classifications.active .x-panel-body, .inspector .tab.classifications.active .x-panel-body:hover, .inspector .tab.classifications .x-panel-body:hover {
+  background: #103210;
+}
+
+/* Tile */
+.tile.classifications {
+	background-image: url(/assets/omni/omni_icons/classifications.png);
+	background-color: #103210 !important;
+}
+
+.tile.classifications:hover {
+	background-color: #600079 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   CONTRACTS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.contracts .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/contracts.png);
+  background-color: #C3004D;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.contracts.active .x-panel-body .logo, .inspector .tab.contracts .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/contracts.png);
+  background-color: #AF0044;  
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.contracts.active .x-panel-body, .inspector .tab.contracts.active .x-panel-body:hover, .inspector .tab.contracts .x-panel-body:hover {
+  background: #C3004D;
+}
+
+/* Tile */
+.tile.contracts {
+	background-image: url(/assets/omni/omni_icons/bill.png);
+	background-color: #C3004D !important;
+}
+
+.tile.contracts:hover {
+	background-color: #AF0044 !important; 
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   CUSTOMERS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.customers .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/customers.png);
+  background-color: #0075C9;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.customers.active .x-panel-body .logo, .inspector .tab.customers .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/customers.png);
+  background-color: #005491;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.customers.active .x-panel-body, .inspector .tab.customers.active .x-panel-body:hover, .inspector .tab.customers .x-panel-body:hover {
+  background: #0075C9;
+}
+
+/* Tile */
+.tile.customers {
+	background-image: url(/assets/omni/omni_icons/customers.png);
+	background-color: #0075C9 !important;
+}
+
+.tile.customers:hover {
+	background-color: #005491 !important;
+}
+
+
+
+
+/*
+---------------------------------------------------------------------------------------
+   PROJECTS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.projects .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/projects.png);
+  background-color: #17A300;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.projects.active .x-panel-body .logo, .inspector .tab.projects .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/projects.png);
+  background-color: #0C7300;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.projects.active .x-panel-body, .inspector .tab.projects.active .x-panel-body:hover, .inspector .tab.projects .x-panel-body:hover {
+  background: #17A300;
+}
+
+/* Tile */
+.tile.projects {
+	background-image: url(/assets/omni/omni_icons/projects.png);
+	background-color: #17A300 !important;
+}
+
+.tile.projects:hover {
+	background-color: #0C7300 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   CONTACTS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.contacts .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/contacts.png);
+  background-color: #B60D44;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.contacts.active .x-panel-body .logo, .inspector .tab.contacts .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/contacts.png);
+  background-color: #84052E;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.contacts.active .x-panel-body, .inspector .tab.contacts.active .x-panel-body:hover, .inspector .tab.contacts .x-panel-body:hover {
+  background: #B60D44;
+}
+
+/* Tile */
+.tile.contacts {
+	background-image: url(/assets/omni/omni_icons/contacts.png);
+	background-color: #B60D44 !important;
+}
+
+.tile.contacts:hover {
+	background-color: #84052E !important;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   COLORS - yellow  F6BD00 / CA9B00
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.omni-colors .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/omni-colors-26.png);
+  background-color: #F6BD00;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.omni-colors.active .x-panel-body .logo, .inspector .tab.omni-colors .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/omni-colors-26.png);
+  background-color: #856500;
+}
+
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.omni-colors.active .x-panel-body, .inspector .tab.omni-colors.active .x-panel-body:hover, .inspector .tab.omni-colors .x-panel-body:hover {
+  background: #F6BD00;
+}
+
+/* Tile */
+.tile.omni-colors {
+	background-image: url(/assets/omni/omni_icons/colors-60.png);
+	background-color: #F6BD00 !important;
+}
+
+.tile.omni-colors:hover {
+	background-color: #CA9B00 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   CFARS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.cfars .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/cfars.png);
+  background-color: #DC592F;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.cfars.active .x-panel-body .logo, .inspector .tab.cfars .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/cfars.png);
+  background-color: #A13E1E;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.cfars.active .x-panel-body, .inspector .tab.cfars.active .x-panel-body:hover, .inspector .tab.cfars .x-panel-body:hover {
+  background: #DC592F;
+}
+
+/* Tile */
+.tile.cfars {
+	background-image: url(/assets/omni/omni_icons/cfars.png);
+	background-color: #DC592F !important;
+}
+
+.tile.cfars:hover {
+	background-color: #A13E1E !important;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   SALES CALLS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.sales_calls .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/sales_calls.png);
+  background-color: #00A5A6;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.sales_calls.active .x-panel-body .logo, .inspector .tab.sales_calls .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/sales_calls.png);
+  background-color: #007373;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.sales_calls.active .x-panel-body, .inspector .tab.sales_calls.active .x-panel-body:hover, .inspector .tab.sales_calls .x-panel-body:hover {
+  background: #00A5A6;
+}
+
+/* Tile */
+.tile.sales_calls {
+	background-image: url(/assets/omni/omni_icons/sales_calls.png);
+	background-color: #00A5A6 !important;
+}
+
+.tile.sales_calls:hover {
+	background-color: #007373 !important;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   TELEPHONES
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.telephones .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/telephones.png);
+  background-color: #757575;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.telephones.active .x-panel-body .logo, .inspector .tab.telephones .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/telephones.png);
+  background-color: #3C3C3C;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.telephones.active .x-panel-body, .inspector .tab.telephones.active .x-panel-body:hover, .inspector .tab.telephones .x-panel-body:hover {
+  background: #757575;
+}
+
+/* Tile */
+.tile.telephones {
+  background-image: url(/assets/omni/omni_icons/telephones.png);
+  background-color: #757575 !important;
+}
+
+.tile.telephones:hover {
+  background-color: #3C3C3C !important;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   ADDRESSES
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.addresses .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/addresses.png);
+  background-color: #757575;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.addresses.active .x-panel-body .logo, .inspector .tab.addresses .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/addresses.png);
+  background-color: #3C3C3C;
+}
+
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.addresses.active .x-panel-body, .inspector .tab.addresses.active .x-panel-body:hover, .inspector .tab.addresses .x-panel-body:hover {
+  background: #757575;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   EMAIL ADDRESSES
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.email_addresses .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/email_addresses.png);
+  background-color: #757575;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.email_addresses.active .x-panel-body .logo, .inspector .tab.email_addresses .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/email_addresses.png);
+  background-color: #3C3C3C;
+}
+
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.email_addresses.active .x-panel-body, .inspector .tab.email_addresses.active .x-panel-body:hover, .inspector .tab.email_addresses .x-panel-body:hover {
+  background: #757575;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   APPROVALS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.approvals .x-panel-body .logo, .inspector .tab.approvals .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/approvals.png);
+  background-color: #69A900;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.approvals.active .x-panel-body, .inspector .tab.approvals.active .x-panel-body:hover, .inspector .tab.approvals .x-panel-body:hover {
+  background: #76BC00;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   SURVEY
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.survey .x-panel-body .logo, .inspector .tab.survey .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/survey.png);
+  background-color: #4E0077;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.survey.active .x-panel-body, .inspector .tab.survey.active .x-panel-body:hover, .inspector .tab.survey .x-panel-body:hover {
+  background: #7400AF;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   TRACKS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.tracks .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/tracks.png);
+  background-color: #FF2082;
+}
+
+/* Inspector Logo Active & Hover*/
+.inspector .tab.tracks.active .x-panel-body .logo, .inspector .tab.tracks .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/tracks.png);
+  background-color: #8A0942;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.tracks.active .x-panel-body, .inspector .tab.tracks.active .x-panel-body:hover, .inspector .tab.tracks .x-panel-body:hover {
+  background: #FF2082;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   FINANCIAL SCORECARD
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.financial_scorecards .x-panel-body .logo, .inspector .tab.financial_scorecards .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/financial_scorecards.png);
+  background-color: #5F5F5F;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.financial_scorecards.active .x-panel-body, .inspector .tab.financial_scorecards.active .x-panel-body:hover, .inspector .tab.financial_scorecards .x-panel-body:hover {
+  background: #6A6A6A;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   MONTHLY REPORTS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.monthly_reports .x-panel-body .logo, .inspector .tab.monthly_reports .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/monthly_reports.png);
+  background-color: #5F5F5F;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.monthly_reports.active .x-panel-body, .inspector .tab.monthly_reports.active .x-panel-body:hover, .inspector .tab.monthly_reports .x-panel-body:hover {
+  background: #6A6A6A;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   CUSTOMER NEEDS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.customer_needs .x-panel-body .logo, .inspector .tab.customer_needs .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/customer_needs.png);
+  background-color: #5F5F5F;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.customer_needs.active .x-panel-body, .inspector .tab.customer_needs.active .x-panel-body:hover, .inspector .tab.customer_needs .x-panel-body:hover {
+  background: #6A6A6A;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   IMPORTS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.imports .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/opportunities.png);
+  background-color: #0075C9;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.imports.active .x-panel-body .logo, .inspector .tab.imports .x-panel-body:hover .logo {
+  background-color: #005491;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.imports.active .x-panel-body, .inspector .tab.imports.active .x-panel-body:hover, .inspector .tab.imports .x-panel-body:hover {
+  background: #0075C9;
+}
+
+/* Tile */
+.tile.imports {
+  background-image: url(/assets/omni/omni_icons/opportunities.png);
+  background-color: #0075C9 !important;
+}
+
+.tile.imports:hover {
+  background-color: #005491 !important;
+}

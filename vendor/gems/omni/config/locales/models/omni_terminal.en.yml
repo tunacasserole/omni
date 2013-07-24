@@ -1,0 +1,28 @@
+en:
+  activerecord:
+    models:
+      omni/terminal: 'Terminal'
+    attributes:
+      omni/terminal:
+        terminal_id:                     Terminal
+        display:                         Display
+        location_display:                Location
+        location_id:                     Location
+        till_display:                    Till
+        till_id:                         Till
+        terminal_nbr:                    Terminal Nbr
+        mac_address:                     MAC Address
+        local_server_ip:                 Local Server IP
+        hq_server_url:                   HQ Server URL
+        override_sale_date:              Override Order Date
+        receipt_printer_url:             Receipt Printer URL
+        receipt_printer_ip:              Receipt Printer IP
+        receipt_format_display:          Receipt Format
+        receipt_format_id:               Receipt Format
+        tag_printer_url:                 Tag Printer URL
+        tag_printer_ip:                  Tag Printer IP
+        pin_pad_port:                    Pin Pad Port
+        is_net_display_enabled:          Net Display Enabled
+        is_login_per_transaction:        Login Before Each Transaction
+        is_destroyed:                    Deleted
+

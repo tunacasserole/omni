@@ -1,0 +1,31 @@
+en:
+  activerecord:
+    models:
+      omni/purchase_detail:  'Model'
+    attributes:
+      omni/purchase_detail:
+        purchase_detail_id:                'Purchase Detail'
+        purchase_id:                       'Purchase'
+        display:                           'Display'
+        state:                             'State'
+        purchase_line_nbr:                 'Purchase Line Nbr'
+        sku_id:                            'Sku'
+        cost_id:                           'Cost'
+        description:                       'Description'
+        supplier_cost:                     'Supplier Cost'
+        invoice_cost:                      'Invoice Cost'
+        inventory_cost:                    'Inventory Cost'
+        extra_cost:                        'Extra Cost'
+        supplier_item_identifier:          'Supplier Item Identifier'
+        color_name:                        'Color Name'
+        size_name:                         'Size Name'
+        sku_alias:                         'Sku Alias'
+        units_ordered:                     'Units Ordered'
+        order_pack_size:                   'Order Pack Size'
+        order_pack_type:                   'Order Pack Type'
+        order_cost_units:                  'Order Cost Units'
+        order_multiple_type:               'Order Multiple Type'
+        order_multiple:                    'Order Multiple'
+        units_approved:                    'Units Approved'
+        units_cancelled:                   'Units Cancelled'
+        is_destroyed:                      'Is Destroyed'

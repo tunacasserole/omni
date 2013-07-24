@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      omni/bin_sku: 'BinSku'
+    attributes:
+      omni/bin_sku:
+        sku_alias_display:               Sku Alias
+        sku_alias_id:                    Barcode
+        last_activity_date:              Last Activity Date
+        being_received_units:            On Hand Units
+        on_hand_units:                   On Hand Units
+        pack_type:                       Pack Type On Hand
+        due_in_units:                    Due In Units
+        due_out_units:                   Due Out Units
+        is_destroyed:                    Deleted
+        bin_sku_id:                      Bin SKU
+        display:                         Display
+        bin_display:                     Bin
+        bin_id:                          Bin ID
+        sku_display:                     Sku
+        sku_id:                          SKU ID
+

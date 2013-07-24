@@ -1,0 +1,25 @@
+en:
+  activerecord:
+    models:
+      omni/projection: 'Projection'
+    attributes:
+      omni/projection:
+        projection_id:                   Projection
+        region_id:                       Region
+        district_id:                     District
+        location_id:                     Location
+        department_id:                   Department
+        classification_id:               Class
+        subclass_id:                     Subclass
+        style_id:                        Style
+        sku_id:                          Sku
+        color_id:                        Color
+        forecast_profile_id:             Forecast Profile                                     
+        display:                         Display Name
+        description:                     Description
+        plan_year:                       Plan Year
+        version:                         Version
+        projection_type:                 Projection Type
+        state:                           State
+        is_destroyed:                    Deleted
+

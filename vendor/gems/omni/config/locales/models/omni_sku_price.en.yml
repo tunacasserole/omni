@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    models:
+      omni/sku_price: 'SkuPrice'
+    attributes:
+      omni/sku_price:
+        sku_price_id:                    SKU Price
+        display:                         Display
+        sku_display:                     Sku
+        sku_id:                          SKU
+        price_book_display:              Price Book
+        price_book_id:                   Price Book
+        effective_date:                  Effective Date
+        retail_price:                    Price
+        price_units:                     Price Units
+        sales_category:                  Sales Category
+        price_change_display:            Price Change
+        price_change_id:                 Price Change Nbr
+        is_destroyed:                    Deleted
+

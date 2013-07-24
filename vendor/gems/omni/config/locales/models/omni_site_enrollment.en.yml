@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      omni/site_enrollment: 'SiteEnrollment'
+    attributes:
+      omni/site_enrollment:
+        site_enrollment_id:              Site Enrollment
+        display:                         Display
+        site_display:                    Site
+        site_id:                         Site
+        school_year:                     School Year
+        grade_display:                   Grade
+        grade_id:                        Grade
+        gender:                          Gender
+        school_year_start_date:          School Year Start Date
+        school_year_end_date:            School Year End Date
+        enrollment:                      Enrollment
+        is_destroyed:                    Deleted
+

@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/location_tax_authority: 'LocationTaxAuthority'
+    attributes:
+      omni/location_tax_authority:
+        location_tax_authority_id:       Location Tax Authority
+        display:                         Display
+        location_display:                Location
+        location_id:                     Location
+        tax_authority_display:           Tax Authority
+        tax_authority_id:                Tax Authority
+        is_destroyed:                    Deleted
+

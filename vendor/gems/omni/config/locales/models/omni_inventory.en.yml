@@ -1,0 +1,39 @@
+en:
+  activerecord:
+    models:
+      omni/inventory: 'Inventory'
+    attributes:
+      omni/inventory:
+        inventory_id:                    Inventory
+        display:                         Display
+        sku_display:                     Sku
+        sku_id:                          Sku
+        location_display:                Location
+        location_id:                     Location
+        on_hand_units:                   On Hand Units
+        in_transit_units:                In Transit Units
+        non_sellable_units:              Non Sellable Units
+        allocated_units:                 Allocated Units
+        reserved_units:                  Reserved Units
+        shipping_units:                  Shipping Units
+        work_in_process_units:           Work In Process Units
+        requested_units:                 Requested Units
+        frozen_units:                    Frozen Units
+        supplier_on_order_units:         Supplier On Order Units
+        warehouse_on_order_units:        Warehouse On Order Units
+        cost_pool:                       Cost Pool
+        retail_pool:                     Retail Pool
+        boy_units:                       Boy Units
+        boy_cost:                        Boy Cost
+        boy_retail:                      Boy Retail
+        last_inventory_units:            Last Inventory Units
+        last_inventory_cost:             Last Inventory Cost
+        last_inventory_retail:           Last Inventory Retail
+        reserve_end_date:                Reserve End Date
+        first_receipt_date:              First Receipt Date
+        last_receipt_date:               Last Receipt Date
+        first_sale_date:                 First Sale Date
+        last_sale_date:                  Last Sale Date
+        last_inventory_date:             Last Inventory Date
+        is_destroyed:                    Is Destroyed
+

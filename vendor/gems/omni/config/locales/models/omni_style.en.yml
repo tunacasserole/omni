@@ -1,0 +1,70 @@
+en:
+  activerecord:
+    models:
+      omni/style: 'Style'
+    attributes:
+      omni/style:
+        style_id:                        Style
+        display:                         Display
+        style_nbr:                       Style Number
+        description:                     Description
+        short_name:                      Short Name
+        concatenated_name:               Concatenation Name
+        pos_name:                        Receipt Name
+        effective_date:                  Effective Date
+        discontinued_date:               Discontinued Date
+        out_of_stock_date:               Out of Stock Date
+        subclass_display:                Subclass
+        subclass_id:                     Subclass
+        product_display:                 Product
+        product_id:                      Web Product
+        buyer_user_display:              Buyer User
+        buyer_user_id:                   Buyer
+        brand:                           Brand
+        product_type_display:            Product Type
+        product_type_id:                 Product Type
+        fabric_content:                  Fabric Contents
+        storage_code:                    Storage Code
+        initial_retail_price:            Initial Retail Price
+        suggested_retail_price:          Suggested Retail Price
+        planning_retail_price:           Planning Retail Price
+        smoothing_factor:                Smoothing Factor
+        replenishment_method:            Replenishement Method
+        replenishment_source:            Replenishment Source
+        minimum_on_hand_units:           Minimum On Hand Units
+        maximum_on_hand_units:           Maximum On Hand Units
+        pack_type:                       Replenishment Multiple
+        is_not_stocked:                  Non Inventory Product
+        sell_unit_uom_code:              Selling Unit of Measure
+        sell_unit_length:                Sell Unit Length
+        sell_unit_height:                Sell Unit Height
+        sell_unit_width:                 Sell Unit Width
+        sell_unit_weight:                Sell Unit Weight
+        is_conveyable_sell_unit:         Conveyable
+        is_discountable:                 Discountable
+        is_taxable:                      Taxable
+        supplier_display:                Supplier
+        supplier_id:                     Primary Supplier
+        order_uom_code:                  Ordering Unit of Measure
+        order_package_type:              Packaging Type
+        garment_pieces:                  Number of pieces
+        is_special_order:                Special Order
+        is_converted:                    Converted Style
+        add_on_sku_id:                   Add On SKU
+        site_id:                         School
+        conversion_type:                 Conversion Type
+        maintenance_level:               Maintenance Level
+        is_convertible:                  Can Be Converted
+        is_converted_heatset:            Heatset Logo or Patch
+        is_converted_sewn:               Sewn On Logo or Patch        
+        generic_style_display:           Generic Style
+        generic_style_id:                Generic Style
+        size_group_display:              Size Group
+        size_group_id:                   Size Group
+        sku_name_method:                 SKU Naming Method
+        is_alterable:                    Can be Altered
+        is_usually_altered:              Is Usually Altered
+        is_enabled:                      Style Active
+        state:                           State
+        is_destroyed:                    Deleted
+

@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/district: 'District'
+    attributes:
+      omni/district:
+        district_id:                     District
+        display:                         Display
+        district_nbr:                    District Number
+        description:                     Description
+        short_name:                      Short Name
+        region_display:                  Region
+        region_id:                       Region
+        user_display:                    User
+        user_id:                         District Manager
+        is_destroyed:                    Deleted
+

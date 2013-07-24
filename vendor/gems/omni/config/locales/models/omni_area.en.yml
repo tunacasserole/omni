@@ -1,0 +1,30 @@
+en:
+  activerecord:
+    models:
+      omni/area: 'Area'
+    attributes:
+      omni/area:
+        area_id:                         Area
+        display:                         Display
+        location_display:                Location
+        location_id:                     Location
+        area_nbr:                        Area Number
+        description:                     Description
+        short_name:                      Short Name
+        is_receiving:                    Receving Area
+        is_picking:                      Picking Area
+        is_reserve:                      Reserve Storage Area
+        is_putaway:                      Available for Putaway
+        is_supplier_return:              Supplier Return Storage
+        is_processing:                   Production/Conversion Area
+        is_shipping:                     Shipping Area
+        is_put_location:                 Put System Area
+        is_special_handling:             Special Handling Area
+        is_quality_control:              Quality Control Area
+        is_quick_case:                   Quick Case Storage
+        is_many_sku_per_bin:             Holds Multiple SKUs/Bin
+        default_cube_capacity:           Default Cubic Capacity
+        is_request_cube_calculation:     Request Cube Utilization Calculation
+        last_utilization_calc_date:      Last Cube Utilization Calc Date
+        is_destroyed:                    Deleted
+

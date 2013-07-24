@@ -1,0 +1,39 @@
+en:
+  activerecord:
+    models:
+      omni/payment: 'Payment'
+    attributes:
+      omni/payment:
+        payment_id:                      Payment
+        display:                         Display
+        payment_nbr:                     Payment Number
+        order_display:                   Order
+        order_id:                        Order
+        customer_display:                Customer
+        customer_id:                     Customer
+        terminal_display:                Terminal
+        terminal_id:                     Terminal
+        location_display:                Location
+        location_id:                     Location
+        tender_display:                  Tender
+        tender_id:                       Tender
+        voucher_display:                 Voucher
+        voucher_id:                      Voucher
+        payment_date:                    Payment Date
+        payment_amount:                  Payment Amount
+        layaway_deposit_amount:          Layaway Deposit Amount
+        account_holder:                  Account Holder
+        account_number:                  Account Number
+        expiration_date:                 Expiration Date
+        ccv_code:                        CCV Code
+        serial_number:                   Serial Number
+        routing_number:                  Routing Number
+        state_code:                      State Code
+        license_number:                  License Number
+        birth_date:                      Birth Date
+        is_prior_authorized_capture:     Prior Authorized Capture
+        payment_authorization_code:      Payment Authorization Code
+        avs_response:                    Avs Response
+        state:                           Payment State
+        is_destroyed:                    Deleted
+

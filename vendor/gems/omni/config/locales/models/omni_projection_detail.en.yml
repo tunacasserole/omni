@@ -1,0 +1,38 @@
+en:
+  activerecord:
+    models:
+      omni/projection_detail: 'Projection Detail'
+    attributes:
+      omni/projection_detail:
+        projection_detail_id:            Projection Detail
+        display:                         Display
+        projection_display:              Projection
+        projection_id:                   Projection
+        projection_line_nbr:             Projection Line Number
+        sku_display:                     Sku
+        sku_id:                          Sku
+        style_display:                   Style
+        style_id:                        Style
+        color_display:                   Color
+        color_id:                        Color
+        size_display:                    Size
+        size_id:                         Size                
+        location_display:                Location
+        location_id:                     Location
+        forecast_units:                  Cast 
+        proposed_units:                  Proposed 
+        closed_units:                    Closed 
+        projection_2_units:              Prj 2 
+        updated_units:                   Updated 
+        adjustment_units:                Adjustment 
+        sale_units_2013:                 2013 
+        sale_units_2012:                 2012
+        sale_units_2011:                 2011
+        sale_units_2010:                 2010 
+        number_of_schools:               Number of Schools
+        average_contract_year:           Average Contract Year
+        years_active:                    Years Active 
+        average_sales:                   Avg
+        standard_deviation:              Dev
+        is_destroyed:                    Deleted
+

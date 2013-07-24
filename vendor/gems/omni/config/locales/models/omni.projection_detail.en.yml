@@ -1,0 +1,30 @@
+en:
+  activerecord:
+    models:
+      omni/projection_detail:  'Model'
+    attributes:
+      omni/projection_detail:
+        projection_detail_id:              'Projection Detail'
+        display:                           'Display'
+        projection_id:                     'Projection'
+        projection_line_nbr:               'Projection Line Nbr'
+        forecast_profile_id:               'Forecast Profile'
+        sku_id:                            'Sku'
+        location_id:                       'Location'
+        forecast_units:                    'Forecast Units'
+        proposed_units:                    'Proposed Units'
+        approved_units:                    'Approved Units'
+        closed_units:                      'Closed Units'
+        projection_2_units:                'Projection 2 Units'
+        projection_update_units:           'Projection Update Units'
+        projection_adjustment_units:        'Projection Adjustment Units'
+        sale_units_2013:                    'Sale Units 2013'
+        sale_units_2012:                    'Sale Units 2012'
+        sale_units_2011:                    'Sale Units 2011'
+        sale_units_2010:                    'Sale Units 2010'
+        number_of_schools:                 'Number Of Schools'
+        average_contract_year:             'Average Contract Year'
+        years_active:                      'Years Active'
+        average_sales:                     'Average Sales'
+        standard_deviation:                'Standard Deviation'
+        is_destroyed:                      'Is Destroyed'

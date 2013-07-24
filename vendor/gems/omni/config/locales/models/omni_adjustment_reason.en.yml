@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/adjustment_reason: 'AdjustmentReason'
+    attributes:
+      omni/adjustment_reason:
+        adjustment_reason_id:            Adjustment Reason
+        display:                         Display
+        description:                     Description
+        short_name:                      Short Name
+        ruleset_display:                 Ruleset
+        ruleset_id:                      Ruleset
+        is_allowed_cost_entry:           Allow Unit Cost Entry
+        is_cost_adjustment:              Cost Pool Adjustment
+        is_destroyed:                    Deleted
+

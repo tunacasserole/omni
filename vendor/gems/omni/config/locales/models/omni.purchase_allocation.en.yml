@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    models:
+      omni/purchase_allocation:  'Model'
+    attributes:
+      omni/purchase_allocation:
+        purchase_allocation_id:            'Purchase Allocation'
+        purchase_detail_id:                'Purchase Detail'
+        allocation_id:                     'Allocation'
+        location_id:                       'Location'
+        display:                           'Display'
+        purchase_allocation_nbr:           'Purchase Allocation Nbr'
+        state:                             'State'
+        units:                             'Units'
+        is_destroyed:                      'Is Destroyed'

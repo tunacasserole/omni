@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      omni/supplier_rating_subject: 'SupplierRatingSubject'
+    attributes:
+      omni/supplier_rating_subject:
+        supplier_rating_subject_id:      Supplier Rating Subject
+        display:                         Display
+        description:                     Description
+        supplier_rating_subject_type:    Type
+        weighting_percent:               Weighting Percent
+        is_destroyed:                    Deleted
+

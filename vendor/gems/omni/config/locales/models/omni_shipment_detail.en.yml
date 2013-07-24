@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      omni/shipment_detail: 'ShipmentDetail'
+    attributes:
+      omni/shipment_detail:
+        shipment_detail_id:              Shipment Detail
+        display:                         Display
+        shipment_display:                Shipment
+        shipment_id:                     Shipment
+        pick_ticket_display:             Pick Ticket
+        pick_ticket_id:                  Pick Ticket
+        ship_units:                      Ship Units
+        received_units:                  Received Units
+        container_display:               Container
+        container_id:                    Container
+        is_destroyed:                    Deleted
+

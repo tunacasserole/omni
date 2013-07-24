@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      omni/site_discount: 'SiteDiscount'
+    attributes:
+      omni/site_discount:
+        site_discount_id:                Site Discount
+        display:                         Display
+        site_display:                    Site
+        site_id:                         Site
+        classification_display:          Classification
+        classification_id:               Classification
+        discount_percent:                Discount Percent
+        effective_date:                  Effective Date
+        end_date:                        Ending Date
+        is_in_store:                     In Store Discount
+        is_on_web:                       Web Discount
+        is_destroyed:                    Deleted
+

@@ -1,0 +1,44 @@
+en:
+  activerecord:
+    models:
+      omni/container: 'Container'
+    attributes:
+      omni/container:
+        container_id:                    Container
+        display:                         Display
+        container_nbr:                   Number
+        description:                     Description
+        container_type:                  Type
+        parent_container_display:        Parent Container
+        parent_container_id:             Parent Container
+        is_labeled:                      Container Labeled
+        barcode_nbr:                     Current Barcode
+        location_display:                Location
+        location_id:                     Location
+        state:                           State
+        create_date:                     Create Date
+        last_update_date:                Last Update Date
+        is_located:                      Container Located
+        is_moving:                       Container Moving
+        is_in_transit:                   Container In Transit
+        bin_display:                     Bin
+        bin_id:                          Bin
+        is_container_lost:               Container Lost
+        last_verify_date:                Last Location Verify
+        capacity:                        Capacity (Cubic Feet)
+        capacity_weight:                 Maximum Fill Weight
+        inside_length:                   Inside Length (Inches)
+        inside_height:                   Inside Height (Inches)
+        inside_width:                    Inside Width (Inches)
+        is_outside_dimensions:           Container Has Outside Dimensions
+        outside_length:                  Outside Length (Inches)
+        outside_height:                  Outside Height (Inches)
+        outside_width:                   Outside Width (Inches)
+        tare_weight:                     Tare Weight (Pounds)
+        fill_percent:                    Percent To Fill
+        carton_count:                    Carton Count
+        actual_weight:                   Act Weight (Pounds)
+        actual_cube:                     Act Cube (Cubic Feet)
+        filled_percent:                  Percent Filled
+        is_destroyed:                    Deleted
+

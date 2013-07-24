@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/tax_authority: 'TaxAuthority'
+    attributes:
+      omni/tax_authority:
+        tax_authority_id:                Tax Authority
+        display:                         Display
+        description:                     Description
+        tax_authority_type:              Tax Authority Type
+        short_name:                      Tax Authority Short Name
+        state_code:                      Tax Authoirty State Code
+        filing_frequency:                Tax Filing Frequency
+        is_tax_when_no_presence:         Tax All Direct Shipments
+        is_destroyed:                    Deleted
+

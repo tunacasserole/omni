@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/style_color: 'StyleColor'
+    attributes:
+      omni/style_color:
+        style_color_id:                  Style Color
+        display:                         Display
+        style_display:                   Style
+        style_id:                        Style
+        color_display:                   Color
+        color_id:                        Color
+        short_name:                      Short Name
+        concatenated_name:               Concatenation Name
+        state:                           State        
+        is_destroyed:                    Deleted
+

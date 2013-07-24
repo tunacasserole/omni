@@ -1,0 +1,7 @@
+*.psd
+*.pdf
+/tmp
+/test
+/spec
+/log
+/vendor/gems/omni/db

@@ -1,0 +1,84 @@
+en:
+  activerecord:
+    models:
+      omni/location: 'Location'
+    attributes:
+      omni/location:
+        location_id:                     Location
+        display:                         Display
+        description:                     Description
+        short_name:                      Short Name
+        location_nbr:                    Location Number
+        location_brand:                  Location Brand
+        line_1:                          Line 1
+        line_2:                          Line 2
+        line_3:                          Line 3
+        line_4:                          Line 4
+        city:                            City
+        state_code:                      State Code
+        zip:                             Zip
+        country:                         Country
+        latitude:                        Latitude
+        longitude:                       Longitude
+        phone:                           Phone
+        fax:                             Fax
+        is_owned:                        Owned by Parker
+        is_store:                        Store Location
+        is_temporary_store:              Temporary Location
+        is_webstore:                     Website Location
+        is_factory:                      Factory Location
+        is_warehouse:                    Warehouse Location
+        open_date:                       Open Date
+        close_date:                      Close Date
+        parent_location_display:         Parent Location
+        parent_location_id:              Parent Location
+        district_display:                District
+        district_id:                     District
+        price_book_display:              Price Book
+        price_book_id:                   Price Book
+        promo_price_book_display:        Promo Price Book
+        promo_price_book_id:             Promotion Price Book
+        selling_square_feet:             Selling Square Feet
+        storage_square_feet:             Storage Square Feet
+        location_url:                    Website URL
+        is_enabled:                      Location Active
+        time_zone:                       Time Zone
+        sunday_open_time:                Sunday Open Time
+        sunday_close_time:               Sunday Close Time
+        monday_open_time:                Monday Open Time
+        monday_close_time:               Monday Close Time
+        tuesday_open_time:               Tuesday Open Time
+        tuesday_close_time:              Tuesday Close Time
+        wednesday_open_time:             Wednesday Open Time
+        wednesday_close_time:            Wednesday Close Time
+        thursday_open_time:              Thursday Open Time
+        thursday_close_time:             Thursday Close Time
+        friday_open_time:                Friday Open Time
+        friday_close_time:               Friday Close Time
+        saturday_open_time:              Saturday Open Time
+        saturday_close_time:             Saturday Close Time
+        merchant_identifier:             Merchant Identifier
+        merchant_name:                   Merchant Name
+        merchant_time_zone:              Merchant Time Zone
+        merchant_location:               Merchant Location
+        merchant_sic:                    Merchant Sic
+        merchant_industry:               Merchant Industry
+        merchant_acquirer_bin:           Merchant Acquirer Bin
+        merchant_agent:                  Merchant Agent
+        merchant_chain:                  Merchant Chain
+        merchant_store:                  Merchant Store
+        merchant_terminal:               Merchant Terminal
+        merchant_v_number:               Merchant V Number
+        merchant_pri_auth_phone:         Merchant Pri Auth Phone
+        merchant_sec_auth_phone:         Merchant Sec Auth Phone
+        merchant_pri_settle_phone:       Merchant Pri Settle Phone
+        merchant_sec_settle_phone:       Merchant Sec Settle Phone
+        merchant_amex_identifier:        Merchant Amex Identifier
+        merchant_discover_identifier:    Merchant Discover Identifier
+        merchant_diners_identifier:      Merchant Diners Identifier
+        merchant_sharing_groups:         Merchant Sharing Groups
+        merchant_reimbursement:          Merchant Reimbursement
+        merchant_settle_agent:           Merchant Settle Agent
+        merchant_bank_aba:               Merchant Bank Aba
+        is_destroyed:                    Deleted
+

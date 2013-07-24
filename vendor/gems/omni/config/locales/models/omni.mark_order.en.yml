@@ -1,0 +1,33 @@
+en:
+  activerecord:
+    models:
+      omni/mark_order:  'Model'
+    attributes:
+      omni/mark_order:
+        order_nbr:                         'Order Nbr'
+        outlet_nbr:                        'Outlet Nbr'
+        school_nbr:                        'School Nbr'
+        status:                            'State'
+        priority:                          'Priority'
+        date_putin:                        'Date Putin'
+        custid:                            'Custid'
+        date_ship:                         'Date Ship'
+        fill_partial:                      'Fill Partial'
+        nbr_ships:                         'Nbr Ships'
+        discount:                          'Discount'
+        entered_by:                        'Entered By'
+        is_percentage:                     'Is Percentage'
+        close_date:                        'Close Date'
+        closing_id:                        'Closing'
+        is_closed:                         'Is Closed'
+        postage:                           'Postage'
+        tax:                               'Tax'
+        comment:                           'Comment'
+        viewed_by:                         'Viewed By'
+        viewed_date:                       'Viewed Date'
+        dbman_order_nbr:                   'Dbman Order Nbr'
+        allow_partial_fill:                'Allow Partial Fill'
+        date_auto_fill_run:                'Date Auto Fill Run'
+        temp_order_nbr:                    'Temp Order Nbr'
+        total:                             'Total'
+        web_order:                         'Web Order'

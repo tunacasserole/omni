@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/region: 'Region'
+    attributes:
+      omni/region:
+        region_id:                       Region
+        display:                         Display
+        region_nbr:                      Region Number
+        description:                     Description
+        short_name:                      Short Name
+        company_display:                 Company
+        company_id:                      Company
+        user_display:                    User
+        user_id:                         Regional Manager
+        is_destroyed:                    Deleted
+

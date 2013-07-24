@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/subclass: 'Subclass'
+    attributes:
+      omni/subclass:
+        subclass_id:                     Subclass
+        display:                         Display
+        subclass_nbr:                    Subclass Number
+        description:                     Description
+        short_name:                      Short Name
+        classification_display:          Classification
+        classification_id:               Class
+        markup_percent_high_limit:       Markup Pct - High Limit
+        markup_percent_low_limit:        Markup Pct - Low Limit
+        is_destroyed:                    Deleted
+

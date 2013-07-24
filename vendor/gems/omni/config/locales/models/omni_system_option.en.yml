@@ -1,0 +1,44 @@
+en:
+  activerecord:
+    models:
+      omni/system_option: 'SystemOption'
+    attributes:
+      omni/system_option:
+        system_option_id:                System Option
+        display:                         Display
+        price_book_display:              Price Book
+        price_book_id:                   National Price Book
+        professional_discount_percent:   Professional Discount Percent
+        employee_discount_percent:       Employee Discount Percent
+        regular_sale_ruleset_display:    Regular Sale Ruleset
+        regular_sale_ruleset_id:         Regular Sale Ruleset
+        promo_sale_ruleset_display:      Promo Sale Ruleset
+        promo_sale_ruleset_id:           Promo Sale Ruleset
+        clearance_sale_ruleset_display:  Clearance Sale Ruleset
+        clearance_sale_ruleset_id:       Clearance Sale Ruleset
+        transfer_request_ruleset_display: Transfer Request Ruleset
+        transfer_request_ruleset_id:     Transfer Request Ruleset
+        transfer_ship_ruleset_display:   Transfer Ship Ruleset
+        transfer_ship_ruleset_id:        Transfer Ship Ruleset
+        transfer_transit_ruleset_display: Transfer Transit Ruleset
+        transfer_transit_ruleset_id:     Transfer Transit Ruleset
+        transfer_receive_ruleset_display: Transfer Receive Ruleset
+        transfer_receive_ruleset_id:     Transfer Receive Ruleset
+        transfer_close_ruleset_display:  Transfer Close Ruleset
+        transfer_close_ruleset_id:       Transfer Close Ruleset
+        transfer_cancel_ruleset_display: Transfer Cancel Ruleset
+        transfer_cancel_ruleset_id:      Transfer Cancel Ruleset
+        is_charge_ship_location:         Is Charge Ship Location
+        transfer_gl_account_display:     Transfer Gl Account
+        transfer_gl_account_id:          Transfer Gl Account
+        discrepancy_gl_account_display:  Discrepancy Gl Account
+        discrepancy_gl_account_id:       Discrepancy Gl Account
+        overage_gl_account_display:      Overage Gl Account
+        overage_gl_account_id:           Overage Gl Account
+        shortage_gl_account_display:     Shortage Gl Account
+        shortage_gl_account_id:          Shortage Gl Account
+        sales_tax_gl_account_display:    Sales Tax Gl Account
+        sales_tax_gl_account_id:         Sales Tax Gl Account
+        consecutive_invalid_login_attempts: Consecutive Invalid Login Attempts
+        is_destroyed:                    Is Destroyed
+

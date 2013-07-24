@@ -1,0 +1,30 @@
+en:
+  activerecord:
+    models:
+      omni/stock_ledger_activity: 'StockLedgerActivity'
+    attributes:
+      omni/stock_ledger_activity:
+        stock_ledger_activity_id:        Stock Ledger Activity
+        display:                         Display
+        stockable_type:                  Stockable Type
+        stockable_id:                    Stockable
+        ruleset_display:                 Ruleset
+        ruleset_id:                      Ruleset
+        sku_display:                     Sku
+        sku_id:                          Sku
+        location_display:                Location
+        location_id:                     Location
+        supplier_display:                Supplier
+        supplier_id:                     Supplier
+        customer_display:                Customer
+        customer_id:                     Customer
+        site_display:                    Site
+        site_id:                         Site
+        units:                           Units
+        cost:                            Cost
+        retail:                          Retail
+        create_date:                     Create Date
+        activity_date:                   Activity Date
+        posted_date:                     Posted Date
+        is_destroyed:                    Is Destroyed
+

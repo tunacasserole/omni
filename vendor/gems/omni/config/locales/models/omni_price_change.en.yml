@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      omni/price_change: 'PriceChange'
+    attributes:
+      omni/price_change:
+        price_change_id:                 Price Change
+        display:                         Display
+        is_destroyed:                    Deleted
+

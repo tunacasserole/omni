@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/classification: 'Classification'
+    attributes:
+      omni/classification:
+        classification_id:               Classification
+        display:                         Display
+        classification_nbr:              Class Number
+        description:                     Description
+        short_name:                      Short Name
+        planner_user_display:            Planner User
+        planner_user_id:                 Planner
+        department_display:              Department
+        department_id:                   Department
+        is_destroyed:                    Deleted
+

@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    models:
+      omni/size_group_detail: 'SizeGroupDetail'
+    attributes:
+      omni/size_group_detail:
+        size_group_detail_id:            Size Group Detail
+        display:                         Display
+        size_group_display:              Size Group
+        size_group_id:                   Size Group
+        size_display:                    Size
+        size_id:                         Size
+        display_order:                   Display Order
+        is_destroyed:                    Deleted
+

@@ -1,0 +1,25 @@
+en:
+  activerecord:
+    models:
+      omni/sku_promo_price: 'SkuPromoPrice'
+    attributes:
+      omni/sku_promo_price:
+        sku_promo_price_id:              Promo Price
+        display:                         Display
+        sku_display:                     Sku
+        sku_id:                          SKU
+        price_book_display:              Price Book
+        price_book_id:                   Price Book
+        effective_date:                  Effective Date
+        end_date:                        Ending Date
+        regular_units:                   Regular Price Units
+        promo_units:                     Promo Units
+        promo_percent:                   Percent Off
+        promo_amount:                    Amount Off
+        promo_price:                     Promo Price
+        maximum_promo_units:             Maximum Promo Units
+        sales_category:                  Sales Category
+        promotion_display:               Promotion
+        promotion_id:                    Promotional Event
+        is_destroyed:                    Deleted
+

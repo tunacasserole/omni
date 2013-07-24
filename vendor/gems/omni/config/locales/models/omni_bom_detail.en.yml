@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      omni/bom_detail: 'BomDetail'
+    attributes:
+      omni/bom_detail:
+        bom_detail_id:                   BOM Detail
+        display:                         Display
+        bom_display:                     Bom
+        bom_id:                          BOM
+        color_display:                   Color
+        color_id:                        Color
+        sku_display:                     Sku
+        sku_id:                          SKU
+        quantity:                        Quantity
+        waste_percent:                   Percent of Fabric Wasted
+        uom_code:                        Unit of Measure
+        is_destroyed:                    Deleted
+

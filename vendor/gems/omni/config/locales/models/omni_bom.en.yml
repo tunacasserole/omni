@@ -1,0 +1,23 @@
+en:
+  activerecord:
+    models:
+      omni/bom: 'Bom'
+    attributes:
+      omni/bom:
+        bom_id:                          BOM
+        display:                         Display
+        bomable_type:                    BOM Type
+        bomable_id:                      BOM Product
+        bom_nbr:                         BOM Number
+        description:                     Description
+        bom_type:                        BOM Type
+        version:                         BOM Version
+        effective_date:                  Effective Date
+        end_date:                        Ending Date
+        is_primary_bom:                  Primary BOM
+        labor_hours:                     Labor Hours
+        machine_hours:                   Machine Hours
+        construction_hours:              Construction Hours
+        is_enabled:                      BOM Active
+        is_destroyed:                    Deleted
+

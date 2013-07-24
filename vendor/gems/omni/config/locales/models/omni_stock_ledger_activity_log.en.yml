@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    models:
+      omni/stock_ledger_activity_log: 'StockLedgerActivityLog'
+    attributes:
+      omni/stock_ledger_activity_log:
+        stock_ledger_activity_log_id:    Stock Ledger Activity Log
+        display:                         Display
+        stock_ledger_activity_display:   Stock Ledger Activity
+        stock_ledger_activity_id:        Stock Ledger Activity
+        activity_log_nbr:                Activity Log Number
+        model_meta_display:              Model Meta
+        model_meta_id:                   Model Meta
+        attribute_meta_display:          Attribute Meta
+        attribute_meta_id:               Attribute Meta
+        row_display:                     Row
+        row_id:                          Row
+        rule_action:                     Rule Action
+        is_destroyed:                    Is Destroyed
+

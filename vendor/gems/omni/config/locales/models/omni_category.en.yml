@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      omni/category: 'Category'
+    attributes:
+      omni/category:
+        category_id:                     Category
+        display:                         Display
+        category_code:                   Category Code
+        description:                     Description
+        category_type:                   Category Type
+        is_destroyed:                    Deleted
+

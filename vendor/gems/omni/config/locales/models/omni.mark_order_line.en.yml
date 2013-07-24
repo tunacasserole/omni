@@ -1,0 +1,21 @@
+en:
+  activerecord:
+    models:
+      omni/mark_order_line:  'Model'
+    attributes:
+      omni/mark_order_line:
+        lineitemid:                        'Lineitemid'
+        order_nbr:                         'Order Nbr'
+        stock_nbr:                         'Stock Nbr'
+        size:                              'Size'
+        price:                             'Price'
+        cost:                              'Cost'
+        qty_ordered:                       'Qty Ordered'
+        qty_shipped:                       'Qty Shipped'
+        status:                            'State'
+        comments:                          'Comments'
+        discount:                          'Discount'
+        is_percentage:                     'Is Percentage'
+        extra_charge:                      'Extra Charge'
+        extra_charge_type:                 'Extra Charge Type'
+        extra_charge_comment:              'Extra Charge Comment'

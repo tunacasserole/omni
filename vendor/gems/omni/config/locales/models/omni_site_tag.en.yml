@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/site_tag: 'SiteTag'
+    attributes:
+      omni/site_tag:
+        site_tag_id:                     Site Tag
+        display:                         Display
+        site_display:                    Site
+        site_id:                         Site
+        tag_display:                     Tag
+        tag_id:                          Tag
+        is_destroyed:                    Deleted
+

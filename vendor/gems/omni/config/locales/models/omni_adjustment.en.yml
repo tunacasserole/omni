@@ -1,0 +1,32 @@
+en:
+  activerecord:
+    models:
+      omni/adjustment: 'Adjustment'
+    attributes:
+      omni/adjustment:
+        adjustment_id:                   Adjustment
+        display:                         Display
+        adjustment_nbr:                  Adjustment Number
+        state:                           State
+        location_display:                Location
+        location_id:                     Location
+        sku_display:                     Sku
+        sku_id:                          SKU
+        bin_display:                     Bin
+        bin_id:                          Bin
+        description:                     Description
+        request_date:                    Request Date
+        request_user_display:            Request User
+        request_user_id:                 Requested By
+        post_date:                       Post Date
+        post_user_display:               Post User
+        post_user_id:                    Posted By
+        cancel_date:                     Cancel Date
+        cancel_user_display:             Cancel User
+        cancel_user_id:                  Cancelled By
+        adjustment_reason_display:       Adjustment Reason
+        adjustment_reason_id:            Adjustment Reason
+        adjustment_units:                Quantity to Adjust
+        adjustment_cost:                 Selling Unit Cost
+        is_destroyed:                    Deleted
+

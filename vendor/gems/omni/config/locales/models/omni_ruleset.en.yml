@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      omni/ruleset: 'Ruleset'
+    attributes:
+      omni/ruleset:
+        ruleset_id:                      Ruleset
+        display:                         Display
+        ruleset_code:                    Ruleset Code
+        description:                     Description
+        is_active:                       Is Active
+        is_destroyed:                    Is Destroyed
+

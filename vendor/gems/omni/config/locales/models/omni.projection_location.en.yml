@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      omni/projection_location:  'Model'
+    attributes:
+      omni/projection_location:
+        projection_location_id:            'Projection Location'
+        projection_id:                     'Projection'
+        location_id:                       'Location'
+        display:                           'Display'
+        state:                             'State'
+        is_destroyed:                      'Is Destroyed'

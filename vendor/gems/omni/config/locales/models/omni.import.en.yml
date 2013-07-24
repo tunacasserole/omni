@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      omni/import:  'Model'
+    attributes:
+      omni/import:
+        import_id:                         'Import'
+        state:                             'State'
+        display:                           'Display'
+        source:                            'Source'
+        target:                            'Target'
+        job_type:                          'Job Type'
+        table_name:                        'Table Name'
+        model_name:                        'Model Name'
+        file_name:                         'File Name'
+        file_path:                         'File Path'
+        start_date:                        'Start Date'
+        end_date:                          'End Date'
+        run_mode:                          'Run Mode'
+        argument_hash:                     'Argument Hash'
+        is_drop_data:                      'Is Drop Data'
+        is_destroyed:                      'Is Destroyed'

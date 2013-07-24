@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      omni/projection_reason: 'ProjectionReason'
+    attributes:
+      omni/projection_reason:
+        projection_reason_id:            Projection Reason
+        display:                         Display
+        description:                     Description
+        short_name:                      Short Name
+        is_destroyed:                    Deleted
+

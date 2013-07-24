@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/log:  'Model'
+    attributes:
+      omni/log:
+        log_id:                            'Log'
+        logable_id:                        'Logable'
+        logable_type:                      'Logable Type'
+        log_nbr:                           'Log Nbr'
+        log_type:                          'Log Type'
+        log_title:                         'Log Title'
+        log_message:                       'Log Message'
+        is_destroyed:                      'Is Destroyed'

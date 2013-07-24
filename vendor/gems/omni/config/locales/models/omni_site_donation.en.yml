@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/site_donation: 'SiteDonation'
+    attributes:
+      omni/site_donation:
+        site_donation_id:                Site Donation
+        display:                         Display
+        site_display:                    Site
+        site_id:                         Site
+        donation_date:                   Donation Date
+        donation_amount:                 Donation Amount
+        is_destroyed:                    Deleted
+

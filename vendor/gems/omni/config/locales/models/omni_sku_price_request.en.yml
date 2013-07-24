@@ -1,0 +1,43 @@
+en:
+  activerecord:
+    models:
+      omni/sku_price_request: 'SkuPriceRequest'
+    attributes:
+      omni/sku_price_request:
+        sku_price_request_id:            SKU Price
+        display:                         Display
+        state:                           Price Request State
+        user_display:                    User
+        user_id:                         Requesting User
+        request_date:                    Request Date
+        sku_display:                     Sku
+        sku_id:                          SKU
+        location_display:                Location
+        location_id:                     Location
+        customer_display:                Customer
+        customer_id:                     Customer
+        site_display:                    Site
+        site_id:                         Site
+        request_price_book_display:      Request Price Book
+        request_price_book_id:           Request Price Book
+        price_date:                      Price Date
+        permanent_sku_retail:            Permanent Price
+        permanent_units:                 Permanent Price Units
+        price_book_display:              Price Book
+        price_book_id:                   Price Book
+        sku_price_display:               Sku Price
+        sku_price_id:                    SKU Price
+        promo_sku_retail:                Promotional Price
+        promo_percent:                   Discount Percent
+        promo_amount:                    Discount Amount
+        promo_units:                     Promotional Units
+        regular_units:                   Regular Units
+        maximum_promo_units:             Maximum Promotional Units
+        sku_promo_price_display:         Sku Promo Price
+        sku_promo_price_id:              SKU Promotional Price
+        sales_category:                  Sales Category
+        professional_discount_percent:   Professional Discount Percent
+        employee_discount_percent:       Employee Discount Percent
+        school_discount_percent:         School Discount Percent
+        is_destroyed:                    Deleted
+

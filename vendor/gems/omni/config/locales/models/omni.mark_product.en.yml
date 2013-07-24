@@ -1,0 +1,33 @@
+en:
+  activerecord:
+    models:
+      omni/mark_product:  'Model'
+    attributes:
+      omni/mark_product:
+        stock_nbr:                         'Stock Nbr'
+        code:                              'Code'
+        description:                       'Description'
+        style:                             'Style'
+        style_divider:                     'Style Divider'
+        style_fabric:                      'Style Fabric'
+        vendor:                            'Vendor'
+        whse_loc:                          'Whse Loc'
+        overstock_1:                       'Overstock 1'
+        overstock_2:                       'Overstock 2'
+        img_nbr:                           'Img Nbr'
+        size_cht:                          'Size Cht'
+        size_code:                         'Size Code'
+        active:                            'Active'
+        prod_type:                         'Prod Type'
+        generic_nbr:                       'Generic Nbr'
+        conversion_type_id:                'Conversion Type'
+        trim_info:                         'Trim Info'
+        fabric_nbr_1:                      'Fabric Nbr 1'
+        yds_req_1:                         'Yds Req 1'
+        fabric_nbr_2:                      'Fabric Nbr 2'
+        yds_req_2:                         'Yds Req 2'
+        fabric_nbr_3:                      'Fabric Nbr 3'
+        yds_req_3:                         'Yds Req 3'
+        create_date:                       'Create Date'
+        description2:                      'Description2'
+        size_code_extra:                   'Size Code Extra'

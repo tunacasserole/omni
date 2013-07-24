@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/department: 'Department'
+    attributes:
+      omni/department:
+        department_id:                   Department
+        display:                         Display
+        department_nbr:                  Department Number
+        description:                     Description
+        short_name:                      Short Name
+        buyer_user_display:              Buyer User
+        buyer_user_id:                   Buyer
+        company_display:                 Company
+        company_id:                      Company
+        is_destroyed:                    Deleted
+

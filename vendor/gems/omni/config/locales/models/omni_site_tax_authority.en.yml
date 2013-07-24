@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/site_tax_authority: 'SiteTaxAuthority'
+    attributes:
+      omni/site_tax_authority:
+        site_tax_authority_id:           Site Tax Authority
+        display:                         Display
+        site_display:                    Site
+        site_id:                         Site
+        tax_authority_display:           Tax Authority
+        tax_authority_id:                Tax Authority
+        is_destroyed:                    Deleted
+

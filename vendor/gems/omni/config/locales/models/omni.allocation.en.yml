@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      omni/allocation:  'Model'
+    attributes:
+      omni/allocation:
+        allocation_id:                     'Allocation'
+        display:                           'Display'
+        allocation_nbr:                    'Allocation Nbr'
+        state:                             'State'
+        location_id:                       'Location'
+        is_destroyed:                      'Is Destroyed'

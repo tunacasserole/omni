@@ -1,0 +1,27 @@
+en:
+  activerecord:
+    models:
+      omni/projection:  'Model'
+    attributes:
+      omni/projection:
+        projection_id:                     'Projection'
+        forecast_profile_id:               'Forecast Profile'
+        region_id:                         'Region'
+        location_id:                       'Location'
+        department_id:                     'Department'
+        class_id:                          'Class'
+        subclass_id:                       'Subclass'
+        style_id:                          'Style'
+        sku_id:                            'Sku'
+        color_id:                          'Color'
+        state:                             'State'
+        display:                           'Display'
+        description:                       'Description'
+        plan_year:                         'Plan Year'
+        projection_type:                   'Projection Type'
+        version:                           'Version'
+        audit_updated_at:                  'Audit Updated At'
+        audit_created_at:                  'Audit Created At'
+        audit_created_by:                  'Audit Created By'
+        audit_updated_by:                  'Audit Updated By'
+        is_destroyed:                      'Is Destroyed'

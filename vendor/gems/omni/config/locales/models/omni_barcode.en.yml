@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      omni/barcode: 'Barcode'
+    attributes:
+      omni/barcode:
+        origin_type:                     Origin
+        is_destroyed:                    Logical Delete
+        barcode_id:                      Barcode ID
+        display:                         Barcode Name
+        barcode_nbr:                     Barcode Number
+        barcode_serial_nbr:              Barcode Serial Number
+        scan_code:                       Scan Code
+        type:                            Label Type
+        format:                          Format
+        container_display:               Container
+        container_id:                    Container Number
+

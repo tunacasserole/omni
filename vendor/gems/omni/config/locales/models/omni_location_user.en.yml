@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      omni/location_user: 'LocationUser'
+    attributes:
+      omni/location_user:
+        location_user_id:                User Location
+        display:                         Display
+        user_display:                    User
+        user_id:                         User
+        location_display:                Location
+        location_id:                     Location
+        is_manager:                      Manager
+        is_cashier:                      Cashier
+        is_sales:                        Salesperson
+        is_back_office:                  Back Office
+        short_password:                  Short Password
+        is_destroyed:                    Deleted
+

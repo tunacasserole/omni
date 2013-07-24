@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      omni/customer_site: 'CustomerSite'
+    attributes:
+      omni/customer_site:
+        customer_site_id:                Person Site
+        display:                         Display
+        customer_display:                Customer
+        customer_id:                     Person
+        site_display:                    Site
+        site_id:                         Site
+        comment:                         Comment
+        is_site_contact:                 Site Contact
+        is_teacher:                      Teacher
+        is_administrator:                Administrator
+        is_destroyed:                    Deleted
+

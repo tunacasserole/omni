@@ -1,0 +1,29 @@
+en:
+  activerecord:
+    models:
+      omni/transfer: 'Transfer'
+    attributes:
+      omni/transfer:
+        transfer_id:                     Transfer
+        display:                         Display
+        state:                           State
+        transfer_nbr:                    Transfer Nbr
+        requesting_location_display:     Requesting Location
+        requesting_location_id:          Requesting Location
+        fulfillment_location_display:    Fulfillment Location
+        fulfillment_location_id:         Fulfillment Location
+        description:                     Description
+        sku_display:                     Sku
+        sku_id:                          SKU
+        transfer_reason_display:         Transfer Reason
+        transfer_reason_id:              Transfer Reason
+        request_units:                   Request Units
+        request_date:                    Request Date
+        request_user_display:            Request User
+        request_user_id:                 Request User
+        ship_date:                       Ship Date
+        cancel_date:                     Cancel Date
+        cancel_user_display:             Cancel User
+        cancel_user_id:                  Cancel User
+        is_destroyed:                    Deleted
+

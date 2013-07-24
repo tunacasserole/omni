@@ -1,0 +1,64 @@
+en:
+  activerecord:
+    models:
+      omni/period_result: 'PeriodResult'
+    attributes:
+      omni/period_result:
+        period_result_id:                Period Result
+        display:                         Display
+        sku_display:                     Sku
+        sku_id:                          Sku
+        location_display:                Location
+        location_id:                     Location
+        period_display:                  Period
+        period_id:                       Period
+        adjusted_cost:                   Adjusted Cost
+        adjusted_retail:                 Adjusted Retail
+        adjusted_units:                  Adjusted Units
+        backorder_cost:                  Backorder Cost
+        backorder_retail:                Backorder Retail
+        backorder_units:                 Backorder Units
+        clearance_sale_cost:             Clearance Sale Cost
+        clearance_sale_retail:           Clearance Sale Retail
+        clearance_sale_units:            Clearance Sale Units
+        consumed_cost:                   Consumed Cost
+        consumed_retail:                 Consumed Retail
+        consumed_units:                  Consumed Units
+        net_inventory_cost:              Net Inventory Cost
+        net_inventory_retail:            Net Inventory Retail
+        net_inventory_units:             Net Inventory Units
+        net_sale_cost:                   Net Sale Cost
+        net_sale_retail:                 Net Sale Retail
+        net_sale_units:                  Net Sale Units
+        produced_cost:                   Produced Cost
+        produced_retail:                 Produced Retail
+        produced_units:                  Produced Units
+        promo_sale_cost:                 Promo Sale Cost
+        promo_sale_retail:               Promo Sale Retail
+        promo_sale_units:                Promo Sale Units
+        purchased_cost:                  Purchased Cost
+        purchased_retail:                Purchased Retail
+        purchased_units:                 Purchased Units
+        received_cost:                   Received Cost
+        received_retail:                 Received Retail
+        received_units:                  Received Units
+        requested_cost:                  Requested Cost
+        requested_retail:                Requested Retail
+        requested_units:                 Requested Units
+        return_sale_cost:                Return Sale Cost
+        return_sale_retail:              Return Sale Retail
+        return_sale_units:               Return Sale Units
+        shipped_cost:                    Shipped Cost
+        shipped_retail:                  Shipped Retail
+        shipped_units:                   Shipped Units
+        work_in_process_cost:            Work In Process Cost
+        work_in_process_retail:          Work In Process Retail
+        work_in_process_units:           Work In Process Units
+        professional_discount_cost:      Professional Discounts
+        employee_discount_cost:          Employee Discounts
+        manager_discount_cost:           Manager Discounts
+        ending_inventory_cost:           Ending Inventory Cost
+        ending_inventory_retail:         Ending Inventory Retail
+        ending_inventory_units:          Ending Inventory Units
+        is_destroyed:                    Is Destroyed
+

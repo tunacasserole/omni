@@ -1,0 +1,31 @@
+en:
+  activerecord:
+    models:
+      omni/company: 'Company'
+    attributes:
+      omni/company:
+        company_id:                      Company
+        display:                         Display
+        company_nbr:                     Company Number
+        description:                     Description
+        short_name:                      Short Name
+        company_url:                     Website
+        line_1:                          Line 1
+        line_2:                          Line 2
+        line_3:                          Line 3
+        line_4:                          Line 4
+        city:                            City
+        state_code:                      State Code
+        zip:                             Zip
+        country:                         Country
+        latitude:                        Latitude
+        longitude:                       Longitude
+        phone:                           Phone
+        fax:                             Fax
+        beta_factor:                     Beta Factor
+        demand_filter:                   Demand Filter
+        tracking_signal:                 Tracking Signal
+        purchase_order_header_cost:      PO Header Cost
+        carrying_cost_percent:           Carrying Cost Percent
+        is_destroyed:                    Deleted
+

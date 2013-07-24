@@ -1,0 +1,23 @@
+en:
+  activerecord:
+    models:
+      omni/till_activity: 'TillActivity'
+    attributes:
+      omni/till_activity:
+        till_activity_id:                Till Activity
+        display:                         Display
+        till_display:                    Till
+        till_id:                         Till
+        till_activity_nbr:               Till Activity Number
+        till_activity_date:              Till Activity Date
+        till_activity_reason:            Till Activity Reason
+        tender_display:                  Tender
+        tender_id:                       Tender
+        activity_count:                  Activity Count
+        activity_amount:                 Activity Amount
+        payment_display:                 Payment
+        payment_id:                      Payment
+        user_display:                    User
+        user_id:                         User
+        is_destroyed:                    Deleted
+

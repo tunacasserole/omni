@@ -1,0 +1,44 @@
+en:
+  activerecord:
+    models:
+      omni/tender: 'Tender'
+    attributes:
+      omni/tender:
+        tender_id:                       Tender
+        display:                         Display
+        description:                     Description
+        short_name:                      Short Name
+        tender_type:                     Tender Type
+        is_allow_over_tendering:         Allow Over Tendering
+        is_open_cash_drawer:             Open Cash Drawer
+        is_required_signature:           Required Signature
+        is_allow_multiple_entry:         Allow Mulitple Entry
+        is_print_duplicate_receipt:      Duplicate Receipt
+        is_allow_cash_back:              Allow Cash Back
+        maximum_tender_amount:           Maximum Tender Amount
+        display_order:                   Display Order
+        is_verify_via_edc:               Verify Via EDC
+        cash_back_limit:                 Cash Back Limit
+        cash_back_fee:                   Cash Back Fee
+        gl_account_display:              Gl Account
+        gl_account_id:                   Gl Account
+        validation_mask:                 Validation Mask
+        is_credit_card:                  Credit Card
+        is_required_account_holder:      Required Account Holder
+        is_required_account_number:      Required Account Nbr
+        is_required_expiration_date:     Required Expiration Date
+        is_required_ccv_code:            Required CCV Code
+        is_required_postal_code:         Required Zip Code
+        is_required_serial_number:       Required Serial Nbr
+        is_required_routing_number:      Required Routing Nbr
+        is_required_state:               Required State
+        is_required_license_number:      Required License Nbr
+        is_required_birth_date:          Required Birth Date
+        is_required_avs_response:        Required AVS Resonse
+        is_update_till:                  Update Till
+        is_accept_business_credit_card:  Accept Business Credit Card
+        is_enabled_for_web:              Tender Active for Web
+        is_enabled_for_pos:              Tender Active for POS
+        is_enabled_for_phone:            Tender Active for Phone
+        is_destroyed:                    Deleted
+

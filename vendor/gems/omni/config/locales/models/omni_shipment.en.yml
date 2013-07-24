@@ -1,0 +1,39 @@
+en:
+  activerecord:
+    models:
+      omni/shipment: 'Shipment'
+    attributes:
+      omni/shipment:
+        shipment_id:                     Shipment
+        display:                         Display
+        state:                           Shipment State
+        shipment_nbr:                    Shipment Number
+        location_display:                Location
+        location_id:                     Location
+        shippable_type:                  Shippable Type
+        shippable_id:                    Shippable Id
+        supplier_display:                Supplier
+        supplier_id:                     Supplier
+        tracking_number:                 Tracking Number
+        create_date:                     Create Date
+        ship_date:                       Ship Date
+        receipt_date:                    Receipt Date
+        estimated_delivery_date:         Estimated Delivery Date
+        shipping_cost:                   Shipping Cost
+        ship_name:                       Ship To
+        ship_line_1:                     Address
+        ship_line_2:                     Line 2
+        ship_line_3:                     Line 3
+        ship_line_4:                     Line 4
+        ship_city:                       City
+        ship_state_code:                 State Code
+        ship_zip:                        Zip
+        ship_country:                    Country
+        ship_latitude:                   Latitude
+        ship_longitude:                  Longitude
+        is_residential:                  Residential
+        is_commercial:                   Commercial
+        phone:                           Phone
+        email_address:                   Email Address
+        is_destroyed:                    Deleted
+

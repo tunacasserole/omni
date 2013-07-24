@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      omni/import_log:  'Model'
+    attributes:
+      omni/import_log:
+        import_log_id:                     'Import Log'
+        import_id:                         'Import'
+        import_log_nbr:                    'Import Log Nbr'
+        log_type:                          'Log Type'
+        log_title:                         'Log Title'
+        log_message:                       'Log Message'
+        is_destroyed:                      'Is Destroyed'

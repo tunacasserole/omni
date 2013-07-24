@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/supplier_rating: 'SupplierRating'
+    attributes:
+      omni/supplier_rating:
+        supplier_rating_id:              Supplier Rating
+        display:                         Display
+        supplier_display:                Supplier
+        supplier_id:                     Supplier
+        supplier_rating_subject_display: Supplier Rating Subject
+        supplier_rating_subject_id:      Rating Subject
+        rating_date:                     Rating Date
+        rating_value:                    Rating Value
+        is_destroyed:                    Deleted
+

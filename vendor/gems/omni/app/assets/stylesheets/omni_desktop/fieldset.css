@@ -1,0 +1,62 @@
+/*
+---------------------------------------------------------------------------------------
+   fieldset_scheme_styles
+
+   This CSS includes all of the necessary elements to theme a fieldset on a standard
+   form or a popup. This file should not be modified directly but instead copied and
+   a new fieldset CSS should be maintained.
+---------------------------------------------------------------------------------------
+*/
+
+/* HEADER */
+fieldset.fieldset_scheme_styles legend.x-fieldset-header {
+  background-color: #DC592F !important;
+}
+
+
+/* BODY */
+fieldset.fieldset_scheme_styles .x-fieldset-body {
+  background-color: #A13E1E !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   fieldset_scheme_2
+
+   This CSS includes all of the necessary elements to theme a fieldset on a standard
+   form or a popup. This file should not be modified directly but instead copied and
+   a new fieldset CSS should be maintained.
+---------------------------------------------------------------------------------------
+*/
+
+/* HEADER */
+fieldset.fieldset_scheme_2 legend.x-fieldset-header {
+  background-color: #DC592F !important;
+}
+
+
+/* BODY */
+fieldset.fieldset_scheme_2 .x-fieldset-body {
+  background-color: #A13E1E !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   fieldset_scheme_skus
+
+   This CSS includes all of the necessary elements to theme a fieldset on a standard
+   form or a popup. This file should not be modified directly but instead copied and
+   a new fieldset CSS should be maintained.
+---------------------------------------------------------------------------------------
+*/
+
+/* HEADER */
+fieldset.fieldset_scheme_skus legend.x-fieldset-header {
+  background-color: #DC592F !important;
+}
+
+
+/* BODY */
+fieldset.fieldset_scheme_skus .x-fieldset-body {
+  background-color: #A13E1E !important;
+}

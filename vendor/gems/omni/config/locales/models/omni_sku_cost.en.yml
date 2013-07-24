@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      omni/sku_cost: 'SkuCost'
+    attributes:
+      omni/sku_cost:
+        display:                         Display
+        sku_display:                     Sku
+        sku_id:                          Sku
+        first_cost:                      First Cost
+        last_cost:                       Last Cost
+        average_cost:                    Average Cost
+        on_hand_units:                   On Hand Units
+        cost_pool:                       Cost Pool
+        retail_pool:                     Retail Pool
+        is_updated_average_cost:         Is Updated Average Cost
+        is_destroyed:                    Is Destroyed
+        sku_cost_id:                     Sku Cost
+

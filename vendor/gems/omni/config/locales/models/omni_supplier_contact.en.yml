@@ -1,0 +1,25 @@
+en:
+  activerecord:
+    models:
+      omni/supplier_contact: 'SupplierContact'
+    attributes:
+      omni/supplier_contact:
+        supplier_contact_id:             Supplier Person
+        display:                         Display
+        supplier_display:                Supplier
+        supplier_id:                     Supplier
+        first_name:                      First Name
+        last_name:                       Last Name
+        name_prefix:                     Name Prefix
+        name_suffix:                     Name Suffix
+        department:                      Department
+        job_title:                       Job Title
+        phone:                           Phone
+        fax:                             Fax
+        email_address:                   Email Address
+        is_order_contact:                Order Contact
+        is_return_contact:               Return Contact
+        is_payment_contact:              Payment Contact
+        is_executive_contact:            Executive Contact
+        is_destroyed:                    Deleted
+

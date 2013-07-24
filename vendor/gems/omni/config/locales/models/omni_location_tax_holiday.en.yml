@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      omni/location_tax_holiday: 'LocationTaxHoliday'
+    attributes:
+      omni/location_tax_holiday:
+        location_tax_holiday_id:         Location Tax Holiday
+        display:                         Display
+        location_display:                Location
+        location_id:                     Location
+        short_name:                      Short Name
+        effective_date:                  Effective Date
+        end_date:                        Ending Date
+        description:                     Description
+        is_tax_holiday:                  Tax Holiday
+        price_cutoff:                    Price Cutoff
+        is_destroyed:                    Deleted
+

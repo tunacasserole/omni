@@ -1,0 +1,44 @@
+en:
+  activerecord:
+    models:
+      omni/container_detail: 'ContainerDetail'
+    attributes:
+      omni/container_detail:
+        container_detail_id:             Container Detail Id
+        display:                         Display
+        container_detail_nbr:            Detail Number
+        container_display:               Container
+        container_id:                    Container Number
+        state:                           Detail State
+        sku_display:                     Sku
+        sku_id:                          SKU
+        selling_units:                   Selling Units
+        commited_units:                  Committed Units
+        pack_type:                       Pack Type
+        sell_units_per_pack:             Selling Units/Pack
+        container_inventory_source:      Inventory Source Type
+        container_detail_source:         Detail Source Type
+        purchase_detail_display:         Purchase Detail
+        purchase_detail_id:              Source Purchase Detail
+        supplier_display:                Supplier
+        supplier_id:                     Source Supplier
+        supplier_item_identifier:        Supplier Item Identifier
+        lot_identifier:                  Lot Identifier
+        work_order_display:              Work Order
+        work_order_id:                   WO Detail
+        receipt_detail_display:          Receipt Detail
+        receipt_detail_id:               Receipt Detail
+        pick_ticket_display:             Pick Ticket
+        pick_ticket_id:                  Pick Ticket
+        origin_container_detail_display: Origin Container Detail
+        origin_container_detail_id:      Origin Container Detail
+        is_quality_hold:                 On QC Hold
+        is_duty_paid:                    Duty Paid
+        last_activity_date:              Last Activity Date
+        last_count_date:                 Last Count Date
+        is_audited:                      Audited
+        is_inspected:                    Inspected
+        Inspection_date:                 Inspection Date
+        create_date:                     Creation Date
+        is_destroyed:                    Deleted
+

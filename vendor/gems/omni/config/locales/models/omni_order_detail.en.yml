@@ -1,0 +1,63 @@
+en:
+  activerecord:
+    models:
+      omni/order_detail: 'OrderDetail'
+    attributes:
+      omni/order_detail:
+        order_detail_id:                 Order Detail
+        display:                         Display
+        order_display:                   Order
+        order_id:                        Order
+        order_line_nbr:                  Order Line Nbr
+        sku_display:                     Sku
+        sku_id:                          SKU
+        sku_alias_display:               Sku Alias
+        sku_alias_id:                    SKU Alias
+        delivery_method:                 Delivery Method
+        pickup_location_display:         Pickup Location
+        pickup_location_id:              Pick-up Location
+        ship_to_name:                    Ship To Name
+        ship_line_1:                     Line 1
+        ship_line_2:                     Line 2
+        ship_line_3:                     Line 3
+        ship_line_4:                     Line 4
+        ship_city:                       City
+        ship_state_code:                 State Code
+        ship_zip:                        Zip
+        ship_country:                    Country
+        ship_latitude:                   Latitude
+        ship_longitude:                  Longitude
+        is_residential:                  Residential
+        is_commercial:                   Commercial
+        phone:                           Phone
+        email_address:                   Email Address
+        site_display:                    Site
+        site_id:                         School
+        grade_display:                   Grade
+        grade_id:                        Grade
+        gender:                          Gender
+        sales_user_display:              Sales User
+        sales_user_id:                   Sales User
+        promised_date:                   Promised Date
+        state:                           Order Line State
+        serial_number:                   Serial Number
+        order_units:                     Ordered Units
+        retail_price:                    Retail Price
+        sale_price:                      Sale Price
+        sales_tax_rate:                  Sales Tax Rate
+        price_type:                      Price Type
+        is_taxable_product:              Taxable Product
+        is_tax_charged:                  Tax Charged
+        shipping_amount:                 Shipping Charge
+        discount_percent:                Discount Percent
+        discount_amount:                 Discount Amount
+        customer_discount_reason:        Customer Discount Reason
+        customer_return_reason:          Customer Return Reason
+        customer_cancel_reason:          Customer Cancel Reason
+        cancel_date:                     Cancel Date
+        reference_order_detail_display:  Reference Order Detail
+        reference_order_detail_id:       Reference Order Detail
+        is_cancelled:                    Cancelled
+        is_layaway:                      Layaway
+        is_destroyed:                    Deleted
+

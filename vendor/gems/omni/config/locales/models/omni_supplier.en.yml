@@ -1,0 +1,73 @@
+en:
+  activerecord:
+    models:
+      omni/supplier: 'Supplier'
+    attributes:
+      omni/supplier:
+        supplier_id:                     Supplier
+        display:                         Display Name
+        supplier_name:                   Supplier Name
+        supplier_nbr:                    Supplier Number
+        supplier_ucc_prefix:             UCC Prefix
+        description:                     Description
+        short_name:                      Short Name
+        legacy_supplier_code:            Mark Supplier Code
+        duns_number:                     Dun\'s Number
+        line_1:                          Line 1
+        line_2:                          Line 2
+        line_3:                          Line 3
+        line_4:                          Line 4
+        city:                            City
+        state_code:                      State Code
+        zip:                             Zip
+        country:                         Country
+        latitude:                        Latitude
+        longitude:                       Longitude
+        phone:                           Phone
+        fax:                             Fax
+        supplier_url:                    Supplier\'s Web Site
+        default_ship_thru_supplier_display: Default Ship Thru Supplier
+        default_ship_thru_supplier_id:   Default Ship-Thru Supplier
+        shipping_point:                  Shipping Point
+        ship_via:                        Ship Via
+        freight_term:                    Freight Terms
+        minimum_order_cost:              Minimum Order Cost
+        minimum_order_units:             Minimum Order Units
+        minimum_weight:                  Minimum Weight
+        minimum_cube:                    Minimum Cube
+        is_ship_cancel:                  Auto Cancel P.O.
+        return_policy:                   Return Policy
+        lead_time:                       Lead Time
+        safety_stock_days:               Safety Stock Days
+        is_calculated_lead_time:         Lead Time Calculated
+        replenishment_method:            Replenishment Method
+        is_dynamic_safety_stock:         Dynamic Safety Stock
+        default_pay_to_supplier_display: Default Pay To Supplier
+        default_pay_to_supplier_id:      Default Pay To Supplier
+        default_payment_term:            Default Payment Terms
+        bank_name:                       Bank Name
+        bank_account_name:               Bank Account Name
+        bank_account_type:               Bank Account Type
+        bank_routing_nbr:                Bank Routing Number
+        bank_account:                    Bank Account Number
+        gl_account_display:              Gl Account
+        gl_account_id:                   G/L Account Number
+        tax_identifier:                  Tax ID
+        is_required_1099:                1099 Required
+        is_edi_capable:                  EDI Supplier
+        is_one_time:                     One-Time Supplier
+        is_employee:                     Employee
+        is_payee:                        Payee
+        is_merchandise:                  Merchandise
+        is_supply:                       Supply
+        is_expense:                      Expense
+        is_creditor:                     Creditor
+        is_freight:                      Freight
+        is_factory:                      Factory
+        is_3pl:                          Logistics
+        is_agent:                        Agent
+        is_outbound_shipper:             Shipper
+        is_on_payment_hold:              Payment Hold
+        is_enabled:                      Supplier Active
+        is_destroyed:                    Deleted
+

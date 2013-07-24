@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/size_group: 'SizeGroup'
+    attributes:
+      omni/size_group:
+        size_group_id:                   Size Group
+        display:                         Display
+        size_group_nbr:                  Size Group Number
+        description:                     Description
+        short_name:                      Short Name
+        concatenated_name:               Concatenation Name
+        is_destroyed:                    Deleted
+

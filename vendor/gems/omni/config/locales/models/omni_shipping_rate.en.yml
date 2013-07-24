@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/shipping_rate: 'ShippingRate'
+    attributes:
+      omni/shipping_rate:
+        shipping_rate_id:                Supplier Shipping Rate
+        display:                         Display
+        supplier_display:                Supplier
+        supplier_id:                     Supplier
+        shipping_rate_name:              Shipping Rate Name
+        shipping_charge:                 Shipping Charge
+        minimum_sale:                    Minimum Sale To Qualify
+        maximum_sale:                    Maximum Sale To Qualify
+        is_destroyed:                    Deleted
+

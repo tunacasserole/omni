@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/cost_detail:  'Model'
+    attributes:
+      omni/cost_detail:
+        cost_detail_id:                    'Cost Detail'
+        display:                           'Display'
+        cost_id:                           'Cost'
+        cost_detail_name:                  'Cost Detail Name'
+        cost_source:                       'Cost Source'
+        cost_type:                         'Cost Type'
+        cost_amount:                       'Cost Amount'
+        cost_percent:                      'Cost Percent'
+        is_update_inventory_cost:          'Is Update Inventory Cost'
+        is_update_invoice_cost:            'Is Update Invoice Cost'
+        is_destroyed:                      'Is Destroyed'

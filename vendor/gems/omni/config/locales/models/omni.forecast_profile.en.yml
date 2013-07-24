@@ -1,0 +1,18 @@
+en:
+  activerecord:
+    models:
+      omni/forecast_profile:  'Model'
+    attributes:
+      omni/forecast_profile:
+        forecast_profile_id:               'Forecast Profile'
+        display:                           'Display'
+        sales_2012_weight:                  'Sales 2012 Weight'
+        sales_2011_weight:                  'Sales 2011 Weight'
+        sales_2010_weight:                  'Sales 2010 Weight'
+        contract_year_1_weight:            'Contract Year 1 Weight'
+        contract_year_2_weight:            'Contract Year 2 Weight'
+        contract_year_3_weight:            'Contract Year 3 Weight'
+        contract_year_4_weight:            'Contract Year 4 Weight'
+        contract_year_5_weight:            'Contract Year 5 Weight'
+        forecast_formula:                  'Forecast Formula'
+        is_destroyed:                      'Is Destroyed'

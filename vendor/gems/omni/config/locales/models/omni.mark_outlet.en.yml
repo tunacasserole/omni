@@ -1,0 +1,27 @@
+en:
+  activerecord:
+    models:
+      omni/mark_outlet:  'Model'
+    attributes:
+      omni/mark_outlet:
+        outlet_nbr:                        'Outlet Nbr'
+        name:                              'Name'
+        address1:                          'Address1'
+        address2:                          'Address2'
+        city:                              'City'
+        state_id:                          'State'
+        zip_code:                          'Zip Code'
+        phone_nbr:                         'Phone Nbr'
+        orig_out:                          'Orig Out'
+        remits_tax:                        'Remits Tax'
+        taxed_by1:                         'Taxed By1'
+        taxed_by2:                         'Taxed By2'
+        taxed_by3:                         'Taxed By3'
+        taxed_by4:                         'Taxed By4'
+        active:                            'Active'
+        information:                       'Information'
+        whse:                              'Whse'
+        email:                             'Email'
+        tax_free:                          'Tax Free'
+        tax_free_start:                    'Tax Free Start'
+        tax_free_stop:                     'Tax Free Stop'

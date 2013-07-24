@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/till_detail: 'TillDetail'
+    attributes:
+      omni/till_detail:
+        till_detail_id:                  Till Detail
+        display:                         Display
+        till_display:                    Till
+        till_id:                         Till
+        tender_display:                  Tender
+        tender_id:                       Tender
+        tender_count:                    Tender Count
+        tender_amount:                   Tender Amount
+        is_destroyed:                    Deleted
+

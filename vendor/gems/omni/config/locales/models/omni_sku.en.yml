@@ -1,0 +1,72 @@
+en:
+  activerecord:
+    models:
+      omni/sku: 'Sku'
+    attributes:
+      omni/sku:
+        sku_id:                          SKU
+        display:                         Display
+        sku_nbr:                         SKU Number
+        description:                     SKU Description
+        short_name:                      Short Name
+        pos_name:                        Receipt Name
+        design_code:                     Design Code
+        state:                           State
+        maintenance_level:               Maintenance Level
+        is_converted:                    Converted SKU
+        generic_sku_display:             Generic Sku
+        generic_sku_id:                  Generic SKU
+        add_on_sku_display:              Add On Sku
+        add_on_sku_id:                   Add On SKU
+        site_display:                    Site
+        site_id:                         School
+        conversion_type:                 Conversion Type
+        style_color_size_display:        Style Color Size
+        style_color_size_id:             Style Color Size
+        style_display:                   Style
+        style_id:                        Style
+        color_display:                   Color
+        color_id:                        Color
+        color_name:                      Color Name
+        color_short_name:                Color Short Name
+        size_display:                    Size
+        size_id:                         Size
+        effective_date:                  Effective Date
+        discontinued_date:               Discontinue Date
+        out_of_stock_date:               Out of Stock Date
+        is_enabled:                      SKU Active
+        subclass_display:                Subclass
+        subclass_id:                     Subclass
+        buyer_user_display:              Buyer User
+        buyer_user_id:                   Buyer
+        brand:                           Brand
+        product_type_display:            Product Type
+        product_type_id:                 Product Type
+        fabric_content:                  Fabric Content
+        initial_retail_price:            Initial Retail Price
+        suggested_retail_price:          Suggested Retail Price
+        smoothing_factor:                Smoothing Factor
+        replenishment_method:            Replenishement Method
+        minimum_on_hand_units:           Minimum On Hand Units
+        maximum_on_hand_units:           Maximum On Hand Units
+        pack_type:                       Replenishment Multiple
+        replenishment_source:            Replenishment Source
+        is_not_stocked:                  Non-Inventory Product
+        sell_unit_uom_code:              Selling Unit of Measure
+        sell_unit_length:                Sell Unit Length
+        sell_unit_height:                Sell Unit Height
+        sell_unit_width:                 Sell Unit Width
+        sell_unit_weight:                Sell Unit Weight
+        is_conveyable_sell_unit:         Conveyable
+        is_discountable:                 Discountable
+        is_taxable:                      Taxable
+        supplier_display:                Supplier
+        supplier_id:                     Primary Supplier
+        order_uom_code:                  Ordering Unit of Measure
+        order_package_type:              Packaging Type
+        garment_pieces:                  Number of pieces
+        stock_nbr:                       Stock Number        
+        is_special_order:                Special Order
+        is_special_size:                 Special Size/Cut
+        is_destroyed:                    Deleted
+

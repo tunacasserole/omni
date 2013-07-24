@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      omni/rule: 'Rule'
+    attributes:
+      omni/rule:
+        rule_id:                         Rule
+        display:                         Display
+        ruleset_display:                 Ruleset
+        ruleset_id:                      Ruleset
+        rule_type:                       Rule Type
+        input_attribute:                 Input Attribute
+        model_name:                      Model Name
+        attribute_name:                  Attribute Name
+        rule_action:                     Rule Action
+        is_active:                       Is Active
+        rule_seq:                        Rule Seq
+        is_destroyed:                    Is Destroyed
+

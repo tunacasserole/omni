@@ -1,0 +1,21 @@
+en:
+  activerecord:
+    models:
+      omni/assigned_barcode: 'AssignedBarcode'
+    attributes:
+      omni/assigned_barcode:
+        assigned_barcode_id:             Assigned Barcode Id
+        display:                         Assigned Barcode Name
+        assigned_barcode_nbr:            Assigned Barcode Number
+        assigned_to_type:                Assigned To Type
+        label_type:                      Label Type Assigned
+        supplier_display:                Supplier
+        supplier_id:                     Supplier Name
+        purchase_display:                Purchase
+        purchase_id:                     Purchase Name
+        is_truncated:                    Was Assigned Block Truncated
+        range_start:                     Start of Range
+        range_end:                       End of Range
+        range_description:               Description
+        is_destroyed:                    Logical Delete
+

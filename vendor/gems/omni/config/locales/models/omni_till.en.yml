@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      omni/till: 'Till'
+    attributes:
+      omni/till:
+        till_id:                         Till
+        display:                         Display
+        location_display:                Location
+        location_id:                     Location
+        till_nbr:                        Till Number
+        is_destroyed:                    Deleted
+

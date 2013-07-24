@@ -1,0 +1,35 @@
+en:
+  activerecord:
+    models:
+      omni/site: 'Site'
+    attributes:
+      omni/site:
+        site_id:                         Site
+        display:                         Display
+        site_name:                       Site Name
+        parent_site_display:             Parent Site
+        parent_site_id:                  Parent Site
+        school_nbr:                      School Number
+        description:                     Description
+        short_name:                      Short Name
+        concatenated_name:               Concatenation Name
+        site_type:                       Site Type
+        location_display:                Location
+        location_id:                     Primary Outlet
+        is_on_web:                       Web Shopping
+        gradeset:                        Gradeset
+        site_gender:                     Gender
+        line_1:                          Line 1
+        line_2:                          Line 2
+        line_3:                          Line 3
+        line_4:                          Line 4
+        city:                            City
+        state_code:                      State Code
+        zip:                             Zip
+        country:                         Country
+        latitude:                        Latitude
+        longitude:                       Longitude
+        phone:                           Phone
+        fax:                             Fax
+        is_destroyed:                    Deleted
+

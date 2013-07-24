@@ -1,0 +1,38 @@
+en:
+  activerecord:
+    models:
+      omni/receipt: 'Receipt'
+    attributes:
+      omni/receipt:
+        receipt_id:                      Receipt
+        display:                         Display
+        receipt_nbr:                     Receipt Nbr
+        location_display:                Location
+        location_id:                     Location
+        carrier_supplier_display:        Carrier Supplier
+        carrier_supplier_id:             Carrier Supplier
+        trailer_identifier:              Trailer Identifier
+        create_date:                     Create Date
+        ship_date:                       Ship Date
+        appointment_date:                Appointment Date
+        appointment_duration:            Appointment Duration
+        start_date:                      Start Date
+        complete_date:                   Complete Date
+        completed_by_user_display:       Completed By User
+        completed_by_user_id:            Completed By
+        pro_number:                      Pro Number
+        bill_of_lading_number:           Bill Of Lading Number
+        packing_slip_number:             Packing Slip Number
+        seal_1_number:                   Seal Number
+        seal_2_number:                   Seal Number
+        seal_3_number:                   Seal Number
+        asn_number:                      ASN Number
+        is_expected_asn:                 ASN Expected
+        standard_carrier_alpha_code:     Standard Carrier Alpha Code
+        ship_point:                      Ship Point
+        ship_via:                        Ship Via
+        freight_terms:                   Freight Terms
+        invoice_number:                  Invoice Number
+        state:                           State
+        is_destroyed:                    Deleted
+

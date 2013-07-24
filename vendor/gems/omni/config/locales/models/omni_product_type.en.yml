@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/product_type: 'ProductType'
+    attributes:
+      omni/product_type:
+        product_type_id:                 Product Type
+        display:                         Display
+        description:                     Description
+        short_name:                      Short Name
+        is_fabric:                       Fabric Product
+        is_trim:                         Trim Product
+        is_converted:                    Converted Product
+        is_labor:                        Labor Charge
+        is_shipping:                     Shipping Charge
+        is_destroyed:                    Deleted
+

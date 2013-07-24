@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      omni/transfer_reason: 'TransferReason'
+    attributes:
+      omni/transfer_reason:
+        transfer_reason_id:              Transfer Reason
+        display:                         Display
+        description:                     Description
+        short_name:                      Short Name
+        is_destroyed:                    Deleted
+

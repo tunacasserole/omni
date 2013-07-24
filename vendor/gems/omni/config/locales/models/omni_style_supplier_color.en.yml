@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/style_supplier_color: 'StyleSupplierColor'
+    attributes:
+      omni/style_supplier_color:
+        style_supplier_color_id:         Style Supplier Color
+        display:                         Display
+        style_supplier_display:          Style Supplier
+        style_supplier_id:               Style Supplier
+        style_color_display:             Style Color
+        style_color_id:                  Style Color
+        is_destroyed:                    Deleted
+

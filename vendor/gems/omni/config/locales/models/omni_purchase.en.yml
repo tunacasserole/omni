@@ -1,0 +1,43 @@
+en:
+  activerecord:
+    models:
+      omni/purchase: 'Purchase'
+    attributes:
+      omni/purchase:
+        purchase_id:                     Purchase
+        display:                         Display
+        purchase_order_nbr:              Purchase Order Nbr
+        supplier_display:                Supplier
+        supplier_id:                     Supplier
+        location_display:                Location
+        location_id:                     Location
+        purchase_type:                   Purchase Type
+        purchase_source:                 Purchase Source
+        state:                           State
+        order_date:                      Order Date
+        ordered_by_user_display:         Ordered By User
+        ordered_by_user_id:              Ordered By User
+        ship_date:                       Ship Date
+        delivery_date:                   Delivery Date
+        cancel_not_shipped_by_date:      Cancel Not Shipped By Date
+        cancel_not_received_by_date:     Cancel Not Received By Date
+        approval_date:                   Approval Date
+        first_receipt_date:              Receipt Date
+        cancelled_date:                  Cancelled Date
+        payment_term:                    Payment Term
+        freight_term:                    Freight Term
+        ship_via:                        Ship Via
+        fob_point:                       FOB Point
+        is_phone_order:                  Is Phone Order
+        confirmed_by_user_display:       Confirmed By User
+        confirmed_by_user_id:            Confirmed By User
+        master_purchase_display:         Master Purchase
+        master_purchase_id:              Master Purchase
+        carrier_supplier_display:        Carrier Supplier
+        carrier_supplier_id:             Carrier Supplier
+        is_special_order:                Is Special Order
+        is_ship_cancel:                  Is Ship Cancel
+        estimated_lead_time_days:        Estimated Lead Time Days
+        is_destroyed:                    Deleted
+        lead_time:                       Lead Time
+
