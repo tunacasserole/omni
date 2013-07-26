@@ -65,18 +65,6 @@ class Omni::GlAccount < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :display
-    string   :gl_main_account
-    string   :gl_sub_account
-    boolean  :is_location_fill
-    string   :gl_account_type
- 
-    text     :display_fulltext, :using => :display
-    text     :gl_main_account_fulltext, :using => :gl_main_account
-    text     :gl_sub_account_fulltext, :using => :gl_sub_account
-    text     :gl_account_type_fulltext, :using => :gl_account_type
-  end 
   # INDEXING (End)
 
 
