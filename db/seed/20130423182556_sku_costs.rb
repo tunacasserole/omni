@@ -1,0 +1,3 @@
+# Omni::SkuCost.delete_all
+# Omni::SkuCost.create(:cost_id => "CF7270A8AC6411E2964500FF58D32228",:display =>"1801LGR-GENERIC-0000000-2017-04",:sku_id =>"5E195FF2AC5A11E299E700FF58D32228",:first_cost =>"12",:last_cost =>"16",:average_cost =>"14",:on_hand_units =>"12",:cost_pool =>"168",:retail_pool =>"",:is_updated_average_cost =>"")
+# Omni::SkuCost.create(:cost_id => "CF7556E2AC6411E2964500FF58D32228",:display =>"1801LGR-GENERIC-0000000-2017-02",:sku_id =>"5E0E3C30AC5A11E299E700FF58D32228",:first_cost =>"10",:last_cost =>"14",:average_cost =>"12",:on_hand_units =>"10",:cost_pool =>"120",:retail_pool =>"",:is_updated_average_cost =>"")

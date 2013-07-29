@@ -1,0 +1,3 @@
+#Omni::Bom.delete_all
+#Omni::Bom.create(:bom_id => "54117B42AC6011E299E700FF58D32228",:display =>"Conversion 1",:bomable_type =>"",:bomable_id =>" ",:bom_nbr =>"",:description =>"",:bom_type =>"CONVERSION",:version =>"",:effective_date =>"",:end_date =>"",:is_primary_bom =>"",:labor_hours =>"",:machine_hours =>"",:construction_hours =>"",:is_enabled =>"")
+#Omni::Bom.create(:bom_id => "5415E826AC6011E299E700FF58D32228",:display =>"Another Conversion",:bomable_type =>"",:bomable_id =>" ",:bom_nbr =>"",:description =>"",:bom_type =>"CONVERSION",:version =>"",:effective_date =>"",:end_date =>"",:is_primary_bom =>"",:labor_hours =>"",:machine_hours =>"",:construction_hours =>"",:is_enabled =>"")

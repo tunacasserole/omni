@@ -72,24 +72,22 @@ class Omni::Voucher < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :customer_display do customer.display if customer end
-    string   :voucher_nbr
-    string   :voucher_type
-    integer  :initial_balance
-    integer  :current_balance
-    date     :issue_date
-    date     :expiration_date
+  # searchable do
+  #   string   :customer_display do customer.display if customer end
+  #   string   :voucher_nbr
+  #   string   :voucher_type
+  #   integer  :initial_balance
+  #   integer  :current_balance
+  #   date     :issue_date
+  #   date     :expiration_date
  
-    text     :customer_display_fulltext, :using => :customer_display
-    text     :voucher_nbr_fulltext, :using => :voucher_nbr
-    text     :voucher_type_fulltext, :using => :voucher_type
-    text     :initial_balance_fulltext, :using => :initial_balance
-    text     :current_balance_fulltext, :using => :current_balance
-  end 
+  #   text     :customer_display_fulltext, :using => :customer_display
+  #   text     :voucher_nbr_fulltext, :using => :voucher_nbr
+  #   text     :voucher_type_fulltext, :using => :voucher_type
+  #   text     :initial_balance_fulltext, :using => :initial_balance
+  #   text     :current_balance_fulltext, :using => :current_balance
+  # end 
   # INDEXING (End)
-
-
 
 end # class Omni::Voucher
 
