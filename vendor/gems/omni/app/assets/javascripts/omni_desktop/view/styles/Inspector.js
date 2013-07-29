@@ -97,38 +97,38 @@ Ext.define('Omni.view.styles.Inspector', {
           model_id:   me.record.get('style_id')
         }
 
-        ,{
-          xtype    : 'buildit-CardGroup',
-          title    : 'Parker Information',
-          cards    : [
-                      {title: 'Parker Stock', xtype: 'mark-products-Explorer', module: 'addresses',
-                         defaultSearch: { with: 
-                           {
-                             stock_nbr:   {equal_to: me.record.get('display').substring(0,4)}
-                           }
-                        }
-                      }
-                      ,{title: 'Parker Inventory', xtype: 'mark-inventories-Explorer', module: 'email_addresses',
-                         defaultSearch: { with: 
-                           {
-                             stock_nbr:   {equal_to: me.record.get('display').substring(0,4)}
-                           }
-                        }
-                        ,showBadge: true              
-                      }
-                      ,{title: 'Parker Order Lines', xtype: 'mark-order_lines-Explorer', module: 'telephones',
-                         defaultSearch: { with: 
-                           {
-                             stock_nbr:   {equal_to: me.record.get('display').substring(0,4)}
-                           }
-                        }
-                        ,showBadge: true
-                      }
-                      // ,{title: 'Omni Stock', xtype: 'mark-products-Form', module: 'tasks',
-                      //      seeker: this.seeker
-                      // }
-          ]
-        }                          
+        // ,{
+        //   xtype    : 'buildit-CardGroup',
+        //   title    : 'Parker Information',
+        //   cards    : [
+        //               {title: 'Parker Stock', xtype: 'mark-products-Explorer', module: 'addresses',
+        //                  defaultSearch: { with: 
+        //                    {
+        //                      stock_nbr:   {equal_to: me.record.get('display').substring(0,4)}
+        //                    }
+        //                 }
+        //               }
+        //               ,{title: 'Parker Inventory', xtype: 'mark-inventories-Explorer', module: 'email_addresses',
+        //                  defaultSearch: { with: 
+        //                    {
+        //                      stock_nbr:   {equal_to: me.record.get('display').substring(0,4)}
+        //                    }
+        //                 }
+        //                 ,showBadge: true              
+        //               }
+        //               ,{title: 'Parker Order Lines', xtype: 'mark-order_lines-Explorer', module: 'telephones',
+        //                  defaultSearch: { with: 
+        //                    {
+        //                      stock_nbr:   {equal_to: me.record.get('display').substring(0,4)}
+        //                    }
+        //                 }
+        //                 ,showBadge: true
+        //               }
+        //               ,{title: 'Omni Stock', xtype: 'mark-products-Form', module: 'tasks',
+        //                    seeker: this.seeker
+        //               }
+        //   ]
+        // }                          
       ]
     });
     // CARDS (End)
