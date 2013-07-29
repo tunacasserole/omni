@@ -1,0 +1,2 @@
+Omni::SkuPromoPrice.delete_all
+Omni::SkuPromoPrice.create(:sku_promo_price_id => "FE060682AE9411E2BCCC00FF58D32228",:display =>"Promotion for 1801LGR-GENERIC",:sku_id =>"5E0E3C30AC5A11E299E700FF58D32228",:price_book_id =>" ",:effective_date =>"",:end_date =>"",:regular_units =>"",:promo_units =>"",:promo_percent =>"",:promo_amount =>"",:promo_price =>"",:maximum_promo_units =>"",:sales_category =>"",:promotion_id =>" ")

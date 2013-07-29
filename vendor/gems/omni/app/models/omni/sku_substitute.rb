@@ -70,21 +70,21 @@ class Omni::SkuSubstitute < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :sku_id    
-    string   :sku_display do sku.display if sku end
-    string   :substitute_sku_display do substitute_sku.display if substitute_sku end
-    string   :sku_substitute_type do |x| Buildit::Lookup::Manager.display_for('SKU_SUBSTITUTE_TYPE', x.sku_substitute_type) end
-    date     :effective_date
-    date     :end_date
-    integer  :priority
-    string   :display
+  # searchable do
+  #   string   :sku_id    
+  #   string   :sku_display do sku.display if sku end
+  #   string   :substitute_sku_display do substitute_sku.display if substitute_sku end
+  #   string   :sku_substitute_type do |x| Buildit::Lookup::Manager.display_for('SKU_SUBSTITUTE_TYPE', x.sku_substitute_type) end
+  #   date     :effective_date
+  #   date     :end_date
+  #   integer  :priority
+  #   string   :display
     
-    text     :sku_display_fulltext, :using => :sku_display
-    text     :substitute_sku_display_fulltext, :using => :substitute_sku_display
-    text     :sku_substitute_type_fulltext, :using => :sku_substitute_type
-    text     :priority_fulltext, :using => :priority
-  end 
+  #   text     :sku_display_fulltext, :using => :sku_display
+  #   text     :substitute_sku_display_fulltext, :using => :substitute_sku_display
+  #   text     :sku_substitute_type_fulltext, :using => :sku_substitute_type
+  #   text     :priority_fulltext, :using => :priority
+  # end 
   # INDEXING (End)
 
 
