@@ -18,8 +18,24 @@ Ext.define('Omni.view.colors.Inspector',{
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
-        {title: 'Profile',           xtype: 'omni-colors-Form'}
-      ]
+        { 
+          title:  'Profile',
+          xtype:  'omni-colors-Form',
+          module: 'cfars'
+        }
+
+       ,{
+          title: 'SKUs', 
+          xtype: 'omni-skus-Explorer', 
+          module: 'contracts',
+          defaultSearch: { with: 
+             {
+               color_id:   {equal_to: me.record.get('color_id')}
+             }
+          },
+          showBadge: true
+        }
+     ]
     });
     // CARDS (End)
 
@@ -33,3 +49,4 @@ Ext.define('Omni.view.colors.Inspector',{
     this.callParent();
   }
 });
+

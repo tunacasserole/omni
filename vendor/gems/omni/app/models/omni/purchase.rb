@@ -77,7 +77,7 @@ class Omni::Purchase < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :purchase_id
-    string   :pruchase_display
+    string   :purchase_display
     string   :display
     string   :purchase_id
     string   :state
