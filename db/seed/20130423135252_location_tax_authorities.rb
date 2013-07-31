@@ -1,5 +1,0 @@
-Omni::LocationTaxAuthority.delete_all
-Omni::LocationTaxAuthority.create(:location_tax_authority_id => "AAE84D32AC3E11E2947800FF58D32228",:display =>"#1 North Post Oak - Houston - Texas",:location_id =>"51713A3EAC3E11E2947800FF58D32228",:tax_authority_id =>"83586408A6C811E2AE1900FF58D32228")
-Omni::LocationTaxAuthority.create(:location_tax_authority_id => "AB1FB1AAAC3E11E2947800FF58D32228",:display =>"#1 North Post Oak - Houston - Houston",:location_id =>"51713A3EAC3E11E2947800FF58D32228",:tax_authority_id =>"8358B228A6C811E2AE1900FF58D32228")
-Omni::LocationTaxAuthority.create(:location_tax_authority_id => "AB215F64AC3E11E2947800FF58D32228",:display =>"#2 Alpha - Dallas - Texas",:location_id =>"51892F68AC3E11E2947800FF58D32228",:tax_authority_id =>"83586408A6C811E2AE1900FF58D32228")
-Omni::LocationTaxAuthority.create(:location_tax_authority_id => "AB22BEF4AC3E11E2947800FF58D32228",:display =>"#2 Alpha - Dallas - Dallas",:location_id =>"51892F68AC3E11E2947800FF58D32228",:tax_authority_id =>"8358D938A6C811E2AE1900FF58D32228")

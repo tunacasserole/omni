@@ -1,3 +1,0 @@
-Omni::PickTicket.delete_all
-Omni::PickTicket.create(:pick_ticket_id => "ECE60B16AD1A11E2A53100FF58D32228",:display =>"Pick Ticket Parker",:state =>"",:pick_ticket_nbr =>"",:pickable_id =>" ",:pickable_type =>"",:fulfillment_location_id =>" ",:work_order_id =>" ",:request_units =>"",:complete_units =>"",:release_date =>"",:start_date =>"",:complete_date =>"",:ship_date =>"")
-Omni::PickTicket.create(:pick_ticket_id => "ED1E59F8AD1A11E2A53100FF58D32228",:display =>"Pick ticket Charter",:state =>"",:pick_ticket_nbr =>"",:pickable_id =>" ",:pickable_type =>"",:fulfillment_location_id =>" ",:work_order_id =>" ",:request_units =>"",:complete_units =>"",:release_date =>"",:start_date =>"",:complete_date =>"",:ship_date =>"")
