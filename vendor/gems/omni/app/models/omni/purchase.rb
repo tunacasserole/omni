@@ -40,7 +40,7 @@ class Omni::Purchase < ActiveRecord::Base
   belongs_to   :supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'  
   belongs_to   :ordered_by_user,                  :class_name => 'Buildit::User',      :foreign_key => 'ordered_by_user_id'  
   belongs_to   :confirmed_by_user,                  :class_name => 'Buildit::User',      :foreign_key => 'confirmed_by_user_id'  
-  belongs_to   :master_purchase,                  :class_name => 'Omni:Purchase',      :foreign_key => 'master_purchase_id'    
+  belongs_to   :master_purchase,                  :class_name => 'Omni::Purchase',      :foreign_key => 'master_purchase_id'    
   belongs_to   :carrier_supplier,           :class_name => 'Omni::Supplier',               :foreign_key => 'carrier_supplier_id'              
   # ASSOCIATIONS (End)
 
