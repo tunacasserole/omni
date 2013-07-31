@@ -33,7 +33,7 @@ Ext.define('Omni.view.styles.Inspector', {
           xtype: 'omni-styles-Form',
           module: 'cfars'
         }
-        ,{title: 'Projection Details', xtype: 'omni-projection_details-Explorer',
+        ,{title: 'Styleion Details', xtype: 'omni-projection_details-Explorer',
            defaultSearch: { with: 
              {
                style_display:   {equal_to: me.record.get('display')}
@@ -89,12 +89,40 @@ Ext.define('Omni.view.styles.Inspector', {
             }
           }
         } 
-        ,{
-          title:      'Audit',
-          xtype:      'buildit-audits-Explorer',
-          module:     'audit',
-          model:      'Omni::Style',
-          model_id:   me.record.get('style_id')
+        {
+          xtype    : 'buildit-CardGroup',
+          title    : 'Support',
+          module   : 'notes',
+          cards    : [
+            {
+              title: 'Notes',
+              xtype: 'buildit-notes-Explorer',
+              defaultSearch: { with:
+                {
+                  notable_type: {equal_to: 'Omni::Style'},
+                  notable_id:   {equal_to: me.record.get('style_id')}
+                }
+              },
+              showBadge: true
+            },
+            {
+              title: 'Attachments',
+              xtype: 'buildit-attachments-Explorer',
+              defaultSearch: { with:
+                {
+                  attachable_type: {equal_to: 'Omni::Style'},
+                  attachable_id:   {equal_to: me.record.get('style_id')}
+                }
+              },
+              showBadge: true
+            },
+            {
+              title:      'Audit',
+              xtype:      'buildit-audits-Explorer',
+              model:      'Omni::Style',
+              model_id:   me.record.get('style_id')
+            }
+          ]
         }
 
         // ,{

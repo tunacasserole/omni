@@ -29,18 +29,41 @@ Ext.define('Omni.view.suppliers.Inspector', {
           title: 'Profile',
           xtype: 'omni-suppliers-Form'
         },
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        },
+        ,{title: 'Styles', xtype: 'omni-styles-Explorer', module: 'cfars',
+           defaultSearch: { with: 
+             {
+               supplier_id:   {equal_to: me.record.get('supplier_id')}
+             }
+          },
+          showBadge: true
+        }
+        ,{title: 'SKUs', xtype: 'omni-sku_suppliers-Explorer', module: 'contracts',
+           defaultSearch: { with: 
+             {
+               supplier_id:   {equal_to: me.record.get('supplier_id ')}
+             }
+          },
+          showBadge: true
+        }                
         {
           title: 'Ratings',
-          xtype: 'omni-supplier_ratings-Explorer'
+          xtype: 'omni-supplier_ratings-Explorer', module: 'projects'
+           defaultSearch: { with: 
+             {
+               supplier_id:   {equal_to: me.record.get('supplier_id')}
+             }
+          },
+          showBadge: true
+
         },
         {
           title: 'Contacts',
           xtype: 'omni-supplier_contacts-Explorer'
         }
+        {
+          title: 'Notes',
+          xtype: 'buildit-notes-Explorer'
+        },        
       ]
     });
     // CARDS (End)

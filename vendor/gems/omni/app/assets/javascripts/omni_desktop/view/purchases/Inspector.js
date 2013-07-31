@@ -40,6 +40,41 @@ Ext.define('Omni.view.purchases.Inspector',{
              }
           }
         }
+        ,{
+          xtype    : 'buildit-CardGroup',
+          title    : 'Support',
+          module   : 'notes',
+          cards    : [
+            {
+              title: 'Notes',
+              xtype: 'buildit-notes-Explorer',
+              defaultSearch: { with:
+                {
+                  notable_type: {equal_to: 'Omni::Purchase'},
+                  notable_id:   {equal_to: me.record.get('purchase_id')}
+                }
+              },
+              showBadge: true
+            },
+            {
+              title: 'Attachments',
+              xtype: 'buildit-attachments-Explorer',
+              defaultSearch: { with:
+                {
+                  attachable_type: {equal_to: 'Omni::Purchase'},
+                  attachable_id:   {equal_to: me.record.get('purchase_id')}
+                }
+              },
+              showBadge: true
+            },
+            {
+              title:      'Audit',
+              xtype:      'buildit-audits-Explorer',
+              model:      'Omni::Purchase',
+              model_id:   me.record.get('purchase_id')
+            }
+          ]
+        }        
       ]
     });
     // CARDS (End)
