@@ -109,33 +109,49 @@ Ext.define('Omni.view.skus.Inspector', {
           }
         }
         ,{
-          title: 'Style',
-          xtype: 'omni-styles-Inspector', module: 'tracks',
+          title: 'Sku',
+          xtype: 'omni-skus-Inspector', module: 'tracks',
           defaultSearch: { with: 
              {
-               style_id:   {equal_to: me.record.get('style_id')}
+               sku_id:   {equal_to: me.record.get('sku_id')}
              }
           }
         }                                
-        ,{title: 'Notes',   xtype: 'buildit-notes-Explorer', module: 'notes',                     
-          defaultSearch: { with: 
-            {
-              notable_type: {equal_to: 'Omni::Sku'},
-              notable_id:   {equal_to: me.record.get('sku_id')}
-            }
-          }
-        }        
         ,{
-          title: 'Attachments',
-          xtype: 'buildit-attachments-Explorer',  
-          module: 'attachments',                    
-          defaultSearch: { with: 
+          xtype    : 'buildit-CardGroup',
+          title    : 'Support',
+          module   : 'notes',
+          cards    : [
             {
-              attachable_type: {equal_to: 'Omni::Sku'},
-              attachable_id:   {equal_to: me.record.get('sku_id')}
+              title: 'Notes',
+              xtype: 'buildit-notes-Explorer',
+              defaultSearch: { with:
+                {
+                  notable_type: {equal_to: 'Omni::Sku'},
+                  notable_id:   {equal_to: me.record.get('sku_id')}
+                }
+              },
+              showBadge: true
+            },
+            {
+              title: 'Attachments',
+              xtype: 'buildit-attachments-Explorer',
+              defaultSearch: { with:
+                {
+                  attachable_type: {equal_to: 'Omni::Sku'},
+                  attachable_id:   {equal_to: me.record.get('sku_id')}
+                }
+              },
+              showBadge: true
+            },
+            {
+              title:      'Audit',
+              xtype:      'buildit-audits-Explorer',
+              model:      'Omni::Sku',
+              model_id:   me.record.get('sku_id')
             }
-          }
-        }          ]
+          ]
+        }
     });
     // CARDS (End)
     

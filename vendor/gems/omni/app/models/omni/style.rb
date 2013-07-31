@@ -127,11 +127,11 @@ class Omni::Style < ActiveRecord::Base
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :planning do
+  state_machine :state, :initial => :draft do
 
   ### CALLBACKS ###
-    after_transition :on => :release,     :do => :after_release
-    after_transition :on => :approve,     :do => :after_approve    
+    after_transition :on => :plan,        :do => :after_plan
+    after_transition :on => :activate,    :do => :after_activate   
     after_transition :on => :locations,   :do => :after_locations    
     after_transition :on => :build,       :do => :after_build
     after_transition :on => :discontinue, :do => :after_discontinue
@@ -140,12 +140,12 @@ class Omni::Style < ActiveRecord::Base
     after_transition :on => :activate,    :do => :after_activate
     
     ## EVENTS ###
-    event :release do
-      transition :planning => :draft
+    event :plan do
+      transition :draft => :planning
     end
 
     event :approve do
-      transition :draft => :active
+      transition :planning => :active
     end
 
     event :locations do
@@ -184,15 +184,15 @@ class Omni::Style < ActiveRecord::Base
 
 
   # STATE HANDLERS (Start) ====================================================================
-  def after_release
-    puts '--- done with after_release ---'
+  def after_plan
+    puts '--- done with after_plan ---'
     puts 'ready...'
   end
 
-  def after_approve
+  def after_activate
     self.effective_date = Time.now
     # self.save
-    puts '--- done with approve ---'
+    puts '--- done with activate ---'
     puts 'ready...'
   end
 

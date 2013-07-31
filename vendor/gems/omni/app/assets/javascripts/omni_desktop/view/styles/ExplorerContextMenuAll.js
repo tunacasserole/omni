@@ -117,40 +117,40 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
         // LEFT ACTIONS (Start) =================================================================
 
         /**
-         * RELEASE
+         * PLAN
          * Supports the release of the selected items in the explorer grid. If none
          * are selected then no records are released.
          */
         {
-          text:'Release',
+          text:'Start Planning',
           cls: 'icon-applications',
-          action: 'release',
+          action: 'plan',
           confirm: true,
           multi: true,
           privileges: [],
           listeners: {
             click: {
-              fn: this.clickRelease,
+              fn: this.clickPlan,
               scope: me
             }
           }
         }
 
         /**
-         * APPROVE
+         * ACTIVATE
          * Supports the deletion of the selected items in the explorer grid. If none
          * are selected then no records are approved.
          */
         ,{
-          text:'Approve',
+          text:'Activate',
           cls: 'icon-applications',
-          action: 'approve',
+          action: 'activate',
           confirm: true,
           multi: true,
           privileges: [],
           listeners: {
             click: {
-              fn: this.clickApprove,
+              fn: this.clickActivate,
               scope: me
             }
           }
@@ -206,12 +206,12 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
 
   // CUSTOM ACTION HANDLERS (Start) ====================================================================
 
-  clickRelease: function(btn, e, eOpts){
-    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'release');
+  clickPlan: function(btn, e, eOpts){
+    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'plan');
   },
   
-  clickApprove: function(btn, e, eOpts){
-    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'approve');
+  clickActivate: function(btn, e, eOpts){
+    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'activate');
   },
 
   clickLocations: function(btn, e, eOpts){
