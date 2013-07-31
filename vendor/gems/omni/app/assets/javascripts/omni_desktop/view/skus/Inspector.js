@@ -116,7 +116,8 @@ Ext.define('Omni.view.skus.Inspector', {
                sku_id:   {equal_to: me.record.get('sku_id')}
              }
           }
-        }                                
+        }
+                                         
         ,{
           xtype    : 'buildit-CardGroup',
           title    : 'Support',
