@@ -89,7 +89,7 @@ Ext.define('Omni.view.styles.Inspector', {
             }
           }
         } 
-        {
+        ,{
           xtype    : 'buildit-CardGroup',
           title    : 'Support',
           module   : 'notes',
