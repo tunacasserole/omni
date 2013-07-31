@@ -1,7 +1,7 @@
 class CreateOmniCosts < ActiveRecord::Migration
   def change
   	# ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
-    #@connection = ActiveRecord::Base.connection
+    @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('costs')
       create_table(:costs, :id => false) do |t|
         t.column   :cost_id,                         :string,            :null  =>  false,   :limit   => 32
