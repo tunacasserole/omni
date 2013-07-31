@@ -71,7 +71,7 @@ Ext.define('Omni.view.purchases.Form', {
             { xtype: 'buildit-Lookup', name: 'purchase_type',               fieldLabel: this.purchase_typeLabel         , allowBlank: true, category:   'PURCHASE_TYPE' },            
             { xtype: 'buildit-Lookup', name: 'purchase_source',               fieldLabel: this.purchase_sourceLabel         , allowBlank: true, category:   'PURCHASE_SOURCE' },            
             { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true, disabled: true },    
-            { xtype: 'textfield', name: 'order_date',                     fieldLabel: this.order_dateLabel                  , allowBlank: true },    
+            { xtype: 'datefield', name: 'order_date',                     fieldLabel: this.order_dateLabel                  , allowBlank: true },    
             { xtype: 'buildit-Locator',   name: 'ordered_by_user_id',          fieldLabel: this.ordered_by_user_idLabel                 , allowBlank: true,  store:   Ext.create('Buildit.store.User',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'ordered_by_user_id', itemTpl:'{display}' },
             { xtype: 'datefield', name: 'ship_date',                      fieldLabel: this.ship_dateLabel                   , allowBlank: true },    
             { xtype: 'datefield', name: 'delivery_date',                  fieldLabel: this.delivery_dateLabel               , allowBlank: true },    
