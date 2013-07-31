@@ -29,7 +29,7 @@ Ext.define('Omni.view.suppliers.Inspector', {
           title: 'Profile',
           xtype: 'omni-suppliers-Form'
         },
-        ,{title: 'Styles', xtype: 'omni-styles-Explorer', module: 'cfars',
+        ,{title: 'Suppliers', xtype: 'omni-suppliers-Explorer', module: 'cfars',
            defaultSearch: { with: 
              {
                supplier_id:   {equal_to: me.record.get('supplier_id')}
@@ -45,9 +45,9 @@ Ext.define('Omni.view.suppliers.Inspector', {
           },
           showBadge: true
         }                
-        {
+        ,{
           title: 'Ratings',
-          xtype: 'omni-supplier_ratings-Explorer', module: 'projects'
+          xtype: 'omni-supplier_ratings-Explorer', module: 'projects', module: 'projects',
            defaultSearch: { with: 
              {
                supplier_id:   {equal_to: me.record.get('supplier_id')}
@@ -55,15 +55,46 @@ Ext.define('Omni.view.suppliers.Inspector', {
           },
           showBadge: true
 
-        },
-        {
+        }
+        ,{
           title: 'Contacts',
           xtype: 'omni-supplier_contacts-Explorer'
         }
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        },        
+        ,{
+          xtype    : 'buildit-CardGroup',
+          title    : 'Support',
+          module   : 'notes',
+          cards    : [
+            {
+              title: 'Notes',
+              xtype: 'buildit-notes-Explorer',
+              defaultSearch: { with:
+                {
+                  notable_type: {equal_to: 'Omni::Supplier'},
+                  notable_id:   {equal_to: me.record.get('supplier_id')}
+                }
+              },
+              showBadge: true
+            },
+            {
+              title: 'Attachments',
+              xtype: 'buildit-attachments-Explorer',
+              defaultSearch: { with:
+                {
+                  attachable_type: {equal_to: 'Omni::Supplier'},
+                  attachable_id:   {equal_to: me.record.get('supplier_id')}
+                }
+              },
+              showBadge: true
+            },
+            {
+              title:      'Audit',
+              xtype:      'buildit-audits-Explorer',
+              model:      'Omni::Supplier',
+              model_id:   me.record.get('supplier_id')
+            }
+          ]
+        }
       ]
     });
     // CARDS (End)

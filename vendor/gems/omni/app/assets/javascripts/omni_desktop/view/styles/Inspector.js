@@ -70,25 +70,6 @@ Ext.define('Omni.view.styles.Inspector', {
              }
           }
         }
-        ,{title: 'Notes',   xtype: 'buildit-notes-Explorer', module: 'notes',                     
-          defaultSearch: { with: 
-            {
-              notable_type: {equal_to: 'Omni::Style'},
-              notable_id:   {equal_to: me.record.get('style_id')}
-            }
-          }
-        }        
-        ,{
-          title: 'Attachments',
-          xtype: 'buildit-attachments-Explorer',  
-          module: 'attachments',                    
-          defaultSearch: { with: 
-            {
-              attachable_type: {equal_to: 'Omni::Style'},
-              attachable_id:   {equal_to: me.record.get('style_id')}
-            }
-          }
-        } 
         ,{
           xtype    : 'buildit-CardGroup',
           title    : 'Support',
