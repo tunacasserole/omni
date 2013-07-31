@@ -45,7 +45,14 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  
+    mapped_attributes do
+    map :ordered_by_user_display,                :to => 'ordered_by_user.display'
+    map :confirmed_by_user_display,              :to => 'confirmed_by_user.display'     
+    map :ordered_by_user_display,                :to => 'ordered_by_user.display'    
+    map :supplier_display,                       :to => 'supplier.display'
+    map :master_purchase_display,                :to => 'master_purchase.display'
+    map :carrier_supplier_display,               :to => 'supplier.display'    
+  end
   # MAPPED ATTRIBUTES (End)
 
   
@@ -78,16 +85,8 @@ class Omni::Purchase < ActiveRecord::Base
   searchable do
     string   :purchase_id
     string   :display
-    string   :display
-    string   :purchase_id
     string   :state
- 
-    text     :department_display_fulltext, :using => :department_display
-    text     :forecast_profile_display_fulltext, :using => :forecast_profile_display
     text     :display_fulltext, :using => :display
-    text     :version_fulltext, :using => :version
-    text     :state_fulltext, :using => :state
-    #text     :state_fulltext, :using => :state
   end 
   # INDEXING (End)
 
