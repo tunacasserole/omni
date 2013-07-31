@@ -107,17 +107,7 @@ Ext.define('Omni.view.skus.Inspector', {
                sku_id:   {equal_to: me.record.get('sku_id')}
              }
           }
-        }
-        ,{
-          title: 'Sku',
-          xtype: 'omni-skus-Inspector', module: 'tracks',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }
-                                         
+        }                            
         ,{
           xtype    : 'buildit-CardGroup',
           title    : 'Support',
@@ -153,6 +143,7 @@ Ext.define('Omni.view.skus.Inspector', {
             }
           ]
         }
+      ]
     });
     // CARDS (End)
     
