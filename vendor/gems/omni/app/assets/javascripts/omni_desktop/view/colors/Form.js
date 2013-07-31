@@ -57,16 +57,16 @@ Ext.define('Omni.view.colors.Form', {
             }
           */
 
-            { xtype: 'textfield', name: 'color_id',                       fieldLabel: this.color_idLabel                    , allowBlank: false },    
+            // { xtype: 'textfield', name: 'color_id',                       fieldLabel: this.color_idLabel                    , allowBlank: true },    
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
-            { xtype: 'textfield', name: 'color_nbr',                      fieldLabel: this.color_nbrLabel                   , allowBlank: false },    
-            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: false },    
-            { xtype: 'textfield', name: 'short_name',                     fieldLabel: this.short_nameLabel                  , allowBlank: false },    
-            { xtype: 'textfield', name: 'concatenated_name',              fieldLabel: this.concatenated_nameLabel           , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_plaid',                       fieldLabel: this.is_plaidLabel                    , allowBlank: false,     xtype: 'checkbox' },    
-            { xtype: 'textfield', name: 'is_stripe',                      fieldLabel: this.is_stripeLabel                   , allowBlank: false ,    xtype: 'checkbox'},    
-            { xtype: 'textfield', name: 'color_family',                   fieldLabel: this.color_familyLabel                , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_discontinued',                fieldLabel: this.is_discontinuedLabel             , allowBlank: false ,    xtype: 'checkbox'}
+            { xtype: 'textfield', name: 'color_nbr',                      fieldLabel: this.color_nbrLabel                   , allowBlank: true },    
+            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },    
+            { xtype: 'textfield', name: 'short_name',                     fieldLabel: this.short_nameLabel                  , allowBlank: true },    
+            { xtype: 'textfield', name: 'concatenated_name',              fieldLabel: this.concatenated_nameLabel           , allowBlank: true },    
+            { xtype: 'textfield', name: 'is_plaid',                       fieldLabel: this.is_plaidLabel                    , allowBlank: true,     xtype: 'checkbox' },    
+            { xtype: 'textfield', name: 'is_stripe',                      fieldLabel: this.is_stripeLabel                   , allowBlank: true ,    xtype: 'checkbox'},    
+            { xtype: 'textfield', name: 'color_family',                   fieldLabel: this.color_familyLabel                , allowBlank: true },    
+            { xtype: 'textfield', name: 'is_discontinued',                fieldLabel: this.is_discontinuedLabel             , allowBlank: true ,    xtype: 'checkbox'}
             
           ]
         }

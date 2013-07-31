@@ -73,6 +73,7 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
     string   :size_display do size.display if size end
     string   :display_order
     string   :display
+    string   :size_group_id    
  
     text     :size_group_display_fulltext, :using => :size_group_display
     text     :size_display_fulltext, :using => :size_display

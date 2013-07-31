@@ -18,7 +18,7 @@ class Omni::Color < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
   validates    :concatenated_name,               :presence    => true
-  validates    :color_family,                    :presence    => true
+  # validates    :color_family,                    :presence    => true
   # VALIDATIONS (End)
 
 

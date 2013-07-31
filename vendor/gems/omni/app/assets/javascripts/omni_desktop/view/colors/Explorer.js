@@ -22,7 +22,7 @@ Ext.define('Omni.view.colors.Explorer', {
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================
-  color_idLabel:                          Omni.i18n.model.Color.color_id,
+  // color_idLabel:                          Omni.i18n.model.Color.color_id,
   displayLabel:                           Omni.i18n.model.Color.display,
   color_nbrLabel:                         Omni.i18n.model.Color.color_nbr,
   descriptionLabel:                       Omni.i18n.model.Color.description,
@@ -32,7 +32,7 @@ Ext.define('Omni.view.colors.Explorer', {
   is_stripeLabel:                         Omni.i18n.model.Color.is_stripe,
   color_familyLabel:                      Omni.i18n.model.Color.color_family,
   is_discontinuedLabel:                   Omni.i18n.model.Color.is_discontinued,
-  is_destroyedLabel:                      Omni.i18n.model.Color.is_destroyed,
+  // is_destroyedLabel:                      Omni.i18n.model.Color.is_destroyed,
   // LABELS (End)
   
   // TITLES (Start) ======================================================================
@@ -47,7 +47,7 @@ Ext.define('Omni.view.colors.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.color_idLabel,                      dataIndex: 'color_id',                    flex: 1 },    
+        // { header: this.color_idLabel,                      dataIndex: 'color_id',                    flex: 1 },    
         { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },    
         { header: this.color_nbrLabel,                     dataIndex: 'color_nbr',                   flex: 1 },    
         { header: this.descriptionLabel,                   dataIndex: 'description',                 flex: 1 },    
@@ -57,7 +57,7 @@ Ext.define('Omni.view.colors.Explorer', {
         { header: this.is_stripeLabel,                     dataIndex: 'is_stripe',                   flex: 1 },    
         { header: this.color_familyLabel,                  dataIndex: 'color_family',                flex: 1 },    
         { header: this.is_discontinuedLabel,               dataIndex: 'is_discontinued',             flex: 1 },    
-        { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }    
+        // { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }    
       ]
     });
     // COLUMNS (End)
