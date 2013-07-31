@@ -28,6 +28,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_id,                          :with => :guid
+  default :purchase_order_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"PURCHASE_ORDER_NBR"  
   # DEFAULTS (End)
 
 
