@@ -93,6 +93,19 @@ Ext.define('Omni.view.app.Hub', {
      ] 
      }     
 
+// Section: Stock Ledger Activity //
+
+   ,{
+   title: 'Stock Ledger Activity',
+     columns: 2,
+     rows: 3,
+     tiles: [
+       {title: 'Rulesets', colspan: 2, rowspan: 1, cls: 'contracts',  target: {xtype: 'omni-rulesets-Explorer'}},       
+       {title: 'Period Results', colspan: 2, rowspan: 1, cls: 'samples', target: { xtype: 'omni-period_results-Explorer'} },
+       {title: 'Stock Ledger Activities', colspan: 2, rowspan: 1, cls: 'cfars', target: { xtype: 'omni-stock_ledger_activities-Explorer'} }       
+     ] 
+     }     
+
       // Section: Activity //
         // ,{
         //   title    : 'Projections Activity',

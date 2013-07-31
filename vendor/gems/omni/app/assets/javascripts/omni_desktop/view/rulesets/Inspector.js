@@ -29,6 +29,15 @@ Ext.define('Omni.view.rulesets.Inspector', {
           title: 'Profile',
           xtype: 'omni-rulesets-Form'
         }
+        ,{
+          title: 'Rules',
+          xtype: 'omni-rules-Explorer', module: 'cfars',
+          defaultSearch: { with: 
+             {
+               ruleset_id:   {equal_to: me.record.get('ruleset_id')}
+             }
+          }
+        }            
       ]
     });
     // CARDS (End)

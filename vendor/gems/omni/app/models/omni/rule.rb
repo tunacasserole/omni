@@ -70,22 +70,23 @@ class Omni::Rule < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :ruleset_display do ruleset.display if ruleset end
-    string   :rule_type do |x| Buildit::Lookup::Manager.display_for('RULE_TYPE', x.rule_type) end
-    string   :input_attribute
-    string   :model_name
-    string   :attribute_name
-    string   :rule_action do |x| Buildit::Lookup::Manager.display_for('RULE_ACTION', x.rule_action) end
-    boolean  :is_active
-    string   :rule_seq
+    # string   :ruleset_display do ruleset.display if ruleset end
+    # string   :rule_type do |x| Buildit::Lookup::Manager.display_for('RULE_TYPE', x.rule_type) end
+    # string   :input_attribute
+    # string   :model_name
+    # string   :attribute_name
+    # string   :rule_action do |x| Buildit::Lookup::Manager.display_for('RULE_ACTION', x.rule_action) end
+    # boolean  :is_active
+    string   :ruleset_id    
+    # string   :rule_seq
  
-    text     :ruleset_display_fulltext, :using => :ruleset_display
-    text     :rule_type_fulltext, :using => :rule_type
-    text     :input_attribute_fulltext, :using => :input_attribute
-    text     :model_name_fulltext, :using => :model_name
-    text     :attribute_name_fulltext, :using => :attribute_name
-    text     :rule_action_fulltext, :using => :rule_action
-    text     :rule_seq_fulltext, :using => :rule_seq
+    # text     :ruleset_display_fulltext, :using => :ruleset_display
+    # text     :rule_type_fulltext, :using => :rule_type
+    # text     :input_attribute_fulltext, :using => :input_attribute
+    # text     :model_name_fulltext, :using => :model_name
+    # text     :attribute_name_fulltext, :using => :attribute_name
+    # text     :rule_action_fulltext, :using => :rule_action
+    # text     :rule_seq_fulltext, :using => :rule_seq
   end 
   # INDEXING (End)
 

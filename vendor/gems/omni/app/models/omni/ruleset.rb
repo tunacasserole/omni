@@ -70,6 +70,7 @@ class Omni::Ruleset < ActiveRecord::Base
     string   :display
     string   :ruleset_code
     string   :description
+    string   :ruleset_id
     boolean  :is_active
  
     text     :display_fulltext, :using => :display
