@@ -129,7 +129,7 @@ Ext.define('Omni.view.suppliers.Form', {
             { name: 'default_ship_thru_supplier_id',  fieldLabel: this.default_ship_thru_supplier_idLabel,allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
             { name: 'shipping_point',                 fieldLabel: this.shipping_pointLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'ship_via',                       fieldLabel: this.ship_viaLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'freight_term',                   fieldLabel: this.freight_termLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'freight_term',                   fieldLabel: this.freight_termLabel,               allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'FREIGHT_TERM' },
             { name: 'minimum_order_cost',             fieldLabel: this.minimum_order_costLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'minimum_order_units',            fieldLabel: this.minimum_order_unitsLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'minimum_weight',                 fieldLabel: this.minimum_weightLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },

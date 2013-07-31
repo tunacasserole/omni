@@ -8,7 +8,7 @@ Ext.define('Omni.view.suppliers.Explorer', {
   supplier_nbrLabel:                        Omni.i18n.model.Supplier.supplier_nbr,
   line_1Label:                              Omni.i18n.model.Supplier.line_1,
   phoneLabel:                               Omni.i18n.model.Supplier.phone,
-  supplier_ucc_prefixLabel:                 Omni.i18n.model.Supplier.supplier_ucc_prefix,
+  supplier_nameLabel:                 Omni.i18n.model.Supplier.supplier_name,
   line_2Label:                              Omni.i18n.model.Supplier.line_2,
   legacy_supplier_codeLabel:                Omni.i18n.model.Supplier.legacy_supplier_code,
   cityLabel:                                Omni.i18n.model.Supplier.city,
@@ -51,10 +51,10 @@ Ext.define('Omni.view.suppliers.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
+        { header: this.supplier_nameLabel,                                     dataIndex: 'supplier_name',                flex: 2,   sortable: true  },
+        { header: this.line_1Label,                                      dataIndex: 'line_1',                             flex: 2,   sortable: true  },        
         { header: this.supplier_nbrLabel,                                dataIndex: 'supplier_nbr',                       flex: 1,   sortable: true  },
-        { header: this.line_1Label,                                      dataIndex: 'line_1',                             flex: 1,   sortable: true  },
         { header: this.phoneLabel,                                       dataIndex: 'phone',                              flex: 1,   sortable: true  },
-        { header: this.supplier_ucc_prefixLabel,                         dataIndex: 'supplier_ucc_prefix',                flex: 1,   sortable: true  },
         { header: this.line_2Label,                                      dataIndex: 'line_2',                             flex: 1,   sortable: true  },
         { header: this.legacy_supplier_codeLabel,                        dataIndex: 'legacy_supplier_code',               flex: 1,   sortable: true  },
         { header: this.cityLabel,                                        dataIndex: 'city',                               flex: 1,   sortable: true  },

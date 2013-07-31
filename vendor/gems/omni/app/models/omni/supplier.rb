@@ -103,7 +103,7 @@ class Omni::Supplier < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :supplier_nbr
-    string   :supplier_ucc_prefix
+    string   :supplier_name
     string   :legacy_supplier_code
     string   :line_1
     string   :line_2
@@ -116,7 +116,7 @@ class Omni::Supplier < ActiveRecord::Base
  
     text     :display_fulltext, :using => :display
     text     :supplier_nbr_fulltext, :using => :supplier_nbr
-    text     :supplier_ucc_prefix_fulltext, :using => :supplier_ucc_prefix
+    text     :supplier_name_fulltext, :using => :supplier_name
     text     :legacy_supplier_code_fulltext, :using => :legacy_supplier_code
     text     :line_1_fulltext, :using => :line_1
     text     :line_2_fulltext, :using => :line_2
