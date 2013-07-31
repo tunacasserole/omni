@@ -19,13 +19,6 @@ Ext.define('Omni.view.costs.Inspector',{
     Ext.apply(this, {
       cards: [
         {title: 'Profile',           xtype: 'omni-costs-Form'}
-        ,{title: 'Details', xtype: 'omni-cost_details-Explorer',
-           defaultSearch: { with: 
-             {
-               cost_id:   {equal_to: me.record.get('cost_id')}
-             }
-          }
-        }        
       ]
     });
     // CARDS (End)

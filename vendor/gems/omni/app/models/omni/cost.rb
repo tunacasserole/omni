@@ -7,7 +7,7 @@ class Omni::Cost < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :costs
   self.primary_key                = :cost_id
   # METADATA (End)
@@ -32,8 +32,9 @@ class Omni::Cost < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :cost_details,              :class_name => 'Omni::CostDetail',    :foreign_key => 'cost_id'  
+  has_many     :cost_details,              :class_name => 'Omni::CostDetail',    :foreign_key => 'cost_id'    
   # ASSOCIATIONS (End)
+
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   

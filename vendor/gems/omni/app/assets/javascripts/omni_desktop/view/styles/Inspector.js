@@ -33,7 +33,7 @@ Ext.define('Omni.view.styles.Inspector', {
           xtype: 'omni-styles-Form',
           module: 'cfars'
         }
-        ,{title: 'Projection Details', xtype: 'omni-projection_details-Explorer',
+        ,{title: 'Projection Details', xtype: 'omni-projection_details-Explorer', module: 'tollgates',
            defaultSearch: { with: 
              {
                style_display:   {equal_to: me.record.get('display')}

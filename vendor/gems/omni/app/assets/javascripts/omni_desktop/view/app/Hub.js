@@ -97,12 +97,13 @@ Ext.define('Omni.view.app.Hub', {
 
    ,{
    title: 'Stock Ledger Activity',
-     columns: 2,
+     columns: 4,
      rows: 3,
      tiles: [
        {title: 'Rulesets', colspan: 2, rowspan: 1, cls: 'contracts',  target: {xtype: 'omni-rulesets-Explorer'}},       
        {title: 'Period Results', colspan: 2, rowspan: 1, cls: 'samples', target: { xtype: 'omni-period_results-Explorer'} },
-       {title: 'Stock Ledger Activities', colspan: 2, rowspan: 1, cls: 'cfars', target: { xtype: 'omni-stock_ledger_activities-Explorer'} }       
+       {title: 'Stock Ledger Activities', colspan: 2, rowspan: 1, cls: 'cfars', target: { xtype: 'omni-stock_ledger_activities-Explorer'} },       
+       {title: 'Costs', colspan: 2, rowspan: 1, cls: 'projects',  target: {xtype: 'omni-costs-Explorer'}},              
      ] 
      }     
 
