@@ -41,6 +41,7 @@ class Omni::Import::Base
     rows = []
     file = File.open(File.join(folder_name, file_name), mode = 'r')
     excel = Excelx.new(file.path, nil, :ignore)
+    tab_name = 'Sheet1' if !excel.sheets.index(tab_name)
     excel.default_sheet = excel.sheets.index(tab_name) + 1
     header = excel.row(1)
     (2..excel.last_row).each do |i|

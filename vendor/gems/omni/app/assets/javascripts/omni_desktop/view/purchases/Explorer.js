@@ -71,7 +71,7 @@ Ext.define('Omni.view.purchases.Explorer', {
         { header: this.purchase_order_nbrLabel,            dataIndex: 'purchase_order_nbr',          flex: 1 },    
         { header: this.supplier_idLabel,                   dataIndex: 'supplier_display',                 flex: 1 },    
         { header: this.location_idLabel,                   dataIndex: 'location_display',                 flex: 1 },    
-        { header: this.purchase_typeLabel,                 dataIndex: 'purchase_type',               flex: 1 },    
+        // { header: this.purchase_typeLabel,                 dataIndex: 'purchase_type',               flex: 1 },    
         { header: this.purchase_sourceLabel,               dataIndex: 'purchase_source',             flex: 1 },    
         { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },    
         { header: this.order_dateLabel,                    dataIndex: 'order_date',                  flex: 1 },    

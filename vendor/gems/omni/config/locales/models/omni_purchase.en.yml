@@ -9,8 +9,8 @@ en:
         purchase_order_nbr:              Purchase Order Nbr
         supplier_display:                Supplier
         supplier_id:                     Supplier
-        location_display:                Location
-        location_id:                     Location
+        location_display:                Deliver To
+        location_id:                     Deliver To
         purchase_type:                   Purchase Type
         purchase_source:                 Purchase Source
         state:                           State
