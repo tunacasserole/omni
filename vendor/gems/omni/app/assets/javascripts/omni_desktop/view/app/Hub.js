@@ -45,7 +45,8 @@ Ext.define('Omni.view.app.Hub', {
      tiles: [
        {title: 'Purchases', colspan: 2, rowspan: 1, cls: 'purchases',  target: {xtype: 'omni-purchases-Explorer'}},       
        {title: 'Allocations', colspan: 2, rowspan: 1, cls: 'allocations', target: { xtype: 'omni-allocations-Explorer'} },
-       {title: 'Costs', colspan: 2, rowspan: 1, cls: 'costs', target: { xtype: 'omni-costs-Explorer'} }       
+       {title: 'Costs', colspan: 2, rowspan: 1, cls: 'costs', target: { xtype: 'omni-costs-Explorer'} },  
+       {title: 'Work Orders', colspan: 2, rowspan: 1, cls: 'work_orders', target: { xtype: 'omni-work_orders-Explorer'} }              
      ] 
      }     
 

@@ -11,12 +11,14 @@ Buildit::User.create(
 Buildit::Role.create(
   role_id: '323244F020411EFCFE9040CSUPPLIER',
   role_code: 'SUPPLIER',
-  description: 'User access to the Omni Supplier console.'
+  description: 'User access to the Omni Supplier console.',
+  is_enabled:           1  
 )
 
 Buildit::UserRole.create(
   user_id: '811166D4D50A11E2B45820C9SUPPLIER',
-  role_id: '323244F020411EFCFE9040CSUPPLIER'
+  role_id: '323244F020411EFCFE9040CSUPPLIER',
+  is_enabled:           1  
 )
 
 supplier = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9SUPPLIER').first
@@ -34,5 +36,6 @@ Buildit::Application.create(
 
 Buildit::ApplicationRole.create(
   application_id:       '6900AE7AC18B11E289BA20C9SUPPLIER',
-  role_id:              '323244F020411EFCFE9040CSUPPLIER'
+  role_id:              '323244F020411EFCFE9040CSUPPLIER',
+  is_enabled:           1  
 )
