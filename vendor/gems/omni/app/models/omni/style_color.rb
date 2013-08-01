@@ -132,13 +132,15 @@ class Omni::StyleColor < ActiveRecord::Base
     #  Get sizes by reading size_group_details for style.size_group_id.
     #  Add style_color_sizes row for added color and each size in the size group
     #
-    sizes = Omni::SizeGroupDetail.where(:size_group_id => self.style.size_group_id)
-    sizes.each do |s|
-      x = Omni::StyleColorSize.new
-      x.style_color_id = self.style_color_id
-      x.size_id = s.size_id
-      x.sku_name = "#{self.display}-#{s.size_display}"
-      x.save
+    if self.style
+      sizes = Omni::SizeGroupDetail.where(:size_group_id => self.style.size_group_id) 
+      sizes.each do |s|
+        x = Omni::StyleColorSize.new
+        x.style_color_id = self.style_color_id
+        x.size_id = s.size_id
+        x.sku_name = "#{self.display}-#{s.size_display}"
+        x.save
+      end
     end
 
   end
