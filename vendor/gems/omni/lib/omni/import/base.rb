@@ -9,10 +9,11 @@ class Omni::Import::Base
     @@import.logs.each do |log|
       log.destroy
     end
-
+    puts "\n\n\n == done destroying logs\n\n\n"
   end
 
   def self.log_it(message)
+    puts "logging message: #{message}"
     Omni::Log.create(:logable_type => 'Omni::Import', :logable_id => @@import.import_id, :log_type => 'info', :log_title => 'none', :log_message => message)
   end
 

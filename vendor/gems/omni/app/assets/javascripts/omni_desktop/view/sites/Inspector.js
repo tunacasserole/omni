@@ -28,23 +28,39 @@ Ext.define('Omni.view.sites.Inspector', {
         {
           title: 'Profile',
           xtype: 'omni-sites-Form'
-        },
-        {
-          title: 'Donations',
-          xtype: 'omni-site_donations-Explorer'
-        },
-        {
-          title: 'Enrollments',
-          xtype: 'omni-site_enrollments-Explorer'
-        },
-        {
-          title: 'Tax Authorities',
-          xtype: 'omni-site_tax_authorities-Explorer'
-        },
-        {
-          title: 'Programs',
-          xtype: 'omni-programs-Explorer'
         }
+        ,{title: 'Donations', xtype: 'omni-site_donations-Explorer', module: 'contracts',
+           defaultSearch: { with: 
+             {
+               style_id:   {equal_to: me.record.get('site_id')}
+             }
+          },
+          showBadge: true
+        }        
+        ,{title: 'Enrollments', xtype: 'omni-site_enrollments-Explorer', module: 'tollgates',
+           defaultSearch: { with: 
+             {
+               style_id:   {equal_to: me.record.get('site_id')}
+             }
+          },
+          showBadge: true
+        }        
+        ,{title: 'Programs', xtype: 'omni-programs-Explorer', module: 'projects',
+           defaultSearch: { with: 
+             {
+               style_id:   {equal_to: me.record.get('site_id')}
+             }
+          },
+          showBadge: true
+        }        
+        ,{title: 'Tax Authorities', xtype: 'omni-site_tax_authorities-Explorer', module: 'cfars',
+           defaultSearch: { with: 
+             {
+               style_id:   {equal_to: me.record.get('site_id')}
+             }
+          },
+          showBadge: true
+        }                       
       ]
     });
     // CARDS (End)

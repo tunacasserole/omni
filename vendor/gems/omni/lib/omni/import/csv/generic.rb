@@ -5,10 +5,10 @@ class Omni::Import::Csv::Generic < Omni::Import::Base
     data_folder = File.join(Rails.root, 'vendor','gems','omni','db','import')    
     exceptions = ''
     @data = excel_to_hash data_folder, import.file_name, import.table_name  
-    model_name = import.table_name.classify
+    model_name = "Omni::" + import.model_name
     @data.each do |row|
       puts "Importing #{row["display"]}"
-      x = ('Omni::' + model_name).constantize.where(:display => row["display"]).first || ('Omni::' + model_name).constantize.new(:display => row["display"])
+      x = model_name.constantize.where(:display => row["display"]).first || model_name.constantize.new(:display => row["display"])
       row.keys.reject {|k| !row[k] or row[k] == ' ' or row[k] == 'main!A1'}.each do |a_name_original|
         next if !a_name_original
         #puts "**** #{row[a_name_original]}"
@@ -23,7 +23,7 @@ class Omni::Import::Csv::Generic < Omni::Import::Base
             exceptions << "Could not locate parent model for #{a_name}\n"
             next
           end
-          parent_row = ('Omni::' + parent.model_name).constantize.where(:display => a_value).first
+          parent_row = parent.model_name.constantize.where(:display => a_value).first
           if !parent_row
             exceptions << "Could not locate parent row for #{a_name}\n"
             next
@@ -47,8 +47,8 @@ class Omni::Import::Csv::Generic < Omni::Import::Base
       end
     end # end of data.each
     
-    log_it " " + ('Omni::' + model_name).constantize.count.to_s + " rows\n"
-    if @data.count > ('Omni::' + model_name).constantize.count
+    log_it model_name.constantize.count.to_s + " rows\n"
+    if @data.count > model_name.constantize.count
       log_it " . . . some rows did not load . . . "
     else
       log_it " . . . things appear to have worked correctly . . . "  
