@@ -7,7 +7,7 @@ class Omni::Import::Csv::Generic < Omni::Import::Base
     @data = excel_to_hash data_folder, import.file_name, import.table_name  
     model_name = import.table_name.classify
     @data.each do |row|
-      log_it "Importing #{row["display"]}"
+      puts "Importing #{row["display"]}"
       x = ('Omni::' + model_name).constantize.where(:display => row["display"]).first || ('Omni::' + model_name).constantize.new(:display => row["display"])
       row.keys.reject {|k| !row[k] or row[k] == ' ' or row[k] == 'main!A1'}.each do |a_name_original|
         next if !a_name_original
@@ -40,10 +40,10 @@ class Omni::Import::Csv::Generic < Omni::Import::Base
         end
       end # end of row.keys
       if x.valid?
-        #puts "#{model_name}, #{x.display}, ERRORS ==> #{x.errors.full_messages.join("\n")}, #{x.inspect}"
+        puts "#{model_name}, #{x.display}, ERRORS ==> #{x.errors.full_messages.join("\n")}, #{x.inspect}"
         x.save
       else
-        log_it "#{model_name}, #{x.display}, ERRORS ==> #{x.errors.full_messages.join("\n")}, #{x.inspect}"
+        puts "#{model_name}, #{x.display}, ERRORS ==> #{x.errors.full_messages.join("\n")}, #{x.inspect}"
       end
     end # end of data.each
     

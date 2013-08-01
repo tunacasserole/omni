@@ -104,6 +104,7 @@ Ext.define('Omni.view.app.Hub', {
        {title: 'Period Results', colspan: 2, rowspan: 1, cls: 'samples', target: { xtype: 'omni-period_results-Explorer'} },
        {title: 'Stock Ledger Activities', colspan: 2, rowspan: 1, cls: 'cfars', target: { xtype: 'omni-stock_ledger_activities-Explorer'} },       
        {title: 'Costs', colspan: 2, rowspan: 1, cls: 'projects',  target: {xtype: 'omni-costs-Explorer'}},              
+       {title: 'Inventory', colspan: 2, rowspan: 1, cls: 'projects',  target: {xtype: 'omni-inventories-Explorer'}},                     
      ] 
      }     
 
