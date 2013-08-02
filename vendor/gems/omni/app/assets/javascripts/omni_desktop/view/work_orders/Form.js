@@ -59,8 +59,8 @@ Ext.define('Omni.view.work_orders.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'work_order_nbr',                 fieldLabel: this.work_order_nbrLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
+            { name: 'work_order_nbr',                 fieldLabel: this.work_order_nbrLabel,             allowBlank: true,   disabled: true,    xtype: 'textfield'        },
             { name: 'production_location_id',         fieldLabel: this.production_location_idLabel,     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
             { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
             { name: 'work_order_description',         fieldLabel: this.work_order_descriptionLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
