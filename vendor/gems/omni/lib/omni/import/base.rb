@@ -5,16 +5,19 @@ class Omni::Import::Base
     @@import = Omni::Import.where(:import_id => import_id).first
     
     # Delete old logs
-     puts "\n\n\n == destroying logs\n\n\n"
-    @@import.logs.each do |log|
-      log.destroy
-    end
-    puts "\n\n\n == done destroying logs\n\n\n"
+    #  puts "== destroying logs"
+    # @@import.logs.each do |log|
+    #   log.destroy
+    # end
+    # puts "== done destroying logs"
   end
 
-  def self.log_it(message)
-    puts "logging message: #{message}"
-    Omni::Log.create(:logable_type => 'Omni::Import', :logable_id => @@import.import_id, :log_type => 'info', :log_title => 'none', :log_message => message)
+  def self.log_it(the_message)
+      puts "logging message: #{the_message}"
+      import_id = @@import.import_id
+      # import_id = 'D66E37AEFBA411E28B9420C9D047DD15'
+      the_message = 'Omni::Import::Csv::Generic'
+      # Omni::Log.create(:logable_type => 'Omni::Import', :logable_id => import_id, :log_type => 'info', :log_title => 'none', :log_message => the_message)
   end
 
   def self.constants

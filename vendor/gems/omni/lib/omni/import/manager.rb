@@ -2,7 +2,7 @@ class Omni::Import::Manager < Omni::Import::Base
 
   def self.run_by_id(import_id)
     Omni::Import::Base.load_import import_id
-    log_it "Omni::Import::Manager.run_by_id('#{import_id}')"     
+    #log_it "Omni::Import::Manager.run_by_id('#{import_id}')"     
     log_it "Omni::Import::#{@@import.data_source.capitalize}::#{@@import.job_type.capitalize}"
     ('Omni::' + @@import.model_name).constantize.all.each {|row| row.destroy} if @@import.is_drop_data  # drop data first, if needed
     "Omni::Import::#{@@import.data_source.capitalize}::#{@@import.job_type.capitalize}".constantize.import(@@import) 

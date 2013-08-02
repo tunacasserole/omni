@@ -1,4 +1,3 @@
-Buildit::Lookup.delete_all
 Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D212313B10044E', :code => 'SELL UNIT', :default_text => 'Sell Unit', :category => 'PACK_TYPE', :position => 1)
 Buildit::Lookup.create(:lookup_id => '04183F3C972911E2A3D212313B10044E', :code => 'INNER PACK', :default_text => 'Inner Pack', :category => 'PACK_TYPE', :position => 2)
 Buildit::Lookup.create(:lookup_id => '05726F2E972911E2A3D212313B10044E', :code => 'MASTER PACK', :default_text => 'Master Pack', :category => 'PACK_TYPE', :position => 3)
