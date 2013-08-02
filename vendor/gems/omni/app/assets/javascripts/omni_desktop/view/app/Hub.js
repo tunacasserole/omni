@@ -50,7 +50,24 @@ Ext.define('Omni.view.app.Hub', {
      ] 
      }     
 
-   // Section: Merchandise Maintenance //
+   // Section: Customer Order Entry //
+   ,{
+   title: 'Customer Order Entry',
+     columns: 6,
+     rows: 3,
+     tiles: [
+       // {title: 'All Customer Orders', colspan: 2, rowspan: 1, cls: 'purchases',  target: {xtype: 'omni-orders-Explorer', title: 'Customer Orders'}},
+       {title: 'All Work Orders', colspan: 2, rowspan: 1, cls: 'allocations',  target: {xtype: 'omni-work_orders-Explorer', title: 'Work Orders'}},
+       {title: 'All Payments', colspan: 2, rowspan: 1, cls: '_payments magenta3',  target: {xtype: 'omni-payments-Explorer', title: 'Payments'}},
+       {title: 'All Gift Cards', colspan: 2, rowspan: 1, cls: '_vouchers magenta3',  target: {xtype: 'omni-vouchers-Explorer', title: 'Gift Cards'}},
+       {title: 'Finalize Customer Orders', colspan: 2, rowspan: 1, cls: 'finalize_orders pink1', badge: '3',  target: {xtype: 'omni-orders-Explorer', title: 'Finalize Customer Order', defaultSearch: { with: {state: {equal_to: 'new'}} }, contextMenuConfig: {xtype: 'omni-orders-ExplorerContextMenuFinalize'}, store: Ext.create('Omni.store.Order',{storeId: 'FinalizeOrderStore'}), allowNew: false}},
+       {title: 'Cancel Customer Orders', colspan: 2, rowspan: 1, cls: 'cancel_orders blue2',  target: {xtype: 'omni-orders-Explorer', title: 'Cancel Customer Order', defaultSearch: { with: {state: {equal_to: 'new'}} }, contextMenuConfig: {xtype: 'omni-orders-ExplorerContextMenuCancel'}, store: Ext.create('Omni.store.Order',{storeId: 'CancelOrderStore'}), allowNew: false}},
+       {title: 'Cancel Work Orders', colspan: 2, rowspan: 1, cls: 'cancel_work_orders magenta',  target: {xtype: 'omni-work_orders-Explorer', title: 'Cancel Work Order', defaultSearch: { with: {state: {any_of: ['new','pending']}} }, contextMenuConfig: {xtype: 'omni-work_orders-ExplorerContextMenuCancel'}, store: Ext.create('Omni.store.WorkOrder',{storeId: 'CancelWorkOrderStore'}), allowNew: false}},
+       {title: 'Cancel Payments', colspan: 2, rowspan: 1, cls: 'cancel_payments magenta',  target: {xtype: 'omni-payments-Explorer', title: 'Cancel Payment', defaultSearch: { with: {state: {equal_to: 'new'}} }, contextMenuConfig: {xtype: 'omni-payments-ExplorerContextMenuCancel'}, store: Ext.create('Omni.store.Payment',{storeId: 'CancelPaymentStore'}), allowNew: false}}
+     ] 
+     } 
+
+ // Section: Merchandise Maintenance //
 
    ,{
    title: 'merchandise maintenance',

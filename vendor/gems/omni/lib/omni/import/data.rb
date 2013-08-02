@@ -23,9 +23,9 @@ class Omni::Import::Data < Omni::Import::Base
         exceptions << "#{a_name_original}, #{a_value}"
         if a_name.end_with? '_id'
           if @@poly_hash.has_key? a_name
-            parent = Buildit::ModelMeta.all(:model_name => row[a_name_original.chop.chop.chop + '_type'].demodulize).first 
+            puts "polymorphic attribute, parent of #{row[a_name_original]} is #{row[a_name_original.chop.chop.chop + '_type'].demodulize}"
           else
-            parent = Buildit::ModelMeta.all(:primary_attribute => a_name).first || Buildit::ModelMeta.all.reject {|x| !a_name.index(x.model_name.singularize.foreign_key)}.first
+            parent = get_parent row[a_name_original]
           end
           if !parent 
             exceptions << "Could not locate parent model for #{a_name}\n"
@@ -71,4 +71,11 @@ class Omni::Import::Data < Omni::Import::Base
       end
     end
   end
+
+  def self.get_parent(attribute_name)
+    parent_model = attribute_name.chop.chop.chop + '_type'
+    puts "the parent of #{attribute_name} is parent_model"
+  end
 end   
+
+# Buildit::ModelMeta.all(:model_name => row[a_name_original.chop.chop.chop + '_type'].demodulize).first 

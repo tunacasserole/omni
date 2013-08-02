@@ -37,7 +37,7 @@ Ext.define('Omni.view.work_orders.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      //stateLabel:                               Omni.i18n.model.WorkOrder.state,
+      stateLabel:                               Omni.i18n.model.WorkOrder.state,
       work_order_nbrLabel:                      Omni.i18n.model.WorkOrder.work_order_nbr,
       workable_idLabel:                         Omni.i18n.model.WorkOrder.workable_id,
       workable_typeLabel:                       Omni.i18n.model.WorkOrder.workable_type,
