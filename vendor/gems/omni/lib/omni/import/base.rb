@@ -16,8 +16,8 @@ class Omni::Import::Base
       puts "logging message: #{the_message}"
       import_id = @@import.import_id
       # import_id = 'D66E37AEFBA411E28B9420C9D047DD15'
-      the_message = 'Omni::Import::Csv::Generic'
-      # Omni::Log.create(:logable_type => 'Omni::Import', :logable_id => import_id, :log_type => 'info', :log_title => 'none', :log_message => the_message)
+      # the_message = 'Omni::Import::Csv::Generic'
+      Omni::Log.create(:logable_type => 'Omni::Import', :logable_id => import_id, :log_type => 'info', :log_title => 'none', :log_message => the_message)
   end
 
   def self.constants

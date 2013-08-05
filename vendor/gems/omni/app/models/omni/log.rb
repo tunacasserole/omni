@@ -33,7 +33,7 @@ class Omni::Log < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  
+  belongs_to   :logable,                  :class_name => 'Omni::Log',              :foreign_key => 'logable_id'
   # ASSOCIATIONS (End)
 
 

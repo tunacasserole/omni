@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration
       create_table(:products, :id => false) do |t|
         t.column :product_id,                        :string,        :limit       => 32,     :null        => false
         t.column :display,                           :string,        :limit       => 100,    :null        => false
-        t.column :product_nbr,                       :string,        :limit       => 6,      :null        => true
+        t.column :product_nbr,                       :string,        :limit       => 20,      :null        => true
         t.column :description,                       :string,        :limit       => 300,    :null        => true
         t.column :category_id,                       :string,        :limit       => 32,     :null        => false
         t.column :is_destroyed,                      :boolean,       :null        => true

@@ -23,7 +23,7 @@ class Omni::Import::Csv::Generic < Omni::Import::Base
         a_value.chop! if a_value.end_with? '.'
         exceptions << "#{a_name_original}, #{a_value}"
         if a_name.end_with? '_id'
-            parent = parent_hash[a_name_original]
+            parent = parent_hash[a_name]
           if !parent 
             log_it "Could not locate parent model for #{a_name}\n"
             next
