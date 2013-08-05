@@ -1,17 +1,17 @@
 class Omni::Import::Csv::Generic < Omni::Import::Base
 
   def self.import(import)
-    # i = 1
+    i = 1
     parent_hash = {'company_id' => 'Company', 'category_id' => 'Category', 'department_id' => 'Department', 'region_id' => 'Region','product_id' => 'Product','subclass_id' => 'Subclass', 'buyer_user_id' => 'User', 'product_type_id' => 'ProductType','supplier_id' => 'Supplier','add_on_sku_id'=>'Sku','site_id' => 'Site','generic_style_id'=>'Style','size_group_id'=>'SizeGroup'}    
-    log_it "importing: #{import.table_name} at #{Time.now.to_s}"
+    log_it "importing #{import.table_name} at #{Time.now.to_s}"
     data_folder = File.join(Rails.root, 'vendor','gems','omni','db','import')    
     exceptions = ''
     @data = excel_to_hash data_folder, import.file_name, import.table_name  
     model_name = "Omni::" + import.model_name
     log_it "finished reading excel into memory at #{Time.now.to_s}"
     @data.each do |row|
-      # i += 1
-      # next if i > 100
+      i += 1
+      next if i > 14000
       puts "Importing #{row["display"]}"
       x = model_name.constantize.where(:display => row["display"]).first || model_name.constantize.new(:display => row["display"])
       row.keys.reject {|k| !row[k] or row[k] == ' ' or row[k] == 'main!A1'}.each do |a_name_original|
