@@ -23,25 +23,31 @@ class Omni::Purchase < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates :purchase_id,                        :presence      => true
+  validates :supplier_id,                        :presence      => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default :purchase_id,                          :with => :guid
-  default :purchase_order_nbr,                   :override  =>  false,        :with  => :sequence,         :named=>"PURCHASE_ORDER_NBR"  
+  default :purchase_id,                                                       :with => :guid
+  default :purchase_order_nbr,                   :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_ORDER_NBR"
+  default :order_date,                                                        :with => :now
+  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - #{m.order_date}"}
+  default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current} 
+  default :payment_term,                                                      :to   => lambda{|m| "#{m.supplier_payment_term}"}
+  
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_details,              :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'  
-  has_many     :purchase_costs,                 :class_name => 'Omni::PurchaseCost',       :foreign_key => 'purchase_cost_id'  
-  has_many     :logs,                            :class_name => 'Omni::Log',                 :foreign_key => 'logable_id' , :as => :logable
-  belongs_to   :location,                        :class_name => 'Omni::Location',            :foreign_key => 'location_id'  
+  has_many     :purchase_costs,                :class_name => 'Omni::PurchaseCost',      :foreign_key => 'purchase_cost_id'  
+  has_many     :logs,                          :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
+  belongs_to   :location,                      :class_name => 'Omni::Location',          :foreign_key => 'location_id'  
   belongs_to   :supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'  
-  belongs_to   :ordered_by_user,                  :class_name => 'Buildit::User',      :foreign_key => 'ordered_by_user_id'  
-  belongs_to   :confirmed_by_user,                  :class_name => 'Buildit::User',      :foreign_key => 'confirmed_by_user_id'  
-  belongs_to   :master_purchase,                  :class_name => 'Omni::Purchase',      :foreign_key => 'master_purchase_id'    
-  belongs_to   :carrier_supplier,           :class_name => 'Omni::Supplier',               :foreign_key => 'carrier_supplier_id'              
+  belongs_to   :ordered_by_user,               :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'  
+  belongs_to   :confirmed_by_user,             :class_name => 'Buildit::User',           :foreign_key => 'confirmed_by_user_id'  
+  belongs_to   :master_purchase,               :class_name => 'Omni::Purchase',          :foreign_key => 'master_purchase_id'    
+  belongs_to   :carrier_supplier,              :class_name => 'Omni::Supplier',          :foreign_key => 'carrier_supplier_id'              
   # ASSOCIATIONS (End)
 
 
@@ -52,7 +58,10 @@ class Omni::Purchase < ActiveRecord::Base
     map :ordered_by_user_display,                :to => 'ordered_by_user.display'    
     map :supplier_display,                       :to => 'supplier.display'
     map :master_purchase_display,                :to => 'master_purchase.display'
-    map :carrier_supplier_display,               :to => 'supplier.display'    
+    map :carrier_supplier_display,               :to => 'supplier.display'
+
+    map :supplier_payment_term,                  :to => 'supplier.default_payment_term'
+
   end
   # MAPPED ATTRIBUTES (End)
 
