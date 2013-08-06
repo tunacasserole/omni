@@ -18,6 +18,7 @@ Buildit::Sequence.create(:sequence_code => 'CUSTOMER_ORDER_NBR', :padding => 3, 
 Buildit::Sequence.create(:sequence_code => 'DEPARTMENT_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'DISTRICT_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'EMPLOYEE_NBR', :padding => 3, :value => 1000)
+# Buildit::Sequence.create(:sequence_code => 'LOG_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'LOCATION_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'ORDER_LINE_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'PAYMENT_NBR', :padding => 3, :value => 1000)

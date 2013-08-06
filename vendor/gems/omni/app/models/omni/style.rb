@@ -12,7 +12,7 @@ class Omni::Style < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_audit
+  #supports_audit
   # BEHAVIOR (End)
 
 
@@ -172,7 +172,7 @@ class Omni::Style < ActiveRecord::Base
       transition :active => :inactive
     end
 
-    state :draft do
+    state :active do
       validates  :concatenated_name, :presence  => true
       validates  :pos_name, :presence  => true      
       validates  :subclass_id, :presence  => true
