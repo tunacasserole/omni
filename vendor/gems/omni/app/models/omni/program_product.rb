@@ -86,6 +86,7 @@ class Omni::ProgramProduct < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :program_id
     string   :product_display do product.display if product end
     string   :from_grade_display do from_grade.display if from_grade end
     string   :thru_grade_display do thru_grade.display if thru_grade end

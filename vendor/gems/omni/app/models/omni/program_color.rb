@@ -75,6 +75,7 @@ class Omni::ProgramColor < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :program_id
     string   :program_style_display do program_style.display if program_style end
     string   :style_color_display do style_color.display if style_color end
     boolean  :is_active

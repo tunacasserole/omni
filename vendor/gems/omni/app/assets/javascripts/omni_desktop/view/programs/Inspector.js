@@ -36,7 +36,7 @@ Ext.define('Omni.view.programs.Inspector', {
              }
           }
         }        
-        ,{title: 'Styles', xtype: 'omni-program_styless-Explorer', module: 'samples',
+        ,{title: 'Styles', xtype: 'omni-program_styles-Explorer', module: 'samples',
            defaultSearch: { with: 
              {
                program_id:   {equal_to: me.record.get('program_id')}

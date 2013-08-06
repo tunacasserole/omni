@@ -97,7 +97,7 @@ class Omni::Shipment < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :new do
+  state_machine :state, :initial => :draft do
 
   ### CALLBACKS ###
     after_transition :on => :cancel, :do => :after_cancel
@@ -108,22 +108,22 @@ class Omni::Shipment < ActiveRecord::Base
 
   ### EVENTS ###
     event :cancel do
-      transition :new => :cancelled
+      transition :draft => :cancelled
       transition :pending => :cancelled
     end
     event :receive do
       transition :shipped => :complete
     end
     #event :send do
-    #  transition :new => :shipped
-    #  transition :new => :complete
+    #  transition :draft => :shipped
+    #  transition :draft => :complete
     #end
   end
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
   
-  # send => new to shipped
+  # send => draft to shipped
   def after_send
 
   end # def after_send
@@ -135,7 +135,7 @@ class Omni::Shipment < ActiveRecord::Base
   end # def after_receive
 
   
-  # cancel => new to cancelled
+  # cancel => draft to cancelled
   def after_cancel
 
   end # def after_cancel

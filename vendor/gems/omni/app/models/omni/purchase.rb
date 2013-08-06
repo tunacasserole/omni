@@ -28,7 +28,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_id,                          :with => :guid
-  default :purchase_order_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"PURCHASE_ORDER_NBR"  
+  default :purchase_order_nbr,                   :override  =>  false,        :with  => :sequence,         :named=>"PURCHASE_ORDER_NBR"  
   # DEFAULTS (End)
 
 
@@ -98,7 +98,7 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :planning do
+  state_machine :state, :initial => :draft do
 
   ### CALLBACKS ###
     after_transition :on => :costing, :do => :process_costing
@@ -107,10 +107,10 @@ class Omni::Purchase < ActiveRecord::Base
   ### EVENTS ###
     event :costing do
       transition any => :costing
-      transition :costing => :planning
+      transition :costing => :draft
     end
     event :release do
-      transition any => :draft
+      transition any => :planning
     end
     event :approve do
       transition any => :open
@@ -126,7 +126,7 @@ class Omni::Purchase < ActiveRecord::Base
     self.purchase_details.each do |pd|
       Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
     end
-    self.state = 'planning'
+    self.state = 'draft'
     self.save
   end
 

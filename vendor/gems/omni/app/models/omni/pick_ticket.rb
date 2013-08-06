@@ -79,17 +79,57 @@ class Omni::PickTicket < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
+  searchable do
+    string   :display
+    string   :pick_ticket_nbr
+    string   :fulfillment_location_display
+    string   :work_order_display
+    string   :state
+ 
+    text     :state_fulltext, :using => :state
+    text     :display_fulltext, :using => :display
+  end 
 
   # INDEXING (End)
 
+  # STATES (Start) ====================================================================
+  state_machine :state, :initial => :draft do
 
-  # HOOKS (Start) =======================================================================
-  # HOOKS (End)
+  ### CALLBACKS ###
+    after_transition :on => :cancel,     :do => :after_cancel
+    after_transition :on => :complete,   :do => :after_complete 
+    after_transition :on => :release,    :do => :after_release
+    after_transition :on => :ship,       :do => :after_ship
+    after_transition :on => :start,      :do => :after_start
+    
+    ## EVENTS ###
+    event :cancel do
+      transition :draft => :cancelled
+    end
+
+    event :complete do
+      transition :open => :complete
+    end
+
+    event :release do
+      transition :draft => :pending
+    end
+
+    event :ship do  
+      transition :complete => :shipped
+    end
+
+    event :start do
+      transition :pending => :open
+    end
+
+  end
+  # STATES (End)
 
 
-  # HELPERS (Start) =====================================================================
-  
-  def write_sla(ruleset, location_id)
+  # STATE HANDLERS (Start) ====================================================================
+
+    def write_sla(ruleset, location_id)
       ruleset_id = Omni::Ruleset.where(:ruleset_code => ruleset).first.ruleset_id
       sku_id = self.pickable.sku_id
       #location_id = location.location_id
@@ -136,6 +176,27 @@ class Omni::PickTicket < ActiveRecord::Base
     def after_cancel
       complete_units = 0
     end
+
+
+  # STATE HANDLERS (End)
+  
+
+  # FILTERS (Start) =====================================================================
+  filter :state_cancelled,        :with => {state: {equal_to: 'cancelled'}},  :priority => 90
+  filter :state_draft,            :with => {state: {equal_to: 'draft'}},      :priority => 40
+  filter :state_complete,         :with => {state: {equal_to: 'complete'}},   :priority => 70
+  filter :state_pending,          :with => {state: {equal_to: 'pending'}},    :priority => 50
+  filter :state_shipped,          :with => {state: {equal_to: 'shipped'}},    :priority => 80
+  filter :state_open,             :with => {state: {equal_to: 'open'}},       :priority => 60
+  # FILTERS (End)
+
+
+  # HOOKS (Start) =======================================================================
+  # HOOKS (End)
+
+
+  # HELPERS (Start) =====================================================================
+  
 
   # HELPERS (End)
 

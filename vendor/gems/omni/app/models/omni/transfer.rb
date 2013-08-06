@@ -113,7 +113,7 @@ class Omni::Transfer < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :new do
+  state_machine :state, :initial => :draft do
 
   ### CALLBACKS ###
     after_transition :on => :approve, :do => :after_approve
@@ -124,7 +124,7 @@ class Omni::Transfer < ActiveRecord::Base
 
   ### EVENTS ###
     event :approve do
-      transition :new => :pending
+      transition :draft => :pending
     end
     event :ship do
       transition :pending => :shipped
@@ -133,7 +133,7 @@ class Omni::Transfer < ActiveRecord::Base
       transition :shipped => :complete
     end
     event :cancel do
-      transition :new => :cancelled
+      transition :draft => :cancelled
       transition :pending => :cancelled
     end
   end

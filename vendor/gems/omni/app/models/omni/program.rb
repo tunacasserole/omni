@@ -79,6 +79,7 @@ class Omni::Program < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :program_nbr
+    string   :site_id
     string   :site_display do site.display if site end
     date     :effective_date
     date     :end_date

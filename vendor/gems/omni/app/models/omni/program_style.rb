@@ -75,6 +75,7 @@ class Omni::ProgramStyle < ActiveRecord::Base
   searchable do
     string   :style_display do style.display if style end
     integer  :retail_price
+    string   :program_id    
  
     text     :style_display_fulltext, :using => :style_display
     text     :retail_price_fulltext, :using => :retail_price
