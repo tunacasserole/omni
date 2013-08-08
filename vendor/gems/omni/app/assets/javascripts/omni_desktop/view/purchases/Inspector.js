@@ -82,7 +82,7 @@ Ext.define('Omni.view.purchases.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Purchase',
-      subtitle:  this.record.get('purchase_id')
+      subtitle:  this.record.get('display')
     });
     // TITLES (End)
 

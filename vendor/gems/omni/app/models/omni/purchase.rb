@@ -55,10 +55,10 @@ class Omni::Purchase < ActiveRecord::Base
     mapped_attributes do
     map :ordered_by_user_display,                :to => 'ordered_by_user.display'
     map :confirmed_by_user_display,              :to => 'confirmed_by_user.display'     
-    map :ordered_by_user_display,                :to => 'ordered_by_user.display'    
     map :supplier_display,                       :to => 'supplier.display'
     map :master_purchase_display,                :to => 'master_purchase.display'
-    map :carrier_supplier_display,               :to => 'supplier.display'
+    map :carrier_supplier_display,               :to => 'carrier_supplier.display'
+    map :location_display,                       :to => 'location.display'
 
     map :supplier_payment_term,                  :to => 'supplier.default_payment_term'
 
@@ -96,8 +96,24 @@ class Omni::Purchase < ActiveRecord::Base
     string   :purchase_id
     string   :display
     string   :state
-    text     :display_fulltext, :using => :display
+    string   :purchase_order_nbr
+    string   :supplier_display
+    string   :location_display
+    # string   :purchase_type
+    # string   :purchase_source
+    date     :order_date
+    date     :ship_date
+    date     :delivery_date
+
+    text     :display_fulltext,            :using => :display
+    text     :state_fulltext,              :using => :state
+    text     :supplier_fulltext,           :using => :supplier_display
+    text     :location_fulltext,           :using => :location_display
+    text     :master_purchase_fulltext,    :using => :master_purchase_display
+    text     :carrier_supplier_fulltext,   :using => :carrier_supplier_display
+
   end 
+
   # INDEXING (End)
 
 

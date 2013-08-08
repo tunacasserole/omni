@@ -4,7 +4,7 @@ Ext.define('Omni.view.purchases.Explorer', {
   alias:'widget.omni-purchases-Explorer',
 
   // EXPLORER INIT (Start) ===============================================================
-  allowFind: false,
+  allowFind: true,
 
   store: Ext.create('Omni.store.Purchase'),
 
@@ -67,17 +67,17 @@ Ext.define('Omni.view.purchases.Explorer', {
     Ext.apply(this, {
       columns: [
         // { header: this.purchase_idLabel,                   dataIndex: 'purchase_id',                 flex: 1 },    
-        { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },    
+        // { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },    
         { header: this.purchase_order_nbrLabel,            dataIndex: 'purchase_order_nbr',          flex: 1 },    
-        { header: this.supplier_idLabel,                   dataIndex: 'supplier_display',                 flex: 1 },    
-        { header: this.location_idLabel,                   dataIndex: 'location_display',                 flex: 1 },    
+        { header: this.supplier_idLabel,                   dataIndex: 'supplier_display',            flex: 1 },    
+        { header: this.location_idLabel,                   dataIndex: 'location_display',            flex: 1 },    
         // { header: this.purchase_typeLabel,                 dataIndex: 'purchase_type',               flex: 1 },    
-        { header: this.purchase_sourceLabel,               dataIndex: 'purchase_source',             flex: 1 },    
+        // { header: this.purchase_sourceLabel,               dataIndex: 'purchase_source',             flex: 1 },    
         { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },    
         { header: this.order_dateLabel,                    dataIndex: 'order_date',                  flex: 1 },    
         // { header: this.ordered_by_user_idLabel,            dataIndex: 'ordered_by_user_id',          flex: 1 },    
-        // { header: this.ship_dateLabel,                     dataIndex: 'ship_date',                   flex: 1 },    
-        // { header: this.delivery_dateLabel,                 dataIndex: 'delivery_date',               flex: 1 },    
+        { header: this.ship_dateLabel,                     dataIndex: 'ship_date',                   flex: 1 },    
+        { header: this.delivery_dateLabel,                 dataIndex: 'delivery_date',               flex: 1 }
         // { header: this.cancel_not_shipped_by_dateLabel,    dataIndex: 'cancel_not_shipped_by_date',  flex: 1 },    
         // { header: this.cancel_not_received_by_dateLabel,   dataIndex: 'cancel_not_received_by_date', flex: 1 },    
         // { header: this.approval_dateLabel,                 dataIndex: 'approval_date',               flex: 1 },    
