@@ -71,7 +71,7 @@ class Omni::SkuSupplier < ActiveRecord::Base
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
   belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
-  belongs_to   :cost_model,                      :class_name => 'Omni::CostModel',               :foreign_key => 'cost_model_id'
+  belongs_to   :cost,                            :class_name => 'Omni::Cost',                    :foreign_key => 'cost_id'
   belongs_to   :pallet_container,                :class_name => 'Omni::Container',               :foreign_key => 'pallet_container_id'
   # ASSOCIATIONS (End)
 
@@ -81,7 +81,7 @@ class Omni::SkuSupplier < ActiveRecord::Base
   mapped_attributes do
     map :sku_display,                            :to => 'sku.display'
     map :supplier_display,                       :to => 'supplier.display'
-    map :cost_model_display,                     :to => 'cost_model.display'
+    map :cost_display,                           :to => 'cost.display'
     map :pallet_container_display,               :to => 'pallet_container.display'
   end
   # MAPPED ATTRIBUTES (End)

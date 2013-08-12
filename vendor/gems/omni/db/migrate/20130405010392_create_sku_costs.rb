@@ -2,7 +2,7 @@ class CreateSkuCosts < ActiveRecord::Migration
   def change
     unless ActiveRecord::Base.connection.tables.include? 'sku_costs'
       create_table(:sku_costs, :id => false) do |t|
-        t.column :sku_cost_id,                           :string,        :limit       => 32,     :null        => false
+        t.column :sku_cost_id,                       :string,        :limit       => 32,     :null        => false
         t.column :display,                           :string,        :limit       => 300,    :null        => false
         t.column :sku_id,                            :string,        :limit       => 32,     :null        => false
         t.column :first_cost,                        :decimal,       :precision   => 13,     :scale       => 4,      :null        => true

@@ -550,3 +550,7 @@ Buildit::Lookup.create(:lookup_id => 'FF778582972811E2A3D212313B100XXX', :code =
 Buildit::Lookup.create(:lookup_id => 'FF778582972811E2A3D212313B100YYY', :code => 'NEW', :default_text => 'New', :category => 'STATE', :position => 1)
 Buildit::Lookup.create(:lookup_id => 'FF778582972811E2A3D212313B100ZZZ', :code => 'IN PROGRESS', :default_text => 'In Progress', :category => 'STATE', :position => 1)
 Buildit::Lookup.create(:lookup_id => 'FF778582972811E2A3D212313B100AAA', :code => 'CLOSED', :default_text => 'Closed', :category => 'STATE', :position => 1)
+Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B428CFE9147CA7', :code => 'PERCENT OF COST', :default_text => 'Percent of Cost', :category => 'CALCULATION_TYPE', :position => 1)
+Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B428CFE9147CA8', :code => 'FIXED AMOUNT', :default_text => 'Fixed Amount', :category => 'CALCULATION_TYPE', :position => 2)
+
+

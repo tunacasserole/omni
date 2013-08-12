@@ -12,6 +12,7 @@ class CreateOmniCostDetails < ActiveRecord::Migration
         t.column   :cost_type,                       :string,            :null  =>  true,    :limit   => 100
         t.column   :cost_amount,                     :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :cost_percent,                    :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
+        t.column   :cost_calculation,                :string,            :null  =>  true,    :limit   => 100
         t.column   :is_update_inventory_cost,        :boolean,           :null  =>  true
         t.column   :is_update_invoice_cost,          :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true

@@ -37,8 +37,8 @@ en:
         order_multiple_type:             Order Multiple Type
         extra_cost:                      Extra Cost
         is_included_extra_cost:          Include Extra Cost in Average Cost
-        cost_model_display:              Cost Model
-        cost_model_id:                   Landed Cost Model
+        cost_display:                    Landed Cost Model
+        cost_id:                         Landed Cost Model
         origin_country:                  Country of Origin
         freight_term:                    Freight Terms
         is_conveyable_master_pack:       Master Pack Conveyable

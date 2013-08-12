@@ -6,7 +6,7 @@ en:
       omni/color:
         color_id:                          'Color'
         display:                           'Display'
-        color_nbr:                         'Color Nbr'
+        color_nbr:                         'Color Number'
         description:                       'Description'
         short_name:                        'Short Name'
         concatenated_name:                 'Concatenated Name'

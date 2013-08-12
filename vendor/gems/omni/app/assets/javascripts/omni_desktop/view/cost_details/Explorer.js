@@ -30,6 +30,7 @@ Ext.define('Omni.view.cost_details.Explorer', {
   cost_typeLabel:                         Omni.i18n.model.CostDetail.cost_type,
   cost_amountLabel:                       Omni.i18n.model.CostDetail.cost_amount,
   cost_percentLabel:                      Omni.i18n.model.CostDetail.cost_percent,
+  cost_calculationLabel:                  Omni.i18n.model.CostDetail.cost_calculation,
   is_update_inventory_costLabel:          Omni.i18n.model.CostDetail.is_update_inventory_cost,
   is_update_invoice_costLabel:            Omni.i18n.model.CostDetail.is_update_invoice_cost,
   is_destroyedLabel:                      Omni.i18n.model.CostDetail.is_destroyed,
@@ -55,6 +56,7 @@ Ext.define('Omni.view.cost_details.Explorer', {
         { header: this.cost_typeLabel,                     dataIndex: 'cost_type',                   flex: 1 },    
         { header: this.cost_amountLabel,                   dataIndex: 'cost_amount',                 flex: 1 },    
         { header: this.cost_percentLabel,                  dataIndex: 'cost_percent',                flex: 1 },    
+        { header: this.cost_calculationLabel,              dataIndex: 'cost_calculation',            flex: 1 },            
         { header: this.is_update_inventory_costLabel,      dataIndex: 'is_update_inventory_cost',    flex: 1 },    
         { header: this.is_update_invoice_costLabel,        dataIndex: 'is_update_invoice_cost',      flex: 1 },    
         // { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }    

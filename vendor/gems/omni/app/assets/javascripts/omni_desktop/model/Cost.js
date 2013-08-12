@@ -4,13 +4,8 @@ Ext.define('Omni.model.Cost', {
   fields: [
       { name: 'cost_id',                     type: 'string'   },
       { name: 'display',                     type: 'string'   },
-      { name: 'first_cost',                  type: 'decimal'  },
-      { name: 'last_cost',                   type: 'decimal'  },
-      { name: 'average_cost',                type: 'decimal'  },
-      { name: 'on_hand_units',               type: 'decimal'  },
-      { name: 'cost_pool',                   type: 'decimal'  },
-      { name: 'retail_pool',                 type: 'decimal'  },
-      { name: 'is_updated_average_cost',     type: 'boolean'  },
+      { name: 'short_name',                  type: 'string'   },
+      { name: 'description',                 type: 'string'   },
       { name: 'is_destroyed',                type: 'boolean'  }
     ],
 

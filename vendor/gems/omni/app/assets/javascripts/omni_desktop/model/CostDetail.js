@@ -10,6 +10,7 @@ Ext.define('Omni.model.CostDetail', {
       { name: 'cost_type',                   type: 'string'   },
       { name: 'cost_amount',                 type: 'decimal'  },
       { name: 'cost_percent',                type: 'decimal'  },
+      { name: 'cost_calculation',            type: 'string'   },
       { name: 'is_update_inventory_cost',    type: 'boolean'  },
       { name: 'is_update_invoice_cost',      type: 'boolean'  },
       { name: 'is_destroyed',                type: 'boolean'  }

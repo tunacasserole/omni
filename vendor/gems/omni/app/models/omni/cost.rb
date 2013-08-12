@@ -22,7 +22,8 @@ class Omni::Cost < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates :cost_id,                        :presence      => true
+  validates :cost_id,                        :uniqueness  => true
+  validates :display,                        :uniqueness  => true
   # VALIDATIONS (End)
 
 
@@ -32,7 +33,8 @@ class Omni::Cost < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :cost_details,              :class_name => 'Omni::CostDetail',    :foreign_key => 'cost_id'    
+  has_many :cost_details,                    :class_name => 'Omni::CostDetail',    :foreign_key => 'cost_id' 
+  has_many :sku_suppliers,                   :class_name => 'Omni::SkuSupplier',   :foreign_key => 'cost_id'
   # ASSOCIATIONS (End)
 
 
@@ -57,7 +59,7 @@ class Omni::Cost < ActiveRecord::Base
 
 
   # ORDERING (Start) ====================================================================
-  
+  order_search_by :display => :asc  
   # ORDERING (End)
 
 
@@ -67,7 +69,16 @@ class Omni::Cost < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  
+  searchable do
+    string   :cost_id
+    string   :display
+    string   :short_name
+    string   :description
+
+    text     :display_fulltext,            :using => :display
+    text     :short_name_fulltext,         :using => :short_name
+    text     :description_fulltext,        :using => :description
+  end
   # INDEXING (End)
 
 

@@ -41,7 +41,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
       order_multiple_typeLabel:                   Omni.i18n.model.SkuSupplier.order_multiple_type,
       extra_costLabel:                            Omni.i18n.model.SkuSupplier.extra_cost,
       is_included_extra_costLabel:                Omni.i18n.model.SkuSupplier.is_included_extra_cost,
-      cost_model_idLabel:                         Omni.i18n.model.SkuSupplier.cost_model_id,
+      cost_idLabel:                               Omni.i18n.model.SkuSupplier.cost_id,
       origin_countryLabel:                        Omni.i18n.model.SkuSupplier.origin_country,
       freight_termLabel:                          Omni.i18n.model.SkuSupplier.freight_term,
       is_conveyable_master_packLabel:             Omni.i18n.model.SkuSupplier.is_conveyable_master_pack,
@@ -132,7 +132,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
             { name: 'order_multiple_type',            fieldLabel: this.order_multiple_typeLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',  category:  'ORDER_MULTIPLE_TYPE' },
             { name: 'extra_cost',                     fieldLabel: this.extra_costLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_included_extra_cost',         fieldLabel: this.is_included_extra_costLabel,     allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'cost_model_id',                  fieldLabel: this.cost_model_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.CostModel',{pageSize: 10}), displayField: 'cost_model_id', queryField: 'cost_model_id', valueField: 'cost_model_id', itemTpl:'{cost_model_id}' },
+            { name: 'cost_id',                        fieldLabel: this.cost_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Cost',{pageSize: 10}), displayField: 'cost_id', queryField: 'cost_id', valueField: 'cost_id', itemTpl:'{cost_id}' },
             { name: 'origin_country',                 fieldLabel: this.origin_countryLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'freight_term',                   fieldLabel: this.freight_termLabel,               allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',  category:  'FREIGHT_TERM' }
           ]

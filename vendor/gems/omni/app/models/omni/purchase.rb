@@ -22,8 +22,8 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates :purchase_id,                        :presence      => true
   validates :supplier_id,                        :presence      => true
+  validates :display,                            :uniqueness    => true
   # VALIDATIONS (End)
 
 
@@ -31,16 +31,22 @@ class Omni::Purchase < ActiveRecord::Base
   default :purchase_id,                                                       :with => :guid
   default :purchase_order_nbr,                   :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_ORDER_NBR"
   default :order_date,                                                        :with => :now
+  default :is_special_order,                                                  :to   => false
+  default :is_phone_order,                                                    :to   => false
   default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - #{m.order_date}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current} 
   default :payment_term,                                                      :to   => lambda{|m| "#{m.supplier_payment_term}"}
+  default :freight_term,                                                      :to   => lambda{|m| "#{m.supplier_freight_term}"}
+  default :ship_via,                                                          :to   => lambda{|m| "#{m.supplier_ship_via}"}
+  # default :fob_point,                                                         :to   => lambda{|m| "#{m.supplier_fob_point}"}
+  default :is_ship_cancel,                                                    :to   => lambda{|m| "#{m.supplier_is_ship_cancel}"}
+  default :estimated_lead_time_days,                                          :to   => lambda{|m| "#{m.supplier_estimated_lead_time_days}"}
   
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_details,              :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'  
-  has_many     :purchase_costs,                :class_name => 'Omni::PurchaseCost',      :foreign_key => 'purchase_cost_id'  
   has_many     :logs,                          :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
   belongs_to   :location,                      :class_name => 'Omni::Location',          :foreign_key => 'location_id'  
   belongs_to   :supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'  
@@ -52,7 +58,7 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-    mapped_attributes do
+  mapped_attributes do
     map :ordered_by_user_display,                :to => 'ordered_by_user.display'
     map :confirmed_by_user_display,              :to => 'confirmed_by_user.display'     
     map :supplier_display,                       :to => 'supplier.display'
@@ -61,12 +67,20 @@ class Omni::Purchase < ActiveRecord::Base
     map :location_display,                       :to => 'location.display'
 
     map :supplier_payment_term,                  :to => 'supplier.default_payment_term'
+    map :supplier_freight_term,                  :to => 'supplier.freight_term'
+    map :supplier_ship_via,                      :to => 'supplier.ship_via'
+    # map :supplier_fob_point,                     :to => 'supplier.fob_point'
+    map :supplier_is_ship_cancel,                :to => 'supplier.is_ship_cancel'
+    map :supplier_estimated_lead_time_days,      :to => 'supplier.lead_time'
 
   end
   # MAPPED ATTRIBUTES (End)
 
   
   # COMPUTED ATTRIBUTES (Start) =========================================================
+  computed_attributes do
+    compute :total_order_units,                  :with => :compute_total_order_units
+  end
   
   # COMPUTED ATTRIBUTES (End)
 
@@ -75,6 +89,9 @@ class Omni::Purchase < ActiveRecord::Base
   
   # TEMPORARY ATTRIBUTES (End)
 
+  # ORDERING (Start) ====================================================================
+  order_search_by :display => :asc
+  # ORDERING (End)
 
   # FILTERS (Start) =====================================================================
   
@@ -119,6 +136,12 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
   before_destroy :cascading_delete
+
+  def compute_total_order_units
+    self.purchase_details.sum(:units_ordered) if self.purchase_details
+  end
+
+
   # HOOKS (End)
 
 
@@ -140,6 +163,41 @@ class Omni::Purchase < ActiveRecord::Base
     event :approve do
       transition any => :open
     end
+
+  ### STATES ###
+    state :draft do
+
+    end
+
+    state :planning do
+      validates :purchase_order_nbr,                         :presence => true
+      validates :supplier_id,                                :presence => true
+      validates :location_id,                                :presence => true
+      validates :purchase_type,                              :presence => true
+      validates :purchase_source,                            :presence => true
+      validates :ordered_by_user_id,                         :presence => true
+      validates :order_date,                                 :presence => true
+      validates :delivery_date,                              :presence => true
+      validates :payment_term,                               :presence => true
+      validates :freight_term,                               :presence => true
+      validates :ship_via,                                   :presence => true
+      validates :fob_point,                                  :presence => true
+
+    end
+
+    state :open do
+
+    end
+
+    state :costing do
+
+    end
+
+    state :allocating do
+
+    end
+
+
   end
   # STATES (End)  
 

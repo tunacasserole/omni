@@ -22,25 +22,34 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates :purchase_detail_id,                        :presence      => true
+  validates :display,                         :uniqueness  => true
+  validates :purchase_id,                     :uniqueness  => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default :purchase_detail_id,                          :with => :guid
+  default :purchase_detail_id,                                 :with => :guid
+  default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
+  default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
+  default :units_ordered,                                      :to   => 0
+  default :description,                                        :to   => lambda{|m| "#{m.sku_description}"}
+
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'    
-  belongs_to   :purchase,            :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'  
-  belongs_to   :sku,                 :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
-  belongs_to   :cost,            :class_name => 'Omni::Cost',                :foreign_key => 'cost_id'
+  has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
+  has_many     :purchase_costs,       :class_name => 'Omni::PurchaseCost',        :foreign_key => 'purchase_detail_id'
+  has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
+  belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'  
+  belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
   # ASSOCIATIONS (End)
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  
+  map :sku_description,               :to => 'sku.sku_description'
+
+
   # MAPPED ATTRIBUTES (End)
 
   
@@ -80,14 +89,14 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :planning do
+  state_machine :state, :initial => :draft do
 
   ### CALLBACKS ###
     after_transition :on => :allocate, :do => :process_allocate
 
   ### EVENTS ###
     event :allocate do
-      transition :planning => :allocating
+      transition :draft => :allocating
       transition :open => :allocating      
     end
   end
@@ -100,7 +109,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     self.purchase_details.each do |pd|
       Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
     end
-    self.state = 'planning'
+    self.state = 'draft'
     self.save
   end
 
@@ -118,7 +127,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def reset
-    self.purchase_allocations.all(:state => 'draft').each {|x| x.destroy}
+    self.purchase_allocations.all(:state => 'planning').each {|x| x.destroy}
   end
 
   def cascading_delete

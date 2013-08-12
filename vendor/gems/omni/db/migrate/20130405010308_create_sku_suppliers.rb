@@ -33,7 +33,7 @@ class CreateSkuSuppliers < ActiveRecord::Migration
         t.column :order_multiple_type,               :string,        :limit       => 100,    :null        => true
         t.column :extra_cost,                        :decimal,       :precision   => 13,     :scale       => 4,      :null        => true
         t.column :is_included_extra_cost,            :boolean,       :null        => true
-        t.column :cost_model_id,                     :string,        :limit       => 32,     :null        => true
+        t.column :cost_id,                           :string,        :limit       => 32,     :null        => true
         t.column :origin_country,                    :string,        :limit       => 100,    :null        => true
         t.column :freight_term,                      :string,        :limit       => 100,    :null        => true
         t.column :is_conveyable_master_pack,         :boolean,       :null        => true
