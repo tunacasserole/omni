@@ -18,33 +18,25 @@ Ext.define('Omni.view.purchases.Inspector',{
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
-        {title: 'Profile',           xtype: 'omni-purchases-Form'}
-        ,{title: 'Details', xtype: 'omni-purchase_details-Explorer',
-           defaultSearch: { with: 
-             {
-               purchase_id:   {equal_to: me.record.get('purchase_id')}
-             }
-          }
+        {
+          title: 'Profile',
+          xtype: 'omni-purchases-Form'
         }
-        ,{title: 'Costs', xtype: 'omni-purchase_costs-Explorer',
-           defaultSearch: { with: 
-             {
-               purchase_id:   {equal_to: me.record.get('purchase_id')}
-             }
-          }
-        }
-        ,{title: 'Allocations', xtype: 'omni-purchase_allocations-Explorer',
-           defaultSearch: { with: 
+
+        ,{
+          title: 'Details',
+          xtype: 'omni-purchase_details-Explorer',
+          defaultSearch: { with: 
              {
                purchase_id:   {equal_to: me.record.get('purchase_id')}
              }
           }
         }
         ,{
-          xtype    : 'buildit-CardGroup',
-          title    : 'Support',
-          module   : 'notes',
-          cards    : [
+          title: 'Support',
+          xtype: 'buildit-CardGroup',
+          module: 'notes',
+          cards: [
             {
               title: 'Notes',
               xtype: 'buildit-notes-Explorer',
@@ -55,8 +47,8 @@ Ext.define('Omni.view.purchases.Inspector',{
                 }
               },
               showBadge: true
-            },
-            {
+            }
+            ,{
               title: 'Attachments',
               xtype: 'buildit-attachments-Explorer',
               defaultSearch: { with:
@@ -66,12 +58,12 @@ Ext.define('Omni.view.purchases.Inspector',{
                 }
               },
               showBadge: true
-            },
-            {
-              title:      'Audit',
-              xtype:      'buildit-audits-Explorer',
-              model:      'Omni::Purchase',
-              model_id:   me.record.get('purchase_id')
+            }
+            ,{
+              title: 'Audit',
+              xtype: 'buildit-audits-Explorer',
+              model: 'Omni::Purchase',
+              model_id: me.record.get('purchase_id')
             }
           ]
         }        

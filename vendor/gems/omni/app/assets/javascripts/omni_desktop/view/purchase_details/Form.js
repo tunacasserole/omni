@@ -18,7 +18,8 @@ Ext.define('Omni.view.purchase_details.Form', {
     
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
-      purchase_detail_idLabel:                Omni.i18n.model.PurchaseDetail.purchase_detail_id,    
+      purchase_detail_idLabel:                Omni.i18n.model.PurchaseDetail.purchase_detail_id,
+      purchase_displayLabel:                  Omni.i18n.model.PurchaseDetail.purchase_display,    
       purchase_idLabel:                       Omni.i18n.model.PurchaseDetail.purchase_id,    
       displayLabel:                           Omni.i18n.model.PurchaseDetail.display,    
       stateLabel:                             Omni.i18n.model.PurchaseDetail.state,    
@@ -51,7 +52,8 @@ Ext.define('Omni.view.purchase_details.Form', {
       items: [
         {
           xtype:        'fieldset',
-          title:        'General Information',
+          title:        'Product Information',
+          scheme:       'fieldset_scheme_styles',
           collapsible:  true,
           defaultType:  'textfield',
           defaults:     {anchor: '95%'},
@@ -72,30 +74,120 @@ Ext.define('Omni.view.purchase_details.Form', {
           */
 
             // { xtype: 'textfield', name: 'purchase_detail_id',             fieldLabel: this.purchase_detail_idLabel          , allowBlank: true },    
-            // { xtype: 'textfield', name: 'purchase_id',                    fieldLabel: this.purchase_idLabel                 , allowBlank: true },    
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },    
+            { xtype: 'textfield', name: 'purchase_display',               fieldLabel: this.purchase_displayLabel            , allowBlank: true, disabled: true },    
+            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true, disabled: true },    
             { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true, disabled: true },    
-            { xtype: 'textfield', name: 'purchase_line_nbr',              fieldLabel: this.purchase_line_nbrLabel           , allowBlank: true },    
-            { xtype: 'buildit-Locator',   name: 'sku_id',          fieldLabel: this.sku_idLabel                 , allowBlank: true,  store:   Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
-            { xtype: 'buildit-Locator',   name: 'cost_id',          fieldLabel: this.cost_idLabel                 , allowBlank: true,  store:   Ext.create('Omni.store.Cost',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'cost_id', itemTpl:'{display}' },
+            { xtype: 'textfield', name: 'purchase_line_nbr',              fieldLabel: this.purchase_line_nbrLabel           , allowBlank: true }
+           ,{ xtype: 'buildit-Locator',
+              name: 'sku_supplier_id', 
+              fieldLabel: this.sku_supplier_idLabel,
+              allowBlank: false,
+              store: Ext.create('Omni.store.SkuSupplier',{pageSize: 10}),
+              displayField: 'display', 
+              queryField: 'display',
+              valueField: 'sku_supplier_id',
+              itemTpl:'{display}' 
+            },
             { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },    
-            { xtype: 'textfield', name: 'supplier_cost',                  fieldLabel: this.supplier_costLabel               , allowBlank: true },    
-            { xtype: 'textfield', name: 'invoice_cost',                   fieldLabel: this.invoice_costLabel                , allowBlank: true },    
-            { xtype: 'textfield', name: 'inventory_cost',                 fieldLabel: this.inventory_costLabel              , allowBlank: true },    
-            { xtype: 'textfield', name: 'extra_cost',                     fieldLabel: this.extra_costLabel                  , allowBlank: true },    
             { xtype: 'textfield', name: 'supplier_item_identifier',       fieldLabel: this.supplier_item_identifierLabel    , allowBlank: true },    
             { xtype: 'textfield', name: 'color_name',                     fieldLabel: this.color_nameLabel                  , allowBlank: true },    
             { xtype: 'textfield', name: 'size_name',                      fieldLabel: this.size_nameLabel                   , allowBlank: true },    
             { xtype: 'textfield', name: 'sku_alias',                      fieldLabel: this.sku_aliasLabel                   , allowBlank: true },    
-            { xtype: 'textfield', name: 'units_ordered',                  fieldLabel: this.units_orderedLabel               , allowBlank: true },    
-            { xtype: 'textfield', name: 'order_pack_size',                fieldLabel: this.order_pack_sizeLabel             , allowBlank: true },    
-            { xtype: 'buildit-Lookup', name: 'order_pack_type',               fieldLabel: this.order_pack_typeLabel         , allowBlank: true, category:   'PACK_TYPE' },            
-            { xtype: 'textfield', name: 'order_cost_units',               fieldLabel: this.order_cost_unitsLabel            , allowBlank: true },    
-            { xtype: 'buildit-Lookup', name: 'order_multiple_type',               fieldLabel: this.order_multiple_typeLabel         , allowBlank: true, category:   'ORDER_MULTIPLE_TYPE' },            
-            { xtype: 'textfield', name: 'order_multiple',                 fieldLabel: this.order_multipleLabel              , allowBlank: true },    
-            { xtype: 'textfield', name: 'units_approved',                 fieldLabel: this.units_approvedLabel              , allowBlank: true },    
-            { xtype: 'textfield', name: 'units_cancelled',                fieldLabel: this.units_cancelledLabel             , allowBlank: true },    
             // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }    
+          ]
+        }
+        ,{
+          xtype: 'fieldset',
+          title: 'Cost Details',
+          scheme: 'fieldset_scheme_1',                    
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { xtype: 'textfield',
+              name: 'supplier_cost',
+              fieldLabel: this.supplier_costLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'buildit-Locator',
+              name: 'cost_id',
+              fieldLabel: this.cost_idLabel,
+              allowBlank: true,
+              store: Ext.create('Omni.store.Cost',{pageSize: 10}),
+              displayField: 'display',
+              queryField: 'display',
+              valueField: 'cost_id',
+              itemTpl: '{display}'
+            }
+           ,{ xtype: 'textfield',
+              name: 'invoice_cost',
+              fieldLabel: this.invoice_costLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'textfield',
+              name: 'inventory_cost',
+              fieldLabel: this.inventory_costLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'textfield',
+              name: 'extra_cost',
+              fieldLabel: this.extra_costLabel,
+              allowBlank: true 
+            }
+          ]
+        }
+        ,{
+          xtype: 'fieldset',
+          title: 'Order Details',
+          scheme: 'fieldset_scheme_1',                    
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { xtype: 'textfield',
+              name: 'units_ordered',
+              fieldLabel: this.units_orderedLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'textfield',
+              name: 'units_approved',
+              fieldLabel: this.units_approvedLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'textfield',
+              name: 'units_cancelled',
+              fieldLabel: this.units_cancelledLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'textfield',
+              name: 'order_pack_size',
+              fieldLabel: this.order_pack_sizeLabel,
+              allowBlank: true
+            }
+           ,{ xtype: 'buildit-Lookup',
+              name: 'order_pack_type',
+              fieldLabel: this.order_pack_typeLabel,
+              allowBlank: true,
+              category:   'PACK_TYPE'
+            }
+           ,{ xtype: 'textfield',
+              name: 'order_cost_units',
+              fieldLabel: this.order_cost_unitsLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'buildit-Lookup',
+            name: 'order_multiple_type',
+            fieldLabel: this.order_multiple_typeLabel,
+            allowBlank: true,
+            category:   'ORDER_MULTIPLE_TYPE' 
+            }
+           ,{ xtype: 'textfield',
+              name: 'order_multiple',
+              fieldLabel: this.order_multipleLabel,
+              allowBlank: true 
+            }
           ]
         }
       ]

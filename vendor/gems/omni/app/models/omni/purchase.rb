@@ -35,12 +35,12 @@ class Omni::Purchase < ActiveRecord::Base
   default :is_phone_order,                                                    :to   => false
   default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - #{m.order_date}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current} 
-  default :payment_term,                                                      :to   => lambda{|m| "#{m.supplier_payment_term}"}
-  default :freight_term,                                                      :to   => lambda{|m| "#{m.supplier_freight_term}"}
-  default :ship_via,                                                          :to   => lambda{|m| "#{m.supplier_ship_via}"}
+  default :payment_term,                                                      :to   => lambda{|m| "#{m.supplier.default_payment_term}"}
+  default :freight_term,                                                      :to   => lambda{|m| "#{m.supplier.freight_term}"}
+  default :ship_via,                                                          :to   => lambda{|m| "#{m.supplier.ship_via}"}
   # default :fob_point,                                                         :to   => lambda{|m| "#{m.supplier_fob_point}"}
-  default :is_ship_cancel,                                                    :to   => lambda{|m| "#{m.supplier_is_ship_cancel}"}
-  default :estimated_lead_time_days,                                          :to   => lambda{|m| "#{m.supplier_estimated_lead_time_days}"}
+  default :is_ship_cancel,                                                    :to   => lambda{|m| "#{m.supplier.is_ship_cancel}"}
+  default :estimated_lead_time_days,                                          :to   => lambda{|m| "#{m.supplier.lead_time}"}
   
   # DEFAULTS (End)
 
@@ -65,13 +65,6 @@ class Omni::Purchase < ActiveRecord::Base
     map :master_purchase_display,                :to => 'master_purchase.display'
     map :carrier_supplier_display,               :to => 'carrier_supplier.display'
     map :location_display,                       :to => 'location.display'
-
-    map :supplier_payment_term,                  :to => 'supplier.default_payment_term'
-    map :supplier_freight_term,                  :to => 'supplier.freight_term'
-    map :supplier_ship_via,                      :to => 'supplier.ship_via'
-    # map :supplier_fob_point,                     :to => 'supplier.fob_point'
-    map :supplier_is_ship_cancel,                :to => 'supplier.is_ship_cancel'
-    map :supplier_estimated_lead_time_days,      :to => 'supplier.lead_time'
 
   end
   # MAPPED ATTRIBUTES (End)

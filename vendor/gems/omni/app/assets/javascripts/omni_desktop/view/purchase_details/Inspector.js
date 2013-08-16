@@ -18,7 +18,29 @@ Ext.define('Omni.view.purchase_details.Inspector',{
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
-        {title: 'Profile',           xtype: 'omni-purchase_details-Form'}
+        {
+          title: 'Profile',
+          xtype: 'omni-purchase_details-Form'
+        }
+        ,{
+          title: 'Costs',
+          xtype: 'omni-purchase_costs-Explorer',
+          defaultSearch: { with: 
+             {
+               purchase_detail_id:   {equal_to: me.record.get('purchase_detail_id')}
+             }
+          }
+        }
+        ,{
+          title: 'Allocations',
+          xtype: 'omni-purchase_allocations-Explorer',
+          defaultSearch: { with: 
+             {
+               purchase_detail_id:   {equal_to: me.record.get('purchase_detail_id')}
+             }
+          }
+        }
+
       ]
     });
     // CARDS (End)

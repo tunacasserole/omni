@@ -3,11 +3,13 @@ Ext.define('Omni.model.PurchaseDetail', {
 
   fields: [
       { name: 'purchase_detail_id',          type: 'string'   },
+      { name: 'purchase_display',            type: 'string'   },
       { name: 'purchase_id',                 type: 'string'   },
       { name: 'display',                     type: 'string'   },
       { name: 'state',                       type: 'string'   },
       { name: 'purchase_line_nbr',           type: 'string'   },
       { name: 'sku_id',                      type: 'string'   },
+      { name: 'sku_supplier_id',             type: 'string'   },
       { name: 'cost_id',                     type: 'string'   },
       { name: 'description',                 type: 'string'   },
       { name: 'supplier_cost',               type: 'decimal'  },

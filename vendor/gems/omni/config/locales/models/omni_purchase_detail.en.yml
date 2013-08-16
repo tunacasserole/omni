@@ -12,11 +12,13 @@ en:
         supplier_id:                     Supplier
         purchase_detail_id:              Purchase Detail
         display:                         Display
-        purchase_display:                Purchase
-        purchase_id:                     Purchase
-        purchase_line_nbr:               Purchase order line number
-        sku_display:                     Sku
+        purchase_display:                Purchase Order
+        purchase_id:                     Purchase Order
+        purchase_line_nbr:               Purchase Order Line Number
+        sku_display:                     SKU
         sku_id:                          SKU
+        sku_supplier_display:            SKU
+        sku_supplier_id:                 SKU
         supplier_item_identifier:        Supplier Item Number
         description:                     Description
         color_name:                      Color Name

@@ -9,6 +9,7 @@ class CreateOmniPurchaseDetails < ActiveRecord::Migration
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
         t.column   :purchase_line_nbr,               :string,            :null  =>  true,    :limit   => 11
+        t.column   :sku_supplier_id,                 :string,            :null  =>  true,    :limit   => 32
         t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :cost_id,                         :string,            :null  =>  true,    :limit   => 32
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300

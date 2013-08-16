@@ -14,6 +14,6 @@ en:
         cost_amount:                       'Cost Amount'
         cost_percent:                      'Cost Percent'
         cost_calculation:                  'Cost Calculation'
-        is_update_inventory_cost:          'Is Update Inventory Cost'
-        is_update_invoice_cost:            'Is Update Invoice Cost'
+        is_update_inventory_cost:          'Update Inventory Cost'
+        is_update_invoice_cost:            'Update Invoice Cost'
         is_destroyed:                      'Is Destroyed'
