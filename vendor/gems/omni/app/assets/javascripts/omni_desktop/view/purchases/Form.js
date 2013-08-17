@@ -67,7 +67,7 @@ Ext.define('Omni.view.purchases.Form', {
             // { xtype: 'textfield', name: 'purchase_id',                    fieldLabel: this.purchase_idLabel                 , allowBlank: true },    
             { xtype: 'textfield',       name: 'display',              fieldLabel: this.displayLabel                     , allowBlank: true },    
             { xtype: 'textfield',       name: 'purchase_order_nbr',   fieldLabel: this.purchase_order_nbrLabel          , allowBlank: true },    
-            { xtype: 'buildit-Locator', name: 'supplier_id',          fieldLabel: this.supplier_idLabel                 , allowBlank: true,  store:   Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
+            { xtype: 'buildit-Locator', name: 'supplier_id',          fieldLabel: this.supplier_idLabel                 , allowBlank: true,  store:   Ext.create('Omni.store.Supplier',{pageSize: 30}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
             { xtype: 'buildit-Locator', name: 'location_id',          fieldLabel: this.location_idLabel                 , allowBlank: true,  store:   Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
             { xtype: 'buildit-Lookup',  name: 'purchase_type',        fieldLabel: this.purchase_typeLabel               , allowBlank: true, category:   'PURCHASE_TYPE' },            
             { xtype: 'buildit-Lookup',  name: 'purchase_source',      fieldLabel: this.purchase_sourceLabel             , allowBlank: true, category:   'PURCHASE_SOURCE' },            

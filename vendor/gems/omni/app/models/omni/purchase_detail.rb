@@ -33,11 +33,11 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default :purchase_detail_id,                                 :with => :guid
   default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
-  default :display,               :override  =>  false,        :to   => lambda{|m| {"#{m.purchase_display} - #{m.purchase_line_nbr}"}
+  default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
   default :units_ordered,                                      :to   => 0
-  default :description,                                        :to   => lambda{|m| {"#{m.sku.description}"}
-  default :cost_id,                                            :to   => lambda{|m| {"#{m.sku_supplier.cost_id}"}
-  defautl :supplier_cost,                                      :to   => lambda{|m| {"#{m.sku_supplier.supplier_cost}"}
+  default :description,                                        :to   => lambda{|m| "#{m.sku.description}"}
+  default :cost_id,                                            :to   => lambda{|m| "#{m.sku_supplier.cost_id}"}
+  default :supplier_cost,                                      :to   => lambda{|m| "#{m.sku_supplier.supplier_cost}"}
 
   # DEFAULTS (End)
 
@@ -104,7 +104,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     text     :display_fulltext,            :using => :display
     text     :state_fulltext,              :using => :state
     text     :sku_display_fulltext,        :using => :sku_display
-    text     :sku_supplier_display,        :using => :sku_supplier_display
+    text     :sku_supplier_fulltext,       :using => :sku_supplier_display
     text     :purchase_display_fulltext,   :using => :purchase_display
 
   end 

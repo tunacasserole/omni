@@ -82,17 +82,26 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'sku_supplier_id', 
               fieldLabel: this.sku_supplier_idLabel,
               allowBlank: false,
-              store: Ext.create('Omni.store.SkuSupplier',{pageSize: 10}),
+              store: Ext.create('Omni.store.SkuSupplier',{pageSize: 30}),
               displayField: 'display', 
               queryField: 'display',
               valueField: 'sku_supplier_id',
               itemTpl:'{display}' 
-            },
-            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },    
-            { xtype: 'textfield', name: 'supplier_item_identifier',       fieldLabel: this.supplier_item_identifierLabel    , allowBlank: true },    
+            }
+           ,{ xtype: 'textfield',
+              name: 'supplier_item_identifier',
+              fieldLabel: this.supplier_item_identifierLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'textarea',
+              name: 'description',
+              fieldLabel: this.descriptionLabel,
+              allowBlank: true 
+            }
+           ,    
             { xtype: 'textfield', name: 'color_name',                     fieldLabel: this.color_nameLabel                  , allowBlank: true },    
             { xtype: 'textfield', name: 'size_name',                      fieldLabel: this.size_nameLabel                   , allowBlank: true },    
-            { xtype: 'textfield', name: 'sku_alias',                      fieldLabel: this.sku_aliasLabel                   , allowBlank: true },    
+            { xtype: 'textfield', name: 'sku_alias',                      fieldLabel: this.sku_aliasLabel                   , allowBlank: true }
             // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }    
           ]
         }

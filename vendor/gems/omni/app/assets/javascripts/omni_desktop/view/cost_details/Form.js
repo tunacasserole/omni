@@ -59,16 +59,16 @@ Ext.define('Omni.view.cost_details.Form', {
           */
 
             // { xtype: 'textfield', name: 'cost_detail_id',                 fieldLabel: this.cost_detail_idLabel              , allowBlank: false },    
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false, disabled:  true },    
+            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true, disabled:  true },    
             // { xtype: 'textfield', name: 'cost_id',                        fieldLabel: this.cost_idLabel                     , allowBlank: false },    
             { xtype: 'textfield', name: 'cost_detail_name',               fieldLabel: this.cost_detail_nameLabel            , allowBlank: false },    
             { xtype: 'buildit-Lookup', name: 'cost_source',               fieldLabel: this.cost_sourceLabel                 , allowBlank: true, category:   'COST_SOURCE' },            
             { xtype: 'buildit-Lookup', name: 'cost_type',                 fieldLabel: this.cost_typeLabel                   , allowBlank: true, category:   'COST_TYPE' },            
             { xtype: 'buildit-Lookup', name: 'cost_calculation',          fieldLabel: this.cost_calculationLabel            , allowBlank: true, category:   'COST_CALCULATION' },            
-            { xtype: 'textfield', name: 'cost_amount',                    fieldLabel: this.cost_amountLabel                 , allowBlank: false },    
-            { xtype: 'textfield', name: 'cost_percent',                   fieldLabel: this.cost_percentLabel                , allowBlank: false }, 
-            { xtype: 'checkbox', name: 'is_update_inventory_cost',        fieldLabel: this.is_update_inventory_costLabel    , allowBlank: false },    
-            { xtype: 'checkbox', name: 'is_update_invoice_cost',          fieldLabel: this.is_update_invoice_costLabel      , allowBlank: false },    
+            { xtype: 'textfield', name: 'cost_amount',                    fieldLabel: this.cost_amountLabel                 , allowBlank: true },    
+            { xtype: 'textfield', name: 'cost_percent',                   fieldLabel: this.cost_percentLabel                , allowBlank: true }, 
+            { xtype: 'checkbox', name: 'is_update_inventory_cost',        fieldLabel: this.is_update_inventory_costLabel    , allowBlank: true },    
+            { xtype: 'checkbox', name: 'is_update_invoice_cost',          fieldLabel: this.is_update_invoice_costLabel      , allowBlank: true },    
             // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false }    
           ]
         }

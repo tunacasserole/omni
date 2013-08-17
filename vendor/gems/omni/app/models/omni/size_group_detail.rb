@@ -58,6 +58,16 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
   # TEMPORARY ATTRIBUTES (End)
 
 
+  # FILTERS (Start) =====================================================================
+  
+  # FILTERS (End)
+
+
+  # ORDERING (Start) ====================================================================
+  order_search_by :display_order => :asc  
+  # ORDERING (End)
+
+
   # SCOPES (Start) ======================================================================
 
   # SCOPES (End)
