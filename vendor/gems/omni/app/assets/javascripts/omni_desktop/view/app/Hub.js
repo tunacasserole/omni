@@ -114,6 +114,24 @@ Ext.define('Omni.view.app.Hub', {
      rows: 3,
      tiles: [
        {title: 'Issues', colspan: 2, rowspan: 2, cls: 'issues',  target: {xtype: 'omni-issues-Explorer'}}     
+
+   // Section: product setup data //
+
+   ,{
+   title: 'product setup data',
+     columns: 6,
+     rows: 3,
+     tiles: [
+       {title: 'Colors', colspan: 2, rowspan: 1, cls: 'omni-colors', target: { xtype: 'omni-colors-Explorer'} },
+       {title: 'Sizes', colspan: 2, rowspan: 1, cls: 'sales_calls', target: { xtype: 'omni-sizes-Explorer'} },       
+       {title: 'Size Groups', colspan: 2, rowspan: 1, cls: 'projects', target: { xtype: 'omni-size_groups-Explorer'} },       
+       {title: 'Category', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-categories-Explorer', title: ''}},
+       {title: 'Product', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-products-Explorer', title: ''}},
+       {title: 'Product Types', colspan: 2, rowspan: 1, cls: 'products_types',  target: {xtype: 'omni-product_types-Explorer', title: ''}},       
+       {title: 'transfer_reasons', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-transfer_reasons-Explorer', title: ''}},       
+       {title: 'Forecast Profile', colspan: 2, rowspan: 1, cls: 'cfars',  target: {xtype: 'omni-forecast_profiles-Explorer'}},       
+       {title: 'Labels', colspan: 2, rowspan: 1, cls: 'labels',  target: {xtype: 'omni-labels-Explorer', title: ''}},       
+>>>>>>> b7d1dfe2cc1603b6bce7446676ceafeb6c46196c
      ] 
   }     
 
