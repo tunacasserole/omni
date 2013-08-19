@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/mark_transfer_line:  'Model'
+    attributes:
+      omni/mark_transfer_line:
+        id:                                'Id'
+        transfer_id:                       'Transfer'
+        stock_nbr:                         'Stock Nbr'
+        size:                              'Size'
+        qty:                               'Qty'
+        date:                              'Date'
+        box_nbr:                           'Box Nbr'
+        status_id:                         'Status'

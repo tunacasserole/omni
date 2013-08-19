@@ -13,6 +13,21 @@ Buildit::ApplicationRole.create(
   role_id:              '323244F0204011EFCFE9040CCEDF842E',
   is_enabled:           1
   )
+
+Buildit::Application.create(
+  application_id:       '6900AE7AC18B11E289BA20COMNIADMIN',
+  application_code:     'OMNI_ADMIN',
+  hub_xtype:            'omni-app-AdminHub',
+  application_name:     'Omni ERP Administration',
+  description:          "The admin console for the ERP solution for Parker School Uniforms",
+  is_enabled:           1
+  )
+Buildit::ApplicationRole.create(
+  application_role_id:  '62BF1790C19511E289BA20C9D04ADMIN',
+  application_id:       '6900AE7AC18B11E289BA20COMNIADMIN',
+  role_id:              '323244F0204011EFCFE9040CCEDF842E',
+  is_enabled:           1
+  )
 # Buildit::Application.create(
 #   application_id:       'A25DC00EC19511E289BA20C9D047DD15',
 #   application_code:     'GRITS',

@@ -73,7 +73,9 @@ class Omni::Classification < ActiveRecord::Base
     skus = []
     self.subclasses.each do |subclass|
       subclass.styles.each do |style|
-        skus << style.skus
+        style.skus.each do |sku|
+          skus << sku
+        end
       end
     end
     skus

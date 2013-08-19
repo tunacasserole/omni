@@ -90,7 +90,7 @@ class Omni::Department < ActiveRecord::Base
     self.classifications.each do |classification|
       classification.subclasses.each do |subclass|
         subclass.styles.each do |style|
-          skus << style.skus
+          style.skus.each {|sku| skus << sku}
         end
       end
     end

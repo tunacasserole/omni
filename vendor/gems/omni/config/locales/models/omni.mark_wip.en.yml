@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      omni/mark_wip:  'Model'
+    attributes:
+      omni/mark_wip:
+        outlet_nbr:                        'Outlet Nbr'
+        stock_nbr:                         'Stock Nbr'
+        size:                              'Size'
+        cut_wip:                           'Cut Wip'
+        plant_wip:                         'Plant Wip'
+        cont_wip:                          'Cont Wip'
+        status_id:                         'Status'

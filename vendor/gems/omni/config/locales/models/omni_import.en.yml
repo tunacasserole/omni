@@ -18,5 +18,5 @@ en:
         end_date:                          'End Date'
         argument_hash:                     'Argument Hash'
         state:                             'State'
-        is_drop_data:                      'Drop existing data prior to import'
-        is_destroyed:                      'Is Destryoed'
+        is_drop_data:                      'Drop data prior to import'
+        is_destroyed:                      'Is Destroyed'

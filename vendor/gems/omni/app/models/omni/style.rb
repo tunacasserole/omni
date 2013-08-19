@@ -433,3 +433,5 @@ class Omni::Style < ActiveRecord::Base
 
 
 end # class Omni::Style
+
+

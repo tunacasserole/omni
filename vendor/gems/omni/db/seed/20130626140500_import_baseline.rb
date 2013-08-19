@@ -10,9 +10,10 @@ Buildit::Lookup.create(:lookup_id => '12348902XXX8XXA6EOH312313B100AAA', :code =
 # Buildit::Lookup.create(:lookup_id => '12348902XXX8XXEHJ8E312313B100AAA', :code => 'OMNI', :default_text => "Omni System", :category => 'IMPORT_TARGET', :position => 1)
 
 # Job Types
-Buildit::Lookup.create(:lookup_id => '12348902XXX8XXOTJ9E312313B100AAA', :code => 'ORDER', :default_text => "Order - Load period results from order history", :category => 'JOB_TYPE', :position => 1)
-Buildit::Lookup.create(:lookup_id => '12348902XXX8XODEHU2312313B100AAA', :code => 'SKU', :default_text => "Sku - Load skus from csvs", :category => 'JOB_TYPE', :position => 2)
-Buildit::Lookup.create(:lookup_id => '12348902XXX8XODEHU2312313B101234', :code => 'GENERIC', :default_text => "Load any table from a csv", :category => 'JOB_TYPE', :position => 2)
+Buildit::Lookup.create(:lookup_id => '12348902XXX8XODEHU2312313GENERIC', :code => 'GENERIC', :default_text => "Load any table from a csv", :category => 'JOB_TYPE', :position => 1)
+Buildit::Lookup.create(:lookup_id => '12348902XXX8XODEHU23123INVENTORY', :code => 'INVENTORY', :default_text => "Convert inventory from legacy system to omni", :category => 'JOB_TYPE', :position => 2)
+Buildit::Lookup.create(:lookup_id => '12348902XXX8XXOTJ9E312313B1ORDER', :code => 'ORDER', :default_text => "Order - Load period results from order history", :category => 'JOB_TYPE', :position => 3)
+Buildit::Lookup.create(:lookup_id => '12348902XXX8XODEHU2312313B100SKU', :code => 'SKU', :default_text => "Sku - Load skus from csvs", :category => 'JOB_TYPE', :position => 4)
 
 # Import Log Sequence
 Buildit::Sequence.create(:sequence_code => 'LOG_NBR', :padding => 3, :value => 1000)

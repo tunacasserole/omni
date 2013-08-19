@@ -56,6 +56,9 @@ class CreateSkus < ActiveRecord::Migration
         t.column :is_special_order,                  :boolean,       :null        => true
         t.column :is_special_size,                   :boolean,       :null        => true
         t.column :is_destroyed,                      :boolean,       :null        => true
+        t.column :mark_id,                           :string,        :limit       => 32,     :null        => false
+        t.column :buckhead_id,                       :string,        :limit       => 32,     :null        => false
+        t.column :grits_id,                          :string,        :limit       => 32,     :null        => false        
       end
       add_index(:skus, [:sku_id], :unique => true)
 

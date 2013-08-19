@@ -8,6 +8,7 @@ Ext.define('Omni.view.skus.Explorer', {
   sku_nbrLabel:                             Omni.i18n.model.Sku.sku_nbr,
   stateLabel:                               Omni.i18n.model.Sku.state,
   site_displayLabel:                        Omni.i18n.model.Sku.site_display,
+  style_idLabel:                            Omni.i18n.model.Sku.style_id,            
   conversion_typeLabel:                     Omni.i18n.model.Sku.conversion_type,
   color_displayLabel:                       Omni.i18n.model.Sku.color_display,
   size_displayLabel:                        Omni.i18n.model.Sku.size_display,
@@ -55,7 +56,7 @@ Ext.define('Omni.view.skus.Explorer', {
       columns: [
         { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 3,   sortable: true  },
         { header: this.sku_nbrLabel,                                     dataIndex: 'sku_nbr',                            flex: 1,   sortable: true  },
-        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: true  },
+        { header: this.style_idLabel,                                       dataIndex: 'style_display',                      flex: 1,   sortable: true  },
         { header: this.site_displayLabel,                                dataIndex: 'site_display',                       flex: 1,   sortable: true  },
         { header: this.conversion_typeLabel,                             dataIndex: 'conversion_type',                    flex: 1,   sortable: true  },
         { header: this.color_displayLabel,                               dataIndex: 'color_display',                      flex: 1,   sortable: true  },

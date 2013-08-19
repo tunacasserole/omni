@@ -48,21 +48,6 @@ Ext.define('Omni.view.imports.Form', {
           defaults:     {anchor: '95%'},
           layout:       'anchor',
           items:[
-          /*
-            {
-              xtype: 'buildit-Locator', 
-              store: Ext.create('MyApp.store.MyModel',{pageSize: 10}), 
-              displayField: 'name', 
-              queryField: 'name', 
-              valueField: 'value_field', 
-              itemTpl:'{name}',
-              name: 'attribute_name', 
-              fieldLabel: this.attribute_nameLabel, 
-              allowBlank: true 
-            }
-          */
-
-
             { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , disabled: true, allowBlank: true },    
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },                
          // { xtype: 'buildit-Lookup',name: 'target_system',              fieldLabel: this.target_systemLabel,              , allowBlank: true,   disabled: false, category:   'TARGET_SYSTEM' },            
@@ -117,8 +102,6 @@ Ext.define('Omni.view.imports.Form', {
 
     // ACTIONS (End)
 
-
-
     // LISTENERS (Start) ===================================================================
 
     // LISTENERS (End)
@@ -130,12 +113,11 @@ Ext.define('Omni.view.imports.Form', {
 
 
   // HANDLERS (Start) ======================================================================
-
-
   /**
    *
    */
   onSubmitAction : function(action, eOpts){
+    Buildit.infoMsg('Your request has been submitted.')
     this.processEventTransition('submit', 'Import job was successfully submitted.', 'An error occurred submitting this import job.');
   }, // onSubmitAction
 

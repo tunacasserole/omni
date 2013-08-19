@@ -1,0 +1,27 @@
+en:
+  activerecord:
+    models:
+      omni/bts_detail:  'Model'
+    attributes:
+      omni/bts_detail:
+        bts_detail_id:                     'Bts Detail'
+        bts_id:                            'Bts'
+        sku_id:                            'Sku'
+        location_id:                       'Location'
+        data_source:                       'Source'
+        mark_stock:                        'Mark Stock'        
+        mark_size:                         'Mark Size'                        
+        on_hand:                           'On Hand'
+        wip:                               'Wip'
+        allocated:                         'Allocated'
+        in_transit:                        'Transit'
+        ytd:                               'YTD'
+        py1:                               'PY1'
+        py2:                               'PY2'
+        projected:                         'Projected'
+        version:                           'Version'
+        audit_updated_at:                  'Audit Updated At'
+        audit_created_at:                  'Audit Created At'
+        audit_created_by:                  'Audit Created By'
+        audit_updated_by:                  'Audit Updated By'
+        is_destroyed:                      'Is Destroyed'

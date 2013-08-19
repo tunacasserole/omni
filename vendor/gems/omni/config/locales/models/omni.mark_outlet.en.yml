@@ -5,7 +5,7 @@ en:
     attributes:
       omni/mark_outlet:
         outlet_nbr:                        'Outlet Nbr'
-        name:                              'Name'
+        display:                           'Display'
         address1:                          'Address1'
         address2:                          'Address2'
         city:                              'City'
@@ -25,3 +25,4 @@ en:
         tax_free:                          'Tax Free'
         tax_free_start:                    'Tax Free Start'
         tax_free_stop:                     'Tax Free Stop'
+        location_id:                       'Location'
