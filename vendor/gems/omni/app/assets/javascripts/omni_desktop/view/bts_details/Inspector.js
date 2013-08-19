@@ -21,7 +21,7 @@ Ext.define('Omni.view.bts_details.Inspector',{
         {title: 'Profile',           xtype: 'omni-bts_details-Form'}
         ,{
           xtype    : 'buildit-CardGroup',
-          title    : 'Mark Research Center',
+          title    : 'Legacy Research Center',
           module   : 'notes',
           cards    : [
             {
@@ -58,20 +58,38 @@ Ext.define('Omni.view.bts_details.Inspector',{
               },
               showBadge: true
             }
-
+            ,{
+              title: 'Buckhead Inventory',
+              xtype: 'omni-rms_item_dynamics-Explorer',
+              defaultSearch: { with:
+                {
+                  buckhead_identifier: {equal_to: me.record.get('ItemID')}
+                }
+              },
+              showBadge: true
+            }
+            ,{
+              title: 'Buckhead WIP',
+              xtype: 'omni-rms_items-Explorer',
+              defaultSearch: { with:
+                {
+                  buckhead_identifier: {equal_to: me.record.get('ItemID')}
+                }
+              },
+              showBadge: true
+            }
+            ,{
+              title: 'Grits Inventory',
+              xtype: 'omni-grits_bts-Explorer',
+              defaultSearch: { with:
+                {
+                  grits_identifier: {equal_to: me.record.get('ItemID')}
+                }
+              },
+              showBadge: true
+            }
           ]
         }         
-
-            // ,{
-            //   title: 'Wip',
-            //   xtype: 'omni-mark_wips-Explorer',
-            //   defaultSearch: { with:
-            //     {
-            //       stock_nbr: {equal_to: me.record.get('mark_stock')},
-            //     }
-            //   },
-            //   showBadge: true
-            // }
       ]
     });
     // CARDS (End)
