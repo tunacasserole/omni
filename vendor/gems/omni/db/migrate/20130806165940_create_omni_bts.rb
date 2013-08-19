@@ -1,4 +1,4 @@
-##class CreateOmniBts < ActiveRecord::Migration
+class CreateOmniBts < ActiveRecord::Migration
   def change
   	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
