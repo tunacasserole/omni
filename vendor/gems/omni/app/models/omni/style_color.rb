@@ -107,6 +107,7 @@ class Omni::StyleColor < ActiveRecord::Base
   searchable do
     string   :style_display do style.display if style end
     string   :color_display do color.display if color end
+    string   :color_id
     string   :short_name
     string   :concatenated_name
     string   :style_id 

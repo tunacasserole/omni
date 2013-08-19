@@ -26,6 +26,7 @@ class CreatePurchaseDetails < ActiveRecord::Migration
         t.column :order_multiple,                    :decimal,       :precision   => 11,     :scale       => 2,      :null        => true
         t.column :units_approved,                    :decimal,       :precision   => 11,     :scale       => 2,      :null        => true
         t.column :units_cancelled,                   :decimal,       :precision   => 11,     :scale       => 2,      :null        => true
+        t.column :cost_id,                           :string,        :limit       => 32,     :null        => true
       end
       add_index(:purchase_details, [:purchase_detail_id], :unique => true)
 

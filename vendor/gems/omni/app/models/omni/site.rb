@@ -17,13 +17,7 @@ class Omni::Site < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  validates    :site_name,                       :presence    => true
-  validates    :school_nbr,                      :presence    => true
-  validates    :site_type,                       :presence    => true
-  validates    :line_1,                          :presence    => true
-  validates    :city,                            :presence    => true
-  validates    :zip,                             :presence    => true
-  validates    :phone,                           :presence    => true
+  validates    :display,                         :uniqueness  => true
   validates    :school_nbr,                      :uniqueness  => true,                         :allow_nil => false 
   validates    :site_type,                       :lookup      => 'SITE_TYPE',                  :allow_nil => false 
   validates    :gradeset,                        :lookup      => 'GRADESET',                   :allow_nil => true  
@@ -35,7 +29,7 @@ class Omni::Site < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :site_id,                          :override  =>  false,        :with  => :guid              
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.site_name} - #{m.school_nbr}"}
-  default      :school_nbr,                       :override  =>  false,        :with  => :sequence,         :named=>"SCHOOL_NBR"
+  default      :school_nbr,                       :override  =>  false,        :with  => :sequence, :named=>"SCHOOL_NBR"
   default      :is_on_web,                        :override  =>  false,        :to    => false              
   default      :is_destroyed,                     :override  =>  false,        :to    => false              
   # DEFAULTS (End)
@@ -53,13 +47,12 @@ class Omni::Site < ActiveRecord::Base
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :parent_site,                     :class_name => 'Omni::Site',                    :foreign_key => 'parent_site_id'
   belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
-  has_many     :notes,                           :class_name => 'Buildit::Note',                     :foreign_key => 'notable_id',       :as => :notable
+  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',    :as => :notable
   has_many     :customer_sites,                  :class_name => 'Omni::CustomerSite',            :foreign_key => 'site_id'
   has_many     :order_details,                   :class_name => 'Omni::OrderDetail',             :foreign_key => 'site_id'
   has_many     :stock_ledger_activities,         :class_name => 'Omni::StockLedgerActivity',     :foreign_key => 'site_id'
   has_many     :programs,                        :class_name => 'Omni::Program',                 :foreign_key => 'site_id'
   has_many     :site_tax_authorities,            :class_name => 'Omni::SiteTaxAuthority',        :foreign_key => 'site_id'
-  has_many     :conversions,                     :class_name => 'Omni::Conversion',              :foreign_key => 'site_id'
   has_many     :site_enrollments,                :class_name => 'Omni::SiteEnrollment',          :foreign_key => 'site_id'
   has_many     :site_donations,                  :class_name => 'Omni::SiteDonation',            :foreign_key => 'site_id'
   # ASSOCIATIONS (End)
