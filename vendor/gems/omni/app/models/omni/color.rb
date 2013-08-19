@@ -42,14 +42,14 @@ class Omni::Color < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :notes,                           :class_name => 'Buildit::Note',                     :foreign_key => 'notable_id',       :as => :notable
+  has_many     :notes,        :class_name => 'Buildit::Note',    :foreign_key => 'notable_id', :as => :notable
+  has_many     :skus,         :class_name => 'Omni::Sku',        :foreign_key => 'color_id'
+  has_many     :style_colors, :class_name => 'Omni::StyleColor', :foreign_key => 'color_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   # MAPPED ATTRIBUTES (End)
-
+  
   # COMPUTED ATTRIBUTES (Start) =========================================================
   # COMPUTED ATTRIBUTES (End)
 

@@ -32,6 +32,7 @@ Ext.define('Omni.view.purchase_details.Form', {
       inventory_costLabel:                    Omni.i18n.model.PurchaseDetail.inventory_cost,    
       extra_costLabel:                        Omni.i18n.model.PurchaseDetail.extra_cost,    
       supplier_item_identifierLabel:          Omni.i18n.model.PurchaseDetail.supplier_item_identifier,    
+      sku_supplier_idLabel:                   Omni.i18n.model.PurchaseDetail.sku_supplier_id,
       color_nameLabel:                        Omni.i18n.model.PurchaseDetail.color_name,    
       size_nameLabel:                         Omni.i18n.model.PurchaseDetail.size_name,    
       sku_aliasLabel:                         Omni.i18n.model.PurchaseDetail.sku_alias,    
