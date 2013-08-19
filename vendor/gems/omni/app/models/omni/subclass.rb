@@ -71,8 +71,12 @@ class Omni::Subclass < ActiveRecord::Base
   # HELPERS (Start) =======================================================================
   def skus
     skus = []
-    self.styles.each { |style| skus << style.skus}
-    skus
+    self.styles.each do |style|
+      style.skus.each do |sku|
+        skus << sku
+      end
+    end
+    return skus
   end
 
   def sku_locations
@@ -91,6 +95,7 @@ class Omni::Subclass < ActiveRecord::Base
   searchable do
     string   :display
     string   :subclass_nbr
+    string   :classification_id
     string   :classification_display do classification.display if classification end
     integer  :markup_percent_high_limit
     integer  :markup_percent_low_limit

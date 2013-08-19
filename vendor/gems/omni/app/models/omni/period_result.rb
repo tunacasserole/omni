@@ -163,6 +163,5 @@ class Omni::PeriodResult < ActiveRecord::Base
   filter :p1,             :with => {period_number: {equal_to: '1'}},        :priority => 10  
   # FILTERS (End)
 
-
 end # class Omni::PeriodResult
 

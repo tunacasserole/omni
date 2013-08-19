@@ -64,6 +64,41 @@
   background-color: #0058DA !important;
 }
 
+
+/*
+---------------------------------------------------------------------------------------
+   issues - pink - C3004D
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.issues .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/issues-26.png);
+  background-color: #C076DE;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.issues.active .x-panel-body .logo, .inspector .tab.issues .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/issues-26.png);
+  background-color: #C488DB;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.issues.active .x-panel-body, .inspector .tab.issues.active .x-panel-body:hover, .inspector .tab.issues .x-panel-body:hover {
+  background: #C076DE;
+}
+
+/* Tile */
+.tile.issues {
+  background-image: url(/assets/omni/omni_icons/issues-60.png);
+  background-color: #C076DE !important;
+}
+
+.tile.issues:hover {
+  background-color: #C488DB !important;
+}
+
+
 /*
 ---------------------------------------------------------------------------------------
    purchases - blue3 / blue - 756BF9 / 0058DA

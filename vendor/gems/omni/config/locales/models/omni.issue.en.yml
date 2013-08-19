@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/issue:  'Model'
+    attributes:
+      omni/issue:
+        issue_id:                          'Issue'
+        issue_nbr:                         'Issue Nbr'
+        state:                             'State'
+        display:                           'Display'
+        description:                       'Description'
+        severity:                          'Severity'
+        assignee_id:                       'Assignee'
+        creator_id:                        'Creator'
+        issue_type:                        'Issue Type'
+        is_destroyed:                      'Is Destroyed'

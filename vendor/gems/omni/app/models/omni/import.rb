@@ -81,7 +81,7 @@ class Omni::Import < ActiveRecord::Base
 
   # EVENTS (Start) ====================================================================  
   eventful do 
-    after :update,  :if => lambda {|m| m.state == 'done' }, :publish => lambda {|m| "#{m.data_source} #{m.job_type} ended at: " << Time.now.strftime("%H:%M:%S")}, :title => 'Imports'
+    # after :update,  :if => lambda {|m| m.state == 'done' }, :publish => lambda {|m| "#{m.data_source} #{m.job_type} ended at: " << Time.now.strftime("%H:%M:%S")}, :title => 'Imports'
   end
   # EVENTS (End)
 
@@ -94,7 +94,7 @@ class Omni::Import < ActiveRecord::Base
   ### EVENTS ###
     event :submit do
       transition any => :running
-      transition :running => :done
+      transition any => :done
     end
 
   end
@@ -110,8 +110,10 @@ class Omni::Import < ActiveRecord::Base
 
   def process_import
     Omni::Import::Manager.run_by_id(self.import_id)
-    self.state = 'done'
-    self.save
+    x = Omni::Import.where(:import_id => self.import_id).first
+    x.state = 'done'
+    x.save
+    # self.save
   end
   # STATE HANDLERS (End)
   

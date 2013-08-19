@@ -63,7 +63,7 @@ class Omni::Location < ActiveRecord::Base
   has_many     :purchases,                       :class_name => 'Omni::Purchase',                :foreign_key => 'location_id'
   has_many     :period_results,                  :class_name => 'Omni::PeriodResult',            :foreign_key => 'location_id'
   has_many     :sku_locations,                   :class_name => 'Omni::SkuLocation',             :foreign_key => 'location_id'
-  has_many     :notes,                           :class_name => 'Buildit::Note',                     :foreign_key => 'notable_id',       :as => :notable
+  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
   has_many     :shipments,                       :class_name => 'Omni::Shipment',                :foreign_key => 'shippable_id',     :as => :shippable
   has_many     :adjustments,                     :class_name => 'Omni::Adjustment',              :foreign_key => 'location_id'
   has_many     :payments,                        :class_name => 'Omni::Payment',                 :foreign_key => 'location_id'
@@ -136,7 +136,11 @@ class Omni::Location < ActiveRecord::Base
   end 
   # INDEXING (End)
 
-
+  # HELPERS (Start) =======================================================================
+  def outlet
+    #Omni::Outlet.all(:display => )
+  end
+  # HELPERS (End)
 
   # STATES (Start) ====================================================================
 

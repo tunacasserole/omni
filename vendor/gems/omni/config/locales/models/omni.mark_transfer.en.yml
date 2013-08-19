@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/mark_transfer:  'Model'
+    attributes:
+      omni/mark_transfer:
+        id:                                'Id'
+        from_outlet_nbr:                   'From Outlet Nbr'
+        to_outlet_nbr:                     'To Outlet Nbr'
+        date:                              'Date'
+        tracking_nbr:                      'Tracking Nbr'
+        status_id:                         'Status'
+        user_id:                           'User'
+        ship_date:                         'Ship Date'
+        accepted_user_id:                  'Accepted User'
+        comment:                           'Comment'

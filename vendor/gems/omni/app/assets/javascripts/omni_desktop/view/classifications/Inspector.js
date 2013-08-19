@@ -29,14 +29,14 @@ Ext.define('Omni.view.classifications.Inspector', {
           title: 'Profile',
           xtype: 'omni-classifications-Form'
         },
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        },
-        {
-          title: 'Subclasses',
-          xtype: 'omni-subclasses-Explorer'
+        ,{title: 'Subclasses', xtype: 'omni-subclasses-Explorer', module: 'contacts',
+           defaultSearch: { with: 
+             {
+               classification_id:   {equal_to: me.record.get('classification_id')}
+             }
+          }
         }
+
       ]
     });
     // CARDS (End)

@@ -9,3 +9,4 @@ en:
         size:                              'Size'
         qoh:                               'Qoh'
         drop_ship:                         'Drop Ship'
+        id:                                'Id'
