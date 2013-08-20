@@ -6,8 +6,6 @@ Ext.define('Omni.view.bts_details.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.BtsDetail'),
 
-  allowFind: true,
-
   contextMenuConfig : {
     xtype    : 'omni-bts_details-ExplorerContextMenu'
   },
@@ -28,15 +26,25 @@ Ext.define('Omni.view.bts_details.Explorer', {
   location_idLabel:                       Omni.i18n.model.BtsDetail.location_id,
   data_sourceLabel:                       Omni.i18n.model.BtsDetail.data_source,
   on_handLabel:                           Omni.i18n.model.BtsDetail.on_hand,
-  work_ipLabel:                           Omni.i18n.model.BtsDetail.work_ip,
-  purchase_ipLabel:                       Omni.i18n.model.BtsDetail.purchase_ip,
   wipLabel:                               Omni.i18n.model.BtsDetail.wip,
   allocatedLabel:                         Omni.i18n.model.BtsDetail.allocated,
   in_transitLabel:                        Omni.i18n.model.BtsDetail.in_transit,
   ytdLabel:                               Omni.i18n.model.BtsDetail.ytd,
   py1Label:                               Omni.i18n.model.BtsDetail.py1,
   py2Label:                               Omni.i18n.model.BtsDetail.py2,
-  projectedLabel:                         Omni.i18n.model.BtsDetail.projected,
+  projectionLabel:                        Omni.i18n.model.BtsDetail.projection,
+  projection_totalLabel:                  Omni.i18n.model.BtsDetail.projection_total,
+  projection_devLabel:                    Omni.i18n.model.BtsDetail.projection_dev,
+  projection_dev_pctLabel:                Omni.i18n.model.BtsDetail.projection_dev_pct,
+  projection_smoothedLabel:               Omni.i18n.model.BtsDetail.projection_smoothed,
+  converted_needLabel:                    Omni.i18n.model.BtsDetail.converted_need,
+  generic_needLabel:                      Omni.i18n.model.BtsDetail.generic_need,
+  needLabel:                              Omni.i18n.model.BtsDetail.need,
+  useable_on_handLabel:                   Omni.i18n.model.BtsDetail.useable_on_hand,
+  unuseable_on_handLabel:                 Omni.i18n.model.BtsDetail.unuseable_on_hand,
+  total_on_handLabel:                     Omni.i18n.model.BtsDetail.total_on_hand,
+  complete_ooLabel:                       Omni.i18n.model.BtsDetail.complete_oo,
+  complete_coverageLabel:                 Omni.i18n.model.BtsDetail.complete_coverage,
   versionLabel:                           Omni.i18n.model.BtsDetail.version,
   audit_updated_atLabel:                  Omni.i18n.model.BtsDetail.audit_updated_at,
   audit_created_atLabel:                  Omni.i18n.model.BtsDetail.audit_created_at,
@@ -45,9 +53,9 @@ Ext.define('Omni.view.bts_details.Explorer', {
   is_destroyedLabel:                      Omni.i18n.model.BtsDetail.is_destroyed,
   // LABELS (End)
 
-  // TITLES (Start) ======================================================================
-  title:     'Bts Details',
-  subtitle:  'Create and maintain BtsDetails',
+ // TITLES (Start) ======================================================================
+  title:     'BTS Details',
+  subtitle:  'Work with BTS Details',
   // TITLES (End)
 
   filters: [
@@ -59,13 +67,6 @@ Ext.define('Omni.view.bts_details.Explorer', {
         ['source_grits',     "GRITS"]
       ]
     }
-    //  ,{
-    //   showAll  : 'All Subclasses',
-    //   items    : [
-    //     ['p1',       "1"],
-    //     ['p2',       "2"],
-    //   ]
-    // }
   ],  
 
   initComponent : function () {
@@ -88,11 +89,11 @@ Ext.define('Omni.view.bts_details.Explorer', {
         {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
-          flex         : 2
+          flex         : 3
         },
         // {
         //   header       : this.location_idLabel,
-        //   dataIndex    : 'location_display',
+        //   dataIndex    : 'location_id',
         //   flex         : 1
         // },
         {
@@ -136,40 +137,65 @@ Ext.define('Omni.view.bts_details.Explorer', {
           flex         : 1
         },
         {
-          header       : this.projectedLabel,
-          dataIndex    : 'projected',
+          header       : this.projectionLabel,
+          dataIndex    : 'projection',
           flex         : 1
         },
-        // {
-        //   header       : this.versionLabel,
-        //   dataIndex    : 'version',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.audit_updated_atLabel,
-        //   dataIndex    : 'audit_updated_at',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.audit_created_atLabel,
-        //   dataIndex    : 'audit_created_at',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.audit_created_byLabel,
-        //   dataIndex    : 'audit_created_by',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.audit_updated_byLabel,
-        //   dataIndex    : 'audit_updated_by',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.is_destroyedLabel,
-        //   dataIndex    : 'is_destroyed',
-        //   flex         : 1
-        // }
+        {
+          header       : this.projection_devLabel,
+          dataIndex    : 'projection_dev',
+          flex         : 1
+        },
+        {
+          header       : this.projection_dev_pctLabel,
+          dataIndex    : 'projection_dev_pct',
+          flex         : 1
+        },
+        {
+          header       : this.projection_smoothedLabel,
+          dataIndex    : 'projection_smoothed',
+          flex         : 1
+        },
+        {
+          header       : this.useable_on_handLabel,
+          dataIndex    : 'useable_on_hand',
+          flex         : 1
+        },
+        {
+          header       : this.unuseable_on_handLabel,
+          dataIndex    : 'unuseable_on_hand',
+          flex         : 1
+        },
+        {
+          header       : this.total_on_handLabel,
+          dataIndex    : 'total_on_hand',
+          flex         : 1
+        },
+        {
+          header       : this.complete_ooLabel,
+          dataIndex    : 'complete_oo',
+          flex         : 1
+        },
+        {
+          header       : this.complete_coverageLabel,
+          dataIndex    : 'complete_coverage',
+          flex         : 1
+        },
+        {
+          header       : this.converted_needLabel,
+          dataIndex    : 'converted_need',
+          flex         : 1
+        },
+        {
+          header       : this.generic_needLabel,
+          dataIndex    : 'generic_need',
+          flex         : 1
+        },
+        {
+          header       : this.needLabel,
+          dataIndex    : 'need',
+          flex         : 1
+        }        
       ]
     });
     // COLUMNS (End)

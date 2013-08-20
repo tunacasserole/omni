@@ -208,19 +208,58 @@ class Omni::Bts < ActiveRecord::Base
       puts "--populating projections at #{Time.now.strftime("%H:%M:%S")}"
       details = Omni::BtsDetail.where(:bts_id => self.bts_id)
       details.each do |bd|
-        bd.projected =  bd.transform 'projected', bd.data_source
+        bd.projection =  bd.transform 'projection', bd.data_source
         bd.save
       end
       puts "--finished populating projections at #{Time.now.strftime("%H:%M:%S")}"      
     end
   
+    if true
+      puts "\n\n\n\n\n\n\n\n\n\n"
+      puts "--populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
+      details = Omni::BtsDetail.where(:bts_id => self.bts_id)
+      details.each do |bd|
+        ### TOTAL ON HAND ###
+        bd.total_oh = bd.on_hand + bd.wip + bd.allocated + bd.in_transit      
+        ### STANDARD DEVIATION OF SALES TO PROJECTED ###
+        mean = (bd.ytd+bd.py1+bd.py2)/3
+        tot_dev = ((bd.ytd-mean)**2) + ((bd.py1-mean)**2) + ((bd.py2-mean)**2)
+        bd.projection_dev = Math.sqrt(tot_dev)
+        ### STANDARD DEVIATION % ###
+        bd.projection_dev_pct = bd.projection_dev / bd.projection unless bd.projection == 0
+        ### SMOOTHED PROJECTION ###
+        bd.projection_smooth = bd.projection_dev + bd.projection - bd.ytd
+        ### CONVERTED NEED ###
+        bd.converted_need = bd.projection_smooth - bd.allocated - bd.py1
+        ### GENERIC NEED ###
+        bd.generic_need = 99
+        ### Unusable O/H inventory ###
+        bd.unuseable_oh = bd.total_oh - bd.complete_coverage if bd.complete_coverage and bd.complete_coverage > bd.total_oh
+        ### COMPLETE COVERAGE ###
+        bd.complete_coverage = bd.generic_need + (bd.unuseable_oh || 0)
+        ### USEABLE OH ###
+        if (bd.complete_coverage - bd.total_oh) < 0
+          bd.useable_oh = bd.complete_coverage
+        else
+          bd.useable_oh = bd.total_oh
+        end
+        ### COMPLETE OO ###
+        bd.complete_oo = bd.wip
+        ### TRUE NEED ###
+        bd.need = bd.complete_coverage - bd.total_oh - bd.complete_coverage
+        bd.save
+      end
+      puts "--finished populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
+      puts "\n\n\n\n\n\n\n\n\n\n"
+    end
+  
+
     self.state = 'done'
     self.save    
     
     puts "--bts detail rows created #{Omni::BtsDetail.count.to_s} at #{Time.now.strftime("%H:%M:%S")}"
   end
 
-  
   def skus
     # reads the parameters provided in the bts (sku_id, style_id … department_id) and returns a list of skus matching the parameters provided.    
     puts "--getting list of skus to process"

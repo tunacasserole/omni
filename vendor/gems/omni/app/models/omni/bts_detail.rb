@@ -91,7 +91,7 @@ class Omni::BtsDetail < ActiveRecord::Base
     string   :ytd
     string   :py1
     string   :py2
-    string   :projected
+    string   :projection
 
     # text     :display_fulltext, :using => :display
     # text     :style_nbr_fulltext, :using => :style_nbr
@@ -202,18 +202,18 @@ class Omni::BtsDetail < ActiveRecord::Base
       end
       return py2
 
-    when 'projected'
-      projected = 0
+    when 'projection'
+      projection = 0
       case data_source
         when 'PARKER'  
-          projected = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2 
+          projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2 
         when 'BUCKHEAD'
-          projected = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
+          projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
         when 'GRITS'
           data = Omni::GritsBts.where(:tg_sku_id => self.grits_identifier)
-          data.each {|i| projected += i.proj_60 + i.proj_61 + i.proj_62 + i.proj_63 + i.proj_64 + i.proj_65 + i.proj_66}
+          data.each {|i| projection += i.proj_60 + i.proj_61 + i.proj_62 + i.proj_63 + i.proj_64 + i.proj_65 + i.proj_66}
       end
-      return projected
+      return projection
     end
 
   end 
