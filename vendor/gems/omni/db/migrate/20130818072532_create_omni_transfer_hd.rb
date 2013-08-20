@@ -16,6 +16,6 @@ class CreateOmniTransferHd < ActiveRecord::Migration
         t.column   :comment,                         :string,            :null  =>  true,    :limit   => 150
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

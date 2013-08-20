@@ -21,6 +21,6 @@ class CreateOmniOrdersLi < ActiveRecord::Migration
         t.column   :extra_charge_comment,            :string,            :null  =>  true,    :limit   => 150
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

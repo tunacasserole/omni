@@ -14,6 +14,6 @@ class CreateOmniTransferLi < ActiveRecord::Migration
         t.column   :status_id,                       :integer,           :null  =>  false
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

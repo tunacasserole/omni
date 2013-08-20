@@ -11,6 +11,6 @@ class CreateOmniMarkOrderReports < ActiveRecord::Migration
         t.column   :year_entered,                    :integer,           :null  =>  false
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

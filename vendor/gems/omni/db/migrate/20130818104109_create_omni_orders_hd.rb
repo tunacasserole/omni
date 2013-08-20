@@ -33,6 +33,6 @@ class CreateOmniOrdersHd < ActiveRecord::Migration
         t.column   :web_order,                       :integer,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end
