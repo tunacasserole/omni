@@ -95,7 +95,7 @@ Ext.define('Omni.view.bts_details.Explorer', {
           flex         : 3
         },
         {
-          header       : this.style_displayLabel,
+          header       : this.style_idLabel,
           dataIndex    : 'style_display',
           flex         : 2
         },        // {
