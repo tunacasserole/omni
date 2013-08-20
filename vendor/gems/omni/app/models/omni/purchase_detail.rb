@@ -35,8 +35,6 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
   default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
   default :units_ordered,                                      :to   => 0
-  default :cost_id,                                            :to   => lambda{|m| "#{m.sku_supplier.cost_id}" if m.sku_supplier }
-  default :supplier_cost,                                      :to   => lambda{|m| "#{m.sku_supplier.supplier_cost}"}
 
   # DEFAULTS (End)
 
@@ -112,7 +110,15 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-  hook :before_save, :update_sku, 10
+  # hook :before_valication(:on :create) do
+  # hook :before_validation on:=>:create do 
+  # hook :before_validation on:=>:create, :set_defaults, 10
+  # hook :before_validation(on:=>:create), :set_defaults, 10
+  # hook :before_validation(on: :create), :set_defaults, 10
+    hook :before_validation, :set_defaults, 10
+    # self.sku_id = self.sku_supplier.sku_id if self.sku_supplier
+
+    # end    
   # HOOKS (End)
 
 
@@ -154,9 +160,12 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   # STATE HELPERS (End)
 
   # HELPERS (Start) =====================================================================
-  def update_sku
-    self.sku_id = self.sku_supplier.sku_id
-    self.description = self.sku.description
+  def set_defaults
+    # self.sku_id = self.sku_supplier.sku_id if self.sku_supplier_id
+    # self.description = self.sku.description if self.sku_id
+    if self.new_record?
+      self.sku_id = self.sku_supplier.sku_id if self.sku_supplier_id      
+    end
   end
 
   def reset
