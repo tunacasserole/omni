@@ -77,11 +77,11 @@ Ext.define('Omni.view.bts_details.Form', {
             }
           */
 
-            { xtype: 'textfield', name: 'bts_detail_id',                  fieldLabel: this.bts_detail_idLabel               , allowBlank: false },    
-            { xtype: 'textfield', name: 'bts_id',                         fieldLabel: this.bts_idLabel                      , allowBlank: false },    
-            { xtype: 'textfield', name: 'sku_id',                         fieldLabel: this.sku_idLabel                      , allowBlank: false },    
-            { xtype: 'textfield', name: 'location_id',                    fieldLabel: this.location_idLabel                 , allowBlank: false },    
-            { xtype: 'textfield', name: 'data_source',                    fieldLabel: this.data_sourceLabel                 , allowBlank: false },    
+            // { xtype: 'textfield', name: 'bts_detail_id',                  fieldLabel: this.bts_detail_idLabel               , allowBlank: false },    
+            // { xtype: 'textfield', name: 'bts_id',                         fieldLabel: this.bts_idLabel                      , allowBlank: false },    
+            // { xtype: 'textfield', name: 'sku_id',                         fieldLabel: this.sku_idLabel                      , allowBlank: false },    
+            // { name: 'location_id',   fieldLabel: this.location_idLabel  , allowBlank: true , xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' }, 
+            { xtype: 'buildit-Lookup', name: 'data_source',   category: 'DATA_SOURCE',            fieldLabel: this.data_sourceLabel , allowBlank: false },    
             { xtype: 'textfield', name: 'on_hand',                        fieldLabel: this.on_handLabel                     , allowBlank: false },    
             { xtype: 'textfield', name: 'wip',                            fieldLabel: this.wipLabel                         , allowBlank: false },    
             { xtype: 'textfield', name: 'allocated',                      fieldLabel: this.allocatedLabel                   , allowBlank: false },    
@@ -102,12 +102,12 @@ Ext.define('Omni.view.bts_details.Form', {
             { xtype: 'textfield', name: 'total_on_hand',                  fieldLabel: this.total_on_handLabel               , allowBlank: false },    
             { xtype: 'textfield', name: 'complete_oo',                    fieldLabel: this.complete_ooLabel                 , allowBlank: false },    
             { xtype: 'textfield', name: 'complete_coverage',              fieldLabel: this.complete_coverageLabel           , allowBlank: false },    
-            { xtype: 'textfield', name: 'version',                        fieldLabel: this.versionLabel                     , allowBlank: false },    
-            { xtype: 'textfield', name: 'audit_updated_at',               fieldLabel: this.audit_updated_atLabel            , allowBlank: false },    
-            { xtype: 'textfield', name: 'audit_created_at',               fieldLabel: this.audit_created_atLabel            , allowBlank: false },    
-            { xtype: 'textfield', name: 'audit_created_by',               fieldLabel: this.audit_created_byLabel            , allowBlank: false },    
-            { xtype: 'textfield', name: 'audit_updated_by',               fieldLabel: this.audit_updated_byLabel            , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false }    
+            // { xtype: 'textfield', name: 'version',                        fieldLabel: this.versionLabel                     , allowBlank: false },    
+            // { xtype: 'textfield', name: 'audit_updated_at',               fieldLabel: this.audit_updated_atLabel            , allowBlank: false },    
+            // { xtype: 'textfield', name: 'audit_created_at',               fieldLabel: this.audit_created_atLabel            , allowBlank: false },    
+            // { xtype: 'textfield', name: 'audit_created_by',               fieldLabel: this.audit_created_byLabel            , allowBlank: false },    
+            // { xtype: 'textfield', name: 'audit_updated_by',               fieldLabel: this.audit_updated_byLabel            , allowBlank: false },    
+            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false }    
           ]
         }
       ]

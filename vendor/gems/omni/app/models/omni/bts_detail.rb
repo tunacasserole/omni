@@ -17,7 +17,7 @@ class Omni::BtsDetail < ActiveRecord::Base
   #supports_logical_delete
   #supports_audit
   #supports_revisioning
-  #supports_fulltext
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -81,6 +81,7 @@ class Omni::BtsDetail < ActiveRecord::Base
   searchable do
     string   :bts_id
     string   :sku_display    
+    string   :style_display
     string   :data_source
     string   :on_hand    
     string   :wip
@@ -93,8 +94,8 @@ class Omni::BtsDetail < ActiveRecord::Base
     string   :py2
     string   :projection
 
-    # text     :display_fulltext, :using => :display
-    # text     :style_nbr_fulltext, :using => :style_nbr
+    text     :sku_fulltext, :using => :sku
+    text     :style_fulltext, :using => :style_display
   end 
   # INDEXING (End)
 

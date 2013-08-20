@@ -5,7 +5,9 @@ Ext.define('Omni.view.bts_details.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.BtsDetail'),
-
+  
+  allowFind  :  true,
+  
   contextMenuConfig : {
     xtype    : 'omni-bts_details-ExplorerContextMenu'
   },
@@ -23,6 +25,7 @@ Ext.define('Omni.view.bts_details.Explorer', {
   bts_detail_idLabel:                     Omni.i18n.model.BtsDetail.bts_detail_id,
   bts_idLabel:                            Omni.i18n.model.BtsDetail.bts_id,
   sku_idLabel:                            Omni.i18n.model.BtsDetail.sku_id,
+  style_idLabel:                          Omni.i18n.model.BtsDetail.style_id,  
   location_idLabel:                       Omni.i18n.model.BtsDetail.location_id,
   data_sourceLabel:                       Omni.i18n.model.BtsDetail.data_source,
   on_handLabel:                           Omni.i18n.model.BtsDetail.on_hand,
@@ -91,7 +94,11 @@ Ext.define('Omni.view.bts_details.Explorer', {
           dataIndex    : 'sku_display',
           flex         : 3
         },
-        // {
+        {
+          header       : this.style_displayLabel,
+          dataIndex    : 'style_display',
+          flex         : 2
+        },        // {
         //   header       : this.location_idLabel,
         //   dataIndex    : 'location_id',
         //   flex         : 1

@@ -26,10 +26,11 @@ Ext.define('Omni.view.app.Hub', {
 
   {
    title: 'Back to School',
-     columns: 2,
+     columns: 4,
      rows: 3,
      tiles: [
        {title: 'Run BTS report', colspan: 2, rowspan: 2, cls: 'projections',  target: {xtype: 'omni-bts-Explorer'}},       
+       // {title: 'Accounts', colspan: 2, rowspan: 2, cls: 'imports',  target: {xtype: 'omni-accounts-Explorer'}},              
      ] 
      }     
 

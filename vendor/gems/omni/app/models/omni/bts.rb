@@ -232,7 +232,7 @@ class Omni::Bts < ActiveRecord::Base
         ### CONVERTED NEED ###
         bd.converted_need = bd.projection_smooth - bd.allocated - bd.py1
         ### GENERIC NEED ###
-        bd.generic_need = 99
+        bd.generic_need = 0
         ### Unusable O/H inventory ###
         bd.unuseable_oh = bd.total_oh - bd.complete_coverage if bd.complete_coverage and bd.complete_coverage > bd.total_oh
         ### COMPLETE COVERAGE ###
@@ -251,6 +251,11 @@ class Omni::Bts < ActiveRecord::Base
       end
       puts "--finished populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
       puts "\n\n\n\n\n\n\n\n\n\n"
+
+      # Create Style summary
+      style_summary
+
+
     end
   
 
@@ -260,7 +265,16 @@ class Omni::Bts < ActiveRecord::Base
     puts "--bts detail rows created #{Omni::BtsDetail.count.to_s} at #{Time.now.strftime("%H:%M:%S")}"
   end
 
-  def skus
+  def style_summary
+    current_style = ''
+    details = Omni::BtsDetail.where(:bts_id => self.bts_id).order("style_id")
+    details.each do |bd|
+      # if bd.style == ' '
+    end
+  end
+
+
+def skus
     # reads the parameters provided in the bts (sku_id, style_id … department_id) and returns a list of skus matching the parameters provided.    
     puts "--getting list of skus to process"
     skus = []
