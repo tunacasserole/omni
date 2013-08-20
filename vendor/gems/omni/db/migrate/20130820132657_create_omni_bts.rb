@@ -9,7 +9,7 @@ class CreateOmniBts < ActiveRecord::Migration
         t.column   :district_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :department_id,                   :string,            :null  =>  true,    :limit   => 32
-        t.column   :class_id,                        :string,            :null  =>  true,    :limit   => 32
+        t.column   :classification_id,               :string,            :null  =>  true,    :limit   => 32
         t.column   :subclass_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :style_id,                        :string,            :null  =>  true,    :limit   => 32
         t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
@@ -20,7 +20,21 @@ class CreateOmniBts < ActiveRecord::Migration
         t.column   :plan_year,                       :string,            :null  =>  true,    :limit   => 32
         t.column   :is_source_parker,                :boolean,           :null  =>  true
         t.column   :is_source_buckhead,              :boolean,           :null  =>  true
-        t.column   :is_source_grits,            :boolean,           :null  =>  true        
+        t.column   :is_source_grits,                 :boolean,           :null  =>  true
+        t.column   :is_drop_data,                    :boolean,           :null  =>  true
+        t.column   :is_create_detail,                :boolean,           :null  =>  true
+        t.column   :is_on_hand,                      :boolean,           :null  =>  true
+        t.column   :is_wip,                          :boolean,           :null  =>  true
+        t.column   :is_allocated,                    :boolean,           :null  =>  true
+        t.column   :is_in_transit,                   :boolean,           :null  =>  true
+        t.column   :is_ytd,                          :boolean,           :null  =>  true
+        t.column   :is_py1,                          :boolean,           :null  =>  true
+        t.column   :is_py2,                          :boolean,           :null  =>  true
+        t.column   :is_projected,                    :boolean,           :null  =>  true
+        t.column   :is_sum_style,                    :boolean,           :null  =>  true
+        t.column   :is_sum_subclass,                 :boolean,           :null  =>  true
+        t.column   :is_sum_class,                    :boolean,           :null  =>  true
+        t.column   :is_sum_department,               :boolean,           :null  =>  true
         t.column   :version,                         :string,            :null  =>  true,    :limit   => 100
         t.column   :audit_updated_at,                :datetime,          :null  =>  true
         t.column   :audit_created_at,                :datetime,          :null  =>  true

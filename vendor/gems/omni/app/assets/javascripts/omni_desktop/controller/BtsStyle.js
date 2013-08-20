@@ -1,4 +1,4 @@
-Buildit.defineController('Omni.controller.Account', {
+Buildit.defineController('Omni.controller.BtsStyle', {
   extend: 'Ext.app.Controller',
   views: [],
 

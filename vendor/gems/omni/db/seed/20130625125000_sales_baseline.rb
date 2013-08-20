@@ -1,5 +1,0 @@
-Buildit::Lookup.create(:lookup_id => '123485829728XXX2A3D123456B100AAA', :code => 'TG STORE', :default_text => 'TG Retail Store', :category => 'ACCOUNT_TYPE', :position => 1)
-Buildit::Lookup.create(:lookup_id => '567885829728BBB3456782313B100AAA', :code => 'CUSTOMER', :default_text => 'School - Customer', :category => 'ACCOUNT_TYPE', :position => 1)
-Buildit::Lookup.create(:lookup_id => '912385829728HHHAHEHUH2313B100AAA', :code => 'NON CONTRACT', :default_text => 'School - Non-Contract', :category => 'ACCOUNT_TYPE', :position => 1)
-Buildit::Lookup.create(:lookup_id => '8345858OTETUHHH2A3D212313B100AAA', :code => 'PROSPECT', :default_text => 'School - Prospect', :category => 'ACCOUNT_TYPE', :position => 1)
-Buildit::Lookup.create(:lookup_id => '3857858294TUHNN2A3D212313B100AAA', :code => 'CLOSED', :default_text => 'School - Closed', :category => 'ACCOUNT_TYPE', :position => 1)

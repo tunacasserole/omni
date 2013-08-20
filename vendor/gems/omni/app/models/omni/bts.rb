@@ -37,6 +37,7 @@ class Omni::Bts < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :bts_details,              :class_name => 'Omni::BtsDetail',    :foreign_key => 'bts_id'  
+  has_many     :bts_styles,              :class_name => 'Omni::BtsStyle',    :foreign_key => 'bts_id'    
   # has_many     :bts_locations,            :class_name => 'Omni::BtsLocation',  :foreign_key => 'bts_id'    
   has_many     :logs,                            :class_name => 'Omni::Log',                 :foreign_key => 'logable_id' , :as => :logable
   belongs_to   :region,                          :class_name => 'Omni::Region',              :foreign_key => 'region_id'
@@ -164,14 +165,14 @@ class Omni::Bts < ActiveRecord::Base
       puts "--finished populating allocated at #{Time.now.strftime("%H:%M:%S")}"
     end
   
-    if self.is_in_transit    
-      puts "--populating in_transit at #{Time.now.strftime("%H:%M:%S")}"
+    if self.is_transit    
+      puts "--populating transit at #{Time.now.strftime("%H:%M:%S")}"
       details = Omni::BtsDetail.where(:bts_id => self.bts_id)
       details.each do |bd|
-        bd.in_transit =  bd.transform 'in_transit', bd.data_source
+        bd.transit =  bd.transform 'transit', bd.data_source
         bd.save
       end
-      puts "--finished populating in_transit at #{Time.now.strftime("%H:%M:%S")}"
+      puts "--finished populating transit at #{Time.now.strftime("%H:%M:%S")}"
     end
   
     if self.is_ytd
@@ -219,62 +220,31 @@ class Omni::Bts < ActiveRecord::Base
       puts "--populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
       details = Omni::BtsDetail.where(:bts_id => self.bts_id)
       details.each do |bd|
-        ### TOTAL ON HAND ###
-        bd.total_oh = bd.on_hand + bd.wip + bd.allocated + bd.in_transit      
-        ### STANDARD DEVIATION OF SALES TO PROJECTED ###
-        mean = (bd.ytd+bd.py1+bd.py2)/3
-        tot_dev = ((bd.ytd-mean)**2) + ((bd.py1-mean)**2) + ((bd.py2-mean)**2)
-        bd.projection_dev = Math.sqrt(tot_dev)
-        ### STANDARD DEVIATION % ###
-        bd.projection_dev_pct = bd.projection_dev / bd.projection unless bd.projection == 0
-        ### SMOOTHED PROJECTION ###
-        bd.projection_smooth = bd.projection_dev + bd.projection - bd.ytd
-        ### CONVERTED NEED ###
-        bd.converted_need = bd.projection_smooth - bd.allocated - bd.py1
-        ### GENERIC NEED ###
-        bd.generic_need = 0
-        ### Unusable O/H inventory ###
-        bd.unuseable_oh = bd.total_oh - bd.complete_coverage if bd.complete_coverage and bd.complete_coverage > bd.total_oh
-        ### COMPLETE COVERAGE ###
-        bd.complete_coverage = bd.generic_need + (bd.unuseable_oh || 0)
-        ### USEABLE OH ###
-        if (bd.complete_coverage - bd.total_oh) < 0
-          bd.useable_oh = bd.complete_coverage
-        else
-          bd.useable_oh = bd.total_oh
-        end
-        ### COMPLETE OO ###
-        bd.complete_oo = bd.wip
-        ### TRUE NEED ###
-        bd.need = bd.complete_coverage - bd.total_oh - bd.complete_coverage
-        bd.save
+        bd.calculate
       end
       puts "--finished populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
       puts "\n\n\n\n\n\n\n\n\n\n"
 
-      # Create Style summary
-      style_summary
-
+      # Create Style Summary
+      if self.is_sum_style
+        puts "\n\n\n\n\n\n\n\n\n\n"
+        puts "--indentifying styles to summarize"
+        # styles = []
+        details = Omni::BtsDetail.where(:bts_id => self.bts_id)
+        puts "--creating bts_styles"
+        details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(self.bts_id, bd.sku.style_id)}
+        styles = Omni::BtsStyle.where(:bts_id => self.bts_id)
+        styles.each {|x| x.summarize}
+      end
 
     end
-  
-
     self.state = 'done'
     self.save    
     
     puts "--bts detail rows created #{Omni::BtsDetail.count.to_s} at #{Time.now.strftime("%H:%M:%S")}"
   end
 
-  def style_summary
-    current_style = ''
-    # details = Omni::BtsDetail.where(:bts_id => self.bts_id).order("style_id")
-    # details.each do |bd|
-    #   # if bd.style == ' '
-    # end
-  end
-
-
-def skus
+  def skus
     # reads the parameters provided in the bts (sku_id, style_id … department_id) and returns a list of skus matching the parameters provided.    
     puts "--getting list of skus to process"
     skus = []

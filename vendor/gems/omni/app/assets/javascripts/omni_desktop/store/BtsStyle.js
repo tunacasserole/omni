@@ -1,9 +1,9 @@
-Ext.define('Omni.store.Account', {
+Ext.define('Omni.store.BtsStyle', {
   extend       : 'Ext.data.Store',
-  alias        : 'store.omni-Account',
-  model        : 'Omni.model.Account',
+  alias        : 'store.omni-BtsStyle',
+  model        : 'Omni.model.BtsStyle',
   autoLoad     : false,
-  storeId      : 'AccountStore',
+  storeId      : 'BtsStyleStore',
   remoteFilter : true,
   remoteSort   : true,
 

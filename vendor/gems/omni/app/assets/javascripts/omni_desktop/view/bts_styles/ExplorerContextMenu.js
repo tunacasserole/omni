@@ -1,6 +1,6 @@
-Ext.define('Omni.view.accounts.ExplorerContextMenu', {
+Ext.define('Omni.view.bts_styles.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
-  alias:  'widget.omni-accounts-ExplorerContextMenu',
+  alias:  'widget.omni-bts_styles-ExplorerContextMenu',
 
   
   initComponent: function() {

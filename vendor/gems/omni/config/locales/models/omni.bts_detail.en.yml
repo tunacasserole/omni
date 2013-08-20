@@ -13,7 +13,7 @@ en:
         on_hand:                           'OH'
         wip:                               'WIP'
         allocated:                         'Allocated'
-        in_transit:                        'Transit'
+        transit:                           'Transit'
         ytd:                               'YTD'
         py1:                               'PY1'
         py2:                               'PY2'

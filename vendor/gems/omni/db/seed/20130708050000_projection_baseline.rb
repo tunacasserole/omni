@@ -1,4 +1,0 @@
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODEHU2312FORECASTAA', :code => 'SALES', :default_text => "Sales", :category => 'FORECAST_FORMULA', :position => 2)
-Buildit::Lookup.create(:lookup_id => 'AOEU8902XXX8XODEHU2312FORECASTBB', :code => 'ENROLLMENT', :default_text => "Enrollment", :category => 'FORECAST_FORMULA', :position => 3)
-Omni::ForecastProfile.create(:forecast_profile_id => '42608AAEE7D011E28FB520C9D0471234',:display => 'default forecast profile', :sales_2012_weight => '.80', :sales_2011_weight => '.15', :sales_2010_weight => '.05', :forecast_formula => 'SALES')
-Omni::Projection.create(:display => 'Girls Specialty', :forecast_profile_id => '42608AAEE7D011E28FB520C9D0471234', :department_id => '05BC6CA0AC5511E299E700FF58D32228')

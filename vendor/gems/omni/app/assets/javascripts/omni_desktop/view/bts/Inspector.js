@@ -19,13 +19,20 @@ Ext.define('Omni.view.bts.Inspector',{
     Ext.apply(this, {
       cards: [
         {title: 'Profile',           xtype: 'omni-bts-Form'}
-        ,{title: 'BTS Details', xtype: 'omni-bts_details-Explorer', module: 'tollgates',
+        ,{title: 'Skus', xtype: 'omni-bts_details-Explorer', module: 'tollgates',
            defaultSearch: { with: 
              {
                bts_id:   {equal_to: me.record.get('bts_id')}
              }
           }
         }  
+        ,{title: 'Styles', xtype: 'omni-bts_styles-Explorer', module: 'cfars',
+           defaultSearch: { with: 
+             {
+               bts_id:   {equal_to: me.record.get('bts_id')}
+             }
+          }
+        }          
         // ,{
         //   xtype    : 'buildit-CardGroup',
         //   title    : 'Support',

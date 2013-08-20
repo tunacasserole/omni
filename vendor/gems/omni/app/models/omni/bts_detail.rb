@@ -87,7 +87,7 @@ class Omni::BtsDetail < ActiveRecord::Base
     string   :wip
     string   :mark_stock
     string   :mark_size
-    string   :in_transit
+    string   :transit
     string   :allocated
     string   :ytd
     string   :py1
@@ -152,13 +152,13 @@ class Omni::BtsDetail < ActiveRecord::Base
       end
       return allocated
 
-    when 'in_transit'
-      in_transit = 0
+    when 'transit'
+      transit = 0
       if data_source == 'PARKER'
         data = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :status_id => 8)
-        data.each {|li| in_transit += li.qty if li.transfer_status == 9}
+        data.each {|li| transit += li.qty if li.transfer_status == 9}
       end
-      return in_transit
+      return transit
     
     when 'ytd'
       ytd = 0
@@ -218,6 +218,38 @@ class Omni::BtsDetail < ActiveRecord::Base
     end
 
   end 
+
+  def calculate
+    ### TOTAL ON HAND ###
+    self.total_oh = self.on_hand + self.wip + self.allocated + self.transit      
+    ### STANDARD DEVIATION OF SALES TO PROJECTED ###
+    mean = (self.ytd+self.py1+self.py2)/3
+    tot_dev = ((self.ytd-mean)**2) + ((self.py1-mean)**2) + ((self.py2-mean)**2)
+    self.projection_dev = Math.sqrt(tot_dev)
+    ### STANDARD DEVIATION % ###
+    self.projection_dev_pct = self.projection_dev / self.projection unless self.projection == 0
+    ### SMOOTHED PROJECTION ###
+    self.projection_smooth = self.projection_dev + self.projection - self.ytd
+    ### CONVERTED NEED ###
+    self.converted_need = self.projection_smooth - self.allocated - self.py1
+    ### GENERIC NEED ###
+    self.generic_need = 0
+    ### Unusable O/H inventory ###
+    self.unuseable_oh = self.total_oh - self.complete_coverage if self.complete_coverage and self.complete_coverage > self.total_oh
+    ### COMPLETE COVERAGE ###
+    self.complete_coverage = self.generic_need + (self.unuseable_oh || 0)
+    ### USEABLE OH ###
+    if (self.complete_coverage - self.total_oh) < 0
+      self.useable_oh = self.complete_coverage
+    else
+      self.useable_oh = self.total_oh
+    end
+    ### COMPLETE OO ###
+    self.complete_oo = self.wip
+    ### TRUE NEED ###
+    self.need = self.complete_coverage - self.total_oh - self.complete_coverage
+    self.save
+  end
   # HELPERS (End)
 
   # FILTERS (Start) =====================================================================

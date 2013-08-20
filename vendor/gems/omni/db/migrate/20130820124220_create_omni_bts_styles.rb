@@ -1,12 +1,12 @@
-class CreateOmniBtsDetails < ActiveRecord::Migration
+class CreateOmniBtsStyles < ActiveRecord::Migration
   def change
-  #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless ActiveRecord::Base.connection.tables.include?('bts_details')
-      create_table(:bts_details, :id => false) do |t|
-        t.column   :bts_detail_id,                   :string,            :null  =>  false,   :limit   => 32
+  	unless ActiveRecord::Base.connection.tables.include?('bts_styles')
+      create_table(:bts_styles, :id => false) do |t|
+        t.column   :bts_style_id,                    :string,            :null  =>  false,   :limit   => 32
         t.column   :bts_id,                          :string,            :null  =>  true,    :limit   => 32
-        t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
+        t.column   :style_id,                        :string,            :null  =>  true,    :limit   => 32
         t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :data_source,                     :string,            :null  =>  true,    :limit   => 100
         t.column   :on_hand,                         :integer,           :null  =>  true
@@ -20,13 +20,13 @@ class CreateOmniBtsDetails < ActiveRecord::Migration
         t.column   :projection_total,                :integer,           :null  =>  true
         t.column   :projection_dev,                  :integer,           :null  =>  true
         t.column   :projection_dev_pct,              :integer,           :null  =>  true
-        t.column   :projection_smoothed,             :integer,           :null  =>  true
+        t.column   :projection_smooth,               :integer,           :null  =>  true
         t.column   :converted_need,                  :integer,           :null  =>  true
         t.column   :generic_need,                    :integer,           :null  =>  true
         t.column   :need,                            :integer,           :null  =>  true
-        t.column   :useable_on_hand,                 :integer,           :null  =>  true
-        t.column   :unuseable_on_hand,               :integer,           :null  =>  true
-        t.column   :total_on_hand,                   :integer,           :null  =>  true
+        t.column   :useable_oh,                      :integer,           :null  =>  true
+        t.column   :unuseable_oh,                    :integer,           :null  =>  true
+        t.column   :total_oh,                        :integer,           :null  =>  true
         t.column   :complete_oo,                     :integer,           :null  =>  true
         t.column   :complete_coverage,               :integer,           :null  =>  true
         t.column   :version,                         :string,            :null  =>  true,    :limit   => 100
@@ -37,6 +37,6 @@ class CreateOmniBtsDetails < ActiveRecord::Migration
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end
-    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

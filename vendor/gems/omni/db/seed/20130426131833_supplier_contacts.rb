@@ -1,2 +1,0 @@
-Omni::SupplierContact.delete_all
-Omni::SupplierContact.create(:supplier_contact_id => "5EBC5E7CAE9511E2BCCC00FF58D32228",:display =>"Olivander's Wands - 1000 Contact",:supplier_id =>"B931D2A4AC5311E299E700FF58D32228",:first_name =>"Oliver's",:last_name =>"Wands",:name_prefix =>"",:name_suffix =>"",:department =>"",:job_title =>"",:phone =>"",:fax =>"",:email_address =>"",:is_order_contact =>"",:is_return_contact =>"",:is_payment_contact =>"",:is_executive_contact =>"")

@@ -31,7 +31,7 @@ Ext.define('Omni.view.bts_details.Explorer', {
   on_handLabel:                           Omni.i18n.model.BtsDetail.on_hand,
   wipLabel:                               Omni.i18n.model.BtsDetail.wip,
   allocatedLabel:                         Omni.i18n.model.BtsDetail.allocated,
-  in_transitLabel:                        Omni.i18n.model.BtsDetail.in_transit,
+  transitLabel:                          Omni.i18n.model.BtsDetail.transit,
   ytdLabel:                               Omni.i18n.model.BtsDetail.ytd,
   py1Label:                               Omni.i18n.model.BtsDetail.py1,
   py2Label:                               Omni.i18n.model.BtsDetail.py2,
@@ -124,8 +124,8 @@ Ext.define('Omni.view.bts_details.Explorer', {
           flex         : 1
         },
         {
-          header       : this.in_transitLabel,
-          dataIndex    : 'in_transit',
+          header       : this.transitLabel,
+          dataIndex    : 'transit',
           flex         : 1
         },
         {
