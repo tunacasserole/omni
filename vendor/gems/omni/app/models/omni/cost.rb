@@ -7,7 +7,7 @@ class Omni::Cost < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  # self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :costs
   self.primary_key                = :cost_id
   # METADATA (End)

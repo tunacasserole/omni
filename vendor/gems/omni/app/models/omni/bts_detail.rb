@@ -7,7 +7,7 @@ class Omni::BtsDetail < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :bts_details
   self.primary_key                = :bts_detail_id
   # METADATA (End)

@@ -7,7 +7,7 @@ class Omni::RmsItemDynamic < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :rms_item_dynamics
   self.primary_key                = :ID
   # METADATA (End)

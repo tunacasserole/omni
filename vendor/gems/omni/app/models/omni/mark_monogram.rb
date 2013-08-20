@@ -7,7 +7,7 @@ class Omni::MarkMonogram < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :monogram_hd
   self.primary_key                = :mg_nbr
   # METADATA (End)

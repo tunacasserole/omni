@@ -7,13 +7,13 @@ class Omni::Bts < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :bts
   self.primary_key                = :bts_id
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  # supports_audit
+  supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
@@ -267,10 +267,10 @@ class Omni::Bts < ActiveRecord::Base
 
   def style_summary
     current_style = ''
-    details = Omni::BtsDetail.where(:bts_id => self.bts_id).order("style_id")
-    details.each do |bd|
-      # if bd.style == ' '
-    end
+    # details = Omni::BtsDetail.where(:bts_id => self.bts_id).order("style_id")
+    # details.each do |bd|
+    #   # if bd.style == ' '
+    # end
   end
 
 

@@ -7,7 +7,7 @@ class Omni::MarkCut < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :cut_hd
   self.primary_key                = :cut_nbr
   # METADATA (End)

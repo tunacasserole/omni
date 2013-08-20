@@ -7,7 +7,7 @@ class Omni::Issue < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :issues
   self.primary_key                = :issue_id
   # METADATA (End)

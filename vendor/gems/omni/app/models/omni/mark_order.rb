@@ -7,7 +7,7 @@ class Omni::MarkOrder < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :orders_hd
   self.primary_key                = :order_nbr
   # METADATA (End)

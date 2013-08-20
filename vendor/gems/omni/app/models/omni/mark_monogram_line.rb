@@ -7,7 +7,7 @@ class Omni::MarkMonogramLine < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :monogram_li
   self.primary_key                = :lineitem_nbr
   # METADATA (End)

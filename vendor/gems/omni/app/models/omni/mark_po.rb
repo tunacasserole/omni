@@ -7,7 +7,7 @@ class Omni::MarkPo < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :po_checkins_hd
   self.primary_key                = :id
   # METADATA (End)

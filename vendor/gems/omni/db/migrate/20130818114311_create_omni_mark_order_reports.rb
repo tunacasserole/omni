@@ -1,6 +1,6 @@
 class CreateOmniMarkOrderReports < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('mark_order_reports')
       create_table(:mark_order_reports, :id => false) do |t|

@@ -7,7 +7,7 @@ class Omni::MarkCutLine < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+ #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :cut_li
   self.primary_key                = :id
   # METADATA (End)
