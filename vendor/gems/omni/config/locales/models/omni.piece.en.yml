@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    models:
+      omni/piece:  'Model'
+    attributes:
+      omni/piece:
+        piece_id:                          'Piece'
+        project_id:                        'Project'
+        piece_nbr:                         'Piece Nbr'
+        piece_type:                        'Piece Type'
+        state:                             'State'
+        display:                           'Display'
+        description:                       'Description'
+        importance:                        'Importance'
+        points:                            'Points'
+        assignee_id:                       'Assignee'
+        creator_id:                        'Creator'
+        target_release:                    'Target Release'
+        actual_release:                    'Actual Release'
+        is_destroyed:                      'Is Destroyed'

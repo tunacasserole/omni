@@ -1487,6 +1487,25 @@ Ext.direct.Manager.addProvider({
 
 //
 // -----------------------------------------------------------------------
+// SERVICE: Piece
+// -----------------------------------------------------------------------
+//
+
+Ext.direct.Manager.addProvider({
+		type        : 'remoting',
+		url         : Buildit.lib.DirectSources.BUILDIT,
+		maxRetries  : 0,
+		actions     : {
+			Piece:[
+				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+			]
+		},
+		namespace   :'Omni.service'
+	}
+);
+
+//
+// -----------------------------------------------------------------------
 // SERVICE: PriceBook
 // -----------------------------------------------------------------------
 //
@@ -1611,6 +1630,25 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ProgramStyle:[
+				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+			]
+		},
+		namespace   :'Omni.service'
+	}
+);
+
+//
+// -----------------------------------------------------------------------
+// SERVICE: Project
+// -----------------------------------------------------------------------
+//
+
+Ext.direct.Manager.addProvider({
+		type        : 'remoting',
+		url         : Buildit.lib.DirectSources.BUILDIT,
+		maxRetries  : 0,
+		actions     : {
+			Project:[
 				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
