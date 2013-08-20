@@ -7,7 +7,7 @@ class Omni::BtsStyle < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :bts_styles
   self.primary_key                = :bts_style_id
   # METADATA (End)
