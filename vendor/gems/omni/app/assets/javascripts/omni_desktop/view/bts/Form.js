@@ -34,7 +34,7 @@ Ext.define('Omni.view.bts.Form', {
       plan_yearLabel:                         Omni.i18n.model.Bts.plan_year,    
       is_source_parkerLabel:                  Omni.i18n.model.Bts.is_source_parker,    
       is_source_buckheadLabel:                Omni.i18n.model.Bts.is_source_buckhead,    
-      is_source_true_gritsLabel:              Omni.i18n.model.Bts.is_source_true_grits,        
+      is_source_gritsLabel:                   Omni.i18n.model.Bts.is_source_grits,        
       is_on_handLabel:                        Omni.i18n.model.Bts.is_on_hand,          
       is_wipLabel:                            Omni.i18n.model.Bts.is_wip,                      
       is_allocatedLabel:                      Omni.i18n.model.Bts.is_allocated,                      
@@ -128,7 +128,7 @@ Ext.define('Omni.view.bts.Form', {
           items:[
             { xtype: 'checkbox', name: 'is_source_parker',               fieldLabel: this.is_source_parkerLabel            , allowBlank: true },    
             { xtype: 'checkbox', name: 'is_source_buckhead',             fieldLabel: this.is_source_buckheadLabel          , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_source_grits',               fieldLabel: this.is_source_true_gritsLabel        , allowBlank: true }
+            { xtype: 'checkbox', name: 'is_source_grits',               fieldLabel: this.is_source_gritsLabel        , allowBlank: true }
           ]
         }                
         ,{
@@ -142,9 +142,9 @@ Ext.define('Omni.view.bts.Form', {
             { xtype: 'checkbox', name: 'is_drop_data',               fieldLabel: this.is_drop_dataLabel            , allowBlank: true },    
             { xtype: 'checkbox', name: 'is_create_detail',               fieldLabel: this.is_create_detailLabel            , allowBlank: true },    
             { xtype: 'checkbox', name: 'is_sum_style',                   fieldLabel: this.is_sum_styleLabel                , allowBlank: false },    
-            { xtype: 'checkbox', name: 'is_sum_subclass',                fieldLabel: this.is_sum_subclassLabel             , allowBlank: false },    
-            { xtype: 'checkbox', name: 'is_sum_class',                   fieldLabel: this.is_sum_classLabel                , allowBlank: false },    
-            { xtype: 'checkbox', name: 'is_sum_department',              fieldLabel: this.is_sum_departmentLabel           , allowBlank: false },                
+            // { xtype: 'checkbox', name: 'is_sum_subclass',                fieldLabel: this.is_sum_subclassLabel             , allowBlank: false },    
+            // { xtype: 'checkbox', name: 'is_sum_class',                   fieldLabel: this.is_sum_classLabel                , allowBlank: false },    
+            // { xtype: 'checkbox', name: 'is_sum_department',              fieldLabel: this.is_sum_departmentLabel           , allowBlank: false },                
           ]
         }                
       ]
