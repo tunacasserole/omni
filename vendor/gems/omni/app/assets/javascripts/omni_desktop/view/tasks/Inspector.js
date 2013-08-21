@@ -1,6 +1,6 @@
-Ext.define('Omni.view.projects.Inspector',{
+Ext.define('Omni.view.tasks.Inspector',{
   extend: 'Buildit.ux.inspector.Panel',
-  alias: 'widget.omni-projects-Inspector',
+  alias: 'widget.omni-tasks-Inspector',
 
 
   initComponent:function(){
@@ -9,8 +9,8 @@ Ext.define('Omni.view.projects.Inspector',{
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter: {
-        property:   'project_id',
-        value:      this.record.get('project_id')
+        property:   'task_id',
+        value:      this.record.get('task_id')
       }
     });
     // INSPECTOR INIT (End)
@@ -18,22 +18,14 @@ Ext.define('Omni.view.projects.Inspector',{
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
-        {title: 'Profile',           xtype: 'omni-projects-Form'}
-        ,{title: 'Tasks', xtype: 'omni-tasks-Explorer', module: 'tasks',
-           defaultSearch: { with: 
-             {
-               project_id:   {equal_to: me.record.get('project_id')}
-             }
-          },
-          showBadge: true
-        }        
+        {title: 'Profile',           xtype: 'omni-tasks-Form'}
       ]
     });
     // CARDS (End)
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title:     'Project',
+      title:     'Task',
       subtitle:  this.record.get('display')
     });
     // TITLES (End)

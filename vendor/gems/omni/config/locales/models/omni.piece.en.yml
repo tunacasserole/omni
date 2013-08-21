@@ -1,13 +1,13 @@
 en:
   activerecord:
     models:
-      omni/piece:  'Model'
+      omni/task:  'Model'
     attributes:
-      omni/piece:
-        piece_id:                          'Piece'
+      omni/task:
+        task_id:                           'Task'
         project_id:                        'Project'
-        piece_nbr:                         'Piece Nbr'
-        piece_type:                        'Piece Type'
+        task_nbr:                          'Task Nbr'
+        task_type:                         'Task Type'
         state:                             'State'
         display:                           'Summary'
         description:                       'Description'

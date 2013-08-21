@@ -67,34 +67,34 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   pieces - pink - C3004D
+   tasks - pink - C3004D
 ---------------------------------------------------------------------------------------
 */
 
 /* Inspector Logo */
-.inspector .tab.pieces .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/pieces-26.png);
+.inspector .tab.tasks .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/tasks-26.png);
   background-color: #C076DE;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.pieces.active .x-panel-body .logo, .inspector .tab.pieces .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/pieces-26.png);
+.inspector .tab.tasks.active .x-panel-body .logo, .inspector .tab.tasks .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/tasks-26.png);
   background-color: #C488DB;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.pieces.active .x-panel-body, .inspector .tab.pieces.active .x-panel-body:hover, .inspector .tab.pieces .x-panel-body:hover {
+.inspector .tab.tasks.active .x-panel-body, .inspector .tab.tasks.active .x-panel-body:hover, .inspector .tab.tasks .x-panel-body:hover {
   background: #C076DE;
 }
 
 /* Tile */
-.tile.pieces {
+.tile.tasks {
   background-image: url(/assets/omni/omni_icons/opportunities.png);
   background-color: #C076DE !important;
 }
 
-.tile.pieces:hover {
+.tile.tasks:hover {
   background-color: #C488DB !important;
 }
 
@@ -807,35 +807,35 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   piece
+   task
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.pieces .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/pieces.png);
+.inspector .tab.tasks .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/tasks.png);
   background-color: #DC592F;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.pieces.active .x-panel-body .logo, .inspector .tab.pieces .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/pieces.png);
+.inspector .tab.tasks.active .x-panel-body .logo, .inspector .tab.tasks .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/tasks.png);
   background-color: #A13E1E;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.pieces.active .x-panel-body, .inspector .tab.pieces.active .x-panel-body:hover, .inspector .tab.pieces .x-panel-body:hover {
+.inspector .tab.tasks.active .x-panel-body, .inspector .tab.tasks.active .x-panel-body:hover, .inspector .tab.tasks .x-panel-body:hover {
   background: #DC592F;
 }
 
 /* Tile */
-.tile.pieces {
-	background-image: url(/assets/omni/omni_icons/pieces.png);
+.tile.tasks {
+	background-image: url(/assets/omni/omni_icons/tasks.png);
 	background-color: #DC592F !important;
 }
 
-.tile.pieces:hover {
+.tile.tasks:hover {
 	background-color: #A13E1E !important;
 }
 
