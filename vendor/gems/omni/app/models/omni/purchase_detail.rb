@@ -110,15 +110,8 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-  # hook :before_valication(:on :create) do
-  # hook :before_validation on:=>:create do 
-  # hook :before_validation on:=>:create, :set_defaults, 10
-  # hook :before_validation(on:=>:create), :set_defaults, 10
-  # hook :before_validation(on: :create), :set_defaults, 10
-    hook :before_validation, :set_defaults, 10
-    # self.sku_id = self.sku_supplier.sku_id if self.sku_supplier
-
-    # end    
+    hook :before_create, :set_defaults, 10
+  
   # HOOKS (End)
 
 
@@ -131,7 +124,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   ### EVENTS ###
     event :allocate do
       transition :draft => :allocating
-      transition :open => :allocating      
+      transition :open =>  :allocating      
     end
   end
   # STATES (End)  
@@ -152,6 +145,9 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   end
 
   def process_approve
+
+    # user = current_user
+    # if user.privileges.include? "Approve Orders"
     # the Approve event writes StockLedgerAudit rows to update On Order and order history; an approved PO is a legally binding contract with the Supplier
     # Add a PurchaseAllocation row for every authorized Location for the PurchaseDetail SKU (unless one already exists in locked state)
     # Calulate the total PurchaseAllocation units from the PurchaseAllocation rows that are in locked state and subtract from PurchaseDetail units to equal "remaining units".
@@ -161,10 +157,35 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def set_defaults
-    # self.sku_id = self.sku_supplier.sku_id if self.sku_supplier_id
-    # self.description = self.sku.description if self.sku_id
+    # default PurchaseDetail fields from Sku and SkuSupplier
     if self.new_record?
-      self.sku_id = self.sku_supplier.sku_id if self.sku_supplier_id      
+      if self.sku_supplier
+        self.sku_id = self.sku_supplier.sku_id 
+        self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
+        self.description = self.sku_supplier.description
+        self.color_name = self.sku.color_name
+        # self.size_name = self.sku.size_name
+        self.order_pack_type = self.sku_supplier.pack_type
+        case self.order_pack_type
+          when "M"
+            self.order_pack_size = self.sku_supplier.master_pack_units
+          when "I"
+            self.order_pack_size = self.sku_supplier.inner_pack_units 
+          else
+            self.order_pack_size = 1
+        end
+        self.order_cost_units = self.sku_supplier.supplier_cost_units
+        self.order_multiple_type = self.sku_supplier.order_multiple_type
+        case self.order_multiple_type
+          when "M"
+            self.order_multiple = self.sku_supplier.master_pack_units
+          when "I"
+            self.order_multiple = self.sku_supplier.inner_pack_units
+          else
+            self.order_multiple = 1
+        end
+        self.supplier_cost = self.sku_supplier.supplier_cost
+      end
     end
   end
 
@@ -195,4 +216,5 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     return 'aaron@buildit.io'
   end
   # HELPERS (End)
+  
 end # class Omni::PurchaseDetail

@@ -120,34 +120,34 @@ class Omni::SkuSupplier < ActiveRecord::Base
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :new do
+  # state_machine :state, :initial => :new do
 
-  ### CALLBACKS ###
-    after_transition :on => :activate,       :do => :after_activate
+  # ### CALLBACKS ###
+  #   after_transition :on => :activate,       :do => :after_activate
     
-    ## EVENTS ###
-    event :activate do
-      transition :new => :active
-      transition :inactive => :active
-    end
+  #   ## EVENTS ###
+  #   event :activate do
+  #     transition :new => :active
+  #     transition :inactive => :active
+  #   end
 
-    event :deactivate do
-      transition :active => :inactive
-    end
+  #   event :deactivate do
+  #     transition :active => :inactive
+  #   end
 
-    state :active do
-      # validates  :concatenated_name, :presence  => true
-    end
+  #   state :active do
+  #     # validates  :concatenated_name, :presence  => true
+  #   end
 
-  end
-  # STATES (End)
+  # end
+  # # STATES (End)
 
 
-  # STATE HANDLERS (Start) ====================================================================
-  def after_activate
-    puts '--- done with after_activate ---'
-    puts 'ready...'
-  end
+  # # STATE HANDLERS (Start) ====================================================================
+  # def after_activate
+  #   puts '--- done with after_activate ---'
+  #   puts 'ready...'
+  # end
   # STATE HANDLERS (End)
 end # class Omni::SkuSupplier
 

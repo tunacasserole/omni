@@ -9,7 +9,10 @@ Ext.define('Omni.view.sku_suppliers.Form', {
 
     var me = this;
 
-    
+    // Define variables to indicate if the current user has or doesn't have a particular roles
+    // var is_buyer = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false)
+    // var disabled = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false);
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       sku_idLabel:                                Omni.i18n.model.SkuSupplier.sku_id,
@@ -54,6 +57,9 @@ Ext.define('Omni.view.sku_suppliers.Form', {
 
     // FIELDSETS (Start) ====================================================================
     Ext.apply(this, {
+
+      // disabled: disabled, // make entire form read only based on role variable
+      
       items: [
         {
           xtype: 'fieldset',
@@ -79,9 +85,15 @@ Ext.define('Omni.view.sku_suppliers.Form', {
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
           layout: 'anchor',
+
+          // hidden: !is_buyer,  // make fieldset non-display based on role variable
+          
           items:[
+            { name: 'supplier_cost',                  fieldLabel: this.supplier_costLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'supplier_cost_units',            fieldLabel: this.supplier_cost_unitsLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'supplier_cost',                  fieldLabel: this.supplier_costLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { name: 'extra_cost',                     fieldLabel: this.extra_costLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'is_included_extra_cost',         fieldLabel: this.is_included_extra_costLabel,     allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'cost_id',                        fieldLabel: this.cost_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Cost',{pageSize: 10}), displayField: 'cost_id', queryField: 'cost_id', valueField: 'cost_id', itemTpl:'{cost_id}' }
           ]
         },
         {
@@ -109,7 +121,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
           layout: 'anchor',
           items:[
             { name: 'inner_pack_units',               fieldLabel: this.inner_pack_unitsLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'master_pack_uom_code',           fieldLabel: this.inner_pack_uom_codeLabel,       allowBlank: true,   disabled: false,     xtype: 'buildit-Lookup',  category:  'INNER_PACK_UOM_CODE' },
+            { name: 'inner_pack_uom_code',            fieldLabel: this.inner_pack_uom_codeLabel,       allowBlank: true,   disabled: false,     xtype: 'buildit-Lookup',  category:  'INNER_PACK_UOM_CODE' },
             { name: 'inner_pack_length',              fieldLabel: this.inner_pack_lengthLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'inner_pack_height',              fieldLabel: this.inner_pack_heightLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'inner_pack_width',               fieldLabel: this.inner_pack_widthLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
@@ -130,9 +142,6 @@ Ext.define('Omni.view.sku_suppliers.Form', {
             { name: 'minimum_order_weight',           fieldLabel: this.minimum_order_weightLabel,       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'minimum_order_cube',             fieldLabel: this.minimum_order_cubeLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'order_multiple_type',            fieldLabel: this.order_multiple_typeLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',  category:  'ORDER_MULTIPLE_TYPE' },
-            { name: 'extra_cost',                     fieldLabel: this.extra_costLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'is_included_extra_cost',         fieldLabel: this.is_included_extra_costLabel,     allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'cost_id',                        fieldLabel: this.cost_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Cost',{pageSize: 10}), displayField: 'cost_id', queryField: 'cost_id', valueField: 'cost_id', itemTpl:'{cost_id}' },
             { name: 'origin_country',                 fieldLabel: this.origin_countryLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'freight_term',                   fieldLabel: this.freight_termLabel,               allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',  category:  'FREIGHT_TERM' }
           ]

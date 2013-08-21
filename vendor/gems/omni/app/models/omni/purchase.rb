@@ -73,6 +73,7 @@ class Omni::Purchase < ActiveRecord::Base
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
     compute :total_order_units,                  :with => :compute_total_order_units
+
   end
   
   # COMPUTED ATTRIBUTES (End)
@@ -131,7 +132,19 @@ class Omni::Purchase < ActiveRecord::Base
   before_destroy :cascading_delete
 
   def compute_total_order_units
-    self.purchase_details.sum(:units_ordered) if self.purchase_details
+# Option 1 - Iterate through each detail record    
+    # :total_order_units = 0
+    # :total_order_cost = 0
+    # :total_order_weight = 0
+    # :total_order_cube = 0
+#     self.purchase_details.each do
+#       :total_order_units = :total_order_units + (:units_ordered * :order_pack_size)
+#       # :total_order_cost = :total_order_cost + ((:units_ordered * :order_pack_size) * (:supplier_cost / :order_cost_units))
+#     end
+
+# # Option 2 - Use multiple "sum" statements
+    self.purchase_details.sum('units_ordered * order_pack_size') if self.purchase_details
+    
   end
 
 
