@@ -9,7 +9,7 @@ en:
         piece_nbr:                         'Piece Nbr'
         piece_type:                        'Piece Type'
         state:                             'State'
-        display:                           'Display'
+        display:                           'Summary'
         description:                       'Description'
         importance:                        'Importance'
         points:                            'Points'

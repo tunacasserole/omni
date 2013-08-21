@@ -61,19 +61,18 @@ Ext.define('Omni.view.pieces.Form', {
           */
 
             // { xtype: 'textfield', name: 'piece_id',                       fieldLabel: this.piece_idLabel                    , allowBlank: true },    
+            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel, disabled: true , allowBlank: true },    
+            { xtype: 'textfield', name: 'piece_nbr',  disabled: true,     fieldLabel: this.piece_nbrLabel                   , allowBlank: true },                
             { name: 'project_id', fieldLabel: this.project_idLabel,    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Project',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'project_id', itemTpl:'{display}',initialValue: this.record.get('project_display'), },
-            { xtype: 'textfield', name: 'project_id',                     fieldLabel: this.project_idLabel                  , allowBlank: true },    
-            { xtype: 'textfield', name: 'piece_nbr',                      fieldLabel: this.piece_nbrLabel                   , allowBlank: true },    
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },                
-            { xtype: 'textfield', name: 'piece_type',                     fieldLabel: this.piece_typeLabel                  , allowBlank: true },    
-            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true },    
-            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },    
-            { xtype: 'textfield', name: 'importance',                     fieldLabel: this.importanceLabel                  , allowBlank: true },    
+            { xtype: 'buildit-Lookup', name: 'piece_type', category: 'PIECE_TYPE', fieldLabel: this.piece_typeLabel                  , allowBlank: true },    
+            { xtype: 'textarea', rows: 3, name: 'description',                    fieldLabel: this.descriptionLabel    , allowBlank: true },    
+            { xtype: 'buildit-Lookup', category: 'IMPORTANCE', name: 'importance', fieldLabel: this.importanceLabel                  , allowBlank: true },    
             { xtype: 'textfield', name: 'points',                         fieldLabel: this.pointsLabel                      , allowBlank: true },    
             { name: 'assignee_id', fieldLabel: this.assignee_idLabel,    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 25}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}',initialValue: this.record.get('assignee_display'), },
-            { name: 'creator_id', fieldLabel: this.creator_idLabel,    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 25}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}',initialValue: this.record.get('assignee_display'), },            
-            { xtype: 'date', name: 'target_release',                 fieldLabel: this.target_releaseLabel              , allowBlank: true },    
-            { xtype: 'date', name: 'actual_release',                 fieldLabel: this.actual_releaseLabel              , allowBlank: true }
+            { name: 'creator_id', fieldLabel: this.creator_idLabel,    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 25}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}',initialValue: this.record.get('creator_display'), },            
+            { xtype: 'datefield', name: 'target_release',                 fieldLabel: this.target_releaseLabel              , allowBlank: true },    
+            { xtype: 'datefield', name: 'actual_release',                 fieldLabel: this.actual_releaseLabel              , allowBlank: true }
           ]
         }
       ]

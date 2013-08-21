@@ -26,14 +26,56 @@ Ext.define('Omni.view.app.Hub', {
 
   {
    title: 'Back to School',
-     columns: 4,
+     columns: 2,
      rows: 3,
      tiles: [
        {title: 'Run BTS report', colspan: 2, rowspan: 2, cls: 'projections',  target: {xtype: 'omni-bts-Explorer'}},       
        // {title: 'Accounts', colspan: 2, rowspan: 2, cls: 'imports',  target: {xtype: 'omni-accounts-Explorer'}},              
      ] 
      }     
+// Section: Merchandise Maintenance //
 
+   ,{
+   title: 'merchandise maintenance',
+     columns: 4,
+     rows: 3,
+     tiles: [
+       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'skus',  target: {xtype: 'omni-skus-Explorer', allowEdit: true, allowNew: false}},       
+       {title: 'Styles', colspan: 2, rowspan: 1, cls: 'styles',  target: {xtype: 'omni-styles-Explorer'}},
+       {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_types',  target: {xtype: 'omni-subclasses-Explorer', title: ''}},   
+       {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-classifications-Explorer', title: ''}},         
+       {title: 'Departments', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-departments-Explorer', title: ''}},                
+       {title: 'Locations', colspan: 2, rowspan: 1, cls: 'departments',  target: {xtype: 'omni-locations-Explorer'}},       
+     ] 
+     }
+
+  ,{
+   title: 'Project Tracking',
+     columns: 2,
+     rows: 4,
+     tiles: [
+       {title: 'Projects', colspan: 2, rowspan: 2, cls: 'projects',  target: {xtype: 'omni-projects-Explorer'}},     
+       {title: 'Pieces', colspan: 2, rowspan: 2, cls: 'pieces',  target: {xtype: 'omni-pieces-Explorer'}}            
+    ]
+  }
+   // Section: product setup data //
+
+   ,{
+   title: 'product setup data',
+     columns: 6,
+     rows: 3,
+     tiles: [
+       {title: 'Colors', colspan: 2, rowspan: 1, cls: 'omni-colors', target: { xtype: 'omni-colors-Explorer'} },
+       {title: 'Sizes', colspan: 2, rowspan: 1, cls: 'sales_calls', target: { xtype: 'omni-sizes-Explorer'} },       
+       {title: 'Size Groups', colspan: 2, rowspan: 1, cls: 'projects', target: { xtype: 'omni-size_groups-Explorer'} },       
+       // {title: 'Category', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-categories-Explorer', title: ''}},
+       // {title: 'Product', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-products-Explorer', title: ''}},
+       // {title: 'Product Types', colspan: 2, rowspan: 1, cls: 'products_types',  target: {xtype: 'omni-product_types-Explorer', title: ''}},       
+       // {title: 'transfer_reasons', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-transfer_reasons-Explorer', title: ''}},       
+       // {title: 'Forecast Profile', colspan: 2, rowspan: 1, cls: 'cfars',  target: {xtype: 'omni-forecast_profiles-Explorer'}},       
+       // {title: 'Labels', colspan: 2, rowspan: 1, cls: 'labels',  target: {xtype: 'omni-labels-Explorer', title: ''}},       
+     ] 
+  }   
 
  // // Section: Mark Research //
 
@@ -93,49 +135,7 @@ Ext.define('Omni.view.app.Hub', {
    //   ] 
    //   } 
 
- // Section: Merchandise Maintenance //
-
-   ,{
-   title: 'merchandise maintenance',
-     columns: 4,
-     rows: 3,
-     tiles: [
-       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'skus',  target: {xtype: 'omni-skus-Explorer', allowEdit: true, allowNew: false}},       
-       {title: 'Styles', colspan: 2, rowspan: 1, cls: 'styles',  target: {xtype: 'omni-styles-Explorer'}},
-       {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_types',  target: {xtype: 'omni-subclasses-Explorer', title: ''}},   
-       {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-classifications-Explorer', title: ''}},         
-       {title: 'Departments', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-departments-Explorer', title: ''}},                
-       {title: 'Locations', colspan: 2, rowspan: 1, cls: 'departments',  target: {xtype: 'omni-locations-Explorer'}},       
-     ] 
-     }
-
-  ,{
-   title: 'Project Tracking',
-     columns: 2,
-     rows: 4,
-     tiles: [
-       {title: 'Projects', colspan: 2, rowspan: 2, cls: 'projects',  target: {xtype: 'omni-projects-Explorer'}},     
-       {title: 'Pieces', colspan: 2, rowspan: 2, cls: 'pieces',  target: {xtype: 'omni-pieces-Explorer'}}            
-    ]
-  }
-   // Section: product setup data //
-
-   ,{
-   title: 'product setup data',
-     columns: 6,
-     rows: 3,
-     tiles: [
-       {title: 'Colors', colspan: 2, rowspan: 1, cls: 'omni-colors', target: { xtype: 'omni-colors-Explorer'} },
-       {title: 'Sizes', colspan: 2, rowspan: 1, cls: 'sales_calls', target: { xtype: 'omni-sizes-Explorer'} },       
-       {title: 'Size Groups', colspan: 2, rowspan: 1, cls: 'projects', target: { xtype: 'omni-size_groups-Explorer'} },       
-       {title: 'Category', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-categories-Explorer', title: ''}},
-       {title: 'Product', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-products-Explorer', title: ''}},
-       // {title: 'Product Types', colspan: 2, rowspan: 1, cls: 'products_types',  target: {xtype: 'omni-product_types-Explorer', title: ''}},       
-       {title: 'transfer_reasons', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-transfer_reasons-Explorer', title: ''}},       
-       {title: 'Forecast Profile', colspan: 2, rowspan: 1, cls: 'cfars',  target: {xtype: 'omni-forecast_profiles-Explorer'}},       
-       // {title: 'Labels', colspan: 2, rowspan: 1, cls: 'labels',  target: {xtype: 'omni-labels-Explorer', title: ''}},       
-     ] 
-  }     
+   
  ] 
  }); 
 

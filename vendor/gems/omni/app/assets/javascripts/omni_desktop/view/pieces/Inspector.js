@@ -26,7 +26,7 @@ Ext.define('Omni.view.pieces.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Piece',
-      subtitle:  this.record.get('piece_id')
+      subtitle:  this.record.get('display')
     });
     // TITLES (End)
 

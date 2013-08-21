@@ -67,34 +67,34 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   issues - pink - C3004D
+   pieces - pink - C3004D
 ---------------------------------------------------------------------------------------
 */
 
 /* Inspector Logo */
-.inspector .tab.issues .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/issues-26.png);
+.inspector .tab.pieces .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/pieces-26.png);
   background-color: #C076DE;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.issues.active .x-panel-body .logo, .inspector .tab.issues .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/issues-26.png);
+.inspector .tab.pieces.active .x-panel-body .logo, .inspector .tab.pieces .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/pieces-26.png);
   background-color: #C488DB;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.issues.active .x-panel-body, .inspector .tab.issues.active .x-panel-body:hover, .inspector .tab.issues .x-panel-body:hover {
+.inspector .tab.pieces.active .x-panel-body, .inspector .tab.pieces.active .x-panel-body:hover, .inspector .tab.pieces .x-panel-body:hover {
   background: #C076DE;
 }
 
 /* Tile */
-.tile.issues {
-  background-image: url(/assets/omni/omni_icons/issues-60.png);
+.tile.pieces {
+  background-image: url(/assets/omni/omni_icons/opportunities.png);
   background-color: #C076DE !important;
 }
 
-.tile.issues:hover {
+.tile.pieces:hover {
   background-color: #C488DB !important;
 }
 
@@ -164,6 +164,7 @@
 .tile.projections:hover {
   background-color: #AF0044 !important;
 }
+
 
 /*
 ---------------------------------------------------------------------------------------
@@ -702,7 +703,7 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   PROJECTS
+   projects
 ---------------------------------------------------------------------------------------
 */
 
@@ -710,28 +711,28 @@
 /* Inspector Logo */
 .inspector .tab.projects .x-panel-body .logo {
   background-image: url(/assets/omni/omni_icons/projects.png);
-  background-color: #17A300;
+  background-color: #71C8EB;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.projects.active .x-panel-body .logo, .inspector .tab.projects .x-panel-body:hover .logo {
   background-image: url(/assets/omni/omni_icons/projects.png);
-  background-color: #0C7300;
+  background-color: #2A7896;
 }
 
 /* Inspector Tab Active & Hover */
 .inspector .tab.projects.active .x-panel-body, .inspector .tab.projects.active .x-panel-body:hover, .inspector .tab.projects .x-panel-body:hover {
-  background: #17A300;
+  background: #71C8EB;
 }
 
 /* Tile */
 .tile.projects {
 	background-image: url(/assets/omni/omni_icons/projects.png);
-	background-color: #17A300 !important;
+	background-color: #71C8EB !important;
 }
 
 .tile.projects:hover {
-	background-color: #0C7300 !important;
+	background-color: #2A7896 !important;
 }
 
 /*
@@ -806,35 +807,35 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   CFARS
+   piece
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.cfars .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/cfars.png);
+.inspector .tab.pieces .x-panel-body .logo {
+  background-image: url(/assets/omni/omni_icons/pieces.png);
   background-color: #DC592F;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.cfars.active .x-panel-body .logo, .inspector .tab.cfars .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/cfars.png);
+.inspector .tab.pieces.active .x-panel-body .logo, .inspector .tab.pieces .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/omni_icons/pieces.png);
   background-color: #A13E1E;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.cfars.active .x-panel-body, .inspector .tab.cfars.active .x-panel-body:hover, .inspector .tab.cfars .x-panel-body:hover {
+.inspector .tab.pieces.active .x-panel-body, .inspector .tab.pieces.active .x-panel-body:hover, .inspector .tab.pieces .x-panel-body:hover {
   background: #DC592F;
 }
 
 /* Tile */
-.tile.cfars {
-	background-image: url(/assets/omni/omni_icons/cfars.png);
+.tile.pieces {
+	background-image: url(/assets/omni/omni_icons/pieces.png);
 	background-color: #DC592F !important;
 }
 
-.tile.cfars:hover {
+.tile.pieces:hover {
 	background-color: #A13E1E !important;
 }
 

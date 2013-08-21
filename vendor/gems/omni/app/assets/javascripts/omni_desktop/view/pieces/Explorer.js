@@ -95,12 +95,12 @@ Ext.define('Omni.view.pieces.Explorer', {
         },
         {
           header       : this.assignee_idLabel,
-          dataIndex    : 'assignee_id',
+          dataIndex    : 'assignee_display',
           flex         : 1
         },
         {
           header       : this.creator_idLabel,
-          dataIndex    : 'creator_id',
+          dataIndex    : 'creator_display',
           flex         : 1
         },
         {

@@ -51,9 +51,9 @@ Ext.define('Omni.view.projects.Form', {
               allowBlank: true 
             }
           */
-            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel  , disabled: true     , allowBlank: true },    
+            // { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel  , disabled: true     , allowBlank: true },    
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
-            { xtype: 'textfield', name: 'release_date',                   fieldLabel: this.release_dateLabel                , allowBlank: true }
+            { xtype: 'datefield', name: 'release_date',                   fieldLabel: this.release_dateLabel                , allowBlank: true }
           ]
         }
       ]

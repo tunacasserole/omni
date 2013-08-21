@@ -17,7 +17,7 @@ class Omni::Piece < ActiveRecord::Base
   #supports_logical_delete
   #supports_audit
   #supports_revisioning
-  #supports_fulltext
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -28,16 +28,22 @@ class Omni::Piece < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :piece_id,                          :with => :guid
+  default :piece_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"PIECE_NBR"
+
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
-  
+  belongs_to            :creator,              :foreign_key => 'creator_id',            :class_name => 'Buildit::User'
+  belongs_to            :assignee,            :foreign_key => 'assignee_id',             :class_name => 'Buildit::User'
   # ASSOCIATIONS (End)
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  
+  mapped_attributes do
+    map :creator_display,                        :to => 'creator.full_name'
+    map :assignee_display,                      :to => 'assignee.full_name'
+  end  
   # MAPPED ATTRIBUTES (End)
 
   
@@ -67,7 +73,9 @@ class Omni::Piece < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  
+  searchable do
+    string      :piece_id
+  end
   # INDEXING (End)
 
 
