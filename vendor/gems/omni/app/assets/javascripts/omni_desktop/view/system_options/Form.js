@@ -31,6 +31,8 @@ Ext.define('Omni.view.system_options.Form', {
       overage_gl_account_idLabel:                 Omni.i18n.model.SystemOption.overage_gl_account_id,
       shortage_gl_account_idLabel:                Omni.i18n.model.SystemOption.shortage_gl_account_id,
       sales_tax_gl_account_idLabel:               Omni.i18n.model.SystemOption.sales_tax_gl_account_id,
+      purchase_approval_1_maximum_amount:         Omni.i18n.model.SystemOption.purchase_approval_1_maximum_amount,
+      purchase_approval_2_maximum_amount:         Omni.i18n.model.SystemOption.purchase_approval_2_maximum_amount,
       consecutive_invalid_login_attemptsLabel:    Omni.i18n.model.SystemOption.consecutive_invalid_login_attempts
     });
     // LABELS (End)
@@ -65,7 +67,9 @@ Ext.define('Omni.view.system_options.Form', {
             { name: 'overage_gl_account_id',          fieldLabel: this.overage_gl_account_idLabel,      allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.GlAccount',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'gl_account_id', itemTpl:'{display}' },
             { name: 'shortage_gl_account_id',         fieldLabel: this.shortage_gl_account_idLabel,     allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.GlAccount',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'gl_account_id', itemTpl:'{display}' },
             { name: 'sales_tax_gl_account_id',        fieldLabel: this.sales_tax_gl_account_idLabel,    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.GlAccount',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'gl_account_id', itemTpl:'{display}' },
-            { name: 'consecutive_invalid_login_attempts',fieldLabel: this.consecutive_invalid_login_attemptsLabel,allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { name: 'consecutive_invalid_login_attempts' ,fieldLabel: this.consecutive_invalid_login_attemptsLabel, allowBlank: true,   disabled: false,    xtype: 'numberfield'        },
+            { name: 'purchase_approval_1_maximum_amount' ,fieldLabel: this.purchase_approval_1_maximum_amountLabel, allowBlank: true,   disabled: false,    xtype: 'numberfield'        },
+            { name: 'purchase_approval_2_maximum_amount' ,fieldLabel: this.purchase_approval_2_maximum_amountLabel, allowBlank: true,   disabled: false,    xtype: 'numberfield'        }
           ]
         }
       ]

@@ -15,8 +15,8 @@ Ext.define('Omni.model.SystemOption', {
     { name: 'display',                              type: 'string'      },
     { name: 'price_book_display',                   type: 'string'      },
     { name: 'price_book_id',                        type: 'string'      },
-    { name: 'professional_discount_percent',        type: 'float',      defaultValue: 0                         },
-    { name: 'employee_discount_percent',            type: 'float',      defaultValue: 0                         },
+    { name: 'professional_discount_percent',        type: 'float',      defaultValue: 0 },
+    { name: 'employee_discount_percent',            type: 'float',      defaultValue: 0 },
     { name: 'regular_sale_ruleset_display',         type: 'string'      },
     { name: 'regular_sale_ruleset_id',              type: 'string'      },
     { name: 'promo_sale_ruleset_display',           type: 'string'      },
@@ -35,7 +35,7 @@ Ext.define('Omni.model.SystemOption', {
     { name: 'transfer_close_ruleset_id',            type: 'string'      },
     { name: 'transfer_cancel_ruleset_display',      type: 'string'      },
     { name: 'transfer_cancel_ruleset_id',           type: 'string'      },
-    { name: 'is_charge_ship_location',              type: 'boolean',    defaultValue: false                     },
+    { name: 'is_charge_ship_location',              type: 'boolean',    defaultValue: false },
     { name: 'transfer_gl_account_display',          type: 'string'      },
     { name: 'transfer_gl_account_id',               type: 'string'      },
     { name: 'discrepancy_gl_account_display',       type: 'string'      },
@@ -46,8 +46,10 @@ Ext.define('Omni.model.SystemOption', {
     { name: 'shortage_gl_account_id',               type: 'string'      },
     { name: 'sales_tax_gl_account_display',         type: 'string'      },
     { name: 'sales_tax_gl_account_id',              type: 'string'      },
-    { name: 'consecutive_invalid_login_attempts',   type: 'integer',    defaultValue: 0                         },
-    { name: 'is_destroyed',                         type: 'boolean',    defaultValue: false                     }
+    { name: 'consecutive_invalid_login_attempts',   type: 'integer',    defaultValue: 0 },
+    { name: ':purchase_approval_1_maximum_amount'   type: 'integer' }
+    { name: ':purchase_approval_2_maximum_amount'   type: 'integer' }
+    { name: 'is_destroyed',                         type: 'boolean',    defaultValue: false }
   ],
   // FIELDS (End)
 

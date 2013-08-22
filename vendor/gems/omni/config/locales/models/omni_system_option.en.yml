@@ -40,5 +40,8 @@ en:
         sales_tax_gl_account_display:    Sales Tax Gl Account
         sales_tax_gl_account_id:         Sales Tax Gl Account
         consecutive_invalid_login_attempts: Consecutive Invalid Login Attempts
+        purchase_approval_1_maximum_amount: Purchase Approval 1 Maximum Amount
+        purchase_approval_2_maximum_amount: Purchase Approval 2 Maximum Amount
+
         is_destroyed:                    Is Destroyed
 

@@ -22,7 +22,9 @@ class CreateSystemOptions < ActiveRecord::Migration
         t.column :overage_gl_account_id,             :string,        :limit       => 32,     :null        => true
         t.column :shortage_gl_account_id,            :string,        :limit       => 32,     :null        => true
         t.column :sales_tax_gl_account_id,           :string,        :limit       => 32,     :null        => true
-        t.column :consecutive_invalid_login_attempts,:integer,       :null        => true
+        t.column :consecutive_invalid_login_attempts, :integer,       :null        => true
+        t.column :purchase_approval_1_maximum_amount, :integer,       :null        => true
+        t.column :purchase_approval_2_maximum_amount, :integer,       :null        => true        
         t.column :is_destroyed,                      :boolean,       :null        => true
       end
       add_index(:system_options, [:system_option_id], :unique => true)
