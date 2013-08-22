@@ -74,7 +74,7 @@ Ext.define('Omni.view.purchases.Explorer', {
         // { header: this.purchase_typeLabel,                 dataIndex: 'purchase_type',               flex: 1 },    
         // { header: this.purchase_sourceLabel,               dataIndex: 'purchase_source',             flex: 1 },    
         { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },
-        // { header: 'Total Order Cost'                       dataIndex: 'total_order_cost'             flex: 1,  renderer: Ext.util.Format.usMoney },
+        { header: 'Total Order Cost',                      dataIndex: 'total_order_cost',            flex: 1 },
         { header: this.order_dateLabel,                    dataIndex: 'order_date',                  flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') },
         // { header: this.ordered_by_user_idLabel,            dataIndex: 'ordered_by_user_id',          flex: 1 },    
         { header: this.ship_dateLabel,                     dataIndex: 'ship_date',                   flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') },    
