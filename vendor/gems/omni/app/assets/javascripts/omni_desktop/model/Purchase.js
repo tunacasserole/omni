@@ -30,10 +30,10 @@ Ext.define('Omni.model.Purchase', {
       { name: 'is_special_order',            type: 'boolean'  },
       { name: 'is_ship_cancel',              type: 'boolean'  },
       { name: 'estimated_lead_time_days',    type: 'integer'  },
-      // { name: 'lead_time',                   type: 'decimal'  },
       { name: 'supplier_display',            type: 'string'   },
       { name: 'location_display',            type: 'string'   },
-
+      { name: 'total_order_units',           type: 'string'   },
+      { name: 'total_order_cost',            type: 'string'   },
       { name: 'is_destroyed',                type: 'boolean'  }
     ],
 
