@@ -33,7 +33,7 @@ class Omni::Purchase < ActiveRecord::Base
   default :order_date,                                                        :with => :now
   default :is_special_order,                                                  :to   => false
   default :is_phone_order,                                                    :to   => false
-  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - #{m.order_date}"}
+  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_order_nbr}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current} 
   default :payment_term,                                                      :to   => lambda{|m| "#{m.supplier.default_payment_term}"}
   default :freight_term,                                                      :to   => lambda{|m| "#{m.supplier.freight_term}"}
@@ -73,6 +73,7 @@ class Omni::Purchase < ActiveRecord::Base
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
     compute :total_order_units,                  :with => :compute_total_order_units
+    compute :total_order_cost,                   :with => :compute_total_order_cost
 
   end
   
@@ -147,6 +148,11 @@ class Omni::Purchase < ActiveRecord::Base
     
   end
 
+  def compute_total_order_cost
+
+    self.purchase_details.sum('(units_ordered * order_pack_size) * (supplier_cost / order_cost_units)')
+
+  end
 
   # HOOKS (End)
 
