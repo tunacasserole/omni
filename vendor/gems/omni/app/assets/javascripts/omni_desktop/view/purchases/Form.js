@@ -150,14 +150,21 @@ Ext.define('Omni.view.purchases.Form', {
 
             { xtype: 'buildit-Lookup', name: 'payment_term',              fieldLabel: this.payment_termLabel         , allowBlank: true, category:   'PAYMENT_TERM' },
             { xtype: 'buildit-Lookup', name: 'freight_term',              fieldLabel: this.freight_termLabel         , allowBlank: true, category:   'FREIGHT_TERM' },
-            { xtype: 'textfield',
+            { xtype: 'numberfield',
               name: 'total_order_units',
               disabled: true,
+              hideTrigger: true,
+              keyNavEnabled: false,
+              mouseWheelEnabled: false,
               fieldLabel: 'Total Units Ordered'
             },
-            { xtype: 'textfield',
+            { xtype: 'numberfield',
               name: 'total_order_cost',
               disabled: true,
+              disabled: true,
+              hideTrigger: true,
+              keyNavEnabled: false,
+              mouseWheelEnabled: false,
               fieldLabel: 'Total Order Cost'
             }
           ]

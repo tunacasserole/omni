@@ -115,9 +115,11 @@ Ext.define('Omni.view.purchase_details.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { xtype: 'textfield',
+            { xtype: 'numberfield',
               name: 'supplier_cost',
               fieldLabel: this.supplier_costLabel,
+              minValue: 0,
+              decimalPrecision: 2,
               allowBlank: true 
             }
            ,{ xtype: 'buildit-Locator',
@@ -156,9 +158,10 @@ Ext.define('Omni.view.purchase_details.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { xtype: 'textfield',
+            { xtype: 'numberfield',
               name: 'units_ordered',
               fieldLabel: this.units_orderedLabel,
+              minValue: 0,
               allowBlank: true 
             }
            ,{ xtype: 'textfield',
