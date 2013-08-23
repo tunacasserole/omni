@@ -116,19 +116,29 @@ class Omni::Print < ActiveRecord::Base
         draw_text "TERMS:  AS AGREED", :size => 9, :at => [210, 600]   
         draw_text "CONFIRMATION #: 1001 ", :size => 9, :at => [210, 590]               
 
-        # make_table([["sub"],["table"]])
+        move_down 120
         
-        data = [["product 1: ","$10.00"],["product 2: ", "$20.00"],["Subtotal:","$30.00"]]
+        data = []
+        data[0] = ["V stock #","Size","Color","Description","QTY","Price","Total"]
+        total_units = 0
+        total_price = 0
 
-        move_down 200
+        source.purchase_details.each_with_index do |pd,i|
+          data[i+1] = [pd.supplier_item_identifier,pd.size_name,pd.color_name,pd.description,pd.units_ordered,"$#{pd.sku.initial_retail_price.to_s}","$#{(pd.sku.initial_retail_price * pd.units_ordered).to_s}"]
+          total_units += pd.units_ordered
+          total_price += (pd.sku.initial_retail_price * pd.units_ordered)
+        end
 
         table(data) do
-          style(row(0), :background_color => 'ff00ff')
+          style(row(0), :background_color => '0075C9')
           # style(column(0)) { |c| c.border_width += 1 }
         end              
-        #   subtable = pdf.make_table([["sub"],["table"]])
-        #   pdf.table([[subtable,"original"]])
-        # end
+
+        # draw_text "cursor1", :at => [cursor,cursor]
+        # draw_text "cursor2", :at => [cursor,cursor]        
+        draw_text "** SUBTOTAL ** ", :size => 9, :at => [cursor - 250, cursor - 15]
+        draw_text total_units.to_s, :size => 9, :at => [cursor - 180, cursor - 15]
+        draw_text "$#{total_price}", :size => 9, :at => [cursor - 120, cursor - 15]
 
         create_stamp("approved") do
           rotate(30, :origin => [-5, -5]) do

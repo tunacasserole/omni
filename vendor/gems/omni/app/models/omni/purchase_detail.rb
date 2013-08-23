@@ -163,7 +163,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
         self.sku_id = self.sku_supplier.sku_id 
         self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
         self.description = self.sku_supplier.description
-        self.color_name = self.sku.color_name
+        self.color_name = 'RED' #self.sku.color_name
         # self.size_name = self.sku.size_name
         self.order_pack_type = self.sku_supplier.pack_type
         case self.order_pack_type
