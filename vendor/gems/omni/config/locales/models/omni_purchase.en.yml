@@ -21,7 +21,9 @@ en:
         delivery_date:                   Estimated Delivery Date
         cancel_not_shipped_by_date:      Cancel Not Shipped By Date
         cancel_not_received_by_date:     Cancel Not Received By Date
-        approval_date:                   Approval Date
+        approval_1_date:                 First Approval Date
+        approval_2_date:                 Second Approval Date
+        approval_3_date:                 Third Approval Date
         first_receipt_date:              Receipt Date
         cancelled_date:                  Cancelled Date
         payment_term:                    Payment Term
@@ -38,6 +40,12 @@ en:
         is_special_order:                Is Special Order
         is_ship_cancel:                  Is Ship Cancel
         estimated_lead_time_days:        Estimated Lead Time Days
+        purchase_approver_1_user_id:     First Purchase Approver
+        purchase_approver_1_user_display: First Purchase Approver
+        purchase_approver_2_user_id:     Second Purchase Approver
+        purchase_approver_2_user_display: Second Purchase Approver
+        purchase_approver_3_user_id:     Third Purchase Approver
+        purchase_approver_3_user_display: Third Purchase Approver        
         is_destroyed:                    Deleted
-        lead_time:                       Lead Time
+
 

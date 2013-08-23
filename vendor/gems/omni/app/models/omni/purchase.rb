@@ -53,7 +53,10 @@ class Omni::Purchase < ActiveRecord::Base
   belongs_to   :ordered_by_user,               :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'  
   belongs_to   :confirmed_by_user,             :class_name => 'Buildit::User',           :foreign_key => 'confirmed_by_user_id'  
   belongs_to   :master_purchase,               :class_name => 'Omni::Purchase',          :foreign_key => 'master_purchase_id'    
-  belongs_to   :carrier_supplier,              :class_name => 'Omni::Supplier',          :foreign_key => 'carrier_supplier_id'              
+  belongs_to   :carrier_supplier,              :class_name => 'Omni::Supplier',          :foreign_key => 'carrier_supplier_id'
+  belongs_to   :purchase_approver_1_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_1_user_id'  
+  belongs_to   :purchase_approver_2_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_2_user_id'  
+  belongs_to   :purchase_approver_3_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_3_user_id'  
   # ASSOCIATIONS (End)
 
 
@@ -65,6 +68,9 @@ class Omni::Purchase < ActiveRecord::Base
     map :master_purchase_display,                :to => 'master_purchase.display'
     map :carrier_supplier_display,               :to => 'carrier_supplier.display'
     map :location_display,                       :to => 'location.display'
+    map :purchase_approver_1_user_display,       :to => 'purchase_approver_1_user.display'
+    map :purchase_approver_2_user_display,       :to => 'purchase_approver_2_user.display'
+    map :purchase_approver_3_user_display,       :to => 'purchase_approver_3_user.display'
 
   end
   # MAPPED ATTRIBUTES (End)
@@ -170,10 +176,10 @@ class Omni::Purchase < ActiveRecord::Base
       transition :costing => :draft
     end
     event :release do
-      transition any => :planning
+      transition :draft => :planning
     end
     event :approve do
-      transition any => :open
+      transition :planning => :open
     end
 
   ### STATES ###

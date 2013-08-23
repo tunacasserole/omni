@@ -32,7 +32,9 @@ Ext.define('Omni.view.purchases.Form', {
       delivery_dateLabel:                     Omni.i18n.model.Purchase.delivery_date,    
       cancel_not_shipped_by_dateLabel:        Omni.i18n.model.Purchase.cancel_not_shipped_by_date,    
       cancel_not_received_by_dateLabel:       Omni.i18n.model.Purchase.cancel_not_received_by_date,    
-      approval_dateLabel:                     Omni.i18n.model.Purchase.approval_date,    
+      approval_1_dateLabel:                   Omni.i18n.model.Purchase.approval_1_date,
+      approval_2_dateLabel:                   Omni.i18n.model.Purchase.approval_2_date,
+      approval_3_dateLabel:                   Omni.i18n.model.Purchase.approval_3_date,
       first_receipt_dateLabel:                Omni.i18n.model.Purchase.first_receipt_date,    
       last_receipt_dateLabel:                 Omni.i18n.model.Purchase.last_receipt_date,
       cancelled_dateLabel:                    Omni.i18n.model.Purchase.cancelled_date,    
@@ -47,7 +49,9 @@ Ext.define('Omni.view.purchases.Form', {
       is_special_orderLabel:                  Omni.i18n.model.Purchase.is_special_order,    
       is_ship_cancelLabel:                    Omni.i18n.model.Purchase.is_ship_cancel,    
       estimated_lead_time_daysLabel:          Omni.i18n.model.Purchase.estimated_lead_time_days,    
-      lead_timeLabel:                         Omni.i18n.model.Purchase.lead_time,    
+      purchase_approver_1_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_1_user_id,
+      purchase_approver_2_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_2_user_id,
+      purchase_approver_3_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_3_user_id,
       is_destroyedLabel:                      Omni.i18n.model.Purchase.is_destroyed    
     });
     // LABELS (End)
@@ -77,7 +81,6 @@ Ext.define('Omni.view.purchases.Form', {
               valueField        : 'user_id',
               itemTpl           : '{full_name}',
               name              : 'ordered_by_user_id',
-              // initialValue      : this.record.get('created_by_full_name'),
               fieldLabel        : this.ordered_by_user_idLabel,
               allowBlank        : true
             },
@@ -114,7 +117,7 @@ Ext.define('Omni.view.purchases.Form', {
           ]
         }
 
-        ,{
+       ,{
           xtype:        'fieldset',
           title:        'Purchase Order Dates',
           collapsible:  true,
@@ -129,13 +132,75 @@ Ext.define('Omni.view.purchases.Form', {
               value: new Date(),
               allowBlank: false
             },
-            { xtype: 'datefield', name: 'approval_date',                  fieldLabel: this.approval_dateLabel               , allowBlank: true },    
-            { xtype: 'datefield', name: 'ship_date',                      fieldLabel: this.ship_dateLabel                   , allowBlank: true },    
-            { xtype: 'datefield', name: 'delivery_date',                  fieldLabel: this.delivery_dateLabel               , allowBlank: true },    
-            { xtype: 'datefield', name: 'cancel_not_shipped_by_date',     fieldLabel: this.cancel_not_shipped_by_dateLabel  , allowBlank: true },    
-            { xtype: 'datefield', name: 'cancel_not_received_by_date',    fieldLabel: this.cancel_not_received_by_dateLabel , allowBlank: true },    
-            { xtype: 'datefield', name: 'first_receipt_date',             fieldLabel: this.first_receipt_dateLabel          , allowBlank: true },    
-            { xtype: 'datefield', name: 'cancelled_date',                 fieldLabel: this.cancelled_dateLabel              , allowBlank: true },    
+            { xtype: 'datefield', name: 'ship_date',                      fieldLabel: this.ship_dateLabel                   , allowBlank: true, disabled: false },
+            { xtype: 'datefield', name: 'delivery_date',                  fieldLabel: this.delivery_dateLabel               , allowBlank: true, disabled: true },
+            { xtype: 'datefield', name: 'cancel_not_shipped_by_date',     fieldLabel: this.cancel_not_shipped_by_dateLabel  , allowBlank: true, disabled: true },    
+            { xtype: 'datefield', name: 'cancel_not_received_by_date',    fieldLabel: this.cancel_not_received_by_dateLabel , allowBlank: true, disabled: true },    
+            { xtype: 'datefield', name: 'first_receipt_date',             fieldLabel: this.first_receipt_dateLabel          , allowBlank: true, disabled: true },    
+            { xtype: 'datefield', name: 'cancelled_date',                 fieldLabel: this.cancelled_dateLabel              , allowBlank: true, disabled: true },    
+          ]
+        }
+
+       ,{
+          xtype:        'fieldset',
+          title:        'Purchase Order Approvals',
+          collapsible:  true,
+          defaultType:  'textfield',
+          defaults:     {anchor: '70%'},
+          layout:       'anchor',
+          items:[
+
+            { xtype             : 'buildit-Locator',
+              store             : Ext.create('Buildit.store.User',{pageSize: 20}),
+              displayField      : 'full_name',
+              queryField        : 'full_name',
+              valueField        : 'user_id',
+              itemTpl           : '{full_name}',
+              name              : 'purchase_approver_1_user_id',
+              fieldLabel        : this.purchase_approver_1_user_idLabel,
+              allowBlank        : true
+            }
+           ,{ xtype: 'datefield',
+              name: 'approval_1_date',
+              fieldLabel: this.order_dateLabel,
+              value: new Date(),
+              disabled: true,
+              allowBlank: false
+            }
+           ,{ xtype             : 'buildit-Locator',
+              store             : Ext.create('Buildit.store.User',{pageSize: 20}),
+              displayField      : 'full_name',
+              queryField        : 'full_name',
+              valueField        : 'user_id',
+              itemTpl           : '{full_name}',
+              name              : 'purchase_approver_2_user_id',
+              fieldLabel        : this.purchase_approver_2_user_idLabel,
+              allowBlank        : true
+            }
+           ,{ xtype: 'datefield',
+              name: 'approval_2_date',
+              fieldLabel: this.order_dateLabel,
+              value: new Date(),
+              disabled: true,
+              allowBlank: false
+            }
+           ,{ xtype             : 'buildit-Locator',
+              store             : Ext.create('Buildit.store.User',{pageSize: 20}),
+              displayField      : 'full_name',
+              queryField        : 'full_name',
+              valueField        : 'user_id',
+              itemTpl           : '{full_name}',
+              name              : 'purchase_approver_3_user_id',
+              fieldLabel        : this.purchase_approver_3_user_idLabel,
+              allowBlank        : true
+            }
+           ,{ xtype: 'datefield',
+              name: 'approval_3_date',
+              fieldLabel: this.order_dateLabel,
+              value: new Date(),
+              disabled: true,
+              allowBlank: false
+            }
           ]
         }
 
@@ -156,6 +221,7 @@ Ext.define('Omni.view.purchases.Form', {
               hideTrigger: true,
               keyNavEnabled: false,
               mouseWheelEnabled: false,
+              decimalPrecision: 2,
               fieldLabel: 'Total Units Ordered'
             },
             { xtype: 'numberfield',
@@ -165,6 +231,7 @@ Ext.define('Omni.view.purchases.Form', {
               hideTrigger: true,
               keyNavEnabled: false,
               mouseWheelEnabled: false,
+              decimalPrecision: 2,
               fieldLabel: 'Total Order Cost'
             }
           ]

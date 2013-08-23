@@ -36,7 +36,9 @@ Ext.define('Omni.view.purchases.Explorer', {
   delivery_dateLabel:                     Omni.i18n.model.Purchase.delivery_date,
   cancel_not_shipped_by_dateLabel:        Omni.i18n.model.Purchase.cancel_not_shipped_by_date,
   cancel_not_received_by_dateLabel:       Omni.i18n.model.Purchase.cancel_not_received_by_date,
-  approval_dateLabel:                     Omni.i18n.model.Purchase.approval_date,
+  approval_1_dateLabel:                   Omni.i18n.model.Purchase.approval_1_date,
+  approval_2_dateLabel:                   Omni.i18n.model.Purchase.approval_2_date,
+  approval_3_dateLabel:                   Omni.i18n.model.Purchase.approval_3_date,
   first_receipt_dateLabel:                Omni.i18n.model.Purchase.first_receipt_date,
   cancelled_dateLabel:                    Omni.i18n.model.Purchase.cancelled_date,
   payment_termLabel:                      Omni.i18n.model.Purchase.payment_term,
@@ -50,7 +52,9 @@ Ext.define('Omni.view.purchases.Explorer', {
   is_special_orderLabel:                  Omni.i18n.model.Purchase.is_special_order,
   is_ship_cancelLabel:                    Omni.i18n.model.Purchase.is_ship_cancel,
   estimated_lead_time_daysLabel:          Omni.i18n.model.Purchase.estimated_lead_time_days,
-  lead_timeLabel:                         Omni.i18n.model.Purchase.lead_time,
+  purchase_approver_1_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_1_user_id,
+  purchase_approver_2_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_2_user_id,
+  purchase_approver_3_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_3_user_id,
   is_destroyedLabel:                      Omni.i18n.model.Purchase.is_destroyed,
   // LABELS (End)
   

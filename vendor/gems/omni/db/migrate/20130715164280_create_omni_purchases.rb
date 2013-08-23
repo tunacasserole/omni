@@ -18,7 +18,9 @@ class CreateOmniPurchases < ActiveRecord::Migration
         t.column   :delivery_date,                   :date,              :null  =>  true
         t.column   :cancel_not_shipped_by_date,      :date,              :null  =>  true
         t.column   :cancel_not_received_by_date,     :date,              :null  =>  true
-        t.column   :approval_date,                   :date,              :null  =>  true
+        t.column   :approval_1_date,                 :date,              :null  =>  true
+        t.column   :approval_2_date,                 :date,              :null  =>  true
+        t.column   :approval_3_date,                 :date,              :null  =>  true
         t.column   :first_receipt_date,              :date,              :null  =>  true
         t.column   :cancelled_date,                  :date,              :null  =>  true
         t.column   :payment_term,                    :string,            :null  =>  true,    :limit   => 100
@@ -32,7 +34,9 @@ class CreateOmniPurchases < ActiveRecord::Migration
         t.column   :is_special_order,                :boolean,           :null  =>  true
         t.column   :is_ship_cancel,                  :boolean,           :null  =>  true
         t.column   :estimated_lead_time_days,        :integer,           :null  =>  true
-        t.column   :lead_time,                       :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
+        t.column   :purchase_approver_1_user_id      :string,            :null  =>  true,    :limit   => 32
+        t.column   :purchase_approver_2_user_id      :string,            :null  =>  true,    :limit   => 32
+        t.column   :purchase_approver_3_user_id      :string,            :null  =>  true,    :limit   => 32
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

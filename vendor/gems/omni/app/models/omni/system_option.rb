@@ -21,12 +21,12 @@ class Omni::SystemOption < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :system_option_id,                 :override  =>  false,        :with  => :guid              
-  default      :professional_discount_percent,    :override  =>  false,        :to    => 0                  
-  default      :employee_discount_percent,        :override  =>  false,        :to    => 0                  
-  default      :is_charge_ship_location,          :override  =>  false,        :to    => false              
+  default      :system_option_id,                    :override  =>  false,        :with  => :guid              
+  default      :professional_discount_percent,       :override  =>  false,        :to    => 0                  
+  default      :employee_discount_percent,           :override  =>  false,        :to    => 0                  
+  default      :is_charge_ship_location,             :override  =>  false,        :to    => false              
   default      :consecutive_invalid_login_attempts,  :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                        :override  =>  false,        :to    => false              
   # DEFAULTS (End)
 
 

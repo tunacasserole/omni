@@ -47,8 +47,8 @@ Ext.define('Omni.model.SystemOption', {
     { name: 'sales_tax_gl_account_display',         type: 'string'      },
     { name: 'sales_tax_gl_account_id',              type: 'string'      },
     { name: 'consecutive_invalid_login_attempts',   type: 'integer',    defaultValue: 0 },
-    { name: ':purchase_approval_1_maximum_amount'   type: 'integer' }
-    { name: ':purchase_approval_2_maximum_amount'   type: 'integer' }
+    { name: ':purchase_approval_1_maximum_amount',  type: 'integer' },
+    { name: ':purchase_approval_2_maximum_amount',  type: 'integer' },
     { name: 'is_destroyed',                         type: 'boolean',    defaultValue: false }
   ],
   // FIELDS (End)
