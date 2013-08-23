@@ -169,6 +169,7 @@ class Omni::Purchase < ActiveRecord::Base
   ### CALLBACKS ###
     after_transition :on => :costing, :do => :process_costing
     after_transition :on => :release, :do => :process_approve
+    after_transition :on => :print, :do => :process_print 
 
   ### EVENTS ###
     event :costing do
@@ -215,6 +216,12 @@ class Omni::Purchase < ActiveRecord::Base
 
     end
 
+  def process_print
+    # Create a pdf of the purchase order for printing 
+    p = Omni::Print.new(:source_model => 'Purchase', :source_id => self.purchase_id)
+    p.save
+    p.print
+  end
 
   end
   # STATES (End)  

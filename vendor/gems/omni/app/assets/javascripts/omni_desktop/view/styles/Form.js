@@ -162,7 +162,7 @@ Ext.define('Omni.view.styles.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'initial_retail_price',           fieldLabel: this.initial_retail_priceLabel,       allowBlank: true,   disabled: false,    xtype: 'currencyfield',      },
+            { name: 'initial_retail_price',           fieldLabel: this.initial_retail_priceLabel,       allowBlank: true,   disabled: false,    xtype: 'currencyfield', currencySymbol: null     },
             { name: 'suggested_retail_price',         fieldLabel: this.suggested_retail_priceLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'planning_retail_price',          fieldLabel: this.planning_retail_priceLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        }
           ]

@@ -13,6 +13,25 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
         // LEFT ACTIONS (Start) =================================================================
  
        /**
+         * Print
+         */
+        {
+          text:'Print',
+          cls: 'icon-settings',
+          action: 'print',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickPrint,
+              scope: me
+            }
+          }
+        },
+
+
+      /**
          * Costing
          * Supports performing 'Costing' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
@@ -31,6 +50,7 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
             }
           }
         },
+
 
        /**
          * Release
@@ -178,6 +198,10 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
 
 
   // ACTION HANDLERS (Start) ====================================================================
+
+  clickPrint: function(btn, e, eOpts){
+    Omni.logic.purchases.ExplorerProcessSelectedItems.click(btn, 'print');
+  },
 
   clickRelease: function(btn, e, eOpts){
     Omni.logic.purchases.ExplorerProcessSelectedItems.click(btn, 'release');
