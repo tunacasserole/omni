@@ -60,25 +60,26 @@ Ext.define('Omni.view.purchase_details.Form', {
           defaults:     {anchor: '95%'},
           layout:       'anchor',
           items:[
-          /*
-            {
-              xtype: 'buildit-Locator', 
-              store: Ext.create('MyApp.store.MyModel',{pageSize: 10}), 
-              displayField: 'name', 
-              queryField: 'name', 
-              valueField: 'value_field', 
-              itemTpl:'{name}',
-              name: 'attribute_name', 
-              fieldLabel: this.attribute_nameLabel, 
-              allowBlank: true 
-            }
-          */
 
             // { xtype: 'textfield', name: 'purchase_detail_id',             fieldLabel: this.purchase_detail_idLabel          , allowBlank: true },    
-            { xtype: 'textfield', name: 'purchase_display',               fieldLabel: this.purchase_displayLabel            , allowBlank: true, disabled: true },    
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true, disabled: true },    
-            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true, disabled: true },    
-            { xtype: 'textfield', name: 'purchase_line_nbr',              fieldLabel: this.purchase_line_nbrLabel           , allowBlank: true }
+            { xtype: 'textfield',
+              name: 'purchase_display',
+              fieldLabel: this.purchase_displayLabel,
+              allowBlank: true,
+              disabled: true 
+            }  
+            // { xtype: 'textfield', name: 'display', fieldLabel: this.displayLabel, allowBlank: true, disabled: true },    
+           ,{ xtype: 'textfield',
+              name: 'purchase_line_nbr',
+              fieldLabel: this.purchase_line_nbrLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'textfield',
+              name: 'state',
+              fieldLabel: this.stateLabel,
+              allowBlank: true,
+              disabled: true 
+            },    
            ,{ xtype: 'buildit-Locator',
               name: 'sku_supplier_id', 
               fieldLabel: this.sku_supplier_idLabel,
@@ -99,10 +100,21 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.descriptionLabel,
               allowBlank: true 
             }
-           ,    
-            { xtype: 'textfield', name: 'color_name',                     fieldLabel: this.color_nameLabel                  , allowBlank: true },    
-            { xtype: 'textfield', name: 'size_name',                      fieldLabel: this.size_nameLabel                   , allowBlank: true },    
-            { xtype: 'textfield', name: 'sku_alias',                      fieldLabel: this.sku_aliasLabel                   , allowBlank: true }
+           ,{ xtype: 'textfield',
+              name: 'color_name',
+              fieldLabel: this.color_nameLabel,
+              allowBlank: true 
+            }
+           ,{ xtype: 'textfield',
+              name: 'size_name',
+              fieldLabel: this.size_nameLabel,
+              allowBlank: true 
+             }
+           ,{ xtype: 'textfield',
+              name: 'sku_alias',
+              fieldLabel: this.sku_aliasLabel,
+              allowBlank: true 
+             }
             // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }    
           ]
         }
@@ -121,6 +133,13 @@ Ext.define('Omni.view.purchase_details.Form', {
               minValue: 0,
               decimalPrecision: 2,
               allowBlank: true 
+            }
+           ,{ xtype: 'numberfield',
+              name: 'order_cost_units',
+              fieldLabel: this.order_cost_unitsLabel,
+              minValue: 1,
+              decimalPrecision: 0,
+              allowBlank: false 
             }
            ,{ xtype: 'buildit-Locator',
               name: 'cost_id',
@@ -167,11 +186,13 @@ Ext.define('Omni.view.purchase_details.Form', {
            ,{ xtype: 'textfield',
               name: 'units_approved',
               fieldLabel: this.units_approvedLabel,
+              disabled: true,
               allowBlank: true 
             }
            ,{ xtype: 'textfield',
               name: 'units_cancelled',
               fieldLabel: this.units_cancelledLabel,
+              disabled: true,
               allowBlank: true 
             }
            ,{ xtype: 'textfield',
@@ -184,11 +205,6 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.order_pack_typeLabel,
               allowBlank: true,
               category:   'PACK_TYPE'
-            }
-           ,{ xtype: 'textfield',
-              name: 'order_cost_units',
-              fieldLabel: this.order_cost_unitsLabel,
-              allowBlank: true 
             }
            ,{ xtype: 'buildit-Lookup',
             name: 'order_multiple_type',

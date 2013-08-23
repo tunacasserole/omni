@@ -168,7 +168,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   ### CALLBACKS ###
     after_transition :on => :costing, :do => :process_costing
-    after_transition :on => :release, :do => :process_approve
+    after_transition :on => :release, :do => :process_release
     after_transition :on => :print, :do => :process_print 
 
   ### EVENTS ###
@@ -201,6 +201,7 @@ class Omni::Purchase < ActiveRecord::Base
       validates :freight_term,                               :presence => true
       validates :ship_via,                                   :presence => true
       validates :fob_point,                                  :presence => true
+      validate  :purchase_approvals
 
     end
 
@@ -239,7 +240,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def process_release
-    send_notice
+    # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
   end
 
   def process_approve
@@ -257,6 +258,18 @@ class Omni::Purchase < ActiveRecord::Base
     self.purchase_costs.all.each {|x| x.destroy}
     self.purchase_allocations.all.each {|x| x.destroy}    
     self.purchase_details.all.each {|x| x.destroy}    
+  end
+  
+  def purchase_approvals
+    case 
+      when self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
+        errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id
+      # when <= Omni::SystemOption.first.purchase_approver_2_maximum_amount
+
+      # else
+
+    # send_notice
+    end
   end
 
   # Sends an email notification to the user when the purchase has finished running
