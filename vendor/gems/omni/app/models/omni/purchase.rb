@@ -169,7 +169,8 @@ class Omni::Purchase < ActiveRecord::Base
   ### CALLBACKS ###
     after_transition :on => :costing, :do => :process_costing
     after_transition :on => :release, :do => :process_release
-    after_transition :on => :print, :do => :process_print 
+    after_transition :on => :approve, :do => :process_approve
+    after_transition :on => :print,   :do => :process_print 
 
   ### EVENTS ###
     event :costing do
@@ -206,7 +207,7 @@ class Omni::Purchase < ActiveRecord::Base
     end
 
     state :open do
-
+      validate  :transition_to_open
     end
 
     state :costing do
@@ -241,11 +242,38 @@ class Omni::Purchase < ActiveRecord::Base
 
   def process_release
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
+
+
+      message = Buildit::Comm::Email::Message.create(
+          subject: "Omni notice: purchase - #{self.purchase_order_nbr} has been released.",
+          body: Buildit::Email::Manager.generate(self, "purchase_notice"),
+      )
+      # email_addresses = Buildit::User.all.collect {|u| u.email_address}
+      email_addresses = Buildit::User.where(:user_id => self.purchase_approver_1_user_id).first.email_address
+      message.send_to email_addresses
+      message.queue
+
   end
 
   def process_approve
     # the Approve event writes StockLedgerAudit rows to update On Order and order history; an approved PO is a legally binding contract with the Supplier
     # Omni::StockLedgerAudit.create(:)
+    # self.purchasae_detail.each do |pd|
+    #   sl = Omni::StockLedgerAudit.create(
+    #     sl.stockable_type = 'Omni::Purchase'
+    #     sl.stockable_id = self.purchase_id
+    #     sl.ruleset_id = Omni::Ruleset.where(ruleset_code = 'ApprovePurchase').ruleset_id if ruleset_id
+    #     sl.sku_id = pd.sku_id
+    #     sl.location_id = self.location_id
+    #     sl.supplier_id = self.supplier_id
+    #     sl.units = pd.order_units * pd.order_pack_size
+    #     sl.cost = pd.supplier_cost / pd.order_cost_units
+    #     sl.retail = 0
+    #     sl.create_date = Date.today
+    #     sl.activity_date = Date.today
+    #   )
+    # end
+
   end
   # STATE HELPERS (End)
 
@@ -261,16 +289,93 @@ class Omni::Purchase < ActiveRecord::Base
   end
   
   def purchase_approvals
-    case 
-      when self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
-        errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id
-      # when <= Omni::SystemOption.first.purchase_approver_2_maximum_amount
-
-      # else
-
-    # send_notice
+    if self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
+        errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
+    else 
+      if self.total_order_cost < Omni::SystemOption.first.purchase_approval_2_maximum_amount
+        errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
+        errors.add('state', 'approver 2 required') unless self.purchase_approver_2_user_id.length > 1
+      else
+        errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
+        errors.add('state', 'approver 2 required') unless self.purchase_approver_2_user_id.length > 1
+        errors.add('state', 'approver 3 required') unless self.purchase_approver_3_user_id.length > 1
+      end
     end
   end
+
+  def transition_to_open
+    # current_user = Buildit::User.current.user_id
+    current_user = '1F040E2409C611E3B93028CFE9147CA7'
+    puts '*********************'
+    approver = false
+    if current_user == self.purchase_approver_1_user_id
+      approver = true
+      puts 'if number 1'
+      if !self.approval_1_date 
+        puts 'if number 2'
+        self.approval_1_date = Date.today
+        if self.purchase_approver_2_user_id 
+          puts 'if number 3'
+              # send notification
+        else
+        #   # do :write_stock_ledger_activity
+          puts 'Stock Ledger Activity 1'
+        end
+      else
+        puts 'if number 4'
+        if current_user != self.purchase_approver_2_user_id
+          puts 'if number 5'
+          errors.add('state', 'approval 1 already done')
+        end
+      end
+    end
+
+    if current_user == self.purchase_approver_2_user_id
+      approver = true
+      puts 'if number 6'
+      if !self.approval_1_date 
+          errors.add('state', 'approval 1 must be done first')
+      else
+        if !self.approval_2_date
+          self.approval_2_date = Date.today
+          if self.purchase_approver_3_user_id
+            #    # do :write_stock_ledger_activity
+            puts 'Stock Ledger Activity 2'
+
+          else
+               # send notification to approver 3
+          end
+        else
+          if current_user != self.purchase_approver_3_user_id
+            errors.add('state', 'approval 2 already done')
+          end
+        end
+      end
+    end
+      
+    if current_user == self.purchase_approver_3_user_id
+      approver = true
+      if !self.approval_2_date
+          errors.add('state', 'approval 2 must be done first')
+      else
+        if !self.approval_3_date
+          self.approval_3_date = Date.today
+              # do :write_stock_ledger_activity
+          puts 'Stock Ledger Activity 3'
+
+        else
+          errors.add('state', 'approval 3 already done')
+        end
+      end
+    end
+      
+    if !approver
+        errors.add('state', 'user not authorized to approve this purchase')
+
+    end
+
+  end
+
 
   # Sends an email notification to the user when the purchase has finished running
   def send_notice
