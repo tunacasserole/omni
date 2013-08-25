@@ -1,7 +1,7 @@
 require 'prawn'
-class Omni::Purchase::Print < Omni::Purchase
+class Omni::Purchase::Helpers < Omni::Purchase
 
-  def self.printer(po)
+  def self.print(po)
     home_dir = File.join(Dir.home,'sandbox','omni')
     pdf_dir = File.join(Dir.home,'sandbox','omni','tmp','pdf') 
     po_warranty = File.join(pdf_dir, 'psu_po_warranty.pdf')

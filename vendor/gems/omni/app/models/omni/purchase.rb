@@ -388,7 +388,7 @@ class Omni::Purchase < ActiveRecord::Base
   # HELPERS (End)
 
   def print
-    Omni::Purchase::Print.printer(self)
-    # Omni::Import::Base.
+    puts "PRINTING\n\n"
+    Omni::Purchase::Helpers.print(self)
   end
 end # class Omni::Purchase

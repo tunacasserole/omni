@@ -68,8 +68,8 @@ GEM
       multi_json (~> 1.3)
     buildit_sockets (0.1.4)
       buildit
-    bunny (1.0.0.pre3)
-      amq-protocol (>= 1.6.0)
+    bunny (1.0.0.pre4)
+      amq-protocol (>= 1.7.0)
     choice (0.1.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
