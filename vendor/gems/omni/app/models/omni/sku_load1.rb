@@ -7,7 +7,7 @@ class Omni::SkuLoad1 < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  # self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :sku_load1
   self.primary_key                = :sku_load_id
   # METADATA (End)
