@@ -7,7 +7,7 @@ Ext.define('Omni.view.bts_details.Form', {
   initComponent:function () {
 
     var me = this;
-
+    console.log(this);
     // FILTER (Start) =======================================================================
     var associativeFilter = {
       property:   'bts_detail_id',
@@ -26,7 +26,7 @@ Ext.define('Omni.view.bts_details.Form', {
       on_handLabel:                           Omni.i18n.model.BtsDetail.on_hand,    
       wipLabel:                               Omni.i18n.model.BtsDetail.wip,    
       allocatedLabel:                         Omni.i18n.model.BtsDetail.allocated,    
-      transitLabel:                        Omni.i18n.model.BtsDetail.transit,    
+      transitLabel:                           Omni.i18n.model.BtsDetail.transit,    
       ytdLabel:                               Omni.i18n.model.BtsDetail.ytd,    
       py1Label:                               Omni.i18n.model.BtsDetail.py1,    
       py2Label:                               Omni.i18n.model.BtsDetail.py2,    
