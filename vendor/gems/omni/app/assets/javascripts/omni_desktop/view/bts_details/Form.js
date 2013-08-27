@@ -7,7 +7,8 @@ Ext.define('Omni.view.bts_details.Form', {
   initComponent:function () {
 
     var me = this;
-    console.log(this);
+    var ass = this.association;
+
     // FILTER (Start) =======================================================================
     var associativeFilter = {
       property:   'bts_detail_id',
@@ -85,7 +86,7 @@ Ext.define('Omni.view.bts_details.Form', {
             { xtype: 'textfield', name: 'on_hand',                        fieldLabel: this.on_handLabel                     , allowBlank: false },    
             { xtype: 'textfield', name: 'wip',                            fieldLabel: this.wipLabel                         , allowBlank: false },    
             { xtype: 'textfield', name: 'allocated',                      fieldLabel: this.allocatedLabel                   , allowBlank: false },    
-            { xtype: 'textfield', name: 'transit',                     fieldLabel: this.transitLabel                  , allowBlank: false },    
+            { xtype: 'textfield', name: 'transit',                        fieldLabel: this.transitLabel                  , allowBlank: false },    
             { xtype: 'textfield', name: 'ytd',                            fieldLabel: this.ytdLabel                         , allowBlank: false },    
             { xtype: 'textfield', name: 'py1',                            fieldLabel: this.py1Label                         , allowBlank: false },    
             { xtype: 'textfield', name: 'py2',                            fieldLabel: this.py2Label                         , allowBlank: false },    

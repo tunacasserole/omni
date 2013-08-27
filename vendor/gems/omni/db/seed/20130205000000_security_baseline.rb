@@ -36,6 +36,15 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
+  user_id: '811166D4D50A11E2B45820C9D0PXXBOB',
+  first_name: 'Bob',
+  last_name: 'Sustak',
+  email_address: 'bob',
+  sso_plugin_code: 'BUILDIT',
+  api_token: 'L0qxHS_RoW'
+)
+
+Buildit::User.create(
   user_id: '811166D4D50A11E2B45820C9D04AMIKE',
   first_name: 'Mike',
   last_name: 'Porter',
