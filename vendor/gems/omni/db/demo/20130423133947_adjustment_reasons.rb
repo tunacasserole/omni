@@ -1,3 +1,0 @@
-Omni::AdjustmentReason.delete_all
-Omni::AdjustmentReason.create(:adjustment_reason_id => "D4CEFA6CAC3C11E2947800FF58D32228",:display =>"Known shrinkage adjustment",:description =>"Shrinkage, such as an empty box, discovered in an outlet",:short_name =>"Known shrink",:ruleset_id =>"DA51BD08A6C911E2AE1A00FF58D32228",:is_allowed_cost_entry =>"FALSE",:is_cost_adjustment =>"FALSE")
-Omni::AdjustmentReason.create(:adjustment_reason_id => "D4EDF48AAC3C11E2947800FF58D32228",:display =>"Invoice cost adjustment",:description =>"Cost difference between invoice and purchase order",:short_name =>"Invoice adj",:ruleset_id =>"DA5195F8A6C911E2AE1900FF58D32228",:is_allowed_cost_entry =>"TRUE",:is_cost_adjustment =>"TRUE")

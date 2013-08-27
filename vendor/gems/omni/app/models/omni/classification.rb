@@ -101,7 +101,9 @@ class Omni::Classification < ActiveRecord::Base
     string   :display
     string   :classification_nbr
     string   :department_display do department.display if department end
+    string   :department_id
  
+    text     :department_id
     text     :display_fulltext, :using => :display
     text     :classification_nbr_fulltext, :using => :classification_nbr
     text     :department_display_fulltext, :using => :department_display

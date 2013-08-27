@@ -35,9 +35,9 @@ gem 'state_machine'
 
 group :development do
   gem "sunspot_solr"
-  gem "prawn"
 end
 
+gem "prawn"
 gem "roo" , "1.10.1"
 gem "buildit"
 gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
