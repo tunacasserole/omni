@@ -170,6 +170,7 @@ class Omni::Purchase < ActiveRecord::Base
     after_transition :on => :costing, :do => :process_costing
     after_transition :on => :release, :do => :process_release
     after_transition :on => :approve, :do => :process_approve
+    after_transition :on => :print,   :do => :process_print 
 
   ### EVENTS ###
     event :costing do
@@ -177,10 +178,10 @@ class Omni::Purchase < ActiveRecord::Base
       transition :costing => :draft
     end
     event :release do
-      transition :draft => :planning
+      transition :draft => :pending_approval
     end
     event :approve do
-      transition :planning => :open
+      transition :pending_approval => :open
     end
 
   ### STATES ###
@@ -188,7 +189,7 @@ class Omni::Purchase < ActiveRecord::Base
 
     end
 
-    state :planning do
+    state :pending_approval do
       validates :purchase_order_nbr,                         :presence => true
       validates :supplier_id,                                :presence => true
       validates :location_id,                                :presence => true
@@ -201,7 +202,7 @@ class Omni::Purchase < ActiveRecord::Base
       validates :freight_term,                               :presence => true
       validates :ship_via,                                   :presence => true
       validates :fob_point,                                  :presence => true
-      validate  :purchase_approvals
+      validate  :transition_to_pending_approval
 
     end
 
@@ -216,6 +217,13 @@ class Omni::Purchase < ActiveRecord::Base
     state :allocating do
 
     end
+
+  def process_print
+    # Create a pdf of the purchase order for printing 
+    p = Omni::Print.new(:source_model => 'Purchase', :source_id => self.purchase_id)
+    p.save
+    p.print
+  end
 
   end
   # STATES (End)  
@@ -280,7 +288,7 @@ class Omni::Purchase < ActiveRecord::Base
     self.purchase_details.all.each {|x| x.destroy}    
   end
   
-  def purchase_approvals
+  def transition_to_pending_approval
     if self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
         errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
     else 
@@ -308,6 +316,7 @@ class Omni::Purchase < ActiveRecord::Base
         self.approval_1_date = Date.today
         if self.purchase_approver_2_user_id 
           puts 'if number 3'
+          errors.add('state', 'approval 2 is needed')
               # send notification
         else
         #   # do :write_stock_ledger_activity
@@ -335,6 +344,8 @@ class Omni::Purchase < ActiveRecord::Base
             puts 'Stock Ledger Activity 2'
 
           else
+            puts 'if number 9'
+            errors.add('state', 'approval 3 is needed')
                # send notification to approver 3
           end
         else
@@ -363,7 +374,6 @@ class Omni::Purchase < ActiveRecord::Base
       
     if !approver
         errors.add('state', 'user not authorized to approve this purchase')
-
     end
 
   end
@@ -385,9 +395,11 @@ class Omni::Purchase < ActiveRecord::Base
     # Search event table for user_id of approver
     return 'aaron@buildit.io'
   end
-  # HELPERS (End)
 
   def print
     Omni::Purchase::Helpers.print(self)
   end
+
+  # HELPERS (End)
+
 end # class Omni::Purchase

@@ -46,6 +46,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'  
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
+
   # ASSOCIATIONS (End)
 
 
@@ -161,10 +162,10 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     if self.new_record?
       if self.sku_supplier
         self.sku_id = self.sku_supplier.sku_id 
-        self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier 
+        self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
         self.description = self.sku_supplier.description
-        self.color_name = self.sku.color_name || 'RED'
-        self.size_name = self.sku.size_name || 'XS'
+        self.color_name = self.sku.color_name
+        # self.size_name = self.sku.size_name
         self.order_pack_type = self.sku_supplier.pack_type
         case self.order_pack_type
           when "M"
@@ -185,6 +186,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
             self.order_multiple = 1
         end
         self.supplier_cost = self.sku_supplier.supplier_cost
+        self.inventory_cost = self.supplier_cost / self.order_cost_units        
       end
     end
   end
