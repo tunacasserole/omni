@@ -1,4 +1,4 @@
-include ActionView::Helpers
+# include ActionView::Helpers
 require 'prawn'
 class Omni::Purchase::Helpers < Omni::Purchase
 
