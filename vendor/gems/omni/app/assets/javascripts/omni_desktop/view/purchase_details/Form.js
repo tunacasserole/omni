@@ -86,16 +86,15 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'sku_supplier_id', 
               fieldLabel: this.sku_supplier_idLabel,
               allowBlank: false,
-              store: Ext.create(
-                'Omni.store.SkuSupplier',
-                {
-                  pageSize: 30,
-                  filters: [{
-                    property: 'supplier_id',
-                    value: this.record.get('supplier_id')
-                  }]
-                  // item.supplier_id === 'B931D2A4AC5311E299E700FF58D32228'
-                }),
+              // store: Ext.create(
+              //   'Omni.store.SkuSupplier',
+              //   {
+              //     pageSize: 30,
+              //     filters: [{
+              //       property: 'supplier_id',
+              //       value: me.association.get('supplier_id')
+                  // }]
+              store: me.purchaseSupplierStore = Ext.create('Omni.store.SkuSupplier', {pageSize: 30}),                  
               displayField: 'display', 
               queryField: 'display',
               valueField: 'sku_supplier_id',
@@ -246,7 +245,15 @@ Ext.define('Omni.view.purchase_details.Form', {
     // TITLES (End)
 
     this.callParent();
-    
+
+    console.log(me);
+
+    me.purchaseSupplierStore.on('beforeload', function()
+     {
+      me.purchaseSupplierStore.proxy.extraParams.search = {
+        with: {supplier_id: {equal_to: me.association.get('supplier_id')}}
+     };
+     });    
   }
 
 });
