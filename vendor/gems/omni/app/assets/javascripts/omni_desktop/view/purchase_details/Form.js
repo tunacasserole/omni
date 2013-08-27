@@ -8,6 +8,8 @@ Ext.define('Omni.view.purchase_details.Form', {
 
     var me = this;
 
+    // var supplier = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false)
+
     // FILTER (Start) =======================================================================
     var associativeFilter = {
       property:   'purchase_detail_id',
@@ -84,7 +86,16 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'sku_supplier_id', 
               fieldLabel: this.sku_supplier_idLabel,
               allowBlank: false,
-              store: Ext.create('Omni.store.SkuSupplier',{pageSize: 30}),
+              store: Ext.create(
+                'Omni.store.SkuSupplier',
+                {
+                  pageSize: 30,
+                  filters: [{
+                    property: 'supplier_id',
+                    value: this.record.get('supplier_id')
+                  }]
+                  // item.supplier_id === 'B931D2A4AC5311E299E700FF58D32228'
+                }),
               displayField: 'display', 
               queryField: 'display',
               valueField: 'sku_supplier_id',
@@ -159,6 +170,7 @@ Ext.define('Omni.view.purchase_details.Form', {
            ,{ xtype: 'textfield',
               name: 'inventory_cost',
               fieldLabel: this.inventory_costLabel,
+              disabled: true,
               allowBlank: true 
             }
            ,{ xtype: 'textfield',

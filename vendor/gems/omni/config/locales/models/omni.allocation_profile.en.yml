@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/allocation_profile:  'Model'
+    attributes:
+      omni/allocation_profile:
+        allocation_profile_id:             'Allocation Profile'
+        display:                           'Display'
+        description:                       'Description'
+        allocation_formula:                'Allocation Formula'
+        state:                             'State'
+        units_allocated:                   'Units Allocated'
+        units_shipped:                     'Units Shipped'
+        is_destroyed:                      'Is Destroyed'

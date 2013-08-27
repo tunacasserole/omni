@@ -58,8 +58,8 @@ Ext.define('Omni.view.sku_suppliers.Form', {
     // FIELDSETS (Start) ====================================================================
     Ext.apply(this, {
 
-      // disabled: disabled, // make entire form read only based on role variable
-      
+// make entire form read only based on some condition
+      // disabled: disabled,       
       items: [
         {
           xtype: 'fieldset',
