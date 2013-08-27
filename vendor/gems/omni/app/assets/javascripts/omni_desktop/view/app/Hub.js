@@ -49,15 +49,15 @@ Ext.define('Omni.view.app.Hub', {
      ] 
      }
 
-  ,{
-   title: 'Project Tracking',
-     columns: 2,
-     rows: 4,
-     tiles: [
-       {title: 'Projects', colspan: 2, rowspan: 2, cls: 'projects',  target: {xtype: 'omni-projects-Explorer'}},     
-       {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'tasks',  target: {xtype: 'omni-tasks-Explorer'}}            
-    ]
-  }
+  // ,{
+  //  title: 'Project Tracking',
+  //    columns: 2,
+  //    rows: 4,
+  //    tiles: [
+  //      {title: 'Projects', colspan: 2, rowspan: 2, cls: 'projects',  target: {xtype: 'omni-projects-Explorer'}},     
+  //      {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'tasks',  target: {xtype: 'omni-tasks-Explorer'}}            
+  //   ]
+  // }
    // Section: product setup data //
 
    ,{

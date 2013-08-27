@@ -1,12 +1,13 @@
 class Omni::Import::Csv::Sku < Omni::Import::Base
 
   def self.import(import)
-    puts "importing #{import.table_name} at #{Time.now.to_s}"
+    puts "importing #{import.table_name} at #{Time.now.to_s.chop.chop.chop.chop.chop}"
     data_folder = File.join(Rails.root, 'vendor','gems','omni','db','import')    
     exceptions = ''
+
     @data = excel_to_hash data_folder, import.file_name, import.table_name
     @data.each_with_index do |row,i|
-      puts "processed #{i.to_s} rows" if i.to_s.end_with? '000'
+      puts "processed #{i.to_s} rows at #{Time.now.to_s.chop.chop.chop.chop.chop}" if i.to_s.end_with? '000'
       x = Omni::Sku.where(:display => row["display"]).first || Omni::Sku.new(:display => row["display"])
       parent_style=Omni::Style.where(:display=>row['style_id']).first
       if parent_style
@@ -14,23 +15,24 @@ class Omni::Import::Csv::Sku < Omni::Import::Base
       else
         puts "--STYLE is not valid sku: #{row["display"]}"
       end
-      parent_color=Omni::Color.where(:display=>row["color_id"]).first
+      parent_color=Omni::Color.where(:display=>row["color_id"]).first || Omni::Color.create(:display => row["color_id"])
       if parent_color
         x.color_id = parent_color.color_id
       else
+
         puts "--COLOR is not valid"
       end
-      parent_size=Omni::Size.where(:display=>row["size_id"]).first
+      parent_size=Omni::Size.where(:display=>row["size_id"]).first || Omni::Size.create(:display => row["size_id"])
       if parent_size
-        x.size_id = parent_size.color_id
+        x.size_id = parent_size.size_id
       else
         puts "--SIZE is not valid"
       end
       x.design_code=row["design_code"]
       x.mark_stock=row["mark_stock"]
       x.mark_size=row["mark_size"]
-      x.buckhead_id=row["buckhead_id"]
-      x.grits_id=row["grits_id"]
+      x.buckhead_identifier=row["buckhead_identifier"]
+      x.grits_identifier=row["grits_identifier"]
       x.initial_retail_price=row["initial_retail_price"]
       if x.valid?
         # puts "#{model_name}, #{x.display} - VALID"
@@ -40,8 +42,8 @@ class Omni::Import::Csv::Sku < Omni::Import::Base
       end
     end # end of data.each
     
-    log_it model_name.constantize.count.to_s + " rows\n"
-    if @data.count > model_name.constantize.count
+    log_it Omni::Sku.count.to_s + " rows\n"
+    if @data.count > Omni::Sku.count
       log_it " . . . some rows did not load . . . "
     else
       log_it " . . . things appear to have worked correctly . . . "  

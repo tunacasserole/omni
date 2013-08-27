@@ -41,21 +41,22 @@ class Omni::Import::Base
   def self.excel_to_hash(folder_name, file_name, tab_name)
     # Takes an excel file name and a tab name, and returns an array of stripped, transposed rows
     # Sample call:  @@models = excel_to_hash File.join(Rails.root,'db/meta/model_headers.xlsx'), 'models'
-    puts "started reading excel into memory at #{Time.now.to_s}"    
+    puts "started reading excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop}"    
     rows = []
     file = File.open(File.join(folder_name, file_name), mode = 'r')
     excel = Excelx.new(file.path, nil, :ignore)
     tab_name = 'Sheet1' if !excel.sheets.index(tab_name)
     excel.default_sheet = excel.sheets.index(tab_name) + 1
     header = excel.row(1)
-    (2..excel.last_row).each do |i|
-      break if i > 30000
+    puts "going into loop"
+    (2..1000).each do |i|
+      # break if i > 100
       next unless excel.row(i)[0]
       row = Hash[[header, excel.row(i)].transpose]      
       row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
       rows << row
     end
-    puts "finished reading excel into memory at #{Time.now.to_s}"    
+    puts "finished reading excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop}"    
     return rows
   end
 

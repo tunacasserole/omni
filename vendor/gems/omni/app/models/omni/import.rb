@@ -109,6 +109,7 @@ class Omni::Import < ActiveRecord::Base
   # end
 
   def process_import
+    puts 'process_import'
     Omni::Import::Manager.run_by_id(self.import_id)
     x = Omni::Import.where(:import_id => self.import_id).first
     x.state = 'done'

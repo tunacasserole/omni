@@ -28,7 +28,7 @@ Ext.define('Omni.view.classifications.Inspector', {
         {
           title: 'Profile',
           xtype: 'omni-classifications-Form'
-        },
+        }
         ,{title: 'Subclasses', xtype: 'omni-subclasses-Explorer', module: 'contacts',
            defaultSearch: { with: 
              {

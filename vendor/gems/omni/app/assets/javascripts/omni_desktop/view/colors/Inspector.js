@@ -23,28 +23,28 @@ Ext.define('Omni.view.colors.Inspector',{
           xtype:  'omni-colors-Form',
           module: 'cfars'
         }
-       ,{
-          title: 'Styles', 
-          xtype: 'omni-style_colors-Explorer', 
-          module: 'contracts',
-          defaultSearch: { with: 
-             {
-               color_id:   {equal_to: me.record.get('color_id')}
-             }
-          },
-          showBadge: true
-        }
-       ,{
-          title: 'SKUs', 
-          xtype: 'omni-skus-Explorer', 
-          module: 'contracts',
-          defaultSearch: { with: 
-             {
-               color_id:   {equal_to: me.record.get('color_id')}
-             }
-          },
-          showBadge: true
-        }        
+       // ,{
+       //    title: 'Styles', 
+       //    xtype: 'omni-style_colors-Explorer', 
+       //    module: 'contracts',
+       //    defaultSearch: { with: 
+       //       {
+       //         color_id:   {equal_to: me.record.get('color_id')}
+       //       }
+       //    },
+       //    showBadge: true
+       //  }
+       // ,{
+       //    title: 'SKUs', 
+       //    xtype: 'omni-skus-Explorer', 
+       //    module: 'contracts',
+       //    defaultSearch: { with: 
+       //       {
+       //         color_id:   {equal_to: me.record.get('color_id')}
+       //       }
+       //    },
+       //    showBadge: true
+       //  }        
      ]
     });
     // CARDS (End)
@@ -52,7 +52,7 @@ Ext.define('Omni.view.colors.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Color',
-      subtitle:  this.record.get('color_id')
+      subtitle:  this.record.get('display')
     });
     // TITLES (End)
 

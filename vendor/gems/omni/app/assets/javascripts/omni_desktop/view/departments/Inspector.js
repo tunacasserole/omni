@@ -30,12 +30,14 @@ Ext.define('Omni.view.departments.Inspector', {
           xtype: 'omni-departments-Form'
         },
         {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        },
-        {
           title: 'Classifications',
-          xtype: 'omni-classifications-Explorer'
+          xtype: 'omni-classifications-Explorer',
+           defaultSearch: { with: 
+             {
+               department_id:   {equal_to: me.record.get('department_id')}
+             }
+          }
+
         }
       ]
     });
