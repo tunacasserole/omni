@@ -16,4 +16,7 @@ en:
         is_back_office:                  Back Office
         short_password:                  Short Password
         is_destroyed:                    Deleted
+        is_purchase_approver_1:          First Level PO Approval
+        is_purchase_approver_2:          Second Level PO Approval
+        is_purchase_approver_3:          Third Level PO Approval
 

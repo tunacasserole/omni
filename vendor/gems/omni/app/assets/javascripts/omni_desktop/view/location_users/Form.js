@@ -18,7 +18,10 @@ Ext.define('Omni.view.location_users.Form', {
       is_cashierLabel:                            Omni.i18n.model.LocationUser.is_cashier,
       is_salesLabel:                              Omni.i18n.model.LocationUser.is_sales,
       is_back_officeLabel:                        Omni.i18n.model.LocationUser.is_back_office,
-      short_passwordLabel:                        Omni.i18n.model.LocationUser.short_password
+      short_passwordLabel:                        Omni.i18n.model.LocationUser.short_password,
+      is_purchase_approver_1Label:                Omni.i18n.model.LocationUser.is_purchase_approver_1,
+      is_purchase_approver_2Label:                Omni.i18n.model.LocationUser.is_purchase_approver_2,
+      is_purchase_approver_2Label:                Omni.i18n.model.LocationUser.is_purchase_approver_3
     });
     // LABELS (End)
 
@@ -39,7 +42,10 @@ Ext.define('Omni.view.location_users.Form', {
             { name: 'is_cashier',                     fieldLabel: this.is_cashierLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_sales',                       fieldLabel: this.is_salesLabel,                   allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_back_office',                 fieldLabel: this.is_back_officeLabel,             allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'short_password',                 fieldLabel: this.short_passwordLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { name: 'short_password',                 fieldLabel: this.short_passwordLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'is_purchase_approver_1',         fieldLabel: this.is_purchase_approver_1Label,     allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_purchase_approver_2',         fieldLabel: this.is_purchase_approver_2Label,     allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_purchase_approver_3',         fieldLabel: this.is_purchase_approver_3Label,     allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
           ]
         }
       ]

@@ -25,7 +25,7 @@ en:
         is_on_hand:                        'Quantity on hand'
         is_wip:                            'Work in process'
         is_allocated:                      'Allocated'
-        is_transit:                        'Transit'
+        is_in_transit:                     'In Transit'
         is_ytd:                            'Year to date sales'
         is_py1:                            'Prior year sales'
         is_py2:                            'Prior year 2 sales'

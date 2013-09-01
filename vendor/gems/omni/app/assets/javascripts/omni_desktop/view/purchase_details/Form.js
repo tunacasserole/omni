@@ -246,9 +246,6 @@ Ext.define('Omni.view.purchase_details.Form', {
 
     this.callParent();
 
-    console.log(me);
-    console.log(me.association);
-    
     me.purchaseSupplierStore.on('beforeload', function()
      {
       me.purchaseSupplierStore.proxy.extraParams.search = {

@@ -41,7 +41,7 @@ class Omni::Subclass < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :styles,                          :class_name => 'Omni::Style',                   :foreign_key => 'subclass_id'
-  # has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'subclass_id'
+  has_many     :skus,                            :class_name => 'Omni::Sku',                     :through => :styles
   belongs_to   :classification,                  :class_name => 'Omni::Classification',          :foreign_key => 'classification_id'
   # ASSOCIATIONS (End)
 

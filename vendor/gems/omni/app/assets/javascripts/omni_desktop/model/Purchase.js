@@ -39,7 +39,10 @@ Ext.define('Omni.model.Purchase', {
       { name: 'location_display',            type: 'string'   },
       { name: 'total_order_units',           type: 'string'   },
       { name: 'total_order_cost',            type: 'string'   },
-      { name: 'is_destroyed',                type: 'boolean'  }
+      { name: 'is_destroyed',                type: 'boolean'  },
+      { name: 'purchase_approver_1_location_user_id', type: 'string'   },
+      { name: 'purchase_approver_2_location_user_id', type: 'string'   },
+      { name: 'purchase_approver_3_location_user_id', type: 'string'   }
     ],
 
   idProperty: 'purchase_id',

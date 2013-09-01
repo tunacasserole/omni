@@ -15,9 +15,10 @@ class Omni::Purchase < ActiveRecord::Base
 
   # BEHAVIOR (Start) ====================================================================
   #supports_logical_delete
-  #supports_audit
+  supports_audit
   #supports_revisioning
-  #supports_fulltext
+  supports_fulltext
+  
   # BEHAVIOR (End)
 
 
@@ -57,6 +58,9 @@ class Omni::Purchase < ActiveRecord::Base
   belongs_to   :purchase_approver_1_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_1_user_id'  
   belongs_to   :purchase_approver_2_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_2_user_id'  
   belongs_to   :purchase_approver_3_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_3_user_id'  
+  belongs_to   :purchase_approver_1_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_1_location_user_id'  
+  belongs_to   :purchase_approver_2_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_2_location_user_id'  
+  belongs_to   :purchase_approver_3_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_3_location_user_id'  
   # ASSOCIATIONS (End)
 
 
@@ -71,6 +75,9 @@ class Omni::Purchase < ActiveRecord::Base
     map :purchase_approver_1_user_display,       :to => 'purchase_approver_1_user.display'
     map :purchase_approver_2_user_display,       :to => 'purchase_approver_2_user.display'
     map :purchase_approver_3_user_display,       :to => 'purchase_approver_3_user.display'
+    map :purchase_approver_1_location_user_display,    :to => 'purchase_approver_1_location_user.display'
+    map :purchase_approver_2_location_user_display,    :to => 'purchase_approver_2_location_user.display'
+    map :purchase_approver_3_location_user_display,    :to => 'purchase_approver_3_location_user.display'
 
   end
   # MAPPED ATTRIBUTES (End)
@@ -83,7 +90,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   end
   
-  # COMPUTED ATTRIBUTES (End)
+  # COMPUTED ATTRIBUTES (End)`
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
@@ -111,7 +118,10 @@ class Omni::Purchase < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    # Exact match attributes
     string   :purchase_id
+    string   :location_id
+    string   :supplier_id
     string   :display
     string   :state
     string   :purchase_order_nbr
@@ -123,6 +133,7 @@ class Omni::Purchase < ActiveRecord::Base
     date     :ship_date
     date     :delivery_date
 
+    # Partial match (contains) attributes
     text     :display_fulltext,            :using => :display
     text     :state_fulltext,              :using => :state
     text     :supplier_fulltext,           :using => :supplier_display

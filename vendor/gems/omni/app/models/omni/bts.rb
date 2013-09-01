@@ -165,7 +165,7 @@ class Omni::Bts < ActiveRecord::Base
       puts "--finished populating allocated at #{Time.now.strftime("%H:%M:%S")}"
     end
   
-    if self.is_transit    
+    if self.is_in_transit    
       puts "--populating transit at #{Time.now.strftime("%H:%M:%S")}"
       details = Omni::BtsDetail.where(:bts_id => self.bts_id)
       details.each do |bd|

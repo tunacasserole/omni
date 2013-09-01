@@ -12,7 +12,7 @@ class CreateOmniBtsDetails < ActiveRecord::Migration
         t.column   :on_hand,                         :integer,           :null  =>  true
         t.column   :wip,                             :integer,           :null  =>  true
         t.column   :allocated,                       :integer,           :null  =>  true
-        t.column   :transit,                      :integer,           :null  =>  true
+        t.column   :transit,                         :integer,           :null  =>  true
         t.column   :ytd,                             :integer,           :null  =>  true
         t.column   :py1,                             :integer,           :null  =>  true
         t.column   :py2,                             :integer,           :null  =>  true

@@ -1563,25 +1563,6 @@ Ext.direct.Manager.addProvider({
 
 //
 // -----------------------------------------------------------------------
-// SERVICE: Print
-// -----------------------------------------------------------------------
-//
-
-Ext.direct.Manager.addProvider({
-		type        : 'remoting',
-		url         : Buildit.lib.DirectSources.BUILDIT,
-		maxRetries  : 0,
-		actions     : {
-			Print:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
-			]
-		},
-		namespace   :'Omni.service'
-	}
-);
-
-//
-// -----------------------------------------------------------------------
 // SERVICE: ProductType
 // -----------------------------------------------------------------------
 //
@@ -2276,6 +2257,25 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SkuCost:[
+				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+			]
+		},
+		namespace   :'Omni.service'
+	}
+);
+
+//
+// -----------------------------------------------------------------------
+// SERVICE: SkuLoad1
+// -----------------------------------------------------------------------
+//
+
+Ext.direct.Manager.addProvider({
+		type        : 'remoting',
+		url         : Buildit.lib.DirectSources.BUILDIT,
+		maxRetries  : 0,
+		actions     : {
+			SkuLoad1:[
 				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},

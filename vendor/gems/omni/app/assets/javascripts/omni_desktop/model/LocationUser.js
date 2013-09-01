@@ -13,18 +13,21 @@ Ext.define('Omni.model.LocationUser', {
 
   // FIELDS (Start) ======================================================================
   fields:[
-    { name: 'location_user_id', type: 'string' },
-    { name: 'display', type: 'string' },
-    { name: 'user_display', type: 'string' },
-    { name: 'user_id', type: 'string' },
-    { name: 'location_display', type: 'string' },
-    { name: 'location_id', type: 'string' },
-    { name: 'is_manager', type: 'boolean', defaultValue: false },
-    { name: 'is_cashier', type: 'boolean', defaultValue: false },
-    { name: 'is_sales', type: 'boolean', defaultValue: false },
-    { name: 'is_back_office', type: 'boolean', defaultValue: false },
-    { name: 'short_password', type: 'string' },
-    { name: 'is_destroyed', type: 'boolean', defaultValue: false }
+    { name: 'location_user_id',       type: 'string' },
+    { name: 'display',                type: 'string' },
+    { name: 'user_display',           type: 'string' },
+    { name: 'user_id',                type: 'string' },
+    { name: 'location_display',       type: 'string' },
+    { name: 'location_id',            type: 'string' },
+    { name: 'is_manager',             type: 'boolean', defaultValue: false },
+    { name: 'is_cashier',             type: 'boolean', defaultValue: false },
+    { name: 'is_sales',               type: 'boolean', defaultValue: false },
+    { name: 'is_back_office',         type: 'boolean', defaultValue: false },
+    { name: 'short_password',         type: 'string' },
+    { name: 'is_destroyed',           type: 'boolean', defaultValue: false },
+    { name: 'is_purchase_approver_1', type: 'boolean', defaultValue: false },
+    { name: 'is_purchase_approver_2', type: 'boolean', defaultValue: false },
+    { name: 'is_purchase_approver_3', type: 'boolean', defaultValue: false }
   ],
   // FIELDS (End)
 

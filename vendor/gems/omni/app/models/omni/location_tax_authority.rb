@@ -12,6 +12,11 @@ class Omni::LocationTaxAuthority < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  # supports_logical_delete
+  # supports_audit
+  # supports_revisioning
+  supports_fulltext
+
   # BEHAVIOR (End)
 
 
@@ -70,9 +75,13 @@ class Omni::LocationTaxAuthority < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    # Exact match attributes
+    string   :location_id
+    string   :tax_authority_id
     string   :location_display do location.display if location end
     string   :tax_authority_display do tax_authority.display if tax_authority end
  
+    # Partial match (contains) attributes
     text     :location_display_fulltext, :using => :location_display
     text     :tax_authority_display_fulltext, :using => :tax_authority_display
   end 

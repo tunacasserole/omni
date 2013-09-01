@@ -12,13 +12,18 @@ class Omni::LocationTaxHoliday < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  # supports_logical_delete
+  # supports_audit
+  # supports_revisioning
+  supports_fulltext
+
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :location_id,                     :presence    => true
-  validates    :short_name,                      :presence    => true
+  validates    :display,                         :uniqueness    => true
+  validates    :location_id,                     :presence      => true
+  validates    :short_name,                      :presence      => true
   # VALIDATIONS (End)
 
 
@@ -41,8 +46,8 @@ class Omni::LocationTaxHoliday < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
-  has_many     :notes,                           :class_name => 'Buildit::Note',                     :foreign_key => 'notable_id',       :as => :notable
+  belongs_to   :location,     :class_name => 'Omni::Location',  :foreign_key => 'location_id'
+  has_many     :notes,        :class_name => 'Buildit::Note',   :foreign_key => 'notable_id',       :as => :notable
   # ASSOCIATIONS (End)
 
 
@@ -71,14 +76,16 @@ class Omni::LocationTaxHoliday < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    # Exact match attributes
+    string   :location_id
     string   :location_display do location.display if location end
     date     :effective_date
     date     :end_date
     boolean  :is_tax_holiday
     integer  :price_cutoff
  
-    text     :location_display_fulltext, :using => :location_display
-    text     :price_cutoff_fulltext, :using => :price_cutoff
+    # Partial match (contains) attributes
+    text     :location_display_fulltext,  :using => :location_display
   end 
   # INDEXING (End)
 
