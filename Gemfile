@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 source 'http://tunacasserole:horizon@gems.buildit.io' 
 ruby '2.0.0'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.14'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -40,7 +40,5 @@ end
 gem "prawn"
 gem "roo" , "1.10.1"
 gem "buildit"
-gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
 gem 'buildit_sockets'
-
-gem "omni", :path => "vendor/gems/omni"
+gem "buildit_comm"
