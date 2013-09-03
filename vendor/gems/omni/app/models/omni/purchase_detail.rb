@@ -1,6 +1,5 @@
 class Omni::PurchaseDetail < ActiveRecord::Base
 
-
   # MIXINS (Start) ======================================================================
 
   # MIXINS (End)
@@ -17,7 +16,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   #supports_logical_delete
   #supports_audit
   #supports_revisioning
-  #supports_fulltext
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -43,6 +42,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
   has_many     :purchase_costs,       :class_name => 'Omni::PurchaseCost',        :foreign_key => 'purchase_detail_id'
   has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
+  has_many     :notes,                :class_name => 'Buildit::Note',             :foreign_key => 'notable_id',       :as => :notable
   belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'  
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
@@ -77,6 +77,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
 
   # ORDERING (Start) ====================================================================
+  order_search_by :display => :asc
   
   # ORDERING (End)
 
@@ -88,6 +89,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    # Exact match attributes
     string   :purchase_detail_id
     string   :display
     string   :state
@@ -99,6 +101,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     string   :sku_supplier_id
     string   :sku_supplier_display
 
+    # Partial match (contains) attributes
     text     :display_fulltext,            :using => :display
     text     :state_fulltext,              :using => :state
     text     :sku_display_fulltext,        :using => :sku_display

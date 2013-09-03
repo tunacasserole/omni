@@ -1,6 +1,5 @@
 class Omni::Purchase < ActiveRecord::Base
 
-
   # MIXINS (Start) ======================================================================
 
   # MIXINS (End)
@@ -11,7 +10,6 @@ class Omni::Purchase < ActiveRecord::Base
   self.table_name                 = :purchases
   self.primary_key                = :purchase_id
   # METADATA (End)
-
 
   # BEHAVIOR (Start) ====================================================================
   #supports_logical_delete
@@ -87,6 +85,7 @@ class Omni::Purchase < ActiveRecord::Base
   computed_attributes do
     compute :total_order_units,                  :with => :compute_total_order_units
     compute :total_order_cost,                   :with => :compute_total_order_cost
+    # compute :total_receipt_units,                :with => :compute_total_receipt_units
 
   end
   
@@ -97,18 +96,16 @@ class Omni::Purchase < ActiveRecord::Base
   
   # TEMPORARY ATTRIBUTES (End)
 
+
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
+  
   # ORDERING (End)
+
 
   # FILTERS (Start) =====================================================================
   
   # FILTERS (End)
-
-
-  # ORDERING (Start) ====================================================================
-  
-  # ORDERING (End)
 
 
   # SCOPES (Start) ======================================================================
@@ -170,6 +167,12 @@ class Omni::Purchase < ActiveRecord::Base
     self.purchase_details.sum('(units_ordered * order_pack_size) * (supplier_cost / order_cost_units)')
 
   end
+
+  def compute_total_receipt_units
+
+
+
+  end  
 
   # HOOKS (End)
 

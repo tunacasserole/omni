@@ -23,7 +23,7 @@ Ext.define('Omni.view.purchases.Inspector',{
           xtype: 'omni-purchases-Form'
         }
 
-        ,{
+       ,{
           title: 'Details',
           xtype: 'omni-purchase_details-Explorer',
           defaultSearch: { with: 
@@ -32,7 +32,18 @@ Ext.define('Omni.view.purchases.Inspector',{
              }
           }
         }
-        ,{
+
+       ,{
+          title: 'Supplier SKUs',
+          xtype: 'omni-sku_suppliers-Explorer',
+          defaultSearch: { with: 
+             {
+               supplier_id:   {equal_to: me.record.get('supplier_id')}
+             }
+          }
+        }
+
+       ,{
           title: 'Support',
           xtype: 'buildit-CardGroup',
           module: 'notes',
@@ -48,7 +59,7 @@ Ext.define('Omni.view.purchases.Inspector',{
               },
               showBadge: true
             }
-            ,{
+           ,{
               title: 'Attachments',
               xtype: 'buildit-attachments-Explorer',
               defaultSearch: { with:
@@ -59,7 +70,7 @@ Ext.define('Omni.view.purchases.Inspector',{
               },
               showBadge: true
             }
-            ,{
+           ,{
               title: 'Audit',
               xtype: 'buildit-audits-Explorer',
               model: 'Omni::Purchase',

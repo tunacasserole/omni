@@ -12,12 +12,17 @@ class Omni::Classification < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  #supports_logical_delete
+  #supports_audit
+  #supports_revisioning
+  supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :department_id,                   :presence    => true
+  validates    :classification_id,               :uniqueness   => true
+  validates    :display,                         :uniqueness   => true
+  validates    :department_id,                   :presence     => true
   # VALIDATIONS (End)
 
 
@@ -62,11 +67,14 @@ class Omni::Classification < ActiveRecord::Base
 
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
+
   # ORDERING (End)
 
 
   # HOOKS (Start) =======================================================================
+
   # HOOKS (End)
+
 
   # HELPERS (Start) =======================================================================
   def skus
@@ -95,7 +103,6 @@ class Omni::Classification < ActiveRecord::Base
   # HELPERS (End)
 
 
-
   # INDEXING (Start) ====================================================================
   searchable do
     string   :display
@@ -109,7 +116,6 @@ class Omni::Classification < ActiveRecord::Base
     text     :department_display_fulltext, :using => :department_display
   end 
   # INDEXING (End)
-
 
 
   # STATES (Start) ====================================================================
