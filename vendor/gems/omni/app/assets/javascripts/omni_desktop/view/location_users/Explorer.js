@@ -47,24 +47,24 @@ Ext.define('Omni.view.location_users.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns      : [
-        {
-          header       : this.location_user_idLabel,
-          dataIndex    : 'location_user_id',
-          flex         : 1
-        },
-        {
-          header       : this.displayLabel,
-          dataIndex    : 'display',
-          flex         : 1
-        },
+        // // {
+        // //   header       : this.location_user_idLabel,
+        // //   dataIndex    : 'location_user_id',
+        // //   flex         : 1
+        // // },
+        // {
+        //   header       : this.displayLabel,
+        //   dataIndex    : 'display',
+        //   flex         : 1
+        // },
         {
           header       : this.user_idLabel,
-          dataIndex    : 'user_id',
+          dataIndex    : 'user_display',
           flex         : 1
         },
         {
           header       : this.location_idLabel,
-          dataIndex    : 'location_id',
+          dataIndex    : 'location_display',
           flex         : 1
         },
         {
@@ -87,16 +87,16 @@ Ext.define('Omni.view.location_users.Explorer', {
           dataIndex    : 'is_back_office',
           flex         : 1
         },
-        {
-          header       : this.short_passwordLabel,
-          dataIndex    : 'short_password',
-          flex         : 1
-        },
-        {
-          header       : this.is_destroyedLabel,
-          dataIndex    : 'is_destroyed',
-          flex         : 1
-        },
+        // {
+        //   header       : this.short_passwordLabel,
+        //   dataIndex    : 'short_password',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.is_destroyedLabel,
+        //   dataIndex    : 'is_destroyed',
+        //   flex         : 1
+        // },
         {
           header       : this.is_purchase_approver_1Label,
           dataIndex    : 'is_purchase_approver_1',

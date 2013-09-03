@@ -98,6 +98,7 @@ Ext.define('Omni.view.purchase_details.Form', {
               displayField      : 'display', 
               queryField        : 'display',
               valueField        : 'sku_supplier_id',
+              initialValue      : this.record.get('sku_supplier_display'),
               itemTpl           : '{display}' 
             }
            ,{ xtype: 'textfield',
@@ -248,6 +249,7 @@ Ext.define('Omni.view.purchase_details.Form', {
 
     me.purchaseSupplierStore.on('beforeload', function()
      {
+      console.log(me.association);
       me.purchaseSupplierStore.proxy.extraParams.search = {
         with: {supplier_id: {equal_to: me.association.get('supplier_id')}}
      };

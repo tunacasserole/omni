@@ -179,23 +179,23 @@ Ext.define('Omni.view.purchases.Form', {
           items               :[
 
             { xtype             : 'buildit-Locator',
-              store             : Ext.create('Buildit.store.LocationUser',
-                                    {
-                                      pageSize: 20,
-                                      filters: [{
-                                        property: 'is_purchase_approver_1',
-                                        value:  true
-                                      }]
-                                    }),
-
-              // store             : Ext.create('Buildit.store.LocationUser',{pageSize: 20}),
+              // store             : Ext.create('Omni.store.LocationUser',
+                                    // {
+                                    //   pageSize: 20,
+                                    //   filters: [{
+                                    //     property: 'is_purchase_approver_1',
+                                    //     value:  true
+                                    //   }]
+                                    // }),
+              store             : Ext.create('Omni.store.LocationUser',{pageSize: 20}),
+              defaultSearch     : { with: {is_purchase_approver_1: {equal_to: true}}},
 
               // store             : Ext.create('Buildit.store.User',{pageSize: 20}),
 
-              displayField      : 'full_name',
-              queryField        : 'full_name',
+              displayField      : 'display',
+              queryField        : 'display',
               valueField        : 'user_id',
-              itemTpl           : '{full_name}',
+              itemTpl           : '{display}',
               // name              : 'purchase_approver_1_location_user_id',
               name              : 'purchase_approver_1_user_id',
               fieldLabel        : this.purchase_approver_1_user_idLabel,

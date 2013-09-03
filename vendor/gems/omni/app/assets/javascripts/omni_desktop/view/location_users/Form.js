@@ -59,19 +59,50 @@ Ext.define('Omni.view.location_users.Form', {
             }
           */
 
-            { xtype: 'textfield', name: 'location_user_id',               fieldLabel: this.location_user_idLabel            , allowBlank: false },    
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
-            { xtype: 'textfield', name: 'user_id',                        fieldLabel: this.user_idLabel                     , allowBlank: false },    
-            { xtype: 'textfield', name: 'location_id',                    fieldLabel: this.location_idLabel                 , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_manager',                     fieldLabel: this.is_managerLabel                  , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_cashier',                     fieldLabel: this.is_cashierLabel                  , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_sales',                       fieldLabel: this.is_salesLabel                    , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_back_office',                 fieldLabel: this.is_back_officeLabel              , allowBlank: false },    
-            { xtype: 'textfield', name: 'short_password',                 fieldLabel: this.short_passwordLabel              , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_purchase_approver_1',         fieldLabel: this.is_purchase_approver_1Label      , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_purchase_approver_2',         fieldLabel: this.is_purchase_approver_2Label      , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_purchase_approver_3',         fieldLabel: this.is_purchase_approver_3Label      , allowBlank: false }    
+            // { xtype: 'textfield', name: 'location_user_id',               fieldLabel: this.location_user_idLabel            , allowBlank: true },    
+            // { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },    
+            // { xtype: 'textfield', name: 'user_id',                        fieldLabel: this.user_idLabel                     , allowBlank: true },    
+
+            { xtype             : 'textfield',
+              name              : 'location_display',
+              fieldLabel        : this.location_idLabel,
+              disabled          : true,
+              allowBlank        : true 
+            },    
+
+            { xtype             : 'buildit-Locator',
+              store             : Ext.create('Buildit.store.User',{pageSize: 20}),
+              displayField      : 'full_name',
+              queryField        : 'full_name',
+              valueField        : 'user_id',
+              itemTpl           : '{full_name}',
+              name              : 'user_id',
+              fieldLabel        : this.user_idLabel,
+              allowBlank        : true
+            },
+            
+            // { xtype: 'buildit-Locator',
+            //   name: 'location_id',
+            //   fieldLabel: this.location_idLabel,
+            //   allowBlank: true,
+            //   store: Ext.create('Omni.store.Location',{pageSize: 10}),
+            //   displayField: 'display',
+            //   queryField: 'display',
+            //   valueField: 'location_id',
+            //   disabled: true,
+            //   itemTpl: '{display}'
+            // },
+
+
+            { xtype: 'textfield', name: 'is_manager',                     fieldLabel: this.is_managerLabel                  , allowBlank: true },    
+            { xtype: 'textfield', name: 'is_cashier',                     fieldLabel: this.is_cashierLabel                  , allowBlank: true },    
+            { xtype: 'textfield', name: 'is_sales',                       fieldLabel: this.is_salesLabel                    , allowBlank: true },    
+            { xtype: 'textfield', name: 'is_back_office',                 fieldLabel: this.is_back_officeLabel              , allowBlank: true },    
+            { xtype: 'textfield', name: 'short_password',                 fieldLabel: this.short_passwordLabel              , allowBlank: true },    
+            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true },    
+            { xtype: 'textfield', name: 'is_purchase_approver_1',         fieldLabel: this.is_purchase_approver_1Label      , allowBlank: true },    
+            { xtype: 'textfield', name: 'is_purchase_approver_2',         fieldLabel: this.is_purchase_approver_2Label      , allowBlank: true },    
+            { xtype: 'textfield', name: 'is_purchase_approver_3',         fieldLabel: this.is_purchase_approver_3Label      , allowBlank: true }    
           ]
         }
       ]

@@ -22,6 +22,7 @@ Ext.define('Omni.model.PurchaseDetail', {
       { name: 'size_name',                   type: 'string'   },
       { name: 'sku_alias',                   type: 'string'   },
       { name: 'sku_id',                      type: 'string'   },
+      { name: 'sku_display',                 type: 'string'   },
       { name: 'sku_supplier_display',        type: 'string'   },
       { name: 'sku_supplier_id',             type: 'string'   },
       { name: 'state',                       type: 'string'   },

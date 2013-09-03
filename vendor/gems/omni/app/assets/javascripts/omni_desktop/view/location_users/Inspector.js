@@ -26,7 +26,7 @@ Ext.define('Omni.view.location_users.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Location User',
-      subtitle:  this.record.get('location_user_id')
+      subtitle:  this.record.get('display')
     });
     // TITLES (End)
 
