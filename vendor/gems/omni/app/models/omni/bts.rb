@@ -287,6 +287,7 @@ class Omni::Bts < ActiveRecord::Base
         subject: "Omni notice: BTS - has completed.",
         body: Buildit::Email::Manager.generate(self, "bts_notice"),
     )
+    puts message.errors if message.errors
     email_addresses = Buildit::User.where(:user_id => bts.user_id).first.email_address
     email_addresses = 'aaron@buildit.io' if email_addresses == 'a'
     message.send_to email_addresses
