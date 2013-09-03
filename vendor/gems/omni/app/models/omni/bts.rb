@@ -232,7 +232,7 @@ class Omni::Bts < ActiveRecord::Base
         # styles = []
         details = Omni::BtsDetail.where(:bts_id => self.bts_id)
         puts "--creating bts_styles"
-        details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(self.bts_id, bd.sku.style_id)}
+        details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(self.bts_id, bd.sku.style_id) if bd.sku}
         styles = Omni::BtsStyle.where(:bts_id => self.bts_id)
         styles.each {|x| x.summarize}
       end

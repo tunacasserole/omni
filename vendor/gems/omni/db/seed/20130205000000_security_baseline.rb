@@ -67,6 +67,7 @@ Buildit::ApplicationRole.create(:application_id=>'6900AE7AC18B11E289BA20C9D047DD
 
 Buildit::User.all.each do |u|
     #Buildit::UserRole.create(:user_id=>u.user_id,:role_id => '323244F0204011EFCFE9040CCEDPOWER') unless Buildit::UserRole.where(:user_id=>u.user_id,:role_id => '323244F0204011EFCFE9040CCEDPOWER').first
+Buildit::UserRole.create(:user_id=>x.user_id,:role_id => '323244F0204011EFCFE9040CCEDPOWER') unless Buildit::UserRole.where(:user_id=>u.user_id,:role_id => '323244F0204011EFCFE9040CCEDPOWER').first    
   u.password = 'parker'
   u.save
 end

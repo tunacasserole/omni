@@ -11,6 +11,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
 
     // Define variables to indicate if the current user has or doesn't have a particular roles
     // var is_buyer = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false)
+    var user_roles = Buildit.context.roles;
     // var disabled = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false);
 
     // LABELS (Start) =======================================================================

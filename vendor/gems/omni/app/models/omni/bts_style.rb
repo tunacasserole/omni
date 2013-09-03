@@ -89,7 +89,7 @@ class Omni::BtsStyle < ActiveRecord::Base
   def summarize
     puts "--summarizing bts details for style: #{self.display}"
     sku_ids = []
-    self.style.skus.each {|x| sku_ids << x.sku_id}    
+    self.style.skus.each {|x| sku_ids << x.sku_id} if self.style    
     bts_details = Omni::BtsDetail.where(:bts_id => self.bts_id,:sku_id => sku_ids)
     
     puts "--updating style totals from bts details"
