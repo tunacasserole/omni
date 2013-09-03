@@ -221,7 +221,7 @@ class Omni::BtsDetail < ActiveRecord::Base
 
   def calculate
     ### TOTAL ON HAND ###
-    self.total_on_hand = self.on_hand + self.wip + self.allocated + self.transit      
+    self.total_oh = self.on_hand + self.wip + self.allocated + self.transit      
     ### STANDARD DEVIATION OF SALES TO PROJECTED ###
     mean = (self.ytd+self.py1+self.py2)/3
     tot_dev = ((self.ytd-mean)**2) + ((self.py1-mean)**2) + ((self.py2-mean)**2)
@@ -235,19 +235,19 @@ class Omni::BtsDetail < ActiveRecord::Base
     ### GENERIC NEED ###
     self.generic_need = 0
     ### Unusable O/H inventory ###
-    self.unuseable_oh = self.total_on_hand - self.complete_coverage if self.complete_coverage and self.complete_coverage > self.total_on_hand
+    self.unuseable_oh = self.total_oh - self.complete_coverage if self.complete_coverage and self.complete_coverage > self.total_oh
     ### COMPLETE COVERAGE ###
     self.complete_coverage = self.generic_need + (self.unuseable_oh || 0)
     ### USEABLE OH ###
-    if (self.complete_coverage - self.total_on_hand) < 0
+    if (self.complete_coverage - self.total_oh) < 0
       self.useable_oh = self.complete_coverage
     else
-      self.useable_oh = self.total_on_hand
+      self.useable_oh = self.total_oh
     end
     ### COMPLETE OO ###
     self.complete_oo = self.wip
     ### TRUE NEED ###
-    self.need = self.complete_coverage - self.total_on_hand - self.complete_coverage
+    self.need = self.complete_coverage - self.total_oh - self.complete_coverage
     self.save
   end
   # HELPERS (End)
