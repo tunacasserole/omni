@@ -137,7 +137,7 @@ class Omni::BtsDetail < ActiveRecord::Base
           data.each {|i| wip += i.cut_wip + i.plant_wip + i.cont_wip}
         when 'BUCKHEAD'
           data = Omni::RmsBts.where(:ItemID => self.buckhead_identifier)
-          data.each {|i| wip += i.qoo}
+          data.each {|i| wip += i.QOO}
         when 'GRITS'
           data = Omni::GritsBts.where(:tg_sku_id => self.grits_identifier)
           data.each {|i| wip += i.qoo_60 + i.qoo_61 + i.qoo_62 + i.qoo_63 + i.qoo_64 + i.qoo_65 + i.qoo_66}

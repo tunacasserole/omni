@@ -92,32 +92,32 @@ Ext.define('Omni.view.bts.Form', {
             //   text: 'Enter one value below.  If you provide multiples, for example, a subclass and a style, the system will run only at the lowest level provided, style.',
             //   cls: 'instruction'
             // },                   
-            { name: 'department_id',  fieldLabel: this.department_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
-            { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },            
+            // { name: 'department_id',  fieldLabel: this.department_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
+            // { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },            
             { name: 'subclass_id', fieldLabel: this.subclass_idLabel,                  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Subclass',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
             { name: 'style_id', fieldLabel: this.style_idLabel,                        allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },            
             { name: 'sku_id', fieldLabel: this.sku_idLabel,                             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },                        
             // { name: 'color_id', fieldLabel: this.color_idLabel,                         allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Color',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'color_id', itemTpl:'{display}' },                                                            
           ]
         }       
-        // ,{
-        //   xtype:        'fieldset',
-        //   title:        'Columns to calculate',
-        //   collapsible:  true,
-        //   defaultType:  'textfield',
-        //   defaults:     {anchor: '70%'},
-        //   layout:       'anchor',
-        //   items:[
-        //     { xtype: 'checkbox', name: 'is_on_hand',               fieldLabel: this.is_on_handLabel            , allowBlank: true },    
-        //     { xtype: 'checkbox', name: 'is_wip',                   fieldLabel: this.is_wipLabel          , allowBlank: true },    
-        //     { xtype: 'checkbox', name: 'is_allocated',             fieldLabel: this.is_allocatedLabel        , allowBlank: true },
-        //     { xtype: 'checkbox', name: 'is_in_transit',            fieldLabel: this.is_in_transitLabel        , allowBlank: true },            
-        //     { xtype: 'checkbox', name: 'is_ytd',                   fieldLabel: this.is_ytdLabel            , allowBlank: true },    
-        //     { xtype: 'checkbox', name: 'is_py1',                   fieldLabel: this.is_py1Label          , allowBlank: true },    
-        //     { xtype: 'checkbox', name: 'is_py2',                   fieldLabel: this.is_py2Label        , allowBlank: true },
-        //     { xtype: 'checkbox', name: 'is_projected',             fieldLabel: this.is_projectedLabel        , allowBlank: true }                        
-        //   ]
-        // } 
+        ,{
+          xtype:        'fieldset',
+          title:        'Columns to calculate',
+          collapsible:  true,
+          defaultType:  'textfield',
+          defaults:     {anchor: '70%'},
+          layout:       'anchor',
+          items:[
+            { xtype: 'checkbox', name: 'is_on_hand',               fieldLabel: this.is_on_handLabel            , allowBlank: true },    
+            { xtype: 'checkbox', name: 'is_wip',                   fieldLabel: this.is_wipLabel          , allowBlank: true },    
+            { xtype: 'checkbox', name: 'is_allocated',             fieldLabel: this.is_allocatedLabel        , allowBlank: true },
+            { xtype: 'checkbox', name: 'is_in_transit',            fieldLabel: this.is_in_transitLabel        , allowBlank: true },            
+            { xtype: 'checkbox', name: 'is_ytd',                   fieldLabel: this.is_ytdLabel            , allowBlank: true },    
+            { xtype: 'checkbox', name: 'is_py1',                   fieldLabel: this.is_py1Label          , allowBlank: true },    
+            { xtype: 'checkbox', name: 'is_py2',                   fieldLabel: this.is_py2Label        , allowBlank: true },
+            { xtype: 'checkbox', name: 'is_projected',             fieldLabel: this.is_projectedLabel        , allowBlank: true }                        
+          ]
+        } 
         ,{
           xtype:        'fieldset',
           title:        'Data Sources to include',
