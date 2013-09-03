@@ -81,11 +81,11 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.stateLabel,
               allowBlank: true,
               disabled: true 
-            },    
-           ,{ xtype: 'buildit-Locator',
-              name: 'sku_supplier_id', 
-              fieldLabel: this.sku_supplier_idLabel,
-              allowBlank: false,
+            }  
+           ,{ xtype             : 'buildit-Locator',
+              name              : 'sku_supplier_id', 
+              fieldLabel        : this.sku_supplier_idLabel,
+              allowBlank        : false,
               // store: Ext.create(
               //   'Omni.store.SkuSupplier',
               //   {
@@ -94,11 +94,11 @@ Ext.define('Omni.view.purchase_details.Form', {
               //       property: 'supplier_id',
               //       value: me.association.get('supplier_id')
                   // }]
-              store: me.purchaseSupplierStore = Ext.create('Omni.store.SkuSupplier', {pageSize: 30}),                  
-              displayField: 'display', 
-              queryField: 'display',
-              valueField: 'sku_supplier_id',
-              itemTpl:'{display}' 
+              store             : me.purchaseSupplierStore = Ext.create('Omni.store.SkuSupplier', {pageSize: 30}),                  
+              displayField      : 'display', 
+              queryField        : 'display',
+              valueField        : 'sku_supplier_id',
+              itemTpl           : '{display}' 
             }
            ,{ xtype: 'textfield',
               name: 'supplier_item_identifier',
@@ -119,7 +119,7 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'size_name',
               fieldLabel: this.size_nameLabel,
               allowBlank: true 
-             }
+            }
            ,{ xtype: 'textfield',
               name: 'sku_alias',
               fieldLabel: this.sku_aliasLabel,

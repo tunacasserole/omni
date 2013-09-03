@@ -105,15 +105,6 @@ Ext.define('Omni.view.location_users.ExplorerContextMenu', {
 
         // LEFT ACTIONS (Start) =================================================================
 
-        /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         */
-        {
-          text: 'New',
-          cls: 'icon-new'
-        }
 
         // LEFT ACTIONS (End)
 
@@ -146,9 +137,12 @@ Ext.define('Omni.view.location_users.ExplorerContextMenu', {
 
   clickNew: function(btn, e, eOpts){
     // TODO
+  },
+
+  clickImport: function(btn, e, eOpts){
+    // TODO
   }
 
   // ACTION HANDLERS (End)
 
 });
-

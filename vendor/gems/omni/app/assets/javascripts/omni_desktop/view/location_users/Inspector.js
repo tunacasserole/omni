@@ -1,48 +1,35 @@
-Ext.define('Omni.view.location_users.Inspector', {
+Ext.define('Omni.view.location_users.Inspector',{
+  extend: 'Buildit.ux.inspector.Panel',
+  alias: 'widget.omni-location_users-Inspector',
 
-  extend:'Buildit.ux.inspector.Panel',
-  alias:'widget.omni-location_users-Inspector',
 
-  
-
-  initComponent:function () {
-
+  initComponent:function(){
     var me = this;
-
-        
-    // LABELS (Start) ======================================================================  
-    // LABELS (End)
-
+  
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter: {
-        property: 'location_user_id',
-        value:    me.record.get('location_user_id')
+        property:   'location_user_id',
+        value:      this.record.get('location_user_id')
       }
     });
     // INSPECTOR INIT (End)
-
+  
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
-        {
-          title: 'Profile',
-          xtype: 'omni-location_users-Form'
-        }
+        {title: 'Profile',           xtype: 'omni-location_users-Form'}
       ]
     });
     // CARDS (End)
-    
+
     // TITLES (Start) ======================================================================
-    Ext.apply(this, {
-      title:     'LocationUser',
-      subtitle:  this.record.get('display')
+    Ext.applyIf(this, {
+      title:     'Location User',
+      subtitle:  this.record.get('location_user_id')
     });
     // TITLES (End)
 
-
-
     this.callParent();
   }
-
 });

@@ -196,7 +196,8 @@ Ext.define('Omni.view.purchases.Form', {
               queryField        : 'full_name',
               valueField        : 'user_id',
               itemTpl           : '{full_name}',
-              name              : 'purchase_approver_1_location_user_id',
+              // name              : 'purchase_approver_1_location_user_id',
+              name              : 'purchase_approver_1_user_id',
               fieldLabel        : this.purchase_approver_1_user_idLabel,
               allowBlank        : true
             }

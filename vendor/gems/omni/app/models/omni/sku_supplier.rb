@@ -30,32 +30,36 @@ class Omni::SkuSupplier < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :sku_supplier_id,                  :override  =>  false,        :with  => :guid              
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.supplier_display}"}
-  default      :is_primary_supplier,              :override  =>  false,        :to    => false              
-  default      :is_manufacturer,                  :override  =>  false,        :to    => false              
-  default      :is_discontinued,                  :override  =>  false,        :to    => false              
-  default      :supplier_cost_units,              :override  =>  false,        :to    => 0                  
-  default      :supplier_cost,                    :override  =>  false,        :to    => 0                  
-  default      :master_pack_units,                :override  =>  false,        :to    => 0                  
-  default      :master_pack_length,               :override  =>  false,        :to    => 0                  
-  default      :master_pack_height,               :override  =>  false,        :to    => 0                  
-  default      :master_pack_width,                :override  =>  false,        :to    => 0                  
-  default      :master_pack_weight,               :override  =>  false,        :to    => 0                  
-  default      :inner_pack_units,                 :override  =>  false,        :to    => 0                  
-  default      :inner_pack_length,                :override  =>  false,        :to    => 0                  
-  default      :inner_pack_height,                :override  =>  false,        :to    => 0                  
-  default      :inner_pack_width,                 :override  =>  false,        :to    => 0                  
-  default      :inner_pack_weight,                :override  =>  false,        :to    => 0                  
-  default      :minimum_order_units,              :override  =>  false,        :to    => 0                  
-  default      :minimum_order_value,              :override  =>  false,        :to    => 0                  
-  default      :minimum_order_weight,             :override  =>  false,        :to    => 0                  
-  default      :minimum_order_cube,               :override  =>  false,        :to    => 0                  
-  default      :extra_cost,                       :override  =>  false,        :to    => 0                  
-  default      :is_included_extra_cost,           :override  =>  false,        :to    => false              
-  default      :is_conveyable_master_pack,        :override  =>  false,        :to    => false              
-  default      :is_conveyable_inner_pack,         :override  =>  false,        :to    => false              
-  default      :pallet_tie,                       :override  =>  false,        :to    => 0                  
-  default      :pallet_high,                      :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_primary_supplier,                                           :to    => false              
+  default      :is_manufacturer,                                               :to    => false              
+  default      :is_discontinued,                                               :to    => false              
+  default      :supplier_cost_units,                                           :to    => 1                  
+  default      :supplier_cost,                                                 :to    => 0                  
+  default      :master_pack_units,                                             :to    => 1                  
+  default      :master_pack_uom_code,                                          :to    => 'EACH'
+  default      :master_pack_length,                                            :to    => 0                  
+  default      :master_pack_height,                                            :to    => 0                  
+  default      :master_pack_width,                                             :to    => 0                  
+  default      :master_pack_weight,                                            :to    => 0                  
+  default      :inner_pack_units,                                              :to    => 1
+  default      :inner_pack_uom_code,                                           :to    => 'EACH'
+  default      :inner_pack_length,                                             :to    => 0                  
+  default      :inner_pack_height,                                             :to    => 0                  
+  default      :inner_pack_width,                                              :to    => 0                  
+  default      :inner_pack_weight,                                             :to    => 0                  
+  default      :minimum_order_units,                                           :to    => 0                  
+  default      :minimum_order_value,                                           :to    => 0                  
+  default      :minimum_order_weight,                                          :to    => 0                  
+  default      :minimum_order_cube,                                            :to    => 0
+  default      :pack_type,                                                     :to    => 'SELL UNIT'
+  default      :order_multiple_type,                                           :to    => 'SELL UNIT'
+  default      :extra_cost,                                                    :to    => 0                  
+  default      :is_included_extra_cost,                                        :to    => false              
+  default      :is_conveyable_master_pack,                                     :to    => false              
+  default      :is_conveyable_inner_pack,                                      :to    => false              
+  default      :pallet_tie,                                                    :to    => 0                  
+  default      :pallet_high,                                                   :to    => 0                  
+  default      :is_destroyed,                                                  :to    => false              
   # DEFAULTS (End)
 
 
