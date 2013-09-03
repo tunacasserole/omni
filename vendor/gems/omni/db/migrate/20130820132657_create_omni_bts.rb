@@ -14,6 +14,7 @@ class CreateOmniBts < ActiveRecord::Migration
         t.column   :style_id,                        :string,            :null  =>  true,    :limit   => 32
         t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :color_id,                        :string,            :null  =>  true,    :limit   => 32
+        t.column   :user_id,                         :string,            :null  =>  true,    :limit   => 32        
         t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
         t.column   :display,                         :string,            :null  =>  true,    :limit   => 300
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300

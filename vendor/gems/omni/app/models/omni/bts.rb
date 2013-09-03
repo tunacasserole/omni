@@ -25,6 +25,8 @@ class Omni::Bts < ActiveRecord::Base
   # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.department_display} - #{m.plan_year} - #{m.version}"}
   default      :is_destroyed,                     :override  =>  false,        :to    => false              
   default      :plan_year,                        :override => true, :to => '2014'
+  default :user_id,                             :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+
   # DEFAULTS (End) 
 
   # REFERENCE (Start) ===================================================================
@@ -118,12 +120,9 @@ class Omni::Bts < ActiveRecord::Base
   def process_run
     puts "-------process_run \n"
     self.state='running'
+    self.user_id = Buildit::User.current.user_id if Buildit::User.current
     self.save
-    puts "bts is: #{self.bts_id}"
-    # system("rake omni:bts[#{self.bts_id}] &")
-    send_notice
-    # self.state='done'
-    # self.save
+    system("rake omni:bts[#{self.bts_id}] &")
   end
 
   def self.rake_run(bts_id)
@@ -133,6 +132,7 @@ class Omni::Bts < ActiveRecord::Base
       puts "\n\n\n"
       puts "--destroying pre-existing bts_details"
       myself.bts_details.each {|det| det.destroy}
+      myself.bts_styles.each {|det| det.destroy}      
       puts "--finished destroying bts_details"
     end
 
@@ -253,7 +253,8 @@ class Omni::Bts < ActiveRecord::Base
     end
     myself.state = 'done'
     myself.save    
-    # send_notice
+    myself.send_notice myself
+    Omni::BtsDetail.reindex
     puts "--bts detail rows created #{Omni::BtsDetail.count.to_s} at #{Time.now.strftime("%H:%M:%S")}"
   end
 
@@ -280,24 +281,17 @@ class Omni::Bts < ActiveRecord::Base
   end     
 
   # Sends an email notification to the user when the projection has finished running
-  def send_notice
+  def send_notice(bts)
     puts "********** notice"
     message = Buildit::Comm::Email::Message.create(
         subject: "Omni notice: BTS - has completed.",
         body: Buildit::Email::Manager.generate(self, "bts_notice"),
-        direction_code: 'OUTBOUND',
-        priority_code: ''
     )
-    # email_addresses = Buildit::User.all.collect {|u| u.email_address if u.email_address == 'aaron@buildit.io'}
-    puts Buildit::User.current.email_address
-    puts lambda{|m| Buildit::User.current.email_address}
-    puts "---------**********"
-    email_addresses = Buildit::User.current.email_address
+    email_addresses = Buildit::User.where(:user_id => bts.user_id).first.email_address
     email_addresses = 'aaron@buildit.io' if email_addresses == 'a'
-    puts email_addresses
     message.send_to email_addresses
     message.queue
-    # Buildit::Comm::Email::OutboundService.process
+    Buildit::Comm::Email::OutboundService.process
   end
 
 # STATE HANDLERS (End)

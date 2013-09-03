@@ -71,6 +71,7 @@ class Omni::BtsStyle < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :bts_id
+    string   :on_hand
   end
   # INDEXING (End)
 
