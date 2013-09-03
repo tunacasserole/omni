@@ -7,7 +7,7 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 # 
-
+# gem "rake", "~> 0.10.2"
 gem 'mysql2'
 
 # Gems used only for assets and not required

@@ -7,7 +7,7 @@ class Omni::BtsStyle < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  # self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :bts_styles
   self.primary_key                = :bts_style_id
   # METADATA (End)
@@ -71,6 +71,7 @@ class Omni::BtsStyle < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :bts_id
+    string   :on_hand
   end
   # INDEXING (End)
 
@@ -89,7 +90,7 @@ class Omni::BtsStyle < ActiveRecord::Base
   def summarize
     puts "--summarizing bts details for style: #{self.display}"
     sku_ids = []
-    self.style.skus.each {|x| sku_ids << x.sku_id}    
+    self.style.skus.each {|x| sku_ids << x.sku_id} if self.style    
     bts_details = Omni::BtsDetail.where(:bts_id => self.bts_id,:sku_id => sku_ids)
     
     puts "--updating style totals from bts details"

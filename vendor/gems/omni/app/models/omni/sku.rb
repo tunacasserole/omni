@@ -188,7 +188,8 @@ class Omni::Sku < ActiveRecord::Base
     string   :state
     string   :sku_id    
     string   :style_id        
-    string   :color_id    
+    string   :color_id  
+    string   :style_display do style.display if style end  
  
     text     :display_fulltext, :using => :display
     text     :sku_nbr_fulltext, :using => :sku_nbr

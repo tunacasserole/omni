@@ -7,7 +7,7 @@ class Omni::AllocationProfile < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  # self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :allocation_profiles
   self.primary_key                = :allocation_profile_id
   # METADATA (End)

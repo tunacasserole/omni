@@ -12,6 +12,7 @@ Ext.define('Omni.model.Bts', {
       { name: 'style_id',                    type: 'string'   },
       { name: 'sku_id',                      type: 'string'   },
       { name: 'color_id',                    type: 'string'   },
+      { name: 'user_id',                     type: 'string'   },
       { name: 'location_display',            type: 'string'   },
       { name: 'department_display',          type: 'string'   },
       { name: 'classification_display',      type: 'string'   },

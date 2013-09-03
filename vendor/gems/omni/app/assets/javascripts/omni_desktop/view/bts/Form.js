@@ -92,8 +92,8 @@ Ext.define('Omni.view.bts.Form', {
             //   text: 'Enter one value below.  If you provide multiples, for example, a subclass and a style, the system will run only at the lowest level provided, style.',
             //   cls: 'instruction'
             // },                   
-            { name: 'department_id',  fieldLabel: this.department_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
-            { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },            
+            // { name: 'department_id',  fieldLabel: this.department_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
+            // { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },            
             { name: 'subclass_id', fieldLabel: this.subclass_idLabel,                  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Subclass',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
             { name: 'style_id', fieldLabel: this.style_idLabel,                        allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },            
             { name: 'sku_id', fieldLabel: this.sku_idLabel,                             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },                        
@@ -139,7 +139,7 @@ Ext.define('Omni.view.bts.Form', {
           defaults:     {anchor: '70%'},
           layout:       'anchor',
           items:[
-            // { xtype: 'checkbox', name: 'is_drop_data',               fieldLabel: this.is_drop_dataLabel            , allowBlank: true },    
+            { xtype: 'checkbox', name: 'is_drop_data',               fieldLabel: this.is_drop_dataLabel            , allowBlank: true },    
             { xtype: 'checkbox', name: 'is_create_detail',               fieldLabel: this.is_create_detailLabel            , allowBlank: true },    
             { xtype: 'checkbox', name: 'is_sum_style',                   fieldLabel: this.is_sum_styleLabel                , allowBlank: false },    
             // { xtype: 'checkbox', name: 'is_sum_subclass',                fieldLabel: this.is_sum_subclassLabel             , allowBlank: false },    
@@ -193,8 +193,8 @@ Ext.define('Omni.view.bts.Form', {
    *
    */
   onRunAction : function(action, eOpts){
-    Buildit.infoMsg('Your request has been submitted.')
-    this.processEventTransition('run', 'Bts was successfully run.', 'An error occurred running this bts.');
+    // Buildit.infoMsg('Your request has been submitted.')
+    this.processEventTransition('run', 'Bts was successfully submitted.  An email confirmation will be sent to you when it is complete.', 'An error occurred running this bts.');
   }, // onBuildAction
 
   processEventTransition : function(eventName, successMsg, failureMsg){
