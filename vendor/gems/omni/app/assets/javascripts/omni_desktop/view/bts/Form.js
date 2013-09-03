@@ -100,24 +100,24 @@ Ext.define('Omni.view.bts.Form', {
             // { name: 'color_id', fieldLabel: this.color_idLabel,                         allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Color',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'color_id', itemTpl:'{display}' },                                                            
           ]
         }       
-        ,{
-          xtype:        'fieldset',
-          title:        'Columns to calculate',
-          collapsible:  true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '70%'},
-          layout:       'anchor',
-          items:[
-            { xtype: 'checkbox', name: 'is_on_hand',               fieldLabel: this.is_on_handLabel            , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_wip',                   fieldLabel: this.is_wipLabel          , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_allocated',             fieldLabel: this.is_allocatedLabel        , allowBlank: true },
-            { xtype: 'checkbox', name: 'is_in_transit',            fieldLabel: this.is_in_transitLabel        , allowBlank: true },            
-            { xtype: 'checkbox', name: 'is_ytd',                   fieldLabel: this.is_ytdLabel            , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_py1',                   fieldLabel: this.is_py1Label          , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_py2',                   fieldLabel: this.is_py2Label        , allowBlank: true },
-            { xtype: 'checkbox', name: 'is_projected',             fieldLabel: this.is_projectedLabel        , allowBlank: true }                        
-          ]
-        } 
+        // ,{
+        //   xtype:        'fieldset',
+        //   title:        'Columns to calculate',
+        //   collapsible:  true,
+        //   defaultType:  'textfield',
+        //   defaults:     {anchor: '70%'},
+        //   layout:       'anchor',
+        //   items:[
+        //     { xtype: 'checkbox', name: 'is_on_hand',               fieldLabel: this.is_on_handLabel            , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_wip',                   fieldLabel: this.is_wipLabel          , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_allocated',             fieldLabel: this.is_allocatedLabel        , allowBlank: true },
+        //     { xtype: 'checkbox', name: 'is_in_transit',            fieldLabel: this.is_in_transitLabel        , allowBlank: true },            
+        //     { xtype: 'checkbox', name: 'is_ytd',                   fieldLabel: this.is_ytdLabel            , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_py1',                   fieldLabel: this.is_py1Label          , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_py2',                   fieldLabel: this.is_py2Label        , allowBlank: true },
+        //     { xtype: 'checkbox', name: 'is_projected',             fieldLabel: this.is_projectedLabel        , allowBlank: true }                        
+        //   ]
+        // } 
         ,{
           xtype:        'fieldset',
           title:        'Data Sources to include',
@@ -139,7 +139,7 @@ Ext.define('Omni.view.bts.Form', {
           defaults:     {anchor: '70%'},
           layout:       'anchor',
           items:[
-            // { xtype: 'checkbox', name: 'is_drop_data',               fieldLabel: this.is_drop_dataLabel            , allowBlank: true },    
+            { xtype: 'checkbox', name: 'is_drop_data',               fieldLabel: this.is_drop_dataLabel            , allowBlank: true },    
             { xtype: 'checkbox', name: 'is_create_detail',               fieldLabel: this.is_create_detailLabel            , allowBlank: true },    
             { xtype: 'checkbox', name: 'is_sum_style',                   fieldLabel: this.is_sum_styleLabel                , allowBlank: false },    
             // { xtype: 'checkbox', name: 'is_sum_subclass',                fieldLabel: this.is_sum_subclassLabel             , allowBlank: false },    
@@ -193,8 +193,8 @@ Ext.define('Omni.view.bts.Form', {
    *
    */
   onRunAction : function(action, eOpts){
-    Buildit.infoMsg('Your request has been submitted.')
-    this.processEventTransition('run', 'Bts was successfully run.', 'An error occurred running this bts.');
+    // Buildit.infoMsg('Your request has been submitted.')
+    this.processEventTransition('run', 'Bts was successfully submitted.  An email confirmation will be sent to you when it is complete.', 'An error occurred running this bts.');
   }, // onBuildAction
 
   processEventTransition : function(eventName, successMsg, failureMsg){

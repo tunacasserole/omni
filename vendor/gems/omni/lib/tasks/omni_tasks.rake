@@ -19,6 +19,19 @@ end
 
 namespace :omni do
 
+  task :bts, [:bts_id] => :environment do |t, args|
+    ### Sample:  rake omni:bts['9E37B80C0FFD11E39FFA668FFF712A0D']
+    puts "\n== starting " << Time.now.strftime("%H:%M:%S").yellow << " ============ "       
+    @start_time = Time.now
+    puts "raking it\n\n\n"
+    bts_id = args[:bts_id] || '03693E3A081F11E396FB20C9D047DD15'
+    puts "bts in rake is: #{bts_id}"
+    Omni::Bts.rake_run bts_id
+
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
+    puts "==================================="
+  end
+
   task :meta, [:model_name] => :environment do |t, args|
     ### Sample:  rake omni:import['Hub']
     puts "\n== starting " << Time.now.strftime("%H:%M:%S").yellow << " ============ "       
