@@ -85,12 +85,12 @@ class Omni::Bts < ActiveRecord::Base
   # end
 
   # HOOKS (Start) =======================================================================
-  # hook  :before_create,      :get_current_user,                  10
+  hook  :before_create,      :get_current_user,                  10
 
   # HOOKS (End)
-  # def get_current_user
-  #   puts "\n\n\n\n current user is: #{Buildit::User.current.full_name}"
-  # end
+  def get_current_user
+    puts "\n\n\n\n current user is: #{Buildit::User.current.full_name}"
+  end
   
   # INDEXING (Start) ====================================================================
   searchable do
@@ -123,7 +123,6 @@ class Omni::Bts < ActiveRecord::Base
 
   # STATE HANDLERS (Start) ====================================================================
   def process_run
-    puts "-------process_run \n"
     self.state='running'
     # self.user_id = Buildit::User.current.user_id if Buildit::User.current
     self.save
@@ -131,26 +130,28 @@ class Omni::Bts < ActiveRecord::Base
   end
 
   def self.rake_run(bts_id)
-    puts "------------- running bts -------------"
+    # puts "------------- running bts -------------"
     myself = Omni::Bts.where(:bts_id => bts_id).first
     if myself.is_drop_data
-      puts "\n\n\n"
-      puts "--destroying pre-existing bts_details"
+      puts "--destroying pre-existing bts_details at #{Time.now.strftime("%H:%M:%S")}"
       myself.bts_details.each {|det| det.destroy}
       myself.bts_styles.each {|det| det.destroy}      
-      puts "--finished destroying bts_details"
+      puts "--finished destroying bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
 
     if myself.is_create_detail
       puts "--creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
-      myself.skus.each_with_index do |x, i|
-        puts "...processed #{i.to_s} rows" if i.to_s.end_with? '000'
+      skus_to_process = myself.skus
+      puts "--got skus to process at #{Time.now.strftime("%H:%M:%S")}"
+      skus_to_process.each_with_index do |x, i|
+        puts "...processed #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' || i == 1
         Omni::BtsDetail.create(:data_source => 'PARKER',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_parker and x.mark_stock
         Omni::BtsDetail.create(:data_source => 'BUCKHEAD',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_buckhead and x.buckhead_identifier
         Omni::BtsDetail.create(:data_source => 'GRITS',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_grits and x.grits_identifier
       end
+      puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
       Omni::BtsDetail.reindex      
-      puts "--finished creating bts_details"
+      puts "--finished creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
     
     if myself.is_on_hand
@@ -235,18 +236,15 @@ class Omni::Bts < ActiveRecord::Base
     end
   
     if true
-      puts "\n\n\n"
       puts "--populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
       details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
       details.each do |bd|
         bd.calculate
       end
       puts "--finished populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
-      puts "\n\n\n\n\n\n\n\n\n\n"
 
       # Create Style Summary
       if myself.is_sum_style
-        puts "\n\n\n"
         puts "--indentifying styles to summarize"
         # styles = []
         details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
@@ -260,7 +258,7 @@ class Omni::Bts < ActiveRecord::Base
     myself.state = 'done'
     myself.save    
     myself.send_notice myself
-    puts "--bts detail rows created #{Omni::BtsDetail.count.to_s} at #{Time.now.strftime("%H:%M:%S")}"
+    puts "--bts detail rows #{Omni::BtsDetail.count.to_s} finished   at #{Time.now.strftime("%H:%M:%S")}"
   end
 
   def skus
@@ -279,7 +277,7 @@ class Omni::Bts < ActiveRecord::Base
     when self.department
       skus = self.department.skus
     else
-      skus = Omni::Sku.first
+      puts "--no skus due to no parameters provided--"
     end   
     puts "--skus to process: #{skus.count}"
     skus
@@ -287,20 +285,16 @@ class Omni::Bts < ActiveRecord::Base
 
   # Sends an email notification to the user when the projection has finished running
   def send_notice(bts)
-    puts "********** notice*********"
-    # myself = Omni::Bts.where(:bts_id => 'C609886410E411E38101326457748C19').first
+    puts "--sending notice--"    # myself = Omni::Bts.where(:bts_id => 'C609886410E411E38101326457748C19').first
     message = Buildit::Comm::Email::Message.create(
         subject: "Omni notice: BTS - has completed.",
         body: Buildit::Email::Manager.generate(self, "bts_notice"),
     )
-    puts "********** created message ********"
-    # email_addresses = 'aaron@buildit.io'
+    email_addresses = Buildit::User.where(:user_id => bts.user_id).first.email_address
     message.send_to email_addresses
-    puts "********** queuing ************"
     message.queue
-    puts "********** sending rake *********"
     Buildit::Comm::Email::OutboundService.process
-    puts "finished rake"
+    puts "--finished rake"
   end
 
 # STATE HANDLERS (End)
