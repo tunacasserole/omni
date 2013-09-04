@@ -1,4 +1,4 @@
-require 'roo'
+# require 'roo'
 class Omni::Import::Base 
   
   def self.load_import(import_id)
@@ -44,18 +44,18 @@ class Omni::Import::Base
     puts "started reading excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop}"    
     rows = []
     file = File.open(File.join(folder_name, file_name), mode = 'r')
-    excel = Excelx.new(file.path, nil, :ignore)
-    tab_name = 'Sheet1' if !excel.sheets.index(tab_name)
-    excel.default_sheet = excel.sheets.index(tab_name) + 1
-    header = excel.row(1)
-    puts "going into loop"
-    (2..1000).each do |i|
-      # break if i > 100
-      next unless excel.row(i)[0]
-      row = Hash[[header, excel.row(i)].transpose]      
-      row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
-      rows << row
-    end
+    # excel = Excelx.new(file.path, nil, :ignore)
+    # tab_name = 'Sheet1' if !excel.sheets.index(tab_name)
+    # excel.default_sheet = excel.sheets.index(tab_name) + 1
+    # header = excel.row(1)
+    # puts "going into loop"
+    # (2..1000).each do |i|
+    #   # break if i > 100
+    #   next unless excel.row(i)[0]
+    #   row = Hash[[header, excel.row(i)].transpose]      
+    #   row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
+    #   rows << row
+    # end
     puts "finished reading excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop}"    
     return rows
   end

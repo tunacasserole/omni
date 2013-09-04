@@ -38,7 +38,7 @@ group :development do
 end
 
 gem "prawn"
-gem "roo" , "1.10.1"
+# gem "roo" , "1.10.1"
 gem "buildit"
 gem 'buildit_sockets'
 gem "buildit_comm"
