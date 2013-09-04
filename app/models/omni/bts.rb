@@ -159,7 +159,8 @@ class Omni::Bts < ActiveRecord::Base
     details = myself.bts_details
     details.each_with_index do |bd,i|
       puts "...transformed and calculated #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1      
-      bd.transform_and_calculate
+      x=bd.transform_and_calculate
+      x.save
     end
     puts "--finished transforming and calculating at #{Time.now.strftime("%H:%M:%S")}"
 
