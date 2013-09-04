@@ -28,3 +28,24 @@ development:
         port:     995
         username: user@gmail.com
         password: pwd
+production:
+  outbound:
+    accounts:
+      omniprod:
+        address:   smtp.gmail.com
+        default:   true
+        port:      587
+        domain:    gmail.com
+        user_name: aaron@buildit.io
+        password:  CrossFit
+        authentication: plain
+        enable_starttls_auto: true        
+  inbound:
+    accounts:
+      bigdump:
+        default:  true
+        provider: pop3
+        server:   pop.gmail.com
+        port:     995
+        username: user@gmail.com
+        password: pwd

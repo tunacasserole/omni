@@ -288,12 +288,16 @@ class Omni::Bts < ActiveRecord::Base
         subject: "Omni notice: BTS - has completed.",
         body: Buildit::Email::Manager.generate(myself, "bts_notice"),
     )
+    puts "********** created message ********"
     # puts message.errors if message.errors
     # email_addresses = Buildit::User.where(:user_id => myself.user_id).first.email_address
     email_addresses = 'aaron@buildit.io'
     message.send_to email_addresses
+    puts "********** queuing ************"
     message.queue
+    puts "********** sending rake *********"
     Buildit::Comm::Email::OutboundService.process
+    puts "finished rake"
   end
 
 # STATE HANDLERS (End)
