@@ -124,18 +124,20 @@ class Omni::Bts < ActiveRecord::Base
   # STATE HANDLERS (Start) ====================================================================
   def process_run
     self.state='running'
-    # self.user_id = Buildit::User.current.user_id if Buildit::User.current
     self.save
     system("rake omni:bts[#{self.bts_id}] &")
   end
 
   def self.rake_run(bts_id)
     # puts "------------- running bts -------------"
+    bts_id = bts_id || '0A5B72DA151C11E3A2C220C9D047DD15'
     myself = Omni::Bts.where(:bts_id => bts_id).first
     if myself.is_drop_data
       puts "--destroying pre-existing bts_details at #{Time.now.strftime("%H:%M:%S")}"
-      myself.bts_details.each {|det| det.destroy}
-      myself.bts_styles.each {|det| det.destroy}      
+      Omni::BtsDetail.delete_all(:bts_id => myself.bts_id)
+      Omni::BtsStyle.delete_all(:bts_id => myself.bts_id)      
+      # myself.bts_details.each {|det| det.destroy}
+      # myself.bts_styles.each {|det| det.destroy}      
       puts "--finished destroying bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
 
@@ -145,120 +147,36 @@ class Omni::Bts < ActiveRecord::Base
       puts "--got skus to process at #{Time.now.strftime("%H:%M:%S")}"
       skus_to_process.each_with_index do |x, i|
         puts "...processed #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' || i == 1
-        Omni::BtsDetail.create(:data_source => 'PARKER',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_parker and x.mark_stock
-        Omni::BtsDetail.create(:data_source => 'BUCKHEAD',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_buckhead and x.buckhead_identifier
-        Omni::BtsDetail.create(:data_source => 'GRITS',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_grits and x.grits_identifier
+        Omni::BtsDetail.create(:data_source => 'PARKER',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_parker and x.mark_stock.length>0
+        Omni::BtsDetail.create(:data_source => 'BUCKHEAD',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_buckhead and x.buckhead_identifier.length>0
+        Omni::BtsDetail.create(:data_source => 'GRITS',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_grits and x.grits_identifier.length>0
       end
       puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
-      Omni::BtsDetail.reindex      
-      puts "--finished creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
+      # Omni::BtsDetail.reindex      
+      Omni::Bts.solr_reindex(:batch_size => 1000, :include => :bts_details)      
+      puts "--finished reindexing bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
     
-    if myself.is_on_hand
-      puts "--populating quantity on hand at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      # details = myself.bts_details
-      details.each do |bd|
-        bd.on_hand =  bd.transform 'on_hand', bd.data_source
-        bd.save
-      end
-      puts "--finished populating quantity on hand at #{Time.now.strftime("%H:%M:%S")}"
+    # details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
+    details = myself.bts_details
+    details.each do |bd|
+      bd.transform
+      bd.calculate
     end
-    
-    if myself.is_wip    
-      puts "--populating wip at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      details.each do |bd|
-        bd.wip =  bd.transform 'wip', bd.data_source
-        bd.save
-      end
-      puts "--finished populating wip at #{Time.now.strftime("%H:%M:%S")}"
-    end
-  
-    if myself.is_allocated 
-      puts "--populating allocated at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      details.each do |bd|
-        bd.allocated =  bd.transform 'allocated', bd.data_source
-        bd.save
-      end
-      puts "--finished populating allocated at #{Time.now.strftime("%H:%M:%S")}"
-    end
-  
-    if myself.is_in_transit    
-      puts "--populating transit at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      details.each do |bd|
-        bd.transit =  bd.transform 'transit', bd.data_source
-        bd.save
-      end
-      puts "--finished populating transit at #{Time.now.strftime("%H:%M:%S")}"
-    end
-  
-    if myself.is_ytd
-      puts "--populating ytd at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      details.each do |bd|
-        bd.ytd =  bd.transform 'ytd', bd.data_source
-        bd.save
-      end
-      puts "--finished populating ytd at #{Time.now.strftime("%H:%M:%S")}"
-    end
-  
-    if myself.is_py1 
-      puts "--populating py1 at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      details.each do |bd|
-        bd.py1 =  bd.transform 'py1', bd.data_source
-        bd.save
-      end
-      puts "--finished populating py1 at #{Time.now.strftime("%H:%M:%S")}"
-    end
-  
-    if myself.is_py2   
-      puts "--populating py2 at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      details.each do |bd|
-        bd.py2 =  bd.transform 'py2', bd.data_source
-        bd.save
-      end
-      puts "--finished populating py2 at #{Time.now.strftime("%H:%M:%S")}"
-    end
-  
-    if myself.is_projected
-      puts "--populating projections at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      details.each do |bd|
-        bd.projection =  bd.transform 'projection', bd.data_source
-        bd.save
-      end
-      puts "--finished populating projections at #{Time.now.strftime("%H:%M:%S")}"      
-    end
-  
-    if true
-      puts "--populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
-      details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-      details.each do |bd|
-        bd.calculate
-      end
-      puts "--finished populating calculated fields at #{Time.now.strftime("%H:%M:%S")}"
 
-      # Create Style Summary
-      if myself.is_sum_style
-        puts "--indentifying styles to summarize"
-        # styles = []
-        details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
-        puts "--creating bts_styles"
-        details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(myself.bts_id, bd.sku.style_id) if bd.sku}
-        styles = Omni::BtsStyle.where(:bts_id => myself.bts_id)
-        styles.each {|x| x.summarize}
-      end
-
+    # Create Style Summary
+    if myself.is_sum_style
+      puts "--creating bts_styles"
+      details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(myself.bts_id, bd.sku.style_id) if bd.sku}
+      styles = Omni::BtsStyle.where(:bts_id => myself.bts_id)
+      styles.each {|x| x.summarize}
     end
+
     myself.state = 'done'
     myself.save    
     myself.send_notice myself
-    puts "--bts detail rows #{Omni::BtsDetail.count.to_s} finished   at #{Time.now.strftime("%H:%M:%S")}"
+
+    puts "--bts finished with #{Omni::BtsDetail.count.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"
   end
 
   def skus
@@ -294,7 +212,7 @@ class Omni::Bts < ActiveRecord::Base
     message.send_to email_addresses
     message.queue
     Buildit::Comm::Email::OutboundService.process
-    puts "--finished rake"
+    puts "--finished sending notice--"
   end
 
 # STATE HANDLERS (End)
