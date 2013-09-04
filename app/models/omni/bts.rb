@@ -51,7 +51,7 @@ class Omni::Bts < ActiveRecord::Base
   belongs_to   :style,                           :class_name => 'Omni::Style',               :foreign_key => 'style_id'              
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'                
   belongs_to   :color,                           :class_name => 'Omni::Color',               :foreign_key => 'color_id'    
-  # belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'    
+  belongs_to   :user,                :class_name => 'Buildit::User',     :foreign_key => 'user_id'    
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -85,8 +85,13 @@ class Omni::Bts < ActiveRecord::Base
   # end
 
   # HOOKS (Start) =======================================================================
-  # HOOKS (End)
+  hook  :before_create,      :get_current_user,                  10
 
+  # HOOKS (End)
+  def get_current_user
+    puts "\n\n\n\n current user is: #{Buildit::User.current.full_name}"
+  end
+  
   # INDEXING (Start) ====================================================================
   searchable do
     string   :department_display
@@ -120,7 +125,7 @@ class Omni::Bts < ActiveRecord::Base
   def process_run
     puts "-------process_run \n"
     self.state='running'
-    self.user_id = Buildit::User.current.user_id if Buildit::User.current
+    # self.user_id = Buildit::User.current.user_id if Buildit::User.current
     self.save
     system("rake omni:bts[#{self.bts_id}] &")
   end
