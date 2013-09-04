@@ -282,7 +282,7 @@ class Omni::Bts < ActiveRecord::Base
 
   # Sends an email notification to the user when the projection has finished running
   def send_notice(bts)
-    puts "********** notice"
+    puts "********** notice*********"
     message = Buildit::Comm::Email::Message.create(
         subject: "Omni notice: BTS - has completed.",
         body: Buildit::Email::Manager.generate(self, "bts_notice"),
