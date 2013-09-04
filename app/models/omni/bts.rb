@@ -25,7 +25,7 @@ class Omni::Bts < ActiveRecord::Base
   # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.department_display} - #{m.plan_year} - #{m.version}"}
   default      :is_destroyed,                     :override  =>  false,        :to    => false              
   default      :plan_year,                        :override => true, :to => '2014'
-  default :user_id,                             :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+  default :user_id,                               :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
 
   # DEFAULTS (End) 
 
@@ -85,12 +85,12 @@ class Omni::Bts < ActiveRecord::Base
   # end
 
   # HOOKS (Start) =======================================================================
-  hook  :before_create,      :get_current_user,                  10
+  # hook  :before_create,      :get_current_user,                  10
 
   # HOOKS (End)
-  def get_current_user
-    puts "\n\n\n\n current user is: #{Buildit::User.current.full_name}"
-  end
+  # def get_current_user
+  #   puts "\n\n\n\n current user is: #{Buildit::User.current.full_name}"
+  # end
   
   # INDEXING (Start) ====================================================================
   searchable do
@@ -288,15 +288,13 @@ class Omni::Bts < ActiveRecord::Base
   # Sends an email notification to the user when the projection has finished running
   def send_notice(bts)
     puts "********** notice*********"
-    myself = Omni::Bts.where(:bts_id => 'C609886410E411E38101326457748C19').first
+    # myself = Omni::Bts.where(:bts_id => 'C609886410E411E38101326457748C19').first
     message = Buildit::Comm::Email::Message.create(
         subject: "Omni notice: BTS - has completed.",
-        body: Buildit::Email::Manager.generate(myself, "bts_notice"),
+        body: Buildit::Email::Manager.generate(self, "bts_notice"),
     )
     puts "********** created message ********"
-    # puts message.errors if message.errors
-    # email_addresses = Buildit::User.where(:user_id => myself.user_id).first.email_address
-    email_addresses = 'aaron@buildit.io'
+    # email_addresses = 'aaron@buildit.io'
     message.send_to email_addresses
     puts "********** queuing ************"
     message.queue
