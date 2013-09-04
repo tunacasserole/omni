@@ -111,74 +111,58 @@ class Omni::BtsDetail < ActiveRecord::Base
   
 
   # HELPERS (Start) =====================================================================
-  def transform
-    puts "transforming #{self.data_source} sku #{self.sku_display}"
-    
-    puts "set counters to 0"
-    on_hand = 0
-    wip = 0
-    allocated = 0
-    transit = 0    
-    ytd = 0 
-    py1 = 0       
-    py2 = 0    
-    projection = 0
+  def transform_and_calculate
+    #puts "transforming #{self.data_source} sku #{self.sku_display}"
 
     case self.data_source
       when 'PARKER'  
-        puts "--on hand--"        
+        #puts "--on hand--"        
         data = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
-        data.each {|i| self.on_hand += i.qoh if i.qoh}
-        puts "--wip--"  
+        data.each {|x| self.on_hand += x.qoh if x.qoh}
+        #puts "--wip--"  
         data = Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
-        data.each {|i| self.wip += i.cut_wip + i.plant_wip + i.cont_wip} 
-        # data.each {|i| puts "WIPS => #{self.cut_wip.to_s}, #{self.plant_wip.to_s}, #{self.cont_wip.to_s}"}          
-        puts "--allocated--"
-        data = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :status_id => 8)
-        data.each {|l| self.allocated += l.qty if [8,53].include? l.transfer_status}        
-        puts "--in transit--"        
-        data.each {|li| self.transit += li.qty if li.transfer_status == 9}
-        puts "--ytd--"
-        data = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :year_entered => Time.new.year)
-        data.each {|o| self.ytd += o.qty}
-        puts "--py1--"
-        data = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :year_entered => Time.new.year-1)
-        data.each {|o| self.py1 += o.qty}
-        puts "--py2--"
-        data = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :year_entered => Time.new.year-2)
-        data.each {|o| self.py2 += o.qty}
-        puts "--projection--"
-        self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2 
+        data.each {|x| self.wip += x.cut_wip + x.plant_wip + x.cont_wip} 
+        # data.each {|i| #puts "WIPS => #{self.cut_wip.to_s}, #{self.plant_wip.to_s}, #{self.cont_wip.to_s}"}          
+        #puts "--allocated, in transit--"
+        data = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        data.each do |x|
+          self.allocated += x.qty if [8,53].include? x.transfer_status
+          self.transit += x.qty if x.transfer_status == 9
+        end
+        #puts "--ytd, py1, py2, projection--"
+        data = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        data.each do |x|
+          self.ytd += x.qty if x.year_entered == Time.new.year
+          self.py1 += x.qty if x.year_entered == Time.new.year-1
+          self.py2 += x.qty if x.year_entered == Time.new.year-2                  
+          self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
+        end
 
       when 'BUCKHEAD'
-        puts "--on_hand--"
+        #puts "--on_hand--"
         data = Omni::RmsItemDynamic.where(:ItemID => self.buckhead_identifier)
-        data.each {|i| on_hand += i.SnapShotQuantity if i.SnapShotQuantity}
-        puts "--WIP--"
+        data.each {|x| self.on_hand += x.SnapShotQuantity if x.SnapShotQuantity}
+        #puts "--WIP, YTD, PY1, PY2, Projection--"
         data = Omni::RmsBts.where(:ItemID => self.buckhead_identifier)
-        data.each {|i| wip += i.QOO}
-        puts "--YTD--"
-        data.each {|b| ytd += b.TOT_2013}
-        puts "--PY1--"
-        data.each {|b| py1 += b.TOT_2012}
-        puts "--PY2--"
-        data.each {|b| py2 += b.TOT_2011}
+        data.each do |x|
+          self.wip += x.QOO
+          self.ytd += x.TOT_2013
+          self.py1 += x.TOT_2012
+          self.py2 += x.TOT_2011
+          self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
+        end
 
       when 'GRITS'
-        puts "--on_hand--"
+        #puts "--on_hand, wip, ytd, projection--"
         data = Omni::GritsBts.where(:tg_sku_id => self.grits_identifier)
-        data.each {|i| on_hand += (i.qoh_60 + i.qoh_61 + i.qoh_62 + i.qoh_63 + i.qoh_64 + i.qoh_65 + i.qoh_66)}
-        puts "--wip--"        
-        data.each {|i| wip += i.qoo_60 + i.qoo_61 + i.qoo_62 + i.qoo_63 + i.qoo_64 + i.qoo_65 + i.qoo_66}                
-        puts "--ytd--"
-        data.each {|b| ytd += b.sold_60 + b.sold_61 + b.sold_62 + b.sold_63 + b.sold_64 + b.sold_65 + b.sold_66}
-        puts "--projection--"
-        data.each {|i| projection += i.proj_60 + i.proj_61 + i.proj_62 + i.proj_63 + i.proj_64 + i.proj_65 + i.proj_66}        
+        data.each do |x|
+          self.on_hand += x.qoh_60 + x.qoh_61 + x.qoh_62 + x.qoh_63 + x.qoh_64 + x.qoh_65 + x.qoh_66
+          self.wip += x.qoo_60 + x.qoo_61 + x.qoo_62 + x.qoo_63 + x.qoo_64 + x.qoo_65 + x.qoo_66
+          self.ytd += x.sold_60 + x.sold_61 + x.sold_62 + x.sold_63 + x.sold_64 + x.sold_65 + x.sold_66
+          self.projection += x.projected_60 + x.projected_61 + x.projected_62 + x.projected_63 + x.projected_64 + x.projected_65 + x.projected_66   
+        end
     end
-    self.save
-  end
 
-  def calculate
     ### TOTAL ON HAND ###    
     self.total_oh = self.on_hand + self.wip + self.allocated + self.transit      
     ### STANDARD DEVIATION OF SALES TO PROJECTED ###
@@ -207,7 +191,7 @@ class Omni::BtsDetail < ActiveRecord::Base
     self.complete_oo = self.wip
     ### TRUE NEED ###
     self.need = self.complete_coverage - self.total_oh - self.complete_coverage
-    self.save
+    return self
   end
   # HELPERS (End)
 

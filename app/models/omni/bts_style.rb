@@ -88,12 +88,12 @@ class Omni::BtsStyle < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def summarize
-    puts "--summarizing bts details for style: #{self.display}"
+    # puts "--summarizing bts details for style: #{self.display}"
     sku_ids = []
     self.style.skus.each {|x| sku_ids << x.sku_id} if self.style    
     bts_details = Omni::BtsDetail.where(:bts_id => self.bts_id,:sku_id => sku_ids)
     
-    puts "--updating style totals from bts details"
+    # puts "--updating style totals from bts details"
     self.on_hand = bts_details.sum(:on_hand)
     self.wip = bts_details.sum(:on_hand)
     self.allocated = bts_details.sum(:allocated)

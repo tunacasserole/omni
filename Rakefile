@@ -10,7 +10,7 @@ namespace :omni do
 
   task :bts, [:bts_id] => :environment do |t, args|
     puts "==================================="
-    puts "\n== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "       
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "       
     @start_time = Time.now
     bts_id = args[:bts_id]
     Omni::Bts.rake_run bts_id

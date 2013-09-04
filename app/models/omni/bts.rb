@@ -136,40 +136,44 @@ class Omni::Bts < ActiveRecord::Base
       puts "--destroying pre-existing bts_details at #{Time.now.strftime("%H:%M:%S")}"
       Omni::BtsDetail.delete_all(:bts_id => myself.bts_id)
       Omni::BtsStyle.delete_all(:bts_id => myself.bts_id)      
-      # myself.bts_details.each {|det| det.destroy}
-      # myself.bts_styles.each {|det| det.destroy}      
       puts "--finished destroying bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
 
     if myself.is_create_detail
       puts "--creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
       skus_to_process = myself.skus
-      puts "--got skus to process at #{Time.now.strftime("%H:%M:%S")}"
-      skus_to_process.each_with_index do |x, i|
-        puts "...processed #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' || i == 1
-        Omni::BtsDetail.create(:data_source => 'PARKER',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_parker and x.mark_stock.length>0
-        Omni::BtsDetail.create(:data_source => 'BUCKHEAD',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_buckhead and x.buckhead_identifier.length>0
-        Omni::BtsDetail.create(:data_source => 'GRITS',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_grits and x.grits_identifier.length>0
+      Omni::BtsDetail.transaction do
+        skus_to_process.each_with_index do |x, i|
+          puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{myself.bts_id}', '#{x.sku_id}', 'PARKER')" if myself.is_source_parker and x.mark_stock.length>0
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{myself.bts_id}', '#{x.sku_id}', 'BUCKHEAD')" if myself.is_source_buckhead and x.buckhead_identifier.length>0
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{myself.bts_id}', '#{x.sku_id}', 'GRITS')" if myself.is_source_grits and x.grits_identifier.length>0
+        end
       end
       puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
-      # Omni::BtsDetail.reindex      
       Omni::Bts.solr_reindex(:batch_size => 1000, :include => :bts_details)      
       puts "--finished reindexing bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
     
-    # details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
+    puts "--transforming and calculating  at #{Time.now.strftime("%H:%M:%S")}"
     details = myself.bts_details
-    details.each do |bd|
-      bd.transform
-      bd.calculate
+    details.each_with_index do |bd,i|
+      puts "...transformed and calculated #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1      
+      bd.transform_and_calculate
     end
+    puts "--finished transforming and calculating at #{Time.now.strftime("%H:%M:%S")}"
 
-    # Create Style Summary
     if myself.is_sum_style
-      puts "--creating bts_styles"
-      details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(myself.bts_id, bd.sku.style_id) if bd.sku}
+      puts "--creating bts_styles at #{Time.now.strftime("%H:%M:%S")}"
+      Omni::BtsDetail.transaction do
+        details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(myself.bts_id, bd.sku.style_id) if bd.sku}
+        # details.each_with_index do |bd,i|
+        #   Omni::BtsStyle.connection.execute "INSERT INTO bts_styles (bts_style_id, bts_id, style_id) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{myself.bts_id}','#{bd.sku.style_id}')" if bd.sku unless Omni::BtsStyle.where(:style_id => bd.sku.style_id).first
+        # end
+      end
       styles = Omni::BtsStyle.where(:bts_id => myself.bts_id)
       styles.each {|x| x.summarize}
+      puts "--finished creating bts_styles at #{Time.now.strftime("%H:%M:%S")}"            
     end
 
     myself.state = 'done'
