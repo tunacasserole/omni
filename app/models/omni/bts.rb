@@ -283,13 +283,14 @@ class Omni::Bts < ActiveRecord::Base
   # Sends an email notification to the user when the projection has finished running
   def send_notice(bts)
     puts "********** notice*********"
+    myself = Omni::Bts.where(:bts_id => 'C609886410E411E38101326457748C19').first
     message = Buildit::Comm::Email::Message.create(
         subject: "Omni notice: BTS - has completed.",
-        body: Buildit::Email::Manager.generate(self, "bts_notice"),
+        body: Buildit::Email::Manager.generate(myself, "bts_notice"),
     )
-    puts message.errors if message.errors
-    email_addresses = Buildit::User.where(:user_id => bts.user_id).first.email_address
-    email_addresses = 'aaron@buildit.io' if email_addresses == 'a'
+    # puts message.errors if message.errors
+    # email_addresses = Buildit::User.where(:user_id => myself.user_id).first.email_address
+    email_addresses = 'aaron@buildit.io'
     message.send_to email_addresses
     message.queue
     Buildit::Comm::Email::OutboundService.process
