@@ -408,25 +408,25 @@ class Omni::Style < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :display
-    string   :style_nbr
-    string   :subclass_id
-    string   :subclass_display do subclass.display if subclass end
-    string   :product_display do product.display if product end
-    integer  :initial_retail_price
-    string   :supplier_display do supplier.display if supplier end
-    boolean  :is_enabled
-    string   :state
+      string   :display
+    # string   :style_nbr
+    # string   :subclass_id
+    # string   :subclass_display do subclass.display if subclass end
+    # string   :product_display do product.display if product end
+    # integer  :initial_retail_price
+    # string   :supplier_display do supplier.display if supplier end
+    # boolean  :is_enabled
+    # string   :state
  
-    text     :display_fulltext, :using => :display
-    text     :style_nbr_fulltext, :using => :style_nbr
-    text     :subclass_display_fulltext, :using => :subclass_display
-    text     :product_display_fulltext, :using => :product_display
-    text     :initial_retail_price_fulltext, :using => :initial_retail_price
-    text     :supplier_display_fulltext, :using => :supplier_display
-    text     :state_fulltext, :using => :state
-    text     :site_display_fulltext, :using => :site_display
-    text     :conversion_type, :using => :conversion_type
+    text     :display_fulltext do self.display.gsub(/(\W)/, ' ') end
+    # text     :style_nbr_fulltext, :using => :style_nbr
+    # text     :subclass_display_fulltext, :using => :subclass_display
+    # text     :product_display_fulltext, :using => :product_display
+    # text     :initial_retail_price_fulltext, :using => :initial_retail_price
+    # text     :supplier_display_fulltext, :using => :supplier_display
+    # text     :state_fulltext, :using => :state
+    # text     :site_display_fulltext, :using => :site_display
+    # text     :conversion_type, :using => :conversion_type
     
   end 
   # INDEXING (End)

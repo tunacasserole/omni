@@ -117,8 +117,9 @@ class Omni::BtsDetail < ActiveRecord::Base
     case self.data_source
       when 'PARKER'  
         #puts "--on hand--"        
-        data = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
-        data.each {|x| self.on_hand += x.qoh if x.qoh}
+        self.on_hand = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size).sum(:qoh)
+        # data = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        # data.each {|x| self.on_hand += x.qoh if x.qoh}
         #puts "--wip--"  
         data = Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
         data.each {|x| self.wip += x.cut_wip + x.plant_wip + x.cont_wip} 

@@ -13,7 +13,8 @@ namespace :omni do
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "       
     @start_time = Time.now
     bts_id = args[:bts_id]
-    Omni::Bts.rake_run bts_id
+    b=Omni::Bts.where(:bts_id => bts_id).first
+    b.rake_run bts_id
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
     puts "==================================="
   end

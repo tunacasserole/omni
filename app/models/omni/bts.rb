@@ -128,7 +128,7 @@ class Omni::Bts < ActiveRecord::Base
     system("rake omni:bts[#{self.bts_id}] &")
   end
 
-  def self.rake_run(bts_id)
+  def rake_run
     # puts "------------- running bts -------------"
     bts_id = bts_id || '0A5B72DA151C11E3A2C220C9D047DD15'
     myself = Omni::Bts.where(:bts_id => bts_id).first

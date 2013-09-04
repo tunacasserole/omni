@@ -246,12 +246,28 @@ Ext.define('Omni.view.purchase_details.Form', {
 
     this.callParent();
 
-    me.purchaseSupplierStore.on('beforeload', function()
+    me.purchaseSupplierStore.on('beforeload',me.setupsupplierfilter, me);    
+  },
+  
+  setupsupplierfilter: function()
      {
-      me.purchaseSupplierStore.proxy.extraParams.search = {
-        with: {supplier_id: {equal_to: me.association.get('supplier_id')}}
-     };
-     });    
-  }
+      var me=this;
 
+      var purchase_id = me.association.get('purchase_id');
+
+      var purchaseStore = new Omni.store.Purchase();
+      purchaseStore.filter('purchase_id',purchase_id);
+      purchaseStore.load(function(records,operation,success){
+        var record=records[0];
+        if (record) {
+          var supplier_id = record.get('supplier_id');
+          me.purchaseSupplierStore.proxy.extraParams.search = {
+            with: {supplier_id: {equal_to: supplier_id}}
+          }
+        }
+     });       
+     }
 });
+
+
+

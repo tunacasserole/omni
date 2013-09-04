@@ -179,7 +179,7 @@ Ext.define('Omni.view.purchases.Form', {
           items               :[
 
             { xtype             : 'buildit-Locator',
-              store             : Ext.create('Buildit.store.LocationUser',
+              store             : Ext.create('Omni.store.LocationUser',
                                     {
                                       pageSize: 20,
                                       filters: [{
