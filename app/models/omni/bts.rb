@@ -149,9 +149,10 @@ class Omni::Bts < ActiveRecord::Base
         Omni::BtsDetail.create(:data_source => 'BUCKHEAD',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_buckhead and x.buckhead_identifier
         Omni::BtsDetail.create(:data_source => 'GRITS',:bts_id => myself.bts_id, :sku_id => x.sku_id) if myself.is_source_grits and x.grits_identifier
       end
+      Omni::BtsDetail.reindex      
       puts "--finished creating bts_details"
     end
-
+    
     if myself.is_on_hand
       puts "--populating quantity on hand at #{Time.now.strftime("%H:%M:%S")}"
       details = Omni::BtsDetail.where(:bts_id => myself.bts_id)
@@ -259,7 +260,6 @@ class Omni::Bts < ActiveRecord::Base
     myself.state = 'done'
     myself.save    
     myself.send_notice myself
-    Omni::BtsDetail.reindex
     puts "--bts detail rows created #{Omni::BtsDetail.count.to_s} at #{Time.now.strftime("%H:%M:%S")}"
   end
 
@@ -279,7 +279,7 @@ class Omni::Bts < ActiveRecord::Base
     when self.department
       skus = self.department.skus
     else
-      skus = Omni::Sku.all
+      skus = Omni::Sku.first
     end   
     puts "--skus to process: #{skus.count}"
     skus
