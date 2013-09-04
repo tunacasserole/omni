@@ -49,20 +49,11 @@ Ext.define('Omni.view.app.Hub', {
      ] 
      }
 
-  // ,{
-  //  title: 'Project Tracking',
-  //    columns: 2,
-  //    rows: 4,
-  //    tiles: [
-  //      {title: 'Projects', colspan: 2, rowspan: 2, cls: 'projects',  target: {xtype: 'omni-projects-Explorer'}},     
-  //      {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'tasks',  target: {xtype: 'omni-tasks-Explorer'}}            
-  //   ]
-  // }
    // Section: product setup data //
 
    ,{
    title: 'product setup data',
-     columns: 6,
+     columns: 4,
      rows: 3,
      tiles: [
        {title: 'Colors', colspan: 2, rowspan: 1, cls: 'omni-colors', target: { xtype: 'omni-colors-Explorer'} },
@@ -77,19 +68,30 @@ Ext.define('Omni.view.app.Hub', {
      ] 
   }   
 
- // // Section: Mark Research //
+ // Section: Mark Research //
 
- //   ,{
- //   title: 'Company Wide Inventory',
- //     columns: 4,
- //     rows: 3,
- //     tiles: [
- //       // {title: 'Mark Outlets', colspan: 2, rowspan: 1, cls: 'mark_outlets',  target: {xtype: 'omni-mark_outlets-Explorer'}},       
- //      {title: 'Mark Inventory', colspan: 2, rowspan: 1, cls: 'mark_inventory', target: { xtype: 'omni-mark_inventories-Explorer'} },
- //      {title: 'RMS Item Dynamic', colspan: 2, rowspan: 1, cls: 'rms_item_dynamics', target: { xtype: 'omni-rms_item_dynamics-Explorer'} },
- //     ] 
- //     }     
+   ,{
+   title: 'Company Wide Inventory',
+     columns: 2,
+     rows: 3,
+     tiles: [
+       // {title: 'Mark Outlets', colspan: 2, rowspan: 1, cls: 'mark_outlets',  target: {xtype: 'omni-mark_outlets-Explorer'}},       
+      {title: 'Mark Inventory', colspan: 2, rowspan: 1, cls: 'mark_inventory', target: { xtype: 'omni-mark_inventories-Explorer'} },
+      {title: 'RMS Item Dynamic', colspan: 2, rowspan: 1, cls: 'rms_item_dynamics', target: { xtype: 'omni-rms_item_dynamics-Explorer'} },
+      {title: 'Grits BTS', colspan: 2, rowspan: 1, cls: 'grits_bts', target: { xtype: 'omni-grits_bts-Explorer'} },      
+     ] 
+     }     
 
+,{
+   title: 'Project Tracking',
+     columns: 2,
+     rows: 4,
+     tiles: [
+       {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'tasks',  target: {xtype: 'omni-tasks-Explorer'}},         
+       {title: 'Projects', colspan: 2, rowspan: 2, cls: 'projects',  target: {xtype: 'omni-projects-Explorer'}}
+    ]
+  }
+  
  //    // Section: Projections //
 
  //    ,{
