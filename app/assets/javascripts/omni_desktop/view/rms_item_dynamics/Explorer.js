@@ -6,6 +6,8 @@ Ext.define('Omni.view.rms_item_dynamics.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.RmsItemDynamic'),
 
+  allowFind  :  true,
+
   contextMenuConfig : {
     xtype    : 'omni-rms_item_dynamics-ExplorerContextMenu'
   },
@@ -67,8 +69,8 @@ Ext.define('Omni.view.rms_item_dynamics.Explorer', {
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
-  title:     'RmsItemDynamics',
-  subtitle:  'Create and maintain RmsItemDynamics',
+  title:     'Rms Item Dynamics',
+  subtitle:  'Create and maintain Rms Item Dynamics',
   // TITLES (End)
 
   initComponent : function () {

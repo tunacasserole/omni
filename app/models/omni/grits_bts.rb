@@ -17,7 +17,7 @@ class Omni::GritsBts < ActiveRecord::Base
   #supports_logical_delete
   #supports_audit
   #supports_revisioning
-  #supports_fulltext
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -67,7 +67,11 @@ class Omni::GritsBts < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  
+  searchable do
+    integer   :tg_sku_id
+ 
+    text     :tg_sku_id_fulltext, :using => :tg_sku_id
+  end 
   # INDEXING (End)
 
 

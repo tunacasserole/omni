@@ -42,6 +42,7 @@ class Omni::Task < ActiveRecord::Base
   # ASSOCIATIONS (End)
 
 
+
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :project_display,                        :to => 'project.display'
@@ -66,9 +67,10 @@ class Omni::Task < ActiveRecord::Base
   # ORDERING (End)
 
   # FILTERS (Start) =====================================================================
-  filter :state_new,            :with => {state: {equal_to: 'not_started'}},       :priority => 10
+  filter :state_new,            :with => {state: {equal_to: 'new'}},       :priority => 10
+  filter :state_test,            :with => {state: {equal_to: 'test'}},       :priority => 12
   filter :state_complete,       :with => {state: {equal_to: 'complete'}},       :priority => 15
-  filter :state_cancel,         :with => {state: {equal_to: 'cancel'}},          :priority => 20
+  filter :state_canceled,         :with => {state: {equal_to: 'canceled'}},          :priority => 20
   # FILTERS (End)
 
   # SCOPES (Start) ======================================================================
@@ -88,6 +90,10 @@ class Omni::Task < ActiveRecord::Base
 
     event :cancel do
       transition any => :cancelled
+    end    
+
+    event :test_it do
+      transition any => :test
     end    
   end
   # STATES (End)

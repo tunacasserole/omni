@@ -6,6 +6,9 @@ Ext.define('Omni.view.rms_items.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.RmsItem'),
 
+  allowFind  :  true,
+
+
   contextMenuConfig : {
     xtype    : 'omni-rms_items-ExplorerContextMenu'
   },

@@ -6,6 +6,8 @@ Ext.define('Omni.view.mark_inventories.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.MarkInventory'),
 
+  allowFind  :  true,
+  
   contextMenuConfig : {
     xtype    : 'omni-mark_inventories-ExplorerContextMenu'
   },

@@ -85,6 +85,17 @@ Ext.define('Omni.view.tasks.Form', {
       actions: [
         {
           xtype      : 'button',
+          iconCls    : 'icon-mail-forward',
+          scope      : me,
+          tooltip    : 'Move to test',
+          listeners  : {
+            beforerender : this.prepareTestAction,
+            click        : this.onTestAction,
+            scope        : me
+          }
+        },
+        {
+          xtype      : 'button',
           iconCls    : 'icon-thumbs-up',
           scope      : me,
           tooltip    : 'Complete Task',
@@ -96,7 +107,7 @@ Ext.define('Omni.view.tasks.Form', {
         },
         {
           xtype      : 'button',
-          iconCls    : 'icon-thumbs-down',
+          iconCls    : 'icon-ban-circle',
           scope      : me,
           tooltip    : 'Cancel Task',
           listeners  : {
@@ -128,16 +139,23 @@ Ext.define('Omni.view.tasks.Form', {
   /**
    *
    */
+  onTestAction : function(action, eOpts){
+    this.processEventTransition('test_it', 'Task is now ready to be tested.', 'An error occurred testing this Task');
+  }, 
+
+  /**
+   *
+   */
   onCancelAction : function(action, eOpts){
     this.processEventTransition('cancel', 'Task was successfully canceled.', 'An error occurred canceling this Task');
-  }, // onRejectAction
+  }, 
 
   /**
    *
    */
   onCompleteAction : function(action, eOpts){
-    this.processEventTransition('close', 'Task was successfully completed.', 'An error occurred completing this Task');
-  }, // onShipAction
+    this.processEventTransition('complete', 'Task was successfully completed.', 'An error occurred completing this Task');
+  }, 
 
 
   processEventTransition : function(eventName, successMsg, failureMsg){
@@ -179,9 +197,18 @@ Ext.define('Omni.view.tasks.Form', {
   /**
    *
    */
+  prepareTestAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    if(this.record.phantom == true || currentState == 'complete' || currentState == 'canceled')
+      action.hide();
+  }, // prepareCancelAction
+
+  /**
+   *
+   */
   prepareCancelAction : function(action, eOpts) {
     var currentState = this.record.get('state');
-    if(this.record.phantom == true || currentState == 'closed')
+    if(this.record.phantom == true || currentState == 'complete' || currentState = 'canceled')
       action.hide();
   }, // prepareCancelAction
 
@@ -191,8 +218,9 @@ Ext.define('Omni.view.tasks.Form', {
   prepareCompleteAction : function(action, eOpts) {
     var currentState = this.record.get('state');
 
-    currentState == 'active' ? action.show() : action.hide();
-  } //   prepareCompleteAction
+    if(currentState == 'complete' || currentState = 'canceled')
+      action.hide();
+  } 
 
 
   // HANDLERS (End)

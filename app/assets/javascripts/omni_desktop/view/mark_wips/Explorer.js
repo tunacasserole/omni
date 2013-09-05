@@ -6,6 +6,8 @@ Ext.define('Omni.view.mark_wips.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.MarkWip'),
 
+  allowFind  :  true,
+    
   contextMenuConfig : {
     xtype    : 'omni-mark_wips-ExplorerContextMenu'
   },

@@ -17,7 +17,7 @@ class Omni::MarkInventory < ActiveRecord::Base
   #supports_logical_delete
   #supports_audit
   #supports_revisioning
-  #supports_fulltext
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -68,16 +68,11 @@ class Omni::MarkInventory < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :stock_nbr
-    string   :size
-    # string   :bts_id
-    # string   :sku_id    
-    # string   :state
+    integer   :stock_nbr
+    integer   :size
  
-    # text     :department_display_fulltext, :using => :department_display
-    # text     :display_fulltext, :using => :display
-    # text     :version_fulltext, :using => :version
-    # text     :state_fulltext, :using => :state
+    text     :stock_nbr, :using => :stock_nbr
+    text     :size, :using => :size 
   end 
   # INDEXING (End)
 

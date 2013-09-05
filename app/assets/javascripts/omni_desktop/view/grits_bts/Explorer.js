@@ -6,6 +6,8 @@ Ext.define('Omni.view.grits_bts.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.GritsBts'),
 
+  allowFind  :  true,
+
   contextMenuConfig : {
     xtype    : 'omni-grits_bts-ExplorerContextMenu'
   },

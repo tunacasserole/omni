@@ -6,6 +6,8 @@ Ext.define('Omni.view.mark_transfer_lines.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.MarkTransferLine'),
 
+  allowFind  :  true,
+
   contextMenuConfig : {
     xtype    : 'omni-mark_transfer_lines-ExplorerContextMenu'
   },

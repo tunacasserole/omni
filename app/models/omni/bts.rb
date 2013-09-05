@@ -17,15 +17,16 @@ class Omni::Bts < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                          :uniqueness => true
+  # validates    :display,                          :uniqueness => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default      :bts_id,                           :override  =>  false,        :with  => :guid              
-  # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.department_display} - #{m.plan_year} - #{m.version}"}
+  default      :display,                          :override  =>  true,        :to   => lambda{|m| "#{m.subclass_display if m.subclass} #{m.style_display} #{m.sku_display} #{m.user_display}"}  
   default      :is_destroyed,                     :override  =>  false,        :to    => false              
   default      :plan_year,                        :override => true, :to => '2014'
-  default :user_id,                               :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+  default      :user_id,                          :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+
 
   # DEFAULTS (End) 
 
@@ -51,7 +52,7 @@ class Omni::Bts < ActiveRecord::Base
   belongs_to   :style,                           :class_name => 'Omni::Style',               :foreign_key => 'style_id'              
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'                
   belongs_to   :color,                           :class_name => 'Omni::Color',               :foreign_key => 'color_id'    
-  belongs_to   :user,                :class_name => 'Buildit::User',     :foreign_key => 'user_id'    
+  belongs_to   :user,                            :class_name => 'Buildit::User',     :foreign_key => 'user_id'    
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -66,6 +67,7 @@ class Omni::Bts < ActiveRecord::Base
     map :style_display,                     :to => 'style.display'    
     map :sku_display,                     :to => 'sku.display'
     map :color_display,                     :to => 'color.display'
+    map :user_display,                            :to => 'user.full_name'    
   end
   # MAPPED ATTRIBUTES (End)
 

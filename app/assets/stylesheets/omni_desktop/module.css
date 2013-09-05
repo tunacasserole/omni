@@ -73,13 +73,13 @@
 
 /* Inspector Logo */
 .inspector .tab.tasks .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/tasks-26.png);
+  background-image: url(/assets/omni/omni_icons/survey.png);
   background-color: #C076DE;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.tasks.active .x-panel-body .logo, .inspector .tab.tasks .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/tasks-26.png);
+  background-image: url(/assets/omni/omni_icons/survey.png);
   background-color: #C488DB;
 }
 
@@ -90,7 +90,7 @@
 
 /* Tile */
 .tile.tasks {
-  background-image: url(/assets/omni/omni_icons/opportunities.png);
+  background-image: url(/assets/omni/omni_icons/approvals.png);
   background-color: #C076DE !important;
 }
 
@@ -804,41 +804,6 @@
 .tile.omni-colors:hover {
 	background-color: #CA9B00 !important;
 }
-
-/*
----------------------------------------------------------------------------------------
-   task
----------------------------------------------------------------------------------------
-*/
-
-
-/* Inspector Logo */
-.inspector .tab.tasks .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/tasks.png);
-  background-color: #DC592F;
-}
-
-/* Inspector Logo Active & Hover */
-.inspector .tab.tasks.active .x-panel-body .logo, .inspector .tab.tasks .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/tasks.png);
-  background-color: #A13E1E;
-}
-
-/* Inspector Tab Active & Hover */
-.inspector .tab.tasks.active .x-panel-body, .inspector .tab.tasks.active .x-panel-body:hover, .inspector .tab.tasks .x-panel-body:hover {
-  background: #DC592F;
-}
-
-/* Tile */
-.tile.tasks {
-	background-image: url(/assets/omni/omni_icons/tasks.png);
-	background-color: #DC592F !important;
-}
-
-.tile.tasks:hover {
-	background-color: #A13E1E !important;
-}
-
 
 /*
 ---------------------------------------------------------------------------------------

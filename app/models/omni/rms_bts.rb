@@ -67,7 +67,18 @@ class Omni::RmsBts < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  
+  searchable do
+    string   :itemID
+    string   :size
+    # string   :bts_id
+    # string   :sku_id    
+    # string   :state
+ 
+    # text     :department_display_fulltext, :using => :department_display
+    # text     :display_fulltext, :using => :display
+    # text     :version_fulltext, :using => :version
+    # text     :state_fulltext, :using => :state
+  end 
   # INDEXING (End)
 
 
