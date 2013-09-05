@@ -161,7 +161,7 @@ Ext.define('Omni.view.tasks.Form', {
   processEventTransition : function(eventName, successMsg, failureMsg){
     var me = this;
 
-    Sbna.service.Cfar.fireEvent({
+    Omni.service.Task.fireEvent({
         id      : this.record.get('task_id'),
         name    : eventName
       },

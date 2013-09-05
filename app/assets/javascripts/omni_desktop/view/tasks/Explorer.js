@@ -24,9 +24,10 @@ Ext.define('Omni.view.tasks.Explorer', {
     {
       showAll     : 'All States',
       items       : [
-        ['state_new',         "New"],
-        ['state_complete',    "Complete"],
-        ['state_cancel',      "Canceled"]        
+        ['state_new',         "new"],
+        ['state_test',        "test"],                                
+        ['state_complete',    "complete"],
+        ['state_cancel',      "canceled"]
       ]
     }
   ],  
