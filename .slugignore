@@ -1,8 +1,11 @@
 *.psd
 *.pdf
-/tmp
-/test
-/spec
+.git
+/doc
 /log
-/solr/data
-/solr/pids
+/public
+/solr
+/spec
+/test
+/tmp
+/vendor

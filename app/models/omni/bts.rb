@@ -87,16 +87,10 @@ class Omni::Bts < ActiveRecord::Base
   # end
 
   # HOOKS (Start) =======================================================================
-  # hook  :after_create,      :process_run,                  10
-  # hook  :after_update,      :process_run,                  20  
-  # hook  :after_save,        :hooky,                          30
+  # after_save   :process_run, :if => proc{|m| m.state != 'running'}
   # HOOKS (End)
   
-  def hooky
-    puts "came from after_save"
-  end
-
-    # INDEXING (Start) ====================================================================
+  # INDEXING (Start) ====================================================================
   searchable do
     string   :department_display
     string   :display
