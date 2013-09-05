@@ -85,12 +85,8 @@ class Omni::Bts < ActiveRecord::Base
   # end
 
   # HOOKS (Start) =======================================================================
-  hook  :before_create,      :get_current_user,                  10
-
+  hook  :after_create,      :process_run,                  10
   # HOOKS (End)
-  def get_current_user
-    puts "\n\n\n\n current user is: #{Buildit::User.current.full_name}"
-  end
   
   # INDEXING (Start) ====================================================================
   searchable do

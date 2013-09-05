@@ -10,6 +10,8 @@ Ext.define('Omni.view.tasks.Explorer', {
     xtype    : 'omni-tasks-ExplorerContextMenu'
   },
 
+  allowFind : true,
+
   newForms : [{
     xtype    : 'omni-tasks-Form'
   }],
@@ -54,13 +56,13 @@ Ext.define('Omni.view.tasks.Explorer', {
         //   flex         : 1
         // },
         {
-          header       : this.stateLabel,
-          dataIndex    : 'state',
+          header       : this.task_nbrLabel,
+          dataIndex    : 'task_nbr',
           flex         : 1
         },
         {
-          header       : this.task_nbrLabel,
-          dataIndex    : 'task_nbr',
+          header       : this.stateLabel,
+          dataIndex    : 'state',
           flex         : 1
         },
         {

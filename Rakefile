@@ -14,7 +14,7 @@ namespace :omni do
     @start_time = Time.now
     bts_id = args[:bts_id]
     b=Omni::Bts.where(:bts_id => bts_id).first
-    b.rake_run bts_id
+    b.rake_run
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
     puts "==================================="
   end
