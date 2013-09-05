@@ -100,7 +100,7 @@ Ext.define('Omni.view.bts.Form', {
               displayField    : 'display',
               queryField      : 'display',
               valueField      : 'subclass_id',
-              itemTpl         : '<b>{display}</b> <span style="float:right">Class:   {classification_display}</span>',              
+              itemTpl         : '<b>{display}</b> <span style="float:right">Class:   {classification_display}, Department:  {department_display}</span>',              
               name            : 'subclass_id',
               initialValue    : this.record.get('subclass_display'),
               fieldLabel      : this.subclass_idLabel,

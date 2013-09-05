@@ -56,6 +56,7 @@ Ext.define('Omni.view.projects.Explorer', {
           flex         : 1
         },        
         {
+          xtype        : 'datefield',
           header       : this.release_dateLabel,
           dataIndex    : 'release_date',
           flex         : 1
