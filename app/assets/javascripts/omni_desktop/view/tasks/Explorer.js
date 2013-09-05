@@ -106,7 +106,8 @@ Ext.define('Omni.view.tasks.Explorer', {
         {
           header       : this.target_releaseLabel,
           dataIndex    : 'target_release',
-          flex         : 1
+          flex         : 1,
+          renderer     : Ext.util.Format.dateRenderer('m/d/y')           
         }
         // {
         //   header       : this.actual_releaseLabel,

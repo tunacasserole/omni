@@ -27,9 +27,10 @@ class Omni::Task < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default :task_id,                          :with => :guid
+  default :task_id,                         :with => :guid
   default :task_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"TASK_NBR"
-
+  default :creator_id,                      :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+  default :assignee_id,                     :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}  
   # DEFAULTS (End)
 
 
@@ -88,7 +89,18 @@ class Omni::Task < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string      :task_id
+    string   :task_id
+    string   :display
+    string   :project_display do project.display if project end
+    string   :task_nbr
+    string   :state
+    string   :task_type
+    string   :importance
+    string   :points
+    string   :assignee_display
+    string   :creator_display
+    date     :target_release
+    text     :display_fulltext, :using => :display
   end
   # INDEXING (End)
 
