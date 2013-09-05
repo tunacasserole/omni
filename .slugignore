@@ -9,9 +9,7 @@
 /db/import
 /doc
 /log
-/public
 /solr
 /spec
 /test
 /tmp
-/vendor
