@@ -208,7 +208,7 @@ Ext.define('Omni.view.tasks.Form', {
    */
   prepareCancelAction : function(action, eOpts) {
     var currentState = this.record.get('state');
-    if(this.record.phantom == true || currentState == 'complete' || currentState = 'canceled')
+    if(this.record.phantom == true || currentState == 'complete' || currentState == 'canceled')
       action.hide();
   }, // prepareCancelAction
 
@@ -218,7 +218,7 @@ Ext.define('Omni.view.tasks.Form', {
   prepareCompleteAction : function(action, eOpts) {
     var currentState = this.record.get('state');
 
-    if(currentState == 'complete' || currentState = 'canceled')
+    if(currentState == 'complete' || currentState == 'canceled')
       action.hide();
   } 
 

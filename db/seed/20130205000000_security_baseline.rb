@@ -146,7 +146,7 @@ x.password = 't'
 x.save
 
 x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820CDEMOAARON').first
-x.password = 'welcome'
+x.password = 'a'
 x.save
 
 x = Buildit::User.where(:user_id => 'FB0ACB1AFAC111E2B25720SYSBUILDIT').first

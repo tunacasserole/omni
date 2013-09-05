@@ -69,7 +69,7 @@ class Omni::MarkInventory < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     integer   :stock_nbr
-    integer   :size
+    string   :size
  
     text     :stock_nbr, :using => :stock_nbr
     text     :size, :using => :size 

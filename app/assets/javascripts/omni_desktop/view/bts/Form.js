@@ -286,34 +286,10 @@ Ext.define('Omni.view.bts.Form', {
   prepareRunAction : function(action, eOpts) {
     var currentState = this.record.get('state');
 
-    // if(currentState != 'new')
-    //   action.hide();
+    if(this.record.phantom == true)
+      action.hide();   
 
-  }, // prepareSubmitAction
+  }, // prepareRunAction
 
-  /**
-   *
-   */
-  //  preRenderStyle : function(field, eOpts) {
-  //   if(this.record.get('subclass_id'))
-  //     field.setDisabled(false);
-  //   else
-  //     field.setDisabled(true);
-  // },
-
-  // clearSubclass :function( field ) {
-  //   var form = field.up('form');
-
-  //   // clear value(s)
-  //   form.getForm().findField('style_id').setValue(null);
-  //   form.getForm().findField('style_id').setDisabled(true);    
-
-  // },
-
-  // selectSubclass :function( field, records, eOpts ) {
-  //   var form = field.up('form');
-  //   form.getForm().findField('style_id').setDisabled(false);
-  // }
-  // HANDLERS (End)
-
+ 
 });
