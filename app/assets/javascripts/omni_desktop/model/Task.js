@@ -4,6 +4,7 @@ Ext.define('Omni.model.Task', {
   fields: [
       { name: 'task_id',                    type: 'string'   },
       { name: 'project_id',                  type: 'string'   },
+      { name: 'project_display',                  type: 'string'   },      
       { name: 'task_nbr',                   type: 'string'   },
       { name: 'task_type',                  type: 'string'   },
       { name: 'state',                       type: 'string'   },
@@ -12,7 +13,9 @@ Ext.define('Omni.model.Task', {
       { name: 'importance',                  type: 'string'   },
       { name: 'points',                      type: 'integer'  },
       { name: 'assignee_id',                 type: 'string'   },
+      { name: 'assignee_display',            type: 'string'   },      
       { name: 'creator_id',                  type: 'string'   },
+      { name: 'creator_display',             type: 'string'   },      
       { name: 'target_release',              type: 'date'     },
       { name: 'actual_release',              type: 'date'     },
       { name: 'is_destroyed',                type: 'boolean'  }

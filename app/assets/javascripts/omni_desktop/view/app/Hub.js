@@ -71,7 +71,7 @@ Ext.define('Omni.view.app.Hub', {
  // Section: Mark Research //
 
    ,{
-   title: 'Company Wide Inventory',
+   title: 'Inventory',
      columns: 2,
      rows: 3,
      tiles: [

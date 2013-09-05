@@ -34,6 +34,7 @@ class Omni::Task < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
+  belongs_to            :project,              :foreign_key => 'project_id',            :class_name => 'Omni::Project'
   belongs_to            :creator,              :foreign_key => 'creator_id',            :class_name => 'Buildit::User'
   belongs_to            :assignee,            :foreign_key => 'assignee_id',             :class_name => 'Buildit::User'
   # ASSOCIATIONS (End)
@@ -41,7 +42,8 @@ class Omni::Task < ActiveRecord::Base
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :creator_display,                        :to => 'creator.full_name'
+    map :project_display,                        :to => 'project.display'
+    map :creator_display,                        :to => 'creator.full_name'    
     map :assignee_display,                      :to => 'assignee.full_name'
   end  
   # MAPPED ATTRIBUTES (End)
@@ -71,6 +73,18 @@ class Omni::Task < ActiveRecord::Base
   
   # SCOPES (End)
 
+  # STATES (Start) ====================================================================
+  state_machine :state, :initial => :new do
+
+  ### CALLBACKS ###
+    after_transition :on => :complete, :do => :process_complete
+
+  ### EVENTS ###
+    event :complete do
+      transition any => :done
+    end
+  end
+  # STATES (End)
 
   # INDEXING (Start) ====================================================================
   searchable do

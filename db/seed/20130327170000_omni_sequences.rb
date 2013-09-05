@@ -40,6 +40,7 @@ Buildit::Sequence.create(:sequence_code => 'SKU_NBR', :padding => 3, :value => 1
 Buildit::Sequence.create(:sequence_code => 'STYLE_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'SUBCLASS_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'SUPPLIER_NBR', :padding => 3, :value => 1000)
+Buildit::Sequence.create(:sequence_code => 'TASK_NBR', :padding => 3, :value => 1)
 Buildit::Sequence.create(:sequence_code => 'TERMINAL_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'TILL_ACTIVITY_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'TILL_NBR', :padding => 3, :value => 1000)

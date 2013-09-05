@@ -61,8 +61,8 @@ Ext.define('Omni.view.tasks.Form', {
           */
 
             // { xtype: 'textfield', name: 'task_id',                       fieldLabel: this.task_idLabel                    , allowBlank: true },    
-            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel, disabled: true , allowBlank: true },    
             { xtype: 'textfield', name: 'task_nbr',  disabled: true,     fieldLabel: this.task_nbrLabel                   , allowBlank: true },                
+            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel, disabled: true , allowBlank: true },    
             { name: 'project_id', fieldLabel: this.project_idLabel,    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Project',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'project_id', itemTpl:'{display}',initialValue: this.record.get('project_display'), },
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },                
             { xtype: 'buildit-Lookup', name: 'task_type', category: 'TASK_TYPE', fieldLabel: this.task_typeLabel                  , allowBlank: true },    
@@ -80,6 +80,37 @@ Ext.define('Omni.view.tasks.Form', {
     // FIELDSETS (End)
 
 
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-ban-circle',
+          scope      : me,
+          tooltip    : 'Complete Task',
+          listeners  : {
+            beforerender : this.prepareCompleteAction,
+            click        : this.onCompleteAction,
+            scope        : me
+          }
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-minus-sign',
+          scope      : me,
+          tooltip    : 'Cancel Task',
+          listeners  : {
+            beforerender : this.prepareCancelAction,
+            click        : this.onCancelAction,
+            scope        : me
+          }
+        }
+      ]
+    });
+
+    // ACTIONS (End)
+
+
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title: 'Profile',
@@ -91,6 +122,79 @@ Ext.define('Omni.view.tasks.Form', {
 
     this.callParent();
     
-  }
+  },
+
+    // HANDLERS (Start) ======================================================================
+  /**
+   *
+   */
+  onCancelAction : function(action, eOpts){
+    this.processEventTransition('cancel', 'Task was successfully canceled.', 'An error occurred canceling this Task');
+  }, // onRejectAction
+
+  /**
+   *
+   */
+  onCompleteAction : function(action, eOpts){
+    this.processEventTransition('close', 'Task was successfully completed.', 'An error occurred completing this Task');
+  }, // onShipAction
+
+
+  processEventTransition : function(eventName, successMsg, failureMsg){
+    var me = this;
+
+    Sbna.service.Cfar.fireEvent({
+        id      : this.record.get('task_id'),
+        name    : eventName
+      },
+      function(result, e){
+        me.getForm().clearInvalid();
+        if(result && result.success == true){
+          Buildit.infoMsg(successMsg);
+          me.record.set(result);
+          me.loadRecord(me.record);
+          me.fireEvent('recordchanged', me, me.banner);
+          me.doLayout();
+        } else {
+          var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+          if(response.errors)
+            me.getForm().markInvalid(response.errors);
+
+          var error_message = failureMsg;
+          if(response.message)
+            error_message = response.message;
+
+          if(response.errors)
+            error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+          Buildit.errorMsg(error_message);
+        }
+      }
+    );
+
+  }, // processEventTransition
+
+
+  /**
+   *
+   */
+  prepareCancelAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    if(this.record.phantom == true || currentState == 'closed')
+      action.hide();
+  }, // prepareCancelAction
+
+  /**
+   *
+   */
+  prepareCompleteAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+
+    currentState == 'active' ? action.show() : action.hide();
+  } //   prepareCompleteAction
+
+
+  // HANDLERS (End)
 
 });

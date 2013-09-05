@@ -54,8 +54,8 @@ Ext.define('Omni.view.tasks.Explorer', {
         //   flex         : 1
         // },
         {
-          header       : this.project_idLabel,
-          dataIndex    : 'project_display',
+          header       : this.stateLabel,
+          dataIndex    : 'state',
           flex         : 1
         },
         {
@@ -67,15 +67,15 @@ Ext.define('Omni.view.tasks.Explorer', {
           header       : this.displayLabel,
           dataIndex    : 'display',
           flex         : 3
-        },        
+        },                
         {
-          header       : this.task_typeLabel,
-          dataIndex    : 'task_type',
+          header       : this.project_idLabel,
+          dataIndex    : 'project_display',
           flex         : 1
         },
         {
-          header       : this.stateLabel,
-          dataIndex    : 'state',
+          header       : this.task_typeLabel,
+          dataIndex    : 'task_type',
           flex         : 1
         },
         // {
