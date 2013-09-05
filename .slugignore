@@ -1,6 +1,12 @@
 *.psd
 *.pdf
+*.xlsx
+*.xls
+*.csv
 .git
+/archives
+/db/demo
+/db/import
 /doc
 /log
 /public

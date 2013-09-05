@@ -1,31 +1,17 @@
-# Ignore bundler config
-/.bundle
-
-# Ignore the default SQLite database.
-/db/*.sqlite3
-
-# Ignore all logfiles and tempfiles.
-/log/*.log
-/log/*.log.lck
-/log/**
-/tmp
-
-# Ignore database.yml
-# /config/database.yml
-
+*.psd
+*.pdf
+*.xlsx
+*.xls
+*.csv
 .DS_Store
 .idea
 /.idea
-
-# Roo files
-oo*
-*.log
-
-config/database.yml
-
-/solr/pids
-/solr/data
-
-docs
-
-/vendor/gems/buildit
+/archives
+/config/database.yml
+/doc
+/log
+/solr
+/spec
+/test
+/tmp
+/vendor
