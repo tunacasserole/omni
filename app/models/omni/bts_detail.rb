@@ -118,26 +118,36 @@ class Omni::BtsDetail < ActiveRecord::Base
       when 'PARKER'  
         #puts "--on hand--"        
         self.on_hand = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size).sum(:qoh)
+        self.wip = Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size).sum(:cut_wip)
+        self.wip += Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size).sum(:plant_wip)        
+        self.wip += Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size).sum(:cont_wip)
+        self.allocated = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :status_id => [8,53]).sum(:qty)
+        self.transit = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :status_id => 9).sum(:qty)        
+        self.ytd = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :year_entered => Time.new.year).sum(:qty)        
+        self.py1 = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :year_entered => Time.new.year-1).sum(:qty)        
+        self.py2 = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size, :year_entered => Time.new.year-2).sum(:qty)                        
+        self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
+
         # data = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
         # data.each {|x| self.on_hand += x.qoh if x.qoh}
         #puts "--wip--"  
-        data = Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
-        data.each {|x| self.wip += x.cut_wip + x.plant_wip + x.cont_wip} 
+        # data = Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        # data.each {|x| self.wip += x.cut_wip + x.plant_wip + x.cont_wip} 
         # data.each {|i| #puts "WIPS => #{self.cut_wip.to_s}, #{self.plant_wip.to_s}, #{self.cont_wip.to_s}"}          
         #puts "--allocated, in transit--"
-        data = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
-        data.each do |x|
-          self.allocated += x.qty if [8,53].include? x.transfer_status
-          self.transit += x.qty if x.transfer_status == 9
-        end
+        # data = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        # data.each do |x|
+        #   self.allocated += x.qty if [8,53].include? x.status_id
+        #   self.transit += x.qty if x.status_id == 9
+        # end
         #puts "--ytd, py1, py2, projection--"
-        data = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
-        data.each do |x|
-          self.ytd += x.qty if x.year_entered == Time.new.year
-          self.py1 += x.qty if x.year_entered == Time.new.year-1
-          self.py2 += x.qty if x.year_entered == Time.new.year-2                  
-          self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
-        end
+        # data = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        # data.each do |x|
+        #   self.ytd += x.qty if x.year_entered == Time.new.year
+        #   self.py1 += x.qty if x.year_entered == Time.new.year-1
+        #   self.py2 += x.qty if x.year_entered == Time.new.year-2                  
+        #   self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
+        # end
 
       when 'BUCKHEAD'
         #puts "--on_hand--"

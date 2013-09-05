@@ -138,7 +138,7 @@ Ext.define('Omni.view.bts.Form', {
               itemTpl         : '<b>{style_display} - {display}</b>',              
               name            : 'sku_id',
               initialValue    : this.record.get('sku_id'),
-              fieldLabel      : this.style_idLabel,
+              fieldLabel      : this.sku_idLabel,
               allowBlank      : true
               // listeners        : {
                 // render           : me.preRenderStyle,
