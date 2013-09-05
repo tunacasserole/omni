@@ -30,7 +30,8 @@ class Omni::Task < ActiveRecord::Base
   default :task_id,                         :with => :guid
   default :task_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"TASK_NBR"
   default :creator_id,                      :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
-  default :assignee_id,                     :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}  
+  default :assignee_id,                     :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current} 
+  default :importance,                      :to => '4'                  
   # DEFAULTS (End)
 
 
@@ -78,12 +79,16 @@ class Omni::Task < ActiveRecord::Base
   state_machine :state, :initial => :new do
 
   ### CALLBACKS ###
-    after_transition :on => :complete, :do => :process_complete
+    # after_transition :on => :complete, :do => :process_complete
 
   ### EVENTS ###
     event :complete do
-      transition any => :done
+      transition any => :complete
     end
+
+    event :cancel do
+      transition any => :cancelled
+    end    
   end
   # STATES (End)
 

@@ -87,21 +87,67 @@ Ext.define('Omni.view.bts.Form', {
           defaults:     {anchor: '70%'},
           layout:       'anchor',
           items:[
-            // {
-            //   xtype: 'label',
-            //   text: 'Enter one value below.  If you provide multiples, for example, a subclass and a style, the system will run only at the lowest level provided, style.',
-            //   cls: 'instruction'
-            // },                   
+            {
+              xtype: 'label',
+              text: 'Enter one value below.  If you provide multiples, the system will run only at the lowest level provided.',
+              cls: 'instruction'
+            }                   
             // { name: 'department_id',  fieldLabel: this.department_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
             // { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },            
-            { name: 'subclass_id', fieldLabel: this.subclass_idLabel,                  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Subclass',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
-            { name: 'style_id', fieldLabel: this.style_idLabel,                        allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },            
-            { name: 'sku_id', fieldLabel: this.sku_idLabel,                             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },                        
-            // { name: 'user_id', fieldLabel: this.user_idLabel,                         allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 10}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{full_name}' },                                                            
-            // { name: 'color_id', fieldLabel: this.color_idLabel,                         allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Color',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'color_id', itemTpl:'{display}' }                                                                    
-          ]
-        }       
-        ,{
+            ,{
+              xtype           : 'buildit-Locator',
+              store           : Ext.create('Omni.store.Subclass',{pageSize: 12}),
+              displayField    : 'display',
+              queryField      : 'display',
+              valueField      : 'subclass_id',
+              itemTpl         : '<b>{display}</b> <span style="float:right">Class:   {classification_display}</span>',              
+              name            : 'subclass_id',
+              initialValue    : this.record.get('subclass_display'),
+              fieldLabel      : this.subclass_idLabel,
+              allowBlank      : true
+              // listeners        : {
+                // clear          : me.clearSubclass,
+                // select         : me.selectSubclass,                
+                // scope            : me
+              // }
+            }   
+            ,{
+              xtype           : 'buildit-Locator',
+              store           : Ext.create('Omni.store.Style',{pageSize: 12}),
+              displayField    : 'display',
+              queryField      : 'display',
+              valueField      : 'style_id',
+              // dependsOn       : 'subclass_id',              
+              itemTpl         : '<b>{display}</b> <span style="float:right">Subclass:   {subclass_display}</span>',              
+              name            : 'style_id',
+              initialValue    : this.record.get('style_display'),
+              fieldLabel      : this.style_idLabel,
+              allowBlank      : true
+              // listeners        : {
+                // render           : me.preRenderStyle,
+                // scope            : me
+              // }
+            }                     
+           ,{
+              xtype           : 'buildit-Locator',
+              store           : Ext.create('Omni.store.Sku',{pageSize: 12}),
+              displayField    : 'display',
+              queryField      : 'display',
+              valueField      : 'sku_id',
+              dependsOn       : 'style_id',              
+              itemTpl         : '<b>{style_display} - {display}</b>',              
+              name            : 'sku_id',
+              initialValue    : this.record.get('sku_id'),
+              fieldLabel      : this.style_idLabel,
+              allowBlank      : true
+              // listeners        : {
+                // render           : me.preRenderStyle,
+                // scope            : me
+              // }
+            }
+        ]
+        }                     
+           ,{
           xtype:        'fieldset',
           title:        'Columns to calculate',
           collapsible:  true,
@@ -245,6 +291,29 @@ Ext.define('Omni.view.bts.Form', {
 
   }, // prepareSubmitAction
 
+  /**
+   *
+   */
+  //  preRenderStyle : function(field, eOpts) {
+  //   if(this.record.get('subclass_id'))
+  //     field.setDisabled(false);
+  //   else
+  //     field.setDisabled(true);
+  // },
+
+  // clearSubclass :function( field ) {
+  //   var form = field.up('form');
+
+  //   // clear value(s)
+  //   form.getForm().findField('style_id').setValue(null);
+  //   form.getForm().findField('style_id').setDisabled(true);    
+
+  // },
+
+  // selectSubclass :function( field, records, eOpts ) {
+  //   var form = field.up('form');
+  //   form.getForm().findField('style_id').setDisabled(false);
+  // }
   // HANDLERS (End)
 
 });

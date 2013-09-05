@@ -85,7 +85,7 @@ Ext.define('Omni.view.tasks.Form', {
       actions: [
         {
           xtype      : 'button',
-          iconCls    : 'icon-ban-circle',
+          iconCls    : 'icon-thumbs-up',
           scope      : me,
           tooltip    : 'Complete Task',
           listeners  : {
@@ -96,7 +96,7 @@ Ext.define('Omni.view.tasks.Form', {
         },
         {
           xtype      : 'button',
-          iconCls    : 'icon-minus-sign',
+          iconCls    : 'icon-thumbs-down',
           scope      : me,
           tooltip    : 'Cancel Task',
           listeners  : {

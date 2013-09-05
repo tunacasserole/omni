@@ -408,9 +408,9 @@ class Omni::Style < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-      string   :display
+    string   :display
     # string   :style_nbr
-    # string   :subclass_id
+    string   :subclass_id
     # string   :subclass_display do subclass.display if subclass end
     # string   :product_display do product.display if product end
     # integer  :initial_retail_price
@@ -420,7 +420,7 @@ class Omni::Style < ActiveRecord::Base
  
     text     :display_fulltext do self.display.gsub(/(\W)/, ' ') end
     # text     :style_nbr_fulltext, :using => :style_nbr
-    # text     :subclass_display_fulltext, :using => :subclass_display
+    text     :subclass_display_fulltext, :using => :subclass_display
     # text     :product_display_fulltext, :using => :product_display
     # text     :initial_retail_price_fulltext, :using => :initial_retail_price
     # text     :supplier_display_fulltext, :using => :supplier_display

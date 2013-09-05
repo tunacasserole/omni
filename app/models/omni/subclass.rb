@@ -103,8 +103,8 @@ class Omni::Subclass < ActiveRecord::Base
     text     :display_fulltext, :using => :display
     text     :subclass_nbr_fulltext, :using => :subclass_nbr
     text     :classification_display_fulltext, :using => :classification_display
-    text     :markup_percent_high_limit_fulltext, :using => :markup_percent_high_limit
-    text     :markup_percent_low_limit_fulltext, :using => :markup_percent_low_limit
+      # text     :markup_percent_high_limit_fulltext, :using => :markup_percent_high_limit
+      # text     :markup_percent_low_limit_fulltext, :using => :markup_percent_low_limit
   end 
   # INDEXING (End)
 
