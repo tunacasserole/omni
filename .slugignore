@@ -1,0 +1,15 @@
+*.psd
+*.pdf
+*.xlsx
+*.xls
+*.csv
+.git
+/archives
+/db/demo
+/db/import
+/doc
+/log
+/solr
+/spec
+/test
+/tmp
