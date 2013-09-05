@@ -24,7 +24,7 @@ group :assets do
 end
 
 # gem 'resque'
-# gem 'progress_bar'      # track sunspot:reindex
+gem 'progress_bar'      # track sunspot:reindex
 
 gem 'jquery-rails'
 gem 'state_machine'
@@ -34,7 +34,7 @@ gem 'state_machine'
 #end
 
 group :development do
-  gem "sunspot_solr"
+  gem "sunspot_rails"
 end
 
 gem "prawn"
