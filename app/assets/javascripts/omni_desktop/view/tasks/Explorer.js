@@ -19,6 +19,17 @@ Ext.define('Omni.view.tasks.Explorer', {
   inspectorConfig : {
     xtype    : 'omni-tasks-Inspector'
   },
+
+  filters: [
+    {
+      showAll     : 'All States',
+      items       : [
+        ['state_new',         "New"],
+        ['state_complete',    "Complete"],
+        ['state_cancel',      "Canceled"]        
+      ]
+    }
+  ],  
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================

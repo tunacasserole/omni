@@ -61,15 +61,15 @@ class Omni::Task < ActiveRecord::Base
   # TEMPORARY ATTRIBUTES (End)
 
 
-  # FILTERS (Start) =====================================================================
-  
-  # FILTERS (End)
-
-
   # ORDERING (Start) ====================================================================
-  
+  order_search_by :task_nbr => :desc
   # ORDERING (End)
 
+  # FILTERS (Start) =====================================================================
+  filter :state_new,            :with => {state: {equal_to: 'not_started'}},       :priority => 10
+  filter :state_complete,       :with => {state: {equal_to: 'complete'}},       :priority => 15
+  filter :state_cancel,         :with => {state: {equal_to: 'cancel'}},          :priority => 20
+  # FILTERS (End)
 
   # SCOPES (Start) ======================================================================
   
