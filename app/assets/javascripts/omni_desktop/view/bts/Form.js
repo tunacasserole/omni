@@ -210,20 +210,20 @@ Ext.define('Omni.view.bts.Form', {
 
 
     // ACTIONS (Start) =====================================================================
-    Ext.apply(this, {
-      actions: [
-        {
-          xtype      : 'button',
-          cls        : 'submit',
-          tooltip    : 'Run BTS',
-          listeners  : {
-            beforerender  : this.prepareRunAction,
-            click         : this.onRunAction,
-            scope         : me
-          }
-        }
-      ]
-    });
+    // Ext.apply(this, {
+    //   actions: [
+    //     {
+    //       xtype      : 'button',
+    //       cls        : 'submit',
+    //       tooltip    : 'Run BTS',
+    //       listeners  : {
+    //         beforerender  : this.prepareRunAction,
+    //         click         : this.onRunAction,
+    //         scope         : me
+    //       }
+    //     }
+    //   ]
+    // });
 
     // ACTIONS (End)
    
