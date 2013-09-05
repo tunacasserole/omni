@@ -87,7 +87,8 @@ class Omni::Bts < ActiveRecord::Base
   # end
 
   # HOOKS (Start) =======================================================================
-  hook  :after_create,      :process_run,                  10
+  # hook  :after_create,      :process_run,                  10
+  # hook  :after_save,      :process_run,                  20  
   # HOOKS (End)
   
   # INDEXING (Start) ====================================================================
@@ -127,25 +128,24 @@ class Omni::Bts < ActiveRecord::Base
   end
 
   def rake_run
-    # puts "------------- running bts -------------"
-    bts_id = bts_id || '0A5B72DA151C11E3A2C220C9D047DD15'
-    myself = Omni::Bts.where(:bts_id => bts_id).first
-    if myself.is_drop_data
+    # puts "\n------------- running bts -------------\n"
+    if self.is_drop_data
       puts "--destroying pre-existing bts_details at #{Time.now.strftime("%H:%M:%S")}"
-      Omni::BtsDetail.delete_all(:bts_id => myself.bts_id)
-      Omni::BtsStyle.delete_all(:bts_id => myself.bts_id)      
+      self.bts_details.delete_all
+      # Omni::BtsDetail.delete_all(:bts_id => self.bts_id)
+      Omni::BtsStyle.delete_all(:bts_id => self.bts_id)      
       puts "--finished destroying bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
 
-    if myself.is_create_detail
+    if self.is_create_detail
       puts "--creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
-      skus_to_process = myself.skus
+      skus_to_process = self.skus
       Omni::BtsDetail.transaction do
         skus_to_process.each_with_index do |x, i|
           puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{myself.bts_id}', '#{x.sku_id}', 'PARKER')" if myself.is_source_parker and x.mark_stock.length>0
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{myself.bts_id}', '#{x.sku_id}', 'BUCKHEAD')" if myself.is_source_buckhead and x.buckhead_identifier.length>0
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{myself.bts_id}', '#{x.sku_id}', 'GRITS')" if myself.is_source_grits and x.grits_identifier.length>0
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}', 'PARKER')" if self.is_source_parker and x.mark_stock.length>0
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}', 'BUCKHEAD')" if self.is_source_buckhead and x.buckhead_identifier.length>0
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}', 'GRITS')" if self.is_source_grits and x.grits_identifier.length>0
         end
       end
       puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
@@ -154,7 +154,7 @@ class Omni::Bts < ActiveRecord::Base
     end
     
     puts "--transforming and calculating  at #{Time.now.strftime("%H:%M:%S")}"
-    details = myself.bts_details
+    details = self.bts_details
     details.each_with_index do |bd,i|
       puts "...transformed and calculated #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1      
       x=bd.transform_and_calculate
@@ -162,24 +162,25 @@ class Omni::Bts < ActiveRecord::Base
     end
     puts "--finished transforming and calculating at #{Time.now.strftime("%H:%M:%S")}"
 
-    if myself.is_sum_style
+    # if self.is_sum_style
+    if false
       puts "--creating bts_styles at #{Time.now.strftime("%H:%M:%S")}"
       Omni::BtsDetail.transaction do
-        details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(myself.bts_id, bd.sku.style_id) if bd.sku}
+        details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(self.bts_id, bd.sku.style_id) if bd.sku}
         # details.each_with_index do |bd,i|
-        #   Omni::BtsStyle.connection.execute "INSERT INTO bts_styles (bts_style_id, bts_id, style_id) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{myself.bts_id}','#{bd.sku.style_id}')" if bd.sku unless Omni::BtsStyle.where(:style_id => bd.sku.style_id).first
+        #   Omni::BtsStyle.connection.execute "INSERT INTO bts_styles (bts_style_id, bts_id, style_id) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}','#{bd.sku.style_id}')" if bd.sku unless Omni::BtsStyle.where(:style_id => bd.sku.style_id).first
         # end
       end
-      styles = Omni::BtsStyle.where(:bts_id => myself.bts_id)
+      styles = Omni::BtsStyle.where(:bts_id => self.bts_id)
       styles.each {|x| x.summarize}
       puts "--finished creating bts_styles at #{Time.now.strftime("%H:%M:%S")}"            
     end
 
-    myself.state = 'done'
-    myself.save    
-    myself.send_notice myself
+    self.state = 'done'
+    self.save    
+    self.send_notice
 
-    puts "--bts finished with #{Omni::BtsDetail.count.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"
+    puts "--bts finished with #{self.bts_details.count.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"
   end
 
   def skus
@@ -205,13 +206,13 @@ class Omni::Bts < ActiveRecord::Base
   end     
 
   # Sends an email notification to the user when the projection has finished running
-  def send_notice(bts)
+  def send_notice
     puts "--sending notice--"    # myself = Omni::Bts.where(:bts_id => 'C609886410E411E38101326457748C19').first
     message = Buildit::Comm::Email::Message.create(
         subject: "Omni notice: BTS - has completed.",
         body: Buildit::Email::Manager.generate(self, "bts_notice"),
     )
-    email_addresses = Buildit::User.where(:user_id => bts.user_id).first.email_address
+    email_addresses = Buildit::User.where(:user_id => self.user_id).first.email_address
     message.send_to email_addresses
     message.queue
     Buildit::Comm::Email::OutboundService.process

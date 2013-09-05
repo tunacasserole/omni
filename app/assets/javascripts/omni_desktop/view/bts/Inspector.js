@@ -26,13 +26,13 @@ Ext.define('Omni.view.bts.Inspector',{
              }
           }
         }  
-        ,{title: 'Styles', xtype: 'omni-bts_styles-Explorer', module: 'cfars',
-           defaultSearch: { with: 
-             {
-               bts_id:   {equal_to: me.record.get('bts_id')}
-             }
-          }
-        }          
+        // ,{title: 'Styles', xtype: 'omni-bts_styles-Explorer', module: 'cfars',
+        //    defaultSearch: { with: 
+        //      {
+        //        bts_id:   {equal_to: me.record.get('bts_id')}
+        //      }
+        //   }
+        // }          
         ,{
           xtype    : 'buildit-CardGroup',
           title    : 'Support',

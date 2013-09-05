@@ -100,7 +100,8 @@ Ext.define('Omni.view.bts.Form', {
               displayField    : 'display',
               queryField      : 'display',
               valueField      : 'subclass_id',
-              itemTpl         : '<b>{display}</b> <span style="float:right">Class:   {classification_display}, Department:  {department_display}</span>',              
+              // itemTpl         : '<b>{display}</b> <span style="float:right">Class:   {classification_display}, Department:  {department_display}</span>',              
+              itemTpl         : '<b>{display}</b> <span style="float:right">Class:   {classification_display}</span>',                            
               name            : 'subclass_id',
               initialValue    : this.record.get('subclass_display'),
               fieldLabel      : this.subclass_idLabel,
@@ -188,7 +189,7 @@ Ext.define('Omni.view.bts.Form', {
           items:[
             { xtype: 'checkbox', name: 'is_drop_data',               fieldLabel: this.is_drop_dataLabel            , allowBlank: true },    
             { xtype: 'checkbox', name: 'is_create_detail',               fieldLabel: this.is_create_detailLabel            , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_sum_style',                   fieldLabel: this.is_sum_styleLabel                , allowBlank: false },    
+            // { xtype: 'checkbox', name: 'is_sum_style',                   fieldLabel: this.is_sum_styleLabel                , allowBlank: false },    
             // { xtype: 'checkbox', name: 'is_sum_subclass',                fieldLabel: this.is_sum_subclassLabel             , allowBlank: false },    
             // { xtype: 'checkbox', name: 'is_sum_class',                   fieldLabel: this.is_sum_classLabel                , allowBlank: false },    
             // { xtype: 'checkbox', name: 'is_sum_department',              fieldLabel: this.is_sum_departmentLabel           , allowBlank: false },                
@@ -210,20 +211,20 @@ Ext.define('Omni.view.bts.Form', {
 
 
     // ACTIONS (Start) =====================================================================
-    // Ext.apply(this, {
-    //   actions: [
-    //     {
-    //       xtype      : 'button',
-    //       cls        : 'submit',
-    //       tooltip    : 'Run BTS',
-    //       listeners  : {
-    //         beforerender  : this.prepareRunAction,
-    //         click         : this.onRunAction,
-    //         scope         : me
-    //       }
-    //     }
-    //   ]
-    // });
+    Ext.apply(this, {
+      actions: [
+        {
+          xtype      : 'button',
+          cls        : 'submit',
+          tooltip    : 'Run BTS',
+          listeners  : {
+            beforerender  : this.prepareRunAction,
+            click         : this.onRunAction,
+            scope         : me
+          }
+        }
+      ]
+    });
 
     // ACTIONS (End)
    
