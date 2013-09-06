@@ -189,7 +189,11 @@ class Omni::Sku < ActiveRecord::Base
     string   :sku_id    
     string   :style_id        
     string   :color_id  
-    string   :style_display do style.display if style end  
+    string   :style_display do style.display if style end
+    string   :mark_stock
+    string   :mark_size
+    string   :buckhead_identifier  
+    string   :grits_identifier    
  
     text     :display_fulltext, :using => :display
     text     :sku_nbr_fulltext, :using => :sku_nbr
@@ -198,6 +202,10 @@ class Omni::Sku < ActiveRecord::Base
     text     :conversion_type_fulltext, :using => :conversion_type
     text     :color_display_fulltext, :using => :color_display
     text     :size_display_fulltext, :using => :size_display
+    text     :mark_stock_fulltext, :using => :mark_stock
+    text     :mark_size_fulltext, :using => :mark_size
+    text     :buckhead_identifier, :using => :buckhead_identifier
+    text     :grits_identifier, :using => :grits_identifier
   end 
   # INDEXING (End)
 

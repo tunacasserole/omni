@@ -5,13 +5,17 @@ en:
     attributes:
       omni/sku:
         sku_id:                          SKU
-        display:                         Display
+        display:                         Sku Display Name
         sku_nbr:                         SKU Number
         description:                     SKU Description
         short_name:                      Short Name
         pos_name:                        Receipt Name
         design_code:                     Design Code
         state:                           State
+        mark_stock:                      Mark Stock
+        mark_size:                       Mark Size
+        buckhead_identifier:             Buckhead Item Id
+        grits_identifier:                Grits sku id
         maintenance_level:               Maintenance Level
         is_converted:                    Converted SKU
         generic_sku_display:             Generic Sku

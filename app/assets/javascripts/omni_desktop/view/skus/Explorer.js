@@ -12,6 +12,10 @@ Ext.define('Omni.view.skus.Explorer', {
   conversion_typeLabel:                     Omni.i18n.model.Sku.conversion_type,
   color_displayLabel:                       Omni.i18n.model.Sku.color_display,
   size_displayLabel:                        Omni.i18n.model.Sku.size_display,
+  mark_stockLabel:                          Omni.i18n.model.Sku.mark_stock,
+  mark_sizeLabel:                           Omni.i18n.model.Sku.mark_size,
+  buckhead_identifierLabel:                  Omni.i18n.model.Sku.buckhead_identifier,
+  grits_identifierLabel:                    Omni.i18n.model.Sku.grits_identifier,    
   // LABELS (End)
 
    
@@ -54,11 +58,15 @@ Ext.define('Omni.view.skus.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 3,   sortable: true  },
+        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 2,   sortable: true  },
         { header: this.sku_nbrLabel,                                     dataIndex: 'sku_nbr',                            flex: 1,   sortable: true  },
-        { header: this.style_idLabel,                                       dataIndex: 'style_display',                      flex: 1,   sortable: true  },
+        { header: this.style_idLabel,                                    dataIndex: 'style_display',                      flex: 1,   sortable: true  },
+        { header: this.mark_stockLabel,                                  dataIndex: 'mark_stock',                      flex: 1,   sortable: true  },
+        { header: this.mark_stockLabel,                                  dataIndex: 'mark_size',                      flex: 1,   sortable: true  },        
+        { header: this.buckhead_identifierLabel,                         dataIndex: 'buckhead_identifier',                      flex: 1,   sortable: true  },        
+        { header: this.grits_identifierLabel,                            dataIndex: 'grits_identifier',                      flex: 1,   sortable: true  },        
+        { header: this.style_idLabel,                                    dataIndex: 'style_display',                      flex: 2,   sortable: true  },        
         { header: this.site_displayLabel,                                dataIndex: 'site_display',                       flex: 1,   sortable: true  },
-        { header: this.conversion_typeLabel,                             dataIndex: 'conversion_type',                    flex: 1,   sortable: true  },
         { header: this.color_displayLabel,                               dataIndex: 'color_display',                      flex: 1,   sortable: true  },
         { header: this.size_displayLabel,                                dataIndex: 'size_display',                       flex: 1,   sortable: true  }
       ]

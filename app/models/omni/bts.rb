@@ -148,12 +148,13 @@ class Omni::Bts < ActiveRecord::Base
         end
       end
       puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
-      Omni::Bts.solr_reindex(:batch_size => 1000, :include => :bts_details)      
+      # Omni::Bts.solr_reindex(:batch_size => 1000, :include => :bts_details)      
       puts "--finished reindexing bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
     
     puts "--transforming and calculating  at #{Time.now.strftime("%H:%M:%S")}"
     details = self.bts_details
+    puts "\n\n\n count of details is #{details.count}"
     details.each_with_index do |bd,i|
       puts "...transformed and calculated #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1      
       x=bd.transform_and_calculate
@@ -179,6 +180,7 @@ class Omni::Bts < ActiveRecord::Base
     self.save    
     self.send_notice
 
+    Omni::BtsDetail.reindex
     puts "--bts finished with #{self.bts_details.count.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"
   end
 

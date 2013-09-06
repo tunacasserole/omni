@@ -76,9 +76,9 @@ Ext.define('Omni.view.app.Hub', {
      rows: 3,
      tiles: [
        // {title: 'Mark Outlets', colspan: 2, rowspan: 1, cls: 'mark_outlets',  target: {xtype: 'omni-mark_outlets-Explorer'}},       
-      {title: 'Mark Inventory', colspan: 2, rowspan: 1, cls: 'mark_inventory', target: { xtype: 'omni-mark_inventories-Explorer'} },
-      {title: 'RMS Item Dynamic', colspan: 2, rowspan: 1, cls: 'rms_item_dynamics', target: { xtype: 'omni-rms_item_dynamics-Explorer'} },
-      {title: 'Grits BTS', colspan: 2, rowspan: 1, cls: 'grits_bts', target: { xtype: 'omni-grits_bts-Explorer'} },      
+      {title: 'Parker Inventory', colspan: 2, rowspan: 1, cls: 'mark_inventory', target: { xtype: 'omni-mark_inventories-Explorer'} },
+      {title: 'Buckhead Inventory', colspan: 2, rowspan: 1, cls: 'rms_item_dynamics', target: { xtype: 'omni-rms_item_dynamics-Explorer'} },
+      {title: 'True Grits BTS', colspan: 2, rowspan: 1, cls: 'grits_bts', target: { xtype: 'omni-grits_bts-Explorer'} },      
      ] 
      }     
 
