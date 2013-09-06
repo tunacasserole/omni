@@ -66,12 +66,12 @@ Ext.define('Omni.view.mark_inventories.Explorer', {
           header       : this.drop_shipLabel,
           dataIndex    : 'drop_ship',
           flex         : 1
-        },
-        {
-          header       : this.idLabel,
-          dataIndex    : 'id',
-          flex         : 1
         }
+        // {
+        //   header       : this.idLabel,
+        //   dataIndex    : 'id',
+        //   flex         : 1
+        // }
       ]
     });
     // COLUMNS (End)

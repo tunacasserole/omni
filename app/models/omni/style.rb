@@ -409,14 +409,14 @@ class Omni::Style < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :display
-    # string   :style_nbr
+    string   :style_nbr
     string   :subclass_id
-    # string   :subclass_display do subclass.display if subclass end
+    string   :subclass_display do subclass.display if subclass end
     # string   :product_display do product.display if product end
-    # integer  :initial_retail_price
+    string   :style_id
     # string   :supplier_display do supplier.display if supplier end
-    # boolean  :is_enabled
-    # string   :state
+    string  :conversion_type
+    string   :state
  
     text     :display_fulltext,  :using => :display
     # text     :display_fulltext do self.display.gsub(/(\W)/, ' ') end

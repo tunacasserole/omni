@@ -112,12 +112,13 @@ class Omni::BtsDetail < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def transform_and_calculate
-    #puts "transforming #{self.data_source} sku #{self.sku_display}"
+    puts "transforming #{self.data_source} sku #{self.sku_display}"
 
     case self.data_source
       when 'PARKER'  
-        #puts "--on hand--"        
+        puts "--on hand--"        
         self.on_hand = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size).sum(:qoh)
+        puts "stock is: #{self.mark_stock}   size is: #{self.mark_size}"
         # data = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
         # data.each {|x| self.on_hand += x.qoh if x.qoh}
         #puts "--wip--"  

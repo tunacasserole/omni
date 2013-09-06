@@ -63,7 +63,7 @@ Ext.define('Omni.view.bts_details.Inspector',{
               xtype: 'omni-rms_item_dynamics-Explorer',
               defaultSearch: { with:
                 {
-                  buckhead_identifier: {equal_to: me.record.get('ItemID')}
+                  ItemID: {equal_to: me.record.get('buckhead_identifier')}
                 }
               },
               showBadge: true
@@ -73,7 +73,7 @@ Ext.define('Omni.view.bts_details.Inspector',{
               xtype: 'omni-rms_items-Explorer',
               defaultSearch: { with:
                 {
-                  buckhead_identifier: {equal_to: me.record.get('ItemID')}
+                  ItemID: {equal_to: me.record.get('buckhead_identifier')}
                 }
               },
               showBadge: true
@@ -83,7 +83,7 @@ Ext.define('Omni.view.bts_details.Inspector',{
               xtype: 'omni-grits_bts-Explorer',
               defaultSearch: { with:
                 {
-                  grits_identifier: {equal_to: me.record.get('ItemID')}
+                  tg_sku_id: {equal_to: me.record.get('grits_identifier')}
                 }
               },
               showBadge: true
