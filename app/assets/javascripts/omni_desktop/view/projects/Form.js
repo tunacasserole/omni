@@ -51,9 +51,13 @@ Ext.define('Omni.view.projects.Form', {
               allowBlank: true 
             }
           */
-            // { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel  , disabled: true     , allowBlank: true },    
+
+            // { xtype: 'textfield', name: 'project_id',                     fieldLabel: this.project_idLabel                  , allowBlank: false },    
+            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true },    
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
-            { xtype: 'datefield', name: 'release_date',                   fieldLabel: this.release_dateLabel                , allowBlank: true }
+            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },    
+            { xtype: 'textfield', name: 'release_date',                   fieldLabel: this.release_dateLabel                , allowBlank: true }    
+            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false }    
           ]
         }
       ]

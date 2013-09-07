@@ -19,49 +19,6 @@ Ext.define('Omni.view.projects.Inspector',{
     Ext.apply(this, {
       cards: [
         {title: 'Profile',           xtype: 'omni-projects-Form'}
-        ,{title: 'Tasks', xtype: 'omni-tasks-Explorer', module: 'tasks',
-           defaultSearch: { with: 
-             {
-               project_id:   {equal_to: me.record.get('project_id')}
-             }
-          },
-          showBadge: true
-        }        
-        ,{
-          xtype    : 'buildit-CardGroup',
-          title    : 'Support',
-          module   : 'notes',
-          cards    : [
-            {
-              title: 'Notes',
-              xtype: 'buildit-notes-Explorer',
-              defaultSearch: { with:
-                {
-                  notable_type: {equal_to: 'Omni::Project'},
-                  notable_id:   {equal_to: me.record.get('project_id')}
-                }
-              },
-              showBadge: true
-            },
-            {
-              title: 'Attachments',
-              xtype: 'buildit-attachments-Explorer',
-              defaultSearch: { with:
-                {
-                  attachable_type: {equal_to: 'Omni::Project'},
-                  attachable_id:   {equal_to: me.record.get('project_id')}
-                }
-              },
-              showBadge: true
-            },
-            {
-              title:      'Audit',
-              xtype:      'buildit-audits-Explorer',
-              model:      'Omni::Project',
-              model_id:   me.record.get('project_id')
-            }
-          ]
-        }        
       ]
     });
     // CARDS (End)
@@ -69,7 +26,7 @@ Ext.define('Omni.view.projects.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Project',
-      subtitle:  this.record.get('display')
+      subtitle:  this.record.get('project_id')
     });
     // TITLES (End)
 

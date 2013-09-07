@@ -130,14 +130,15 @@ class Omni::Bts < ActiveRecord::Base
     # puts "\n------------- running bts -------------\n"
     if self.is_drop_data
       puts "--destroying pre-existing bts_details at #{Time.now.strftime("%H:%M:%S")}"
-      self.bts_details.delete_all
-      # Omni::BtsDetail.delete_all(:bts_id => self.bts_id)
+      # self.bts_details.delete_all
+      Omni::BtsDetail.delete_all(:bts_id => self.bts_id)
       Omni::BtsStyle.delete_all(:bts_id => self.bts_id)      
       puts "--finished destroying bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
 
     if self.is_create_detail
       puts "--creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
+      puts "--bts_id is: #{self.bts_id}"
       skus_to_process = self.skus
       Omni::BtsDetail.transaction do
         skus_to_process.each_with_index do |x, i|
@@ -159,8 +160,9 @@ class Omni::Bts < ActiveRecord::Base
       puts "xxx"
       puts "...transformed and calculated #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}"# if i.to_s.end_with? '000' #|| i == 1      
       x=bd.transform_and_calculate
+
       puts "--quantity on hand is: #{x.on_hand}"
-      x.save
+      puts "--ERRORS => #{x.errors if x.errors}"
     end
     puts "--finished transforming and calculating at #{Time.now.strftime("%H:%M:%S")}"
 
@@ -190,6 +192,7 @@ class Omni::Bts < ActiveRecord::Base
     # reads the parameters provided in the bts (sku_id, style_id … department_id) and returns a list of skus matching the parameters provided.    
     puts "--getting list of skus to process"
     skus = []
+    puts "--bts_id is: #{self.bts_id}"
     case 
     when self.sku
       skus << self.sku

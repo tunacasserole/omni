@@ -46,21 +46,30 @@ Ext.define('Omni.view.projects.Explorer', {
         //   flex         : 1
         // },
         {
-          header       : this.displayLabel,
-          dataIndex    : 'display',
-          flex         : 3
-        },
-        {
           header       : this.stateLabel,
           dataIndex    : 'state',
           flex         : 1
-        },        
+        },
         {
-          xtype        : 'datefield',
+          header       : this.displayLabel,
+          dataIndex    : 'display',
+          flex         : 1
+        },
+        // {
+        //   header       : this.descriptionLabel,
+        //   dataIndex    : 'description',
+        //   flex         : 1
+        // },
+        {
           header       : this.release_dateLabel,
           dataIndex    : 'release_date',
           flex         : 1
         }
+        // {
+        //   header       : this.is_destroyedLabel,
+        //   dataIndex    : 'is_destroyed',
+        //   flex         : 1
+        // }
       ]
     });
     // COLUMNS (End)
