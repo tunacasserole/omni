@@ -157,12 +157,11 @@ class Omni::Bts < ActiveRecord::Base
     details = Omni::BtsDetail.where(:bts_id => self.bts_id)
     puts "count of details is #{details.count}"
     details.each_with_index do |bd,i|
-      puts "xxx"
       puts "...transformed and calculated #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}"# if i.to_s.end_with? '000' #|| i == 1      
       x=bd.transform_and_calculate
-
-      puts "--quantity on hand is: #{x.on_hand}"
-      puts "--ERRORS => #{x.errors if x.errors}"
+      x.save
+      puts "--quantity on hand is: #{x.on_hand}, WIP is #{x.wip}, Allocated is #{x.allocated}, in transit is #{x.transit}"
+      # puts "--ERRORS => #{x.errors if x.errors}"
     end
     puts "--finished transforming and calculating at #{Time.now.strftime("%H:%M:%S")}"
 

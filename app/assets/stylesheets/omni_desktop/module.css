@@ -6,13 +6,13 @@
 
 /* Inspector Logo */
 .inspector .tab.allocations .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/allocations-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/allocations-26.png);
   background-color: #002B82;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.allocations.active .x-panel-body .logo, .inspector .tab.allocations .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/allocations-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/allocations-26.png);
   background-color: #002B82;
 }
 
@@ -23,7 +23,7 @@
 
 /* Tile */
 .tile.allocations {
-  background-image: url(/assets/omni/omni_icons/allocations-60.png);
+  background-image: url(/assets/omni/desktop/icons/module/allocations-60.png);
   background-color: #002B82 !important;
 }
 
@@ -39,13 +39,13 @@
 
 /* Inspector Logo */
 .inspector .tab.costs .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/costs-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/costs-26.png);
   background-color: #105F86;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.costs.active .x-panel-body .logo, .inspector .tab.costs .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/costs-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/costs-26.png);
   background-color: #105F86;
 }
 
@@ -56,7 +56,7 @@
 
 /* Tile */
 .tile.costs {
-  background-image: url(/assets/omni/omni_icons/costs-60.png);
+  background-image: url(/assets/omni/desktop/icons/module/costs-60.png);
   background-color: #105F86 !important;
 }
 
@@ -73,13 +73,13 @@
 
 /* Inspector Logo */
 .inspector .tab.tasks .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/survey.png);
+  background-image: url(/assets/omni/desktop/icons/module/survey.png);
   background-color: #C076DE;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.tasks.active .x-panel-body .logo, .inspector .tab.tasks .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/survey.png);
+  background-image: url(/assets/omni/desktop/icons/module/survey.png);
   background-color: #C488DB;
 }
 
@@ -90,7 +90,7 @@
 
 /* Tile */
 .tile.tasks {
-  background-image: url(/assets/omni/omni_icons/approvals.png);
+  background-image: url(/assets/omni/desktop/icons/module/approvals.png);
   background-color: #C076DE !important;
 }
 
@@ -107,13 +107,13 @@
 
 /* Inspector Logo */
 .inspector .tab.purchases .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/purchases-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/purchases-26.png);
   background-color: #756BF9;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.purchases.active .x-panel-body .logo, .inspector .tab.purchases .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/purchases-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/purchases-26.png);
   background-color: #756BF9;
 }
 
@@ -124,7 +124,7 @@
 
 /* Tile */
 .tile.purchases {
-  background-image: url(/assets/omni/omni_icons/purchases-60.png);
+  background-image: url(/assets/omni/desktop/icons/module/purchases-60.png);
   background-color: #756BF9 !important;
 }
 
@@ -140,13 +140,13 @@
 
 /* Inspector Logo */
 .inspector .tab.projections .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/projections-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/projections-26.png);
   background-color: #C3004D;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.projections.active .x-panel-body .logo, .inspector .tab.projections .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/projections-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/projections-26.png);
   background-color: #AF0044;
 }
 
@@ -157,7 +157,7 @@
 
 /* Tile */
 .tile.projections {
-  background-image: url(/assets/omni/omni_icons/projections-60.png);
+  background-image: url(/assets/omni/desktop/icons/module/projections-60.png);
   background-color: #C3004D !important;
 }
 
@@ -174,13 +174,13 @@
 
 /* Inspector Logo */
 .inspector .tab.period_results .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/period_results-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/period_results-26.png);
   background-color: #A200FF;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.period_results.active .x-panel-body .logo, .inspector .tab.period_results .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/period_results-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/period_results-26.png);
   background-color: #AF0044;
 }
 
@@ -191,7 +191,7 @@
 
 /* Tile */
 .tile.period_results {
-  background-image: url(/assets/omni/omni_icons/period_results-60.png);
+  background-image: url(/assets/omni/desktop/icons/module/period_results-60.png);
   background-color: #A200FF !important;
 }
 
@@ -207,13 +207,13 @@
 
 /* Inspector Logo */
 .inspector .tab.skus .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/skus-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/skus-26.png);
   background-color: #009999;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.skus.active .x-panel-body .logo, .inspector .tab.skus .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/skus-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/skus-26.png);
   background-color: #AF0044;
 }
 
@@ -224,7 +224,7 @@
 
 /* Tile */
 .tile.skus {
-  background-image: url(/assets/omni/omni_icons/skus-60.png);
+  background-image: url(/assets/omni/desktop/icons/module/skus-60.png);
   background-color: #009999 !important;
 }
 
@@ -241,13 +241,13 @@
 
 /* Inspector Logo */
 .inspector .tab.styles .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/styles-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/styles-26.png);
   background-color: #015965;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.styles.active .x-panel-body .logo, .inspector .tab.styles .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/styles-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/styles-26.png);
   background-color: #AF0044;
 }
 
@@ -258,7 +258,7 @@
 
 /* Tile */
 .tile.styles {
-  background-image: url(/assets/omni/omni_icons/styles-60.png);
+  background-image: url(/assets/omni/desktop/icons/module/styles-60.png);
   background-color: #015965 !important;
 }
 
@@ -275,13 +275,13 @@
 
 /* Inspector Logo */
 .inspector .tab.classifications .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/classifications.png);
+  background-image: url(/assets/omni/desktop/icons/module/classifications.png);
   background-color: #E671B8;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.classifications.active .x-panel-body .logo, .inspector .tab.classifications .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/classifications.png);
+  background-image: url(/assets/omni/desktop/icons/module/classifications.png);
   background-color: #600079;
 }
 
@@ -292,7 +292,7 @@
 
 /* Tile */
 .tile.classifications {
-	background-image: url(/assets/omni/omni_icons/classifications.png);
+	background-image: url(/assets/omni/desktop/icons/module/classifications.png);
 	background-color: #E671B8 !important;
 }
 
@@ -308,13 +308,13 @@
 
 /* Inspector Logo */
 .inspector .tab.categories .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/colorgroups52x52.png);
+  background-image: url(/assets/omni/desktop/icons/module/colorgroups52x52.png);
   background-color: #990000;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.categories.active .x-panel-body .logo, .inspector .tab.categories .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/colorgroups52x52.png);
+  background-image: url(/assets/omni/desktop/icons/module/colorgroups52x52.png);
   background-color: #600079;
 }
 
@@ -325,7 +325,7 @@
 
 /* Tile */
 .tile.categories {
-	background-image: url(/assets/omni/omni_icons/colorgroups52x52.png);
+	background-image: url(/assets/omni/desktop/icons/module/colorgroups52x52.png);
 	background-color: #990000 !important;
 }
 
@@ -341,13 +341,13 @@
 
 /* Inspector Logo */
 .inspector .tab.omni-colors .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/omni-colors.png);
+  background-image: url(/assets/omni/desktop/icons/module/omni-colors.png);
   background-color: #1F92C2;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.omni-colors.active .x-panel-body .logo, .inspector .tab.omni-colors .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/omni-colors.png);
+  background-image: url(/assets/omni/desktop/icons/module/omni-colors.png);
   background-color: #600079;
 }
 
@@ -358,7 +358,7 @@
 
 /* Tile */
 .tile.omni-colors {
-	background-image: url(/assets/omni/omni_icons/omni-colors.png);
+	background-image: url(/assets/omni/desktop/icons/module/omni-colors.png);
 	background-color: #1F92C2 !important;
 }
 
@@ -374,13 +374,13 @@
 
 /* Inspector Logo */
 .inspector .tab.departments .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/departments.png);
+  background-image: url(/assets/omni/desktop/icons/module/departments.png);
   background-color: #276DA5;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.departments.active .x-panel-body .logo, .inspector .tab.departments .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/departments.png);
+  background-image: url(/assets/omni/desktop/icons/module/departments.png);
   background-color: #600079;
 }
 
@@ -391,7 +391,7 @@
 
 /* Tile */
 .tile.departments {
-	background-image: url(/assets/omni/omni_icons/departments1.png);
+	background-image: url(/assets/omni/desktop/icons/module/departments1.png);
 	background-color: #276DA5 !important;
 }
 
@@ -407,13 +407,13 @@
 
 /* Inspector Logo */
 .inspector .tab.products .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/products.png);
+  background-image: url(/assets/omni/desktop/icons/module/products.png);
   background-color: #F09609;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.products.active .x-panel-body .logo, .inspector .tab.products .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/products.png);
+  background-image: url(/assets/omni/desktop/icons/module/products.png);
   background-color: #600079;
 }
 
@@ -424,7 +424,7 @@
 
 /* Tile */
 .tile.products {
-	background-image: url(/assets/omni/omni_icons/products.png);
+	background-image: url(/assets/omni/desktop/icons/module/products.png);
 	background-color: #F09609 !important;
 }
 
@@ -440,13 +440,13 @@
 
 /* Inspector Logo */
 .inspector .tab.product_types .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/product_types.png);
+  background-image: url(/assets/omni/desktop/icons/module/product_types.png);
   background-color: #A05000;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.product_types.active .x-panel-body .logo, .inspector .tab.product_types .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/product_types.png);
+  background-image: url(/assets/omni/desktop/icons/module/product_types.png);
   background-color: #A05000;
 }
 
@@ -457,7 +457,7 @@
 
 /* Tile */
 .tile.product_types {
-	background-image: url(/assets/omni/omni_icons/product_types.png);
+	background-image: url(/assets/omni/desktop/icons/module/product_types.png);
 	background-color: #A05000 !important;
 }
 
@@ -472,13 +472,13 @@
 
 /* Inspector Logo */
 .inspector .tab.subclasses .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/subclasses.png);
+  background-image: url(/assets/omni/desktop/icons/module/subclasses.png);
   background-color: #BD47FF;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.subclasses.active .x-panel-body .logo, .inspector .tab.subclasses .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/subclasses.png);
+  background-image: url(/assets/omni/desktop/icons/module/subclasses.png);
   background-color: #600079;
 }
 
@@ -489,7 +489,7 @@
 
 /* Tile */
 .tile.subclasses {
-	background-image: url(/assets/omni/omni_icons/subclasses.png);
+	background-image: url(/assets/omni/desktop/icons/module/subclasses.png);
 	background-color: #8900AF !important;
 }
 
@@ -505,13 +505,13 @@
 
 /* Inspector Logo */
 .inspector .tab.sizes .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/sizes.png);
+  background-image: url(/assets/omni/desktop/icons/module/sizes.png);
   background-color: #6900A4;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.sizes.active .x-panel-body .logo, .inspector .tab.sizes .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/sizes.png);
+  background-image: url(/assets/omni/desktop/icons/module/sizes.png);
   background-color: #600079;
 }
 
@@ -522,7 +522,7 @@
 
 /* Tile */
 .tile.sizes {
-	background-image: url(/assets/omni/omni_icons/sizes.png);
+	background-image: url(/assets/omni/desktop/icons/module/sizes.png);
 	background-color: #6900A4 !important;
 }
 
@@ -538,13 +538,13 @@
 
 /* Inspector Logo */
 .inspector .tab.size_groups .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/size_groups.png);
+  background-image: url(/assets/omni/desktop/icons/module/size_groups.png);
   background-color: #F0A6D2;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.size_groups.active .x-panel-body .logo, .inspector .tab.size_groups .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/size_groups.png);
+  background-image: url(/assets/omni/desktop/icons/module/size_groups.png);
   background-color: #600079;
 }
 
@@ -555,7 +555,7 @@
 
 /* Tile */
 .tile.size_groups {
-	background-image: url(/assets/omni/omni_icons/size_groups.png);
+	background-image: url(/assets/omni/desktop/icons/module/size_groups.png);
 	background-color: #F0A6D2 !important;
 }
 
@@ -571,13 +571,13 @@
 
 /* Inspector Logo */
 .inspector .tab.size_group_details .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/size_group_details.png);
+  background-image: url(/assets/omni/desktop/icons/module/size_group_details.png);
   background-color: #007976;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.size_group_details.active .x-panel-body .logo, .inspector .tab.size_group_details .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/size_group_details.png);
+  background-image: url(/assets/omni/desktop/icons/module/size_group_details.png);
   background-color: #600079;
 }
 
@@ -588,7 +588,7 @@
 
 /* Tile */
 .tile.size_group_details {
-	background-image: url(/assets/omni/omni_icons/size_group_details.png);
+	background-image: url(/assets/omni/desktop/icons/module/size_group_details.png);
 	background-color: #007976 !important;
 }
 
@@ -604,13 +604,13 @@
 
 /* Inspector Logo */
 .inspector .tab.classifications .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/classifications.png);
+  background-image: url(/assets/omni/desktop/icons/module/classifications.png);
   background-color: #103210;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.classifications.active .x-panel-body .logo, .inspector .tab.classifications .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/classifications.png);
+  background-image: url(/assets/omni/desktop/icons/module/classifications.png);
   background-color: #600079;
 }
 
@@ -621,7 +621,7 @@
 
 /* Tile */
 .tile.classifications {
-	background-image: url(/assets/omni/omni_icons/classifications.png);
+	background-image: url(/assets/omni/desktop/icons/module/classifications.png);
 	background-color: #103210 !important;
 }
 
@@ -638,13 +638,13 @@
 
 /* Inspector Logo */
 .inspector .tab.contracts .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/contracts.png);
+  background-image: url(/assets/omni/desktop/icons/module/contracts.png);
   background-color: #C3004D;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.contracts.active .x-panel-body .logo, .inspector .tab.contracts .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/contracts.png);
+  background-image: url(/assets/omni/desktop/icons/module/contracts.png);
   background-color: #AF0044;  
 }
 
@@ -655,7 +655,7 @@
 
 /* Tile */
 .tile.contracts {
-	background-image: url(/assets/omni/omni_icons/bill.png);
+	background-image: url(/assets/omni/desktop/icons/module/bill.png);
 	background-color: #C3004D !important;
 }
 
@@ -673,13 +673,13 @@
 
 /* Inspector Logo */
 .inspector .tab.customers .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/customers.png);
+  background-image: url(/assets/omni/desktop/icons/module/customers.png);
   background-color: #0075C9;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.customers.active .x-panel-body .logo, .inspector .tab.customers .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/customers.png);
+  background-image: url(/assets/omni/desktop/icons/module/customers.png);
   background-color: #005491;
 }
 
@@ -690,7 +690,7 @@
 
 /* Tile */
 .tile.customers {
-	background-image: url(/assets/omni/omni_icons/customers.png);
+	background-image: url(/assets/omni/desktop/icons/module/customers.png);
 	background-color: #0075C9 !important;
 }
 
@@ -710,13 +710,13 @@
 
 /* Inspector Logo */
 .inspector .tab.projects .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/projects.png);
+  background-image: url(/assets/omni/desktop/icons/module/projects.png);
   background-color: #71C8EB;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.projects.active .x-panel-body .logo, .inspector .tab.projects .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/projects.png);
+  background-image: url(/assets/omni/desktop/icons/module/projects.png);
   background-color: #2A7896;
 }
 
@@ -727,7 +727,7 @@
 
 /* Tile */
 .tile.projects {
-	background-image: url(/assets/omni/omni_icons/projects.png);
+	background-image: url(/assets/omni/desktop/icons/module/projects.png);
 	background-color: #71C8EB !important;
 }
 
@@ -744,13 +744,13 @@
 
 /* Inspector Logo */
 .inspector .tab.contacts .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/contacts.png);
+  background-image: url(/assets/omni/desktop/icons/module/contacts.png);
   background-color: #B60D44;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.contacts.active .x-panel-body .logo, .inspector .tab.contacts .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/contacts.png);
+  background-image: url(/assets/omni/desktop/icons/module/contacts.png);
   background-color: #84052E;
 }
 
@@ -761,7 +761,7 @@
 
 /* Tile */
 .tile.contacts {
-	background-image: url(/assets/omni/omni_icons/contacts.png);
+	background-image: url(/assets/omni/desktop/icons/module/contacts.png);
 	background-color: #B60D44 !important;
 }
 
@@ -779,13 +779,13 @@
 
 /* Inspector Logo */
 .inspector .tab.omni-colors .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/omni-colors-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/omni-colors-26.png);
   background-color: #F6BD00;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.omni-colors.active .x-panel-body .logo, .inspector .tab.omni-colors .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/omni-colors-26.png);
+  background-image: url(/assets/omni/desktop/icons/module/omni-colors-26.png);
   background-color: #856500;
 }
 
@@ -797,7 +797,7 @@
 
 /* Tile */
 .tile.omni-colors {
-	background-image: url(/assets/omni/omni_icons/colors-60.png);
+	background-image: url(/assets/omni/desktop/icons/module/colors-60.png);
 	background-color: #F6BD00 !important;
 }
 
@@ -814,13 +814,13 @@
 
 /* Inspector Logo */
 .inspector .tab.sales_calls .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/sales_calls.png);
+  background-image: url(/assets/omni/desktop/icons/module/sales_calls.png);
   background-color: #00A5A6;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.sales_calls.active .x-panel-body .logo, .inspector .tab.sales_calls .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/sales_calls.png);
+  background-image: url(/assets/omni/desktop/icons/module/sales_calls.png);
   background-color: #007373;
 }
 
@@ -831,7 +831,7 @@
 
 /* Tile */
 .tile.sales_calls {
-	background-image: url(/assets/omni/omni_icons/sales_calls.png);
+	background-image: url(/assets/omni/desktop/icons/module/sales_calls.png);
 	background-color: #00A5A6 !important;
 }
 
@@ -849,13 +849,13 @@
 
 /* Inspector Logo */
 .inspector .tab.telephones .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/telephones.png);
+  background-image: url(/assets/omni/desktop/icons/module/telephones.png);
   background-color: #757575;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.telephones.active .x-panel-body .logo, .inspector .tab.telephones .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/telephones.png);
+  background-image: url(/assets/omni/desktop/icons/module/telephones.png);
   background-color: #3C3C3C;
 }
 
@@ -866,7 +866,7 @@
 
 /* Tile */
 .tile.telephones {
-  background-image: url(/assets/omni/omni_icons/telephones.png);
+  background-image: url(/assets/omni/desktop/icons/module/telephones.png);
   background-color: #757575 !important;
 }
 
@@ -884,13 +884,13 @@
 
 /* Inspector Logo */
 .inspector .tab.addresses .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/addresses.png);
+  background-image: url(/assets/omni/desktop/icons/module/addresses.png);
   background-color: #757575;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.addresses.active .x-panel-body .logo, .inspector .tab.addresses .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/addresses.png);
+  background-image: url(/assets/omni/desktop/icons/module/addresses.png);
   background-color: #3C3C3C;
 }
 
@@ -910,13 +910,13 @@
 
 /* Inspector Logo */
 .inspector .tab.email_addresses .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/email_addresses.png);
+  background-image: url(/assets/omni/desktop/icons/module/email_addresses.png);
   background-color: #757575;
 }
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.email_addresses.active .x-panel-body .logo, .inspector .tab.email_addresses .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/email_addresses.png);
+  background-image: url(/assets/omni/desktop/icons/module/email_addresses.png);
   background-color: #3C3C3C;
 }
 
@@ -936,7 +936,7 @@
 
 /* Inspector Logo */
 .inspector .tab.approvals .x-panel-body .logo, .inspector .tab.approvals .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/approvals.png);
+  background-image: url(/assets/omni/desktop/icons/module/approvals.png);
   background-color: #69A900;
 }
 
@@ -955,7 +955,7 @@
 
 /* Inspector Logo */
 .inspector .tab.survey .x-panel-body .logo, .inspector .tab.survey .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/survey.png);
+  background-image: url(/assets/omni/desktop/icons/module/survey.png);
   background-color: #4E0077;
 }
 
@@ -974,13 +974,13 @@
 
 /* Inspector Logo */
 .inspector .tab.tracks .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/tracks.png);
+  background-image: url(/assets/omni/desktop/icons/module/tracks.png);
   background-color: #FF2082;
 }
 
 /* Inspector Logo Active & Hover*/
 .inspector .tab.tracks.active .x-panel-body .logo, .inspector .tab.tracks .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/tracks.png);
+  background-image: url(/assets/omni/desktop/icons/module/tracks.png);
   background-color: #8A0942;
 }
 
@@ -999,7 +999,7 @@
 
 /* Inspector Logo */
 .inspector .tab.financial_scorecards .x-panel-body .logo, .inspector .tab.financial_scorecards .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/financial_scorecards.png);
+  background-image: url(/assets/omni/desktop/icons/module/financial_scorecards.png);
   background-color: #5F5F5F;
 }
 
@@ -1018,7 +1018,7 @@
 
 /* Inspector Logo */
 .inspector .tab.monthly_reports .x-panel-body .logo, .inspector .tab.monthly_reports .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/monthly_reports.png);
+  background-image: url(/assets/omni/desktop/icons/module/monthly_reports.png);
   background-color: #5F5F5F;
 }
 
@@ -1036,7 +1036,7 @@
 
 /* Inspector Logo */
 .inspector .tab.customer_needs .x-panel-body .logo, .inspector .tab.customer_needs .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/omni_icons/customer_needs.png);
+  background-image: url(/assets/omni/desktop/icons/module/customer_needs.png);
   background-color: #5F5F5F;
 }
 
@@ -1054,7 +1054,7 @@
 
 /* Inspector Logo */
 .inspector .tab.imports .x-panel-body .logo {
-  background-image: url(/assets/omni/omni_icons/opportunities.png);
+  background-image: url(/assets/omni/desktop/icons/module/opportunities.png);
   background-color: #0075C9;
 }
 
@@ -1070,7 +1070,7 @@
 
 /* Tile */
 .tile.imports {
-  background-image: url(/assets/omni/omni_icons/opportunities.png);
+  background-image: url(/assets/omni/desktop/icons/module/opportunities.png);
   background-color: #0075C9 !important;
 }
 

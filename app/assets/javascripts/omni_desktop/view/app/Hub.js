@@ -68,7 +68,19 @@ Ext.define('Omni.view.app.Hub', {
      ] 
   }   
 
- // Section: Mark Research //
+    // Section: Partners //
+
+   ,{
+   title: 'Partners',
+     columns: 2,
+     rows: 3,
+     tiles: [
+       {title: 'Suppliers', colspan: 2, rowspan: 1, cls: 'contracts',  target: {xtype: 'omni-suppliers-Explorer'}},       
+       {title: 'Sites', colspan: 2, rowspan: 1, cls: 'samples', target: { xtype: 'omni-sites-Explorer'} }
+     ] 
+     }     
+
+    // Section: Mark Research //
 
    ,{
    title: 'Legacy Inventory',

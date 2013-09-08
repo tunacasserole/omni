@@ -69,6 +69,7 @@ class Omni::MarkTransferLine < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string :stock_nbr
+    string :size
   end
   # INDEXING (End)
 

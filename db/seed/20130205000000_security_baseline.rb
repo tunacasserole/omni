@@ -47,6 +47,22 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
+  user_id: '811166D4D50A11E2B45820C9D04MARTY',
+  first_name: 'Martin',
+  last_name: 'Walls',
+  email_address: 'marty@buildit.io',
+  sso_plugin_code: 'BUILDIT'
+)
+
+Buildit::User.create(
+  user_id: '811166D4D50A11E2B45820C9D04JASON',
+  first_name: 'Jason',
+  last_name: 'Ihaia',
+  email_address: 'jason@buildit.io',
+  sso_plugin_code: 'BUILDIT'
+)
+
+Buildit::User.create(
   user_id: '811166D4D50A11E2B45820C9D04AAJIM',
   first_name: 'Jim',
   last_name: 'Mullady',
@@ -83,7 +99,8 @@ Buildit::User.create(
   first_name: 'Bob',
   last_name: 'Sustak',
   email_address: 'bob.sustak@buckheaduniforms.com',
-  sso_plugin_code: 'BUILDIT'
+  sso_plugin_code: 'BUILDIT',
+  api_token:  'J0ZWpblOYA'
 )
 
 Buildit::User.create(
@@ -91,7 +108,8 @@ Buildit::User.create(
   first_name: 'Bob',
   last_name: 'Sustak',
   email_address: 'bob',
-  sso_plugin_code: 'BUILDIT'
+  sso_plugin_code: 'BUILDIT',
+  api_token:  'L5+p+qgR5p'
 )
 
 Buildit::User.create(
@@ -165,18 +183,23 @@ role = Buildit::Role.create(
 )
 
 # PSU POWER ROLE
-Buildit::Role.create(:role_id=> '323244F0204011EFCFE9040CCEDPOWER', :role_code => 'POWER_USER', :description => 'access to most of the omni system')
+Buildit::Role.create(
+  role_id:                 '323244F0204011EFCFE9040CCEDPOWER',
+  role_code:               'POWER_USER',
+  description:             'access to most of the omni system',
+  is_enabled:              true,
+  auto_assign:             false
+)
 
 # USER ROLES =====================================================================
 # everyone is at least a power user
 Buildit::User.all.each do |u|
   Buildit::UserRole.create(:user_id=>u.user_id,:role_id => '323244F0204011EFCFE9040CCEDPOWER', :is_enabled => true)
-  u.save
 end
 
-# Tom and Aaron are system admins
-Buildit::User.where("email_address in ('a','aaron@buildit.io','t','thenderson@parkersu.com','bob.sustak@buckheaduniforms.com')").each do |u|
-  Buildit::UserRole.create(:user_id => u.user_id, :role_id => '323244F0204011EFCFE904SUPERADMIN')
+# Tom, Aaron, Bob, Marty, and Jason are system admins
+Buildit::User.where("email_address in ('a','aaron@buildit.io','t','thenderson@parkersu.com','bob.sustak@buckheaduniforms.com','bob','jason@buildit.io','marty@buildit.io')").each do |u|
+  Buildit::UserRole.create(:user_id => u.user_id, :role_id => '323244F0204011EFCFE904SUPERADMIN', :is_enabled => true)
 end
 
 # APPLICATIONS =====================================================================

@@ -21,7 +21,7 @@ Ext.define('Omni.view.bts_details.Inspector',{
         {title: 'Profile',           xtype: 'omni-bts_details-Form'}
         ,{
           xtype    : 'buildit-CardGroup',
-          title    : 'Legacy Research Center',
+          title    : 'Parker Research Center',
           module   : 'notes',
           cards    : [
             {
@@ -50,8 +50,7 @@ Ext.define('Omni.view.bts_details.Inspector',{
               title: 'Transfers',
               xtype: 'omni-mark_transfer_lines-Explorer',
               defaultSearch: { with:
-                {
-                  // status_id: {equal_to: 8},                  
+                {       
                   stock_nbr: {equal_to: me.record.get('mark_stock')},
                   // size: {equal_to: me.record.get('mark_size')}
                 }
@@ -59,6 +58,24 @@ Ext.define('Omni.view.bts_details.Inspector',{
               showBadge: true
             }
             ,{
+              title: 'Order History',
+              xtype: 'omni-mark_order_reports-Explorer',
+              defaultSearch: { with:
+                {                  
+                  stock_nbr: {equal_to: me.record.get('mark_stock')},
+                  // size: {equal_to: me.record.get('mark_size')}
+                }
+              },
+              showBadge: true
+            }            
+          ]
+        }
+         ,{
+          xtype    : 'buildit-CardGroup',
+          title    : 'Buckhead Research Center',
+          module   : 'notes',
+          cards    : [
+            {
               title: 'Buckhead Inventory',
               xtype: 'omni-rms_item_dynamics-Explorer',
               defaultSearch: { with:
@@ -78,7 +95,14 @@ Ext.define('Omni.view.bts_details.Inspector',{
               },
               showBadge: true
             }
-            ,{
+          ]
+        }
+         ,{
+          xtype    : 'buildit-CardGroup',
+          title    : 'Grits Research Center',
+          module   : 'notes',
+          cards    : [
+            {
               title: 'Grits Inventory',
               xtype: 'omni-grits_bts-Explorer',
               defaultSearch: { with:
@@ -89,7 +113,7 @@ Ext.define('Omni.view.bts_details.Inspector',{
               showBadge: true
             }
           ]
-        }         
+        }                 
       ]
     });
     // CARDS (End)

@@ -116,15 +116,12 @@ class Omni::BtsDetail < ActiveRecord::Base
 
     case self.data_source
       when 'PARKER'  
-        puts "--on hand--"        
+        puts "stock is: #{self.mark_stock}   size is: #{self.mark_size}"        
+        # puts "--on hand--"        
         self.on_hand = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size).sum(:qoh)
-        puts "stock is: #{self.mark_stock}   size is: #{self.mark_size}"
-        # data = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
-        # data.each {|x| self.on_hand += x.qoh if x.qoh}
         #puts "--wip--"  
         data = Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
         data.each {|x| self.wip += x.cut_wip + x.plant_wip + x.cont_wip} 
-        # data.each {|i| #puts "WIPS => #{self.cut_wip.to_s}, #{self.plant_wip.to_s}, #{self.cont_wip.to_s}"}          
         #puts "--allocated, in transit--"
         data = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
         data.each do |x|
