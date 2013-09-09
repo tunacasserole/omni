@@ -29,6 +29,13 @@ Ext.define('Omni.view.companies.Inspector', {
           title: 'Profile',
           xtype: 'omni-companies-Form'
         }
+        ,{title: 'Regions', xtype: 'omni-regions-Explorer', module: 'contacts',
+           defaultSearch: { with: 
+             {
+               company_id:   {equal_to: me.record.get('company_id')}
+             }
+          }
+        }        
       ]
     });
     // CARDS (End)

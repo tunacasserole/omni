@@ -36,7 +36,7 @@ Ext.define('Omni.view.sizes.Explorer', {
     Ext.applyIf(this, {
       size_nbrLabel: Omni.i18n.model.Size.size_nbr,
       size_typeLabel: Omni.i18n.model.Size.size_type,
-      short_nameLabel: Omni.i18n.model.Size.short_name,
+      displayLabel: Omni.i18n.model.Size.display,
       concatenated_nameLabel: Omni.i18n.model.Size.concatenated_name,
       dimension_1Label: Omni.i18n.model.Size.dimension_1,
       dimension_2Label: Omni.i18n.model.Size.dimension_2

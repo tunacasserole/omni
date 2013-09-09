@@ -87,6 +87,7 @@ class Omni::Region < ActiveRecord::Base
     string   :short_name
     string   :company_display do company.display if company end
     string   :user_display do user.full_name if user end
+    string   :company_id
  
     text     :display_fulltext, :using => :display
     text     :region_nbr_fulltext, :using => :region_nbr

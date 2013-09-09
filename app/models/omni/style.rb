@@ -18,10 +18,13 @@ class Omni::Style < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
+  validates    :subclass_id,                     :presence    => true  
   validates    :display,                         :uniqueness  => true
   validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true  
   validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true  
   validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true  
+  validates    :product_type,                    :lookup      => 'PRODUCT_TYPE',            :allow_nil => true  
+
   validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true  
   validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true  
   validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true  
@@ -30,7 +33,6 @@ class Omni::Style < ActiveRecord::Base
   validates    :order_package_type,              :lookup      => 'ORDER_PACKAGE_TYPE',         :allow_nil => true  
   validates    :maintenance_level,               :lookup      => 'MAINTENANCE_LEVEL',          :allow_nil => true  
   validates    :sku_name_method,                 :lookup      => 'SKU_NAME_METHOD',            :allow_nil => true  
-  validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
   # VALIDATIONS (End)
 
 

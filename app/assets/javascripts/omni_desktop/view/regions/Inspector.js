@@ -29,13 +29,12 @@ Ext.define('Omni.view.regions.Inspector', {
           title: 'Profile',
           xtype: 'omni-regions-Form'
         },
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        },
-        {
-          title: 'Districts',
-          xtype: 'omni-districts-Explorer'
+        ,{title: 'Districts', xtype: 'omni-districts-Explorer', module: 'contacts',
+           defaultSearch: { with: 
+             {
+               region_id:   {equal_to: me.record.get('region_id')}
+             }
+          }
         }
       ]
     });

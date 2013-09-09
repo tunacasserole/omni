@@ -67,34 +67,34 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   tasks - pink - C3004D
+   company - pink - C3004D
 ---------------------------------------------------------------------------------------
 */
 
 /* Inspector Logo */
-.inspector .tab.tasks .x-panel-body .logo {
+.inspector .tab.company .x-panel-body .logo {
   background-image: url(/assets/omni/desktop/icons/module/survey.png);
   background-color: #C076DE;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.tasks.active .x-panel-body .logo, .inspector .tab.tasks .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/survey.png);
+.inspector .tab.company.active .x-panel-body .logo, .inspector .tab.company .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/company.png);
   background-color: #C488DB;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.tasks.active .x-panel-body, .inspector .tab.tasks.active .x-panel-body:hover, .inspector .tab.tasks .x-panel-body:hover {
+.inspector .tab.company.active .x-panel-body, .inspector .tab.company.active .x-panel-body:hover, .inspector .tab.company .x-panel-body:hover {
   background: #C076DE;
 }
 
 /* Tile */
-.tile.tasks {
-  background-image: url(/assets/omni/desktop/icons/module/approvals.png);
+.tile.company {
+  background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
   background-color: #C076DE !important;
 }
 
-.tile.tasks:hover {
+.tile.company:hover {
   background-color: #C488DB !important;
 }
 
@@ -134,34 +134,34 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   projections - pink - C3004D
+   bts_source - pink - 000058
 ---------------------------------------------------------------------------------------
 */
 
 /* Inspector Logo */
-.inspector .tab.projections .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/projections-26.png);
-  background-color: #C3004D;
+.inspector .tab.bts_source .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/bts_source-26.png);
+  background-color: #000058;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.projections.active .x-panel-body .logo, .inspector .tab.projections .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/projections-26.png);
+.inspector .tab.bts_source.active .x-panel-body .logo, .inspector .tab.bts_source .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/bts_source-26.png);
   background-color: #AF0044;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.projections.active .x-panel-body, .inspector .tab.projections.active .x-panel-body:hover, .inspector .tab.projections .x-panel-body:hover {
-  background: #C3004D;
+.inspector .tab.bts_source.active .x-panel-body, .inspector .tab.bts_source.active .x-panel-body:hover, .inspector .tab.bts_source .x-panel-body:hover {
+  background: #000058;
 }
 
 /* Tile */
-.tile.projections {
-  background-image: url(/assets/omni/desktop/icons/module/projections-60.png);
-  background-color: #C3004D !important;
+.tile.bts_source {
+  background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
+  background-color: #000058 !important;
 }
 
-.tile.projections:hover {
+.tile.bts_source:hover {
   background-color: #AF0044 !important;
 }
 
@@ -302,67 +302,67 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   categories - maroon1 - 990000
+   subclasses - maroon1 - 990000
 ---------------------------------------------------------------------------------------
 */
 
 /* Inspector Logo */
-.inspector .tab.categories .x-panel-body .logo {
+.inspector .tab.subclasses .x-panel-body .logo {
   background-image: url(/assets/omni/desktop/icons/module/colorgroups52x52.png);
   background-color: #990000;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.categories.active .x-panel-body .logo, .inspector .tab.categories .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/colorgroups52x52.png);
+.inspector .tab.subclasses.active .x-panel-body .logo, .inspector .tab.subclasses .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/subclasses.png);
   background-color: #600079;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.categories.active .x-panel-body, .inspector .tab.categories.active .x-panel-body:hover, .inspector .tab.categories .x-panel-body:hover {
+.inspector .tab.subclasses.active .x-panel-body, .inspector .tab.subclasses.active .x-panel-body:hover, .inspector .tab.subclasses .x-panel-body:hover {
   background: #990000;
 }
 
 /* Tile */
-.tile.categories {
-	background-image: url(/assets/omni/desktop/icons/module/colorgroups52x52.png);
+.tile.subclasses {
+	background-image: url(/assets/omni/desktop/icons/module/subclasses.png);
 	background-color: #990000 !important;
 }
 
-.tile.categories:hover {
+.tile.subclasses:hover {
 	background-color: #600079 !important;
 }
 
 /*
 ---------------------------------------------------------------------------------------
-   omni-colors - light blue - 1F92C2
+   colors - light blue - 1F92C2
 ---------------------------------------------------------------------------------------
 */
 
 /* Inspector Logo */
-.inspector .tab.omni-colors .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/omni-colors.png);
+.inspector .tab.colors .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/colors.png);
   background-color: #1F92C2;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.omni-colors.active .x-panel-body .logo, .inspector .tab.omni-colors .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/omni-colors.png);
+.inspector .tab.colors.active .x-panel-body .logo, .inspector .tab.colors .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/colors.png);
   background-color: #600079;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.omni-colors.active .x-panel-body, .inspector .tab.omni-colors.active .x-panel-body:hover, .inspector .tab.omni-colors .x-panel-body:hover {
+.inspector .tab.colors.active .x-panel-body, .inspector .tab.colors.active .x-panel-body:hover, .inspector .tab.colors .x-panel-body:hover {
   background: #1F92C2;
 }
 
 /* Tile */
-.tile.omni-colors {
-	background-image: url(/assets/omni/desktop/icons/module/omni-colors.png);
+.tile.colors {
+	background-image: url(/assets/omni/desktop/icons/module/colors.png);
 	background-color: #1F92C2 !important;
 }
 
-.tile.omni-colors:hover {
+.tile.colors:hover {
 	background-color: #600079 !important;
 }
 
@@ -380,7 +380,7 @@
 
 /* Inspector Logo Active & Hover */
 .inspector .tab.departments.active .x-panel-body .logo, .inspector .tab.departments .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/departments.png);
+  background-image: url(/assets/omni/desktop/icons/module/departments1.png);
   background-color: #600079;
 }
 
@@ -401,34 +401,34 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   products - F09609
+   product_setup - F09609
 ---------------------------------------------------------------------------------------
 */
 
 /* Inspector Logo */
-.inspector .tab.products .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/products.png);
-  background-color: #F09609;
+.inspector .tab.product_setup .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/product_setup.png);
+  background-color: #00A5A6;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.products.active .x-panel-body .logo, .inspector .tab.products .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/products.png);
+.inspector .tab.product_setup.active .x-panel-body .logo, .inspector .tab.product_setup .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/product_setup.png);
   background-color: #600079;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.products.active .x-panel-body, .inspector .tab.products.active .x-panel-body:hover, .inspector .tab.products .x-panel-body:hover {
-  background: #F09609;
+.inspector .tab.product_setup.active .x-panel-body, .inspector .tab.product_setup.active .x-panel-body:hover, .inspector .tab.product_setup .x-panel-body:hover {
+  background: #00A5A6;
 }
 
 /* Tile */
-.tile.products {
-	background-image: url(/assets/omni/desktop/icons/module/products.png);
-	background-color: #F09609 !important;
+.tile.product_setup {
+	background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
+	background-color: #00A5A6 !important;
 }
 
-.tile.products:hover {
+.tile.product_setup:hover {
 	background-color: #600079 !important;
 }
 
@@ -555,7 +555,7 @@
 
 /* Tile */
 .tile.size_groups {
-	background-image: url(/assets/omni/desktop/icons/module/size_groups.png);
+	background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
 	background-color: #F0A6D2 !important;
 }
 
@@ -631,71 +631,105 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   CONTRACTS
+   BTS
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.contracts .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/contracts.png);
+.inspector .tab.bts .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/bts.png);
   background-color: #C3004D;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.contracts.active .x-panel-body .logo, .inspector .tab.contracts .x-panel-body:hover .logo {
+.inspector .tab.bts.active .x-panel-body .logo, .inspector .tab.bts .x-panel-body:hover .logo {
   background-image: url(/assets/omni/desktop/icons/module/contracts.png);
   background-color: #AF0044;  
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.contracts.active .x-panel-body, .inspector .tab.contracts.active .x-panel-body:hover, .inspector .tab.contracts .x-panel-body:hover {
+.inspector .tab.bts.active .x-panel-body, .inspector .tab.bts.active .x-panel-body:hover, .inspector .tab.bts .x-panel-body:hover {
   background: #C3004D;
 }
 
 /* Tile */
-.tile.contracts {
+.tile.bts {
 	background-image: url(/assets/omni/desktop/icons/module/bill.png);
 	background-color: #C3004D !important;
 }
 
-.tile.contracts:hover {
+.tile.bts:hover {
 	background-color: #AF0044 !important; 
 }
 
 
 /*
 ---------------------------------------------------------------------------------------
-   CUSTOMERS
+   inventories
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.customers .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/customers.png);
+.inspector .tab.inventories .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/inventories.png);
   background-color: #0075C9;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.customers.active .x-panel-body .logo, .inspector .tab.customers .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/customers.png);
+.inspector .tab.inventories.active .x-panel-body .logo, .inspector .tab.inventories .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/inventories.png);
   background-color: #005491;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.customers.active .x-panel-body, .inspector .tab.customers.active .x-panel-body:hover, .inspector .tab.customers .x-panel-body:hover {
+.inspector .tab.inventories.active .x-panel-body, .inspector .tab.inventories.active .x-panel-body:hover, .inspector .tab.inventories .x-panel-body:hover {
   background: #0075C9;
 }
 
 /* Tile */
-.tile.customers {
-	background-image: url(/assets/omni/desktop/icons/module/customers.png);
-	background-color: #0075C9 !important;
+.tile.inventories {
+  background-image: url(/assets/omni/desktop/icons/module/inventories.png);
+  background-color: #D6E629 !important;
 }
 
-.tile.customers:hover {
-	background-color: #005491 !important;
+.tile.inventories:hover {
+  background-color: #005491 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   legacy - F0A6D2
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.legacy .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/legacy.png);
+  background-color: #F0A6D2;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.legacy.active .x-panel-body .logo, .inspector .tab.legacy .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/legacy.png);
+  background-color: #005491;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.legacy.active .x-panel-body, .inspector .tab.legacy.active .x-panel-body:hover, .inspector .tab.legacy .x-panel-body:hover {
+  background: #F0A6D2;
+}
+
+/* Tile */
+.tile.legacy {
+  background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
+  background-color: #F0A6D2 !important;
+}
+
+.tile.legacy:hover {
+  background-color: #005491 !important;
 }
 
 
@@ -703,69 +737,69 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   projects
+   project_tracking
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.projects .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/projects.png);
+.inspector .tab.project_tracking .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
   background-color: #71C8EB;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.projects.active .x-panel-body .logo, .inspector .tab.projects .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/projects.png);
+.inspector .tab.project_tracking.active .x-panel-body .logo, .inspector .tab.project_tracking .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
   background-color: #2A7896;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.projects.active .x-panel-body, .inspector .tab.projects.active .x-panel-body:hover, .inspector .tab.projects .x-panel-body:hover {
+.inspector .tab.project_tracking.active .x-panel-body, .inspector .tab.tile_default.active .x-panel-body:hover, .inspector .tab.project_tracking .x-panel-body:hover {
   background: #71C8EB;
 }
 
 /* Tile */
-.tile.projects {
-	background-image: url(/assets/omni/desktop/icons/module/projects.png);
+.tile.project_tracking {
+	background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
 	background-color: #71C8EB !important;
 }
 
-.tile.projects:hover {
+.tile.project_tracking:hover {
 	background-color: #2A7896 !important;
 }
 
 /*
 ---------------------------------------------------------------------------------------
-   CONTACTS
+   network
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.contacts .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/contacts.png);
+.inspector .tab.network .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/network.png);
   background-color: #B60D44;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.contacts.active .x-panel-body .logo, .inspector .tab.contacts .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/contacts.png);
+.inspector .tab.network.active .x-panel-body .logo, .inspector .tab.network .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
   background-color: #84052E;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.contacts.active .x-panel-body, .inspector .tab.contacts.active .x-panel-body:hover, .inspector .tab.contacts .x-panel-body:hover {
+.inspector .tab.network.active .x-panel-body, .inspector .tab.network.active .x-panel-body:hover, .inspector .tab.network .x-panel-body:hover {
   background: #B60D44;
 }
 
 /* Tile */
-.tile.contacts {
-	background-image: url(/assets/omni/desktop/icons/module/contacts.png);
+.tile.network {
+	background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
 	background-color: #B60D44 !important;
 }
 
-.tile.contacts:hover {
+.tile.network:hover {
 	background-color: #84052E !important;
 }
 
@@ -778,99 +812,99 @@
 
 
 /* Inspector Logo */
-.inspector .tab.omni-colors .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/omni-colors-26.png);
+.inspector .tab.colors .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/colors-26.png);
   background-color: #F6BD00;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.omni-colors.active .x-panel-body .logo, .inspector .tab.omni-colors .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/omni-colors-26.png);
+.inspector .tab.colors.active .x-panel-body .logo, .inspector .tab.colors .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/colors-26.png);
   background-color: #856500;
 }
 
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.omni-colors.active .x-panel-body, .inspector .tab.omni-colors.active .x-panel-body:hover, .inspector .tab.omni-colors .x-panel-body:hover {
+.inspector .tab.colors.active .x-panel-body, .inspector .tab.colors.active .x-panel-body:hover, .inspector .tab.colors .x-panel-body:hover {
   background: #F6BD00;
 }
 
 /* Tile */
-.tile.omni-colors {
+.tile.colors {
 	background-image: url(/assets/omni/desktop/icons/module/colors-60.png);
 	background-color: #F6BD00 !important;
 }
 
-.tile.omni-colors:hover {
+.tile.colors:hover {
 	background-color: #CA9B00 !important;
 }
 
 /*
 ---------------------------------------------------------------------------------------
-   SALES CALLS
+   sites
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.sales_calls .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/sales_calls.png);
-  background-color: #00A5A6;
+.inspector .tab.sites .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/sites.png);
+  background-color: #B60D44;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.sales_calls.active .x-panel-body .logo, .inspector .tab.sales_calls .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/sales_calls.png);
+.inspector .tab.sites.active .x-panel-body .logo, .inspector .tab.sites .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/sites.png);
   background-color: #007373;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.sales_calls.active .x-panel-body, .inspector .tab.sales_calls.active .x-panel-body:hover, .inspector .tab.sales_calls .x-panel-body:hover {
-  background: #00A5A6;
+.inspector .tab.sites.active .x-panel-body, .inspector .tab.sites.active .x-panel-body:hover, .inspector .tab.sites .x-panel-body:hover {
+  background: #B60D44;
 }
 
 /* Tile */
-.tile.sales_calls {
-	background-image: url(/assets/omni/desktop/icons/module/sales_calls.png);
-	background-color: #00A5A6 !important;
+.tile.sites {
+	background-image: url(/assets/omni/desktop/icons/module/sites.png);
+	background-color: #B60D44 !important;
 }
 
-.tile.sales_calls:hover {
+.tile.sites:hover {
 	background-color: #007373 !important;
 }
 
 
 /*
 ---------------------------------------------------------------------------------------
-   TELEPHONES
+   product_hierarchy
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.telephones .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/telephones.png);
-  background-color: #757575;
+.inspector .tab.product_hierarchy .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/product_hierarchy.png);
+  background-color: #0075C9;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.telephones.active .x-panel-body .logo, .inspector .tab.telephones .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/telephones.png);
+.inspector .tab.product_hierarchy.active .x-panel-body .logo, .inspector .tab.product_hierarchy .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/product_hierarchy.png);
   background-color: #3C3C3C;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.telephones.active .x-panel-body, .inspector .tab.telephones.active .x-panel-body:hover, .inspector .tab.telephones .x-panel-body:hover {
-  background: #757575;
+.inspector .tab.product_hierarchy.active .x-panel-body, .inspector .tab.product_hierarchy.active .x-panel-body:hover, .inspector .tab.product_hierarchy .x-panel-body:hover {
+  background: #0075C9;
 }
 
 /* Tile */
-.tile.telephones {
-  background-image: url(/assets/omni/desktop/icons/module/telephones.png);
-  background-color: #757575 !important;
+.tile.product_hierarchy {
+  background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
+  background-color: #0075C9 !important;
 }
 
-.tile.telephones:hover {
+.tile.product_hierarchy:hover {
   background-color: #3C3C3C !important;
 }
 
@@ -1047,33 +1081,33 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   IMPORTS
+   locations
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.imports .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/opportunities.png);
+.inspector .tab.locations .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/locations.png);
   background-color: #0075C9;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.imports.active .x-panel-body .logo, .inspector .tab.imports .x-panel-body:hover .logo {
+.inspector .tab.locations.active .x-panel-body .logo, .inspector .tab.locations .x-panel-body:hover .logo {
   background-color: #005491;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.imports.active .x-panel-body, .inspector .tab.imports.active .x-panel-body:hover, .inspector .tab.imports .x-panel-body:hover {
+.inspector .tab.locations.active .x-panel-body, .inspector .tab.locations.active .x-panel-body:hover, .inspector .tab.locations .x-panel-body:hover {
   background: #0075C9;
 }
 
 /* Tile */
-.tile.imports {
-  background-image: url(/assets/omni/desktop/icons/module/opportunities.png);
+.tile.locations {
+  background-image: url(/assets/omni/desktop/icons/module/locations.png);
   background-color: #0075C9 !important;
 }
 
-.tile.imports:hover {
+.tile.locations:hover {
   background-color: #005491 !important;
 }

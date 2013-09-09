@@ -2,7 +2,8 @@ Ext.define('Omni.view.sites.Explorer', {
 
   extend : 'Buildit.ux.explorer.Panel',
   alias  : 'widget.omni-sites-Explorer',
-
+  allowFind  :  true,
+  
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.Site'),
 
@@ -65,16 +66,16 @@ Ext.define('Omni.view.sites.Explorer', {
         //   dataIndex    : 'site_id',
         //   flex         : 1
         // },
-        // {
-        //   header       : this.displayLabel,
-        //   dataIndex    : 'display',
-        //   flex         : 1
-        // },
         {
-          header       : this.site_nameLabel,
-          dataIndex    : 'site_name',
+          header       : this.displayLabel,
+          dataIndex    : 'display',
           flex         : 1
         },
+        // {
+        //   header       : this.site_nameLabel,
+        //   dataIndex    : 'site_name',
+        //   flex         : 1
+        // },
         // {
         //   header       : this.parent_site_idLabel,
         //   dataIndex    : 'parent_site_id',
@@ -106,7 +107,7 @@ Ext.define('Omni.view.sites.Explorer', {
           flex         : 1
         },
         {
-          header       : this.locationLabel,
+          header       : this.location_idLabel,
           dataIndex    : 'location_display',
           flex         : 1
         },

@@ -29,120 +29,120 @@ Ext.define('Omni.view.skus.Inspector', {
           xtype: 'omni-skus-Form',
           module: 'contracts'
         }
-        ,{
-          title: 'Aliases', 
-          xtype: 'omni-sku_aliases-Explorer', module: 'survey',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }                
-        ,{
-          title: 'Locations',
-          xtype: 'omni-sku_locations-Explorer', module: 'cfars',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }          
-        ,{
-          title: 'Substitutes',
-          xtype: 'omni-sku_substitutes-Explorer', module: 'projects',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }
-        ,{
-          title: 'Prices',
-          xtype: 'omni-sku_prices-Explorer', module: 'tracks',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }
-        ,{
-          title: 'Promotional Prices',
-          xtype: 'omni-sku_promo_prices-Explorer', module: 'sales_calls',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }
-        ,{
-          title: 'Suppliers',
-          xtype: 'omni-sku_suppliers-Explorer', module: 'samples',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }
-        ,{
-          title: 'BOMs',
-          xtype: 'omni-boms-Explorer', module: 'monthly_reports', module: 'contacts',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }        
-        ,{
-          title: 'Sales History',
-          xtype: 'omni-skus-Chart', module: 'customers',
-          defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}               
-             }
-          }
-        }
-        ,{title: 'Period Results', xtype: 'omni-period_results-Explorer', module: 'approvals',
-           defaultSearch: { with: 
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }                            
-        ,{
-          xtype    : 'buildit-CardGroup',
-          title    : 'Support',
-          module   : 'notes',
-          cards    : [
-            {
-              title: 'Notes',
-              xtype: 'buildit-notes-Explorer',
-              defaultSearch: { with:
-                {
-                  notable_type: {equal_to: 'Omni::Sku'},
-                  notable_id:   {equal_to: me.record.get('sku_id')}
-                }
-              },
-              showBadge: true
-            },
-            {
-              title: 'Attachments',
-              xtype: 'buildit-attachments-Explorer',
-              defaultSearch: { with:
-                {
-                  attachable_type: {equal_to: 'Omni::Sku'},
-                  attachable_id:   {equal_to: me.record.get('sku_id')}
-                }
-              },
-              showBadge: true
-            },
-            {
-              title:      'Audit',
-              xtype:      'buildit-audits-Explorer',
-              model:      'Omni::Sku',
-              model_id:   me.record.get('sku_id')
-            }
-          ]
-        }
+        // ,{
+        //   title: 'Aliases', 
+        //   xtype: 'omni-sku_aliases-Explorer', module: 'survey',
+        //   defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
+        //      }
+        //   }
+        // }                
+        // ,{
+        //   title: 'Locations',
+        //   xtype: 'omni-sku_locations-Explorer', module: 'cfars',
+        //   defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
+        //      }
+        //   }
+        // }          
+        // ,{
+        //   title: 'Substitutes',
+        //   xtype: 'omni-sku_substitutes-Explorer', module: 'projects',
+        //   defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
+        //      }
+        //   }
+        // }
+        // ,{
+        //   title: 'Prices',
+        //   xtype: 'omni-sku_prices-Explorer', module: 'tracks',
+        //   defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
+        //      }
+        //   }
+        // }
+        // ,{
+        //   title: 'Promotional Prices',
+        //   xtype: 'omni-sku_promo_prices-Explorer', module: 'sales_calls',
+        //   defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
+        //      }
+        //   }
+        // }
+        // ,{
+        //   title: 'Suppliers',
+        //   xtype: 'omni-sku_suppliers-Explorer', module: 'samples',
+        //   defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
+        //      }
+        //   }
+        // }
+        // ,{
+        //   title: 'BOMs',
+        //   xtype: 'omni-boms-Explorer', module: 'monthly_reports', module: 'contacts',
+        //   defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
+        //      }
+        //   }
+        // }        
+        // ,{
+        //   title: 'Sales History',
+        //   xtype: 'omni-skus-Chart', module: 'customers',
+        //   defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}               
+        //      }
+        //   }
+        // }
+        // ,{title: 'Period Results', xtype: 'omni-period_results-Explorer', module: 'approvals',
+        //    defaultSearch: { with: 
+        //      {
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
+        //      }
+        //   }
+        // }                            
+        // ,{
+        //   xtype    : 'buildit-CardGroup',
+        //   title    : 'Support',
+        //   module   : 'notes',
+        //   cards    : [
+        //     {
+        //       title: 'Notes',
+        //       xtype: 'buildit-notes-Explorer',
+        //       defaultSearch: { with:
+        //         {
+        //           notable_type: {equal_to: 'Omni::Sku'},
+        //           notable_id:   {equal_to: me.record.get('sku_id')}
+        //         }
+        //       },
+        //       showBadge: true
+        //     },
+        //     {
+        //       title: 'Attachments',
+        //       xtype: 'buildit-attachments-Explorer',
+        //       defaultSearch: { with:
+        //         {
+        //           attachable_type: {equal_to: 'Omni::Sku'},
+        //           attachable_id:   {equal_to: me.record.get('sku_id')}
+        //         }
+        //       },
+        //       showBadge: true
+        //     },
+        //     {
+        //       title:      'Audit',
+        //       xtype:      'buildit-audits-Explorer',
+        //       model:      'Omni::Sku',
+        //       model_id:   me.record.get('sku_id')
+        //     }
+        //   ]
+        // }
       ]
     });
     // CARDS (End)

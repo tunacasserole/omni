@@ -72,10 +72,10 @@ Ext.define('Omni.view.sites.Form', {
             }
           */
 
-            { xtype: 'textfield', name: 'site_id',                        fieldLabel: this.site_idLabel                     , allowBlank: false },    
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
+            // { xtype: 'textfield', name: 'site_id',                        fieldLabel: this.site_idLabel                     , allowBlank: false },    
+            // { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
             { xtype: 'textfield', name: 'site_name',                      fieldLabel: this.site_nameLabel                   , allowBlank: false },    
-            { xtype: 'textfield', name: 'parent_site_id',                 fieldLabel: this.parent_site_idLabel              , allowBlank: false },    
+            // { xtype: 'textfield', name: 'parent_site_id',                 fieldLabel: this.parent_site_idLabel              , allowBlank: false },    
             { xtype: 'textfield', name: 'school_nbr',                     fieldLabel: this.school_nbrLabel                  , allowBlank: false },    
             { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: false },    
             { xtype: 'textfield', name: 'short_name',                     fieldLabel: this.short_nameLabel                  , allowBlank: false },    
@@ -97,7 +97,7 @@ Ext.define('Omni.view.sites.Form', {
             { xtype: 'textfield', name: 'longitude',                      fieldLabel: this.longitudeLabel                   , allowBlank: false },    
             { xtype: 'textfield', name: 'phone',                          fieldLabel: this.phoneLabel                       , allowBlank: false },    
             { xtype: 'textfield', name: 'fax',                            fieldLabel: this.faxLabel                         , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false }    
+            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false }    
           ]
         }
       ]
