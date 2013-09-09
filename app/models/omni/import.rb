@@ -23,8 +23,8 @@ class Omni::Import < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates :import_id,                        :presence    => true
-  validates :data_source,                      :lookup      => 'DATA_SOURCE',                      :allow_nil => false  
-  validates :job_type,                         :lookup      => 'JOB_TYPE',                         :allow_nil => false      
+  # validates :data_source,                      :lookup      => 'DATA_SOURCE',                      :allow_nil => false  
+  # validates :job_type,                         :lookup      => 'JOB_TYPE',                         :allow_nil => false      
   # VALIDATIONS (End)
 
 

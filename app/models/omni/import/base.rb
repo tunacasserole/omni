@@ -22,7 +22,7 @@ class Omni::Import::Base
 
   def self.constants
     @@project_id = Buildit::StudioProject.all(:project_code => Buildit::Framework.configuration.studio['project']).first.project_id    
-    @@data_folder = File.join(Rails.root, 'vendor','gems','omni','db','meta')
+    @@data_folder = File.join(Rails.root,'db','meta')
     @@data_file = 'core_data table assignment, v6.xlsx'
     @@models = ActiveRecord::Base.subclasses.collect {|type| type.name}.sort
     @@poly_hash = {'stockable_id' => 'StockLedgerActivity','noteable_id' => 'Note','pickable_id' => 'PickTicket'}
@@ -43,20 +43,20 @@ class Omni::Import::Base
     # Sample call:  @@models = excel_to_hash File.join(Rails.root,'db/meta/model_headers.xlsx'), 'models'
     puts "started reading excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop}"    
     rows = []
-    file = File.open(File.join(folder_name, file_name), mode = 'r')
-    # excel = Excelx.new(file.path, nil, :ignore)
-    # tab_name = 'Sheet1' if !excel.sheets.index(tab_name)
-    # excel.default_sheet = excel.sheets.index(tab_name) + 1
-    # header = excel.row(1)
-    # puts "going into loop"
-    # (2..1000).each do |i|
-    #   # break if i > 100
-    #   next unless excel.row(i)[0]
-    #   row = Hash[[header, excel.row(i)].transpose]      
-    #   row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
-    #   rows << row
-    # end
-    puts "finished reading excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop}"    
+      # file = File.open(File.join(folder_name, file_name), mode = 'r')
+      # excel = Excelx.new(file.path, nil, :ignore)
+      # tab_name = 'Sheet1' if !excel.sheets.index(tab_name)
+      # excel.default_sheet = excel.sheets.index(tab_name) + 1
+      # header = excel.row(1)
+      # puts "going into loop"
+      # (2..1000).each do |i|
+      #   # break if i > 100
+      #   next unless excel.row(i)[0]
+      #   row = Hash[[header, excel.row(i)].transpose]      
+      #   row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
+      #   rows << row
+      # end
+    puts "finished reading #{rows.count.to_s} rows from excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop} "    
     return rows
   end
 

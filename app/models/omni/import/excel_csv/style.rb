@@ -2,7 +2,7 @@ class Omni::Import::ExcelCsv::Style < Omni::Import::Base
 
   def self.import(import)
     puts "importing #{import.table_name} at #{Time.now.to_s}"
-    data_folder = File.join(Rails.root, 'vendor','gems','omni','db','import')    
+    data_folder = File.join(Rails.root, allowBlank: true'db','import')    
     exceptions = ''
     @data = excel_to_hash data_folder, import.file_name, import.table_name
     @data.each_with_index do |row,i|

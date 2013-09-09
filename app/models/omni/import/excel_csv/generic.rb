@@ -3,7 +3,7 @@ class Omni::Import::ExcelCsv::Generic < Omni::Import::Base
   def self.import(import)
     parent_hash = {'company_id' => 'Company', 'category_id' => 'Category', 'classification_id' => 'Classification', 'department_id' => 'Department', 'region_id' => 'Region','product_id' => 'Product','subclass_id' => 'Subclass', 'buyer_user_id' => 'User', 'product_type_id' => 'ProductType','supplier_id' => 'Supplier','add_on_sku_id'=>'Sku','site_id' => 'Site','style_id' => 'Style','color_id'=> 'Color','size_id'=>'Size','generic_style_id'=>'Style','size_group_id'=>'SizeGroup'}    
     puts "importing #{import.table_name} at #{Time.now.to_s}"
-    data_folder = File.join(Rails.root, 'vendor','gems','omni','db','import')    
+    data_folder = File.join(Rails.root, 'db')    
     exceptions = ''
     @data = excel_to_hash data_folder, import.file_name, import.table_name  
     model_name = "Omni::" + import.model_name

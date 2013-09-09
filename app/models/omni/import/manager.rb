@@ -3,7 +3,8 @@ class Omni::Import::Manager < Omni::Import::Base
   def self.run_by_id(import_id)
     puts "--run by id - importing"
     Omni::Import::Base.load_import import_id
-    "Omni::Import::#{@@import.data_source.capitalize}::#{@@import.job_type.capitalize}".constantize.import(@@import) 
+    puts "Omni::Import::#{@@import.data_source.capitalize}::#{@@import.job_type.capitalize}" + '**********\n'
+    "Omni::Import::#{@@import.data_source}::#{@@import.job_type.capitalize}".constantize.import(@@import) 
     puts "--end of importing"        
   end
 
