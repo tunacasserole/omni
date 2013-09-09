@@ -26,11 +26,11 @@ Ext.define('Omni.view.app.Hub', {
 
   {
    title: 'Back to School',
-     columns: 4,
+     columns: 2,
      rows: 3,
      tiles: [
         {title: 'Run BTS report', colspan: 2, rowspan: 2, cls: 'bts',  target: {xtype: 'omni-bts-Explorer'}},       
-        {title: 'Period Results', colspan: 2, rowspan: 2, cls: 'bts_source',  target: {xtype: 'omni-period_results-Explorer'} },       
+        // {title: 'Period Results', colspan: 2, rowspan: 2, cls: 'bts_source',  target: {xtype: 'omni-period_results-Explorer'} },       
         {title: 'Projections', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-projections-Explorer', allowInlineEdit: true} },
         {title: 'Inventory', colspan: 2, rowspan: 1, cls: 'bts_source',  target: {xtype: 'omni-inventories-Explorer'} },                            
      ] 
@@ -97,17 +97,6 @@ Ext.define('Omni.view.app.Hub', {
      }     
 
     // Section: Legacy Data //
-
-   ,{
-   title: 'Legacy Data',
-     columns: 2,
-     rows: 3,
-     tiles: [
-      {title: 'Parker Inventory', colspan: 2, rowspan: 1, cls: 'legacy', target: { xtype: 'omni-mark_inventories-Explorer'} },
-      {title: 'Buckhead Inventory', colspan: 2, rowspan: 1, cls: 'legacy', target: { xtype: 'omni-rms_item_dynamics-Explorer'} },
-      {title: 'True Grits BTS', colspan: 2, rowspan: 1, cls: 'legacy', target: { xtype: 'omni-grits_bts-Explorer'} }    
-     ] 
-     }     
 
 ,{
    title: 'Project Tracking',

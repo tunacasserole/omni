@@ -47,6 +47,18 @@ Ext.define('Omni.view.app.AdminHub', {
      ] 
      }     
 
+  //
+   ,{
+   title: 'Legacy Data',
+     columns: 2,
+     rows: 3,
+     tiles: [
+      {title: 'Parker Inventory', colspan: 2, rowspan: 1, cls: 'legacy', target: { xtype: 'omni-mark_inventories-Explorer'} },
+      {title: 'Buckhead Inventory', colspan: 2, rowspan: 1, cls: 'legacy', target: { xtype: 'omni-rms_item_dynamics-Explorer'} },
+      {title: 'True Grits BTS', colspan: 2, rowspan: 1, cls: 'legacy', target: { xtype: 'omni-grits_bts-Explorer'} }    
+     ] 
+     }     
+
     // Section: Projections //
 
     ,{
