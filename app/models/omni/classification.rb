@@ -12,12 +12,16 @@ class Omni::Classification < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  #supports_logical_delete
+  #supports_audit
+  #supports_revisioning
+  supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :department_id,                   :presence    => true
+  validates    :display,                         :uniqueness    => true
+  validates    :department_id,                   :presence      => true
   # VALIDATIONS (End)
 
 

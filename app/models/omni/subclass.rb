@@ -12,20 +12,24 @@ class Omni::Subclass < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  #supports_logical_delete
+  #supports_audit
+  #supports_revisioning
+  supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :classification_id,               :presence    => true
+  validates    :display,                         :uniqueness    => true
+  validates    :classification_id,               :presence      => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
   default      :subclass_id,                      :override  =>  false,        :with  => :guid              
   default      :subclass_nbr,                     :override  =>  false,        :with  => :sequence,         :named=>"SUBCLASS_NBR"
-  default      :markup_percent_high_limit,        :override  =>  false,        :to    => 0                  
-  default      :markup_percent_low_limit,         :override  =>  false,        :to    => 0                  
+  default      :markup_percent_high_limit,        :override  =>  true,         :to    => 0                  
+  default      :markup_percent_low_limit,         :override  =>  true,         :to    => 0                  
   default      :is_destroyed,                     :override  =>  false,        :to    => false              
   # DEFAULTS (End)
 
@@ -98,8 +102,8 @@ class Omni::Subclass < ActiveRecord::Base
     string   :subclass_nbr
     string   :classification_id
     string   :classification_display do classification.display if classification end
-    integer  :markup_percent_high_limit
-    integer  :markup_percent_low_limit
+    # integer  :markup_percent_high_limit
+    # integer  :markup_percent_low_limit
  
     text     :display_fulltext, :using => :display
     text     :subclass_nbr_fulltext, :using => :subclass_nbr
