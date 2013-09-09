@@ -42,6 +42,8 @@ class Omni::Purchase < ActiveRecord::Base
   # default :fob_point,                                                         :to   => lambda{|m| "#{m.supplier_fob_point}"}
   default :is_ship_cancel,                                                    :to   => lambda{|m| "#{m.supplier.is_ship_cancel}"}
   default :estimated_lead_time_days,                                          :to   => lambda{|m| "#{m.supplier.lead_time}"}
+  default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days}
+  default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30}
   
   # DEFAULTS (End)
 
@@ -147,53 +149,18 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-  before_destroy :cascading_delete
+  # before_destroy :cascading_delete
 
-  def compute_total_order_units
-# Option 1 - Iterate through each detail record    
-    # :total_order_units = 0
-    # :total_order_cost = 0
-    # :total_order_weight = 0
-    # :total_order_cube = 0
-#     self.purchase_details.each do
-#       :total_order_units = :total_order_units + (:units_ordered * :order_pack_size)
-#       # :total_order_cost = :total_order_cost + ((:units_ordered * :order_pack_size) * (:supplier_cost / :order_cost_units))
-#     end
+  hook :before_update, :recompute_delivery_date, 10 
+  hook :before_update, :recompute_cancel_date, 20
 
-# # Option 2 - Use multiple "sum" statements
-    self.purchase_details.sum('units_ordered * order_pack_size') if self.purchase_details
-    
-  end
-
-  def compute_total_order_cost
-
-    self.purchase_details.sum('(units_ordered * order_pack_size) * (supplier_cost / order_cost_units)')
-
-  end
+  # hook :before_create, :set_defaults, 10
 
   # HOOKS (End)
 
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
-
-  ### CALLBACKS ###
-    after_transition :on => :costing, :do => :process_costing
-    after_transition :on => :release, :do => :process_release
-    after_transition :on => :approve, :do => :process_approve
-    after_transition :on => :print,   :do => :process_print 
-
-  ### EVENTS ###
-    event :costing do
-      transition any => :costing
-      transition :costing => :draft
-    end
-    event :release do
-      transition :draft => :pending_approval
-    end
-    event :approve do
-      transition :pending_approval => :open
-    end
 
   ### STATES ###
     state :draft do
@@ -214,7 +181,6 @@ class Omni::Purchase < ActiveRecord::Base
       validates :ship_via,                                   :presence => true
       validates :fob_point,                                  :presence => true
       validate  :transition_to_pending_approval
-
     end
 
     state :open do
@@ -229,12 +195,23 @@ class Omni::Purchase < ActiveRecord::Base
 
     end
 
-  def process_print
-    # Create a pdf of the purchase order for printing 
-    p = Omni::Print.new(:source_model => 'Purchase', :source_id => self.purchase_id)
-    p.save
-    p.print
-  end
+  ### CALLBACKS ###
+    after_transition :on => :costing, :do => :process_costing
+    after_transition :on => :release, :do => :process_release
+    after_transition :on => :approve, :do => :process_approve
+    after_transition :on => :print,   :do => :process_print 
+
+  ### EVENTS ###
+    event :costing do
+      transition any => :costing
+      transition :costing => :draft
+    end
+    event :release do
+      transition :draft => :pending_approval
+    end
+    event :approve do
+      transition :pending_approval => :open
+    end
 
   end
   # STATES (End)  
@@ -389,6 +366,42 @@ class Omni::Purchase < ActiveRecord::Base
 
   end
 
+  def compute_total_order_units
+# Option 1 - Iterate through each detail record    
+    # :total_order_units = 0
+    # :total_order_cost = 0
+    # :total_order_weight = 0
+    # :total_order_cube = 0
+#     self.purchase_details.each do
+#       :total_order_units = :total_order_units + (:units_ordered * :order_pack_size)
+#       # :total_order_cost = :total_order_cost + ((:units_ordered * :order_pack_size) * (:supplier_cost / :order_cost_units))
+#     end
+
+# # Option 2 - Use multiple "sum" statements
+    self.purchase_details.sum('units_ordered * order_pack_size') if self.purchase_details
+    
+  end
+
+  def compute_total_order_cost
+    self.purchase_details.sum('(units_ordered * order_pack_size) * (supplier_cost / order_cost_units)')
+  end
+
+  def set_defaults
+    self.delivery_date = self.order_date + self.estimated_lead_time_days
+    self.cancel_not_received_by_date = self.delivery_date + 30
+  end
+
+  def recompute_delivery_date
+    if self.order_date_changed? || self.estimated_lead_time_days_changed?
+      self.delivery_date = self.order_date + self.estimated_lead_time_days
+    end
+  end
+
+  def recompute_cancel_date
+    if self.delivery_date_changed?
+      self.cancel_not_received_by_date = self.delivery_date + 30
+    end
+  end
 
   # Sends an email notification to the user when the purchase has finished running
   def send_notice
@@ -402,6 +415,7 @@ class Omni::Purchase < ActiveRecord::Base
     message.queue
   end
 
+  # Get the email address 
   def approver_email
     # Search event table for user_id of approver
     return 'aaron@buildit.io'
@@ -409,6 +423,13 @@ class Omni::Purchase < ActiveRecord::Base
 
   def print
     Omni::Purchase::Helpers.print(self)
+  end
+
+  def process_print
+    # Create a pdf of the purchase order for printing 
+    p = Omni::Print.new(:source_model => 'Purchase', :source_id => self.purchase_id)
+    p.save
+    p.print
   end
 
   # HELPERS (End)

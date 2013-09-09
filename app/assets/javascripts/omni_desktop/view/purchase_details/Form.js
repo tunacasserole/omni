@@ -8,6 +8,11 @@ Ext.define('Omni.view.purchase_details.Form', {
 
     var me = this;
 
+    var disabled = this.record.get('state') != 'draft' ? true : false;
+    if (this.record.phantom){
+      disabled = false
+    };
+
     // var supplier = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false)
 
     // FILTER (Start) =======================================================================
@@ -74,7 +79,8 @@ Ext.define('Omni.view.purchase_details.Form', {
            ,{ xtype: 'textfield',
               name: 'purchase_line_nbr',
               fieldLabel: this.purchase_line_nbrLabel,
-              allowBlank: true 
+              allowBlank: true,
+              disabled: true
             }
            ,{ xtype: 'textfield',
               name: 'state',
@@ -98,7 +104,8 @@ Ext.define('Omni.view.purchase_details.Form', {
               displayField: 'display', 
               queryField: 'display',
               valueField: 'sku_supplier_id',
-              itemTpl:'{display}' 
+              itemTpl:'{display}',
+              disabled: disabled
             }
            ,{ xtype: 'textfield',
               name: 'supplier_item_identifier',
@@ -142,14 +149,16 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.supplier_costLabel,
               minValue: 0,
               decimalPrecision: 2,
-              allowBlank: true 
+              allowBlank: true,
+              disabled: disabled
             }
            ,{ xtype: 'numberfield',
               name: 'order_cost_units',
               fieldLabel: this.order_cost_unitsLabel,
               minValue: 1,
               decimalPrecision: 0,
-              allowBlank: false 
+              allowBlank: false,
+              disabled: disabled 
             }
            ,{ xtype: 'buildit-Locator',
               name: 'cost_id',
@@ -164,12 +173,15 @@ Ext.define('Omni.view.purchase_details.Form', {
            ,{ xtype: 'textfield',
               name: 'invoice_cost',
               fieldLabel: this.invoice_costLabel,
+              disabled: true,
+              decimalPrecision: 2,
               allowBlank: true 
             }
            ,{ xtype: 'textfield',
               name: 'inventory_cost',
               fieldLabel: this.inventory_costLabel,
               disabled: true,
+              decimalPrecision: 2,
               allowBlank: true 
             }
            ,{ xtype: 'textfield',
@@ -192,7 +204,8 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'units_ordered',
               fieldLabel: this.units_orderedLabel,
               minValue: 0,
-              allowBlank: true 
+              allowBlank: true,
+              disabled: disabled
             }
            ,{ xtype: 'textfield',
               name: 'units_approved',
@@ -209,7 +222,8 @@ Ext.define('Omni.view.purchase_details.Form', {
            ,{ xtype: 'textfield',
               name: 'order_pack_size',
               fieldLabel: this.order_pack_sizeLabel,
-              allowBlank: true
+              allowBlank: true,
+              disabled: disabled
             }
            ,{ xtype: 'buildit-Lookup',
               name: 'order_pack_type',

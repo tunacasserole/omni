@@ -343,7 +343,7 @@ Ext.define('Omni.view.purchases.Form', {
         },
         {
           xtype      : 'button',
-          cls        : 'submit',
+          cls        : 'approve',
           tooltip    : 'Approve Purchase Order',
           listeners  : {
             beforerender  : this.prepareApproveAction,

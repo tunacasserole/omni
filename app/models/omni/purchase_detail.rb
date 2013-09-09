@@ -17,7 +17,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   #supports_logical_delete
   #supports_audit
   #supports_revisioning
-  #supports_fulltext
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -26,7 +26,6 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   validates :purchase_detail_id,              :uniqueness  => true
   validates :sku_supplier_id,                 :presence    => true
   validates :units_ordered,                   :numericality => {:greater_than => 0}
-
   # VALIDATIONS (End)
 
 
@@ -35,7 +34,6 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
   default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
   default :units_ordered,                                      :to   => 0
-
   # DEFAULTS (End)
 
 
@@ -46,7 +44,6 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'  
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
-
   # ASSOCIATIONS (End)
 
 
@@ -55,9 +52,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     map :sku_display,                   :to => 'sku.display'
     map :sku_supplier_display,          :to => 'sku_supplier.display'
     map :purchase_display,              :to => 'purchase.display'
-
   end
-
   # MAPPED ATTRIBUTES (End)
 
   
@@ -165,6 +160,8 @@ class Omni::PurchaseDetail < ActiveRecord::Base
         self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
         self.description = self.sku_supplier.description
         self.color_name = self.sku.color_name
+        size_id = Omni::Sku.where(:sku_id => self.sku_id).first.size_id
+        self.size_name = Omni::Size.where(:size_id => size_id).first.size_nbr
         # self.size_name = self.sku.size_name
         self.order_pack_type = self.sku_supplier.pack_type
         case self.order_pack_type
@@ -186,7 +183,8 @@ class Omni::PurchaseDetail < ActiveRecord::Base
             self.order_multiple = 1
         end
         self.supplier_cost = self.sku_supplier.supplier_cost
-        self.inventory_cost = self.supplier_cost / self.order_cost_units        
+        self.inventory_cost = self.supplier_cost / self.order_cost_units
+        self.invoice_cost = self.supplier_cost
       end
     end
   end

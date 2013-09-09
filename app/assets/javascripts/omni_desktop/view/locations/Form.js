@@ -12,8 +12,6 @@ Ext.define('Omni.view.locations.Form', {
     
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
-      displayLabel:                               Omni.i18n.model.Location.display,
-      displayLabel:                               Omni.i18n.model.Location.display,
       descriptionLabel:                           Omni.i18n.model.Location.description,
       short_nameLabel:                            Omni.i18n.model.Location.short_name,
       location_nbrLabel:                          Omni.i18n.model.Location.location_nbr,
@@ -99,13 +97,17 @@ Ext.define('Omni.view.locations.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: true,     xtype: 'textfield'        },
-            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: true,     xtype: 'textfield'        },
-            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: true,     xtype: 'textfield'        },
-            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textarea'         },
             { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'location_nbr',                   fieldLabel: this.location_nbrLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'location_brand',                 fieldLabel: this.location_brandLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { xtype: 'buildit-Lookup',
+              name: 'location_brand',
+              fieldLabel: this.locationBrandLabel,
+              allowBlank: true,
+              category:   'LOCATION_BRAND'
+            }
+
           ]
         },
         {
@@ -116,17 +118,22 @@ Ext.define('Omni.view.locations.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'line_1',                         fieldLabel: this.line_1Label,                     allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'line_1',                         fieldLabel: this.line_1Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'line_2',                         fieldLabel: this.line_2Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'line_3',                         fieldLabel: this.line_3Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'line_4',                         fieldLabel: this.line_4Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'city',                           fieldLabel: this.cityLabel,                       allowBlank: false,  disabled: false,    xtype: 'textfield'        },
-            { name: 'state_code',                     fieldLabel: this.state_codeLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'zip',                            fieldLabel: this.zipLabel,                        allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'city',                           fieldLabel: this.cityLabel,                       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { xtype: 'buildit-Lookup',
+              name: 'state_code',
+              fieldLabel: this.stateCodeLabel,
+              allowBlank: true,
+              category:   'STATE_CODE'
+            },
+            { name: 'zip',                            fieldLabel: this.zipLabel,                        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'country',                        fieldLabel: this.countryLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'latitude',                       fieldLabel: this.latitudeLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'longitude',                      fieldLabel: this.longitudeLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'phone',                          fieldLabel: this.phoneLabel,                      allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'phone',                          fieldLabel: this.phoneLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'fax',                            fieldLabel: this.faxLabel,                        allowBlank: true,   disabled: false,    xtype: 'textfield'        }
           ]
         },
@@ -164,21 +171,100 @@ Ext.define('Omni.view.locations.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'time_zone',                      fieldLabel: this.time_zoneLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sunday_open_time',               fieldLabel: this.sunday_open_timeLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sunday_close_time',              fieldLabel: this.sunday_close_timeLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'monday_open_time',               fieldLabel: this.monday_open_timeLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'monday_close_time',              fieldLabel: this.monday_close_timeLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'tuesday_open_time',              fieldLabel: this.tuesday_open_timeLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'tuesday_close_time',             fieldLabel: this.tuesday_close_timeLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'wednesday_open_time',            fieldLabel: this.wednesday_open_timeLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'wednesday_close_time',           fieldLabel: this.wednesday_close_timeLabel,       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'thursday_open_time',             fieldLabel: this.thursday_open_timeLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'thursday_close_time',            fieldLabel: this.thursday_close_timeLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'friday_open_time',               fieldLabel: this.friday_open_timeLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'friday_close_time',              fieldLabel: this.friday_close_timeLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'saturday_open_time',             fieldLabel: this.saturday_open_timeLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'saturday_close_time',            fieldLabel: this.saturday_close_timeLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { xtype: 'buildit-Lookup',
+              name: 'time_zone',
+              fieldLabel: this.timeZoneLabel,
+              allowBlank: true,
+              category:   'TIME_ZONE'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'sunday_open_time',
+              fieldLabel: this.sundayOpenTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'sunday_close_time',
+              fieldLabel: this.sundayCloseTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'monday_open_time',
+              fieldLabel: this.mondayOpenTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'monday_close_time',
+              fieldLabel: this.mondayCloseTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'tuesday_open_time',
+              fieldLabel: this.tuesdayOpenTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'tuesday_close_time',
+              fieldLabel: this.tuesdayCloseTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+
+            { xtype: 'buildit-Lookup',
+              name: 'wednesday_open_time',
+              fieldLabel: this.wednesdayOpenTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'wednesday_close_time',
+              fieldLabel: this.wednesdayCloseTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+
+            { xtype: 'buildit-Lookup',
+              name: 'thursday_open_time',
+              fieldLabel: this.thursdayOpenTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'thursday_close_time',
+              fieldLabel: this.thursdayCloseTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+
+            { xtype: 'buildit-Lookup',
+              name: 'friday_open_time',
+              fieldLabel: this.fridayOpenTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'friday_close_time',
+              fieldLabel: this.fridayCloseTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+
+            { xtype: 'buildit-Lookup',
+              name: 'saturday_open_time',
+              fieldLabel: this.saturdayOpenTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            },
+            { xtype: 'buildit-Lookup',
+              name: 'saturday_close_time',
+              fieldLabel: this.saturdayCloseTimeLabel,
+              allowBlank: true,
+              category:   'CLOCK_TIME'
+            }
           ]
         },
         {
@@ -187,6 +273,7 @@ Ext.define('Omni.view.locations.Form', {
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
+          disabled: true,
           layout: 'anchor',
           items:[
             { name: 'merchant_identifier',            fieldLabel: this.merchant_identifierLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
