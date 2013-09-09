@@ -115,6 +115,7 @@ class Omni::Location < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :display
+    string   :district_id
     string   :location_nbr
     string   :location_brand
     string   :line_1

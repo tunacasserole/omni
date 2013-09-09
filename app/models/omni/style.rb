@@ -415,6 +415,7 @@ class Omni::Style < ActiveRecord::Base
     string   :subclass_id
     string   :subclass_display do subclass.display if subclass end
     # string   :product_display do product.display if product end
+    string   :initial_retail_price
     string   :style_id
     # string   :supplier_display do supplier.display if supplier end
     string  :conversion_type

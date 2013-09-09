@@ -28,7 +28,7 @@ Ext.define('Omni.view.regions.Inspector', {
         {
           title: 'Profile',
           xtype: 'omni-regions-Form'
-        },
+        }
         ,{title: 'Districts', xtype: 'omni-districts-Explorer', module: 'contacts',
            defaultSearch: { with: 
              {

@@ -146,103 +146,103 @@ Ext.define('Omni.view.styles.Form', {
             { name: 'size_group_id',                  fieldLabel: this.size_group_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SizeGroup',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'size_group_id', itemTpl:'{display}' },
             { name: 'subclass_id',                    fieldLabel: this.subclass_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Subclass',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
             // { name: 'product_id',                     fieldLabel: this.product_idLabel,                 allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Product',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'product_id', itemTpl:'{display}' },
-            { name: 'buyer_user_id',                  fieldLabel: this.buyer_user_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 25}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}',initialValue: this.record.get('buyer_user_display'), },
+            // { name: 'buyer_user_id',                  fieldLabel: this.buyer_user_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 25}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}',initialValue: this.record.get('buyer_user_display'), },
             { name: 'brand',                          fieldLabel: this.brandLabel,                      allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'BRAND' },
-            { name: 'product_type_id',                fieldLabel: this.product_type_idLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ProductType',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'product_type_id', itemTpl:'{display}' },
+            // { name: 'product_type_id',                fieldLabel: this.product_type_idLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ProductType',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'product_type_id', itemTpl:'{display}' },
             { name: 'fabric_content',                 fieldLabel: this.fabric_contentLabel,             allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'FABRIC_CONTENT' },
-            { name: 'storage_code',                   fieldLabel: this.storage_codeLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            // { name: 'storage_code',                   fieldLabel: this.storage_codeLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        }
           ]
         },
-        {
-          xtype: 'fieldset',
-          title: 'Pricing',
-          scheme: 'fieldset_scheme_styles',          
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'initial_retail_price',           fieldLabel: this.initial_retail_priceLabel,       allowBlank: true,   disabled: false,    xtype: 'currencyfield', currencySymbol: null     },
-            { name: 'suggested_retail_price',         fieldLabel: this.suggested_retail_priceLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'planning_retail_price',          fieldLabel: this.planning_retail_priceLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        }
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Forecasting & Replenishment',
-          scheme: 'fieldset_scheme_styles',          
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'smoothing_factor',               fieldLabel: this.smoothing_factorLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_METHOD' },
-            { name: 'replenishment_source',           fieldLabel: this.replenishment_sourceLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_SOURCE' },
-            { name: 'minimum_on_hand_units',          fieldLabel: this.minimum_on_hand_unitsLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'maximum_on_hand_units',          fieldLabel: this.maximum_on_hand_unitsLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'pack_type',                      fieldLabel: this.pack_typeLabel,                  allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'PACK_TYPE' },
-            { name: 'is_not_stocked',                 fieldLabel: this.is_not_stockedLabel,             allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Selling Unit Definition',
-          scheme: 'fieldset_scheme_styles',          
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'sell_unit_uom_code',             fieldLabel: this.sell_unit_uom_codeLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'SELL_UNIT_UOM_CODE' },
-            { name: 'sell_unit_length',               fieldLabel: this.sell_unit_lengthLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sell_unit_height',               fieldLabel: this.sell_unit_heightLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sell_unit_width',                fieldLabel: this.sell_unit_widthLabel,            allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sell_unit_weight',               fieldLabel: this.sell_unit_weightLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'is_conveyable_sell_unit',        fieldLabel: this.is_conveyable_sell_unitLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_discountable',                fieldLabel: this.is_discountableLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_taxable',                     fieldLabel: this.is_taxableLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Ordering Information',
-          scheme: 'fieldset_scheme_styles',          
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.StyleSupplier',{pageSize: 25}), displayField: 'supplier_display', queryField: 'supplier_display', valueField: 'supplier_id', itemTpl:'{supplier_display}' },
-            { name: 'order_uom_code',                 fieldLabel: this.order_uom_codeLabel,             allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'ORDER_UOM_CODE' },
-            { name: 'order_package_type',             fieldLabel: this.order_package_typeLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'ORDER_PACKAGE_TYPE' },
-            { name: 'garment_pieces',                 fieldLabel: this.garment_piecesLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'is_special_order',               fieldLabel: this.is_special_orderLabel,           allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Process Control',
-          scheme: 'fieldset_scheme_styles',          
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'maintenance_level',              fieldLabel: this.maintenance_levelLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'MAINTENANCE_LEVEL' },
-            // { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'generic_style_id',               fieldLabel: this.generic_style_idLabel,           allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },            
-            { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{storeId: 'AddOnSkuStore'},{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
-            { name: 'site_id',                        fieldLabel: this.site_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Site',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'site_id', itemTpl:'{display}' },
-            { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
-            { name: 'is_convertible',                 fieldLabel: this.is_convertibleLabel,             allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_converted_heatset',           fieldLabel: this.is_converted_heatsetLabel,       allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'sku_name_method',                fieldLabel: this.sku_name_methodLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'SKU_NAME_METHOD' },
-            { name: 'is_converted_sewn',              fieldLabel: this.is_converted_sewnLabel,          allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_alterable',                   fieldLabel: this.is_alterableLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_usually_altered',             fieldLabel: this.is_usually_alteredLabel,         allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
-          ]
-        }
+        // {
+        //   xtype: 'fieldset',
+        //   title: 'Pricing',
+        //   scheme: 'fieldset_scheme_styles',          
+        //   collapsible: true,
+        //   defaultType: 'textfield',
+        //   defaults: {anchor: '70%'},
+        //   layout: 'anchor',
+        //   items:[
+        //     { name: 'initial_retail_price',           fieldLabel: this.initial_retail_priceLabel,       allowBlank: true,   disabled: false,    xtype: 'currencyfield', currencySymbol: null     },
+        //     { name: 'suggested_retail_price',         fieldLabel: this.suggested_retail_priceLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'planning_retail_price',          fieldLabel: this.planning_retail_priceLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+        //   ]
+        // },
+        // {
+        //   xtype: 'fieldset',
+        //   title: 'Forecasting & Replenishment',
+        //   scheme: 'fieldset_scheme_styles',          
+        //   collapsible: true,
+        //   defaultType: 'textfield',
+        //   defaults: {anchor: '70%'},
+        //   layout: 'anchor',
+        //   items:[
+        //     { name: 'smoothing_factor',               fieldLabel: this.smoothing_factorLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_METHOD' },
+        //     { name: 'replenishment_source',           fieldLabel: this.replenishment_sourceLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_SOURCE' },
+        //     { name: 'minimum_on_hand_units',          fieldLabel: this.minimum_on_hand_unitsLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'maximum_on_hand_units',          fieldLabel: this.maximum_on_hand_unitsLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'pack_type',                      fieldLabel: this.pack_typeLabel,                  allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'PACK_TYPE' },
+        //     { name: 'is_not_stocked',                 fieldLabel: this.is_not_stockedLabel,             allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
+        //   ]
+        // },
+        // {
+        //   xtype: 'fieldset',
+        //   title: 'Selling Unit Definition',
+        //   scheme: 'fieldset_scheme_styles',          
+        //   collapsible: true,
+        //   defaultType: 'textfield',
+        //   defaults: {anchor: '70%'},
+        //   layout: 'anchor',
+        //   items:[
+        //     { name: 'sell_unit_uom_code',             fieldLabel: this.sell_unit_uom_codeLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'SELL_UNIT_UOM_CODE' },
+        //     { name: 'sell_unit_length',               fieldLabel: this.sell_unit_lengthLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'sell_unit_height',               fieldLabel: this.sell_unit_heightLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'sell_unit_width',                fieldLabel: this.sell_unit_widthLabel,            allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'sell_unit_weight',               fieldLabel: this.sell_unit_weightLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'is_conveyable_sell_unit',        fieldLabel: this.is_conveyable_sell_unitLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+        //     { name: 'is_discountable',                fieldLabel: this.is_discountableLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+        //     { name: 'is_taxable',                     fieldLabel: this.is_taxableLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
+        //   ]
+        // },
+        // {
+        //   xtype: 'fieldset',
+        //   title: 'Ordering Information',
+        //   scheme: 'fieldset_scheme_styles',          
+        //   collapsible: true,
+        //   defaultType: 'textfield',
+        //   defaults: {anchor: '70%'},
+        //   layout: 'anchor',
+        //   items:[
+        //     { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.StyleSupplier',{pageSize: 25}), displayField: 'supplier_display', queryField: 'supplier_display', valueField: 'supplier_id', itemTpl:'{supplier_display}' },
+        //     { name: 'order_uom_code',                 fieldLabel: this.order_uom_codeLabel,             allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'ORDER_UOM_CODE' },
+        //     { name: 'order_package_type',             fieldLabel: this.order_package_typeLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'ORDER_PACKAGE_TYPE' },
+        //     { name: 'garment_pieces',                 fieldLabel: this.garment_piecesLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'is_special_order',               fieldLabel: this.is_special_orderLabel,           allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
+        //   ]
+        // },
+        // {
+        //   xtype: 'fieldset',
+        //   title: 'Process Control',
+        //   scheme: 'fieldset_scheme_styles',          
+        //   collapsible: true,
+        //   defaultType: 'textfield',
+        //   defaults: {anchor: '70%'},
+        //   layout: 'anchor',
+        //   items:[
+        //     { name: 'maintenance_level',              fieldLabel: this.maintenance_levelLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'MAINTENANCE_LEVEL' },
+        //     // { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+        //     { name: 'generic_style_id',               fieldLabel: this.generic_style_idLabel,           allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },            
+        //     { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{storeId: 'AddOnSkuStore'},{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
+        //     { name: 'site_id',                        fieldLabel: this.site_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Site',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'site_id', itemTpl:'{display}' },
+        //     { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
+        //     { name: 'is_convertible',                 fieldLabel: this.is_convertibleLabel,             allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+        //     { name: 'is_converted_heatset',           fieldLabel: this.is_converted_heatsetLabel,       allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+        //     { name: 'sku_name_method',                fieldLabel: this.sku_name_methodLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'SKU_NAME_METHOD' },
+        //     { name: 'is_converted_sewn',              fieldLabel: this.is_converted_sewnLabel,          allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+        //     { name: 'is_alterable',                   fieldLabel: this.is_alterableLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+        //     { name: 'is_usually_altered',             fieldLabel: this.is_usually_alteredLabel,         allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
+        //   ]
+        // }
       ]
     });
     // FIELDSETS (End)
