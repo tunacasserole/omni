@@ -35,6 +35,7 @@ gem 'state_machine'
 
 group :development do
   gem "sunspot_rails"
+  gem 'sunspot_solr'  
 end
 
 gem "prawn"

@@ -67,11 +67,11 @@ class Omni::RmsItemDynamic < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    integer   :ItemID
+  # searchable do
+  #   integer   :ItemID
  
-    text     :ItemID_fulltext, :using => :ItemID
-  end 
+  #   text     :ItemID_fulltext, :using => :ItemID
+  # end 
   # INDEXING (End)
 
 

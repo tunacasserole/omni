@@ -67,11 +67,11 @@ class Omni::GritsBts < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    integer   :tg_sku_id
+  # searchable do
+  #   integer   :tg_sku_id
  
-    text     :tg_sku_id_fulltext, :using => :tg_sku_id
-  end 
+  #   text     :tg_sku_id_fulltext, :using => :tg_sku_id
+  # end 
   # INDEXING (End)
 
 

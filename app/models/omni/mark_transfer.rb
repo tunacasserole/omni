@@ -67,13 +67,13 @@ class Omni::MarkTransfer < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    integer   :stock_nbr
-    string   :size
+  # searchable do
+  #   integer   :stock_nbr
+  #   string   :size
  
-    text     :stock_nbr, :using => :stock_nbr
-    text     :size, :using => :size 
-  end 
+  #   text     :stock_nbr, :using => :stock_nbr
+  #   text     :size, :using => :size 
+  # end 
   # INDEXING (End)
 
 
