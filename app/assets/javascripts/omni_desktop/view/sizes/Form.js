@@ -36,7 +36,7 @@ Ext.define('Omni.view.sizes.Form', {
             { name: 'size_nbr',                       fieldLabel: this.size_nbrLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'size_type',                      fieldLabel: this.size_typeLabel,                  allowBlank: false,  disabled: false,    xtype: 'buildit-Lookup',      category:   'SIZE_TYPE' },
-            { name: 'display',                     fieldLabel: this.displayLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'display', hidden: true,          fieldLabel: this.displayLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'concatenated_name',              fieldLabel: this.concatenated_nameLabel,          allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'dimension_1',                    fieldLabel: this.dimension_1Label,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'dimension_2',                    fieldLabel: this.dimension_2Label,                allowBlank: true,   disabled: false,    xtype: 'textfield'        }

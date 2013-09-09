@@ -16,8 +16,8 @@ class Omni::Supplier < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :supplier_name,                   :presence    => true
-  validates    :supplier_name,                   :uniqueness  => true,                         :allow_nil => false 
+  validates    :supplier_name,                   :uniqueness  => true,         :allow_nil => false 
+  validates    :supplier_nbr,                    :uniqueness  => true
   # VALIDATIONS (End)
 
 
@@ -36,7 +36,7 @@ class Omni::Supplier < ActiveRecord::Base
   default      :safety_stock_days,                :override  =>  false,        :to    => 0                  
   default      :is_calculated_lead_time,          :override  =>  false,        :to    => false              
   default      :is_dynamic_safety_stock,          :override  =>  false,        :to    => false              
-  default      :bank_routing_nbr,                 :override  =>  false,        :with  => :sequence,         :named=>"BANK_ROUTING_NBR"
+  # default      :bank_routing_nbr,                 :override  =>  false,        :with  => :sequence,         :named=>"BANK_ROUTING_NBR"
   default      :tax_identifier,                   :override  =>  false,        :to    => 0                  
   default      :is_required_1099,                 :override  =>  false,        :to    => false              
   default      :is_edi_capable,                   :override  =>  false,        :to    => false              
@@ -71,7 +71,10 @@ class Omni::Supplier < ActiveRecord::Base
   belongs_to   :default_ship_thru_supplier,      :class_name => 'Omni::Supplier',                :foreign_key => 'default_ship_thru_supplier_id'
   belongs_to   :default_pay_to_supplier,         :class_name => 'Omni::Supplier',                :foreign_key => 'default_pay_to_supplier_id'
   belongs_to   :gl_account,                      :class_name => 'Omni::GlAccount',               :foreign_key => 'gl_account_id'
-  has_many     :notes,                           :class_name => 'Buildit::Note',                     :foreign_key => 'notable_id',       :as => :notable
+  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
+  has_many     :style_suppliers,                 :class_name => 'Omni::StyleSupplier',           :foreign_key => 'supplier_id'
+  has_many     :sku_suppliers,                   :class_name => 'Omni::SkuSupplier',             :foreign_key => 'supplier_id'
+  has_many     :purchases,                       :class_name => 'Omni::Purchase',                :foreign_key => 'supplier_id'  
   # ASSOCIATIONS (End)
 
 
@@ -106,25 +109,25 @@ class Omni::Supplier < ActiveRecord::Base
     string   :supplier_name
     string   :legacy_supplier_code
     string   :line_1
-    string   :line_2
+    # string   :line_2
     string   :city
     string   :state_code
-    string   :zip
-    string   :phone
-    string   :fax
+    # string   :zip
+    # string   :phone
+    # string   :fax
     string   :display
  
     text     :display_fulltext, :using => :display
     text     :supplier_nbr_fulltext, :using => :supplier_nbr
     text     :supplier_name_fulltext, :using => :supplier_name
     text     :legacy_supplier_code_fulltext, :using => :legacy_supplier_code
-    text     :line_1_fulltext, :using => :line_1
-    text     :line_2_fulltext, :using => :line_2
-    text     :city_fulltext, :using => :city
+    # text     :line_1_fulltext, :using => :line_1
+    # text     :line_2_fulltext, :using => :line_2
+    # text     :city_fulltext, :using => :city
     text     :state_code_fulltext, :using => :state_code
-    text     :zip_fulltext, :using => :zip
-    text     :phone_fulltext, :using => :phone
-    text     :fax_fulltext, :using => :fax
+    # text     :zip_fulltext, :using => :zip
+    # text     :phone_fulltext, :using => :phone
+    # text     :fax_fulltext, :using => :fax
   end 
   # INDEXING (End)
 

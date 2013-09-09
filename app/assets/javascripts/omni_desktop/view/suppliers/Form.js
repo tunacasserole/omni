@@ -89,7 +89,7 @@ Ext.define('Omni.view.suppliers.Form', {
             { name: 'supplier_name',                  fieldLabel: this.supplier_nameLabel,              allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'supplier_nbr',                   fieldLabel: this.supplier_nbrLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'supplier_ucc_prefix',            fieldLabel: this.supplier_ucc_prefixLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textarea'         },
             { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'legacy_supplier_code',           fieldLabel: this.legacy_supplier_codeLabel,       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'duns_number',                    fieldLabel: this.duns_numberLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        }
@@ -108,7 +108,12 @@ Ext.define('Omni.view.suppliers.Form', {
             { name: 'line_3',                         fieldLabel: this.line_3Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'line_4',                         fieldLabel: this.line_4Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'city',                           fieldLabel: this.cityLabel,                       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'state_code',                     fieldLabel: this.state_codeLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { xtype: 'buildit-Lookup',
+              name: 'state_code',
+              fieldLabel: this.state_codeLabel,
+              allowBlank: true,
+              category:   'STATE_CODE'
+            },
             { name: 'zip',                            fieldLabel: this.zipLabel,                        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'country',                        fieldLabel: this.countryLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'latitude',                       fieldLabel: this.latitudeLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
@@ -139,7 +144,7 @@ Ext.define('Omni.view.suppliers.Form', {
             { name: 'lead_time',                      fieldLabel: this.lead_timeLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'safety_stock_days',              fieldLabel: this.safety_stock_daysLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_calculated_lead_time',        fieldLabel: this.is_calculated_lead_timeLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category: 'REPLENISHMENT_METHOD' },
             { name: 'is_dynamic_safety_stock',        fieldLabel: this.is_dynamic_safety_stockLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
           ]
         },
@@ -152,10 +157,10 @@ Ext.define('Omni.view.suppliers.Form', {
           layout: 'anchor',
           items:[
             { name: 'default_pay_to_supplier_id',     fieldLabel: this.default_pay_to_supplier_idLabel, allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
-            { name: 'default_payment_term',           fieldLabel: this.default_payment_termLabel,       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'default_payment_term',           fieldLabel: this.default_payment_termLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category: 'PAYMENT_TERM' },
             { name: 'bank_name',                      fieldLabel: this.bank_nameLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'bank_account_name',              fieldLabel: this.bank_account_nameLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'bank_account_type',              fieldLabel: this.bank_account_typeLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'bank_account_type',              fieldLabel: this.bank_account_typeLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',     category: 'BANK_ACCOUNT_TYPE' },
             { name: 'bank_routing_nbr',               fieldLabel: this.bank_routing_nbrLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'bank_account',                   fieldLabel: this.bank_accountLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'gl_account_id',                  fieldLabel: this.gl_account_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.GlAccount',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'gl_account_id', itemTpl:'{display}' },

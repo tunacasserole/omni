@@ -65,7 +65,7 @@ Ext.define('Omni.view.colors.Form', {
             { xtype: 'textfield', name: 'concatenated_name',              fieldLabel: this.concatenated_nameLabel           , allowBlank: true },    
             { xtype: 'textfield', name: 'is_plaid',                       fieldLabel: this.is_plaidLabel                    , allowBlank: true,     xtype: 'checkbox' },    
             { xtype: 'textfield', name: 'is_stripe',                      fieldLabel: this.is_stripeLabel                   , allowBlank: true ,    xtype: 'checkbox'},    
-            { xtype: 'buildit-Lookup', category: 'CONVERSION_TYPE',   name: 'color_family',    fieldLabel: this.color_familyLabel  , allowBlank: true },    
+            { xtype: 'buildit-Lookup', category: 'COLOR_FAMILY',   name: 'color_family',    fieldLabel: this.color_familyLabel  , allowBlank: true },    
             { xtype: 'textfield', name: 'is_discontinued',                fieldLabel: this.is_discontinuedLabel             , allowBlank: true ,    xtype: 'checkbox'}
             
           ]
