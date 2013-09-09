@@ -11,7 +11,7 @@ en:
         short_name:                      Short Name
         region_display:                  Region
         region_id:                       Region
-        user_display:                    User
+        user_display:                    District Manager
         user_id:                         District Manager
         is_destroyed:                    Deleted
 

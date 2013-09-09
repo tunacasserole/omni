@@ -103,7 +103,7 @@ Ext.define('Omni.view.locations.Form', {
             { name: 'location_nbr',                   fieldLabel: this.location_nbrLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { xtype: 'buildit-Lookup',
               name: 'location_brand',
-              fieldLabel: this.locationBrandLabel,
+              fieldLabel: this.location_brandLabel,
               allowBlank: true,
               category:   'LOCATION_BRAND'
             }
@@ -125,7 +125,7 @@ Ext.define('Omni.view.locations.Form', {
             { name: 'city',                           fieldLabel: this.cityLabel,                       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { xtype: 'buildit-Lookup',
               name: 'state_code',
-              fieldLabel: this.stateCodeLabel,
+              fieldLabel: this.state_codeLabel,
               allowBlank: true,
               category:   'STATE_CODE'
             },
@@ -173,95 +173,92 @@ Ext.define('Omni.view.locations.Form', {
           items:[
             { xtype: 'buildit-Lookup',
               name: 'time_zone',
-              fieldLabel: this.timeZoneLabel,
+              fieldLabel: this.time_zoneLabel,
               allowBlank: true,
               category:   'TIME_ZONE'
             },
             { xtype: 'buildit-Lookup',
               name: 'sunday_open_time',
-              fieldLabel: this.sundayOpenTimeLabel,
+              fieldLabel: this.sunday_open_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'sunday_close_time',
-              fieldLabel: this.sundayCloseTimeLabel,
+              fieldLabel: this.sunday_close_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'monday_open_time',
-              fieldLabel: this.mondayOpenTimeLabel,
+              fieldLabel: this.monday_open_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'monday_close_time',
-              fieldLabel: this.mondayCloseTimeLabel,
+              fieldLabel: this.monday_close_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'tuesday_open_time',
-              fieldLabel: this.tuesdayOpenTimeLabel,
+              fieldLabel: this.tuesday_open_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'tuesday_close_time',
-              fieldLabel: this.tuesdayCloseTimeLabel,
+              fieldLabel: this.tuesday_close_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
-
             { xtype: 'buildit-Lookup',
               name: 'wednesday_open_time',
-              fieldLabel: this.wednesdayOpenTimeLabel,
+              fieldLabel: this.wednesday_open_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'wednesday_close_time',
-              fieldLabel: this.wednesdayCloseTimeLabel,
+              fieldLabel: this.wednesday_close_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
 
             { xtype: 'buildit-Lookup',
               name: 'thursday_open_time',
-              fieldLabel: this.thursdayOpenTimeLabel,
+              fieldLabel: this.thursday_open_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'thursday_close_time',
-              fieldLabel: this.thursdayCloseTimeLabel,
+              fieldLabel: this.thursday_close_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
-
             { xtype: 'buildit-Lookup',
               name: 'friday_open_time',
-              fieldLabel: this.fridayOpenTimeLabel,
+              fieldLabel: this.friday_open_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'friday_close_time',
-              fieldLabel: this.fridayCloseTimeLabel,
+              fieldLabel: this.friday_close_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
-
             { xtype: 'buildit-Lookup',
               name: 'saturday_open_time',
-              fieldLabel: this.saturdayOpenTimeLabel,
+              fieldLabel: this.saturday_open_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             },
             { xtype: 'buildit-Lookup',
               name: 'saturday_close_time',
-              fieldLabel: this.saturdayCloseTimeLabel,
+              fieldLabel: this.saturday_close_timeLabel,
               allowBlank: true,
               category:   'CLOCK_TIME'
             }

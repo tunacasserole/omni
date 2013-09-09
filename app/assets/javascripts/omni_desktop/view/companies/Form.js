@@ -48,7 +48,7 @@ Ext.define('Omni.view.companies.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: true,     xtype: 'textfield'        },
+            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'company_nbr',                    fieldLabel: this.company_nbrLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
@@ -68,7 +68,12 @@ Ext.define('Omni.view.companies.Form', {
             { name: 'line_3',                         fieldLabel: this.line_3Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'line_4',                         fieldLabel: this.line_4Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'city',                           fieldLabel: this.cityLabel,                       allowBlank: false,  disabled: false,    xtype: 'textfield'        },
-            { name: 'state_code',                     fieldLabel: this.state_codeLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { xtype: 'buildit-Lookup',
+              name: 'state_code',
+              fieldLabel: this.state_codeLabel,
+              allowBlank: true,
+              category:   'STATE_CODE'
+            },
             { name: 'zip',                            fieldLabel: this.zipLabel,                        allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'country',                        fieldLabel: this.countryLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'latitude',                       fieldLabel: this.latitudeLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },

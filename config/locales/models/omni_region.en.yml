@@ -11,7 +11,7 @@ en:
         short_name:                      Short Name
         company_display:                 Company
         company_id:                      Company
-        user_display:                    User
+        user_display:                    Regional Manager
         user_id:                         Regional Manager
         is_destroyed:                    Deleted
 

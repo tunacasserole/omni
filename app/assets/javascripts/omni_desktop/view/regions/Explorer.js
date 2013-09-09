@@ -38,18 +38,19 @@ Ext.define('Omni.view.regions.Explorer', {
       displayLabel:                          Omni.i18n.model.Region.display,
       region_nbrLabel:                       Omni.i18n.model.Region.region_nbr,
       company_displayLabel:                  Omni.i18n.model.Region.company_display,
-      user_idLabel:                          Omni.i18n.model.Region.user_id
+      user_displayLabel:                     Omni.i18n.model.Region.user_display,
+      user_idLabel:                          Omni.i18n.model.Region.user_display
     });
     // LABELS (End)
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.short_nameLabel,                                  dataIndex: 'short_name',                         flex: 1,   sortable: true  },
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.region_nbrLabel,                                  dataIndex: 'region_nbr',                         flex: 1,   sortable: true  },
-        { header: this.company_displayLabel,                             dataIndex: 'company_display',                    flex: 1,   sortable: true  },
-        { header: this.user_idLabel,                                     dataIndex: 'user_id',                            flex: 1,   sortable: true  }
+        { header: this.short_nameLabel,                        dataIndex: 'short_name',                         flex: 1,   sortable: true  },
+        { header: this.displayLabel,                           dataIndex: 'display',                            flex: 1,   sortable: true  },
+        { header: this.region_nbrLabel,                        dataIndex: 'region_nbr',                         flex: 1,   sortable: true  },
+        { header: this.company_displayLabel,                   dataIndex: 'company_display',                    flex: 1,   sortable: true  },
+        { header: this.user_displayLabel,                      dataIndex: 'user_display',                       flex: 1,   sortable: true  }
       ]
     });
     // COLUMNS (End)

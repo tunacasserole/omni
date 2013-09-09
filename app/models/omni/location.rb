@@ -17,12 +17,8 @@ class Omni::Location < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  validates    :line_1,                          :presence    => true
-  validates    :city,                            :presence    => true
-  validates    :zip,                             :presence    => true
-  validates    :phone,                           :presence    => true
   validates    :district_id,                     :presence    => true
-  validates    :location_nbr,                    :uniqueness  => true,                         :allow_nil => true  
+  validates    :location_nbr,                    :uniqueness  => true
   # VALIDATIONS (End)
 
 

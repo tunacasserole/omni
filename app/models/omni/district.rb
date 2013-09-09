@@ -73,6 +73,7 @@ class Omni::District < ActiveRecord::Base
   searchable do
     string   :display
     string   :district_nbr
+    string   :region_id
     string   :region_display do region.display if region end
     string   :user_display do user.full_name if user end
  
