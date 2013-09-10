@@ -22,12 +22,6 @@ class Omni::Import::Manager < Omni::Import::Base
  
   def self.run_all(options = {})
     Omni::Import::Base.constants
-    seq = 0
-    @@core_data_main.each {|row| seq = row['sequence'] if row['table_name'].classify == options[:restart]} if options[:restart]
-    @@core_data_main.each {|row| run row['table_name'].classify unless (@@skip_these_tables.include? row['table_name']) or !row['sequence'] or (row['sequence'] < seq.to_s and options[:restart]) }
-
-   # @@core_data_main.sort!{|x,y| x['table_name'] <=> y['table_name']}
-   # @@core_data_main.each {|row| run row['table_name'].classify unless (@@skip_these_tables.include? row['table_name'] and options[:restart] and row['table_name'] < options[:restart])}
   end
 
 end

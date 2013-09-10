@@ -12,7 +12,7 @@ class Omni::Style < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_audit
+  supports_fulltext
   # BEHAVIOR (End)
 
 

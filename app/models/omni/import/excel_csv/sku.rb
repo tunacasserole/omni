@@ -32,7 +32,7 @@ class Omni::Import::ExcelCsv::Sku < Omni::Import::Base
       x.mark_stock=row["mark_stock"]
       x.mark_size=row["mark_size"]
       x.buckhead_identifier=row["buckhead_identifier"]
-      x.grits_identifier=row["grits_identifier"]
+      x.source_id=row["source_id"]
       x.initial_retail_price=row["initial_retail_price"]
       if x.valid?
         # puts "#{model_name}, #{x.display} - VALID"

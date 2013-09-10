@@ -41,10 +41,9 @@ class Omni::BtsDetail < ActiveRecord::Base
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :sku_display,                            :to => 'sku.display'
-    map :mark_stock,                             :to => 'sku.mark_stock'
     map :mark_size,                              :to => 'sku.mark_size'    
     map :buckhead_identifier,                    :to => 'sku.buckhead_identifier'
-    map :grits_identifier,                       :to => 'sku.grits_identifier'    
+    map :source_id,                       :to => 'sku.source_id'    
     map :location_display,                       :to => 'location.display'
     map :style_id,                               :to => 'sku.style_id'
     map :style_display,                          :to => 'sku.style_display'   
@@ -82,11 +81,10 @@ class Omni::BtsDetail < ActiveRecord::Base
     string   :bts_id
     string   :sku_display    
     string   :style_display
-    string   :data_source
     string   :on_hand    
     string   :wip
-    string   :mark_stock
-    string   :mark_size
+    string   :source
+    string   :source_id
     string   :transit
     string   :allocated
     string   :ytd
@@ -114,22 +112,22 @@ class Omni::BtsDetail < ActiveRecord::Base
   def transform_and_calculate
     puts "transforming #{self.data_source} sku #{self.sku_display}"
 
-    case self.data_source
-      when 'PARKER'  
-        puts "stock is: #{self.mark_stock}   size is: #{self.mark_size}"        
+    case self.sku.source
+      when 'Parker'  
+        puts "stock is: #{self.source}   size is: #{self.mark_size}"        
         # puts "--on hand--"        
-        self.on_hand = Omni::MarkInventory.where(:stock_nbr => self.mark_stock, :size => self.mark_size).sum(:qoh)
+        self.on_hand = Omni::MarkInventory.where(:stock_nbr => self.source_id, :size => self.source_id).sum(:qoh)
         #puts "--wip--"  
-        data = Omni::MarkWip.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        data = Omni::MarkWip.where(:stock_nbr => self.source_id, :size => self.source_id)
         data.each {|x| self.wip += x.cut_wip + x.plant_wip + x.cont_wip} 
         #puts "--allocated, in transit--"
-        data = Omni::MarkTransferLine.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        data = Omni::MarkTransferLine.where(:stock_nbr => self.source_id, :size => self.source_id)
         data.each do |x|
           self.allocated += x.qty if [8,53].include? x.transfer_status
           self.transit += x.qty if x.transfer_status == 9
         end
         #puts "--ytd, py1, py2, projection--"
-        data = Omni::MarkOrderReport.where(:stock_nbr => self.mark_stock, :size => self.mark_size)
+        data = Omni::MarkOrderReport.where(:stock_nbr => self.source_id, :size => self.source_id)
         data.each do |x|
           self.ytd += x.qty if x.year_entered == Time.new.year
           self.py1 += x.qty if x.year_entered == Time.new.year-1
@@ -137,12 +135,12 @@ class Omni::BtsDetail < ActiveRecord::Base
           self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
         end
 
-      when 'BUCKHEAD'
+      when 'Buckhead'
         #puts "--on_hand--"
-        data = Omni::RmsItemDynamic.where(:ItemID => self.buckhead_identifier)
+        data = Omni::RmsItemDynamic.where(:ItemID => self.source_id)
         data.each {|x| self.on_hand += x.SnapShotQuantity if x.SnapShotQuantity}
         #puts "--WIP, YTD, PY1, PY2, Projection--"
-        data = Omni::RmsBts.where(:ItemID => self.buckhead_identifier)
+        data = Omni::RmsBts.where(:ItemID => self.source_id)
         data.each do |x|
           self.wip += x.QOO
           self.ytd += x.TOT_2013
@@ -151,9 +149,9 @@ class Omni::BtsDetail < ActiveRecord::Base
           self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
         end
 
-      when 'GRITS'
+      when 'Grits'
         #puts "--on_hand, wip, ytd, projection--"
-        data = Omni::GritsBts.where(:tg_sku_id => self.grits_identifier)
+        data = Omni::GritsBts.where(:tg_sku_id => self.source_id)
         data.each do |x|
           self.on_hand += x.qoh_60 + x.qoh_61 + x.qoh_62 + x.qoh_63 + x.qoh_64 + x.qoh_65 + x.qoh_66
           self.wip += x.qoo_60 + x.qoo_61 + x.qoo_62 + x.qoo_63 + x.qoo_64 + x.qoo_65 + x.qoo_66

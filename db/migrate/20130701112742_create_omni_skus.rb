@@ -55,10 +55,6 @@ class CreateOmniSkus < ActiveRecord::Migration
         t.column   :order_package_type,              :string,            :null  =>  true,    :limit   => 100
         t.column   :garment_pieces,                  :integer,           :null  =>  true
         t.column   :stock_nbr,                       :string,            :null  =>  true,    :limit   => 100
-        t.column   :mark_stock,                      :string,            :null  =>  true,    :limit   => 100
-        t.column   :mark_size,                       :string,            :null  =>  true,    :limit   => 100
-        t.column   :buckhead_identifier,             :string,            :null  =>  true,    :limit   => 100
-        t.column   :grits_identifier,                :string,            :null  =>  true,    :limit   => 100
         t.column   :source,                          :string,            :null  =>  true,    :limit   => 100
         t.column   :source_id,                       :string,            :null  =>  true,    :limit   => 100
         t.column   :is_special_order,                :boolean,           :null  =>  true

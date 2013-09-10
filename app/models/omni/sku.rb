@@ -34,7 +34,7 @@ class Omni::Sku < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :sku_id,                           :override  =>  false,        :with  => :guid              
-  default      :sku_nbr,                          :override  =>  false,        :with  => :sequence,         :named=>"SKU_NBR"
+  # default      :sku_nbr,                          :override  =>  false,        :with  => :sequence,         :named=>"SKU_NBR"
   default      :is_converted,                     :override  =>  false,        :to    => false              
   default      :is_enabled,                       :override  =>  false,        :to    => false              
   default      :initial_retail_price,             :override  =>  false,        :to    => 0                  
@@ -173,6 +173,10 @@ class Omni::Sku < ActiveRecord::Base
   filter :state_discontinued,      :with => {state: {equal_to: 'discontinued'}}, :priority => 70
   filter :state_obsolete,          :with => {state: {equal_to: 'obsolete'}},     :priority => 80
   filter :state_inactive,          :with => {state: {equal_to: 'inactive'}},     :priority => 90
+
+  filter :source_parker,           :with => {source: {equal_to: 'Parker'}},       :priority => 60
+  filter :source_buckhead,         :with => {source: {equal_to: 'Buckhead'}}, :priority => 70
+  filter :source_grits,            :with => {source: {equal_to: 'True Grits'}},     :priority => 80
   # FILTERS (End)
 
 
@@ -190,22 +194,13 @@ class Omni::Sku < ActiveRecord::Base
     string   :style_id        
     string   :color_id  
     string   :style_display do style.display if style end
-    string   :mark_stock
-    string   :mark_size
-    string   :buckhead_identifier  
-    string   :grits_identifier    
- 
+    string   :source
+    string   :source_id
+
     text     :display_fulltext, :using => :display
-    text     :sku_nbr_fulltext, :using => :sku_nbr
-    text     :state_fulltext, :using => :state
     text     :site_display_fulltext, :using => :site_display
-    text     :conversion_type_fulltext, :using => :conversion_type
     text     :color_display_fulltext, :using => :color_display
     text     :size_display_fulltext, :using => :size_display
-    text     :mark_stock_fulltext, :using => :mark_stock
-    text     :mark_size_fulltext, :using => :mark_size
-    text     :buckhead_identifier, :using => :buckhead_identifier
-    text     :grits_identifier, :using => :grits_identifier
   end 
   # INDEXING (End)
 

@@ -13,10 +13,18 @@ class Omni::Import::Db::Sku < Omni::Import::Base
       size=Omni::Size.where(:display=>sku_load.size_id).first || Omni::Size.create(:display => sku_load.size_id)
       x.size_id = size.size_id if size
       x.design_code=sku_load.design_code
-      x.mark_stock=sku_load.mark_stock
-      x.mark_size=sku_load.mark_size
-      x.buckhead_identifier=sku_load.buckhead_identifier
-      x.grits_identifier=sku_load.grits_identifier
+      if sku_load.mark_stock
+        x.source = 'Parker'
+        x.source_id = "#{sku_load.mark_stock},#{sku_load.mark_size}"
+      end
+      if sku_load.buckhead_identifier
+        x.source = 'Buckhead'
+        x.source_id = sku_load.buckhead_identifier
+      end
+      if sku_load.grits_identifier
+        x.source = 'True Grits'
+        x.source_id = sku_load.grits_identifier
+      end
       x.initial_retail_price=sku_load.price.gsub('$','').to_f
       x.save
     end

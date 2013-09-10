@@ -35,10 +35,8 @@ class Omni::Import::ExcelCsv::Style < Omni::Import::Base
         puts "--SIZE is not valid"
       end
       x.design_code=row["design_code"]
-      x.mark_stock=row["mark_stock"]
-      x.mark_size=row["mark_size"]
-      x.buckhead_id=row["buckhead_id"]
-      x.grits_id=row["grits_id"]
+      x.source=row["source"]
+      x.source_id=row["source_id"]
       x.initial_retail_price=row["initial_retail_price"]
       if x.valid?
         # puts "#{model_name}, #{x.display} - VALID"

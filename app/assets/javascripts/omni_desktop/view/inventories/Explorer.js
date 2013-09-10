@@ -24,6 +24,8 @@ Ext.define('Omni.view.inventories.Explorer', {
   // EXPLORER CONFIG (End)
 
     // LABELS (Start) ======================================================================
+  sku_idLabel                               Omni.i18n.model.Inventory.sku_id,
+  location_idLabel                               Omni.i18n.model.Inventory.location_id,
   on_hand_unitsLabel:                       Omni.i18n.model.Inventory.on_hand_units,
   in_transit_unitsLabel:                    Omni.i18n.model.Inventory.in_transit_units,
   non_sellable_unitsLabel:                  Omni.i18n.model.Inventory.non_sellable_units,
@@ -51,6 +53,8 @@ Ext.define('Omni.view.inventories.Explorer', {
     Ext.apply(this, {
       columns: [
         { header: this.on_hand_unitsLabel,                               dataIndex: 'on_hand_units',                      flex: 1,   sortable: true  },
+        { header: this.location_idLabel,                                 dataIndex: 'location_display',                      flex: 1,   sortable: true  },        
+        { header: this.sku_idLabel,                                      dataIndex: 'sku_display',                      flex: 1,   sortable: true  },                
         { header: this.in_transit_unitsLabel,                            dataIndex: 'in_transit_units',                   flex: 1,   sortable: true  },
         { header: this.non_sellable_unitsLabel,                          dataIndex: 'non_sellable_units',                 flex: 1,   sortable: true  },
         { header: this.allocated_unitsLabel,                             dataIndex: 'allocated_units',                    flex: 1,   sortable: true  },

@@ -143,14 +143,14 @@ class Omni::Bts < ActiveRecord::Base
       Omni::BtsDetail.transaction do
         skus_to_process.each_with_index do |x, i|
           puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}', 'PARKER')" if self.is_source_parker and x.mark_stock.length>0
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}', 'BUCKHEAD')" if self.is_source_buckhead and x.buckhead_identifier.length>0
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}', 'GRITS')" if self.is_source_grits and x.grits_identifier.length>0
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}')" if self.is_source_parker and x.mark_stock.length>0
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}')" if self.is_source_buckhead and x.buckhead_identifier.length>0
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}')" if self.is_source_grits and x.grits_identifier.length>0
         end
       end
-      puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
+      # puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
       # Omni::Bts.solr_reindex(:batch_size => 1000, :include => :bts_details)      
-      puts "--finished reindexing bts_details at #{Time.now.strftime("%H:%M:%S")}"
+      # puts "--finished reindexing bts_details at #{Time.now.strftime("%H:%M:%S")}"
     end
 
     puts "--transforming and calculating  at #{Time.now.strftime("%H:%M:%S")}"

@@ -1,4 +1,4 @@
-class Omni::MarkInventory < ActiveRecord::Base
+class Omni::ProductType < ActiveRecord::Base
 
 
   # MIXINS (Start) ======================================================================
@@ -7,9 +7,9 @@ class Omni::MarkInventory < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
-  self.table_name                 = :inventory
-  self.primary_key                = :id
+  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  self.table_name                 = :product_types
+  self.primary_key                = :product_type_id
   # METADATA (End)
 
 
@@ -17,17 +17,17 @@ class Omni::MarkInventory < ActiveRecord::Base
   #supports_logical_delete
   #supports_audit
   #supports_revisioning
-  supports_fulltext
+  #supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
-  validates :id,                        :presence      => true
+  validates :product_type_id,                        :presence      => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default :id,                          :with => :guid
+  default :product_type_id,                          :with => :guid
   # DEFAULTS (End)
 
 
@@ -67,13 +67,7 @@ class Omni::MarkInventory < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    integer   :stock_nbr
-    string    :size
- 
-    # text     :stock_nbr, :using => :stock_nbr
-    # text     :size, :using => :size 
-  end 
+  
   # INDEXING (End)
 
 
@@ -91,4 +85,4 @@ class Omni::MarkInventory < ActiveRecord::Base
 
   # HELPERS (End)
 
-end # class Omni::MarkInventory
+end # class Omni::ProductType
