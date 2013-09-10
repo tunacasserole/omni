@@ -6,7 +6,7 @@ class Omni::Import::Grits::Inventory < Omni::Import::Base
   	error_count = 0
   	created_count = 0
 
-    locations = {:60 => }
+    # locations = {:60 => }
     Omni::GritsBts.all.each_with_index do |x,i|
       puts "*********PROCESSING row #{i.to_s}:" if i.to_s.end_with? '0000'
     	total_count += 1

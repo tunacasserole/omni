@@ -20,5 +20,5 @@ class Omni::Import::Grits::Product < Omni::Import::Base
   #   puts  "rows succesfully created: #{created_count}"
   #   puts "******************************"
   #   # puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"    
-  # end
+  end
 end
