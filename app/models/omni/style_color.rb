@@ -12,6 +12,10 @@ class Omni::StyleColor < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  #supports_logical_delete
+  #supports_audit
+  #supports_revisioning
+  supports_fulltext
   # BEHAVIOR (End)
 
 

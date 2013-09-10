@@ -12,6 +12,10 @@ class Omni::StyleColorSize < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  #supports_logical_delete
+  #supports_audit
+  #supports_revisioning
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -22,10 +26,10 @@ class Omni::StyleColorSize < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :style_color_size_id,              :override  =>  false,        :with  => :guid              
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.style_color_display} - #{m.size_display}"}
-  default      :is_special_order,                 :override  =>  false,        :to    => false              
-  default      :is_not_available,                 :override  =>  false,        :to    => false              
-  default      :fabric_bom_adjust_percent,        :override  =>  false,        :to    => 0                  
+  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.style_color_display}-#{m.size_display}"}
+  default      :is_special_order,                 :override  =>  true,         :to    => false              
+  default      :is_not_available,                 :override  =>  true,         :to    => false              
+  default      :fabric_bom_adjust_percent,        :override  =>  true,         :to    => 0                  
   default      :is_destroyed,                     :override  =>  false,        :to    => false              
   # DEFAULTS (End)
 
@@ -43,7 +47,8 @@ class Omni::StyleColorSize < ActiveRecord::Base
   belongs_to   :style_color,                     :class_name => 'Omni::StyleColor',              :foreign_key => 'style_color_id'
   belongs_to   :size,                            :class_name => 'Omni::Size',                    :foreign_key => 'size_id'
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
-  has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'style_color_size_id'
+  # belongs_to   :style,                           :class_name => 'Omni::Style',                   :foreign_key => 'style_id'
+  # has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'style_color_size_id'
   # ASSOCIATIONS (End)
 
 

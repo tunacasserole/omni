@@ -12,6 +12,10 @@ class Omni::Site < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  #supports_logical_delete
+  #supports_audit
+  #supports_revisioning
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -19,7 +23,7 @@ class Omni::Site < ActiveRecord::Base
   validates    :display,                         :presence    => true
   validates    :display,                         :uniqueness  => true
   validates    :school_nbr,                      :uniqueness  => true,                         :allow_nil => false 
-  validates    :site_type,                       :lookup      => 'SITE_TYPE',                  :allow_nil => false 
+  validates    :site_type,                       :lookup      => 'SITE_TYPE',                  :allow_nil => true 
   validates    :gradeset,                        :lookup      => 'GRADESET',                   :allow_nil => true  
   validates    :site_gender,                     :lookup      => 'SITE_GENDER',                :allow_nil => true  
   validates    :state_code,                      :lookup      => 'STATE_CODE',                 :allow_nil => true  
@@ -87,20 +91,20 @@ class Omni::Site < ActiveRecord::Base
     string   :location_display do location.display if location end
     string   :gradeset do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
     string   :site_gender do |x| Buildit::Lookup::Manager.display_for('SITE_GENDER', x.site_gender) end
-    string   :line_1
+    # string   :line_1
     string   :city
     string   :state_code do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.state_code) end
-    string   :phone
+    # string   :phone
     string   :display
  
     text     :display_fulltext, :using => :display
     text     :location_display_fulltext, :using => :location_display
     text     :gradeset_fulltext, :using => :gradeset
     text     :site_gender_fulltext, :using => :site_gender
-    text     :line_1_fulltext, :using => :line_1
+    # text     :line_1_fulltext, :using => :line_1
     text     :city_fulltext, :using => :city
     text     :state_code_fulltext, :using => :state_code
-    text     :phone_fulltext, :using => :phone
+    # text     :phone_fulltext, :using => :phone
     text     :display_fulltext, :using => :display
   end 
   # INDEXING (End)

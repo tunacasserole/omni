@@ -12,6 +12,9 @@ class Omni::Style < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  #supports_logical_delete
+  #supports_audit
+  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
 
@@ -337,7 +340,7 @@ class Omni::Style < ActiveRecord::Base
         x.safety_stock_days = sl.safety_stock_days
         x.is_override_demand_exception = sl.is_override_demand_exception
         x.smoothing_factor = sl.smoothing_factor
-        x.forecast_profile_id = sl.forecast_profile_id
+        x.forecast_profile_id = sl.forecast_profile_id                    
         x.is_soq_override = sl.is_soq_override
         x.minimum_units = sl.minimum_units
         x.maximum_units = sl.maximum_units

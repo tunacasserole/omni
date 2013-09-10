@@ -16,7 +16,9 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
+  validates    :display,                         :uniqueness  => true
+  validates    :size_group_id,                   :presence    => true
+  validates    :size_id,                         :presence    => true
   # VALIDATIONS (End)
 
 
@@ -84,6 +86,7 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
     string   :display_order
     string   :display
     string   :size_group_id    
+    string   :size_id
  
     text     :size_group_display_fulltext, :using => :size_group_display
     text     :size_display_fulltext, :using => :size_display
