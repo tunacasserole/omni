@@ -3,7 +3,6 @@ Ext.define('Omni.view.inventories.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-inventories-Explorer',
 
-
     // EXPLORER CONFIG (Start) ===============================================================
   allowFind:      true,
 
@@ -13,25 +12,26 @@ Ext.define('Omni.view.inventories.Explorer', {
     xtype:        'omni-inventories-ExplorerContextMenu',
   },
 
-  inspectorConfig: {
-    xtype:        'omni-inventories-Inspector'
-  },
-
   newForms:[{
     xtype:        'omni-inventories-Form',
     windowConfig: {}
   }],
+
+  inspectorConfig: {
+    xtype:        'omni-inventories-Inspector'
+  },
+
   // EXPLORER CONFIG (End)
 
-    // LABELS (Start) ======================================================================
-  sku_idLabel                               Omni.i18n.model.Inventory.sku_id,
-  location_idLabel                               Omni.i18n.model.Inventory.location_id,
-  on_hand_unitsLabel:                       Omni.i18n.model.Inventory.on_hand_units,
-  in_transit_unitsLabel:                    Omni.i18n.model.Inventory.in_transit_units,
-  non_sellable_unitsLabel:                  Omni.i18n.model.Inventory.non_sellable_units,
-  allocated_unitsLabel:                     Omni.i18n.model.Inventory.allocated_units,
-  work_in_process_unitsLabel:               Omni.i18n.model.Inventory.work_in_process_units,
-  supplier_on_order_unitsLabel:             Omni.i18n.model.Inventory.supplier_on_order_units,
+  // LABELS (Start) ======================================================================
+    sku_idLabel:                              Omni.i18n.model.Inventory.sku_id,
+    location_idLabel:                         Omni.i18n.model.Inventory.location_id,
+    on_hand_unitsLabel:                       Omni.i18n.model.Inventory.on_hand_units,
+    in_transit_unitsLabel:                    Omni.i18n.model.Inventory.in_transit_units,
+    non_sellable_unitsLabel:                  Omni.i18n.model.Inventory.non_sellable_units,
+    allocated_unitsLabel:                     Omni.i18n.model.Inventory.allocated_units,
+    work_in_process_unitsLabel:               Omni.i18n.model.Inventory.work_in_process_units,
+    supplier_on_order_unitsLabel:             Omni.i18n.model.Inventory.supplier_on_order_units,
   // LABELS (End)
 
     // TITLES (Start) ======================================================================
