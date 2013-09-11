@@ -95,8 +95,6 @@ Ext.define('Omni.view.inventories.Form', {
     });
     // TITLES (End)
 
-
-
     this.callParent();
   }
 

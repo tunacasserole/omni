@@ -40,6 +40,15 @@ Ext.define('Omni.view.periods.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) =======================================================================
+    Ext.applyIf(this, {
+      title:         'Period Results',
+      subtitle:      'Inventory & Sales units, cost and retail by SKU and Location',
+      newTitle:      'Period Results',
+      newSubtitle:   undefined
+    });
+    // TITLES (End)
+
 
     this.callParent();
   }

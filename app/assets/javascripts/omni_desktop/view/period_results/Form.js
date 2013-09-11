@@ -134,6 +134,12 @@ Ext.define('Omni.view.period_results.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.apply(this, {
+      title:     'Period Results',
+      subtitle:  this.record.get('sku_display')
+    });
+    // TITLES (End)
 
     this.callParent();
   }

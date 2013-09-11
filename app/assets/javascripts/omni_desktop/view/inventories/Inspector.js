@@ -33,7 +33,11 @@ Ext.define('Omni.view.inventories.Inspector', {
     });
     // CARDS (End)
     
-    // TITLES (Start) ====================================================================== 
+    // TITLES (Start) ======================================================================
+    Ext.apply(this, {
+      title:     'Inventory',
+      subtitle:  this.record.get('sku_display')
+    });
     // TITLES (End)
 
 
