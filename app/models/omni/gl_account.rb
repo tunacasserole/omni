@@ -65,9 +65,16 @@ class Omni::GlAccount < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
+  searchable do
+    string  :display
+    string  :gl_main_account
+    string  :gl_sub_account
+    string  :gl_account_type
+
+ 
+    text     :display_fulltext, :using => :display
+  end 
   # INDEXING (End)
-
-
 
   # STATES (Start) ====================================================================
 

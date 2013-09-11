@@ -106,7 +106,6 @@ class Omni::Inventory < ActiveRecord::Base
   # INDEXING (End)
 
 
-
   # STATES (Start) ====================================================================
 
   # STATES (End)

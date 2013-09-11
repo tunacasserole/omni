@@ -38,6 +38,15 @@ Ext.define('Omni.view.size_group_details.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Size Group Detail',
+      newTitle: 'New Size Group Detail',
+      newSubtitle: 'Enter the new Size Group Detail'
+    });
+    // TITLES (End)
+
 
     this.callParent();
   }
