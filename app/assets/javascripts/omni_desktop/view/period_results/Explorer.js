@@ -81,10 +81,10 @@ Ext.define('Omni.view.period_results.Explorer', {
         // { header: this.net_sale_retailLabel, dataIndex: 'net_sale_retail',  flex: 1,  sortable: true  },
         // { header: this.net_inventory_costLabel, dataIndex: 'net_inventory_cost',  flex: 1,  sortable: true  },
         // { header: this.net_inventory_unitsLabel, dataIndex: 'net_inventory_units',  flex: 1,  sortable: true  },
+        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 2,  sortable: true  },
+        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: true  },
         { header: this.period_displayLabel, dataIndex: 'period_display',  flex: 1,  sortable: true  },        
         // { header: this.year_numberLabel, dataIndex: 'year_number',  flex: 1,  sortable: true  },                
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: true  },
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: true  },
         { header: this.net_sale_unitsLabel, dataIndex: 'net_sale_units',  flex: 1,  sortable: true  },        
       ]
     });
