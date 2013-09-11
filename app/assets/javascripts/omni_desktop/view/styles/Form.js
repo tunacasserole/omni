@@ -303,7 +303,7 @@ Ext.define('Omni.view.styles.Form', {
       title: 'Profile',
       subtitle: 'Edit Styles',
       newTitle: 'New Style',
-      newSubtitle: 'Complete the following to create a new style in planning mode.'
+      newSubtitle: 'Complete the following to create a new style in draft state.'
     });
     // TITLES (End)
 

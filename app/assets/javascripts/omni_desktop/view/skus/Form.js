@@ -230,10 +230,13 @@ Ext.define('Omni.view.skus.Form', {
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title:     'Sku',
-      subtitle:  this.record.get('display')
+      title: 'Profile',
+      subtitle: 'Edit Skus',
+      newTitle: 'New Sku',
+      newSubtitle: 'Complete the following to create a new sku in draft state.'
     });
     // TITLES (End)
+
 
 
     this.callParent();

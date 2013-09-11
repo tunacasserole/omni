@@ -41,9 +41,8 @@ class Omni::BtsDetail < ActiveRecord::Base
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :sku_display,                            :to => 'sku.display'
-    map :mark_size,                              :to => 'sku.mark_size'    
-    map :buckhead_identifier,                    :to => 'sku.buckhead_identifier'
-    map :source_id,                       :to => 'sku.source_id'    
+    map :source,                                 :to => 'sku.source'    
+    map :source_id,                              :to => 'sku.source_id'    
     map :location_display,                       :to => 'location.display'
     map :style_id,                               :to => 'sku.style_id'
     map :style_display,                          :to => 'sku.style_display'   
