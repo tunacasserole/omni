@@ -155,7 +155,6 @@ Ext.define('Omni.view.skus.Inspector', {
     // TITLES (End)
 
 
-
     this.callParent();
   }
 

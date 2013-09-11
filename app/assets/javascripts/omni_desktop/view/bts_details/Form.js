@@ -82,7 +82,7 @@ Ext.define('Omni.view.bts_details.Form', {
             // { xtype: 'textfield', name: 'bts_id',                         fieldLabel: this.bts_idLabel                      , allowBlank: false },    
             // { xtype: 'textfield', name: 'sku_id',                         fieldLabel: this.sku_idLabel                      , allowBlank: false },    
             // { name: 'location_id',   fieldLabel: this.location_idLabel  , allowBlank: true , xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' }, 
-            { xtype: 'buildit-Lookup', name: 'data_source',   category: 'DATA_SOURCE',            fieldLabel: this.data_sourceLabel , allowBlank: false },    
+            // { xtype: 'buildit-Lookup', name: 'data_source',   category: 'DATA_SOURCE',            fieldLabel: this.data_sourceLabel , allowBlank: false },    
             { xtype: 'textfield', name: 'on_hand',                        fieldLabel: this.on_handLabel                     , allowBlank: false },    
             { xtype: 'textfield', name: 'wip',                            fieldLabel: this.wipLabel                         , allowBlank: false },    
             { xtype: 'textfield', name: 'allocated',                      fieldLabel: this.allocatedLabel                   , allowBlank: false },    

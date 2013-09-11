@@ -1,3 +1,6 @@
+Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D212313BPARKER', :code => 'PARKER', :default_text => 'Parker', :category => 'SOURCE', :position => 2)
+Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D21231BUCKHEAD', :code => 'BUCKHEAD', :default_text => 'Buckhead', :category => 'SOURCE', :position => 1)
+Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D212313B1GRITS', :code => 'GRITS', :default_text => 'True Grits', :category => 'SOURCE', :position => 3)
 Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D212313B100LOW', :code => 'LOW', :default_text => 'Low', :category => 'IMPORTANCE', :position => 1)
 Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D212313FMEDIUM', :code => 'MEDIUM', :default_text => 'Medium', :category => 'IMPORTANCE', :position => 2)
 Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D212313B10HIGH', :code => 'HIGH', :default_text => 'High', :category => 'IMPORTANCE', :position => 3)

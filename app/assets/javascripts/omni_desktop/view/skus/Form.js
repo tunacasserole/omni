@@ -62,7 +62,9 @@ Ext.define('Omni.view.skus.Form', {
       order_package_typeLabel:                    Omni.i18n.model.Sku.order_package_type,
       garment_piecesLabel:                        Omni.i18n.model.Sku.garment_pieces,
       is_special_orderLabel:                      Omni.i18n.model.Sku.is_special_order,
-      is_special_sizeLabel:                       Omni.i18n.model.Sku.is_special_size
+      is_special_sizeLabel:                       Omni.i18n.model.Sku.is_special_size,
+      sourceLabel:                                Omni.i18n.model.Sku.source,
+      source_idLabel:                             Omni.i18n.model.Sku.source_id            
     });
     // LABELS (End)
 
@@ -84,6 +86,8 @@ Ext.define('Omni.view.skus.Form', {
             { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'pos_name',                       fieldLabel: this.pos_nameLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'design_code',                    fieldLabel: this.design_codeLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'source',                         fieldLabel: this.sourceLabel,                     allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',     category:   'SOURCE' },
+            { name: 'source_id',                      fieldLabel: this.source_idLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'maintenance_level',              fieldLabel: this.maintenance_levelLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'MAINTENANCE_LEVEL' },
             { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
             ]
@@ -223,6 +227,13 @@ Ext.define('Omni.view.skus.Form', {
       ]
     });
     // FIELDSETS (End)
+
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title:     'Sku',
+      subtitle:  this.record.get('display')
+    });
+    // TITLES (End)
 
 
     this.callParent();
