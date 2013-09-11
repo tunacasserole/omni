@@ -101,7 +101,14 @@ Ext.define('Omni.view.companies.Form', {
     });
     // FIELDSETS (End)
 
-
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Company',
+      newTitle: 'New Company',
+      newSubtitle: 'Complete the following to create a new Company.'
+    });
+    // TITLES (End)
     this.callParent();
   }
 

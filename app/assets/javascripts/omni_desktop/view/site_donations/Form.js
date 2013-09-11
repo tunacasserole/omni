@@ -38,7 +38,14 @@ Ext.define('Omni.view.site_donations.Form', {
     });
     // FIELDSETS (End)
 
-
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Site',
+      newTitle: 'New Site',
+      newSubtitle: 'Complete the following to create a new Site.'
+    });
+    // TITLES (End)
     this.callParent();
   }
 

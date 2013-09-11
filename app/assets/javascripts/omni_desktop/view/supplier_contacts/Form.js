@@ -70,6 +70,14 @@ Ext.define('Omni.view.supplier_contacts.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Supplier',
+      newTitle: 'New Supplier',
+      newSubtitle: 'Complete the following to create a new Supplier.'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

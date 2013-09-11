@@ -46,7 +46,14 @@ Ext.define('Omni.view.sizes.Form', {
     });
     // FIELDSETS (End)
 
-
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Size',
+      newTitle: 'New Size',
+      newSubtitle: 'Complete the following to create a new Size.'
+    });
+    // TITLES (End)
     this.callParent();
   }
 

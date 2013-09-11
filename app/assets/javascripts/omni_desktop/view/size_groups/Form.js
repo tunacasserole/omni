@@ -44,12 +44,13 @@ Ext.define('Omni.view.size_groups.Form', {
 
 
     // TITLES (Start) ======================================================================
-    Ext.apply(this, {
-      title:  'Size Group',
-      subtitle: 'Profile'
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Size Group',
+      newTitle: 'New Size Group',
+      newSubtitle: 'Complete the following to create a new Size Group.'
     });
     // TITLES (End)
-
     this.callParent();
     
   }

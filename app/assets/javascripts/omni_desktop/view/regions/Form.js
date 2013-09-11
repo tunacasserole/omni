@@ -44,7 +44,14 @@ Ext.define('Omni.view.regions.Form', {
     });
     // FIELDSETS (End)
 
-
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Region',
+      newTitle: 'New Region',
+      newSubtitle: 'Complete the following to create a new Region.'
+    });
+    // TITLES (End)
     this.callParent();
   }
 

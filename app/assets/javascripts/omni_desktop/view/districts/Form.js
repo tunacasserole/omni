@@ -44,7 +44,14 @@ Ext.define('Omni.view.districts.Form', {
     });
     // FIELDSETS (End)
 
-
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit District',
+      newTitle: 'New District',
+      newSubtitle: 'Complete the following to create a new District.'
+    });
+    // TITLES (End)
     this.callParent();
   }
 
