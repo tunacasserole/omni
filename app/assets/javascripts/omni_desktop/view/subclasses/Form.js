@@ -46,7 +46,14 @@ Ext.define('Omni.view.subclasses.Form', {
     });
     // FIELDSETS (End)
 
-
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Subclasses',
+      newTitle: 'New Subclass',
+      newSubtitle: 'Complete the following to create a new subclass.'
+    });
+    // TITLES (End)    
     this.callParent();
   }
 

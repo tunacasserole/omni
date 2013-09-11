@@ -44,6 +44,14 @@ Ext.define('Omni.view.classifications.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Class',
+      newTitle: 'New Class',
+      newSubtitle: 'Complete the following to create a new Class.'
+    });
+    // TITLES (End)
 
     this.callParent();
   }
