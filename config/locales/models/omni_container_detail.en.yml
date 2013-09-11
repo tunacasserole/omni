@@ -5,7 +5,7 @@ en:
     attributes:
       omni/container_detail:
         container_detail_id:             Container Detail Id
-        display:                         Display
+        display:                         Name
         container_detail_nbr:            Detail Number
         container_display:               Container
         container_id:                    Container Number

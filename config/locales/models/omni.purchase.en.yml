@@ -5,7 +5,7 @@ en:
     attributes:
       omni/purchase:
         purchase_id:                       'Purchase'
-        display:                           'Display'
+        display:                           'Name'
         purchase_order_nbr:                'Purchase Order Nbr'
         supplier_id:                       'Supplier'
         location_id:                       'Location'

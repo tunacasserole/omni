@@ -5,7 +5,7 @@ en:
     attributes:
       omni/customer_tag:
         customer_tag_id:                 Customer Tag
-        display:                         Display
+        display:                         Name
         customer_display:                Customer
         customer_id:                     Customer
         tag_display:                     Tag

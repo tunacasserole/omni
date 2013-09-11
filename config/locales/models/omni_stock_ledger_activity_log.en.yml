@@ -5,7 +5,7 @@ en:
     attributes:
       omni/stock_ledger_activity_log:
         stock_ledger_activity_log_id:    Stock Ledger Activity Log
-        display:                         Display
+        display:                         Name
         stock_ledger_activity_display:   Stock Ledger Activity
         stock_ledger_activity_id:        Stock Ledger Activity
         activity_log_nbr:                Activity Log Number

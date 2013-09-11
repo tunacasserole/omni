@@ -264,40 +264,40 @@ Ext.define('Omni.view.locations.Form', {
             }
           ]
         },
-        {
-          xtype: 'fieldset',
-          title: 'Merchant Card Services',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          disabled: true,
-          layout: 'anchor',
-          items:[
-            { name: 'merchant_identifier',            fieldLabel: this.merchant_identifierLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_name',                  fieldLabel: this.merchant_nameLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_time_zone',             fieldLabel: this.merchant_time_zoneLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_location',              fieldLabel: this.merchant_locationLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_sic',                   fieldLabel: this.merchant_sicLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_industry',              fieldLabel: this.merchant_industryLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_acquirer_bin',          fieldLabel: this.merchant_acquirer_binLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_agent',                 fieldLabel: this.merchant_agentLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_chain',                 fieldLabel: this.merchant_chainLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_store',                 fieldLabel: this.merchant_storeLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_terminal',              fieldLabel: this.merchant_terminalLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_v_number',              fieldLabel: this.merchant_v_numberLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_pri_auth_phone',        fieldLabel: this.merchant_pri_auth_phoneLabel,    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_sec_auth_phone',        fieldLabel: this.merchant_sec_auth_phoneLabel,    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_pri_settle_phone',      fieldLabel: this.merchant_pri_settle_phoneLabel,  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_sec_settle_phone',      fieldLabel: this.merchant_sec_settle_phoneLabel,  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_amex_identifier',       fieldLabel: this.merchant_amex_identifierLabel,   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_discover_identifier',   fieldLabel: this.merchant_discover_identifierLabel,allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_diners_identifier',     fieldLabel: this.merchant_diners_identifierLabel, allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_sharing_groups',        fieldLabel: this.merchant_sharing_groupsLabel,    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_reimbursement',         fieldLabel: this.merchant_reimbursementLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_settle_agent',          fieldLabel: this.merchant_settle_agentLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'merchant_bank_aba',              fieldLabel: this.merchant_bank_abaLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        }
-          ]
-        }
+        // {
+        //   xtype: 'fieldset',
+        //   title: 'Merchant Card Services',
+        //   collapsible: true,
+        //   defaultType: 'textfield',
+        //   defaults: {anchor: '70%'},
+        //   disabled: true,
+        //   layout: 'anchor',
+        //   items:[
+        //     { name: 'merchant_identifier',            fieldLabel: this.merchant_identifierLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_name',                  fieldLabel: this.merchant_nameLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_time_zone',             fieldLabel: this.merchant_time_zoneLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_location',              fieldLabel: this.merchant_locationLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_sic',                   fieldLabel: this.merchant_sicLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_industry',              fieldLabel: this.merchant_industryLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_acquirer_bin',          fieldLabel: this.merchant_acquirer_binLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_agent',                 fieldLabel: this.merchant_agentLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_chain',                 fieldLabel: this.merchant_chainLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_store',                 fieldLabel: this.merchant_storeLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_terminal',              fieldLabel: this.merchant_terminalLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_v_number',              fieldLabel: this.merchant_v_numberLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_pri_auth_phone',        fieldLabel: this.merchant_pri_auth_phoneLabel,    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_sec_auth_phone',        fieldLabel: this.merchant_sec_auth_phoneLabel,    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_pri_settle_phone',      fieldLabel: this.merchant_pri_settle_phoneLabel,  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_sec_settle_phone',      fieldLabel: this.merchant_sec_settle_phoneLabel,  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_amex_identifier',       fieldLabel: this.merchant_amex_identifierLabel,   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_discover_identifier',   fieldLabel: this.merchant_discover_identifierLabel,allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_diners_identifier',     fieldLabel: this.merchant_diners_identifierLabel, allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_sharing_groups',        fieldLabel: this.merchant_sharing_groupsLabel,    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_reimbursement',         fieldLabel: this.merchant_reimbursementLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_settle_agent',          fieldLabel: this.merchant_settle_agentLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+        //     { name: 'merchant_bank_aba',              fieldLabel: this.merchant_bank_abaLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+        //   ]
+        // }
       ]
     });
     // FIELDSETS (End)

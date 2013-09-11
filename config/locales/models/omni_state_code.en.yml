@@ -5,7 +5,7 @@ en:
     attributes:
       omni/state_code:
         state_code_id:                   State Code
-        display:                         Display
+        display:                         Name
         state_code:                      State Code
         country:                         Country
         state_type:                      Type

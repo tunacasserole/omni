@@ -5,7 +5,7 @@ en:
     attributes:
       omni/till_detail:
         till_detail_id:                  Till Detail
-        display:                         Display
+        display:                         Name
         till_display:                    Till
         till_id:                         Till
         tender_display:                  Tender

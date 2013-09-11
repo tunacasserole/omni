@@ -5,7 +5,7 @@ en:
     attributes:
       omni/program_style:
         program_style_id:                Program Product Style
-        display:                         Display
+        display:                         Name
         program_product_display:         Program Product
         program_product_id:              Program Product
         style_display:                   Style

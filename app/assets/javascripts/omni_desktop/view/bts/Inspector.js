@@ -19,7 +19,7 @@ Ext.define('Omni.view.bts.Inspector',{
     Ext.apply(this, {
       cards: [
         {title: 'Profile',           xtype: 'omni-bts-Form'}
-        ,{title: 'Skus', xtype: 'omni-bts_details-Explorer', module: 'tollgates',
+        ,{title: 'Results', xtype: 'omni-bts_details-Explorer', module: 'tollgates',
            defaultSearch: { with: 
              {
                bts_id:   {equal_to: me.record.get('bts_id')}
@@ -33,41 +33,41 @@ Ext.define('Omni.view.bts.Inspector',{
         //      }
         //   }
         // }          
-        ,{
-          xtype    : 'buildit-CardGroup',
-          title    : 'Support',
-          module   : 'notes',
-          cards    : [
-            {
-              title: 'Notes',
-              xtype: 'buildit-notes-Explorer',
-              defaultSearch: { with:
-                {
-                  notable_type: {equal_to: 'Omni::Bts'},
-                  notable_id:   {equal_to: me.record.get('bts_id')}
-                }
-              },
-              showBadge: true
-            },
-            {
-              title: 'Attachments',
-              xtype: 'buildit-attachments-Explorer',
-              defaultSearch: { with:
-                {
-                  attachable_type: {equal_to: 'Omni::Bts'},
-                  attachable_id:   {equal_to: me.record.get('bts_id')}
-                }
-              },
-              showBadge: true
-            },
-            {
-              title:      'Audit',
-              xtype:      'buildit-audits-Explorer',
-              model:      'Omni::Bts',
-              model_id:   me.record.get('bts_id')
-            }
-          ]
-        }                      
+        // ,{
+        //   xtype    : 'buildit-CardGroup',
+        //   title    : 'Support',
+        //   module   : 'notes',
+        //   cards    : [
+        //     {
+        //       title: 'Notes',
+        //       xtype: 'buildit-notes-Explorer',
+        //       defaultSearch: { with:
+        //         {
+        //           notable_type: {equal_to: 'Omni::Bts'},
+        //           notable_id:   {equal_to: me.record.get('bts_id')}
+        //         }
+        //       },
+        //       showBadge: true
+        //     },
+        //     {
+        //       title: 'Attachments',
+        //       xtype: 'buildit-attachments-Explorer',
+        //       defaultSearch: { with:
+        //         {
+        //           attachable_type: {equal_to: 'Omni::Bts'},
+        //           attachable_id:   {equal_to: me.record.get('bts_id')}
+        //         }
+        //       },
+        //       showBadge: true
+        //     },
+        //     {
+        //       title:      'Audit',
+        //       xtype:      'buildit-audits-Explorer',
+        //       model:      'Omni::Bts',
+        //       model_id:   me.record.get('bts_id')
+        //     }
+        //   ]
+        // }                      
       ]
     });
     // CARDS (End)

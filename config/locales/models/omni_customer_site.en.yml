@@ -5,7 +5,7 @@ en:
     attributes:
       omni/customer_site:
         customer_site_id:                Person Site
-        display:                         Display
+        display:                         Name
         customer_display:                Customer
         customer_id:                     Person
         site_display:                    Site

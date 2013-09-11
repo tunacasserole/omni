@@ -5,7 +5,7 @@ en:
     attributes:
       omni/work_order:
         work_order_id:                   work_order_id
-        display:                         Display
+        display:                         Name
         state:                           Work Order State
         work_order_nbr:                  Work Order Nbr
         workable_id:                     Work Order Source Id

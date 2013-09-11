@@ -62,45 +62,15 @@ Ext.define('Omni.view.sites.Explorer', {
     Ext.apply(this, {
       columns      : [
         // {
-        //   header       : this.site_idLabel,
-        //   dataIndex    : 'site_id',
+        //   header       : this.displayLabel,
+        //   dataIndex    : 'display',
         //   flex         : 1
         // },
         {
-          header       : this.displayLabel,
-          dataIndex    : 'display',
-          flex         : 1
+          header       : this.site_nameLabel,
+          dataIndex    : 'site_name',
+          flex         : 2
         },
-        // {
-        //   header       : this.site_nameLabel,
-        //   dataIndex    : 'site_name',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.parent_site_idLabel,
-        //   dataIndex    : 'parent_site_id',
-        //   flex         : 1
-        // },
-        {
-          header       : this.school_nbrLabel,
-          dataIndex    : 'school_nbr',
-          flex         : 1
-        },
-        // {
-        //   header       : this.descriptionLabel,
-        //   dataIndex    : 'description',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.short_nameLabel,
-        //   dataIndex    : 'short_name',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.concatenated_nameLabel,
-        //   dataIndex    : 'concatenated_name',
-        //   flex         : 1
-        // },
         {
           header       : this.site_typeLabel,
           dataIndex    : 'site_type',
@@ -121,11 +91,11 @@ Ext.define('Omni.view.sites.Explorer', {
           dataIndex    : 'gradeset',
           flex         : 1
         },
-        {
-          header       : this.site_genderLabel,
-          dataIndex    : 'site_gender',
-          flex         : 1
-        },
+        // {
+        //   header       : this.site_genderLabel,
+        //   dataIndex    : 'site_gender',
+        //   flex         : 1
+        // },
         // {
         //   header       : this.line_1Label,
         //   dataIndex    : 'line_1',
@@ -155,7 +125,7 @@ Ext.define('Omni.view.sites.Explorer', {
           header       : this.state_codeLabel,
           dataIndex    : 'state_code',
           flex         : 1
-        }
+        },
         // {
         //   header       : this.zipLabel,
         //   dataIndex    : 'zip',
@@ -176,21 +146,21 @@ Ext.define('Omni.view.sites.Explorer', {
         //   dataIndex    : 'longitude',
         //   flex         : 1
         // },
-        // {
-        //   header       : this.phoneLabel,
-        //   dataIndex    : 'phone',
-        //   flex         : 1
-        // },
+        {
+          header       : this.phoneLabel,
+          dataIndex    : 'phone',
+          flex         : 1
+        },
         // {
         //   header       : this.faxLabel,
         //   dataIndex    : 'fax',
         //   flex         : 1
         // },
-        // {
-        //   header       : this.is_destroyedLabel,
-        //   dataIndex    : 'is_destroyed',
-        //   flex         : 1
-        // }
+        {
+          header       : this.school_nbrLabel,
+          dataIndex    : 'school_nbr',
+          flex         : 1
+        }
       ]
     });
     // COLUMNS (End)

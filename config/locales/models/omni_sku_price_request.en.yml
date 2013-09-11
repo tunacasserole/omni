@@ -5,7 +5,7 @@ en:
     attributes:
       omni/sku_price_request:
         sku_price_request_id:            SKU Price
-        display:                         Display
+        display:                         Name
         state:                           Price Request State
         user_display:                    User
         user_id:                         Requesting User

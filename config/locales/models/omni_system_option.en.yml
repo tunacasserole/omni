@@ -5,7 +5,7 @@ en:
     attributes:
       omni/system_option:
         system_option_id:                System Option
-        display:                         Display
+        display:                         Name
         price_book_display:              Price Book
         price_book_id:                   National Price Book
         professional_discount_percent:   Professional Discount Percent

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/payment:
         payment_id:                      Payment
-        display:                         Display
+        display:                         Name
         payment_nbr:                     Payment Number
         order_display:                   Order
         order_id:                        Order

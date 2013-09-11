@@ -5,7 +5,7 @@ en:
     attributes:
       omni/voucher:
         voucher_id:                      Voucher
-        display:                         Display
+        display:                         Name
         customer_display:                Customer
         customer_id:                     Customer
         voucher_nbr:                     Voucher Nbr

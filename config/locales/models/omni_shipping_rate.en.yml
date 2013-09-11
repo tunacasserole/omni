@@ -5,7 +5,7 @@ en:
     attributes:
       omni/shipping_rate:
         shipping_rate_id:                Supplier Shipping Rate
-        display:                         Display
+        display:                         Name
         supplier_display:                Supplier
         supplier_id:                     Supplier
         shipping_rate_name:              Shipping Rate Name

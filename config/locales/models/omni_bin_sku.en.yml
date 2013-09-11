@@ -14,7 +14,7 @@ en:
         due_out_units:                   Due Out Units
         is_destroyed:                    Deleted
         bin_sku_id:                      Bin SKU
-        display:                         Display
+        display:                         Name
         bin_display:                     Bin
         bin_id:                          Bin ID
         sku_display:                     Sku

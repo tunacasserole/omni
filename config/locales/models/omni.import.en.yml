@@ -6,7 +6,7 @@ en:
       omni/import:
         import_id:                         'Import'
         state:                             'State'
-        display:                           'Display'
+        display:                           'Name'
         source:                            'Source'
         target:                            'Target'
         job_type:                          'Job Type'

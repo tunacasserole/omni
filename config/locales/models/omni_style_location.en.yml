@@ -5,7 +5,7 @@ en:
     attributes:
       omni/style_location:
         style_location_id:               Style Location
-        display:                         Display
+        display:                         Name
         style_display:                   Style
         style_id:                        Style
         location_display:                Location

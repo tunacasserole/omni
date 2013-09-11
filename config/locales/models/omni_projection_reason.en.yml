@@ -5,7 +5,7 @@ en:
     attributes:
       omni/projection_reason:
         projection_reason_id:            Projection Reason
-        display:                         Display
+        display:                         Name
         description:                     Description
         short_name:                      Short Name
         is_destroyed:                    Deleted

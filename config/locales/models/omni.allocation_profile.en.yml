@@ -5,7 +5,7 @@ en:
     attributes:
       omni/allocation_profile:
         allocation_profile_id:             'Allocation Profile'
-        display:                           'Display'
+        display:                           'Name'
         description:                       'Description'
         allocation_formula:                'Allocation Formula'
         state:                             'State'

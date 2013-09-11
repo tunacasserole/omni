@@ -5,7 +5,7 @@ en:
     attributes:
       omni/site_donation:
         site_donation_id:                Site Donation
-        display:                         Display
+        display:                         Name
         site_display:                    Site
         site_id:                         Site
         donation_date:                   Donation Date

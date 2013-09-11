@@ -5,7 +5,7 @@ en:
     attributes:
       omni/program:
         program_id:                      Program
-        display:                         Display
+        display:                         Name
         program_nbr:                     Program Number
         site_display:                    Site
         site_id:                         Site

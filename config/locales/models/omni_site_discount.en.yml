@@ -5,7 +5,7 @@ en:
     attributes:
       omni/site_discount:
         site_discount_id:                Site Discount
-        display:                         Display
+        display:                         Name
         site_display:                    Site
         site_id:                         Site
         classification_display:          Classification

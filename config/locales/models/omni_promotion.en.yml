@@ -5,6 +5,6 @@ en:
     attributes:
       omni/promotion:
         promotion_id:                    Promotion
-        display:                         Display
+        display:                         Name
         is_destroyed:                    Deleted
 

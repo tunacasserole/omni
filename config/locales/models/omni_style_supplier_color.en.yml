@@ -5,7 +5,7 @@ en:
     attributes:
       omni/style_supplier_color:
         style_supplier_color_id:         Style Supplier Color
-        display:                         Display
+        display:                         Name
         style_supplier_display:          Style Supplier
         style_supplier_id:               Style Supplier
         style_color_display:             Style Color

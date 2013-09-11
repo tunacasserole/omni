@@ -48,9 +48,10 @@ Ext.define('Omni.view.regions.Explorer', {
       columns: [
         { header: this.short_nameLabel,                        dataIndex: 'short_name',                         flex: 1,   sortable: true  },
         { header: this.displayLabel,                           dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.region_nbrLabel,                        dataIndex: 'region_nbr',                         flex: 1,   sortable: true  },
         { header: this.company_displayLabel,                   dataIndex: 'company_display',                    flex: 1,   sortable: true  },
-        { header: this.user_displayLabel,                      dataIndex: 'user_display',                       flex: 1,   sortable: true  }
+        { header: this.user_displayLabel,                      dataIndex: 'user_display',                       flex: 1,   sortable: true  },
+        { header: this.region_nbrLabel,                        dataIndex: 'region_nbr',                         flex: 1,   sortable: true  },
+
       ]
     });
     // COLUMNS (End)

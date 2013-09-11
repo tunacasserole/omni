@@ -4,7 +4,7 @@ en:
       omni/sku_cost: 'SkuCost'
     attributes:
       omni/sku_cost:
-        display:                         Display
+        display:                         Name
         sku_display:                     Sku
         sku_id:                          Sku
         first_cost:                      First Cost

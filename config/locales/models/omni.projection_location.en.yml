@@ -7,6 +7,6 @@ en:
         projection_location_id:            'Projection Location'
         projection_id:                     'Projection'
         location_id:                       'Location'
-        display:                           'Display'
+        display:                           'Name'
         state:                             'State'
         is_destroyed:                      'Is Destroyed'

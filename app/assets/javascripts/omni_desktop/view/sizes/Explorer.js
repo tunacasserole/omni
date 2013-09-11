@@ -46,12 +46,12 @@ Ext.define('Omni.view.sizes.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.size_nbrLabel, dataIndex: 'size_nbr',  flex: 1,  sortable: true  },
-        // { header: this.size_typeLabel, dataIndex: 'size_type',  flex: 1,  sortable: true , renderer: Buildit.util.Format.lookupRenderer('SIZE_TYPE') },
         { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
         { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: true  },
         { header: this.dimension_1Label, dataIndex: 'dimension_1',  flex: 1,  sortable: true  },
-        { header: this.dimension_2Label, dataIndex: 'dimension_2',  flex: 1,  sortable: true  }
+        { header: this.dimension_2Label, dataIndex: 'dimension_2',  flex: 1,  sortable: true  },
+        { header: this.size_typeLabel, dataIndex: 'size_type',  flex: 1,  sortable: true , renderer: Buildit.util.Format.lookupRenderer('SIZE_TYPE') },        
+        { header: this.size_nbrLabel, dataIndex: 'size_nbr',  flex: 1,  sortable: true  },
       ]
     });
     // COLUMNS (End)

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/sku_promo_price:
         sku_promo_price_id:              Promo Price
-        display:                         Display
+        display:                         Name
         sku_display:                     Sku
         sku_id:                          SKU
         price_book_display:              Price Book

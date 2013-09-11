@@ -5,7 +5,7 @@ en:
     attributes:
       omni/supplier_contact:
         supplier_contact_id:             Supplier Person
-        display:                         Display
+        display:                         Name
         supplier_display:                Supplier
         supplier_id:                     Supplier
         first_name:                      First Name

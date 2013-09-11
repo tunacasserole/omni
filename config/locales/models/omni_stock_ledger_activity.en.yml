@@ -5,7 +5,7 @@ en:
     attributes:
       omni/stock_ledger_activity:
         stock_ledger_activity_id:        Stock Ledger Activity
-        display:                         Display
+        display:                         Name
         stockable_type:                  Stockable Type
         stockable_id:                    Stockable
         ruleset_display:                 Ruleset

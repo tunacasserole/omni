@@ -5,7 +5,7 @@ en:
     attributes:
       omni/area:
         area_id:                         Area
-        display:                         Display
+        display:                         Name
         location_display:                Location
         location_id:                     Location
         area_nbr:                        Area Number

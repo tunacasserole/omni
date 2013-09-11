@@ -5,7 +5,7 @@ en:
     attributes:
       omni/label:
         label_id:                        Label
-        display:                         Display
+        display:                         Name
         description:                     Description
         label_type:                      Label Type
         short_name:                      Short Name

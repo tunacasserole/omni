@@ -5,7 +5,7 @@ en:
     attributes:
       omni/daily_result:
         daily_result_id:                 Daily Result
-        display:                         Display
+        display:                         Name
         sku_display:                     Sku
         sku_id:                          Sku
         location_display:                Location

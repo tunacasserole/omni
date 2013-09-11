@@ -5,7 +5,7 @@ en:
     attributes:
       omni/size:
         size_id:                         Size
-        display:                         Display
+        display:                         Name
         size_nbr:                        Size Number
         description:                     Description
         size_type:                       Size Type

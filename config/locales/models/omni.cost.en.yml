@@ -6,7 +6,7 @@ en:
       omni/cost:
         cost_id:                           'Landed Cost Model'
         cost_display:                      'Lanced Cost Model'
-        display:                           'Display'
+        display:                           'Name'
         short_name:                        'Short Name'    
         description:                       'Description'
         is_destroyed:                      'Is Destroyed'

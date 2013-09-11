@@ -5,7 +5,7 @@ en:
     attributes:
       omni/category:
         category_id:                     Category
-        display:                         Display
+        display:                         Name
         category_code:                   Category Code
         description:                     Description
         category_type:                   Category Type

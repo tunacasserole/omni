@@ -5,7 +5,7 @@ en:
     attributes:
       omni/adjustment_reason:
         adjustment_reason_id:            Adjustment Reason
-        display:                         Display
+        display:                         Name
         description:                     Description
         short_name:                      Short Name
         ruleset_display:                 Ruleset

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/projection_detail:
         projection_detail_id:            Projection Detail
-        display:                         Display
+        display:                         Name
         projection_display:              Projection
         projection_id:                   Projection
         projection_line_nbr:             Projection Line Number

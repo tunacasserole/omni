@@ -5,7 +5,7 @@ en:
     attributes:
       omni/sku:
         sku_id:                          SKU
-        display:                         Sku Display Name
+        display:                         Sku Name Name
         sku_nbr:                         SKU Number
         description:                     SKU Description
         short_name:                      Short Name
@@ -41,7 +41,7 @@ en:
         is_enabled:                      SKU Active
         subclass_display:                Subclass
         subclass_id:                     Subclass
-        buyer_user_display:              Buyer User
+        buyer_user_display:              Buyer
         buyer_user_id:                   Buyer
         brand:                           Brand
         product_type_display:            Product Type
@@ -72,5 +72,7 @@ en:
         stock_nbr:                       Stock Number        
         is_special_order:                Special Order
         is_special_size:                 Special Size/Cut
+        source:                          Source
+        source_id:                       Source Id
         is_destroyed:                    Deleted
 

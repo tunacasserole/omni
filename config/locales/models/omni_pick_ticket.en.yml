@@ -5,7 +5,7 @@ en:
     attributes:
       omni/pick_ticket:
         pick_ticket_id:                  Pick Ticket
-        display:                         Display
+        display:                         Name
         state:                           Pick Ticket State
         pick_ticket_nbr:                 Pick Ticket Nbr
         pickable_id:                     Pick Ticket Owner

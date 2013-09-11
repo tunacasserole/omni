@@ -5,7 +5,7 @@ en:
     attributes:
       omni/grade:
         grade_id:                        Grade
-        display:                         Display
+        display:                         Name
         gradeset:                        Gradeset
         grade_name:                      Grade Name
         short_name:                      Short Name

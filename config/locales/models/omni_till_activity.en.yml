@@ -5,7 +5,7 @@ en:
     attributes:
       omni/till_activity:
         till_activity_id:                Till Activity
-        display:                         Display
+        display:                         Name
         till_display:                    Till
         till_id:                         Till
         till_activity_nbr:               Till Activity Number

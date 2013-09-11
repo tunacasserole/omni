@@ -5,6 +5,6 @@ en:
     attributes:
       omni/price_change:
         price_change_id:                 Price Change
-        display:                         Display
+        display:                         Name
         is_destroyed:                    Deleted
 

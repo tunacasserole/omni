@@ -42,11 +42,11 @@ Ext.define('Omni.view.app.Hub', {
      columns: 4,
      rows: 3,
      tiles: [
-       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-skus-Explorer', allowEdit: true, allowNew: false}},       
+       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-skus-Explorer'}},       
        {title: 'Styles', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-styles-Explorer'}},
-       {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-subclasses-Explorer', title: ''}},   
-       {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-classifications-Explorer', title: ''}},         
-       {title: 'Departments', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-departments-Explorer', title: ''}}           
+       {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-subclasses-Explorer'}},   
+       {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-classifications-Explorer'}},         
+       {title: 'Departments', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-departments-Explorer'}}           
      ] 
      }
 
@@ -96,17 +96,15 @@ Ext.define('Omni.view.app.Hub', {
      }     
 
     // Section: Legacy Data //
-
-,{
-   title: 'Project Tracking',
-     columns: 2,
-     rows: 4,
-     tiles: [
-       {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-tasks-Explorer'}},         
-       {title: 'Projects', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-projects-Explorer'}}
-    ]
-  }
-
+// ,{
+//    title: 'Project Tracking',
+//      columns: 2,
+//      rows: 4,
+//      tiles: [
+//        {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-tasks-Explorer'}},         
+//        {title: 'Projects', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-projects-Explorer'}}
+//     ]
+//   }
    
  ] 
  }); 

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/forecast_profile:
         forecast_profile_id:               'Forecast Profile'
-        display:                           'Display'
+        display:                           'Name'
         sales_2012_weight:                  'Sales 2012 Weight'
         sales_2011_weight:                  'Sales 2011 Weight'
         sales_2010_weight:                  'Sales 2010 Weight'

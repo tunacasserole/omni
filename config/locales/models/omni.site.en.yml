@@ -5,7 +5,7 @@ en:
     attributes:
       omni/site:
         site_id:                           'Site'
-        display:                           'Display'
+        display:                           'Name'
         site_name:                         'Site Name'
         parent_site_id:                    'Parent Site'
         school_nbr:                        'School Nbr'

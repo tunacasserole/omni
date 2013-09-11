@@ -11,7 +11,7 @@ en:
         is_destroyed:                    Deleted
         supplier_id:                     Supplier
         purchase_detail_id:              Purchase Detail
-        display:                         Display
+        display:                         Name
         purchase_display:                Purchase Order
         purchase_id:                     Purchase Order
         purchase_line_nbr:               Purchase Order Line Number

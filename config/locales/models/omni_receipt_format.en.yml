@@ -5,12 +5,12 @@ en:
     attributes:
       omni/receipt_format:
         receipt_format_id:               Receipt Format
-        display:                         Display
+        display:                         Name
         description:                     Description
         icon_url:                        Icon URL
         icon_width:                      Icon Width
         paper_width:                     Paper Width
-        top_name:                        Display
+        top_name:                        Name
         feedback_message:                Feedback Message
         return_policy:                   Return Policy
         website_message:                 Website Message

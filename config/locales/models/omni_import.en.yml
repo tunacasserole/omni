@@ -7,7 +7,7 @@ en:
         import_id:                         'Import'
         department_id:                     'Department'
         department_display:                'department_display'
-        display:                           'Display'
+        display:                           'Name'
         data_source:                       'Data Source'
         table_name:                        'Table Name'
         model_name:                        'Model Name'        

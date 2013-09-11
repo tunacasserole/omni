@@ -5,7 +5,7 @@ en:
     attributes:
       omni/product:
         product_id:                      Product
-        display:                         Display
+        display:                         Name
         product_nbr:                     Product Number
         description:                     Description
         category_display:                Category

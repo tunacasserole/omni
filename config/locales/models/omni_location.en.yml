@@ -5,7 +5,7 @@ en:
     attributes:
       omni/location:
         location_id:                     Location
-        display:                         Display
+        display:                         Name
         description:                     Description
         short_name:                      Short Name
         location_nbr:                    Location Number

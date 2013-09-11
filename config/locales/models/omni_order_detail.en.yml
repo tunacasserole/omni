@@ -5,7 +5,7 @@ en:
     attributes:
       omni/order_detail:
         order_detail_id:                 Order Detail
-        display:                         Display
+        display:                         Name
         order_display:                   Order
         order_id:                        Order
         order_line_nbr:                  Order Line Nbr

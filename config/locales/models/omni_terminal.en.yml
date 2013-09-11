@@ -5,7 +5,7 @@ en:
     attributes:
       omni/terminal:
         terminal_id:                     Terminal
-        display:                         Display
+        display:                         Name
         location_display:                Location
         location_id:                     Location
         till_display:                    Till
@@ -22,7 +22,7 @@ en:
         tag_printer_url:                 Tag Printer URL
         tag_printer_ip:                  Tag Printer IP
         pin_pad_port:                    Pin Pad Port
-        is_net_display_enabled:          Net Display Enabled
+        is_net_display_enabled:          Net Name Enabled
         is_login_per_transaction:        Login Before Each Transaction
         is_destroyed:                    Deleted
 

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/sku_substitute:
         sku_substitute_id:               SKU Substitute
-        display:                         Display
+        display:                         Name
         sku_display:                     Sku
         sku_id:                          SKU
         substitute_sku_display:          Substitute Sku

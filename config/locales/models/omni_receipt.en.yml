@@ -5,7 +5,7 @@ en:
     attributes:
       omni/receipt:
         receipt_id:                      Receipt
-        display:                         Display
+        display:                         Name
         receipt_nbr:                     Receipt Nbr
         location_display:                Location
         location_id:                     Location

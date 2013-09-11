@@ -5,7 +5,7 @@ en:
     attributes:
       omni/site_enrollment:
         site_enrollment_id:              Site Enrollment
-        display:                         Display
+        display:                         Name
         site_display:                    Site
         site_id:                         Site
         school_year:                     School Year

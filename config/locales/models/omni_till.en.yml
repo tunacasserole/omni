@@ -5,7 +5,7 @@ en:
     attributes:
       omni/till:
         till_id:                         Till
-        display:                         Display
+        display:                         Name
         location_display:                Location
         location_id:                     Location
         till_nbr:                        Till Number

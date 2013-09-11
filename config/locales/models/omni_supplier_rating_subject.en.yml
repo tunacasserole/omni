@@ -5,7 +5,7 @@ en:
     attributes:
       omni/supplier_rating_subject:
         supplier_rating_subject_id:      Supplier Rating Subject
-        display:                         Display
+        display:                         Name
         description:                     Description
         supplier_rating_subject_type:    Type
         weighting_percent:               Weighting Percent

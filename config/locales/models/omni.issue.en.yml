@@ -7,7 +7,7 @@ en:
         issue_id:                          'Issue'
         issue_nbr:                         'Issue Nbr'
         state:                             'State'
-        display:                           'Display'
+        display:                           'Name'
         description:                       'Description'
         severity:                          'Severity'
         assignee_id:                       'Assignee'

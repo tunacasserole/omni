@@ -5,7 +5,7 @@ en:
     attributes:
       omni/tax_authority_rate:
         tax_authority_rate_id:           Tax Authority Rate
-        display:                         Display
+        display:                         Name
         tax_authority_display:           Tax Authority
         tax_authority_id:                Tax Authority
         effective_date:                  Tax Rate Effective Date

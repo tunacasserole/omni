@@ -5,7 +5,7 @@ en:
     attributes:
       omni/price_book:
         price_book_id:                   Price Book
-        display:                         Display
+        display:                         Name
         description:                     Description
         price_book_type:                 Price Book Type
         short_name:                      Short Name

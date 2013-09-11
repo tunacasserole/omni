@@ -44,8 +44,9 @@ Ext.define('Omni.view.classifications.Explorer', {
     Ext.apply(this, {
       columns: [
         { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: true  },
+        { header: this.department_displayLabel,                          dataIndex: 'department_display',                 flex: 1,   sortable: true  },
         { header: this.classification_nbrLabel,                          dataIndex: 'classification_nbr',                 flex: 1,   sortable: true  },
-        { header: this.department_displayLabel,                          dataIndex: 'department_display',                 flex: 1,   sortable: true  }
+
       ]
     });
     // COLUMNS (End)

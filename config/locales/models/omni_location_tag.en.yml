@@ -5,7 +5,7 @@ en:
     attributes:
       omni/location_tag:
         location_tag_id:                 Location Tag
-        display:                         Display
+        display:                         Name
         location_display:                Location
         location_id:                     Location
         tag_display:                     Tag

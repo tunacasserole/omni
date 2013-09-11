@@ -5,7 +5,7 @@ en:
     attributes:
       omni/tender:
         tender_id:                       Tender
-        display:                         Display
+        display:                         Name
         description:                     Description
         short_name:                      Short Name
         tender_type:                     Tender Type
@@ -16,7 +16,7 @@ en:
         is_print_duplicate_receipt:      Duplicate Receipt
         is_allow_cash_back:              Allow Cash Back
         maximum_tender_amount:           Maximum Tender Amount
-        display_order:                   Display Order
+        display_order:                   Name Order
         is_verify_via_edc:               Verify Via EDC
         cash_back_limit:                 Cash Back Limit
         cash_back_fee:                   Cash Back Fee

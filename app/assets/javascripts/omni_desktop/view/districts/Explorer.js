@@ -45,9 +45,10 @@ Ext.define('Omni.view.districts.Explorer', {
     Ext.apply(this, {
       columns: [
         { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.district_nbrLabel,                                dataIndex: 'district_nbr',                       flex: 1,   sortable: true  },
         { header: this.region_displayLabel,                              dataIndex: 'region_display',                     flex: 1,   sortable: true  },
-        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: true  }
+        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: true  },
+        { header: this.district_nbrLabel,                                dataIndex: 'district_nbr',                       flex: 1,   sortable: true  },
+
       ]
     });
     // COLUMNS (End)

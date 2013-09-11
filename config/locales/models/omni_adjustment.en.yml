@@ -5,7 +5,7 @@ en:
     attributes:
       omni/adjustment:
         adjustment_id:                   Adjustment
-        display:                         Display
+        display:                         Name
         adjustment_nbr:                  Adjustment Number
         state:                           State
         location_display:                Location

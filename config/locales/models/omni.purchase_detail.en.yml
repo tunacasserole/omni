@@ -7,7 +7,7 @@ en:
         color_name:                        'Color Name'
         cost_id:                           'Cost Model'
         description:                       'Description'
-        display:                           'Display'
+        display:                           'Name'
         extra_cost:                        'Extra Cost'
         inventory_cost:                    'Inventory Cost'
         invoice_cost:                      'Invoice Cost'

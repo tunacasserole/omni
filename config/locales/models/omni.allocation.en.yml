@@ -5,7 +5,7 @@ en:
     attributes:
       omni/allocation:
         allocation_id:                     'Allocation'
-        display:                           'Display'
+        display:                           'Name'
         allocation_nbr:                    'Allocation Nbr'
         state:                             'State'
         location_id:                       'Location'

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/rule:
         rule_id:                         Rule
-        display:                         Display
+        display:                         Name
         ruleset_display:                 Ruleset
         ruleset_id:                      Ruleset
         rule_type:                       Rule Type

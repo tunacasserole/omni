@@ -5,7 +5,7 @@ en:
     attributes:
       omni/order:
         order_id:                        Order
-        display:                         Display
+        display:                         Name
         location_display:                Location
         location_id:                     Location
         terminal_display:                Terminal

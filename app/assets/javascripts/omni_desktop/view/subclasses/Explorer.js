@@ -46,10 +46,11 @@ Ext.define('Omni.view.subclasses.Explorer', {
     Ext.apply(this, {
       columns: [
         { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.subclass_nbrLabel, dataIndex: 'subclass_nbr',  flex: 1,  sortable: true  },
         { header: this.classification_displayLabel, dataIndex: 'classification_display',  flex: 1,  sortable: true  },
         { header: this.markup_percent_high_limitLabel, dataIndex: 'markup_percent_high_limit',  flex: 1,  sortable: true  },
-        { header: this.markup_percent_low_limitLabel, dataIndex: 'markup_percent_low_limit',  flex: 1,  sortable: true  }
+        { header: this.markup_percent_low_limitLabel, dataIndex: 'markup_percent_low_limit',  flex: 1,  sortable: true  },
+        { header: this.subclass_nbrLabel, dataIndex: 'subclass_nbr',  flex: 1,  sortable: true  },
+
       ]
     });
     // COLUMNS (End)

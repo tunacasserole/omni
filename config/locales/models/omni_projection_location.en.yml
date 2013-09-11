@@ -8,7 +8,7 @@ en:
         projection_id:                   Projection
         projection_location_id:          Location
         location_display:                Location
-        display:                         Display
+        display:                         Name
         state:                           State
         is_destroyed:                    Deleted
 

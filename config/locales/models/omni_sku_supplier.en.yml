@@ -5,7 +5,7 @@ en:
     attributes:
       omni/sku_supplier:
         sku_supplier_id:                 SKU Supplier
-        display:                         Display
+        display:                         Name
         sku_display:                     Sku
         sku_id:                          SKU
         supplier_display:                Supplier

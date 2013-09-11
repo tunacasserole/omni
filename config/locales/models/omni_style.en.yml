@@ -5,7 +5,7 @@ en:
     attributes:
       omni/style:
         style_id:                        Style
-        display:                         Display
+        display:                         Style Name Name
         style_nbr:                       Style Number
         description:                     Description
         short_name:                      Short Name
@@ -18,7 +18,7 @@ en:
         subclass_id:                     Subclass
         product_display:                 Product
         product_id:                      Web Product
-        buyer_user_display:              Buyer User
+        buyer_user_display:              Buyer
         buyer_user_id:                   Buyer
         brand:                           Brand
         product_type_display:            Product Type

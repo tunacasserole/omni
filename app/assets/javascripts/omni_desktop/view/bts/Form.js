@@ -25,8 +25,8 @@ Ext.define('Omni.view.bts.Form', {
       department_idLabel:                     Omni.i18n.model.Bts.department_id,    
       classification_idLabel:                 Omni.i18n.model.Bts.classification_id,    
       subclass_idLabel:                       Omni.i18n.model.Bts.subclass_id,    
-      style_idLabel:                          Omni.i18n.model.Bts.style_id,    
-      sku_idLabel:                            Omni.i18n.model.Bts.sku_id,    
+      classification_idLabel:                          Omni.i18n.model.Bts.classification_id,    
+      department_idLabel:                            Omni.i18n.model.Bts.department_id,    
       color_idLabel:                          Omni.i18n.model.Bts.color_id,    
       stateLabel:                             Omni.i18n.model.Bts.state,    
       displayLabel:                           Omni.i18n.model.Bts.display,    
@@ -45,7 +45,7 @@ Ext.define('Omni.view.bts.Form', {
       is_projectedLabel:                      Omni.i18n.model.Bts.is_projected,    
       is_drop_dataLabel:                      Omni.i18n.model.Bts.is_drop_data,    
       is_create_detailLabel:                  Omni.i18n.model.Bts.is_create_detail,
-      is_sum_styleLabel:                      Omni.i18n.model.Bts.is_sum_style,                                                 
+      is_sum_classificationLabel:                      Omni.i18n.model.Bts.is_sum_classification,                                                 
       is_sum_subclassLabel:                   Omni.i18n.model.Bts.is_sum_subclass,  
       is_sum_classLabel:                      Omni.i18n.model.Bts.is_sum_class,  
       is_sum_departmentLabel:                 Omni.i18n.model.Bts.is_sum_department,                   
@@ -87,21 +87,54 @@ Ext.define('Omni.view.bts.Form', {
           defaults:     {anchor: '70%'},
           layout:       'anchor',
           items:[
-            {
-              xtype: 'label',
-              text: 'Enter one value below.  If you provide multiples, the system will run only at the lowest level provided.',
-              cls: 'instruction'
-            }                   
+            // {
+            //   xtype: 'label',
+            //   text: 'Select a department, class or subclass to run.',
+            //   cls: 'instruction'
+            // }                   
             // { name: 'department_id',  fieldLabel: this.department_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
             // { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },            
+           ,{
+              xtype           : 'buildit-Locator',
+              store           : Ext.create('Omni.store.Department',{pageSize: 12}),
+              displayField    : 'display',
+              queryField      : 'display',
+              valueField      : 'department_id',
+              itemTpl         : '<b>{display}</b>',              
+              name            : 'department_id',
+              initialValue    : this.record.get('department_display'),
+              fieldLabel      : this.department_idLabel,
+              allowBlank      : true
+              // listeners        : {
+                // render           : me.preRenderClassification,
+                // scope            : me
+              // }
+            }
+           ,{
+              xtype           : 'buildit-Locator',
+              store           : Ext.create('Omni.store.Classification',{pageSize: 12}),
+              displayField    : 'display',
+              queryField      : 'display',
+              valueField      : 'classification_id',
+              // dependsOn       : 'subclass_id',              
+              itemTpl         : '<b>{display}</span>',              
+              name            : 'classification_id',
+              initialValue    : this.record.get('classification_display'),
+              fieldLabel      : this.classification_idLabel,
+              allowBlank      : true
+              // listeners        : {
+                // render           : me.preRenderClassification,
+                // scope            : me
+              // }
+            }                     
             ,{
               xtype           : 'buildit-Locator',
               store           : Ext.create('Omni.store.Subclass',{pageSize: 12}),
               displayField    : 'display',
               queryField      : 'display',
               valueField      : 'subclass_id',
-              // itemTpl         : '<b>{display}</b> <span style="float:right">Class:   {classification_display}, Department:  {department_display}</span>',              
-              itemTpl         : '<b>{display}</b> <span style="float:right">Class:   {classification_display}</span>',                            
+              // itemTpl         : '<b>{display}</b> <span classification="float:right">Class:   {classification_display}, Department:  {department_display}</span>',              
+              itemTpl         : '<b>{display}</b>',                            
               name            : 'subclass_id',
               initialValue    : this.record.get('subclass_display'),
               fieldLabel      : this.subclass_idLabel,
@@ -112,60 +145,26 @@ Ext.define('Omni.view.bts.Form', {
                 // scope            : me
               // }
             }   
-            ,{
-              xtype           : 'buildit-Locator',
-              store           : Ext.create('Omni.store.Style',{pageSize: 12}),
-              displayField    : 'display',
-              queryField      : 'display',
-              valueField      : 'style_id',
-              // dependsOn       : 'subclass_id',              
-              itemTpl         : '<b>{display}</b> <span style="float:right">Subclass:   {subclass_display}</span>',              
-              name            : 'style_id',
-              initialValue    : this.record.get('style_display'),
-              fieldLabel      : this.style_idLabel,
-              allowBlank      : true
-              // listeners        : {
-                // render           : me.preRenderStyle,
-                // scope            : me
-              // }
-            }                     
-           ,{
-              xtype           : 'buildit-Locator',
-              store           : Ext.create('Omni.store.Sku',{pageSize: 12}),
-              displayField    : 'display',
-              queryField      : 'display',
-              valueField      : 'sku_id',
-              dependsOn       : 'style_id',              
-              itemTpl         : '<b>{style_display} - {display}</b>',              
-              name            : 'sku_id',
-              initialValue    : this.record.get('sku_id'),
-              fieldLabel      : this.sku_idLabel,
-              allowBlank      : true
-              // listeners        : {
-                // render           : me.preRenderStyle,
-                // scope            : me
-              // }
-            }
         ]
         }                     
-           ,{
-          xtype:        'fieldset',
-          title:        'Columns to calculate',
-          collapsible:  true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '70%'},
-          layout:       'anchor',
-          items:[
-            { xtype: 'checkbox', name: 'is_on_hand',               fieldLabel: this.is_on_handLabel            , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_wip',                   fieldLabel: this.is_wipLabel          , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_allocated',             fieldLabel: this.is_allocatedLabel        , allowBlank: true },
-            { xtype: 'checkbox', name: 'is_in_transit',            fieldLabel: this.is_in_transitLabel        , allowBlank: true },            
-            { xtype: 'checkbox', name: 'is_ytd',                   fieldLabel: this.is_ytdLabel            , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_py1',                   fieldLabel: this.is_py1Label          , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_py2',                   fieldLabel: this.is_py2Label        , allowBlank: true },
-            { xtype: 'checkbox', name: 'is_projected',             fieldLabel: this.is_projectedLabel        , allowBlank: true }                        
-          ]
-        } 
+        //    ,{
+        //   xtype:        'fieldset',
+        //   title:        'Columns to calculate',
+        //   collapsible:  true,
+        //   defaultType:  'textfield',
+        //   defaults:     {anchor: '70%'},
+        //   layout:       'anchor',
+        //   items:[
+        //     { xtype: 'checkbox', name: 'is_on_hand',               fieldLabel: this.is_on_handLabel            , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_wip',                   fieldLabel: this.is_wipLabel          , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_allocated',             fieldLabel: this.is_allocatedLabel        , allowBlank: true },
+        //     { xtype: 'checkbox', name: 'is_in_transit',            fieldLabel: this.is_in_transitLabel        , allowBlank: true },            
+        //     { xtype: 'checkbox', name: 'is_ytd',                   fieldLabel: this.is_ytdLabel            , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_py1',                   fieldLabel: this.is_py1Label          , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_py2',                   fieldLabel: this.is_py2Label        , allowBlank: true },
+        //     { xtype: 'checkbox', name: 'is_projected',             fieldLabel: this.is_projectedLabel        , allowBlank: true }                        
+        //   ]
+        // } 
         ,{
           xtype:        'fieldset',
           title:        'Data Sources to include',
@@ -179,22 +178,22 @@ Ext.define('Omni.view.bts.Form', {
             { xtype: 'checkbox', name: 'is_source_grits',               fieldLabel: this.is_source_gritsLabel        , allowBlank: true }
           ]
         }                
-        ,{
-          xtype:        'fieldset',
-          title:        'General Report Options',
-          collapsible:  true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '70%'},
-          layout:       'anchor',
-          items:[
-            { xtype: 'checkbox', name: 'is_drop_data',               fieldLabel: this.is_drop_dataLabel            , allowBlank: true },    
-            { xtype: 'checkbox', name: 'is_create_detail',               fieldLabel: this.is_create_detailLabel            , allowBlank: true },    
-            // { xtype: 'checkbox', name: 'is_sum_style',                   fieldLabel: this.is_sum_styleLabel                , allowBlank: false },    
-            // { xtype: 'checkbox', name: 'is_sum_subclass',                fieldLabel: this.is_sum_subclassLabel             , allowBlank: false },    
-            // { xtype: 'checkbox', name: 'is_sum_class',                   fieldLabel: this.is_sum_classLabel                , allowBlank: false },    
-            // { xtype: 'checkbox', name: 'is_sum_department',              fieldLabel: this.is_sum_departmentLabel           , allowBlank: false },                
-          ]
-        }                
+        // ,{
+        //   xtype:        'fieldset',
+        //   title:        'General Report Options',
+        //   collapsible:  true,
+        //   defaultType:  'textfield',
+        //   defaults:     {anchor: '70%'},
+        //   layout:       'anchor',
+        //   items:[
+        //     { xtype: 'checkbox', name: 'is_drop_data',               fieldLabel: this.is_drop_dataLabel            , allowBlank: true },    
+        //     { xtype: 'checkbox', name: 'is_create_detail',               fieldLabel: this.is_create_detailLabel            , allowBlank: true },    
+        //     // { xtype: 'checkbox', name: 'is_sum_classification',                   fieldLabel: this.is_sum_classificationLabel                , allowBlank: false },    
+        //     // { xtype: 'checkbox', name: 'is_sum_subclass',                fieldLabel: this.is_sum_subclassLabel             , allowBlank: false },    
+        //     // { xtype: 'checkbox', name: 'is_sum_class',                   fieldLabel: this.is_sum_classLabel                , allowBlank: false },    
+        //     // { xtype: 'checkbox', name: 'is_sum_department',              fieldLabel: this.is_sum_departmentLabel           , allowBlank: false },                
+        //   ]
+        // }                
       ]
     });
     // FIELDSETS (End)

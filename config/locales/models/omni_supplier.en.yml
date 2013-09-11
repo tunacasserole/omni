@@ -5,7 +5,7 @@ en:
     attributes:
       omni/supplier:
         supplier_id:                     Supplier
-        display:                         Display Name
+        display:                         Name Name
         supplier_name:                   Supplier Name
         supplier_nbr:                    Supplier Number
         supplier_ucc_prefix:             UCC Prefix

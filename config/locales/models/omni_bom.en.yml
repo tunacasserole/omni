@@ -5,7 +5,7 @@ en:
     attributes:
       omni/bom:
         bom_id:                          BOM
-        display:                         Display
+        display:                         Name
         bomable_type:                    BOM Type
         bomable_id:                      BOM Product
         bom_nbr:                         BOM Number

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/region:
         region_id:                       Region
-        display:                         Display
+        display:                         Name
         region_nbr:                      Region Number
         description:                     Description
         short_name:                      Short Name

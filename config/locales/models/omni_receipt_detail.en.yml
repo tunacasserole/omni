@@ -5,7 +5,7 @@ en:
     attributes:
       omni/receipt_detail:
         receipt_detail_id:               Receipt Detail
-        display:                         Display
+        display:                         Name
         receipt_display:                 Receipt
         receipt_id:                      Receipt
         receipt_line_nbr:                Receipt line number

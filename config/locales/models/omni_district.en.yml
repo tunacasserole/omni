@@ -5,7 +5,7 @@ en:
     attributes:
       omni/district:
         district_id:                     District
-        display:                         Display
+        display:                         Name
         district_nbr:                    District Number
         description:                     Description
         short_name:                      Short Name

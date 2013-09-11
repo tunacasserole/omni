@@ -5,7 +5,7 @@ en:
     attributes:
       omni/size_group:
         size_group_id:                   Size Group
-        display:                         Display
+        display:                         Name
         size_group_nbr:                  Size Group Number
         description:                     Description
         short_name:                      Short Name

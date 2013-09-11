@@ -5,7 +5,7 @@ en:
     attributes:
       omni/sku_location:
         sku_location_id:                 SKU Locatino
-        display:                         Display
+        display:                         Name
         sku_display:                     Sku
         sku_id:                          SKU
         location_display:                Location

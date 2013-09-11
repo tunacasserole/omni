@@ -5,7 +5,7 @@ en:
     attributes:
       omni/subclass:
         subclass_id:                     Subclass
-        display:                         Display
+        display:                         Name
         subclass_nbr:                    Subclass Number
         description:                     Description
         short_name:                      Short Name

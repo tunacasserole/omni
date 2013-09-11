@@ -5,7 +5,7 @@ en:
     attributes:
       omni/color:
         color_id:                          'Color'
-        display:                           'Display'
+        display:                           'Name'
         color_nbr:                         'Color Number'
         description:                       'Description'
         short_name:                        'Short Name'

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/customer:
         customer_id:                     Customer
-        display:                         Display
+        display:                         Name
         customer_nbr:                    Customer Nbr
         registration_date:               Registration Date
         user_display:                    User

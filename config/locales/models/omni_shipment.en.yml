@@ -5,7 +5,7 @@ en:
     attributes:
       omni/shipment:
         shipment_id:                     Shipment
-        display:                         Display
+        display:                         Name
         state:                           Shipment State
         shipment_nbr:                    Shipment Number
         location_display:                Location

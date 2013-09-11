@@ -5,7 +5,7 @@ en:
     attributes:
       omni/company:
         company_id:                      Company
-        display:                         Display
+        display:                         Name
         company_nbr:                     Company Number
         description:                     Description
         short_name:                      Short Name

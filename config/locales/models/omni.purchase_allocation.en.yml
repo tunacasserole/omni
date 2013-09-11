@@ -8,7 +8,7 @@ en:
         purchase_detail_id:                'Purchase Detail'
         allocation_id:                     'Allocation'
         location_id:                       'Location'
-        display:                           'Display'
+        display:                           'Name'
         purchase_allocation_nbr:           'Purchase Allocation Nbr'
         state:                             'State'
         units:                             'Units'

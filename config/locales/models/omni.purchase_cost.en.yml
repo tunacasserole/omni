@@ -5,7 +5,7 @@ en:
     attributes:
       omni/purchase_cost:
         purchase_cost_id:                  'Purchase Cost'
-        display:                           'Display'
+        display:                           'Name'
         purchase_detail_id:                'Purchase Detail'
         cost_detail_id:                    'Cost Detail'
         cost_type:                         'Cost Type'

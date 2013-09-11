@@ -5,28 +5,28 @@ en:
     attributes:
       omni/inventory:
         inventory_id:                    Inventory
-        display:                         Display
+        display:                         Name
         sku_display:                     Sku
         sku_id:                          Sku
         location_display:                Location
         location_id:                     Location
-        on_hand_units:                   On Hand Units
-        in_transit_units:                In Transit Units
-        non_sellable_units:              Non Sellable Units
-        allocated_units:                 Allocated Units
-        reserved_units:                  Reserved Units
-        shipping_units:                  Shipping Units
-        work_in_process_units:           Work In Process Units
-        requested_units:                 Requested Units
-        frozen_units:                    Frozen Units
-        supplier_on_order_units:         Supplier On Order Units
-        warehouse_on_order_units:        Warehouse On Order Units
+        on_hand_units:                   On Hand 
+        in_transit_units:                In Transit 
+        non_sellable_units:              Non Sellable 
+        allocated_units:                 Allocated 
+        reserved_units:                  Reserved 
+        shipping_units:                  Shipping 
+        work_in_process_units:           Work In Process 
+        requested_units:                 Requested 
+        frozen_units:                    Frozen 
+        supplier_on_order_units:         On Order 
+        warehouse_on_order_units:        Warehouse On Order 
         cost_pool:                       Cost Pool
         retail_pool:                     Retail Pool
-        boy_units:                       Boy Units
+        boy_units:                       Boy 
         boy_cost:                        Boy Cost
         boy_retail:                      Boy Retail
-        last_inventory_units:            Last Inventory Units
+        last_inventory_units:            Last Inventory 
         last_inventory_cost:             Last Inventory Cost
         last_inventory_retail:           Last Inventory Retail
         reserve_end_date:                Reserve End Date

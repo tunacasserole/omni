@@ -49,15 +49,14 @@ Ext.define('Omni.view.colors.Explorer', {
       columns: [
         // { header: this.color_idLabel,                      dataIndex: 'color_id',                    flex: 1 },    
         { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },    
-        { header: this.color_nbrLabel,                     dataIndex: 'color_nbr',                   flex: 1 },    
-        { header: this.descriptionLabel,                   dataIndex: 'description',                 flex: 1 },    
+        // { header: this.descriptionLabel,                   dataIndex: 'description',                 flex: 1 },    
         { header: this.short_nameLabel,                    dataIndex: 'short_name',                  flex: 1 },    
         { header: this.concatenated_nameLabel,             dataIndex: 'concatenated_name',           flex: 1 },    
         { header: this.is_plaidLabel,                      dataIndex: 'is_plaid',                    flex: 1 },    
         { header: this.is_stripeLabel,                     dataIndex: 'is_stripe',                   flex: 1 },    
         { header: this.color_familyLabel,                  dataIndex: 'color_family',                flex: 1 },    
         { header: this.is_discontinuedLabel,               dataIndex: 'is_discontinued',             flex: 1 },    
-        // { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }    
+        { header: this.color_nbrLabel,                     dataIndex: 'color_nbr',                   flex: 1 },    
       ]
     });
     // COLUMNS (End)

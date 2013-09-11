@@ -15,7 +15,7 @@ en:
         sku_id:                            'Sku'
         color_id:                          'Color'
         state:                             'State'
-        display:                           'Display'
+        display:                           'Name'
         description:                       'Description'
         plan_year:                         'Plan Year'
         projection_type:                   'Projection Type'

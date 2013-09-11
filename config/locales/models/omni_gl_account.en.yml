@@ -5,7 +5,7 @@ en:
     attributes:
       omni/gl_account:
         gl_account_id:                   Gl Account
-        display:                         Display
+        display:                         Name
         gl_main_account:                 Gl Main Account
         gl_sub_account:                  Gl Sub Account
         is_location_fill:                Is Location Fill

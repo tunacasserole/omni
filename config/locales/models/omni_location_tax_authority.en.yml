@@ -5,7 +5,7 @@ en:
     attributes:
       omni/location_tax_authority:
         location_tax_authority_id:       Location Tax Authority
-        display:                         Display
+        display:                         Name
         location_display:                Location
         location_id:                     Location
         tax_authority_display:           Tax Authority

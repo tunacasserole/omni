@@ -5,7 +5,7 @@ en:
     attributes:
       omni/supplier_rating:
         supplier_rating_id:              Supplier Rating
-        display:                         Display
+        display:                         Name
         supplier_display:                Supplier
         supplier_id:                     Supplier
         supplier_rating_subject_display: Supplier Rating Subject

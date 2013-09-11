@@ -5,7 +5,7 @@ en:
     attributes:
       omni/location_user:
         location_user_id:                User Location
-        display:                         Display
+        display:                         Name
         user_display:                    User
         user_id:                         User
         location_display:                Location

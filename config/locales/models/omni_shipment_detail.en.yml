@@ -5,7 +5,7 @@ en:
     attributes:
       omni/shipment_detail:
         shipment_detail_id:              Shipment Detail
-        display:                         Display
+        display:                         Name
         shipment_display:                Shipment
         shipment_id:                     Shipment
         pick_ticket_display:             Pick Ticket
