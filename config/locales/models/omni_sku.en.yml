@@ -5,7 +5,7 @@ en:
     attributes:
       omni/sku:
         sku_id:                          SKU
-        display:                         Sku Name Name
+        display:                         Name
         sku_nbr:                         SKU Number
         description:                     SKU Description
         short_name:                      Short Name

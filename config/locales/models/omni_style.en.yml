@@ -5,7 +5,7 @@ en:
     attributes:
       omni/style:
         style_id:                        Style
-        display:                         Style Name Name
+        display:                         Name
         style_nbr:                       Style Number
         description:                     Description
         short_name:                      Short Name

@@ -5,7 +5,7 @@ en:
     attributes:
       omni/classification:
         classification_id:               Classification
-        display:                         Name Name
+        display:                         Name
         classification_nbr:              Class Number
         description:                     Description
         short_name:                      Short Name
