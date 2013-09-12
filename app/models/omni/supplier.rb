@@ -125,7 +125,7 @@ class Omni::Supplier < ActiveRecord::Base
     text     :supplier_nbr_fulltext, :using => :supplier_nbr
     text     :supplier_name_fulltext, :using => :supplier_name
     text     :legacy_supplier_code_fulltext, :using => :legacy_supplier_code
-    # text     :line_1_fulltext, :using => :line_1
+    text     :line_1_fulltext, :using => :line_1
     # text     :line_2_fulltext, :using => :line_2
     # text     :city_fulltext, :using => :city
     text     :state_code_fulltext, :using => :state_code

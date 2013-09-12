@@ -426,7 +426,7 @@ class Omni::Style < ActiveRecord::Base
  
     text     :display_fulltext,  :using => :display
     # text     :display_fulltext do self.display.gsub(/(\W)/, ' ') end
-    # text     :style_nbr_fulltext, :using => :style_nbr
+    text     :style_nbr_fulltext, :using => :style_nbr
     text     :subclass_display_fulltext, :using => :subclass_display
     # text     :product_display_fulltext, :using => :product_display
     # text     :initial_retail_price_fulltext, :using => :initial_retail_price

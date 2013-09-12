@@ -8,7 +8,7 @@ class Omni::MarkWip < ActiveRecord::Base
 
   # METADATA (Start) ====================================================================
  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
-  self.table_name                 = :wip
+  self.table_name                 = :mark_wip
   self.primary_key                = :id
   # METADATA (End)
 

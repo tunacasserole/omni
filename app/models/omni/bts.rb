@@ -93,14 +93,16 @@ class Omni::Bts < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :department_display
+    string   :subclass_display
+    string   :classification_display    
     string   :display
-    string   :bts_id
-    # string   :sku_id    
+    string   :bts_id  
     string   :state
  
     text     :department_display_fulltext, :using => :department_display
     text     :display_fulltext, :using => :display
-    text     :version_fulltext, :using => :version
+    text     :subclass_display_fulltext, :using => :subclass
+    text     :classification_display_fulltext, :using => :classification    
     text     :state_fulltext, :using => :state
   end 
   # INDEXING (End)

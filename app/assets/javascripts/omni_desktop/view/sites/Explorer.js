@@ -71,11 +71,11 @@ Ext.define('Omni.view.sites.Explorer', {
           dataIndex    : 'site_name',
           flex         : 2
         },
-        {
-          header       : this.site_typeLabel,
-          dataIndex    : 'site_type',
-          flex         : 1
-        },
+        // {
+        //   header       : this.site_typeLabel,
+        //   dataIndex    : 'site_type',
+        //   flex         : 1
+        // },
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',

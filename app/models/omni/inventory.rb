@@ -89,19 +89,14 @@ class Omni::Inventory < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    integer  :on_hand_units
-    integer  :in_transit_units
-    integer  :non_sellable_units
-    integer  :allocated_units
-    integer  :work_in_process_units
-    integer  :supplier_on_order_units
+    string   :location_display do location.display if location end          
+    string   :sku_display do sku.display if sku end      
+    string   :location_id
+    string   :sku_id
+    string   :display
  
-    text     :on_hand_units_fulltext, :using => :on_hand_units
-    text     :in_transit_units_fulltext, :using => :in_transit_units
-    text     :non_sellable_units_fulltext, :using => :non_sellable_units
-    text     :allocated_units_fulltext, :using => :allocated_units
-    text     :work_in_process_units_fulltext, :using => :work_in_process_units
-    text     :supplier_on_order_units_fulltext, :using => :supplier_on_order_units
+    text     :location_display_fulltext, :using => :location_display
+    text     :sku_display_fulltext, :using => :sku_display        
   end 
   # INDEXING (End)
 

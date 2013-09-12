@@ -10,3 +10,4 @@ Omni::SizeGroup.create(:size_group_id => '637990E6AC5711E299E700FF58D32228',:dis
 Omni::SizeGroup.create(:size_group_id => '637AF080AC5711E299E700FF58D32228',:display => 'TGR',:size_group_nbr => '1009',:description => '',:short_name => '',:concatenated_name => 'TGR',:is_destroyed => 0,)
 Omni::SizeGroup.create(:size_group_id => '637C2900AC5711E299E700FF58D32228',:display => 'UAD',:size_group_nbr => '1010',:description => '',:short_name => '',:concatenated_name => 'UAD',:is_destroyed => 0,)
 Omni::SizeGroup.create(:size_group_id => '637DAFAAAC5711E299E700FF58D32228',:display => 'UYH',:size_group_nbr => '1011',:description => '',:short_name => '',:concatenated_name => 'UYH',:is_destroyed => 0,)
+Omni::SizeGroup.create(:size_group_id => '637DAFAAAC5711E299E700FF58D32XXX',:display => 'GRL',:size_group_nbr => '1012',:description => '',:short_name => '',:concatenated_name => 'GRL',:is_destroyed => 0,)

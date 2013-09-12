@@ -25,8 +25,8 @@ namespace :omni do
       puts "==================================="
       puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "       
       @start_time = Time.now
-      Omni::Import::Parker::Inventory.import
-      # Omni::Import::Parker::Product.import # create skus from stock size combos in mark inventory
+      Omni::Sync::Mark.inventories
+      Omni::Sync::Mark.orders
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
       puts "==================================="
     end
@@ -35,7 +35,7 @@ namespace :omni do
       puts "==================================="
       puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "       
       @start_time = Time.now
-      Omni::Import::Buckhead::Inventory.import
+      Omni::Import::Rms.inventories
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
       puts "==================================="
     end

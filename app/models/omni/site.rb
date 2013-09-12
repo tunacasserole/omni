@@ -88,6 +88,7 @@ class Omni::Site < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :site_name
     string   :location_display do location.display if location end
     string   :gradeset do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
     string   :site_gender do |x| Buildit::Lookup::Manager.display_for('SITE_GENDER', x.site_gender) end
@@ -101,7 +102,7 @@ class Omni::Site < ActiveRecord::Base
     text     :location_display_fulltext, :using => :location_display
     text     :gradeset_fulltext, :using => :gradeset
     text     :site_gender_fulltext, :using => :site_gender
-    # text     :line_1_fulltext, :using => :line_1
+    text     :line_1_fulltext, :using => :line_1
     text     :city_fulltext, :using => :city
     text     :state_code_fulltext, :using => :state_code
     # text     :phone_fulltext, :using => :phone

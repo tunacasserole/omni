@@ -59,7 +59,7 @@ Ext.define('Omni.view.suppliers.Explorer', {
         { header: this.cityLabel,                                        dataIndex: 'city',                               flex: 1,   sortable: true  },
         { header: this.state_codeLabel,                                  dataIndex: 'state_code',                         flex: 1,   sortable: true  },
         { header: this.zipLabel,                                         dataIndex: 'zip',                                flex: 1,   sortable: true  },
-        { header: this.faxLabel,                                         dataIndex: 'fax',                                flex: 1,   sortable: true  },
+        // { header: this.faxLabel,                                         dataIndex: 'fax',                                flex: 1,   sortable: true  },
         { header: this.supplier_nbrLabel,                                dataIndex: 'supplier_nbr',                       flex: 1,   sortable: true  },        
       ]
     });

@@ -116,6 +116,7 @@ class Omni::Location < ActiveRecord::Base
   searchable do
     string   :display
     string   :district_id
+    string   :district_display
     string   :location_nbr
     string   :location_brand
     string   :line_1
