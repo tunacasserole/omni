@@ -149,7 +149,7 @@ class Omni::Sync::Mark
   end
 end
 
-ol = Omni::MarkOrderLine.where('order_nbr < 1569747').delete
+ol = Omni::MarkOrderLine.delete('order_nbr < 1569747')
   # def self.period_results
   #   ### Last order of 2010 = 1569747.  All orders must be greater than that
   #   ### Last order of 2011 = ?
