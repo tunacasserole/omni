@@ -128,8 +128,14 @@ class Omni::Style < ActiveRecord::Base
   # ORDERING (End)
 
 
-  # HOOKS (Start) =======================================================================
-  # HOOKS (End)
+  # HELPERS (Start) =====================================================================
+  def generate_sequence_umber
+    unless self.style_number
+      self.style_number             = "T#{Buildit::Sequence.nextval('STYLE_NBR')}"
+      self.save
+    end
+  end
+  # HELPERS (End) =====================================================================
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do

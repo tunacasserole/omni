@@ -41,7 +41,7 @@ class Omni::Sync::Mark
   def self.orders
     puts "STARTED EXPORTING FROM MARK AT: #{Time.now.to_s}"
     start_date = Date.parse('31-12-2010')
-    end_date = Date.parse('31-12-2013')
+    end_date = Date.parse('31-1-2011')
     puts "start date: #{start_date.to_s}"
     puts "end date: #{end_date.to_s}"
 

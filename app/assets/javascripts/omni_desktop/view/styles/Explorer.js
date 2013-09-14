@@ -30,15 +30,52 @@ Ext.define('Omni.view.styles.Explorer', {
         xtype: 'omni-styles-Inspector'
       },
 
-      filters: [
-        ['state_draft',     "Draft"],
-        ['state_planning',   "Planning"],
-        ['state_active',     "Active"],
-        ['state_discontinued', "Discontinued"],
-        ['state_obsolete',   "Obsolete"],
-        ['state_inactive',     "Inactive"]        
-      ],
+// filters: [
+//     {
+//       showAll  : 'All Divisions',
+//       items    : [
+//         ['division_compounds',        "Compounds"],
+//         ['division_resins',           "Resins"]
+//       ]
+//     },
+//     {
+//       showAll      : 'Any State',
+//       items        : [
+//         ['state_draft',               "Draft"],
+//         ['state_submitted',           "Submitted"],
+//         ['state_active',              "Active"],
+//         ['state_closed',              "Closed"],
+//         ['state_canceled',            "Canceled"]
+//       ]
+//     },    
+//     {
+//       showAll  : 'All Plants',
+//       items    : [
+//         ['rs_plant_FortErie',         "Fort Erie"],
+//         ['rs_plant_Kenton',           "Kenton"],
+//         ['rs_plant_Manchester',       "Manchester"],
+//         ['rs_plant_NiagaraFalls',     "Niagara Falls"],
+//         ['rs_plant_RD',               "R&D Labs"],
+//         ['rs_plant_Shizuoka',         "Shizuoka"],
+//         ['rs_plant_CustomerService',  "Customer Service"]
+//       ]
+//     }
+//   ],
 
+
+      filters: [
+        {
+          showAll   : 'All States',
+          items     : [
+              ['state_draft',     "Draft"],
+              ['state_planning',   "Planning"],
+              ['state_active',     "Active"],
+              ['state_discontinued', "Discontinued"],
+              ['state_obsolete',   "Obsolete"],
+              ['state_inactive',     "Inactive"]        
+            ]
+        }
+      ],
     });
     // EXPLORER INIT (End)
 

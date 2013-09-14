@@ -18,6 +18,7 @@ class Omni::SizeGroup < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
   validates    :concatenated_name,               :presence    => true
+  validates    :size_group_nbr,                  :uniqueness  => true,                         :allow_nil => true    
   # VALIDATIONS (End)
 
 

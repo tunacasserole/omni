@@ -42,7 +42,7 @@ Ext.define('Omni.view.app.Hub', {
      columns: 4,
      rows: 3,
      tiles: [
-       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-skus-Explorer'}},       
+       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-skus-Explorer' }},       
        {title: 'Styles', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-styles-Explorer'}},
        {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-subclasses-Explorer'}},   
        {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-classifications-Explorer'}},         

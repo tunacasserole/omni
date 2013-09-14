@@ -31,7 +31,7 @@ Ext.define('Omni.view.size_groups.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: true,     xtype: 'textfield'        },
+            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: false,     xtype: 'textfield'        },
             { name: 'size_group_nbr',                 fieldLabel: this.size_group_nbrLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },

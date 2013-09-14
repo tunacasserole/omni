@@ -25,7 +25,7 @@ namespace :omni do
       puts "==================================="
       puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "       
       @start_time = Time.now
-      Omni::Sync::Mark.inventories
+      # Omni::Sync::Mark.inventories
       Omni::Sync::Mark.orders
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
       puts "==================================="

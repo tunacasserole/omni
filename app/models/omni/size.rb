@@ -19,7 +19,7 @@ class Omni::Size < ActiveRecord::Base
   validates    :display,                         :presence    => true
   validates    :size_type,                       :presence    => true
   validates    :concatenated_name,               :presence    => true
-  validates    :size_nbr,                        :uniqueness  => true,                         :allow_nil => true  
+  # validates    :size_nbr,                        :uniqueness  => true,                         :allow_nil => true  
   validates    :size_type,                       :lookup      => 'SIZE_TYPE',                  :allow_nil => false 
   # VALIDATIONS (End)
 

@@ -37,7 +37,7 @@ Ext.define('Omni.view.subclasses.Form', {
             { name: 'subclass_nbr',                   fieldLabel: this.subclass_nbrLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'classification_id',              fieldLabel: this.classification_idLabel,          allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },
+            { name: 'classification_id',              fieldLabel: this.classification_idLabel,          allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },
             { name: 'markup_percent_high_limit',      fieldLabel: this.markup_percent_high_limitLabel,  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'markup_percent_low_limit',       fieldLabel: this.markup_percent_low_limitLabel,   allowBlank: true,   disabled: false,    xtype: 'textfield'        }
           ]

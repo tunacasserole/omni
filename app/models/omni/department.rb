@@ -69,9 +69,14 @@ class Omni::Department < ActiveRecord::Base
   # ORDERING (End)
 
 
-  # HOOKS (Start) =======================================================================
-  # HOOKS (End)
-
+  # HELPERS (Start) =====================================================================
+  def generate_dept_number
+    unless self.sku_number
+      self.dept_number             = "T#{Buildit::Sequence.nextval('DEPT_NBR')}"
+      self.save
+    end
+  end # def generate_task_number
+  # HELPERS (End) =====================================================================
 
   # INDEXING (Start) ====================================================================
   searchable do

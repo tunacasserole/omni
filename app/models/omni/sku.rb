@@ -18,7 +18,7 @@ class Omni::Sku < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :uniqueness  => true,                         :allow_nil => false
-  validates    :sku_nbr,                         :uniqueness  => true,                         :allow_nil => true  
+  validates    :sku_nbr,                         :uniqueness  => true,                           :allow_nil => true  
   validates    :maintenance_level,               :lookup      => 'MAINTENANCE_LEVEL',          :allow_nil => true  
   validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
   validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true  
@@ -34,7 +34,7 @@ class Omni::Sku < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :sku_id,                           :override  =>  false,        :with  => :guid              
-  # default      :sku_nbr,                          :override  =>  false,        :with  => :sequence,         :named=>"SKU_NBR"
+  default      :sku_nbr,                          :override  =>  false,        :with  => :sequence,         :named=>"SKU_NBR"
   default      :is_converted,                     :override  =>  false,        :to    => false              
   default      :is_enabled,                       :override  =>  false,        :to    => false              
   default      :initial_retail_price,             :override  =>  false,        :to    => 0                  
@@ -112,9 +112,18 @@ class Omni::Sku < ActiveRecord::Base
   order_search_by :display => :asc
   # ORDERING (End)
 
-
   # HOOKS (Start) =======================================================================
+    # hook  :before_create,      :get_sequence_nbr,                  10
   # HOOKS (End)
+
+  # HELPERS (Start) =====================================================================
+  def get_sequence_nbr
+    unless self.sku_nbr
+      self.sku_nbr           = "#{Buildit::Sequence.nextval('SKU_NBR')}"
+      self.save
+    end
+  end # def generate_task_number
+  # HELPERS (End) =====================================================================
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :active do
@@ -166,7 +175,6 @@ class Omni::Sku < ActiveRecord::Base
     puts 'ready...'    
   end
   # STATE HANDLERS (End)
-  
 
   # FILTERS (Start) =====================================================================
   filter :state_active,            :with => {state: {equal_to: 'active'}},       :priority => 60
