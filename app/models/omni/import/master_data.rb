@@ -14,38 +14,6 @@ class Omni::Import::MasterData
 
   end
 
-  def cleanup
-    data = Omni::LocationUserLoad.all
-    data.each do |loc_user|
-      # loc_user = Omni::LocationUser.first
-      user = Buildit::User.where(:email_address => loc_user.display).first || Buildit::User.create(:email_address => loc_user.display, :first_name => loc_user.display.split(',').first, :last_name => loc_user.display.split(',').last, :sso_plugin_code => 'BUILDIT')
-      loc = Omni::Location.where(:location_nbr => loc_user.location_id).first || Omni::Location.first
-      x=Omni::LocationUser.create(:user_id => user.user_id, :location_id => loc.location_id)
-    end
-
-
-
-
-
-
-
-
-        dup_check = Omni::LocationUser.where(:display => loc_user.display).count
-        if dup_check > 1
-          puts "dup found"
-          # loc_user.display = 'delete me'
-        end
-      end
-
-    data = Buildit::User.all
-    data.each do |user|
-    us =
-
-    if dup_check > 1
-      user.destroy
-    end
-  end
-
   def archives
     data = Omni::SkuLoad1.all
     data.each_with_index do |sku_load, i|
