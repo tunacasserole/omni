@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      omni/period:  'Model'
+    attributes:
+      omni/period:
+        period_id:                         'Period'
+        display:                           'Display'
+        start_date:                        'Start Date'
+        end_date:                          'End Date'
+        year_number:                       'Year Number'
+        period_number:                     'Period Number'
+        is_destroyed:                      'Is Destroyed'

@@ -5,7 +5,7 @@ Ext.define('Omni.view.location_users.Inspector',{
 
   initComponent:function(){
     var me = this;
-  
+
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter: {
@@ -14,7 +14,7 @@ Ext.define('Omni.view.location_users.Inspector',{
       }
     });
     // INSPECTOR INIT (End)
-  
+
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [

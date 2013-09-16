@@ -22,9 +22,9 @@ class Omni::Product < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :product_id,                       :override  =>  false,        :with  => :guid              
+  default      :product_id,                       :override  =>  false,        :with  => :guid
   default      :product_nbr,                      :override  =>  false,        :with  => :sequence,         :named=>"PRODUCT_NBR"
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -72,12 +72,13 @@ class Omni::Product < ActiveRecord::Base
   searchable do
     string   :display
     string   :product_nbr
+    string   :category_id
     string   :category_display do category.display if category end
- 
+
     text     :display_fulltext, :using => :display
     text     :product_nbr_fulltext, :using => :product_nbr
     text     :category_display_fulltext, :using => :category_display
-  end 
+  end
   # INDEXING (End)
 
 

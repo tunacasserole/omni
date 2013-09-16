@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    models:
+      omni/location_user:  'Model'
+    attributes:
+      omni/location_user:
+        display:                           'Display'
+        user_id:                           'User'
+        location_id:                       'Location'
+        is_manager:                        'Is Manager'
+        is_cashier:                        'Is Cashier'
+        is_sales:                          'Is Sales'
+        is_back_office:                    'Is Back Office'
+        short_password:                    'Short Password'
+        is_destroyed:                      'Is Destroyed'
+        is_purchase_approver_1:            'Is Purchase Approver 1'
+        is_purchase_approver_2:            'Is Purchase Approver 2'
+        is_purchase_approver_3:            'Is Purchase Approver 3'
+        id:                                'Id'
+        location_user_id:                  'Location User'

@@ -7,14 +7,14 @@ Ext.define('Omni.view.app.Hub', {
     cls: 'desktop',
 
   initComponent: function(){
-    var me = this;  
+    var me = this;
 
     // this.socket   = Buildit.lib.SocketManager.get('STANDARD');
     // this.socket.on('newEvents', this.handleNewEvents, me);
 
 
     Ext.apply(this, {
-      allowSignout      : true,      
+      allowSignout      : true,
       title: 'Start',
       subtitle: '',
       contextMenuConfig: {
@@ -29,11 +29,11 @@ Ext.define('Omni.view.app.Hub', {
      columns: 2,
      rows: 4,
      tiles: [
-        {title: 'BTS', colspan: 2, rowspan: 2, cls: 'bts',  target: {xtype: 'omni-bts-Explorer'}},       
-        {title: 'Inventory', colspan: 2, rowspan: 1, cls: 'bts_source',  target: {xtype: 'omni-inventories-Explorer'} },                            
-        {title: 'Period Results', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-period_results-Explorer'} },        
-     ] 
-     }     
+        {title: 'BTS', colspan: 2, rowspan: 2, cls: 'bts',  target: {xtype: 'omni-bts-Explorer'}},
+        {title: 'Inventory', colspan: 2, rowspan: 1, cls: 'bts_source',  target: {xtype: 'omni-inventories-Explorer'} },
+        {title: 'Period Results', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-period_results-Explorer'} },
+     ]
+     }
 
    // Section: Product Hierarchy //
 
@@ -42,26 +42,12 @@ Ext.define('Omni.view.app.Hub', {
      columns: 4,
      rows: 3,
      tiles: [
-       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-skus-Explorer' }},       
+       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-skus-Explorer' }},
        {title: 'Styles', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-styles-Explorer'}},
-       {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-subclasses-Explorer'}},   
-       {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-classifications-Explorer'}},         
-       {title: 'Departments', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-departments-Explorer'}}           
-     ] 
-     }
-
-   // Section: Company Hierarchy //
-
-   ,{
-   title: 'company hierarchy',
-     columns: 4,
-     rows: 3,
-     tiles: [
-       {title: 'Companies', colspan: 2, rowspan: 1, cls: 'company',  target: {xtype: 'omni-companies-Explorer'}},       
-       {title: 'Regions', colspan: 2, rowspan: 1, cls: 'company',  target: {xtype: 'omni-regions-Explorer'}},
-       {title: 'Districts', colspan: 2, rowspan: 1, cls: 'company',  target: {xtype: 'omni-districts-Explorer'}},   
-       {title: 'Locations', colspan: 2, rowspan: 1, cls: 'company',  target: {xtype: 'omni-locations-Explorer'}}
-     ] 
+       {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-subclasses-Explorer'}},
+       {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-classifications-Explorer'}},
+       {title: 'Departments', colspan: 2, rowspan: 1, cls: 'product_hierarchy',  target: {xtype: 'omni-departments-Explorer'}}
+     ]
      }
 
    // Section: product setup data //
@@ -72,16 +58,56 @@ Ext.define('Omni.view.app.Hub', {
      rows: 3,
      tiles: [
        {title: 'Colors', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-colors-Explorer'} },
-       {title: 'Sizes', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-sizes-Explorer'} },       
-       {title: 'Size Groups', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-size_groups-Explorer'} }      
-       // {title: 'Category', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-categories-Explorer', title: ''}},
-       // {title: 'Product', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-products-Explorer', title: ''}},
-       // {title: 'Product Types', colspan: 2, rowspan: 1, cls: 'products_types',  target: {xtype: 'omni-product_types-Explorer', title: ''}},       
-       // {title: 'transfer_reasons', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-transfer_reasons-Explorer', title: ''}},       
-       // {title: 'Forecast Profile', colspan: 2, rowspan: 1, cls: 'cfars',  target: {xtype: 'omni-forecast_profiles-Explorer'}},       
-       // {title: 'Labels', colspan: 2, rowspan: 1, cls: 'labels',  target: {xtype: 'omni-labels-Explorer', title: ''}},       
-     ] 
-  }   
+       {title: 'Sizes', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-sizes-Explorer'} },
+       {title: 'Size Groups', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-size_groups-Explorer'} },
+       {title: 'Labels', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-labels-Explorer', title: ''}},
+       {title: 'Price Books', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-price_books-Explorer', title: ''}},
+     ]
+  }
+
+   // Section: Company Hierarchy //
+
+   ,{
+   title: 'company hierarchy',
+     columns: 4,
+     rows: 3,
+     tiles: [
+       {title: 'Companies', colspan: 2, rowspan: 1, cls: 'company',  target: {xtype: 'omni-companies-Explorer'}},
+       {title: 'Regions', colspan: 2, rowspan: 1, cls: 'company',  target: {xtype: 'omni-regions-Explorer'}},
+       {title: 'Districts', colspan: 2, rowspan: 1, cls: 'company',  target: {xtype: 'omni-districts-Explorer'}},
+       {title: 'Locations', colspan: 2, rowspan: 1, cls: 'company',  target: {xtype: 'omni-locations-Explorer'}}
+     ]
+     }
+
+   // Section: company setup data //
+
+   ,{
+   title: 'company setup data',
+     columns: 4,
+     rows: 4,
+     tiles: [
+       {title: 'Gl Accounts', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-gl_accounts-Explorer'} },
+       {title: 'Tenders', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-tenders-Explorer'} },
+       {title: 'Tills', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-tills-Explorer'} },
+       {title: 'Transfer Reasons', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-transfer_reasons-Explorer', title: ''}},
+       {title: 'Grades', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-grades-Explorer', title: ''}},
+       {title: 'Periods', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-periods-Explorer', title: ''}}
+     ]
+  }
+
+   // Section: web hierarchy //
+
+   ,{
+   title: 'web hierarchy',
+     columns: 2,
+     rows: 3,
+     tiles: [
+       {title: 'Category', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-categories-Explorer', title: ''}},
+       {title: 'Product', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-products-Explorer', title: ''}},
+       {title: 'Product Types', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-product_types-Explorer', title: ''}},
+     ]
+     }
+
 
     // Section: Partners //
 
@@ -90,10 +116,10 @@ Ext.define('Omni.view.app.Hub', {
      columns: 2,
      rows: 3,
      tiles: [
-       {title: 'Suppliers', colspan: 2, rowspan: 1, cls: 'network',  target: {xtype: 'omni-suppliers-Explorer'}},       
+       {title: 'Suppliers', colspan: 2, rowspan: 1, cls: 'network',  target: {xtype: 'omni-suppliers-Explorer'}},
        {title: 'Sites', colspan: 2, rowspan: 1, cls: 'network', target: { xtype: 'omni-sites-Explorer'} }
-     ] 
-     }     
+     ]
+     }
 
     // Section: Legacy Data //
 // ,{
@@ -101,15 +127,15 @@ Ext.define('Omni.view.app.Hub', {
 //      columns: 2,
 //      rows: 4,
 //      tiles: [
-//        {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-tasks-Explorer'}},         
+//        {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-tasks-Explorer'}},
 //        {title: 'Projects', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-projects-Explorer'}}
 //     ]
 //   }
-   
- ] 
- }); 
 
- this.callParent(); 
+ ]
+ });
+
+ this.callParent();
  },
 
  // handleNewEvents : function(data){
@@ -122,5 +148,5 @@ Ext.define('Omni.view.app.Hub', {
  //    });
  //  }
 
- 
+
  });

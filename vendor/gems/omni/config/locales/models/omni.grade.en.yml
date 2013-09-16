@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      omni/grade:  'Model'
+    attributes:
+      omni/grade:
+        grade_id:                          'Grade'
+        display:                           'Display'
+        gradeset:                          'Gradeset'
+        grade_name:                        'Grade Name'
+        short_name:                        'Short Name'
+        grade_order:                       'Grade Order'
+        is_destroyed:                      'Is Destroyed'

@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      omni/product:  'Model'
+    attributes:
+      omni/product:
+        display:                           'Display'
+        product_nbr:                       'Product Nbr'
+        description:                       'Description'
+        category_id:                       'Category'
+        is_destroyed:                      'Is Destroyed'
+        product_id:                        'Product'

@@ -72,7 +72,6 @@ Ext.define('Omni.view.skus.Explorer', {
     });
     // EXPLORER INIT (End)
 
-
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [{

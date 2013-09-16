@@ -3,13 +3,13 @@ Ext.define('Omni.view.categories.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-categories-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.Category.display,

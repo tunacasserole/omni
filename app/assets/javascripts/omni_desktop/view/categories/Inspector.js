@@ -3,14 +3,14 @@ Ext.define('Omni.view.categories.Inspector', {
   extend:'Buildit.ux.inspector.Panel',
   alias:'widget.omni-categories-Inspector',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-        
-    // LABELS (Start) ======================================================================  
+
+    // LABELS (Start) ======================================================================
     // LABELS (End)
 
     // INSPECTOR INIT (Start) ==============================================================
@@ -28,19 +28,18 @@ Ext.define('Omni.view.categories.Inspector', {
         {
           title: 'Profile',
           xtype: 'omni-categories-Form'
-        },
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        },
-        {
-          title: 'Products',
-          xtype: 'omni-products-Explorer'
+        }
+        ,{title: 'Products', xtype: 'omni-products-Explorer',
+           defaultSearch: { with:
+             {
+               category_id:   {equal_to: me.record.get('category_id')}
+             }
+          }
         }
       ]
     });
     // CARDS (End)
-    
+
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
       title:     'Category',

@@ -3,13 +3,13 @@ Ext.define('Omni.view.categories.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-categories-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 

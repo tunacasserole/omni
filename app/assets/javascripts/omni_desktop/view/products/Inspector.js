@@ -1,23 +1,16 @@
-Ext.define('Omni.view.products.Inspector', {
+Ext.define('Omni.view.products.Inspector',{
+  extend: 'Buildit.ux.inspector.Panel',
+  alias: 'widget.omni-products-Inspector',
 
-  extend:'Buildit.ux.inspector.Panel',
-  alias:'widget.omni-products-Inspector',
 
-  
-
-  initComponent:function () {
-
+  initComponent:function(){
     var me = this;
-
-        
-    // LABELS (Start) ======================================================================  
-    // LABELS (End)
 
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter: {
-        property: 'product_id',
-        value:    me.record.get('product_id')
+        property:   'product_id',
+        value:      this.record.get('product_id')
       }
     });
     // INSPECTOR INIT (End)
@@ -25,28 +18,18 @@ Ext.define('Omni.view.products.Inspector', {
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
-        {
-          title: 'Profile',
-          xtype: 'omni-products-Form'
-        }
-        // {
-        //   title: 'Notes',
-        //   xtype: 'buildit-notes-Explorer'
-        // },
-        // {
-        //   title: 'Styles',
-        //   xtype: 'omni-styles-Explorer'
-        // }
+        {title: 'Profile',           xtype: 'omni-products-Form'}
       ]
     });
     // CARDS (End)
-    
-    // TITLES (Start) ====================================================================== 
+
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title:     'Product',
+      subtitle:  this.record.get('display')
+    });
     // TITLES (End)
-
-
 
     this.callParent();
   }
-
 });

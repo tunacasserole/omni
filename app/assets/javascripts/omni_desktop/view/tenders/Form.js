@@ -3,13 +3,13 @@ Ext.define('Omni.view.tenders.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-tenders-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.Tender.display,
@@ -60,10 +60,10 @@ Ext.define('Omni.view.tenders.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: true,     xtype: 'textfield'        },
-            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: false,  disabled: false,    xtype: 'textfield'        },
-            { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: false,  disabled: false,    xtype: 'textfield'        },
-            { name: 'tender_type',                    fieldLabel: this.tender_typeLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: false,     xtype: 'textfield'        },
+            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,  disabled: false,    xtype: 'textfield'        },
+            { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,  disabled: false,    xtype: 'textfield'        },
+            { name: 'tender_type',                    fieldLabel: this.tender_typeLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'TENDER_TYPE' },
           ]
         },
         {

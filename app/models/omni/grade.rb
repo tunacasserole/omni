@@ -17,15 +17,15 @@ class Omni::Grade < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  validates    :gradeset,                        :lookup      => 'GRADESET',                   :allow_nil => true  
+  validates    :gradeset,                        :lookup      => 'GRADESET',                   :allow_nil => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :grade_id,                         :override  =>  false,        :with  => :guid              
+  default      :grade_id,                         :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.gradeset} - #{m.grade_name}"}
-  default      :grade_order,                      :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :grade_order,                      :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -69,10 +69,10 @@ class Omni::Grade < ActiveRecord::Base
   searchable do
     string   :gradeset do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
     string   :grade_order
- 
+
     text     :gradeset_fulltext, :using => :gradeset
     text     :grade_order_fulltext, :using => :grade_order
-  end 
+  end
   # INDEXING (End)
 
 
