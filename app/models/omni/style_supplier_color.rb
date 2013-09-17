@@ -17,14 +17,14 @@ class Omni::StyleSupplierColor < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  # validates    :color_id, uniqueness: { scope: :style_supplier_id, message: "Color already exists for this style supplier." }  
+  # validates    :color_id, uniqueness: { scope: :style_supplier_id, message: "Color already exists for this style supplier." }
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :style_supplier_color_id,          :override  =>  false,        :with  => :guid              
+  default      :style_supplier_color_id,          :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.style_supplier_display} - #{m.style_color_display}"}
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -72,10 +72,11 @@ class Omni::StyleSupplierColor < ActiveRecord::Base
     string   :style_supplier_display do style_supplier.display if style_supplier end
     string   :style_color_display do style_color.display if style_color end
     string   :display
- 
+    string   :style_supplier_id
+
     text     :style_supplier_display_fulltext, :using => :style_supplier_display
     text     :style_color_display_fulltext, :using => :style_color_display
-  end 
+  end
   # INDEXING (End)
 
 

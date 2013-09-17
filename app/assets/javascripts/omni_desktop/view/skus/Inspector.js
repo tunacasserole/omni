@@ -3,14 +3,14 @@ Ext.define('Omni.view.skus.Inspector', {
   extend:'Buildit.ux.inspector.Panel',
   alias:'widget.omni-skus-Inspector',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-        
-    // LABELS (Start) ======================================================================  
+
+    // LABELS (Start) ======================================================================
     // LABELS (End)
 
     // INSPECTOR INIT (Start) ==============================================================
@@ -30,84 +30,84 @@ Ext.define('Omni.view.skus.Inspector', {
           module: 'contracts'
         }
         // ,{
-        //   title: 'Aliases', 
-        //   xtype: 'omni-sku_aliases-Explorer', module: 'survey',
-        //   defaultSearch: { with: 
+        //   title: 'Costs',
+        //   xtype: 'omni-sku_costs-Explorer', module: 'survey',
+        //   defaultSearch: { with:
         //      {
         //        sku_id:   {equal_to: me.record.get('sku_id')}
         //      }
         //   }
-        // }                
-        // ,{
-        //   title: 'Locations',
-        //   xtype: 'omni-sku_locations-Explorer', module: 'cfars',
-        //   defaultSearch: { with: 
-        //      {
-        //        sku_id:   {equal_to: me.record.get('sku_id')}
-        //      }
-        //   }
-        // }          
+        // }
+        ,{
+          title: 'Locations',
+          xtype: 'omni-sku_locations-Explorer', module: 'cfars',
+          defaultSearch: { with:
+             {
+               sku_id:   {equal_to: me.record.get('sku_id')}
+             }
+          }
+        }
         // ,{
         //   title: 'Substitutes',
         //   xtype: 'omni-sku_substitutes-Explorer', module: 'projects',
-        //   defaultSearch: { with: 
+        //   defaultSearch: { with:
         //      {
         //        sku_id:   {equal_to: me.record.get('sku_id')}
         //      }
         //   }
         // }
-        // ,{
-        //   title: 'Prices',
-        //   xtype: 'omni-sku_prices-Explorer', module: 'tracks',
-        //   defaultSearch: { with: 
-        //      {
-        //        sku_id:   {equal_to: me.record.get('sku_id')}
-        //      }
-        //   }
-        // }
+        ,{
+          title: 'Prices',
+          xtype: 'omni-sku_prices-Explorer', module: 'tracks',
+          defaultSearch: { with:
+             {
+               sku_id:   {equal_to: me.record.get('sku_id')}
+             }
+          }
+        }
         // ,{
         //   title: 'Promotional Prices',
         //   xtype: 'omni-sku_promo_prices-Explorer', module: 'sales_calls',
-        //   defaultSearch: { with: 
+        //   defaultSearch: { with:
         //      {
         //        sku_id:   {equal_to: me.record.get('sku_id')}
         //      }
         //   }
         // }
-        // ,{
-        //   title: 'Suppliers',
-        //   xtype: 'omni-sku_suppliers-Explorer', module: 'samples',
-        //   defaultSearch: { with: 
-        //      {
-        //        sku_id:   {equal_to: me.record.get('sku_id')}
-        //      }
-        //   }
-        // }
+        ,{
+          title: 'Suppliers',
+          xtype: 'omni-sku_suppliers-Explorer', module: 'samples',
+          defaultSearch: { with:
+             {
+               sku_id:   {equal_to: me.record.get('sku_id')}
+             }
+          }
+        }
         // ,{
         //   title: 'BOMs',
         //   xtype: 'omni-boms-Explorer', module: 'monthly_reports', module: 'contacts',
-        //   defaultSearch: { with: 
+        //   defaultSearch: { with:
         //      {
         //        sku_id:   {equal_to: me.record.get('sku_id')}
         //      }
         //   }
-        // }        
+        // }
         // ,{
         //   title: 'Sales History',
         //   xtype: 'omni-skus-Chart', module: 'customers',
-        //   defaultSearch: { with: 
+        //   defaultSearch: { with:
         //      {
-        //        sku_id:   {equal_to: me.record.get('sku_id')}               
+        //        sku_id:   {equal_to: me.record.get('sku_id')}
         //      }
         //   }
         // }
         // ,{title: 'Period Results', xtype: 'omni-period_results-Explorer', module: 'approvals',
-        //    defaultSearch: { with: 
+        //    defaultSearch: { with:
         //      {
         //        sku_id:   {equal_to: me.record.get('sku_id')}
         //      }
         //   }
-        // }                            
+        // }
         // ,{
         //   xtype    : 'buildit-CardGroup',
         //   title    : 'Support',
@@ -146,7 +146,7 @@ Ext.define('Omni.view.skus.Inspector', {
       ]
     });
     // CARDS (End)
-    
+
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Sku',

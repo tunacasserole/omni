@@ -3,14 +3,14 @@ Ext.define('Omni.view.sku_suppliers.Inspector', {
   extend:'Buildit.ux.inspector.Panel',
   alias:'widget.omni-sku_suppliers-Inspector',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-        
-    // LABELS (Start) ======================================================================  
+
+    // LABELS (Start) ======================================================================
     // LABELS (End)
 
     // INSPECTOR INIT (Start) ==============================================================
@@ -32,8 +32,12 @@ Ext.define('Omni.view.sku_suppliers.Inspector', {
       ]
     });
     // CARDS (End)
-    
-    // TITLES (Start) ====================================================================== 
+
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title:     'Sku Supplier',
+      subtitle:  this.record.get('display')
+    });
     // TITLES (End)
 
 

@@ -3,7 +3,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-sku_suppliers-Form',
 
-  
+
 
   initComponent:function () {
 
@@ -60,7 +60,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
     Ext.apply(this, {
 
 // make entire form read only based on some condition
-      // disabled: disabled,       
+      // disabled: disabled,
       items: [
         {
           xtype: 'fieldset',
@@ -88,7 +88,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
           layout: 'anchor',
 
           // hidden: !is_buyer,  // make fieldset non-display based on role variable
-          
+
           items:[
             { name: 'supplier_cost',                  fieldLabel: this.supplier_costLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'supplier_cost_units',            fieldLabel: this.supplier_cost_unitsLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
@@ -159,7 +159,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
             { name: 'is_conveyable_inner_pack',       fieldLabel: this.is_conveyable_inner_packLabel,   allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'pallet_tie',                     fieldLabel: this.pallet_tieLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'pallet_high',                    fieldLabel: this.pallet_highLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'pallet_container_id',            fieldLabel: this.pallet_container_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Container',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'container_id', itemTpl:'{display}' }
+            // { name: 'pallet_container_id',            fieldLabel: this.pallet_container_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Container',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'container_id', itemTpl:'{display}' }
           ]
         }
       ]

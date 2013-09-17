@@ -2,7 +2,7 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-styles-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -12,54 +12,11 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
 
         // RIGHT ACTIONS (Start) ================================================================
 
-        /**
-         * DELETE
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         */
-        {
-          text:'Delete',
-          cls: 'icon-delete',
-          action: 'delete',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickDelete,
-              scope: me
-            }
-          }
-        },
 
         /**
-         * DELETE
+         * SELECT ALL
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         */
-        {
-          text:'Export',
-          cls: 'icon-export',
-          action: 'export',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickExport,
-              scope: me
-            }
-          }
-        },
-
-        // SEPARATOR
-        '-',
-
-
-        /**
-         * DELETE
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are approved.
          */
         {
           text:'Select All',
@@ -74,15 +31,14 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
               scope: me
             }
           }
-        },
-
+        }
 
         /**
-         * EXPORT
+         * DESELECT ALL
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are approved.
          */
-        {
+        ,{
           text:'Deselect All',
           cls: 'icon-deselect-all',
           action: 'deselect-all',
@@ -96,6 +52,61 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
           }
         }
 
+        // SEPARATOR
+        ,'-'
+
+        /**
+         * NEW
+         * Supports the deletion of the selected items in the explorer grid. If none
+         * are selected then no records are approved.
+         */
+        ,{
+          text: 'New',
+          cls: 'icon-new'
+        }
+
+        // SEPARATOR
+        ,'-'
+
+        /**
+         * EXPORT
+         * Supports the deletion of the selected items in the explorer grid. If none
+         * are selected then no records are approved.
+         */
+        ,{
+          text:'Export',
+          cls: 'icon-export',
+          action: 'export',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickExport,
+              scope: me
+            }
+          }
+        }
+
+        /**
+         * DELETE
+         * Supports the deletion of the selected items in the explorer grid. If none
+         * are selected then no records are approved.
+         */
+        ,{
+          text:'Delete',
+          cls: 'icon-delete',
+          action: 'delete',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickDelete,
+              scope: me
+            }
+          }
+        },
         // RIGHT ACTIONS (End)
 
       ],
@@ -105,15 +116,83 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
 
         // LEFT ACTIONS (Start) =================================================================
 
+        // /**
+        //  * PLAN
+        //  * Supports the plan of the selected items in the explorer grid. If none
+        //  * are selected then no records are planned.
+        //  */
+        // {
+        //   text:'Start Planning',
+        //   cls: 'icon-applications',
+        //   action: 'plan',
+        //   confirm: true,
+        //   multi: true,
+        //   privileges: [],
+        //   listeners: {
+        //     click: {
+        //       fn: this.clickPlan,
+        //       scope: me
+        //     }
+        //   }
+        // }
+
+        // /**
+        //  * ACTIVATE
+        //  * Supports the deletion of the selected items in the explorer grid. If none
+        //  * are selected then no records are approved.
+        //  */
+        // ,{
+        //   text:'Activate',
+        //   cls: 'icon-applications',
+        //   action: 'activate',
+        //   confirm: true,
+        //   multi: true,
+        //   privileges: [],
+        //   listeners: {
+        //     click: {
+        //       fn: this.clickActivate,
+        //       scope: me
+        //     }
+        //   }
+        // }
+
         /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * BUILD LOCATIONS
+         * Supports the building of style locations for the selected style
          */
-        {
-          text: 'New',
-          cls: 'icon-new'
+        ,{
+          text:'Build Locations',
+          cls: 'icon-settings',
+          action: 'gen_locations',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickLocations,
+              scope: me
+            }
+          }
         }
+        /**
+         * BUILD SKUS
+         * Supports the building of skus for the selected style
+         */
+        ,{
+          text:'Build Skus',
+          cls: 'icon-settings',
+          action: 'build',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickBuild,
+              scope: me
+            }
+          }
+        }
+
 
         // LEFT ACTIONS (End)
 
@@ -126,8 +205,28 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
 
 
 
-  // ACTION HANDLERS (Start) ====================================================================
+  // CUSTOM ACTION HANDLERS (Start) ====================================================================
 
+  clickPlan: function(btn, e, eOpts){
+    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'plan');
+  },
+
+  clickActivate: function(btn, e, eOpts){
+    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'activate');
+  },
+
+  clickLocations: function(btn, e, eOpts){
+    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'gen_locations');
+  },
+
+  clickBuild: function(btn, e, eOpts){
+    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'build');
+  },
+
+  // CUSTOM ACTION HANDLERS (End)
+
+
+  // ACTION HANDLERS (Start) ====================================================================
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);
   },

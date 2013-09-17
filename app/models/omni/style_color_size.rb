@@ -20,17 +20,17 @@ class Omni::StyleColorSize < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :size_id, uniqueness: { scope: :style_color_id, message: "Size already exists for this style and color." }  
+  validates    :size_id, uniqueness: { scope: :style_color_id, message: "Size already exists for this style and color." }
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :style_color_size_id,              :override  =>  false,        :with  => :guid              
+  default      :style_color_size_id,              :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.style_color_display}-#{m.size_display}"}
-  default      :is_special_order,                 :override  =>  true,         :to    => false              
-  default      :is_not_available,                 :override  =>  true,         :to    => false              
-  default      :fabric_bom_adjust_percent,        :override  =>  true,         :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_special_order,                 :override  =>  true,         :to    => false
+  default      :is_not_available,                 :override  =>  true,         :to    => false
+  default      :fabric_bom_adjust_percent,        :override  =>  true,         :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -93,14 +93,14 @@ class Omni::StyleColorSize < ActiveRecord::Base
       transition :inactive => :active
     end
 
-    event :deactivate do  
+    event :deactivate do
       transition :active => :inactive
     end
 
     event :generate do
       transition :active => :generated
     end
-    
+
   end
   # STATES (End)
 
@@ -108,22 +108,22 @@ class Omni::StyleColorSize < ActiveRecord::Base
   # STATE HANDLERS (Start) ====================================================================
 
   def after_activate
-    puts '--- done with activate ---'    
-    puts 'ready...'    
+    puts '--- done with activate ---'
+    puts 'ready...'
   end
 
   def after_deactivate
-    puts '--- done with deactivate ---'    
-    puts 'ready...'    
+    puts '--- done with deactivate ---'
+    puts 'ready...'
   end
 
   def after_generate
-    puts '--- done with SKU generation ---'    
-    puts 'ready...'    
+    puts '--- done with generation ---'
+    puts 'ready...'
   end
 
   # STATE HANDLERS (End)
-  
+
 
   # FILTERS (Start) =====================================================================
   filter :state_active,            :with => {state: {equal_to: 'active'}},       :priority => 60
@@ -139,17 +139,17 @@ class Omni::StyleColorSize < ActiveRecord::Base
     string   :sku_name
     string   :pos_name
     string   :style_color_id
-    string   :display    
+    string   :display
     string   :state
- 
+
     text     :style_color_display_fulltext, :using => :style_color_display
     text     :size_display_fulltext, :using => :size_display
     text     :sku_display_fulltext, :using => :sku_display
     text     :sku_name_fulltext, :using => :sku_name
     text     :pos_name_fulltext, :using => :pos_name
     text     :state_fulltext, :using => :state
-    
-  end 
+
+  end
   # INDEXING (End)
 
 

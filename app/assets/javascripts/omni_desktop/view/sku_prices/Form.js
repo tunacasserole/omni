@@ -3,13 +3,13 @@ Ext.define('Omni.view.sku_prices.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-sku_prices-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       sku_idLabel:                                Omni.i18n.model.SkuPrice.sku_id,
@@ -39,7 +39,7 @@ Ext.define('Omni.view.sku_prices.Form', {
             { name: 'retail_price',                   fieldLabel: this.retail_priceLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'price_units',                    fieldLabel: this.price_unitsLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'sales_category',                 fieldLabel: this.sales_categoryLabel,             allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'SALES_CATEGORY' },
-            { name: 'price_change_id',                fieldLabel: this.price_change_idLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.PriceChange',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'price_change_id', itemTpl:'{display}' }
+            // { name: 'price_change_id',                fieldLabel: this.price_change_idLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.PriceChange',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'price_change_id', itemTpl:'{display}' }
           ]
         }
       ]

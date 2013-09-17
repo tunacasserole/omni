@@ -20,14 +20,14 @@ class Omni::StyleColor < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :color_id, uniqueness: { scope: :style_id, message: "Color already exists for this style." }  
+  validates    :color_id, uniqueness: { scope: :style_id, message: "Color already exists for this style." }
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :style_color_id,                   :override  =>  false,        :with  => :guid              
+  default      :style_color_id,                   :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.style_display} - #{m.color_display}"}
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -91,7 +91,7 @@ class Omni::StyleColor < ActiveRecord::Base
     event :deactivate do
       transition :active => :inactive
     end
-                       
+
 
   end
   # STATES (End)
@@ -105,7 +105,7 @@ class Omni::StyleColor < ActiveRecord::Base
 
   end
   # STATE HANDLERS (End)
-  
+
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -114,22 +114,22 @@ class Omni::StyleColor < ActiveRecord::Base
     string   :color_id
     string   :short_name
     string   :concatenated_name
-    string   :style_id 
+    string   :style_id
     string   :state
-    string   :display    
- 
+    string   :display
+
     text     :style_display_fulltext, :using => :style_display
     text     :color_display_fulltext, :using => :color_display
     text     :short_name_fulltext, :using => :short_name
     text     :concatenated_name_fulltext, :using => :concatenated_name
     text     :state_fulltext, :using => :state
-  end 
+  end
   # INDEXING (End)
 
 
   # HELPERS (Start) =====================================================================
   def validate_style_size_group
-  
+
   end
 
   def add_style_color_sizes
@@ -138,7 +138,7 @@ class Omni::StyleColor < ActiveRecord::Base
     #  Add style_color_sizes row for added color and each size in the size group
     #
     if self.style
-      sizes = Omni::SizeGroupDetail.where(:size_group_id => self.style.size_group_id) 
+      sizes = Omni::SizeGroupDetail.where(:size_group_id => self.style.size_group_id) if self.style.size_group_id
       sizes.each do |s|
         x = Omni::StyleColorSize.new
         x.style_color_id = self.style_color_id

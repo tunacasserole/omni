@@ -3,17 +3,17 @@ Ext.define('Omni.view.style_locations.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-style_locations-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       style_idLabel:                              Omni.i18n.model.StyleLocation.style_id,
-      stateLabel:                                 Omni.i18n.model.StyleColor.state,      
+      stateLabel:                                 Omni.i18n.model.StyleColor.state,
       location_idLabel:                           Omni.i18n.model.StyleLocation.location_id,
       is_authorizedLabel:                         Omni.i18n.model.StyleLocation.is_authorized,
       is_taxableLabel:                            Omni.i18n.model.StyleLocation.is_taxable,
@@ -45,9 +45,9 @@ Ext.define('Omni.view.style_locations.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
-            { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,     xtype: 'textfield'        },            
+            { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: true,   disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
+            { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
+            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,     xtype: 'textfield'        },
             { name: 'is_authorized',                  fieldLabel: this.is_authorizedLabel,              allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_taxable',                     fieldLabel: this.is_taxableLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_special_order',               fieldLabel: this.is_special_orderLabel,           allowBlank: true,   disabled: false,    xtype: 'checkbox'         },

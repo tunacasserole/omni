@@ -18,8 +18,8 @@ class Omni::StyleSupplier < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :supplier_id, uniqueness: { scope: :style_id, message: "Supplier already exists for this style." }  
-  validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true  
+  validates    :supplier_id, uniqueness: { scope: :style_id, message: "Supplier already exists for this style." }
+  validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true
   validates    :master_pack_uom_code,            :lookup      => 'MASTER_PACK_UOM_CODE',       :allow_nil => true
   validates    :inner_pack_uom_code,             :lookup      => 'INNER_PACK_UOM_CODE',        :allow_nil => true
   validates    :order_multiple_type,             :lookup      => 'ORDER_MULTIPLE_TYPE',        :allow_nil => true
@@ -30,34 +30,34 @@ class Omni::StyleSupplier < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :style_supplier_id,                :override  =>  false,        :with  => :guid              
+  default      :style_supplier_id,                :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.style_display} - #{m.supplier_display}"}
-  default      :is_primary_supplier,              :override  =>  false,        :to    => false              
-  default      :is_manufacturer,                  :override  =>  false,        :to    => false              
-  default      :is_discontinued,                  :override  =>  false,        :to    => false              
-  default      :supplier_cost_units,              :override  =>  false,        :to    => 0                  
-  default      :supplier_cost,                    :override  =>  false,        :to    => 0                  
-  default      :master_pack_units,                :override  =>  false,        :to    => 0                  
-  default      :master_pack_length,               :override  =>  false,        :to    => 0                  
-  default      :master_pack_height,               :override  =>  false,        :to    => 0                  
-  default      :master_pack_width,                :override  =>  false,        :to    => 0                  
-  default      :master_pack_weight,               :override  =>  false,        :to    => 0                  
-  default      :inner_pack_units,                 :override  =>  false,        :to    => 0                  
-  default      :inner_pack_length,                :override  =>  false,        :to    => 0                  
-  default      :inner_pack_height,                :override  =>  false,        :to    => 0                  
-  default      :inner_pack_width,                 :override  =>  false,        :to    => 0                  
-  default      :inner_pack_weight,                :override  =>  false,        :to    => 0                  
-  default      :minimum_order_units,              :override  =>  false,        :to    => 0                  
-  default      :minimum_order_value,              :override  =>  false,        :to    => 0                  
-  default      :minimum_order_weight,             :override  =>  false,        :to    => 0                  
-  default      :minimum_order_cube,               :override  =>  false,        :to    => 0                  
-  default      :extra_cost,                       :override  =>  false,        :to    => 0                  
-  default      :is_included_extra_cost,           :override  =>  false,        :to    => false              
-  default      :is_conveyable_master_pack,        :override  =>  false,        :to    => false              
-  default      :is_conveyable_inner_pack,         :override  =>  false,        :to    => false              
-  default      :pallet_tie,                       :override  =>  false,        :to    => 0                  
-  default      :pallet_high,                      :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_primary_supplier,              :override  =>  false,        :to    => false
+  default      :is_manufacturer,                  :override  =>  false,        :to    => false
+  default      :is_discontinued,                  :override  =>  false,        :to    => false
+  default      :supplier_cost_units,              :override  =>  false,        :to    => 0
+  default      :supplier_cost,                    :override  =>  false,        :to    => 0
+  default      :master_pack_units,                :override  =>  false,        :to    => 0
+  default      :master_pack_length,               :override  =>  false,        :to    => 0
+  default      :master_pack_height,               :override  =>  false,        :to    => 0
+  default      :master_pack_width,                :override  =>  false,        :to    => 0
+  default      :master_pack_weight,               :override  =>  false,        :to    => 0
+  default      :inner_pack_units,                 :override  =>  false,        :to    => 0
+  default      :inner_pack_length,                :override  =>  false,        :to    => 0
+  default      :inner_pack_height,                :override  =>  false,        :to    => 0
+  default      :inner_pack_width,                 :override  =>  false,        :to    => 0
+  default      :inner_pack_weight,                :override  =>  false,        :to    => 0
+  default      :minimum_order_units,              :override  =>  false,        :to    => 0
+  default      :minimum_order_value,              :override  =>  false,        :to    => 0
+  default      :minimum_order_weight,             :override  =>  false,        :to    => 0
+  default      :minimum_order_cube,               :override  =>  false,        :to    => 0
+  default      :extra_cost,                       :override  =>  false,        :to    => 0
+  default      :is_included_extra_cost,           :override  =>  false,        :to    => false
+  default      :is_conveyable_master_pack,        :override  =>  false,        :to    => false
+  default      :is_conveyable_inner_pack,         :override  =>  false,        :to    => false
+  default      :pallet_tie,                       :override  =>  false,        :to    => 0
+  default      :pallet_high,                      :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -113,11 +113,11 @@ class Omni::StyleSupplier < ActiveRecord::Base
     string   :style_id
     string   :display
     string   :state
- 
+
     text     :style_display_fulltext, :using => :style_display
     text     :supplier_display_fulltext, :using => :supplier_display
     text     :state_fulltext, :using => :state
-  end 
+  end
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
@@ -135,11 +135,11 @@ class Omni::StyleSupplier < ActiveRecord::Base
     event :deactivate do
       transition :active => :inactive
     end
-                       
+
   end
   # STATES (End)
 
-  
+
   # STATE HANDLERS (Start) ====================================================================
   def after_activate
 
@@ -155,14 +155,15 @@ class Omni::StyleSupplier < ActiveRecord::Base
 
   def add_style_supplier_colors
   # System inserts a StyleSupplierColor row in active state for the added supplier and every color for the style (from StyleColor).
-  Omni::StyleSupplier.where(:style_supplier_id => self.style_supplier_id).each do |ss|
-    Omni::StyleColor.all.each do |sc|
+  # Omni::StyleSupplier.where(:style_supplier_id => self.style_supplier_id).each do |ss|
+    colors = Omni::StyleColor.where(:style_id => style_id)
+    colors.each do |sc|
       x = Omni::StyleSupplierColor.new
       x.style_supplier_id = self.style_supplier_id
       x.style_color_id = sc.style_color_id
       x.save
     end
-  end
+  # end
 
   end
   # HELPERS (End)

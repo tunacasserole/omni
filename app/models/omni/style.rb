@@ -21,51 +21,51 @@ class Omni::Style < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  validates    :subclass_id,                     :presence    => true  
+  validates    :subclass_id,                     :presence    => true
   validates    :display,                         :uniqueness  => true
-  validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true  
-  validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true  
-  validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true  
-  validates    :product_type,                    :lookup      => 'PRODUCT_TYPE',            :allow_nil => true  
+  validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
+  validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
+  validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
+  validates    :product_type,                    :lookup      => 'PRODUCT_TYPE',            :allow_nil => true
 
-  validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true  
-  validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true  
-  validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true  
-  validates    :sell_unit_uom_code,              :lookup      => 'SELL_UNIT_UOM_CODE',         :allow_nil => true  
-  validates    :order_uom_code,                  :lookup      => 'ORDER_UOM_CODE',             :allow_nil => true  
-  validates    :order_package_type,              :lookup      => 'ORDER_PACKAGE_TYPE',         :allow_nil => true  
-  validates    :maintenance_level,               :lookup      => 'MAINTENANCE_LEVEL',          :allow_nil => true  
-  validates    :sku_name_method,                 :lookup      => 'SKU_NAME_METHOD',            :allow_nil => true  
+  validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true
+  validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
+  validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true
+  validates    :sell_unit_uom_code,              :lookup      => 'SELL_UNIT_UOM_CODE',         :allow_nil => true
+  validates    :order_uom_code,                  :lookup      => 'ORDER_UOM_CODE',             :allow_nil => true
+  validates    :order_package_type,              :lookup      => 'ORDER_PACKAGE_TYPE',         :allow_nil => true
+  validates    :maintenance_level,               :lookup      => 'MAINTENANCE_LEVEL',          :allow_nil => true
+  validates    :sku_name_method,                 :lookup      => 'SKU_NAME_METHOD',            :allow_nil => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :style_id,                         :override  =>  false,        :with  => :guid              
+  default      :style_id,                         :override  =>  false,        :with  => :guid
   default      :style_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"STYLE_NBR"
-  default      :initial_retail_price,             :override  =>  false,        :to    => 0                  
-  default      :suggested_retail_price,           :override  =>  false,        :to    => 0                  
-  default      :planning_retail_price,            :override  =>  false,        :to    => 0                  
-  default      :smoothing_factor,                 :override  =>  false,        :to    => 0                  
-  default      :minimum_on_hand_units,            :override  =>  false,        :to    => 0                  
-  default      :maximum_on_hand_units,            :override  =>  false,        :to    => 0                  
-  default      :is_not_stocked,                   :override  =>  false,        :to    => false              
-  default      :sell_unit_length,                 :override  =>  false,        :to    => 0                  
-  default      :sell_unit_height,                 :override  =>  false,        :to    => 0                  
-  default      :sell_unit_width,                  :override  =>  false,        :to    => 0                  
-  default      :sell_unit_weight,                 :override  =>  false,        :to    => 0                  
-  default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => false              
-  default      :is_discountable,                  :override  =>  false,        :to    => false              
-  default      :is_taxable,                       :override  =>  false,        :to    => false              
-  default      :garment_pieces,                   :override  =>  false,        :to    => 0                  
-  default      :is_special_order,                 :override  =>  false,        :to    => false              
+  default      :initial_retail_price,             :override  =>  false,        :to    => 0
+  default      :suggested_retail_price,           :override  =>  false,        :to    => 0
+  default      :planning_retail_price,            :override  =>  false,        :to    => 0
+  default      :smoothing_factor,                 :override  =>  false,        :to    => 0
+  default      :minimum_on_hand_units,            :override  =>  false,        :to    => 0
+  default      :maximum_on_hand_units,            :override  =>  false,        :to    => 0
+  default      :is_not_stocked,                   :override  =>  false,        :to    => false
+  default      :sell_unit_length,                 :override  =>  false,        :to    => 0
+  default      :sell_unit_height,                 :override  =>  false,        :to    => 0
+  default      :sell_unit_width,                  :override  =>  false,        :to    => 0
+  default      :sell_unit_weight,                 :override  =>  false,        :to    => 0
+  default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => false
+  default      :is_discountable,                  :override  =>  false,        :to    => false
+  default      :is_taxable,                       :override  =>  false,        :to    => false
+  default      :garment_pieces,                   :override  =>  false,        :to    => 0
+  default      :is_special_order,                 :override  =>  false,        :to    => false
   default      :is_converted,                     :override  =>  false,        :to    => false
-  default      :is_convertible,                   :override  =>  false,        :to    => false              
-  default      :is_converted_heatset,             :override  =>  false,        :to    => false              
-  default      :is_converted_sewn,                :override  =>  false,        :to    => false              
-  default      :is_alterable,                     :override  =>  false,        :to    => false              
-  default      :is_usually_altered,               :override  =>  false,        :to    => false              
-  default      :is_enabled,                       :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_convertible,                   :override  =>  false,        :to    => false
+  default      :is_converted_heatset,             :override  =>  false,        :to    => false
+  default      :is_converted_sewn,                :override  =>  false,        :to    => false
+  default      :is_alterable,                     :override  =>  false,        :to    => false
+  default      :is_usually_altered,               :override  =>  false,        :to    => false
+  default      :is_enabled,                       :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -88,7 +88,7 @@ class Omni::Style < ActiveRecord::Base
   belongs_to   :add_on_sku,                      :class_name => 'Omni::Sku',                     :foreign_key => 'add_on_sku_id'
   belongs_to   :site,                            :class_name => 'Omni::Site',                    :foreign_key => 'site_id'
   belongs_to   :size_group,                      :class_name => 'Omni::SizeGroup',               :foreign_key => 'size_group_id'
-# 
+#
   has_many     :style_suppliers,                 :class_name => 'Omni::StyleSupplier',           :foreign_key => 'style_id'
   has_many     :style_locations,                 :class_name => 'Omni::StyleLocation',           :foreign_key => 'style_id'
   has_many     :style_colors,                    :class_name => 'Omni::StyleColor',              :foreign_key => 'style_id'
@@ -142,14 +142,14 @@ class Omni::Style < ActiveRecord::Base
 
   ### CALLBACKS ###
     after_transition :on => :plan,        :do => :after_plan
-    after_transition :on => :activate,    :do => :after_activate   
-    after_transition :on => :locations,   :do => :after_locations    
+    after_transition :on => :activate,    :do => :after_activate
+    # after_transition :on => :locations,   :do => :after_locations
     after_transition :on => :build,       :do => :after_build
     after_transition :on => :discontinue, :do => :after_discontinue
     after_transition :on => :drop,        :do => :after_drop
     after_transition :on => :deactivate,  :do => :after_deactivate
     after_transition :on => :activate,    :do => :after_activate
-    
+
     ## EVENTS ###
     event :plan do
       transition :draft => :planning
@@ -159,11 +159,11 @@ class Omni::Style < ActiveRecord::Base
       transition :planning => :active
     end
 
-    event :locations do
-      transition :planning => :planning
-    end
+    # event :locations do
+    #   transition :planning => :planning
+    # end
 
-    event :build do  
+    event :build do
       transition :active => :active
     end
 
@@ -179,13 +179,13 @@ class Omni::Style < ActiveRecord::Base
       transition :inactive => :active
     end
 
-    event :deactivate do  
+    event :deactivate do
       transition :active => :inactive
     end
 
     state :active do
       validates  :concatenated_name, :presence  => true
-      validates  :pos_name, :presence  => true      
+      validates  :pos_name, :presence  => true
       validates  :subclass_id, :presence  => true
       validates  :size_group_id, :presence  => true
     end
@@ -207,7 +207,7 @@ class Omni::Style < ActiveRecord::Base
     puts 'ready...'
   end
 
-  def after_locations
+  def gen_locations
   # adds a StyleLocation row for the Style and every Location where is_enabled = True (bypass any Locations that already have a StyleLocation
     puts '--- starting building locations ---'
     Omni::Location.all.each do |l|
@@ -217,32 +217,32 @@ class Omni::Style < ActiveRecord::Base
       x.location_id = l.location_id
       x.save
     end
-    puts '--- done with building locations ---'    
-    puts 'ready...'    
+    puts '--- done with building locations ---'
+    puts 'ready...'
   end
 
   ######## GENERATE SKU DATA ##############
   def after_build
-    puts '--- starting building skus ---'    
+    puts '--- starting building skus ---'
     gen_skus
     gen_sku_suppliers
     gen_sku_locations
     gen_sku_prices
-    puts '--- done with building skus ---'        
+    puts '--- done with building skus ---'
     puts 'ready...'
   end
 
   def gen_skus
     # Add Sku row for each StyleColorSize row in active state
     self.style_colors.each do |sc|
-      Omni::StyleColorSize.where(:style_color_id => sc.style_color_id).each do |scs|
+      Omni::StyleColorSize.where(:style_color_id => sc.style_color_id, :state => 'active').each do |scs|
         x = Omni::Sku.new
         x.display = "#{self.display}-#{scs.style_color.color_display}-#{scs.size_display}"
         x.maintenance_level = self.maintenance_level
         # x.generic_sku_id = self.generic_sku_id
-        x.add_on_sku_id = self.add_on_sku_id    
+        x.add_on_sku_id = self.add_on_sku_id
         x.site_id = self.site_id
-        x.conversion_type = self.conversion_type    
+        x.conversion_type = self.conversion_type
         x.style_color_size_id = scs.style_color_size_id
         x.style_id = self.style_id
         x.color_id = scs.style_color.color_id
@@ -277,15 +277,16 @@ class Omni::Style < ActiveRecord::Base
         # x.is_special_size = self.is_special_size
         x.save
         # update style color size sku_id
-        scs.sku_id = x.sku_id   # Update the StyleColorSize sku_id to the one just buildd
+        scs.sku_id = x.sku_id   # Update the StyleColorSize sku_id to the one just built
+        scs.state = 'generated'
         scs.save
       end
     end
   end
 
   def gen_sku_suppliers
-    # Add SkuSupplier row for each Sku & all StyleSupplier rows in active state  
-    self.skus.each do |sku|  
+    # Add SkuSupplier row for each Sku & all StyleSupplier rows in active state
+    self.skus.each do |sku|
       next unless sku.state == 'active'
       Omni::StyleSupplier.where(:style_id => self.style_id).each do |ss|
         x = Omni::SkuSupplier.new
@@ -328,8 +329,8 @@ class Omni::Style < ActiveRecord::Base
   end
 
   def gen_sku_locations
-    # Add SkuLocation row for each Sku & all StyleLocation rows in active state 
-    self.skus.each do |sku|  
+    # Add SkuLocation row for each Sku & all StyleLocation rows in active state
+    self.skus.each do |sku|
       next unless sku.state == 'active'
       Omni::StyleLocation.where(:style_id => self.style_id).each do |sl|
         x = Omni::SkuLocation.new
@@ -346,13 +347,13 @@ class Omni::Style < ActiveRecord::Base
         x.safety_stock_days = sl.safety_stock_days
         x.is_override_demand_exception = sl.is_override_demand_exception
         x.smoothing_factor = sl.smoothing_factor
-        x.forecast_profile_id = sl.forecast_profile_id                    
+        x.forecast_profile_id = sl.forecast_profile_id
         x.is_soq_override = sl.is_soq_override
         x.minimum_units = sl.minimum_units
         x.maximum_units = sl.maximum_units
         x.seasonal_index_id = sl.seasonal_index_id
         x.save
-        puts "sku location row created..................................."      
+        puts "sku location row created..................................."
       end
     end
   end
@@ -383,18 +384,18 @@ class Omni::Style < ActiveRecord::Base
   end
 
   def after_activate
-    puts '--- done with activate ---'    
-    puts 'ready...'    
+    puts '--- done with activate ---'
+    puts 'ready...'
   end
 
   def after_deactivate
-    puts '--- done with deactivate ---'    
-    puts 'ready...'    
+    puts '--- done with deactivate ---'
+    puts 'ready...'
   end
 
 
   # STATE HANDLERS (End)
-  
+
 
   # FILTERS (Start) =====================================================================
   filter :state_planning,          :with => {state: {equal_to: 'planning'}},     :priority => 40
@@ -429,7 +430,7 @@ class Omni::Style < ActiveRecord::Base
     # string   :supplier_display do supplier.display if supplier end
     string  :conversion_type
     string   :state
- 
+
     text     :display_fulltext,  :using => :display
     # text     :display_fulltext do self.display.gsub(/(\W)/, ' ') end
     text     :style_nbr_fulltext, :using => :style_nbr
@@ -440,8 +441,8 @@ class Omni::Style < ActiveRecord::Base
     # text     :state_fulltext, :using => :state
     # text     :site_display_fulltext, :using => :site_display
     # text     :conversion_type, :using => :conversion_type
-    
-  end 
+
+  end
   # INDEXING (End)
 
 

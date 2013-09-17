@@ -1,20 +1,20 @@
-Ext.define('Teller.ext.CurrencyField', {  extend: 'Ext.form.field.Number',  alias: 'widget.currencyfield',  hideTrigger: true,  
-  setValue: function (v) {    this.callParent(arguments);     if (!Ext.isEmpty(this.getValue())) {      this.setRawValue(Ext.util.Format.currency(this.getValue()));    } },  
-  removeFormat: function (v) {    if (Ext.isEmpty(v)) {     return '';    } else {      v = v.toString().replace(Ext.util.Format.currencySign, '').replace(Ext.util.Format.thousandSeparator, '');      
-  if (v % 1 === 0) { 
-    // Return value formatted with no precision since there are no digits after the decimal 
-    return Ext.util.Format.number(v, '0');      } 
-  else {        
-    // Return value formatted with precision of two digits since there are digits after the decimal       
-    return Ext.util.Format.number(v, '0.00');     }   
-   } },  
-  // Override parseValue to remove the currency format  
-  parseValue: function (v) {    return this.callParent([this.removeFormat(v)]); }, 
-  // Remove the format before validating the value  
-  getErrors: function (v) {   return this.callParent([this.removeFormat(v)]); },  
-  /* Override getSubmitData to remove the currency format on the value  that will be passed out from the getValues method of the form */  
-  getSubmitData: function () {    var returnObject = {};    returnObject[this.name] = this.removeFormat(this.callParent(arguments)[this.name]);     return returnObject;  },  
-  // Override preFocus to remove the format during edit 
+Ext.define('Teller.ext.CurrencyField', {  extend: 'Ext.form.field.Number',  alias: 'widget.currencyfield',  hideTrigger: true,
+  setValue: function (v) {    this.callParent(arguments);     if (!Ext.isEmpty(this.getValue())) {      this.setRawValue(Ext.util.Format.currency(this.getValue()));    } },
+  removeFormat: function (v) {    if (Ext.isEmpty(v)) {     return '';    } else {      v = v.toString().replace(Ext.util.Format.currencySign, '').replace(Ext.util.Format.thousandSeparator, '');
+  if (v % 1 === 0) {
+    // Return value formatted with no precision since there are no digits after the decimal
+    return Ext.util.Format.number(v, '0');      }
+  else {
+    // Return value formatted with precision of two digits since there are digits after the decimal
+    return Ext.util.Format.number(v, '0.00');     }
+   } },
+  // Override parseValue to remove the currency format
+  parseValue: function (v) {    return this.callParent([this.removeFormat(v)]); },
+  // Remove the format before validating the value
+  getErrors: function (v) {   return this.callParent([this.removeFormat(v)]); },
+  /* Override getSubmitData to remove the currency format on the value  that will be passed out from the getValues method of the form */
+  getSubmitData: function () {    var returnObject = {};    returnObject[this.name] = this.removeFormat(this.callParent(arguments)[this.name]);     return returnObject;  },
+  // Override preFocus to remove the format during edit
   preFocus: function () {   this.setRawValue(this.removeFormat(this.getRawValue()));    this.callParent(arguments); } });
 
 Ext.define('Omni.view.styles.Form', {
@@ -22,13 +22,13 @@ Ext.define('Omni.view.styles.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-styles-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.Style.display,
@@ -102,42 +102,28 @@ Ext.define('Omni.view.styles.Form', {
           items:[
             { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'style_nbr',                      fieldLabel: this.style_nbrLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield', emptyText: 'auto-generated on save'        },
-            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: false,  disabled: false,    xtype: 'textarea', rows:  5       },
+            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,  disabled: false,    xtype: 'textarea', rows:  5       },
             { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'concatenated_name',              fieldLabel: this.concatenated_nameLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             {
               xtype: 'label',
               text: 'Concatenated name is used on shipping lables.',
               cls: 'instruction'
-            },         
+            },
             { name: 'pos_name',                       fieldLabel: this.pos_nameLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             {
               xtype: 'label',
               text: 'Receipt name is the label used on store receipts.',
               cls: 'instruction'
-            },            
-            { name: 'is_enabled',                     fieldLabel: this.is_enabledLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            },
+            // { name: 'is_enabled',                     fieldLabel: this.is_enabledLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,     xtype: 'textfield'        }
           ]
         },
-        {
-          xtype: 'fieldset',
-          title: 'Tracking Dates',
-          scheme: 'fieldset_scheme_styles',          
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'effective_date',                 fieldLabel: this.effective_dateLabel,             allowBlank: true,   disabled: false,    xtype: 'datefield'        },
-            { name: 'discontinued_date',              fieldLabel: this.discontinued_dateLabel,          allowBlank: true,   disabled: false,    xtype: 'datefield'        },
-            { name: 'out_of_stock_date',              fieldLabel: this.out_of_stock_dateLabel,          allowBlank: true,   disabled: false,    xtype: 'datefield'        }
-          ]
-        },
-        {
+            {
           xtype: 'fieldset',
           title: 'Product Classification',
-          scheme: 'fieldset_scheme_styles',          
+          scheme: 'fieldset_scheme_styles',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -152,11 +138,25 @@ Ext.define('Omni.view.styles.Form', {
             { name: 'fabric_content',                 fieldLabel: this.fabric_contentLabel,             allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'FABRIC_CONTENT' },
             { name: 'storage_code',                   fieldLabel: this.storage_codeLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        }
           ]
+        },    {
+          xtype: 'fieldset',
+          title: 'Tracking Dates',
+          scheme: 'fieldset_scheme_styles',
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { name: 'effective_date',                 fieldLabel: this.effective_dateLabel,             allowBlank: true,   disabled: false,    xtype: 'datefield'        },
+            { name: 'discontinued_date',              fieldLabel: this.discontinued_dateLabel,          allowBlank: true,   disabled: false,    xtype: 'datefield'        },
+            { name: 'out_of_stock_date',              fieldLabel: this.out_of_stock_dateLabel,          allowBlank: true,   disabled: false,    xtype: 'datefield'        }
+          ]
         },
+
         {
           xtype: 'fieldset',
           title: 'Pricing',
-          scheme: 'fieldset_scheme_styles',          
+          scheme: 'fieldset_scheme_styles',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -170,7 +170,7 @@ Ext.define('Omni.view.styles.Form', {
         {
           xtype: 'fieldset',
           title: 'Forecasting & Replenishment',
-          scheme: 'fieldset_scheme_styles',          
+          scheme: 'fieldset_scheme_styles',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -188,7 +188,7 @@ Ext.define('Omni.view.styles.Form', {
         {
           xtype: 'fieldset',
           title: 'Selling Unit Definition',
-          scheme: 'fieldset_scheme_styles',          
+          scheme: 'fieldset_scheme_styles',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -207,7 +207,7 @@ Ext.define('Omni.view.styles.Form', {
         {
           xtype: 'fieldset',
           title: 'Ordering Information',
-          scheme: 'fieldset_scheme_styles',          
+          scheme: 'fieldset_scheme_styles',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -223,7 +223,7 @@ Ext.define('Omni.view.styles.Form', {
         {
           xtype: 'fieldset',
           title: 'Process Control',
-          scheme: 'fieldset_scheme_styles',          
+          scheme: 'fieldset_scheme_styles',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -231,7 +231,7 @@ Ext.define('Omni.view.styles.Form', {
           items:[
             { name: 'maintenance_level',              fieldLabel: this.maintenance_levelLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'MAINTENANCE_LEVEL' },
             // { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'generic_style_id',               fieldLabel: this.generic_style_idLabel,           allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },            
+            { name: 'generic_style_id',               fieldLabel: this.generic_style_idLabel,           allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
             { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{storeId: 'AddOnSkuStore'},{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             { name: 'site_id',                        fieldLabel: this.site_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Site',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'site_id', itemTpl:'{display}' },
             { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
@@ -254,10 +254,10 @@ Ext.define('Omni.view.styles.Form', {
           xtype      : 'button',
           cls        : 'approve',
           scope      : me,
-          tooltip    : 'Release style',
+          tooltip    : 'Plan style',
           listeners  : {
-            beforerender  : this.prepareReleaseAction,
-            click         : this.onReleaseAction,
+            beforerender  : this.preparePlanAction,
+            click         : this.onPlanAction,
             scope         : me
           }
         }
@@ -293,7 +293,7 @@ Ext.define('Omni.view.styles.Form', {
             click         : this.onBuildAction,
             scope         : me
           }
-        }                
+        }
       ]
     });
     // ACTIONS (End)
@@ -316,9 +316,9 @@ Ext.define('Omni.view.styles.Form', {
   /**
    *
    */
-  onReleaseAction : function(action, eOpts){
-    this.processEventTransition('release', 'Style was successfully released.', 'An error occurred releasing this Style');
-  }, // onReleaseAction
+  onPlanAction : function(action, eOpts){
+    this.processEventTransition('plan', 'Style was successfully planned.', 'An error occurred planning this Style');
+  }, // onPlanAction
 
   /**
    *
@@ -414,20 +414,20 @@ Ext.define('Omni.view.styles.Form', {
    /**
    *
    */
-  prepareApproveAction : function(action, eOpts) {
+  preparePlanAction : function(action, eOpts) {
 
     var currentState = this.record.get('state');
     currentState == 'draft' ? action.show() : action.hide();
-  }, // prepareApproveAction
+  }, // preparePlanAction
 
    /**
    *
    */
-  prepareReleaseAction : function(action, eOpts) {
+  prepareApproveAction : function(action, eOpts) {
 
     var currentState = this.record.get('state');
     currentState == 'planning' ? action.show() : action.hide();
-  }, // prepareReleaseAction
+  }, // prepareApproveAction
 
    /**
    *
@@ -436,7 +436,7 @@ Ext.define('Omni.view.styles.Form', {
 
     var currentState = this.record.get('state');
     currentState == 'planning' ? action.show() : action.hide();
-  }, // 
+  }, //
 
    /**
    *
@@ -445,7 +445,7 @@ Ext.define('Omni.view.styles.Form', {
 
     var currentState = this.record.get('state');
     currentState == 'active' ? action.show() : action.hide();
-  }, // 
+  }, //
 
 
 
