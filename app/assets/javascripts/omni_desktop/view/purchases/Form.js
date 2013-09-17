@@ -26,41 +26,41 @@ Ext.define('Omni.view.purchases.Form', {
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
-      purchase_idLabel:                       Omni.i18n.model.Purchase.purchase_id,    
-      displayLabel:                           Omni.i18n.model.Purchase.display,    
-      purchase_order_nbrLabel:                Omni.i18n.model.Purchase.purchase_order_nbr,    
-      supplier_idLabel:                       Omni.i18n.model.Purchase.supplier_id,    
-      location_idLabel:                       Omni.i18n.model.Purchase.location_id,    
-      purchase_typeLabel:                     Omni.i18n.model.Purchase.purchase_type,    
-      purchase_sourceLabel:                   Omni.i18n.model.Purchase.purchase_source,    
-      stateLabel:                             Omni.i18n.model.Purchase.state,    
-      order_dateLabel:                        Omni.i18n.model.Purchase.order_date,    
-      ordered_by_user_idLabel:                Omni.i18n.model.Purchase.ordered_by_user_id,    
-      ship_dateLabel:                         Omni.i18n.model.Purchase.ship_date,    
-      delivery_dateLabel:                     Omni.i18n.model.Purchase.delivery_date,    
-      cancel_not_shipped_by_dateLabel:        Omni.i18n.model.Purchase.cancel_not_shipped_by_date,    
-      cancel_not_received_by_dateLabel:       Omni.i18n.model.Purchase.cancel_not_received_by_date,    
+      purchase_idLabel:                       Omni.i18n.model.Purchase.purchase_id,
+      displayLabel:                           Omni.i18n.model.Purchase.display,
+      purchase_order_nbrLabel:                Omni.i18n.model.Purchase.purchase_order_nbr,
+      supplier_idLabel:                       Omni.i18n.model.Purchase.supplier_id,
+      location_idLabel:                       Omni.i18n.model.Purchase.location_id,
+      purchase_typeLabel:                     Omni.i18n.model.Purchase.purchase_type,
+      purchase_sourceLabel:                   Omni.i18n.model.Purchase.purchase_source,
+      stateLabel:                             Omni.i18n.model.Purchase.state,
+      order_dateLabel:                        Omni.i18n.model.Purchase.order_date,
+      ordered_by_user_idLabel:                Omni.i18n.model.Purchase.ordered_by_user_id,
+      ship_dateLabel:                         Omni.i18n.model.Purchase.ship_date,
+      delivery_dateLabel:                     Omni.i18n.model.Purchase.delivery_date,
+      cancel_not_shipped_by_dateLabel:        Omni.i18n.model.Purchase.cancel_not_shipped_by_date,
+      cancel_not_received_by_dateLabel:       Omni.i18n.model.Purchase.cancel_not_received_by_date,
       approval_1_dateLabel:                   Omni.i18n.model.Purchase.approval_1_date,
       approval_2_dateLabel:                   Omni.i18n.model.Purchase.approval_2_date,
       approval_3_dateLabel:                   Omni.i18n.model.Purchase.approval_3_date,
-      first_receipt_dateLabel:                Omni.i18n.model.Purchase.first_receipt_date,    
+      first_receipt_dateLabel:                Omni.i18n.model.Purchase.first_receipt_date,
       last_receipt_dateLabel:                 Omni.i18n.model.Purchase.last_receipt_date,
-      cancelled_dateLabel:                    Omni.i18n.model.Purchase.cancelled_date,    
-      payment_termLabel:                      Omni.i18n.model.Purchase.payment_term,    
-      freight_termLabel:                      Omni.i18n.model.Purchase.freight_term,    
-      fob_pointLabel:                         Omni.i18n.model.Purchase.fob_point,    
-      ship_viaLabel:                          Omni.i18n.model.Purchase.ship_via,    
-      is_phone_orderLabel:                    Omni.i18n.model.Purchase.is_phone_order,    
-      confirmed_by_user_idLabel:              Omni.i18n.model.Purchase.confirmed_by_user_id,    
-      master_purchase_idLabel:                Omni.i18n.model.Purchase.master_purchase_id,    
-      carrier_supplier_idLabel:               Omni.i18n.model.Purchase.carrier_supplier_id,    
-      is_special_orderLabel:                  Omni.i18n.model.Purchase.is_special_order,    
-      is_ship_cancelLabel:                    Omni.i18n.model.Purchase.is_ship_cancel,    
-      estimated_lead_time_daysLabel:          Omni.i18n.model.Purchase.estimated_lead_time_days,    
+      cancelled_dateLabel:                    Omni.i18n.model.Purchase.cancelled_date,
+      payment_termLabel:                      Omni.i18n.model.Purchase.payment_term,
+      freight_termLabel:                      Omni.i18n.model.Purchase.freight_term,
+      fob_pointLabel:                         Omni.i18n.model.Purchase.fob_point,
+      ship_viaLabel:                          Omni.i18n.model.Purchase.ship_via,
+      is_phone_orderLabel:                    Omni.i18n.model.Purchase.is_phone_order,
+      confirmed_by_user_idLabel:              Omni.i18n.model.Purchase.confirmed_by_user_id,
+      master_purchase_idLabel:                Omni.i18n.model.Purchase.master_purchase_id,
+      carrier_supplier_idLabel:               Omni.i18n.model.Purchase.carrier_supplier_id,
+      is_special_orderLabel:                  Omni.i18n.model.Purchase.is_special_order,
+      is_ship_cancelLabel:                    Omni.i18n.model.Purchase.is_ship_cancel,
+      estimated_lead_time_daysLabel:          Omni.i18n.model.Purchase.estimated_lead_time_days,
       purchase_approver_1_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_1_user_id,
       purchase_approver_2_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_2_user_id,
       purchase_approver_3_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_3_user_id,
-      is_destroyedLabel:                      Omni.i18n.model.Purchase.is_destroyed    
+      is_destroyedLabel:                      Omni.i18n.model.Purchase.is_destroyed
     });
     // LABELS (End)
 
@@ -68,7 +68,7 @@ Ext.define('Omni.view.purchases.Form', {
     Ext.apply(this, {
 
 // make entire form read only based on state
-      // disabled: disabled,       
+      // disabled: disabled,
       items: [
         {
           xtype              : 'fieldset',
@@ -84,8 +84,8 @@ Ext.define('Omni.view.purchases.Form', {
             { xtype             : 'textfield',
               name              : 'purchase_order_nbr',
               fieldLabel        : this.purchase_order_nbrLabel,
-              allowBlank        : true 
-            },    
+              allowBlank        : true
+            },
             { xtype             : 'buildit-Locator',
               name              : 'supplier_id',
               fieldLabel        : this.supplier_idLabel,
@@ -95,7 +95,7 @@ Ext.define('Omni.view.purchases.Form', {
               queryField        : 'display',
               valueField        : 'supplier_id',
               // initialValue      : this.record.get('display'), // gets Purchase.display, should be Supplier.display
-              itemTpl           : '{display}' 
+              itemTpl           : '{display}'
             },
             { xtype             : 'buildit-Locator',
               name              : 'location_id',
@@ -105,14 +105,14 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'location_id',
-              itemTpl           : '{display}' 
+              itemTpl           : '{display}'
             },
             { xtype             : 'textfield',
               name              : 'state',
               fieldLabel        : this.stateLabel,
               allowBlank        : true,
-              disabled          : true 
-            }, 
+              disabled          : true
+            },
             { xtype             : 'numberfield',
               name              : 'total_order_units',
               disabled          : true,
@@ -153,18 +153,18 @@ Ext.define('Omni.view.purchases.Form', {
               name              : 'ship_date',
               fieldLabel        : this.ship_dateLabel,
               allowBlank        : true,
-              disabled          : false 
+              disabled          : false
             },
             { xtype             : 'datefield',
               name              : 'delivery_date',
               fieldLabel        : this.delivery_dateLabel,
               allowBlank        : true,
-              disabled          : false 
+              disabled          : false
             },
-            { xtype: 'datefield', name: 'cancel_not_shipped_by_date',     fieldLabel: this.cancel_not_shipped_by_dateLabel  , allowBlank: true, disabled: false },    
-            { xtype: 'datefield', name: 'cancel_not_received_by_date',    fieldLabel: this.cancel_not_received_by_dateLabel , allowBlank: true, disabled: false },    
-            { xtype: 'datefield', name: 'first_receipt_date',             fieldLabel: this.first_receipt_dateLabel          , allowBlank: true, disabled: true },    
-            { xtype: 'datefield', name: 'cancelled_date',                 fieldLabel: this.cancelled_dateLabel              , allowBlank: true, disabled: true },    
+            { xtype: 'datefield', name: 'cancel_not_shipped_by_date',     fieldLabel: this.cancel_not_shipped_by_dateLabel  , allowBlank: true, disabled: false },
+            { xtype: 'datefield', name: 'cancel_not_received_by_date',    fieldLabel: this.cancel_not_received_by_dateLabel , allowBlank: true, disabled: false },
+            { xtype: 'datefield', name: 'first_receipt_date',             fieldLabel: this.first_receipt_dateLabel          , allowBlank: true, disabled: true },
+            { xtype: 'datefield', name: 'cancelled_date',                 fieldLabel: this.cancelled_dateLabel              , allowBlank: true, disabled: true },
           ]
         }
 
@@ -192,10 +192,10 @@ Ext.define('Omni.view.purchases.Form', {
 
               // store             : Ext.create('Buildit.store.User',{pageSize: 20}),
 
-              displayField      : 'full_name',
-              queryField        : 'full_name',
+              displayField      : 'user_display',
+              queryField        : 'user_display',
               valueField        : 'user_id',
-              itemTpl           : '{full_name}',
+              itemTpl           : '{user_display}',
               name              : 'purchase_approver_1_location_user_id',
               fieldLabel        : this.purchase_approver_1_user_idLabel,
               allowBlank        : true
@@ -251,11 +251,11 @@ Ext.define('Omni.view.purchases.Form', {
           items:[
 
             { xtype: 'buildit-Lookup', name: 'freight_term',             fieldLabel: this.freight_termLabel         , allowBlank: true, category:   'FREIGHT_TERM' },
-            { xtype: 'buildit-Lookup', name: 'fob_point',                fieldLabel: this.fob_pointLabel                   , allowBlank: true, category:   'FOB_POINT' },            
-            { xtype: 'textfield', name: 'ship_via',                      fieldLabel: this.ship_viaLabel                    , allowBlank: true },    
-            { xtype: 'buildit-Locator',   name: 'carrier_supplier_id',   fieldLabel: this.carrier_supplier_idLabel         , allowBlank: true,  store:   Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'carrier_supplier_id', itemTpl:'{display}' }, 
-            { xtype: 'checkbox', name: 'is_ship_cancel',                 fieldLabel: this.is_ship_cancelLabel              , allowBlank: true },    
-            { xtype: 'textfield', name: 'estimated_lead_time_days',      fieldLabel: this.estimated_lead_time_daysLabel    , allowBlank: true },    
+            { xtype: 'buildit-Lookup', name: 'fob_point',                fieldLabel: this.fob_pointLabel                   , allowBlank: true, category:   'FOB_POINT' },
+            { xtype: 'textfield', name: 'ship_via',                      fieldLabel: this.ship_viaLabel                    , allowBlank: true },
+            { xtype: 'buildit-Locator',   name: 'carrier_supplier_id',   fieldLabel: this.carrier_supplier_idLabel         , allowBlank: true,  store:   Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'carrier_supplier_id', itemTpl:'{display}' },
+            { xtype: 'checkbox', name: 'is_ship_cancel',                 fieldLabel: this.is_ship_cancelLabel              , allowBlank: true },
+            { xtype: 'textfield', name: 'estimated_lead_time_days',      fieldLabel: this.estimated_lead_time_daysLabel    , allowBlank: true },
 
             { xtype             : 'buildit-Locator',
               name              : 'master_purchase_id',
@@ -265,12 +265,12 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'master_purchase_id',
-              itemTpl           : '{display}' 
+              itemTpl           : '{display}'
             },
             { xtype             : 'checkbox',
               name              : 'is_special_order',
               fieldLabel        : this.is_special_orderLabel,
-              allowBlank        : true 
+              allowBlank        : true
             }
           ]
         }
@@ -283,8 +283,8 @@ Ext.define('Omni.view.purchases.Form', {
           defaults:     {anchor: '70%'},
           layout:       'anchor',
           items:[
-            { xtype: 'buildit-Lookup',  name: 'purchase_type',        fieldLabel: this.purchase_typeLabel               , allowBlank: true, category:   'PURCHASE_TYPE' },            
-            { xtype: 'buildit-Lookup',  name: 'purchase_source',      fieldLabel: this.purchase_sourceLabel             , allowBlank: true, category:   'PURCHASE_SOURCE' },            
+            { xtype: 'buildit-Lookup',  name: 'purchase_type',        fieldLabel: this.purchase_typeLabel               , allowBlank: true, category:   'PURCHASE_TYPE' },
+            { xtype: 'buildit-Lookup',  name: 'purchase_source',      fieldLabel: this.purchase_sourceLabel             , allowBlank: true, category:   'PURCHASE_SOURCE' },
             { xtype: 'buildit-Lookup',  name: 'payment_term',         fieldLabel: this.payment_termLabel                , allowBlank: true, category:   'PAYMENT_TERM' },
 
             { xtype             : 'buildit-Locator',
@@ -301,7 +301,7 @@ Ext.define('Omni.view.purchases.Form', {
               name              : 'is_phone_order',
               fieldLabel        : this.is_phone_orderLabel,
               allowBlank        : true
-            },    
+            },
             { xtype             : 'buildit-Locator',
               name              : 'confirmed_by_user_id',
               fieldLabel        : this.confirmed_by_user_idLabel,
@@ -310,7 +310,7 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'full_name',
               queryField        : 'full_name',
               valueField        : 'confirmed_by_user_id',
-              itemTpl           : '{full_name}' 
+              itemTpl           : '{full_name}'
             }
           ]
         }
@@ -350,7 +350,7 @@ Ext.define('Omni.view.purchases.Form', {
             click         : this.onApproveAction,
             scope         : me
           }
-        }        
+        }
       ]
     });
 
@@ -362,7 +362,7 @@ Ext.define('Omni.view.purchases.Form', {
 
 
     this.callParent();
-    
+
   },
 
   // HANDLERS (Start) ======================================================================
@@ -408,11 +408,11 @@ Ext.define('Omni.view.purchases.Form', {
       }
     );
 
-  }, 
+  },
 
   prepareReleaseAction : function(action, eOpts) {
     var currentState = this.record.get('state');
-  }, 
+  },
 
   prepareApproveAction : function(action, eOpts) {
     var currentState = this.record.get('state');

@@ -5,7 +5,7 @@ Ext.define('Omni.view.purchase_allocations.Inspector',{
 
   initComponent:function(){
     var me = this;
-  
+
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter: {
@@ -14,7 +14,7 @@ Ext.define('Omni.view.purchase_allocations.Inspector',{
       }
     });
     // INSPECTOR INIT (End)
-  
+
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
@@ -26,7 +26,7 @@ Ext.define('Omni.view.purchase_allocations.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Purchase Allocation',
-      subtitle:  this.record.get('purchase_allocation_id')
+      subtitle:  this.record.get('display')
     });
     // TITLES (End)
 

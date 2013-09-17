@@ -41,7 +41,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
   has_many     :purchase_costs,       :class_name => 'Omni::PurchaseCost',        :foreign_key => 'purchase_detail_id'
   has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
-  belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'  
+  belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
   # ASSOCIATIONS (End)
@@ -55,29 +55,29 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  
+
   # COMPUTED ATTRIBUTES (Start) =========================================================
-  
+
   # COMPUTED ATTRIBUTES (End)
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-  
+
   # TEMPORARY ATTRIBUTES (End)
 
 
   # FILTERS (Start) =====================================================================
-  
+
   # FILTERS (End)
 
 
   # ORDERING (Start) ====================================================================
-  
+
   # ORDERING (End)
 
 
   # SCOPES (Start) ======================================================================
-  
+
   # SCOPES (End)
 
 
@@ -100,14 +100,14 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     text     :sku_supplier_fulltext,       :using => :sku_supplier_display
     text     :purchase_display_fulltext,   :using => :purchase_display
 
-  end 
+  end
 
   # INDEXING (End)
 
 
   # HOOKS (Start) =======================================================================
     hook :before_create, :set_defaults, 10
-  
+
   # HOOKS (End)
 
 
@@ -120,11 +120,11 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   ### EVENTS ###
     event :allocate do
       transition :draft => :allocating
-      transition :open =>  :allocating      
+      transition :open =>  :allocating
     end
   end
-  # STATES (End)  
-  
+  # STATES (End)
+
   # STATE HELPERS (Start) =====================================================================
   def process_costing
     reset
@@ -156,7 +156,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     # default PurchaseDetail fields from Sku and SkuSupplier
     if self.new_record?
       if self.sku_supplier
-        self.sku_id = self.sku_supplier.sku_id 
+        self.sku_id = self.sku_supplier.sku_id
         self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
         self.description = self.sku_supplier.description
         self.color_name = self.sku.color_name
@@ -168,7 +168,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
           when "M"
             self.order_pack_size = self.sku_supplier.master_pack_units
           when "I"
-            self.order_pack_size = self.sku_supplier.inner_pack_units 
+            self.order_pack_size = self.sku_supplier.inner_pack_units
           else
             self.order_pack_size = 1
         end
@@ -183,7 +183,11 @@ class Omni::PurchaseDetail < ActiveRecord::Base
             self.order_multiple = 1
         end
         self.supplier_cost = self.sku_supplier.supplier_cost
-        self.inventory_cost = self.supplier_cost / self.order_cost_units
+        if self.order_cost_units.is_a? Integer and self.order_cost_units > 0
+          self.inventory_cost = self.supplier_cost / self.order_cost_units
+        else
+          self.invoice_cost = 0
+        end
         self.invoice_cost = self.supplier_cost
       end
     end
@@ -195,8 +199,8 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   def cascading_delete
     self.purchase_costs.all.each {|x| x.destroy}
-    self.purchase_allocations.all.each {|x| x.destroy}    
-    self.purchase_details.all.each {|x| x.destroy}    
+    self.purchase_allocations.all.each {|x| x.destroy}
+    self.purchase_details.all.each {|x| x.destroy}
   end
 
   # Sends an email notification to the user when the purchase has finished running
@@ -216,5 +220,5 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     return 'aaron@buildit.io'
   end
   # HELPERS (End)
-  
+
 end # class Omni::PurchaseDetail

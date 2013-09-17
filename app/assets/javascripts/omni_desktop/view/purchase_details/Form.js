@@ -22,36 +22,36 @@ Ext.define('Omni.view.purchase_details.Form', {
     };
     // FILTER (End)
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       purchase_detail_idLabel:                Omni.i18n.model.PurchaseDetail.purchase_detail_id,
-      purchase_displayLabel:                  Omni.i18n.model.PurchaseDetail.purchase_display,    
-      purchase_idLabel:                       Omni.i18n.model.PurchaseDetail.purchase_id,    
-      displayLabel:                           Omni.i18n.model.PurchaseDetail.display,    
-      stateLabel:                             Omni.i18n.model.PurchaseDetail.state,    
-      purchase_line_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_line_nbr,    
-      sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,    
-      cost_idLabel:                           Omni.i18n.model.PurchaseDetail.cost_id,    
-      descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,    
-      supplier_costLabel:                     Omni.i18n.model.PurchaseDetail.supplier_cost,    
-      invoice_costLabel:                      Omni.i18n.model.PurchaseDetail.invoice_cost,    
-      inventory_costLabel:                    Omni.i18n.model.PurchaseDetail.inventory_cost,    
-      extra_costLabel:                        Omni.i18n.model.PurchaseDetail.extra_cost,    
-      supplier_item_identifierLabel:          Omni.i18n.model.PurchaseDetail.supplier_item_identifier,    
+      purchase_displayLabel:                  Omni.i18n.model.PurchaseDetail.purchase_display,
+      purchase_idLabel:                       Omni.i18n.model.PurchaseDetail.purchase_id,
+      displayLabel:                           Omni.i18n.model.PurchaseDetail.display,
+      stateLabel:                             Omni.i18n.model.PurchaseDetail.state,
+      purchase_line_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_line_nbr,
+      sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,
+      cost_idLabel:                           Omni.i18n.model.PurchaseDetail.cost_id,
+      descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,
+      supplier_costLabel:                     Omni.i18n.model.PurchaseDetail.supplier_cost,
+      invoice_costLabel:                      Omni.i18n.model.PurchaseDetail.invoice_cost,
+      inventory_costLabel:                    Omni.i18n.model.PurchaseDetail.inventory_cost,
+      extra_costLabel:                        Omni.i18n.model.PurchaseDetail.extra_cost,
+      supplier_item_identifierLabel:          Omni.i18n.model.PurchaseDetail.supplier_item_identifier,
       sku_supplier_idLabel:                   Omni.i18n.model.PurchaseDetail.sku_supplier_id,
-      color_nameLabel:                        Omni.i18n.model.PurchaseDetail.color_name,    
-      size_nameLabel:                         Omni.i18n.model.PurchaseDetail.size_name,    
-      sku_aliasLabel:                         Omni.i18n.model.PurchaseDetail.sku_alias,    
-      units_orderedLabel:                     Omni.i18n.model.PurchaseDetail.units_ordered,    
-      order_pack_sizeLabel:                   Omni.i18n.model.PurchaseDetail.order_pack_size,    
-      order_pack_typeLabel:                   Omni.i18n.model.PurchaseDetail.order_pack_type,    
-      order_cost_unitsLabel:                  Omni.i18n.model.PurchaseDetail.order_cost_units,    
-      order_multiple_typeLabel:               Omni.i18n.model.PurchaseDetail.order_multiple_type,    
-      order_multipleLabel:                    Omni.i18n.model.PurchaseDetail.order_multiple,    
-      units_approvedLabel:                    Omni.i18n.model.PurchaseDetail.units_approved,    
-      units_cancelledLabel:                   Omni.i18n.model.PurchaseDetail.units_cancelled,    
-      is_destroyedLabel:                      Omni.i18n.model.PurchaseDetail.is_destroyed    
+      color_nameLabel:                        Omni.i18n.model.PurchaseDetail.color_name,
+      size_nameLabel:                         Omni.i18n.model.PurchaseDetail.size_name,
+      sku_aliasLabel:                         Omni.i18n.model.PurchaseDetail.sku_alias,
+      units_orderedLabel:                     Omni.i18n.model.PurchaseDetail.units_ordered,
+      order_pack_sizeLabel:                   Omni.i18n.model.PurchaseDetail.order_pack_size,
+      order_pack_typeLabel:                   Omni.i18n.model.PurchaseDetail.order_pack_type,
+      order_cost_unitsLabel:                  Omni.i18n.model.PurchaseDetail.order_cost_units,
+      order_multiple_typeLabel:               Omni.i18n.model.PurchaseDetail.order_multiple_type,
+      order_multipleLabel:                    Omni.i18n.model.PurchaseDetail.order_multiple,
+      units_approvedLabel:                    Omni.i18n.model.PurchaseDetail.units_approved,
+      units_cancelledLabel:                   Omni.i18n.model.PurchaseDetail.units_cancelled,
+      is_destroyedLabel:                      Omni.i18n.model.PurchaseDetail.is_destroyed
     });
     // LABELS (End)
 
@@ -68,14 +68,14 @@ Ext.define('Omni.view.purchase_details.Form', {
           layout:       'anchor',
           items:[
 
-            // { xtype: 'textfield', name: 'purchase_detail_id',             fieldLabel: this.purchase_detail_idLabel          , allowBlank: true },    
+            // { xtype: 'textfield', name: 'purchase_detail_id',             fieldLabel: this.purchase_detail_idLabel          , allowBlank: true },
             { xtype: 'textfield',
               name: 'purchase_display',
               fieldLabel: this.purchase_displayLabel,
               allowBlank: true,
-              disabled: true 
-            }  
-            // { xtype: 'textfield', name: 'display', fieldLabel: this.displayLabel, allowBlank: true, disabled: true },    
+              disabled: true
+            }
+            // { xtype: 'textfield', name: 'display', fieldLabel: this.displayLabel, allowBlank: true, disabled: true },
            ,{ xtype: 'textfield',
               name: 'purchase_line_nbr',
               fieldLabel: this.purchase_line_nbrLabel,
@@ -86,10 +86,10 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'state',
               fieldLabel: this.stateLabel,
               allowBlank: true,
-              disabled: true 
-            },    
+              disabled: true
+            },
            ,{ xtype: 'buildit-Locator',
-              name: 'sku_supplier_id', 
+              name: 'sku_supplier_id',
               fieldLabel: this.sku_supplier_idLabel,
               allowBlank: false,
               // store: Ext.create(
@@ -100,8 +100,8 @@ Ext.define('Omni.view.purchase_details.Form', {
               //       property: 'supplier_id',
               //       value: me.association.get('supplier_id')
                   // }]
-              store: me.purchaseSupplierStore = Ext.create('Omni.store.SkuSupplier', {pageSize: 30}),                  
-              displayField: 'display', 
+              store: me.purchaseSupplierStore = Ext.create('Omni.store.SkuSupplier', {pageSize: 30}),
+              displayField: 'display',
               queryField: 'display',
               valueField: 'sku_supplier_id',
               itemTpl:'{display}',
@@ -110,35 +110,35 @@ Ext.define('Omni.view.purchase_details.Form', {
            ,{ xtype: 'textfield',
               name: 'supplier_item_identifier',
               fieldLabel: this.supplier_item_identifierLabel,
-              allowBlank: true 
+              allowBlank: true
             }
            ,{ xtype: 'textarea',
               name: 'description',
               fieldLabel: this.descriptionLabel,
-              allowBlank: true 
+              allowBlank: true
             }
            ,{ xtype: 'textfield',
               name: 'color_name',
               fieldLabel: this.color_nameLabel,
-              allowBlank: true 
+              allowBlank: true
             }
            ,{ xtype: 'textfield',
               name: 'size_name',
               fieldLabel: this.size_nameLabel,
-              allowBlank: true 
+              allowBlank: true
              }
            ,{ xtype: 'textfield',
               name: 'sku_alias',
               fieldLabel: this.sku_aliasLabel,
-              allowBlank: true 
+              allowBlank: true
              }
-            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }    
+            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }
           ]
         }
         ,{
           xtype: 'fieldset',
           title: 'Cost Details',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -157,8 +157,8 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.order_cost_unitsLabel,
               minValue: 1,
               decimalPrecision: 0,
-              allowBlank: false,
-              disabled: disabled 
+              allowBlank: true,
+              disabled: disabled
             }
            ,{ xtype: 'buildit-Locator',
               name: 'cost_id',
@@ -175,26 +175,26 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.invoice_costLabel,
               disabled: true,
               decimalPrecision: 2,
-              allowBlank: true 
+              allowBlank: true
             }
            ,{ xtype: 'textfield',
               name: 'inventory_cost',
               fieldLabel: this.inventory_costLabel,
               disabled: true,
               decimalPrecision: 2,
-              allowBlank: true 
+              allowBlank: true
             }
            ,{ xtype: 'textfield',
               name: 'extra_cost',
               fieldLabel: this.extra_costLabel,
-              allowBlank: true 
+              allowBlank: true
             }
           ]
         }
         ,{
           xtype: 'fieldset',
           title: 'Order Details',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -204,20 +204,20 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'units_ordered',
               fieldLabel: this.units_orderedLabel,
               minValue: 0,
-              allowBlank: true,
+              allowBlank: false,
               disabled: disabled
             }
            ,{ xtype: 'textfield',
               name: 'units_approved',
               fieldLabel: this.units_approvedLabel,
               disabled: true,
-              allowBlank: true 
+              allowBlank: true
             }
            ,{ xtype: 'textfield',
               name: 'units_cancelled',
               fieldLabel: this.units_cancelledLabel,
               disabled: true,
-              allowBlank: true 
+              allowBlank: true
             }
            ,{ xtype: 'textfield',
               name: 'order_pack_size',
@@ -235,12 +235,12 @@ Ext.define('Omni.view.purchase_details.Form', {
             name: 'order_multiple_type',
             fieldLabel: this.order_multiple_typeLabel,
             allowBlank: true,
-            category:   'ORDER_MULTIPLE_TYPE' 
+            category:   'ORDER_MULTIPLE_TYPE'
             }
            ,{ xtype: 'textfield',
               name: 'order_multiple',
               fieldLabel: this.order_multipleLabel,
-              allowBlank: true 
+              allowBlank: true
             }
           ]
         }
@@ -260,9 +260,9 @@ Ext.define('Omni.view.purchase_details.Form', {
 
     this.callParent();
 
-    me.purchaseSupplierStore.on('beforeload',me.setupsupplierfilter, me);    
+    me.purchaseSupplierStore.on('beforeload',me.setupsupplierfilter, me);
   },
-  
+
   setupsupplierfilter: function()
      {
       var me=this;
@@ -279,7 +279,7 @@ Ext.define('Omni.view.purchase_details.Form', {
             with: {supplier_id: {equal_to: supplier_id}}
           }
         }
-     });       
+     });
      }
 });
 
