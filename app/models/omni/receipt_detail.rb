@@ -21,11 +21,11 @@ class Omni::ReceiptDetail < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :receipt_detail_id,                :override  =>  false,        :with  => :guid              
+  default      :receipt_detail_id,                :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.receipt_display} - #{m.purchase_detail_display}"}
   default      :receipt_line_nbr,                 :override  =>  false,        :with  => :sequence,         :named=>"RECEIPT_LINE_NBR"
-  default      :received_units,                   :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :received_units,                   :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -75,12 +75,13 @@ class Omni::ReceiptDetail < ActiveRecord::Base
     string   :purchase_detail_display do purchase_detail.display if purchase_detail end
     integer  :received_units
     string   :state
- 
+    string   :receipt_id
+
     text     :receipt_display_fulltext, :using => :receipt_display
     text     :purchase_detail_display_fulltext, :using => :purchase_detail_display
     text     :received_units_fulltext, :using => :received_units
     text     :state_fulltext, :using => :state
-  end 
+  end
   # INDEXING (End)
 
 

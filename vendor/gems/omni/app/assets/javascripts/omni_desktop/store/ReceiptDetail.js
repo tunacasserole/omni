@@ -1,9 +1,9 @@
-Ext.define('Omni.store.Receipt', {
+Ext.define('Omni.store.ReceiptDetail', {
   extend       : 'Ext.data.Store',
-  alias        : 'store.omni-Receipt',
-  model        : 'Omni.model.Receipt',
+  alias        : 'store.omni-ReceiptDetail',
+  model        : 'Omni.model.ReceiptDetail',
   autoLoad     : false,
-  storeId      : 'ReceiptStore',
+  storeId      : 'ReceiptDetailStore',
   remoteFilter : true,
   remoteSort   : true,
 

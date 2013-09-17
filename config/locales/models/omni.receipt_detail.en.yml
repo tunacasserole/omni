@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/receipt_detail:  'Model'
+    attributes:
+      omni/receipt_detail:
+        receipt_detail_id:                 'Receipt Detail'
+        display:                           'Display'
+        receipt_id:                        'Receipt'
+        receipt_line_nbr:                  'Receipt Line Nbr'
+        purchase_detail_id:                'Purchase Detail'
+        received_units:                    'Received Units'
+        state:                             'State'
+        is_destroyed:                      'Is Destroyed'

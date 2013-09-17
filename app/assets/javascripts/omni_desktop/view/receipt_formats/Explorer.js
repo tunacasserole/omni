@@ -3,13 +3,13 @@ Ext.define('Omni.view.receipt_formats.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-receipt_formats-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -36,7 +36,9 @@ Ext.define('Omni.view.receipt_formats.Explorer', {
     Ext.applyIf(this, {
       displayLabel: Omni.i18n.model.ReceiptFormat.display,
       descriptionLabel: Omni.i18n.model.ReceiptFormat.description,
-      paper_widthLabel: Omni.i18n.model.ReceiptFormat.paper_width
+      paper_widthLabel: Omni.i18n.model.ReceiptFormat.paper_width,
+      icon_urlLabel: Omni.i18n.model.ReceiptFormat.icon_url,
+      icon_widthLabel: Omni.i18n.model.ReceiptFormat.icon_width
     });
     // LABELS (End)
 
@@ -45,7 +47,9 @@ Ext.define('Omni.view.receipt_formats.Explorer', {
       columns: [
         { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
         { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
-        { header: this.paper_widthLabel, dataIndex: 'paper_width',  flex: 1,  sortable: true  }
+        { header: this.paper_widthLabel, dataIndex: 'paper_width',  flex: 1,  sortable: true  },
+        { header: this.icon_urlLabel, dataIndex: 'icon_url',  flex: 1,  sortable: true  },
+        { header: this.icon_widthLabel, dataIndex: 'icon_width',  flex: 1,  sortable: true  }
       ]
     });
     // COLUMNS (End)

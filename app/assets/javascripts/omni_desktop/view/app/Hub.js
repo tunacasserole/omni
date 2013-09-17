@@ -22,7 +22,7 @@ Ext.define('Omni.view.app.Hub', {
           },
           sections: [
 
-            // Section: BTS //
+            // Section: Inventory Planning //
 
             {
               title: 'Inventory Planning',
@@ -81,92 +81,106 @@ Ext.define('Omni.view.app.Hub', {
               }, ]
             }
 
+              // Section: Supply //
+
             , {
-              title: 'Purchasing',
+              title: 'Supply',
               columns: 2,
               rows: 4,
               tiles: [{
-                title: 'Purchases',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'purchases',
-                target: {
-                  xtype: 'omni-purchases-Explorer'
+                  title: 'Purchases',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'purchases',
+                  target: {
+                    xtype: 'omni-purchases-Explorer'
+                  }
+                }, {
+                  title: 'Allocations',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'allocations',
+                  target: {
+                    xtype: 'omni-allocations-Explorer'
+                  }
+                }, {
+                  title: 'Costs',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'costs',
+                  target: {
+                    xtype: 'omni-costs-Explorer'
+                  }
+                }, {
+                  title: 'Receipts',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'costs',
+                  target: {
+                    xtype: 'omni-receipts-Explorer'
+                  }
                 }
-              }, {
-                title: 'Allocations',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'allocations',
-                target: {
-                  xtype: 'omni-allocations-Explorer'
-                }
-              }, {
-                title: 'Costs',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'costs',
-                target: {
-                  xtype: 'omni-costs-Explorer'
-                }
-              }, ]
-            }
-            // Section: Product Hierarchy //
+                  ]
+              }
 
-            , {
-              title: 'product hierarchy',
-              columns: 4,
-              rows: 3,
-              tiles: [{
-                title: 'Skus',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'product_hierarchy',
-                target: {
-                  xtype: 'omni-skus-Explorer'
-                }
-              }, {
-                title: 'Styles',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'product_hierarchy',
-                target: {
-                  xtype: 'omni-styles-Explorer'
-                }
-              }, {
-                title: 'Subclasses',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'product_hierarchy',
-                target: {
-                  xtype: 'omni-subclasses-Explorer'
-                }
-              }, {
-                title: 'Classifications',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'product_hierarchy',
-                target: {
-                  xtype: 'omni-classifications-Explorer'
-                }
-              }, {
-                title: 'Departments',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'product_hierarchy',
-                target: {
-                  xtype: 'omni-departments-Explorer'
-                }
-              }]
-            }
+              // Section: Product Hierarchy //
 
-            // Section: product setup data //
 
-            , {
-              title: 'product setup data',
-              columns: 4,
-              rows: 3,
-              tiles: [{
+              ,{
+                title: 'product hierarchy',
+                columns: 4,
+                rows: 3,
+                tiles: [{
+                  title: 'Skus',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'product_hierarchy',
+                  target: {
+                    xtype: 'omni-skus-Explorer'
+                  }
+                }, {
+                  title: 'Styles',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'product_hierarchy',
+                  target: {
+                    xtype: 'omni-styles-Explorer'
+                  }
+                }, {
+                  title: 'Subclasses',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'product_hierarchy',
+                  target: {
+                    xtype: 'omni-subclasses-Explorer'
+                  }
+                }, {
+                  title: 'Classifications',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'product_hierarchy',
+                  target: {
+                    xtype: 'omni-classifications-Explorer'
+                  }
+                }, {
+                  title: 'Departments',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'product_hierarchy',
+                  target: {
+                    xtype: 'omni-departments-Explorer'
+                  }
+                }]
+              }
+
+              // Section: product setup data //
+
+              ,
+              {
+                title: 'product setup data',
+                columns: 4,
+                rows: 3,
+                tiles: [{
                   title: 'Colors',
                   colspan: 2,
                   rowspan: 1,
@@ -216,12 +230,13 @@ Ext.define('Omni.view.app.Hub', {
                   target: {
                     xtype: 'omni-allocation_profiles-Explorer'
                   }
-              }]
+                }]
               }
               // Section: Company Hierarchy //
 
 
-              ,{
+              ,
+              {
                 title: 'company hierarchy',
                 columns: 4,
                 rows: 3,
@@ -359,20 +374,12 @@ Ext.define('Omni.view.app.Hub', {
                     xtype: 'omni-system_options-Explorer'
                   }
                 }, {
-                  title: 'Receipts',
+                  title: 'Receipt Formats',
                   colspan: 2,
                   rowspan: 1,
                   cls: 'product_setup',
                   target: {
-                    xtype: 'omni-receipts-Explorer'
-                  }
-                }, {
-                  title: 'Purchases',
-                  colspan: 2,
-                  rowspan: 1,
-                  cls: 'product_setup',
-                  target: {
-                    xtype: 'omni-purchases-Explorer'
+                    xtype: 'omni-receipt_formats-Explorer'
                   }
                 }]
               }
