@@ -7,10 +7,10 @@ class CreateOmniProjections < ActiveRecord::Migration
         t.column   :projection_id,                   :string,            :null  =>  false,   :limit   => 32
         t.column   :forecast_profile_id,             :string,            :null  =>  true,    :limit   => 32
         t.column   :region_id,                       :string,            :null  =>  true,    :limit   => 32
-        t.column   :district_id,                     :string,            :null  =>  true,    :limit   => 32        
+        t.column   :district_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :department_id,                   :string,            :null  =>  true,    :limit   => 32
-        t.column   :class_id,                        :string,            :null  =>  true,    :limit   => 32
+        t.column   :classification_id,               :string,            :null  =>  true,    :limit   => 32
         t.column   :subclass_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :style_id,                        :string,            :null  =>  true,    :limit   => 32
         t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32

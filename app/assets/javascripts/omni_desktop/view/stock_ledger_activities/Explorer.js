@@ -3,13 +3,13 @@ Ext.define('Omni.view.stock_ledger_activities.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-stock_ledger_activities-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -23,7 +23,7 @@ Ext.define('Omni.view.stock_ledger_activities.Explorer', {
 
       newForms:[{
         xtype:'omni-stock_ledger_activities-Form',
-        windowConfig: {}
+        windowConfig: {allowNew: false}
       }],
 
       inspectorConfig: {

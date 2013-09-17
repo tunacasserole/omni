@@ -2,7 +2,7 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-projections-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -27,40 +27,40 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
          * Supports performing 'Build' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
-        {
-          text:'Build',
-          cls: 'icon-settings',
-          action: 'build',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickBuild,
-              scope: me
-            }
-          }
-        },
+        // {
+        //   text:'Build',
+        //   cls: 'icon-settings',
+        //   action: 'build',
+        //   confirm: true,
+        //   multi: true,
+        //   privileges: [],
+        //   listeners: {
+        //     click: {
+        //       fn: this.clickBuild,
+        //       scope: me
+        //     }
+        //   }
+        // },
 
         /**
          * Forecast
          * Supports performing 'Forecast' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
-        {
-          text:'Forecast',
-          cls: 'icon-settings',
-          action: 'forecast',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickForecast,
-              scope: me
-            }
-          }
-        },
+        // {
+        //   text:'Forecast',
+        //   cls: 'icon-settings',
+        //   action: 'forecast',
+        //   confirm: true,
+        //   multi: true,
+        //   privileges: [],
+        //   listeners: {
+        //     click: {
+        //       fn: this.clickForecast,
+        //       scope: me
+        //     }
+        //   }
+        // },
 
         /**
          * Release
@@ -81,7 +81,7 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
         //     }
         //   }
         // },
-        
+
         /**
          * Revise
          * Supports performing 'Revise' on the selected items in the explorer grid.
@@ -126,14 +126,14 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
 
       ],
 
-      
+
       // RIGHT ACTIONS (Start) ================================================================
       rightActions: [
 
         /**
          * SELECT ALL
          * Supports the selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Select All',
@@ -153,7 +153,7 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
         /**
          * DESELECT ALL
          * Supports the de-selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Deselect All',
@@ -195,7 +195,7 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
         /**
          * EXPORT
          * Supports the export of the selected items in the explorer grid.
-         * 
+         *
          */
         {
           text:'Export',

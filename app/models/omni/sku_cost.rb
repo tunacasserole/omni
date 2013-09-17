@@ -22,16 +22,16 @@ class Omni::SkuCost < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :sku_cost_id,                          :override  =>  false,        :with  => :guid              
+  default      :sku_cost_id,                          :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display}"}
-  default      :first_cost,                       :override  =>  false,        :to    => 0                  
-  default      :last_cost,                        :override  =>  false,        :to    => 0                  
-  default      :average_cost,                     :override  =>  false,        :to    => 0                  
-  default      :on_hand_units,                    :override  =>  false,        :to    => 0                  
-  default      :cost_pool,                        :override  =>  false,        :to    => 0                  
-  default      :retail_pool,                      :override  =>  false,        :to    => 0                  
-  default      :is_updated_average_cost,          :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :first_cost,                       :override  =>  false,        :to    => 0
+  default      :last_cost,                        :override  =>  false,        :to    => 0
+  default      :average_cost,                     :override  =>  false,        :to    => 0
+  default      :on_hand_units,                    :override  =>  false,        :to    => 0
+  default      :cost_pool,                        :override  =>  false,        :to    => 0
+  default      :retail_pool,                      :override  =>  false,        :to    => 0
+  default      :is_updated_average_cost,          :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -80,13 +80,14 @@ class Omni::SkuCost < ActiveRecord::Base
     integer  :cost_pool
     boolean  :is_updated_average_cost
     integer  :first_cost
- 
+    string   :sku_id
+
     text     :last_cost_fulltext, :using => :last_cost
     text     :average_cost_fulltext, :using => :average_cost
     text     :on_hand_units_fulltext, :using => :on_hand_units
     text     :cost_pool_fulltext, :using => :cost_pool
     text     :first_cost_fulltext, :using => :first_cost
-  end 
+  end
   # INDEXING (End)
 
 

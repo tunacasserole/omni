@@ -3,13 +3,13 @@ Ext.define('Omni.view.rulesets.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-rulesets-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.Ruleset.display,
@@ -40,6 +40,14 @@ Ext.define('Omni.view.rulesets.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Ruleset',
+      newTitle: 'New Ruleset',
+      newSubtitle: 'Complete the following to create a new ruleset'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

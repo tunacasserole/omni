@@ -35,10 +35,10 @@ Ext.define('Omni.view.forecast_profiles.Explorer', {
   forecast_formulaLabel:                  Omni.i18n.model.ForecastProfile.forecast_formula,
 /*   is_destroyedLabel:                      Omni.i18n.model.ForecastProfile.is_destroyed, */
   // LABELS (End)
-  
+
   // TITLES (Start) ======================================================================
-  title:     'ForecastProfiles',
-  subtitle:  'Create and maintain ForecastProfiles',
+  title:     'Forecast Profiles',
+  subtitle:  'Create and maintain Forecast Profiles',
   // TITLES (End)
 
   initComponent:function () {
@@ -49,16 +49,16 @@ Ext.define('Omni.view.forecast_profiles.Explorer', {
     Ext.apply(this, {
       columns: [
 /*         { header: this.forecast_profile_idLabel,           dataIndex: 'forecast_profile_id',         flex: 1 },     */
-        { header: this.displayLabel,                       dataIndex: 'display',                     flex: 2 },    
-        { header: this.forecast_formulaLabel,              dataIndex: 'forecast_formula',            flex: 1 },         
-        { header: this.sales_2012_weightLabel,              dataIndex: 'sales_2012_weight',            flex: 1 },    
-        { header: this.sales_2011_weightLabel,              dataIndex: 'sales_2011_weight',            flex: 1 },    
-        { header: this.sales_2010_weightLabel,              dataIndex: 'sales_2010_weight',            flex: 1 },    
-        { header: this.contract_year_1_weightLabel,        dataIndex: 'contract_year_1_weight',      flex: 1 },    
-        { header: this.contract_year_2_weightLabel,        dataIndex: 'contract_year_2_weight',      flex: 1 },    
-        { header: this.contract_year_3_weightLabel,        dataIndex: 'contract_year_3_weight',      flex: 1 },    
-        { header: this.contract_year_4_weightLabel,        dataIndex: 'contract_year_4_weight',      flex: 1 },    
-        { header: this.contract_year_5_weightLabel,        dataIndex: 'contract_year_5_weight',      flex: 1 },       
+        { header: this.displayLabel,                       dataIndex: 'display',                     flex: 2 },
+        { header: this.forecast_formulaLabel,              dataIndex: 'forecast_formula',            flex: 1 },
+        { header: this.sales_2012_weightLabel,              dataIndex: 'sales_2012_weight',            flex: 1 },
+        { header: this.sales_2011_weightLabel,              dataIndex: 'sales_2011_weight',            flex: 1 },
+        { header: this.sales_2010_weightLabel,              dataIndex: 'sales_2010_weight',            flex: 1 },
+        { header: this.contract_year_1_weightLabel,        dataIndex: 'contract_year_1_weight',      flex: 1 },
+        { header: this.contract_year_2_weightLabel,        dataIndex: 'contract_year_2_weight',      flex: 1 },
+        { header: this.contract_year_3_weightLabel,        dataIndex: 'contract_year_3_weight',      flex: 1 },
+        { header: this.contract_year_4_weightLabel,        dataIndex: 'contract_year_4_weight',      flex: 1 },
+        { header: this.contract_year_5_weightLabel,        dataIndex: 'contract_year_5_weight',      flex: 1 },
 /*     { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }     */
       ]
     });

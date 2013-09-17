@@ -6,8 +6,8 @@ class CreateStockLedgerActivityLogs < ActiveRecord::Migration
         t.column :display,                           :string,        :limit       => 300,    :null        => false
         t.column :stock_ledger_activity_id,          :string,        :limit       => 32,     :null        => false
         t.column :activity_log_nbr,                  :string,        :limit       => 11,     :null        => false
-        t.column :model_meta_id,                     :string,        :limit       => 32,     :null        => false
-        t.column :attribute_meta_id,                 :string,        :limit       => 32,     :null        => false
+        t.column :model_name                         :string,        :limit       => 200,     :null        => false
+        t.column :attribute_name,                    :string,        :limit       => 200,     :null        => false
         t.column :row_id,                            :string,        :limit       => 32,     :null        => false
         t.column :rule_action,                       :string,        :limit       => 100,    :null        => true
         t.column :is_destroyed,                      :boolean,       :null        => true

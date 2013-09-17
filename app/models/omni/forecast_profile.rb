@@ -17,14 +17,14 @@ class Omni::ForecastProfile < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  validates    :display,           				:uniqueness  => true,                         :allow_nil => false 
+  validates    :display,           				:uniqueness  => true,                         :allow_nil => false
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :forecast_profile_id,              :override  =>  false,        :with  => :guid              
+  default      :forecast_profile_id,              :override  =>  false,        :with  => :guid
  # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.forecast_profile_name}"}
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -66,9 +66,10 @@ class Omni::ForecastProfile < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :display
- 
+    string   :forecast_formula
+
     text     :display_fulltext, :using => :display
-  end 
+  end
   # INDEXING (End)
 
 

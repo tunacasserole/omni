@@ -29,15 +29,15 @@ Ext.define('Omni.view.skus.Inspector', {
           xtype: 'omni-skus-Form',
           module: 'contracts'
         }
-        // ,{
-        //   title: 'Costs',
-        //   xtype: 'omni-sku_costs-Explorer', module: 'survey',
-        //   defaultSearch: { with:
-        //      {
-        //        sku_id:   {equal_to: me.record.get('sku_id')}
-        //      }
-        //   }
-        // }
+        ,{
+          title: 'Costs',
+          xtype: 'omni-sku_costs-Explorer', module: 'survey',
+          defaultSearch: { with:
+             {
+               sku_id:   {equal_to: me.record.get('sku_id')}
+             }
+          }
+        }
         ,{
           title: 'Locations',
           xtype: 'omni-sku_locations-Explorer', module: 'cfars',

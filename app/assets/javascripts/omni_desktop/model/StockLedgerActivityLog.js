@@ -1,17 +1,17 @@
 Ext.define('Omni.model.StockLedgerActivityLog', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
-  validations: [
-    { type: 'presence', field: 'display' },
-    { type: 'presence', field: 'stock_ledger_activity_id' },
-    { type: 'presence', field: 'activity_log_nbr' },
-    { type: 'presence', field: 'model_meta_id' },
-    { type: 'presence', field: 'attribute_meta_id' },
-    { type: 'presence', field: 'row_id' }
-  ],
+  // validations: [
+  //   { type: 'presence', field: 'display' },
+  //   { type: 'presence', field: 'stock_ledger_activity_id' },
+  //   { type: 'presence', field: 'activity_log_nbr' },
+  //   { type: 'presence', field: 'model_meta_id' },
+  //   { type: 'presence', field: 'attribute_meta_id' },
+  //   { type: 'presence', field: 'row_id' }
+  // ],
   // VALIDATIONS (End)
 
   // FIELDS (Start) ======================================================================
@@ -21,10 +21,8 @@ Ext.define('Omni.model.StockLedgerActivityLog', {
     { name: 'stock_ledger_activity_display', type: 'string' },
     { name: 'stock_ledger_activity_id', type: 'string' },
     { name: 'activity_log_nbr', type: 'string' },
-    { name: 'model_meta_display', type: 'string' },
-    { name: 'model_meta_id', type: 'string' },
-    { name: 'attribute_meta_display', type: 'string' },
-    { name: 'attribute_meta_id', type: 'string' },
+    { name: 'model_name', type: 'string' },
+    { name: 'attribute_name', type: 'string' },
     { name: 'row_display', type: 'string' },
     { name: 'row_id', type: 'string' },
     { name: 'rule_action', type: 'string' },

@@ -5,7 +5,7 @@ Ext.define('Omni.view.forecast_profiles.Inspector',{
 
   initComponent:function(){
     var me = this;
-  
+
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter: {
@@ -14,7 +14,7 @@ Ext.define('Omni.view.forecast_profiles.Inspector',{
       }
     });
     // INSPECTOR INIT (End)
-  
+
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
@@ -26,7 +26,7 @@ Ext.define('Omni.view.forecast_profiles.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Forecast Profile',
-      subtitle:  this.record.get('forecast_profile_id')
+      subtitle:  this.record.get('display')
     });
     // TITLES (End)
 

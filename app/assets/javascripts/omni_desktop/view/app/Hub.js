@@ -25,13 +25,28 @@ Ext.define('Omni.view.app.Hub', {
    // Section: BTS //
 
   {
-   title: 'Back to School',
+   title: 'Inventory Planning',
+     columns: 4,
+     rows: 3,
+     tiles: [
+        {title: 'BTS', colspan: 2, rowspan: 1, cls: 'bts',  target: {xtype: 'omni-bts-Explorer'}},
+        {title: 'Daily Results', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-daily_results-Explorer'} },
+        {title: 'Period Results', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-period_results-Explorer'} },
+        {title: 'Projections', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-projections-Explorer'} },
+        {title: 'Stock Ledger Activity', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-stock_ledger_activities-Explorer'}, allowNew: false,  allowFind: true },
+        {title: 'Inventory', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-inventories-Explorer'} },
+     ]
+     }
+
+   // Section: product maintenance //
+
+  ,{
+   title: 'product maintenance',
      columns: 2,
      rows: 4,
      tiles: [
-        {title: 'BTS', colspan: 2, rowspan: 2, cls: 'bts',  target: {xtype: 'omni-bts-Explorer'}},
-        {title: 'Inventory', colspan: 2, rowspan: 1, cls: 'bts_source',  target: {xtype: 'omni-inventories-Explorer'} },
-        {title: 'Period Results', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-period_results-Explorer'} },
+        {title: 'Areas', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-areas-Explorer'} },
+        {title: 'Allocations', colspan: 2, rowspan: 1, cls: 'bts_source', target: { xtype: 'omni-allocations-Explorer'} },
      ]
      }
 
@@ -83,7 +98,7 @@ Ext.define('Omni.view.app.Hub', {
 
    ,{
    title: 'company setup data',
-     columns: 4,
+     columns: 6,
      rows: 4,
      tiles: [
        {title: 'Gl Accounts', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-gl_accounts-Explorer'} },
@@ -91,7 +106,11 @@ Ext.define('Omni.view.app.Hub', {
        {title: 'Tills', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-tills-Explorer'} },
        {title: 'Transfer Reasons', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-transfer_reasons-Explorer', title: ''}},
        {title: 'Grades', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-grades-Explorer', title: ''}},
-       {title: 'Periods', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-periods-Explorer', title: ''}}
+       {title: 'Periods', colspan: 2, rowspan: 1, cls: 'product_setup',  target: {xtype: 'omni-periods-Explorer', title: ''}},
+       {title: 'Forecast Profiles', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-forecast_profiles-Explorer'} },
+       {title: 'Rules', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-rules-Explorer'} },
+       {title: 'Rulesets', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-rulesets-Explorer'} },
+       {title: 'System Options', colspan: 2, rowspan: 1, cls: 'product_setup', target: { xtype: 'omni-system_options-Explorer'} }
      ]
   }
 

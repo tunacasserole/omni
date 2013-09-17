@@ -1,16 +1,16 @@
 Ext.define('Omni.model.StockLedgerActivity', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
   validations: [
-    { type: 'presence', field: 'display' },
-    { type: 'presence', field: 'stockable_type' },
-    { type: 'presence', field: 'stockable_id' },
-    { type: 'presence', field: 'ruleset_id' },
-    { type: 'presence', field: 'sku_id' },
-    { type: 'presence', field: 'location_id' }
+    // { type: 'presence', field: 'display' },
+    // { type: 'presence', field: 'stockable_type' },
+    // { type: 'presence', field: 'stockable_id' },
+    // { type: 'presence', field: 'ruleset_id' },
+    // { type: 'presence', field: 'sku_id' },
+    // { type: 'presence', field: 'location_id' }
   ],
   // VALIDATIONS (End)
 

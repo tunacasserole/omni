@@ -16,21 +16,24 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  validates    :stockable_type,                  :presence    => true
-  validates    :stockable_id,                    :presence    => true
-  validates    :ruleset_id,                      :presence    => true
-  validates    :sku_id,                          :presence    => true
-  validates    :location_id,                     :presence    => true
+  # validates    :stockable_type,                  :presence    => true
+  # validates    :stockable_id,                    :presence    => true
+  # validates    :ruleset_id,                      :presence    => true
+  # validates    :sku_id,                          :presence    => true
+  # validates    :location_id,                     :presence    => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :stock_ledger_activity_id,         :override  =>  false,        :with  => :guid              
+  default      :stock_ledger_activity_id,         :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.activity_date}"}
-  default      :units,                            :override  =>  false,        :to    => 0                  
-  default      :cost,                             :override  =>  false,        :to    => 0                  
-  default      :retail,                           :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :units,                            :override  =>  false,        :to    => 0
+  default      :cost,                             :override  =>  false,        :to    => 0
+  default      :retail,                           :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  # default      :stockable_id,                     :override  =>  false,        :to    => :sku_id
+  # default      :stockable_type,                   :override  =>  false,        :to    => "Omni::StockLedgerActivty"
+
   # DEFAULTS (End)
 
 
@@ -44,6 +47,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
+  belongs_to      :stockable,                :polymorphic => true
   belongs_to   :stockable,                       :class_name => 'Omni::PickTicket',              :foreign_key => 'stockable_id'
   belongs_to   :ruleset,                         :class_name => 'Omni::Ruleset',                 :foreign_key => 'ruleset_id'
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
@@ -81,9 +85,9 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-  hook :after_create, :validate_ruleset, 10
-  hook :after_create, :apply_rules, 20
-  hook :after_create, :set_sla_state, 30
+  # hook :after_create, :validate_ruleset, 10
+  # hook :after_create, :apply_rules, 20
+  # hook :after_create, :set_sla_state, 30
   # HOOKS (End)
 
 
@@ -99,7 +103,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
     date     :activity_date
     string   :stockable_id
     string   :stockable_type
- 
+
     text     :ruleset_display_fulltext, :using => :ruleset_display
     text     :supplier_display_fulltext, :using => :supplier_display
     text     :customer_display_fulltext, :using => :customer_display
@@ -107,7 +111,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
     text     :units_fulltext, :using => :units
     text     :cost_fulltext, :using => :cost
     text     :retail_fulltext, :using => :retail
-  end 
+  end
   # INDEXING (End)
 
 

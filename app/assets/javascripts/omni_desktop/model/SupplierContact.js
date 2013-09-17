@@ -1,14 +1,14 @@
 Ext.define('Omni.model.SupplierContact', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
   validations: [
-    { type: 'presence', field: 'display' },
-    { type: 'presence', field: 'supplier_id' },
-    { type: 'presence', field: 'first_name' },
-    { type: 'presence', field: 'last_name' }
+    // { type: 'presence', field: 'display' },
+    // { type: 'presence', field: 'supplier_id' },
+    // { type: 'presence', field: 'first_name' },
+    // { type: 'presence', field: 'last_name' }
   ],
   // VALIDATIONS (End)
 
