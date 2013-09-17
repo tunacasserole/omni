@@ -42,8 +42,8 @@ class Omni::Purchase < ActiveRecord::Base
   # default :fob_point,                                                         :to   => lambda{|m| "#{m.supplier_fob_point}"}
   default :is_ship_cancel,                                                    :to   => lambda{|m| "#{m.supplier.is_ship_cancel}"}
   default :estimated_lead_time_days,                                          :to   => lambda{|m| "#{m.supplier.lead_time}"}
-  default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days}
-  default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30}
+  default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days.days}
+  default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30.days}
   
   # DEFAULTS (End)
 
@@ -153,6 +153,8 @@ class Omni::Purchase < ActiveRecord::Base
 
   hook :before_update, :recompute_delivery_date, 10 
   hook :before_update, :recompute_cancel_date, 20
+  # hook :before_create, :recompute_delivery_date, 10 
+  # hook :before_create, :recompute_cancel_date, 20
 
   # hook :before_create, :set_defaults, 10
 
@@ -387,19 +389,19 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def set_defaults
-    self.delivery_date = self.order_date + self.estimated_lead_time_days
-    self.cancel_not_received_by_date = self.delivery_date + 30
+    self.delivery_date = self.order_date + self.estimated_lead_time_days.days
+    self.cancel_not_received_by_date = self.delivery_date + 30.days
   end
 
   def recompute_delivery_date
     if self.order_date_changed? || self.estimated_lead_time_days_changed?
-      self.delivery_date = self.order_date + self.estimated_lead_time_days
+      self.delivery_date = self.order_date + self.estimated_lead_time_days.days
     end
   end
 
   def recompute_cancel_date
     if self.delivery_date_changed?
-      self.cancel_not_received_by_date = self.delivery_date + 30
+      self.cancel_not_received_by_date = self.delivery_date + 30.days
     end
   end
 
