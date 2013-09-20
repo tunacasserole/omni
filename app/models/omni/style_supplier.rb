@@ -14,6 +14,7 @@ class Omni::StyleSupplier < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  supports_fulltext    
   # BEHAVIOR (End)
 
 

@@ -12,6 +12,7 @@ class Omni::Customer < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  supports_fulltext    
   # BEHAVIOR (End)
 
 

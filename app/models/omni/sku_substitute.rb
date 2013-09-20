@@ -12,6 +12,7 @@ class Omni::SkuSubstitute < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  supports_fulltext    
   # BEHAVIOR (End)
 
 

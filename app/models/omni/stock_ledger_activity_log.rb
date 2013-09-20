@@ -12,6 +12,7 @@ class Omni::StockLedgerActivityLog < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  supports_fulltext    
   # BEHAVIOR (End)
 
 

@@ -12,6 +12,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  supports_fulltext    
   # BEHAVIOR (End)
 
 
@@ -67,6 +68,25 @@ class Omni::ReceiptDetail < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
+
+  # STATES (Start) ====================================================================
+  state_machine :state, :initial => :draft do
+
+  ### STATES ###
+    # state :draft do
+
+    # end
+
+  ### CALLBACKS ###
+    # after_transition :on => :costing, :do => :process_costing
+
+  ### EVENTS ###
+    # event :approve do
+    #   transition :pending_approval => :open
+    # end
+
+  end
+  # STATES (End)
 
 
   # INDEXING (Start) ====================================================================

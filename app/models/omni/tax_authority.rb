@@ -12,6 +12,7 @@ class Omni::TaxAuthority < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  supports_fulltext    
   # BEHAVIOR (End)
 
 

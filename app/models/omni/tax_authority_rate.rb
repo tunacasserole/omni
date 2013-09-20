@@ -12,6 +12,7 @@ class Omni::TaxAuthorityRate < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  supports_fulltext    
   # BEHAVIOR (End)
 
 

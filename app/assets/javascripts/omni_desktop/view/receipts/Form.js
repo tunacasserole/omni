@@ -78,7 +78,7 @@ Ext.define('Omni.view.receipts.Form', {
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
             { xtype: 'textfield', name: 'receipt_nbr',                    fieldLabel: this.receipt_nbrLabel                 , allowBlank: true },
             { xtype: 'buildit-Locator', name: 'location_id',              fieldLabel: this.location_idLabel                 , allowBlank: true,   disabled: false,  store: Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { xtype: 'buildit-Locator', name: 'carrier_supplier_id',      fieldLabel: this.carrier_supplier_idLabel          , allowBlank: true,   disabled: false,  store: Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'carrier_supplier_id', itemTpl:'{display}' },
+            { xtype: 'buildit-Locator', name: 'carrier_supplier_id',      fieldLabel: this.carrier_supplier_idLabel          , allowBlank: true,   disabled: false,  store: Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
             { xtype: 'textfield', name: 'trailer_identifier',             fieldLabel: this.trailer_identifierLabel          , allowBlank: true },
             { xtype: 'datefield', name: 'create_date',                    fieldLabel: this.create_dateLabel                 , allowBlank: true },
             { xtype: 'datefield', name: 'ship_date',                      fieldLabel: this.ship_dateLabel                   , allowBlank: true },

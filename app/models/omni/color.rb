@@ -12,6 +12,7 @@ class Omni::Color < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
+  supports_fulltext  
   # BEHAVIOR (End)
 
 

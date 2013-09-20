@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
-source 'http://tunacasserole:horizon@gems.buildit.io' 
+source 'http://tunacasserole:horizon@gems.buildit.io'
 ruby '2.0.0'
 
 gem 'rails', '3.2.14'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-# 
+#
 # gem "rake", "~> 0.10.2"
 gem 'mysql2'
 
@@ -25,9 +25,11 @@ end
 
 # gem 'resque'
 gem 'progress_bar'      # track sunspot:reindex
-
+gem 'crack'
+gem 'ap'
 gem 'jquery-rails'
 gem 'state_machine'
+gem 'whenever', :require => false
 
 #group :development do
   gem "thin"
@@ -35,7 +37,7 @@ gem 'state_machine'
 
 group :development do
   gem "sunspot_rails"
-  gem 'sunspot_solr'  
+  gem 'sunspot_solr'
 end
 
 gem "prawn"

@@ -75,8 +75,7 @@ Ext.define('Omni.view.receipt_details.Explorer', {
         {
           header       : this.stateLabel,
           dataIndex    : 'state',
-          flex         : 1,
-          disabled     : true
+          flex         : 1
         },
         // {
         //   header       : this.is_destroyedLabel,
