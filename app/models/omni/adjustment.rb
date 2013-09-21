@@ -12,7 +12,7 @@ class Omni::Adjustment < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  suppors_fulltext
+  supports_fulltext
   # BEHAVIOR (End)
 
 
