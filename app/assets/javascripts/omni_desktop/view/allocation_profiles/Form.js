@@ -54,14 +54,13 @@ Ext.define('Omni.view.allocation_profiles.Form', {
             }
           */
 
-            { xtype: 'textfield', name: 'allocation_profile_id',          fieldLabel: this.allocation_profile_idLabel       , allowBlank: false },    
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
-            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: false },    
-            { xtype: 'textfield', name: 'allocation_formula',             fieldLabel: this.allocation_formulaLabel          , allowBlank: false },    
-            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: false },    
-            { xtype: 'textfield', name: 'units_allocated',                fieldLabel: this.units_allocatedLabel             , allowBlank: false },    
-            { xtype: 'textfield', name: 'units_shipped',                  fieldLabel: this.units_shippedLabel               , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false }    
+            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },    
+            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },    
+            { xtype: 'textfield', name: 'percent_to_allocate',            fieldLabel: this.percent_to_allocateLabel         , allowBlank: true },                
+            { xtype: 'buildit-Lookup', name: 'allocation_formula',        fieldLabel: this.allocation_formulaLabel          , allowBlank: true, category: 'ALLOCATION_FORMULA'},    
+            { xtype: 'buildit-Lookup', name: 'excess_demand_option',      fieldLabel: this.excess_demand_optionLabel        , allowBlank: true, category: 'EXCESS_DEMAND_OPTION'}, 
+            { xtype: 'buildit-Lookup', name: 'excess_supply_option',      fieldLabel: this.excess_supply_optionLabel        , allowBlank: true, category: 'EXCESS_SUPPLY_OPTION'}, 
+            { xtype: 'buildit-Lookup', name: 'rounding_option',           fieldLabel: this.rounding_optionLabel             , allowBlank: true, category: 'ROUNDING_OPTION'},    
           ]
         }
       ]

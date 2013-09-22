@@ -56,6 +56,14 @@ Ext.define('Omni.view.stock_ledger_activities.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Stock Ledger Activity',
+      newTitle: 'New Stock Ledger Activity',
+      newSubtitle: 'Complete the following to create a new stock ledger activity.'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

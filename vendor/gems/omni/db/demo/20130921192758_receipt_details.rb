@@ -1,0 +1,4 @@
+Omni::ReceiptDetail.delete_all
+Omni::ReceiptDetail.create(:receipt_detail_id => '2E8E2600231511E3BE4920C9D047DD15',:display => '45678',:receipt_id => '26E69D60231511E3BE4920C9D047DD15',:receipt_line_nbr => '2345',:purchase_detail_id => nil,:received_units => 456.0,:state => 'draft',:is_destroyed => 0,)
+Omni::ReceiptDetail.create(:receipt_detail_id => '94B0A72E1FDB11E3AA1D20C9D047DD15',:display => 'oeui',:receipt_id => 'D08127841FDA11E3A17020C9D047DD15',:receipt_line_nbr => '123',:purchase_detail_id => nil,:received_units => 0.0,:state => nil,:is_destroyed => 0,)
+Omni::ReceiptDetail.create(:receipt_detail_id => 'DF7B9330231511E3BE4920C9D047DD15',:display => 'iue',:receipt_id => '7EE81E9E1FDC11E388F720C9D047DD15',:receipt_line_nbr => 'iueo',:purchase_detail_id => nil,:received_units => 0.0,:state => 'draft',:is_destroyed => 0,)

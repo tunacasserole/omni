@@ -29,11 +29,6 @@ Ext.define('Omni.view.products.Explorer', {
   product_idLabel:                        Omni.i18n.model.Product.product_id,
   // LABELS (End)
 
-  // TITLES (Start) ======================================================================
-  title:     'Products',
-  subtitle:  'Create and maintain Products',
-  // TITLES (End)
-
   initComponent : function () {
 
     var me = this;
@@ -80,6 +75,12 @@ Ext.define('Omni.view.products.Explorer', {
     });
     // COLUMNS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.apply(this, {
+      title:     'Products',
+      subtitle:  'List of products'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

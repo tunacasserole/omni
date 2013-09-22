@@ -28,15 +28,15 @@ Ext.define('Omni.view.areas.Inspector', {
         {
           title: 'Profile',
           xtype: 'omni-areas-Form'
-        },
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        },
-        {
-          title: 'Bins',
-          xtype: 'omni-bins-Explorer'
         }
+        // {
+        //   title: 'Notes',
+        //   xtype: 'buildit-notes-Explorer'
+        // },
+        // {
+        //   title: 'Bins',
+        //   xtype: 'omni-bins-Explorer'
+        // }
       ]
     });
     // CARDS (End)

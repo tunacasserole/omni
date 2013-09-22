@@ -1,8 +1,84 @@
 class Omni::Sync::Mark
 
   def self.put(message)
-    @output << "#{Time.now.strftime("%H:%M:%S").yellow}: #{message}"
-  
+    # @output << "#{Time.now.strftime("%H:%M:%S").yellow}: #{message}"
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: #{message}"
+  end
+
+  def self.load
+    @total_count = 0
+    @error_count = 0
+    @created_count = 0
+    @no_sku_count = 0
+    @no_location_count = 0
+    @loops = 0
+    @locations = {}
+    @skus = {}
+    @i = 0
+    @inv_count
+
+    sql = "Select mark_stock,mark_size,sku_id from skus where mark_stock is not null and mark_size is not null"
+    records_array = ActiveRecord::Base.connection.execute(sql)    
+
+    sql = "Select * from skus where mark_stock is not null and mark_size is not null"
+    records_array = ActiveRecord::Base.connection.execute(sql)    
+
+    put "START..create sku hash - using activerecord"
+    Omni::Sku.where("mark_stock IS NOT NULL and mark_size IS NOT NULL").find_each {|x| @skus.merge!([x.mark_stock, x.mark_size] => x.sku_id)}
+    put "END....create sku hash: #{@skus.count.to_s}"
+
+    put "START..create location hash for faster processing"
+    Omni::Location.all.find {|loc| @locations[loc.location_nbr] = loc.location_id}
+    put "END....create location hash: #{@locations.count.to_s}"
+
+    # put "START..create inventory hash for faster processing"
+    # Omni::MarkInventory.all.find_each {|i| @@locations[loc.location_nbr] = loc.location_id}
+    # put "END....create inventory hash for faster processing"
+ 
+  end
+
+  def self.inventory
+    load
+
+    # Omni::MarkInventory.where("id between ? and ?",start,finish).find_each do |x|
+    # Omni::MarkInventory.all.find_each do |x|
+
+    @inv_count = Omni::MarkInventory.count / 1000 + 1
+    (1...@inv_count).each do |c|
+      Omni::MarkInventory.paginate(:page => c, :per_page => 1000).find_each do |x|   
+        @i += 1
+        put "*********PROCESSING row #{@i.to_s}:" if @i.to_s.end_with? '00000'
+        # put "row #{i.to_s} MARK: outlet = #{x.outlet_nbr} stock = {#x.stock_nbr} size = #{x.size} qoh = #{x.qoh}"
+        @total_count += 1
+        location_id = @locations["#{x.outlet_nbr}"]
+        if !location_id
+          @no_location_count += 1
+          next
+        end
+
+        sku_id = @skus[[x[:stock_nbr].to_s, x[:size].to_s]]
+        if !sku_id
+          @no_sku_count += 1
+          next
+        end
+
+        inv = Omni::Inventory.create(:sku_id => sku_id, :location_id => location_id, :on_hand_units => x.qoh)
+        @error_count += 1 unless inv
+        @created_count += 1 if inv
+      end
+    end
+
+    put "******************************"
+    put "Mark inventory rows: #{@total_count}"
+    put "no sku found for that stock-size: #{@no_sku_count}"
+    put "no location found for that outlet: #{@no_location_count}"
+    put "creation error: #{@error_count}"
+    put "rows succesfully created: #{@created_count}"
+    put "******************************"
+    put "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+
+    put "DONE EXPORTING FROM MARK AT: #{Time.now.to_s}"
+
   end
 
   def self.xit
@@ -24,24 +100,41 @@ class Omni::Sync::Mark
 
   def self.results
     ### Last order of 2010 = 1569747.  All orders must be greater than that
-    @start_time = Time.now
     @output = []
+    put "== starting =="    
+    @start_time = Time.now
     @rows_to_be_updated = 0
     @rows_to_be_created = 0
     @rows_created = 0
     @rows_updated = 0
-    @sku_hash = {}
+    @skus = {}
     @locations = {}
+    @orders = {}    
+    @order_dates = {}
+    @lines = []
     @days = 0
 
-    put "== starting =="
+    put "deleting daily results"
+    Omni::DailyResult.delete_all
+    put "done deleting"
+
+    put "create order hash"
+    Omni::MarkOrder.where('order_nbr >= ?',1569747).find_each do |o|
+      @orders[o.order_nbr] = o.outlet_nbr
+      @order_dates[o.date_putin] = o.order_nbr
+    end
+    put "created order hash: #{@orders.count.to_s}"
+
+    # put "create order to date hash"
+    # Omni::MarkOrder.where('order_nbr >= ?',1569747).find_each {|o| }
+    # put "created order to date hash: #{@order_dates.count.to_s}"
+
     put "create sku hash"
-    # Omni::Sku.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}','PARKER')" if self.is_source_parker and x.source == 'PARKER'
-    Omni::Sku.where("mark_stock IS NOT NULL and mark_size IS NOT NULL").each {|x| @sku_hash.merge!([x.mark_stock, x.mark_size] => x.sku_id)}
-    put "created @sku_hash: #{@sku_hash.count.to_s}"
+    Omni::Sku.where("mark_stock IS NOT NULL and mark_size IS NOT NULL").find_each {|x| @skus.merge!([x.mark_stock, x.mark_size] => x.sku_id)}
+    put "created @skus: #{@skus.count.to_s}"
 
     put "create location hash"
-    Omni::Location.all.each {|loc| @locations[loc.location_nbr] = loc.location_id}
+    Omni::Location.all.find_each {|loc| @locations[loc.location_nbr] = loc.location_id}
     put "created location hash: #{@locations.count.to_s}"
 
     start_date = Date.parse('1-1-2011')
@@ -55,54 +148,47 @@ class Omni::Sync::Mark
   def self.result_by_day(date_to_export)
     puts "#{Time.now.strftime("%H:%M:%S").yellow}: #{date_to_export.to_s}"
     @days += 1
+    # orders = Omni::MarkOrder.where('DATE(date_putin) = ?', date_to_export)
+    
+    put "start getting start and end order numbers"
     orders = Omni::MarkOrder.where('DATE(date_putin) = ?', date_to_export)
     if orders
-      @start_order_nbr = orders.where('DATE(date_putin) = ?', date_to_export).minimum('order_nbr')
-      @end_order_nbr = orders.where('DATE(date_putin) = ?', date_to_export).maximum('order_nbr')
+      start_order_nbr = orders.where('DATE(date_putin) = ?', date_to_export).minimum('order_nbr')
+      end_order_nbr = orders.where('DATE(date_putin) = ?', date_to_export).maximum('order_nbr')
       put "--order range: #{@start_order_nbr} to #{@end_order_nbr}: #{orders.count.to_s}"
     end
-
-    put "create order to outlet hash"
-    orders = {}
-    @order_headers = Omni::MarkOrder.where('order_nbr >= ? and order_nbr <= ?', @start_order_nbr, @end_order_nbr)
-    @order_headers.each {|o| orders[o.order_nbr] = o.outlet_nbr}
-    put "created order to outlet hash: #{orders.count.to_s}"
+    put "done getting start and end order numbers"
 
     put "create a hash of mark order lines summarized for the period"
-    @lines = []
-    @order_lines = Omni::MarkOrderLine.where('order_nbr >= ? and order_nbr <= ?', @start_order_nbr, @end_order_nbr).order("stock_nbr")
-    put "order_lines: #{@order_lines.count}"
-    @order_lines.each do |line|
-      outlet_nbr = orders[line.order_nbr]
-      # put "for each line, look to see if period_result row exists, if not then create it."
+    Omni::MarkOrderLine.where('order_nbr >= ? and order_nbr <= ?', start_order_nbr, end_order_nbr).find_each do |line|
+      outlet_nbr = @orders[line.order_nbr]
       result = @lines.detect {|r| r[:stock_nbr] == line.stock_nbr && r[:size] == line.size && r[:outlet_nbr] == outlet_nbr}
       if result
         result[:total_units] += line.qty_ordered
       else
-        # @rows_to_be_created += 1
         result = {:stock_nbr => line.stock_nbr, :size => line.size, :outlet_nbr => outlet_nbr, :total_units => line.qty_ordered}
         @lines.push(result)
       end
     end
     put "created hash of order lines: #{@lines.count.to_s}"
 
-    put "deleting daily results for #{date_to_export.to_s}"
-    Omni::DailyResult.delete_all(:date => date_to_export)
-    put "done deleting"
-
     put "For each result, write a period_result row if the sku and location can be found"
-    @lines.each do |line|
+    # @lines.sort! {|a,b| a.order_nbr <=> b.order_nbr}
+    @lines.find_each do |line|
       # put "#{line[:stock_nbr].to_s}, #{line[:size]}"
-      sku_id = @sku_hash[[line[:stock_nbr].to_s, line[:size].to_s]]
+      puts line[:date_putin].to_s + "************************************"
+      sku_id = @skus[[line[:stock_nbr].to_s, line[:size].to_s]]
       location_id = @locations["#{line[:outlet_nbr]}"]
       # put "sku for #{line[:stock_nbr]} and #{line[:size]} is: #{sku_id}"
       # put "Location missing for: #{line.outlet_nbr}" unless location_id
       next unless sku_id and location_id
-      Omni::DailyResult.create(:date => date_to_export, :sku_id => sku_id, :location_id => location_id, :net_sale_units => line[:total_units])
+      # Omni::DailyResult.create(:date => date_to_export, :sku_id => sku_id, :location_id => location_id, :net_sale_units => line[:total_units])
       # put "--daily_result:  SKU: #{sku_id} and LOCATION: #{location_id} and #{date_to_export.to_s}"
       @rows_created += 1
     end
   end
+
+
 end
 
           # Omni::Sku.where(:mark_stock => line[:stock_nbr],:mark_size => line[:size]).first
@@ -172,61 +258,7 @@ end
   # end
 
 
-#   def self.inventory
-#     @total_count = 0
-#     @error_count = 0
-#     @created_count = 0
-#     @no_sku_count = 0
-#     @no_location_count = 0
-#     loops = 0
 
-
-#     # count = Omni::MarkInventory.count
-#     count = 1000
-#     page_size = 1000
-#     loops = page_size / count
-#     loops = 2
-#     (0...loops).each do |i|
-#       paged_inventory(i*page_size+1,i+page_size)
-#     end
-#     # put "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-
-#     put "******************************"
-#     put "Mark inventory rows: #{@total_count}"
-#     put "no sku found for that stock-size: #{@no_sku_count}"
-#     put "no location found for that outlet: #{@no_location_count}"
-#     put "creation error: #{@error_count}"
-#     put "rows succesfully created: #{@created_count}"
-#     put "******************************"
-#     # put "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-
-#     put "DONE EXPORTING FROM MARK AT: #{Time.now.to_s}"
-#   end
-
-#   def self.paged_inventory(start, finish)
-#     Omni::MarkInventory.where("id between ? and ?",start,finish).each_with_index do |x,i|
-#       put "*********PROCESSING row #{i.to_s}:" if i.to_s.end_with? '00000'
-#       # put "row #{i.to_s} MARK: outlet = #{x.outlet_nbr} stock = {#x.stock_nbr} size = #{x.size} qoh = #{x.qoh}"
-#       @total_count += 1
-#       location_id = @@locations["#{x.outlet_nbr}"]
-#       if !location_id
-#         @no_location_count += 1
-#         next
-#       end
-#       sku = Omni::Sku.where(:source => 'PARKER', :source_id=>"#{x.stock_nbr},#{x.size}").first  #|| Omni::Sku.create(:source => "PARKER",:display=>"#{x.stock_nbr},#{x.size}")
-#       if !sku
-#         @no_sku_count += 1
-#         next
-#       end
-#       inv = Omni::Inventory.create(:sku_id => sku.sku_id, :location_id => location_id, :on_hand_units => x.qoh)
-#       @error_count += 1 unless inv
-#       @created_count += 1 if inv
-
-#       # inv = Omni::Inventory.create(:sku_id => '51713A3EAC3E11E2947800FF58D32228', :location_id => '', :on_hand_units => 0)
-#       # put inv.errors if inv.errors.inspect
-#     end
-#   end
-# end
 
 # def self.wip
 #   data = Omni::MarkWip.all
@@ -286,3 +318,14 @@ end
     # end
     # put "done creating stock to sku hash: #{products.count}"
     # xit
+ # if orders
+    #   @start_order_nbr = orders.where('DATE(date_putin) = ?', date_to_export).minimum('order_nbr')
+    #   @end_order_nbr = orders.where('DATE(date_putin) = ?', date_to_export).maximum('order_nbr')
+    #   put "--order range: #{@start_order_nbr} to #{@end_order_nbr}: #{orders.count.to_s}"
+    # end
+
+    # put "create order to outlet hash"
+    # orders = {}
+    # @order_headers = Omni::MarkOrder.where('order_nbr >= ? and order_nbr <= ?', @start_order_nbr, @end_order_nbr)
+    # @order_headers.each {|o| orders[o.order_nbr] = o.outlet_nbr}
+    # put "created order to outlet hash: #{orders.count.to_s}"

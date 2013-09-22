@@ -42,6 +42,15 @@ Ext.define('Omni.view.style_colors.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) =======================================================================
+    Ext.applyIf(this, {
+      title:         'Style Colors',
+      subtitle:      'All of the colors available for this style',
+      newTitle:      'Style Colors',
+      newSubtitle:   'new color'
+    });
+    // TITLES (End)
+
 
     this.callParent();
   }

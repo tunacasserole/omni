@@ -85,8 +85,6 @@ Ext.define('Omni.view.system_options.Form', {
     });
     // TITLES (End)
 
-
-
     this.callParent();
   }
 

@@ -1,0 +1,4 @@
+Omni::StyleSupplierColor.delete_all
+Omni::StyleSupplierColor.create(:style_supplier_color_id => '1FA0D8541F1911E38B4F20C9D047DD15',:display => '123 - ACADAMIE FOOTWEAR - 1020 - 123 - 107',:style_supplier_id => '1F9673A01F1911E38B4F20C9D047DD15',:style_color_id => '9C8EBF181F1711E3BCD820C9D047DD15',:is_destroyed => 0,)
+Omni::StyleSupplierColor.create(:style_supplier_color_id => '4369BF541F1811E3BCD820C9D047DD15',:display => '123 - ACADAMIE FOOTWEAR - 1020 - 123 - 107',:style_supplier_id => '4336E6F61F1811E3BCD820C9D047DD15',:style_color_id => '9C8EBF181F1711E3BCD820C9D047DD15',:is_destroyed => 0,)
+Omni::StyleSupplierColor.create(:style_supplier_color_id => '5AB4647E1F1911E398A220C9D047DD15',:display => '123 - ACADAMIE FOOTWEAR - 1020 - 123 - 107',:style_supplier_id => '5A99045E1F1911E398A220C9D047DD15',:style_color_id => '9C8EBF181F1711E3BCD820C9D047DD15',:is_destroyed => 0,)

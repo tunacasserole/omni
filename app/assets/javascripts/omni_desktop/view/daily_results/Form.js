@@ -122,6 +122,14 @@ Ext.define('Omni.view.daily_results.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Daily Results',
+      newTitle: 'New Daily Result',
+      newSubtitle: 'Complete the following to create a new daily result.'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

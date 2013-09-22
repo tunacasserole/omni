@@ -67,38 +67,38 @@ class Omni::Sku < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  # belongs_to   :generic_sku,                     :class_name => 'Omni::Sku',                     :foreign_key => 'generic_sku_id'
-  # belongs_to   :add_on_sku,                      :class_name => 'Omni::Sku',                     :foreign_key => 'add_on_sku_id'
-  # belongs_to   :site,                            :class_name => 'Omni::Site',                    :foreign_key => 'site_id'
-  # belongs_to   :style_color_size,                :class_name => 'Omni::StyleColorSize',          :foreign_key => 'style_color_size_id'
-  # belongs_to   :style,                           :class_name => 'Omni::Style',                   :foreign_key => 'style_id'
-  # belongs_to   :color,                           :class_name => 'Omni::Color',                   :foreign_key => 'color_id'
-  # belongs_to   :size,                            :class_name => 'Omni::Size',                    :foreign_key => 'size_id'
-  # belongs_to   :subclass,                        :class_name => 'Omni::Subclass',                :foreign_key => 'subclass_id'
-  # belongs_to   :buyer_user,                      :class_name => 'Buildit::User',                 :foreign_key => 'buyer_user_id'
-  # belongs_to   :product_type,                    :class_name => 'Omni::ProductType',             :foreign_key => 'product_type_id'
-  # belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
-  # has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
-  # has_many     :sku_aliases,                     :class_name => 'Omni::SkuAlias',                :foreign_key => 'sku_id'
-  # has_many     :sku_locations,                   :class_name => 'Omni::SkuLocation',             :foreign_key => 'sku_id'
+  belongs_to   :generic_sku,                     :class_name => 'Omni::Sku',                     :foreign_key => 'generic_sku_id'
+  belongs_to   :add_on_sku,                      :class_name => 'Omni::Sku',                     :foreign_key => 'add_on_sku_id'
+  belongs_to   :site,                            :class_name => 'Omni::Site',                    :foreign_key => 'site_id'
+  belongs_to   :style_color_size,                :class_name => 'Omni::StyleColorSize',          :foreign_key => 'style_color_size_id'
+  belongs_to   :style,                           :class_name => 'Omni::Style',                   :foreign_key => 'style_id'
+  belongs_to   :color,                           :class_name => 'Omni::Color',                   :foreign_key => 'color_id'
+  belongs_to   :size,                            :class_name => 'Omni::Size',                    :foreign_key => 'size_id'
+  belongs_to   :subclass,                        :class_name => 'Omni::Subclass',                :foreign_key => 'subclass_id'
+  belongs_to   :buyer_user,                      :class_name => 'Buildit::User',                 :foreign_key => 'buyer_user_id'
+  belongs_to   :product_type,                    :class_name => 'Omni::ProductType',             :foreign_key => 'product_type_id'
+  belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
+  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
+  has_many     :sku_aliases,                     :class_name => 'Omni::SkuAlias',                :foreign_key => 'sku_id'
+  has_many     :sku_locations,                   :class_name => 'Omni::SkuLocation',             :foreign_key => 'sku_id'
   # ASSOCIATIONS (End)
 
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  # mapped_attributes do
-  #   map :generic_sku_display,                    :to => 'generic_sku.display'
-  #   map :add_on_sku_display,                     :to => 'add_on_sku.display'
-  #   map :site_display,                           :to => 'site.display'
-  #   map :style_color_size_display,               :to => 'style_color_size.display'
-  #   map :style_display,                          :to => 'style.display'
-  #   map :color_display,                          :to => 'color.display'
-  #   map :size_display,                           :to => 'size.display'
-  #   map :subclass_display,                       :to => 'subclass.display'
-  #   map :buyer_user_display,                     :to => 'buyer_user.full_name'
-  #   map :product_type_display,                   :to => 'product_type.display'
-  #   map :supplier_display,                       :to => 'supplier.display'
-  # end
+  mapped_attributes do
+    map :generic_sku_display,                    :to => 'generic_sku.display'
+    map :add_on_sku_display,                     :to => 'add_on_sku.display'
+    map :site_display,                           :to => 'site.display'
+    map :style_color_size_display,               :to => 'style_color_size.display'
+    map :style_display,                          :to => 'style.display'
+    map :color_display,                          :to => 'color.display'
+    map :size_display,                           :to => 'size.display'
+    map :subclass_display,                       :to => 'subclass.display'
+    map :buyer_user_display,                     :to => 'buyer_user.full_name'
+    map :product_type_display,                   :to => 'product_type.display'
+    map :supplier_display,                       :to => 'supplier.display'
+  end
   # MAPPED ATTRIBUTES (End)
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
@@ -117,12 +117,12 @@ class Omni::Sku < ActiveRecord::Base
   # HOOKS (End)
 
   # HELPERS (Start) =====================================================================
-  def get_sequence_nbr
-    unless self.sku_nbr
-      self.sku_nbr           = "#{Buildit::Sequence.nextval('SKU_NBR')}"
-      self.save
-    end
-  end # def generate_task_number
+  # def get_sequence_nbr
+  #   unless self.sku_nbr
+  #     self.sku_nbr           = "#{Buildit::Sequence.nextval('SKU_NBR')}"
+  #     self.save
+  #   end
+  # end # def generate_task_number
   # HELPERS (End) =====================================================================
 
   # STATES (Start) ====================================================================

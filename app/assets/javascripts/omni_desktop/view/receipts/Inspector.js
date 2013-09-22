@@ -27,6 +27,14 @@ Ext.define('Omni.view.receipts.Inspector',{
           },
           showBadge: true
         }
+        ,{title: 'Allocations', xtype: 'omni-receipt_allocations-Explorer', module: 'contracts',
+           defaultSearch: { with:
+             {
+               receipt_id:   {equal_to: me.record.get('receipt_id')}
+             }
+          },
+          showBadge: true
+        }
       ]
     });
     // CARDS (End)

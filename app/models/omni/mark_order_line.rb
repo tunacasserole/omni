@@ -32,13 +32,14 @@ class Omni::MarkOrderLine < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  
+  # belongs_to   :mark_order,                    :class_name => 'Omni::MarkOrder',             :foreign_key => 'order_nbr'  
   # ASSOCIATIONS (End)
 
 
-  # MAPPED ATTRIBUTES (Start) ===========================================================
-  
-  # MAPPED ATTRIBUTES (End)
+  # mapped_attributes do
+    # map :outlet_nbr,                       :to => 'mark_order.outlet_nbr'
+    # map :date_putin,                        :to => 'mark_order.date_putin'
+  # end
 
   
   # COMPUTED ATTRIBUTES (Start) =========================================================

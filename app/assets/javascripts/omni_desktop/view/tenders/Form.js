@@ -120,6 +120,14 @@ Ext.define('Omni.view.tenders.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) =======================================================================
+    Ext.applyIf(this, {
+      title:         'Tenders',
+      subtitle:      'All supported tender types',
+      newTitle:      'New Tender',
+      newSubtitle:   undefined
+    });
+    // TITLES (End)
 
     this.callParent();
   }

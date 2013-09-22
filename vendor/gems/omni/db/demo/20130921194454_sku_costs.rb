@@ -1,0 +1,3 @@
+Omni::SkuCost.delete_all
+Omni::SkuCost.create(:sku_cost_id => '6C5DEF2E1F7311E3A3A520C9D047DD15',:display => '123',:sku_id => '285C928C0F3611E3BB7120C9D047DD15',:first_cost => 0.0,:last_cost => 0.0,:average_cost => 0.0,:on_hand_units => 0.0,:cost_pool => 0.0,:retail_pool => 0.0,:is_updated_average_cost => 0,:is_destroyed => 0,)
+Omni::SkuCost.create(:sku_cost_id => 'F2C9F0B81F7211E3A3A520C9D047DD15',:display => 'new',:sku_id => '285C928C0F3611E3BB7120C9D047DD15',:first_cost => 111.0,:last_cost => 111.0,:average_cost => 111.0,:on_hand_units => 11.0,:cost_pool => 111.0,:retail_pool => 111.0,:is_updated_average_cost => 0,:is_destroyed => 0,)

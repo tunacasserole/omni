@@ -46,9 +46,9 @@ Ext.define('Omni.view.areas.Form', {
           layout: 'anchor',
           items:[
             { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { name: 'area_nbr',                       fieldLabel: this.area_nbrLabel,                   allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'area_nbr',                       fieldLabel: this.area_nbrLabel,                   allowBlank: true,  disabled: false,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: false,  disabled: false,    xtype: 'textfield'        }
+            { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,  disabled: false,    xtype: 'textfield'        }
           ]
         },
         {

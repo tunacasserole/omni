@@ -8,6 +8,15 @@
 
 namespace :omni do
 
+  task :migrations => :environment do |t, args|
+    puts "==================================="
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    @start_time = Time.now
+    Omni::Sync::Script.go
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
+    puts "==================================="
+  end
+  
   task :bts, [:bts_id] => :environment do |t, args|
     puts "==================================="
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
@@ -29,9 +38,9 @@ namespace :omni do
       # setting program parameters
       run_size = 1000
 
-      # Omni::Sync::Mark.inventories
+      Omni::Sync::Mark.inventory
       # Omni::Sync::Mark.costs
-      Omni::Sync::Mark.results
+      # Omni::Sync::Mark.results
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
       puts "==================================="
     end
@@ -63,6 +72,18 @@ namespace :omni do
       @start_time = Time.now
       # Summarize daily results into period results
       Omni::Sync::Omni.results 
+      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
+      puts "==================================="
+    end
+
+    desc "Timings for different etl techniques."
+    task :time => :environment do |t, args|
+      puts "==================================="
+      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+      @start_time = Time.now
+
+      # Omni::Sync::Time.mri
+      Omni::Sync::Time.jruby      
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
       puts "==================================="
     end

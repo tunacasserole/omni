@@ -1,0 +1,1 @@
+Omni::ProjectionDetailAttributeAudit.delete_all

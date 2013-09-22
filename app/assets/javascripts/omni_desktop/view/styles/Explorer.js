@@ -114,7 +114,7 @@ Ext.define('Omni.view.styles.Explorer', {
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
       title:     'Work with Styles',
-      subtitle:  'A template for creating and maintaining  SKUs'
+      subtitle:  'A template for creating and maintaining Styles'
     });
     // TITLES (End)
 

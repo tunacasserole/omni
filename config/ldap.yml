@@ -1,0 +1,12 @@
+development:
+  host: omni.local
+  port: 389
+
+test:
+  host: omni.local
+  port: 389
+
+production:
+  host: omni.local
+  port: 389
+

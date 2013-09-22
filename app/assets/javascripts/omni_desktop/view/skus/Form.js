@@ -237,8 +237,6 @@ Ext.define('Omni.view.skus.Form', {
     });
     // TITLES (End)
 
-
-
     this.callParent();
   }
 

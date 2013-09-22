@@ -79,6 +79,7 @@ class Omni::StockLedgerActivityLog < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :activity_log_nbr
+    string   :stock_ledger_activity_id
     string   :model_meta_display do model_meta.display if model_meta end
     string   :attribute_meta_display do attribute_meta.display if attribute_meta end
     string   :row_display do row.display if row end

@@ -5,36 +5,60 @@
 //= require_tree ./omni_desktop/view
 //= require_tree ./omni_desktop/controller
 
-
-
 Buildit.desktopApplication({
-	name:'Omni',
+  name:'Omni',
 
-	autoCreateViewport:false,
+  autoCreateViewport:false,
 
-	launch:function () {
+  launch:function () {
 
-		// LAUNCH INITIAL COMPONENT
-		Ext.widget('buildit-Viewport', {
-      items:[
-      {
-        xtype: 'buildit-Canvas',
-        flex: 1, 
-        id: 'canvas',
-        title: 'buildit.io',
-        subtitle: 'Enterprise Application',
-        items: [
-          {
-            xtype: 'buildit-SecurityCheckpoint',
-            id: 'login'
+    /* PATCH */
+    delete Ext.tip.Tip.prototype.minWidth;
+
+    if(Ext.isIE10) {
+      Ext.override(Ext.tip.Tip, {
+          componentLayout : {
+          type            : 'fieldset',
+          getDockedItems  : function() {
+            return [];
           }
-          
+        }
+      });
+    }
+    /* PATCH */
+
+    Ext.QuickTips.init();
+
+    // LAUNCH INITIAL COMPONENT
+    Ext.widget('buildit-Viewport', {
+      items    : [
+      {
+        xtype      : 'buildit-Canvas',
+        flex       : 1,
+        id         : 'canvas',
+        items      : [
+          {
+            xtype      : 'buildit-SecurityCheckpoint',
+            id         : 'login',
+            listeners  : {
+              loginsuccess : function() {
+
+                var socket = Ext.create('Buildit.ux.Socket',{
+                  host     : 'localhost',
+                  port     : 3001,
+                  channels : ['newEvents', 'newApprovalRequests']
+                });
+
+                Buildit.lib.SocketManager.add('STANDARD', socket);
+              }
+            }
+          }
         ]
       }
       ]
     });
 
-		Ext.FocusManager.enable();
-	}
+    Ext.FocusManager.enable();
+  }
 
 });

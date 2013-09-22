@@ -46,6 +46,14 @@ Ext.define('Omni.view.sku_prices.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Sku Prices',
+      newTitle: 'New Sku Price',
+      newSubtitle: 'Complete the following to create a new sku price.'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

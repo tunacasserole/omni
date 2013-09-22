@@ -98,7 +98,7 @@ class Omni::Receipt < ActiveRecord::Base
     string   :receipt_nbr
     string   :location_display do location.display if location end
     string   :carrier_supplier_display do carrier_supplier.display if carrier_supplier end
-    date     :ship_date
+    string   :display
     string   :state
 
     text     :receipt_nbr_fulltext, :using => :receipt_nbr

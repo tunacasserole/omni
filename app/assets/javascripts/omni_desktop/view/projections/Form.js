@@ -26,9 +26,6 @@ Ext.define('Omni.view.projections.Form', {
       department_idLabel:                     Omni.i18n.model.Projection.department_id,
       classification_idLabel:                 Omni.i18n.model.Projection.classification_id,
       subclass_idLabel:                       Omni.i18n.model.Projection.subclass_id,
-      style_idLabel:                          Omni.i18n.model.Projection.style_id,
-      sku_idLabel:                            Omni.i18n.model.Projection.sku_id,
-      color_idLabel:                          Omni.i18n.model.Projection.color_id,
       stateLabel:                             Omni.i18n.model.Projection.state,
       displayLabel:                           Omni.i18n.model.Projection.display,
       descriptionLabel:                       Omni.i18n.model.Projection.description,
@@ -75,10 +72,6 @@ Ext.define('Omni.view.projections.Form', {
           items:[
             { name: 'department_id',  fieldLabel: this.department_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
             { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },
-            { name: 'subclass_id', fieldLabel: this.subclass_idLabel,                  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Subclass',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
-            { name: 'style_id', fieldLabel: this.style_idLabel,                        allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
-            { name: 'sku_id', fieldLabel: this.sku_idLabel,                             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
-            { name: 'color_id', fieldLabel: this.color_idLabel,                         allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Color',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'color_id', itemTpl:'{display}' },
           ]
         }
         ,{

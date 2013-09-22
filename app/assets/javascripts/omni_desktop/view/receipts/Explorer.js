@@ -2,7 +2,8 @@ Ext.define('Omni.view.receipts.Explorer', {
 
   extend : 'Buildit.ux.explorer.Panel',
   alias  : 'widget.omni-receipts-Explorer',
-
+  allowFind  : true,
+  
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.Receipt'),
 

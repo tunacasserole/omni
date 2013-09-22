@@ -2,13 +2,20 @@ Ext.define('Omni.view.product_types.Form', {
 
   extend:'Buildit.ux.Form',
   alias:'widget.omni-product_types-Form',
-
   
 
   initComponent:function () {
 
     var me = this;
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Styles',
+      newTitle: 'New Style',
+      newSubtitle: 'Complete the following to create a new style in draft state.'
+    });
+    // TITLES (End)
     
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {

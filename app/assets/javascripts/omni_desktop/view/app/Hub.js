@@ -91,17 +91,9 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'Purchases',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'purchases',
+                  cls: 'costs',
                   target: {
                     xtype: 'omni-purchases-Explorer'
-                  }
-                }, {
-                  title: 'Allocations',
-                  colspan: 2,
-                  rowspan: 1,
-                  cls: 'allocations',
-                  target: {
-                    xtype: 'omni-allocations-Explorer'
                   }
                 }, {
                   title: 'Costs',
@@ -119,8 +111,16 @@ Ext.define('Omni.view.app.Hub', {
                   target: {
                     xtype: 'omni-receipts-Explorer'
                   }
+                }, {
+                  title: 'Suppliers',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'costs',
+                  target: {
+                    xtype: 'omni-suppliers-Explorer'
                 }
-                  ]
+              },
+               ]
               }
 
               // Section: Product Hierarchy //
@@ -280,6 +280,14 @@ Ext.define('Omni.view.app.Hub', {
                   target: {
                     xtype: 'omni-areas-Explorer'
                   }
+                }, {
+                  title: 'Sites',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'company',
+                  target: {
+                    xtype: 'omni-sites-Explorer'
+                  }                  
                 }]
               }
 
@@ -294,31 +302,15 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'Gl Accounts',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-gl_accounts-Explorer'
-                  }
-                }, {
-                  title: 'Tenders',
-                  colspan: 2,
-                  rowspan: 1,
-                  cls: 'product_setup',
-                  target: {
-                    xtype: 'omni-tenders-Explorer'
-                  }
-                }, {
-                  title: 'Tills',
-                  colspan: 2,
-                  rowspan: 1,
-                  cls: 'product_setup',
-                  target: {
-                    xtype: 'omni-tills-Explorer'
                   }
                 }, {
                   title: 'Transfer Reasons',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-transfer_reasons-Explorer',
                     title: ''
@@ -327,7 +319,7 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'Grades',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-grades-Explorer',
                     title: ''
@@ -336,7 +328,7 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'Periods',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-periods-Explorer',
                     title: ''
@@ -345,7 +337,7 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'Forecast Profiles',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-forecast_profiles-Explorer'
                   }
@@ -353,7 +345,7 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'Rules',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-rules-Explorer'
                   }
@@ -361,7 +353,7 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'Rulesets',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-rulesets-Explorer'
                   }
@@ -369,7 +361,7 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'System Options',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-system_options-Explorer'
                   }
@@ -377,10 +369,34 @@ Ext.define('Omni.view.app.Hub', {
                   title: 'Receipt Formats',
                   colspan: 2,
                   rowspan: 1,
-                  cls: 'product_setup',
+                  cls: 'network',
                   target: {
                     xtype: 'omni-receipt_formats-Explorer'
                   }
+                }, {
+                  title: 'Tenders',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'network',
+                  target: {
+                    xtype: 'omni-tenders-Explorer'
+                  }
+                }, {
+                  title: 'Terminals',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'network',
+                  target: {
+                    xtype: 'omni-terminals-Explorer'
+                  }
+                }, {
+                  title: 'Tills',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'network',
+                  target: {
+                    xtype: 'omni-tills-Explorer'
+                  }                  
                 }]
               }
 
@@ -419,33 +435,6 @@ Ext.define('Omni.view.app.Hub', {
                     title: ''
                   }
                 }, ]
-              }
-
-
-              // Section: Partners //
-
-              ,
-              {
-                title: 'Network',
-                columns: 2,
-                rows: 3,
-                tiles: [{
-                  title: 'Suppliers',
-                  colspan: 2,
-                  rowspan: 1,
-                  cls: 'network',
-                  target: {
-                    xtype: 'omni-suppliers-Explorer'
-                  }
-                }, {
-                  title: 'Sites',
-                  colspan: 2,
-                  rowspan: 1,
-                  cls: 'network',
-                  target: {
-                    xtype: 'omni-sites-Explorer'
-                  }
-                }]
               }
 
               // Section: Legacy Data //

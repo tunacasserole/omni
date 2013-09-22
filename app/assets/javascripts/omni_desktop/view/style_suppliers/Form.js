@@ -161,8 +161,6 @@ Ext.define('Omni.view.style_suppliers.Form', {
     });
     // TITLES (End)
 
-
-
     this.callParent();
   }
 

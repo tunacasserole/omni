@@ -23,9 +23,9 @@ en:
         pro_number:                      Pro Number
         bill_of_lading_number:           Bill Of Lading Number
         packing_slip_number:             Packing Slip Number
-        seal_1_number:                   Seal Number
-        seal_2_number:                   Seal Number
-        seal_3_number:                   Seal Number
+        seal_1_number:                   Seal 1
+        seal_2_number:                   Seal 2
+        seal_3_number:                   Seal 3
         asn_number:                      ASN Number
         is_expected_asn:                 ASN Expected
         standard_carrier_alpha_code:     Standard Carrier Alpha Code

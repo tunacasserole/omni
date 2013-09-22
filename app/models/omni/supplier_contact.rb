@@ -80,6 +80,7 @@ class Omni::SupplierContact < ActiveRecord::Base
     string   :supplier_display do supplier.display if supplier end
     string   :phone
     string   :email_address
+    string   :supplier_id
     boolean  :is_order_contact
     boolean  :is_return_contact
     boolean  :is_payment_contact

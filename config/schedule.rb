@@ -2,8 +2,9 @@
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
+set :output, 'log/schedule.log'
 
-every 1.day, :at => '4:30 am' do
+every :day, :at => '12:00am' do
   rake "omni:sync:mark"
 end
 

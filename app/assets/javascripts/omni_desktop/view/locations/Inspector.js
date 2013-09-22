@@ -38,13 +38,13 @@ Ext.define('Omni.view.locations.Inspector', {
              }
           }
         }
-        // ,{title: 'Period Results', xtype: 'omni-period_results-Explorer',
-        //    defaultSearch: { with:
-        //      {
-        //        location_id:   {equal_to: me.record.get('location_id')}
-        //      }
-        //   }
-        // }
+        ,{title: 'Areas', xtype: 'omni-areas-Explorer',
+           defaultSearch: { with:
+             {
+               location_id:   {equal_to: me.record.get('location_id')}
+             }
+          }
+        }
         // ,{title: 'Projection Details', xtype: 'omni-projection_details-Explorer',
         //    defaultSearch: { with:
         //      {

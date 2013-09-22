@@ -90,13 +90,7 @@ class Omni::Area < ActiveRecord::Base
   searchable do
     string   :location_display do location.display if location end
     string   :area_nbr
-    boolean  :is_receiving
-    boolean  :is_picking
-    boolean  :is_reserve
-    boolean  :is_put_location
-    boolean  :is_special_handling
-    boolean  :is_quality_control
-    boolean  :is_quick_case
+    string   :location_id
  
     text     :location_display_fulltext, :using => :location_display
     text     :area_nbr_fulltext, :using => :area_nbr

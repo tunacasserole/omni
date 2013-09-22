@@ -24,9 +24,10 @@ Ext.define('Omni.view.allocation_profiles.Explorer', {
   displayLabel:                           Omni.i18n.model.AllocationProfile.display,
   descriptionLabel:                       Omni.i18n.model.AllocationProfile.description,
   allocation_formulaLabel:                Omni.i18n.model.AllocationProfile.allocation_formula,
-  stateLabel:                             Omni.i18n.model.AllocationProfile.state,
-  units_allocatedLabel:                   Omni.i18n.model.AllocationProfile.units_allocated,
-  units_shippedLabel:                     Omni.i18n.model.AllocationProfile.units_shipped,
+  percent_to_allocateLabel:               Omni.i18n.model.AllocationProfile.percent_to_allocate,
+  excess_demand_optionLabel:              Omni.i18n.model.AllocationProfile.excess_demand_option,
+  excess_supply_optionLabel:              Omni.i18n.model.AllocationProfile.excess_supply_option,
+  rounding_optionLabel:                   Omni.i18n.model.AllocationProfile.rounding_option,
   is_destroyedLabel:                      Omni.i18n.model.AllocationProfile.is_destroyed,
   // LABELS (End)
 
@@ -43,45 +44,45 @@ Ext.define('Omni.view.allocation_profiles.Explorer', {
     Ext.apply(this, {
       columns      : [
         {
-          header       : this.allocation_profile_idLabel,
-          dataIndex    : 'allocation_profile_id',
-          flex         : 1
-        },
-        {
           header       : this.displayLabel,
           dataIndex    : 'display',
           flex         : 1
         },
-        {
-          header       : this.descriptionLabel,
-          dataIndex    : 'description',
-          flex         : 1
-        },
+        // {
+        //   header       : this.descriptionLabel,
+        //   dataIndex    : 'description',
+        //   flex         : 1
+        // },
         {
           header       : this.allocation_formulaLabel,
           dataIndex    : 'allocation_formula',
           flex         : 1
         },
         {
-          header       : this.stateLabel,
-          dataIndex    : 'state',
+          header       : this.percent_to_allocateLabel,
+          dataIndex    : 'percent_to_allocate',
           flex         : 1
         },
         {
-          header       : this.units_allocatedLabel,
-          dataIndex    : 'units_allocated',
+          header       : this.excess_demand_optionLabel,
+          dataIndex    : 'excess_demand_option',
           flex         : 1
         },
         {
-          header       : this.units_shippedLabel,
-          dataIndex    : 'units_shipped',
+          header       : this.excess_supply_optionLabel,
+          dataIndex    : 'excess_supply_option',
           flex         : 1
         },
         {
-          header       : this.is_destroyedLabel,
-          dataIndex    : 'is_destroyed',
+          header       : this.rounding_optionLabel,
+          dataIndex    : 'rounding_option',
           flex         : 1
         }
+        //         {
+        //   header       : this.is_destroyedLabel,
+        //   dataIndex    : 'is_destroyed',
+        //   flex         : 1
+        // }
       ]
     });
     // COLUMNS (End)

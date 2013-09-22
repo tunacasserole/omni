@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    models:
+      omni/allocation_profile:  'Model'
+    attributes:
+      omni/allocation_profile:
+        allocation_profile_id:             'Allocation Profile'
+        display:                           'Display'
+        description:                       'Description'
+        allocation_formula:                'Allocation Formula'
+        percent_to_allocate:               'Percent To Allocate'
+        excess_demand_option:              'Excess Demand Option'
+        excess_supply_option:              'Excess Supply Option'
+        rounding_option:                   'Rounding Option'
+        is_destroyed:                      'Is Destroyed'

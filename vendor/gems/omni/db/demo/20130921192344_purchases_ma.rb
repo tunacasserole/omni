@@ -1,0 +1,6 @@
+Omni::PurchaseModelAudit.delete_all
+Omni::PurchaseModelAudit.create(:model_audit_id => '785CD38A1FBE11E3824220C9D047DD15',:model_id => '783B08221FBE11E3824220C9D047DD15',:user_id => '811166D4D50A11E2B45820C9D04AARON',:action => 'create',:audited_at => '2013-09-17 17:27:47',)
+Omni::PurchaseModelAudit.create(:model_audit_id => '6E7144541FBF11E3987720C9D047DD15',:model_id => '6E4FED9A1FBF11E3987720C9D047DD15',:user_id => 'FB0ACB1AFAC111E2B25720SYSBUILDIT',:action => 'create',:audited_at => '2013-09-17 17:34:40',)
+Omni::PurchaseModelAudit.create(:model_audit_id => 'B32CC8341FBF11E3987720C9D047DD15',:model_id => 'B2F490861FBF11E3987720C9D047DD15',:user_id => 'FB0ACB1AFAC111E2B25720SYSBUILDIT',:action => 'create',:audited_at => '2013-09-17 17:36:35',)
+Omni::PurchaseModelAudit.create(:model_audit_id => '1DE742621FC011E3987720C9D047DD15',:model_id => '1DA1432A1FC011E3987720C9D047DD15',:user_id => 'FB0ACB1AFAC111E2B25720SYSBUILDIT',:action => 'create',:audited_at => '2013-09-17 17:39:34',)
+Omni::PurchaseModelAudit.create(:model_audit_id => '48EA85461FC011E3987720C9D047DD15',:model_id => '48B174181FC011E3987720C9D047DD15',:user_id => 'FB0ACB1AFAC111E2B25720SYSBUILDIT',:action => 'create',:audited_at => '2013-09-17 17:40:46',)
