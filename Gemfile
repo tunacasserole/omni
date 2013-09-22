@@ -13,10 +13,10 @@ platforms :jruby do
     gem 'activerecord-jdbcmysql-adapter'
   end
 
-  gem 'puma'
-  gem 'warbler'
 end
 
+  gem 'puma'
+  gem 'warbler'
 
 platforms :ruby do
   gem 'mysql2', '0.3.13'
