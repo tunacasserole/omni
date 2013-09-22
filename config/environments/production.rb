@@ -1,4 +1,14 @@
 Omni::Application.configure do
+  # OMNI CONFIG
+  config.assets.js_compressor = :closure
+  
+  STDOUT.sync = true
+  logger = Logger.new(STDOUT)
+  logger.level = Logger::INFO
+  config.logger = logger
+
+  config.threadsafe!
+  # DEFAULT CONFIG
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
