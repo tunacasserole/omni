@@ -6,6 +6,7 @@ class Omni::Sync::Mark
   end
 
   def self.load
+    @start_time = Time.now
     @total_count = 0
     @error_count = 0
     @created_count = 0
@@ -15,20 +16,22 @@ class Omni::Sync::Mark
     @locations = {}
     @skus = {}
     @i = 0
-    @inv_count
+    @inv_count = 0
+    @no_location_outlets = []
+    @no_sku_stocks = []
+    @inserts = []
+    # sql = "Select mark_stock,mark_size,sku_id from skus where mark_stock is not null and mark_size is not null"
+    # records_array = ActiveRecord::Base.connection.execute(sql)    
 
-    sql = "Select mark_stock,mark_size,sku_id from skus where mark_stock is not null and mark_size is not null"
-    records_array = ActiveRecord::Base.connection.execute(sql)    
+    # sql = "Select * from skus where mark_stock is not null and mark_size is not null"
+    # records_array = ActiveRecord::Base.connection.execute(sql)    
 
-    sql = "Select * from skus where mark_stock is not null and mark_size is not null"
-    records_array = ActiveRecord::Base.connection.execute(sql)    
-
-    put "START..create sku hash - using activerecord"
-    Omni::Sku.where("mark_stock IS NOT NULL and mark_size IS NOT NULL").find_each {|x| @skus.merge!([x.mark_stock, x.mark_size] => x.sku_id)}
+    put "START..create sku hash"
+    Omni::Sku.find_each(:conditions => "mark_stock IS NOT NULL and mark_size IS NOT NULL") {|x| @skus.merge!([x.mark_stock, x.mark_size] => x.sku_id)}
     put "END....create sku hash: #{@skus.count.to_s}"
 
-    put "START..create location hash for faster processing"
-    Omni::Location.all.find {|loc| @locations[loc.location_nbr] = loc.location_id}
+    put "START..create location hash"
+    Omni::Location.all.each {|loc| @locations[loc.location_nbr] = loc.location_id}
     put "END....create location hash: #{@locations.count.to_s}"
 
     # put "START..create inventory hash for faster processing"
@@ -41,58 +44,72 @@ class Omni::Sync::Mark
     load
 
     # Omni::MarkInventory.where("id between ? and ?",start,finish).find_each do |x|
-    # Omni::MarkInventory.all.find_each do |x|
 
-    @inv_count = Omni::MarkInventory.count / 1000 + 1
-    (1...@inv_count).each do |c|
-      Omni::MarkInventory.paginate(:page => c, :per_page => 1000).find_each do |x|   
+    # @inv_count = Omni::MarkInventory.count / 1000 + 1
+    # (1...@inv_count).each do |c|
+      # Omni::MarkInventory.paginate(:page => c, :per_page => 1000).find_each do |x|   
+    put "-- processing mark inventory now --"
+    ActiveRecord::Base.transaction do
+      Omni::MarkInventory.find_each do |x|      
+        # xit      
         @i += 1
         put "*********PROCESSING row #{@i.to_s}:" if @i.to_s.end_with? '00000'
         # put "row #{i.to_s} MARK: outlet = #{x.outlet_nbr} stock = {#x.stock_nbr} size = #{x.size} qoh = #{x.qoh}"
         @total_count += 1
+        on_hand = x.qoh || 0
         location_id = @locations["#{x.outlet_nbr}"]
         if !location_id
           @no_location_count += 1
+          # @no_location_outlets << "#{x.outlet_nbr},"
           next
         end
 
         sku_id = @skus[[x[:stock_nbr].to_s, x[:size].to_s]]
         if !sku_id
           @no_sku_count += 1
+          # @no_sku_stocks << x.stock_nbr.to_s + ':' + x.size + ','
           next
         end
+        
+        # @inserts.push  "('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{location_id}', #{on_hand})"
 
-        inv = Omni::Inventory.create(:sku_id => sku_id, :location_id => location_id, :on_hand_units => x.qoh)
-        @error_count += 1 unless inv
-        @created_count += 1 if inv
+        @insert_sql = "insert into inventories (inventory_id, sku_id, location_id, on_hand_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{location_id}',#{on_hand})"
+        ActiveRecord::Base.connection.execute @insert_sql
+
+        # Omni::Inventory.create(:sku_id => sku_id, :location_id => location_id, :on_hand_units => x.qoh)
+        # @error_count += 1 unless inv
+        # @created_count += 1 if inv
       end
     end
+    put "-- done processing mark inventory now --"
+    
+    # insert_sql = "INSERT INTO inventories (inventory_id, sku_id, location_id, on_hand_units) VALUES #{@inserts.join(", ")}"
+    # ActiveRecord::Base.connection.execute @insert_sql
 
     put "******************************"
     put "Mark inventory rows: #{@total_count}"
     put "no sku found for that stock-size: #{@no_sku_count}"
     put "no location found for that outlet: #{@no_location_count}"
-    put "creation error: #{@error_count}"
-    put "rows succesfully created: #{@created_count}"
+    # put "creation error: #{@error_count}"
+    # put "rows succesfully created: #{@created_count}"
     put "******************************"
-    put "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
     put "DONE EXPORTING FROM MARK AT: #{Time.now.to_s}"
 
   end
 
   def self.xit
-    if Time.now-@start_time > 30
-      put "start with order # #{@start_order_nbr.to_s}"
-      put "end with order # #{@end_order_nbr.to_s}"
-      put "order headers: #{@order_headers.count.to_s}"
-      put "order_lines: #{@order_lines.count.to_s}"
-      put "hash of summarized order @lines: #{@lines.count.to_s}" if @lines
-      put "- Total rows to be saved: #{@rows_to_be_created.to_s}"
-      put "- actual # of rows saved: #{@rows_created.to_s}"
-      put "DONE EXPORTING FROM Mark: #{Time.now.to_s}"
-      put "Number of days processed: #{@days}"
-      put "EXECUTION TIME: #{(Time.now-@start_time).to_s}"
+    if Time.now-@start_time > 120
+      # put "start with order # #{@start_order_nbr.to_s}"
+      # put "end with order # #{@end_order_nbr.to_s}"
+      # put "order headers: #{@order_headers.count.to_s}"
+      # put "order_lines: #{@order_lines.count.to_s}"
+      # put "hash of summarized order @lines: #{@lines.count.to_s}" if @lines
+      # put "- Total rows to be saved: #{@rows_to_be_created.to_s}"
+      # put "- actual # of rows saved: #{@rows_created.to_s}"
+      # put "DONE EXPORTING FROM Mark: #{Time.now.to_s}"
+      # put "Number of days processed: #{@days}"
+      # put "EXECUTION TIME: #{(Time.now-@start_time).to_s}"
       puts @output
       exit
     end
@@ -134,7 +151,7 @@ class Omni::Sync::Mark
     put "created @skus: #{@skus.count.to_s}"
 
     put "create location hash"
-    Omni::Location.all.find_each {|loc| @locations[loc.location_nbr] = loc.location_id}
+    Omni::Location.find_each {|loc| @locations[loc.location_nbr] = loc.location_id}
     put "created location hash: #{@locations.count.to_s}"
 
     start_date = Date.parse('1-1-2011')
@@ -155,7 +172,7 @@ class Omni::Sync::Mark
     if orders
       start_order_nbr = orders.where('DATE(date_putin) = ?', date_to_export).minimum('order_nbr')
       end_order_nbr = orders.where('DATE(date_putin) = ?', date_to_export).maximum('order_nbr')
-      put "--order range: #{@start_order_nbr} to #{@end_order_nbr}: #{orders.count.to_s}"
+      put "--order range: #{start_order_nbr} to #{end_order_nbr}: #{orders.count.to_s}"
     end
     put "done getting start and end order numbers"
 
@@ -174,9 +191,9 @@ class Omni::Sync::Mark
 
     put "For each result, write a period_result row if the sku and location can be found"
     # @lines.sort! {|a,b| a.order_nbr <=> b.order_nbr}
-    @lines.find_each do |line|
+    @lines.each do |line|
       # put "#{line[:stock_nbr].to_s}, #{line[:size]}"
-      puts line[:date_putin].to_s + "************************************"
+      # puts line[:date_putin].to_s + "************************************"
       sku_id = @skus[[line[:stock_nbr].to_s, line[:size].to_s]]
       location_id = @locations["#{line[:outlet_nbr]}"]
       # put "sku for #{line[:stock_nbr]} and #{line[:size]} is: #{sku_id}"
@@ -184,6 +201,9 @@ class Omni::Sync::Mark
       next unless sku_id and location_id
       # Omni::DailyResult.create(:date => date_to_export, :sku_id => sku_id, :location_id => location_id, :net_sale_units => line[:total_units])
       # put "--daily_result:  SKU: #{sku_id} and LOCATION: #{location_id} and #{date_to_export.to_s}"
+      units = line[:total_units]
+      insert_sql = "insert into daily_results (daily_result_id, sku_id, location_id, net_sale_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{location_id}', #{units})"
+      ActiveRecord::Base.connection.execute insert_sql
       @rows_created += 1
     end
   end

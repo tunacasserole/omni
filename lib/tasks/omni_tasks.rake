@@ -38,9 +38,9 @@ namespace :omni do
       # setting program parameters
       run_size = 1000
 
-      Omni::Sync::Mark.inventory
+      # Omni::Sync::Mark.inventory
       # Omni::Sync::Mark.costs
-      # Omni::Sync::Mark.results
+      Omni::Sync::Mark.results
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
       puts "==================================="
     end

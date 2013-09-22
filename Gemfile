@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 source 'http://tunacasserole:horizon@gems.buildit.io'
 
+# ruby '2.0.0', engine: 'jruby', engine_version: '1.7.4'
 gem 'rails', '3.2.14'
 
 
@@ -16,6 +17,7 @@ platforms :jruby do
   gem 'puma'
   gem 'warbler'
 end
+
 
 
 platforms :ruby do
@@ -38,6 +40,8 @@ end
 
 gem 'jquery-rails'
 gem 'whenever'
+gem 'therubyrhino'
+gem 'closure-compiler'
 
 gem "buildit"#,              :path => "vendor/gems/buildit"
 gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"
