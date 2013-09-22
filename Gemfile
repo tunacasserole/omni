@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 source 'http://tunacasserole:horizon@gems.buildit.io'
 
-ruby '2.0.0', engine: 'jruby', engine_version: '1.7.4'
+# ruby '2.0.0', engine: 'jruby', engine_version: '1.7.4'
 gem 'rails', '3.2.14'
 
 
