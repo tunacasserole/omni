@@ -1,1 +1,0 @@
-Omni::StockLedgerActivityLog.delete_all

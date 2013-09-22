@@ -1,1 +1,0 @@
-Omni::PurchaseAttributeAudit.delete_all

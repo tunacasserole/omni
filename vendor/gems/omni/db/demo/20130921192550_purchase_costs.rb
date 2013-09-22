@@ -1,3 +1,0 @@
-Omni::PurchaseCost.delete_all
-Omni::PurchaseCost.create(:purchase_cost_id => '7036A2441FD211E3BC7220C9D047DD15',:display => 'ueo',:purchase_detail_id => '5CD8FECC1FD211E3BC7220C9D047DD15',:cost_detail_id => nil,:cost_type => 'SAMPLE',:cost_amount => 12.0,:cost_percent => 12.0,:estimated_cost => 12.0,:actual_cost => nil,:is_destroyed => 0,)
-Omni::PurchaseCost.create(:purchase_cost_id => 'D6DFE2BC1FD211E3BC7220C9D047DD15',:display => 'eo',:purchase_detail_id => '5CD8FECC1FD211E3BC7220C9D047DD15',:cost_detail_id => nil,:cost_type => 'SAMPLE',:cost_amount => 11.0,:cost_percent => nil,:estimated_cost => nil,:actual_cost => nil,:is_destroyed => 0,)

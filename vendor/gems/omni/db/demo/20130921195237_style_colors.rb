@@ -1,3 +1,0 @@
-Omni::StyleColor.delete_all
-Omni::StyleColor.create(:style_color_id => '4C822C30231D11E3BE4920C9D047DD15',:display => '0010PKGRL-BU-391-BU391b1 - 10070',:state => 'active',:style_id => 'D4EB81EE0EC711E3BFA320C9D047DD15',:color_id => 'CE4A4AB80EE111E3891020C9D047DD15',:short_name => nil,:concatenated_name => nil,:is_destroyed => 0,)
-Omni::StyleColor.create(:style_color_id => '9C8EBF181F1711E3BCD820C9D047DD15',:display => '123 - 107',:state => 'active',:style_id => '95BBEE001F1611E3BCD820C9D047DD15',:color_id => 'CEA3A2C00EE111E3891020C9D047DD15',:short_name => nil,:concatenated_name => nil,:is_destroyed => 0,)

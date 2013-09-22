@@ -1,2 +1,0 @@
-Omni::ForecastProfile.delete_all
-Omni::ForecastProfile.create(:forecast_profile_id => '42608AAEE7D011E28FB520C9D0471234',:display => 'default forecast profile',:sales_2012_weight => 0.8,:sales_2011_weight => 0.15,:sales_2010_weight => 0.05,:contract_year_1_weight => nil,:contract_year_2_weight => nil,:contract_year_3_weight => nil,:contract_year_4_weight => nil,:contract_year_5_weight => nil,:forecast_formula => 'SALES',:is_destroyed => 0,)
