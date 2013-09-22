@@ -40,7 +40,7 @@ end
 
 gem 'jquery-rails'
 gem 'whenever'
-gem 'therubyrhino'
+# gem 'therubyrhino'
 gem 'closure-compiler'
 
 gem "buildit"#,              :path => "vendor/gems/buildit"
