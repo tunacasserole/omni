@@ -19,7 +19,7 @@
 /solr/data
 /solr/pids
 
-/config/database.yml
+#/config/database.yml
 
 *.rbc
 *.sassc
