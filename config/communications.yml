@@ -1,12 +1,12 @@
 development:
   outbound:
     accounts:
-      # sbnatest:
+      # omnitest:
       #   address:   smtp.gmail.com
       #   default:   true
       #   port:      587
       #   domain:    gmail.com
-      #   user_name: sbna-test@buildit.io
+      #   user_name: omni-test@buildit.io
       #   password:  TunaCasserole2013
       #   authentication: plain
       #   enable_starttls_auto: true

@@ -40,7 +40,7 @@ Ext.define('Omni.view.skus.Explorer', {
       },
 
       newForms: [{
-        xtype: 'sbna-checkpoints-Form'
+        xtype: 'omni-checkpoints-Form'
       }],
 
       newForms: [{

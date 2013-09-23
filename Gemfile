@@ -6,7 +6,7 @@ gem 'rails', '3.2.14'
 
 
 platforms :jruby do
-  # gem 'jruby-openssl'
+  gem 'jruby-openssl'
 
   if ENV['RDBMS'] == 'MSSQL'
     gem 'activerecord-jdbcmssql-adapter'
@@ -40,8 +40,8 @@ end
 
 gem 'jquery-rails'
 gem 'whenever'
-gem 'therubyrhino'
-gem 'closure-compiler'
+# gem 'therubyrhino'
+# gem 'closure-compiler'
 
 gem "buildit"#,              :path => "vendor/gems/buildit"
 gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"

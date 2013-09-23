@@ -1,14 +1,4 @@
 Omni::Application.configure do
-  # OMNI CONFIG
-  config.assets.js_compressor = :closure
-  
-  STDOUT.sync = true
-  logger = Logger.new(STDOUT)
-  logger.level = Logger::INFO
-  config.logger = logger
-
-  config.threadsafe!
-  # DEFAULT CONFIG
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -41,7 +31,7 @@ Omni::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  #config.log_level = :debug
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
