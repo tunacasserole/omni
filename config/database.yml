@@ -21,7 +21,7 @@ production:
   username: root
   password: password103
   wait_timeout: 2147483
-  host: http://omni.che7o4j7ujdi.us-east-1.rds.amazonaws.com/
+  host: 10.0.4.186
 
 # MARK RDBMS: Connection Details
 #---------------------------------------------------
