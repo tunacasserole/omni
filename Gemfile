@@ -6,7 +6,7 @@ gem 'rails', '3.2.14'
 
 
 platforms :jruby do
-  gem 'jruby-openssl'
+  # gem 'jruby-openssl'
 
   if ENV['RDBMS'] == 'MSSQL'
     gem 'activerecord-jdbcmssql-adapter'

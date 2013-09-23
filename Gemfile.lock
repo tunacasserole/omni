@@ -36,7 +36,6 @@ GEM
       multi_json (~> 1.0)
     amq-protocol (1.8.0)
     arel (3.0.2)
-    bouncy-castle-java (1.5.0147)
     builder (3.0.4)
     buildit (0.8.95-java)
       buildit_her
@@ -95,8 +94,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jruby-jars (1.7.4)
     jruby-ldap (0.0.2)
-    jruby-openssl (0.9.0)
-      bouncy-castle-java (>= 1.5.0147)
     jruby-rack (1.1.13.2)
     json (1.8.0)
     json (1.8.0-java)
@@ -205,7 +202,6 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   factory_girl_rails
   jquery-rails
-  jruby-openssl
   mysql2 (= 0.3.13)
   puma
   rails (= 3.2.14)
