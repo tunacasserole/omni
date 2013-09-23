@@ -16,10 +16,10 @@ production:
   adapter: jdbcmysql
   encoding: utf8
   reconnect: true
-  database: omni_data
+  database: omni_db
   pool: 20
   username: root
-  password:
+  password: password103
   wait_timeout: 2147483
   host: 127.0.0.1
 
