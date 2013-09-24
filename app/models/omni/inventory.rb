@@ -25,7 +25,7 @@ class Omni::Inventory < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :inventory_id,                     :override  =>  false,        :with  => :guid              
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display}"}
+  # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display}"}
   default      :on_hand_units,                    :override  =>  false,        :to    => 0                  
   default      :in_transit_units,                 :override  =>  false,        :to    => 0                  
   default      :non_sellable_units,               :override  =>  false,        :to    => 0                  
@@ -59,17 +59,17 @@ class Omni::Inventory < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
-  belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
+  # belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
+  # belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
   # ASSOCIATIONS (End)
 
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  mapped_attributes do
-    map :sku_display,                            :to => 'sku.display'
-    map :location_display,                       :to => 'location.display'
-  end
+  # mapped_attributes do
+  #   map :sku_display,                            :to => 'sku.display'
+  #   map :location_display,                       :to => 'location.display'
+  # end
   # MAPPED ATTRIBUTES (End)
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
@@ -89,16 +89,16 @@ class Omni::Inventory < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :location_display do location.display if location end          
-    string   :sku_display do sku.display if sku end      
-    string   :location_id
-    string   :sku_id
-    string   :display
+  # searchable do
+    # string   :location_display do location.display if location end          
+    # string   :sku_display do sku.display if sku end      
+    # string   :location_id
+    # string   :sku_id
+    # string   :display
  
-    text     :location_display_fulltext, :using => :location_display
-    text     :sku_display_fulltext, :using => :sku_display        
-  end 
+    # text     :location_display_fulltext, :using => :location_display
+    # text     :sku_display_fulltext, :using => :sku_display        
+  # end 
   # INDEXING (End)
 
 

@@ -88,6 +88,19 @@ class Omni::MarkTransfer < ActiveRecord::Base
   
 
   # HELPERS (Start) =====================================================================
+  def self.outlet_hash
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create outlet hash"
+    outlet_hash = {}
+    self.where("id > #{self.last_transfer_of_2010}").each do |x|
+      outlet_hash[x.id] = x.to_outlet_nbr
+    end
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create transfer to outlet hash: #{outlet_hash.count.to_s}"
+    outlet_hash
+  end
+  
+  def self.last_transfer_of_2010
+    49236
+  end
 
   # HELPERS (End)
 

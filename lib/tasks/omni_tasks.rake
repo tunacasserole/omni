@@ -6,89 +6,73 @@
 
 # Omni::Application.load_tasks
 
-namespace :omni do
+# namespace :omni do
 
-  task :migrations => :environment do |t, args|
-    puts "==================================="
-    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    @start_time = Time.now
-    Omni::Sync::Script.go
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
-    puts "==================================="
-  end
-  
-  task :bts, [:bts_id] => :environment do |t, args|
-    puts "==================================="
-    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    @start_time = Time.now
-    bts_id = args[:bts_id]
-    b=Omni::Bts.where(:bts_id => bts_id).first
-    b.rake_run
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
-    puts "==================================="
-  end
+#   task :migrations => :environment do |t, args|
 
-  namespace :sync do
-   
-    desc "load Omni inventory, cost, daily, and perion results from the Mark System."
-    task :mark => :environment do |t, args|
-      puts "==================================="
-      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-      @start_time = Time.now
-      # setting program parameters
-      run_size = 1000
+#     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+#     @start_time = Time.now
+#     Omni::Sync::Script.go
+#     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
 
-      # Omni::Sync::Mark.inventory
-      # Omni::Sync::Mark.costs
-      Omni::Sync::Mark.results
-      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
-      puts "==================================="
-    end
+#   end
 
-    desc "load Omni inventory, cost, daily, and period results from the RMS System."
-    task :rms => :environment do |t, args|
-      puts "==================================="
-      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-      @start_time = Time.now
-      Omni::Sync::Rms.results
-      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
-      puts "==================================="
-    end
+#   task :bts, [:bts_id] => :environment do |t, args|
 
-    desc "load Omni inventory, cost, daily, and period results from Retail Pro."
-    task :retail_pro => :environment do |t, args|
-      puts "==================================="
-      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-      @start_time = Time.now
-      Omni::Sync::Grits.results
-      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
-      puts "==================================="
-    end
+#     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+#     @start_time = Time.now
+#     bts_id = args[:bts_id]
+#     b=Omni::Bts.where(:bts_id => bts_id).first
+#     b.rake_run
+#     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
 
-    desc "Sync omni tables to omni tables."
-    task :omni => :environment do |t, args|
-      puts "==================================="
-      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-      @start_time = Time.now
-      # Summarize daily results into period results
-      Omni::Sync::Omni.results 
-      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
-      puts "==================================="
-    end
+#   end
 
-    desc "Timings for different etl techniques."
-    task :time => :environment do |t, args|
-      puts "==================================="
-      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-      @start_time = Time.now
+#   namespace :sync do
+#     namespace :mark do
+#       desc "load Omni inventories on hand from Mark inventory qoh."
+#       task :on_hand => :environment do |t, args|
+#         Omni::Sync::Mark.on_hand
+#       end
+#       desc "load Omni inventories wip from Mark wip."
+#       task :wip => :environment do |t, args|
+#         Omni::Sync::Mark.wip
+#       end
+#       desc "load Omni inventories allocated from Mark transfer line qty."
+#       task :allocated => :environment do |t, args|
+#         Omni::Sync::Mark.allocated
+#       end
+#       desc "load Omni inventories transit from Mark transfer line qty."
+#       task :transit => :environment do |t, args|
+#         Omni::Sync::Mark.transit
+#       end
+#       desc "load Omni daily results net sale units from Mark order line qty_ordered."
+#       task :sold => :environment do |t, args|
+#         Omni::Sync::Mark.results
+#       end
+#     end
 
-      # Omni::Sync::Time.mri
-      Omni::Sync::Time.jruby      
-      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
-      puts "==================================="
-    end
+#     namespace :rms do
+#       desc "load Omni daily results net sale units from rms."
+#       task :on_hand => :environment do |t, args|
+#         Omni::Sync::Rms.on_hand
+#       end
+#       desc "load Omni inventory, cost, daily, and period results from the RMS System."
+#       task :on_order => :environment do |t, args|
+#         Omni::Sync::Rms.on_order
+#       end
+#       desc "load Omni daily results net sale units from rms transaction_entry quantity."
+#       task :sold => :environment do |t, args|
+#         Omni::Sync::Rms.on_order
+#       end
+#     end
 
-  end
+#     namespace :grits do
+#       desc "load Omni inventory, cost, daily, and period results from the RMS System."
+#       task :rms => :environment do |t, args|
+#         Omni::Sync::Rms.results
+#       end
 
-end # namespace omni
-
+#     end
+#   end # namespace omni
+# end

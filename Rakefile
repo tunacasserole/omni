@@ -6,13 +6,75 @@ require File.expand_path('../config/application', __FILE__)
 
 Omni::Application.load_tasks
 
-# List of environments and their heroku git remotes
-REMOTES = {
-  :staging    => 'omni-prod',
-  :prod       => 'omni-jruby'
-}
-
 namespace :omni do
+
+  task :migrations => :environment do |t, args|
+
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    @start_time = Time.now
+    Omni::Sync::Script.go
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
+
+  end
+
+  task :bts, [:bts_id] => :environment do |t, args|
+
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    @start_time = Time.now
+    bts_id = args[:bts_id]
+    b=Omni::Bts.where(:bts_id => bts_id).first
+    b.rake_run
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
+
+  end
+
+  namespace :sync do
+    namespace :mark do
+      desc "load Omni inventories on hand from Mark inventory qoh."
+      task :on_hand => :environment do |t, args|
+        Omni::Sync::Mark.on_hand
+      end
+      desc "load Omni inventories wip from Mark wip."
+      task :wip => :environment do |t, args|
+        Omni::Sync::Mark.wip
+      end
+      desc "load Omni inventories allocated from Mark transfer line qty."
+      task :allocated => :environment do |t, args|
+        Omni::Sync::Mark.allocated
+      end
+      desc "load Omni inventories transit from Mark transfer line qty."
+      task :transit => :environment do |t, args|
+        Omni::Sync::Mark.transit
+      end
+      desc "load Omni daily results net sale units from Mark order line qty_ordered."
+      task :sold => :environment do |t, args|
+        Omni::Sync::Mark.sold_simple
+      end
+    end
+
+    namespace :rms do
+      desc "load Omni daily results net sale units from rms."
+      task :on_hand => :environment do |t, args|
+        Omni::Sync::Rms.on_hand
+      end
+      desc "load Omni inventory, cost, daily, and period results from the RMS System."
+      task :on_order => :environment do |t, args|
+        Omni::Sync::Rms.on_order
+      end
+      desc "load Omni daily results net sale units from rms transaction_entry quantity."
+      task :sold => :environment do |t, args|
+        Omni::Sync::Rms.on_order
+      end
+    end
+
+    namespace :grits do
+      desc "load Omni inventory, cost, daily, and period results from the RMS System."
+      task :rms => :environment do |t, args|
+        Omni::Sync::Rms.results
+      end
+
+    end
+  end
 
   desc "Drops all unused tables from the source"
   task :drop => :environment do
@@ -47,82 +109,6 @@ namespace :omni do
       :comm_email_messages,
       :comm_outbox_items,
       :comm_sent_items,
-
-      # LEGACY FOR Migration
-      :content,
-      :content_data,
-      :e_attachment,
-      :e_rel_attachment,
-      :address,
-      :agent,
-      :lookup_attribute_domain_view,
-      :audit_data,
-      :individual,
-      :customer,
-      :email_address,
-      :interaction,
-      :lookup,
-      :organization_indiv,
-      :organization,
-      :organization_rel,
-      :omni_prob_success,
-      :product,
-      :omni_related_product,
-      :request,
-      :row_level_audit,
-      :omni_sales_call_indiv,
-      :telephone,
-      :omni_tollgate_track,
-      :omni_tollgate,
-      :user_note,
-
-      # PRIMARY tables
-      :people,
-      :customers,
-      :sales_calls,
-      :addresses,
-      :email_addresses,
-      :telephones,
-      :products,
-      :cfars,
-      :ccrs,
-      :omni_sample,
-      :omni_tollgate_track,
-      :omni_project,
-      :omni_technical_response,
-      :omni_sample_approval,
-      :omni_request_approval,
-      :omni_request_team,
-      :omni_severity,
-      :omni_request_followup,
-      :omni_request_notification,
-      :omni_checkpoint,
-      :omni_cust_end_use_lkp,
-      :omni_financial_scorecard,
-      :probabilities,
-      :omni_prod_review,
-      :omni_product_grade_lkp,
-      :omni_quality_plant,
-      :omni_technical_report,
-      :sales_call_people,
-      :omni_technical_response,
-      :omni_tollgate_checkpoint,
-      :omni_monthly_report,
-      :omni_project_approval,
-      :omni_tollgate_admin,
-      :omni_trans_package_lkp,
-      :customer_products,
-      :omni_project_goal,
-      :omni_track,
-      :omni_user_extensions,
-      :account_plans,
-      :sales_periods,
-      :opportunities,
-      :posis,
-      :vro_agent_roles,
-      :contracts,
-      :approval_requests,
-      :tasks
     ]
 
     USED_TABLES = USED_TABLES_SYM.map{|x| x.to_s}
@@ -139,11 +125,7 @@ namespace :omni do
       end
     end
   end
-
-
-
-
-
+  
   desc "Generates Binary Conversion"
   task :convert => :environment do
 
@@ -200,9 +182,9 @@ namespace :omni do
 
   end
 
-# ------------------------------------------------------------------------------
-# DOCUMENTATION Tasks
-# ------------------------------------------------------------------------------
+  # ------------------------------------------------------------------------------
+  # DOCUMENTATION Tasks
+  # ------------------------------------------------------------------------------
 
   desc "Generates the model specs"
   task :document do
@@ -248,9 +230,9 @@ namespace :omni do
     system("./doc/model_specs/wordsmith generate")
   end
 
-# ------------------------------------------------------------------------------
-# BUILD Tasks
-# ------------------------------------------------------------------------------
+  # ------------------------------------------------------------------------------
+  # BUILD Tasks
+  # ------------------------------------------------------------------------------
 
   desc 'Generates the WAR file for deployment to server'
   task :war do
@@ -264,9 +246,9 @@ namespace :omni do
   end
 
 
-# ------------------------------------------------------------------------------
-# DEPLOYMENT Tasks
-# ------------------------------------------------------------------------------
+  # ------------------------------------------------------------------------------
+  # DEPLOYMENT Tasks
+  # ------------------------------------------------------------------------------
 
   namespace :deploy  do
     REMOTES.keys.each do |env|
@@ -309,3 +291,9 @@ namespace :omni do
     end
   end
 end
+
+# List of environments and their heroku git remotes
+REMOTES = {
+  :staging    => 'omni-prod',
+  :prod       => 'omni-jruby'
+}

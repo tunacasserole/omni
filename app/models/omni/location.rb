@@ -27,18 +27,18 @@ class Omni::Location < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :location_id,                      :override  =>  false,        :with  => :guid              
+  default      :location_id,                      :override  =>  false,        :with  => :guid
   default      :location_nbr,                     :override  =>  false,        :with  => :sequence,         :named=>"LOCATION_NBR"
-  default      :is_owned,                         :override  =>  false,        :to    => false              
-  default      :is_store,                         :override  =>  false,        :to    => false              
-  default      :is_temporary_store,               :override  =>  false,        :to    => false              
-  default      :is_webstore,                      :override  =>  false,        :to    => false              
-  default      :is_factory,                       :override  =>  false,        :to    => false              
-  default      :is_warehouse,                     :override  =>  false,        :to    => false              
-  default      :selling_square_feet,              :override  =>  false,        :to    => 0                  
-  default      :storage_square_feet,              :override  =>  false,        :to    => 0                  
-  default      :is_enabled,                       :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_owned,                         :override  =>  false,        :to    => false
+  default      :is_store,                         :override  =>  false,        :to    => false
+  default      :is_temporary_store,               :override  =>  false,        :to    => false
+  default      :is_webstore,                      :override  =>  false,        :to    => false
+  default      :is_factory,                       :override  =>  false,        :to    => false
+  default      :is_warehouse,                     :override  =>  false,        :to    => false
+  default      :selling_square_feet,              :override  =>  false,        :to    => 0
+  default      :storage_square_feet,              :override  =>  false,        :to    => 0
+  default      :is_enabled,                       :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -127,7 +127,7 @@ class Omni::Location < ActiveRecord::Base
     date     :open_date
     string   :district_display do district.display if district end
     string   :parent_location_id
- 
+
     text     :display_fulltext, :using => :display
     text     :location_nbr_fulltext, :using => :location_nbr
     text     :location_brand_fulltext, :using => :location_brand
@@ -135,13 +135,25 @@ class Omni::Location < ActiveRecord::Base
     text     :city_fulltext, :using => :city
     text     :state_code_fulltext, :using => :state_code
     text     :district_display_fulltext, :using => :district_display
-  end 
+  end
   # INDEXING (End)
 
   # HELPERS (Start) =======================================================================
   def outlet
     #Omni::Outlet.all(:display => )
   end
+
+  def self.outlet_hash
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create location hash"
+    location_to_outlet_hash = {}
+    self.all.each do |loc|
+      location_to_outlet_hash[loc.location_nbr.to_i] = loc.location_id
+    end
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create location hash: #{location_to_outlet_hash.count.to_s}"
+    location_to_outlet_hash
+  end
+
+
   # HELPERS (End)
 
   # STATES (Start) ====================================================================
@@ -149,4 +161,3 @@ class Omni::Location < ActiveRecord::Base
   # STATES (End)
 
 end # class Omni::Location
-
