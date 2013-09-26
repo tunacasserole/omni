@@ -7,7 +7,7 @@ class Omni::MarkOrder < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
- #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  self.establish_connection       Buildit::Util::Data::Connection.for 'ndb'
   self.table_name                 = :orders_hd
   self.primary_key                = :order_nbr
   # METADATA (End)
@@ -32,37 +32,37 @@ class Omni::MarkOrder < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  
+
   # ASSOCIATIONS (End)
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  
+
   # MAPPED ATTRIBUTES (End)
 
-  
+
   # COMPUTED ATTRIBUTES (Start) =========================================================
-  
+
   # COMPUTED ATTRIBUTES (End)
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-  
+
   # TEMPORARY ATTRIBUTES (End)
 
 
   # FILTERS (Start) =====================================================================
-  
+
   # FILTERS (End)
 
 
   # ORDERING (Start) ====================================================================
-  
+
   # ORDERING (End)
 
 
   # SCOPES (Start) ======================================================================
-  
+
   # SCOPES (End)
 
 
@@ -70,10 +70,10 @@ class Omni::MarkOrder < ActiveRecord::Base
   # searchable do
   #   integer   :stock_nbr
   #   string   :size
- 
+
   #   text     :stock_nbr, :using => :stock_nbr
-  #   text     :size, :using => :size 
-  # end 
+  #   text     :size, :using => :size
+  # end
   # INDEXING (End)
 
 
@@ -83,27 +83,29 @@ class Omni::MarkOrder < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  
+
   # STATES (End)
-  
+
 
   # HELPERS (Start) =====================================================================
   def self.last_order_of_2010
     1569747
   end
-  
-  def self.order_to_outlet_hash    
+
+  def self.order_to_outlet_hash
     puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
-    order_to_outlet = {}  
-    Omni::MarkOrder.where('order_nbr >= ?',self.last_order_of_2010).find_each {|o| order_to_outlet[o.order_nbr] = o.outlet_nbr}
+    order_to_outlet = {}
+    # sql = "select order_nbr, outlet_nbr from orders_hd where order_nbr > #{last_order_of_2010}"
+    # ActiveRecord::Base.connection.execute sql
+    Omni::MarkOrder.where('order_nbr >= ?',self.last_order_of_2010).find_each(:batch_size => 15000) {|o| order_to_outlet[o.order_nbr] = o.outlet_nbr}
     puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_nbr to outlet_nbr hash: #{order_to_outlet.count.to_s}"
     order_to_outlet
   end
 
   def self.order_to_date_hash
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to order date hash"    
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to order date hash"
     order_to_date = {}
-    Omni::MarkOrder.where('order_nbr >= ?',self.last_order_of_2010).find_each {|o| order_to_date[o.order_nbr] = o.date_putin}
+    Omni::MarkOrder.where('order_nbr >= ?',self.last_order_of_2010).find_each(:batch_size => 15000) {|o| order_to_date[o.order_nbr] = "'#{o.date_putin.to_s[0...10]}'"}
     puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_nbr to order date hash: #{order_to_date.count.to_s}"
     order_to_date
   end

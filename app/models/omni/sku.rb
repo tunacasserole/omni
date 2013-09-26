@@ -117,23 +117,15 @@ class Omni::Sku < ActiveRecord::Base
   # HOOKS (End)
 
   # HELPERS (Start) =====================================================================
-  def self.stock_hash
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku hash"
-    skus = {}
-    sku_array = []
-    select_sql = "select sku_id, mark_stock, mark_size from skus where mark_stock IS NOT NULL and mark_size IS NOT NULL"    
-    sku_array = ActiveRecord::Base.connection.execute select_sql
-    sku_array.each {|x| skus.merge!([x['mark_stock'], x['mark_size']] => x['sku_id'])}
-    # Omni::Sku.find_each(:conditions => "mark_stock IS NOT NULL and mark_size IS NOT NULL") {|x| skus.merge!([x.mark_stock, x.mark_size] => x.sku_id)}
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END....create sku hash: #{skus.count.to_s}"
-    skus
+  def self.source_hash(legacy_source)
+    # puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku hash"
+    # legacy_source = 'BUCKHEAD'
+    sku_hash = {}
+    ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| sku_hash[x['source_id']] = x['sku_id']}
+    sku_hash
+    # puts "#{Time.now.strftime("%H:%M:%S").yellow}: END....create sku hash: #{sku_hash.count.to_s}"
+    # sku_hash
   end
-  # def get_sequence_nbr
-  #   unless self.sku_nbr
-  #     self.sku_nbr           = "#{Buildit::Sequence.nextval('SKU_NBR')}"
-  #     self.save
-  #   end
-  # end # def generate_task_number
   # HELPERS (End) =====================================================================
 
   # STATES (Start) ====================================================================

@@ -7,8 +7,11 @@ class Omni::RmsItem < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
-  self.table_name                 = :rms_items
+  # self.establish_connection       Buildit::Util::Data::Connection.for 'rms'
+  # self.table_name                 = :rms_items
+  # self.primary_key                = :ID
+  self.establish_connection       Buildit::Util::Data::Connection.for 'RMS'
+  self.table_name                 = :Item
   self.primary_key                = :ID
   # METADATA (End)
 
@@ -32,42 +35,42 @@ class Omni::RmsItem < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  
+
   # ASSOCIATIONS (End)
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  
+
   # MAPPED ATTRIBUTES (End)
 
-  
+
   # COMPUTED ATTRIBUTES (Start) =========================================================
-  
+
   # COMPUTED ATTRIBUTES (End)
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-  
+
   # TEMPORARY ATTRIBUTES (End)
 
 
   # FILTERS (Start) =====================================================================
-  
+
   # FILTERS (End)
 
 
   # ORDERING (Start) ====================================================================
-  
+
   # ORDERING (End)
 
 
   # SCOPES (Start) ======================================================================
-  
+
   # SCOPES (End)
 
 
   # INDEXING (Start) ====================================================================
-  
+
   # INDEXING (End)
 
 
@@ -77,9 +80,9 @@ class Omni::RmsItem < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  
+
   # STATES (End)
-  
+
 
   # HELPERS (Start) =====================================================================
 

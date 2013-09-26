@@ -19,7 +19,7 @@ production:
   database: omni_db
   pool: 20
   username: root
-  password: password103
+  password: password1
   wait_timeout: 2147483
   host: 10.0.4.186
 
@@ -73,7 +73,7 @@ mark_development:
 # RMS RDBMS: Connection Details
 #---------------------------------------------------
 
-rms_development:
+rms_local:
   adapter: mysql2
   encoding: utf8
   reconnect: true
@@ -83,6 +83,18 @@ rms_development:
   password:
   wait_timeout: 2147483
   host: 127.0.0.1
+
+rms_development:
+  adapter: jdbcmssql
+  encoding: utf8
+  reconnect: true
+  # dataserver: '10.0.1.5\OmniTest'
+  database: OmniTest
+  pool: 20
+  username: sa
+  password: p0stec
+  wait_timeout: 2147483
+  host: 10.0.1.5
 
 rms_production:
   adapter: mysql2

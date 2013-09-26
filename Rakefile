@@ -48,7 +48,7 @@ namespace :omni do
       end
       desc "load Omni daily results net sale units from Mark order line qty_ordered."
       task :sold => :environment do |t, args|
-        Omni::Sync::Mark.sold_simple
+        Omni::Sync::Mark.sold
       end
     end
 
@@ -63,7 +63,7 @@ namespace :omni do
       end
       desc "load Omni daily results net sale units from rms transaction_entry quantity."
       task :sold => :environment do |t, args|
-        Omni::Sync::Rms.on_order
+        Omni::Sync::Rms.sold
       end
     end
 
@@ -125,7 +125,7 @@ namespace :omni do
       end
     end
   end
-  
+
   desc "Generates Binary Conversion"
   task :convert => :environment do
 

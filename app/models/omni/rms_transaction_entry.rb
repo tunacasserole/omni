@@ -1,4 +1,4 @@
-class Omni::MarkOrderLine < ActiveRecord::Base
+class Omni::RmsTransactionEntry < ActiveRecord::Base
 
 
   # MIXINS (Start) ======================================================================
@@ -7,9 +7,12 @@ class Omni::MarkOrderLine < ActiveRecord::Base
 
 
   # METADATA (Start) ====================================================================
-  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
-  self.table_name                 = :orders_li
-  self.primary_key                = :lineitemid
+  # self.establish_connection       Buildit::Util::Data::Connection.for 'rms'
+  # self.table_name                 = :rms_items
+  # self.primary_key                = :ID
+  self.establish_connection       Buildit::Util::Data::Connection.for 'RMS'
+  self.table_name                 = :TransactionEntry
+  self.primary_key                = :AutoID
   # METADATA (End)
 
 
@@ -22,24 +25,23 @@ class Omni::MarkOrderLine < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  # validates :id,                        :presence      => true
+  validates :ID,                        :presence      => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  # default :id,                          :with => :guid
+  default :ID,                          :with => :guid
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
-  # belongs_to   :mark_order,                    :class_name => 'Omni::MarkOrder',             :foreign_key => 'order_nbr'
+
   # ASSOCIATIONS (End)
 
 
-  # mapped_attributes do
-    # map :outlet_nbr,                       :to => 'mark_order.outlet_nbr'
-    # map :date_putin,                        :to => 'mark_order.date_putin'
-  # end
+  # MAPPED ATTRIBUTES (Start) ===========================================================
+
+  # MAPPED ATTRIBUTES (End)
 
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
@@ -68,13 +70,7 @@ class Omni::MarkOrderLine < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  # searchable do
-  #   integer   :stock_nbr
-  #   string   :size
 
-  #   text     :stock_nbr, :using => :stock_nbr
-  #   text     :size, :using => :size
-  # end
   # INDEXING (End)
 
 
@@ -92,4 +88,4 @@ class Omni::MarkOrderLine < ActiveRecord::Base
 
   # HELPERS (End)
 
-end # class Omni::MarkOrderReport
+end # class Omni::RmsItem

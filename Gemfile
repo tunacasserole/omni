@@ -7,12 +7,13 @@ gem 'rails', '3.2.14'
 platforms :jruby do
   #gem 'jruby-openssl'
 
-  if ENV['RDBMS'] == 'MSSQL'
+  # if ENV['RDBMS'] == 'MSSQL'
     gem 'activerecord-jdbcmssql-adapter'
-    gem 'jdbc-jtds'
-  else
+    # gem 'jdbc-jtds'
+gem 'jdbc-jtds', '~> 1.2.8'
+  # else
     gem 'activerecord-jdbcmysql-adapter'
-  end
+  # end
 
   gem 'puma'
   gem 'warbler'
