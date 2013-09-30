@@ -3,20 +3,19 @@ source 'http://sbna:muppet5@gems.buildit.io'
 
 gem 'rails', '3.2.14'
 
-platforms :jruby do
-  gem 'jruby-openssl'
+# platforms :jruby do
 
-  if ENV['RDBMS'] == 'MSSQL'
-    gem 'activerecord-jdbcmssql-adapter'
-    # gem 'jdbc-jtds'
-    # gem 'jdbc-jtds', '~> 1.2.8'
-  else
-    gem 'activerecord-jdbcmysql-adapter'
-  end
+#   if ENV['RDBMS'] == 'MSSQL'
+#     gem 'activerecord-jdbcmssql-adapter'
+#     # gem 'jdbc-jtds'
+#     # gem 'jdbc-jtds', '~> 1.2.8'
+#   else
+#     gem 'activerecord-jdbcmysql-adapter'
+#   end
 
-  gem 'puma'
-  # gem 'warbler'
-end
+#   gem 'puma'
+#   gem 'warbler'
+# end
 
 
 platforms :ruby do
