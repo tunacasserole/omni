@@ -23,7 +23,7 @@ Warbler::Config.new do |config|
   # in lib (and not otherwise excluded) then they need not be mentioned here.
   # JRuby and JRuby-Rack are pre-loaded in this list.  Be sure to include your
   # own versions if you directly set the value
-  # config.java_libs += FileList["lib/java/*.jar"]
+  config.java_libs += FileList["jars/*.jar"]
 
   # Loose Java classes and miscellaneous files to be included.
   # config.java_classes = FileList["target/classes/**.*"]
@@ -121,8 +121,8 @@ Warbler::Config.new do |config|
   # config.webserver = 'jetty'
 
   # Value of RAILS_ENV for the webapp -- default as shown below
-  #config.webxml.rails.env = ENV['RAILS_ENV'] || 'production'
-  config.webxml.rails.env = ENV['RAILS_ENV'] || 'development'
+  config.webxml.rails.env = ENV['RAILS_ENV'] || 'production'
+  #config.webxml.rails.env = ENV['RAILS_ENV'] || 'development'
 
   # Application booter to use, one of :rack, :rails, or :merb (autodetected by default)
   # config.webxml.booter = :rails
@@ -148,8 +148,8 @@ Warbler::Config.new do |config|
   # that you fix these values when running a production server!
   # If you're using threadsafe! mode, you probably don't want to set these values,
   # since 1 runtime(default for threadsafe mode) will be enough.
-  # config.webxml.jruby.min.runtimes = 2
-  # config.webxml.jruby.max.runtimes = 4
+  #config.webxml.jruby.min.runtimes = 2
+  #config.webxml.jruby.max.runtimes = 4
 
   # JNDI data source name
   # config.webxml.jndi = 'jdbc/rails'

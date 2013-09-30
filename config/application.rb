@@ -2,8 +2,8 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-require 'java'
-require File.expand_path('../../jars/sqljdbc4.jar', __FILE__)
+# require 'java'
+# require File.expand_path('../../jars/sqljdbc4.jar', __FILE__)
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -60,7 +60,12 @@ module Omni
     config.assets.enabled = true
 
     #config.assets.initialize_on_precompile = false
-
+    console do
+      # this block is called only when running console,
+      # so we can safely require pry here
+      require "pry"
+      config.console = Pry
+    end
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end

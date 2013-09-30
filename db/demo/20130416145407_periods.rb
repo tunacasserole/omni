@@ -1,4 +1,8 @@
 Omni::Period.delete_all
+Omni::Period.create(:period_id => "101EC892A6C710E2AE1010FF58D32010",:display =>"2010",:start_date =>"2010-01-01",:end_date =>"2010-12-31",:year_number =>"2010",:period_number =>"1")
+Omni::Period.create(:period_id => "101EC892A6C710E2AE1010FF58D32011",:display =>"2011",:start_date =>"2011-01-01",:end_date =>"2011-12-31",:year_number =>"2011",:period_number =>"1")
+Omni::Period.create(:period_id => "101EC892A6C710E2AE1010FF58D32012",:display =>"2012",:start_date =>"2012-01-01",:end_date =>"2012-12-31",:year_number =>"2012",:period_number =>"1")
+Omni::Period.create(:period_id => "101EC892A6C710E2AE1010FF58D32013",:display =>"2013",:start_date =>"2013-01-01",:end_date =>"2013-12-31",:year_number =>"2013",:period_number =>"1")
 Omni::Period.create(:period_id => "101EC892A6C710E2AE1010FF58D32228",:display =>"2010-Period 1",:start_date =>"2010-01-01",:end_date =>"2010-01-31",:year_number =>"2010",:period_number =>"1")
 Omni::Period.create(:period_id => "101EEFA2A6C710E2AE1010FF58D32228",:display =>"2010-Period 2",:start_date =>"2010-02-01",:end_date =>"2010-02-28",:year_number =>"2010",:period_number =>"2")
 Omni::Period.create(:period_id => "101F16B2A6C710E2AE1010FF58D32228",:display =>"2010-Period 3",:start_date =>"2010-03-01",:end_date =>"2010-03-31",:year_number =>"2010",:period_number =>"3")

@@ -162,6 +162,21 @@ class Omni::Sync::Mark < Omni::Import::Base
     ActiveRecord::Base.connection.execute sql
     xit
   end
+
+  def self.order_hashes
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
+    @order_to_outlet = {}
+    @order_to_date = {}
+    ActiveRecord::Base.transaction do
+      Omni::MarkOrder.where('order_nbr >= ? and order_nbr <= ?',Omni::MarkOrder.last_order_of_2010, Omni::MarkOrder.count).find_each(:batch_size => 10000) do |o|
+      # Omni::MarkOrder.where('order_nbr >= ? and order_nbr <= ?',Omni::MarkOrder.last_order_of_2010, Omni::MarkOrder.count).find_each(:batch_size => 10000) do |o|
+        @order_to_date[o.order_nbr] = "'#{o.date_putin.to_s[0...10]}'"
+        @order_to_outlet[o.order_nbr] = o.outlet_nbr
+      end
+    end
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_to_date hash: #{@order_to_date.count.to_s} and order_to_outlet hash: #{@order_to_outlet.count.to_s}"
+  end
+
 end
   # def self.sold_daily
   #   load
@@ -213,18 +228,5 @@ end
   #   end
   # end
 
-  # def self.order_hashes
-  #   puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
-  #   @order_to_outlet = {}
-  #   @order_to_date = {}
-  #   ActiveRecord::Base.transaction do
-  #     Omni::MarkOrder.where('order_nbr >= ? and order_nbr <= ?',Omni::MarkOrder.last_order_of_2010, Omni::MarkOrder.count).find_each(:batch_size => 10000) do |o|
-  #     # Omni::MarkOrder.where('order_nbr >= ? and order_nbr <= ?',Omni::MarkOrder.last_order_of_2010, Omni::MarkOrder.count).find_each(:batch_size => 10000) do |o|
-  #       @order_to_date[o.order_nbr] = "'#{o.date_putin.to_s[0...10]}'"
-  #       @order_to_outlet[o.order_nbr] = o.outlet_nbr
-  #     end
-  #   end
-  #   puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_to_date hash: #{@order_to_date.count.to_s} and order_to_outlet hash: #{@order_to_outlet.count.to_s}"
-  # end
 
 # end

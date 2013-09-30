@@ -4,9 +4,9 @@
 # http://en.wikipedia.org/wiki/Cron
 set :output, 'log/schedule.log'
 
-every :day, :at => '12:00am' do
-  rake "omni:sync:mark"
-end
+# every :day, :at => '12:00am' do
+#   rake "omni:sync:mark"
+# end
 
 # Example:
 #

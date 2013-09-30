@@ -68,11 +68,14 @@ namespace :omni do
     end
 
     namespace :grits do
-      desc "load Omni inventory, cost, daily, and period results from the RMS System."
-      task :rms => :environment do |t, args|
-        Omni::Sync::Rms.results
+      desc "load Omni inventory on hand from the RMS System."
+      task :inventory => :environment do |t, args|
+        Omni::Sync::Grits.inventory
       end
-
+      desc "load Omni daily results from sales history from the RMS System."
+      task :results => :environment do |t, args|
+        Omni::Sync::Grits.results
+      end
     end
   end
 

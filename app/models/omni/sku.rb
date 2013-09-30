@@ -195,7 +195,6 @@ class Omni::Sku < ActiveRecord::Base
   searchable do
     string   :display
     string   :sku_nbr
-    string   :state
     string   :site_display do site.display if site end
     string   :conversion_type
     string   :color_display do color.display if color end
