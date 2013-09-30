@@ -204,10 +204,11 @@ class Omni::Sku < ActiveRecord::Base
     string   :style_id
     string   :color_id
     string   :style_display do style.display if style end
-    string   :source
     string   :source_id
+    string   :source
 
     text     :display_fulltext, :using => :display
+    text     :source_fulltext, :using => :source_id
     text     :site_display_fulltext, :using => :site_display
     text     :color_display_fulltext, :using => :color_display
     text     :size_display_fulltext, :using => :size_display
