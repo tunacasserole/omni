@@ -63,8 +63,8 @@ module Omni
     console do
       # this block is called only when running console,
       # so we can safely require pry here
-      require "pry"
-      config.console = Pry
+      # require "pry"
+      # config.console = Pry
     end
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
