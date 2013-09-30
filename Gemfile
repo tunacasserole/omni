@@ -39,12 +39,12 @@ group :development, :test do
   #gem 'factory_girl_rails'
 end
 
-gem 'jquery-rails'
+# gem 'jquery-rails'
 
 gem "buildit"#,              :path => "vendor/gems/buildit"
 gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"
 gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
 
-gem 'whenever'
+# gem 'whenever'
 # gem 'roo'
 # gem 'jruby-openssl', :require => false
