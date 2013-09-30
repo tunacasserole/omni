@@ -1,4 +1,4 @@
-require 'roo'
+# require 'roo'
 
 class Omni::Sync::Grits < Omni::Import::Base
 

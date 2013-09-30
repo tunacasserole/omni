@@ -9,13 +9,13 @@ platforms :jruby do
   if ENV['RDBMS'] == 'MSSQL'
     gem 'activerecord-jdbcmssql-adapter'
     # gem 'jdbc-jtds'
-    gem 'jdbc-jtds', '~> 1.2.8'
+    # gem 'jdbc-jtds', '~> 1.2.8'
   else
     gem 'activerecord-jdbcmysql-adapter'
   end
 
   gem 'puma'
-  gem 'warbler'
+  # gem 'warbler'
 end
 
 
@@ -47,4 +47,5 @@ gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"
 gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
 
 gem 'whenever'
-gem 'roo'
+# gem 'roo'
+# gem 'jruby-openssl', :require => false
