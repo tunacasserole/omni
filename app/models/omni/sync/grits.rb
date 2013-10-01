@@ -8,7 +8,11 @@ class Omni::Sync::Grits < Omni::Import::Base
     # put "no skus found for these stock-size combos: #{@no_skus}"
     put "no sku found: #{@no_sku_count}"
     put "no location found for that outlet: #{@no_location_count}"
+    put "***********************************"
+    put "legacy source rows: #{@source_count}"
     put "omni rows created: #{@created_count}"
+    put "legacy rows skipped: #{@source_count - @created_count}"
+    put "***********************************"
     put "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
     puts @output
     # @no_locations.each {|x| puts x}
@@ -28,10 +32,12 @@ class Omni::Sync::Grits < Omni::Import::Base
     @end_date = Date.parse('31-12-2013')
     @total_count = 0
     @created_count = 0
+    @source_count = 0
     @no_sku_count = 0
     @no_location_count = 0
     @no_inventory_count = 0
     @days = 0
+    @grits_stores = ['60','61','62','63','64','65','66']
 
     @locations = Omni::Location.source_hash('GRITS')
     @skus = Omni::Sku.source_hash('GRITS')
@@ -57,7 +63,7 @@ class Omni::Sync::Grits < Omni::Import::Base
       s.default_sheet = s.sheets.first
       header = s.row(1)
       (2..s.last_row).each do |i|
-        break if i > 10
+        break if i > 1000
         next unless s.row(i)[0]
         row = Hash[[header, s.row(i)].transpose]
         row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
@@ -78,6 +84,7 @@ class Omni::Sync::Grits < Omni::Import::Base
   def self.inventory
     data = load_file('DATA.txt')
     data.each do  |x|
+      @source_count += 1
       sku_id = @skus[x['TGSU SKU #']]
       unless sku_id
         @no_sku_count += 1
@@ -85,18 +92,21 @@ class Omni::Sync::Grits < Omni::Import::Base
         next
       end
 
-      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id(@locations['60'], sku_id)}', '#{sku_id}', '#{@locations['60']}',#{x['60 O/H']},#{x['60 O/O']})"  if x['60 O/H'].to_i != 0 || x['60 O/O'].to_i != 0
-      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['61']}',#{x['61 O/H']},#{x['61 O/O']})"  if x['61 O/H'].to_i != 0 || x['61 O/O'].to_i != 0
-      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['62']}',#{x['62 O/H']},#{x['62 O/O']})"  if x['62 O/H'].to_i != 0 || x['62 O/O'].to_i != 0
-      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['63']}',#{x['63 O/H']},#{x['63 O/O']})"  if x['63 O/H'].to_i != 0 || x['63 O/O'].to_i != 0
-      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['64']}',#{x['64 O/H']},#{x['64 O/O']})"  if x['64 O/H'].to_i != 0 || x['64 O/O'].to_i != 0
-      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['65']}',#{x['65 O/H']},#{x['65 O/O']})"  if x['65 O/H'].to_i != 0 || x['65 O/O'].to_i != 0
-      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['66']}',#{x['66 O/H']},#{x['66 O/O']})"  if x['66 O/H'].to_i != 0 || x['66 O/O'].to_i != 0
-
-      if @created_count.to_s.end_with? '000'
-        puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
+      @grits_stores.each do |loc|
+      # loc = '60'
+        location_id = @locations[loc]
+        oh = x["#{loc} O/H"] || 0
+        oo = x["#{loc} O/O"] || 0
+        row_id = get_id(location_id, sku_id)
+        next if (oh == '0') and (oo == '0')
+        @created_count += 1
+        # @updates.push "('#{row_id}','#{sku_id}','#{location_id}',#{oh},#{oo},'#{date}')"
+        ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{row_id}', '#{sku_id}', '#{location_id}',#{oh},#{oo}) ON DUPLICATE KEY UPDATE on_hand_units = VALUES(on_hand_units), supplier_on_order_units = VALUES(supplier_on_order_units)"
+        if @created_count.to_s.end_with? '000'
+          puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
+        end
       end
-      @created_count += 1
+
     end
 
     xit
@@ -106,6 +116,7 @@ class Omni::Sync::Grits < Omni::Import::Base
   def self.results
     data = load_file('sold.xlsx')
     data.each do  |x|
+      @source_count += 1
       sku_id = @skus[x['Item#'].chop.chop]
       unless sku_id
         @no_sku_count += 1
