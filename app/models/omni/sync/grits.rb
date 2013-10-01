@@ -42,7 +42,9 @@ class Omni::Sync::Grits < Omni::Import::Base
     @locations = Omni::Location.source_hash('GRITS')
     @skus = Omni::Sku.source_hash('GRITS')
     @inventories = Omni::Inventory.source_hash
-
+    @period_py2 = Omni::Period.where(:display => '2011')
+    @period_py1= Omni::Period.where(:display => '2012')
+    @period_ytd = Omni::Period.where(:display => '2013')
     @updates = []
     @no_locations = []
     @no_skus = []
@@ -124,10 +126,10 @@ class Omni::Sync::Grits < Omni::Import::Base
         next
       end
 
-      # period_ytd = Omni::Period.
-      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['YTD']},#{period_ytd})" if x['YTD'] != "0.0"
-      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['PY1']},#{period_py1})" if x['PY1'] != "0.0"
-      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['PY2']},#{period_py2})" if x['PY2'] != "0.0"
+
+      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['YTD']},#{@period_ytd})" if x['YTD'] != "0.0"
+      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['PY1']},#{@period_py1})" if x['PY1'] != "0.0"
+      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['PY2']},#{@period_py2})" if x['PY2'] != "0.0"
       if @created_count.to_s.end_with? '000'
         puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
       end

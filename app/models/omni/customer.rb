@@ -125,10 +125,6 @@ class Omni::Customer < ActiveRecord::Base
   # INDEXING (End)
 
 
-
-
-
-
   # STATES (Start) ====================================================================
 
   # STATES (End)
