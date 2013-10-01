@@ -41,7 +41,7 @@ Ext.define('Omni.view.inventories.Explorer', {
       work_in_process_unitsLabel:               Omni.i18n.model.Inventory.work_in_process_units,
       supplier_on_order_unitsLabel:             Omni.i18n.model.Inventory.supplier_on_order_units,
       sourceLabel:                                         Omni.i18n.model.Inventory.source,
-      source_idLabel:                                    Omni.i18n.model.Inventory.source_id
+      source_idLabel:                                    Omni.i18n.model.Inventory.source_id,
      });
     // LABELS (End)
 
@@ -55,7 +55,7 @@ Ext.define('Omni.view.inventories.Explorer', {
         { header: this.work_in_process_unitsLabel,                       dataIndex: 'work_in_process_units',              flex: 1,   sortable: true  },
         { header: this.in_transit_unitsLabel,                            dataIndex: 'in_transit_units',                   flex: 1,   sortable: true  },
         { header: this.allocated_unitsLabel,                             dataIndex: 'allocated_units',                    flex: 1,   sortable: true  },
-        { header: this.sourceLabel,                                    dataIndex: 'source',                 flex: 1,   sortable: true  }
+        { header: this.sourceLabel,                                    dataIndex: 'source',                 flex: 1,   sortable: true  },
         { header: this.source_id,                                    dataIndex: 'source_id',                 flex: 1,   sortable: true  },
       ]
     });
