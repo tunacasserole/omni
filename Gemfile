@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-source 'http://sbna:muppet5@gems.buildit.io'
+source 'http://tunacasserole:horizon@gems.buildit.io'
 
 gem 'rails', '3.2.14'
 
@@ -42,7 +42,7 @@ end
 
 # gem 'jquery-rails'
 
-gem "buildit", '= 0.8.87'
+gem "buildit", '= 0.8.91'
 gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"
 gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
 
