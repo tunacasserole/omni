@@ -48,7 +48,7 @@ Ext.define('Omni.view.daily_results.Explorer', {
     Ext.apply(this, {
       columns: [
         { header: this.sku_idLabel, dataIndex: 'sku_display',  flex: 1,  sortable: true  },
-        { header: this.sku_idLabel, dataIndex: 'location_display',  flex: 1,  sortable: true  },
+        { header: this.location_idLabel, dataIndex: 'location_display',  flex: 1,  sortable: true  },
         { header: this.dateLabel, dataIndex: 'date',  flex: 1,  sortable: true , renderer: Ext.util.Format.dateRenderer('m/d/y') },
         { header: this.net_inventory_costLabel, dataIndex: 'net_inventory_cost',  flex: 1,  sortable: true  },
         { header: this.net_inventory_unitsLabel, dataIndex: 'net_inventory_units',  flex: 1,  sortable: true  },

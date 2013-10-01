@@ -43,6 +43,9 @@ class Omni::Sync::Grits < Omni::Import::Base
     @order_lines = []
   end
 
+  def self.get_id(location_id, sku_id)
+    row_id = @inventories["#{location_id},#{sku_id}"] || Buildit::Util::Guid.generate
+  end
 
   def self.load_file(file_name)
     load
@@ -82,13 +85,13 @@ class Omni::Sync::Grits < Omni::Import::Base
         next
       end
 
-      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{@locations['60']}',#{x['60 O/H']},#{x['60 O/O']})"  if x['60 O/H'].to_i != 0 || x['60 O/O'].to_i != 0
-      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{@locations['61']}',#{x['61 O/H']},#{x['61 O/O']})"  if x['61 O/H'].to_i != 0 || x['61 O/O'].to_i != 0
-      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{@locations['62']}',#{x['62 O/H']},#{x['62 O/O']})"  if x['62 O/H'].to_i != 0 || x['62 O/O'].to_i != 0
-      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{@locations['63']}',#{x['63 O/H']},#{x['63 O/O']})"  if x['63 O/H'].to_i != 0 || x['63 O/O'].to_i != 0
-      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{@locations['64']}',#{x['64 O/H']},#{x['64 O/O']})"  if x['64 O/H'].to_i != 0 || x['64 O/O'].to_i != 0
-      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{@locations['65']}',#{x['65 O/H']},#{x['65 O/O']})"  if x['65 O/H'].to_i != 0 || x['65 O/O'].to_i != 0
-      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', '#{@locations['66']}',#{x['66 O/H']},#{x['66 O/O']})"  if x['66 O/H'].to_i != 0 || x['66 O/O'].to_i != 0
+      ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id(@locations['60'], sku_id)}', '#{sku_id}', '#{@locations['60']}',#{x['60 O/H']},#{x['60 O/O']})"  if x['60 O/H'].to_i != 0 || x['60 O/O'].to_i != 0
+      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['61']}',#{x['61 O/H']},#{x['61 O/O']})"  if x['61 O/H'].to_i != 0 || x['61 O/O'].to_i != 0
+      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['62']}',#{x['62 O/H']},#{x['62 O/O']})"  if x['62 O/H'].to_i != 0 || x['62 O/O'].to_i != 0
+      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['63']}',#{x['63 O/H']},#{x['63 O/O']})"  if x['63 O/H'].to_i != 0 || x['63 O/O'].to_i != 0
+      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['64']}',#{x['64 O/H']},#{x['64 O/O']})"  if x['64 O/H'].to_i != 0 || x['64 O/O'].to_i != 0
+      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['65']}',#{x['65 O/H']},#{x['65 O/O']})"  if x['65 O/H'].to_i != 0 || x['65 O/O'].to_i != 0
+      # ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units) VALUES ('#{get_id}', '#{sku_id}', '#{@locations['66']}',#{x['66 O/H']},#{x['66 O/O']})"  if x['66 O/H'].to_i != 0 || x['66 O/O'].to_i != 0
 
       if @created_count.to_s.end_with? '000'
         puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
