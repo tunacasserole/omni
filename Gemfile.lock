@@ -32,16 +32,15 @@ GEM
     amq-protocol (1.8.0)
     arel (3.0.2)
     builder (3.0.4)
-    buildit (0.8.91)
+    buildit (0.8.87)
       buildit_her
       bunny (>= 0.9.0.rc1)
       colored
       extjs4-rails
-      jruby-ldap
       json
       log4r
       rack-cors
-      rails (~> 3.2.14)
+      rails (~> 3.2.13)
       rest-client
       socket.io-rails
       state_machine
@@ -74,13 +73,10 @@ GEM
       railties (~> 3.1)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
-    ffi (1.9.0-java)
     hike (1.2.3)
     i18n (0.6.5)
     journey (1.0.4)
-    jruby-ldap (0.0.2)
     json (1.8.0)
-    json (1.8.0-java)
     log4r (1.1.10)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -93,19 +89,12 @@ GEM
     mysql2 (0.3.13)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
-    nokogiri (1.6.0-java)
-      mini_portile (~> 0.5.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
-    pry (0.9.12.2-java)
-      coderay (~> 1.0.5)
-      method_source (~> 0.8)
-      slop (~> 3.4)
-      spoon (~> 0.0)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
     rack (1.4.5)
@@ -137,14 +126,20 @@ GEM
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    roo (1.12.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
     rsolr (1.0.9)
       builder (>= 2.1.2)
     ruby-net-ldap (0.0.4)
+    ruby-ole (1.2.11.7)
+    rubyzip (1.0.0)
     slop (3.4.6)
     socket.io-rails (0.9.16)
       railties (>= 3.1)
-    spoon (0.0.4)
-      ffi
+    spreadsheet (0.9.0)
+      ruby-ole (>= 1.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -171,11 +166,10 @@ GEM
     will_paginate (3.0.5)
 
 PLATFORMS
-  java
   ruby
 
 DEPENDENCIES
-  buildit
+  buildit (= 0.8.87)
   buildit_comm
   buildit_sockets
   coffee-rails (~> 3.2.1)
@@ -183,6 +177,7 @@ DEPENDENCIES
   pry
   pry-rails
   rails (= 3.2.14)
+  roo
   ruby-net-ldap
   sunspot_rails
   sunspot_solr

@@ -41,7 +41,6 @@ class Omni::Sync::Rms < Omni::Import::Base
 
   def self.on_hand
     load
-
     ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for 'RMS')
     sql = 'select ItemID, StoreID, SnapShotQuantity from ItemDynamic where SnapShotQuantity > 0'
     data = ActiveRecord::Base.connection.execute sql
@@ -49,7 +48,7 @@ class Omni::Sync::Rms < Omni::Import::Base
     # Omni::RmsItemDynamic.where('SnapShotQuantity > 0').find_each do |x|
     data.each do |x|
         puts "PROCESSING row #{@created_count.to_s}:" if @created_count.to_s.end_with? '00000'
-
+        puts x.StoreID
         location_id = @locations[x.StoreID.to_i]
         unless location_id
           @no_location_count += 1
@@ -163,31 +162,41 @@ class Omni::Sync::Rms < Omni::Import::Base
     xit
   end
 end
-  # def self.transaction_to_date_hash
-  #   @hash = {}
-  #   ActiveRecord::Base.transaction do
-  #     Omni::RmsTransaction.where("[Time] >= '01/01/2011'").find_each(:batch_size => 10000) do |x|
-  #       @hash[x.transaction_nbr] = "'#{x.time.to_s[0...10]}'"
-  #     end
-  #   end
-  #   @hash
-  # end
+  # def self.to_sql(store_id, item, units, date, sold)
+  #   @source_count += 1
 
-  # def self.tester
-  #   @locations = Omni::Location.source_hash('BUCKHEAD')
-  #   @skus = Omni::Sku.source_hash('BUCKHEAD')
-  #   ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for 'RMS')
-  #   sql = "select T.[Time], T.StoreID, TE.ItemID, TE.Quantity as Sold from TransactionEntry TE, [Transaction] T where T.TransactionNumber = TE.TransactionNumber and TE.Quantity > 0 and TE.ItemID <> '48389' and T.[Time] >= '01/01/2012' and T.[Time] <= '1/31/2012'"
-  #   data = ActiveRecord::Base.connection().execute sql
-  #   ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for 'BUILDIT')
-  #   x=data.first
-  #   location_id = @locations[x['StoreID']]
-  #   sku_id = @skus["#{x['ItemID']}"]
-  #   units = x['Sold'].to_s.chop.chop
-  #   date = "'#{x['Time'].to_s[0...10]}'"
-  #   puts date
-  #   @updates.push "('#{SecureRandom.uuid.gsub('-','').upcase}','#{sku_id}','#{location_id}',#{date},#{units})"
-  #   sql = "insert into daily_results (daily_result_id, sku_id, location_id, date, net_sale_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
-  #   ActiveRecord::Base.connection.execute sql
+  #   location_id = @locations[.to_i]
+  #   unless location_id
+  #       @no_location_count += 1
+  #       @no_locations << "#{store_id.to_s},#{item.to_s}"
+  #   end
+
+  #   sku_id = @skus["#{stock_nbr.to_s},#{size}"]
+  #   unless sku_id
+  #     @no_sku_count += 1
+  #     @no_skus << "#{store_id.to_s},#{item.to_s}"
+  #   end
+
+  #   if sold
+  #     row_id = @inventories["#{location_id},#{sku_id},#{date}.to_s"]
+  #   else
+  #     row_id = @inventories["#{location_id},#{sku_id}"]
+  #   end
+
+  #   unless row_id
+  #     @no_id_count += 1
+  #     @no_row << "#{location_id},#{sku_id}"
+  #     row_id = Buildit::Util::Guid.generate
+  #   end
+
+  #   if location_id and sku_id
+  #     if sold
+  #       @updates.push "('#{row_id}','#{sku_id}','#{location_id}',#{units},#{date})"
+  #     else
+  #       @updates.push "('#{row_id}','#{sku_id}','#{location_id}',#{units})"
+  #     end
+  #     @created_count += 1
+  #   end
+
   # end
 # end

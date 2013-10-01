@@ -25,61 +25,61 @@ Ext.define('Omni.view.app.Hub', {
             // Section: Inventory Planning //
 
             {
-              title: 'Inventory Planning',
-              columns: 4,
-              rows: 3,
-              tiles: [{
-                title: 'BTS',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'bts',
-                target: {
-                  xtype: 'omni-bts-Explorer'
-                }
-              }, {
-                title: 'Daily Results',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'bts_source',
-                target: {
-                  xtype: 'omni-daily_results-Explorer'
-                }
-              }, {
-                title: 'Period Results',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'bts_source',
-                target: {
-                  xtype: 'omni-period_results-Explorer'
-                }
-              }, {
-                title: 'Projections',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'bts_source',
-                target: {
-                  xtype: 'omni-projections-Explorer'
-                }
-              }, {
-                title: 'Stock Ledger Activity',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'bts_source',
-                target: {
-                  xtype: 'omni-stock_ledger_activities-Explorer'
-                },
-                allowNew: false,
-                allowFind: true
-              }, {
-                title: 'Inventory',
-                colspan: 2,
-                rowspan: 1,
-                cls: 'bts_source',
-                target: {
-                  xtype: 'omni-inventories-Explorer'
-                }
-              }, ]
-            }
+        title: 'Inventory Planning',
+        columns: 4,
+        rows: 3,
+        tiles: [{
+          title: 'BTS',
+          colspan: 2,
+          rowspan: 1,
+          cls: 'bts',
+          target: {
+            xtype: 'omni-bts-Explorer'
+          }
+        }, {
+          title: 'Inventory',
+          colspan: 2,
+          rowspan: 1,
+          cls: 'bts_source',
+          target: {
+            xtype: 'omni-inventories-Explorer'
+          },
+        }, {
+          title: 'Daily Results',
+          colspan: 2,
+          rowspan: 1,
+          cls: 'bts_source',
+          target: {
+            xtype: 'omni-daily_results-Explorer'
+          }
+        }, {
+          title: 'Period Results',
+          colspan: 2,
+          rowspan: 1,
+          cls: 'bts_source',
+          target: {
+            xtype: 'omni-period_results-Explorer'
+          }
+        }, {
+          title: 'Projections',
+          colspan: 2,
+          rowspan: 1,
+          cls: 'bts_source',
+          target: {
+            xtype: 'omni-projections-Explorer'
+          }
+        }, {
+          title: 'Stock Ledger Activity',
+          colspan: 2,
+          rowspan: 1,
+          cls: 'bts_source',
+          target: {
+            xtype: 'omni-stock_ledger_activities-Explorer'
+          },
+          allowNew: false,
+          allowFind: true
+        }, ]
+      }
 
               // Section: Supply //
 
@@ -287,7 +287,7 @@ Ext.define('Omni.view.app.Hub', {
                   cls: 'company',
                   target: {
                     xtype: 'omni-sites-Explorer'
-                  }                  
+                  }
                 }]
               }
 
@@ -396,7 +396,7 @@ Ext.define('Omni.view.app.Hub', {
                   cls: 'network',
                   target: {
                     xtype: 'omni-tills-Explorer'
-                  }                  
+                  }
                 }]
               }
 

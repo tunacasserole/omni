@@ -30,6 +30,14 @@ namespace :omni do
 
   namespace :sync do
     namespace :mark do
+      desc "load Omni inventory and daily results from Mark"
+      task :all => :environment do |t, args|
+        Omni::Sync::Mark.on_hand
+        Omni::Sync::Mark.wip
+        Omni::Sync::Mark.allocated
+        Omni::Sync::Mark.transit
+        Omni::Sync::Mark.solf
+      end
       desc "load Omni inventories on hand from Mark inventory qoh."
       task :on_hand => :environment do |t, args|
         Omni::Sync::Mark.on_hand

@@ -119,10 +119,20 @@ class Omni::Sku < ActiveRecord::Base
   # HELPERS (Start) =====================================================================
   def self.source_hash(legacy_source)
     # puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku hash"
-    # legacy_source = 'BUCKHEAD'
+    # legacy_source = 'PARKER'
+    # ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| sku_hash[x['source_id']] = x['sku_id']}  # JRUBY!!!
     sku_hash = {}
-    ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| sku_hash[x['source_id']] = x['sku_id']}
+    ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| sku_hash[x[1]] = x[0]}
     sku_hash
+    # sku_array = []
+    # sku_array = ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'")
+    # sku_array.each do |x|
+
+      # source = x['source_id']
+      # sku_id = x['sku_id']
+      # sku_hash[x['source_id']] = x['sku_id']
+   # end
+    # sku_hash
     # puts "#{Time.now.strftime("%H:%M:%S").yellow}: END....create sku hash: #{sku_hash.count.to_s}"
     # sku_hash
   end

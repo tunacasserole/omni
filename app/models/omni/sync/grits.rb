@@ -1,3 +1,4 @@
+
 # require 'roo'
 
 class Omni::Sync::Grits < Omni::Import::Base
@@ -34,6 +35,7 @@ class Omni::Sync::Grits < Omni::Import::Base
 
     @locations = Omni::Location.source_hash('GRITS')
     @skus = Omni::Sku.source_hash('GRITS')
+    @inventories = Omni::Inventory.source_hash
 
     @updates = []
     @no_locations = []
@@ -45,7 +47,6 @@ class Omni::Sync::Grits < Omni::Import::Base
   def self.load_file(file_name)
     load
     rows = []
-    file_name = 'sold.xlsx'
     file_name = File.join(Rails.root, '/db/import/', file_name)
 
     if file_name.end_with? '.xlsx'

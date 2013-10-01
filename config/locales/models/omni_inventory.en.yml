@@ -8,25 +8,27 @@ en:
         display:                         Name
         sku_display:                     Sku
         sku_id:                          Sku
+        source:                     Source
+        source_id:                          Source Id
         location_display:                Location
         location_id:                     Location
-        on_hand_units:                   On Hand 
-        in_transit_units:                In Transit 
-        non_sellable_units:              Non Sellable 
-        allocated_units:                 Allocated 
-        reserved_units:                  Reserved 
-        shipping_units:                  Shipping 
-        work_in_process_units:           Work In Process 
-        requested_units:                 Requested 
-        frozen_units:                    Frozen 
-        supplier_on_order_units:         On Order 
-        warehouse_on_order_units:        Warehouse On Order 
+        on_hand_units:                   On Hand
+        in_transit_units:                In Transit
+        non_sellable_units:              Non Sellable
+        allocated_units:                 Allocated
+        reserved_units:                  Reserved
+        shipping_units:                  Shipping
+        work_in_process_units:           Work In Process
+        requested_units:                 Requested
+        frozen_units:                    Frozen
+        supplier_on_order_units:         On Order
+        warehouse_on_order_units:        Warehouse On Order
         cost_pool:                       Cost Pool
         retail_pool:                     Retail Pool
-        boy_units:                       Boy 
+        boy_units:                       Boy
         boy_cost:                        Boy Cost
         boy_retail:                      Boy Retail
-        last_inventory_units:            Last Inventory 
+        last_inventory_units:            Last Inventory
         last_inventory_cost:             Last Inventory Cost
         last_inventory_retail:           Last Inventory Retail
         reserve_end_date:                Reserve End Date

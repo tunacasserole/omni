@@ -92,23 +92,27 @@ class Omni::MarkOrder < ActiveRecord::Base
     1569747
   end
 
-  def self.order_to_outlet_hash
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
-    order_to_outlet = {}
-    # sql = "select order_nbr, outlet_nbr from orders_hd where order_nbr > #{last_order_of_2010}"
-    # ActiveRecord::Base.connection.execute sql
-    Omni::MarkOrder.where('order_nbr >= ?',self.last_order_of_2010).find_each(:batch_size => 15000) {|o| order_to_outlet[o.order_nbr] = o.outlet_nbr}
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_nbr to outlet_nbr hash: #{order_to_outlet.count.to_s}"
-    order_to_outlet
+  def self.last_order_of_2012
+    2053197
   end
 
-  def self.order_to_date_hash
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to order date hash"
-    order_to_date = {}
-    Omni::MarkOrder.where('order_nbr >= ?',self.last_order_of_2010).find_each(:batch_size => 15000) {|o| order_to_date[o.order_nbr] = "'#{o.date_putin.to_s[0...10]}'"}
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_nbr to order date hash: #{order_to_date.count.to_s}"
-    order_to_date
-  end
+  # def self.order_to_outlet_hash
+  #   puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
+  #   order_to_outlet = {}
+  #   # sql = "select order_nbr, outlet_nbr from orders_hd where order_nbr > #{last_order_of_2010}"
+  #   # ActiveRecord::Base.connection.execute sql
+  #   Omni::MarkOrder.where('order_nbr >= ?',self.last_order_of_2012).find_each(:batch_size => 15000) {|o| order_to_outlet[o.order_nbr] = o.outlet_nbr}
+  #   puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_nbr to outlet_nbr hash: #{order_to_outlet.count.to_s}"
+  #   order_to_outlet
+  # end
+
+  # def self.order_to_date_hash
+  #   puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to order date hash"
+  #   order_to_date = {}
+  #   Omni::MarkOrder.where('order_nbr >= ?',self.last_order_of_2010).find_each(:batch_size => 15000) {|o| order_to_date[o.order_nbr] = "#{o.date_putin.to_s[0...10]}"}
+  #   puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_nbr to order date hash: #{order_to_date.count.to_s}"
+  #   order_to_date
+  # end
   # HELPERS (End)
 
 end # class Omni::MarkOrderReport

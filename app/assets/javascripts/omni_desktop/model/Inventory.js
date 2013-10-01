@@ -1,6 +1,6 @@
 Ext.define('Omni.model.Inventory', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -17,6 +17,8 @@ Ext.define('Omni.model.Inventory', {
     { name: 'display',                              type: 'string'      },
     { name: 'sku_display',                          type: 'string'      },
     { name: 'sku_id',                               type: 'string'      },
+    { name: 'source',                               type: 'string'      },
+    { name: 'source_id',                          type: 'string'      },
     { name: 'location_display',                     type: 'string'      },
     { name: 'location_id',                          type: 'string'      },
     { name: 'on_hand_units',                        type: 'float',      defaultValue: 0                         },

@@ -1,7 +1,6 @@
 class Omni::Inventory < ActiveRecord::Base
 
   # MIXINS (Start) ======================================================================
-
   # MIXINS (End)
 
 
@@ -12,7 +11,7 @@ class Omni::Inventory < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -24,28 +23,28 @@ class Omni::Inventory < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :inventory_id,                     :override  =>  false,        :with  => :guid              
+  default      :inventory_id,                     :override  =>  false,        :with  => :guid
   # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display}"}
-  default      :on_hand_units,                    :override  =>  false,        :to    => 0                  
-  default      :in_transit_units,                 :override  =>  false,        :to    => 0                  
-  default      :non_sellable_units,               :override  =>  false,        :to    => 0                  
-  default      :allocated_units,                  :override  =>  false,        :to    => 0                  
-  default      :reserved_units,                   :override  =>  false,        :to    => 0                  
-  default      :shipping_units,                   :override  =>  false,        :to    => 0                  
-  default      :work_in_process_units,            :override  =>  false,        :to    => 0                  
-  default      :requested_units,                  :override  =>  false,        :to    => 0                  
-  default      :frozen_units,                     :override  =>  false,        :to    => 0                  
-  default      :supplier_on_order_units,          :override  =>  false,        :to    => 0                  
-  default      :warehouse_on_order_units,         :override  =>  false,        :to    => 0                  
-  default      :cost_pool,                        :override  =>  false,        :to    => 0                  
-  default      :retail_pool,                      :override  =>  false,        :to    => 0                  
-  default      :boy_units,                        :override  =>  false,        :to    => 0                  
-  default      :boy_cost,                         :override  =>  false,        :to    => 0                  
-  default      :boy_retail,                       :override  =>  false,        :to    => 0                  
-  default      :last_inventory_units,             :override  =>  false,        :to    => 0                  
-  default      :last_inventory_cost,              :override  =>  false,        :to    => 0                  
-  default      :last_inventory_retail,            :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :on_hand_units,                    :override  =>  false,        :to    => 0
+  default      :in_transit_units,                 :override  =>  false,        :to    => 0
+  default      :non_sellable_units,               :override  =>  false,        :to    => 0
+  default      :allocated_units,                  :override  =>  false,        :to    => 0
+  default      :reserved_units,                   :override  =>  false,        :to    => 0
+  default      :shipping_units,                   :override  =>  false,        :to    => 0
+  default      :work_in_process_units,            :override  =>  false,        :to    => 0
+  default      :requested_units,                  :override  =>  false,        :to    => 0
+  default      :frozen_units,                     :override  =>  false,        :to    => 0
+  default      :supplier_on_order_units,          :override  =>  false,        :to    => 0
+  default      :warehouse_on_order_units,         :override  =>  false,        :to    => 0
+  default      :cost_pool,                        :override  =>  false,        :to    => 0
+  default      :retail_pool,                      :override  =>  false,        :to    => 0
+  default      :boy_units,                        :override  =>  false,        :to    => 0
+  default      :boy_cost,                         :override  =>  false,        :to    => 0
+  default      :boy_retail,                       :override  =>  false,        :to    => 0
+  default      :last_inventory_units,             :override  =>  false,        :to    => 0
+  default      :last_inventory_cost,              :override  =>  false,        :to    => 0
+  default      :last_inventory_retail,            :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -59,17 +58,17 @@ class Omni::Inventory < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  # belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
-  # belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
+  belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
+  belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
   # ASSOCIATIONS (End)
 
-
-
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  # mapped_attributes do
-  #   map :sku_display,                            :to => 'sku.display'
-  #   map :location_display,                       :to => 'location.display'
-  # end
+  mapped_attributes do
+    map :sku_display,                              :to => 'sku.display'
+    map :source,                                      :to => 'sku.source'
+    map :source_id,                                 :to => 'sku.source_id'
+    map :location_display,                       :to => 'location.display'
+  end
   # MAPPED ATTRIBUTES (End)
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
@@ -85,20 +84,35 @@ class Omni::Inventory < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
+  def self.source_hash
+     # legacy_source = 'PARKER'
+    # ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| sku_hash[x['source_id']] = x['sku_id']}  # JRUBY!!!
+    inventory_hash = {}
+    ActiveRecord::Base.connection.execute("select inventory_id, location_id, sku_id from inventories").each {|x| inventory_hash["#{x[1]},#{x[2]}"] = x[0]}
+    inventory_hash
+    # sku_id = 'FC01B0200EE811E3BB7020C9D047DD15'
+    # location_id = '540ADAA2AC3E11E2947800FF58D32228'
+    # inventory_id = @inventories["#{location_id},#{sku_id}"]
+  end
   # HOOKS (End)
 
 
   # INDEXING (Start) ====================================================================
-  # searchable do
-    # string   :location_display do location.display if location end          
-    # string   :sku_display do sku.display if sku end      
-    # string   :location_id
-    # string   :sku_id
-    # string   :display
- 
-    # text     :location_display_fulltext, :using => :location_display
-    # text     :sku_display_fulltext, :using => :sku_display        
-  # end 
+  searchable do
+    string   :location_display do location.display if location end
+    string   :sku_display do sku.display if sku end
+    string   :location_id
+    string   :sku_id
+    string   :display
+    string   :source
+    string   :source_id
+
+    text     :location_display_fulltext, :using => :location_display
+    text     :sku_display_fulltext, :using => :sku_display
+    text     :display_fulltext, :using => :display
+    text     :source_fulltext, :using => :source
+    text     :source_id_fulltext, :using => :source_id
+  end
   # INDEXING (End)
 
 
