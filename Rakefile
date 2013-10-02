@@ -67,6 +67,10 @@ namespace :omni do
       task :results => :environment do |t, args|
         Omni::Sync::Omni.results
       end
+      desc "Run the back to school report"
+      task :bts => :environment do |t, args|
+        Omni::Sync::Omni.bts
+      end
     end
   end
 

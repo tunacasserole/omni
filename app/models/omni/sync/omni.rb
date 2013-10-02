@@ -3,8 +3,8 @@ class Omni::Sync::Omni
   def self.xit
     # put "no locations found for these outlets: #{@no_locations}"
     # put "no skus found for these products: #{@no_skus}"
-    put "no sku found for that item: #{@no_sku_count}"
-    put "no location found for that store: #{@no_location_count}"
+    # put "no sku found for that item: #{@no_sku_count}"
+    # put "no location found for that store: #{@no_location_count}"
     # put "no inventory found: #{@no_id_count}"
     put "***********************************"
     put "legacy source rows: #{@source_count}"
@@ -38,21 +38,28 @@ class Omni::Sync::Omni
 
   def self.results
     puts "---results---"
+    load
+    sum_to_month
+    sum_to_year
+    xit
+  end
+
+  def self.sum_to_month
     @period_results = Omni::PeriodResult.source_hash
-    periods = Omni::Period.where("year_number > '2010' and year_number < '2014'").order('year_number ASC').order('period_number ASC')
-    periods.each do |p|
+    @periods = Omni::Period.where("year_number > '2010' and year_number < '2014'").order('year_number ASC').order('period_number ASC')
+    @periods.each do |p|
         # p = Omni::Period.where(:display => '2011-Period 1').first
         # units = x['sold']  #JRUBY
         # location_id = x['location_id'] #JRUBY
         # sku_id = x['sku_id'] #JRUBY
-      sql = "select sku_id, location_id, sum(net_sale_units) as sold from daily_results where date >= '#{p.start_date}' and date <= '#{p.end_date}' group by sku_id, location_id"
+      sql = "select location_id, sku_id, sum(net_sale_units) as sold from daily_results where date >= '#{p.start_date}' and date <= '#{p.end_date}' group by sku_id, location_id"
       data = ActiveRecord::Base.connection.execute sql
       data.each do |x|
         @source_count += 1
         units = x[2]
         period_id = p.period_id
-        location_id = x[1] #MRI
-        sku_id = x[0] #MRI
+        location_id = x[0] #MRI
+        sku_id = x[1] #MRI
         row_id = @period_results["#period_id},#{location_id},#{sku_id}"] || Buildit::Util::Guid.generate
         @updates.push "('#{row_id}','#{period_id}','#{location_id}','#{sku_id}',#{units})"
 
@@ -65,14 +72,53 @@ class Omni::Sync::Omni
         end
         @created_count += 1
       end
-      xit
+    end
+    @period_results = {}
+  end
+
+  def self.sum_to_year
+    puts "sum to year"
+    @period_results = Omni::PeriodResult.source_hash
+    periods = ""
+    ['2011','2012','2013'].each do |year|
+      @period_id = Omni::Period.where(:display => year).first.period_id
+      @periods = Omni::Period.where(:year_number => year).order('display')
+      @periods.each do |p|
+        periods += "'#{p.period_id}',"
+      end
+      # puts "year is #{p.display}"
+      sql = "select location_id, sku_id, sum(net_sale_units) as sold from period_results where period_id in (#{periods.chop}) group by sku_id, location_id"
+      data = ActiveRecord::Base.connection.execute sql
+      data.each do |x|
+        @source_count += 1
+        units = x[2]
+        location_id = x[0] #MRI
+        sku_id = x[1] #MRI
+        period_id = @period_id
+        row_id = @period_results["#{period_id},#{location_id},#{sku_id}"] || Buildit::Util::Guid.generate
+        @updates.push "('#{row_id}','#{period_id}','#{location_id}','#{sku_id}',#{units})"
+
+        if @created_count.to_s.end_with? '000'
+          puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
+          sql = "insert into period_results (period_result_id, period_id, location_id, sku_id, net_sale_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
+          ActiveRecord::Base.connection.execute sql
+          @updates = []
+          sql = ''
+        end
+        @created_count += 1
+      end
     end
   end
 
   def self.bts
     load
-    bts = Omni::Bts.find_or_create(:display => Date.today.to_s)
-    @bts = Omni::BtsDetail.source_hash
+    @bts = Omni::Bts.first #where(:display => Date.today.to_s).first || Omni::Bts.create(:display => Date.today.to_s)
+    @bts_hash = {} #Omni::BtsDetail.source_hash
+    # get_inventory
+    get_results
+  end
+
+  def self.get_inventory
     sql = 'select location_id, sku_id, on_hand_units, supplier_on_order_units, work_in_process_units, in_transit_units, allocated_units from inventories'
     # ActiveRecord::Base.transaction do
     data = ActiveRecord::Base.connection.execute sql
@@ -80,15 +126,15 @@ class Omni::Sync::Omni
       @source_count += 1
       location_id = x[0]
       sku_id = x[1]
-      oh = x[2]
-      oo = x[3]
-      wip = x[4]
-      tr = x[5]
-      al = x[6]
-      row_id = @bts["#{location_id},#{sku_id}"] || Buildit::Util::Guid.generate
-      @updates.push "('#{row_id}','#{bts.bts_id}','#{location_id}','#{sku_id}',#{oh},#{oo},#{wip},#{tr},#{al})"
+      oh = x[2] || 0
+      oo = x[3] || 0
+      wip = x[4] || 0
+      tr = x[5] || 0
+      al = x[6] || 0
+      row_id = @bts_hash["#{location_id},#{sku_id}"] || Buildit::Util::Guid.generate
+      @updates.push "('#{row_id}','#{@bts.bts_id}','#{location_id}','#{sku_id}',#{oh},#{oo},#{wip},#{tr},#{al})"
       if @created_count.to_s.end_with? '000'
-        puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
+        puts "#{Time.now.strftime("%H:%M:%S").yellow}: INVENTORY processing row: #{@created_count.to_s}"
         sql = "insert into bts_details (bts_detail_id, bts_id, location_id, sku_id, on_hand, on_order, wip, transit, allocated) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE on_hand = VALUES(on_hand)"
         ActiveRecord::Base.connection.execute sql
         @updates = []
@@ -98,4 +144,29 @@ class Omni::Sync::Omni
     end
   end
 
+  def self.get_results
+    ['2011','2012','2013'].each do |year|
+      period_id = Omni::Period.where(:display => year).first.period_id
+      sql = "select location_id, sku_id, net_sale_units from period_results where period_id = #{'period_id'}"
+      data = ActiveRecord::Base.connection.execute sql
+      data.each do |x|
+        @source_count += 1
+        location_id = x[0]
+        sku_id = x[1]
+        row_id = @bts["#{location_id},#{sku_id}"] || Buildit::Util::Guid.generate
+        units = x[2] || 0
+        @updates.push "('#{row_id}','#{@bts.bts_id}','#{location_id}','#{sku_id}',#{units})"
+        if @created_count.to_s.end_with? '00'
+          puts "#{Time.now.strftime("%H:%M:%S").yellow}: RESULTS  processing row: #{@created_count.to_s}"
+          sql = "insert into bts_details (bts_detail_id, bts_id, location_id, sku_id, py2) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE py2 = VALUES(py2)" if year == '2011'
+          sql = "insert into bts_details (bts_detail_id, bts_id, location_id, sku_id, py1) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE py1 = VALUES(py1)" if year == '2012'
+          sql = "insert into bts_details (bts_detail_id, bts_id, location_id, sku_id, ytd) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE ytd = VALUES(ytd)" if year == '2013'
+          ActiveRecord::Base.connection.execute sql
+          @updates = []
+          sql = ''
+        end
+        @created_count += 1
+      end
+    end
+  end
 end

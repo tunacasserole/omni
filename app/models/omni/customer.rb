@@ -114,12 +114,15 @@ class Omni::Customer < ActiveRecord::Base
     string   :phone
     string   :email_address
 
-    text     :customer_nbr_fulltext, :using => :customer_nbr
+    # text     :customer_nbr_fulltext, :using => :customer_nbr
     text     :line_1_fulltext, :using => :line_1
     text     :city_fulltext, :using => :city
-    text     :state_code_fulltext, :using => :state_code
-    text     :zip_fulltext, :using => :zip
-    text     :phone_fulltext, :using => :phone
+    text     :first_name_fulltext, :using => :first_name
+    text     :last_name_fulltext, :using => :last_name
+    text     :display_fulltext, :using => :display
+    # text     :state_code_fulltext, :using => :state_code
+    # text     :zip_fulltext, :using => :zip
+    # text     :phone_fulltext, :using => :phone
     text     :email_address_fulltext, :using => :email_address
   end
   # INDEXING (End)
