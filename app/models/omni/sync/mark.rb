@@ -65,7 +65,7 @@ class Omni::Sync::Mark < Omni::Import::Base
         self.to_sql(x.outlet_nbr, x.stock_nbr, x.size, x.qoh, @date, false)
         if @created_count.to_s.end_with? '0000'
           puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
-          sql = "insert into inventories (inventory_id, sku_id, location_id, on_hand_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE on_hand_units = VALUES(on_hand_units)"
+          sql = "insert into inventories (inventory_id, location_id, sku_id, on_hand_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE on_hand_units = VALUES(on_hand_units)"
           ActiveRecord::Base.connection.execute sql
           @updates = []
           sql = ''
@@ -73,7 +73,7 @@ class Omni::Sync::Mark < Omni::Import::Base
       end
     end
 
-    sql = "insert into inventories (inventory_id, sku_id, location_id, on_hand_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE on_hand_units = VALUES(on_hand_units)"
+    sql = "insert into inventories (inventory_id, location_id, sku_id, on_hand_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE on_hand_units = VALUES(on_hand_units)"
     ActiveRecord::Base.connection.execute sql
     xit
   end
@@ -88,7 +88,7 @@ class Omni::Sync::Mark < Omni::Import::Base
       end
     end
 
-    sql = "insert into inventories (inventory_id, sku_id, location_id, work_in_process_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE work_in_process_units = VALUES(work_in_process_units)"
+    sql = "insert into inventories (inventory_id, location_id, sku_id, work_in_process_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE work_in_process_units = VALUES(work_in_process_units)"
     ActiveRecord::Base.connection.execute sql
     # if @updates.length > 1
     #   # sql = "insert into inventories (inventory_id, work_in_process_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE work_in_process_units = VALUES(work_in_process_units)"
@@ -103,7 +103,7 @@ class Omni::Sync::Mark < Omni::Import::Base
       outlet_nbr = transfer_to_outlet[x.transfer_id]
       self.to_sql(outlet_nbr, x.stock_nbr, x.size, x.qty, @date, false)
     end
-    sql = "insert into inventories (inventory_id, sku_id, location_id, allocated_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE allocated_units = VALUES(allocated_units)"
+    sql = "insert into inventories (inventory_id, location_id, sku_id, allocated_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE allocated_units = VALUES(allocated_units)"
     ActiveRecord::Base.connection.execute sql
     xit
   end
@@ -115,7 +115,7 @@ class Omni::Sync::Mark < Omni::Import::Base
       outlet_nbr = transfer_to_outlet[x.transfer_id]
       self.to_sql(outlet_nbr, x.stock_nbr, x.size, x.qty, @date, false)
     end
-    sql = "insert into inventories (inventory_id, sku_id, location_id, in_transit_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE in_transit_units = VALUES(in_transit_units)"
+    sql = "insert into inventories (inventory_id, location_id, sku_id, in_transit_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE in_transit_units = VALUES(in_transit_units)"
     ActiveRecord::Base.connection.execute sql
     xit
   end
@@ -133,7 +133,7 @@ class Omni::Sync::Mark < Omni::Import::Base
 
       if @updates.length == 10000
         puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
-        sql = "insert into daily_results (daily_result_id, sku_id, location_id, net_sale_units, date) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
+        sql = "insert into daily_results (daily_result_id, location_id, sku_id, net_sale_units, date) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
         ActiveRecord::Base.connection.execute sql
         @updates = []
         sql = ''
@@ -141,7 +141,7 @@ class Omni::Sync::Mark < Omni::Import::Base
       end
 
     end
-    sql = "insert into daily_results (daily_result_id, sku_id, location_id, net_sale_units, date) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
+    sql = "insert into daily_results (daily_result_id, location_id, sku_id, net_sale_units, date) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
     ActiveRecord::Base.connection.execute sql
     xit
   end
@@ -177,9 +177,9 @@ class Omni::Sync::Mark < Omni::Import::Base
 
     if location_id and sku_id
       if sold
-        @updates.push "('#{row_id}','#{sku_id}','#{location_id}',#{units},'#{date}')"
+        @updates.push "('#{row_id}','#{location_id}','#{sku_id}',#{units},'#{date}')"
       else
-        @updates.push "('#{row_id}','#{sku_id}','#{location_id}',#{units})"
+        @updates.push "('#{row_id}','#{location_id}','#{sku_id}',#{units})"
       end
       @created_count += 1
     end
@@ -187,8 +187,8 @@ class Omni::Sync::Mark < Omni::Import::Base
   end
 
   def self.order_hashes
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
     @daily_results = Omni::DailyResult.source_hash
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
     @order_to_outlet = {}
     @order_to_date = {}
     ActiveRecord::Base.transaction do

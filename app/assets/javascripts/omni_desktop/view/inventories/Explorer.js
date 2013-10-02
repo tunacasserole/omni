@@ -56,7 +56,7 @@ Ext.define('Omni.view.inventories.Explorer', {
         { header: this.in_transit_unitsLabel,                            dataIndex: 'in_transit_units',                   flex: 1,   sortable: true  },
         { header: this.allocated_unitsLabel,                             dataIndex: 'allocated_units',                    flex: 1,   sortable: true  },
         { header: this.sourceLabel,                                    dataIndex: 'source',                 flex: 1,   sortable: true  },
-        { header: this.source_id,                                    dataIndex: 'source_id',                 flex: 1,   sortable: true  },
+        { header: this.source_idLabel,                                    dataIndex: 'source_id',                 flex: 1,   sortable: true  },
       ]
     });
    // COLUMNS (End)

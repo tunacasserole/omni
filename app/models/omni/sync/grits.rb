@@ -10,8 +10,8 @@ class Omni::Sync::Grits < Omni::Import::Base
     put "no location found for that outlet: #{@no_location_count}"
     put "***********************************"
     put "legacy source rows: #{@source_count}"
-    put "omni rows created: #{@created_count}"
     put "legacy rows skipped: #{@source_count - @created_count}"
+    put "omni rows created: #{@created_count}"
     put "***********************************"
     put "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
     puts @output
@@ -65,7 +65,7 @@ class Omni::Sync::Grits < Omni::Import::Base
       s.default_sheet = s.sheets.first
       header = s.row(1)
       (2..s.last_row).each do |i|
-        break if i > 1000
+        # break if i > 1000
         next unless s.row(i)[0]
         row = Hash[[header, s.row(i)].transpose]
         row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
@@ -117,7 +117,7 @@ class Omni::Sync::Grits < Omni::Import::Base
   end
 
   def self.results
-    @period_results = Omni::PeriodResult.source_hash
+    @period_results = {} #Omni::PeriodResult.source_hash
     data = load_file('sold.xlsx')
     data.each do  |x|
       @source_count += 1

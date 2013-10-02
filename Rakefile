@@ -61,6 +61,13 @@ namespace :omni do
         Omni::Sync::Grits.results
       end
     end
+
+    namespace :omni do
+      desc "load Omni daily results from sales history from the RMS System."
+      task :results => :environment do |t, args|
+        Omni::Sync::Omni.results
+      end
+    end
   end
 
   desc "Drops all unused tables from the source"

@@ -10,6 +10,7 @@ class CreateOmniBtsDetails < ActiveRecord::Migration
         t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :data_source,                     :string,            :null  =>  true,    :limit   => 100
         t.column   :on_hand,                         :integer,           :null  =>  true
+        t.column   :on_order,                         :integer,           :null  =>  true
         t.column   :wip,                             :integer,           :null  =>  true
         t.column   :allocated,                       :integer,           :null  =>  true
         t.column   :transit,                         :integer,           :null  =>  true

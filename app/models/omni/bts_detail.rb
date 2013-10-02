@@ -32,55 +32,55 @@ class Omni::BtsDetail < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :bts,                            :class_name => 'Omni::Bts',                    :foreign_key => 'bts_id'  
-  belongs_to   :sku,                            :class_name => 'Omni::Sku',                    :foreign_key => 'sku_id'    
-  belongs_to   :location,                       :class_name => 'Omni::Location',               :foreign_key => 'location_id'      
+  belongs_to   :bts,                            :class_name => 'Omni::Bts',                    :foreign_key => 'bts_id'
+  belongs_to   :sku,                            :class_name => 'Omni::Sku',                    :foreign_key => 'sku_id'
+  belongs_to   :location,                       :class_name => 'Omni::Location',               :foreign_key => 'location_id'
   # ASSOCIATIONS (End)
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :sku_display,                            :to => 'sku.display'
-    map :source,                                 :to => 'sku.source'    
-    map :source_id,                              :to => 'sku.source_id'    
+    map :source,                                 :to => 'sku.source'
+    map :source_id,                              :to => 'sku.source_id'
     map :location_display,                       :to => 'location.display'
     map :style_id,                               :to => 'sku.style_id'
-    map :style_display,                          :to => 'sku.style_display'   
+    map :style_display,                          :to => 'sku.style_display'
   end
   # MAPPED ATTRIBUTES (End)
 
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
-  
+
   # COMPUTED ATTRIBUTES (End)
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-  
+
   # TEMPORARY ATTRIBUTES (End)
 
 
   # FILTERS (Start) =====================================================================
-  
+
   # FILTERS (End)
 
 
   # ORDERING (Start) ====================================================================
-  
+
   # ORDERING (End)
 
 
   # SCOPES (Start) ======================================================================
-  
+
   # SCOPES (End)
 
 
   # INDEXING (Start) ====================================================================
   searchable do
     string   :bts_id
-    string   :sku_display    
+    string   :sku_display
     string   :style_display
-    string   :on_hand    
+    string   :on_hand
     string   :wip
     string   :source
     string   :source_id
@@ -93,7 +93,7 @@ class Omni::BtsDetail < ActiveRecord::Base
 
     text     :sku_fulltext, :using => :sku
     text     :style_fulltext, :using => :style_display
-  end 
+  end
   # INDEXING (End)
 
 
@@ -103,22 +103,29 @@ class Omni::BtsDetail < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  
+
   # STATES (End)
-  
+
+  # HELPERS (Start) =======================================================================
+  def self.source_hash
+    etl_hash = {}
+    ActiveRecord::Base.connection.execute("select bts_detail_id, location_id, sku_id from bts_details").each {|x| etl_hash["#{x[1]},#{x[2]}"] = x[0]} #MRI
+    etl_hash
+  end
+  # HELPERS (End) =======================================================================
 
   # HELPERS (Start) =====================================================================
   def transform_and_calculate
     puts "transforming #{self.data_source} sku #{self.sku_display}"
 
     case self.sku.source
-      when 'Parker'  
-        puts "stock is: #{self.source}   size is: #{self.mark_size}"        
-        # puts "--on hand--"        
+      when 'Parker'
+        puts "stock is: #{self.source}   size is: #{self.mark_size}"
+        # puts "--on hand--"
         self.on_hand = Omni::MarkInventory.where(:stock_nbr => self.source_id, :size => self.source_id).sum(:qoh)
-        #puts "--wip--"  
+        #puts "--wip--"
         data = Omni::MarkWip.where(:stock_nbr => self.source_id, :size => self.source_id)
-        data.each {|x| self.wip += x.cut_wip + x.plant_wip + x.cont_wip} 
+        data.each {|x| self.wip += x.cut_wip + x.plant_wip + x.cont_wip}
         #puts "--allocated, in transit--"
         data = Omni::MarkTransferLine.where(:stock_nbr => self.source_id, :size => self.source_id)
         data.each do |x|
@@ -130,7 +137,7 @@ class Omni::BtsDetail < ActiveRecord::Base
         data.each do |x|
           self.ytd += x.qty if x.year_entered == Time.new.year
           self.py1 += x.qty if x.year_entered == Time.new.year-1
-          self.py2 += x.qty if x.year_entered == Time.new.year-2                  
+          self.py2 += x.qty if x.year_entered == Time.new.year-2
           self.projection = (self.py1 * 0.85) + (self.py2 * 0.15) if self.py1 && self.py2
         end
 
@@ -155,12 +162,12 @@ class Omni::BtsDetail < ActiveRecord::Base
           self.on_hand += x.qoh_60 + x.qoh_61 + x.qoh_62 + x.qoh_63 + x.qoh_64 + x.qoh_65 + x.qoh_66
           self.wip += x.qoo_60 + x.qoo_61 + x.qoo_62 + x.qoo_63 + x.qoo_64 + x.qoo_65 + x.qoo_66
           self.ytd += x.sold_60 + x.sold_61 + x.sold_62 + x.sold_63 + x.sold_64 + x.sold_65 + x.sold_66
-          self.projection += x.projected_60 + x.projected_61 + x.projected_62 + x.projected_63 + x.projected_64 + x.projected_65 + x.projected_66   
+          self.projection += x.projected_60 + x.projected_61 + x.projected_62 + x.projected_63 + x.projected_64 + x.projected_65 + x.projected_66
         end
     end
 
-    ### TOTAL ON HAND ###    
-    self.total_oh = self.on_hand + self.wip + self.allocated + self.transit      
+    ### TOTAL ON HAND ###
+    self.total_oh = self.on_hand + self.wip + self.allocated + self.transit
     ### STANDARD DEVIATION OF SALES TO PROJECTED ###
     mean = (self.ytd+self.py1+self.py2)/3
     tot_dev = ((self.ytd-mean)**2) + ((self.py1-mean)**2) + ((self.py2-mean)**2)

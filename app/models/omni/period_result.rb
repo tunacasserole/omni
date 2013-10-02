@@ -127,9 +127,9 @@ class Omni::PeriodResult < ActiveRecord::Base
   # HOOKS (End)
 
   # HELPERS (Start) =======================================================================
-    def self.source_hash
+  def self.source_hash
     etl_hash = {}
-    ActiveRecord::Base.connection.execute("select period_result_id, location_id, sku_id, period_id from period_results").each {|x| etl_hash["#{x[1]},#{x[2]},#{x[3]}"] = x[0]}
+    ActiveRecord::Base.connection.execute("select period_result_id, period_id, location_id, sku_id from period_results").each {|x| etl_hash["#{x[1]},#{x[2]},#{x[3]}"] = x[0]} #MRI
     etl_hash
   end
   # HELPERS (End) =======================================================================

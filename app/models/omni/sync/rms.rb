@@ -122,7 +122,8 @@ class Omni::Sync::Rms < Omni::Import::Base
 
   def self.results
     load
-    @daily_results = Omni::DailyResult.source_hash
+    # @daily_results = Omni::DailyResult.source_hash
+    @daily_results = {}
     # backorder_sql = "select T.Time, T.StoreID, TE.ItemID, TE.Quantity from TransactionEntry TE, [Transaction] T where T.TransactionNumber = TE.TransactionNumber and TE.Quantity > 0 and T.ItemID <> '48389' and T.RecallID <> 0 and T.RecallType = 4 and T.Time >= '01/01/2011'"
     start_date = '01-01-2011'
     1.upto(40).each do |x|
