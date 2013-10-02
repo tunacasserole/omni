@@ -75,16 +75,16 @@ mark_development:
 # RMS RDBMS: Connection Details
 #---------------------------------------------------
 
-rms_development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: true
-  database: rms_development
-  pool: 20
-  username: root
-  password:
-  wait_timeout: 2147483
-  host: 127.0.0.1
+# rms_development:
+#   adapter: mysql2
+#   encoding: utf8
+#   reconnect: true
+#   database: rms_development
+#   pool: 20
+#   username: root
+#   password:
+#   wait_timeout: 2147483
+#   host: 127.0.0.1
 
 rms_production:
   adapter: mysql2
@@ -121,17 +121,17 @@ rms_production:
 #   wait_timeout: 2147483
 #   host: 10.0.4.101
 
-# rms_development:
-#   adapter: jdbcmssql
-#   encoding: utf8
-#   reconnect: true
-#   # dataserver: '10.0.1.5\OmniTest'
-#   database: OmniTest
-#   pool: 20
-#   username: sa
-#   password: p0stec
-#   wait_timeout: 2147483
-#   host: 10.0.1.5
+rms_development:
+  adapter: jdbcmssql
+  encoding: utf8
+  reconnect: true
+  # dataserver: '10.0.1.5\OmniTest'
+  database: OmniTest
+  pool: 20
+  username: sa
+  password: p0stec
+  wait_timeout: 2147483
+  host: 10.0.1.5
 
 # rms_production:
 #   adapter: jdbcmssql

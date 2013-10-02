@@ -5,18 +5,19 @@ class Omni::Sync::Mark < Omni::Import::Base
     # put "number of locations without an outlet: #{@no_locations.length}"
     # put "no skus found for these stock-size combos: #{@no_skus}"
     # put "no inventory rows: #{@no_row_rows}"
+    put "***********************************"
     put "no sku found for that stock-size: #{@no_sku_count}"
     put "no location found for that outlet: #{@no_location_count}"
     put "no inventory found: #{@no_id_count}"
-    put "***********************************"
+    put "      -------------------------"
     put "legacy source rows: #{@source_count}"
-    put "omni rows created: #{@created_count}"
     put "legacy rows skipped: #{@source_count - @created_count}"
+    put "omni rows created: #{@created_count}"
     put "***********************************"
     put "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
     puts @output
     # @no_locations.each {|x| puts x}
-    exit
+    # exit
   end
 
   def self.put(message)
@@ -42,8 +43,6 @@ class Omni::Sync::Mark < Omni::Import::Base
     @last_order = Omni::MarkOrder.last_order_of_2010
     @locations = Omni::Location.source_hash('PARKER')
     @skus = Omni::Sku.source_hash('PARKER')
-    @inventories = Omni::Inventory.source_hash
-
     @updates = []
     @no_locations = []
     @no_skus = []
@@ -52,10 +51,11 @@ class Omni::Sync::Mark < Omni::Import::Base
   end
 
   def self.inventory
+    @inventories = Omni::Inventory.source_hash
     self.on_hand
     self.wip
     self.transit
-    self.sold
+    self.allocated
   end
 
   def self.on_hand
@@ -120,7 +120,7 @@ class Omni::Sync::Mark < Omni::Import::Base
     xit
   end
 
-  def self.sold
+  def self.results
     load
     self.order_hashes
 

@@ -41,10 +41,10 @@ class Omni::Sync::Grits < Omni::Import::Base
 
     @locations = Omni::Location.source_hash('GRITS')
     @skus = Omni::Sku.source_hash('GRITS')
-    @inventories = Omni::Inventory.source_hash
-    @period_py2 = Omni::Period.where(:display => '2011')
-    @period_py1= Omni::Period.where(:display => '2012')
-    @period_ytd = Omni::Period.where(:display => '2013')
+    @period_py2 = Omni::Period.where(:display => '2011').first.period_id
+    @period_py1= Omni::Period.where(:display => '2012').first.period_id
+    @period_ytd = Omni::Period.where(:display => '2013').first.period_id
+    @location_id = ''
     @updates = []
     @no_locations = []
     @no_skus = []
@@ -84,6 +84,7 @@ class Omni::Sync::Grits < Omni::Import::Base
   end
 
   def self.inventory
+    @inventories = Omni::Inventory.source_hash
     data = load_file('DATA.txt')
     data.each do  |x|
       @source_count += 1
@@ -116,6 +117,7 @@ class Omni::Sync::Grits < Omni::Import::Base
   end
 
   def self.results
+    @period_results = Omni::PeriodResult.source_hash
     data = load_file('sold.xlsx')
     data.each do  |x|
       @source_count += 1
@@ -126,10 +128,21 @@ class Omni::Sync::Grits < Omni::Import::Base
         next
       end
 
+      row_id = @period_results["#{@location_id},#{sku_id},#{@period_ytd}"] || Buildit::Util::Guid.generate
+      units = x['YTD']
+      period_id = @period_ytd
+      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, period_id, net_sale_units) VALUES ('#{row_id}', '#{sku_id}', '#{period_id}', #{units}) ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)" if units != "0.0"
 
-      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['YTD']},#{@period_ytd})" if x['YTD'] != "0.0"
-      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['PY1']},#{@period_py1})" if x['PY1'] != "0.0"
-      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, net_sale_units, period_id) VALUES ('#{SecureRandom.uuid.gsub('-','').upcase}', '#{sku_id}', #{x['PY2']},#{@period_py2})" if x['PY2'] != "0.0"
+      row_id = @period_results["#{@location_id},#{sku_id},#{@period_py1}"] || Buildit::Util::Guid.generate
+      units = x['PY1']
+      period_id = @period_py1
+      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, period_id, net_sale_units) VALUES ('#{row_id}', '#{sku_id}', '#{period_id}', #{units}) ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)" if units != "0.0"
+
+      row_id = @period_results["#{@location_id},#{sku_id},#{@period_py2}"] || Buildit::Util::Guid.generate
+      units = x['PY2']
+      period_id = @period_py2
+      ActiveRecord::Base.connection.execute "insert into period_results (period_result_id, sku_id, period_id, net_sale_units) VALUES ('#{row_id}', '#{sku_id}', '#{period_id}', #{units}) ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)" if units != "0.0"
+
       if @created_count.to_s.end_with? '000'
         puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
       end

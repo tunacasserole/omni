@@ -17,7 +17,11 @@ gem 'rails', '3.2.14'
 #   gem 'puma'
 #   gem 'warbler'
 # end
-
+platforms :jruby do
+  gem 'activerecord-jdbcmssql-adapter'
+  gem 'activerecord-jdbcmysql-adapter'
+  gem 'jdbc-jtds'
+end
 
 platforms :ruby do
   gem 'mysql2', '0.3.13'

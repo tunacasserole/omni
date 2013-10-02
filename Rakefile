@@ -30,48 +30,24 @@ namespace :omni do
 
   namespace :sync do
     namespace :mark do
-      desc "load Omni inventory and daily results from Mark"
-      task :all => :environment do |t, args|
-        Omni::Sync::Mark.on_hand
-        Omni::Sync::Mark.wip
-        Omni::Sync::Mark.allocated
-        Omni::Sync::Mark.transit
-        Omni::Sync::Mark.solf
-      end
-      desc "load Omni inventories on hand from Mark inventory qoh."
-      task :on_hand => :environment do |t, args|
-        Omni::Sync::Mark.on_hand
-      end
-      desc "load Omni inventories wip from Mark wip."
-      task :wip => :environment do |t, args|
-        Omni::Sync::Mark.wip
-      end
-      desc "load Omni inventories allocated from Mark transfer line qty."
-      task :allocated => :environment do |t, args|
-        Omni::Sync::Mark.allocated
-      end
-      desc "load Omni inventories transit from Mark transfer line qty."
-      task :transit => :environment do |t, args|
-        Omni::Sync::Mark.transit
+      desc "load Omni inventory from RMS inventory."
+      task :inventory => :environment do |t, args|
+        Omni::Sync::Mark.inventory
       end
       desc "load Omni daily results net sale units from Mark order line qty_ordered."
-      task :sold => :environment do |t, args|
-        Omni::Sync::Mark.sold
+      task :results => :environment do |t, args|
+        Omni::Sync::Mark.results
       end
     end
 
     namespace :rms do
       desc "load Omni daily results net sale units from rms."
-      task :on_hand => :environment do |t, args|
-        Omni::Sync::Rms.on_hand
-      end
-      desc "load Omni inventory, cost, daily, and period results from the RMS System."
-      task :on_order => :environment do |t, args|
-        Omni::Sync::Rms.on_order
+      task :inventory => :environment do |t, args|
+        Omni::Sync::Rms.inventory
       end
       desc "load Omni daily results net sale units from rms transaction_entry quantity."
-      task :sold => :environment do |t, args|
-        Omni::Sync::Rms.sold
+      task :results => :environment do |t, args|
+        Omni::Sync::Rms.results
       end
     end
 

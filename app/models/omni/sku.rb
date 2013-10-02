@@ -120,10 +120,10 @@ class Omni::Sku < ActiveRecord::Base
   def self.source_hash(legacy_source)
     # puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku hash"
     # legacy_source = 'PARKER'
-    # ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| sku_hash[x['source_id']] = x['sku_id']}  # JRUBY!!!
-    sku_hash = {}
-    ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| sku_hash[x[1]] = x[0]}
-    sku_hash
+    to_hash = {}
+    # ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| to_hash[x['source_id']] = x['sku_id']}  # JRUBY!!!
+    ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| to_hash[x[1]] = x[0]} # MRI
+    to_hash
     # sku_array = []
     # sku_array = ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'")
     # sku_array.each do |x|
@@ -218,7 +218,8 @@ class Omni::Sku < ActiveRecord::Base
     string   :source
 
     text     :display_fulltext, :using => :display
-    text     :source_fulltext, :using => :source_id
+    text     :source_idfulltext, :using => :source_id
+    text     :source_fulltext, :using => :source
     text     :site_display_fulltext, :using => :site_display
     text     :color_display_fulltext, :using => :color_display
     text     :size_display_fulltext, :using => :size_display

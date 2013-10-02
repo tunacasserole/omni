@@ -12,7 +12,7 @@ class Omni::PeriodResult < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -25,57 +25,57 @@ class Omni::PeriodResult < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :period_result_id,                 :override  =>  false,        :with  => :guid              
+  default      :period_result_id,                 :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.period_display}"}
-  default      :adjusted_cost,                    :override  =>  false,        :to    => 0                  
-  default      :adjusted_retail,                  :override  =>  false,        :to    => 0                  
-  default      :adjusted_units,                   :override  =>  false,        :to    => 0                  
-  default      :backorder_cost,                   :override  =>  false,        :to    => 0                  
-  default      :backorder_retail,                 :override  =>  false,        :to    => 0                  
-  default      :backorder_units,                  :override  =>  false,        :to    => 0                  
-  default      :clearance_sale_cost,              :override  =>  false,        :to    => 0                  
-  default      :clearance_sale_retail,            :override  =>  false,        :to    => 0                  
-  default      :clearance_sale_units,             :override  =>  false,        :to    => 0                  
-  default      :consumed_cost,                    :override  =>  false,        :to    => 0                  
-  default      :consumed_retail,                  :override  =>  false,        :to    => 0                  
-  default      :consumed_units,                   :override  =>  false,        :to    => 0                  
-  default      :net_inventory_cost,               :override  =>  false,        :to    => 0                  
-  default      :net_inventory_retail,             :override  =>  false,        :to    => 0                  
-  default      :net_inventory_units,              :override  =>  false,        :to    => 0                  
-  default      :net_sale_cost,                    :override  =>  false,        :to    => 0                  
-  default      :net_sale_retail,                  :override  =>  false,        :to    => 0                  
-  default      :net_sale_units,                   :override  =>  false,        :to    => 0                  
-  default      :produced_cost,                    :override  =>  false,        :to    => 0                  
-  default      :produced_retail,                  :override  =>  false,        :to    => 0                  
-  default      :produced_units,                   :override  =>  false,        :to    => 0                  
-  default      :promo_sale_cost,                  :override  =>  false,        :to    => 0                  
-  default      :promo_sale_retail,                :override  =>  false,        :to    => 0                  
-  default      :promo_sale_units,                 :override  =>  false,        :to    => 0                  
-  default      :purchased_cost,                   :override  =>  false,        :to    => 0                  
-  default      :purchased_retail,                 :override  =>  false,        :to    => 0                  
-  default      :purchased_units,                  :override  =>  false,        :to    => 0                  
-  default      :received_cost,                    :override  =>  false,        :to    => 0                  
-  default      :received_retail,                  :override  =>  false,        :to    => 0                  
-  default      :received_units,                   :override  =>  false,        :to    => 0                  
-  default      :requested_cost,                   :override  =>  false,        :to    => 0                  
-  default      :requested_retail,                 :override  =>  false,        :to    => 0                  
-  default      :requested_units,                  :override  =>  false,        :to    => 0                  
-  default      :return_sale_cost,                 :override  =>  false,        :to    => 0                  
-  default      :return_sale_retail,               :override  =>  false,        :to    => 0                  
-  default      :return_sale_units,                :override  =>  false,        :to    => 0                  
-  default      :shipped_cost,                     :override  =>  false,        :to    => 0                  
-  default      :shipped_retail,                   :override  =>  false,        :to    => 0                  
-  default      :shipped_units,                    :override  =>  false,        :to    => 0                  
-  default      :work_in_process_cost,             :override  =>  false,        :to    => 0                  
-  default      :work_in_process_retail,           :override  =>  false,        :to    => 0                  
-  default      :work_in_process_units,            :override  =>  false,        :to    => 0                  
-  default      :professional_discount_cost,       :override  =>  false,        :to    => 0                  
-  default      :employee_discount_cost,           :override  =>  false,        :to    => 0                  
-  default      :manager_discount_cost,            :override  =>  false,        :to    => 0                  
-  default      :ending_inventory_cost,            :override  =>  false,        :to    => 0                  
-  default      :ending_inventory_retail,          :override  =>  false,        :to    => 0                  
-  default      :ending_inventory_units,           :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :adjusted_cost,                    :override  =>  false,        :to    => 0
+  default      :adjusted_retail,                  :override  =>  false,        :to    => 0
+  default      :adjusted_units,                   :override  =>  false,        :to    => 0
+  default      :backorder_cost,                   :override  =>  false,        :to    => 0
+  default      :backorder_retail,                 :override  =>  false,        :to    => 0
+  default      :backorder_units,                  :override  =>  false,        :to    => 0
+  default      :clearance_sale_cost,              :override  =>  false,        :to    => 0
+  default      :clearance_sale_retail,            :override  =>  false,        :to    => 0
+  default      :clearance_sale_units,             :override  =>  false,        :to    => 0
+  default      :consumed_cost,                    :override  =>  false,        :to    => 0
+  default      :consumed_retail,                  :override  =>  false,        :to    => 0
+  default      :consumed_units,                   :override  =>  false,        :to    => 0
+  default      :net_inventory_cost,               :override  =>  false,        :to    => 0
+  default      :net_inventory_retail,             :override  =>  false,        :to    => 0
+  default      :net_inventory_units,              :override  =>  false,        :to    => 0
+  default      :net_sale_cost,                    :override  =>  false,        :to    => 0
+  default      :net_sale_retail,                  :override  =>  false,        :to    => 0
+  default      :net_sale_units,                   :override  =>  false,        :to    => 0
+  default      :produced_cost,                    :override  =>  false,        :to    => 0
+  default      :produced_retail,                  :override  =>  false,        :to    => 0
+  default      :produced_units,                   :override  =>  false,        :to    => 0
+  default      :promo_sale_cost,                  :override  =>  false,        :to    => 0
+  default      :promo_sale_retail,                :override  =>  false,        :to    => 0
+  default      :promo_sale_units,                 :override  =>  false,        :to    => 0
+  default      :purchased_cost,                   :override  =>  false,        :to    => 0
+  default      :purchased_retail,                 :override  =>  false,        :to    => 0
+  default      :purchased_units,                  :override  =>  false,        :to    => 0
+  default      :received_cost,                    :override  =>  false,        :to    => 0
+  default      :received_retail,                  :override  =>  false,        :to    => 0
+  default      :received_units,                   :override  =>  false,        :to    => 0
+  default      :requested_cost,                   :override  =>  false,        :to    => 0
+  default      :requested_retail,                 :override  =>  false,        :to    => 0
+  default      :requested_units,                  :override  =>  false,        :to    => 0
+  default      :return_sale_cost,                 :override  =>  false,        :to    => 0
+  default      :return_sale_retail,               :override  =>  false,        :to    => 0
+  default      :return_sale_units,                :override  =>  false,        :to    => 0
+  default      :shipped_cost,                     :override  =>  false,        :to    => 0
+  default      :shipped_retail,                   :override  =>  false,        :to    => 0
+  default      :shipped_units,                    :override  =>  false,        :to    => 0
+  default      :work_in_process_cost,             :override  =>  false,        :to    => 0
+  default      :work_in_process_retail,           :override  =>  false,        :to    => 0
+  default      :work_in_process_units,            :override  =>  false,        :to    => 0
+  default      :professional_discount_cost,       :override  =>  false,        :to    => 0
+  default      :employee_discount_cost,           :override  =>  false,        :to    => 0
+  default      :manager_discount_cost,            :override  =>  false,        :to    => 0
+  default      :ending_inventory_cost,            :override  =>  false,        :to    => 0
+  default      :ending_inventory_retail,          :override  =>  false,        :to    => 0
+  default      :ending_inventory_units,           :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -102,9 +102,9 @@ class Omni::PeriodResult < ActiveRecord::Base
     map :location_display,                       :to => 'location.display'
     map :period_display,                         :to => 'period.display'
     map :year_number,                            :to => 'period.year_number'
-    map :period_number,                          :to => 'period.period_number' 
+    map :period_number,                          :to => 'period.period_number'
     map :style_id,                               :to => 'sku.style_id'
-    map :style_display,                           :to => 'sku.style_display'   
+    map :style_display,                           :to => 'sku.style_display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -125,26 +125,33 @@ class Omni::PeriodResult < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
-  
-  
+
+  # HELPERS (Start) =======================================================================
+    def self.source_hash
+    etl_hash = {}
+    ActiveRecord::Base.connection.execute("select period_result_id, location_id, sku_id, period_id from period_results").each {|x| etl_hash["#{x[1]},#{x[2]},#{x[3]}"] = x[0]}
+    etl_hash
+  end
+  # HELPERS (End) =======================================================================
+
   # INDEXING (Start) ====================================================================
   searchable do
     string   :period_display do period.display if period end
-    string   :location_display do location.display if location end          
-    string   :sku_display do sku.display if sku end      
+    string   :location_display do location.display if location end
+    string   :sku_display do sku.display if sku end
     string   :location_id
     # string   :period_display
     string   :sku_id
-    string   :period_number    
+    string   :period_number
     string   :year_number
     string   :display
- 
+
     text     :period_display_fulltext, :using => :period_display
     text     :location_display_fulltext, :using => :location_display
-    text     :sku_display_fulltext, :using => :sku_display        
+    text     :sku_display_fulltext, :using => :sku_display
 
     # order_search_by :period_display => :asc
-  end 
+  end
   # INDEXING (End)
 
 
@@ -161,7 +168,7 @@ class Omni::PeriodResult < ActiveRecord::Base
   filter :year_2011,            :with => {year_number: {equal_to: '2011'}},       :priority => 20
   filter :year_2012,            :with => {year_number: {equal_to: '2012'}},       :priority => 30
   filter :year_2013,            :with => {year_number: {equal_to: '2013'}},       :priority => 40
-  filter :p1,             :with => {period_number: {equal_to: '1'}},        :priority => 10  
+  filter :p1,             :with => {period_number: {equal_to: '1'}},        :priority => 10
   # FILTERS (End)
 
 end # class Omni::PeriodResult
