@@ -15,10 +15,10 @@ class Omni::Purchase < ActiveRecord::Base
 
   # BEHAVIOR (Start) ====================================================================
   #supports_logical_delete
-  supports_audit
+  # supports_audit
   #supports_revisioning
   supports_fulltext
-  
+
   # BEHAVIOR (End)
 
 
@@ -35,7 +35,7 @@ class Omni::Purchase < ActiveRecord::Base
   default :is_special_order,                                                  :to   => false
   default :is_phone_order,                                                    :to   => false
   default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_order_nbr}"}
-  default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current} 
+  default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :payment_term,                                                      :to   => lambda{|m| "#{m.supplier.default_payment_term}"}
   default :freight_term,                                                      :to   => lambda{|m| "#{m.supplier.freight_term}"}
   default :ship_via,                                                          :to   => lambda{|m| "#{m.supplier.ship_via}"}
@@ -44,32 +44,32 @@ class Omni::Purchase < ActiveRecord::Base
   default :estimated_lead_time_days,                                          :to   => lambda{|m| "#{m.supplier.lead_time}"}
   default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days.days}
   default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30.days}
-  
+
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :purchase_details,              :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'  
+  has_many     :purchase_details,              :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'
   has_many     :logs,                          :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
-  belongs_to   :location,                      :class_name => 'Omni::Location',          :foreign_key => 'location_id'  
-  belongs_to   :supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'  
-  belongs_to   :ordered_by_user,               :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'  
-  belongs_to   :confirmed_by_user,             :class_name => 'Buildit::User',           :foreign_key => 'confirmed_by_user_id'  
-  belongs_to   :master_purchase,               :class_name => 'Omni::Purchase',          :foreign_key => 'master_purchase_id'    
+  belongs_to   :location,                      :class_name => 'Omni::Location',          :foreign_key => 'location_id'
+  belongs_to   :supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'
+  belongs_to   :ordered_by_user,               :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'
+  belongs_to   :confirmed_by_user,             :class_name => 'Buildit::User',           :foreign_key => 'confirmed_by_user_id'
+  belongs_to   :master_purchase,               :class_name => 'Omni::Purchase',          :foreign_key => 'master_purchase_id'
   belongs_to   :carrier_supplier,              :class_name => 'Omni::Supplier',          :foreign_key => 'carrier_supplier_id'
-  belongs_to   :purchase_approver_1_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_1_user_id'  
-  belongs_to   :purchase_approver_2_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_2_user_id'  
-  belongs_to   :purchase_approver_3_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_3_user_id'  
-  belongs_to   :purchase_approver_1_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_1_location_user_id'  
-  belongs_to   :purchase_approver_2_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_2_location_user_id'  
-  belongs_to   :purchase_approver_3_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_3_location_user_id'  
+  belongs_to   :purchase_approver_1_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_1_user_id'
+  belongs_to   :purchase_approver_2_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_2_user_id'
+  belongs_to   :purchase_approver_3_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_3_user_id'
+  belongs_to   :purchase_approver_1_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_1_location_user_id'
+  belongs_to   :purchase_approver_2_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_2_location_user_id'
+  belongs_to   :purchase_approver_3_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_3_location_user_id'
   # ASSOCIATIONS (End)
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :ordered_by_user_display,                :to => 'ordered_by_user.display'
-    map :confirmed_by_user_display,              :to => 'confirmed_by_user.display'     
+    map :confirmed_by_user_display,              :to => 'confirmed_by_user.display'
     map :supplier_display,                       :to => 'supplier.display'
     map :master_purchase_display,                :to => 'master_purchase.display'
     map :carrier_supplier_display,               :to => 'carrier_supplier.display'
@@ -84,19 +84,19 @@ class Omni::Purchase < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  
+
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
     compute :total_order_units,                  :with => :compute_total_order_units
     compute :total_order_cost,                   :with => :compute_total_order_cost
 
   end
-  
+
   # COMPUTED ATTRIBUTES (End)`
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-  
+
   # TEMPORARY ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
@@ -104,17 +104,17 @@ class Omni::Purchase < ActiveRecord::Base
   # ORDERING (End)
 
   # FILTERS (Start) =====================================================================
-  
+
   # FILTERS (End)
 
 
   # ORDERING (Start) ====================================================================
-  
+
   # ORDERING (End)
 
 
   # SCOPES (Start) ======================================================================
-  
+
   # SCOPES (End)
 
 
@@ -143,7 +143,7 @@ class Omni::Purchase < ActiveRecord::Base
     text     :master_purchase_fulltext,    :using => :master_purchase_display
     text     :carrier_supplier_fulltext,   :using => :carrier_supplier_display
 
-  end 
+  end
 
   # INDEXING (End)
 
@@ -151,9 +151,9 @@ class Omni::Purchase < ActiveRecord::Base
   # HOOKS (Start) =======================================================================
   # before_destroy :cascading_delete
 
-  hook :before_update, :recompute_delivery_date, 10 
+  hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
-  # hook :before_create, :recompute_delivery_date, 10 
+  # hook :before_create, :recompute_delivery_date, 10
   # hook :before_create, :recompute_cancel_date, 20
 
   # hook :before_create, :set_defaults, 10
@@ -201,7 +201,7 @@ class Omni::Purchase < ActiveRecord::Base
     after_transition :on => :costing, :do => :process_costing
     after_transition :on => :release, :do => :process_release
     after_transition :on => :approve, :do => :process_approve
-    after_transition :on => :print,   :do => :process_print 
+    after_transition :on => :print,   :do => :process_print
 
   ### EVENTS ###
     event :costing do
@@ -216,7 +216,7 @@ class Omni::Purchase < ActiveRecord::Base
     end
 
   end
-  # STATES (End)  
+  # STATES (End)
 
 
   # STATE HELPERS (Start) =====================================================================
@@ -274,14 +274,14 @@ class Omni::Purchase < ActiveRecord::Base
 
   def cascading_delete
     self.purchase_costs.all.each {|x| x.destroy}
-    self.purchase_allocations.all.each {|x| x.destroy}    
-    self.purchase_details.all.each {|x| x.destroy}    
+    self.purchase_allocations.all.each {|x| x.destroy}
+    self.purchase_details.all.each {|x| x.destroy}
   end
-  
+
   def transition_to_pending_approval
     if self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
         errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
-    else 
+    else
       if self.total_order_cost < Omni::SystemOption.first.purchase_approval_2_maximum_amount
         errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
         errors.add('state', 'approver 2 required') unless self.purchase_approver_2_user_id.length > 1
@@ -301,10 +301,10 @@ class Omni::Purchase < ActiveRecord::Base
     if current_user == self.purchase_approver_1_user_id
       approver = true
       puts 'if number 1'
-      if !self.approval_1_date 
+      if !self.approval_1_date
         puts 'if number 2'
         self.approval_1_date = Date.today
-        if self.purchase_approver_2_user_id 
+        if self.purchase_approver_2_user_id
           puts 'if number 3'
           errors.add('state', 'approval 2 is needed')
               # send notification
@@ -324,7 +324,7 @@ class Omni::Purchase < ActiveRecord::Base
     if current_user == self.purchase_approver_2_user_id
       approver = true
       puts 'if number 6'
-      if !self.approval_1_date 
+      if !self.approval_1_date
           errors.add('state', 'approval 1 must be done first')
       else
         if !self.approval_2_date
@@ -345,7 +345,7 @@ class Omni::Purchase < ActiveRecord::Base
         end
       end
     end
-      
+
     if current_user == self.purchase_approver_3_user_id
       approver = true
       if !self.approval_2_date
@@ -361,7 +361,7 @@ class Omni::Purchase < ActiveRecord::Base
         end
       end
     end
-      
+
     if !approver
         errors.add('state', 'user not authorized to approve this purchase')
     end
@@ -369,7 +369,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def compute_total_order_units
-# Option 1 - Iterate through each detail record    
+# Option 1 - Iterate through each detail record
     # :total_order_units = 0
     # :total_order_cost = 0
     # :total_order_weight = 0
@@ -381,7 +381,7 @@ class Omni::Purchase < ActiveRecord::Base
 
 # # Option 2 - Use multiple "sum" statements
     self.purchase_details.sum('units_ordered * order_pack_size') if self.purchase_details
-    
+
   end
 
   def compute_total_order_cost
@@ -417,7 +417,7 @@ class Omni::Purchase < ActiveRecord::Base
     message.queue
   end
 
-  # Get the email address 
+  # Get the email address
   def approver_email
     # Search event table for user_id of approver
     return 'aaron@buildit.io'
@@ -428,7 +428,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def process_print
-    # Create a pdf of the purchase order for printing 
+    # Create a pdf of the purchase order for printing
     p = Omni::Print.new(:source_model => 'Purchase', :source_id => self.purchase_id)
     p.save
     p.print

@@ -46,7 +46,7 @@ end
 
 # gem 'jquery-rails'
 
-gem "buildit", '= 0.8.91'
+gem "buildit", '= 0.8.87'
 gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"
 gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
 

@@ -113,12 +113,13 @@ class Omni::Sync::Omni
   def self.bts
     load
     @bts = Omni::Bts.first #where(:display => Date.today.to_s).first || Omni::Bts.create(:display => Date.today.to_s)
-    @bts_hash = {} #Omni::BtsDetail.source_hash
-    # get_inventory
-    get_results
+    @bts_hash = {}
+    # bts_inventory
+    bts_results
   end
 
-  def self.get_inventory
+  def self.bts_inventory
+    @bts_hash = Omni::BtsDetail.source_hash
     sql = 'select location_id, sku_id, on_hand_units, supplier_on_order_units, work_in_process_units, in_transit_units, allocated_units from inventories'
     # ActiveRecord::Base.transaction do
     data = ActiveRecord::Base.connection.execute sql
@@ -144,7 +145,8 @@ class Omni::Sync::Omni
     end
   end
 
-  def self.get_results
+  def self.bts_results
+    @bts_hash = Omni::BtsDetail.source_hash
     ['2011','2012','2013'].each do |year|
       period_id = Omni::Period.where(:display => year).first.period_id
       sql = "select location_id, sku_id, net_sale_units from period_results where period_id = #{'period_id'}"
