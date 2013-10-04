@@ -39,7 +39,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
-  has_many     :purchase_costs,       :class_name => 'Omni::PurchaseCost',        :foreign_key => 'purchase_detail_id'
+  # has_many     :purchase_costs,       :class_name => 'Omni::PurchaseCost',        :foreign_key => 'purchase_detail_id'
   has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
   belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
@@ -126,15 +126,15 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
-  def process_costing
-    reset
-    # Read each CostDetail for the Cost in the PurchaseDetail row and add a PurchaseCost row
-    self.purchase_details.each do |pd|
-      Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
-    end
-    self.state = 'draft'
-    self.save
-  end
+  # def process_costing
+  #   reset
+  #   # Read each CostDetail for the Cost in the PurchaseDetail row and add a PurchaseCost row
+  #   self.purchase_details.each do |pd|
+  #     Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
+  #   end
+  #   self.state = 'draft'
+  #   self.save
+  # end
 
   def process_release
     send_notice
@@ -198,7 +198,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   end
 
   def cascading_delete
-    self.purchase_costs.all.each {|x| x.destroy}
+    # self.purchase_costs.all.each {|x| x.destroy}
     self.purchase_allocations.all.each {|x| x.destroy}
     self.purchase_details.all.each {|x| x.destroy}
   end

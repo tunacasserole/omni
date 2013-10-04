@@ -190,7 +190,7 @@ class Omni::Style < ActiveRecord::Base
       validates  :size_group_id, :presence  => true
     end
 
-  end
+  end     
   # STATES (End)
 
 
