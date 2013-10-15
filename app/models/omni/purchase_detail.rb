@@ -151,15 +151,6 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
-  # def process_costing
-  #   reset
-  #   # Read each CostDetail for the Cost in the PurchaseDetail row and add a PurchaseCost row
-  #   self.purchase_details.each do |pd|
-  #     Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
-  #   end
-  #   self.state = 'draft'
-  #   self.save
-  # end
 
   def process_cancel
     # caculate open units as selling units approved - selling units received - selling units cancelled
@@ -176,13 +167,22 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   end
 
   def process_approve
-
-    # user = current_user
-    # if user.privileges.include? "Approve Orders"
-    # the Approve event writes StockLedgerAudit rows to update On Order and order history; an approved PO is a legally binding contract with the Supplier
-    # Add a PurchaseAllocation row for every authorized Location for the PurchaseDetail SKU (unless one already exists in locked state)
-    # Calulate the total PurchaseAllocation units from the PurchaseAllocation rows that are in locked state and subtract from PurchaseDetail units to equal "remaining units".
-    # Calculate the allocation of the "remaining units" to every PurchaseAllocation that is in draft state.
+    # the Approve event writes StockLedgerActivity rows to update On Order and order history
+      sl = Omni::StockLedgerActivity.create(
+        sl.stockable_type = 'Omni::Purchase'
+        sl.stockable_id = self.purchase_id
+        sl.ruleset_id = Omni::Ruleset.where(ruleset_code = 'ApprovePurchase').ruleset_id if ruleset_id
+        sl.sku_id = self.sku_id
+        sl.location_id = self.purchase.location_id
+        sl.supplier_id = self.purchase.supplier_id
+        sl.units = pd.order_units * self.order_pack_size
+        sl.cost = pd.supplier_cost / self.order_cost_units
+        sl.retail = 0
+        sl.create_date = Date.today
+        sl.activity_date = Date.today
+      )
+    end
+    
   end
   # STATE HELPERS (End)
 

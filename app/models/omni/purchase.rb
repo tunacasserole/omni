@@ -258,26 +258,11 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def process_approve
-    self.purchase_details.each {|pd| pd.approve}
-    # the Approve event writes StockLedgerAudit rows to update On Order and order history; an approved PO is a legally binding contract with the Supplier
-    # Omni::StockLedgerAudit.create(:)
-    # self.purchasae_detail.each do |pd|
-    #   sl = Omni::StockLedgerAudit.create(
-    #     sl.stockable_type = 'Omni::Purchase'
-    #     sl.stockable_id = self.purchase_id
-    #     sl.ruleset_id = Omni::Ruleset.where(ruleset_code = 'ApprovePurchase').ruleset_id if ruleset_id
-    #     sl.sku_id = pd.sku_id
-    #     sl.location_id = self.location_id
-    #     sl.supplier_id = self.supplier_id
-    #     sl.units = pd.order_units * pd.order_pack_size
-    #     sl.cost = pd.supplier_cost / pd.order_cost_units
-    #     sl.retail = 0
-    #     sl.create_date = Date.today
-    #     sl.activity_date = Date.today
-    #   )
-    # end
-
+    # the Approve event writes StockLedgerAudit rows for each PurchaseDetail 
+    # to update On Order and order history
+        self.purchase_details.each {|pd| pd.approve}   
   end
+
   # STATE HELPERS (End)
 
   # HELPERS (Start) =====================================================================
