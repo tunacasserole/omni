@@ -1,6 +1,8 @@
 class Omni::Purchase < ActiveRecord::Base
 
-
+  # TEST DATA (Start)
+    x=Omni::Purchase.create(:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228')  #:display => Time.now.to_s,
+  # TEST DATA (End)
   # MIXINS (Start) ======================================================================
 
   # MIXINS (End)
@@ -34,7 +36,7 @@ class Omni::Purchase < ActiveRecord::Base
   default :order_date,                                                        :with => :now
   default :is_special_order,                                                  :to   => false
   default :is_phone_order,                                                    :to   => false
-  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_order_nbr}"}
+  default :display,                                       :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_order_nbr}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :payment_term,                                                      :to   => lambda{|m| "#{m.supplier.default_payment_term}"}
   default :freight_term,                                                      :to   => lambda{|m| "#{m.supplier.freight_term}"}
@@ -44,7 +46,14 @@ class Omni::Purchase < ActiveRecord::Base
   default :estimated_lead_time_days,                                          :to   => lambda{|m| "#{m.supplier.lead_time}"}
   default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days.days}
   default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30.days}
-
+  default :supplier_address_1,                                       :to   => lambda{|m| m.supplier.line_1}
+  default :supplier_address_2,                                       :to   => lambda{|m| m.supplier.line_2}
+  default :supplier_address_3,                                       :to   => lambda{|m| m.supplier.line_3}
+  default :supplier_address_4,                                       :to   => lambda{|m| m.supplier.line_4}
+  default :supplier_city,                                       :to   => lambda{|m| m.supplier.city}
+  default :supplier_state_code,                                       :to   => lambda{|m| m.supplier.state_code}
+  default :supplier_zip,                                       :to   => lambda{|m| m.supplier.zip}
+  default :supplier_country,                                       :to   => lambda{|m| m.supplier.country}
   # DEFAULTS (End)
 
 
@@ -53,6 +62,8 @@ class Omni::Purchase < ActiveRecord::Base
   has_many     :logs,                          :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
   belongs_to   :location,                      :class_name => 'Omni::Location',          :foreign_key => 'location_id'
   belongs_to   :supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'
+  belongs_to   :pay_to_supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'pay_to_supplier_id'
+  belongs_to   :ship_thru_supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'ship_thru_supplier_id'
   belongs_to   :ordered_by_user,               :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'
   belongs_to   :confirmed_by_user,             :class_name => 'Buildit::User',           :foreign_key => 'confirmed_by_user_id'
   belongs_to   :master_purchase,               :class_name => 'Omni::Purchase',          :foreign_key => 'master_purchase_id'
@@ -71,6 +82,8 @@ class Omni::Purchase < ActiveRecord::Base
     map :ordered_by_user_display,                :to => 'ordered_by_user.display'
     map :confirmed_by_user_display,              :to => 'confirmed_by_user.display'
     map :supplier_display,                       :to => 'supplier.display'
+    map :pay_to_supplier_display,                       :to => 'ship_thru_supplier.display'
+    map :ship_thru_supplier_display,                       :to => 'pay_to_supplier.display'
     map :master_purchase_display,                :to => 'master_purchase.display'
     map :carrier_supplier_display,               :to => 'carrier_supplier.display'
     map :location_display,                       :to => 'location.display'
@@ -188,11 +201,14 @@ class Omni::Purchase < ActiveRecord::Base
       validate  :transition_to_open
     end
 
-    # state :costing do
-    # end
+    state :partial do
+    end
 
-    # state :allocating do
-    # end
+    state :complete do
+    end
+
+    state :cancelled do
+    end
 
   ### CALLBACKS ###
     # after_transition :on => :costing, :do => :process_costing
@@ -230,7 +246,6 @@ class Omni::Purchase < ActiveRecord::Base
   def process_release
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
 
-
       message = Buildit::Comm::Email::Message.create(
           subject: "Omni notice: purchase - #{self.purchase_order_nbr} has been released.",
           body: Buildit::Email::Manager.generate(self, "purchase_notice"),
@@ -243,6 +258,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def process_approve
+    self.purchase_details.each {|pd| pd.approve}
     # the Approve event writes StockLedgerAudit rows to update On Order and order history; an approved PO is a legally binding contract with the Supplier
     # Omni::StockLedgerAudit.create(:)
     # self.purchasae_detail.each do |pd|

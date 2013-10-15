@@ -30,10 +30,13 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default :purchase_detail_id,                                 :with => :guid
-  default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
-  default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
-  default :units_ordered,                                      :to   => 0
+  default :purchase_detail_id,                :with => :guid
+  default :purchase_line_nbr,                :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
+  default :display,                                 :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
+  default :units_ordered,                      :to   => 0
+  default :selling_units_approved,                      :to   => 0
+  default :selling_units_received,                      :to   => 0
+  default :selling_units_cancelled,                      :to   => 0
   # DEFAULTS (End)
 
 
@@ -42,6 +45,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   # has_many     :purchase_costs,       :class_name => 'Omni::PurchaseCost',        :foreign_key => 'purchase_detail_id'
   has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
   belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
+  belongs_to   :allocation_profile,             :class_name => 'Omni::AllocationProfile',            :foreign_key => 'allocation_profile_id'
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
   # ASSOCIATIONS (End)
@@ -52,6 +56,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     map :sku_display,                   :to => 'sku.display'
     map :sku_supplier_display,          :to => 'sku_supplier.display'
     map :purchase_display,              :to => 'purchase.display'
+    map :allocation_profile_display,              :to => 'allocation_profile.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -107,9 +112,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
     hook :before_create, :set_defaults, 10
-
   # HOOKS (End)
-
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
@@ -132,11 +135,17 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   ### CALLBACKS ###
     after_transition :on => :allocate, :do => :process_allocate
+    after_transition :on => :cancel, :do => :process_cancel
 
   ### EVENTS ###
-    event :allocate do
-      transition :draft => :allocating
-      transition :open =>  :allocating
+    event :approve do
+      transition :draft => :open
+      transition :partial => :open
+    end
+
+    event :cancel do
+      transition :open => :cancelled
+      transition :partial => :cancelled
     end
   end
   # STATES (End)
@@ -151,6 +160,16 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   #   self.state = 'draft'
   #   self.save
   # end
+
+  def process_cancel
+    # caculate open units as selling units approved - selling units received - selling units cancelled
+    open_units = selling_units_approved - selling_units_received - selling_units_cancelled
+    # Give error because no open units cancelled
+    errors.add('state', 'negative units to cancel') if open_units < 0
+    # if open units > 0 then write an SLA with ruleset = purchase cancellation
+
+    # update selling units cancelled += open units
+  end
 
   def process_release
     send_notice
