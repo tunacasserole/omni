@@ -1,7 +1,9 @@
 class Omni::Purchase < ActiveRecord::Base
 
   # TEST DATA (Start)
-    x=Omni::Purchase.create(:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228')  #:display => Time.now.to_s,
+  # ss=Omni::SkuSupplier.create(:sku_supplier_id => 1)
+  # Omni::Purchase.desroy_all
+#
   # TEST DATA (End)
   # MIXINS (Start) ======================================================================
 
@@ -248,7 +250,7 @@ class Omni::Purchase < ActiveRecord::Base
 
       message = Buildit::Comm::Email::Message.create(
           subject: "Omni notice: purchase - #{self.purchase_order_nbr} has been released.",
-          body: Buildit::Email::Manager.generate(self, "purchase_notice"),
+          body: Buildit::Email::Manager.generate(self, "purchase_notice")
       )
       # email_addresses = Buildit::User.all.collect {|u| u.email_address}
       email_addresses = Buildit::User.where(:user_id => self.purchase_approver_1_user_id).first.email_address
@@ -258,9 +260,9 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def process_approve
-    # the Approve event writes StockLedgerAudit rows for each PurchaseDetail 
+    # the Approve event writes StockLedgerAudit rows for each PurchaseDetail
     # to update On Order and order history
-        self.purchase_details.each {|pd| pd.approve}   
+        self.purchase_details.each {|pd| pd.approve}
   end
 
   # STATE HELPERS (End)
@@ -277,23 +279,27 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def transition_to_pending_approval
+
     if self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
-        errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
+        # errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
+        errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
     else
       if self.total_order_cost < Omni::SystemOption.first.purchase_approval_2_maximum_amount
-        errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
-        errors.add('state', 'approver 2 required') unless self.purchase_approver_2_user_id.length > 1
+        errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
+        errors.add("approver 2", "can't be blank") unless self.purchase_approver_2_user_id
       else
-        errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
-        errors.add('state', 'approver 2 required') unless self.purchase_approver_2_user_id.length > 1
-        errors.add('state', 'approver 3 required') unless self.purchase_approver_3_user_id.length > 1
+        errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
+        errors.add("approver 2", "can't be blank") unless self.purchase_approver_2_user_id
+        errors.add("approver 3", "can't be blank") unless self.purchase_approver_3_user_id
       end
     end
   end
 
   def transition_to_open
-    current_user = Buildit::User.current.user_id
-    # current_user = '1F040E2409C611E3B93028CFE9147CA7'
+    # current_user = Buildit::User.current.user_id
+    # current_user = '1F040E2409C611E3B93028CFE9147CA7' # tom
+    current_user = '811166D4D50A11E2B45820C9D04AARON' # aaron
+
     # puts '*********************'
     approver = false
     if current_user == self.purchase_approver_1_user_id
@@ -383,7 +389,9 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def compute_total_order_cost
-    self.purchase_details.sum('(units_ordered * order_pack_size) * (supplier_cost / order_cost_units)')
+    toc = self.purchase_details.sum('(units_ordered * order_pack_size) * (supplier_cost / order_cost_units)')
+    puts "\n\n\n\n*****************#{toc}"
+    return toc
   end
 
   def set_defaults

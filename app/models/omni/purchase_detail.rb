@@ -1,17 +1,12 @@
 class Omni::PurchaseDetail < ActiveRecord::Base
-
-
   # MIXINS (Start) ======================================================================
-
   # MIXINS (End)
-
 
   # METADATA (Start) ====================================================================
   #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :purchase_details
   self.primary_key                = :purchase_detail_id
   # METADATA (End)
-
 
   # BEHAVIOR (Start) ====================================================================
   #supports_logical_delete
@@ -20,14 +15,12 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   supports_fulltext
   # BEHAVIOR (End)
 
-
   # VALIDATIONS (Start) =================================================================
   validates :display,                         :uniqueness  => true
   validates :purchase_detail_id,              :uniqueness  => true
   validates :sku_supplier_id,                 :presence    => true
   validates :units_ordered,                   :numericality => {:greater_than => 0}
   # VALIDATIONS (End)
-
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_detail_id,                :with => :guid
@@ -39,7 +32,6 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   default :selling_units_cancelled,                      :to   => 0
   # DEFAULTS (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
   # has_many     :purchase_costs,       :class_name => 'Omni::PurchaseCost',        :foreign_key => 'purchase_detail_id'
@@ -49,7 +41,6 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
   # ASSOCIATIONS (End)
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
@@ -77,7 +68,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
 
   # ORDERING (Start) ====================================================================
-
+  order_search_by :display => :asc
   # ORDERING (End)
 
 
@@ -111,7 +102,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-    hook :before_create, :set_defaults, 10
+  hook :before_create, :set_defaults, 10
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
@@ -134,8 +125,8 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    after_transition :on => :allocate, :do => :process_allocate
-    after_transition :on => :cancel, :do => :process_cancel
+    # after_transition :on => :allocate, :do => :process_allocate
+    # after_transition :on => :cancel, :do => :process_cancel
 
   ### EVENTS ###
     event :approve do
@@ -168,21 +159,22 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   def process_approve
     # the Approve event writes StockLedgerActivity rows to update On Order and order history
-      sl = Omni::StockLedgerActivity.create(
-        sl.stockable_type = 'Omni::Purchase'
-        sl.stockable_id = self.purchase_id
-        sl.ruleset_id = Omni::Ruleset.where(ruleset_code = 'ApprovePurchase').ruleset_id if ruleset_id
-        sl.sku_id = self.sku_id
-        sl.location_id = self.purchase.location_id
-        sl.supplier_id = self.purchase.supplier_id
-        sl.units = pd.order_units * self.order_pack_size
-        sl.cost = pd.supplier_cost / self.order_cost_units
-        sl.retail = 0
-        sl.create_date = Date.today
-        sl.activity_date = Date.today
-      )
-    end
-    
+      sl = Omni::StockLedgerActivity.new
+      sl.stockable_type = 'Omni::Purchase'
+      sl.stockable_id = self.purchase_id
+      sl.sku_id = self.sku_id
+      sl.location_id = self.purchase.location_id
+      sl.supplier_id = self.purchase.supplier_id
+      sl.units = self.order_units * self.order_pack_size
+      sl.cost = (self.supplier_cost / self.order_cost_units) * sl.units
+      sl.retail = 0
+      sl.create_date = Date.today
+      sl.activity_date = Date.today
+      sl.ruleset_id = Omni::Ruleset.where(ruleset_code = 'ApprovePurchase').ruleset_id if ruleset_id
+      sl.save
+
+      self.selling_units_approved = sl.units
+      self.save # ???
   end
   # STATE HELPERS (End)
 
