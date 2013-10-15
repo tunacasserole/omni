@@ -15,12 +15,13 @@ gem 'rails', '3.2.14'
 #   end
 
 #   gem 'puma'
-#   gem 'warbler'
 # end
 platforms :jruby do
   gem 'activerecord-jdbcmssql-adapter'
   gem 'activerecord-jdbcmysql-adapter'
   gem 'jdbc-jtds'
+  gem 'puma'
+#   gem 'warbler'
 end
 
 platforms :ruby do
@@ -38,15 +39,15 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-rails'
-  gem 'sunspot_solr'
-  gem 'sunspot_rails'
+  # gem 'sunspot_solr'
+  # gem 'sunspot_rails'
   #gem 'rspec-rails'
   #gem 'factory_girl_rails'
 end
 
 # gem 'jquery-rails'
 
-gem "buildit", '= 0.8.87'
+gem "buildit"#, '= 0.8.87'
 gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"
 gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
 

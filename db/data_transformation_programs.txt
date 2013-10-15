@@ -1,8 +1,0 @@
-data = Omni::LocationUser.all
-data.each do |x|
-  x.location_user_id = SecureRandom.uuid.gsub('-','').upcase
-  x.user_id = 'TBD'
-  loc = Omni::Location.where(:location_nbr=>x.location_id).first
-  x.location_id = loc.location_id if loc
-  x.save
-end

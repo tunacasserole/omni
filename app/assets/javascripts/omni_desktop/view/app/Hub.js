@@ -68,14 +68,14 @@ Ext.define('Omni.view.app.Hub', {
             target: {
               xtype: 'omni-period_results-Explorer'
             }
-            // }, {
-            //   title: 'Projections',
-            //   colspan: 2,
-            //   rowspan: 1,
-            //   cls: 'bts_source',
-            //   target: {
-            //     xtype: 'omni-projections-Explorer'
-            //   }
+            }, {
+              title: 'BTS Results',
+              colspan: 2,
+              rowspan: 1,
+              cls: 'bts_source',
+              target: {
+                xtype: 'omni-bts_details-Explorer'
+              }
           }
           ]
         }
