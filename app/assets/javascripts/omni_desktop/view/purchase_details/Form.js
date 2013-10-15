@@ -32,7 +32,7 @@ Ext.define('Omni.view.purchase_details.Form', {
       stateLabel:                             Omni.i18n.model.PurchaseDetail.state,
       purchase_line_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_line_nbr,
       sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,
-      cost_idLabel:                           Omni.i18n.model.PurchaseDetail.cost_id,
+      // cost_idLabel:                           Omni.i18n.model.PurchaseDetail.cost_id,
       descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,
       supplier_costLabel:                     Omni.i18n.model.PurchaseDetail.supplier_cost,
       invoice_costLabel:                      Omni.i18n.model.PurchaseDetail.invoice_cost,
@@ -160,16 +160,16 @@ Ext.define('Omni.view.purchase_details.Form', {
               allowBlank: true,
               disabled: disabled
             }
-           ,{ xtype: 'buildit-Locator',
-              name: 'cost_id',
-              fieldLabel: this.cost_idLabel,
-              allowBlank: true,
-              store: Ext.create('Omni.store.Cost',{pageSize: 10}),
-              displayField: 'display',
-              queryField: 'display',
-              valueField: 'cost_id',
-              itemTpl: '{display}'
-            }
+           // ,{ xtype: 'buildit-Locator',
+           //    name: 'cost_id',
+           //    fieldLabel: this.cost_idLabel,
+           //    allowBlank: true,
+           //    store: Ext.create('Omni.store.Cost',{pageSize: 10}),
+           //    displayField: 'display',
+           //    queryField: 'display',
+           //    valueField: 'cost_id',
+           //    itemTpl: '{display}'
+           //  }
            ,{ xtype: 'textfield',
               name: 'invoice_cost',
               fieldLabel: this.invoice_costLabel,
