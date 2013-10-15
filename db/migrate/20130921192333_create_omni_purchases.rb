@@ -37,6 +37,17 @@ class CreateOmniPurchases < ActiveRecord::Migration
         t.column   :purchase_approver_1_user_id,     :string,            :null  =>  true,    :limit   => 32
         t.column   :purchase_approver_2_user_id,     :string,            :null  =>  true,    :limit   => 32
         t.column   :purchase_approver_3_user_id,     :string,            :null  =>  true,    :limit   => 32
+        t.column   :last_receipt_date,                  :date,              :null  =>  true
+        t.column   :pay_to_supplier_id,                    :string,            :null  =>  true,    :limit   => 32
+        t.column   :ship_thru_supplier_id,                    :string,            :null  =>  true,    :limit   => 32
+        t.column   :supplier_address_1,                    :string,            :null  =>  true,    :limit   => 100
+        t.column   :supplier_address_2,                    :string,            :null  =>  true,    :limit   => 100
+        t.column   :supplier_address_3,                    :string,            :null  =>  true,    :limit   => 100
+        t.column   :supplier_address_4,                    :string,            :null  =>  true,    :limit   => 100
+        t.column   :supplier_city,                    :string,            :null  =>  true,    :limit   => 100
+        t.column   :supplier_state_code,                    :string,            :null  =>  true,    :limit   => 100
+        t.column   :supplier_zip,                    :string,            :null  =>  true,    :limit   => 100
+        t.column   :supplier_country,                    :string,            :null  =>  true,    :limit   => 100***
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
         t.column   :purchase_approver_1_location_user_id,:string,            :null  =>  true,    :limit   => 32
         t.column   :purchase_approver_2_location_user_id,:string,            :null  =>  true,    :limit   => 32
