@@ -166,7 +166,6 @@ class Omni::Purchase < ActiveRecord::Base
 
   ### STATES ###
     state :draft do
-
     end
 
     state :pending_approval do
@@ -189,25 +188,23 @@ class Omni::Purchase < ActiveRecord::Base
       validate  :transition_to_open
     end
 
-    state :costing do
+    # state :costing do
+    # end
 
-    end
-
-    state :allocating do
-
-    end
+    # state :allocating do
+    # end
 
   ### CALLBACKS ###
-    after_transition :on => :costing, :do => :process_costing
+    # after_transition :on => :costing, :do => :process_costing
     after_transition :on => :release, :do => :process_release
     after_transition :on => :approve, :do => :process_approve
     after_transition :on => :print,   :do => :process_print
 
   ### EVENTS ###
-    event :costing do
-      transition any => :costing
-      transition :costing => :draft
-    end
+    # event :costing do
+    #   transition any => :costing
+    #   transition :costing => :draft
+    # end
     event :release do
       transition :draft => :pending_approval
     end
@@ -220,15 +217,15 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # STATE HELPERS (Start) =====================================================================
-  def process_costing
-    reset
-    # Read each CostDetail for the Cost in the PurchaseDetail row and add a PurchaseCost row
-    self.purchase_details.each do |pd|
-      Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
-    end
-    self.state = 'draft'
-    self.save
-  end
+  # def process_costing
+  #   reset
+  #   # Read each CostDetail for the Cost in the PurchaseDetail row and add a PurchaseCost row
+  #   self.purchase_details.each do |pd|
+  #     Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
+  #   end
+  #   self.state = 'draft'
+  #   self.save
+  # end
 
   def process_release
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
@@ -268,12 +265,12 @@ class Omni::Purchase < ActiveRecord::Base
   # STATE HELPERS (End)
 
   # HELPERS (Start) =====================================================================
-  def reset
-    Omni::PurchaseCost.all.each {|pc| pc.destroy}
-  end
+  # def reset
+  #   Omni::PurchaseCost.all.each {|pc| pc.destroy}
+  # end
 
   def cascading_delete
-    self.purchase_costs.all.each {|x| x.destroy}
+    # self.purchase_costs.all.each {|x| x.destroy}
     self.purchase_allocations.all.each {|x| x.destroy}
     self.purchase_details.all.each {|x| x.destroy}
   end
@@ -294,9 +291,9 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def transition_to_open
-    # current_user = Buildit::User.current.user_id
-    current_user = '1F040E2409C611E3B93028CFE9147CA7'
-    puts '*********************'
+    current_user = Buildit::User.current.user_id
+    # current_user = '1F040E2409C611E3B93028CFE9147CA7'
+    # puts '*********************'
     approver = false
     if current_user == self.purchase_approver_1_user_id
       approver = true

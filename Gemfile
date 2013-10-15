@@ -39,8 +39,8 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-rails'
-  # gem 'sunspot_solr'
-  # gem 'sunspot_rails'
+  gem 'sunspot_solr'
+  gem 'sunspot_rails'
   #gem 'rspec-rails'
   #gem 'factory_girl_rails'
 end

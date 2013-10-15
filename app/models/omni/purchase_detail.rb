@@ -114,6 +114,22 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
 
+  ### STATES ###
+    state :draft do
+    end
+
+    state :open do
+    end
+
+    state :partial do
+    end
+
+    state :complete do
+    end
+
+    state :cancelled do
+    end
+
   ### CALLBACKS ###
     after_transition :on => :allocate, :do => :process_allocate
 
