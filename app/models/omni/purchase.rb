@@ -196,11 +196,11 @@ class Omni::Purchase < ActiveRecord::Base
       validates :freight_term,                               :presence => true
       validates :ship_via,                                   :presence => true
       validates :fob_point,                                  :presence => true
-      validate  :transition_to_pending_approval
+      validate  :validate_release
     end
 
     state :open do
-      validate  :transition_to_open
+      validate  :validate_approve
     end
 
     state :partial do
@@ -262,7 +262,18 @@ class Omni::Purchase < ActiveRecord::Base
   def process_approve
     # the Approve event writes StockLedgerAudit rows for each PurchaseDetail
     # to update On Order and order history
-        self.purchase_details.each {|pd| pd.approve}
+    self.purchase_details.each {|pd| pd.approve}
+
+    if @date_1 == 1
+      self.approval_1_date = Date.today
+    end
+    if @date_2 == 1
+      self.approval_2_date = Date.today
+    end
+    if @date_3 == 1
+      self.approval_3_date = Date.today
+    end
+
   end
 
   # STATE HELPERS (End)
@@ -278,7 +289,7 @@ class Omni::Purchase < ActiveRecord::Base
     self.purchase_details.all.each {|x| x.destroy}
   end
 
-  def transition_to_pending_approval
+  def validate_release
 
     if self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
         # errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
@@ -295,31 +306,25 @@ class Omni::Purchase < ActiveRecord::Base
     end
   end
 
-  def transition_to_open
+  def validate_approve
     # current_user = Buildit::User.current.user_id
     # current_user = '1F040E2409C611E3B93028CFE9147CA7' # tom
     current_user = '811166D4D50A11E2B45820C9D04AARON' # aaron
 
-    # puts '*********************'
     approver = false
+    @date_1 = 0
+    @date_2 = 0
+    @date_3 = 0
     if current_user == self.purchase_approver_1_user_id
       approver = true
-      puts 'if number 1'
       if !self.approval_1_date
-        puts 'if number 2'
-        self.approval_1_date = Date.today
+        @date_1 = 1
         if self.purchase_approver_2_user_id
-          puts 'if number 3'
           errors.add('state', 'approval 2 is needed')
-              # send notification
-        else
-        #   # do :write_stock_ledger_activity
-          puts 'Stock Ledger Activity 1'
+              # send notification to approver 2
         end
       else
-        puts 'if number 4'
         if current_user != self.purchase_approver_2_user_id
-          puts 'if number 5'
           errors.add('state', 'approval 1 already done')
         end
       end
@@ -327,18 +332,12 @@ class Omni::Purchase < ActiveRecord::Base
 
     if current_user == self.purchase_approver_2_user_id
       approver = true
-      puts 'if number 6'
       if !self.approval_1_date
           errors.add('state', 'approval 1 must be done first')
       else
         if !self.approval_2_date
-          self.approval_2_date = Date.today
-          if self.purchase_approver_3_user_id
-            #    # do :write_stock_ledger_activity
-            puts 'Stock Ledger Activity 2'
-
-          else
-            puts 'if number 9'
+          @date_2 = 1
+          if !self.purchase_approver_3_user_id
             errors.add('state', 'approval 3 is needed')
                # send notification to approver 3
           end
@@ -356,20 +355,15 @@ class Omni::Purchase < ActiveRecord::Base
           errors.add('state', 'approval 2 must be done first')
       else
         if !self.approval_3_date
-          self.approval_3_date = Date.today
-              # do :write_stock_ledger_activity
-          puts 'Stock Ledger Activity 3'
-
+          @date_3 = 1
         else
           errors.add('state', 'approval 3 already done')
         end
       end
     end
-
     if !approver
         errors.add('state', 'user not authorized to approve this purchase')
     end
-
   end
 
   def compute_total_order_units
