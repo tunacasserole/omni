@@ -336,12 +336,14 @@ class Omni::Purchase < ActiveRecord::Base
              @process_approval = true
           else
              @notify = 2
+             errors.add("approval 2", "needed, no state change")
           end
        when 2
           if !self.purchase_approver_3_user_id
              @process_approval = true
           else
              @notify = 3
+             errors.add("approval 3", "needed, no state change")
           end
        when 3
           @process_approval = true
