@@ -102,7 +102,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    compute :total_order_units   ,                  :with => :compute_total_order_units
+    compute :   ,                  :with => :compute_total_order_units
     compute :total_order_cost,                   :with => :compute_total_order_cost
 
   end
@@ -319,29 +319,31 @@ class Omni::Purchase < ActiveRecord::Base
       approver = true
       if !self.approval_1_date
         @date_1 = 1
-        errors.add("approval 2", "can't be blank") if self.purchase_approver_2_user_id
-        # send notification to approver 2
+        if self.purchase_approver_2_user_id
+          errors.add('state', ' is needed')
+              # send notification to approver 2
+        end
       else
         if current_user != self.purchase_approver_2_user_id
-          errors.add('approval 1', 'already done')
+          errors.add('state', 'approval 1 already done')
         end
       end
     end
 
     if current_user == self.purchase_approver_2_user_id
       approver = true
-      if !self.approval_1_date && @date_1 == 0
-          errors.add('approval 1', 'must be done first')
+      if !self.approval_1_date
+          errors.add('state', 'approval 1 must be done first')
       else
         if !self.approval_2_date
           @date_2 = 1
           if !self.purchase_approver_3_user_id
-            errors.add("approval 3", "can't be blank")
+            errors.add('state', 'approval 3 is needed')
                # send notification to approver 3
           end
         else
           if current_user != self.purchase_approver_3_user_id
-            errors.add('approval 2', 'already done')
+            errors.add('state', 'approval 2 already done')
           end
         end
       end
@@ -350,17 +352,17 @@ class Omni::Purchase < ActiveRecord::Base
     if current_user == self.purchase_approver_3_user_id
       approver = true
       if !self.approval_2_date
-          errors.add('approval 2', 'must be done first')
+          errors.add('state', 'approval 2 must be done first')
       else
         if !self.approval_3_date
           @date_3 = 1
         else
-          errors.add('approval 3','already done')
+          errors.add('state', 'approval 3 already done')
         end
       end
     end
     if !approver
-        errors.add('user', 'not authorized to approve this purchase')
+        errors.add('state', 'user not authorized to approve this purchase')
     end
   end
 
