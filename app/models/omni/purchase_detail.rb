@@ -125,13 +125,12 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    # after_transition :on => :allocate, :do => :process_allocate
+    after_transition :on => :approve, :do => :process_approve
     # after_transition :on => :cancel, :do => :process_cancel
 
   ### EVENTS ###
     event :approve do
       transition :draft => :open
-      transition :partial => :open
     end
 
     event :cancel do
@@ -159,22 +158,24 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   def process_approve
     # the Approve event writes StockLedgerActivity rows to update On Order and order history
+      myself = self
       sl = Omni::StockLedgerActivity.new
       sl.stockable_type = 'Omni::Purchase'
-      sl.stockable_id = self.purchase_id
-      sl.sku_id = self.sku_id
-      sl.location_id = self.purchase.location_id
-      sl.supplier_id = self.purchase.supplier_id
-      sl.units = self.order_units * self.order_pack_size
-      sl.cost = (self.supplier_cost / self.order_cost_units) * sl.units
+      sl.stockable_id = myself.purchase_id
+      sl.sku_id = myself.sku_id
+      sl.location_id = myself.purchase.location_id
+      sl.supplier_id = myself.purchase.supplier_id
+      sl.units = myself.units_ordered * myself.order_pack_size
+      sl.cost = (myself.supplier_cost / myself.order_cost_units) * sl.units
       sl.retail = 0
       sl.create_date = Date.today
       sl.activity_date = Date.today
-      sl.ruleset_id = Omni::Ruleset.where(ruleset_code = 'ApprovePurchase').ruleset_id if ruleset_id
+      ruleset = Omni::Ruleset.where(:ruleset_code => 'ApprovePurchase').first
+      sl.ruleset_id = ruleset.ruleset_id if ruleset
       sl.save
 
-      self.selling_units_approved = sl.units
-      self.save # ???
+      myself.selling_units_approved = sl.units
+      myself.save # ???
   end
   # STATE HELPERS (End)
 

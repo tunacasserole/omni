@@ -273,7 +273,7 @@ class Omni::Purchase < ActiveRecord::Base
     if @date_3 == 1
       self.approval_3_date = Date.today
     end
-
+    self.save
   end
 
   # STATE HELPERS (End)
