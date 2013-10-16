@@ -191,9 +191,9 @@ class Omni::Purchase < ActiveRecord::Base
       validate  :validate_release
     end
 
-    state :open do
-      validate  :validate_approve
-    end
+    # state :open do
+    #   # validate  :validate_approve
+    # end
 
     state :partial do
     end
@@ -207,20 +207,20 @@ class Omni::Purchase < ActiveRecord::Base
   ### CALLBACKS ###
     # after_transition :on => :costing, :do => :process_costing
     after_transition :on => :release, :do => :process_release
-    after_transition :on => :approve, :do => :process_approve
-    after_transition :on => :open, :do => :process_open
+    # after_transition :on => :approve, :do => :process_approve
+    # after_transition :on => :open, :do => :process_open
     after_transition :on => :print,   :do => :process_print
 
   ### EVENTS ###
     event :release do
       transition :draft => :pending_approval
     end
-    event :approve do
-      transition :pending_approval => :pending_approval
-    end
-    event :open do
-      transition :pending_approval => :open
-    end
+    # event :approve do
+    #   transition :pending_approval => :pending_approval
+    # end
+    # event :open do
+    #   transition :pending_approval => :open
+    # end
 
   end
   # STATES (End)
@@ -241,32 +241,6 @@ class Omni::Purchase < ActiveRecord::Base
 
   end
 
-  def process_approve
-#  Determine whether this is the final approval or if the next approver needs to be notified
-    case @approval_level
-      when 1
-        self.approval_1_date = Date.today
-        self.save
-        if self.purchase_approver_2_user_id
-#         notify approver 2
-        else
-#         do "open" event
-        end
-      when 2
-        self.approval_2_date = Date.today
-        self.save
-        if self.purchase_approver_3_user_id
-#         notify approver 3
-        else
-#         do "open" event
-        end
-      when 3
-        self.approval_3_date = Date.today
-        self.save
-#       do "open" event
-    end
-  end
-
   def process_open
        self.purchase_details.each {|pd| pd.approve}
   end
@@ -274,7 +248,62 @@ class Omni::Purchase < ActiveRecord::Base
   # STATE HELPERS (End)
 
   # HELPERS (Start) =====================================================================
-  def queue
+   def approve
+      case self.approval_level
+        when 1
+          self.approval_1_date = Date.today
+          self.save
+          if self.purchase_approver_2_user_id
+  #         notify approver 2
+          else
+  #         do "open" event
+          end
+        when 2
+          self.approval_2_date = Date.today
+          self.save
+          if self.purchase_approver_3_user_id
+  #         notify approver 3
+          else
+  #         do "open" event
+          end
+        when 3
+          self.approval_3_date = Date.today
+          self.save
+  #       do "open" event
+      end
+  end
+
+  def approval_level
+    # Determine current user
+    # current_user_id = Buildit::User.current.user_id
+    # current_user_id = '1F040E2409C611E3B93028CFE9147CA7' # tom
+    current_user_id = '811166D4D50A11E2B45820C9D04AARON' # aaron
+
+    #  Determine whether this is the final approval or if the next approver needs to be notified
+    approval_level = 0
+     #  Determine which approval is needed (1, 2 or 3) and whether the user is authorized to do the approval
+    if !self.approval_1_date
+       errors.add("user", "may not authorize this purchase1") unless current_user_id == self.purchase_approver_1_user_id
+       approval_level = 1
+    else
+       if !self.approval_2_date
+          errors.add("user", "may not authorize this purchase2") unless current_user_id == self.purchase_approver_2_user_id
+          approval_level = 2
+       else
+          if !self.approval_3_date
+            errors.add("user", "may not authorize this purchase3") unless current_user_id == self.purchase_approver_3_user_id
+             approval_level = 3
+          else
+             errors.add("purchase", "cannot be approved") unless current_user_id == self.purchase_approver_3_user_id
+          end
+       end
+    end
+    puts "errors count is #{errors.count}"
+    approval_level = 0 if errors.count > 0
+    return approval_level
+  end
+
+def queue
     # self.purchase_costs.all.each {|x| x.destroy}
     self.purchase_allocations.all.each {|x| x.destroy}
     self.purchase_details.all.each {|x| x.destroy}
@@ -294,31 +323,6 @@ class Omni::Purchase < ActiveRecord::Base
         errors.add("approver 2", "can't be blank") unless self.purchase_approver_2_user_id
         errors.add("approver 3", "can't be blank") unless self.purchase_approver_3_user_id
       end
-    end
-  end
-
-  def validate_approve
-    # current_user_id = Buildit::User.current.user_id
-    # current_user_id = '1F040E2409C611E3B93028CFE9147CA7' # tom
-    current_user_id = '811166D4D50A11E2B45820C9D04AARON' # aaron
-
-    @approval_level = 0
-     #  Determine which approval is needed (1, 2 or 3) and whether the user is authorized to do the approval
-    if !self.approval_1_date
-       errors.add("user", "may not authorize this purchase1") unless current_user_id == self.purchase_approver_1_user_id
-       @approval_level = 1
-    else
-       if !self.approval_2_date
-          errors.add("user", "may not authorize this purchase2") unless current_user_id == self.purchase_approver_2_user_id
-          @approval_level = 2
-       else
-          if !self.approval_3_date
-            errors.add("user", "may not authorize this purchase3") unless current_user_id == self.purchase_approver_3_user_id
-             @approval_level = 3
-          else
-             errors.add("purchase", "cannot be approved") unless current_user_id == self.purchase_approver_3_user_id
-          end
-       end
     end
   end
 
