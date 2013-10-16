@@ -1,14 +1,6 @@
 class Omni::Purchase < ActiveRecord::Base
-
-  # TEST DATA (Start)
-  # ss=Omni::SkuSupplier.create(:sku_supplier_id => 1)
-  # Omni::Purchase.desroy_all
-#
-  # TEST DATA (End)
   # MIXINS (Start) ======================================================================
-
   # MIXINS (End)
-
 
   # METADATA (Start) ====================================================================
   #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
@@ -102,7 +94,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    compute :   ,                  :with => :compute_total_order_units
+    compute :total_order_units,                  :with => :compute_total_order_units
     compute :total_order_cost,                   :with => :compute_total_order_cost
 
   end
@@ -228,6 +220,7 @@ class Omni::Purchase < ActiveRecord::Base
     end
     event :approve do
       transition :pending_approval => :open
+      transition :open => :open
     end
 
   end
@@ -235,16 +228,6 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # STATE HELPERS (Start) =====================================================================
-  # def process_costing
-  #   reset
-  #   # Read each CostDetail for the Cost in the PurchaseDetail row and add a PurchaseCost row
-  #   self.purchase_details.each do |pd|
-  #     Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
-  #   end
-  #   self.state = 'draft'
-  #   self.save
-  # end
-
   def process_release
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
 
@@ -274,7 +257,7 @@ class Omni::Purchase < ActiveRecord::Base
     #   self.approval_3_date = Date.today
     # end
     # self.save
-    case @approval
+    case @approval_level
        when 1
           self.approval_1_date = Date.today
        when 2
@@ -283,7 +266,7 @@ class Omni::Purchase < ActiveRecord::Base
           self.approval_3_date = Date.today
     end
     self.save
-    if @process_approval = 1
+    if @process_approval
        self.purchase_details.each {|pd| pd.approve}
     end
     case @notify
@@ -298,10 +281,6 @@ class Omni::Purchase < ActiveRecord::Base
   # STATE HELPERS (End)
 
   # HELPERS (Start) =====================================================================
-  # def reset
-  #   Omni::PurchaseCost.all.each {|pc| pc.destroy}
-  # end
-
   def queue
     # self.purchase_costs.all.each {|x| x.destroy}
     self.purchase_allocations.all.each {|x| x.destroy}
@@ -326,101 +305,47 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def validate_approve
-    # current_user = Buildit::User.current.user_id
-    # current_user = '1F040E2409C611E3B93028CFE9147CA7' # tom
-    current_user = '811166D4D50A11E2B45820C9D04AARON' # aaron
+    # current_user_id = Buildit::User.current.user_id
+    # current_user_id = '1F040E2409C611E3B93028CFE9147CA7' # tom
+    current_user_id = '811166D4D50A11E2B45820C9D04AARON' # aaron
 
-    # approver = false
-    # @date_1 = 0
-    # @date_2 = 0
-    # @date_3 = 0
-    # if current_user == self.purchase_approver_1_user_id
-    #   approver = true
-    #   if !self.approval_1_date
-    #     @date_1 = 1
-    #     if self.purchase_approver_2_user_id
-    #       errors.add('state', ' is needed')
-    #           # send notification to approver 2
-    #     end
-    #   else
-    #     if current_user != self.purchase_approver_2_user_id
-    #       errors.add('state', 'approval 1 already done')
-    #     end
-    #   end
-    # end
-
-    # if current_user == self.purchase_approver_2_user_id
-    #   approver = true
-    #   if !self.approval_1_date
-    #       errors.add('state', 'approval 1 must be done first')
-    #   else
-    #     if !self.approval_2_date
-    #       @date_2 = 1
-    #       if !self.purchase_approver_3_user_id
-    #         errors.add('state', 'approval 3 is needed')
-    #            # send notification to approver 3
-    #       end
-    #     else
-    #       if current_user != self.purchase_approver_3_user_id
-    #         errors.add('state', 'approval 2 already done')
-    #       end
-    #     end
-    #   end
-    # end
-
-    # if current_user == self.purchase_approver_3_user_id
-    #   approver = true
-    #   if !self.approval_2_date
-    #       errors.add('state', 'approval 2 must be done first')
-    #   else
-    #     if !self.approval_3_date
-    #       @date_3 = 1
-    #     else
-    #       errors.add('state', 'approval 3 already done')
-    #     end
-    #   end
-    # end
-    # if !approver
-    #     errors.add('state', 'user not authorized to approve this purchase')
-    # end
-    @approval = 0
-    @process_approval = 0
+    @approval_level = 0
+    @process_approval = false
     @notify = 0
     #  Determine which approval is needed (1, 2 or 3) and whether the user is authorized to do the approval
     if !self.approval_1_date
-       errors.add(“user”, “may not authorize this purchase”) unless current_user == self.purchase_approver_1_user_id
-       @approval = 1
+       errors.add("user", "may not authorize this purchase1") unless current_user_id == self.purchase_approver_1_user_id
+       @approval_level = 1
     else
        if !self.approval_2_date
-          errors.add(“user”, “may not authorize this purchase”) unless current_user == self.purchase_approver_2_user_id
-          @approval = 2
+          errors.add("user", "may not authorize this purchase2") unless current_user_id == self.purchase_approver_2_user_id
+          @approval_level = 2
        else
           if !self.approval_3_date
-             errors.add(“user”, “may not authorize this purchase”) unless current_user == self.purchase_approver_3_user_id
-             @approval = 3
+            errors.add("user", "may not authorize this purchase3") unless current_user_id == self.purchase_approver_3_user_id
+             @approval_level = 3
           else
-             errors.add(“purchase”, “cannot be approved”) unless current_user == self.purchase_approver_3_user_id
+             errors.add("purchase", "cannot be approved") unless current_user_id == self.purchase_approver_3_user_id
           end
        end
     end
     #  Determine whether this is the final approval or if the next approver needs to be notified
-    case @approval
+    case @approval_level
        when 1
           if !self.purchase_approver_2_user_id
-             @process_approval = 1
+             @process_approval = true
           else
              @notify = 2
           end
        when 2
           if !self.purchase_approver_3_user_id
-             @process_approval = 1
+             @process_approval = true
           else
              @notify = 3
           end
        when 3
-          @process_approval = 1
+          @process_approval = true
     end
-
 
   end
 
@@ -495,3 +420,78 @@ class Omni::Purchase < ActiveRecord::Base
   # HELPERS (End)
 
 end # class Omni::Purchase
+
+### DEPRECATED CODE ###
+  # def process_costing
+  #   reset
+  #   # Read each CostDetail for the Cost in the PurchaseDetail row and add a PurchaseCost row
+  #   self.purchase_details.each do |pd|
+  #     Omni::PurchaseCost.create(:purchase_detail_id => pd.purchase_detail_id)
+  #   end
+  #   self.state = 'draft'
+  #   self.save
+  # end
+
+  # def reset
+  #   Omni::PurchaseCost.all.each {|pc| pc.destroy}
+  # end
+
+# old validate method ###
+# def validate_approve
+#     # current_user_id = Buildit::User.current.user_id
+#     # current_user_id = '1F040E2409C611E3B93028CFE9147CA7' # tom
+#     current_user_id = '811166D4D50A11E2B45820C9D04AARON' # aaron
+
+    # approver = false
+    # @date_1 = 0
+    # @date_2 = 0
+    # @date_3 = 0
+    # if current_user_id == self.purchase_approver_1_user_id
+    #   approver = true
+    #   if !self.approval_1_date
+    #     @date_1 = 1
+    #     if self.purchase_approver_2_user_id
+    #       errors.add('state', ' is needed')
+    #           # send notification to approver 2
+    #     end
+    #   else
+    #     if current_user_id != self.purchase_approver_2_user_id
+    #       errors.add('state', 'approval 1 already done')
+    #     end
+    #   end
+    # end
+
+    # if current_user_id == self.purchase_approver_2_user_id
+    #   approver = true
+    #   if !self.approval_1_date
+    #       errors.add('state', 'approval 1 must be done first')
+    #   else
+    #     if !self.approval_2_date
+    #       @date_2 = 1
+    #       if !self.purchase_approver_3_user_id
+    #         errors.add('state', 'approval 3 is needed')
+    #            # send notification to approver 3
+    #       end
+    #     else
+    #       if current_user_id != self.purchase_approver_3_user_id
+    #         errors.add('state', 'approval 2 already done')
+    #       end
+    #     end
+    #   end
+    # end
+
+    # if current_user_id == self.purchase_approver_3_user_id
+    #   approver = true
+    #   if !self.approval_2_date
+    #       errors.add('state', 'approval 2 must be done first')
+    #   else
+    #     if !self.approval_3_date
+    #       @date_3 = 1
+    #     else
+    #       errors.add('state', 'approval 3 already done')
+    #     end
+    #   end
+    # end
+    # if !approver
+    #     errors.add('state', 'user not authorized to approve this purchase')
+    # end
