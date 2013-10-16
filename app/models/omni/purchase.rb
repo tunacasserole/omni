@@ -208,6 +208,7 @@ class Omni::Purchase < ActiveRecord::Base
     # after_transition :on => :costing, :do => :process_costing
     after_transition :on => :release, :do => :process_release
     after_transition :on => :approve, :do => :process_approve
+    after_transition :on => :open, :do => :process_open
     after_transition :on => :print,   :do => :process_print
 
   ### EVENTS ###
@@ -219,8 +220,10 @@ class Omni::Purchase < ActiveRecord::Base
       transition :draft => :pending_approval
     end
     event :approve do
+      transition :pending_approval => :pending_approval
+    end
+    event :open do
       transition :pending_approval => :open
-      transition :open => :open
     end
 
   end
