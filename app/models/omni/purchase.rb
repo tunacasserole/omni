@@ -102,7 +102,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    compute :total_order_units,                  :with => :compute_total_order_units
+    compute :total_order_units   ,                  :with => :compute_total_order_units
     compute :total_order_cost,                   :with => :compute_total_order_cost
 
   end
@@ -283,7 +283,7 @@ class Omni::Purchase < ActiveRecord::Base
   #   Omni::PurchaseCost.all.each {|pc| pc.destroy}
   # end
 
-  def cascading_delete
+  def queue
     # self.purchase_costs.all.each {|x| x.destroy}
     self.purchase_allocations.all.each {|x| x.destroy}
     self.purchase_details.all.each {|x| x.destroy}
@@ -319,31 +319,29 @@ class Omni::Purchase < ActiveRecord::Base
       approver = true
       if !self.approval_1_date
         @date_1 = 1
-        if self.purchase_approver_2_user_id
-          errors.add('state', 'approval 2 is needed')
-              # send notification to approver 2
-        end
+        errors.add("approval 2", "can't be blank") if self.purchase_approver_2_user_id
+        # send notification to approver 2
       else
         if current_user != self.purchase_approver_2_user_id
-          errors.add('state', 'approval 1 already done')
+          errors.add('approval 1', 'already done')
         end
       end
     end
 
     if current_user == self.purchase_approver_2_user_id
       approver = true
-      if !self.approval_1_date
-          errors.add('state', 'approval 1 must be done first')
+      if !self.approval_1_date && @date_1 == 0
+          errors.add('approval 1', 'must be done first')
       else
         if !self.approval_2_date
           @date_2 = 1
           if !self.purchase_approver_3_user_id
-            errors.add('state', 'approval 3 is needed')
+            errors.add("approval 3", "can't be blank")
                # send notification to approver 3
           end
         else
           if current_user != self.purchase_approver_3_user_id
-            errors.add('state', 'approval 2 already done')
+            errors.add('approval 2', 'already done')
           end
         end
       end
@@ -352,17 +350,17 @@ class Omni::Purchase < ActiveRecord::Base
     if current_user == self.purchase_approver_3_user_id
       approver = true
       if !self.approval_2_date
-          errors.add('state', 'approval 2 must be done first')
+          errors.add('approval 2', 'must be done first')
       else
         if !self.approval_3_date
           @date_3 = 1
         else
-          errors.add('state', 'approval 3 already done')
+          errors.add('approval 3','already done')
         end
       end
     end
     if !approver
-        errors.add('state', 'user not authorized to approve this purchase')
+        errors.add('user', 'not authorized to approve this purchase')
     end
   end
 
@@ -384,7 +382,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   def compute_total_order_cost
     toc = self.purchase_details.sum('(units_ordered * order_pack_size) * (supplier_cost / order_cost_units)')
-    puts "\n\n\n\n*****************#{toc}"
+    # puts "\n\n\n\n*****************#{toc}"
     return toc
   end
 
