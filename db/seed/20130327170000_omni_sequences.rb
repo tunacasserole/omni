@@ -28,6 +28,7 @@ Buildit::Sequence.create(:sequence_code => 'PROJECTION_LINE_NBR', :padding => 3,
 Buildit::Sequence.create(:sequence_code => 'PURCHASE_ALLOCATION_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'PURCHASE_ORDER_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'PURCHASE_LINE_NBR', :padding => 3, :value => 1000)
+Buildit::Sequence.create(:sequence_code => 'RECEIPT_ALLOCATION_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'RECEIPT_LINE_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'RECEIPT_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'REGION_NBR', :padding => 3, :value => 1000)
