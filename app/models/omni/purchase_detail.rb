@@ -41,7 +41,8 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => :sku_id
-  has_many     :sku_locations,        :class_name => 'Omni::SkuLocation',         :through     => :sku
+  #has_many     :sku_locations,        :class_name => 'Omni::SkuLocation',         :primary_key => :sku_id,    :conditions => { is_authorized: true }
+  has_many     :sku_locations,        :class_name => 'Omni::SkuLocation',         :foreign_key => :sku_id,              :primary_key => :sku_id
   has_many     :locations,            :class_name => 'Omni::Location',            :through     => :sku_locations
   # ASSOCIATIONS (End)
 
@@ -325,18 +326,6 @@ class Omni::PurchaseDetail < ActiveRecord::Base
       end
 
     end # self.locations.each
-
-
-
-
-    
-    
-
-
-
-
-
-    end
 
 
   end
