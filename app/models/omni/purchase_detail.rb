@@ -126,7 +126,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   ### CALLBACKS ###
     after_transition :on => :approve, :do => :process_approve
-    # after_transition :on => :cancel, :do => :process_cancel
+    after_transition :on => :cancel, :do => :process_cancel
 
   ### EVENTS ###
     event :approve do
@@ -134,22 +134,39 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     end
 
     event :cancel do
-      transition :open => :cancelled
-      transition :partial => :cancelled
+      transition [:open, :partial] => :cancelled
+      # transition :open => :cancelled
+      # transition :partial => :cancelled
     end
   end
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
-
   def process_cancel
-    # caculate open units as selling units approved - selling units received - selling units cancelled
-    open_units = selling_units_approved - selling_units_received - selling_units_cancelled
+    # Write SLA
+    open_units = self.selling_units_approved - self.selling_units_received - self.selling_units_cancelled
     # Give error because no open units cancelled
-    errors.add('state', 'negative units to cancel') if open_units < 0
-    # if open units > 0 then write an SLA with ruleset = purchase cancellation
-
-    # update selling units cancelled += open units
+    if open_units < 0
+      errors.add('state', 'negative units to cancel')
+    else
+      sl = Omni::StockLedgerActivity.new
+      sl.stockable_type = 'Omni::Purchase'
+      sl.stockable_id = self.purchase_id
+      ruleset = Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first
+      ruleset_id = ruleset.ruleset_id if ruleset
+      sl.sku_id = self.sku_id
+      sl.location_id = self.purchase.location_id
+      sl.supplier_id = self.purchase.supplier_id
+      sl.units = open_units * -1
+      sl.cost = (self.supplier_cost / self.order_cost_units) * open_units
+      sl.retail = 0
+      sl.create_date = Date.today
+      sl.activity_date = Date.today
+      sl.save
+      # update selling units cancelled += open units
+      self.selling_units_cancelled += open_units * -1
+      self.save
+    end
   end
 
   def process_release

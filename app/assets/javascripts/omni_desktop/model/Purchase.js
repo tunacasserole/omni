@@ -53,7 +53,7 @@ Ext.define('Omni.model.Purchase', {
       { name: 'audit_created_by',            type: 'string'   },
       { name: 'audit_updated_by',            type: 'string'   },
       { name: 'audit_created_at',            type: 'date'     },
-      { name: 'audit_created_at',            type: 'date'     }
+      { name: 'audit_created_at',            type: 'date'     },
       { name: 'supplier_display',            type: 'string'   },
       { name: 'location_display',            type: 'string'   },
       { name: 'total_order_units',           type: 'string'   },
