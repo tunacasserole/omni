@@ -1,0 +1,2 @@
+Omni::Area.delete_all
+Omni::Area.create(:area_id => "CF0B4236AD0711E2982E00FF58D32228",:display =>"Post Oak Area",:location_id =>"51713A3EAC3E11E2947800FF58D32228",:area_nbr =>"",:description =>"",:short_name =>"Houston Area",:is_receiving =>"",:is_picking =>"",:is_reserve =>"",:is_putaway =>"",:is_supplier_return =>"",:is_processing =>"",:is_shipping =>"",:is_put_location =>"",:is_special_handling =>"",:is_quality_control =>"",:is_quick_case =>"",:is_many_sku_per_bin =>"",:default_cube_capacity =>"",:is_request_cube_calculation =>"",:last_utilization_calc_date =>"")

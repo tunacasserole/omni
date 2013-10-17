@@ -191,9 +191,9 @@ class Omni::Purchase < ActiveRecord::Base
       validate  :validate_release
     end
 
-    # state :open do
-    #   # validate  :validate_approve
-    # end
+    state :open do
+      # validate  :validate_approve
+    end
 
     state :partial do
     end
@@ -206,6 +206,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   ### CALLBACKS ###
     # after_transition :on => :costing, :do => :process_costing
+    after_transition :on => :cancel,  :do => :process_cancel
     after_transition :on => :release, :do => :process_release
     # after_transition :on => :approve, :do => :process_approve
     # after_transition :on => :open, :do => :process_open
@@ -215,9 +216,10 @@ class Omni::Purchase < ActiveRecord::Base
     event :release do
       transition :draft => :pending_approval
     end
-    # event :approve do
-    #   transition :pending_approval => :pending_approval
-    # end
+
+    event :cancel do
+         transition [:open, :partial] => :cancelled
+    end
     # event :open do
     #   transition :pending_approval => :open
     # end
@@ -227,6 +229,14 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # STATE HELPERS (Start) =====================================================================
+  def process_cancel
+    # the Cancel event writes StockLedgerActivity rows for each PurchaseDetail
+    # to update On Order and order history
+     self.purchase_details.each {|pd| pd.cancel}
+     self.cancelled_date = Date.today
+     self.save
+  end
+
   def process_release
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
 
@@ -242,6 +252,8 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def process_open
+       self.state = "open"
+       self.save
        self.purchase_details.each {|pd| pd.approve}
   end
 
@@ -256,7 +268,7 @@ class Omni::Purchase < ActiveRecord::Base
           if self.purchase_approver_2_user_id
   #         notify approver 2
           else
-  #         do "open" event
+            self.process_open
           end
         when 2
           self.approval_2_date = Date.today
@@ -264,19 +276,18 @@ class Omni::Purchase < ActiveRecord::Base
           if self.purchase_approver_3_user_id
   #         notify approver 3
           else
-  #         do "open" event
+            self.process_open
           end
         when 3
           self.approval_3_date = Date.today
           self.save
-  #       do "open" event
+            self.process_open
       end
   end
 
   def approval_level
     # Determine current user
     # current_user_id = Buildit::User.current.user_id
-    # current_user_id = '1F040E2409C611E3B93028CFE9147CA7' # tom
     current_user_id = '811166D4D50A11E2B45820C9D04AARON' # aaron
 
     #  Determine whether this is the final approval or if the next approver needs to be notified

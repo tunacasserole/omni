@@ -1,0 +1,2 @@
+Omni::Receipt.delete_all
+Omni::Receipt.create(:receipt_id => "813085B0AD1D11E2973500FF58D32228",:display =>"Parker Receipt",:receipt_nbr =>"",:location_id =>" ",:carrier_supplier_id =>" ",:trailer_identifier =>"",:ship_date =>"",:appointment_date =>"",:appointment_duration =>"",:start_date =>"",:complete_date =>"",:pro_number =>"",:bill_of_lading_number =>"",:packing_slip_number =>"",:seal_1_number =>"",:seal_2_number =>"",:seal_3_number =>"",:standard_carrier_alpha_code =>"",:ship_point =>"",:ship_via =>"",:freight_terms =>"",:invoice_number =>"",:state =>"")
