@@ -6,9 +6,10 @@ Ext.define('Omni.model.AllocationProfile', {
       { name: 'display',                     type: 'string'   },
       { name: 'description',                 type: 'string'   },
       { name: 'allocation_formula',          type: 'string'   },
-      { name: 'state',                       type: 'string'   },
-      { name: 'units_allocated',             type: 'decimal'  },
-      { name: 'units_shipped',               type: 'decimal'  },
+      { name: 'rounding_option',                       type: 'string'   },
+      { name: 'percent_to_allocate',                       type: 'string'   },
+      { name: 'excess_supply_option',             type: 'decimal'  },
+      { name: 'excess_demand_option',               type: 'decimal'  },
       { name: 'is_destroyed',                type: 'boolean'  }
     ],
 
