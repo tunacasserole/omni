@@ -41,8 +41,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => :sku_id
-  #has_many     :sku_locations,        :class_name => 'Omni::SkuLocation',         :primary_key => :sku_id,    :conditions => { is_authorized: true }
-  has_many     :sku_locations,        :class_name => 'Omni::SkuLocation',         :foreign_key => :sku_id,              :primary_key => :sku_id
+  has_many     :sku_locations,        :class_name => 'Omni::SkuLocation',         :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
   has_many     :locations,            :class_name => 'Omni::Location',            :through     => :sku_locations
   # ASSOCIATIONS (End)
 
@@ -51,7 +50,7 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     map :sku_display,                   :to => 'sku.display'
     map :sku_supplier_display,          :to => 'sku_supplier.display'
     map :purchase_display,              :to => 'purchase.display'
-    map :allocation_profile_display,              :to => 'allocation_profile.display'
+    map :allocation_profile_display,    :to => 'allocation_profile.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -292,12 +291,14 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   #
   def process_allocation
 
+    return if self.allocation_profile.nil?
+
     # remove any purchase allocations that are not locked. Locked is defined as having a
     # state equal to 'locked'
     self.purchase_allocations.where('state != "locked"').each {|pa| pa.delete}
 
     # determine the sum of the locked units allocated
-    units_locked = self.purchase_allocations.sum(:units_allocated)
+    units_locked = self.purchase_allocations.empty? ? 0 : self.purchase_allocations.sum(:units_allocated)
 
     # compute the total amount available to allocate
     selling_units_available = self.units_ordered * self.order_pack_size * self.allocation_profile.percent_to_allocate / 100
@@ -310,18 +311,27 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
     # create a new PurchaseAllocation entry for each location that does not already
     # have an existing one  
-    self.locations.each do |location|
+    self.sku_locations.each do |sku_location|
       
-      # determine if there is aleady an allocation for the current location
-      unless self.purchase_allocations.select(:location_id).include?(location.location_id)
+      # determine if there is aleady a purchase allocation for the current location
+      unless self.purchase_allocations.select(:location_id).include?(sku_location.location_id)
         
         # determine the type of formula to use as defined by the allocation profile
         allocation_profile = self.allocation_profile.allocation_formula
 
-        # fetch the amount needed for this location and sku from the projection detail
-        # based on the type of calculation defined in the formula of the allocation profile
-        
+        if allocation_profile == 'BTS_NEED'
 
+          bts_detail = sku_location.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
+
+          # fetch the units required or default to zero
+          units_needed =  bts_detail ? bts_detail.units_needed : 0
+
+          self.purchase_allocations.create(
+            locaction_id: sku_location.location_id,
+            units_needed: units
+          )
+
+        end
 
       end
 
