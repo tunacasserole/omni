@@ -4,11 +4,12 @@ en:
       omni/allocation_profile:  'Model'
     attributes:
       omni/allocation_profile:
-        allocation_profile_id:             'Allocation Profile'
-        display:                           'Name'
-        description:                       'Description'
-        allocation_formula:                'Allocation Formula'
-        state:                             'State'
-        units_allocated:                   'Units Allocated'
-        units_shipped:                     'Units Shipped'
+        allocation_profile_id:         'Allocation Profile'
+        display:                               'Name'
+        description:                        'Description'
+        allocation_formula:            'Allocation Formula'
+        excess_demand_option:     'Excess Demand Option'
+        excess_supply_option:       'Excess Supply Option
+        percent_to_allocate:           'Percent to Allocate'
+        rounding_option:               'Rounding Option'
         is_destroyed:                      'Is Destroyed'
