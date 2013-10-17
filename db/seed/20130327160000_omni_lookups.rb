@@ -1,14 +1,3 @@
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLOCATIONPROFIL1', :code => 'PROJECTION1', :default_text => "Projection 1", :category => 'ALLOCATION_FORMULA', :position => 1)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLOCATIONPROFIL2', :code => 'PROJECTION2', :default_text => "Projection 2", :category => 'ALLOCATION_FORMULA', :position => 2)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLOCATIONPROFIL3', :code => 'PROJECTION3', :default_text => "Projection 3", :category => 'ALLOCATION_FORMULA', :position => 3)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLOCATIONPROFIL4', :code => 'PROJECTION4', :default_text => "Projection 4", :category => 'ALLOCATION_FORMULA', :position => 4)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLOCATIONPROFIL5', :code => 'FORECAST', :default_text => "Forecast", :category => 'ALLOCATION_FORMULA', :position => 5)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLOCATIONPREQUAL', :code => 'EQUAL', :default_text => "Aportion Equally", :category => 'EXCESS_DEMAND_OPTION', :position => 1)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLOCATIONLARGEST', :code => 'LARGEST', :default_text => "Fill largest demand first", :category => 'EXCESS_DEMAND_OPTION', :position => 2)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLOCATIONPSTORES', :code => 'STORES', :default_text => "Aportion to stores", :category => 'EXCESS_SUPPLY_OPTION', :position => 1)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODALLXXXXXWAREHOUSE', :code => 'WAREHOUSE', :default_text => "Leave in warehouse", :category => 'EXCESS_SUPPLY_OPTION', :position => 2)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODEHU2312FOPURCHASE', :code => 'SAMPLE', :default_text => "Sample", :category => 'PURCHASE_TYPE', :position => 2)
-Buildit::Lookup.create(:lookup_id => 'AOEU8902XXX8XODEHU2312XXPURCHASE', :code => 'SAMPLE', :default_text => "Sample", :category => 'PURCHASE_SOURCE', :position => 3)
 Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODEHU2312FOPURCCOST', :code => 'SAMPLE', :default_text => "Sample", :category => 'COST_TYPE', :position => 2)
 Buildit::Lookup.create(:lookup_id => 'AOEU8902XXX8XODEHU2312XXPURCCOST', :code => 'SAMPLE', :default_text => "Sample", :category => 'COST_SOURCE', :position => 3)
 Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D212313BPARKER', :code => 'PARKER', :default_text => 'Parker', :category => 'SOURCE', :position => 2)
@@ -574,5 +563,4 @@ Buildit::Lookup.create(:lookup_id => 'FF778582972811E2A3D212313B100ZZZ', :code =
 Buildit::Lookup.create(:lookup_id => 'FF778582972811E2A3D212313B100AAA', :code => 'CLOSED', :default_text => 'Closed', :category => 'STATE', :position => 1)
 Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B428CFE9147CA7', :code => 'PERCENT OF COST', :default_text => 'Percent of Cost', :category => 'CALCULATION_TYPE', :position => 1)
 Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B428CFE9147CA8', :code => 'FIXED AMOUNT', :default_text => 'Fixed Amount', :category => 'CALCULATION_TYPE', :position => 2)
-
 
