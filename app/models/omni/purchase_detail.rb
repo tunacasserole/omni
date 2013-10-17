@@ -34,12 +34,15 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
-  # has_many     :purchase_costs,       :class_name => 'Omni::PurchaseCost',        :foreign_key => 'purchase_detail_id'
+  
   has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
   belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
-  belongs_to   :allocation_profile,             :class_name => 'Omni::AllocationProfile',            :foreign_key => 'allocation_profile_id'
+  belongs_to   :allocation_profile,   :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
-  belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
+  
+  belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => :sku_id
+  has_many     :sku_locations,        :class_name => 'Omni::SkuLocation',         :through     => :sku
+  has_many     :locations,            :class_name => 'Omni::Location',            :through     => :sku_locations
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -263,6 +266,79 @@ class Omni::PurchaseDetail < ActiveRecord::Base
   def approver_email
     # Search event table for user_id of approver
     return 'aaron@buildit.io'
+  end
+
+
+  # The purpose of purchase allocation is to take the units ordered of a SKU on a
+  # PurchaseDetail and figure out how they are going to be distributed out to the 
+  # stores after the purchase is received.  The distribution to each store is based on 
+  # each store's demand.  Store demand can come from a number of different sources, 
+  # such as the BTS report or Projections.
+  # The system uses Allocation Profiles to control various parts of the allocation calculations, 
+  # such as the source for store demand.
+  #
+  # The Allocate action may be run multiple times for a PurchaseDetail, so it starts by
+  # deleting any existing PurchaseAllocation rows for the PurchaseDetail that are in 
+  # draft state.  Purchase Allocation rows that are in locked state are not deleted.
+  #
+  # Calculate "locked units" as the total PurchaseAllocation.units_allocated from the 
+  # remaining PurchaseAllocation rows that are in locked state.
+  #
+  # Calculate the "selling units available" to allocate as PurchaseDetail.order_units x 
+  # PurchaseDetail.order_pack_size x AllocationProfile.percent_to_allocate/100.
+  #
+  # Subtract "locked units" from "selling units available" to get "allocatable units". 
+  #
+  def process_allocation
+
+    # remove any purchase allocations that are not locked. Locked is defined as having a
+    # state equal to 'locked'
+    self.purchase_allocations.where('state != "locked"').each {|pa| pa.delete}
+
+    # determine the sum of the locked units allocated
+    units_locked = self.purchase_allocations.sum(:units_allocated)
+
+    # compute the total amount available to allocate
+    selling_units_available = self.units_ordered * self.order_pack_size * self.allocation_profile.percent_to_allocate / 100
+
+    # derive the number of units available to allocate by removing the number of locked_units already allocated
+    allocatable_units       = selling_units_available - units_locked
+    
+    # counter for the total number of units needed by each of the new purchase allocations
+    total_units_needed      = 0
+
+    # create a new PurchaseAllocation entry for each location that does not already
+    # have an existing one  
+    self.locations.each do |location|
+      
+      # determine if there is aleady an allocation for the current location
+      unless self.purchase_allocations.select(:location_id).include?(location.location_id)
+        
+        # determine the type of formula to use as defined by the allocation profile
+        allocation_profile = self.allocation_profile.allocation_formula
+
+        # fetch the amount needed for this location and sku from the projection detail
+        # based on the type of calculation defined in the formula of the allocation profile
+        
+
+
+      end
+
+    end # self.locations.each
+
+
+
+
+    
+    
+
+
+
+
+
+    end
+
+
   end
   # HELPERS (End)
 
