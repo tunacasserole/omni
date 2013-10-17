@@ -1,0 +1,4 @@
+Omni::TaxAuthority.delete_all
+Omni::TaxAuthority.create(:tax_authority_id => "83586408A6C811E2AE1900FF58D32228",:display =>"Texas",:description =>"",:tax_authority_type =>"State",:short_name =>"Texas",:state_code =>"TX",:filing_frequency =>"Monthly",:is_tax_when_no_presence =>"FALSE")
+Omni::TaxAuthority.create(:tax_authority_id => "8358B228A6C811E2AE1900FF58D32228",:display =>"Houston",:description =>"",:tax_authority_type =>"City",:short_name =>"Houston",:state_code =>"TX",:filing_frequency =>"Quarterly",:is_tax_when_no_presence =>"FALSE")
+Omni::TaxAuthority.create(:tax_authority_id => "8358D938A6C811E2AE1900FF58D32228",:display =>"Dallas",:description =>"",:tax_authority_type =>"City",:short_name =>"Dallas",:state_code =>"TX",:filing_frequency =>"Quarterly",:is_tax_when_no_presence =>"FALSE")

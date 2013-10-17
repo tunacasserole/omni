@@ -1,0 +1,2 @@
+Omni::Projection.delete_all
+Omni::Projection.create(:projection_id => "296BC0BAAD0411E2BF2000FF58D32228",:display =>"Generic polo shirts",:description =>"",:plan_year =>"2014",:version =>"",:state =>"")

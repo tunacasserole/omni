@@ -1,0 +1,3 @@
+Omni::CostDetail.delete_all
+Omni::CostDetail.create(:cost_detail_id => "13195D56AD0211E281C400FF58D32228",:display =>"Parker Cost Model Det",:cost_id =>" ",:cost_detail_name =>"Parker Cost Model Det",:cost_source =>"",:cost_type =>"",:cost_amount =>"",:cost_percent =>"",:is_update_inventory_cost =>"",:is_update_invoice_cost =>"")
+Omni::CostDetail.create(:cost_detail_id => "133FD1ACAD0211E281C400FF58D32228",:display =>"Charter Cost Model Det",:cost_id =>" ",:cost_detail_name =>"Charter Cost Model Det",:cost_source =>"",:cost_type =>"",:cost_amount =>"",:cost_percent =>"",:is_update_inventory_cost =>"",:is_update_invoice_cost =>"")
