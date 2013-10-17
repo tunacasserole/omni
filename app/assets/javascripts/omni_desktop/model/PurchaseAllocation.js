@@ -9,7 +9,9 @@ Ext.define('Omni.model.PurchaseAllocation', {
       { name: 'display',                     type: 'string'   },
       { name: 'purchase_allocation_nbr',     type: 'string'   },
       { name: 'state',                       type: 'string'   },
-      { name: 'units',                       type: 'decimal'  },
+      { name: 'units_needed',                type: 'decimal'  },
+      { name: 'units_allocated',             type: 'decimal'  },
+      { name: 'units_shipped',               type: 'decimal'  },
       { name: 'is_destroyed',                type: 'boolean'  }
     ],
 

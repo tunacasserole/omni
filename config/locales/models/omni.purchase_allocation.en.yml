@@ -11,5 +11,7 @@ en:
         display:                           'Name'
         purchase_allocation_nbr:           'Purchase Allocation Nbr'
         state:                             'State'
-        units:                             'Units'
+        units_needed:                      'Units Needed'
+        units_allocated:                   'Units Allocated'
+        units_shipped:                     'Units Shipped'
         is_destroyed:                      'Is Destroyed'

@@ -25,7 +25,9 @@ Ext.define('Omni.view.purchase_allocations.Form', {
       displayLabel:                           Omni.i18n.model.PurchaseAllocation.display,
       purchase_allocation_nbrLabel:           Omni.i18n.model.PurchaseAllocation.purchase_allocation_nbr,
       stateLabel:                             Omni.i18n.model.PurchaseAllocation.state,
-      unitsLabel:                             Omni.i18n.model.PurchaseAllocation.units,
+      units_neededLabel:                      Omni.i18n.model.PurchaseAllocation.units_needed,
+      units_allocatedLabel:                   Omni.i18n.model.PurchaseAllocation.units_allocated,
+      units_shippedLabel:                     Omni.i18n.model.PurchaseAllocation.units_shipped,
       is_destroyedLabel:                      Omni.i18n.model.PurchaseAllocation.is_destroyed
     });
     // LABELS (End)
