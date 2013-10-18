@@ -301,13 +301,15 @@ class Omni::PurchaseDetail < ActiveRecord::Base
     units_locked = self.purchase_allocations.empty? ? 0 : self.purchase_allocations.sum(:units_allocated)
 
     # compute the total amount available to allocate
-    selling_units_available = self.units_ordered * self.order_pack_size * self.allocation_profile.percent_to_allocate / 100
+    selling_units_available = self.units_ordered * (self.order_pack_size || 1) * self.allocation_profile.percent_to_allocate / 100
 
     # derive the number of units available to allocate by removing the number of locked_units already allocated
     allocatable_units       = selling_units_available - units_locked
     
     # counter for the total number of units needed by each of the new purchase allocations
     total_units_needed      = 0
+
+    temp_purchase_allocations = {}
 
     # create a new PurchaseAllocation entry for each location that does not already
     # have an existing one  
@@ -317,19 +319,38 @@ class Omni::PurchaseDetail < ActiveRecord::Base
       unless self.purchase_allocations.select(:location_id).include?(sku_location.location_id)
         
         # determine the type of formula to use as defined by the allocation profile
-        allocation_profile = self.allocation_profile.allocation_formula
+        #
+        # Possible values:
+        # BTS_NEED               - maps to Omni::BtsDetail.need
+        # PROJECTION_1_UNITS     - maps to Omni::ProjectionDetail.projection_1_units
+        # PROJECTION_2_UNITS     - maps to Omni::ProjectionDetail.projection_2_units
+        # PROJECTION_3_UNITS     - maps to Omni::ProjectionDetail.projection_3_units
+        # PROJECTION_4_UNITS     - maps to Omni::ProjectionDetail.projection_4_units
+        # LAST_FORECAST_UNITS    - maps to Omni::ProjectionDetail.last_forecast_units
+        # APPROVED_PROJECTION    - maps to Omni::ProjectionDetail.send({STATE}_units)
+        allocation_profile_formula = self.allocation_profile.allocation_formula
 
-        if allocation_profile == 'BTS_NEED'
+        case allocation_profile_formula
 
-          bts_detail = sku_location.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
+          when 'BTS_NEED'
+            bts_detail = sku_location.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
+            units_needed =  bts_detail ? bts_detail.need : 0
+            temp_purchase_allocations.merge!(sku_location.location_id => units_needed)
 
-          # fetch the units required or default to zero
-          units_needed =  bts_detail ? bts_detail.units_needed : 0
+          when /PROJECTION_\d_UNITS/
+            projection_detail = sku_location.projection_details.joins(:projection).where(:projection => 'state != "complete"').first
+            units_needed =  projection_detail.send(allocation_profile_formula.downcase) ? projection_detail.send(allocation_profile_formula.downcase) : 0
+            temp_purchase_allocations.merge!(sku_location.location_id => units_needed)            
 
-          self.purchase_allocations.create(
-            locaction_id: sku_location.location_id,
-            units_needed: units
-          )
+          when 'LAST_FORECAST_UNITS'
+            projection_detail = sku_location.projection_details.joins(:projection).where(:projection => 'state != "complete"').first
+            units_needed =  projection_detail.last_forecast_units ? projection_detail.last_forecast_units : 0
+            temp_purchase_allocations.merge!(sku_location.location_id => units_needed) 
+
+          when 'APPROVED_PROJECTION'
+            projection_detail = sku_location.projection_details.joins(:projection).where(:projection => 'state like "projection_%"').first
+            units_needed =  projection_detail.send("#{projection_detail.state}_units") || 0
+            temp_purchase_allocations.merge!(sku_location.location_id => units_needed) 
 
         end
 
@@ -337,8 +358,46 @@ class Omni::PurchaseDetail < ActiveRecord::Base
 
     end # self.locations.each
 
+    total_units_needed = (temp_purchase_allocations.map {|k,v| v}).sum
+    
+    if total_units_needed < allocatable_units
 
-  end
+      if allocation_profile.excess_supply_option == 'APPORTION_TO_STORES'
+        difference = allocatable_units - total_units_needed
+
+        proportions = temp_purchase_allocations.inject({}) { |h, (k, v)| h[k] = BigDecimal.new(v)/BigDecimal.new(total_units_needed).floor; h }
+        
+        residual = allocatable_units - (proportions.map{|k,v| v}).sum
+        while residual > 0
+          proportions.each do |k,v|
+            proportions[k] += 1
+            residual -= 1
+            break if residual == 0
+          end
+        end
+
+        temp_purchase_allocations = proportions
+      end
+
+
+    elsif total_units_needed > allocatable_units
+
+
+    end
+
+    # process the locations and their corresponding units and create
+    # a purchase allocation record to this purchase detail
+    temp_purchase_allocations.each do |location_id, units_allocated|
+      self.purchase_allocations.create(
+        location_id: location_id,
+        units_allocated: units_allocated
+      )
+    end
+
+
+  end # process_allocation
+
+
   # HELPERS (End)
 
 end # class Omni::PurchaseDetail
