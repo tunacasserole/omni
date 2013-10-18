@@ -22,17 +22,17 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :projection_detail_id,             :override  =>  false,        :with  => :guid              
+  default      :projection_detail_id,             :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.projection_display} - #{m.sku_display} - #{m.location_display}"}
   default      :projection_line_nbr,              :override  =>  false,        :with  => :sequence,         :named=>"PROJECTION_LINE_NBR"
-  default      :forecast_units,                   :override  =>  false,        :to    => 0                  
-  default      :proposed_units,                   :override  =>  false,        :to    => 0                  
-  default      :approved_units,                   :override  =>  false,        :to    => 0                  
-  default      :sale_units_2012,                   :override  =>  false,        :to    => 0                  
-  default      :sale_units_2011,                   :override  =>  false,        :to    => 0                  
-  default      :sale_units_2010,                   :override  =>  false,        :to    => 0                  
-  default      :sale_units_2013,                   :override  =>  false,        :to    => 0                          
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :last_forecast_units,                   :override  =>  false,        :to    => 0
+  # default      :proposed_units,                   :override  =>  false,        :to    => 0
+  # default      :approved_units,                   :override  =>  false,        :to    => 0
+  # default      :sale_units_2012,                   :override  =>  false,        :to    => 0
+  # default      :sale_units_2011,                   :override  =>  false,        :to    => 0
+  # default      :sale_units_2010,                   :override  =>  false,        :to    => 0
+  # default      :sale_units_2013,                   :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -59,11 +59,11 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     map :sku_display,                            :to => 'sku.display'
     map :location_display,                       :to => 'location.display'
     map :style_id,                               :to => 'sku.style_id'
-    map :style_display,                          :to => 'sku.style_display'    
+    map :style_display,                          :to => 'sku.style_display'
     map :color_id,                               :to => 'sku.color_id'
     map :color_display,                          :to => 'sku.color_display'
-    map :size_id,                               :to => 'sku.size_id'    
-    map :size_display,                          :to => 'sku.size_display'    
+    map :size_id,                               :to => 'sku.size_id'
+    map :size_display,                          :to => 'sku.size_display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -89,29 +89,29 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     string   :sku_display do sku.display if sku end
     string   :location_display do location.display if location end
     string   :projection_id
-    string   :sku_id    
-    string   :size_id    
-    string   :color_id            
-    string   :location_id    
-    string   :style_id        
-    integer  :forecast_units
-    integer  :proposed_units
-    integer  :approved_units
+    string   :sku_id
+    string   :size_id
+    string   :color_id
+    string   :location_id
+    string   :style_id
+    # integer  :forecast_units
+    # integer  :proposed_units
+    # integer  :approved_units
     string   :display
     string   :color_display do sku.color.display if sku and sku.color end
     string   :style_display do sku.style.display if sku and sku.style end
-    string   :size_display do sku.size.display if sku and sku.size end      
- 
+    string   :size_display do sku.size.display if sku and sku.size end
+
     text     :size_display_fulltext, :using => :size_display
     text     :style_display_fulltext, :using => :style_display
-    text     :color_display_fulltext, :using => :color_display    
+    text     :color_display_fulltext, :using => :color_display
     text     :projection_display_fulltext, :using => :projection_display
     text     :sku_display_fulltext, :using => :sku_display
     text     :location_display_fulltext, :using => :location_display
-    text     :forecast_units_fulltext, :using => :forecast_units
-    text     :proposed_units_fulltext, :using => :proposed_units
-    text     :approved_units_fulltext, :using => :approved_units
-  end 
+    # text     :forecast_units_fulltext, :using => :forecast_units
+    # text     :proposed_units_fulltext, :using => :proposed_units
+    # text     :approved_units_fulltext, :using => :approved_units
+  end
   # INDEXING (End)
 
 

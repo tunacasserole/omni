@@ -42,7 +42,6 @@ class CreateOmniBts < ActiveRecord::Migration
         t.column   :audit_created_by,                :string,            :null  =>  true,    :limit   => 100
         t.column   :audit_updated_by,                :string,            :null  =>  true,    :limit   => 100
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
-        t.column   :id,                              :integer,           :null  =>  false
       end
     end
     ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
