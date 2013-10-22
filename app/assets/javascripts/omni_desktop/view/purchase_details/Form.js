@@ -34,23 +34,25 @@ Ext.define('Omni.view.purchase_details.Form', {
       sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,
       // cost_idLabel:                           Omni.i18n.model.PurchaseDetail.cost_id,
       descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,
-      supplier_costLabel:                     Omni.i18n.model.PurchaseDetail.supplier_cost,
-      invoice_costLabel:                      Omni.i18n.model.PurchaseDetail.invoice_cost,
-      inventory_costLabel:                    Omni.i18n.model.PurchaseDetail.inventory_cost,
-      extra_costLabel:                        Omni.i18n.model.PurchaseDetail.extra_cost,
       supplier_item_identifierLabel:          Omni.i18n.model.PurchaseDetail.supplier_item_identifier,
       sku_supplier_idLabel:                   Omni.i18n.model.PurchaseDetail.sku_supplier_id,
       color_nameLabel:                        Omni.i18n.model.PurchaseDetail.color_name,
       size_nameLabel:                         Omni.i18n.model.PurchaseDetail.size_name,
       sku_aliasLabel:                         Omni.i18n.model.PurchaseDetail.sku_alias,
+      allocation_profile_idLabel:             Omni.i18n.model.PurchaseDetail.allocation_profile_id,
       units_orderedLabel:                     Omni.i18n.model.PurchaseDetail.units_ordered,
       order_pack_sizeLabel:                   Omni.i18n.model.PurchaseDetail.order_pack_size,
       order_pack_typeLabel:                   Omni.i18n.model.PurchaseDetail.order_pack_type,
       order_cost_unitsLabel:                  Omni.i18n.model.PurchaseDetail.order_cost_units,
       order_multiple_typeLabel:               Omni.i18n.model.PurchaseDetail.order_multiple_type,
       order_multipleLabel:                    Omni.i18n.model.PurchaseDetail.order_multiple,
-      units_approvedLabel:                    Omni.i18n.model.PurchaseDetail.units_approved,
-      units_cancelledLabel:                   Omni.i18n.model.PurchaseDetail.units_cancelled,
+      selling_units_approvedLabel:            Omni.i18n.model.PurchaseDetail.selling_units_approved,
+      selling_units_receivedLabel:            Omni.i18n.model.PurchaseDetail.selling_units_received,
+      selling_units_cancelledLabel:           Omni.i18n.model.PurchaseDetail.selling_units_cancelled,
+      supplier_costLabel:                     Omni.i18n.model.PurchaseDetail.supplier_cost,
+      invoice_costLabel:                      Omni.i18n.model.PurchaseDetail.invoice_cost,
+      inventory_costLabel:                    Omni.i18n.model.PurchaseDetail.inventory_cost,
+      extra_costLabel:                        Omni.i18n.model.PurchaseDetail.extra_cost,
       is_destroyedLabel:                      Omni.i18n.model.PurchaseDetail.is_destroyed
     });
     // LABELS (End)
@@ -132,6 +134,17 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.sku_aliasLabel,
               allowBlank: true
              }
+            { xtype             : 'buildit-Locator',
+              name              : 'allocation_profile_id',
+              fieldLabel        : this.allocation_profile_idLabel,
+              allowBlank        : true,
+              store             : Ext.create('Omni.store.AllocationProfile',{pageSize: 50}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'allocation_profile_id',
+              itemTpl           : '{display}'
+            },
+
             // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }
           ]
         }
@@ -170,13 +183,13 @@ Ext.define('Omni.view.purchase_details.Form', {
            //    valueField: 'cost_id',
            //    itemTpl: '{display}'
            //  }
-           ,{ xtype: 'textfield',
-              name: 'invoice_cost',
-              fieldLabel: this.invoice_costLabel,
-              disabled: true,
-              decimalPrecision: 2,
-              allowBlank: true
-            }
+//           ,{ xtype: 'textfield',
+//              name: 'invoice_cost',
+//              fieldLabel: this.invoice_costLabel,
+//              disabled: true,
+//              decimalPrecision: 2,
+//              allowBlank: true
+//            }
            ,{ xtype: 'textfield',
               name: 'inventory_cost',
               fieldLabel: this.inventory_costLabel,
@@ -208,14 +221,20 @@ Ext.define('Omni.view.purchase_details.Form', {
               disabled: disabled
             }
            ,{ xtype: 'textfield',
-              name: 'units_approved',
-              fieldLabel: this.units_approvedLabel,
+              name: 'selling_units_approved',
+              fieldLabel: this.selling_units_approvedLabel,
               disabled: true,
               allowBlank: true
             }
            ,{ xtype: 'textfield',
-              name: 'units_cancelled',
-              fieldLabel: this.units_cancelledLabel,
+              name: 'selling_units_received',
+              fieldLabel: this.selling_units_receivedLabel,
+              disabled: true,
+              allowBlank: true
+            }
+           ,{ xtype: 'textfield',
+              name: 'selling_units_cancelled',
+              fieldLabel: this.selling_units_cancelledLabel,
               disabled: true,
               allowBlank: true
             }
@@ -232,10 +251,10 @@ Ext.define('Omni.view.purchase_details.Form', {
               category:   'PACK_TYPE'
             }
            ,{ xtype: 'buildit-Lookup',
-            name: 'order_multiple_type',
-            fieldLabel: this.order_multiple_typeLabel,
-            allowBlank: true,
-            category:   'ORDER_MULTIPLE_TYPE'
+              name: 'order_multiple_type',
+              fieldLabel: this.order_multiple_typeLabel,
+              allowBlank: true,
+              category:   'ORDER_MULTIPLE_TYPE'
             }
            ,{ xtype: 'textfield',
               name: 'order_multiple',

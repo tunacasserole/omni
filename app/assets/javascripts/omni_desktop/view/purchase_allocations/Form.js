@@ -43,29 +43,46 @@ Ext.define('Omni.view.purchase_allocations.Form', {
           defaults:     {anchor: '95%'},
           layout:       'anchor',
           items:[
-          /*
-            {
-              xtype: 'buildit-Locator',
-              store: Ext.create('MyApp.store.MyModel',{pageSize: 10}),
-              displayField: 'name',
-              queryField: 'name',
-              valueField: 'value_field',
-              itemTpl:'{name}',
-              name: 'attribute_name',
-              fieldLabel: this.attribute_nameLabel,
-              allowBlank: true
-            }
-          */
 
-            // { xtype: 'textfield', name: 'purchase_allocation_id',         fieldLabel: this.purchase_allocation_idLabel      , allowBlank: true },
-            // { xtype: 'textfield', name: 'purchase_detail_id',             fieldLabel: this.purchase_detail_idLabel          , allowBlank: true },
-            { xtype: 'buildit-Locator',   name: 'allocation_id',          fieldLabel: this.allocation_idLabel                 , allowBlank: true,  store:   Ext.create('Omni.store.Allocation',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'allocation_id', itemTpl:'{display}' },
-            { xtype: 'buildit-Locator',   name: 'location_id',            fieldLabel: this.location_idLabel                 , allowBlank: true,  store:   Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
-            { xtype: 'textfield', name: 'purchase_allocation_nbr',        fieldLabel: this.purchase_allocation_nbrLabel     , allowBlank: true },
-            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true, disabled: true },
-            { xtype: 'textfield', name: 'units',                          fieldLabel: this.unitsLabel                       , allowBlank: true },
-            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }
+            { xtype             : 'textfield',
+              name              : 'purchase_allocation_nbr',
+              fieldLabel        : this.purchase_allocation_nbrLabel,
+              allowBlank        : true
+            },
+            { xtype             : 'buildit-Locator',
+              name              : 'location_id',
+              fieldLabel        : this.location_idLabel,
+              allowBlank        : true,
+              store             : Ext.create('Omni.store.Location',{pageSize: 50}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'location_id',
+              itemTpl           : '{display}'
+            },
+            { xtype             : 'textfield',
+              name              : 'state',
+              fieldLabel        : this.stateLabel,
+              allowBlank        : true,
+              disabled          : true
+            },
+            { xtype             : 'textfield',
+              name              : 'units_needed',
+              fieldLabel        : this.units_neededLabel,
+              disabled          : true,
+              allowBlank        : true
+            },
+            { xtype             : 'numberfield',
+              name              : 'units_allocated',
+              fieldLabel        : this.units_allocatedLabel,
+              minValue          : 0,
+              allowBlank        : false
+            },
+            { xtype             : 'textfield',
+              name              : 'units_shipped',
+              fieldLabel        : this.units_shippedLabel,
+              disabled          : true,
+              allowBlank        : true
+            }
           ]
         }
       ]

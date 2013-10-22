@@ -29,13 +29,15 @@ Ext.define('Omni.view.purchase_allocations.Explorer', {
   displayLabel:                           Omni.i18n.model.PurchaseAllocation.display,
   purchase_allocation_nbrLabel:           Omni.i18n.model.PurchaseAllocation.purchase_allocation_nbr,
   stateLabel:                             Omni.i18n.model.PurchaseAllocation.state,
-  unitsLabel:                             Omni.i18n.model.PurchaseAllocation.units,
+  units_neededLabel:                      Omni.i18n.model.PurchaseAllocation.units_needed,
+  units_allocatedLabel:                   Omni.i18n.model.PurchaseAllocation.units_allocated,
+  units_shippedLabel:                     Omni.i18n.model.PurchaseAllocation.units_shipped,
   is_destroyedLabel:                      Omni.i18n.model.PurchaseAllocation.is_destroyed,
   // LABELS (End)
   
   // TITLES (Start) ======================================================================
   title:     'PurchaseAllocations',
-  subtitle:  'Create and maintain PurchaseAllocations',
+  subtitle:  'Create and Maintain Purchase Allocations',
   // TITLES (End)
 
   initComponent:function () {
@@ -45,15 +47,12 @@ Ext.define('Omni.view.purchase_allocations.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        // { header: this.purchase_allocation_idLabel,        dataIndex: 'purchase_allocation_id',      flex: 1 },    
-        // { header: this.purchase_detail_idLabel,            dataIndex: 'purchase_detail_id',          flex: 1 },    
-        // { header: this.allocation_idLabel,                 dataIndex: 'allocation_id',               flex: 1 },    
-        { header: this.location_idLabel,                   dataIndex: 'location_display',                 flex: 1 },    
-        { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },    
         { header: this.purchase_allocation_nbrLabel,       dataIndex: 'purchase_allocation_nbr',     flex: 1 },    
+        { header: this.location_idLabel,                   dataIndex: 'location_display',            flex: 1 },    
         { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },    
-        { header: this.unitsLabel,                         dataIndex: 'units',                       flex: 1 },    
-        // { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }    
+        { header: this.units_neededLabel,                  dataIndex: 'units_needed',                flex: 1 },    
+        { header: this.units_allocatedLabel,               dataIndex: 'units_allocated',             flex: 1 },    
+        { header: this.units_shippedLabel,                 dataIndex: 'units_shipped',               flex: 1 },    
       ]
     });
     // COLUMNS (End)
