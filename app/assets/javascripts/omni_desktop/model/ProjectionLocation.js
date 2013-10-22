@@ -3,12 +3,12 @@ Ext.define('Omni.model.ProjectionLocation', {
 
   fields: [
       { name: 'projection_location_id',      type: 'string'  },    
+      { name: 'display',                     type: 'string'  },    
+      { name: 'state',                       type: 'string'  },    
       { name: 'projection_id',               type: 'string'  },    
       { name: 'location_id',                 type: 'string'  },    
-      { name: 'display',                     type: 'string'   },    
-      { name: 'location_display',                     type: 'string'   },       
-      { name: 'state',                       type: 'string'   },    
-      { name: 'is_destroyed',                type: 'boolean'  }    
+      { name: 'approval_date',               type: 'string'  }, 
+      { name: 'is_destroyed',                type: 'date'    }    
    
   ],
 

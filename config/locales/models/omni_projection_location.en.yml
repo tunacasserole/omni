@@ -5,10 +5,9 @@ en:
     attributes:
       omni/projection_location:
         projection_location_id:          Projection Location
-        projection_id:                   Projection
-        projection_location_id:          Location
-        location_display:                Location
-        display:                         Name
+        display:                         Display Name
         state:                           State
+        projection_id:                   Projection
+        location_id:                     Location
+        approval_date:                   Approval Date  
         is_destroyed:                    Deleted
-
