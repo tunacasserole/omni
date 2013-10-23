@@ -4,35 +4,27 @@ en:
       omni/projection_detail: 'Projection Detail'
     attributes:
       omni/projection_detail:
-        projection_detail_id:            Projection Detail
-        display:                         Name
-        projection_display:              Projection
-        projection_id:                   Projection
-        projection_line_nbr:             Projection Line Number
-        sku_display:                     Sku
-        sku_id:                          Sku
-        style_display:                   Style
-        style_id:                        Style
-        color_display:                   Color
-        color_id:                        Color
-        size_display:                    Size
-        size_id:                         Size                
-        location_display:                Location
-        location_id:                     Location
-        forecast_units:                  Cast 
-        proposed_units:                  Proposed 
-        closed_units:                    Closed 
-        projection_2_units:              Prj 2 
-        updated_units:                   Updated 
-        adjustment_units:                Adjustment 
-        sale_units_2013:                 2013 
-        sale_units_2012:                 2012
-        sale_units_2011:                 2011
-        sale_units_2010:                 2010 
-        number_of_schools:               Number of Schools
-        average_contract_year:           Average Contract Year
-        years_active:                    Years Active 
-        average_sales:                   Avg
-        standard_deviation:              Dev
-        is_destroyed:                    Deleted
+        projection_detail_id:              Projection Detail
+        display:                           Name
+        projection_id:                     Projection
+        projection_location_id:            Projection Location
+        projection_line_nbr:               Projection Line Nbr
+        forecast_profile_id:               Forecast Profile
+        sku_id:                            Sku
+        location_id:                       Location
+        first_forecast_units:              First Forecast Units
+        last_forecast_units:               Last Forecast Units
+        last_forecast_date:                Last Forecast Date
+        projection_1_units:                Projection 1 Units
+        projection_2_units:                Projection 2 Units
+        projection_3_units:                Projection 3 Units
+        projection_4_units:                Projection 4 Units
+        is_destroyed:                      Deleted
+#  Computed attributes
+        sale_units_ytd:                    Unit Sales Year-To_Date
+        sale_units_py1:                    Unit Sales Prior Year 1
+        sale_units_py2:                    Unit Sales Prior Year 2
+        sale_units_py3:                    Unit Sales Prior Year 3
+        average_sales:                     Average Unit Sales
+        standard_deviation:                Standard Deviation of Sales
 
