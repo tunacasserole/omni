@@ -134,7 +134,7 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.sku_aliasLabel,
               allowBlank: true
              }
-            { xtype             : 'buildit-Locator',
+            ,{ xtype             : 'buildit-Locator',
               name              : 'allocation_profile_id',
               fieldLabel        : this.allocation_profile_idLabel,
               allowBlank        : true,
@@ -143,7 +143,7 @@ Ext.define('Omni.view.purchase_details.Form', {
               queryField        : 'display',
               valueField        : 'allocation_profile_id',
               itemTpl           : '{display}'
-            },
+            }
 
             // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }
           ]

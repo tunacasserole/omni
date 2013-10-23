@@ -3,13 +3,13 @@ Ext.define('Omni.view.suppliers.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-suppliers-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       supplier_nameLabel:                         Omni.i18n.model.Supplier.supplier_name,
@@ -103,35 +103,35 @@ Ext.define('Omni.view.suppliers.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'line_1',
               fieldLabel        : this.line_1Label,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'line_2',
               fieldLabel        : this.line_2Label,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'line_3',
               fieldLabel        : this.line_3Label,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'line_4',
               fieldLabel        : this.line_4Label,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'city',
               fieldLabel        : this.cityLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
             { xtype             : 'buildit-Lookup',
               name              : 'state_code',
@@ -139,47 +139,47 @@ Ext.define('Omni.view.suppliers.Form', {
               allowBlank        : true,
               category          : 'STATE_CODE'
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'zip',
               fieldLabel        : this.zipLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'country',
               fieldLabel        : this.countryLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'latitude',
               fieldLabel        : this.latitudeLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'longitude',
               fieldLabel        : this.longitudeLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'phone',
               fieldLabel        : this.phoneLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'fax',
               fieldLabel        : this.faxLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'supplier_url',
               fieldLabel        : this.supplier_urlLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
           ]
         },
@@ -216,7 +216,7 @@ Ext.define('Omni.view.suppliers.Form', {
               decimalPrecision  : 0,
               allowBlank        : true,
               disabled          : disabled
-            }
+            },
             { name: 'is_calculated_lead_time',        fieldLabel: this.is_calculated_lead_timeLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category: 'REPLENISHMENT_METHOD' },
             { name: 'is_dynamic_safety_stock',        fieldLabel: this.is_dynamic_safety_stockLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         }

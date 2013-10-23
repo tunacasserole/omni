@@ -250,7 +250,7 @@ Ext.define('Omni.view.purchases.Form', {
             }
           ]
         }
-        {
+        ,{
           xtype: 'fieldset',
           title: 'Contact Information',
           collapsible: true,
@@ -258,35 +258,35 @@ Ext.define('Omni.view.purchases.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'supplier_address_1',
               fieldLabel        : this.supplier_address_1Label,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'supplier_address_2',
               fieldLabel        : this.supplier_address_2Label,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'supplier_address_3',
               fieldLabel        : this.supplier_address_3Label,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'supplier_address_4',
               fieldLabel        : this.supplier_address_4Label,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'supplier_city',
               fieldLabel        : this.supplier_cityLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
             { xtype             : 'buildit-Lookup',
               name              : 'supplier_state_code',
@@ -294,18 +294,18 @@ Ext.define('Omni.view.purchases.Form', {
               allowBlank        : true,
               category          : 'STATE_CODE'
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'supplier_zip',
               fieldLabel        : this.supplier_zipLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
+              disabled          : false,
             },
-            { xtype             : 'textfield'
+            { xtype             : 'textfield',
               name              : 'supplier_country',
               fieldLabel        : this.supplier_countryLabel,
               allowBlank        : true,
-              disabled          : false,      	                              
-            },
+              disabled          : false,
+            }
           ]
         },
        ,{
@@ -321,18 +321,18 @@ Ext.define('Omni.view.purchases.Form', {
               name              : 'freight_term',
               fieldLabel        : this.freight_termLabel,
               allowBlank        : true,
-              category          : 'FREIGHT_TERM' 
+              category          : 'FREIGHT_TERM'
             },
             { xtype             : 'buildit-Lookup',
               name              : 'fob_point',
               fieldLabel        : this.fob_pointLabel,
               allowBlank        : true,
-              category          : 'FOB_POINT' 
+              category          : 'FOB_POINT'
             },
             { xtype             : 'textfield',
               name              : 'ship_via',
               fieldLabel        : this.ship_viaLabel,
-              allowBlank        : true 
+              allowBlank        : true
             },
             { xtype             : 'buildit-Locator',
               name              : 'carrier_supplier_id',
@@ -342,12 +342,12 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'carrier_supplier_id',
-              itemTpl           : '{display}' 
+              itemTpl           : '{display}'
             },
             { xtype             : 'textfield',
               name              : 'estimated_lead_time_days',
               fieldLabel        : this.estimated_lead_time_daysLabel,
-              allowBlank        : true 
+              allowBlank        : true
             },
             { xtype             : 'buildit-Locator',
               name              : 'ship_thru_supplier_id',
@@ -357,7 +357,7 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'carrier_supplier_id',
-              itemTpl           : '{display}' 
+              itemTpl           : '{display}'
             },
             { xtype             : 'buildit-Locator',
               name              : 'master_purchase_id',
@@ -391,7 +391,7 @@ Ext.define('Omni.view.purchases.Form', {
               name              : 'payment_term',
               fieldLabel        : this.payment_termLabel,
               allowBlank        : true,
-              category          : 'PAYMENT_TERM' 
+              category          : 'PAYMENT_TERM'
             },
             { xtype             : 'buildit-Locator',
               name              : 'pay_to_supplier_id',
@@ -401,7 +401,7 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'pay_to_supplier_id',
-              itemTpl           : '{display}' 
+              itemTpl           : '{display}'
             },
             { xtype             : 'buildit-Locator',
               store             : Ext.create('Buildit.store.User',{pageSize: 20}),
