@@ -68,7 +68,7 @@ class Omni::SkuLocation < ActiveRecord::Base
   belongs_to   :seasonal_index,                  :class_name => 'Omni::SeasonalIndex',           :foreign_key => 'seasonal_index_id'
 
   has_many     :bts_details,                     :class_name => 'Omni::BtsDetail',               :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"bts_details.location_id = '#{send(:location_id)}'"}
-  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',        :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"projection_details.location_id = '#{send(:location_id)}'"}
+  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',        :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"bts_details.location_id = '#{send(:location_id)}'"}
   # ASSOCIATIONS (End)
 
 
@@ -118,34 +118,34 @@ class Omni::SkuLocation < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :new do
+  # state_machine :state, :initial => :new do
 
   ### CALLBACKS ###
-    after_transition :on => :activate,       :do => :after_activate
+    # after_transition :on => :activate,       :do => :after_activate
 
     ## EVENTS ###
-    event :activate do
-      transition :new => :active
-      transition :inactive => :active
-    end
+  #   event :activate do
+  #     transition :new => :active
+  #     transition :inactive => :active
+  #   end
 
-    event :deactivate do
-      transition :active => :inactive
-    end
+  #   event :deactivate do
+  #     transition :active => :inactive
+  #   end
 
-    state :active do
-      # validates  :concatenated_name, :presence  => true
-    end
+  #   state :active do
+  #     # validates  :concatenated_name, :presence  => true
+  #   end
 
-  end
+  # end
   # STATES (End)
 
 
   # STATE HANDLERS (Start) ====================================================================
-  def after_activate
-    puts '--- done with after_activate ---'
-    puts 'ready...'
-  end
+  # def after_activate
+  #   puts '--- done with after_activate ---'
+  #   puts 'ready...'
+  # end
   # STATE HANDLERS (End)
 
 end # class Omni::SkuLocation

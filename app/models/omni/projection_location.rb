@@ -22,7 +22,9 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates :projection_location_id,                        :presence      => true
+  validates :display,                                       :uniqueness  => true
+  validates :projection_id,                                 :presence  => true
+  validates :location_id,                                   :presence  => true
   # VALIDATIONS (End)
 
 
@@ -35,7 +37,6 @@ class Omni::ProjectionLocation < ActiveRecord::Base
   belongs_to   :projection,                      :class_name => 'Omni::Projection',              :foreign_key => 'projection_id'
   belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
   # ASSOCIATIONS (End)
-
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -62,7 +63,7 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 
 
   # ORDERING (Start) ====================================================================
-  
+  order_search_by :display => :asc  
   # ORDERING (End)
 
 
@@ -73,9 +74,15 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+# Exact match attributes
     string   :projection_id
-    string   :location_id    
- 
+    string   :location_id
+    string   :state
+  # Partial match (contains) attributes
+    text     :projection_display_fulltext, :using => :projection_display
+    text     :location_display_fulltext,   :using => :location_display
+    text     :display_fulltext,            :using => :display
+    text     :state_fulltext,              :using => :state
   end 
   # INDEXING (End)
 
@@ -86,27 +93,28 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :new do
+  state_machine :state, :initial => :planning do
+
+  ### STATES ###
+    state :planning do
+    end
+    state :approved do
+    end
 
   ### CALLBACKS ###
-    after_transition :on => :release,  :do => :process_release
     after_transition :on => :approve, :do => :process_approve  
 
   ### EVENTS ###
-    event :release do
-      transition any => :released
-    end
     event :approve do
-      transition any => :approved      
+      transition :planning => :approved      
     end
   end
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def process_release
-  end  
-
   def process_approve
+    self.approval_date = Date.today
+    self.save
   end  
   # STATE HANDLERS (End) ====================================================================
 

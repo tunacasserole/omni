@@ -403,6 +403,19 @@
     end
 
 
+      case allocation_profile.excess_demand_option
+        when 'APPORTION_BY_PERCENT'
+
+       # for each location in hash, calculate its percent_of_demand as units_needed / total_units_needed
+       # multiply the percent_of_demand x allocatable_units to get the location's allocated_units
+
+        when 'FILL_LARGEST_DEMAND'
+
+       # sort location hash descending by units_needed
+       # start at first entry in hash and give the allocation all of its units_needed
+       # continue throught the hash giving each locattion all of its needed units until all allocatable_units have been allocated
+
+      end
 
     end
 

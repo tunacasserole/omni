@@ -23,6 +23,7 @@ Ext.define('Omni.view.projection_locations.Form', {
       location_idLabel:                       Omni.i18n.model.ProjectionLocation.location_id,    
       displayLabel:                           Omni.i18n.model.ProjectionLocation.display,    
       stateLabel:                             Omni.i18n.model.ProjectionLocation.state,    
+      approval_dateLabel:                     Omni.i18n.model.ProjectionLocation.approval_date,
       is_destroyedLabel:                      Omni.i18n.model.ProjectionLocation.is_destroyed    
     });
     // LABELS (End)
@@ -38,25 +39,33 @@ Ext.define('Omni.view.projection_locations.Form', {
           defaults:     {anchor: '95%'},
           layout:       'anchor',
           items:[
-          /*
-            {
-              xtype: 'buildit-Locator', 
-              store: Ext.create('MyApp.store.MyModel',{pageSize: 10}), 
-              displayField: 'name', 
-              queryField: 'name', 
-              valueField: 'value_field', 
-              itemTpl:'{name}',
-              name: 'attribute_name', 
-              fieldLabel: this.attribute_nameLabel, 
-              allowBlank: true 
+         // { xtype: 'textfield', name: 'projection_location_id',         fieldLabel: this.projection_location_idLabel      , allowBlank: false },    
+         // { xtype: 'textfield', name: 'projection_id',                  fieldLabel: this.projection_idLabel               , allowBlank: false },    
+            { xtype             : 'buildit-Locator',
+              name              : 'location_id',
+              fieldLabel        : this.location_idLabel,
+              allowBlank        : false,
+              disabled          : true,
+              store             : Ext.create('Omni.store.Location',{pageSize: 50}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'location_id',
+              itemTpl           : '{display}'
+            },            
+         // { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
+            { xtype             : 'textfield',
+              name              : 'state',
+              fieldLabel        : this.stateLabel,
+              disabled          : true,
+              allowBlank        : false 
+            },    
+            { xtype             : 'datefield',
+              name              : 'approval_date',
+              fieldLabel        : this.approval_dateLabel,
+              value             : new Date(),
+              disabled          : true,
+              allowBlank        : true
             }
-          */
-
-            // { xtype: 'textfield', name: 'projection_location_id',         fieldLabel: this.projection_location_idLabel      , allowBlank: false },    
-            // { xtype: 'textfield', name: 'projection_id',                  fieldLabel: this.projection_idLabel               , allowBlank: false },    
-            { name: 'location_id', fieldLabel: this.location_idLabel, allowBlank: true,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },                        
-            // { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
-            // { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: false },    
             // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: false }    
           ]
         }

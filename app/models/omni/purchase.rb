@@ -30,44 +30,46 @@ class Omni::Purchase < ActiveRecord::Base
   default :order_date,                                                        :with => :now
   default :is_special_order,                                                  :to   => false
   default :is_phone_order,                                                    :to   => false
-  default :display,                                       :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_order_nbr}"}
+  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_order_nbr}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
-  default :payment_term,                                                      :to   => lambda{|m| "#{m.supplier.default_payment_term}"}
-  default :freight_term,                                                      :to   => lambda{|m| "#{m.supplier.freight_term}"}
-  default :ship_via,                                                          :to   => lambda{|m| "#{m.supplier.ship_via}"}
+  default :payment_term,                                                      :to   => lambda{|m| m.supplier.default_payment_term}
+  default :freight_term,                                                      :to   => lambda{|m| m.supplier.freight_term}
+  default :ship_via,                                                          :to   => lambda{|m| m.supplier.ship_via}
   # default :fob_point,                                                         :to   => lambda{|m| "#{m.supplier_fob_point}"}
-  default :is_ship_cancel,                                                    :to   => lambda{|m| "#{m.supplier.is_ship_cancel}"}
-  default :estimated_lead_time_days,                                          :to   => lambda{|m| "#{m.supplier.lead_time}"}
+  default :is_ship_cancel,                                                    :to   => lambda{|m| m.supplier.is_ship_cancel}
+  default :estimated_lead_time_days,                                          :to   => lambda{|m| m.supplier.lead_time}
   default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days.days}
   default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30.days}
-  default :supplier_address_1,                                       :to   => lambda{|m| m.supplier.line_1}
-  default :supplier_address_2,                                       :to   => lambda{|m| m.supplier.line_2}
-  default :supplier_address_3,                                       :to   => lambda{|m| m.supplier.line_3}
-  default :supplier_address_4,                                       :to   => lambda{|m| m.supplier.line_4}
-  default :supplier_city,                                       :to   => lambda{|m| m.supplier.city}
-  default :supplier_state_code,                                       :to   => lambda{|m| m.supplier.state_code}
-  default :supplier_zip,                                       :to   => lambda{|m| m.supplier.zip}
-  default :supplier_country,                                       :to   => lambda{|m| m.supplier.country}
+  default :supplier_address_1,                                                :to   => lambda{|m| m.supplier.line_1}
+  default :supplier_address_2,                                                :to   => lambda{|m| m.supplier.line_2}
+  default :supplier_address_3,                                                :to   => lambda{|m| m.supplier.line_3}
+  default :supplier_address_4,                                                :to   => lambda{|m| m.supplier.line_4}
+  default :supplier_city,                                                     :to   => lambda{|m| m.supplier.city}
+  default :supplier_state_code,                                               :to   => lambda{|m| m.supplier.state_code}
+  default :supplier_zip,                                                      :to   => lambda{|m| m.supplier.zip}
+  default :supplier_country,                                                  :to   => lambda{|m| m.supplier.country}
+  default :ship_thru_supplier_id,                                             :to   => lambda{|m| m.supplier.default_ship_thru_supplier_id}
+  default :pay_to_supplier_id,                                                :to   => lambda{|m| m.supplier.default_pay_to_supplier_id}
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :purchase_details,              :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'
-  has_many     :logs,                          :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
-  belongs_to   :location,                      :class_name => 'Omni::Location',          :foreign_key => 'location_id'
-  belongs_to   :supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'
-  belongs_to   :pay_to_supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'pay_to_supplier_id'
-  belongs_to   :ship_thru_supplier,                      :class_name => 'Omni::Supplier',          :foreign_key => 'ship_thru_supplier_id'
-  belongs_to   :ordered_by_user,               :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'
-  belongs_to   :confirmed_by_user,             :class_name => 'Buildit::User',           :foreign_key => 'confirmed_by_user_id'
-  belongs_to   :master_purchase,               :class_name => 'Omni::Purchase',          :foreign_key => 'master_purchase_id'
-  belongs_to   :carrier_supplier,              :class_name => 'Omni::Supplier',          :foreign_key => 'carrier_supplier_id'
-  belongs_to   :purchase_approver_1_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_1_user_id'
-  belongs_to   :purchase_approver_2_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_2_user_id'
-  belongs_to   :purchase_approver_3_user,      :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_3_user_id'
-  belongs_to   :purchase_approver_1_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_1_location_user_id'
-  belongs_to   :purchase_approver_2_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_2_location_user_id'
-  belongs_to   :purchase_approver_3_location_user,   :class_name => 'Omni::LocationUser',     :foreign_key => 'purchase_approver_3_location_user_id'
+  has_many     :purchase_details,                    :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'
+  has_many     :logs,                                :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
+  belongs_to   :location,                            :class_name => 'Omni::Location',          :foreign_key => 'location_id'
+  belongs_to   :supplier,                            :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'
+  belongs_to   :pay_to_supplier,                     :class_name => 'Omni::Supplier',          :foreign_key => 'pay_to_supplier_id'
+  belongs_to   :ship_thru_supplier,                  :class_name => 'Omni::Supplier',          :foreign_key => 'ship_thru_supplier_id'
+  belongs_to   :ordered_by_user,                     :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'
+  belongs_to   :confirmed_by_user,                   :class_name => 'Buildit::User',           :foreign_key => 'confirmed_by_user_id'
+  belongs_to   :master_purchase,                     :class_name => 'Omni::Purchase',          :foreign_key => 'master_purchase_id'
+  belongs_to   :carrier_supplier,                    :class_name => 'Omni::Supplier',          :foreign_key => 'carrier_supplier_id'
+  belongs_to   :purchase_approver_1_user,            :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_1_user_id'
+  belongs_to   :purchase_approver_2_user,            :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_2_user_id'
+  belongs_to   :purchase_approver_3_user,            :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_3_user_id'
+  belongs_to   :purchase_approver_1_location_user,   :class_name => 'Omni::LocationUser',      :foreign_key => 'purchase_approver_1_location_user_id'
+  belongs_to   :purchase_approver_2_location_user,   :class_name => 'Omni::LocationUser',      :foreign_key => 'purchase_approver_2_location_user_id'
+  belongs_to   :purchase_approver_3_location_user,   :class_name => 'Omni::LocationUser',      :foreign_key => 'purchase_approver_3_location_user_id'
   # ASSOCIATIONS (End)
 
 
@@ -87,7 +89,6 @@ class Omni::Purchase < ActiveRecord::Base
     map :purchase_approver_1_location_user_display,    :to => 'purchase_approver_1_location_user.display'
     map :purchase_approver_2_location_user_display,    :to => 'purchase_approver_2_location_user.display'
     map :purchase_approver_3_location_user_display,    :to => 'purchase_approver_3_location_user.display'
-
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -96,9 +97,7 @@ class Omni::Purchase < ActiveRecord::Base
   computed_attributes do
     compute :total_order_units,                  :with => :compute_total_order_units
     compute :total_order_cost,                   :with => :compute_total_order_cost
-
   end
-
   # COMPUTED ATTRIBUTES (End)`
 
 
@@ -114,16 +113,9 @@ class Omni::Purchase < ActiveRecord::Base
 
   # FILTERS (End)
 
-
-  # ORDERING (Start) ====================================================================
-
-  # ORDERING (End)
-
-
   # SCOPES (Start) ======================================================================
 
   # SCOPES (End)
-
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -136,12 +128,9 @@ class Omni::Purchase < ActiveRecord::Base
     string   :purchase_order_nbr
     string   :supplier_display
     string   :location_display
-    # string   :purchase_type
-    # string   :purchase_source
     date     :order_date
     date     :ship_date
     date     :delivery_date
-
     # Partial match (contains) attributes
     text     :display_fulltext,            :using => :display
     text     :state_fulltext,              :using => :state
@@ -149,24 +138,18 @@ class Omni::Purchase < ActiveRecord::Base
     text     :location_fulltext,           :using => :location_display
     text     :master_purchase_fulltext,    :using => :master_purchase_display
     text     :carrier_supplier_fulltext,   :using => :carrier_supplier_display
-
   end
-
   # INDEXING (End)
-
 
   # HOOKS (Start) =======================================================================
   # before_destroy :cascading_delete
 
   hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
-  # hook :before_create, :recompute_delivery_date, 10
-  # hook :before_create, :recompute_cancel_date, 20
 
   # hook :before_create, :set_defaults, 10
 
   # HOOKS (End)
-
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
@@ -218,7 +201,7 @@ class Omni::Purchase < ActiveRecord::Base
     end
 
     event :cancel do
-         transition [:open, :partial] => :cancelled
+      transition [:open, :partial] => :cancelled
     end
     # event :open do
     #   transition :pending_approval => :open
@@ -281,7 +264,7 @@ class Omni::Purchase < ActiveRecord::Base
         when 3
           self.approval_3_date = Date.today
           self.save
-            self.process_open
+          self.process_open
       end
   end
 
@@ -322,8 +305,12 @@ def queue
 
   def validate_release
 
+<<<<<<< HEAD
     if self.total_order_cost.to_i < Omni::SystemOption.first.purchase_approval_1_maximum_amount
         # errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
+=======
+    if self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
+>>>>>>> d929eabbe0de41e142a2586b1e03abd1507b490b
         errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
     else
       if self.total_order_cost < Omni::SystemOption.first.purchase_approval_2_maximum_amount
@@ -379,7 +366,7 @@ def queue
 
   # Get the email address
   def approver_email
-    # Search event table for user_id of approver
+  # Search event table for user_id of approver
     return 'aaron@buildit.io'
   end
 

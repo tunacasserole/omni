@@ -55,7 +55,6 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
         // SEPARATOR
         '-',
 
-
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
@@ -76,7 +75,6 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
           }
         },
 
-
         /**
          * EXPORT
          * Supports the deletion of the selected items in the explorer grid. If none
@@ -95,35 +93,12 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
             }
           }
         }
-
         // RIGHT ACTIONS (End)
-
       ],
-
 
       leftActions: [
 
         // LEFT ACTIONS (Start) =================================================================
-
-       /**
-         * Release
-         * Supports performing 'Release' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Release',
-          cls: 'icon-settings',
-          action: 'release',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickRelease,
-              scope: me
-            }
-          }
-        },
 
           /**
          * Approve
@@ -145,21 +120,14 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
           }
         },
         // LEFT ACTIONS (End)
-
       ]
-
     });
 
     this.callParent();
   },
 
 
-
   // ACTION HANDLERS (Start) ====================================================================
-
-  clickRelease: function(btn, e, eOpts){
-    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'release');
-  },
 
   clickApprove: function(btn, e, eOpts){
     Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'approve');

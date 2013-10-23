@@ -13,10 +13,6 @@ Ext.define('Omni.view.purchases.Form', {
       disabled = false
     };
 
-    // var disabled = this.record.get('state') != 'draft' ? true : false;
-    // console.log('******************************************');
-    // console.log(disabled);
-
     // FILTER (Start) =======================================================================
     var associativeFilter = {
       property:   'purchase_id',
@@ -153,7 +149,6 @@ Ext.define('Omni.view.purchases.Form', {
             }
           ]
         }
-
        ,{
           xtype:        'fieldset',
           title:        'Purchase Order Dates',
@@ -184,10 +179,10 @@ Ext.define('Omni.view.purchases.Form', {
             { xtype: 'datefield', name: 'cancel_not_shipped_by_date',     fieldLabel: this.cancel_not_shipped_by_dateLabel  , allowBlank: true, disabled: false },
             { xtype: 'datefield', name: 'cancel_not_received_by_date',    fieldLabel: this.cancel_not_received_by_dateLabel , allowBlank: true, disabled: false },
             { xtype: 'datefield', name: 'first_receipt_date',             fieldLabel: this.first_receipt_dateLabel          , allowBlank: true, disabled: true },
+            { xtype: 'datefield', name: 'last_receipt_date',              fieldLabel: this.last_receipt_dateLabel           , allowBlank: true, disabled: true },
             { xtype: 'datefield', name: 'cancelled_date',                 fieldLabel: this.cancelled_dateLabel              , allowBlank: true, disabled: true },
           ]
         }
-
        ,{
           xtype               : 'fieldset',
           title               : 'Purchase Order Approvals',
@@ -207,11 +202,6 @@ Ext.define('Omni.view.purchases.Form', {
                                         value:  true
                                       }]
                                     }),
-
-              // store             : Ext.create('Buildit.store.LocationUser',{pageSize: 20}),
-
-              // store             : Ext.create('Buildit.store.User',{pageSize: 20}),
-
               displayField      : 'user_display',
               queryField        : 'user_display',
               valueField        : 'user_id',
@@ -260,7 +250,64 @@ Ext.define('Omni.view.purchases.Form', {
             }
           ]
         }
-
+        {
+          xtype: 'fieldset',
+          title: 'Contact Information',
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { xtype             : 'textfield'
+              name              : 'supplier_address_1',
+              fieldLabel        : this.supplier_address_1Label,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'supplier_address_2',
+              fieldLabel        : this.supplier_address_2Label,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'supplier_address_3',
+              fieldLabel        : this.supplier_address_3Label,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'supplier_address_4',
+              fieldLabel        : this.supplier_address_4Label,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'supplier_city',
+              fieldLabel        : this.supplier_cityLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'buildit-Lookup',
+              name              : 'supplier_state_code',
+              fieldLabel        : this.supplier_state_codeLabel,
+              allowBlank        : true,
+              category          : 'STATE_CODE'
+            },
+            { xtype             : 'textfield'
+              name              : 'supplier_zip',
+              fieldLabel        : this.supplier_zipLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'supplier_country',
+              fieldLabel        : this.supplier_countryLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+          ]
+        },
        ,{
           xtype:        'fieldset',
           title:        'Logistics Information',
@@ -270,13 +317,48 @@ Ext.define('Omni.view.purchases.Form', {
           layout:       'anchor',
           items:[
 
-            { xtype: 'buildit-Lookup', name: 'freight_term',             fieldLabel: this.freight_termLabel         , allowBlank: true, category:   'FREIGHT_TERM' },
-            { xtype: 'buildit-Lookup', name: 'fob_point',                fieldLabel: this.fob_pointLabel                   , allowBlank: true, category:   'FOB_POINT' },
-            { xtype: 'textfield', name: 'ship_via',                      fieldLabel: this.ship_viaLabel                    , allowBlank: true },
-            { xtype: 'buildit-Locator',   name: 'carrier_supplier_id',   fieldLabel: this.carrier_supplier_idLabel         , allowBlank: true,  store:   Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'carrier_supplier_id', itemTpl:'{display}' },
-            // { xtype: 'checkbox', name: 'is_ship_cancel',                 fieldLabel: this.is_ship_cancelLabel              , allowBlank: true },
-            { xtype: 'textfield', name: 'estimated_lead_time_days',      fieldLabel: this.estimated_lead_time_daysLabel    , allowBlank: true },
-
+            { xtype             : 'buildit-Lookup',
+              name              : 'freight_term',
+              fieldLabel        : this.freight_termLabel,
+              allowBlank        : true,
+              category          : 'FREIGHT_TERM' 
+            },
+            { xtype             : 'buildit-Lookup',
+              name              : 'fob_point',
+              fieldLabel        : this.fob_pointLabel,
+              allowBlank        : true,
+              category          : 'FOB_POINT' 
+            },
+            { xtype             : 'textfield',
+              name              : 'ship_via',
+              fieldLabel        : this.ship_viaLabel,
+              allowBlank        : true 
+            },
+            { xtype             : 'buildit-Locator',
+              name              : 'carrier_supplier_id',
+              fieldLabel        : this.carrier_supplier_idLabel,
+              allowBlank        : true,
+              store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'carrier_supplier_id',
+              itemTpl           : '{display}' 
+            },
+            { xtype             : 'textfield',
+              name              : 'estimated_lead_time_days',
+              fieldLabel        : this.estimated_lead_time_daysLabel,
+              allowBlank        : true 
+            },
+            { xtype             : 'buildit-Locator',
+              name              : 'ship_thru_supplier_id',
+              fieldLabel        : this.ship_thru_supplier_idLabel,
+              allowBlank        : true,
+              store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'carrier_supplier_id',
+              itemTpl           : '{display}' 
+            },
             { xtype             : 'buildit-Locator',
               name              : 'master_purchase_id',
               fieldLabel        : this.master_purchase_idLabel,
@@ -305,8 +387,22 @@ Ext.define('Omni.view.purchases.Form', {
           items:[
             { xtype: 'buildit-Lookup',  name: 'purchase_type',        fieldLabel: this.purchase_typeLabel               , allowBlank: true, category:   'PURCHASE_TYPE' },
             { xtype: 'buildit-Lookup',  name: 'purchase_source',      fieldLabel: this.purchase_sourceLabel             , allowBlank: true, category:   'PURCHASE_SOURCE' },
-            { xtype: 'buildit-Lookup',  name: 'payment_term',         fieldLabel: this.payment_termLabel                , allowBlank: true, category:   'PAYMENT_TERM' },
-
+            { xtype             : 'buildit-Lookup',
+              name              : 'payment_term',
+              fieldLabel        : this.payment_termLabel,
+              allowBlank        : true,
+              category          : 'PAYMENT_TERM' 
+            },
+            { xtype             : 'buildit-Locator',
+              name              : 'pay_to_supplier_id',
+              fieldLabel        : this.pay_to_supplier_idLabel,
+              allowBlank        : true,
+              store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'pay_to_supplier_id',
+              itemTpl           : '{display}' 
+            },
             { xtype             : 'buildit-Locator',
               store             : Ext.create('Buildit.store.User',{pageSize: 20}),
               displayField      : 'full_name',

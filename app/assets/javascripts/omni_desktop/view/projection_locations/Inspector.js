@@ -18,7 +18,18 @@ Ext.define('Omni.view.projection_locations.Inspector',{
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
-        {title: 'Profile',           xtype: 'omni-projection_locations-Form'}
+        {title: 'Profile',           xtype: 'omni-projection_locations-Form'},
+
+        { title: 'Notes',
+          xtype: 'buildit-notes-Explorer',
+          defaultSearch: { with:
+            {
+              notable_type: {equal_to: 'Omni::ProjectionLocation'},
+              notable_id:   {equal_to: me.record.get('projection_location_id')}
+            }
+          },
+          showBadge: true
+        }
       ]
     });
     // CARDS (End)

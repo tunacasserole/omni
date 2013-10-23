@@ -18,9 +18,9 @@
 
   # DEFAULTS (Start) ====================================================================
   default      :projection_id,                    :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.department_display} - #{m.plan_year} - #{m.version}"}
+  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.department_display} - #{m.plan_year}"}
+  default      :plan_year,                        :override  =>  true,         :to    => '2014'
   default      :is_destroyed,                     :override  =>  false,        :to    => false
-  default      :plan_year,                        :override => true, :to => '2004'
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -35,30 +35,18 @@
   has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'projection_id'
   has_many     :projection_locations,            :class_name => 'Omni::ProjectionLocation',  :foreign_key => 'projection_id'
   has_many     :logs,                            :class_name => 'Omni::Log',                 :foreign_key => 'logable_id' , :as => :logable
-  belongs_to   :region,                          :class_name => 'Omni::Region',              :foreign_key => 'region_id'
-  belongs_to   :district,                        :class_name => 'Omni::District',            :foreign_key => 'district_id'
-  belongs_to   :location,                        :class_name => 'Omni::Location',            :foreign_key => 'location_id'
   belongs_to   :department,                      :class_name => 'Omni::Department',          :foreign_key => 'department_id'
-  belongs_to   :classification,                  :class_name => 'Omni::Classification',      :foreign_key => 'classification_id'
-  belongs_to   :subclass,                        :class_name => 'Omni::Subclass',            :foreign_key => 'subclass_id'
-  belongs_to   :style,                           :class_name => 'Omni::Style',               :foreign_key => 'style_id'
-  belongs_to   :sku,                             :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
-  belongs_to   :color,                           :class_name => 'Omni::Color',               :foreign_key => 'color_id'
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'
+  belongs_to   :projection_approver_user,        :class_name => ':Buildit::User',            :foreign_key => 'projection_approver_user_id'
+  belongs_to   :projection_closer_user,          :class_name => ':Buildit::User',            :foreign_key => 'projection_closer_user_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :forecast_profile_display,           :to => 'forecast_profile.display'
-    map :region_display,                     :to => 'region.display'
-    map :district_display,                     :to => 'district.display'
-    map :location_display,                     :to => 'location.display'
-    map :department_display,                     :to => 'department.display'
-    map :classification_display,              :to => 'classification.display'
-    map :subclass_display,                     :to => 'subclass.display'
-    map :style_display,                     :to => 'style.display'
-    map :sku_display,                     :to => 'sku.display'
-    map :color_display,                     :to => 'color.display'
+    map :department_display,                 :to => 'department.display'
+    map :projection_approver_user_display,   :to => 'projection_approver_user.display'
+    map :projection_closer_user_display,     :to => 'projection_closer_user.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -82,37 +70,76 @@
 
   # INDEXING (Start) ====================================================================
   searchable do
+  # Exact match attributes
     string   :department_display
     string   :forecast_profile_display
     string   :display
     string   :projection_id
     string   :state
-
+    string   :plan_year
+  # Partial match (contains) attributes
     text     :department_display_fulltext, :using => :department_display
     text     :forecast_profile_display_fulltext, :using => :forecast_profile_display
     text     :display_fulltext, :using => :display
-    text     :version_fulltext, :using => :version
     text     :state_fulltext, :using => :state
-    #text     :state_fulltext, :using => :state
   end
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :new do
 
+  ### STATES ###
+    state :new do
+    end
+    state :draft do
+      validates :plan_year,                         :presence => true
+      validates :department_id,                     :presence => true
+    end
+    state :forecast do
+      validates :forecast_profile_id,               :presence => true
+    end
+    state :projection_1 do
+      validates :projection_approver_user_id,       :presence => true
+      validates :projection_closer_user_id,         :presence => true
+    end
+    state :projection_2 do
+    end
+    state :projection_3 do
+    end
+    state :projection_4 do
+      validates :approval_3_date,                   :presence => true
+    end
+    state :complete do
+      validates :approval_4_date,                   :presence => true
+    end
+
   ### CALLBACKS ###
     after_transition :on => :build, :do => :process_build
+
     after_transition :on => :forecast, :do => :process_forecast
 
   ### EVENTS ###
+# The following actions may run on this model:
+    # Action      State Event   Description
+    # build           true      Build the Projection Details
+    # forecast        false     Calculate projection forecast (changes state only if state was previously draft)
+    # released        true      Builds Projection Locations
+    # close 1         true      Copy projection_1_units to projection_2_units
+    # close 2         true      Copy projection_2_units to projection_3_units
+    # approve 3       false     Set approval_3 date
+    # close 3         true      Copy projection_2_units to projection_3_units
+    # approve 4       false     Set approval_4 date
+    # cloase 4        true      Copy projection_2_units to projection_3_units
+# 
+
     event :build do
-      transition any => :running
-      transition :running => :built
+      transition :new => :draft
     end
+
     event :forecast do
-      transition any => :running
-      transition :running => :forecasted
+      transition ![:new, :complete] => :forecast
     end
+
     event :release do
       transition any => :released
     end

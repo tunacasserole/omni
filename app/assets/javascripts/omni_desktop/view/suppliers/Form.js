@@ -103,24 +103,84 @@ Ext.define('Omni.view.suppliers.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'line_1',                         fieldLabel: this.line_1Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'line_2',                         fieldLabel: this.line_2Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'line_3',                         fieldLabel: this.line_3Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'line_4',                         fieldLabel: this.line_4Label,                     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'city',                           fieldLabel: this.cityLabel,                       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { xtype: 'buildit-Lookup',
-              name: 'state_code',
-              fieldLabel: this.state_codeLabel,
-              allowBlank: true,
-              category:   'STATE_CODE'
+            { xtype             : 'textfield'
+              name              : 'line_1',
+              fieldLabel        : this.line_1Label,
+              allowBlank        : true,
+              disabled          : false,      	                              
             },
-            { name: 'zip',                            fieldLabel: this.zipLabel,                        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'country',                        fieldLabel: this.countryLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'latitude',                       fieldLabel: this.latitudeLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'longitude',                      fieldLabel: this.longitudeLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'phone',                          fieldLabel: this.phoneLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'fax',                            fieldLabel: this.faxLabel,                        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'supplier_url',                   fieldLabel: this.supplier_urlLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { xtype             : 'textfield'
+              name              : 'line_2',
+              fieldLabel        : this.line_2Label,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'line_3',
+              fieldLabel        : this.line_3Label,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'line_4',
+              fieldLabel        : this.line_4Label,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'city',
+              fieldLabel        : this.cityLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'buildit-Lookup',
+              name              : 'state_code',
+              fieldLabel        : this.state_codeLabel,
+              allowBlank        : true,
+              category          : 'STATE_CODE'
+            },
+            { xtype             : 'textfield'
+              name              : 'zip',
+              fieldLabel        : this.zipLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'country',
+              fieldLabel        : this.countryLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'latitude',
+              fieldLabel        : this.latitudeLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'longitude',
+              fieldLabel        : this.longitudeLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'phone',
+              fieldLabel        : this.phoneLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'fax',
+              fieldLabel        : this.faxLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
+            { xtype             : 'textfield'
+              name              : 'supplier_url',
+              fieldLabel        : this.supplier_urlLabel,
+              allowBlank        : true,
+              disabled          : false,      	                              
+            },
           ]
         },
         {
@@ -141,8 +201,22 @@ Ext.define('Omni.view.suppliers.Form', {
             { name: 'minimum_cube',                   fieldLabel: this.minimum_cubeLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_ship_cancel',                 fieldLabel: this.is_ship_cancelLabel,             allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'return_policy',                  fieldLabel: this.return_policyLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'lead_time',                      fieldLabel: this.lead_timeLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'safety_stock_days',              fieldLabel: this.safety_stock_daysLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+           ,{ xtype             : 'numberfield',
+              name              : 'lead_time',
+              fieldLabel        : this.lead_timeLabel,
+              minValue          : 0,
+              decimalPrecision  : 0,
+              allowBlank        : true,
+              disabled          : disabled
+            }
+           ,{ xtype             : 'numberfield',
+              name              : 'safety_stock_days',
+              fieldLabel        : this.safety_stock_daysLabel,
+              minValue          : 0,
+              decimalPrecision  : 0,
+              allowBlank        : true,
+              disabled          : disabled
+            }
             { name: 'is_calculated_lead_time',        fieldLabel: this.is_calculated_lead_timeLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category: 'REPLENISHMENT_METHOD' },
             { name: 'is_dynamic_safety_stock',        fieldLabel: this.is_dynamic_safety_stockLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
