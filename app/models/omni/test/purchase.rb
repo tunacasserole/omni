@@ -186,4 +186,5 @@ class Omni::Test::Purchase
     Omni::Purchase.reindex
     Omni::PurchaseAllocation.reindex
     Omni::PurchaseDetail.reindex
+  end
 end
