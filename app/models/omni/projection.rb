@@ -37,8 +37,8 @@
   has_many     :logs,                            :class_name => 'Omni::Log',                 :foreign_key => 'logable_id' , :as => :logable
   belongs_to   :department,                      :class_name => 'Omni::Department',          :foreign_key => 'department_id'
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'
-  belongs_to   :projection_approver_user,        :class_name => ':Buildit::User',            :foreign_key => 'projection_approver_user_id'
-  belongs_to   :projection_closer_user,          :class_name => ':Buildit::User',            :foreign_key => 'projection_closer_user_id'
+  belongs_to   :projection_approver_user,        :class_name => 'Buildit::User',            :foreign_key => 'projection_approver_user_id'
+  belongs_to   :projection_closer_user,          :class_name => 'Buildit::User',            :foreign_key => 'projection_closer_user_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -130,7 +130,7 @@
     # close 3         true      Copy projection_2_units to projection_3_units
     # approve 4       false     Set approval_4 date
     # cloase 4        true      Copy projection_2_units to projection_3_units
-# 
+#
 
     event :build do
       transition :new => :draft

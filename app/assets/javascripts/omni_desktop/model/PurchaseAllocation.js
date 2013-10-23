@@ -6,6 +6,7 @@ Ext.define('Omni.model.PurchaseAllocation', {
       { name: 'purchase_detail_id',          type: 'string'   },
       { name: 'allocation_id',               type: 'string'   },
       { name: 'location_id',                 type: 'string'   },
+      { name: 'location_display',                 type: 'string'   },
       { name: 'display',                     type: 'string'   },
       { name: 'purchase_allocation_nbr',     type: 'string'   },
       { name: 'state',                       type: 'string'   },

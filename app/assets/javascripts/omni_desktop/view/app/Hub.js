@@ -27,7 +27,7 @@ Ext.define('Omni.view.app.Hub', {
         {
           title: 'Inventory Planning',
           columns: 4,
-          rows: 3,
+          rows: 4,
           tiles: [{
             title: 'Locations',
             colspan: 2,
@@ -68,7 +68,15 @@ Ext.define('Omni.view.app.Hub', {
             target: {
               xtype: 'omni-period_results-Explorer'
             }
-            }, {
+          }, {
+            title: 'Projections',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'bts_source',
+            target: {
+              xtype: 'omni-projections-Explorer'
+            }
+           }, {
               title: 'BTS Results',
               colspan: 2,
               rowspan: 1,
@@ -93,14 +101,6 @@ Ext.define('Omni.view.app.Hub', {
             cls: 'costs',
             target: {
               xtype: 'omni-purchases-Explorer'
-            }
-          }, {
-            title: 'Costs',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'costs',
-            target: {
-              xtype: 'omni-costs-Explorer'
             }
           }, {
             title: 'Receipts',

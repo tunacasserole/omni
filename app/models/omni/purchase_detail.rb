@@ -130,11 +130,16 @@
 
   ### CALLBACKS ###
     after_transition :on => :approve, :do => :process_approve
+    after_transition :on => :receive, :do => :process_receive
     after_transition :on => :cancel, :do => :process_cancel
 
   ### EVENTS ###
     event :approve do
       transition :draft => :open
+    end
+
+    event :receive do
+      transition :open => :open
     end
 
     event :cancel do
@@ -146,6 +151,10 @@
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
+  def process_receive
+    errors.add('Not Ready','Feature is not yet implemented.')
+  end
+
   def process_cancel
     # Write SLA
     open_units = self.selling_units_approved - self.selling_units_received - self.selling_units_cancelled

@@ -2,7 +2,7 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-purchases-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -11,46 +11,6 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
             leftActions: [
 
         // LEFT ACTIONS (Start) =================================================================
- 
-       /**
-         * Print
-         */
-        {
-          text:'Print',
-          cls: 'icon-settings',
-          action: 'print',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickPrint,
-              scope: me
-            }
-          }
-        },
-
-
-      /**
-         * Costing
-         * Supports performing 'Costing' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Costing',
-          cls: 'icon-settings',
-          action: 'costing',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickCosting,
-              scope: me
-            }
-          }
-        },
-
 
        /**
          * Release
@@ -72,7 +32,6 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
           }
         },
 
-
         /**
          * Approve
          * Supports performing 'Approve' on the selected items in the explorer grid.
@@ -88,6 +47,45 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
           listeners: {
             click: {
               fn: this.clickApprove,
+              scope: me
+            }
+          }
+        },
+
+       /**
+         * Print
+         */
+        {
+          text:'Print',
+          cls: 'icon-settings',
+          action: 'print',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickPrint,
+              scope: me
+            }
+          }
+        },
+
+
+      /**
+         * Cancel
+         * Supports performing 'Cancel' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Cancel',
+          cls: 'icon-settings',
+          action: 'cancel',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickCancel,
               scope: me
             }
           }
@@ -211,8 +209,8 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
     Omni.logic.purchases.ExplorerProcessSelectedItems.click(btn, 'approve');
   },
 
-  clickCosting: function(btn, e, eOpts){
-    Omni.logic.purchases.ExplorerProcessSelectedItems.click(btn, 'costing');
+  clickCancel: function(btn, e, eOpts){
+    Omni.logic.purchases.ExplorerProcessSelectedItems.click(btn, 'cancel');
   },
 
   clickDelete: function(btn, e, eOpts){

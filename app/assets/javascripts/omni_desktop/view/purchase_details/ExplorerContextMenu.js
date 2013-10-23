@@ -2,7 +2,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-purchase_details-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -11,7 +11,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
             leftActions: [
 
         // LEFT ACTIONS (Start) =================================================================
- 
+
        /**
          * Allocate
          * Supports performing 'Allocate' on the selected items in the explorer grid.
@@ -27,6 +27,46 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
           listeners: {
             click: {
               fn: this.clickAllocate,
+              scope: me
+            }
+          }
+        },
+
+       /**
+         * Receive
+         * Supports performing 'Receive' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Receive',
+          cls: 'icon-settings',
+          action: 'receive',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickReceive,
+              scope: me
+            }
+          }
+        },
+
+       /**
+         * Cancel
+         * Supports performing 'Cancel' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Cancel',
+          cls: 'icon-settings',
+          action: 'cancel',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickReceive,
               scope: me
             }
           }
@@ -140,6 +180,14 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
 
   clickAllocate: function(btn, e, eOpts){
     Omni.logic.purchase_details.ExplorerProcessSelectedItems.click(btn, 'allocate');
+  },
+
+  clickReceive: function(btn, e, eOpts){
+    Omni.logic.purchase_details.ExplorerProcessSelectedItems.click(btn, 'receive');
+  },
+
+  clickCancel: function(btn, e, eOpts){
+    Omni.logic.purchase_details.ExplorerProcessSelectedItems.click(btn, 'cancel');
   },
 
   clickDelete: function(btn, e, eOpts){

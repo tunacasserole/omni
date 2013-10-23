@@ -2,11 +2,60 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-purchase_allocations-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
     Ext.apply(this, {
+
+    leftActions: [
+
+        // LEFT ACTIONS (Start) =================================================================
+
+   /**
+         * Lock
+         * Supports performing 'Lock' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Lock',
+          cls: 'icon-settings',
+          action: 'lock',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickLock,
+              scope: me
+            }
+          }
+        },
+
+
+        /**
+         * Unlock
+         * Supports performing 'Unlock' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Unlock',
+          cls: 'icon-settings',
+          action: 'unlock',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickUnlock,
+              scope: me
+            }
+          }
+        },
+
+        // LEFT ACTIONS (End)
+
+      ],
 
       rightActions: [
 
@@ -98,16 +147,6 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
 
         // RIGHT ACTIONS (End)
 
-      ],
-
-
-      leftActions: [
-
-        // LEFT ACTIONS (Start) =================================================================
-
-
-        // LEFT ACTIONS (End)
-
       ]
 
     });
@@ -118,6 +157,14 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
 
 
   // ACTION HANDLERS (Start) ====================================================================
+
+  clickLock: function(btn, e, eOpts){
+    Omni.logic.purchase_allocations.ExplorerProcessSelectedItems.click(btn, 'lock');
+  },
+
+  clickUnlock: function(btn, e, eOpts){
+    Omni.logic.purchase_allocations.ExplorerProcessSelectedItems.click(btn, 'unlock');
+  },
 
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);
