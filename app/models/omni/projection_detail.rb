@@ -68,8 +68,8 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     map :color_display,                          :to => 'sku.color_display'
     map :size_id,                                :to => 'sku.size_id'
     map :size_display,                           :to => 'sku.size_display'
-    map :forecast_profile_display                :to => 'forecast_profile.display'
-    map :projection_location_display             :to => 'projection_location.display' if projection_location
+    map :forecast_profile_display,               :to => 'forecast_profile.display'
+    map :projection_location_display,            :to => 'projection_location.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -79,7 +79,8 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     compute :sale_units_py1,                     :with => :compute_sale_units_py1
     compute :sale_units_py2,                     :with => :compute_sale_units_py2
     compute :sale_units_py3,                     :with => :compute_sale_units_py3
-    compute :average_sales, :standard_deviation, :with => :compute_average_sales
+    compute :average_sales,                      :with => :compute_average_sales
+    compute :standard_deviation,                 :with => :compute_standard_deviation
   end
   # COMPUTED ATTRIBUTES (End)
 
@@ -138,13 +139,13 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     # read SkuPeriodResults for ProjectionDetail.sku_id, ProjectionDetail.location_id and current year -3. Sum regular_sale_units.
   end
   def compute_average_sales
-    avg = (self.sale_units_py1+self.sale_units_py2+self.sale_units_py3) / 3
-    dev = (((self.sale_units_py1 - avg)**2 + (self.sale_units_py2 - avg)**2 + (self.sale_units_py3 - avg)**2) / 3)
-#  Need to calculate square root of dev to get standard deviation
+    (self.sale_units_py1+self.sale_units_py2+self.sale_units_py3) / 3
+  end
+  def compute_standard_deviation
+    avg = self.average_sales
+    squared_deviations = (((self.sale_units_py1 - avg)**2 + (self.sale_units_py2 - avg)**2 + (self.sale_units_py3 - avg)**2) / 3)
+#  Need to calculate square root of squared_deviations to get standard deviation
     std = 0    
-    self.average_sales = avg
-    self.standard_deviation = std
-    self.save
   end
   # HELPERS (End)
 
