@@ -240,14 +240,14 @@ class Omni::Purchase < ActiveRecord::Base
   def process_release
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
 
-      message = Buildit::Comm::Email::Message.create(
-          subject: "Omni notice: purchase - #{self.purchase_order_nbr} has been released.",
-          body: Buildit::Email::Manager.generate(self, "purchase_notice")
-      )
-      # email_addresses = Buildit::User.all.collect {|u| u.email_address}
-      email_addresses = Buildit::User.where(:user_id => self.purchase_approver_1_user_id).first.email_address
-      message.send_to email_addresses
-      message.queue
+      # message = Buildit::Comm::Email::Message.create(
+      #     subject: "Omni notice: purchase - #{self.purchase_order_nbr} has been released.",
+      #     body: Buildit::Email::Manager.generate(self, "purchase_notice")
+      # )
+      # # email_addresses = Buildit::User.all.collect {|u| u.email_address}
+      # email_addresses = Buildit::User.where(:user_id => self.purchase_approver_1_user_id).first.email_address
+      # message.send_to email_addresses
+      # message.queue
 
   end
 
@@ -322,7 +322,7 @@ def queue
 
   def validate_release
 
-    if self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
+    if self.total_order_cost.to_i < Omni::SystemOption.first.purchase_approval_1_maximum_amount
         # errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
         errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
     else

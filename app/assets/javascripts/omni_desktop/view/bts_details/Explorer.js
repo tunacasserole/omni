@@ -5,9 +5,9 @@ Ext.define('Omni.view.bts_details.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.BtsDetail'),
-  
+
   allowFind  :  true,
-  
+
   contextMenuConfig : {
     xtype    : 'omni-bts_details-ExplorerContextMenu'
   },
@@ -25,7 +25,7 @@ Ext.define('Omni.view.bts_details.Explorer', {
   bts_detail_idLabel:                     Omni.i18n.model.BtsDetail.bts_detail_id,
   bts_idLabel:                            Omni.i18n.model.BtsDetail.bts_id,
   sku_idLabel:                            Omni.i18n.model.BtsDetail.sku_id,
-  style_idLabel:                          Omni.i18n.model.BtsDetail.style_id,  
+  style_idLabel:                          Omni.i18n.model.BtsDetail.style_id,
   location_idLabel:                       Omni.i18n.model.BtsDetail.location_id,
   data_sourceLabel:                       Omni.i18n.model.BtsDetail.data_source,
   on_handLabel:                           Omni.i18n.model.BtsDetail.on_hand,
@@ -65,12 +65,12 @@ Ext.define('Omni.view.bts_details.Explorer', {
     {
       showAll  : 'All Sources',
       items    : [
-        ['source_parker',     "PARKER"],  
-        ['source_buckhead',     "BUCKHEAD"],  
+        ['source_parker',     "PARKER"],
+        ['source_buckhead',     "BUCKHEAD"],
         ['source_grits',     "GRITS"]
       ]
     }
-  ],  
+  ],
 
   initComponent : function () {
 
@@ -89,25 +89,31 @@ Ext.define('Omni.view.bts_details.Explorer', {
         //   dataIndex    : 'bts_id',
         //   flex         : 1
         // },
-        {
-          header       : this.sku_idLabel,
-          dataIndex    : 'sku_display',
-          flex         : 3
-        },
-        {
-          header       : this.style_idLabel,
-          dataIndex    : 'style_display',
-          flex         : 2
-        },        // {
+        // {
         //   header       : this.location_idLabel,
         //   dataIndex    : 'location_id',
         //   flex         : 1
         // },
+        // {
+        //   header       : this.data_sourceLabel,
+        //   dataIndex    : 'data_source',
+        //   flex         : 1
+        // },
         {
-          header       : this.data_sourceLabel,
-          dataIndex    : 'data_source',
+          header       : this.sku_idLabel,
+          dataIndex    : 'sku_display',
+          flex         : 5
+        },
+        {
+          header       : this.needLabel,
+          dataIndex    : 'need',
           flex         : 1
         },
+        {
+          header       : this.style_idLabel,
+          dataIndex    : 'style_display',
+          flex         : 1
+        },        // {
         {
           header       : this.on_handLabel,
           dataIndex    : 'on_hand',
@@ -198,11 +204,6 @@ Ext.define('Omni.view.bts_details.Explorer', {
           dataIndex    : 'generic_need',
           flex         : 1
         },
-        {
-          header       : this.needLabel,
-          dataIndex    : 'need',
-          flex         : 1
-        }        
       ]
     });
     // COLUMNS (End)
