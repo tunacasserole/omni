@@ -1,6 +1,6 @@
 class CreateOmniStyles < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('styles')
       create_table(:styles, :id => false) do |t|
@@ -66,6 +66,6 @@ class CreateOmniStyles < ActiveRecord::Migration
         t.column   :audit_updated_at,                :datetime,          :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

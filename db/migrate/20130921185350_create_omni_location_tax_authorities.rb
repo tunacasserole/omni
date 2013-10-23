@@ -1,6 +1,6 @@
 class CreateOmniLocationTaxAuthorities < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('location_tax_authorities')
       create_table(:location_tax_authorities, :id => false) do |t|
@@ -11,6 +11,6 @@ class CreateOmniLocationTaxAuthorities < ActiveRecord::Migration
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

@@ -1,6 +1,6 @@
 class CreateOmniStyleColorSizes < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('style_color_sizes')
       create_table(:style_color_sizes, :id => false) do |t|
@@ -18,6 +18,6 @@ class CreateOmniStyleColorSizes < ActiveRecord::Migration
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

@@ -1,6 +1,6 @@
 class CreateOmniRmsItems < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('rms_items')
       create_table(:rms_items, :id => false) do |t|
@@ -90,6 +90,6 @@ class CreateOmniRmsItems < ActiveRecord::Migration
         t.column   :TenderID,                        :integer,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

@@ -1,6 +1,6 @@
 class CreateOmniTerminals < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('terminals')
       create_table(:terminals, :id => false) do |t|
@@ -24,6 +24,6 @@ class CreateOmniTerminals < ActiveRecord::Migration
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

@@ -1,6 +1,6 @@
 class CreateOmniTransferHd < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('transfer_hd')
       create_table(:transfer_hd, :id => false) do |t|
@@ -16,6 +16,6 @@ class CreateOmniTransferHd < ActiveRecord::Migration
         t.column   :comment,                         :string,            :null  =>  true,    :limit   => 150
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

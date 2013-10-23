@@ -1,6 +1,6 @@
 class CreateOmniSkuSubstitutes < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('sku_substitutes')
       create_table(:sku_substitutes, :id => false) do |t|
@@ -15,6 +15,6 @@ class CreateOmniSkuSubstitutes < ActiveRecord::Migration
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

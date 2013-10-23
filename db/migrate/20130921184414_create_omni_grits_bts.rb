@@ -1,6 +1,6 @@
 class CreateOmniGritsBts < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('grits_bts')
       create_table(:grits_bts, :id => false) do |t|
@@ -35,6 +35,6 @@ class CreateOmniGritsBts < ActiveRecord::Migration
         t.column   :projected_66,                    :integer,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

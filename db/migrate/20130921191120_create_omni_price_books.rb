@@ -1,6 +1,6 @@
 class CreateOmniPriceBooks < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('price_books')
       create_table(:price_books, :id => false) do |t|
@@ -12,6 +12,6 @@ class CreateOmniPriceBooks < ActiveRecord::Migration
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

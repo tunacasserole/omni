@@ -5,6 +5,7 @@ class Omni::Test::Purchase
   def self.go
     load_base_data
     run_tests
+    reindex_data
   end
 
   def self.run_tests
@@ -114,10 +115,10 @@ class Omni::Test::Purchase
     Omni::SkuSupplier.create(:sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:supplier_id => 'B95C3E9AAC5311E299E700FF58D32228',:supplier_cost=>100, :supplier_cost_units=>1)
 
     Omni::SkuLocation.where(:sku_location_id => ['14A01280231F11E3BE4920C9D047LOC1','14A01280231F11E3BE4920C9D047LOC2','14A01280231F11E3BE4920C9D047LOC4','14A01280231F11E3BE4920C9D047LOC5']).all.each {|x| x.delete}
-    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC1', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '51713A3EAC3E11E2947800FF58D32228',:is_authorized => true, :state => 'active')
-    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC2', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '51892F68AC3E11E2947800FF58D32228',:is_authorized => true, :state => 'active')
-    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC4', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '5247A038AC3E11E2947800FF58D32228',:is_authorized => true, :state => 'active')
-    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC5', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '526058B2AC3E11E2947800FF58D32228',:is_authorized => false, :state => 'active')
+    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC1', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '51713A3EAC3E11E2947800FF58D32228',:is_authorized => true, :is_authorized => true)
+    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC2', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '51892F68AC3E11E2947800FF58D32228',:is_authorized => true, :is_authorized => true)
+    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC4', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '5247A038AC3E11E2947800FF58D32228',:is_authorized => true, :is_authorized => true)
+    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC5', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '526058B2AC3E11E2947800FF58D32228',:is_authorized => false, :is_authorized => true)
 
     Omni::PurchaseDetail.where(:purchase_detail_id => ['ABABDAAA35E011E3ABAA20XXXXXXXXXX','ABABDAAA35E011E3ABAA20C9DBTPROJ1','ABABDAAA35E011E3ABAA20C9DBTPROJ2','ABABDAAA35E011E3ABAA20C9DBTPROJ3','ABABDAAA35E011E3ABAA20C9DBTPROJ4','ABABDAAA35E011E3ABAALASTFORECAST','ABABDAAA35E011E3ABAA20C9APPROVED']).all.each {|x| x.delete}
     Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 1, :order_pack_size => 1)
@@ -175,4 +176,14 @@ class Omni::Test::Purchase
     @ap9='913BB680231XXXAPPROVEDPROJECTION'
     Omni::AllocationProfile.create(:allocation_profile_id => @ap9, :display => 'approve projection units profile', :allocation_formula => 'APPROVED_PROJECTION', :percent_to_allocate => percent_to_allocate, :excess_demand_option => 'LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211APPROVEDPROJECTION').first
   end
+
+  def reindex_data
+    Omni::AllocationProfile.reindex
+    Omni::Bts.reindex
+    Omni::BtsDetail.reindex
+    Omni::Projection.reindex
+    Omni::ProjectionDetail.reindex
+    Omni::Purchase.reindex
+    Omni::PurchaseAllocation.reindex
+    Omni::PurchaseDetail.reindex
 end

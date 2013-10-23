@@ -23,7 +23,7 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D04AARON',
+  user_id: '811166D4D50A11E2B45820C9D04USERA',
   first_name: 'Aaron',
   last_name: 'Henderson',
   email_address: 'a',
@@ -157,7 +157,7 @@ x.password = 'demo'
 x.password_confirmation = 'demo'
 x.save
 
-x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04AARON').first
+x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04USERA').first
 x.password = 'a'
 x.password_confirmation = 'a'
 x.save

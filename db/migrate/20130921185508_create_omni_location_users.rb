@@ -1,6 +1,6 @@
 class CreateOmniLocationUsers < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('location_users')
       create_table(:location_users, :id => false) do |t|
@@ -19,6 +19,6 @@ class CreateOmniLocationUsers < ActiveRecord::Migration
         t.column   :location_user_id,                :string,            :null  =>  true,    :limit   => 32
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

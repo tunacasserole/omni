@@ -1,6 +1,6 @@
 class CreateOmniMarkWip < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('mark_wip')
       create_table(:mark_wip, :id => false) do |t|
@@ -14,6 +14,6 @@ class CreateOmniMarkWip < ActiveRecord::Migration
         t.column   :status_id,                       :integer,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

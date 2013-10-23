@@ -1,6 +1,6 @@
 class CreateOmniRmsBts < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('rms_bts')
       create_table(:rms_bts, :id => false) do |t|
@@ -49,6 +49,6 @@ class CreateOmniRmsBts < ActiveRecord::Migration
         t.column   :TOT_2013,                        :integer,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

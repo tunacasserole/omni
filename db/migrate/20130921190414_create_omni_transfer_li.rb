@@ -1,6 +1,6 @@
 class CreateOmniTransferLi < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('transfer_li')
       create_table(:transfer_li, :id => false) do |t|
@@ -14,6 +14,6 @@ class CreateOmniTransferLi < ActiveRecord::Migration
         t.column   :status_id,                       :integer,           :null  =>  false
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

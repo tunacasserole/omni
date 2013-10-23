@@ -1,6 +1,6 @@
 class CreateOmniOrderDetails < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('order_details')
       create_table(:order_details, :id => false) do |t|
@@ -54,6 +54,6 @@ class CreateOmniOrderDetails < ActiveRecord::Migration
         t.column   :ship_latitude,                   :string,            :null  =>  true,    :limit   => 15
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

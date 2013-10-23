@@ -1,6 +1,6 @@
 class CreateOmniProjectionDetails < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	# unless ActiveRecord::Base.connection.tables.include?('projection_details')
     drop_table :projection_details if ActiveRecord::Base.connection.tables.include?('projection_details')
@@ -34,6 +34,6 @@ class CreateOmniProjectionDetails < ActiveRecord::Migration
         t.column   :audit_updated_at,                :datetime,          :null  =>  true
       end
     # end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

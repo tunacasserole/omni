@@ -1,6 +1,6 @@
 class CreateOmniProgramColors < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('program_colors')
       create_table(:program_colors, :id => false) do |t|
@@ -14,6 +14,6 @@ class CreateOmniProgramColors < ActiveRecord::Migration
         t.column   :color_id,                        :string,            :null  =>  true,    :limit   => 32
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

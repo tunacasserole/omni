@@ -1,6 +1,6 @@
 class CreateOmniRmsItemDynamics < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('rms_item_dynamics')
       create_table(:rms_item_dynamics, :id => false) do |t|
@@ -50,6 +50,6 @@ class CreateOmniRmsItemDynamics < ActiveRecord::Migration
         t.column   :BuydownQuantity,                 :integer,           :null  =>  true
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

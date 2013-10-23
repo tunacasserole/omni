@@ -1,6 +1,6 @@
 class CreateOmniBinSkus < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('bin_skus')
       create_table(:bin_skus, :id => false) do |t|
@@ -18,6 +18,6 @@ class CreateOmniBinSkus < ActiveRecord::Migration
         t.column   :sku_id,                          :string,            :null  =>  false,   :limit   => 32
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

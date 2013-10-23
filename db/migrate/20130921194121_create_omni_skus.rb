@@ -1,6 +1,6 @@
 class CreateOmniSkus < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('skus')
       create_table(:skus, :id => false) do |t|
@@ -64,6 +64,6 @@ class CreateOmniSkus < ActiveRecord::Migration
         t.column   :mark_size,                       :string,            :null  =>  true,    :limit   => 100
       end
     end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end
