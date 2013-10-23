@@ -305,12 +305,7 @@ def queue
 
   def validate_release
 
-<<<<<<< HEAD
     if self.total_order_cost.to_i < Omni::SystemOption.first.purchase_approval_1_maximum_amount
-        # errors.add('state', 'approver 1 required') unless self.purchase_approver_1_user_id.length > 1
-=======
-    if self.total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
->>>>>>> d929eabbe0de41e142a2586b1e03abd1507b490b
         errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
     else
       if self.total_order_cost < Omni::SystemOption.first.purchase_approval_2_maximum_amount
