@@ -68,7 +68,7 @@ class Omni::SkuLocation < ActiveRecord::Base
   belongs_to   :seasonal_index,                  :class_name => 'Omni::SeasonalIndex',           :foreign_key => 'seasonal_index_id'
 
   has_many     :bts_details,                     :class_name => 'Omni::BtsDetail',               :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"bts_details.location_id = '#{send(:location_id)}'"}
-  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',        :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"bts_details.location_id = '#{send(:location_id)}'"}
+  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',        :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"projection_details.location_id = '#{send(:location_id)}'"}
   # ASSOCIATIONS (End)
 
 
