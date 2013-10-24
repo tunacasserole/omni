@@ -165,8 +165,7 @@
       sl = Omni::StockLedgerActivity.new
       sl.stockable_type = 'Omni::Purchase'
       sl.stockable_id = self.purchase_id
-      ruleset = Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first
-      sl.ruleset_id = ruleset.ruleset_id if ruleset
+      sl.ruleset_id = Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first.ruleset_id if Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first
       sl.sku_id = self.sku_id
       sl.location_id = self.purchase.location_id
       sl.supplier_id = self.purchase.supplier_id
