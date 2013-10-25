@@ -16,7 +16,7 @@ Ext.define('Omni.model.PurchaseDetail', {
       { name: 'size_name',                   type: 'string'   },
       { name: 'sku_alias',                   type: 'string'   },
       { name: 'allocation_profile_id',       type: 'string'   },
-      { name: 'units_ordered',               type: 'decimal'  }
+      { name: 'units_ordered',               type: 'decimal'  },
       { name: 'order_pack_size',             type: 'decimal'  },
       { name: 'order_pack_type',             type: 'string'   },
       { name: 'order_cost_units',            type: 'decimal'  },

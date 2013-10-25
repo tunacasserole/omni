@@ -31,3 +31,5 @@ en:
         inventory_cost:                    'Inventory Cost'
         extra_cost:                        'Extra Cost'
         is_destroyed:                      'Is Destroyed'
+        purchase_display:                  'Purchase Order'
+

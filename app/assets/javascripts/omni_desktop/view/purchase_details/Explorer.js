@@ -49,7 +49,7 @@ Ext.define('Omni.view.purchase_details.Explorer', {
   invoice_costLabel:                      Omni.i18n.model.PurchaseDetail.invoice_cost,
   inventory_costLabel:                    Omni.i18n.model.PurchaseDetail.inventory_cost,
   extra_costLabel:                        Omni.i18n.model.PurchaseDetail.extra_cost,
-  is_destroyedLabel:                      Omni.i18n.model.PurchaseDetail.is_destroyed
+  is_destroyedLabel:                      Omni.i18n.model.PurchaseDetail.is_destroyed,
   // LABELS (End)
   
   // TITLES (Start) ======================================================================
