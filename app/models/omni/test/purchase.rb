@@ -38,10 +38,10 @@ class Omni::Test::Purchase
 
     # PRINT SHOULD CREATE A PDF
     # x.print
-    test_it('Print a purchase',1,'TEST NOT IMPLEMENTED YET')
+    test_it('Print a purchase','PRINT','TEST NOT IMPLEMENTED YET')
 
     # CANCEL SHOULD SET STATE TO PENDING APPROVAL
-    x.cancel
+    # x.cancel
     test_it('Cancel a purchase','cancelled',x.state)
   end
 
@@ -97,6 +97,8 @@ class Omni::Test::Purchase
   end
 
   def self.test_it(scenario_description, expected_result, actual_result)
+    # FOR DEBUGGING
+    puts "\n\n\n scenario #{@scenario_number +1}: #{scenario_description}  #{expected_result} <=> #{actual_result}"
     # RUN TEST BY COMPARING EXPECTED VS ACTUAL RESULTS
     success = (expected_result == actual_result)
     # OUTPUT TEST RESULTS
@@ -133,7 +135,7 @@ class Omni::Test::Purchase
     Omni::Supplier.create(:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :display=>"Olivander's Wands - 1000", :supplier_name=>"Olivander's Wands", :supplier_nbr=>1000, :line_1=>'123 Maple St', :line_2=>'Ste 300', :line_3=>'Attn: Sam', :city=>'Sandy Springs', :state_code=>'GA', :zip=>'30303', :country=>'USA', :phone => '999-999-9999', :default_ship_thru_supplier_id=>'B931D2A4AC5311E299E700FF58D32228', :default_pay_to_supplier_id=>'B931D2A4AC5311E299E700FF58D32228', :shipping_point=>'Hong Kong', :ship_via=>'Ocean', :freight_term=>'PREPAID', :lead_time=>60, :default_payment_term=>'NET', :is_enabled=>true)
 
     Omni::SkuSupplier.where(:sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15').all.each {|x| x.delete}
-    Omni::SkuSupplier.create(:sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:supplier_id => 'B95C3E9AAC5311E299E700FF58D32228',:supplier_cost=>100, :supplier_cost_units=>1, :supplier_item_identifier=>'The Elder Wand', :master_pack_units=>1, :master_pack_uom_code=>'EACH', :inner_pack_units=>1, :inner_pack_uom_code=>'EACH', :extra_cost=>10, :is_included_extra_cost=>true, :origin_country=>'China', :freight_term=>'PREPAID', :pack_type=>'SELL_UNIT')
+    Omni::SkuSupplier.create(:sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:supplier_id => 'B931D2A4AC5311E299E700FF58D32228',:supplier_cost=>100, :supplier_cost_units=>1, :supplier_item_identifier=>'The Elder Wand', :master_pack_units=>1, :master_pack_uom_code=>'EACH', :inner_pack_units=>1, :inner_pack_uom_code=>'EACH', :extra_cost=>10, :is_included_extra_cost=>true, :origin_country=>'China', :freight_term=>'PREPAID', :pack_type=>'SELL_UNIT')
 
     Omni::SkuLocation.where(:sku_location_id=>['14A01280231F11E3BE4920C9D047LOC1','14A01280231F11E3BE4920C9D047LOC2','14A01280231F11E3BE4920C9D047LOC4','14A01280231F11E3BE4920C9D047LOC5']).all.each {|x| x.delete}
     Omni::SkuLocation.create(:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'51713A3EAC3E11E2947800FF58D32228',:is_authorized => true)

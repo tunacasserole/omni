@@ -1,5 +1,5 @@
   class Omni::PurchaseDetail < ActiveRecord::Base
-# My Version    
+# My Version
   # MIXINS (Start) ======================================================================
   # MIXINS (End)
 
@@ -166,7 +166,8 @@
       sl = Omni::StockLedgerActivity.new
       sl.stockable_type = 'Omni::Purchase'
       sl.stockable_id = self.purchase_id
-      sl.ruleset_id = Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first.ruleset_id if Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first      sl.sku_id = self.sku_id
+      sl.ruleset_id = Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first.ruleset_id if Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first
+      sl.sku_id = self.sku_id
       sl.location_id = self.purchase.location_id
       sl.supplier_id = self.purchase.supplier_id
       sl.units = open_units * -1
