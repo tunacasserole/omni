@@ -126,8 +126,8 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
 
   # STATE HELPERS (Start) =====================================================================
   def permitted_to_lock
-    errors.add('state','only allocations in draft state may be locked.') if self.state == 'locked'
-    self.state == 'draft' ? true : false
+    # permitted = ()
+    # errors.add('state','only allocations in draft state may be locked.') unless self.state == 'draft'
   end
 
   def process_something

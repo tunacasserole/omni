@@ -3,50 +3,81 @@ require 'colored'
 class Omni::Test::Purchase
 
   def self.go
-    # Create all data needed to run this test suite
+    # create all data needed to run this test suite
     create_base_data
 
-    # RUN TESTS
-    # Release a purchase
-    test_release
+    # test release, approve & cancel a purchase
+    test_purchase_events
 
-    # Appove a purchase
-    test_approve
+    # test approve, receive, allocate & cancel a purchase detail
+    test_purchase_detail_events
 
-    # Allocate a purchase
-    allocation_scenarios.each {|s| test_allocation_scenario s}
+    # test approve, receive, allocate & cancel a purchase detail
+    test_purchase_allocation_events
 
-    # Cancel a purchase
-    test_cancel
-
-    # Reindex newly created test data
+    # reindex newly created test data
     reindex_data
 
-    # OUTPUT TEST RESULTS
+    # output test results to screen
     puts @results + ["******************************************************************************************************\n\n\n"]
   end
 
-  def self.test_release
+  def self.test_purchase_events
+    x=@p
+
+    # if base data was created and relationship exists, the purchase should have 1 detail
+    test_it('Create a purchase with 1 detail', 1, x.purchase_details.count)
+
     # RELEASE SHOULD SET STATE TO PENDING APPROVAL
-    @p.release
-    run_test('Release a purchase','pending_approval',@p.state)
-  end
+    x.release
+    test_it('Release a purchase','pending_approval',@p.state)
 
-  def self.test_approve
     # APPROVE SHOULD SET STATE TO OPEN
-    3.times {|x| @p.approve}
-    run_test('Approve a purchase','open',@p.state)
+    3.times {|i| x.approve}
+    test_it('Approve a purchase','open',x.state)
+
+    # PRINT SHOULD CREATE A PDF
+    # x.print
+    test_it('Print a purchase',1,'TEST NOT IMPLEMENTED YET')
+
+    # CANCEL SHOULD SET STATE TO PENDING APPROVAL
+    x.cancel
+    test_it('Cancel a purchase','cancelled',x.state)
   end
 
-  def self.test_cancel
-    # CANCEL SHOULD SET STATE TO PENDING APPROVAL
-    @p.cancel
-    run_test('Cancel a purchase','cancelled',@p.state)
+  def self.test_purchase_detail_events
+    # run 26 different allocation tests
+    allocation_scenarios.each {|s| test_allocation_scenario s}
+
+    x=@pd
+
+    # approve should set state to open
+    x.approve
+    test_it('Approve a purchase detail','open',x.state)
+
+    # receive should set state to open
+    x.receive
+    test_it('Receive a purchase detail','open',x.state)
+
+    # cancel should set state to cancelled
+    x.cancel
+    test_it('Cancel a purchase detail','cancelled',x.state)
+  end
+
+  def self.test_purchase_allocation_events
+    @pd=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
+    x = @pd.purchase_allocations.first
+
+    # lock should set state to locked
+    x.lock
+    test_it('Lock a purchase allocation','locked',x.state)
+
+    # unlock should set state to draft
+    x.unlock
+    test_it('Unlock a purchase allocation','draft',x.state)
   end
 
   def self.test_allocation_scenario(s)
-    puts "\n\nScenario: #{s[:scenario_number].to_s}\n\n"
-
     a=Omni::AllocationProfile.where(:allocation_profile_id=>s[:allocation_profile_id]).first
     a.percent_to_allocate = s[:percent_to_allocate]
     a.save
@@ -62,10 +93,10 @@ class Omni::Test::Purchase
     expected_result =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
     actual_result = x.purchase_allocations.first.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.second.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.third.units_allocated.to_s.chop.chop
 
-    run_test(s[:scenario_description], expected_result, actual_result)
+    test_it("Allocation - #{s[:scenario_description]}", expected_result, actual_result)
   end
 
-  def self.run_test(scenario_description, expected_result, actual_result)
+  def self.test_it(scenario_description, expected_result, actual_result)
     # RUN TEST BY COMPARING EXPECTED VS ACTUAL RESULTS
     success = (expected_result == actual_result)
     # OUTPUT TEST RESULTS
@@ -78,13 +109,14 @@ class Omni::Test::Purchase
     create_allocation_profiles
     create_projections
     create_bts
-    create_purchase
+    create_purchase_data
   end
 
-  def self.create_purchase
+  def self.create_purchase_data
+    # create data for styles, skus, sizes, system_options, sku_suppliers, sku_locations, location_users, purchases and purchase_details by destroying then creating.
     @results = ["\n\n\n************************* RUN RESULTS ****************************************************************"]
     @scenario_number = 0
-    # load data for sku_suppliers, sku_locations, purchases and purchase_details by destroying then creating.
+
     Omni::Style.where(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15').all.each {|x| x.delete}
     Omni::Style.create(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15', :display=>'0010PKGRL-BU-391-BU391b1', :concatenated_name=>'*BLOUSE, SS, P-PAN',:pos_name=>'*BLOUSE, SS, P-PAN',:size_group_id=>'636F7E9EAC5711E299E700FF58D32228',:style_nbr=>'54504',:description=>'*BLOUSE, SS, P-PAN', :subclass_id=>'4AB6ABEA081C11E3A9EB20C9D047DD15', :product_id=>'3DC7C7B8FE1F11E28D2320C9D047DD15', :brand=>'PARKER', :product_type_id=>'B25227F6AC5611E299E700FF58D32228', :fabric_content=>'65% POLY 35% COTTON', :initial_retail_price=>15.50, :site_id=>'0E5E192EAC5211E299E700FF58D32228', :conversion_type=>'MONOGRAM', :state=>'active')
 
@@ -113,18 +145,10 @@ class Omni::Test::Purchase
     Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC4', :location_id=>'526058B2AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
 
     Omni::PurchaseDetail.where(:purchase_detail_id=>['ABABDAAA35E011E3ABAA20XXXXXXXXXX','ABABDAAA35E011E3ABAA20C9DBTPROJ1','ABABDAAA35E011E3ABAA20C9DBTPROJ2','ABABDAAA35E011E3ABAA20C9DBTPROJ3','ABABDAAA35E011E3ABAA20C9DBTPROJ4','ABABDAAA35E011E3ABAALASTFORECAST','ABABDAAA35E011E3ABAA20C9APPROVED']).all.each {|x| x.delete}
-    Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3ABAA20XXXXXXXXXX', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 1, :order_pack_size => 1)
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DBTPROJ1', :allocation_profile_id => '913BB680231211E3PROJECTION1UNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1)
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DBTPROJ2', :allocation_profile_id => '913BB680231211E3PROJECTION2UNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) #unless Omni::PurchaseDetail.where(:purchase_detail_id => '913BB680231211E3PROJECTION2UNITS').first
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DBTPROJ3', :allocation_profile_id => '913BB680231211E3PROJECTION3UNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) #unless Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DBTPROJ4', :allocation_profile_id => '913BB680231211E3PROJECTION4UNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) #unless Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAALASTFORECAST', :allocation_profile_id => '913BB680231211ELASTFORECASTUNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) # unless Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9APPROVED', :allocation_profile_id => '913BB680231211APPROVEDPROJECTION', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) #unless Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
+    @pd=Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3ABAA20XXXXXXXXXX', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 1, :order_pack_size => 1)
 
-    @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').all.each {|x| x.delete}
-    @p = Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON',  :payment_term =>'NET 30', :purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON',:purchase_approver_2_user_id => '811166D4D50A11E2B45820C9D04AARON', :purchase_approver_3_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' )
-
-    run_test('Create a purchase with 1 detail', 1, @p.purchase_details.count)
+    Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').all.each {|x| x.delete}
+    @p=Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON',  :payment_term =>'NET 30', :purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON',:purchase_approver_2_user_id => '811166D4D50A11E2B45820C9D04AARON', :purchase_approver_3_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase')
   end
 
   def self.create_projections
@@ -170,17 +194,6 @@ class Omni::Test::Purchase
     Omni::AllocationProfile.create(:allocation_profile_id => @ap9, :display => 'approve projection units profile', :allocation_formula => 'APPROVED_PROJECTION', :percent_to_allocate => percent_to_allocate, :excess_demand_option => 'LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211APPROVEDPROJECTION').first
   end
 
-  def self.reindex_data
-    Omni::AllocationProfile.reindex
-    Omni::Bts.reindex
-    Omni::BtsDetail.reindex
-    Omni::Projection.reindex
-    Omni::ProjectionDetail.reindex
-    Omni::Purchase.reindex
-    Omni::PurchaseAllocation.reindex
-    Omni::PurchaseDetail.reindex
-  end
-
   def self.allocation_scenarios
     x = []
     x << {:scenario_description=>'Supply equals Demand',      :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
@@ -210,6 +223,17 @@ class Omni::Test::Purchase
     x << {:scenario_description=>'Allocated Units',           :allocation_profile_id => @ap8, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>0, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0 }
     x << {:scenario_description=>'Approved Projection',   :allocation_profile_id => @ap9, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
     x
+  end
+
+  def self.reindex_data
+    Omni::AllocationProfile.reindex
+    Omni::Bts.reindex
+    Omni::BtsDetail.reindex
+    Omni::Projection.reindex
+    Omni::ProjectionDetail.reindex
+    Omni::Purchase.reindex
+    Omni::PurchaseAllocation.reindex
+    Omni::PurchaseDetail.reindex
   end
 
 end

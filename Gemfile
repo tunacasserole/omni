@@ -53,3 +53,4 @@ gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
 
 # gem 'whenever'
 gem 'roo'
+gem 'prawn'
