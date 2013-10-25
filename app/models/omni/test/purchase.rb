@@ -3,66 +3,81 @@ require 'colored'
 class Omni::Test::Purchase
 
   def self.go
-    load_base_data
-    run_tests
+    # create all data needed to run this test suite
+    create_base_data
+
+    # test release, approve & cancel a purchase
+    test_purchase_events
+
+    # test approve, receive, allocate & cancel a purchase detail
+    test_purchase_detail_events
+
+    # test approve, receive, allocate & cancel a purchase detail
+    test_purchase_allocation_events
+
+    # reindex newly created test data
     reindex_data
-    puts @errors
+
+    # output test results to screen
+    puts @results + ["******************************************************************************************************\n\n\n"]
   end
 
-  def self.run_tests
+  def self.test_purchase_events
+    x=@p
 
-    # Release a purchase
-    @p.release
+    # if base data was created and relationship exists, the purchase should have 1 detail
+    test_it('Create a purchase with 1 detail', 1, x.purchase_details.count)
 
-    # Appove a purchase
-    [1,2,3].each {|x| @p.approve}
+    # RELEASE SHOULD SET STATE TO PENDING APPROVAL
+    x.release
+    test_it('Release a purchase','pending_approval',@p.state)
 
-    # Allocate a purchase
-    allocation_scenarios.each {|x| process_scenario x}
-    # test_allocation # - old way to to test allocation
+    # APPROVE SHOULD SET STATE TO OPEN
+    3.times {|i| x.approve}
+    test_it('Approve a purchase','open',x.state)
 
-    # Cancel a purchase
-    # @p.cancel
+    # PRINT SHOULD CREATE A PDF
+    # x.print
+    test_it('Print a purchase',1,'TEST NOT IMPLEMENTED YET')
 
-    @errors << ["******************************************************************************************************\n\n\n"]
+    # CANCEL SHOULD SET STATE TO PENDING APPROVAL
+    x.cancel
+    test_it('Cancel a purchase','cancelled',x.state)
   end
 
-  def self.allocation_scenarios
-    x = []
+  def self.test_purchase_detail_events
+    # run 26 different allocation tests
+    allocation_scenarios.each {|s| test_allocation_scenario s}
 
-    x << {:scenario_number=>1, :scenario_description=>'Supply = Demand                            ',:allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {:scenario_number=>2, :scenario_description=>'Excess Supply                                   ',:allocation_profile_id => @ap1, :order_pack_size => 10, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>500, :expected_allocation_results_loc_2=>400, :expected_allocation_results_loc_3=>100 }
-    x << {:scenario_number=>3, :scenario_description=>'Excess Demand                                ',:allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>1, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>1, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0}
-    x << {:scenario_number=>4, :scenario_description=>'Excess Demand                                ',:allocation_profile_id => @ap1, :order_pack_size => 10, :percent_to_allocate=>1, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>5, :expected_allocation_results_loc_2=>4, :expected_allocation_results_loc_3=>1}
-    x << {:scenario_number=>5, :scenario_description=>'Excess Demand                                ',:allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>80, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>32, :expected_allocation_results_loc_3=>8}
-    x << {:scenario_number=>6, :scenario_description=>'Excess Supply                                   ',:allocation_profile_id => @ap1, :order_pack_size => 10, :percent_to_allocate=>80, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>400, :expected_allocation_results_loc_2=>320, :expected_allocation_results_loc_3=>80}
-    x << {:scenario_number=>7, :scenario_description=>'Supply = Demand                            ', :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10}
-    x << {:scenario_number=>8, :scenario_description=>'Excess Supply                                  ', :allocation_profile_id => @ap2, :order_pack_size => 10, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10}
-    x << {:scenario_number=>9, :scenario_description=>'Excess Demand                                ', :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>1, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>1, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0}
-    x << {:scenario_number=>10, :scenario_description=>'Excess Demand                              ', :allocation_profile_id => @ap2, :order_pack_size => 10, :percent_to_allocate=>1, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>10, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0}
-    x << {:scenario_number=>11, :scenario_description=>'Excess Demand                               ', :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>80, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>30, :expected_allocation_results_loc_3=>0}
-    x << {:scenario_number=>12, :scenario_description=>'Excess Supply                                 ',  :allocation_profile_id => @ap2, :order_pack_size => 10, :percent_to_allocate=>80, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10}
-    x << {:scenario_number=>13, :scenario_description=>'All Locations Locked                       ', :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>40,  :allocated_units_locked_loc_3=>40, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>40 }
-    x << {:scenario_number=>14, :scenario_description=>'1 Location not locked, Excess Supply    ', :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>40,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>20 }
-    x << {:scenario_number=>15, :scenario_description=>'1 Location not locked, Excess Supply    ', :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>40,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {:scenario_number=>16, :scenario_description=>'1 Location locked, Excess Supply          ', :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>48, :expected_allocation_results_loc_3=>12 }
-    x << {:scenario_number=>17, :scenario_description=>'1 Location locked, Excess Supply          ', :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {:scenario_number=>18, :scenario_description=>'1 Location locked, Excess Demand        ', :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>60,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>60, :expected_allocation_results_loc_2=>32, :expected_allocation_results_loc_3=>8 }
-    x << {:scenario_number=>19, :scenario_description=>'1 Location locked, Excess Demand        ', :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>60,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>60, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>0 }
-    x << {:scenario_number=>20, :scenario_description=>'Projection 1 Units                           ', :allocation_profile_id => @ap3, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {:scenario_number=>21, :scenario_description=>'Projection 2 Units                           ', :allocation_profile_id => @ap4, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {:scenario_number=>22, :scenario_description=>'Projection 3 Units                           ', :allocation_profile_id => @ap5, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {:scenario_number=>23, :scenario_description=>'Projection 4 Units                           ', :allocation_profile_id => @ap6, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {:scenario_number=>24, :scenario_description=>'Last Forecast Units                         ', :allocation_profile_id => @ap7, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {:scenario_number=>25, :scenario_description=>'Allocated Units                               ', :allocation_profile_id => @ap8, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>0, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0 }
-    x << {:scenario_number=>26, :scenario_description=>'Approved Projection                       ', :allocation_profile_id => @ap9, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x=@pd
 
-    x
+    # approve should set state to open
+    x.approve
+    test_it('Approve a purchase detail','open',x.state)
+
+    # receive should set state to open
+    x.receive
+    test_it('Receive a purchase detail','open',x.state)
+
+    # cancel should set state to cancelled
+    x.cancel
+    test_it('Cancel a purchase detail','cancelled',x.state)
   end
 
-  def self.process_scenario(s)
-    # puts "\n\n\n\n\n allocation_profile_id is #{s[:allocation_profile_id]} \n\n\n"
-    puts "\sScenario: #{s[:scenario_number].to_s}"
+  def self.test_purchase_allocation_events
+    @pd=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
+    x = @pd.purchase_allocations.first
+
+    # lock should set state to locked
+    x.lock
+    test_it('Lock a purchase allocation','locked',x.state)
+
+    # unlock should set state to draft
+    x.unlock
+    test_it('Unlock a purchase allocation','draft',x.state)
+  end
+
+  def self.test_allocation_scenario(s)
     a=Omni::AllocationProfile.where(:allocation_profile_id=>s[:allocation_profile_id]).first
     a.percent_to_allocate = s[:percent_to_allocate]
     a.save
@@ -75,29 +90,33 @@ class Omni::Test::Purchase
 
     x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
 
-    # TEST CONDITION
-    expected_results =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
-    actual_results = x.purchase_allocations.first.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.second.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.third.units_allocated.to_s.chop.chop
-    success = (expected_results == actual_results)
+    expected_result =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
+    actual_result = x.purchase_allocations.first.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.second.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.third.units_allocated.to_s.chop.chop
 
-    result = s[:scenario_number].to_s + ': ' + s[:scenario_description] + 'Passed ==> ' + success.to_s + '. expected: ' + expected_results + ' actual: ' + actual_results
-
-    success ?  @errors << result.green : @errors << result.red
-
-    # @errors << "1.error => incorrect purchase allocation amounts.  expected: 50 & 50, actual: #{x.purchase_allocations.first.units_allocated} and #{x.purchase_allocations.second.units_allocated}"
-
+    test_it("Allocation - #{s[:scenario_description]}", expected_result, actual_result)
   end
 
-  def self.load_base_data
-    load_allocation_profiles
-    load_projections
-    load_bts
-    create_purchase
+  def self.test_it(scenario_description, expected_result, actual_result)
+    # RUN TEST BY COMPARING EXPECTED VS ACTUAL RESULTS
+    success = (expected_result == actual_result)
+    # OUTPUT TEST RESULTS
+    result = "#{(@scenario_number += 1).to_s}: #{scenario_description}  ==> result: #{success ? 'PASS' : 'FAIL'},   expected: #{expected_result.to_s},  actual: #{actual_result.to_s}"
+    @results << (success ?  result.green : result.red)
   end
 
-  def self.create_purchase
-    @errors = ["\n\n\n************************* RUN RESULTS ****************************************************************"]
-    # load data for sku_suppliers, sku_locations, purchases and purchase_details by destroying then creating.
+  def self.create_base_data
+    #   CREATE ALL DATA NEEDED FOR TEST SUITE
+    create_allocation_profiles
+    create_projections
+    create_bts
+    create_purchase_data
+  end
+
+  def self.create_purchase_data
+    # create data for styles, skus, sizes, system_options, sku_suppliers, sku_locations, location_users, purchases and purchase_details by destroying then creating.
+    @results = ["\n\n\n************************* RUN RESULTS ****************************************************************"]
+    @scenario_number = 0
+
     Omni::Style.where(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15').all.each {|x| x.delete}
     Omni::Style.create(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15', :display=>'0010PKGRL-BU-391-BU391b1', :concatenated_name=>'*BLOUSE, SS, P-PAN',:pos_name=>'*BLOUSE, SS, P-PAN',:size_group_id=>'636F7E9EAC5711E299E700FF58D32228',:style_nbr=>'54504',:description=>'*BLOUSE, SS, P-PAN', :subclass_id=>'4AB6ABEA081C11E3A9EB20C9D047DD15', :product_id=>'3DC7C7B8FE1F11E28D2320C9D047DD15', :brand=>'PARKER', :product_type_id=>'B25227F6AC5611E299E700FF58D32228', :fabric_content=>'65% POLY 35% COTTON', :initial_retail_price=>15.50, :site_id=>'0E5E192EAC5211E299E700FF58D32228', :conversion_type=>'MONOGRAM', :state=>'active')
 
@@ -113,27 +132,26 @@ class Omni::Test::Purchase
     Omni::SkuSupplier.where(:sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15').all.each {|x| x.delete}
     Omni::SkuSupplier.create(:sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:supplier_id => 'B95C3E9AAC5311E299E700FF58D32228',:supplier_cost=>100, :supplier_cost_units=>1)
 
-    Omni::SkuLocation.where(:sku_location_id => ['14A01280231F11E3BE4920C9D047LOC1','14A01280231F11E3BE4920C9D047LOC2','14A01280231F11E3BE4920C9D047LOC4','14A01280231F11E3BE4920C9D047LOC5']).all.each {|x| x.delete}
-    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC1', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '51713A3EAC3E11E2947800FF58D32228',:is_authorized => true)
-    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC2', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '51892F68AC3E11E2947800FF58D32228',:is_authorized => true)
-    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC4', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '5247A038AC3E11E2947800FF58D32228',:is_authorized => true)
-    Omni::SkuLocation.create(:sku_location_id => '14A01280231F11E3BE4920C9D047LOC5', :sku_id => '285C928C0F3611E3BB7120C9D047DD15',:location_id => '526058B2AC3E11E2947800FF58D32228',:is_authorized => false)
+    Omni::SkuLocation.where(:sku_location_id=>['14A01280231F11E3BE4920C9D047LOC1','14A01280231F11E3BE4920C9D047LOC2','14A01280231F11E3BE4920C9D047LOC4','14A01280231F11E3BE4920C9D047LOC5']).all.each {|x| x.delete}
+    Omni::SkuLocation.create(:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'51713A3EAC3E11E2947800FF58D32228',:is_authorized => true)
+    Omni::SkuLocation.create(:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC2', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'51892F68AC3E11E2947800FF58D32228',:is_authorized => true)
+    Omni::SkuLocation.create(:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC4', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'5247A038AC3E11E2947800FF58D32228',:is_authorized => true)
+    Omni::SkuLocation.create(:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC5', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'526058B2AC3E11E2947800FF58D32228',:is_authorized => false)
 
-    Omni::PurchaseDetail.where(:purchase_detail_id => ['ABABDAAA35E011E3ABAA20XXXXXXXXXX','ABABDAAA35E011E3ABAA20C9DBTPROJ1','ABABDAAA35E011E3ABAA20C9DBTPROJ2','ABABDAAA35E011E3ABAA20C9DBTPROJ3','ABABDAAA35E011E3ABAA20C9DBTPROJ4','ABABDAAA35E011E3ABAALASTFORECAST','ABABDAAA35E011E3ABAA20C9APPROVED']).all.each {|x| x.delete}
-    Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 1, :order_pack_size => 1)
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DBTPROJ1', :allocation_profile_id => '913BB680231211E3PROJECTION1UNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1)
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DBTPROJ2', :allocation_profile_id => '913BB680231211E3PROJECTION2UNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) #unless Omni::PurchaseDetail.where(:purchase_detail_id => '913BB680231211E3PROJECTION2UNITS').first
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DBTPROJ3', :allocation_profile_id => '913BB680231211E3PROJECTION3UNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) #unless Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DBTPROJ4', :allocation_profile_id => '913BB680231211E3PROJECTION4UNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) #unless Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAALASTFORECAST', :allocation_profile_id => '913BB680231211ELASTFORECASTUNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) # unless Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
-    # Omni::PurchaseDetail.create(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9APPROVED', :allocation_profile_id => '913BB680231211APPROVEDPROJECTION', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 5, :order_pack_size => 1) #unless Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
+    Omni::LocationUser.where(:user_id=>'811166D4D50A11E2B45820C9D04AARON').all.each {|x| x.delete}
+    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC1', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
+    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC2', :location_id=>'51892F68AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
+    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC3', :location_id=>'5247A038AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
+    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC4', :location_id=>'526058B2AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
 
-    @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').all.each {|x| x.delete}
-    @p = Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON',  :payment_term =>'NET 30', :purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON',:purchase_approver_2_user_id => '811166D4D50A11E2B45820C9D04AARON', :purchase_approver_3_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' )
-    @errors << "error => purchase details not created.  expected:  1, actual: #{@p.purchase_details.count.to_s}" unless @p.purchase_details.count == 1
+    Omni::PurchaseDetail.where(:purchase_detail_id=>['ABABDAAA35E011E3ABAA20XXXXXXXXXX','ABABDAAA35E011E3ABAA20C9DBTPROJ1','ABABDAAA35E011E3ABAA20C9DBTPROJ2','ABABDAAA35E011E3ABAA20C9DBTPROJ3','ABABDAAA35E011E3ABAA20C9DBTPROJ4','ABABDAAA35E011E3ABAALASTFORECAST','ABABDAAA35E011E3ABAA20C9APPROVED']).all.each {|x| x.delete}
+    @pd=Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3ABAA20XXXXXXXXXX', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 1, :order_pack_size => 1)
+
+    Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').all.each {|x| x.delete}
+    @p=Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON',  :payment_term =>'NET 30', :purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON',:purchase_approver_2_user_id => '811166D4D50A11E2B45820C9D04AARON', :purchase_approver_3_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase')
   end
 
-  def self.load_projections
+  def self.create_projections
     Omni::Projection.all.each {|x| x.delete}
     Omni::Projection.create(:projection_id => '4D594A1C193611E3A22D20C9D04PROJ1', :state => 'active', :department_id => '5EA20FF2FE0611E280D020C9D047DD15')
 
@@ -143,7 +161,7 @@ class Omni::Test::Purchase
     Omni::ProjectionDetail.create(:projection_id => '4D594A1C193611E3A22D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET3', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'5247A038AC3E11E2947800FF58D32228', :projection_1_units => 10, :projection_2_units => 10, :projection_3_units => 10, :projection_4_units => 10, :last_forecast_units => 10)
   end
 
-  def self.load_bts
+  def self.create_bts
     Omni::Bts.all.each {|x| x.delete}
     Omni::Bts.create(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS', :state => 'active')
 
@@ -153,7 +171,7 @@ class Omni::Test::Purchase
     Omni::BtsDetail.create(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS', :bts_detail_id => '6D8E304E323C11E38DC320C9D047DBD3',:sku_id => '285C928C0F3611E3BB7120C9D047DD15',:style_id => 'D4EB81EE0EC711E3BFA320C9D047DD15',:style_display=>'0010PKGRL-BU-391-BU391b1',:location_id => '5247A038AC3E11E2947800FF58D32228',:need => 10)
   end
 
-  def self.load_allocation_profiles
+  def self.create_allocation_profiles
     percent_to_allocate = 100
     Omni::AllocationProfile.all.each {|x|x.delete}
     @ap1= '913BB680231211XXXXBTSPERCENTSTOR'
@@ -176,6 +194,37 @@ class Omni::Test::Purchase
     Omni::AllocationProfile.create(:allocation_profile_id => @ap9, :display => 'approve projection units profile', :allocation_formula => 'APPROVED_PROJECTION', :percent_to_allocate => percent_to_allocate, :excess_demand_option => 'LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211APPROVEDPROJECTION').first
   end
 
+  def self.allocation_scenarios
+    x = []
+    x << {:scenario_description=>'Supply equals Demand',      :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {:scenario_description=>'Excess Supply',             :allocation_profile_id => @ap1, :order_pack_size => 10, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>500, :expected_allocation_results_loc_2=>400, :expected_allocation_results_loc_3=>100 }
+    x << {:scenario_description=>'Excess Demand',           :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>1, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>1, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0}
+    x << {:scenario_description=>'Excess Demand',           :allocation_profile_id => @ap1, :order_pack_size => 10, :percent_to_allocate=>1, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>5, :expected_allocation_results_loc_2=>4, :expected_allocation_results_loc_3=>1}
+    x << {:scenario_description=>'Excess Demand',           :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>80, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>32, :expected_allocation_results_loc_3=>8}
+    x << {:scenario_description=>'Excess Supply',              :allocation_profile_id => @ap1, :order_pack_size => 10, :percent_to_allocate=>80, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>400, :expected_allocation_results_loc_2=>320, :expected_allocation_results_loc_3=>80}
+    x << {:scenario_description=>'Supply equals Demand',       :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10}
+    x << {:scenario_description=>'Excess Supply',              :allocation_profile_id => @ap2, :order_pack_size => 10, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10}
+    x << {:scenario_description=>'Excess Demand',           :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>1, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>1, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0}
+    x << {:scenario_description=>'Excess Demand',           :allocation_profile_id => @ap2, :order_pack_size => 10, :percent_to_allocate=>1, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>10, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0}
+    x << {:scenario_description=>'Excess Demand',           :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>80, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>30, :expected_allocation_results_loc_3=>0}
+    x << {:scenario_description=>'Excess Supply',              :allocation_profile_id => @ap2, :order_pack_size => 10, :percent_to_allocate=>80, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10}
+    x << {:scenario_description=>'All Locations Locked',   :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>40,  :allocated_units_locked_loc_3=>40, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>40 }
+    x << {:scenario_description=>'1 Location not locked, Excess Supply', :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>40,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>20 }
+    x << {:scenario_description=>'1 Location not locked, Excess Supply', :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>40,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {:scenario_description=>'1 Location locked, Excess Supply',       :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>48, :expected_allocation_results_loc_3=>12 }
+    x << {:scenario_description=>'1 Location locked, Excess Supply',       :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>40,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>40, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {:scenario_description=>'1 Location locked, Excess Demand',    :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>60,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>60, :expected_allocation_results_loc_2=>32, :expected_allocation_results_loc_3=>8 }
+    x << {:scenario_description=>'1 Location locked, Excess Demand',    :allocation_profile_id => @ap2, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>60,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>60, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>0 }
+    x << {:scenario_description=>'Projection 1 Units',       :allocation_profile_id => @ap3, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {:scenario_description=>'Projection 2 Units',       :allocation_profile_id => @ap4, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {:scenario_description=>'Projection 3 Units',       :allocation_profile_id => @ap5, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {:scenario_description=>'Projection 4 Units',       :allocation_profile_id => @ap6, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {:scenario_description=>'Last Forecast Units',     :allocation_profile_id => @ap7, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {:scenario_description=>'Allocated Units',           :allocation_profile_id => @ap8, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>0, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0 }
+    x << {:scenario_description=>'Approved Projection',   :allocation_profile_id => @ap9, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x
+  end
+
   def self.reindex_data
     Omni::AllocationProfile.reindex
     Omni::Bts.reindex
@@ -186,4 +235,5 @@ class Omni::Test::Purchase
     Omni::PurchaseAllocation.reindex
     Omni::PurchaseDetail.reindex
   end
+
 end
