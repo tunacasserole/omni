@@ -4,33 +4,31 @@ en:
       omni/purchase_detail: 'PurchaseDetail'
     attributes:
       omni/purchase_detail:
-        supplier_cost:                   Vendor Cost
-        invoice_cost:                    Invoice Cost
-        inventory_cost:                  Inventory Cost
-        extra_cost:                      Landing Cost
-        is_destroyed:                    Deleted
-        supplier_id:                     Supplier
-        purchase_detail_id:              Purchase Detail
-        display:                         Name
-        purchase_display:                Purchase Order
-        purchase_id:                     Purchase Order
-        purchase_line_nbr:               Purchase Order Line Number
-        sku_display:                     SKU
-        sku_id:                          SKU
-        sku_supplier_display:            SKU
-        sku_supplier_id:                 SKU
-        supplier_item_identifier:        Supplier Item Number
-        description:                     Description
-        color_name:                      Color Name
-        size_name:                       Size Name
-        sku_alias:                       SKU Alias
-        state:                           State
-        units_ordered:                   Units Ordered
-        order_pack_size:                 Order Pack Size
-        order_pack_type:                 Order Pack Type
-        order_cost_units:                Order Cost Units
-        order_multiple_type:             Order Multiple Type
-        order_multiple:                  Order Multiple
-        units_approved:                  Units Approved
-        units_cancelled:                 Units Cancelled
+        purchase_detail_id:                Purchase Detail
+        display:                           Name
+        purchase_id:                       Purchase
+        purchase_line_nbr:                 Purchase Order Line Number
+        state:                             State
+        sku_id:                            SKU
+        sku_supplier_id:                   SKU
+        supplier_item_identifier:          Supplier Item Identifier
+        description:                       Description
+        color_name:                        Color Name
+        size_name:                         Size Name
+        sku_alias:                         Sku Alias
+        allocation_profile_id:             Allocation Profile
+        units_ordered:                     Units Ordered 
+        order_pack_size:                   Order Pack Size
+        order_pack_type:                   Order Pack Type
+        order_cost_units:                  Order Cost Units
+        order_multiple_type:               Order Multiple Type
+        order_multiple:                    Order Multiple
+        selling_units_approved:            Selling Units Approved
+        selling_units_received:            Selling Units Received
+        selling_units_cancelled:           Selling Units Cancelled
+        supplier_cost:                     Supplier Cost
+        invoice_cost:                      Invoice Cost
+        inventory_cost:                    Inventory Cost
+        extra_cost:                        Extra Cost
+        is_destroyed:                      Is Destroyed
 

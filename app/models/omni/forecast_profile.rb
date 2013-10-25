@@ -12,19 +12,29 @@ class Omni::ForecastProfile < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  #supports_logical_delete
+  #supports_audit
+  #supports_revisioning
+   supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :display,           				:uniqueness  => true,                         :allow_nil => false
+  validates    :display,           			        	:uniqueness  => true,               :allow_nil => false
+  validates    :forecast_formula,                 :lookup      => 'FORECAST_FORMULA', :allow_nil => false
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
   default      :forecast_profile_id,              :override  =>  false,        :with  => :guid
- # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.forecast_profile_name}"}
+  default      :sales_py1_weight,                 :override  =>  true,         :to    => 0
+  default      :sales_py2_weight,                 :override  =>  true,         :to    => 0
+  default      :sales_py3_weight,                 :override  =>  true,         :to    => 0
+  default      :contract_year_1_weight,           :override  =>  true,         :to    => 0
+  default      :contract_year_2_weight,           :override  =>  true,         :to    => 0
+  default      :contract_year_3_weight,           :override  =>  true,         :to    => 0
+  default      :contract_year_4_weight,           :override  =>  true,         :to    => 0
+  default      :contract_year_5_weight,           :override  =>  true,         :to    => 0
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -39,10 +49,8 @@ class Omni::ForecastProfile < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :style_locations,                 :class_name => 'Omni::StyleLocation',           :foreign_key => 'forecast_profile_id'
-  has_many     :sku_locations,                   :class_name => 'Omni::SkuLocation',             :foreign_key => 'forecast_profile_id'
+  has_many     :projection_details,     :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'forecast_profile_id'  
   # ASSOCIATIONS (End)
-
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -67,7 +75,6 @@ class Omni::ForecastProfile < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :display
-    string   :forecast_formula
 
     text     :display_fulltext, :using => :display
   end

@@ -23,13 +23,13 @@
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :purchase_detail_id,                :with => :guid
-  default :purchase_line_nbr,                :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
-  default :display,                                 :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
-  default :units_ordered,                      :to   => 0
-  default :selling_units_approved,                      :to   => 0
-  default :selling_units_received,                      :to   => 0
-  default :selling_units_cancelled,                      :to   => 0
+  default :purchase_detail_id,                                 :with => :guid
+  default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
+  default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
+  default :units_ordered,                                      :to   => 0
+  default :selling_units_approved,                             :to   => 0
+  default :selling_units_received,                             :to   => 0
+  default :selling_units_cancelled,                            :to   => 0
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
@@ -165,9 +165,7 @@
       sl = Omni::StockLedgerActivity.new
       sl.stockable_type = 'Omni::Purchase'
       sl.stockable_id = self.purchase_id
-      ruleset = Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first
-      sl.ruleset_id = ruleset.ruleset_id if ruleset
-      sl.sku_id = self.sku_id
+      sl.ruleset_id = Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first.ruleset_id if Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first      sl.sku_id = self.sku_id
       sl.location_id = self.purchase.location_id
       sl.supplier_id = self.purchase.supplier_id
       sl.units = open_units * -1
@@ -188,25 +186,22 @@
 
   def process_approve
     # the Approve event writes StockLedgerActivity rows to update On Order and order history"
-    myself = self
-    # myself = Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20C9DETAILID').first
     sl = Omni::StockLedgerActivity.new
     sl.stockable_type = 'Omni::Purchase'
-    sl.stockable_id = myself.purchase_id
-    sl.sku_id = myself.sku_id
-    sl.location_id = myself.purchase.location_id
-    sl.supplier_id = myself.purchase.supplier_id
-    sl.units = myself.units_ordered * myself.order_pack_size
-    sl.cost = (myself.supplier_cost / (myself.order_cost_units > 1 ? myself.order_cost_units : 1 )) * sl.units
+    sl.stockable_id = self.purchase_id
+    sl.sku_id = self.sku_id
+    sl.location_id = self.purchase.location_id
+    sl.supplier_id = self.purchase.supplier_id
+    sl.units = self.units_ordered * self.order_pack_size
+    sl.cost = (self.supplier_cost / (self.order_cost_units > 1 ? self.order_cost_units : 1 )) * sl.units
     # sl.retail = 0
     sl.create_date = Date.today
     sl.activity_date = Date.today
-    ruleset = Omni::Ruleset.where(:ruleset_code => 'ApprovePurchase').first
-    sl.ruleset_id = ruleset.ruleset_id if ruleset
+    sl.ruleset_id = Omni::Ruleset.where(:ruleset_code => 'ApprovePurchase').first.ruleset_id if Omni::Ruleset.where(:ruleset_code => 'ApprovePurchase').first
     sl.save
 
-    myself.selling_units_approved = sl.units
-    myself.save # ???
+    self.selling_units_approved = sl.units
+    self.save # ???
   end
   # STATE HELPERS (End)
 
@@ -245,7 +240,7 @@
         if self.order_cost_units.is_a? Integer and self.order_cost_units > 0
           self.inventory_cost = self.supplier_cost / self.order_cost_units
         else
-          self.invoice_cost = 0
+          self.inventory_cost = 0
         end
         self.invoice_cost = self.supplier_cost
       end

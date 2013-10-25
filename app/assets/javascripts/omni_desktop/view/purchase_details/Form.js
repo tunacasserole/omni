@@ -32,7 +32,6 @@ Ext.define('Omni.view.purchase_details.Form', {
       stateLabel:                             Omni.i18n.model.PurchaseDetail.state,
       purchase_line_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_line_nbr,
       sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,
-      // cost_idLabel:                           Omni.i18n.model.PurchaseDetail.cost_id,
       descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,
       supplier_item_identifierLabel:          Omni.i18n.model.PurchaseDetail.supplier_item_identifier,
       sku_supplier_idLabel:                   Omni.i18n.model.PurchaseDetail.sku_supplier_id,
@@ -134,7 +133,7 @@ Ext.define('Omni.view.purchase_details.Form', {
               fieldLabel: this.sku_aliasLabel,
               allowBlank: true
              }
-            ,{ xtype             : 'buildit-Locator',
+            ,{ xtype            : 'buildit-Locator',
               name              : 'allocation_profile_id',
               fieldLabel        : this.allocation_profile_idLabel,
               allowBlank        : true,
