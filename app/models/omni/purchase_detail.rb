@@ -1,4 +1,5 @@
   class Omni::PurchaseDetail < ActiveRecord::Base
+# My Version    
   # MIXINS (Start) ======================================================================
   # MIXINS (End)
 
