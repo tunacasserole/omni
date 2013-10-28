@@ -32,9 +32,8 @@ class Omni::Test::Purchase
     x.release
     test_it('Release a purchase','pending_approval',@p.state)
 
-    # APPROVE SHOULD SET STATE TO OPEN
-    3.times {|i| x.approve}
-    test_it('Approve a purchase','open',x.state)
+    # test 20 different approval scenarios
+    test_purchase_approval_events
 
     # PRINT SHOULD CREATE A PDF
     # x.print
@@ -43,6 +42,24 @@ class Omni::Test::Purchase
     # CANCEL SHOULD SET STATE TO PENDING APPROVAL
     # x.cancel
     test_it('Cancel a purchase','cancelled',x.state)
+  end
+
+  def self.test_purchase_approval_events
+    # scenario 1 - Test Approve transition
+    ['draft','open','partial','complete','cancelled'].each do |x|
+      @p.state = x
+      @p.save
+      @p.approve
+      test_it('Test approve transition with no approvals',x,@p.state)
+    end
+
+    #:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON',:purchase_approver_2_user_id => '811166D4D50A11E2B45820C9D04AARON', :purchase_approver_3_user_id => '811166D4D50A11E2B45820C9D04AARON',
+
+
+
+    # ORIGINAL
+    # 3.times {|i| x.approve}
+    # test_it('Approve a purchase','open',x.state)
   end
 
   def self.test_purchase_detail_events
@@ -153,7 +170,7 @@ class Omni::Test::Purchase
     Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3ABAA20XXXXXXXXXX', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 1, :order_pack_size => 1)
 
     Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').all.each {|x| x.delete}
-    @p=Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC531XXXXXXXXXXOLIVANDER', :location_id => '51579764AC3E11E2947800FF58D32228', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON',  :payment_term =>'NET 30', :purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON',:purchase_approver_2_user_id => '811166D4D50A11E2B45820C9D04AARON', :purchase_approver_3_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase')
+    @p=Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC531XXXXXXXXXXOLIVANDER', :location_id => '51579764AC3E11E2947800FF58D32228', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase')
     @pd=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
   end
 
