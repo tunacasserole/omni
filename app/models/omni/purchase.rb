@@ -30,6 +30,8 @@ class Omni::Purchase < ActiveRecord::Base
   default :order_date,                                                        :with => :now
   default :is_special_order,                                                  :to   => false
   default :is_phone_order,                                                    :to   => false
+  default :is_update_blank_details,                                           :to   => false
+  default :is_update_all_details,                                             :to   => false
   default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_order_nbr}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :payment_term,                                                      :to   => lambda{|m| m.supplier.default_payment_term}
@@ -58,6 +60,7 @@ class Omni::Purchase < ActiveRecord::Base
   has_many     :logs,                                :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
   belongs_to   :location,                            :class_name => 'Omni::Location',          :foreign_key => 'location_id'
   belongs_to   :supplier,                            :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'
+  belongs_to   :allocation_profile,                  :class_name => 'Omni::AllocationProfile', :foreign_key => 'allocation_profile_id'
   belongs_to   :pay_to_supplier,                     :class_name => 'Omni::Supplier',          :foreign_key => 'pay_to_supplier_id'
   belongs_to   :ship_thru_supplier,                  :class_name => 'Omni::Supplier',          :foreign_key => 'ship_thru_supplier_id'
   belongs_to   :ordered_by_user,                     :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'
@@ -75,20 +78,21 @@ class Omni::Purchase < ActiveRecord::Base
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :ordered_by_user_display,                :to => 'ordered_by_user.display'
-    map :confirmed_by_user_display,              :to => 'confirmed_by_user.display'
-    map :supplier_display,                       :to => 'supplier.display'
+    map :ordered_by_user_display,                       :to => 'ordered_by_user.display'
+    map :confirmed_by_user_display,                     :to => 'confirmed_by_user.display'
+    map :supplier_display,                              :to => 'supplier.display'
+    map :allocation_profile_display,                    :to => 'allocation_profile.display'
     map :pay_to_supplier_display,                       :to => 'ship_thru_supplier.display'
-    map :ship_thru_supplier_display,                       :to => 'pay_to_supplier.display'
-    map :master_purchase_display,                :to => 'master_purchase.display'
-    map :carrier_supplier_display,               :to => 'carrier_supplier.display'
-    map :location_display,                       :to => 'location.display'
-    map :purchase_approver_1_user_display,       :to => 'purchase_approver_1_user.display'
-    map :purchase_approver_2_user_display,       :to => 'purchase_approver_2_user.display'
-    map :purchase_approver_3_user_display,       :to => 'purchase_approver_3_user.display'
-    map :purchase_approver_1_location_user_display,    :to => 'purchase_approver_1_location_user.display'
-    map :purchase_approver_2_location_user_display,    :to => 'purchase_approver_2_location_user.display'
-    map :purchase_approver_3_location_user_display,    :to => 'purchase_approver_3_location_user.display'
+    map :ship_thru_supplier_display,                    :to => 'pay_to_supplier.display'
+    map :master_purchase_display,                       :to => 'master_purchase.display'
+    map :carrier_supplier_display,                      :to => 'carrier_supplier.display'
+    map :location_display,                              :to => 'location.display'
+    map :purchase_approver_1_user_display,              :to => 'purchase_approver_1_user.display'
+    map :purchase_approver_2_user_display,              :to => 'purchase_approver_2_user.display'
+    map :purchase_approver_3_user_display,              :to => 'purchase_approver_3_user.display'
+    map :purchase_approver_1_location_user_display,     :to => 'purchase_approver_1_location_user.display'
+    map :purchase_approver_2_location_user_display,     :to => 'purchase_approver_2_location_user.display'
+    map :purchase_approver_3_location_user_display,     :to => 'purchase_approver_3_location_user.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -102,7 +106,10 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-
+  temporary_attributes do
+    config :is_update_blank_details
+    config :is_update_all_details
+  end
   # TEMPORARY ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
@@ -138,6 +145,8 @@ class Omni::Purchase < ActiveRecord::Base
     text     :location_fulltext,           :using => :location_display
     text     :master_purchase_fulltext,    :using => :master_purchase_display
     text     :carrier_supplier_fulltext,   :using => :carrier_supplier_display
+    text     :ship_thru_supplier_fulltext, :using => :ship_thru_supplier_display
+    text     :pay_to_supplier_fulltext,    :using => :pay_to_supplier_display
   end
   # INDEXING (End)
 
@@ -146,6 +155,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
+  hook :before_update, :update_allocation_profiles, 30
 
   # hook :before_create, :set_defaults, 10
 
@@ -266,7 +276,7 @@ class Omni::Purchase < ActiveRecord::Base
           self.save
           self.process_open
       end
-  end
+   end
 
   def approval_level
     # Determine current user
@@ -297,7 +307,7 @@ class Omni::Purchase < ActiveRecord::Base
     return approval_level
   end
 
-def queue
+  def queue
     # self.purchase_costs.all.each {|x| x.destroy}
     self.purchase_allocations.all.each {|x| x.destroy}
     self.purchase_details.all.each {|x| x.destroy}
@@ -346,6 +356,26 @@ def queue
       self.cancel_not_received_by_date = self.delivery_date + 30.days
     end
   end
+
+# If an Allocation Profile is set or changed, update all the Purchase Details
+  def update_allocation_profiles
+    return if self.allocation_profile_id.nil?
+    if self.allocation_profile_id_changed?
+      if self.is_update_blank_details
+          self.purchase_details.all(:allocation_profile_id != nil).each do |pd|
+            pd.allocation_profile_id = self.allocation_profile_id
+            pd.save
+          end
+      else
+        if self.is_update_all_details
+          self.purchase_details.each do |pd|
+            pd.allocation_profile_id = self.allocation_profile_id
+            pd.save
+          end
+        end
+      end
+    end
+  end    
 
   # Sends an email notification to the user when the purchase has finished running
   def send_notice

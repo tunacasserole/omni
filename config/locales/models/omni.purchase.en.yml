@@ -13,6 +13,7 @@ en:
         purchase_source:                   'Purchase Source'
         state:                             'State'
         order_date:                        'Order Date'
+        allocation_profile_id:             'Allocation_Profile'
         ordered_by_user_id:                'Ordered By User'
         ship_date:                         'Ship Date'
         delivery_date:                     'Delivery Date'
@@ -58,3 +59,5 @@ en:
         audit_updated_at:                  'Updated Date'
         total_order_units:                 'Total Order Units'
         total_order_cost:                  'Total Order Cost'
+        is_update_blank_details:           'Update Purchase Detail When Blank'
+        is_update_all_details:             'Update All Purchase Details'

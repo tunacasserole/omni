@@ -11,6 +11,7 @@ Ext.define('Omni.model.Purchase', {
       { name: 'purchase_source',             type: 'string'   },
       { name: 'state',                       type: 'string'   },
       { name: 'order_date',                  type: 'date'     },
+      { name: 'allocation_profile_id',       type: 'string'   },
       { name: 'ordered_by_user_id',          type: 'string'   },
       { name: 'ship_date',                   type: 'date'     },
       { name: 'delivery_date',               type: 'date'     },
@@ -58,6 +59,8 @@ Ext.define('Omni.model.Purchase', {
       { name: 'location_display',            type: 'string'   },
       { name: 'total_order_units',           type: 'string'   },
       { name: 'total_order_cost',            type: 'string'   },
+      { name: 'is_update_all_details',       type: 'boolean'  },
+      { name: 'is_update_blank_details',     type: 'boolean'  },
 
     ],
 

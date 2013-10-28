@@ -31,6 +31,7 @@ Ext.define('Omni.view.purchases.Form', {
       purchase_sourceLabel:                   Omni.i18n.model.Purchase.purchase_source,
       stateLabel:                             Omni.i18n.model.Purchase.state,
       order_dateLabel:                        Omni.i18n.model.Purchase.order_date,
+      allocation_profile_idLabel:             Omni.i18n.model.Purchase.allocation_profile_id,
       ordered_by_user_idLabel:                Omni.i18n.model.Purchase.ordered_by_user_id,
       ship_dateLabel:                         Omni.i18n.model.Purchase.ship_date,
       delivery_dateLabel:                     Omni.i18n.model.Purchase.delivery_date,
@@ -76,7 +77,9 @@ Ext.define('Omni.view.purchases.Form', {
       audit_created_atLabel:                  Omni.i18n.model.Purchase.audit_created_at,
       audit_updated_atLabel:                  Omni.i18n.model.Purchase.audit_updated_at,
       total_order_unitsLabel:                 Omni.i18n.model.Purchase.total_order_units,
-      total_order_costLabel:                  Omni.i18n.model.Purchase.total_order_cost
+      total_order_costLabel:                  Omni.i18n.model.Purchase.total_order_cost,
+      is_update_blank_detailsLabel:           Omni.i18n.model.Purchase.is_update_blank_details,
+      is_update_all_detailsLabel:             Omni.i18n.model.Purchase.is_update_all_details,
     });
     // LABELS (End)
 
@@ -356,7 +359,7 @@ Ext.define('Omni.view.purchases.Form', {
               store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
               displayField      : 'display',
               queryField        : 'display',
-              valueField        : 'carrier_supplier_id',
+              valueField        : 'ship_thru_supplier_id',
               itemTpl           : '{display}'
             },
             { xtype             : 'buildit-Locator',
@@ -376,7 +379,44 @@ Ext.define('Omni.view.purchases.Form', {
             }
           ]
         }
-
+       ,{
+          xtype:        'fieldset',
+          title:        'Allocation Information',
+          collapsible:  true,
+          defaultType:  'textfield',
+          defaults:     {anchor: '70%'},
+          layout:       'anchor',
+          items:[
+            { xtype            : 'buildit-Locator',
+              name              : 'allocation_profile_id',
+              fieldLabel        : this.allocation_profile_idLabel,
+              allowBlank        : true,
+              store             : Ext.create('Omni.store.AllocationProfile',{pageSize: 50}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'allocation_profile_id',
+              itemTpl           : '{display}'
+            },
+            { xtype             : 'checkbox',
+              name              : 'is_update_blank_details',
+              fieldLabel        : this.is_update_blank_detailsLabel,
+              allowBlank        : true
+            },
+            { xtype             : 'label',
+              text              : 'This will update the Allocation Profile in each Purchase Detail where it is blank.',
+              cls               : 'instruction'
+            },
+            { xtype             : 'checkbox',
+              name              : 'is_update_all_details',
+              fieldLabel        : this.is_update_all_detailsLabel,
+              allowBlank        : true
+            }
+            { xtype             : 'label',
+              text              : 'This will update all Purchase Details to the new Allocation Profile',
+              cls               : 'instruction'
+            }
+          ]
+        }
        ,{
           xtype:        'fieldset',
           title:        'Other Information',
