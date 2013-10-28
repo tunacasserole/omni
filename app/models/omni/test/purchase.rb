@@ -19,7 +19,9 @@ class Omni::Test::Purchase
     reindex_data
 
     # output test results to screen
-    puts @results + ["******************************************************************************************************\n\n\n"]
+    @results << ["**************************************************************************************************************************\n\n"]
+    @results << "TEST RESULTS: #{@passed_tests.to_s} out of #{@test_number.to_s} tests passed\n\n"
+    puts @results
   end
 
   def self.test_purchase_events
@@ -32,8 +34,16 @@ class Omni::Test::Purchase
     x.release
     test_it('Release a purchase','pending_approval',@p.state)
 
-    # test 20 different approval scenarios
-    test_purchase_approval_events
+    # approval scenarios 1 - 5 approve not allowed for these state
+    ['draft','open','partial','complete','cancelled'].each do |s|
+      @p.state = s
+      @p.save
+      @p.approve
+      test_it('Test approve transition - approve not allowed for this state',s,@p.state)
+    end
+
+    # approval scenarios 6 - 20 various approval tests
+    approval_scenarios.each {|s| test_approval_scenario s}
 
     # PRINT SHOULD CREATE A PDF
     # x.print
@@ -44,19 +54,15 @@ class Omni::Test::Purchase
     test_it('Cancel a purchase','cancelled',x.state)
   end
 
-  def self.test_purchase_approval_events
-    # current user for testing without UI - 811166D4D50A11E2B45820C9D04AARON
-
-    # scenarios 1 - 5 approve not allowed for these state
-    ['draft','open','partial','complete','cancelled'].each do |x|
-      @p.state = x
-      @p.save
-      @p.approve
-      test_it('Test approve transition - approve not allowed for this state',x,@p.state)
-    end
-
-    # scenarios 6 - 20 various approval tests
-    approval_scenarios.each {|s| test_approval_scenario s}
+  def self.test_it(scenario_description, expected_result, actual_result)
+    # FOR DEBUGGING
+    # puts "scenario #{@test_number +1}: #{scenario_description}  #{expected_result} <=> #{actual_result}"
+    # RUN TEST BY COMPARING EXPECTED VS ACTUAL RESULTS
+    success = (expected_result == actual_result)
+    # OUTPUT TEST RESULTS
+    result = "#{(@test_number += 1).to_s}: #{scenario_description}  ==> result: #{success ? 'PASS' : 'FAIL'},   expected: #{expected_result.to_s},  actual: #{actual_result.to_s}"
+    @results << (success ?  result.green : result.red)
+    @passed_tests += 1 if success
   end
 
   def self.test_approval_scenario(s)
@@ -128,28 +134,23 @@ class Omni::Test::Purchase
     test_it("Allocation - #{s[:scenario_description]}", expected_result, actual_result)
   end
 
-  def self.test_it(scenario_description, expected_result, actual_result)
-    # FOR DEBUGGING
-    puts "\n\n\n scenario #{@scenario_number +1}: #{scenario_description}  #{expected_result} <=> #{actual_result}"
-    # RUN TEST BY COMPARING EXPECTED VS ACTUAL RESULTS
-    success = (expected_result == actual_result)
-    # OUTPUT TEST RESULTS
-    result = "#{(@scenario_number += 1).to_s}: #{scenario_description}  ==> result: #{success ? 'PASS' : 'FAIL'},   expected: #{expected_result.to_s},  actual: #{actual_result.to_s}"
-    @results << (success ?  result.green : result.red)
-  end
-
   def self.create_base_data
     #   CREATE ALL DATA NEEDED FOR TEST SUITE
+    constants
     create_allocation_profiles
     create_projections
     create_bts
     create_purchase_data
   end
 
+  def self.constants
+    @test_number = 0
+    @passed_tests = 0
+    @results = ["\n\n\n**************************************** RUN RESULTS *********************************************************************"]
+  end
+
   def self.create_purchase_data
     # create data for styles, skus, sizes, system_options, sku_suppliers, sku_locations, location_users, purchases and purchase_details by destroying then creating.
-    @results = ["\n\n\n************************* RUN RESULTS ****************************************************************"]
-    @scenario_number = 0
 
     Omni::Style.where(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15').all.each {|x| x.delete}
     Omni::Style.create(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15', :display=>'0010PKGRL-BU-391-BU391b1', :concatenated_name=>'*BLOUSE, SS, P-PAN',:pos_name=>'*BLOUSE, SS, P-PAN',:size_group_id=>'636F7E9EAC5711E299E700FF58D32228',:style_nbr=>'54504',:description=>'*BLOUSE, SS, P-PAN', :subclass_id=>'4AB6ABEA081C11E3A9EB20C9D047DD15', :product_id=>'3DC7C7B8FE1F11E28D2320C9D047DD15', :brand=>'PARKER', :product_type_id=>'B25227F6AC5611E299E700FF58D32228', :fabric_content=>'65% POLY 35% COTTON', :initial_retail_price=>15.50, :site_id=>'0E5E192EAC5211E299E700FF58D32228', :conversion_type=>'MONOGRAM', :state=>'active')
@@ -234,6 +235,17 @@ class Omni::Test::Purchase
     Omni::AllocationProfile.create(:allocation_profile_id => @ap9, :display => 'approve projection units profile', :allocation_formula => 'APPROVED_PROJECTION', :percent_to_allocate => percent_to_allocate, :excess_demand_option => 'LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211APPROVEDPROJECTION').first
   end
 
+  def self.reindex_data
+    Omni::AllocationProfile.reindex
+    Omni::Bts.reindex
+    Omni::BtsDetail.reindex
+    Omni::Projection.reindex
+    Omni::ProjectionDetail.reindex
+    Omni::Purchase.reindex
+    Omni::PurchaseAllocation.reindex
+    Omni::PurchaseDetail.reindex
+  end
+
   def self.allocation_scenarios
     x = []
     x << {:scenario_description=>'Supply equals Demand',      :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
@@ -287,17 +299,6 @@ class Omni::Test::Purchase
     x << {:scenario_description=>'Approval 1 succesfull',        :approver_1=>user_1, :approver_2=>user_1, :approver_3=>user_1, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
     x << {:scenario_description=>'Approval 2 succesfull',        :approver_1=>user_2, :approver_2=>user_1, :approver_3=>user_1, :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil,  :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
     x
-  end
-
-  def self.reindex_data
-    Omni::AllocationProfile.reindex
-    Omni::Bts.reindex
-    Omni::BtsDetail.reindex
-    Omni::Projection.reindex
-    Omni::ProjectionDetail.reindex
-    Omni::Purchase.reindex
-    Omni::PurchaseAllocation.reindex
-    Omni::PurchaseDetail.reindex
   end
 
 end
