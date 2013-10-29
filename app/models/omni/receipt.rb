@@ -124,6 +124,8 @@ class Omni::Receipt < ActiveRecord::Base
       transition :accepted => :complete
     end
 
+  end
+
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
