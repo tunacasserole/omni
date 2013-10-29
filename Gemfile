@@ -41,8 +41,10 @@ group :development, :test do
   gem 'pry-rails'
   gem 'sunspot_solr'
   gem 'sunspot_rails'
-  #gem 'rspec-rails'
-  #gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'guard-rspec'
 end
 
 # gem 'jquery-rails'
