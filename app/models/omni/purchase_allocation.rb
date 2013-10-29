@@ -27,15 +27,15 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default :purchase_allocation_id,                          :with => :guid
+  default :purchase_allocation_id,                                              :with => :guid
   default :purchase_allocation_nbr,                :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_ALLOCATION_NBR"
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :purchase_detail,            :class_name => 'Omni::PurchaseDetail',            :foreign_key => 'purchase_detail_id'
-  belongs_to   :allocation,                      :class_name => 'Omni::Allocation',          :foreign_key => 'allocation_id'
-  belongs_to   :location,           :class_name => 'Omni::Location',               :foreign_key => 'location_id'
+  belongs_to   :allocation,                 :class_name => 'Omni::Allocation',          :foreign_key => 'allocation_id'
+  belongs_to   :location,                   :class_name => 'Omni::Location',               :foreign_key => 'location_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================

@@ -302,7 +302,7 @@ class Omni::Purchase < ActiveRecord::Base
           end
        end
     end
-    puts "errors count is #{errors.count}"
+    # puts "errors count is #{errors.count}"
     approval_level = 0 if errors.count > 0
     return approval_level
   end
