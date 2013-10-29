@@ -37,14 +37,14 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'pry'
-  gem 'pry-rails'
-  gem 'sunspot_solr'
-  gem 'sunspot_rails'
+  # gem 'pry'
+  # gem 'pry-rails'
+  # gem 'sunspot_solr'
+  # gem 'sunspot_rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'capybara'
-  gem 'guard-rspec'
+  # gem 'capybara'
+  # gem 'guard-rspec'
 end
 
 # gem 'jquery-rails'
@@ -54,5 +54,5 @@ gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"
 gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
 
 # gem 'whenever'
-gem 'roo'
-gem 'prawn'
+# gem 'roo'
+# gem 'prawn'

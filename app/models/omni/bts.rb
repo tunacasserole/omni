@@ -107,21 +107,28 @@ class Omni::Bts < ActiveRecord::Base
   end
   # INDEXING (End)
 
-  # STATES (Start) ====================================================================
-  state_machine :state, :initial => :new do
+  # # STATES (Start) ====================================================================
+  # state_machine :state, :initial => :new do
 
-  ### CALLBACKS ###
-    after_transition :on => :run, :do => :process_run
+  # ### CALLBACKS ###
+  #   after_transition :on => :run, :do => :process_run
 
-  ### EVENTS ###
-    event :run do
-      transition any => :active
-      # transition any => :done
-    end
-  end
-  # STATES (End)
+  # ### EVENTS ###
+  #   event :run do
+  #     transition any => :active
+  #     # transition any => :done
+  #   end
+  # end
+  # # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
+  def run
+    # update bts state to 'running'
+    self.state='running'
+    self.save
+
+  end
+
   def process_run
     self.state='running'
     self.save

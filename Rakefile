@@ -17,11 +17,12 @@ namespace :omni do
 
   end
 
+  desc "run automated tests for Bts, Purchase"
   task :test => :environment do |t, args|
-
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     @start_time = Time.now
-    Omni::Test::Purchase.go
+    Omni::Test::Bts.go
+    # Omni::Test::Purchase.go
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
 
   end
