@@ -12,12 +12,16 @@ class Omni::Receipt < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  # supports_logical_delete
+  # supports_audit
+  # supports_revisioning
+  supports_fulltext
+  supports_crud_privileges
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
+  validates    :display,                         :uniqueness  => true
   validates    :freight_terms,                   :lookup      => 'FREIGHT_TERMS',              :allow_nil => true
   # VALIDATIONS (End)
 
@@ -26,6 +30,10 @@ class Omni::Receipt < ActiveRecord::Base
   default      :receipt_id,                       :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.location_display} - Receipt: #{m.create_date}"}
   default      :receipt_nbr,                      :override  =>  false,        :with  => :sequence,         :named=>"RECEIPT_NBR"
+  
+  default      :create_date,                                                   :with  => :now
+  default      :carrier_supplier_id,                                            :to    => lambda{|m| }
+
   default      :appointment_duration,             :override  =>  false,        :to    => 0
   default      :is_expected_asn,                  :override  =>  false,        :to    => false
   default      :is_destroyed,                     :override  =>  false,        :to    => false
@@ -42,19 +50,26 @@ class Omni::Receipt < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :receipt_details,                 :class_name => 'Omni::ReceiptDetail',           :foreign_key => 'receipt_id'
   belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
   belongs_to   :carrier_supplier,                :class_name => 'Omni::Supplier',                :foreign_key => 'carrier_supplier_id'
-  belongs_to   :completed_by_user,               :class_name => 'Buildit::User',                     :foreign_key => 'completed_by_user_id'
-  # ASSOCIATIONS (End)
+  belongs_to   :accepted_by_user,                :class_name => 'Buildit::User',                 :foreign_key => 'accepted_by_user_id'
+  belongs_to   :completed_by_user,               :class_name => 'Buildit::User',                 :foreign_key => 'completed_by_user_id'
+  belongs_to   :allocation_profile,              :class_name => 'Omni::AllocationProfile',       :foreign_key => 'allocation_profile_id'
 
+  has_many     :receipt_details,                 :class_name => 'Omni::ReceiptDetail',           :foreign_key => 'receipt_id'
+  has_many     :receipt_purchases,               :class_name => 'Omni::ReceptPurchase',          :foreign_key => 'receipt_id'
+  has_many     :purchases,                       :class_name => 'Omni::Purchase',                :through => :receipt_purchases
+
+  # ASSOCIATIONS (End)
 
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :location_display,                       :to => 'location.display'
     map :carrier_supplier_display,               :to => 'carrier_supplier.display'
+    map :accepted_by_user_display,               :to => 'accepted_by_user.full_name'
     map :completed_by_user_display,              :to => 'completed_by_user.full_name'
+    map :allocation_profile_display,             :to => 'allocation_profile.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -77,20 +92,60 @@ class Omni::Receipt < ActiveRecord::Base
   state_machine :state, :initial => :draft do
 
   ### STATES ###
-    # state :draft do
+    state :draft do; end
 
-    # end
+    state :scheduled do; end
+
+    state :processing do; end
+
+    state :accepted do; end
+
+    state :complete do
+    # Validate that all receipt_details are in complete state
+
+    end
 
   ### CALLBACKS ###
-    # after_transition :on => :costing, :do => :process_costing
+    after_transition :on => :start, :do => :process_start
+    after_transition :on => :accept, :do => :process_accept
+    after_transition :on => :complete, :do => :process_complete
+
 
   ### EVENTS ###
-    # event :approve do
-    #   transition :pending_approval => :open
-    # end
+    event :start do
+      transition [:draft, :scheduled] => :processing
+    end
 
-  end
+    event :accept do
+      transition [:draft, :scheduled, :processing] => :accepted
+    end
+
+    event :complete do
+      transition :accepted => :complete
+    end
+
   # STATES (End)
+
+  # STATE HELPERS (Start) =====================================================================
+    def process_start
+      self.receipt_date = Date.today
+      self.save
+    end
+
+    def process_accept
+    # Do complete process on each Receipt Detail
+
+    # Update Receipt
+      self.accepted_date = Date.today
+      self.accepted_by_user_id = Buildit::User.current.user_id
+    end
+
+    def process_complete
+      self.complete_date = Date.today
+      self.completed_by_user_id = Buildit::User.current.user_id
+    end
+
+  # STATE HELPERS (End)
 
 
   # INDEXING (Start) ====================================================================
