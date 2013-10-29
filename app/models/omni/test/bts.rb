@@ -12,7 +12,7 @@ class Omni::Test::Bts < Omni::Test::Base
 
   def self.test_bts
     # if base data was created and relationship exists, the bts should have 3 details
-    x=@b
+    x=Omni::Bts.where(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS').first
     test_it('It creates a bts with bts details', 3, x.bts_details.count)
 
     # if detail rows were succesfully destroyed, there should be no detail rows

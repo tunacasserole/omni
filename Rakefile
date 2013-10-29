@@ -22,7 +22,7 @@ namespace :omni do
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     @start_time = Time.now
     Omni::Test::Bts.go
-    # Omni::Test::Purchase.go
+    Omni::Test::Purchase.go
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
 
   end
