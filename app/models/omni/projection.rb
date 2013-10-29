@@ -135,11 +135,9 @@
     event :build do
       transition :new => :draft
     end
-
     event :forecast do
       transition ![:new, :complete] => :forecast
     end
-
     event :release do
       transition any => :released
     end
@@ -148,6 +146,9 @@
     end
     event :approve do
       transition :released => :approved
+    end
+    event :close do
+      transition :any => :complete
     end
     event :activate do
       transition any => :active

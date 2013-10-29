@@ -1,6 +1,7 @@
 class Omni::Test::Purchase < Omni::Test::Base
 
   def self.go
+    create_purchase_data
     @@model_name = 'Purchase'
     @@model_action = 'Event'
 
