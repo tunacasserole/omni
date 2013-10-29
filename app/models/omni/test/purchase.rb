@@ -19,7 +19,9 @@ class Omni::Test::Purchase
     reindex_data
 
     # output test results to screen
-    puts @results + ["******************************************************************************************************\n\n\n"]
+    @results << ["**************************************************************************************************************************\n\n"]
+    @results << "TEST RESULTS: #{@passed_tests.to_s} out of #{@test_number.to_s} tests passed\n\n"
+    puts @results
   end
 
   def self.test_purchase_events
@@ -32,64 +34,83 @@ class Omni::Test::Purchase
     x.release
     test_it('Release a purchase','pending_approval',@p.state)
 
-    # test 20 different approval scenarios
-    test_purchase_approval_events
+    # approval scenarios 1 - 5 approve not allowed for these state
+    ['draft','open','partial','complete','cancelled'].each do |s|
+      @p.state = s
+      @p.save
+      @p.approve
+      test_it('Test approve transition - approve not allowed for this state',s,@p.state)
+    end
+
+    # approval scenarios 6 - 20 various approval tests
+    approval_scenarios.each {|s| test_approval_scenario s}
 
     # PRINT SHOULD CREATE A PDF
     # x.print
-    test_it('Print a purchase','PRINT','TEST NOT IMPLEMENTED YET')
+    test_it('Print a purchase','PRINT','NOT IMPLEMENTED YET')
 
     # CANCEL SHOULD SET STATE TO PENDING APPROVAL
     # x.cancel
     test_it('Cancel a purchase','cancelled',x.state)
   end
 
-  def self.test_purchase_approval_events
-    # scenario 1 - Test Approve transition
-    ['draft','open','partial','complete','cancelled'].each do |x|
-      @p.state = x
-      @p.save
-      @p.approve
-      test_it('Test approve transition with no approvals',x,@p.state)
-    end
+  def self.test_it(scenario_description, expected_result, actual_result)
+    # FOR DEBUGGING
+    # puts "scenario #{@test_number +1}: #{scenario_description}  #{expected_result} <=> #{actual_result}"
+    # RUN TEST BY COMPARING EXPECTED VS ACTUAL RESULTS
+    success = (expected_result == actual_result)
+    # OUTPUT TEST RESULTS
+    result = "#{(@test_number += 1).to_s}: #{scenario_description}  ==> result: #{success ? 'PASS' : 'FAIL'},   expected: #{expected_result.to_s},  actual: #{actual_result.to_s}"
+    @results << (success ?  result.green : result.red)
+    @passed_tests += 1 if success
+  end
 
-    #:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON',:purchase_approver_2_user_id => '811166D4D50A11E2B45820C9D04AARON', :purchase_approver_3_user_id => '811166D4D50A11E2B45820C9D04AARON',
+  def self.test_approval_scenario(s)
+    pd = @pd1
+    pd.order_pack_size=10
+    pd.supplier_cost=24
+    pd.order_cost_units=12
+    pd.save
 
+    p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
+    p.state = 'pending_approval'
+    p.purchase_approver_1_user_id = s[:approver_1]
+    p.purchase_approver_2_user_id = s[:approver_2]
+    p.purchase_approver_3_user_id = s[:approver_3]
+    p.approval_1_date = s[:approval_1_date]
+    p.approval_2_date = s[:approval_2_date]
+    p.approval_3_date = s[:approval_3_date]
+    p.save
+    p.approve
 
+    expected_result =  s[:purchase_state_after] + ',' + s[:approval_1_date_after].to_s + ',' + s[:approval_2_date_after].to_s + ',' + s[:approval_3_date_after].to_s
+    actual_result =      p.state                            + ',' + p.approval_1_date.to_s           + ',' + p.approval_2_date.to_s            + ',' + p.approval_3_date.to_s
 
-    # ORIGINAL
-    # 3.times {|i| x.approve}
-    # test_it('Approve a purchase','open',x.state)
+    test_it(s[:scenario_description], expected_result, actual_result)
   end
 
   def self.test_purchase_detail_events
     # run 26 different allocation tests
     allocation_scenarios.each {|s| test_allocation_scenario s}
 
-    x=@pd
+    x=@pd1
 
-    # approve should set state to open
     x.approve
     test_it('Approve a purchase detail','open',x.state)
 
-    # receive should set state to open
     x.receive
     test_it('Receive a purchase detail','open',x.state)
 
-    # cancel should set state to cancelled
     x.cancel
     test_it('Cancel a purchase detail','cancelled',x.state)
   end
 
   def self.test_purchase_allocation_events
-    @pd=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
-    x = @pd.purchase_allocations.first
+    x = @pd1.purchase_allocations.first
 
-    # lock should set state to locked
     x.lock
     test_it('Lock a purchase allocation','locked',x.state)
 
-    # unlock should set state to draft
     x.unlock
     test_it('Unlock a purchase allocation','draft',x.state)
   end
@@ -99,13 +120,13 @@ class Omni::Test::Purchase
     a.percent_to_allocate = s[:percent_to_allocate]
     a.save
 
-    x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
+    x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
     x.allocation_profile_id = s[:allocation_profile_id]
     x.save
 
     x.process_allocation
 
-    x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
+    x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
 
     expected_result =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
     actual_result = x.purchase_allocations.first.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.second.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.third.units_allocated.to_s.chop.chop
@@ -113,28 +134,23 @@ class Omni::Test::Purchase
     test_it("Allocation - #{s[:scenario_description]}", expected_result, actual_result)
   end
 
-  def self.test_it(scenario_description, expected_result, actual_result)
-    # FOR DEBUGGING
-    puts "\n\n\n scenario #{@scenario_number +1}: #{scenario_description}  #{expected_result} <=> #{actual_result}"
-    # RUN TEST BY COMPARING EXPECTED VS ACTUAL RESULTS
-    success = (expected_result == actual_result)
-    # OUTPUT TEST RESULTS
-    result = "#{(@scenario_number += 1).to_s}: #{scenario_description}  ==> result: #{success ? 'PASS' : 'FAIL'},   expected: #{expected_result.to_s},  actual: #{actual_result.to_s}"
-    @results << (success ?  result.green : result.red)
-  end
-
   def self.create_base_data
     #   CREATE ALL DATA NEEDED FOR TEST SUITE
+    constants
     create_allocation_profiles
     create_projections
     create_bts
     create_purchase_data
   end
 
+  def self.constants
+    @test_number = 0
+    @passed_tests = 0
+    @results = ["\n\n\n**************************************** RUN RESULTS *********************************************************************"]
+  end
+
   def self.create_purchase_data
     # create data for styles, skus, sizes, system_options, sku_suppliers, sku_locations, location_users, purchases and purchase_details by destroying then creating.
-    @results = ["\n\n\n************************* RUN RESULTS ****************************************************************"]
-    @scenario_number = 0
 
     Omni::Style.where(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15').all.each {|x| x.delete}
     Omni::Style.create(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15', :display=>'0010PKGRL-BU-391-BU391b1', :concatenated_name=>'*BLOUSE, SS, P-PAN',:pos_name=>'*BLOUSE, SS, P-PAN',:size_group_id=>'636F7E9EAC5711E299E700FF58D32228',:style_nbr=>'54504',:description=>'*BLOUSE, SS, P-PAN', :subclass_id=>'4AB6ABEA081C11E3A9EB20C9D047DD15', :product_id=>'3DC7C7B8FE1F11E28D2320C9D047DD15', :brand=>'PARKER', :product_type_id=>'B25227F6AC5611E299E700FF58D32228', :fabric_content=>'65% POLY 35% COTTON', :initial_retail_price=>15.50, :site_id=>'0E5E192EAC5211E299E700FF58D32228', :conversion_type=>'MONOGRAM', :state=>'active')
@@ -166,12 +182,14 @@ class Omni::Test::Purchase
     Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC3', :location_id=>'5247A038AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
     Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC4', :location_id=>'526058B2AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
 
-    Omni::PurchaseDetail.where(:purchase_detail_id=>['ABABDAAA35E011E3ABAA20XXXXXXXXXX','ABABDAAA35E011E3ABAA20C9DBTPROJ1','ABABDAAA35E011E3ABAA20C9DBTPROJ2','ABABDAAA35E011E3ABAA20C9DBTPROJ3','ABABDAAA35E011E3ABAA20C9DBTPROJ4','ABABDAAA35E011E3ABAALASTFORECAST','ABABDAAA35E011E3ABAA20C9APPROVED']).all.each {|x| x.delete}
-    Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3ABAA20XXXXXXXXXX', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered => 100, :order_cost_units => 1, :order_pack_size => 1)
+    Omni::PurchaseDetail.where(:purchase_detail_id=>['ABABDAAA35E011E3APURCHASEDETAIL1','ABABDAAA35E011E3APURCHASEDETAIL2']).all.each {|x| x.delete}
+    Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered=>100, :order_pack_size=>1, :supplier_cost=>25, :order_cost_units=>1)
+    # Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL2', :allocation_profile_id => '913BB680231211E3BE49201ILBTSNEED', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered=>100, :order_pack_size=>10, :supplier_cost=>24, :order_cost_units=>12)
 
     Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').all.each {|x| x.delete}
-    @p=Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC531XXXXXXXXXXOLIVANDER', :location_id => '51579764AC3E11E2947800FF58D32228', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase')
-    @pd=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3ABAA20XXXXXXXXXX').first
+    @p=Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC531XXXXXXXXXXOLIVANDER', :location_id => '51579764AC3E11E2947800FF58D32228', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON')
+    @pd1=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1').first
+    # @pd2=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1').first
   end
 
   def self.create_projections
@@ -217,6 +235,17 @@ class Omni::Test::Purchase
     Omni::AllocationProfile.create(:allocation_profile_id => @ap9, :display => 'approve projection units profile', :allocation_formula => 'APPROVED_PROJECTION', :percent_to_allocate => percent_to_allocate, :excess_demand_option => 'LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211APPROVEDPROJECTION').first
   end
 
+  def self.reindex_data
+    Omni::AllocationProfile.reindex
+    Omni::Bts.reindex
+    Omni::BtsDetail.reindex
+    Omni::Projection.reindex
+    Omni::ProjectionDetail.reindex
+    Omni::Purchase.reindex
+    Omni::PurchaseAllocation.reindex
+    Omni::PurchaseDetail.reindex
+  end
+
   def self.allocation_scenarios
     x = []
     x << {:scenario_description=>'Supply equals Demand',      :allocation_profile_id => @ap1, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
@@ -248,15 +277,28 @@ class Omni::Test::Purchase
     x
   end
 
-  def self.reindex_data
-    Omni::AllocationProfile.reindex
-    Omni::Bts.reindex
-    Omni::BtsDetail.reindex
-    Omni::Projection.reindex
-    Omni::ProjectionDetail.reindex
-    Omni::Purchase.reindex
-    Omni::PurchaseAllocation.reindex
-    Omni::PurchaseDetail.reindex
+  def self.approval_scenarios
+    user_1 = '811166D4D50A11E2B45820C9D04AARON'
+    user_2 = '811166D4D50A11E2B45820C9D04ATTTT'
+    user_3 = 'FB0ACB1AFAC111E2B25720SYSBUILDIT'
+    now = Date.today
+    x=[]
+    x << {:scenario_description=>'Approval not authorized',        :approver_1=>user_2, :approver_2=>nil, :approver_3=>nil,       :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 1 already done',        :approver_1=>user_1, :approver_2=>user_2, :approver_3=>nil, :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil, :purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 1 must be done first',:approver_1=>user_2, :approver_2=>user_1, :approver_3=>nil, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,   :purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 2 already done',        :approver_1=>user_2, :approver_2=>user_1, :approver_3=>nil, :approval_1_date=>now, :approval_2_date=>now, :approval_3_date=>nil, :purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',:purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 2 must be done first',:approver_1=>user_2, :approver_2=>user_3, :approver_3=>user_1,:approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil,:purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',:purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 3 already done', :approver_1=>user_2, :approver_2=>user_3, :approver_3=>user_1,:approval_1_date=>now, :approval_2_date=>now, :approval_3_date=>now,:purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 1 of 1 succesfull', :approver_1=>user_1, :approver_2=>nil, :approver_3=>nil,             :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'open',                     :purchase_detail_state_after=>'open', :selling_units_approved_after=>100, :email_sent=>false, :stock_ledger_row=>true}
+    x << {:scenario_description=>'Approval 1 of 2 succesfull', :approver_1=>user_1, :approver_2=>user_2, :approver_3=>nil,       :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',:purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 1 of 3 succesfull', :approver_1=>user_1, :approver_2=>user_2, :approver_3=>user_3, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,   :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 2 of 2 succesfull', :approver_1=>user_2, :approver_2=>user_1, :approver_3=>nil,       :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil, :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>now, :approval_3_date_after=>nil, :purchase_state_after=>'open',                   :purchase_detail_state_after=>'open', :selling_units_approved_after=>1000, :email_sent=>false, :stock_ledger_row=>true}
+    x << {:scenario_description=>'Approval 2 of 3 succesfull', :approver_1=>user_2, :approver_2=>user_1, :approver_3=>user_3, :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil,  :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>now,:approval_3_date_after=>nil,:purchase_state_after=>'pending_approval',:purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 3 of 3 succesfull', :approver_1=>user_2, :approver_2=>user_3, :approver_3=>user_1, :approval_1_date=>now, :approval_2_date=>now, :approval_3_date=>nil, :purchase_details=>@pd2, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>now, :purchase_state_after=>'open',                   :purchase_detail_state_after=>'open', :selling_units_approved_after=>1000, :email_sent=>false, :stock_ledger_row=>true}
+    x << {:scenario_description=>'Approval 1 succesfull',        :approver_1=>user_1, :approver_2=>user_1, :approver_3=>user_3, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,     :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 1 succesfull',        :approver_1=>user_1, :approver_2=>user_1, :approver_3=>user_1, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
+    x << {:scenario_description=>'Approval 2 succesfull',        :approver_1=>user_2, :approver_2=>user_1, :approver_3=>user_1, :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil,  :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
+    x
   end
 
 end
