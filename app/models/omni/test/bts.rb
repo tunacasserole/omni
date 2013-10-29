@@ -1,13 +1,7 @@
 class Omni::Test::Bts < Omni::Test::Base
 
   def self.go
-    create_base_data
-
     test_bts
-
-    reindex_data
-
-    output_results
   end
 
   def self.test_bts
@@ -24,8 +18,6 @@ class Omni::Test::Bts < Omni::Test::Base
     test_it('It sets the state to running','running',x.state)
     test_it('it creates a bts detail for every sku location',4,x.bts_details.count)
     # test_it('it creates a bts detail for every sku location',4,x.bts_details.count)
-
   end
-
 
 end

@@ -1,8 +1,9 @@
 class Omni::Test::Purchase < Omni::Test::Base
 
   def self.go
-    # create all data needed to run this test suite
-    create_base_data
+    @@model_name = 'Purchase'
+    @@model_action = 'Event'
+
     @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
     @pd1=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1').first
 
@@ -14,11 +15,6 @@ class Omni::Test::Purchase < Omni::Test::Base
 
     # test approve, receive, allocate & cancel a purchase detail
     test_purchase_allocation_events
-
-    # reindex newly created test data
-    reindex_data
-
-    output_results
   end
 
   def self.test_purchase_events
@@ -38,16 +34,43 @@ class Omni::Test::Purchase < Omni::Test::Base
       test_it('Test approve transition - approve not allowed for this state',s,@p.state)
     end
 
-    # approval scenarios 6 - 20 various approval tests
-    approval_scenarios.each {|s| test_approval_scenario s}
-
-    # PRINT SHOULD CREATE A PDF
     # x.print
     test_it('Print a purchase','PRINT','NOT IMPLEMENTED YET')
 
-    # CANCEL SHOULD SET STATE TO PENDING APPROVAL
     # x.cancel
     test_it('Cancel a purchase','cancelled',x.state)
+
+    # approval scenarios 6 - 20 various approval tests
+    @@model_action = 'Approval'
+    approval_scenarios.each {|s| test_approval_scenario s}
+
+    # run 26 different allocation tests
+    @@model_action = 'Allocation'
+    allocation_scenarios.each {|s| test_allocation_scenario s}
+
+  end
+
+  def self.test_purchase_detail_events
+    x=@pd1
+
+    x.approve
+    test_it('Approve a purchase detail','open',x.state)
+
+    x.receive
+    test_it('Receive a purchase detail','open',x.state)
+
+    x.cancel
+    test_it('Cancel a purchase detail','cancelled',x.state)
+  end
+
+  def self.test_purchase_allocation_events
+    x = @pd1.purchase_allocations.first
+
+    x.lock
+    test_it('Lock a purchase allocation','locked',x.state)
+
+    x.unlock
+    test_it('Unlock a purchase allocation','draft',x.state)
   end
 
   def self.test_approval_scenario(s)
@@ -74,32 +97,6 @@ class Omni::Test::Purchase < Omni::Test::Base
     test_it(s[:scenario_description], expected_result, actual_result)
   end
 
-  def self.test_purchase_detail_events
-    # run 26 different allocation tests
-    allocation_scenarios.each {|s| test_allocation_scenario s}
-
-    x=@pd1
-
-    x.approve
-    test_it('Approve a purchase detail','open',x.state)
-
-    x.receive
-    test_it('Receive a purchase detail','open',x.state)
-
-    x.cancel
-    test_it('Cancel a purchase detail','cancelled',x.state)
-  end
-
-  def self.test_purchase_allocation_events
-    x = @pd1.purchase_allocations.first
-
-    x.lock
-    test_it('Lock a purchase allocation','locked',x.state)
-
-    x.unlock
-    test_it('Unlock a purchase allocation','draft',x.state)
-  end
-
   def self.test_allocation_scenario(s)
     a=Omni::AllocationProfile.where(:allocation_profile_id=>s[:allocation_profile_id]).first
     a.percent_to_allocate = s[:percent_to_allocate]
@@ -108,7 +105,6 @@ class Omni::Test::Purchase < Omni::Test::Base
     x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
     x.allocation_profile_id = s[:allocation_profile_id]
     x.save
-
     x.process_allocation
 
     x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
@@ -116,7 +112,7 @@ class Omni::Test::Purchase < Omni::Test::Base
     expected_result =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
     actual_result = x.purchase_allocations.first.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.second.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.third.units_allocated.to_s.chop.chop
 
-    test_it("Allocation - #{s[:scenario_description]}", expected_result, actual_result)
+    test_it("#{s[:scenario_description]}", expected_result, actual_result)
   end
 
 end

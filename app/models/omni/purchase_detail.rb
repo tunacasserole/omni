@@ -382,7 +382,7 @@
       case allocation_profile.excess_supply_option
       when 'APPORTION_TO_STORES'
         difference = allocatable_units - total_units_needed
-        puts difference.to_s
+        # puts difference.to_s
         proportions = temp_purchase_allocations.inject({}) { |h, (k, v)| h[k] = BigDecimal.new(v)/BigDecimal.new(total_units_needed).floor; h }
 
         residual = allocatable_units - (proportions.map{|k,v| v}).sum
@@ -428,6 +428,7 @@
     # process the locations and their corresponding units and create
     # a purchase allocation record to this purchase detail
     temp_purchase_allocations.each do |location_id, units_allocated|
+      # puts "units_allocated: #{units_allocated.to_s}"
       self.purchase_allocations.create(
         location_id: location_id,
         units_allocated: units_allocated
