@@ -114,13 +114,21 @@ class Omni::Test::Base
   end
 
   def self.create_projection_data
+    Buildit::Privilege.where(privilege_id: ['70694A7840C511EXPROJECTIONCLOSER', 'XXXXXPRIVILEGEPROJECTIONAPPROVER']).all.each {|x|x.delete}
+    Buildit::Privilege.create(privilege_id: '70694A7840C511EXPROJECTIONCLOSER', privilege_code: 'PROJECTION_CLOSER', module_code: 'OMNI_PROJECTION', description: 'PROJECTION_CLOSER', is_enabled: true, model_name: 'Omni::Projection', op_custom: true)
+    Buildit::Privilege.create(privilege_id: 'XXXXXPRIVILEGEPROJECTIONAPPROVER', privilege_code: 'PROJECTION_APPROVER', module_code: 'OMNI_PROJECTION', description: 'PROJECTION_APPROVER', is_enabled: true, model_name: 'Omni::Projection', op_custom: true)
+
+    Buildit::Permission.where(permission_id: ['525C4310191911E3PROJECTIONCLOSER','XPERMISSIONXXXPROJECTIONAPPROVER']).all.each {|x|x.delete}
+    Buildit::Permission.create(permission_id: '525C4310191911E3PROJECTIONCLOSER', role_id: '323244F0204011EFCFE904SUPERADMIN', privilege_id: '70694A7840C511EXPROJECTIONCLOSER', is_enabled: true)
+    Buildit::Permission.create(permission_id: 'XPERMISSIONXXXPROJECTIONAPPROVER', role_id: '323244F0204011EFCFE904SUPERADMIN', privilege_id: 'XXXXXPRIVILEGEPROJECTIONAPPROVER', is_enabled: true)
+
     Omni::Projection.all.each {|x| x.delete}
-    Omni::Projection.create(:projection_id => '4D594A1C193611E3A22D20C9D04PROJ1', :state => 'active', :department_id => '5EA20FF2FE0611E280D020C9D047DD15')
+    Omni::Projection.create(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1', :state => 'active', :department_id => '5EA20FF2FE0611E280D020C9D047DD15')
 
     Omni::ProjectionDetail.all.each {|x| x.delete}
-    Omni::ProjectionDetail.create(:projection_id => '4D594A1C193611E3A22D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50)
-    Omni::ProjectionDetail.create(:projection_id => '4D594A1C193611E3A22D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET2', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51892F68AC3E11E2947800FF58D32228', :projection_1_units => 40, :projection_2_units => 40, :projection_3_units => 40, :projection_4_units => 40, :last_forecast_units => 40)
-    Omni::ProjectionDetail.create(:projection_id => '4D594A1C193611E3A22D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET3', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'5247A038AC3E11E2947800FF58D32228', :projection_1_units => 10, :projection_2_units => 10, :projection_3_units => 10, :projection_4_units => 10, :last_forecast_units => 10)
+    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50)
+    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET2', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51892F68AC3E11E2947800FF58D32228', :projection_1_units => 40, :projection_2_units => 40, :projection_3_units => 40, :projection_4_units => 40, :last_forecast_units => 40)
+    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET3', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'5247A038AC3E11E2947800FF58D32228', :projection_1_units => 10, :projection_2_units => 10, :projection_3_units => 10, :projection_4_units => 10, :last_forecast_units => 10)
   end
 
   def self.projection_scenarios
