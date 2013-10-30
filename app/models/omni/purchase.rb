@@ -362,7 +362,7 @@ class Omni::Purchase < ActiveRecord::Base
     return if self.allocation_profile_id.nil?
     if self.allocation_profile_id_changed?
       if self.is_update_blank_details
-          self.purchase_details.all(:allocation_profile_id != nil).each do |pd|
+          self.purchase_details.where(:allocation_profile_id => nil).each do |pd|
             pd.allocation_profile_id = self.allocation_profile_id
             pd.save
           end
