@@ -13,114 +13,104 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
         // LEFT ACTIONS (Start) =================================================================
 
         /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         */
-        {
-          text: 'New',
-          cls: 'icon-new'
-        },
-
-        /**
          * Build
          * Supports performing 'Build' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
-        // {
-        //   text:'Build',
-        //   cls: 'icon-settings',
-        //   action: 'build',
-        //   confirm: true,
-        //   multi: true,
-        //   privileges: [],
-        //   listeners: {
-        //     click: {
-        //       fn: this.clickBuild,
-        //       scope: me
-        //     }
-        //   }
-        // },
+        {
+          text:'Build',
+          cls: 'icon-settings',
+          action: 'build',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickBuild,
+              scope: me
+            }
+          }
+        },
 
         /**
          * Forecast
          * Supports performing 'Forecast' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
-        // {
-        //   text:'Forecast',
-        //   cls: 'icon-settings',
-        //   action: 'forecast',
-        //   confirm: true,
-        //   multi: true,
-        //   privileges: [],
-        //   listeners: {
-        //     click: {
-        //       fn: this.clickForecast,
-        //       scope: me
-        //     }
-        //   }
-        // },
+        {
+          text:'Forecast',
+          cls: 'icon-settings',
+          action: 'forecast',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickForecast,
+              scope: me
+            }
+          }
+        },
 
         /**
          * Release
          * Supports performing 'Release' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
-        // {
-        //   text:'Release',
-        //   cls: 'icon-settings',
-        //   action: 'release',
-        //   confirm: true,
-        //   multi: true,
-        //   privileges: [],
-        //   listeners: {
-        //     click: {
-        //       fn: this.clickRelease,
-        //       scope: me
-        //     }
-        //   }
-        // },
+        {
+          text:'Release',
+          cls: 'icon-settings',
+          action: 'release',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickRelease,
+              scope: me
+            }
+          }
+        },
 
         /**
          * Revise
          * Supports performing 'Revise' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
-        // {
-        //   text:'Revise',
-        //   cls: 'icon-settings',
-        //   action: 'revise',
-        //   confirm: true,
-        //   multi: true,
-        //   privileges: [],
-        //   listeners: {
-        //     click: {
-        //       fn: this.clickRevise,
-        //       scope: me
-        //     }
-        //   }
-        // },
+        {
+          text:'Revise',
+          cls: 'icon-settings',
+          action: 'revise',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickRevise,
+              scope: me
+            }
+          }
+        },
 
         /**
          * Approve
          * Supports performing 'Approve' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
-        // {
-        //   text:'Approve',
-        //   cls: 'icon-settings',
-        //   action: 'approve',
-        //   confirm: true,
-        //   multi: true,
-        //   privileges: [],
-        //   listeners: {
-        //     click: {
-        //       fn: this.clickApprove,
-        //       scope: me
-        //     }
-        //   }
-        // },
+        {
+          text:'Approve',
+          cls: 'icon-settings',
+          action: 'approve',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickApprove,
+              scope: me
+            }
+          }
+        },
 
         // LEFT ACTIONS (End)
 
