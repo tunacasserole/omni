@@ -89,71 +89,60 @@
   state_machine :state, :initial => :new do
 
   ### STATES ###
-    state :new do
-    end
+    state :new do; end
+
     state :draft do
       validates :plan_year,                         :presence => true
       validates :department_id,                     :presence => true
     end
-    state :forecast do
-      validates :forecast_profile_id,               :presence => true
-    end
+
+    state :forecast do; end
+
     state :projection_1 do
-      validates :projection_approver_user_id,       :presence => true
-      validates :projection_closer_user_id,         :presence => true
+    # Validate that user has "CLOSE_PROJECTION" privilege
     end
+
     state :projection_2 do
+    # Validate that user has "CLOSE_PROJECTION" privilege
     end
+
     state :projection_3 do
+    # Validate that user has "CLOSE_PROJECTION" privilege
     end
+
     state :projection_4 do
+    # Validate that user has "CLOSE_PROJECTION" privilege
       validates :approval_3_date,                   :presence => true
     end
+
     state :complete do
+    # Validate that user has "CLOSE_PROJECTION" privilege
       validates :approval_4_date,                   :presence => true
     end
 
   ### CALLBACKS ###
     after_transition :on => :build, :do => :process_build
 
-    after_transition :on => :forecast, :do => :process_forecast
+    after_transition :on => :release, :do => :process_release
 
   ### EVENTS ###
 # The following actions may run on this model:
     # Action      State Event   Description
     # build           true      Build the Projection Details
     # forecast        false     Calculate projection forecast (changes state only if state was previously draft)
-    # released        true      Builds Projection Locations
-    # close 1         true      Copy projection_1_units to projection_2_units
-    # close 2         true      Copy projection_2_units to projection_3_units
-    # approve 3       false     Set approval_3 date
-    # close 3         true      Copy projection_2_units to projection_3_units
-    # approve 4       false     Set approval_4 date
-    # cloase 4        true      Copy projection_2_units to projection_3_units
+    # release         true      Builds Projection Locations
+    # close           false     Copy projection_"n"_units to projection_"n+1"_units
+    # approve         false     Approve projection_3 or projection_4
 #
 
     event :build do
       transition :new => :draft
     end
-    event :forecast do
-      transition ![:new, :complete] => :forecast
-    end
+
     event :release do
-      transition any => :released
+      transition :forecast => :projection_1
     end
-    event :revise do
-      transition :released => :revised
-    end
-    event :approve do
-      transition :released => :approved
-    end
-    event :close do
-      transition :any => :complete
-    end
-    event :activate do
-      transition any => :active
-      # transition any => :done
-    end
+
   end
   # STATES (End)
 
@@ -183,6 +172,105 @@
     # send_notice
   end
 
+  def process_release
+# Build Projection Location records
+
+  end
+
+  def skus
+    skus = []
+    case
+    when self.sku
+      skus << self.sku
+    when self.style
+      skus = self.style.skus
+    when self.subclass
+      skus = self.subclass.skus
+    when self.classification
+      skus = self.classification.skus
+    when self.department
+      skus = self.department.skus
+    else
+      skus = Omni::Sku.all
+    end
+    Omni::Log.create(:log_message =>  "number of skus #{skus.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
+    skus
+  end
+
+  def locations
+    locations = []
+    case
+    when self.location
+      locations << self.location
+    when self.district
+      locations = self.district.locations
+    when self.region
+      locations = self.region.locations
+    else
+      locations = Omni::Location.all
+    end
+    Omni::Log.create(:log_message =>  "number of locations #{locations.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
+    locations
+  end
+
+
+  def sku_locations
+    sku_locations = []
+    case
+    when self.sku
+      sku_locations = self.skus.sku_locations
+    when self.style
+      sku_locations = self.style.sku_locations
+    when self.subclass
+      sku_locations = self.subclass.sku_locations
+    when self.classification
+      sku_locations = self.classification.sku_locations
+    when self.department
+      sku_locations = self.department.sku_locations
+    else
+      sku_locations = Omni::SkuLocation.all
+    end
+    Omni::Log.create(:log_message =>  "number of sku_locations #{sku_locations.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
+
+    sku_locations
+  end
+
+
+  def destroy_all
+    # Clear Logging
+    Omni::Log.all.each {|log| log.destroy}
+    Omni::Log.create(:logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO", :log_message =>  "PROCESS BUILD at #{Time.now.to_s}")
+
+    # Clear details and locations
+    self.projection_details.each {|det| det.destroy}
+    self.projection_locations.each {|loc| loc.destroy}
+    Omni::Log.create(:log_message =>  "START of BUILD  at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
+  end
+
+  def reset
+    # Clear Logging
+    Omni::Log.all.each {|log| log.destroy}
+    Omni::Log.create(:log_message => "Begin Forecast at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
+
+    # Clear prior forecast numbers
+    Omni::ProjectionDetail.all.each do |pd|
+      pd.forecast_units = 0
+      pd.sale_units_2013 = 0
+      pd.sale_units_2012 = 0
+      pd.sale_units_2011 = 0
+      pd.sale_units_2010 = 0
+      pd.number_of_schools = 0
+      pd.average_contract_year = 0
+      pd.years_active = 0
+      pd.average_sales = 0
+      pd.standard_deviation = 0
+      pd.save
+    end
+  end
+
+  # STATE HANDLERS (End)
+
+  # HELPERS (Start) =====================================================================
 
   def process_forecast
     reset
@@ -229,70 +317,21 @@
       det.save
     end
 
-    self.state = 'forecasted'
+    self.state = 'forecast'
     self.save
     Omni::Log.create(:log_message =>  "End Forecast at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
     # send_notice
   end
 
-  def skus
-    skus = []
-    case
-    when self.sku
-      skus << self.sku
-    when self.style
-      skus = self.style.skus
-    when self.subclass
-      skus = self.subclass.skus
-    when self.classification
-      skus = self.classification.skus
-    when self.department
-      skus = self.department.skus
-    else
-      skus = Omni::Sku.all
-    end
-    Omni::Log.create(:log_message =>  "number of skus #{skus.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-    skus
+  def process_approve
+  # Approve projection 3 or projection 4
+
   end
 
- def locations
-    locations = []
-    case
-    when self.location
-      locations << self.location
-    when self.district
-      locations = self.district.locations
-    when self.region
-      locations = self.region.locations
-    else
-      locations = Omni::Location.all
-    end
-    Omni::Log.create(:log_message =>  "number of locations #{locations.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-    locations
+  def process_close
+  # Cloase projection 1, 2, 3, or 4
+
   end
-
-
- def sku_locations
-    sku_locations = []
-    case
-    when self.sku
-      sku_locations = self.sku.sku_locations
-    when self.style
-      sku_locations = self.style.sku_locations
-    when self.subclass
-      sku_locations = self.subclass.sku_locations
-    when self.classification
-      sku_locations = self.classification.sku_locations
-    when self.department
-      sku_locations = self.department.sku_locations
-    else
-      sku_locations = Omni::SkuLocation.all
-    end
-    Omni::Log.create(:log_message =>  "number of sku_locations #{sku_locations.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-
-    sku_locations
-  end
-
 
   # Sends an email notification to the user when the projection has finished running
   def send_notice
@@ -306,38 +345,7 @@
     message.queue
   end
 
-  def destroy_all
-    # Clear Logging
-    Omni::Log.all.each {|log| log.destroy}
-    Omni::Log.create(:logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO", :log_message =>  "PROCESS BUILD at #{Time.now.to_s}")
+  # HELPERS (End)
 
-    # Clear details and locations
-    self.projection_details.each {|det| det.destroy}
-    self.projection_locations.each {|loc| loc.destroy}
-    Omni::Log.create(:log_message =>  "START of BUILD  at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-  end
+end # class Omni::Projection
 
-  def reset
-    # Clear Logging
-    Omni::Log.all.each {|log| log.destroy}
-    Omni::Log.create(:log_message => "Begin Forecast at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-
-    # Clear prior forecast numbers
-    Omni::ProjectionDetail.all.each do |pd|
-      pd.forecast_units = 0
-      pd.sale_units_2013 = 0
-      pd.sale_units_2012 = 0
-      pd.sale_units_2011 = 0
-      pd.sale_units_2010 = 0
-      pd.number_of_schools = 0
-      pd.average_contract_year = 0
-      pd.years_active = 0
-      pd.average_sales = 0
-      pd.standard_deviation = 0
-      pd.save
-    end
-  end
-
-  # STATE HANDLERS (End)
-
-end #
