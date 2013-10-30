@@ -53,6 +53,26 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
         },
 
         /**
+         * Approve
+         * Supports performing 'Approve' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Approve',
+          cls: 'icon-settings',
+          action: 'approve',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickApprove,
+              scope: me
+            }
+          }
+        },
+
+        /**
          * Release
          * Supports performing 'Release' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
@@ -72,45 +92,29 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
           }
         },
 
+     // SEPARATOR
+        '-',
+
         /**
-         * Revise
-         * Supports performing 'Revise' on the selected items in the explorer grid.
+         * Close
+         * Supports performing 'Close' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
         {
-          text:'Revise',
+          text:'Close',
           cls: 'icon-settings',
-          action: 'revise',
+          action: 'close',
           confirm: true,
           multi: true,
           privileges: [],
           listeners: {
             click: {
-              fn: this.clickRevise,
+              fn: this.clickClose,
               scope: me
             }
           }
         },
 
-        /**
-         * Approve
-         * Supports performing 'Approve' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Approve',
-          cls: 'icon-settings',
-          action: 'approve',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickApprove,
-              scope: me
-            }
-          }
-        },
 
         // LEFT ACTIONS (End)
 
@@ -230,8 +234,8 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
     Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'approve');
   },
 
-  clickRevise: function(btn, e, eOpts){
-    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'revise');
+  clickClose: function(btn, e, eOpts){
+    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'close');
   },
 
   clickDelete: function(btn, e, eOpts){
