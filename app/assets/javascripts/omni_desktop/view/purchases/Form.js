@@ -116,6 +116,17 @@ Ext.define('Omni.view.purchases.Form', {
               // initialValue      : this.record.get('display'), // gets Purchase.display, should be Supplier.display
               itemTpl           : '{display}'
             },
+           { xtype             : 'buildit-Locator',
+              name              : 'supplier_id',
+              fieldLabel        : 'TESTING ONLY - ',
+              allowBlank        : true,
+              store             : Ext.create('Omni.store.Supplier',{pageSize: 20}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'supplier_id',
+              // initialValue      : this.record.get('display'), // gets Purchase.display, should be Supplier.display
+              itemTpl           : '{display}'
+            },
             { xtype             : 'buildit-Locator',
               name              : 'location_id',
               fieldLabel        : this.location_idLabel,
