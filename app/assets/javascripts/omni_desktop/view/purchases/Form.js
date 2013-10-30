@@ -116,17 +116,6 @@ Ext.define('Omni.view.purchases.Form', {
               // initialValue      : this.record.get('display'), // gets Purchase.display, should be Supplier.display
               itemTpl           : '{display}'
             },
-           { xtype             : 'buildit-Locator',
-              name              : 'supplier_id',
-              fieldLabel        : 'TESTING ONLY - ',
-              allowBlank        : true,
-              store             : Ext.create('Omni.store.Supplier',{pageSize: 20}),
-              displayField      : 'display',
-              queryField        : 'display',
-              valueField        : 'supplier_id',
-              // initialValue      : this.record.get('display'), // gets Purchase.display, should be Supplier.display
-              itemTpl           : '{display}'
-            },
             { xtype             : 'buildit-Locator',
               name              : 'location_id',
               fieldLabel        : this.location_idLabel,
@@ -216,11 +205,11 @@ Ext.define('Omni.view.purchases.Form', {
                                         value:  true
                                       }]
                                     }),
-              displayField      : 'user_display',
-              queryField        : 'user_display',
+              displayField      : 'full_name',
+              queryField        : 'full_name',
               valueField        : 'user_id',
-              itemTpl           : '{user_display}',
-              name              : 'purchase_approver_1_location_user_id',
+              itemTpl           : '{full_name}',
+              name              : 'purchase_approver_1_user_id',
               fieldLabel        : this.purchase_approver_1_user_idLabel,
               allowBlank        : true
             }
@@ -355,7 +344,7 @@ Ext.define('Omni.view.purchases.Form', {
               store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
               displayField      : 'display',
               queryField        : 'display',
-              valueField        : 'carrier_supplier_id',
+              valueField        : 'supplier_id',
               itemTpl           : '{display}'
             },
             { xtype             : 'textfield',
@@ -370,7 +359,7 @@ Ext.define('Omni.view.purchases.Form', {
               store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
               displayField      : 'display',
               queryField        : 'display',
-              valueField        : 'ship_thru_supplier_id',
+              valueField        : 'supplier_id',
               itemTpl           : '{display}'
             },
             { xtype             : 'buildit-Locator',
@@ -380,7 +369,7 @@ Ext.define('Omni.view.purchases.Form', {
               store             : Ext.create('Omni.store.Purchase',{pageSize: 20}),
               displayField      : 'display',
               queryField        : 'display',
-              valueField        : 'master_purchase_id',
+              valueField        : 'purchase_id',
               itemTpl           : '{display}'
             },
             { xtype             : 'checkbox',
@@ -451,7 +440,7 @@ Ext.define('Omni.view.purchases.Form', {
               store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
               displayField      : 'display',
               queryField        : 'display',
-              valueField        : 'pay_to_supplier_id',
+              valueField        : 'supplier_id',
               itemTpl           : '{display}'
             },
             { xtype             : 'buildit-Locator',
