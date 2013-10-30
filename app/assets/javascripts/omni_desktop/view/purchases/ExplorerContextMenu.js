@@ -12,27 +12,26 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
 
         // LEFT ACTIONS (Start) =================================================================
 
-       /**
-         * Release
-         * Supports performing 'Release' on the selected items in the explorer grid.
+        /**
+         * Allocate
+         * Supports performing 'Allocate' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
         {
-          text:'Release',
+          text:'Allocate',
           cls: 'icon-settings',
-          action: 'release',
+          action: 'allocate',
           confirm: true,
           multi: true,
           privileges: [],
           listeners: {
             click: {
-              fn: this.clickRelease,
+              fn: this.clickAllocate,
               scope: me
             }
           }
         },
-
-        /**
+  /**
          * Approve
          * Supports performing 'Approve' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
@@ -70,6 +69,28 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
           }
         },
 
+ /**
+         * Release
+         * Supports performing 'Release' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Release',
+          cls: 'icon-settings',
+          action: 'release',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickRelease,
+              scope: me
+            }
+          }
+        },
+
+        // SEPARATOR
+        '-',
 
       /**
          * Cancel
@@ -203,6 +224,10 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
 
   clickRelease: function(btn, e, eOpts){
     Omni.logic.purchases.ExplorerProcessSelectedItems.click(btn, 'release');
+  },
+
+  clickAllocate: function(btn, e, eOpts){
+    Omni.logic.purchases.ExplorerProcessSelectedItems.click(btn, 'allocate');
   },
 
   clickApprove: function(btn, e, eOpts){

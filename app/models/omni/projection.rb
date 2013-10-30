@@ -98,6 +98,8 @@
 
     state :forecast do; end
 
+    state :active do; end
+
     state :projection_1 do
     # Validate that user has "CLOSE_PROJECTION" privilege
     end
@@ -122,7 +124,7 @@
 
   ### CALLBACKS ###
     after_transition :on => :build, :do => :process_build
-
+    after_transition :on => :close, :do => :process_close
     after_transition :on => :release, :do => :process_release
 
   ### EVENTS ###
@@ -139,6 +141,10 @@
       transition :new => :draft
     end
 
+    event :close do
+      transition :any => :complete
+    end
+
     event :release do
       transition :forecast => :projection_1
     end
@@ -147,6 +153,9 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
+  def process_close
+  end
+
   def process_build
   # Create a ProjectionDetail for every active SKU belonging to the Departement in the Projection and every active selling location authorized for the SKU.
     destroy_all # destroy logs and projection details for easy rebuilding.

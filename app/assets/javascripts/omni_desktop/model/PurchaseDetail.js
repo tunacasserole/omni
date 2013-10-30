@@ -30,7 +30,6 @@ Ext.define('Omni.model.PurchaseDetail', {
       { name: 'inventory_cost',              type: 'decimal'  },
       { name: 'extra_cost',                  type: 'decimal'  },
       { name: 'is_destroyed',                type: 'boolean'  },
-
       { name: 'purchase_display',            type: 'string'   },
       { name: 'sku_display',                 type: 'string'   },
       { name: 'sku_supplier_display',        type: 'string'   },

@@ -205,10 +205,10 @@ Ext.define('Omni.view.purchases.Form', {
                                         value:  true
                                       }]
                                     }),
-              displayField      : 'full_name',
-              queryField        : 'full_name',
+              displayField      : 'display',
+              queryField        : 'display',
               valueField        : 'user_id',
-              itemTpl           : '{full_name}',
+              itemTpl           : '{display}',
               name              : 'purchase_approver_1_user_id',
               fieldLabel        : this.purchase_approver_1_user_idLabel,
               allowBlank        : true
@@ -568,10 +568,14 @@ Ext.define('Omni.view.purchases.Form', {
 
   prepareReleaseAction : function(action, eOpts) {
     var currentState = this.record.get('state');
+    if(this.record.phantom == true || currentState != 'draft')
+      action.hide();
   },
 
   prepareApproveAction : function(action, eOpts) {
     var currentState = this.record.get('state');
+    if(this.record.phantom == true || currentState != 'pending_approval')
+      action.hide();
   }
 
   // HANDLERS (End)

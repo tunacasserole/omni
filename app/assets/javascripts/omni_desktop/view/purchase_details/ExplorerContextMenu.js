@@ -37,20 +37,20 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
          * Supports performing 'Receive' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
          */
-        {
-          text:'Receive',
-          cls: 'icon-settings',
-          action: 'receive',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickReceive,
-              scope: me
-            }
-          }
-        },
+        // {
+        //   text:'Receive',
+        //   cls: 'icon-settings',
+        //   action: 'receive',
+        //   confirm: true,
+        //   multi: true,
+        //   privileges: [],
+        //   listeners: {
+        //     click: {
+        //       fn: this.clickReceive,
+        //       scope: me
+        //     }
+        //   }
+        // },
 
        /**
          * Cancel
