@@ -410,7 +410,7 @@ Ext.define('Omni.view.purchases.Form', {
               name              : 'is_update_all_details',
               fieldLabel        : this.is_update_all_detailsLabel,
               allowBlank        : true
-            }
+            },
             { xtype             : 'label',
               text              : 'This will update all Purchase Details to the new Allocation Profile',
               cls               : 'instruction'

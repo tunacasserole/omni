@@ -6,7 +6,7 @@ class Omni::Test::Projection < Omni::Test::Base
   end
 
   def self.test_projection
-    @@model_name = 'Projection'
+    # @@model_name = 'Projection'
     @@model_action = 'Event'
 
     @p=Omni::Projection.where(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1').first
@@ -24,6 +24,7 @@ class Omni::Test::Projection < Omni::Test::Base
       x.save
       x.close
       test_it("it doesn't allow closing from #{s} state",s,x.state)
+
     end
 
   end
