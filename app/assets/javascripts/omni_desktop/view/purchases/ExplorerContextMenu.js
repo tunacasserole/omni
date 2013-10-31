@@ -12,64 +12,7 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
 
         // LEFT ACTIONS (Start) =================================================================
 
-        /**
-         * Allocate
-         * Supports performing 'Allocate' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Allocate',
-          cls: 'icon-settings',
-          action: 'allocate',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickAllocate,
-              scope: me
-            }
-          }
-        },
-  /**
-         * Approve
-         * Supports performing 'Approve' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Approve',
-          cls: 'icon-settings',
-          action: 'approve',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickApprove,
-              scope: me
-            }
-          }
-        },
-
-       /**
-         * Print
-         */
-        {
-          text:'Print',
-          cls: 'icon-settings',
-          action: 'print',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickPrint,
-              scope: me
-            }
-          }
-        },
-
- /**
+      /**
          * Release
          * Supports performing 'Release' on the selected items in the explorer grid.
          * If none are selected then no records are deleted.
@@ -89,8 +32,66 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
           }
         },
 
+       /**
+         * Approve
+         * Supports performing 'Approve' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Approve',
+          cls: 'icon-settings',
+          action: 'approve',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickApprove,
+              scope: me
+            }
+          }
+        },
+
+        /**
+         * Allocate
+         * Supports performing 'Allocate' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Allocate',
+          cls: 'icon-settings',
+          action: 'allocate',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickAllocate,
+              scope: me
+            }
+          }
+        },
+
         // SEPARATOR
         '-',
+
+       /**
+         * Print
+         */
+        {
+          text:'Print',
+          cls: 'icon-settings',
+          action: 'print',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickPrint,
+              scope: me
+            }
+          }
+        },
 
       /**
          * Cancel

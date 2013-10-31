@@ -8,7 +8,7 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
-  user_id: 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX',
+  user_id: '811166D4D50A11E2B45820C9D04AARON',
   first_name: 'Aaron',
   last_name: 'Henderson',
   email_address: 'a',
@@ -40,7 +40,7 @@ Buildit::UserRole.create(
 )
 
 Buildit::UserRole.create(
-  user_id: 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX',
+  user_id: '811166D4D50A11E2B45820C9D04AARON',
   role_id: '323244F0204011EFCFE9040CCEDF842E'
 )
 
@@ -53,7 +53,7 @@ aaron = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D0PARKER').firs
 aaron.password = 'demo'
 aaron.save
 
-aaron = Buildit::User.where(:user_id => 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX').first
+aaron = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04AARON').first
 aaron.password = 'a'
 aaron.save
 

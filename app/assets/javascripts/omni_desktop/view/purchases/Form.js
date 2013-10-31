@@ -197,16 +197,16 @@ Ext.define('Omni.view.purchases.Form', {
           items               :[
 
             { xtype             : 'buildit-Locator',
-              store             : Ext.create('Omni.store.LocationUser',
+              store             : Ext.create('Omni.store.User',
                                     {
-                                      pageSize: 20,
-                                      filters: [{
-                                        property: 'is_purchase_approver_1',
-                                        value:  true
-                                      }]
+                                      pageSize: 20
+                                      // filters: [{
+                                      //   property: 'is_purchase_approver_1',
+                                      //   value:  true
+                                      // }]
                                     }),
-              displayField      : 'display',
-              queryField        : 'display',
+              displayField      : 'full_name',
+              queryField        : 'full_name  ',
               valueField        : 'user_id',
               itemTpl           : '{display}',
               name              : 'purchase_approver_1_user_id',

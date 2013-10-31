@@ -152,6 +152,10 @@
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
+  def allocate
+    process_allocation
+  end
+
   def process_receive
     errors.add('Not Ready','Feature is not yet implemented.')
   end
