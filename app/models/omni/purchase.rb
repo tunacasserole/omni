@@ -281,7 +281,7 @@ class Omni::Purchase < ActiveRecord::Base
   def approval_level
     # Determine current user
 
-    current_user_id = (Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON') # aaron
+    current_user_id = (Buildit::User.current ? Buildit::User.current.user_id : 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX') # aaron
 
     #  Determine whether this is the final approval or if the next approver needs to be notified
     approval_level = 0
@@ -375,7 +375,7 @@ class Omni::Purchase < ActiveRecord::Base
         end
       end
     end
-  end    
+  end
 
   # Sends an email notification to the user when the purchase has finished running
   def send_notice

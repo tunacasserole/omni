@@ -15,7 +15,7 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
-  user_id: 'FB0ACB1AFAC111E2B25720XSYSDOMAIN',  
+  user_id: 'FB0ACB1AFAC111E2B25720XSYSDOMAIN',
   first_name: 'System',
   last_name: 'Administrator',
   email_address: 'sys@domain.com',
@@ -23,7 +23,7 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D04AARON',
+  user_id: 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX',
   first_name: 'Aaron',
   last_name: 'Henderson',
   email_address: 'a',
@@ -155,7 +155,7 @@ x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D0PARKER').first
 x.password = 'demo'
 x.save
 
-x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04AARON').first
+x = Buildit::User.where(:user_id => 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX').first
 x.password = 'a'
 x.save
 
@@ -245,24 +245,24 @@ Buildit::ApplicationRole.create(
 # SUPER ADMIN ROLE GETS ALL 3 APPLICATIONS
 Buildit::ApplicationRole.create(
   application_role_id:  '62BF1790C19511E289BAADMINCONSOLE',
-  role_id:              '323244F0204011EFCFE904SUPERADMIN',  
+  role_id:              '323244F0204011EFCFE904SUPERADMIN',
   application_id:       '6900AE7AC18B11E289BA20COMNIADMIN',
   is_enabled:           1
-  ) 
+  )
 
 Buildit::ApplicationRole.create(
   application_role_id:  '62BF1790C19511E289BA20ADMINADMIN',
-  role_id:              '323244F0204011EFCFE904SUPERADMIN',  
+  role_id:              '323244F0204011EFCFE904SUPERADMIN',
   application_id:       '6900AE7AC18B11E289BA20COMNIADMIN',
   is_enabled:           1
-  ) 
+  )
 
 Buildit::ApplicationRole.create(
   application_role_id:  '62BF1790C19511E289BA20COMNIADMIN',
   role_id:              '323244F0204011EFCFE904SUPERADMIN',
-  application_id:       'AC41CFBEFAC211E2BPLATFORMCONSOLE',  
+  application_id:       'AC41CFBEFAC211E2BPLATFORMCONSOLE',
   is_enabled:           1
-  ) 
+  )
 
 
 Buildit::Role.create(

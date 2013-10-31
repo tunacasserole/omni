@@ -7,8 +7,7 @@ class Omni::Test::Base
     Omni::Test::Purchase.go
     Omni::Test::Projection.go
     create_purchase_data
-    create_bts_data
-    create_projection_data
+    # create_bts_data
     reindex_data
     output_results
   end
@@ -32,6 +31,8 @@ class Omni::Test::Base
   end
 
   def self.constants
+    @@model_name = ''
+    @@model_action = ''
     @@test_number = 0
     @@passed_tests = 0
     @@results = ["\n**************************************** RUN RESULTS *********************************************************************"]
@@ -75,20 +76,28 @@ class Omni::Test::Base
     Omni::SkuLocation.create(:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC4', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'5247A038AC3E11E2947800FF58D32228',:is_authorized => true)
     Omni::SkuLocation.create(:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC5', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'526058B2AC3E11E2947800FF58D32228',:is_authorized => false)
 
-    Omni::LocationUser.where(:user_id=>'811166D4D50A11E2B45820C9D04AARON').all.each {|x| x.delete}
-    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC1', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
-    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC2', :location_id=>'51892F68AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
-    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC3', :location_id=>'5247A038AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
-    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC4', :location_id=>'526058B2AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
+    Omni::LocationUser.where(:user_id=>'TESTUSERAARONXXXXXXXXXXXXXXXXXXX').all.each {|x| x.delete}
+    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC1', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :user_id=>'TESTUSERAARONXXXXXXXXXXXXXXXXXXX' )
+    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC2', :location_id=>'51892F68AC3E11E2947800FF58D32228', :user_id=>'TESTUSERAARONXXXXXXXXXXXXXXXXXXX' )
+    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC3', :location_id=>'5247A038AC3E11E2947800FF58D32228', :user_id=>'TESTUSERAARONXXXXXXXXXXXXXXXXXXX' )
+    Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC4', :location_id=>'526058B2AC3E11E2947800FF58D32228', :user_id=>'TESTUSERAARONXXXXXXXXXXXXXXXXXXX' )
+
+    Omni::Projection.all.each {|x| x.delete}
+    Omni::Projection.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :state => 'active', :department_id => '5EA20FF2FE0611E280D020C9D047DD15')
+
+    Omni::ProjectionDetail.all.each {|x| x.delete}
+    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50)
+    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET2', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51892F68AC3E11E2947800FF58D32228', :projection_1_units => 40, :projection_2_units => 40, :projection_3_units => 40, :projection_4_units => 40, :last_forecast_units => 40)
+    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET3', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'5247A038AC3E11E2947800FF58D32228', :projection_1_units => 10, :projection_2_units => 10, :projection_3_units => 10, :projection_4_units => 10, :last_forecast_units => 10)
 
     Omni::PurchaseDetail.where(:purchase_detail_id=>['ABABDAAA35E011E3APURCHASEDETAIL1','ABABDAAA35E011E3APURCHASEDETAIL2']).all.each {|x| x.delete}
     Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1', :allocation_profile_id => '913BB680231211XXXXBTSPERCENTSTOR', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered=>100, :order_pack_size=>1, :supplier_cost=>25, :order_cost_units=>1)
     # Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL2', :allocation_profile_id => '913BB680231211XXXXBTSPERCENTSTOR', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:sku_id => '285C928C0F3611E3BB7120C9D047DD15', :units_ordered=>100, :order_pack_size=>10, :supplier_cost=>24, :order_cost_units=>12)
 
     Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').all.each {|x| x.delete}
-    Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC531XXXXXXXXXXOLIVANDER', :location_id => '51579764AC3E11E2947800FF58D32228',  :allocation_profile_id => '913BB680231211XXXXBTSPERCENTSTOR', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON')
+    Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC531XXXXXXXXXXOLIVANDER', :location_id => '51579764AC3E11E2947800FF58D32228',  :allocation_profile_id => '913BB680231211XXXXBTSPERCENTSTOR', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX')
 
-    create_projection_data
+
     create_bts_data
   end
 
@@ -114,28 +123,6 @@ class Omni::Test::Base
     Omni::BtsDetail.create(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS', :bts_detail_id => '6D8E304E323C11E38DC320C9D047DBD1',:sku_id => '285C928C0F3611E3BB7120C9D047DD15',:style_id => 'D4EB81EE0EC711E3BFA320C9D047DD15',:style_display=>'0010PKGRL-BU-391-BU391b1',:location_id => '51713A3EAC3E11E2947800FF58D32228',:need => 50)
     Omni::BtsDetail.create(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS', :bts_detail_id => '6D8E304E323C11E38DC320C9D047DBD2',:sku_id => '285C928C0F3611E3BB7120C9D047DD15',:style_id => 'D4EB81EE0EC711E3BFA320C9D047DD15',:style_display=>'0010PKGRL-BU-391-BU391b1',:location_id => '51892F68AC3E11E2947800FF58D32228',:need => 40)
     Omni::BtsDetail.create(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS', :bts_detail_id => '6D8E304E323C11E38DC320C9D047DBD3',:sku_id => '285C928C0F3611E3BB7120C9D047DD15',:style_id => 'D4EB81EE0EC711E3BFA320C9D047DD15',:style_display=>'0010PKGRL-BU-391-BU391b1',:location_id => '5247A038AC3E11E2947800FF58D32228',:need => 10)
-  end
-
-  def self.create_projection_data
-    Buildit::Privilege.where(privilege_id: ['70694A7840C511EXPROJECTIONCLOSER', 'XXXXXPRIVILEGEPROJECTIONAPPROVER']).all.each {|x|x.delete}
-    Buildit::Privilege.create(privilege_id: '70694A7840C511EXPROJECTIONCLOSER', privilege_code: 'PROJECTION_CLOSER', module_code: 'OMNI_PROJECTION', description: 'PROJECTION_CLOSER', is_enabled: true, model_name: 'Omni::Projection', op_custom: true)
-    Buildit::Privilege.create(privilege_id: 'XXXXXPRIVILEGEPROJECTIONAPPROVER', privilege_code: 'PROJECTION_APPROVER', module_code: 'OMNI_PROJECTION', description: 'PROJECTION_APPROVER', is_enabled: true, model_name: 'Omni::Projection', op_custom: true)
-
-    Buildit::Permission.where(permission_id: ['525C4310191911E3PROJECTIONCLOSER','XPERMISSIONXXXPROJECTIONAPPROVER']).all.each {|x|x.delete}
-    Buildit::Permission.create(permission_id: '525C4310191911E3PROJECTIONCLOSER', role_id: '323244F0204011EFCFE904SUPERADMIN', privilege_id: '70694A7840C511EXPROJECTIONCLOSER', is_enabled: true)
-    Buildit::Permission.create(permission_id: 'XPERMISSIONXXXPROJECTIONAPPROVER', role_id: '323244F0204011EFCFE904SUPERADMIN', privilege_id: 'XXXXXPRIVILEGEPROJECTIONAPPROVER', is_enabled: true)
-
-    Omni::Projection.all.each {|x| x.delete}
-    Omni::Projection.create(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1', :state => 'active', :department_id => '5EA20FF2FE0611E280D020C9D047DD15')
-
-    Omni::ProjectionDetail.all.each {|x| x.delete}
-    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50)
-    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET2', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51892F68AC3E11E2947800FF58D32228', :projection_1_units => 40, :projection_2_units => 40, :projection_3_units => 40, :projection_4_units => 40, :last_forecast_units => 40)
-    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C193611E3A2B2D20C9D04PROJ1', :projection_detail_id => '4D594A1C193611E3A22D20CXXPRODET3', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'5247A038AC3E11E2947800FF58D32228', :projection_1_units => 10, :projection_2_units => 10, :projection_3_units => 10, :projection_4_units => 10, :last_forecast_units => 10)
-  end
-
-  def self.projection_scenarios
-
   end
 
   def self.allocation_scenarios
@@ -170,7 +157,7 @@ class Omni::Test::Base
   end
 
   def self.approval_scenarios
-    user_1 = '811166D4D50A11E2B45820C9D04AARON'
+    user_1 = 'TESTUSERAARONXXXXXXXXXXXXXXXXXXX'
     user_2 = '811166D4D50A11E2B45820C9D04ATTTT'
     user_3 = 'FB0ACB1AFAC111E2B25720SYSBUILDIT'
     now = Date.today
@@ -190,12 +177,6 @@ class Omni::Test::Base
     x << {:model_name=>'Purchase', :model_action=>'Approval', :scenario_description=>'Approval 1 succesfull',        :approver_1=>user_1, :approver_2=>user_1, :approver_3=>user_3, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,     :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
     x << {:model_name=>'Projection', :model_action=>'Approval', :scenario_description=>'Approval 1 succesfull',        :approver_1=>user_1, :approver_2=>user_1, :approver_3=>user_1, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
     x << {:model_name=>'Projection', :model_action=>'Approval', :scenario_description=>'Approval 2 succesfull',        :approver_1=>user_2, :approver_2=>user_1, :approver_3=>user_1, :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil,  :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
-    x
-  end
-
-  def self.projection_scenarios
-    x=[]
-    x << {:model_name=>'Projection', :model_action=>'Close', :scenario_description=>'Approval not authorized',        :approver_1=>user_2, :approver_2=>nil, :approver_3=>nil,       :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
     x
   end
 
