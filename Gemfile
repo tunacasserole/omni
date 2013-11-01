@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-#source 'http://username:password@gems.buildit.io'
+source 'http://tunacasserole:horizon@gems.buildit.io'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
