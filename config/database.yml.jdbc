@@ -1,0 +1,29 @@
+development:
+  adapter: jdbcmysql
+  host: localhost
+  username: root
+  database: omni_development
+  password:
+  encoding: utf8
+  wait_timeout: 5
+  pool: 5
+
+production:
+  adapter: jdbcmysql
+  host: localhost
+  username: root
+  database: omni_production
+  password:
+  encoding: utf8
+  wait_timeout: 5
+  pool: 5
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: sbna_test
+  pool: 5
+  username: root
+  password:
+

@@ -1,58 +1,43 @@
 source 'https://rubygems.org'
-source 'http://tunacasserole:horizon@gems.buildit.io'
+#source 'http://username:password@gems.buildit.io'
 
-gem 'rails', '3.2.14'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.0'
 
-# platforms :jruby do
+# Use mysql as the database for Active Record
+gem 'mysql2'
 
-#   if ENV['RDBMS'] == 'MSSQL'
-#     gem 'activerecord-jdbcmssql-adapter'
-# gem 'jruby-openssl', :require => false
-#     # gem 'jdbc-jtds'
-#     # gem 'jdbc-jtds', '~> 1.2.8'
-#   else
-#     gem 'activerecord-jdbcmysql-adapter'
-#   end
+# Use jdbcmysql as the database for Active Record
+#gem 'activerecord-jdbcmysql-adapter'
 
-#   gem 'puma'
-# end
-platforms :jruby do
-  gem 'activerecord-jdbcmssql-adapter'
-  gem 'activerecord-jdbcmysql-adapter'
-  gem 'jdbc-jtds'
-  gem 'puma'
-#   gem 'warbler'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
 end
 
-platforms :ruby do
-  gem 'mysql2', '0.3.13'
-  gem 'ruby-net-ldap'
-end
+gem "buildit"
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
+gem "buildit_comm"
 
-group :development, :test do
-  # gem 'pry'
-  # gem 'pry-rails'
-  # gem 'sunspot_solr'
-  # gem 'sunspot_rails'
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
-  # gem 'capybara'
-  # gem 'guard-rspec'
-end
-
-# gem 'jquery-rails'
-
-gem "buildit"#, '= 0.8.87'
-gem "buildit_sockets"#,      :path => "vendor/gems/buildit_sockets"
-gem "buildit_comm"#,         :path => "vendor/gems/buildit_comm"
-
-# gem 'whenever'
-# gem 'roo'
-# gem 'prawn'
+gem "puma"
