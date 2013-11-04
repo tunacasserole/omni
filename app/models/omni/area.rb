@@ -10,9 +10,8 @@ class Omni::Area < ActiveRecord::Base
   self.primary_key  = :area_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext  
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -21,29 +20,29 @@ class Omni::Area < ActiveRecord::Base
   validates    :location_id,                     :presence    => true
   validates    :area_nbr,                        :presence    => true
   validates    :short_name,                      :presence    => true
-  validates    :area_nbr,                        :uniqueness  => true,                         :allow_nil => false 
+  validates    :area_nbr,                        :uniqueness  => true,                         :allow_nil => false
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :area_id,                          :override  =>  false,        :with  => :guid              
+  default      :area_id,                          :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda {|m| "#{m.location_display} - Area #{m.area_nbr} - #{m.short_name}"}
   default      :area_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"AREA_NBR"
-  default      :is_receiving,                     :override  =>  false,        :to    => false              
-  default      :is_picking,                       :override  =>  false,        :to    => false              
-  default      :is_reserve,                       :override  =>  false,        :to    => false              
-  default      :is_putaway,                       :override  =>  false,        :to    => false              
-  default      :is_supplier_return,               :override  =>  false,        :to    => false              
-  default      :is_processing,                    :override  =>  false,        :to    => false              
-  default      :is_shipping,                      :override  =>  false,        :to    => false              
-  default      :is_put_location,                  :override  =>  false,        :to    => false              
-  default      :is_special_handling,              :override  =>  false,        :to    => false              
-  default      :is_quality_control,               :override  =>  false,        :to    => false              
-  default      :is_quick_case,                    :override  =>  false,        :to    => false              
-  default      :is_many_sku_per_bin,              :override  =>  false,        :to    => false              
-  default      :default_cube_capacity,            :override  =>  false,        :to    => 0                  
-  default      :is_request_cube_calculation,      :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_receiving,                     :override  =>  false,        :to    => false
+  default      :is_picking,                       :override  =>  false,        :to    => false
+  default      :is_reserve,                       :override  =>  false,        :to    => false
+  default      :is_putaway,                       :override  =>  false,        :to    => false
+  default      :is_supplier_return,               :override  =>  false,        :to    => false
+  default      :is_processing,                    :override  =>  false,        :to    => false
+  default      :is_shipping,                      :override  =>  false,        :to    => false
+  default      :is_put_location,                  :override  =>  false,        :to    => false
+  default      :is_special_handling,              :override  =>  false,        :to    => false
+  default      :is_quality_control,               :override  =>  false,        :to    => false
+  default      :is_quick_case,                    :override  =>  false,        :to    => false
+  default      :is_many_sku_per_bin,              :override  =>  false,        :to    => false
+  default      :default_cube_capacity,            :override  =>  false,        :to    => 0
+  default      :is_request_cube_calculation,      :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -91,10 +90,10 @@ class Omni::Area < ActiveRecord::Base
     string   :location_display do location.display if location end
     string   :area_nbr
     string   :location_id
- 
+
     text     :location_display_fulltext, :using => :location_display
     text     :area_nbr_fulltext, :using => :area_nbr
-  end 
+  end
   # INDEXING (End)
 
 

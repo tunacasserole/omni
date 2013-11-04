@@ -4,6 +4,7 @@ Buildit::Sequence.create(:sequence_code => 'ADJUSTMENT_NBR', :padding => 3, :val
 Buildit::Sequence.create(:sequence_code => 'ACTIVITY_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'AREA_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'ALLOCATION_NBR', :padding => 3, :value => 1000)
+Buildit::Sequence.create(:sequence_code => 'ALLOCATION_DETAIL_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'BANK_ROUTING_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'BIN_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'BOM_NBR', :padding => 3, :value => 1000)

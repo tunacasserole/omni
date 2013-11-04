@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      omni/allocation:  'Model'
+    attributes:
+      omni/allocation:
+        allocation_id:              'Allocation Detail'
+        allocatable_id:              'Allocatable Id'
+        allocatable_type:              'Allocatable Type'
+        allocation_profile_id:   'Allocation Profile'
+        location_id:                 'Location'
+        sku_id:                        'Sku'
+        allocation_nbr:            'Allocation Detail Nbr'
+        state:                          'State'
+        display:                       'Display'
+        description:                 'Description'
+        units_to_allocate:        'Units to Allocate'
+        is_destroyed:               'Is Destroyed'
+

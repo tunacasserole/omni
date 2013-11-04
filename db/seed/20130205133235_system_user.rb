@@ -34,29 +34,29 @@ Buildit::User.create(
   api_token: 'L0qxHS_RoW'
 )
 
-Buildit::UserRole.create(
-  user_id: '811166D4D50A11E2B45820C9D0PARKER',
-  role_id: '323244F0204011EFCFE9040CCEDF842E'
-)
+# Buildit::UserRole.create(
+#   user_id: '811166D4D50A11E2B45820C9D0PARKER',
+#   role_id: '323244F0204011EFCFE9040CCEDF842E'
+# )
 
-Buildit::UserRole.create(
-  user_id: '811166D4D50A11E2B45820C9D04AARON',
-  role_id: '323244F0204011EFCFE9040CCEDF842E'
-)
+# Buildit::UserRole.create(
+#   user_id: '811166D4D50A11E2B45820C9D04AARON',
+#   role_id: '323244F0204011EFCFE9040CCEDF842E'
+# )
 
-Buildit::UserRole.create(
-  user_id: '811166D4D50A11E2B45820CDEMOAARON',
-  role_id: '323244F0204011EFCFE9040CCEDF842E'
-)
+# Buildit::UserRole.create(
+#   user_id: '811166D4D50A11E2B45820CDEMOAARON',
+#   role_id: '323244F0204011EFCFE9040CCEDF842E'
+# )
 
-aaron = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D0PARKER').first
-aaron.password = 'demo'
-aaron.save
+x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D0PARKER').first
+x.password = 'demo'
+x.save
 
-aaron = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04AARON').first
-aaron.password = 'a'
-aaron.save
+x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04AARON').first
+x.password = 'a'
+x.save
 
-aaron = Buildit::User.where(:user_id => '811166D4D50A11E2B45820CDEMOAARON').first
-aaron.password = 'welcome'
-aaron.save
+x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820CDEMOAARON').first
+x.password = 'welcome'
+x.save
