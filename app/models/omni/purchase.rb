@@ -315,7 +315,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def validate_release
-    puts "total_order_cost is #{total_order_cost.to_s}"
+    # puts "total_order_cost is #{total_order_cost.to_s}"
     if self.total_order_cost.to_i < Omni::SystemOption.first.purchase_approval_1_maximum_amount
         errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
     else

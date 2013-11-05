@@ -24,11 +24,11 @@ class Omni::Test::Purchase < Omni::Test::Base
     test_it('Create a purchase with 1 detail', 1, x.purchase_details.count)
 
     # RELEASE SHOULD SET STATE TO PENDING APPROVAL
-    puts x.state
+    # puts x.state
     x.release
-    puts x.errors.inspect
+    # puts x.errors.inspect
     x=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
-    puts x.state
+    # puts x.state
     test_it('Release a purchase','pending_approval',x.state)
 
     # approval scenarios 1 - 5 approve not allowed for these state
