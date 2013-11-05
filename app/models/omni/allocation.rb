@@ -1,38 +1,27 @@
 class Omni::Allocation < ActiveRecord::Base
 
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   # self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :allocations
   self.primary_key                = :allocation_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
 
-
   # VALIDATIONS (Start) =================================================================
   validates :allocation_id,                        :presence      => true
+  validates :display,                                 :uniqueness    => true
   # VALIDATIONS (End)
-
 
   # DEFAULTS (Start) ====================================================================
   default :allocation_id,                          :with => :guid
   default :allocation_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"ALLOCATION_NBR"
+  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.state}"}
+  default :units_to_allocate,                     :override  =>  true,        :to    => 0
   default :is_destroyed,                           :override  =>  false,        :to    => false
-  default :units_to_allocate,                     :override  =>  false,        :to    => 0
   # DEFAULTS (End)
-
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :allocation_details,     :class_name => 'Omni::AllocationDetail',    :foreign_key => 'allocation_id'
@@ -211,6 +200,7 @@ class Omni::Allocation < ActiveRecord::Base
   end
 
   def store_demand(allocation_formula, sku_location)
+    projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4','complete']}).first
     case allocation_formula
 
       when 'BTS_NEED'
@@ -218,16 +208,12 @@ class Omni::Allocation < ActiveRecord::Base
         units_needed =  bts_detail ? bts_detail.need : 0
 
       when 'LAST_FORECAST_UNITS'
-        projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4']}).first
         units_needed =  projection_detail ? projection_detail.last_forecast_units : 0
 
       when /PROJECTION_\d_UNITS/
-        projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4']}).first
         units_needed = projection_detail.send(allocation_formula.downcase) ? projection_detail.send(allocation_formula.downcase) : 0
 
       when 'APPROVED_PROJECTION'
-        # TO DO - Use table to determine which field to use
-        projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4']}).first
         case projection_detail.projection.state
           when 'forecast', 'projection_1_units'
             units_needed = projection_detail.state == 'draft' ? projection_detail.send("last_forecast_units") : projection_detail.send("projection_1_units")
@@ -237,11 +223,10 @@ class Omni::Allocation < ActiveRecord::Base
             phase -= 1 if projection_detail.state == 'draft'
             units_needed = projection_detail.send("projection_#{phase_nbr-1}_units")
 
-        end
+          when 'complete'
+            units_needed = projection_detail.send("projection_4_units")
 
-      when 'ALLOCATED_UNITS'
-        # TO DO
-        units_needed = 0
+        end
 
       when 'PURCHASE_ALLOCATION'
         # TO DO
@@ -252,7 +237,7 @@ class Omni::Allocation < ActiveRecord::Base
 
     end
     units_needed -= (sku_location.inventory.on_hand_units + sku_location.inventory.supplier_on_order_units) if ['LAST_FORECAST_UNITS','APPROVED_PROJECTION',/PROJECTION_\d_UNITS/].include? allocation_formula and sku_location.inventory and units_needed > 0
-    units_needed
+    # units_needed
   end
   # HELPERS (End)
 
