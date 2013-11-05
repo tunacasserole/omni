@@ -121,7 +121,7 @@
     end
 
   ### CALLBACKS ###
-    after_transition :on => :build, :do => :process_build
+    # after_transition :on => :build, :do => :process_build
     after_transition :on => :release, :do => :process_release
     # after_transition :on => :close, :do => :process_close
 
@@ -135,9 +135,9 @@
     # approve         false     Approve projection_3 or projection_4
 #
 
-    event :build do
-      transition :new => :draft
-    end
+    # event :build do
+    #   transition :new => :draft
+    # end
 
     # event :close do
       # transition :any => :complete
@@ -151,6 +151,92 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
+
+  # STATE HANDLERS (End)
+
+  # HELPERS (Start) =====================================================================
+  def forecast
+    return false if ['new','complete'].include? self.state
+    self.projection_details.each do |pd|
+
+      if pd.last_forecast_date
+      # Calculate first_forecast_units using formula from forecast_profile;
+        formula = self.forecast_profile.forecast_formula
+        first_forecast_units = (formula.sales_py1_weight * pd.inventory.py1_sales)+(formula.sales_py2_weight * pd.inventory.py2_sales)+(formula.sales_py3_weight * pd.inventory.py3_sales)
+      # Copy first_forecast_units to last_forecast_units & projection_1_units;
+        pd.last_forecast_units = pd.first_forecast_units
+        pd.projection_1_units = pd.first_forecast_units
+      # Update last_forecast_date to today;
+        pd.last_forecast_date = Date.today
+      else
+      # Calculate first_forecast_units using formula from forecast_profile;
+      # Copy first_forecast_units to last_forecast_units & projection_1_units;
+      # Update last_forecast_date to today;
+      end
+    end
+
+
+    # self.projection_details.each do |det|
+    #   Omni::PeriodResult.where(:sku_id => detail.sku_id, :location_id => detail.location_id).where("net_sale_units > 0").each do |pr|
+    #     case
+    #     when pr.period.year_number == '2010'
+    #       det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2010_weight.to_f
+    #       det.sale_units_2010 += pr.net_sale_units
+    #     when pr.period.year_number == '2011'
+    #       det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2011_weight.to_f
+    #       det.sale_units_2011 += pr.net_sale_units
+    #     when pr.period.year_number == '2012'
+    #       det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2012_weight.to_f
+    #       det.sale_units_2012 += pr.net_sale_units
+    #     when pr.period.year_number == '2013'
+    #       det.sale_units_2013 += pr.net_sale_units
+    #     else
+    #       # data is too old to be factored into the forecast
+    #     end
+    #     det.save
+    #   end
+    # end
+
+    # self.projection_details.each do |det|
+    #   if det.sale_units_2012 and det.sale_units_2011 and det.sale_units_2010
+    #     average_sales = (det.sale_units_2012 + det.sale_units_2011 + det.sale_units_2010) / 3
+    #     total_deviation = ((average_sales - det.sale_units_2012) ** 2) + ((average_sales - det.sale_units_2011) ** 2) + ((average_sales - det.sale_units_2010) ** 2)
+    #   end
+
+    #   if det.sale_units_2012 and det.sale_units_2011 and !det.sale_units_2010
+    #     average_sales = (det.sale_units_2012 + det.sale_units_2011) / 2
+    #     total_deviation = ((average_sales - det.sale_units_2012) ** 2) + ((average_sales - det.sale_units_2011) ** 2)
+    #   end
+
+    #   if det.sale_units_2012 and !det.sale_units_2011 and !det.sale_units_2010
+    #     average_sales = det.sale_units_2012 / 1
+    #     total_deviation = ((average_sales - det.sale_units_2012) ** 2)
+    #   end
+
+    #   det.average_sales = average_sales
+    #   det.standard_deviation = Math.sqrt(total_deviation)
+    #   det.forecast_units = det.forecast_units * 1.03 if (det.sale_units_2010 < det.sale_units_2011) and (det.sale_units_2011 < det.sale_units_2012)
+    #   det.save
+    # end
+
+    self.state = 'forecast' if self.state =='draft'
+    self.save
+  end
+
+  def process_approve
+  # Approve projection 3 or projection 4
+
+  end
+
+  def build
+    # Insert ProjectionDetail row for every authorized SKU/Location combination (SkuLocation.is_authorized = true)
+    # Create a ProjectionDetail for every active SKU belonging to the Departement in the Projection and every active selling location authorized for the SKU.
+    sku_locations = Omni::SkuLocation.all
+    sku_locations.where(is_authorized: true).each {|sl| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: sl.sku_id, location_id: sl.location_id, forecast_profile_id: self.forecast_profile_id)}
+    self.state = 'built'
+    self.save
+  end
+
   def process_close
      # current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
     closer = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
@@ -180,31 +266,6 @@
     return true
   end
 
-  def process_build
-  # Create a ProjectionDetail for every active SKU belonging to the Departement in the Projection and every active selling location authorized for the SKU.
-    destroy_all # destroy logs and projection details for easy rebuilding.
-    locations = self.locations
-    locations.each do |l|
-      Omni::ProjectionLocation.create(:projection_id => self.projection_id, :location_id => l.location_id) unless Omni::ProjectionLocation.where(:projection_id => self.projection_id, :location_id => l.location_id).first
-    end
-
-    sku_locations = self.sku_locations
-    sku_locations.select! {|sl| locations.include? sl.location}
-    sku_locations.select! {|sl| self.color == sl.sku.color} if self.color
-
-    sku_locations.each do |sl|
-      if Omni::PeriodResult.where(:sku_id => sl.sku_id, :location_id => sl.location_id).where("net_sale_units > 0").first
-        Omni::ProjectionDetail.create(:projection_id => self.projection_id, :sku_id => sl.sku_id, :location_id => sl.location_id, :forecast_units => 0, :forecast_profile_id => self.forecast_profile_id)
-      end
-    end
-
-    Omni::Log.create(:log_message =>  "Projection Detail rows created #{Omni::ProjectionDetail.where(:projection_id => self.projection_id).count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-    self.state = 'built'
-    self.save
-    Omni::Log.create(:log_message =>  "END of BUILD  at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-    # send_notice
-  end
-
   def process_release
 # Build Projection Location records
 
@@ -226,141 +287,8 @@
     else
       skus = Omni::Sku.all
     end
-    Omni::Log.create(:log_message =>  "number of skus #{skus.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
     skus
   end
-
-  def locations
-    locations = []
-    case
-    when self.location
-      locations << self.location
-    when self.district
-      locations = self.district.locations
-    when self.region
-      locations = self.region.locations
-    else
-      locations = Omni::Location.all
-    end
-    Omni::Log.create(:log_message =>  "number of locations #{locations.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-    locations
-  end
-
-
-  def sku_locations
-    sku_locations = []
-    case
-    when self.sku
-      sku_locations = self.skus.sku_locations
-    when self.style
-      sku_locations = self.style.sku_locations
-    when self.subclass
-      sku_locations = self.subclass.sku_locations
-    when self.classification
-      sku_locations = self.classification.sku_locations
-    when self.department
-      sku_locations = self.department.sku_locations
-    else
-      sku_locations = Omni::SkuLocation.all
-    end
-    Omni::Log.create(:log_message =>  "number of sku_locations #{sku_locations.count}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-
-    sku_locations
-  end
-
-
-  def destroy_all
-    # Clear Logging
-    Omni::Log.all.each {|log| log.destroy}
-    Omni::Log.create(:logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO", :log_message =>  "PROCESS BUILD at #{Time.now.to_s}")
-
-    # Clear details and locations
-    self.projection_details.each {|det| det.destroy}
-    self.projection_locations.each {|loc| loc.destroy}
-    Omni::Log.create(:log_message =>  "START of BUILD  at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-  end
-
-  def reset
-    # Clear Logging
-    Omni::Log.all.each {|log| log.destroy}
-    Omni::Log.create(:log_message => "Begin Forecast at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-
-    # Clear prior forecast numbers
-    Omni::ProjectionDetail.all.each do |pd|
-      pd.forecast_units = 0
-      pd.sale_units_2013 = 0
-      pd.sale_units_2012 = 0
-      pd.sale_units_2011 = 0
-      pd.sale_units_2010 = 0
-      pd.number_of_schools = 0
-      pd.average_contract_year = 0
-      pd.years_active = 0
-      pd.average_sales = 0
-      pd.standard_deviation = 0
-      pd.save
-    end
-  end
-
-  # STATE HANDLERS (End)
-
-  # HELPERS (Start) =====================================================================
-
-  def process_forecast
-    reset
-    self.projection_details.each do |det|
-      Omni::PeriodResult.where(:sku_id => detail.sku_id, :location_id => detail.location_id).where("net_sale_units > 0").each do |pr|
-        case
-        when pr.period.year_number == '2010'
-          det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2010_weight.to_f
-          det.sale_units_2010 += pr.net_sale_units
-        when pr.period.year_number == '2011'
-          det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2011_weight.to_f
-          det.sale_units_2011 += pr.net_sale_units
-        when pr.period.year_number == '2012'
-          det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2012_weight.to_f
-          det.sale_units_2012 += pr.net_sale_units
-        when pr.period.year_number == '2013'
-          det.sale_units_2013 += pr.net_sale_units
-        else
-          # data is too old to be factored into the forecast
-        end
-        det.save
-      end
-    end
-
-    self.projection_details.each do |det|
-      if det.sale_units_2012 and det.sale_units_2011 and det.sale_units_2010
-        average_sales = (det.sale_units_2012 + det.sale_units_2011 + det.sale_units_2010) / 3
-        total_deviation = ((average_sales - det.sale_units_2012) ** 2) + ((average_sales - det.sale_units_2011) ** 2) + ((average_sales - det.sale_units_2010) ** 2)
-      end
-
-      if det.sale_units_2012 and det.sale_units_2011 and !det.sale_units_2010
-        average_sales = (det.sale_units_2012 + det.sale_units_2011) / 2
-        total_deviation = ((average_sales - det.sale_units_2012) ** 2) + ((average_sales - det.sale_units_2011) ** 2)
-      end
-
-      if det.sale_units_2012 and !det.sale_units_2011 and !det.sale_units_2010
-        average_sales = det.sale_units_2012 / 1
-        total_deviation = ((average_sales - det.sale_units_2012) ** 2)
-      end
-
-      det.average_sales = average_sales
-      det.standard_deviation = Math.sqrt(total_deviation)
-      det.forecast_units = det.forecast_units * 1.03 if (det.sale_units_2010 < det.sale_units_2011) and (det.sale_units_2011 < det.sale_units_2012)
-      det.save
-    end
-
-    self.state = 'forecast'
-    self.save
-    Omni::Log.create(:log_message =>  "End Forecast at #{Time.now.to_s}", :logable_type => 'Omni::Projection', :logable_id => self.projection_id, :log_type => "INFO")
-    # send_notice
-  end
-
-  def process_approve
-  # Approve projection 3 or projection 4
-
-  end
-
   # Sends an email notification to the user when the projection has finished running
   def send_notice
     puts "********** notice"

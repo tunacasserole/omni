@@ -1,36 +1,23 @@
 class Omni::Department < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :departments
   self.primary_key  = :department_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :uniqueness    => true
   validates    :company_id,                      :presence      => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  default      :department_id,                    :override  =>  false,        :with  => :guid              
+  default      :department_id,                    :override  =>  false,        :with  => :guid
   default      :department_nbr,                   :override  =>  false,        :with  => :sequence,         :named=>"DEPARTMENT_NBR"
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -40,15 +27,12 @@ class Omni::Department < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :buyer_user,                      :class_name => 'Buildit::User',                 :foreign_key => 'buyer_user_id'
   belongs_to   :company,                         :class_name => 'Omni::Company',                 :foreign_key => 'company_id'
   has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
   has_many     :classifications,                 :class_name => 'Omni::Classification',          :foreign_key => 'department_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
@@ -84,12 +68,12 @@ class Omni::Department < ActiveRecord::Base
     string   :department_nbr
     string   :buyer_user_display do buyer_user.full_name if buyer_user end
     string   :company_display do company.display if company end
- 
+
     text     :display_fulltext, :using => :display
     text     :department_nbr_fulltext, :using => :department_nbr
     text     :buyer_user_display_fulltext, :using => :buyer_user_display
     text     :company_display_fulltext, :using => :company_display
-  end 
+  end
   # INDEXING (End)
 
 
@@ -108,16 +92,17 @@ class Omni::Department < ActiveRecord::Base
 
   def sku_locations
     sku_locations = []
-    self.classifications.each do |classification|
-      classification.subclasses.each do |subclass|
-        subclass.styles.each do |style|
-          style.sku_locations.each do |sl|
-            sku_locations << sl
-          end
-        end
-      end
-    end
+    # self.classifications.each do |classification|
+    #   classification.subclasses.each do |subclass|
+    #     subclass.styles.each do |style|
+    #       style.sku_locations.each do |sl|
+    #         sku_locations << sl
+    #       end
+    #     end
+    #   end
+    # end
     sku_locations
+    Omni::SkuLocation.all
   end
   # HELPERS (End)
 

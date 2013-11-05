@@ -13,13 +13,21 @@ class Omni::Test::Projection < Omni::Test::Base
     @pd=Omni::ProjectionDetail.where(:projection_detail_id => 'PROJ2A1C193611E3A22D20CXXPRODET1').first
 
     x=@p
-    test_it('It creates one with details', 3, x.projection_details.count)
+    # test_it('It creates one with details', 3, x.projection_details.count)
 
-    # x.projection_details.each {|x| x.delete}
-    # test_it('it destroys all details', 0, x.projection_details.count)
+    x.projection_details.each {|x| x.delete}
+    test_it('it destroys all details', 0, x.projection_details.count)
+
+    x.build
+    test_it('It builds projection detail rows', 3, x.projection_details.count)
+
+    x.forecast
+    self.forecasting_scenarios.each {|x| process_projection_scenario x}
+    test_it('It forecasts projection detail rows', 3, x.projection_details.count)
+
 
     @@model_action = 'Close'
-    self.closing_scenarios.each {|x| process_projection_scenario x}
+    # self.closing_scenarios.each {|x| process_projection_scenario x}
   end
 
   def self.process_projection_scenario(s)
@@ -55,6 +63,12 @@ class Omni::Test::Projection < Omni::Test::Base
     end
 
     test_it(s[:scenario],expected, actual)
+  end
+
+  def self.forecasting_scenarios
+    x=[]
+    x << {:scenario=>'It'}
+    x
   end
 
   def self.closing_scenarios
