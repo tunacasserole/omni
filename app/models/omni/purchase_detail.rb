@@ -377,8 +377,6 @@
 
     end # self.locations.each
 
-    # puts "\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n "
-
     total_units_needed = (temp_purchase_allocations.map {|k,v| v}).sum
 
     if total_units_needed < allocatable_units # EXCESS SUPPLY

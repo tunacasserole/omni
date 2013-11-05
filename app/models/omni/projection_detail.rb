@@ -18,7 +18,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                          :uniqueness  => true
+  # validates    :display,                          :uniqueness  => true
   validates    :projection_id,                    :presence    => true
   validates    :sku_id,                           :presence    => true
   validates    :location_id,                      :presence    => true
@@ -31,11 +31,11 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   default      :projection_line_nbr,              :override  =>  false,        :with  => :sequence,         :named=>"PROJECTION_LINE_NBR"
   default      :last_forecast_units,              :override  =>  false,        :to    => 0
   default      :first_forecast_units,             :override  =>  false,        :to    => 0
-  default      :projection_1_units,               :override  =>  true,         :to    => 0
-  default      :projection_2_units,               :override  =>  true,         :to    => 0
-  default      :projection_3_units,               :override  =>  true,         :to    => 0
-  default      :projection_4_units,               :override  =>  true,         :to    => 0
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  # default      :projection_1_units,               :override  =>  true,         :to    => 0
+  # default      :projection_2_units,               :override  =>  true,         :to    => 0
+  # default      :projection_3_units,               :override  =>  true,         :to    => 0
+  # default      :projection_4_units,               :override  =>  true,         :to    => 0
+  # default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -101,13 +101,13 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   searchable do
     # Exact match attributes
     string   :projection_detail_id
-    string   :display 
+    string   :display
     string   :projection_id
     string   :projection_location_id
     string   :forecast_profile_id
     string   :sku_id
     string   :location_id
-    string   :sku_display 
+    string   :sku_display
     string   :location_display
     string   :size_id
     string   :color_id
@@ -145,7 +145,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     avg = self.average_sales
     squared_deviations = (((self.sale_units_py1 - avg)**2 + (self.sale_units_py2 - avg)**2 + (self.sale_units_py3 - avg)**2) / 3)
 #  Need to calculate square root of squared_deviations to get standard deviation
-    std = 0    
+    std = 0
   end
   # HELPERS (End)
 

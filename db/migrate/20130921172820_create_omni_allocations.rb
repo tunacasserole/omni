@@ -4,8 +4,8 @@ class CreateOmniAllocations < ActiveRecord::Migration
     drop_table :allocations #if ActiveRecord::Base.connection.tables.include?('allocations')
     create_table(:allocations, :id => false) do |t|
       t.column   :allocation_id,              :string,            :null  =>  false,   :limit   => 32
-      t.column   :allocatable_id,             :string,            :null  =>  false,   :limit   => 32
-      t.column   :allocatable_type,         :string,            :null  =>  false,   :limit   => 100
+      t.column   :allocatable_id,             :string,            :null  =>  true,   :limit   => 32
+      t.column   :allocatable_type,         :string,            :null  =>  true,   :limit   => 100
       t.column   :sku_id,                        :string,            :null  =>  true,    :limit   => 32
       t.column   :location_id,                 :string,            :null  =>  true,    :limit   => 32
       t.column   :allocation_profile_id,   :string,            :null  =>  true,    :limit   => 32

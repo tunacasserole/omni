@@ -36,7 +36,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :allocation,                      :class_name => 'Omni::Allocation',                      :foreign_key => 'allocation_id'
+  belongs_to   :allocation,                      :class_name => 'Omni::Allocation',             :foreign_key => 'allocation_id'
   belongs_to   :location,                        :class_name => 'Omni::Location',               :foreign_key => 'location_id'
   # ASSOCIATIONS (End)
 

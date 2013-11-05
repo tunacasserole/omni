@@ -1,16 +1,15 @@
 en:
   activerecord:
-    models:
-      omni/allocation_detail:  'Model'
     attributes:
       omni/allocation_detail:
-        allocation_detail_id:            'Allocation Detail'
-        allocation_detail_nbr:          'Allocation Detail Nbr'
-        allocation_id:                      'Allocation'
-        location_id:                        'Location'
-        state:                                  'State'
-        units_needed:                     'Units Needed'
-        units_allocated:                   'Units Allocated'
-        units_shipped:                    'Units Shipped
-        is_destroyed:                      'Is Destroyed'
-
+        allocation_detail_id: "Allocation Detail"
+        allocation_detail_nbr: "Allocation Detail Nbr"
+        allocation_id: Allocation
+        location_id: Location
+        state: State
+        units_allocated: "Units Allocated"
+        units_needed: "Units Needed"
+        units_shipped: "Units Shipped"
+        is_destroyed: "Destroyed"
+    models:
+      omni/allocation_detail: Model

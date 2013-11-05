@@ -21,4 +21,10 @@ class Omni::Test::Bts < Omni::Test::Base
     # test_it('it creates a bts detail for every sku location',4,x.bts_details.count)
   end
 
+  def self.create_bts_data
+    @@model_name = 'Bts'
+    @@model_action = 'Run'
+      # create data for bts, bts_details, styles, skus, sizes, system_options, sku_suppliers, sku_locations, location_users, purchases and purchase_details by destroying then creating.
+  end
+
 end

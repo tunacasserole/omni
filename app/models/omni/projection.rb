@@ -13,7 +13,7 @@
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                          :uniqueness => true
+  # validates    :display,                          :uniqueness => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
