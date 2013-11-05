@@ -15,7 +15,7 @@ class Omni::Test::Allocation < Omni::Test::Base
       ap.percent_to_allocate = s[:percent_to_allocate]
       ap.save
 
-      Omni::Allocation.where(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX').first.delete
+      Omni::Allocation.where(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX').to_a.each {|x|x.delete}
       x = Omni::Allocation.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '51713A3EAC3E11E2947800FF58D32228', :allocation_profile_id => ap.allocation_profile_id, :units_to_allocate=>100)
       # puts "x.ap.percent_to_allocate is #{x.allocation_profile.percent_to_allocate }"
 
