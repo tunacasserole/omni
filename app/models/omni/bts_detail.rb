@@ -28,6 +28,7 @@ class Omni::BtsDetail < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :bts_detail_id,                          :with => :guid
+  # default :is_destroyed,                           :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 

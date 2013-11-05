@@ -201,7 +201,7 @@ class Omni::Purchase < ActiveRecord::Base
     # after_transition :on => :costing, :do => :process_costing
     after_transition :on => :cancel,  :do => :process_cancel
     after_transition :on => :release, :do => :process_release
-    # after_transition :on => :approve, :do => :process_approve
+    after_transition :on => :approve, :do => :process_approve
     # after_transition :on => :open, :do => :process_open
     after_transition :on => :print,   :do => :process_print
 
@@ -213,9 +213,10 @@ class Omni::Purchase < ActiveRecord::Base
     event :cancel do
       transition [:open, :partial] => :cancelled
     end
-    # event :open do
-    #   transition :pending_approval => :open
-    # end
+
+    event :approve do
+      transition :pending_approval => :pending_approval
+    end
 
   end
   # STATES (End)
@@ -253,7 +254,7 @@ class Omni::Purchase < ActiveRecord::Base
   # STATE HELPERS (End)
 
   # HELPERS (Start) =====================================================================
-   def approve
+   def process_approve
       case self.approval_level
         when 1
           self.approval_1_date = Date.today
@@ -314,7 +315,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def validate_release
-
+    puts "total_order_cost is #{total_order_cost.to_s}"
     if self.total_order_cost.to_i < Omni::SystemOption.first.purchase_approval_1_maximum_amount
         errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
     else

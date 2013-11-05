@@ -15,7 +15,9 @@ class Omni::Test::Allocation < Omni::Test::Base
       ap.percent_to_allocate = s[:percent_to_allocate]
       ap.save
 
+      Omni::Allocation.where(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX').first.delete
       x = Omni::Allocation.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '51713A3EAC3E11E2947800FF58D32228', :allocation_profile_id => ap.allocation_profile_id, :units_to_allocate=>100)
+      # puts "x.ap.percent_to_allocate is #{x.allocation_profile.percent_to_allocate }"
 
       locked_units = 0 + s[:allocated_units_locked_loc_1] + s[:allocated_units_locked_loc_2] + s[:allocated_units_locked_loc_3]
       locked_locations = []
@@ -28,7 +30,7 @@ class Omni::Test::Allocation < Omni::Test::Base
       expected =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
       actual = (allocations['51713A3EAC3E11E2947800FF58D32228'] || s[:allocated_units_locked_loc_1].to_f).to_s.chop.chop + ',' + (allocations['51892F68AC3E11E2947800FF58D32228'] || s[:allocated_units_locked_loc_2].to_f).to_s.chop.chop + ',' + (allocations['5247A038AC3E11E2947800FF58D32228'] || s[:allocated_units_locked_loc_1].to_f).to_s.chop.chop
 
-      test_it(s[:scenario], expected, actual)
+      test_it("#{s[:scenario]}", expected, actual)
     end
 
   end
@@ -45,7 +47,6 @@ class Omni::Test::Allocation < Omni::Test::Base
   def self.create_data
     @@model_name = 'Allocation'
     @@model_action = 'Event'
-    Omni::Allocation.where(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX').to_a.each {|x| x.delete}
 
     # Omni::AllocationDetail.where(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX').to_a.each {|x| x.delete}
     # @ad=Omni::AllocationDetail.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', allocation_detail_id: 'PRIMARYALLOCATIONDETAIL1XXXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '51713A3EAC3E11E2947800FF58D32228', :units_needed=>100)

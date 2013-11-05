@@ -153,9 +153,9 @@ class Omni::Allocation < ActiveRecord::Base
     sku_locations = Omni::SkuLocation.where(sku_id: sku_id, is_authorized: true).to_a
     sku_locations.reject! {|x| locked_locations.include? x.location_id}
     sku_locations.each do |sl|
-      locked_locations.include? sl.location_id ? units_needed  = store_demand(allocation_formula, sl) : 0
-      temp_needs.merge!(sl.location_id => units_needed)
       # puts "location #{sl.location_id} -- units_needed #{units_needed}"
+      locked_locations.include? sl.location_id ? units_needed = store_demand(allocation_formula, sl) : 0
+      temp_needs.merge!(sl.location_id => units_needed)
     end
 
     temp_allocations = temp_needs
@@ -209,7 +209,6 @@ class Omni::Allocation < ActiveRecord::Base
     end
     temp_allocations
   end
-
 
   def store_demand(allocation_formula, sku_location)
     case allocation_formula

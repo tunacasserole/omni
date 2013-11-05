@@ -123,10 +123,9 @@ class Omni::Bts < ActiveRecord::Base
 
   # STATE HANDLERS (Start) ====================================================================
   def run
-    # update bts state to 'running'
     self.state='running'
     self.save
-
+    rake_run
   end
 
   def process_run
@@ -137,70 +136,45 @@ class Omni::Bts < ActiveRecord::Base
 
   def rake_run
     # puts "\n------------- running bts -------------\n"
-    if self.is_drop_data
-      puts "--destroying pre-existing bts_details at #{Time.now.strftime("%H:%M:%S")}"
+
+      # puts "--creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
+
       # self.bts_details.delete_all
       Omni::BtsDetail.delete_all(:bts_id => self.bts_id)
-      Omni::BtsStyle.delete_all(:bts_id => self.bts_id)
-      puts "--finished destroying bts_details at #{Time.now.strftime("%H:%M:%S")}"
-    end
-
-    if self.is_create_detail
-      puts "--creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
-      puts "--bts_id is: #{self.bts_id}"
-      skus_to_process = self.skus
       Omni::BtsDetail.transaction do
-        skus_to_process.each_with_index do |x, i|
-          puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}','PARKER')" if self.is_source_parker and x.source == 'PARKER'
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}','BUCKHEAD')" if self.is_source_buckhead and x.source == 'BUCKHEAD'
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}','GRITS')" if self.is_source_grits and x.source == 'GRITS'
+        self.skus.each_with_index do |x, i|
+          # puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}','#{x.source}')"
         end
       end
       # puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
       # Omni::Bts.solr_reindex(:batch_size => 1000, :include => :bts_details)
       # puts "--finished reindexing bts_details at #{Time.now.strftime("%H:%M:%S")}"
-    end
 
-    puts "--transforming and calculating  at #{Time.now.strftime("%H:%M:%S")}"
+    # puts "--transforming and calculating  at #{Time.now.strftime("%H:%M:%S")}"
     details = Omni::BtsDetail.where(:bts_id => self.bts_id)
-    puts "count of details is #{details.count}"
     details.each_with_index do |bd,i|
-      puts "...transformed and calculated #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}"# if i.to_s.end_with? '000' #|| i == 1
-      x=bd.transform_and_calculate
-      x.save
-      puts "--quantity on hand is: #{x.on_hand}, WIP is #{x.wip}, Allocated is #{x.allocated}, in transit is #{x.transit}"
+      # puts "...transformed and calculated #{i.to_s} rows at #{Time.now.strftime("%H:%M:%S")}"# if i.to_s.end_with? '000' #|| i == 1
+      # x=bd.transform_and_calculate
+      # x.save
+      # puts "--quantity on hand is: #{x.on_hand}, WIP is #{x.wip}, Allocated is #{x.allocated}, in transit is #{x.transit}"
       # puts "--ERRORS => #{x.errors if x.errors}"
     end
-    puts "--finished transforming and calculating at #{Time.now.strftime("%H:%M:%S")}"
-
-    # if self.is_sum_style
-    if false
-      puts "--creating bts_styles at #{Time.now.strftime("%H:%M:%S")}"
-      Omni::BtsDetail.transaction do
-        details.each {|bd| Omni::BtsStyle.find_or_create_by_bts_id_and_style_id(self.bts_id, bd.sku.style_id) if bd.sku}
-        # details.each_with_index do |bd,i|
-        #   Omni::BtsStyle.connection.execute "INSERT INTO bts_styles (bts_style_id, bts_id, style_id) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}','#{bd.sku.style_id}')" if bd.sku unless Omni::BtsStyle.where(:style_id => bd.sku.style_id).first
-        # end
-      end
-      styles = Omni::BtsStyle.where(:bts_id => self.bts_id)
-      styles.each {|x| x.summarize}
-      puts "--finished creating bts_styles at #{Time.now.strftime("%H:%M:%S")}"
-    end
+    # puts "--finished transforming and calculating at #{Time.now.strftime("%H:%M:%S")}"
 
     self.state = 'done'
     self.save
-    self.send_notice
+    # self.send_notice
 
     Omni::BtsDetail.reindex
-    puts "--bts finished with #{self.bts_details.count.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"
+    # puts "--bts finished with #{self.bts_details.count.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"
   end
 
   def skus
     # reads the parameters provided in the bts (sku_id, style_id … department_id) and returns a list of skus matching the parameters provided.
-    puts "--getting list of skus to process"
+    # puts "--getting list of skus to process"
     skus = []
-    puts "--bts_id is: #{self.bts_id}"
+    # puts "--bts_id is: #{self.bts_id}"
     case
     when self.sku
       skus << self.sku
@@ -213,9 +187,9 @@ class Omni::Bts < ActiveRecord::Base
     when self.department
       skus = self.department.skus
     else
-      puts "--no skus due to no parameters provided--"
+      # puts "--no skus due to no parameters provided--"
     end
-    puts "--skus to process: #{skus.count}"
+    # puts "--skus to process: #{skus.count}"
     skus
   end
 
@@ -226,7 +200,7 @@ class Omni::Bts < ActiveRecord::Base
         subject: "Omni notice: BTS - has completed.",
         body: Buildit::Email::Manager.generate(self, "bts_notice"),
     )
-    email_addresses = Buildit::User.where(:user_id => self.user_id).first.email_address
+    email_addresses = Buildit::User.where(:user_id => self.user_id || '811166D4D50A11E2B45820C9D04AARON').first.email_address
     message.send_to email_addresses
     message.queue
     Buildit::Comm::Email::OutboundService.process

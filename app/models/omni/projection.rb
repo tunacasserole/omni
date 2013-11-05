@@ -86,11 +86,9 @@
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :new do
+  state_machine :state, :initial => :draft do
 
   ### STATES ###
-    state :new do; end
-
     state :draft do
       validates :plan_year,                         :presence => true
       validates :department_id,                     :presence => true
@@ -124,8 +122,8 @@
 
   ### CALLBACKS ###
     after_transition :on => :build, :do => :process_build
-    after_transition :on => :close, :do => :process_close
     after_transition :on => :release, :do => :process_release
+    # after_transition :on => :close, :do => :process_close
 
   ### EVENTS ###
 # The following actions may run on this model:
@@ -141,9 +139,9 @@
       transition :new => :draft
     end
 
-    event :close do
-      transition :any => :complete
-    end
+    # event :close do
+      # transition :any => :complete
+    # end
 
     event :release do
       transition :forecast => :projection_1
@@ -154,6 +152,32 @@
 
   # STATE HANDLERS (Start) ====================================================================
   def process_close
+     # current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
+    closer = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
+    return false unless closer.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first
+    self.projection_closer_user_id = closer.user_id
+    phase = (self.state.byteslice(11).to_i + 1)
+    projection_details = Omni::ProjectionDetail.where(projection_id: self.projection_id)
+    case self.state
+      when 'projection_1','projection_2','projection_3'
+        projection_details.each do |pd|
+          pd.send("projection_#{phase.to_s}_units=", pd.send("projection_#{(phase-1).to_s}_units"))
+          pd.state = 'approved'
+          pd.save
+        end
+        self.state = "projection_#{phase}"
+        self.save
+
+      when 'projection_4'
+        self.state = 'complete'
+        self.save
+        self.projection_details.each do |x|
+          x.state = 'approved'
+          x.save
+        end
+
+    end
+    return true
   end
 
   def process_build
@@ -334,11 +358,6 @@
 
   def process_approve
   # Approve projection 3 or projection 4
-
-  end
-
-  def process_close
-  # Cloase projection 1, 2, 3, or 4
 
   end
 
