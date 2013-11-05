@@ -1,16 +1,16 @@
 class CreateOmniProjectionDetails < ActiveRecord::Migration
   def change
-  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	# unless ActiveRecord::Base.connection.tables.include?('projection_details')
     drop_table :projection_details if ActiveRecord::Base.connection.tables.include?('projection_details')
       create_table(:projection_details, :id => false) do |t|
         t.column   :projection_detail_id,            :string,            :null  =>  false,   :limit   => 32
         t.column   :display,                         :string,            :null  =>  true,    :limit   => 200
+        t.column   :state,                              :string,             :null => true,  :limit => 200
         t.column   :projection_id,                   :string,            :null  =>  true,    :limit   => 32
         t.column   :projection_location_id,          :string,            :null  =>  true,    :limit   => 32
         t.column   :projection_line_nbr,             :string,            :null  =>  true,    :limit   => 20
         t.column   :forecast_profile_id,             :string,            :null  =>  true,    :limit   => 32
+        t.column   :inventory_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :first_forecast_units,            :integer,           :null  =>  true
@@ -33,7 +33,5 @@ class CreateOmniProjectionDetails < ActiveRecord::Migration
         t.column   :audit_created_at,                :datetime,          :null  =>  true
         t.column   :audit_updated_at,                :datetime,          :null  =>  true
       end
-    # end
-    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

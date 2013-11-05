@@ -7,14 +7,14 @@ Ext.define('Omni.view.app.Hub', {
     cls: 'desktop',
 
   initComponent: function(){
-    var me = this;  
+    var me = this;
 
     // this.socket   = Buildit.lib.SocketManager.get('STANDARD');
     // this.socket.on('newEvents', this.handleNewEvents, me);
 
 
     Ext.apply(this, {
-      allowSignout      : true,      
+      allowSignout      : true,
       title: 'Start',
       subtitle: '',
       contextMenuConfig: {
@@ -40,15 +40,15 @@ Ext.define('Omni.view.app.Hub', {
           rowspan: 2,
           cls: 'period_results',
           target: {xtype: 'omni-period_results-Explorer'}
-        }                                  
-        // {title: 'Mark Order History', colspan: 2, rowspan: 1, cls: 'cfars',  target: {xtype: 'mark-order_headers-Explorer', title: 'View Mark order history'}},        
+        }
+        // {title: 'Mark Order History', colspan: 2, rowspan: 1, cls: 'cfars',  target: {xtype: 'mark-order_headers-Explorer', title: 'View Mark order history'}},
        ,{ title: 'Imports',
           colspan: 2,
           rowspan: 1,
           cls: 'imports',
-          target: {xtype: 'omni-imports-Explorer'} 
-        }                    
-      ] 
+          target: {xtype: 'omni-imports-Explorer'}
+        }
+      ]
      }
 
    // Section: Purchasing, Allocations, Costing and Production Planning //
@@ -58,12 +58,11 @@ Ext.define('Omni.view.app.Hub', {
      columns: 2,
      rows: 3,
      tiles: [
-       {title: 'Purchases', colspan: 2, rowspan: 1, cls: 'purchases',  target: {xtype: 'omni-purchases-Explorer'}},       
+       {title: 'Purchases', colspan: 2, rowspan: 1, cls: 'purchases',  target: {xtype: 'omni-purchases-Explorer'}},
        {title: 'Allocations', colspan: 2, rowspan: 1, cls: 'allocations', target: { xtype: 'omni-allocations-Explorer'} },
-       {title: 'Costs', colspan: 2, rowspan: 1, cls: 'costs', target: { xtype: 'omni-costs-Explorer'} },  
-       {title: 'Work Orders', colspan: 2, rowspan: 1, cls: 'work_orders', target: { xtype: 'omni-work_orders-Explorer'} }              
-     ] 
-     }     
+       {title: 'Work Orders', colspan: 2, rowspan: 1, cls: 'work_orders', target: { xtype: 'omni-work_orders-Explorer'} }
+     ]
+     }
 
    // Section: Customer Order Entry //
    ,{
@@ -96,8 +95,8 @@ Ext.define('Omni.view.app.Hub', {
        {title: 'Cancel Customer Orders', colspan: 2, rowspan: 1, cls: 'cancel_orders',  target: {xtype: 'omni-orders-Explorer', title: 'Cancel Customer Order', defaultSearch: { with: {state: {equal_to: 'new'}} }, contextMenuConfig: {xtype: 'omni-orders-ExplorerContextMenuCancel'}, store: Ext.create('Omni.store.Order',{storeId: 'CancelOrderStore'}), allowNew: false}},
        {title: 'Cancel Work Orders', colspan: 2, rowspan: 1, cls: 'cancel_work_orders',  target: {xtype: 'omni-work_orders-Explorer', title: 'Cancel Work Order', defaultSearch: { with: {state: {any_of: ['new','pending']}} }, contextMenuConfig: {xtype: 'omni-work_orders-ExplorerContextMenuCancel'}, store: Ext.create('Omni.store.WorkOrder',{storeId: 'CancelWorkOrderStore'}), allowNew: false}},
        {title: 'Cancel Payments', colspan: 2, rowspan: 1, cls: 'cancel_payments',  target: {xtype: 'omni-payments-Explorer', title: 'Cancel Payment', defaultSearch: { with: {state: {equal_to: 'new'}} }, contextMenuConfig: {xtype: 'omni-payments-ExplorerContextMenuCancel'}, store: Ext.create('Omni.store.Payment',{storeId: 'CancelPaymentStore'}), allowNew: false}}
-     ] 
-     } 
+     ]
+     }
 
  // Section: Merchandise Maintenance //
 
@@ -106,13 +105,13 @@ Ext.define('Omni.view.app.Hub', {
      columns: 4,
      rows: 3,
      tiles: [
-       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'skus',  target: {xtype: 'omni-skus-Explorer', allowEdit: true, allowNew: true}},       
+       {title: 'Skus', colspan: 2, rowspan: 1, cls: 'skus',  target: {xtype: 'omni-skus-Explorer', allowEdit: true, allowNew: true}},
        {title: 'Styles', colspan: 2, rowspan: 1, cls: 'styles',  target: {xtype: 'omni-styles-Explorer'}},
-       {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_types',  target: {xtype: 'omni-subclasses-Explorer', title: ''}},   
-       {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-classifications-Explorer', title: ''}},         
-       {title: 'Departments', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-departments-Explorer', title: ''}},                
-       {title: 'Locations', colspan: 2, rowspan: 1, cls: 'departments',  target: {xtype: 'omni-locations-Explorer'}},       
-     ] 
+       {title: 'Subclasses', colspan: 2, rowspan: 1, cls: 'product_types',  target: {xtype: 'omni-subclasses-Explorer', title: ''}},
+       {title: 'Classifications', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-classifications-Explorer', title: ''}},
+       {title: 'Departments', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-departments-Explorer', title: ''}},
+       {title: 'Locations', colspan: 2, rowspan: 1, cls: 'departments',  target: {xtype: 'omni-locations-Explorer'}},
+     ]
      }
 
    // Section: product setup data //
@@ -123,12 +122,12 @@ Ext.define('Omni.view.app.Hub', {
      rows: 3,
      tiles: [
        {title: 'Colors', colspan: 2, rowspan: 1, cls: 'omni-colors', target: { xtype: 'omni-colors-Explorer'} },
-       {title: 'Sizes', colspan: 2, rowspan: 1, cls: 'sales_calls', target: { xtype: 'omni-sizes-Explorer'} },       
-       {title: 'Size Groups', colspan: 2, rowspan: 1, cls: 'projects', target: { xtype: 'omni-size_groups-Explorer'} },       
+       {title: 'Sizes', colspan: 2, rowspan: 1, cls: 'sales_calls', target: { xtype: 'omni-sizes-Explorer'} },
+       {title: 'Size Groups', colspan: 2, rowspan: 1, cls: 'projects', target: { xtype: 'omni-size_groups-Explorer'} },
        {title: 'Category', colspan: 2, rowspan: 1, cls: 'categories',  target: {xtype: 'omni-categories-Explorer', title: ''}},
        {title: 'Product', colspan: 2, rowspan: 1, cls: 'products',  target: {xtype: 'omni-products-Explorer', title: ''}},
-       {title: 'Forecast Profile', colspan: 2, rowspan: 1, cls: 'cfars',  target: {xtype: 'omni-forecast_profiles-Explorer'}},       
-     ] 
+       {title: 'Forecast Profile', colspan: 2, rowspan: 1, cls: 'cfars',  target: {xtype: 'omni-forecast_profiles-Explorer'}},
+     ]
      }
 
    // Section: Partners //
@@ -138,10 +137,10 @@ Ext.define('Omni.view.app.Hub', {
      columns: 2,
      rows: 3,
      tiles: [
-       {title: 'Suppliers', colspan: 2, rowspan: 1, cls: 'contracts',  target: {xtype: 'omni-suppliers-Explorer'}},       
+       {title: 'Suppliers', colspan: 2, rowspan: 1, cls: 'contracts',  target: {xtype: 'omni-suppliers-Explorer'}},
        {title: 'Schools', colspan: 2, rowspan: 1, cls: 'samples', target: { xtype: 'omni-sites-Explorer'} }
-     ] 
-     }     
+     ]
+     }
 
 // Section: Stock Ledger Activity //
 
@@ -150,13 +149,12 @@ Ext.define('Omni.view.app.Hub', {
      columns: 4,
      rows: 3,
      tiles: [
-       {title: 'Rulesets', colspan: 2, rowspan: 1, cls: 'contracts',  target: {xtype: 'omni-rulesets-Explorer'}},       
+       {title: 'Rulesets', colspan: 2, rowspan: 1, cls: 'contracts',  target: {xtype: 'omni-rulesets-Explorer'}},
        {title: 'Period Results', colspan: 2, rowspan: 1, cls: 'samples', target: { xtype: 'omni-period_results-Explorer'} },
-       {title: 'Stock Ledger Activities', colspan: 2, rowspan: 1, cls: 'cfars', target: { xtype: 'omni-stock_ledger_activities-Explorer'} },       
-       {title: 'Costs', colspan: 2, rowspan: 1, cls: 'projects',  target: {xtype: 'omni-costs-Explorer'}},              
-       {title: 'Inventory', colspan: 2, rowspan: 1, cls: 'projects',  target: {xtype: 'omni-inventories-Explorer'}},                     
-     ] 
-     }     
+       {title: 'Stock Ledger Activities', colspan: 2, rowspan: 1, cls: 'cfars', target: { xtype: 'omni-stock_ledger_activities-Explorer'} },
+       {title: 'Inventory', colspan: 2, rowspan: 1, cls: 'projects',  target: {xtype: 'omni-inventories-Explorer'}},
+     ]
+     }
 
       // Section: Activity //
         // ,{
@@ -184,8 +182,8 @@ Ext.define('Omni.view.app.Hub', {
   //   rows     : 3,
   //   tiles    : [
   //     {colspan: 2, rowspan: 1, title: 'Accounts', cls: 'contacts', target: { xtype: 'omni-accounts-Explorer'} },
-  //     {colspan: 2, rowspan: 1, title: 'Leads', cls: 'contacts', target: { xtype: 'omni-leads-Explorer'} },            
-  //     {colspan: 2, rowspan: 1, title: 'Donations', cls: 'contacts', target: { xtype: 'omni-donations-Explorer'} },                        
+  //     {colspan: 2, rowspan: 1, title: 'Leads', cls: 'contacts', target: { xtype: 'omni-leads-Explorer'} },
+  //     {colspan: 2, rowspan: 1, title: 'Donations', cls: 'contacts', target: { xtype: 'omni-donations-Explorer'} },
   //   ]
   // }
 
@@ -206,19 +204,18 @@ Ext.define('Omni.view.app.Hub', {
    //     // {title: 'StyleColorSize', colspan: 1, rowspan: 1, cls: '_style_color_sizes magenta',  target: {xtype: 'omni-style_color_sizes-Explorer', title: ''}},
    //     // {title: 'Sku', colspan: 1, rowspan: 3, cls: '_skus blue1',  target: {xtype: 'omni-skus-Explorer', title: ''}},
    //     // {title: 'SkuSupplier', colspan: 1, rowspan: 1, cls: '_sku_suppliers blue1',  target: {xtype: 'omni-sku_suppliers-Explorer', title: ''}},
-   //     // {title: 'SkuLocation', colspan: 1, rowspan: 1, cls: '_sku_locations blue1',  target: {xtype: 'omni-sku_locations-Explorer', title: ''}},
    //     // {title: 'SkuPromoPrice', colspan: 1, rowspan: 2, cls: '_sku_promo_prices blue2',  target: {xtype: 'omni-sku_promo_prices-Explorer', title: ''}},
    //     // {title: 'SkuAlias', colspan: 1, rowspan: 1, cls: '_sku_aliases blue',  target: {xtype: 'omni-sku_aliases-Explorer', title: ''}},
    //     // {title: 'SkuSubstitute', colspan: 1, rowspan: 1, cls: '_sku_substitutes blue',  target: {xtype: 'omni-sku_substitutes-Explorer', title: ''}}
-   //   ] 
+   //   ]
    //   }
 
 
 
- ] 
- }); 
+ ]
+ });
 
- this.callParent(); 
+ this.callParent();
  },
 
  // handleNewEvents : function(data){
@@ -231,5 +228,5 @@ Ext.define('Omni.view.app.Hub', {
  //    });
  //  }
 
- 
+
  });

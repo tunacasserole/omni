@@ -30,32 +30,14 @@ Ext.define('Omni.view.skus.Inspector', {
           module: 'contracts'
         }
         ,{
-          title: 'Costs',
-          xtype: 'omni-sku_costs-Explorer', module: 'survey',
+          title: 'Inventory',
+          xtype: 'omni-inventories-Explorer', module: 'survey',
           defaultSearch: { with:
              {
                sku_id:   {equal_to: me.record.get('sku_id')}
              }
           }
         }
-        ,{
-          title: 'Locations',
-          xtype: 'omni-sku_locations-Explorer', module: 'cfars',
-          defaultSearch: { with:
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }
-        // ,{
-        //   title: 'Substitutes',
-        //   xtype: 'omni-sku_substitutes-Explorer', module: 'projects',
-        //   defaultSearch: { with:
-        //      {
-        //        sku_id:   {equal_to: me.record.get('sku_id')}
-        //      }
-        //   }
-        // }
         ,{
           title: 'Prices',
           xtype: 'omni-sku_prices-Explorer', module: 'tracks',

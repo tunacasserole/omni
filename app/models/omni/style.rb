@@ -1,23 +1,13 @@
 class Omni::Style < ActiveRecord::Base
 
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :styles
   self.primary_key  = :style_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
@@ -37,7 +27,6 @@ class Omni::Style < ActiveRecord::Base
   validates    :maintenance_level,               :lookup      => 'MAINTENANCE_LEVEL',          :allow_nil => true
   validates    :sku_name_method,                 :lookup      => 'SKU_NAME_METHOD',            :allow_nil => true
   # VALIDATIONS (End)
-
 
   # DEFAULTS (Start) ====================================================================
   default      :style_id,                         :override  =>  false,        :with  => :guid
@@ -68,7 +57,6 @@ class Omni::Style < ActiveRecord::Base
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
-
   # REFERENCE (Start) ===================================================================
   reference do
     display_attribute  :display
@@ -76,7 +64,6 @@ class Omni::Style < ActiveRecord::Base
     item_template      '{display}'
   end
   # REFERENCE (End)
-
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :subclass,                        :class_name => 'Omni::Subclass',                :foreign_key => 'subclass_id'
@@ -190,7 +177,7 @@ class Omni::Style < ActiveRecord::Base
       validates  :size_group_id, :presence  => true
     end
 
-  end     
+  end
   # STATES (End)
 
 
@@ -226,7 +213,7 @@ class Omni::Style < ActiveRecord::Base
     puts '--- starting building skus ---'
     gen_skus
     gen_sku_suppliers
-    gen_sku_locations
+    gen_inventories
     gen_sku_prices
     puts '--- done with building skus ---'
     puts 'ready...'
@@ -328,12 +315,12 @@ class Omni::Style < ActiveRecord::Base
     end
   end
 
-  def gen_sku_locations
-    # Add SkuLocation row for each Sku & all StyleLocation rows in active state
+  def gen_inventories
+    # Add inventory rows for each Sku & all StyleLocation rows in active state
     self.skus.each do |sku|
       next unless sku.state == 'active'
       Omni::StyleLocation.where(:style_id => self.style_id).each do |sl|
-        x = Omni::SkuLocation.new
+        x = Omni::Inventory.new
         x.sku_id = sku.sku_id
         x.location_id = sl.location_id
         x.is_authorized = sl.is_authorized
@@ -353,7 +340,6 @@ class Omni::Style < ActiveRecord::Base
         x.maximum_units = sl.maximum_units
         x.seasonal_index_id = sl.seasonal_index_id
         x.save
-        puts "sku location row created..................................."
       end
     end
   end
@@ -407,14 +393,14 @@ class Omni::Style < ActiveRecord::Base
   # FILTERS (End)
 
   # HELPERS (Start) =======================================================================
-  def sku_locations
-    sku_locations = []
+  def inventories
+    inventories = []
     self.skus.each do |sku|
-      sku.sku_locations.each do |sl|
-        sku_locations << sl
+      sku.inventories.each do |sl|
+        inventories << sl
       end
     end
-    sku_locations
+    inventories
   end
   # HELPERS (End)
 

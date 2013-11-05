@@ -1,30 +1,25 @@
 class Omni::Inventory < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :inventories
   self.primary_key  = :inventory_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
   validates    :sku_id,                          :presence    => true
   validates    :location_id,                     :presence    => true
+  validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true
+  validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
+  validates    :location_id, uniqueness: { scope: :sku_id, message: "Inventory record already exists for this Location and SKU." }
   # VALIDATIONS (End)
-
 
   # DEFAULTS (Start) ====================================================================
   default      :inventory_id,                     :override  =>  false,        :with  => :guid
-  # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display}"}
+  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display}"}
   default      :on_hand_units,                    :override  =>  false,        :to    => 0
   default      :in_transit_units,                 :override  =>  false,        :to    => 0
   default      :non_sellable_units,               :override  =>  false,        :to    => 0
@@ -44,9 +39,19 @@ class Omni::Inventory < ActiveRecord::Base
   default      :last_inventory_units,             :override  =>  false,        :to    => 0
   default      :last_inventory_cost,              :override  =>  false,        :to    => 0
   default      :last_inventory_retail,            :override  =>  false,        :to    => 0
+  default      :is_authorized,                    :override  =>  false,        :to    => false
+  default      :is_taxable,                       :override  =>  false,        :to    => false
+  default      :is_special_order,                 :override  =>  false,        :to    => false
+  default      :is_discontinued,                  :override  =>  false,        :to    => false
+  default      :safety_stock_units,               :override  =>  false,        :to    => 0
+  default      :safety_stock_days,                :override  =>  false,        :to    => 0
+  default      :smoothing_factor,                 :override  =>  false,        :to    => 0
+  default      :minimum_units,                    :override  =>  false,        :to    => 0
+  default      :maximum_units,                    :override  =>  false,        :to    => 0
+  default      :forecast,                         :override  =>  false,        :to    => 0
+  default      :standard_deviation,               :override  =>  false,        :to    => 0
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -56,10 +61,14 @@ class Omni::Inventory < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
   belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
+  belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
+  belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',         :foreign_key => 'forecast_profile_id'
+  belongs_to   :seasonal_index,                  :class_name => 'Omni::SeasonalIndex',           :foreign_key => 'seasonal_index_id'
+  has_many     :bts_details,                     :class_name => 'Omni::BtsDetail',               :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"bts_details.location_id = '#{send(:location_id)}'"}
+  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',        :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"projection_details.location_id = '#{send(:location_id)}'"}
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================

@@ -25,7 +25,7 @@ class Omni::Allocation < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :allocation_details,     :class_name => 'Omni::AllocationDetail',    :foreign_key => 'allocation_id'
-  has_many     :sku_locations,           :class_name => 'Omni::SkuLocation',         :foreign_key => 'sku_id'
+  has_many     :inventories,           :class_name => 'Omni::Inventory',         :foreign_key => 'sku_id'
   belongs_to   :sku,                           :class_name => 'Omni::Sku',                      :foreign_key => 'sku_id'
   belongs_to   :location,                    :class_name => 'Omni::Location',               :foreign_key => 'location_id'
   belongs_to   :allocation_profile,      :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
@@ -139,20 +139,17 @@ class Omni::Allocation < ActiveRecord::Base
     remainder=0
     allocatable_units = (units_to_allocate * allocation_profile.percent_to_allocate / 100) - locked_units
     # error = 'No units available to allocate' if allocatable_units < 1
-    sku_locations = Omni::SkuLocation.where(sku_id: sku_id, is_authorized: true).to_a
-    sku_locations.reject! {|x| locked_locations.include? x.location_id}
-    sku_locations.each do |sl|
-      # puts "location #{sl.location_id} -- units_needed #{units_needed}"
-      locked_locations.include? sl.location_id ? units_needed = store_demand(allocation_formula, sl) : 0
-      temp_needs.merge!(sl.location_id => units_needed)
+    inventories = Omni::Inventory.where(sku_id: sku_id, is_authorized: true).to_a
+    inventories.reject! {|x| locked_locations.include? x.location_id}
+    inventories.each do |i|
+      # puts i.display
+      locked_locations.include? i.location_id ? units_needed = store_demand(allocation_formula, i) : 0
+      temp_needs.merge!(i.location_id => units_needed)
     end
 
-    temp_allocations = temp_needs
     total_units_needed = (temp_needs.map {|k,v| v}).sum
     remainder = allocatable_units - total_units_needed
-    # puts "remainder is #{remainder}"
-    # puts "allocatable_units is #{allocatable_units}"
-    # puts "total_units_needed is #{total_units_needed}"
+    temp_allocations = temp_needs
 
     case
       when remainder == 0 # DEMAIND = SUPPLY
@@ -179,9 +176,7 @@ class Omni::Allocation < ActiveRecord::Base
             # Calculate each Output table location's percent of the total_units_needed as allocation_percent
             # Multiply each Output table location's allocation_percent times the remaining_units calculated above to get units_allocated
             proportions = temp_needs.inject({}) { |h, (k, v)| h[k] = BigDecimal.new(v)/BigDecimal.new(total_units_needed).floor; h }
-            proportions.each do |k,v|
-              temp_allocations[k] = (allocatable_units*v).round.to_f
-            end
+            proportions.each { |k,v| temp_allocations[k] = (allocatable_units*v).round.to_f}
 
           when 'FILL_LARGEST_DEMAND'
          # sort location hash descending by units_needed
@@ -199,22 +194,26 @@ class Omni::Allocation < ActiveRecord::Base
     temp_allocations
   end
 
-  def store_demand(allocation_formula, sku_location)
-    projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4','complete']}).first
+  def store_demand(allocation_formula, inventory)
+    # puts "In store demand, allocation_formula is #{allocation_formula}"
+    projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4','complete']}).first unless allocation_formula =='BTS_NEED' or allocation_formula=='PURCHASE_ALLOCATION'
+
     case allocation_formula
 
       when 'BTS_NEED'
-        bts_detail = sku_location.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
+        bts_detail = inventory.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
         units_needed =  bts_detail ? bts_detail.need : 0
 
-      when 'LAST_FORECAST_UNITS'
-        units_needed =  projection_detail ? projection_detail.last_forecast_units : 0
+      # when 'LAST_FORECAST_UNITS'
+      #   units_needed =  projection_detail.send('last_forecast_units') ? projection_detail.send('last_forecast_units') : 0
 
-      when /PROJECTION_\d_UNITS/
+      when /PROJECTION_\d_UNITS/, 'LAST_FORECAST_UNITS'
         units_needed = projection_detail.send(allocation_formula.downcase) ? projection_detail.send(allocation_formula.downcase) : 0
 
       when 'APPROVED_PROJECTION'
+
         case projection_detail.projection.state
+
           when 'forecast', 'projection_1_units'
             units_needed = projection_detail.state == 'draft' ? projection_detail.send("last_forecast_units") : projection_detail.send("projection_1_units")
 
@@ -236,8 +235,9 @@ class Omni::Allocation < ActiveRecord::Base
         units_needed = 0
 
     end
-    units_needed -= (sku_location.inventory.on_hand_units + sku_location.inventory.supplier_on_order_units) if ['LAST_FORECAST_UNITS','APPROVED_PROJECTION',/PROJECTION_\d_UNITS/].include? allocation_formula and sku_location.inventory and units_needed > 0
-    # units_needed
+    units_needed -= (inventory.on_hand_units + inventory.supplier_on_order_units) if ['LAST_FORECAST_UNITS','APPROVED_PROJECTION',/PROJECTION_\d_UNITS/].include? allocation_formula and units_needed > 0
+    # puts "units_needed #{units_needed}"
+    units_needed
   end
   # HELPERS (End)
 

@@ -8,4 +8,4 @@ Omni::PeriodResult.create(:sku_id => '74963C1EAC5A11E299E700FF58D32228', :locati
 # Period = 1/2013
 Omni::PeriodResult.create(:sku_id => '74963C1EAC5A11E299E700FF58D32228', :location_id => '527BD056AC3E11E2947800FF58D32228', :period_id => '133C5BD0A6C711E2ADF120FF58D32228', :net_sale_units => 6)
 # Sku Location
-Omni::SkuLocation.create(:sku_id => '74963C1EAC5A11E299E700FF58D32228', :location_id => '527BD056AC3E11E2947800FF58D32228')
+Omni::Inventory.create(:sku_id => '74963C1EAC5A11E299E700FF58D32228', :location_id => '527BD056AC3E11E2947800FF58D32228')

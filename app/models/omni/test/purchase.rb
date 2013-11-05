@@ -29,7 +29,7 @@ class Omni::Test::Purchase < Omni::Test::Base
     # puts x.errors.inspect
     x=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
     # puts x.state
-    test_it('Release a purchase','pending_approval',x.state)
+    test_it('Release a purchase requires approvals','draft',x.state)
 
     # approval scenarios 1 - 5 approve not allowed for these state
     ['draft','open','partial','complete','cancelled'].each do |s|

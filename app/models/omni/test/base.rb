@@ -6,10 +6,10 @@ class Omni::Test::Base
     create_base_test_data
 
     # RUN TESTS BY MODULE
-    # Omni::Test::Allocation.go
-    # Omni::Test::Purchase.go
+    Omni::Test::Allocation.go
+    Omni::Test::Purchase.go
     Omni::Test::Projection.go
-    # Omni::Test::Bts.go
+    Omni::Test::Bts.go
     # END OF RUN TESTS
 
     reindex_data
@@ -51,7 +51,7 @@ class Omni::Test::Base
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231211E3PROJECTION3UNITS', :display => 'projection 3 units profile', :allocation_formula => 'PROJECTION_3_UNITS', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211E3PROJECTION3UNITS').first
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231211E3PROJECTION4UNITS', :display => 'projection 4 units profile', :allocation_formula => 'PROJECTION_4_UNITS', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211E3PROJECTION4UNITS').first
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231XXXXLASTFORECASTUNITS', :display => 'last forecast units profile', :allocation_formula => 'LAST_FORECAST_UNITS', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211ELASTFORECASTUNITS').first
-    Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231XXXXXXXALLOCATEDUNITS', :display => 'allocated units profile', :allocation_formula => 'ALLOCATED_UNITS', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211APPROVEDPROJECTION').first
+    Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231XXPURCHASEALLOCATIONS', :display => 'allocated units profile', :allocation_formula => 'PURCHASE_ALLOCATION', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211APPROVEDPROJECTION').first
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231XXXAPPROVEDPROJECTION', :display => 'approve projection units profile', :allocation_formula => 'APPROVED_PROJECTION', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211APPROVEDPROJECTION').first
 
     Omni::SystemOption.where(:system_option_id=>'89278604AD2911E2AFA800FF58D32228').to_a.each {|x| x.delete}
@@ -79,12 +79,11 @@ class Omni::Test::Base
     Omni::Inventory.create(inventory_id: 'INVENTORYFORSKU1LOCATION4XXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '5247A038AC3E11E2947800FF58D32228')
     Omni::Inventory.create(inventory_id: 'INVENTORYFORSKU1LOCATION5XXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '526058B2AC3E11E2947800FF58D32228')
 
-    Omni::SkuLocation.all.each {|x| x.delete}
-    # Omni::SkuLocation.where(:sku_location_id=>['14A01280231F11E3BE4920C9D047LOC1','14A01280231F11E3BE4920C9D047LOC2','14A01280231F11E3BE4920C9D047LOC4','14A01280231F11E3BE4920C9D047LOC5']).to_a.each {|x| x.delete}
-    Omni::SkuLocation.create(:inventory_id=>'INVENTORYFORSKU1LOCATION1XXXXXXX',:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'51713A3EAC3E11E2947800FF58D32228',:is_authorized => true)
-    Omni::SkuLocation.create(:inventory_id=>'INVENTORYFORSKU1LOCATION2XXXXXXX',:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC2', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'51892F68AC3E11E2947800FF58D32228',:is_authorized => true)
-    Omni::SkuLocation.create(:inventory_id=>'INVENTORYFORSKU1LOCATION4XXXXXXX',:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC4', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'5247A038AC3E11E2947800FF58D32228',:is_authorized => true)
-    Omni::SkuLocation.create(:inventory_id=>'INVENTORYFORSKU1LOCATION5XXXXXXX',:sku_location_id=>'14A01280231F11E3BE4920C9D047LOC5', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'526058B2AC3E11E2947800FF58D32228',:is_authorized => false)
+    Omni::Inventory.all.each {|x| x.delete}
+    Omni::Inventory.create(:inventory_id=>'INVENTORYFORSKU1LOCATION1XXXXXXX',:sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'51713A3EAC3E11E2947800FF58D32228',:is_authorized => true)
+    Omni::Inventory.create(:inventory_id=>'INVENTORYFORSKU1LOCATION2XXXXXXX',:sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'51892F68AC3E11E2947800FF58D32228',:is_authorized => true)
+    Omni::Inventory.create(:inventory_id=>'INVENTORYFORSKU1LOCATION4XXXXXXX',:sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'5247A038AC3E11E2947800FF58D32228',:is_authorized => true)
+    Omni::Inventory.create(:inventory_id=>'INVENTORYFORSKU1LOCATION5XXXXXXX',:sku_id=>'285C928C0F3611E3BB7120C9D047DD15',:location_id=>'526058B2AC3E11E2947800FF58D32228',:is_authorized => false)
 
     Omni::LocationUser.where(:user_id=>'811166D4D50A11E2B45820C9D04AARON').to_a.each {|x| x.delete}
     Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC1', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
@@ -158,8 +157,8 @@ class Omni::Test::Base
     x << {scenario: 'Projection 3 Units',       :allocation_profile_id => '913BB680231211E3PROJECTION3UNITS', :units_to_allocate => 100, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
     x << {scenario: 'Projection 4 Units',       :allocation_profile_id => '913BB680231211E3PROJECTION4UNITS', :units_to_allocate => 100, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
     x << {scenario: 'Last Forecast Units',     :allocation_profile_id => '913BB680231XXXXLASTFORECASTUNITS', :units_to_allocate => 100, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
-    x << {scenario: 'Allocated Units',           :allocation_profile_id => '913BB680231XXXXXXXALLOCATEDUNITS', :units_to_allocate => 100, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>0, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0 }
-    x << {scenario: 'Approved Projection',   :allocation_profile_id => '913BB680231XXXAPPROVEDPROJECTION', :units_to_allocate => 100, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
+    x << {scenario: 'Purchase Allocation formula',   :allocation_profile_id => '913BB680231XXPURCHASEALLOCATIONS', :units_to_allocate => 100, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>0, :expected_allocation_results_loc_2=>0, :expected_allocation_results_loc_3=>0 }
+    x << {scenario: 'Approved Projection formula',   :allocation_profile_id => '913BB680231XXXAPPROVEDPROJECTION', :units_to_allocate => 100, :order_pack_size => 1, :percent_to_allocate=>100, :allocated_units_locked_loc_1=>0,  :allocated_units_locked_loc_2=>0,  :allocated_units_locked_loc_3=>0, :expected_allocation_results_loc_1=>50, :expected_allocation_results_loc_2=>40, :expected_allocation_results_loc_3=>10 }
     x
   end
 

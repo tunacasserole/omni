@@ -1,18 +1,11 @@
   class Omni::PurchaseDetail < ActiveRecord::Base
-# My Version
-  # MIXINS (Start) ======================================================================
-  # MIXINS (End)
 
   # METADATA (Start) ====================================================================
-  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :purchase_details
   self.primary_key                = :purchase_detail_id
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
 
@@ -36,15 +29,13 @@
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
   has_many     :unlocked_purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id', :conditions => ["state != 'locked'" ]
-
   has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
   belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
   belongs_to   :allocation_profile,   :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
-
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => :sku_id
-  has_many     :sku_locations,        :class_name => 'Omni::SkuLocation',         :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
-  has_many     :locations,            :class_name => 'Omni::Location',            :through     => :sku_locations
+  has_many     :inventories,        :class_name => 'Omni::Inventory',         :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
+  has_many     :locations,            :class_name => 'Omni::Location',            :through     => :inventories
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -56,31 +47,9 @@
   end
   # MAPPED ATTRIBUTES (End)
 
-
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-
-  # COMPUTED ATTRIBUTES (End)
-
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # FILTERS (Start) =====================================================================
-
-  # FILTERS (End)
-
-
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
   # ORDERING (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -100,11 +69,8 @@
     text     :sku_display_fulltext,        :using => :sku_display
     text     :sku_supplier_fulltext,       :using => :sku_supplier_display
     text     :purchase_display_fulltext,   :using => :purchase_display
-
   end
-
   # INDEXING (End)
-
 
   # HOOKS (Start) =======================================================================
   hook :before_create, :set_defaults, 10
@@ -327,10 +293,10 @@
 
     # create a new PurchaseAllocation entry for each location that does not already
     # have an existing one
-    self.sku_locations.each do |sku_location|
+    self.inventories.each do |inventory|
 
       # determine if there is aleady a purchase allocation for the current location
-      unless self.purchase_allocations.select(:location_id).include?(sku_location.location_id)
+      unless self.purchase_allocations.select(:location_id).include?(inventory.location_id)
 
         # determine the type of formula to use as defined by the allocation profile
         #
@@ -347,29 +313,29 @@
         case allocation_profile_formula
 
           when 'BTS_NEED'
-            bts_detail = sku_location.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
+            bts_detail = inventory.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
             units_needed =  bts_detail ? bts_detail.need : 0
-            temp_purchase_allocations.merge!(sku_location.location_id => units_needed)
+            temp_purchase_allocations.merge!(inventory.location_id => units_needed)
 
           when /PROJECTION_\d_UNITS/
-            projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
+            projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
             units_needed =  projection_detail.send(allocation_profile_formula.downcase) ? projection_detail.send(allocation_profile_formula.downcase) : 0
-            temp_purchase_allocations.merge!(sku_location.location_id => units_needed)
+            temp_purchase_allocations.merge!(inventory.location_id => units_needed)
 
           when 'LAST_FORECAST_UNITS'
-            projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
+            projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
             units_needed =  projection_detail.last_forecast_units ? projection_detail.last_forecast_units : 0
-            temp_purchase_allocations.merge!(sku_location.location_id => units_needed)
+            temp_purchase_allocations.merge!(inventory.location_id => units_needed)
 
           when 'ALLOCATED_UNITS'
-            projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
+            projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
             units_needed =  projection_detail.send("last_forecast_units") || 0
-            temp_purchase_allocations.merge!(sku_location.location_id => units_needed)
+            temp_purchase_allocations.merge!(inventory.location_id => units_needed)
 
           when 'APPROVED_PROJECTION'
-            projection_detail = sku_location.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
+            projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
             units_needed =  projection_detail.send("last_forecast_units") || 0
-            temp_purchase_allocations.merge!(sku_location.location_id => units_needed)
+            temp_purchase_allocations.merge!(inventory.location_id => units_needed)
 
         end
 

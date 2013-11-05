@@ -3,13 +3,10 @@ Ext.define('Omni.view.inventories.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-inventories-Form',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-    
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       sku_idLabel:                                Omni.i18n.model.Inventory.sku_id,
@@ -38,7 +35,24 @@ Ext.define('Omni.view.inventories.Form', {
       last_receipt_dateLabel:                     Omni.i18n.model.Inventory.last_receipt_date,
       first_sale_dateLabel:                       Omni.i18n.model.Inventory.first_sale_date,
       last_sale_dateLabel:                        Omni.i18n.model.Inventory.last_sale_date,
-      last_inventory_dateLabel:                   Omni.i18n.model.Inventory.last_inventory_date
+      last_inventory_dateLabel:                   Omni.i18n.model.Inventory.last_inventory_date,
+      replenishment_methodLabel:                  Omni.i18n.model.Inventory.replenishment_method,
+      replenishment_sourceLabel:                  Omni.i18n.model.Inventory.replenishment_source,
+      supplier_idLabel:                           Omni.i18n.model.Inventory.supplier_id,
+      safety_stock_unitsLabel:                    Omni.i18n.model.Inventory.safety_stock_units,
+      safety_stock_daysLabel:                     Omni.i18n.model.Inventory.safety_stock_days,
+      smoothing_factorLabel:                      Omni.i18n.model.Inventory.smoothing_factor,
+      forecast_profile_idLabel:                   Omni.i18n.model.Inventory.forecast_profile_id,
+      minimum_unitsLabel:                         Omni.i18n.model.Inventory.minimum_units,
+      maximum_unitsLabel:                         Omni.i18n.model.Inventory.maximum_units,
+      seasonal_index_idLabel:                     Omni.i18n.model.Inventory.seasonal_index_id,
+      forecastLabel:                              Omni.i18n.model.Inventory.forecast,
+      velocity_codeLabel:                         Omni.i18n.model.Inventory.velocity_code,
+      standard_deviationLabel:                    Omni.i18n.model.Inventory.standard_deviation,
+      is_authorizedLabel:                         Omni.i18n.model.Inventory.is_authorized,
+      is_taxableLabel:                            Omni.i18n.model.Inventory.is_taxable,
+      is_special_orderLabel:                      Omni.i18n.model.Inventory.is_special_order,
+      is_discontinuedLabel:                       Omni.i18n.model.Inventory.is_discontinued,
     });
     // LABELS (End)
 
@@ -81,7 +95,45 @@ Ext.define('Omni.view.inventories.Form', {
             { name: 'last_sale_date',                 fieldLabel: this.last_sale_dateLabel,             allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'last_inventory_date',            fieldLabel: this.last_inventory_dateLabel,        allowBlank: true,   disabled: false,    xtype: 'datefield'        }
           ]
+        },
+       {
+          xtype: 'fieldset',
+          title: 'General',
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { name: 'is_authorized',                  fieldLabel: this.is_authorizedLabel,              allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_taxable',                     fieldLabel: this.is_taxableLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_special_order',               fieldLabel: this.is_special_orderLabel,           allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_discontinued',                fieldLabel: this.is_discontinuedLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
+          ]
         }
+       // ,{
+       //    xtype: 'fieldset',
+       //    title: 'Replenishment',
+       //    collapsible: true,
+       //    defaultType: 'textfield',
+       //    defaults: {anchor: '70%'},
+       //    layout: 'anchor',
+       //    items:[
+       //      { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_METHOD' },
+       //      { name: 'replenishment_source',           fieldLabel: this.replenishment_sourceLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_SOURCE' },
+       //      { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
+       //      { name: 'safety_stock_units',             fieldLabel: this.safety_stock_unitsLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+       //      { name: 'safety_stock_days',              fieldLabel: this.safety_stock_daysLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+       //      { name: 'smoothing_factor',               fieldLabel: this.smoothing_factorLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+       //      { name: 'forecast_profile_id',            fieldLabel: this.forecast_profile_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ForecastProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'forecast_profile_id', itemTpl:'{display}' },
+       //      { name: 'minimum_units',                  fieldLabel: this.minimum_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+       //      { name: 'maximum_units',                  fieldLabel: this.maximum_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+       //      { name: 'seasonal_index_id',              fieldLabel: this.seasonal_index_idLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SeasonalIndex',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'seasonal_index_id', itemTpl:'{display}' },
+       //      { name: 'forecast',                       fieldLabel: this.forecastLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+       //      { name: 'econeview_date',               fieldLabel: this.next_review_dateLabel,           allowBlank: true,   disabled: false,    xtype: 'datefield'        },
+       //      { name: 'velocity_code',                  fieldLabel: this.velocity_codeLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+       //      { name: 'standard_deviation',             fieldLabel: this.standard_deviationLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+       //    ]
+       //  }
       ]
     });
     // FIELDSETS (End)

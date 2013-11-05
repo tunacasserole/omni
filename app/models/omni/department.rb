@@ -90,19 +90,19 @@ class Omni::Department < ActiveRecord::Base
     skus
   end
 
-  def sku_locations
-    sku_locations = []
+  def inventories
+    # x = []
     # self.classifications.each do |classification|
     #   classification.subclasses.each do |subclass|
     #     subclass.styles.each do |style|
-    #       style.sku_locations.each do |sl|
-    #         sku_locations << sl
+    #       style.inventories.each do |i|
+    #         x << i
     #       end
     #     end
     #   end
     # end
-    sku_locations
-    Omni::SkuLocation.all
+    # x
+    Omni::Inventory.all
   end
   # HELPERS (End)
 

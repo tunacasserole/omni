@@ -1,8 +1,4 @@
   class Omni::Projection < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-  # MIXINS (End)
-
   # METADATA (Start) ====================================================================
   self.table_name   = :projections
   self.primary_key  = :projection_id
@@ -229,41 +225,29 @@
   end
 
   def build
-    # Insert ProjectionDetail row for every authorized SKU/Location combination (SkuLocation.is_authorized = true)
-    # Create a ProjectionDetail for every active SKU belonging to the Departement in the Projection and every active selling location authorized for the SKU.
-    sku_locations = Omni::SkuLocation.all
-    sku_locations.where(is_authorized: true).each {|sl| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: sl.sku_id, location_id: sl.location_id, forecast_profile_id: self.forecast_profile_id)}
+    # Insert ProjectionDetail row for every authorized SKU/Location combination (Inventory.is_authorized = true) belonging to the Departement in the Projection and every active selling location authorized for the SKU.
+    inventories = Omni::Inventory.all
+    inventories.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id)}
     self.state = 'built'
     self.save
   end
 
   def process_close
-     # current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
-    closer = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
-    return false unless closer.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first
-    self.projection_closer_user_id = closer.user_id
-    phase = (self.state.byteslice(11).to_i + 1)
-    projection_details = Omni::ProjectionDetail.where(projection_id: self.projection_id)
-    case self.state
-      when 'projection_1','projection_2','projection_3'
-        projection_details.each do |pd|
-          pd.send("projection_#{phase.to_s}_units=", pd.send("projection_#{(phase-1).to_s}_units"))
+    user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
+
+    if self.state =~ /projection_\d/ && user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first ? true : false
+        phase = (self.state.byteslice(11).to_i + 1)
+
+        self.projection_details.each do |pd|
+          pd.send("projection_#{phase.to_s}_units=", pd.send("projection_#{(phase-1).to_s}_units")) unless self.state == 'projection_4'
           pd.state = 'approved'
           pd.save
         end
-        self.state = "projection_#{phase}"
-        self.save
 
-      when 'projection_4'
-        self.state = 'complete'
+        self.projection_closer_user_id = user.user_id
+        self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{phase}"
         self.save
-        self.projection_details.each do |x|
-          x.state = 'approved'
-          x.save
-        end
-
     end
-    return true
   end
 
   def process_release

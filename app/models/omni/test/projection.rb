@@ -1,7 +1,7 @@
 class Omni::Test::Projection < Omni::Test::Base
 
   def self.go
-    create_security_data
+    # create_security_data
     test_projection
   end
 
@@ -13,7 +13,7 @@ class Omni::Test::Projection < Omni::Test::Base
     @pd=Omni::ProjectionDetail.where(:projection_detail_id => 'PROJ2A1C193611E3A22D20CXXPRODET1').first
 
     x=@p
-    # test_it('It creates one with details', 3, x.projection_details.count)
+    test_it('It creates one with details', 3, x.projection_details.count)
 
     x.projection_details.each {|x| x.delete}
     test_it('it destroys all details', 0, x.projection_details.count)
@@ -22,16 +22,21 @@ class Omni::Test::Projection < Omni::Test::Base
     test_it('It builds projection detail rows', 3, x.projection_details.count)
 
     x.forecast
-    self.forecasting_scenarios.each {|x| process_projection_scenario x}
     test_it('It forecasts projection detail rows', 3, x.projection_details.count)
-
+    # self.forecasting_scenarios.each {|x| process_closing_scenario x}
 
     @@model_action = 'Close'
-    # self.closing_scenarios.each {|x| process_projection_scenario x}
+    self.closing_scenarios.each {|x| process_closing_scenario x}
   end
 
-  def self.process_projection_scenario(s)
-    x=@p
+  def self.process_closing_scenario(s)
+    # puts "\n" + s[:scenario]
+    Omni::ProjectionDetail.all.each {|x| x.delete}
+    Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION2', :projection_detail_id => 'PROJ2A1C193611E3A22D20CXXPRODET1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50)
+
+    Omni::Projection.all.each {|x| x.delete}
+    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', state: 'forecast', department_id: '5EA20FF2FE0611E280D020C9D047DD15', forecast_profile_id: '42608AAEE7D011E28FB520C9D0471234')
+
     x.state = s[:projection_state]
     x.projection_approver_user_id = s[:projection_approver_user_id]
     x.projection_closer_user_id = s[:projection_closer_user_id]
@@ -39,7 +44,7 @@ class Omni::Test::Projection < Omni::Test::Base
     x.approval_4_date = s[:approval_4_date]
     x.save
 
-    y=@pd
+    y=x.projection_details.first
     y.state = s[:projection_detail_state]
     y.projection_1_units = s[:projection_1_units]
     y.projection_2_units = s[:projection_2_units]
@@ -47,17 +52,14 @@ class Omni::Test::Projection < Omni::Test::Base
     y.projection_4_units = s[:projection_4_units]
     y.save
 
-    # x=Omni::Projection.where(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION2').first
     x.process_close
-    y=Omni::ProjectionDetail.where(:projection_detail_id => 'PROJ2A1C193611E3A22D20CXXPRODET1').first
-
     expected = s[:expected]
 
     case s[:compare_to_model]
     when 'projection'
       actual = x.send(s[:compare_to_field])
     when 'projection_detail'
-      actual = y.send(s[:compare_to_field])
+      actual =  x.projection_details.first.send(s[:compare_to_field])
     when 'email'
       actual = 'not yet implemented'
     end
@@ -84,9 +86,10 @@ class Omni::Test::Projection < Omni::Test::Base
 
     x << {:scenario=>'It updates state from projection_1 to projection_2', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,expected: 'projection_2', compare_to_model: 'projection', compare_to_field: 'state'}
     x << {:scenario=>'It updates projection_closer_user_id', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,                     expected: user_3,            compare_to_model: 'projection', compare_to_field: 'projection_closer_user_id'}
+
     x << {:scenario=>'It updates Projection Detail projection_2_units', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,     expected: 100,                compare_to_model: 'projection_detail', compare_to_field: 'projection_2_units'}
-    x << {:scenario=>'It updates Projection Detail state', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,     expected: 'approved',      compare_to_model: 'projection_detail', compare_to_field: 'state'}
-    x << {:scenario=>'It updates Projection Detail state', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'draft',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,     expected: 'approved',      compare_to_model: 'projection_detail', compare_to_field: 'state'}
+    x << {:scenario=>'It updates Projection Detail state from draft', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'draft',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,     expected: 'approved',      compare_to_model: 'projection_detail', compare_to_field: 'state'}
+    x << {:scenario=>'It updates Projection Detail state from approved', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,     expected: 'approved',      compare_to_model: 'projection_detail', compare_to_field: 'state'}
     x << {:scenario=>'It allows closing with proper Permission', :user_id=>user_1, projection_state: 'projection_2', projection_approver_user_id: nil, projection_closer_user_id: user_1, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 150, projection_3_units: 0, projection_4_units: 0,     expected: 'projection_3',      compare_to_model: 'projection', compare_to_field: 'state'}
 
     x << {:scenario=>'It updates state from projection_2 to projection_3', :user_id=>user_2, projection_state: 'projection_2', projection_approver_user_id: nil, projection_closer_user_id: user_1, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 150, projection_3_units: 0, projection_4_units: 0,     expected: 'projection_3',      compare_to_model: 'projection', compare_to_field: 'state'}
@@ -103,14 +106,6 @@ class Omni::Test::Projection < Omni::Test::Base
     x << {:scenario=>'It sends an email to Projection Approver', :user_id=>user_2, projection_state: 'projection_3', projection_approver_user_id: user_1, projection_closer_user_id: user_1, approval_3_date: Date.yesterday, approval_4_date: nil, projection_detail_state: 'draft',  projection_1_units: 100, projection_2_units: 150, projection_3_units: 200, projection_4_units: 0,     expected: user_1,      compare_to_model: 'email', compare_to_field: 'recipient'}
     x
   end
-
-  # def self.create_projection_data
-  #   Omni::Projection.all.each {|x| x.delete}
-  #   Omni::Projection.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :state => 'active', :department_id => '5EA20FF2FE0611E280D020C9D047DD15')
-
-  #   Omni::ProjectionDetail.all.each {|x| x.delete}
-  #   Omni::ProjectionDetail.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', projection_detail_id: '4D594A1C193611E3A22D20CXXPRODET1', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '51713A3EAC3E11E2947800FF58D32228', first_forecast_units: 100, last_forecast_units: 100, last_forecast_date: Date.yesterday, projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0)
-  # end
 
   def self.create_security_data
     # Buildit::User.where(user_id: ['TESTUSERXXXXXXXXXXXXXXXBUYERBILL','TESTUSERXXXXXXXXXXXXXPLANNERPAUL','TESTUSERXXXXXXXXMERCHANDISERMARY','TESTUSERXXXXXXXXXXXBIGCHEESEBART','TESTUSERXXXXXXXXXXXXXXBUYERBETTY']).to_a.each {|x| x.delete}

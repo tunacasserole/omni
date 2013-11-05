@@ -3,13 +3,13 @@ Ext.define('Omni.view.skus.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-skus-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.Sku.display,
@@ -61,10 +61,18 @@ Ext.define('Omni.view.skus.Form', {
       order_uom_codeLabel:                        Omni.i18n.model.Sku.order_uom_code,
       order_package_typeLabel:                    Omni.i18n.model.Sku.order_package_type,
       garment_piecesLabel:                        Omni.i18n.model.Sku.garment_pieces,
-      is_special_orderLabel:                      Omni.i18n.model.Sku.is_special_order,
-      is_special_sizeLabel:                       Omni.i18n.model.Sku.is_special_size,
+      is_special_orderLabel:                 Omni.i18n.model.Sku.is_special_order,
+      is_special_sizeLabel:                    Omni.i18n.model.Sku.is_special_size,
       sourceLabel:                                Omni.i18n.model.Sku.source,
-      source_idLabel:                             Omni.i18n.model.Sku.source_id            
+      source_idLabel:                           Omni.i18n.model.Sku.source_id,
+      conversion_costLabel:                 Omni.i18n.model.Sku.conversion_cost,
+      first_costLabel:                            Omni.i18n.model.Sku.first_cost,
+      last_costLabel:                             Omni.i18n.model.Sku.last_cost,
+      average_costLabel:                      Omni.i18n.model.Sku.average_cost,
+      on_hand_unitsLabel:                   Omni.i18n.model.Sku.on_hand_units,
+      cost_poolLabel:                           Omni.i18n.model.Sku.cost_pool,
+      retail_poolLabel:                         Omni.i18n.model.Sku.retail_pool,
+      is_updated_average_costLabel: Omni.i18n.model.Sku.is_updated_average_cost,
     });
     // LABELS (End)
 
@@ -74,7 +82,7 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'General',
-          scheme: 'fieldset_scheme_1',          
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -95,14 +103,14 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'Conversion',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
             { name: 'generic_sku_id',                 fieldLabel: this.generic_sku_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',  defaultSearch: { with: {state: {equal_to: 'new'}}},
-              store:      Ext.create('Omni.store.Sku',{storeId: 'GenericSkus', pageSize: 10 }), 
+              store:      Ext.create('Omni.store.Sku',{storeId: 'GenericSkus', pageSize: 10 }),
               displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             { name: 'site_id',                        fieldLabel: this.site_idLabel,                    allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Site',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'site_id', itemTpl:'{display}' },
@@ -113,7 +121,7 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'Style, Color and Size',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -130,7 +138,7 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'Tracking Dates',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -145,7 +153,7 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'Product Classification',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -161,7 +169,7 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'Pricing',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -174,7 +182,7 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'Replenishment',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -192,7 +200,7 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'Selling Unit Definition',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -210,7 +218,7 @@ Ext.define('Omni.view.skus.Form', {
         {
           xtype: 'fieldset',
           title: 'Ordering Information',
-          scheme: 'fieldset_scheme_1',                    
+          scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
@@ -222,8 +230,28 @@ Ext.define('Omni.view.skus.Form', {
             { name: 'garment_pieces',                 fieldLabel: this.garment_piecesLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_special_order',               fieldLabel: this.is_special_orderLabel,           allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_special_size',                fieldLabel: this.is_special_sizeLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
+
           ]
-        }
+        },
+    {
+          xtype: 'fieldset',
+          title: 'Sku Costs',
+          scheme: 'fieldset_scheme_1',
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { xtype: 'textfield', name: 'conversion_cost',                     fieldLabel: this.conversion_costLabel                  , allowBlank: true },
+            { xtype: 'textfield', name: 'first_cost',                     fieldLabel: this.first_costLabel                  , allowBlank: true },
+            { xtype: 'textfield', name: 'last_cost',                      fieldLabel: this.last_costLabel                   , allowBlank: true },
+            { xtype: 'textfield', name: 'average_cost',                   fieldLabel: this.average_costLabel                , allowBlank: true },
+            { xtype: 'textfield', name: 'on_hand_units',                  fieldLabel: this.on_hand_unitsLabel               , allowBlank: true },
+            { xtype: 'textfield', name: 'cost_pool',                      fieldLabel: this.cost_poolLabel                   , allowBlank: true },
+            { xtype: 'textfield', name: 'retail_pool',                    fieldLabel: this.retail_poolLabel                 , allowBlank: true },
+            { xtype: 'checkbox', name: 'is_updated_average_cost',        fieldLabel: this.is_updated_average_costLabel     , allowBlank: true },
+          ]
+        },
       ]
     });
     // FIELDSETS (End)

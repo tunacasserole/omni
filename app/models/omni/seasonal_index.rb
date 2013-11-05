@@ -1,10 +1,4 @@
 class Omni::SeasonalIndex < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :seasonal_indexes
   self.primary_key  = :seasonal_index_id
@@ -12,21 +6,21 @@ class Omni::SeasonalIndex < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
   validates    :seasonal_index_name,             :presence    => true
-  validates    :seasonal_index_name,             :uniqueness  => true,                         :allow_nil => false 
+  validates    :seasonal_index_name,             :uniqueness  => true,                         :allow_nil => false
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :seasonal_index_id,                :override  =>  false,        :with  => :guid              
+  default      :seasonal_index_id,                :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m|"#{m.seasonal_index_name}"}
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -41,7 +35,7 @@ class Omni::SeasonalIndex < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :style_locations,                 :class_name => 'Omni::StyleLocation',           :foreign_key => 'seasonal_index_id'
-  has_many     :sku_locations,                   :class_name => 'Omni::SkuLocation',             :foreign_key => 'seasonal_index_id'
+  # has_many     :inventories,                   :class_name => 'Omni::Inventory',             :foreign_key => 'seasonal_index_id'
   # ASSOCIATIONS (End)
 
 
@@ -69,9 +63,9 @@ class Omni::SeasonalIndex < ActiveRecord::Base
   searchable do
     string   :seasonal_index_name
     boolean  :is_destroyed
- 
+
     text     :seasonal_index_name_fulltext, :using => :seasonal_index_name
-  end 
+  end
   # INDEXING (End)
 
 

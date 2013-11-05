@@ -1,7 +1,7 @@
 /**
  *  The PROCESS button will be clicked from the context menu bound to the gridview.
  */
-Ext.define('Omni.logic.sku_locations.ExplorerProcessSelectedItems', {
+Ext.define('Omni.logic.inventories.ExplorerProcessSelectedItems', {
   statics: {
     click:function(btn, event_name){
       var explorerGridView = btn.ownerCt.contextOwner.down('grid').getView();
@@ -14,10 +14,10 @@ Ext.define('Omni.logic.sku_locations.ExplorerProcessSelectedItems', {
         function(btn){
           if(btn == 'yes'){
             Ext.each(selectedItems, function(item){
-              Omni.service.SkuLocation.fireEvent(
+              Omni.service.Inventory.fireEvent(
                 {
-                  name: event_name, 
-                  id: item.get('sku_location_id')
+                  name: event_name,
+                  id: item.get('inventory_id')
                 },
                 function(response, e){
                   if(response.success == true){

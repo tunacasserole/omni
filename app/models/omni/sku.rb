@@ -53,6 +53,13 @@ class Omni::Sku < ActiveRecord::Base
   default      :garment_pieces,                   :override  =>  false,        :to    => 0
   default      :is_special_order,                 :override  =>  false,        :to    => false
   default      :is_special_size,                  :override  =>  false,        :to    => false
+  default      :first_cost,                       :override  =>  false,        :to    => 0
+  default      :last_cost,                        :override  =>  false,        :to    => 0
+  default      :average_cost,                     :override  =>  false,        :to    => 0
+  default      :on_hand_units,                    :override  =>  false,        :to    => 0
+  default      :cost_pool,                        :override  =>  false,        :to    => 0
+  default      :retail_pool,                      :override  =>  false,        :to    => 0
+  default      :is_updated_average_cost,          :override  =>  false,        :to    => false
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -80,7 +87,7 @@ class Omni::Sku < ActiveRecord::Base
   belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
   has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
   has_many     :sku_aliases,                     :class_name => 'Omni::SkuAlias',                :foreign_key => 'sku_id'
-  has_many     :sku_locations,                   :class_name => 'Omni::SkuLocation',             :foreign_key => 'sku_id'
+  has_many     :inventories,                   :class_name => 'Omni::Inventory',             :foreign_key => 'sku_id'
   # ASSOCIATIONS (End)
 
 

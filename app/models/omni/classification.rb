@@ -1,36 +1,23 @@
 class Omni::Classification < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :classifications
   self.primary_key  = :classification_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :uniqueness    => true
   validates    :department_id,                   :presence      => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  default      :classification_id,                :override  =>  false,        :with  => :guid              
+  default      :classification_id,                :override  =>  false,        :with  => :guid
   default      :classification_nbr,               :override  =>  false,        :with  => :sequence,         :named=>"CLASSIFICATION_NBR"
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -39,7 +26,6 @@ class Omni::Classification < ActiveRecord::Base
     item_template      '{display}'
   end
   # REFERENCE (End)
-
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :planner_user,                    :class_name => 'Buildit::User',                     :foreign_key => 'planner_user_id'
@@ -85,20 +71,18 @@ class Omni::Classification < ActiveRecord::Base
     skus
   end
 
-  def sku_locations
-    sku_locations = []
+  def inventories
+    inventories = []
     self.subclasses.each do |subclass|
       subclass.styles.each do |style|
-        style.sku_locations.each do |sl|
-          sku_locations << sl
+        style.inventories.each do |sl|
+          inventories << sl
         end
       end
     end
-    sku_locations
+    inventories
   end
   # HELPERS (End)
-
-
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -106,12 +90,12 @@ class Omni::Classification < ActiveRecord::Base
     string   :classification_nbr
     string   :department_display do department.display if department end
     string   :department_id
- 
+
     text     :department_id
     text     :display_fulltext, :using => :display
     text     :classification_nbr_fulltext, :using => :classification_nbr
     text     :department_display_fulltext, :using => :department_display
-  end 
+  end
   # INDEXING (End)
 
 

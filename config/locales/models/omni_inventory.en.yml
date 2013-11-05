@@ -37,5 +37,37 @@ en:
         first_sale_date:                 First Sale Date
         last_sale_date:                  Last Sale Date
         last_inventory_date:             Last Inventory Date
+        replenishment_method:            Replenishment Method
+        replenishment_source:            Replenishment Source
+        supplier_display:                Supplier
+        supplier_id:                     Primary Supplier
+        safety_stock_units:              Safety Stock Units
+        safety_stock_days:               Safety Stock Days
+        smoothing_factor:                Smoothing Factor
+        forecast_profile_display:        Forecast Profile
+        forecast_profile_id:             Demand Forecast Profile
+        minimum_units:                   Minimum Units On Hand
+        maximum_units:                   Maximum Units On Hand
+        seasonal_index_display:          Seasonal Index
+        seasonal_index_id:               Seasonal Index
+        forecast:                        Average Weekly Demand
+        velocity_code:                   Velocity Code
+        standard_deviation:              Mean Absolute Deviation
+        sale_units_ytd:                        sale_units_ytd
+        sale_units_py1:                        sale_units_py1
+        sale_units_py2:                        sale_units_py2
+        sale_units_py3:                        sale_units_py3
+        sale_retail_ytd:                        sale_retail_ytd
+        sale_retail_py1:                        sale_retail_py1
+        sale_retail_py2:                        sale_retail_py2
+        sale_retail_py3:                        sale_retail_py3
+        sale_cost_ytd:                        sale_cost_ytd
+        sale_cost_py1:                        sale_cost_py1
+        sale_cost_py2:                        sale_cost_py2
+        sale_cost_py3:                        sale_cost_py3
+        is_authorized:                   Authorized for Sale
+        is_taxable:                      Taxable
+        is_special_order:                Special Order
+        is_discontinued:                 Discontinued
         is_destroyed:                    Is Destroyed
 

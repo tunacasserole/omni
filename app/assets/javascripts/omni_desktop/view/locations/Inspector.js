@@ -38,6 +38,13 @@ Ext.define('Omni.view.locations.Inspector', {
              }
           }
         }
+        ,{title: 'Inventory', xtype: 'omni-inventories-Explorer',
+           defaultSearch: { with:
+             {
+               location_id:   {equal_to: me.record.get('location_id')}
+             }
+          }
+        }
         ,{title: 'Areas', xtype: 'omni-areas-Explorer',
            defaultSearch: { with:
              {
