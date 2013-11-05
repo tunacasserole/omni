@@ -32,23 +32,23 @@ class Omni::Test::Purchase < Omni::Test::Base
     test_it('Release a purchase','pending_approval',x.state)
 
     # approval scenarios 1 - 5 approve not allowed for these state
-    # ['draft','open','partial','complete','cancelled'].each do |s|
-    #   x=@p
-    #   x.state = s
-    #   x.save
-    #   x.approve
-    #   test_it('Test approve transition - approve not allowed for this state',s,x.state)
-    # end
+    ['draft','open','partial','complete','cancelled'].each do |s|
+      x=@p
+      x.state = s
+      x.save
+      x.approve
+      test_it('Test approve transition - approve not allowed for this state',s,x.state)
+    end
 
     # x.print
     # test_it('Print a purchase','PRINT','NOT IMPLEMENTED YET')
 
-    # x.cancel
-    # test_it('Cancel a purchase','cancelled',x.state)
+    x.cancel
+    test_it('Cancel a purchase','cancelled',x.state)
 
     # approval scenarios 6 - 20 various approval tests
     @@model_action = 'Approval'
-    # approval_scenarios.each {|s| test_approval_scenario s}
+    approval_scenarios.each {|s| test_approval_scenario s}
 
     # run 26 different allocation tests
     # @@model_action = 'Allocation'
