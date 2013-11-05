@@ -1,7 +1,7 @@
 class CreateOmniAllocations < ActiveRecord::Migration
   def change
     @connection = ActiveRecord::Base.connection
-    drop_table :allocations #if ActiveRecord::Base.connection.tables.include?('allocations')
+    drop_table :allocations if ActiveRecord::Base.connection.tables.include?('allocations')
     create_table(:allocations, :id => false) do |t|
       t.column   :allocation_id,              :string,            :null  =>  false,   :limit   => 32
       t.column   :allocatable_id,             :string,            :null  =>  true,   :limit   => 32
