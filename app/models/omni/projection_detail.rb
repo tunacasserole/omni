@@ -22,11 +22,11 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   default      :projection_line_nbr,              :override  =>  false,        :with  => :sequence,         :named=>"PROJECTION_LINE_NBR"
   default      :last_forecast_units,              :override  =>  false,        :to    => 0
   default      :first_forecast_units,             :override  =>  false,        :to    => 0
-  # default      :projection_1_units,               :override  =>  true,         :to    => 0
-  # default      :projection_2_units,               :override  =>  true,         :to    => 0
-  # default      :projection_3_units,               :override  =>  true,         :to    => 0
-  # default      :projection_4_units,               :override  =>  true,         :to    => 0
-  # default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :projection_1_units,               :override  =>  false,         :to    => 0
+  default      :projection_2_units,               :override  =>  false,         :to    => 0
+  default      :projection_3_units,               :override  =>  false,         :to    => 0
+  default      :projection_4_units,               :override  =>  false,         :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
