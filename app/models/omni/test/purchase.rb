@@ -15,7 +15,7 @@ class Omni::Test::Purchase < Omni::Test::Base
     test_purchase_detail_events
 
     # test approve, receive, allocate & cancel a purchase detail
-    test_purchase_allocation_events
+    # test_purchase_allocation_events
   end
 
   def self.test_purchase_events
