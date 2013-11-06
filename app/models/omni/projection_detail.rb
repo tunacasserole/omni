@@ -132,7 +132,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     # read SkuPeriodResults for ProjectionDetail.sku_id, ProjectionDetail.location_id and current year -3. Sum regular_sale_units.
   end
   def compute_average_sales
-    (self.sale_units_py1+self.sale_units_py2+self.sale_units_py3) / 3
+    ((self.sale_units_py1||0)+(self.sale_units_py2||0)+(self.sale_units_py3||0)) / 3
   end
   def compute_standard_deviation
     avg = self.average_sales
