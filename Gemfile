@@ -22,7 +22,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem "extjs4-rails",   :path => 'vendor/gems/extjs4-rails'
+#gem "extjs4-rails",   :path => 'vendor/gems/extjs4-rails'
 
 gem "buildit"
 

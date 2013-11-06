@@ -1,8 +1,3 @@
-PATH
-  remote: vendor/gems/extjs4-rails
-  specs:
-    extjs4-rails (4.2.1.884)
-
 GEM
   remote: https://rubygems.org/
   remote: http://tunacasserole:horizon@gems.buildit.io/
@@ -84,6 +79,7 @@ GEM
     colored (1.2)
     erubis (2.7.0)
     execjs (2.0.2)
+    extjs4-rails (4.2.1.884)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     hike (1.2.3)
@@ -188,7 +184,6 @@ PLATFORMS
 DEPENDENCIES
   buildit
   buildit_comm
-  extjs4-rails!
   mysql2
   puma
   rails (= 4.0.0)
