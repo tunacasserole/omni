@@ -82,7 +82,7 @@
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, :initial => :new do
 
   ### STATES ###
     state :draft do
@@ -116,28 +116,13 @@
       validates :approval_4_date,                   :presence => true
     end
 
-  ### CALLBACKS ###
-    # after_transition :on => :build, :do => :process_build
+    after_transition :on => :build, :do => :process_build
     after_transition :on => :release, :do => :process_release
     # after_transition :on => :close, :do => :process_close
 
-  ### EVENTS ###
-# The following actions may run on this model:
-    # Action      State Event   Description
-    # build           true      Build the Projection Details
-    # forecast        false     Calculate projection forecast (changes state only if state was previously draft)
-    # release         true      Builds Projection Locations
-    # close           false     Copy projection_"n"_units to projection_"n+1"_units
-    # approve         false     Approve projection_3 or projection_4
-#
-
-    # event :build do
-    #   transition :new => :draft
-    # end
-
-    # event :close do
-      # transition :any => :complete
-    # end
+    event :build do
+      transition :new => :draft
+    end
 
     event :release do
       transition :forecast => :projection_1
@@ -147,51 +132,89 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
+ def forecast
+    return false if ['new','complete'].include? self.state #JASON
 
+    self.projection_details.each do |detail|
+      # JASON - inventory is a two part key, how to leverage an association
+      inv = Omni::Inventory.where(sku_id: detail.sku_id, location_id: detail.location_id).first
+      next unless inv
+
+      # calculate forecasted units using formula from forecast_profile;
+      profile = self.forecast_profile
+      forecasted_units = (profile.sales_py1_weight * (inv.sale_units_py1||0)) +(profile.sales_py2_weight * (inv.sale_units_py2||0))+(profile.sales_py3_weight * (inv.sale_units_py3||0))
+
+      unless detail.last_forecast_date
+      # update first_forecast_units and projection_1_units with forecasted_units if this is the first forecast
+        detail.first_forecast_units = forecasted_units
+        detail.projection_1_units = forecasted_units
+      end
+
+      # update last_forecast_units with forecasted_units and  last_forecast_date to today;
+      detail.last_forecast_units = forecasted_units
+      detail.last_forecast_date = Date.today
+      detail.save
+    end
+
+    self.state = 'forecast' if self.state =='draft'
+    self.save
+  end
   # STATE HANDLERS (End)
 
   # HELPERS (Start) =====================================================================
-  def forecast
-    return false if ['new','complete'].include? self.state
-    self.projection_details.each do |pd|
+  def approve
+  # ensure current_user has privilege APPROVE_PROJECTION AND ((Projection.state = projection_3 AND Projection.approval_3_date nil) OR (Projection.state = projection_4 AND Projection.approval_4_date nil))
+    user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
+    is_approver = user.privileges.where(privilege_code: 'PROJECTION_APPROVER', is_enabled: true).first ? true : false
 
-      if pd.last_forecast_date
-      # Calculate first_forecast_units using formula from forecast_profile;
-        formula = self.forecast_profile.forecast_formula
-        first_forecast_units = (formula.sales_py1_weight * pd.inventory.py1_sales)+(formula.sales_py2_weight * pd.inventory.py2_sales)+(formula.sales_py3_weight * pd.inventory.py3_sales)
-      # Copy first_forecast_units to last_forecast_units & projection_1_units;
-        pd.last_forecast_units = pd.first_forecast_units
-        pd.projection_1_units = pd.first_forecast_units
-      # Update last_forecast_date to today;
-        pd.last_forecast_date = Date.today
-      else
-      # Calculate first_forecast_units using formula from forecast_profile;
-      # Copy first_forecast_units to last_forecast_units & projection_1_units;
-      # Update last_forecast_date to today;
+    if  is_approver && (self.state == 'projection_3' && !self.approval_3_date) or (self.state == 'projection_4' && !self.approval_4_date)
+
+      case self.state
+
+        when 'projection_3'
+          self.approval_3_date = Date.today
+
+        when 'projection_4'
+          self.approval_4_date = Date.today
+
       end
+
     end
+  end
 
+  def build
+    # Insert ProjectionDetail row for every authorized SKU/Location combination (Inventory.is_authorized = true) belonging to the Departement in the Projection and every active selling location authorized for the SKU.
+    Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id)}
+  end
 
-    # self.projection_details.each do |det|
-    #   Omni::PeriodResult.where(:sku_id => detail.sku_id, :location_id => detail.location_id).where("net_sale_units > 0").each do |pr|
-    #     case
-    #     when pr.period.year_number == '2010'
-    #       det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2010_weight.to_f
-    #       det.sale_units_2010 += pr.net_sale_units
-    #     when pr.period.year_number == '2011'
-    #       det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2011_weight.to_f
-    #       det.sale_units_2011 += pr.net_sale_units
-    #     when pr.period.year_number == '2012'
-    #       det.forecast_units += pr.net_sale_units * self.forecast_profile.sales_2012_weight.to_f
-    #       det.sale_units_2012 += pr.net_sale_units
-    #     when pr.period.year_number == '2013'
-    #       det.sale_units_2013 += pr.net_sale_units
-    #     else
-    #       # data is too old to be factored into the forecast
-    #     end
-    #     det.save
-    #   end
-    # end
+  def close
+     # ensure current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
+    user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
+    is_closer = user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first ? true : false
+
+    if  is_closer && ((self.state == 'projection_1') or (self.state == 'projection_2') or (self.state == 'projection_3' && self.approval_3_date) or (self.state == 'projection_4' && self.approval_4_date))
+        next_phase = (self.state.byteslice(11).to_i + 1)
+
+        self.projection_details.each do |pd|
+          pd.send("projection_#{next_phase.to_s}_units=", pd.send("#{self.state.to_s}_units")) unless self.state == 'projection_4'
+          pd.state = 'approved'
+          pd.save
+        end
+
+        self.projection_closer_user_id = user.user_id
+        self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{next_phase}"
+        self.save
+    end
+  end
+
+  def process_release
+    # Insert a ProjecdtionLocation row for every distinct location in the Projection Detail where last_forecast_date is not null
+    self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) if detail.last_forecast_date} #unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
+  end
+
+  # HELPERS (End)
+
+end # class Omni::Projection
 
     # self.projection_details.each do |det|
     #   if det.sale_units_2012 and det.sale_units_2011 and det.sale_units_2010
@@ -214,78 +237,3 @@
     #   det.forecast_units = det.forecast_units * 1.03 if (det.sale_units_2010 < det.sale_units_2011) and (det.sale_units_2011 < det.sale_units_2012)
     #   det.save
     # end
-
-    self.state = 'forecast' if self.state =='draft'
-    self.save
-  end
-
-  def process_approve
-  # Approve projection 3 or projection 4
-
-  end
-
-  def build
-    # Insert ProjectionDetail row for every authorized SKU/Location combination (Inventory.is_authorized = true) belonging to the Departement in the Projection and every active selling location authorized for the SKU.
-    inventories = Omni::Inventory.all
-    inventories.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id)}
-    self.state = 'built'
-    self.save
-  end
-
-  def process_close
-    user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
-
-    if self.state =~ /projection_\d/ && user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first
-        next_phase = (self.state.byteslice(11).to_i + 1)
-
-        self.projection_details.each do |pd|
-          pd.send("projection_#{next_phase.to_s}_units=", pd.send("#{self.state.to_s}_units")) unless self.state == 'projection_4'
-          pd.state = 'approved'
-          pd.save
-        end
-
-        self.projection_closer_user_id = user.user_id
-        self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{next_phase}"
-        self.save
-    end
-  end
-
-  def process_release
-# Build Projection Location records
-
-  end
-
-  def skus
-    skus = []
-    case
-    when self.sku
-      skus << self.sku
-    when self.style
-      skus = self.style.skus
-    when self.subclass
-      skus = self.subclass.skus
-    when self.classification
-      skus = self.classification.skus
-    when self.department
-      skus = self.department.skus
-    else
-      skus = Omni::Sku.all
-    end
-    skus
-  end
-  # Sends an email notification to the user when the projection has finished running
-  def send_notice
-    puts "********** notice"
-    message = Buildit::Comm::Email::Message.create(
-        subject: "Omni notice: projection - #{self.display} has completed.",
-        body: Buildit::Email::Manager.generate(self, "projection_notice"),
-    )
-    email_addresses = Buildit::User.all.collect {|u| u.email_address}
-    message.send_to email_addresses
-    message.queue
-  end
-
-  # HELPERS (End)
-
-end # class Omni::Projection
-

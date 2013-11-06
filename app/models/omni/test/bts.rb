@@ -14,13 +14,10 @@ class Omni::Test::Bts < Omni::Test::Base
     x.bts_details.each {|x| x.delete}
     test_it('it destroys all details', 0, x.bts_details.count)
 
-    # RUNNING THE BTS SHOULD:
+    # running the bts should set the state to done and create details for each inventory
     x.run
     test_it('It sets the state to done','done',x.state)
-
-    x=Omni::Bts.where(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS').first
-    test_it('it creates a detail row for every inventory',1,x.bts_details.count)
-    # test_it('it creates a bts detail for every sku location',4,x.bts_details.count)
+    test_it('it creates a detail row for every inventory',3,x.bts_details.count)
   end
 
   def self.create_bts_data

@@ -204,9 +204,6 @@ class Omni::Allocation < ActiveRecord::Base
         bts_detail = inventory.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
         units_needed =  bts_detail ? bts_detail.need : 0
 
-      # when 'LAST_FORECAST_UNITS'
-      #   units_needed =  projection_detail.send('last_forecast_units') ? projection_detail.send('last_forecast_units') : 0
-
       when /PROJECTION_\d_UNITS/, 'LAST_FORECAST_UNITS'
         units_needed = projection_detail.send(allocation_formula.downcase) ? projection_detail.send(allocation_formula.downcase) : 0
 

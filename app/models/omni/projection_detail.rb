@@ -43,7 +43,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   belongs_to   :projection,                      :class_name => 'Omni::Projection',              :foreign_key => 'projection_id'
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
   belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
-  belongs_to   :inventory,                        :class_name => 'Omni::Inventory',                :foreign_key => 'inventory_id'
+  # belongs_to   :inventory,                        :class_name => 'Omni::Inventory',                :foreign_key => 'inventory_id' # JASON need two part key here
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',         :foreign_key => 'forecast_profile_id'
   belongs_to   :projection_location,             :class_name => 'Omni::ProjectionLocation',      :foreign_key => 'projection_location_id'
   # ASSOCIATIONS (End)
@@ -86,6 +86,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
+    # hook :before_update, :set_state, 10
   # HOOKS (End)
 
 
@@ -142,7 +143,26 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   # HELPERS (End)
 
   # STATES (Start) ====================================================================
+  state_machine :state, :initial => :draft do
 
+    state :approve do
+      validate  :validate_approve
+    end
+
+  ### EVENTS ###
+    event :approve do
+      transition :draft => :approved
+    end
+
+    def self.validate_approve
+      errors.add('State','This action is only valid if the Projection State is Forecast, Projection 1, Projection 2, Projection 3 or Projection 4.') unless self.projection.state == 'forecast' or self.projection_state =~ /projection_\d_units/
+    end
+
+    # def self.set_state
+    # # if units changed, update state to draft JASON
+    #   self.state == 'draft'
+    # end
+  end
   # STATES (End)
 
 end # class Omni::ProjectionDetail

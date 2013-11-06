@@ -20,6 +20,7 @@ Ext.define('Omni.view.projection_details.Form', {
     Ext.applyIf(this, {
       projection_detail_idLabel:              Omni.i18n.model.ProjectionDetail.projection_detail_id,
       displayLabel:                           Omni.i18n.model.ProjectionDetail.display,
+      stateLabel:                           Omni.i18n.model.ProjectionDetail.state,
       projection_idLabel:                     Omni.i18n.model.ProjectionDetail.projection_id,
       projection_line_nbrLabel:               Omni.i18n.model.ProjectionDetail.projection_line_nbr,
       forecast_profile_idLabel:               Omni.i18n.model.ProjectionDetail.forecast_profile_id,
@@ -72,6 +73,7 @@ Ext.define('Omni.view.projection_details.Form', {
 
             // { xtype: 'textfield', name: 'projection_detail_id',           fieldLabel: this.projection_detail_idLabel        , allowBlank: false },
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
+            { xtype: 'textfield', name: 'state',                        fieldLabel: this.stateLabel                     , disabled: true, allowBlank: true },
             // { xtype: 'textfield', name: 'projection_id',                  fieldLabel: this.projection_idLabel               , allowBlank: false },
             { xtype: 'textfield', name: 'projection_line_nbr',            fieldLabel: this.projection_line_nbrLabel         , allowBlank: true },
             {

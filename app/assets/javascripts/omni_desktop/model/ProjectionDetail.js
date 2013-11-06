@@ -4,6 +4,7 @@ Ext.define('Omni.model.ProjectionDetail', {
   fields: [
       { name: 'projection_detail_id',        type: 'string'  },
       { name: 'display',                     type: 'string'  },
+      { name: 'state',                     type: 'string'  },
       { name: 'projection_id',               type: 'string'  },
       { name: 'projection_location_id',      type: 'string'  },
       { name: 'projection_line_nbr',         type: 'integer' },
@@ -20,14 +21,14 @@ Ext.define('Omni.model.ProjectionDetail', {
       { name: 'is_destroyed',                type: 'boolean' },
 
       { name: 'projection_display',          type: 'string'   },
-      { name: 'sku_display',                 type: 'string'   },      
-      { name: 'location_display',            type: 'string'   },      
+      { name: 'sku_display',                 type: 'string'   },
+      { name: 'location_display',            type: 'string'   },
       { name: 'style_id',                    type: 'string'   },
-      { name: 'style_display',               type: 'string'   },      
+      { name: 'style_display',               type: 'string'   },
       { name: 'color_id',                    type: 'string'   },
-      { name: 'color_display',               type: 'string'   },      
+      { name: 'color_display',               type: 'string'   },
       { name: 'size_id',                     type: 'string'   },
-      { name: 'size_display',                type: 'string'   },      
+      { name: 'size_display',                type: 'string'   },
       { name: 'forecast_profile_display',    type: 'string'   },
       { name: 'projection_location_display', type: 'string'   },
 

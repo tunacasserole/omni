@@ -135,16 +135,11 @@ class Omni::Bts < ActiveRecord::Base
   end
 
   def rake_run
-    # puts "\n------------- running bts -------------\n"
-
-      # puts "--creating bts_details at #{Time.now.strftime("%H:%M:%S")}"
-
-      # self.bts_details.delete_all
       Omni::BtsDetail.delete_all(:bts_id => self.bts_id)
       Omni::BtsDetail.transaction do
-        self.skus.each_with_index do |x, i|
-          # puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}" if i.to_s.end_with? '000' #|| i == 1
-          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, data_source) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}','#{x.source}')"
+        self.inventory.each_with_index do |x, i|
+          puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"# if i.to_s.end_with? '000' #|| i == 1
+          Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, location_id) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}','#{x.location_id}')"
         end
       end
       # puts "--reindexing bts details at #{Time.now.strftime("%H:%M:%S")}"
@@ -170,43 +165,9 @@ class Omni::Bts < ActiveRecord::Base
     # puts "--bts finished with #{self.bts_details.count.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"
   end
 
-  def skus
-    # reads the parameters provided in the bts (sku_id, style_id … department_id) and returns a list of skus matching the parameters provided.
-    # puts "--getting list of skus to process"
-    skus = []
-    # puts "--bts_id is: #{self.bts_id}"
-    case
-    when self.sku
-      skus << self.sku
-    when self.style
-      skus = self.style.skus
-    when self.subclass
-      skus = self.subclass.skus
-    when self.classification
-      skus = self.classification.skus
-    when self.department
-      skus = self.department.skus
-    else
-      # puts "--no skus due to no parameters provided--"
-    end
-    # puts "--skus to process: #{skus.count}"
-    skus
+  def inventory
+    Omni::Inventory.where(is_authorized: true)
   end
-
-  # Sends an email notification to the user when the projection has finished running
-  def send_notice
-    puts "--sending notice--"    # myself = Omni::Bts.where(:bts_id => 'C609886410E411E38101326457748C19').first
-    message = Buildit::Comm::Email::Message.create(
-        subject: "Omni notice: BTS - has completed.",
-        body: Buildit::Email::Manager.generate(self, "bts_notice"),
-    )
-    email_addresses = Buildit::User.where(:user_id => self.user_id || '811166D4D50A11E2B45820C9D04AARON').first.email_address
-    message.send_to email_addresses
-    message.queue
-    Buildit::Comm::Email::OutboundService.process
-    puts "--finished sending notice--"
-  end
-
 # STATE HANDLERS (End)
 
 end #

@@ -6,6 +6,7 @@ en:
       omni/projection_detail:
         projection_detail_id:              'Projection Detail'
         display:                           'Name'
+        state:                           'State'
         projection_id:                     'Projection'
         projection_location_id:            'Projection Location'
         projection_line_nbr:               'Projection Line Nbr'

@@ -27,14 +27,9 @@ class Omni::ForecastProfile < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :forecast_profile_id,              :override  =>  false,        :with  => :guid
-  default      :sales_py1_weight,                 :override  =>  true,         :to    => 0
-  default      :sales_py2_weight,                 :override  =>  true,         :to    => 0
-  default      :sales_py3_weight,                 :override  =>  true,         :to    => 0
-  default      :contract_year_1_weight,           :override  =>  true,         :to    => 0
-  default      :contract_year_2_weight,           :override  =>  true,         :to    => 0
-  default      :contract_year_3_weight,           :override  =>  true,         :to    => 0
-  default      :contract_year_4_weight,           :override  =>  true,         :to    => 0
-  default      :contract_year_5_weight,           :override  =>  true,         :to    => 0
+  # default      :sales_py1_weight,                 :override  =>  true,         :to    => 0
+  # default      :sales_py2_weight,                 :override  =>  true,         :to    => 0
+  # default      :sales_py3_weight,                 :override  =>  true,         :to    => 0
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -49,7 +44,7 @@ class Omni::ForecastProfile < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :projection_details,     :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'forecast_profile_id'  
+  has_many     :projection_details,     :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'forecast_profile_id'
   # ASSOCIATIONS (End)
 
 
