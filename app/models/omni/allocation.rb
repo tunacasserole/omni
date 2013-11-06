@@ -225,10 +225,10 @@ class Omni::Allocation < ActiveRecord::Base
         end
 
       when 'PURCHASE_ALLOCATION'
-        # TO DO
-        # purchase allocation: store demand = allocated_units from the associated PurchaseAllocation.
         # This formula is only valid when allocating a Receipt.
+        # purchase allocation: store demand = allocated_units from the associated PurchaseAllocation.
         # If it is used for a Purchase or Inventory allocation, the calculation will not create any allocations.
+
         units_needed = 0
 
     end

@@ -138,7 +138,7 @@ class Omni::Bts < ActiveRecord::Base
       Omni::BtsDetail.delete_all(:bts_id => self.bts_id)
       Omni::BtsDetail.transaction do
         self.inventory.each_with_index do |x, i|
-          puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"# if i.to_s.end_with? '000' #|| i == 1
+          # puts "...created #{i.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"# if i.to_s.end_with? '000' #|| i == 1
           Omni::BtsDetail.connection.execute "INSERT INTO bts_details (bts_detail_id, bts_id, sku_id, location_id) values ('#{SecureRandom.uuid.gsub('-','').upcase}','#{self.bts_id}', '#{x.sku_id}','#{x.location_id}')"
         end
       end
