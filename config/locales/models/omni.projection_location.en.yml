@@ -1,12 +1,13 @@
 en:
   activerecord:
     models:
-      omni/projection_location:  'Model'
+      omni/projection_location:  'ProjectionLocation'
     attributes:
       omni/projection_location:
         projection_location_id:            'Projection Location'
         projection_id:                     'Projection'
         location_id:                       'Location'
-        display:                           'Name'
+        display:                           'Display'
+        approval_date:                     'Approval Date'
         state:                             'State'
         is_destroyed:                      'Is Destroyed'

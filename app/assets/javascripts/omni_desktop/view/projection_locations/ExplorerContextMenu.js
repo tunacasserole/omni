@@ -55,6 +55,7 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
         // SEPARATOR
         '-',
 
+
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
@@ -75,6 +76,7 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
           }
         },
 
+
         /**
          * EXPORT
          * Supports the deletion of the selected items in the explorer grid. If none
@@ -93,45 +95,29 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
             }
           }
         }
+
         // RIGHT ACTIONS (End)
+
       ],
+
 
       leftActions: [
 
         // LEFT ACTIONS (Start) =================================================================
 
-          /**
-         * Approve
-         * Supports performing 'Approve' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Approve',
-          cls: 'icon-settings',
-          action: 'approve',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickApprove,
-              scope: me
-            }
-          }
-        },
+
         // LEFT ACTIONS (End)
+
       ]
+
     });
 
     this.callParent();
   },
 
 
-  // ACTION HANDLERS (Start) ====================================================================
 
-  clickApprove: function(btn, e, eOpts){
-    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'approve');
-  },
+  // ACTION HANDLERS (Start) ====================================================================
 
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);
