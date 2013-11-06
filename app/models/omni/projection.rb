@@ -235,17 +235,17 @@
   def process_close
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
 
-    if self.state =~ /projection_\d/ && user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first ? true : false
-        phase = (self.state.byteslice(11).to_i + 1)
+    if self.state =~ /projection_\d/ && user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first
+        next_phase = (self.state.byteslice(11).to_i + 1)
 
         self.projection_details.each do |pd|
-          pd.send("projection_#{phase.to_s}_units=", pd.send("projection_#{(phase-1).to_s}_units")) unless self.state == 'projection_4'
+          pd.send("projection_#{next_phase.to_s}_units=", pd.send("#{self.state.to_s}_units")) unless self.state == 'projection_4'
           pd.state = 'approved'
           pd.save
         end
 
         self.projection_closer_user_id = user.user_id
-        self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{phase}"
+        self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{next_phase}"
         self.save
     end
   end
