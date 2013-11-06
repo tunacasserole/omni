@@ -78,6 +78,8 @@ class Omni::ProjectionLocation < ActiveRecord::Base
     string   :projection_id
     string   :location_id
     string   :state
+    string   :display
+    
   # Partial match (contains) attributes
     text     :projection_display_fulltext, :using => :projection_display
     text     :location_display_fulltext,   :using => :location_display

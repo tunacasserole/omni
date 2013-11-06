@@ -26,6 +26,10 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   default      :projection_2_units,               :override  =>  false,         :to    => 0
   default      :projection_3_units,               :override  =>  false,         :to    => 0
   default      :projection_4_units,               :override  =>  false,         :to    => 0
+  default      :sale_units_py1,                   :override  =>  false,         :to    => 0
+  default      :sale_units_py2,                   :override  =>  false,         :to    => 0
+  default      :sale_units_py3,                   :override  =>  false,         :to    => 0
+  default      :sale_units_ytd,                   :override  =>  false,         :to    => 0
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -136,7 +140,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   end
   def compute_standard_deviation
     avg = self.average_sales
-    squared_deviations = (((self.sale_units_py1 - avg)**2 + (self.sale_units_py2 - avg)**2 + (self.sale_units_py3 - avg)**2) / 3)
+    #squared_deviations = (((self.sale_units_py1 - avg)**2 + (self.sale_units_py2 - avg)**2 + (self.sale_units_py3 - avg)**2) / 3)
 #  Need to calculate square root of squared_deviations to get standard deviation
     std = 0
   end
