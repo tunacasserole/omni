@@ -20,13 +20,10 @@ Ext.define('Omni.view.projection_locations.Explorer', {
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================
-  projection_location_idLabel             : Omni.i18n.model.ProjectionLocation.projection_location_id,
-  projection_idLabel                      : Omni.i18n.model.ProjectionLocation.projection_id,
   location_idLabel                        : Omni.i18n.model.ProjectionLocation.location_id,
   displayLabel                            : Omni.i18n.model.ProjectionLocation.display,
   approval_dateLabel                      : Omni.i18n.model.ProjectionLocation.approval_date,
   stateLabel                              : Omni.i18n.model.ProjectionLocation.state,
-  is_destroyedLabel                       : Omni.i18n.model.ProjectionLocation.is_destroyed,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -42,6 +39,11 @@ Ext.define('Omni.view.projection_locations.Explorer', {
     Ext.apply(this, {
       columns      : [
         {
+          header       : this.stateLabel,
+          dataIndex    : 'state',
+          flex         : 1
+        },
+        {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
           flex         : 1
@@ -49,11 +51,6 @@ Ext.define('Omni.view.projection_locations.Explorer', {
         {
           header       : this.approval_dateLabel,
           dataIndex    : 'approval_date',
-          flex         : 1
-        },
-        {
-          header       : this.stateLabel,
-          dataIndex    : 'state',
           flex         : 1
         }
       ]

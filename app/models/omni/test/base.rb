@@ -91,8 +91,8 @@ class Omni::Test::Base
     Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC4', :location_id=>'526058B2AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
 
     Omni::Projection.all.each {|x| x.delete}
-    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE1')
-    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE2')
+    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', display: 'Test projection 1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE1')
+    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', display: 'Test projection 2', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE2')
     # Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION3', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE3')
 
     Omni::ProjectionDetail.all.each {|x| x.delete}

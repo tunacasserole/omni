@@ -6,10 +6,14 @@
 
   # BEHAVIOR (Start) ====================================================================
   supports_audit
+  supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  # validates    :display,                          :uniqueness => true
+  validates :display,                          :uniqueness => true
+  validates :plan_year,                         :presence => true
+  validates :department_id,                     :presence => true
+
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -30,11 +34,8 @@
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :department,                      :class_name => 'Omni::Department',          :foreign_key => 'department_id'
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'
-  belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'
-
   belongs_to   :projection_approver_user,        :class_name => 'Buildit::User',            :foreign_key => 'projection_approver_user_id'
   belongs_to   :projection_closer_user,          :class_name => 'Buildit::User',            :foreign_key => 'projection_closer_user_id'
-  has_many     :logs,                            :class_name => 'Omni::Log',                 :foreign_key => 'logable_id' , :as => :logable
   has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'projection_id'
   has_many     :projection_locations,            :class_name => 'Omni::ProjectionLocation',  :foreign_key => 'projection_id'
   # ASSOCIATIONS (End)
@@ -58,10 +59,10 @@
   order_search_by :display => :asc
   # ORDERING (End)
 
-  eventful do
-    after :update,  :if => lambda {|m| m.state == 'built' or m.state == 'forecasted'}, :publish => lambda {|m| "#{m.display} ended at: " << Time.now.strftime("%H:%M:%S")}, :title => 'Projections'
+  # eventful do
+    # after :update,  :if => lambda {|m| m.state == 'built' or m.state == 'forecasted'}, :publish => lambda {|m| "#{m.display} ended at: " << Time.now.strftime("%H:%M:%S")}, :title => 'Projections'
     # after :update,  :if => lambda {|m| m.state.changed?}, :publish => lambda {|m| "#{m.display} state was changed at: " << Time.now.strftime("%H:%M:%S")}, :title => 'Projection State Changed'
-  end
+  # end
 
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
@@ -84,47 +85,26 @@
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :new do
-
-    ### STATES ###
-    state :draft do
-      validates :plan_year,                         :presence => true
-      validates :department_id,                     :presence => true
-    end
-
-    state :forecast do; end
-
-    state :active do; end
+  state_machine :state, :initial => :draft do
 
     state :projection_1 do
-      # Validate that user has "CLOSE_PROJECTION" privilege
     end
 
     state :projection_2 do
-      # Validate that user has "CLOSE_PROJECTION" privilege
     end
 
     state :projection_3 do
-      # Validate that user has "CLOSE_PROJECTION" privilege
     end
 
     state :projection_4 do
-      # Validate that user has "CLOSE_PROJECTION" privilege
       validates :approval_3_date,                   :presence => true
     end
 
     state :complete do
-      # Validate that user has "CLOSE_PROJECTION" privilege
       validates :approval_4_date,                   :presence => true
     end
 
-    after_transition :on => :build, :do => :process_build
     after_transition :on => :release, :do => :process_release
-    # after_transition :on => :close, :do => :process_close
-
-    event :build do
-      transition :new => :draft
-    end
 
     event :release do
       transition :forecast => :projection_1
@@ -135,7 +115,10 @@
 
   # STATE HANDLERS (Start) ====================================================================
   def forecast
-    return false if ['new','complete'].include? self.state #JASON
+    return 'invalid action for the current state' if self.state == 'complete'
+
+    # Insert or update ProjectionDetail row for every authorized SKU/Location combination (TO DO: in the Departement in the Projection) and every active selling location authorized for the SKU.
+    Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: self.projection_id).first} unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
 
     self.projection_details.each do |detail|
       # JASON - inventory is a two part key, how to leverage an association
@@ -147,9 +130,14 @@
       forecasted_units = (profile.sales_py1_weight * (inv.sale_units_py1||0)) +(profile.sales_py2_weight * (inv.sale_units_py2||0))+(profile.sales_py3_weight * (inv.sale_units_py3||0))
 
       unless detail.last_forecast_date
-        # update first_forecast_units and projection_1_units with forecasted_units if this is the first forecast
+        # set first_forecast_units and projection_1_units with forecasted_units if this is the first forecast
         detail.first_forecast_units = forecasted_units
         detail.projection_1_units = forecasted_units
+        # set historical sales data
+        detail.sale_units_ytd = inv.sale_units_ytd
+        detail.sale_units_py1 = inv.sale_units_py1
+        detail.sale_units_py2 = inv.sale_units_py2
+        detail.sale_units_py3 = inv.sale_units_py3
       end
 
       # update last_forecast_units with forecasted_units and  last_forecast_date to today;
@@ -184,11 +172,6 @@
     end
   end
 
-  def process_build
-    # Insert ProjectionDetail row for every authorized SKU/Location combination (Inventory.is_authorized = true) belonging to the Departement in the Projection and every active selling location authorized for the SKU.
-    Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id)}
-  end
-
   def close
     # ensure current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
@@ -210,7 +193,7 @@
   end
 
   def process_release
-    # Insert a ProjecdtionLocation row for every distinct location in the Projection Detail where last_forecast_date is not null
+    # Insert a ProjectionLocation row for every distinct location in the Projection Detail where last_forecast_date is not null
     self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) if detail.last_forecast_date} #unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
   end
 

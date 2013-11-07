@@ -30,6 +30,7 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :projection_location_id,                          :with => :guid
+  default :display,                    :override  =>  false,:to => lambda{|m| "#{m.projection_display} - #{m.location_display}"}
   # DEFAULTS (End)
 
 
@@ -46,29 +47,29 @@ class Omni::ProjectionLocation < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  
+
   # COMPUTED ATTRIBUTES (Start) =========================================================
-  
+
   # COMPUTED ATTRIBUTES (End)
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-  
+
   # TEMPORARY ATTRIBUTES (End)
 
 
   # FILTERS (Start) =====================================================================
-  
+
   # FILTERS (End)
 
 
   # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc  
+  order_search_by :display => :asc
   # ORDERING (End)
 
 
   # SCOPES (Start) ======================================================================
-  
+
   # SCOPES (End)
 
 
@@ -79,13 +80,13 @@ class Omni::ProjectionLocation < ActiveRecord::Base
     string   :location_id
     string   :state
     string   :display
-    
+
   # Partial match (contains) attributes
     text     :projection_display_fulltext, :using => :projection_display
     text     :location_display_fulltext,   :using => :location_display
     text     :display_fulltext,            :using => :display
     text     :state_fulltext,              :using => :state
-  end 
+  end
   # INDEXING (End)
 
 
@@ -104,11 +105,11 @@ class Omni::ProjectionLocation < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    after_transition :on => :approve, :do => :process_approve  
+    after_transition :on => :approve, :do => :process_approve
 
   ### EVENTS ###
     event :approve do
-      transition :planning => :approved      
+      transition :planning => :approved
     end
   end
   # STATES (End)
@@ -117,7 +118,7 @@ class Omni::ProjectionLocation < ActiveRecord::Base
   def process_approve
     self.approval_date = Date.today
     self.save
-  end  
+  end
   # STATE HANDLERS (End) ====================================================================
 
 
