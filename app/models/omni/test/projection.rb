@@ -56,7 +56,7 @@ class Omni::Test::Projection < Omni::Test::Base
     Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :projection_detail_id => 'PROJ1A1C193611E3A22D20CXXPRODET1', :forecast_profile_id =>s[:forecast_profile_id], :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50)
 
     Omni::Projection.where(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1').each {|x| x.delete}
-    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', state: 'forecast', department_id: '5EA20FF2FE0611E280D020C9D047DD15', :forecast_profile_id =>s[:forecast_profile_id])
+    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', :forecast_profile_id =>s[:forecast_profile_id])
 
     x.forecast
 
@@ -73,7 +73,7 @@ class Omni::Test::Projection < Omni::Test::Base
 
     # Omni::Projection.all.each {|x| x.delete}
     Omni::Projection.where(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2').each {|x| x.delete}
-    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', state: 'forecast', department_id: '5EA20FF2FE0611E280D020C9D047DD15', :forecast_profile_id =>(s[:forecast_profile_id]||'XXXXXXXXXXXXXXXXFORECASTPROFILE1'))
+    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', :forecast_profile_id =>(s[:forecast_profile_id]||'XXXXXXXXXXXXXXXXFORECASTPROFILE1'))
 
     x.state = s[:projection_state]
     x.projection_approver_user_id = s[:projection_approver_user_id]

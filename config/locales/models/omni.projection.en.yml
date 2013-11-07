@@ -18,6 +18,8 @@ en:
         state:                             'State'
         display:                           'Name'
         description:                       'Description'
+        approval_3_date:                   'Approval 3 Date'
+        approval_4_date:                   'Approval 4 Date'
         plan_year:                         'Plan Year'
         projection_type:                   'Projection Type'
         version:                           'Version'

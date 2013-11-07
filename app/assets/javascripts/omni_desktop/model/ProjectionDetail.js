@@ -31,6 +31,10 @@ Ext.define('Omni.model.ProjectionDetail', {
       type       : 'string'
     },
     {
+      name       : 'forecast_profile_display',
+      type       : 'string'
+    },
+    {
       name       : 'inventory_id',
       type       : 'string'
     },

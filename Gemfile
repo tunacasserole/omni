@@ -29,3 +29,5 @@ gem "buildit"
 gem "buildit_comm"
 
 gem "puma"
+
+gem "guard"

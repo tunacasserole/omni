@@ -29,6 +29,8 @@ Ext.define('Omni.view.projections.Form', {
       stateLabel:                             Omni.i18n.model.Projection.state,
       displayLabel:                           Omni.i18n.model.Projection.display,
       descriptionLabel:                       Omni.i18n.model.Projection.description,
+      approval_3_dateLabel:                   Omni.i18n.model.Projection.approval_3_date,
+      approval_4_dateLabel:                   Omni.i18n.model.Projection.approval_4_date,
       plan_yearLabel:                         Omni.i18n.model.Projection.plan_year,
       projection_typeLabel:                   Omni.i18n.model.Projection.projection_type,
       versionLabel:                           Omni.i18n.model.Projection.version,
@@ -56,6 +58,20 @@ Ext.define('Omni.view.projections.Form', {
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
             // { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },
             { name: 'forecast_profile_id', fieldLabel: this.forecast_profile_idLabel, allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ForecastProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'forecast_profile_id', itemTpl:'{display}' },
+
+            { xtype             : 'datefield',
+              name              : 'approval_3_date',
+              fieldLabel        : this.approval_3_dateLabel,
+              // value             : new Date(),
+              allowBlank        : true
+            },
+            { xtype             : 'datefield',
+              name              : 'approval_4_date',
+              fieldLabel        : this.approval_4_dateLabel,
+              // value             : new Date(),
+              allowBlank        : true
+            },
+            // { name: 'approval_3_date', fieldLabel: this.approval_3_date, allowBlank: true,  disabled: false,    xtype: 'datefield',     store:      Ext.create('Omni.store.ForecastProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'forecast_profile_id', itemTpl:'{display}' },
             // { xtype: 'textfield', name: 'plan_year',                      fieldLabel: this.plan_yearLabel                   , allowBlank: true },
             // { xtype: 'textfield', name: 'projection_type',                fieldLabel: this.projection_typeLabel             , allowBlank: true },
             // { xtype: 'textfield', name: 'version',                        fieldLabel: this.versionLabel                     , allowBlank: true },
@@ -71,22 +87,22 @@ Ext.define('Omni.view.projections.Form', {
           layout:       'anchor',
           items:[
             { name: 'department_id',  fieldLabel: this.department_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
-            { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },
+            // { name: 'classification_id', fieldLabel: this.classification_idLabel,      allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },
           ]
         }
-        ,{
-          xtype:        'fieldset',
-          title:        'Location Info',
-          collapsible:  true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '70%'},
-          layout:       'anchor',
-          items:[
-            { name: 'region_id', fieldLabel: this.region_idLabel,                       allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Region',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'region_id', itemTpl:'{display}' },
-            { name: 'district_id', fieldLabel: this.district_idLabel,                   allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.District',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'district_id', itemTpl:'{display}' },
-            { name: 'location_id', fieldLabel: this.location_idLabel,                   allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-          ]
-        }
+        // ,{
+        //   xtype:        'fieldset',
+        //   title:        'Location Info',
+        //   collapsible:  true,
+        //   defaultType:  'textfield',
+        //   defaults:     {anchor: '70%'},
+        //   layout:       'anchor',
+        //   items:[
+        //     { name: 'region_id', fieldLabel: this.region_idLabel,                       allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Region',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'region_id', itemTpl:'{display}' },
+        //     { name: 'district_id', fieldLabel: this.district_idLabel,                   allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.District',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'district_id', itemTpl:'{display}' },
+        //     { name: 'location_id', fieldLabel: this.location_idLabel,                   allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
+        //   ]
+        // }
       ]
     });
     // FIELDSETS (End)
@@ -108,23 +124,53 @@ Ext.define('Omni.view.projections.Form', {
         {
           xtype      : 'button',
           cls        : 'submit',
-          tooltip    : 'Build Projection',
+          tooltip    : 'Build',
           listeners  : {
             beforerender  : this.prepareBuildAction,
             click         : this.onBuildAction,
             scope         : me
           }
+        },
+        {
+          xtype      : 'button',
+          cls        : 'submit',
+          tooltip    : 'Forecast Projection',
+          listeners  : {
+            beforerender  : this.prepareForecastAction,
+            click         : this.onForecastAction,
+            scope         : me
+          }
+        },
+        {
+          xtype      : 'button',
+          cls        : 'submit',
+          tooltip    : 'Release Projection',
+          listeners  : {
+            beforerender  : this.prepareReleaseAction,
+            click         : this.onReleaseAction,
+            scope         : me
+          }
+        },
+        {
+          xtype      : 'button',
+          cls        : 'submit',
+          tooltip    : 'Close Projection',
+          listeners  : {
+            beforerender  : this.prepareCloseAction,
+            click         : this.onCloseAction,
+            scope         : me
+          }
+        },
+        {
+          xtype      : 'button',
+          cls        : 'submit',
+          tooltip    : 'Approve Projection',
+          listeners  : {
+            beforerender  : this.prepareApproveAction,
+            click         : this.onApproveAction,
+            scope         : me
+          }
         }
-        // {
-        //   xtype      : 'button',
-        //   cls        : 'submit',
-        //   tooltip    : 'Forecast Projection',
-        //   listeners  : {
-        //     beforerender  : this.prepareForecastAction,
-        //     click         : this.onForecastAction,
-        //     scope         : me
-        //   }
-        // }
       ]
     });
 
@@ -149,12 +195,24 @@ Ext.define('Omni.view.projections.Form', {
    *
    */
   onBuildAction : function(action, eOpts){
-    this.processEventTransition('build', 'Projection was successfully built.', 'An error occurred building this projection.');
-  }, // onBuildAction
+    this.processEventTransition('build', 'Projection was successfully built.', 'An error occurred processing this projection.');
+  }, // onAction
 
   onForecastAction : function(action, eOpts){
-    this.processEventTransition('forecast', 'Projection was successfully forecasted.', 'An error occurred forecasting this projection.');
-  }, // onBuildAction
+    this.processEventTransition('forecast', 'Projection was successfully forecasted.', 'An error occurred processing this projection.');
+  }, // onAction
+
+  onReleaseAction : function(action, eOpts){
+    this.processEventTransition('release', 'Projection was successfully released.', 'An error occurred processing this projection.');
+  }, // onAction
+
+  onCloseAction : function(action, eOpts){
+    this.processEventTransition('close', 'Projection was successfully closed.', 'An error occurred processing this projection.');
+  }, // onAction
+
+  onApproveAction : function(action, eOpts){
+    this.processEventTransition('approve', 'Projection was successfully approved.', 'An error occurred processing this projection.');
+  }, // onAction
 
   processEventTransition : function(eventName, successMsg, failureMsg){
     var me = this;
@@ -198,10 +256,9 @@ Ext.define('Omni.view.projections.Form', {
   prepareBuildAction : function(action, eOpts) {
     var currentState = this.record.get('state');
 
-    // if(currentState != 'new')
-    //   action.hide();
+    (this.record.phantom != true && currentState == 'new') ? action.show() : action.hide();
 
-  }, // prepareSubmitAction
+  }, // prepareAction
 
   /**
    *
@@ -209,10 +266,39 @@ Ext.define('Omni.view.projections.Form', {
   prepareForecastAction : function(action, eOpts) {
     var currentState = this.record.get('state');
 
-    // if(currentState != 'new')
-    //   action.hide();
+    this.record.phantom != true && currentState != 'new' && currentState != 'complete' ? action.show() : action.hide();
 
-  }, // prepareSubmitAction
+  }, // prepareAction
+
+  /**
+   *
+   */
+  prepareReleaseAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+
+     (this.record.phantom != true && currentState == 'forecast') ? action.show() : action.hide();
+
+  }, // prepareAction
+
+  /**
+   *
+   */
+  prepareCloseAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+     // JASON need regular expression here
+    (this.record.phantom != true) && (currentState == 'projection_1' || currentState == 'projection_2' || (currentState == 'projection_3' && this.record.get('approval_3_date') != null) || (currentState == 'projection_4' && this.record.get('approval_4_date') != null)) ? action.show() : action.hide();
+
+  }, // prepareAction
+
+  /**
+   *
+   */
+  prepareApproveAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    console.log(this.record);
+    (this.record.phantom != true) && ((currentState == 'projection_3' && this.record.get('approval_3_date') == null) || (currentState == 'projection_4' && this.record.get('approval_4_date') == null)) ? action.show() : action.hide();
+
+  }, // prepareAction
 
   // HANDLERS (End)
 

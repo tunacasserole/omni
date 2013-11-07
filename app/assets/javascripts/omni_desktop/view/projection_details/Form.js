@@ -5,35 +5,35 @@ Ext.define('Omni.view.projection_details.Form', {
 
 
   // LABELS (Start) =======================================================================
-  projection_detail_idLabel               : Omni.i18n.model.ProjectionDetail.projection_detail_id,
+  audit_created_atLabel                   : Omni.i18n.model.ProjectionDetail.audit_created_at,
+  audit_created_byLabel                   : Omni.i18n.model.ProjectionDetail.audit_created_by,
+  audit_updated_atLabel                   : Omni.i18n.model.ProjectionDetail.audit_updated_at,
+  audit_updated_byLabel                   : Omni.i18n.model.ProjectionDetail.audit_updated_by,
+  average_salesLabel                      : Omni.i18n.model.ProjectionDetail.average_sales,
   displayLabel                            : Omni.i18n.model.ProjectionDetail.display,
-  stateLabel                              : Omni.i18n.model.ProjectionDetail.state,
-  projection_idLabel                      : Omni.i18n.model.ProjectionDetail.projection_id,
-  projection_location_idLabel             : Omni.i18n.model.ProjectionDetail.projection_location_id,
-  projection_line_nbrLabel                : Omni.i18n.model.ProjectionDetail.projection_line_nbr,
+  first_forecast_unitsLabel               : Omni.i18n.model.ProjectionDetail.first_forecast_units,
   forecast_profile_idLabel                : Omni.i18n.model.ProjectionDetail.forecast_profile_id,
   inventory_idLabel                       : Omni.i18n.model.ProjectionDetail.inventory_id,
-  sku_idLabel                             : Omni.i18n.model.ProjectionDetail.sku_id,
-  location_idLabel                        : Omni.i18n.model.ProjectionDetail.location_id,
-  first_forecast_unitsLabel               : Omni.i18n.model.ProjectionDetail.first_forecast_units,
-  last_forecast_unitsLabel                : Omni.i18n.model.ProjectionDetail.last_forecast_units,
+  is_destroyedLabel                       : Omni.i18n.model.ProjectionDetail.is_destroyed,
   last_forecast_dateLabel                 : Omni.i18n.model.ProjectionDetail.last_forecast_date,
+  last_forecast_unitsLabel                : Omni.i18n.model.ProjectionDetail.last_forecast_units,
+  location_idLabel                        : Omni.i18n.model.ProjectionDetail.location_id,
+  number_of_schoolsLabel                  : Omni.i18n.model.ProjectionDetail.number_of_schools,
   projection_1_unitsLabel                 : Omni.i18n.model.ProjectionDetail.projection_1_units,
   projection_2_unitsLabel                 : Omni.i18n.model.ProjectionDetail.projection_2_units,
   projection_3_unitsLabel                 : Omni.i18n.model.ProjectionDetail.projection_3_units,
   projection_4_unitsLabel                 : Omni.i18n.model.ProjectionDetail.projection_4_units,
-  sale_units_ytdLabel                     : Omni.i18n.model.ProjectionDetail.sale_units_ytd,
+  projection_detail_idLabel               : Omni.i18n.model.ProjectionDetail.projection_detail_id,
+  projection_idLabel                      : Omni.i18n.model.ProjectionDetail.projection_id,
+  projection_line_nbrLabel                : Omni.i18n.model.ProjectionDetail.projection_line_nbr,
+  projection_location_idLabel             : Omni.i18n.model.ProjectionDetail.projection_location_id,
   sale_units_py1Label                     : Omni.i18n.model.ProjectionDetail.sale_units_py1,
   sale_units_py2Label                     : Omni.i18n.model.ProjectionDetail.sale_units_py2,
   sale_units_py3Label                     : Omni.i18n.model.ProjectionDetail.sale_units_py3,
-  number_of_schoolsLabel                  : Omni.i18n.model.ProjectionDetail.number_of_schools,
-  average_salesLabel                      : Omni.i18n.model.ProjectionDetail.average_sales,
+  sale_units_ytdLabel                     : Omni.i18n.model.ProjectionDetail.sale_units_ytd,
+  sku_idLabel                             : Omni.i18n.model.ProjectionDetail.sku_id,
   standard_deviationLabel                 : Omni.i18n.model.ProjectionDetail.standard_deviation,
-  is_destroyedLabel                       : Omni.i18n.model.ProjectionDetail.is_destroyed,
-  audit_created_byLabel                   : Omni.i18n.model.ProjectionDetail.audit_created_by,
-  audit_updated_byLabel                   : Omni.i18n.model.ProjectionDetail.audit_updated_by,
-  audit_created_atLabel                   : Omni.i18n.model.ProjectionDetail.audit_created_at,
-  audit_updated_atLabel                   : Omni.i18n.model.ProjectionDetail.audit_updated_at,
+  stateLabel                              : Omni.i18n.model.ProjectionDetail.state,
   // LABELS (End)
 
 
@@ -47,9 +47,6 @@ Ext.define('Omni.view.projection_details.Form', {
       value       : this.record.get('projection_detail_id')
     };
     // FILTER (End)
-
-
-
 
     // FIELDSETS (Start) ====================================================================
     Ext.apply(this, {

@@ -28,13 +28,15 @@
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'projection_id'
-  has_many     :projection_locations,            :class_name => 'Omni::ProjectionLocation',  :foreign_key => 'projection_id'
-  has_many     :logs,                            :class_name => 'Omni::Log',                 :foreign_key => 'logable_id' , :as => :logable
   belongs_to   :department,                      :class_name => 'Omni::Department',          :foreign_key => 'department_id'
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'
+  belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'
+
   belongs_to   :projection_approver_user,        :class_name => 'Buildit::User',            :foreign_key => 'projection_approver_user_id'
   belongs_to   :projection_closer_user,          :class_name => 'Buildit::User',            :foreign_key => 'projection_closer_user_id'
+  has_many     :logs,                            :class_name => 'Omni::Log',                 :foreign_key => 'logable_id' , :as => :logable
+  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'projection_id'
+  has_many     :projection_locations,            :class_name => 'Omni::ProjectionLocation',  :foreign_key => 'projection_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -66,14 +68,14 @@
 
   # INDEXING (Start) ====================================================================
   searchable do
-  # Exact match attributes
+    # Exact match attributes
     string   :department_display
     string   :forecast_profile_display
     string   :display
     string   :projection_id
     string   :state
     string   :plan_year
-  # Partial match (contains) attributes
+    # Partial match (contains) attributes
     text     :department_display_fulltext, :using => :department_display
     text     :forecast_profile_display_fulltext, :using => :forecast_profile_display
     text     :display_fulltext, :using => :display
@@ -84,7 +86,7 @@
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :new do
 
-  ### STATES ###
+    ### STATES ###
     state :draft do
       validates :plan_year,                         :presence => true
       validates :department_id,                     :presence => true
@@ -95,24 +97,24 @@
     state :active do; end
 
     state :projection_1 do
-    # Validate that user has "CLOSE_PROJECTION" privilege
+      # Validate that user has "CLOSE_PROJECTION" privilege
     end
 
     state :projection_2 do
-    # Validate that user has "CLOSE_PROJECTION" privilege
+      # Validate that user has "CLOSE_PROJECTION" privilege
     end
 
     state :projection_3 do
-    # Validate that user has "CLOSE_PROJECTION" privilege
+      # Validate that user has "CLOSE_PROJECTION" privilege
     end
 
     state :projection_4 do
-    # Validate that user has "CLOSE_PROJECTION" privilege
+      # Validate that user has "CLOSE_PROJECTION" privilege
       validates :approval_3_date,                   :presence => true
     end
 
     state :complete do
-    # Validate that user has "CLOSE_PROJECTION" privilege
+      # Validate that user has "CLOSE_PROJECTION" privilege
       validates :approval_4_date,                   :presence => true
     end
 
@@ -132,7 +134,7 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
- def forecast
+  def forecast
     return false if ['new','complete'].include? self.state #JASON
 
     self.projection_details.each do |detail|
@@ -145,7 +147,7 @@
       forecasted_units = (profile.sales_py1_weight * (inv.sale_units_py1||0)) +(profile.sales_py2_weight * (inv.sale_units_py2||0))+(profile.sales_py3_weight * (inv.sale_units_py3||0))
 
       unless detail.last_forecast_date
-      # update first_forecast_units and projection_1_units with forecasted_units if this is the first forecast
+        # update first_forecast_units and projection_1_units with forecasted_units if this is the first forecast
         detail.first_forecast_units = forecasted_units
         detail.projection_1_units = forecasted_units
       end
@@ -163,7 +165,7 @@
 
   # HELPERS (Start) =====================================================================
   def approve
-  # ensure current_user has privilege APPROVE_PROJECTION AND ((Projection.state = projection_3 AND Projection.approval_3_date nil) OR (Projection.state = projection_4 AND Projection.approval_4_date nil))
+    # ensure current_user has privilege APPROVE_PROJECTION AND ((Projection.state = projection_3 AND Projection.approval_3_date nil) OR (Projection.state = projection_4 AND Projection.approval_4_date nil))
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
     is_approver = user.privileges.where(privilege_code: 'PROJECTION_APPROVER', is_enabled: true).first ? true : false
 
@@ -171,39 +173,39 @@
 
       case self.state
 
-        when 'projection_3'
-          self.approval_3_date = Date.today
+      when 'projection_3'
+        self.approval_3_date = Date.today
 
-        when 'projection_4'
-          self.approval_4_date = Date.today
+      when 'projection_4'
+        self.approval_4_date = Date.today
 
       end
 
     end
   end
 
-  def build
+  def process_build
     # Insert ProjectionDetail row for every authorized SKU/Location combination (Inventory.is_authorized = true) belonging to the Departement in the Projection and every active selling location authorized for the SKU.
     Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id)}
   end
 
   def close
-     # ensure current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
+    # ensure current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
     is_closer = user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first ? true : false
 
-    if  is_closer && ((self.state == 'projection_1') or (self.state == 'projection_2') or (self.state == 'projection_3' && self.approval_3_date) or (self.state == 'projection_4' && self.approval_4_date))
-        next_phase = (self.state.byteslice(11).to_i + 1)
+    if is_closer && ((self.state == 'projection_1') or (self.state == 'projection_2') or (self.state == 'projection_3' && self.approval_3_date) or (self.state == 'projection_4' && self.approval_4_date))
+      next_phase = (self.state.byteslice(11).to_i + 1)
 
-        self.projection_details.each do |pd|
-          pd.send("projection_#{next_phase.to_s}_units=", pd.send("#{self.state.to_s}_units")) unless self.state == 'projection_4'
-          pd.state = 'approved'
-          pd.save
-        end
+      self.projection_details.each do |pd|
+        pd.send("projection_#{next_phase.to_s}_units=", pd.send("#{self.state.to_s}_units")) unless self.state == 'projection_4'
+        pd.state = 'approved'
+        pd.save
+      end
 
-        self.projection_closer_user_id = user.user_id
-        self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{next_phase}"
-        self.save
+      self.projection_closer_user_id = user.user_id
+      self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{next_phase}"
+      self.save
     end
   end
 
@@ -216,24 +218,24 @@
 
 end # class Omni::Projection
 
-    # self.projection_details.each do |det|
-    #   if det.sale_units_2012 and det.sale_units_2011 and det.sale_units_2010
-    #     average_sales = (det.sale_units_2012 + det.sale_units_2011 + det.sale_units_2010) / 3
-    #     total_deviation = ((average_sales - det.sale_units_2012) ** 2) + ((average_sales - det.sale_units_2011) ** 2) + ((average_sales - det.sale_units_2010) ** 2)
-    #   end
+# self.projection_details.each do |det|
+#   if det.sale_units_2012 and det.sale_units_2011 and det.sale_units_2010
+#     average_sales = (det.sale_units_2012 + det.sale_units_2011 + det.sale_units_2010) / 3
+#     total_deviation = ((average_sales - det.sale_units_2012) ** 2) + ((average_sales - det.sale_units_2011) ** 2) + ((average_sales - det.sale_units_2010) ** 2)
+#   end
 
-    #   if det.sale_units_2012 and det.sale_units_2011 and !det.sale_units_2010
-    #     average_sales = (det.sale_units_2012 + det.sale_units_2011) / 2
-    #     total_deviation = ((average_sales - det.sale_units_2012) ** 2) + ((average_sales - det.sale_units_2011) ** 2)
-    #   end
+#   if det.sale_units_2012 and det.sale_units_2011 and !det.sale_units_2010
+#     average_sales = (det.sale_units_2012 + det.sale_units_2011) / 2
+#     total_deviation = ((average_sales - det.sale_units_2012) ** 2) + ((average_sales - det.sale_units_2011) ** 2)
+#   end
 
-    #   if det.sale_units_2012 and !det.sale_units_2011 and !det.sale_units_2010
-    #     average_sales = det.sale_units_2012 / 1
-    #     total_deviation = ((average_sales - det.sale_units_2012) ** 2)
-    #   end
+#   if det.sale_units_2012 and !det.sale_units_2011 and !det.sale_units_2010
+#     average_sales = det.sale_units_2012 / 1
+#     total_deviation = ((average_sales - det.sale_units_2012) ** 2)
+#   end
 
-    #   det.average_sales = average_sales
-    #   det.standard_deviation = Math.sqrt(total_deviation)
-    #   det.forecast_units = det.forecast_units * 1.03 if (det.sale_units_2010 < det.sale_units_2011) and (det.sale_units_2011 < det.sale_units_2012)
-    #   det.save
-    # end
+#   det.average_sales = average_sales
+#   det.standard_deviation = Math.sqrt(total_deviation)
+#   det.forecast_units = det.forecast_units * 1.03 if (det.sale_units_2010 < det.sale_units_2011) and (det.sale_units_2011 < det.sale_units_2012)
+#   det.save
+# end

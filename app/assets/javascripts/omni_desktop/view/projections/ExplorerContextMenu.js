@@ -8,117 +8,117 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
 
     Ext.apply(this, {
 
-      leftActions: [
+     //  leftActions: [
 
-        // LEFT ACTIONS (Start) =================================================================
+     //    // LEFT ACTIONS (Start) =================================================================
 
-        /**
-         * Build
-         * Supports performing 'Build' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Build',
-          cls: 'icon-settings',
-          action: 'build',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickBuild,
-              scope: me
-            }
-          }
-        },
+     //    /**
+     //     * Build
+     //     * Supports performing 'Build' on the selected items in the explorer grid.
+     //     * If none are selected then no records are deleted.
+     //     */
+     //    {
+     //      text:'Build',
+     //      cls: 'icon-settings',
+     //      action: 'build',
+     //      confirm: true,
+     //      multi: true,
+     //      privileges: [],
+     //      listeners: {
+     //        click: {
+     //          fn: this.clickBuild,
+     //          scope: me
+     //        }
+     //      }
+     //    },
 
-        /**
-         * Forecast
-         * Supports performing 'Forecast' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Forecast',
-          cls: 'icon-settings',
-          action: 'forecast',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickForecast,
-              scope: me
-            }
-          }
-        },
+     //    /**
+     //     * Forecast
+     //     * Supports performing 'Forecast' on the selected items in the explorer grid.
+     //     * If none are selected then no records are deleted.
+     //     */
+     //    {
+     //      text:'Forecast',
+     //      cls: 'icon-settings',
+     //      action: 'forecast',
+     //      confirm: true,
+     //      multi: true,
+     //      privileges: [],
+     //      listeners: {
+     //        click: {
+     //          fn: this.clickForecast,
+     //          scope: me
+     //        }
+     //      }
+     //    },
 
-        /**
-         * Approve
-         * Supports performing 'Approve' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Approve',
-          cls: 'icon-settings',
-          action: 'approve',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickApprove,
-              scope: me
-            }
-          }
-        },
+     //    /**
+     //     * Approve
+     //     * Supports performing 'Approve' on the selected items in the explorer grid.
+     //     * If none are selected then no records are deleted.
+     //     */
+     //    {
+     //      text:'Approve',
+     //      cls: 'icon-settings',
+     //      action: 'approve',
+     //      confirm: true,
+     //      multi: true,
+     //      privileges: [],
+     //      listeners: {
+     //        click: {
+     //          fn: this.clickApprove,
+     //          scope: me
+     //        }
+     //      }
+     //    },
 
-        /**
-         * Release
-         * Supports performing 'Release' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Release',
-          cls: 'icon-settings',
-          action: 'release',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickRelease,
-              scope: me
-            }
-          }
-        },
+     //    /**
+     //     * Release
+     //     * Supports performing 'Release' on the selected items in the explorer grid.
+     //     * If none are selected then no records are deleted.
+     //     */
+     //    {
+     //      text:'Release',
+     //      cls: 'icon-settings',
+     //      action: 'release',
+     //      confirm: true,
+     //      multi: true,
+     //      privileges: [],
+     //      listeners: {
+     //        click: {
+     //          fn: this.clickRelease,
+     //          scope: me
+     //        }
+     //      }
+     //    },
 
-     // SEPARATOR
-        '-',
+     // // SEPARATOR
+     //    '-',
 
-        /**
-         * Close
-         * Supports performing 'Close' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Close',
-          cls: 'icon-settings',
-          action: 'close',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickClose,
-              scope: me
-            }
-          }
-        },
+     //    /**
+     //     * Close
+     //     * Supports performing 'Close' on the selected items in the explorer grid.
+     //     * If none are selected then no records are deleted.
+     //     */
+     //    {
+     //      text:'Close',
+     //      cls: 'icon-settings',
+     //      action: 'close',
+     //      confirm: true,
+     //      multi: true,
+     //      privileges: [],
+     //      listeners: {
+     //        click: {
+     //          fn: this.clickClose,
+     //          scope: me
+     //        }
+     //      }
+     //    },
 
 
-        // LEFT ACTIONS (End)
+     //    // LEFT ACTIONS (End)
 
-      ],
+     //  ],
 
 
       // RIGHT ACTIONS (Start) ================================================================
