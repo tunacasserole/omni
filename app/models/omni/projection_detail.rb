@@ -90,10 +90,14 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-    # hook :before_update, :set_state, 10
+    hook :before_update, :do_reset, 10
   # HOOKS (End)
 
-
+  def do_reset
+    if projection_1_units_changed?
+      reset
+    end
+  end
   # INDEXING (Start) ====================================================================
   searchable do
     # Exact match attributes
@@ -139,10 +143,10 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     ((self.sale_units_py1||0)+(self.sale_units_py2||0)+(self.sale_units_py3||0)) / 3
   end
   def compute_standard_deviation
-    avg = self.average_sales
+    # avg = self.average_sales
     #squared_deviations = (((self.sale_units_py1 - avg)**2 + (self.sale_units_py2 - avg)**2 + (self.sale_units_py3 - avg)**2) / 3)
 #  Need to calculate square root of squared_deviations to get standard deviation
-    std = 0
+    # std = 0
   end
   # HELPERS (End)
 
@@ -158,14 +162,14 @@ class Omni::ProjectionDetail < ActiveRecord::Base
       transition :draft => :approved
     end
 
+    event :reset do
+      transition [:draft, :approved] => :draft
+    end
+
     def self.validate_approve
       errors.add('State','This action is only valid if the Projection State is Forecast, Projection 1, Projection 2, Projection 3 or Projection 4.') unless self.projection.state == 'forecast' or self.projection_state =~ /projection_\d_units/
     end
 
-    # def self.set_state
-    # # if units changed, update state to draft JASON
-    #   self.state == 'draft'
-    # end
   end
   # STATES (End)
 

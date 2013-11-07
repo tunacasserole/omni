@@ -16,12 +16,6 @@ class Omni::Test::Projection < Omni::Test::Base
     y=x.projection_details.first
     test_it('It creates one with details', 3, x.projection_details.count)
 
-    x.projection_details.to_a.each {|x| x.delete}
-    test_it('it destroys all details', 0, x.projection_details.count)
-
-    x.build
-    test_it('It builds projection detail rows', 3, x.projection_details.count)
-
     @@model_action = 'Forecast'
     self.forecasting_scenarios.each {|x| process_forecasting_scenario x}
 
@@ -33,18 +27,18 @@ class Omni::Test::Projection < Omni::Test::Base
     test_it('It builds projection location rows when released', 1, x.projection_locations.count)
 
     @@model_action = 'Approve'
-     x=Omni::Projection.where(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1').first
+    x=Omni::Projection.where(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1').first
     x.state = 'projection_3'
     x.approval_3_date=nil
     x.save
     x.approve
-    test_it('It approves a projection if it is in projection 3 or 4 status', Date.today, x.approval_3_date)
+    test_it('It approves a projection if state = projection 3', Date.today, x.approval_3_date)
 
     x.state = 'projection_4'
     x.approval_4_date=nil
     x.save
     x.approve
-    test_it('It approves a projection if it is in projection 3 or 4 status', Date.today, x.approval_4_date)
+    test_it('It approves a projection if state = projection 4', Date.today, x.approval_4_date)
 
     @@model_action = 'Close'
     self.closing_scenarios.each {|x| process_closing_scenario x}
@@ -56,7 +50,7 @@ class Omni::Test::Projection < Omni::Test::Base
     Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :projection_detail_id => 'PROJ1A1C193611E3A22D20CXXPRODET1', :forecast_profile_id =>s[:forecast_profile_id], :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50)
 
     Omni::Projection.where(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1').each {|x| x.delete}
-    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', :forecast_profile_id =>s[:forecast_profile_id])
+    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', display: 'test projection 1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', :forecast_profile_id =>s[:forecast_profile_id])
 
     x.forecast
 
@@ -73,7 +67,8 @@ class Omni::Test::Projection < Omni::Test::Base
 
     # Omni::Projection.all.each {|x| x.delete}
     Omni::Projection.where(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2').each {|x| x.delete}
-    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', :forecast_profile_id =>(s[:forecast_profile_id]||'XXXXXXXXXXXXXXXXFORECASTPROFILE1'))
+    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', display: 'test projection 2', state: s[:projection_state], department_id: '05A9CEBAAC5511E299E700FF58D32228', :forecast_profile_id =>'XXXXXXXXXXXXXXXXFORECASTPROFILE1')
+    x=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', state: 'draft', department_id: '05A9CEBAAC5511E299E700FF58D32228', :forecast_profile_id =>'XXXXXXXXXXXXXXXXFORECASTPROFILE1')
 
     x.state = s[:projection_state]
     x.projection_approver_user_id = s[:projection_approver_user_id]
@@ -118,11 +113,10 @@ class Omni::Test::Projection < Omni::Test::Base
     user_2 = 'TESTUSERXXXXXXXXXXXXXPLANNERPAUL'
     user_3 = '811166D4D50A11E2B45820C9D04AARON'
     x=[]
-    x << {:scenario=>'It prevents closing from new state', :user_id=>user_2, projection_state: 'new', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved', projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,           expected: 'new',        model_name: 'projection', actual_result: 'state'}
     x << {:scenario=>'It prevents closing from draft state', :user_id=>user_2, projection_state: 'draft', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved', projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,        expected: 'draft',       model_name: 'projection', actual_result: 'state'}
     x << {:scenario=>'It prevents closing from forecast state', :user_id=>user_2, projection_state: 'forecast', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved', projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0, expected: 'forecast',  model_name: 'projection', actual_result: 'state'}
     x << {:scenario=>'It prevents closing from complete state', :user_id=>user_2, projection_state: 'complete', projection_approver_user_id: user_2, projection_closer_user_id: user_2, approval_3_date: Date.yesterday, approval_4_date: Date.yesterday, projection_detail_state: 'approved', projection_1_units: 100, projection_2_units: 150, projection_3_units: 200, projection_4_units: 250,expected: 'complete',model_name: 'projection', actual_result: 'state'}
-    x << {:scenario=>'It prevents closing without proper permission', :user_id=>user_1, projection_state: 'new', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved', projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,                     expected: 'new',              model_name: 'projection', actual_result: 'state'}
+    x << {:scenario=>'It prevents closing without proper permission', :user_id=>user_1, projection_state: 'draft', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved', projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,                     expected: 'draft',              model_name: 'projection', actual_result: 'state'}
 
     x << {:scenario=>'It updates state from projection_1 to projection_2', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,expected: 'projection_2', model_name: 'projection', actual_result: 'state'}
     x << {:scenario=>'It updates projection_closer_user_id', :user_id=>user_2, projection_state: 'projection_1', projection_approver_user_id: nil, projection_closer_user_id: nil, approval_3_date: nil, approval_4_date: nil, projection_detail_state: 'approved',  projection_1_units: 100, projection_2_units: 0, projection_3_units: 0, projection_4_units: 0,                     expected: user_3,            model_name: 'projection', actual_result: 'projection_closer_user_id'}

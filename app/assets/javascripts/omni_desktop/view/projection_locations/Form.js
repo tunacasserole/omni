@@ -48,13 +48,13 @@ Ext.define('Omni.view.projection_locations.Form', {
           queryField: 'display',
           valueField: 'location_id',
           itemTpl: '{display}'
+        // }, {
+        //   xtype: 'textfield',
+        //   name: 'display',
+        //   fieldLabel: this.displayLabel,
+        //   allowBlank: true
         }, {
-          xtype: 'textfield',
-          name: 'display',
-          fieldLabel: this.displayLabel,
-          allowBlank: true
-        }, {
-          xtype: 'textfield',
+          xtype: 'datefield',
           name: 'approval_date',
           fieldLabel: this.approval_dateLabel,
           allowBlank: true

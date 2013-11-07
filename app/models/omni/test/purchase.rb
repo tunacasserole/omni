@@ -47,7 +47,7 @@ class Omni::Test::Purchase < Omni::Test::Base
     test_it('Cancel a purchase','cancelled',x.state)
 
     # approval scenarios 6 - 20 various approval tests
-    @@model_action = 'Approval'
+    @@model_action = 'Approve'
     approval_scenarios.each {|s| test_approval_scenario s}
 
     # run 26 different allocation tests
@@ -59,14 +59,33 @@ class Omni::Test::Purchase < Omni::Test::Base
   def self.test_purchase_detail_events
     x=@pd1
 
+    x.state = 'draft'
+    x.save
+    x.receive
+    test_it('it prevents receiving unless state is open','draft',x.state)
+
+    x.state = 'open'
+    x.save
     x.approve
     test_it('Approve a purchase detail','open',x.state)
 
+    @@model_action = 'Receive'
+    x.selling_units_approved = 100
+    x.selling_units_cancelled = 10
+    x.selling_units_received = 10
     x.receive
-    test_it('Receive a purchase detail','open',x.state)
+    test_it('it partially receive a purchase detail when there are open_units','partial',x.state)
 
+    x.selling_units_approved = 100
+    x.selling_units_cancelled = 0
+    x.selling_units_received = 100
+    x.receive
+    test_it('it completely receive a purchase detail when there are no remaining open_units','complete',x.state)
+
+    x.state = 'open'
+    x.save
     x.cancel
-    test_it('Cancel a purchase detail','cancelled',x.state)
+    test_it('it cancels a purchase detail when state is open or partial','cancelled',x.state)
   end
 
   def self.test_purchase_allocation_events

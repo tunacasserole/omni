@@ -60,7 +60,7 @@ Ext.define('Omni.view.projections.Explorer', {
         { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },
         { header: this.department_idLabel,                 dataIndex: 'department_display',               flex: 1 },
         { header: this.forecast_profile_idLabel,           dataIndex: 'forecast_profile_display',         flex: 1 },
-        { header: this.displayLabel,              editor:   {},         dataIndex: 'display',                     flex: 1 },
+        // { header: this.displayLabel,              editor:   {},         dataIndex: 'display',                     flex: 1 },
         { header: this.plan_yearLabel,                     dataIndex: 'plan_year',                   flex: 1 },
         { header: this.location_idLabel,                   dataIndex: 'location_display',                 flex: 1 },
       ]

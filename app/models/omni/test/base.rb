@@ -6,10 +6,10 @@ class Omni::Test::Base
     create_base_test_data
 
     # RUN TESTS BY MODULE
-    Omni::Test::Allocation.go
     Omni::Test::Purchase.go
-    Omni::Test::Bts.go
-    Omni::Test::Projection.go
+    # Omni::Test::Allocation.go
+    # Omni::Test::Bts.go
+    # Omni::Test::Projection.go
     # END OF RUN TESTS
 
     reindex_data

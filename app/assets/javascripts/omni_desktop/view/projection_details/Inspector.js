@@ -19,13 +19,6 @@ Ext.define('Omni.view.projection_details.Inspector',{
     Ext.apply(this, {
       cards: [
         {title: 'Profile',           xtype: 'omni-projection_details-Form'}
-        ,{title: 'Period Results', xtype: 'omni-period_results-Explorer', module: 'approvals',
-           defaultSearch: { with:
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }
       ]
     });
     // CARDS (End)

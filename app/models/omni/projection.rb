@@ -10,7 +10,7 @@
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates :display,                          :uniqueness => true
+  validates :display,                           :uniqueness => true
   validates :plan_year,                         :presence => true
   validates :department_id,                     :presence => true
 
@@ -18,7 +18,7 @@
 
   # DEFAULTS (Start) ====================================================================
   default      :projection_id,                    :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.department_display} - #{m.plan_year}"}
+  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{ m.department_display } - #{m.plan_year}"}
   default      :plan_year,                        :override  =>  true,         :to    => '2014'
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
@@ -65,6 +65,7 @@
   # end
 
   # HOOKS (Start) =======================================================================
+  hook        :before_destroy,                :cascading_destroy,    10
   # HOOKS (End)
 
   # INDEXING (Start) ====================================================================
@@ -197,6 +198,10 @@
     self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) if detail.last_forecast_date} #unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
   end
 
+  def cascading_destroy
+    self.projection_details.each {|x| x.destroy}
+    self.projection_locations.each {|x| x.destroy}
+  end
   # HELPERS (End)
 
 end # class Omni::Projection
