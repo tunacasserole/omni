@@ -254,6 +254,14 @@ class Omni::Purchase < ActiveRecord::Base
   # STATE HELPERS (End)
 
   # HELPERS (Start) =====================================================================
+
+  def self.createAdvancedPO(params={})
+
+    return 'hello motto'
+
+  end
+
+
    def process_approve
       case self.approval_level
         when 1

@@ -4,7 +4,11 @@ Ext.define('Omni.view.projection_details.Explorer', {
   alias    : 'widget.omni-projection_details-Explorer',
 
   // EXPLORER INIT (Start) ===============================================================
-  store    : Ext.create('Omni.store.ProjectionDetail'),
+  allowInlineEdit : true,
+
+  allowBulkUpdate : true,
+
+  store      : Ext.create('Omni.store.ProjectionDetail'),
 
   contextMenuConfig : {
     xtype    : 'omni-projection_details-ExplorerContextMenu'
@@ -18,6 +22,8 @@ Ext.define('Omni.view.projection_details.Explorer', {
     xtype    : 'omni-projection_details-Inspector'
   },
   // EXPLORER INIT (End)
+
+
 
   // LABELS (Start) ======================================================================
   projection_detail_idLabel               : Omni.i18n.model.ProjectionDetail.projection_detail_id,
@@ -60,13 +66,15 @@ Ext.define('Omni.view.projection_details.Explorer', {
 
     var me = this;
 
+
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns      : [
         {
           header       : this.stateLabel,
           dataIndex    : 'state',
-          flex         : 1
+          flex         : 1,
+          hidden       : true
         },
         {
           header       : this.forecast_profile_idLabel,
@@ -76,7 +84,17 @@ Ext.define('Omni.view.projection_details.Explorer', {
         {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
-          flex         : 1
+          flex         : 1,
+          editor       : {
+            xtype        : 'buildit-Locator',
+            store        : Ext.create('Omni.store.Sku',{pageSize: 10}),
+            displayField : 'display',
+            queryField   : 'display',
+            valueField   : 'sku_id',
+            itemTpl      : '{display}',
+            name         : 'sku_id',
+            allowBlank   : true
+          }
         },
         {
           header       : this.location_idLabel,
@@ -96,27 +114,34 @@ Ext.define('Omni.view.projection_details.Explorer', {
         {
           header       : this.last_forecast_dateLabel,
           dataIndex    : 'last_forecast_date',
-          flex         : 1
+          flex         : 1,
+          editor       : {
+            xtype        : 'datefield'
+          }
         },
         {
           header       : this.projection_1_unitsLabel,
           dataIndex    : 'projection_1_units',
-          flex         : 1
+          flex         : 1,
+          bulkEditable : true
         },
         {
           header       : this.projection_2_unitsLabel,
           dataIndex    : 'projection_2_units',
-          flex         : 1
+          flex         : 1,
+          bulkEditable : true
         },
         {
           header       : this.projection_3_unitsLabel,
           dataIndex    : 'projection_3_units',
-          flex         : 1
+          flex         : 1,
+          bulkEditable : true
         },
         {
           header       : this.projection_4_unitsLabel,
           dataIndex    : 'projection_4_units',
-          flex         : 1
+          flex         : 1,
+          bulkEditable : true
         },
         {
           header       : this.sale_units_ytdLabel,

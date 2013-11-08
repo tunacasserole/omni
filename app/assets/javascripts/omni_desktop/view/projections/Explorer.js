@@ -59,7 +59,11 @@ Ext.define('Omni.view.projections.Explorer', {
     Ext.apply(this, {
       columns: [
         // { header: this.projection_idLabel,                 dataIndex: 'projection_id',               flex: 1 },    
-        { header: this.forecast_profile_idLabel,           dataIndex: 'forecast_profile_display',         flex: 1 },    
+        { 
+          header      : this.forecast_profile_idLabel,
+          dataIndex   : 'forecast_profile_display',
+          flex        : 1
+        },    
         // { header: this.region_displayLabel,                     dataIndex: 'region_display',                   flex: 1 },    
         // { header: this.location_idLabel,                   dataIndex: 'location_display',                 flex: 1 },    
         { header: this.department_idLabel,                 dataIndex: 'department_display',               flex: 1 },    

@@ -81,6 +81,25 @@ Ext.direct.Manager.addProvider({
 
 //
 // -----------------------------------------------------------------------
+// SERVICE: Batch
+// -----------------------------------------------------------------------
+//
+
+Ext.direct.Manager.addProvider({
+		type        : 'remoting',
+		url         : Buildit.lib.DirectSources.BUILDIT,
+		maxRetries  : 0,
+		actions     : {
+			Batch:[
+				{name: 'update', len: 1}
+			]
+		},
+		namespace   :'Buildit.service'
+	}
+);
+
+//
+// -----------------------------------------------------------------------
 // SERVICE: Dashlet
 // -----------------------------------------------------------------------
 //

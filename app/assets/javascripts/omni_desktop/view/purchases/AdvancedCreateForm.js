@@ -1,24 +1,13 @@
-Ext.define('Omni.view.purchases.Form', {
+Ext.define('Omni.view.purchases.AdvancedCreateForm', {
 
   extend:'Buildit.ux.Form',
-  alias:'widget.omni-purchases-Form',
+  alias:'widget.omni-purchases-AdvancedCreateForm',
 
 
   initComponent:function () {
 
     var me = this;
 
-    var disabled = this.record.get('state') != ('draft' || 'pending_approval') ? true : false;
-    if (this.record.phantom){
-      disabled = false
-    };
-
-    // FILTER (Start) =======================================================================
-    var associativeFilter = {
-      property:   'purchase_id',
-      value:      this.record.get('purchase_id')
-    };
-    // FILTER (End)
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
@@ -96,8 +85,6 @@ Ext.define('Omni.view.purchases.Form', {
           defaultType        : 'textfield',
           defaults           : {anchor: '95%'},
           layout             : 'anchor',
-          // disabled:     disabled,     // disable fieldset if disabled var is true
-          disabled           : disabled,
           items              :[
 
             { xtype             : 'textfield',
@@ -193,7 +180,6 @@ Ext.define('Omni.view.purchases.Form', {
           defaultType         : 'textfield',
           defaults            : {anchor: '70%'},
           layout              : 'anchor',
-          disabled            : disabled,
           items               :[
 
             { xtype             : 'buildit-Locator',
@@ -254,223 +240,6 @@ Ext.define('Omni.view.purchases.Form', {
             }
           ]
         }
-        ,{
-          xtype: 'fieldset',
-          title: 'Contact Information',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { xtype             : 'textfield',
-              name              : 'supplier_address_1',
-              fieldLabel        : this.supplier_address_1Label,
-              allowBlank        : true,
-              disabled          : false,
-            },
-            { xtype             : 'textfield',
-              name              : 'supplier_address_2',
-              fieldLabel        : this.supplier_address_2Label,
-              allowBlank        : true,
-              disabled          : false,
-            },
-            { xtype             : 'textfield',
-              name              : 'supplier_address_3',
-              fieldLabel        : this.supplier_address_3Label,
-              allowBlank        : true,
-              disabled          : false,
-            },
-            { xtype             : 'textfield',
-              name              : 'supplier_address_4',
-              fieldLabel        : this.supplier_address_4Label,
-              allowBlank        : true,
-              disabled          : false,
-            },
-            { xtype             : 'textfield',
-              name              : 'supplier_city',
-              fieldLabel        : this.supplier_cityLabel,
-              allowBlank        : true,
-              disabled          : false,
-            },
-            { xtype             : 'buildit-Lookup',
-              name              : 'supplier_state_code',
-              fieldLabel        : this.supplier_state_codeLabel,
-              allowBlank        : true,
-              category          : 'STATE_CODE'
-            },
-            { xtype             : 'textfield',
-              name              : 'supplier_zip',
-              fieldLabel        : this.supplier_zipLabel,
-              allowBlank        : true,
-              disabled          : false,
-            },
-            { xtype             : 'textfield',
-              name              : 'supplier_country',
-              fieldLabel        : this.supplier_countryLabel,
-              allowBlank        : true,
-              disabled          : false,
-            }
-          ]
-        },
-       ,{
-          xtype:        'fieldset',
-          title:        'Logistics Information',
-          collapsible:  true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '70%'},
-          layout:       'anchor',
-          items:[
-
-            { xtype             : 'buildit-Lookup',
-              name              : 'freight_term',
-              fieldLabel        : this.freight_termLabel,
-              allowBlank        : true,
-              category          : 'FREIGHT_TERM'
-            },
-            { xtype             : 'buildit-Lookup',
-              name              : 'fob_point',
-              fieldLabel        : this.fob_pointLabel,
-              allowBlank        : true,
-              category          : 'FOB_POINT'
-            },
-            { xtype             : 'textfield',
-              name              : 'ship_via',
-              fieldLabel        : this.ship_viaLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'buildit-Locator',
-              name              : 'carrier_supplier_id',
-              fieldLabel        : this.carrier_supplier_idLabel,
-              allowBlank        : true,
-              store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
-              displayField      : 'display',
-              queryField        : 'display',
-              valueField        : 'supplier_id',
-              itemTpl           : '{display}'
-            },
-            { xtype             : 'textfield',
-              name              : 'estimated_lead_time_days',
-              fieldLabel        : this.estimated_lead_time_daysLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'buildit-Locator',
-              name              : 'ship_thru_supplier_id',
-              fieldLabel        : this.ship_thru_supplier_idLabel,
-              allowBlank        : true,
-              store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
-              displayField      : 'display',
-              queryField        : 'display',
-              valueField        : 'supplier_id',
-              itemTpl           : '{display}'
-            },
-            { xtype             : 'buildit-Locator',
-              name              : 'master_purchase_id',
-              fieldLabel        : this.master_purchase_idLabel,
-              allowBlank        : true,
-              store             : Ext.create('Omni.store.Purchase',{pageSize: 20}),
-              displayField      : 'display',
-              queryField        : 'display',
-              valueField        : 'purchase_id',
-              itemTpl           : '{display}'
-            },
-            { xtype             : 'checkbox',
-              name              : 'is_special_order',
-              fieldLabel        : this.is_special_orderLabel,
-              allowBlank        : true
-            }
-          ]
-        }
-       ,{
-          xtype:        'fieldset',
-          title:        'Allocation Information',
-          collapsible:  true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '70%'},
-          layout:       'anchor',
-          items:[
-            { xtype            : 'buildit-Locator',
-              name              : 'allocation_profile_id',
-              fieldLabel        : this.allocation_profile_idLabel,
-              allowBlank        : true,
-              store             : Ext.create('Omni.store.AllocationProfile',{pageSize: 50}),
-              displayField      : 'display',
-              queryField        : 'display',
-              valueField        : 'allocation_profile_id',
-              itemTpl           : '{display}'
-            },
-            { xtype             : 'checkbox',
-              name              : 'is_update_blank_details',
-              fieldLabel        : this.is_update_blank_detailsLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'label',
-              text              : 'This will update the Allocation Profile in each Purchase Detail where it is blank.',
-              cls               : 'instruction'
-            },
-            { xtype             : 'checkbox',
-              name              : 'is_update_all_details',
-              fieldLabel        : this.is_update_all_detailsLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'label',
-              text              : 'This will update all Purchase Details to the new Allocation Profile',
-              cls               : 'instruction'
-            }
-          ]
-        }
-       ,{
-          xtype:        'fieldset',
-          title:        'Other Information',
-          collapsible:  true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '70%'},
-          layout:       'anchor',
-          items:[
-            { xtype: 'buildit-Lookup',  name: 'purchase_type',        fieldLabel: this.purchase_typeLabel               , allowBlank: true, category:   'PURCHASE_TYPE' },
-            { xtype: 'buildit-Lookup',  name: 'purchase_source',      fieldLabel: this.purchase_sourceLabel             , allowBlank: true, category:   'PURCHASE_SOURCE' },
-            { xtype             : 'buildit-Lookup',
-              name              : 'payment_term',
-              fieldLabel        : this.payment_termLabel,
-              allowBlank        : true,
-              category          : 'PAYMENT_TERM'
-            },
-            { xtype             : 'buildit-Locator',
-              name              : 'pay_to_supplier_id',
-              fieldLabel        : this.pay_to_supplier_idLabel,
-              allowBlank        : true,
-              store             : Ext.create('Omni.store.Supplier',{pageSize: 10}),
-              displayField      : 'display',
-              queryField        : 'display',
-              valueField        : 'supplier_id',
-              itemTpl           : '{display}'
-            },
-            { xtype             : 'buildit-Locator',
-              store             : Ext.create('Buildit.store.User',{pageSize: 20}),
-              displayField      : 'full_name',
-              queryField        : 'full_name',
-              valueField        : 'user_id',
-              itemTpl           : '{full_name}',
-              name              : 'ordered_by_user_id',
-              fieldLabel        : this.ordered_by_user_idLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'checkbox',
-              name              : 'is_phone_order',
-              fieldLabel        : this.is_phone_orderLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'buildit-Locator',
-              name              : 'confirmed_by_user_id',
-              fieldLabel        : this.confirmed_by_user_idLabel,
-              allowBlank        : true,
-              store             :   Ext.create('Buildit.store.User',{pageSize: 20}),
-              displayField      : 'full_name',
-              queryField        : 'full_name',
-              valueField        : 'confirmed_by_user_id',
-              itemTpl           : '{full_name}'
-            }
-          ]
-        }
       ]
     });
     // FIELDSETS (End)
@@ -486,41 +255,6 @@ Ext.define('Omni.view.purchases.Form', {
     // TITLES (End)
 
     // ACTIONS (Start) =====================================================================
-    Ext.apply(this, {
-      actions: [
-        {
-          xtype      : 'button',
-          cls        : 'submit',
-          tooltip    : 'Release Purchase Order',
-          listeners  : {
-            beforerender  : this.prepareReleaseAction,
-            click         : this.onReleaseAction,
-            scope         : me
-          }
-        },
-        {
-          xtype      : 'button',
-          cls        : 'approve',
-          tooltip    : 'Approve Purchase Order',
-          listeners  : {
-            beforerender  : this.prepareApproveAction,
-            click         : this.onApproveAction,
-            scope         : me
-          }
-        },
-        {
-          xtype      : 'button',
-          cls        : 'approve',
-          tooltip    : 'Advanced Create',
-          listeners  : {
-            beforerender  : Ext.emptyFn,
-            click         : me.onAdvancedCreateToggle,
-            scope         : me
-          }
-        }
-
-      ]
-    });
 
     // ACTIONS (End)
 
@@ -531,82 +265,7 @@ Ext.define('Omni.view.purchases.Form', {
 
     this.callParent();
 
-
-    me.advancedCreateWindow = Ext.create('Omni.view.purchases.AdvancedCreatePanel');
-    me.advancedHidden = true;
-  },
-
-  // HANDLERS (Start) ======================================================================
-
-  onAdvancedCreateToggle : function(btn, e){
-    
-    var me               = this;
-    me.advancedHidden    = !me.advancedHidden;
-
-    if(me.advancedHidden){
-      me.advancedCreateWindow.hide();
-    } else {
-      me.advancedCreateWindow.showBy(btn);
-    }
-
-
-  }, // onAdvancedCreateToggle
-
-  onReleaseAction : function(action, eOpts){
-    this.processEventTransition('release', 'Purchase Order was successfully released.', 'An error occurred releasing this purchase order.');
-  }, // onBuildAction
-
-  onApproveAction : function(action, eOpts){
-    this.processEventTransition('release', 'Purchase Order was successfully approved.', 'Approval was not completed.');
-  }, // onBuildAction
-
-  processEventTransition : function(eventName, successMsg, failureMsg){
-    var me = this;
-
-    Omni.service.Purchase.fireEvent({
-        id      : this.record.get('purchase_id'),
-        name    : eventName
-      },
-      function(result, e){
-        me.getForm().clearInvalid();
-        if(result && result.success == true){
-          Buildit.infoMsg(successMsg);
-          me.record.set(result);
-          me.loadRecord(me.record);
-          me.fireEvent('recordchanged', me, me.banner);
-          me.doLayout();
-        } else {
-          var response = Ext.JSON.decode(e.xhr.responseText).result;
-
-          if(response.errors)
-            me.getForm().markInvalid(response.errors);
-
-          var error_message = failureMsg;
-          if(response.message)
-            error_message = response.message;
-
-          if(response.errors)
-            error_message = error_message + '. Please fix the highlighted fields and try again.'
-
-          Buildit.errorMsg(error_message);
-        }
-      }
-    );
-
-  },
-
-  prepareReleaseAction : function(action, eOpts) {
-    var currentState = this.record.get('state');
-    if(this.record.phantom == true || currentState != 'draft')
-      action.hide();
-  },
-
-  prepareApproveAction : function(action, eOpts) {
-    var currentState = this.record.get('state');
-    if(this.record.phantom == true || currentState != 'pending_approval')
-      action.hide();
   }
 
-  // HANDLERS (End)
 
 });

@@ -1,4 +1,5 @@
 class Omni::ProjectionDetail < ActiveRecord::Base
+
   # METADATA (Start) ====================================================================
   self.table_name   = :projection_details
   self.primary_key  = :projection_detail_id
@@ -22,14 +23,14 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   default      :projection_line_nbr,              :override  =>  false,        :with  => :sequence,         :named=>"PROJECTION_LINE_NBR"
   default      :last_forecast_units,              :override  =>  false,        :to    => 0
   default      :first_forecast_units,             :override  =>  false,        :to    => 0
-  default      :projection_1_units,               :override  =>  false,         :to    => 0
-  default      :projection_2_units,               :override  =>  false,         :to    => 0
-  default      :projection_3_units,               :override  =>  false,         :to    => 0
-  default      :projection_4_units,               :override  =>  false,         :to    => 0
-  default      :sale_units_py1,                   :override  =>  false,         :to    => 0
-  default      :sale_units_py2,                   :override  =>  false,         :to    => 0
-  default      :sale_units_py3,                   :override  =>  false,         :to    => 0
-  default      :sale_units_ytd,                   :override  =>  false,         :to    => 0
+  default      :projection_1_units,               :override  =>  false,        :to    => 0
+  default      :projection_2_units,               :override  =>  false,        :to    => 0
+  default      :projection_3_units,               :override  =>  false,        :to    => 0
+  default      :projection_4_units,               :override  =>  false,        :to    => 0
+  default      :sale_units_py1,                   :override  =>  false,        :to    => 0
+  default      :sale_units_py2,                   :override  =>  false,        :to    => 0
+  default      :sale_units_py3,                   :override  =>  false,        :to    => 0
+  default      :sale_units_ytd,                   :override  =>  false,        :to    => 0
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -70,7 +71,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
-    computed_attributes do
+  computed_attributes do
     compute :sale_units_ytd,                     :with => :compute_sale_units_ytd
     compute :sale_units_py1,                     :with => :compute_sale_units_py1
     compute :sale_units_py2,                     :with => :compute_sale_units_py2
