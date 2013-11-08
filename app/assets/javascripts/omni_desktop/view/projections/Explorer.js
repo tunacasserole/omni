@@ -5,7 +5,6 @@ Ext.define('Omni.view.projections.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   allowFind: true,
-  allowEdit: true,
 
   store: Ext.create('Omni.store.Projection'),
 
@@ -45,7 +44,7 @@ Ext.define('Omni.view.projections.Explorer', {
   audit_updated_byLabel:                  Omni.i18n.model.Projection.audit_updated_by,
   is_destroyedLabel:                      Omni.i18n.model.Projection.is_destroyed,
   // LABELS (End)
-  
+
   // TITLES (Start) ======================================================================
   title:     'Projections',
   subtitle:  'Create and maintain Projections',
@@ -83,6 +82,7 @@ Ext.define('Omni.view.projections.Explorer', {
         // { header: this.audit_created_byLabel,              dataIndex: 'audit_created_by',            flex: 1 },    
         // { header: this.audit_updated_byLabel,              dataIndex: 'audit_updated_by',            flex: 1 },    
         // { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }    
+
       ]
     });
     // COLUMNS (End)

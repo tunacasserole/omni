@@ -1,4 +1,12 @@
 Buildit::Lookup.delete_all
+Buildit::Lookup.create(:lookup_id => '032456XXC72911HIHI3212313B102013', :code => '2013', :default_text => '2013', :category => 'PLAN_YEAR', :position => 1)
+Buildit::Lookup.create(:lookup_id => '032456E2972911HIHI3212313B102014', :code => '2014', :default_text => '2014', :category => 'PLAN_YEAR', :position => 2)
+Buildit::Lookup.create(:lookup_id => '032456E2OH5911HIHI3212313B102015', :code => '2015', :default_text => '2015', :category => 'PLAN_YEAR', :position => 3)
+Buildit::Lookup.create(:lookup_id => '032456E2U8O911HIHI3212313B102016', :code => '2016', :default_text => '2016', :category => 'PLAN_YEAR', :position => 4)
+Buildit::Lookup.create(:lookup_id => '032456E2DT5911HIHI3212313B102017', :code => '2017', :default_text => '2017', :category => 'PLAN_YEAR', :position => 5)
+Buildit::Lookup.create(:lookup_id => '032456E2QT3911HIHI3212313B102018', :code => '2018', :default_text => '2018', :category => 'PLAN_YEAR', :position => 6)
+Buildit::Lookup.create(:lookup_id => '032456EOTU8911HIHI3212313B102019', :code => '2019', :default_text => '2019', :category => 'PLAN_YEAR', :position => 7)
+Buildit::Lookup.create(:lookup_id => '032456ORU9D911HIHI3212313B102020', :code => '2020', :default_text => '2020', :category => 'PLAN_YEAR', :position => 8)
 Buildit::Lookup.create(:lookup_id => '032456E2972911E2A3D212313B10044E', :code => 'SELL UNIT', :default_text => 'Sell Unit', :category => 'PACK_TYPE', :position => 1)
 Buildit::Lookup.create(:lookup_id => '04183F3C972911E2A3D212313B10044E', :code => 'INNER PACK', :default_text => 'Inner Pack', :category => 'PACK_TYPE', :position => 2)
 Buildit::Lookup.create(:lookup_id => '05726F2E972911E2A3D212313B10044E', :code => 'MASTER PACK', :default_text => 'Master Pack', :category => 'PACK_TYPE', :position => 3)

@@ -200,7 +200,7 @@ class Omni::Purchase < ActiveRecord::Base
   ### CALLBACKS ###
     # after_transition :on => :costing, :do => :process_costing
     after_transition :on => :cancel,  :do => :process_cancel
-    after_transition :on => :release, :do => :process_release
+    after_transition :on => :release, :do => :do_release
     after_transition :on => :approve, :do => :process_approve
     # after_transition :on => :open, :do => :process_open
     after_transition :on => :print,   :do => :process_print
@@ -231,7 +231,7 @@ class Omni::Purchase < ActiveRecord::Base
      self.save
   end
 
-  def process_release
+  def do_release
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
 
       # message = Buildit::Comm::Email::Message.create(

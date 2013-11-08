@@ -3,26 +3,6 @@ Ext.define('Omni.view.skus.Explorer', {
   extend: 'Buildit.ux.explorer.Panel',
   alias: 'widget.omni-skus-Explorer',
 
-  // LABELS (Start) ======================================================================
-  displayLabel: Omni.i18n.model.Sku.display,
-  sku_nbrLabel: Omni.i18n.model.Sku.sku_nbr,
-  stateLabel: Omni.i18n.model.Sku.state,
-  site_idLabel: Omni.i18n.model.Sku.site_id,
-  style_idLabel: Omni.i18n.model.Sku.style_id,
-  conversion_typeLabel: Omni.i18n.model.Sku.conversion_type,
-  color_idLabel: Omni.i18n.model.Sku.color_id,
-  size_idLabel: Omni.i18n.model.Sku.size_id,
-  sourceLabel: Omni.i18n.model.Sku.source,
-  source_idLabel: Omni.i18n.model.Sku.source_id,
-  // LABELS (End)
-
-
-  // TITLES (Start) ======================================================================
-  title: 'Sku',
-  subtitle: 'A Product that is stocked and/or sold',
-  // TITLES (End)
-
-
   initComponent: function() {
 
     var me = this;
@@ -36,15 +16,12 @@ Ext.define('Omni.view.skus.Explorer', {
       store: Ext.create('Omni.store.Sku'),
 
       contextMenuConfig: {
-        xtype: 'omni-skus-ExplorerContextMenuAll',
+        xtype: 'omni-skus-ExplorerContextMenu',
       },
 
       newForms: [{
-        xtype: 'omni-checkpoints-Form'
-      }],
-
-      newForms: [{
         xtype: 'omni-skus-Form',
+        windowConfig: {}
       }],
 
       inspectorConfig: {
@@ -71,6 +48,23 @@ Ext.define('Omni.view.skus.Explorer', {
 
     });
     // EXPLORER INIT (End)
+
+  // LABELS (Start) ======================================================================
+  Ext.applyIf(this, {
+    displayLabel: Omni.i18n.model.Sku.display,
+    sku_nbrLabel: Omni.i18n.model.Sku.sku_nbr,
+    stateLabel: Omni.i18n.model.Sku.state,
+    site_idLabel: Omni.i18n.model.Sku.site_id,
+    style_idLabel: Omni.i18n.model.Sku.style_id,
+    conversion_typeLabel: Omni.i18n.model.Sku.conversion_type,
+    color_idLabel: Omni.i18n.model.Sku.color_id,
+    size_idLabel: Omni.i18n.model.Sku.size_id,
+    sourceLabel: Omni.i18n.model.Sku.source,
+    source_idLabel: Omni.i18n.model.Sku.source_id,
+  });
+  // LABELS (End)
+
+
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
@@ -123,6 +117,12 @@ Ext.define('Omni.view.skus.Explorer', {
     });
     // COLUMNS (End)
 
+  // TITLES (Start) ======================================================================
+  Ext.apply(this, {
+    title: 'Sku',
+    subtitle: 'A Product that is stocked and/or sold',
+  });
+  // TITLES (End)
 
 
     this.callParent();

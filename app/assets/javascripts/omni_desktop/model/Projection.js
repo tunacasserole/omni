@@ -16,6 +16,8 @@ Ext.define('Omni.model.Projection', {
       { name: 'state',                       type: 'string'   },
       { name: 'display',                     type: 'string'   },
       { name: 'description',                 type: 'string'   },
+      { name: 'approval_3_date',             type: 'string'   },
+      { name: 'approval_4_date',             type: 'string'   },
       { name: 'plan_year',                   type: 'string'   },
       { name: 'projection_type',             type: 'string'   },
       { name: 'version',                     type: 'string'   },

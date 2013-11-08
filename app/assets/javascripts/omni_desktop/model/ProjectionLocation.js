@@ -15,6 +15,10 @@ Ext.define('Omni.model.ProjectionLocation', {
       type       : 'string'
     },
     {
+      name       : 'location_display',
+      type       : 'string'
+    },
+    {
       name       : 'display',
       type       : 'string'
     },

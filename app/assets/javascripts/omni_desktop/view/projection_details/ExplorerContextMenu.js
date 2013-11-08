@@ -139,6 +139,10 @@ Ext.define('Omni.view.projection_details.ExplorerContextMenu', {
 
   // ACTION HANDLERS (Start) ====================================================================
 
+  clickApprove: function(btn, e, eOpts){
+    Omni.logic.projection_details.ExplorerProcessSelectedItems.click(btn, 'approve');
+  },
+
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);
   },

@@ -6,10 +6,10 @@ class Omni::Test::Base
     create_base_test_data
 
     # RUN TESTS BY MODULE
-    Omni::Test::Allocation.go
-    Omni::Test::Purchase.go
-    Omni::Test::Bts.go
     Omni::Test::Projection.go
+    Omni::Test::Purchase.go
+    Omni::Test::Allocation.go
+    Omni::Test::Bts.go
     # END OF RUN TESTS
 
     reindex_data
@@ -43,6 +43,8 @@ class Omni::Test::Base
   end
 
   def self.create_base_test_data
+    Omni::Test::Security.create_data unless Buildit::User.where(user_id: 'TESTUSERXXXXXXXXXXXXXXXBUYERBILL').first
+
     # Omni::AllocationProfile.all.each {|x|x.delete}
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231211XXXXBTSPERCENTSTOR', :display => 'bts need with allocate by percent to store', :allocation_formula => 'BTS_NEED', :percent_to_allocate => 100,:excess_demand_option => 'APPORTION_BY_PERCENT', :excess_supply_option => 'APPORTION_TO_STORES',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211E3E4BTSPERCENTSTOR').first
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231211XXXXXBTSDEMANDWHSE', :display => 'bts need with allocate by demand and warehouse', :allocation_formula => 'BTS_NEED', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211E3BE4BTSDEMANDWHSE').first
@@ -67,6 +69,9 @@ class Omni::Test::Base
 
     # Heirarchy: style_id: D4EB81EE0EC711E3BFA320C9D047DD15, subclass_id:   , class_id: 54058C7AAC5511E299E700FF58D32228, department_id: 05C40DDEAC5511E299E700FF58D32228
     # Omni::Style.where(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15').to_a.each {|x| x.delete}
+    Omni::Department.create(department_id: '05C40DDEAC5511E299E700FF58D32228', display: '05C40DDEAC5511E299E700FF58D32228', company_id: '651A58C8AC3D11E2947800FF58D32228') unless Omni::Department.where(department_id: '05C40DDEAC5511E299E700FF58D32228').first
+    Omni::Classification.create(classification_id: '54058C7AAC5511E299E700FF58D32228', display: 'WOVEN TOPS-BROADCLOTH&POPLIN', department_id: '05C40DDEAC5511E299E700FF58D32228') unless Omni::Classification.where(classification_id: '54058C7AAC5511E299E700FF58D32228').first
+    Omni::Subclass.create(subclass_id: 'B1D7091EAC5511E299E700FF58D32228', display: 'GIRLS SHORT SLV', classification_id: '54058C7AAC5511E299E700FF58D32228') unless Omni::Subclass.where(subclass_id: 'B1D7091EAC5511E299E700FF58D32228').first
     Omni::Style.create(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15', :display=>'0010PKGRL-BU-391-BU391b1', :concatenated_name=>'*BLOUSE, SS, P-PAN',:pos_name=>'*BLOUSE, SS, P-PAN',:size_group_id=>'636F7E9EAC5711E299E700FF58D32228',:style_nbr=>'54504',:description=>'*BLOUSE, SS, P-PAN', :subclass_id=>'B1D7091EAC5511E299E700FF58D32228', :product_id=>'3DC7C7B8FE1F11E28D2320C9D047DD15', :brand=>'PARKER', :product_type_id=>'B25227F6AC5611E299E700FF58D32228', :fabric_content=>'65% POLY 35% COTTON', :initial_retail_price=>15.50, :site_id=>'0E5E192EAC5211E299E700FF58D32228', :conversion_type=>'MONOGRAM', :state=>'active') unless Omni::Style.where(:style_id=>'D4EB81EE0EC711E3BFA320C9D047DD15').first
 
     Omni::Sku.where(:sku_id => '285C928C0F3611E3BB7120C9D047DD15').to_a.each {|x| x.delete}
@@ -91,9 +96,9 @@ class Omni::Test::Base
     Omni::LocationUser.create(:location_user_id=>'1281A4CA1DF511E3ABXXXXXUSERALOC4', :location_id=>'526058B2AC3E11E2947800FF58D32228', :user_id=>'811166D4D50A11E2B45820C9D04AARON' )
 
     Omni::Projection.all.each {|x| x.delete}
-    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', state: 'forecast', department_id: '5EA20FF2FE0611E280D020C9D047DD15', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE1')
-    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', state: 'forecast', department_id: '5EA20FF2FE0611E280D020C9D047DD15', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE2')
-    # Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION3', state: 'forecast', department_id: '5EA20FF2FE0611E280D020C9D047DD15', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE3')
+    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', display: 'Test projection 1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE1')
+    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2', display: 'Test projection 2', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE2')
+    # Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION3', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE3')
 
     Omni::ProjectionDetail.all.each {|x| x.delete}
     Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :projection_detail_id => 'PROJ1A1C193611E3A22D20CXXPRODET1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50, :last_forecast_date => Date.today)

@@ -2,11 +2,41 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-projection_locations-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
     Ext.apply(this, {
+
+
+     leftActions: [
+
+        // LEFT ACTIONS (Start) =================================================================
+
+       /**
+         * Approve
+         * Supports performing 'Approve' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Approve',
+          cls: 'icon-settings',
+          action: 'approve',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickApprove,
+              scope: me
+            }
+          }
+        },
+
+        // LEFT ACTIONS (End)
+
+      ],
+
 
       rightActions: [
 
@@ -100,16 +130,6 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
 
       ],
 
-
-      leftActions: [
-
-        // LEFT ACTIONS (Start) =================================================================
-
-
-        // LEFT ACTIONS (End)
-
-      ]
-
     });
 
     this.callParent();
@@ -118,6 +138,10 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
 
 
   // ACTION HANDLERS (Start) ====================================================================
+
+  clickApprove: function(btn, e, eOpts){
+    Omni.logic.projection_locations.ExplorerProcessSelectedItems.click(btn, 'approve');
+  },
 
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);

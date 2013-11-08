@@ -3,12 +3,9 @@ Ext.define('Omni.view.styles.Inspector', {
   extend:'Buildit.ux.inspector.Panel',
   alias:'widget.omni-styles-Inspector',
 
-
-
   initComponent:function () {
 
     var me = this;
-
 
     // LABELS (Start) ======================================================================
     // LABELS (End)

@@ -106,7 +106,8 @@
     end
 
     event :receive do
-      transition :open => :open
+      transition [:open, :partial] => :partial, :if => :open_units?
+      transition [:open, :partial] => :complete, :unless => :open_units?
     end
 
     event :cancel do
@@ -118,6 +119,10 @@
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
+  def open_units?
+    selling_units_approved - selling_units_received - selling_units_cancelled > 0 ? true : false
+  end
+
   def allocate
     process_allocation
   end
@@ -152,7 +157,7 @@
     end
   end
 
-  def process_release
+  def do_release
     # send_notice
   end
 
@@ -280,9 +285,7 @@
 
     # compute the total amount available to allocate
     selling_units_available = (self.units_ordered * (self.order_pack_size || 1) )* self.allocation_profile.percent_to_allocate / 100
-    # puts "\n\n\n\nself.allocation_profile.percent_to_allocate is #{self.allocation_profile.percent_to_allocate.to_s}\n\n\n\n"
-    # puts "\n\n\n\nselling_units_available is #{selling_units_available.to_s}\n\n\n\n"
-    # puts "\n\n\nself.units_ordered is #{self.units_ordered.to_s}\n\n\n\n"
+
     # derive the number of units available to allocate by removing the number of locked_units already allocated
     allocatable_units       = selling_units_available - units_locked
 

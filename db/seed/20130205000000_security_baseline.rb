@@ -47,22 +47,6 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D04MARTY',
-  first_name: 'Martin',
-  last_name: 'Walls',
-  email_address: 'marty@buildit.io',
-  sso_plugin_code: 'BUILDIT'
-)
-
-Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D04JASON',
-  first_name: 'Jason',
-  last_name: 'Ihaia',
-  email_address: 'jason@buildit.io',
-  sso_plugin_code: 'BUILDIT'
-)
-
-Buildit::User.create(
   user_id: '811166D4D50A11E2B45820C9D04AAJIM',
   first_name: 'Jim',
   last_name: 'Mullady',
@@ -145,7 +129,6 @@ Buildit::User.create(
 )
 
 # SET PASSWORDS =====================================================================
-
 Buildit::User.all.each do |u|
   u.password = 'parker' # set password
   u.password_confirmation = 'parker'
@@ -180,7 +163,8 @@ x.save
 
 # ROLES =====================================================================
 # SUPER ADMINSTRATOR ROLE
-role = Buildit::Role.create(
+
+Buildit::Role.create(
   role_id:                 '323244F0204011EFCFE904SUPERADMIN',
   role_code:               'SUPER_ADMIN',
   description:             'The highest-level administrator of the system',
@@ -197,15 +181,36 @@ Buildit::Role.create(
   auto_assign:             false
 )
 
+Buildit::Role.create(
+                     :role_id => '60D522FC09C611E3B93028CFE9147ZZZ',
+                     :role_code => 'PURCHASE_APPROVER_1',
+                     :description => 'Can do first level of Purchase Order approval.'
+                     )
+
+Buildit::Role.create(
+                     :role_id => '60D522FC09C611E3B93028CFE9147XXX',
+                     :role_code => 'PURCHASE_APPROVER_2',
+                     :description => 'Can do second level of Purchase Order approval.'
+                     )
+
+Buildit::Role.create(
+                     :role_id => '60D522FC09C611E3B93028CFE9147YYY',
+                     :role_code => 'PURCHASE_APPROVER_3',
+                     :description => 'Can do third level of Purchase Order approval.'
+                     )
 # USER ROLES =====================================================================
 # everyone is at least a power user
 Buildit::User.all.each do |u|
-  Buildit::UserRole.create(:user_id=>u.user_id,:role_id => '323244F0204011EFCFE9040CCEDPOWER', :is_enabled => true)
+  ur = u.roles.where(:role_id => '323244F0204011EFCFE9040CCEDPOWER').first
+  ur.is_enabled = true
+  ur.save
 end
 
 # Tom, Aaron, Bob, Marty, and Jason are system admins
 Buildit::User.where("email_address in ('a','aaron@buildit.io','t','thenderson@parkersu.com','bob.sustak@buckheaduniforms.com','bob','jason@buildit.io','marty@buildit.io')").each do |u|
-  Buildit::UserRole.create(:user_id => u.user_id, :role_id => '323244F0204011EFCFE904SUPERADMIN', :is_enabled => true)
+  ur = u.roles.where(:role_id => '323244F0204011EFCFE904SUPERADMIN').first
+  ur.is_enabled = true
+  ur.save
 end
 
 # APPLICATIONS =====================================================================
@@ -240,51 +245,6 @@ Buildit::Application.create(
   )
 
 # APPLICATION ROLES =====================================================================
-# OMNI POWER USER GETS OMNI ERP DESKTOP
-Buildit::ApplicationRole.create(
-  application_role_id:  '62BF1790C19511E289BA20C9D0476666',
-  application_id:       '6900AE7AC18B11E289BA20C9DOMNIERP',
-  role_id:              '323244F0204011EFCFE9040CCEDPOWER',
-  is_enabled:           1
-  )
+# TO DO: OMNI POWER USER GETS OMNI ERP DESKTOP
 
-# SUPER ADMIN ROLE GETS ALL 3 APPLICATIONS
-Buildit::ApplicationRole.create(
-  application_role_id:  '62BF1790C19511E289BAADMINCONSOLE',
-  role_id:              '323244F0204011EFCFE904SUPERADMIN',
-  application_id:       '6900AE7AC18B11E289BA20COMNIADMIN',
-  is_enabled:           1
-  )
-
-Buildit::ApplicationRole.create(
-  application_role_id:  '62BF1790C19511E289BA20ADMINADMIN',
-  role_id:              '323244F0204011EFCFE904SUPERADMIN',
-  application_id:       '6900AE7AC18B11E289BA20COMNIADMIN',
-  is_enabled:           1
-  )
-
-Buildit::ApplicationRole.create(
-  application_role_id:  '62BF1790C19511E289BA20COMNIADMIN',
-  role_id:              '323244F0204011EFCFE904SUPERADMIN',
-  application_id:       'AC41CFBEFAC211E2BPLATFORMCONSOLE',
-  is_enabled:           1
-  )
-
-
-Buildit::Role.create(
-                     :role_id => '60D522FC09C611E3B93028CFE9147ZZZ',
-                     :role_code => 'PURCHASE_APPROVER_1',
-                     :description => 'Can do first level of Purchase Order approval.'
-                     )
-
-Buildit::Role.create(
-                     :role_id => '60D522FC09C611E3B93028CFE9147XXX',
-                     :role_code => 'PURCHASE_APPROVER_2',
-                     :description => 'Can do second level of Purchase Order approval.'
-                     )
-
-Buildit::Role.create(
-                     :role_id => '60D522FC09C611E3B93028CFE9147YYY',
-                     :role_code => 'PURCHASE_APPROVER_3',
-                     :description => 'Can do third level of Purchase Order approval.'
-                     )
+# TO DO: SUPER ADMIN ROLE GETS ALL 3 APPLICATIONS

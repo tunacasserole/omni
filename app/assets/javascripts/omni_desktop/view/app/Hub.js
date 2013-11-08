@@ -29,6 +29,14 @@ Ext.define('Omni.view.app.Hub', {
           columns: 4,
           rows: 4,
           tiles: [{
+            title: 'Projections',
+            colspan: 4,
+            rowspan: 1,
+            cls: 'bts_source',
+            target: {
+              xtype: 'omni-projections-Explorer'
+            }
+          }, {
             title: 'Locations',
             colspan: 2,
             rowspan: 1,
@@ -67,14 +75,6 @@ Ext.define('Omni.view.app.Hub', {
             cls: 'bts_source',
             target: {
               xtype: 'omni-period_results-Explorer'
-            }
-          }, {
-            title: 'Projections',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'bts_source',
-            target: {
-              xtype: 'omni-projections-Explorer'
             }
            }, {
               title: 'BTS Results',
