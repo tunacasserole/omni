@@ -53,7 +53,7 @@ Ext.define('Omni.view.projections.Form', {
             name: 'department_id',
             fieldLabel: this.department_idLabel,
             allowBlank: true,
-            disabled: this.record.get('state') !== 'draft',
+            disabled: (this.record.phantom != true && this.record.get('state') != 'draft'),
             xtype: 'buildit-Locator',
             store: Ext.create('Omni.store.Department', {
               pageSize: 10

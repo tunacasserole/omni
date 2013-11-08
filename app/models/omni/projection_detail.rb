@@ -70,7 +70,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
-    computed_attributes do
+  computed_attributes do
     compute :sale_units_ytd,                     :with => :compute_sale_units_ytd
     compute :sale_units_py1,                     :with => :compute_sale_units_py1
     compute :sale_units_py2,                     :with => :compute_sale_units_py2
@@ -95,7 +95,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
   def do_reset
     if projection_1_units_changed?
-      reset
+      # reset
     end
   end
   # INDEXING (Start) ====================================================================

@@ -157,7 +157,7 @@
     end
   end
 
-  def process_release
+  def do_release
     # send_notice
   end
 

@@ -105,7 +105,7 @@
       validates :approval_4_date,                   :presence => true
     end
 
-    after_transition :on => :release, :do => :process_release
+    after_transition :on => :release, :do => :do_release
 
     event :release do
       transition :forecast => :projection_1
@@ -115,7 +115,7 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def forecast
+  def do_forecast
     return 'invalid action for the current state' if self.state == 'complete'
 
     # Insert or update ProjectionDetail row for every authorized SKU/Location combination (TO DO: in the Departement in the Projection) and every active selling location authorized for the SKU.
@@ -153,7 +153,7 @@
   # STATE HANDLERS (End)
 
   # HELPERS (Start) =====================================================================
-  def approve
+  def do_approve
     # ensure current_user has privilege APPROVE_PROJECTION AND ((Projection.state = projection_3 AND Projection.approval_3_date nil) OR (Projection.state = projection_4 AND Projection.approval_4_date nil))
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
     is_approver = user.privileges.where(privilege_code: 'PROJECTION_APPROVER', is_enabled: true).first ? true : false
@@ -173,7 +173,7 @@
     end
   end
 
-  def close
+  def do_close
     # ensure current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
     is_closer = user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first ? true : false
@@ -193,7 +193,7 @@
     end
   end
 
-  def process_release
+  def do_release
     # Insert a ProjectionLocation row for every distinct location in the Projection Detail where last_forecast_date is not null
     self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) if detail.last_forecast_date} #unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
   end
