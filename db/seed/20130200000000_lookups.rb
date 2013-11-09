@@ -372,8 +372,6 @@ Buildit::Lookup.create(:lookup_id => '004520D2972911E295B122000A9D0283', :code =
 Buildit::Lookup.create(:lookup_id => '014F42D2972911E295B122000A9D0283', :code => 'GROSS', :default_text => 'Gross', :category => 'ORDER_UOM_CODE', :position => 3)
 Buildit::Lookup.create(:lookup_id => '021E90FA972911E295B122000A9D0283', :code => 'PACK', :default_text => 'Pack', :category => 'ORDER_UOM_CODE', :position => 4)
 Buildit::Lookup.create(:lookup_id => 'FF778582972811E2A3D212313B10044E', :code => 'EACH', :default_text => 'Each', :category => 'ORDER_UOM_CODE', :position => 1)
-Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODEHU2312FOPURCHASE', :code => 'SAMPLE', :default_text => "Sample", :category => 'PURCHASE_TYPE', :position => 2)
-Buildit::Lookup.create(:lookup_id => 'AOEU8902XXX8XODEHU2312XXPURCHASE', :code => 'SAMPLE', :default_text => "Sample", :category => 'PURCHASE_SOURCE', :position => 3)
 Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODEHU2312FOPURCCOST', :code => 'SAMPLE', :default_text => "Sample", :category => 'COST_TYPE', :position => 2)
 Buildit::Lookup.create(:lookup_id => 'AOEU8902XXX8XODEHU2312XXPURCCOST', :code => 'SAMPLE', :default_text => "Sample", :category => 'COST_SOURCE', :position => 3)
 Buildit::Lookup.create(:lookup_id => '123485829728XXX2A3D123456B100AAA', :code => 'TG STORE', :default_text => 'TG Retail Store', :category => 'ACCOUNT_TYPE', :position => 1)

@@ -13,7 +13,9 @@
   validates :display,                         :uniqueness  => true
   validates :purchase_detail_id,              :uniqueness  => true
   validates :sku_supplier_id,                 :presence    => true
-  validates :units_ordered,                   :numericality => {:greater_than => 0}
+  validates_numericality_of :units_ordered,              :greater_than => 0
+  # validates_numericality_of :order_pack_size,            :greater_than => 0
+  # validates_numericality_of :order_cost_units,           :greater_than => 0
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================

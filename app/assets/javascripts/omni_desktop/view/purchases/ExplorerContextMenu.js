@@ -12,106 +12,106 @@ Ext.define('Omni.view.purchases.ExplorerContextMenu', {
 
         // LEFT ACTIONS (Start) =================================================================
 
-      /**
-         * Release
-         * Supports performing 'Release' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Release',
-          cls: 'icon-settings',
-          action: 'release',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickRelease,
-              scope: me
-            }
-          }
-        },
+      // /**
+      //    * Release
+      //    * Supports performing 'Release' on the selected items in the explorer grid.
+      //    * If none are selected then no records are deleted.
+      //    */
+      //   {
+      //     text:'Release',
+      //     cls: 'icon-settings',
+      //     action: 'release',
+      //     confirm: true,
+      //     multi: true,
+      //     privileges: [],
+      //     listeners: {
+      //       click: {
+      //         fn: this.clickRelease,
+      //         scope: me
+      //       }
+      //     }
+      //   },
 
-       /**
-         * Approve
-         * Supports performing 'Approve' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Approve',
-          cls: 'icon-settings',
-          action: 'approve',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickApprove,
-              scope: me
-            }
-          }
-        },
+      //  /**
+      //    * Approve
+      //    * Supports performing 'Approve' on the selected items in the explorer grid.
+      //    * If none are selected then no records are deleted.
+      //    */
+      //   {
+      //     text:'Approve',
+      //     cls: 'icon-settings',
+      //     action: 'approve',
+      //     confirm: true,
+      //     multi: true,
+      //     privileges: [],
+      //     listeners: {
+      //       click: {
+      //         fn: this.clickApprove,
+      //         scope: me
+      //       }
+      //     }
+      //   },
 
-        /**
-         * Allocate
-         * Supports performing 'Allocate' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Allocate',
-          cls: 'icon-settings',
-          action: 'allocate',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickAllocate,
-              scope: me
-            }
-          }
-        },
+      //   /**
+      //    * Allocate
+      //    * Supports performing 'Allocate' on the selected items in the explorer grid.
+      //    * If none are selected then no records are deleted.
+      //    */
+      //   {
+      //     text:'Allocate',
+      //     cls: 'icon-settings',
+      //     action: 'allocate',
+      //     confirm: true,
+      //     multi: true,
+      //     privileges: [],
+      //     listeners: {
+      //       click: {
+      //         fn: this.clickAllocate,
+      //         scope: me
+      //       }
+      //     }
+      //   },
 
-        // SEPARATOR
-        '-',
+      //   // SEPARATOR
+      //   '-',
 
-       /**
-         * Print
-         */
-        {
-          text:'Print',
-          cls: 'icon-settings',
-          action: 'print',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickPrint,
-              scope: me
-            }
-          }
-        },
+      //  /**
+      //    * Print
+      //    */
+      //   {
+      //     text:'Print',
+      //     cls: 'icon-settings',
+      //     action: 'print',
+      //     confirm: true,
+      //     multi: true,
+      //     privileges: [],
+      //     listeners: {
+      //       click: {
+      //         fn: this.clickPrint,
+      //         scope: me
+      //       }
+      //     }
+      //   },
 
-      /**
-         * Cancel
-         * Supports performing 'Cancel' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Cancel',
-          cls: 'icon-settings',
-          action: 'cancel',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickCancel,
-              scope: me
-            }
-          }
-        },
+      // /**
+      //    * Cancel
+      //    * Supports performing 'Cancel' on the selected items in the explorer grid.
+      //    * If none are selected then no records are deleted.
+      //    */
+      //   {
+      //     text:'Cancel',
+      //     cls: 'icon-settings',
+      //     action: 'cancel',
+      //     confirm: true,
+      //     multi: true,
+      //     privileges: [],
+      //     listeners: {
+      //       click: {
+      //         fn: this.clickCancel,
+      //         scope: me
+      //       }
+      //     }
+      //   },
 
         // LEFT ACTIONS (End)
 

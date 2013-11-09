@@ -195,21 +195,21 @@ Ext.define('Omni.view.purchases.Form', {
           layout              : 'anchor',
           disabled            : disabled,
           items               :[
-
             { xtype             : 'buildit-Locator',
-              store             : Ext.create('Omni.store.User',
-                                    {
-                                      pageSize      : 20
+              store             : Ext.create('Buildit.store.User',{pageSize: 20}),
+              // store             : Ext.create('Buildit.store.User',
+                                    // {
+                                      // pageSize      : 20
                                       //defaultearch  : {with: {is_purchase_approver_1: {equal_to:  true}}}
                                       // filters: [{
                                       //   property: 'is_purchase_approver_1',
                                       //   value:  true
                                       // }]
-                                    }),
+                                    // }),
               displayField      : 'full_name',
-              queryField        : 'full_name  ',
+              queryField        : 'full_name',
               valueField        : 'user_id',
-              itemTpl           : '{display}',
+              itemTpl           : '{full_name}',
               name              : 'purchase_approver_1_user_id',
               fieldLabel        : this.purchase_approver_1_user_idLabel,
               allowBlank        : true
@@ -491,7 +491,7 @@ Ext.define('Omni.view.purchases.Form', {
         {
           xtype      : 'button',
           cls        : 'submit',
-          tooltip    : 'Release Purchase Order',
+          tooltip    : 'Release',
           listeners  : {
             beforerender  : this.prepareReleaseAction,
             click         : this.onReleaseAction,
@@ -501,10 +501,30 @@ Ext.define('Omni.view.purchases.Form', {
         {
           xtype      : 'button',
           cls        : 'approve',
-          tooltip    : 'Approve Purchase Order',
+          tooltip    : 'Approve',
           listeners  : {
             beforerender  : this.prepareApproveAction,
             click         : this.onApproveAction,
+            scope         : me
+          }
+        },
+    {
+          xtype      : 'button',
+          cls        : 'ship',
+          tooltip    : 'Allocate',
+          listeners  : {
+            beforerender  : this.prepareAllocateAction,
+            click         : this.onAllocateAction,
+            scope         : me
+          }
+        },
+         {
+          xtype      : 'button',
+          cls        : 'close',
+          tooltip    : 'Cancel',
+          listeners  : {
+            beforerender  : this.prepareCancelAction,
+            click         : this.onCancelAction,
             scope         : me
           }
         },
@@ -549,15 +569,22 @@ Ext.define('Omni.view.purchases.Form', {
       me.advancedCreateWindow.showBy(btn);
     }
 
-
   }, // onAdvancedCreateToggle
 
   onReleaseAction : function(action, eOpts){
     this.processEventTransition('release', 'Purchase Order was successfully released.', 'An error occurred releasing this purchase order.');
   }, // onBuildAction
 
+  onCancelAction : function(action, eOpts){
+    this.processEventTransition('cancel', 'Purchase Order was successfully cancelled.', 'An error occurred releasing this purchase order.');
+  }, // onBuildAction
+
+  onAllocateAction : function(action, eOpts){
+    this.processEventTransition('allocate', 'Purchase Order was successfully allocated.', 'An error occurred allocated this purchase order.');
+  }, // onBuildAction
+
   onApproveAction : function(action, eOpts){
-    this.processEventTransition('release', 'Purchase Order was successfully approved.', 'Approval was not completed.');
+    this.processEventTransition('approve', 'Purchase Order was successfully approved.', 'Approval was not completed.');
   }, // onBuildAction
 
   prepareAdvancedCreateAction : function(action, eOpts) {
@@ -570,14 +597,22 @@ Ext.define('Omni.view.purchases.Form', {
 
   prepareReleaseAction : function(action, eOpts) {
     var currentState = this.record.get('state');
-    if(this.record.phantom || currentState != 'draft')
-      action.hide();
+    currentState === 'draft' ? action.show() : action.hide();
   },
 
   prepareApproveAction : function(action, eOpts) {
     var currentState = this.record.get('state');
-    if(this.record.phantom || currentState != 'pending_approval')
-      action.hide();
+    currentState === 'pending_approval' ? action.show() : action.hide();
+  },
+
+  prepareAllocateAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'draft' || currentState === 'pending' || currentState === 'pending_approval' || currentState === 'open' ? action.show() : action.hide();
+  },
+
+  prepareCancelAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'open' || currentState === 'partial' ? action.show() : action.hide();
   },
 
   processEventTransition : function(eventName, successMsg, failureMsg){

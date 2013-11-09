@@ -1,28 +1,18 @@
 class Omni::Purchase < ActiveRecord::Base
-  # MIXINS (Start) ======================================================================
-  # MIXINS (End)
-
   # METADATA (Start) ====================================================================
-  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :purchases
   self.primary_key                = :purchase_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  # supports_audit
-  #supports_revisioning
   supports_fulltext
-
+  # supports_logical_delete
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates :supplier_id,                        :presence      => true
   validates :display,                            :uniqueness    => true
   # VALIDATIONS (End)
-
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_id,                                                       :with => :guid
@@ -37,7 +27,6 @@ class Omni::Purchase < ActiveRecord::Base
   default :payment_term,                                                      :to   => lambda{|m| m.supplier.default_payment_term}
   default :freight_term,                                                      :to   => lambda{|m| m.supplier.freight_term}
   default :ship_via,                                                          :to   => lambda{|m| m.supplier.ship_via}
-  # default :fob_point,                                                         :to   => lambda{|m| "#{m.supplier_fob_point}"}
   default :is_ship_cancel,                                                    :to   => lambda{|m| m.supplier.is_ship_cancel}
   default :estimated_lead_time_days,                                          :to   => lambda{|m| m.supplier.lead_time}
   default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days.days}
@@ -116,14 +105,6 @@ class Omni::Purchase < ActiveRecord::Base
   order_search_by :display => :asc
   # ORDERING (End)
 
-  # FILTERS (Start) =====================================================================
-
-  # FILTERS (End)
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
   # INDEXING (Start) ====================================================================
   searchable do
     # Exact match attributes
@@ -138,6 +119,7 @@ class Omni::Purchase < ActiveRecord::Base
     date     :order_date
     date     :ship_date
     date     :delivery_date
+    boolean  :is_destroyed
     # Partial match (contains) attributes
     text     :display_fulltext,            :using => :display
     text     :state_fulltext,              :using => :state
@@ -156,9 +138,9 @@ class Omni::Purchase < ActiveRecord::Base
   hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
   hook :before_update, :update_allocation_profiles, 30
+  hook :before_destroy, :validate_state, 40
 
   # hook :before_create, :set_defaults, 10
-
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
@@ -181,7 +163,7 @@ class Omni::Purchase < ActiveRecord::Base
       validates :freight_term,                               :presence => true
       validates :ship_via,                                   :presence => true
       validates :fob_point,                                  :presence => true
-      validate  :validate_release
+      validate  :validate_approvals
     end
 
     state :open do
@@ -325,7 +307,7 @@ class Omni::Purchase < ActiveRecord::Base
     # Determine current user
 
     current_user_id = (Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON') # aaron
-
+    puts "\ncurrent_user_id is #{current_user_id}"
     #  Determine whether this is the final approval or if the next approver needs to be notified
     approval_level = 0
      #  Determine which approval is needed (1, 2 or 3) and whether the user is authorized to do the approval
@@ -356,19 +338,20 @@ class Omni::Purchase < ActiveRecord::Base
     self.purchase_details.all.each {|x| x.destroy}
   end
 
-  def validate_release
+  def validate_approvals
     # puts "total_order_cost is #{total_order_cost.to_s}"
-    if self.total_order_cost.to_i < Omni::SystemOption.first.purchase_approval_1_maximum_amount
-        errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
-    else
-      if self.total_order_cost < Omni::SystemOption.first.purchase_approval_2_maximum_amount
-        errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
-        errors.add("approver 2", "can't be blank") unless self.purchase_approver_2_user_id
-      else
-        errors.add("approver 1", "can't be blank") unless self.purchase_approver_1_user_id
-        errors.add("approver 2", "can't be blank") unless self.purchase_approver_2_user_id
-        errors.add("approver 3", "can't be blank") unless self.purchase_approver_3_user_id
-      end
+    case
+      when total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
+        errors.add(:purchase_approver_1_user_id, "can't be blank") unless self.purchase_approver_1_user_id
+
+      when total_order_cost < Omni::SystemOption.first.purchase_approval_2_maximum_amount
+        errors.add(:purchase_approver_1_user_id, "can't be blank") unless self.purchase_approver_1_user_id
+        errors.add(:purchase_approver_2_user_id, "can't be blank") unless self.purchase_approver_2_user_id
+
+      when total_order_cost >= Omni::SystemOption.first.purchase_approval_2_maximum_amount
+        errors.add(:purchase_approver_1_user_id, "can't be blank") unless self.purchase_approver_1_user_id
+        errors.add(:purchase_approver_2_user_id, "can't be blank") unless self.purchase_approver_2_user_id
+        errors.add(:purchase_approver_3_user_id, "can't be blank") unless self.purchase_approver_3_user_id
     end
   end
 
@@ -417,6 +400,16 @@ class Omni::Purchase < ActiveRecord::Base
           end
         end
       end
+    end
+  end
+
+  def validate_state
+    if state == 'draft'
+      purchase_allocations.each {|x| x.destroy}
+      return true
+    else
+      errors.add(:state, 'Only items in draft state may be deleted.')
+      return false
     end
   end
 
