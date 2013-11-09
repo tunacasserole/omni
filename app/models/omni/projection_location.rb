@@ -116,7 +116,7 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 
   # STATE HANDLERS (Start) ====================================================================
   def process_approve
-    self.approval_date = Date.today
+    self.approval_date = Time.now
     self.save
   end
   # STATE HANDLERS (End) ====================================================================

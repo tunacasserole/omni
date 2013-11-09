@@ -57,33 +57,16 @@ Ext.define('Omni.view.projections.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        // { header: this.projection_idLabel,                 dataIndex: 'projection_id',               flex: 1 },    
-        { 
+        // { header: this.projection_idLabel,                 dataIndex: 'projection_id',               flex: 1 },
+        { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },
+        { header: this.department_idLabel,                 dataIndex: 'department_display',               flex: 1 },
+        { header: this.descriptionLabel,                   dataIndex: 'description',                 flex: 1 },
+        { header: this.plan_yearLabel,                     dataIndex: 'plan_year',                   flex: 1 },
+        {
           header      : this.forecast_profile_idLabel,
           dataIndex   : 'forecast_profile_display',
           flex        : 1
-        },    
-        // { header: this.region_displayLabel,                     dataIndex: 'region_display',                   flex: 1 },    
-        // { header: this.location_idLabel,                   dataIndex: 'location_display',                 flex: 1 },    
-        { header: this.department_idLabel,                 dataIndex: 'department_display',               flex: 1 },    
-        // { header: this.class_displayLabel,                      dataIndex: 'class_display',                    flex: 1 },    
-        // { header: this.subclass_displayLabel,                   dataIndex: 'subclass_display',                 flex: 1 },    
-        // { header: this.style_displayLabel,                      dataIndex: 'style_display',                    flex: 1 },    
-        // { header: this.sku_displayLabel,                        dataIndex: 'sku_display',                      flex: 1 },    
-        // { header: this.color_displayLabel,                      dataIndex: 'color_display',                    flex: 1 },    
-        { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },    
-        { header: this.displayLabel,              editor:   {},         dataIndex: 'display',                     flex: 1 },    
-        // { header: this.descriptionLabel,                   dataIndex: 'description',                 flex: 1 },    
-        { header: this.plan_yearLabel,                     dataIndex: 'plan_year',                   flex: 1 },    
-        // { header: this.projection_typeLabel,               dataIndex: 'projection_type',             flex: 1 },    
-        // { header: this.versionLabel,                       dataIndex: 'version',                     flex: 1 },    
-        // { header: this.audit_updated_atLabel,              dataIndex: 'audit_updated_at',            flex: 1 },    
-        // { header: this.audit_created_atLabel,              dataIndex: 'audit_created_at',            flex: 1 },    
-        // { header: this.audit_created_byLabel,              dataIndex: 'audit_created_by',            flex: 1 },    
-        // { header: this.audit_updated_byLabel,              dataIndex: 'audit_updated_by',            flex: 1 },    
-        // { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }    
-
-      ]
+        }      ]
     });
     // COLUMNS (End)
 

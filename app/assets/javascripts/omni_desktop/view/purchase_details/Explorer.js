@@ -51,7 +51,7 @@ Ext.define('Omni.view.purchase_details.Explorer', {
   extra_costLabel:                        Omni.i18n.model.PurchaseDetail.extra_cost,
   is_destroyedLabel:                      Omni.i18n.model.PurchaseDetail.is_destroyed,
   // LABELS (End)
-  
+
   // TITLES (Start) ======================================================================
   title:     'PurchaseDetails',
   subtitle:  'Create and maintain PurchaseDetails',
@@ -66,36 +66,36 @@ Ext.define('Omni.view.purchase_details.Explorer', {
       columns: [
         { header: this.purchase_line_nbrLabel,
           dataIndex: 'purchase_line_nbr',
-          flex: 1 
-        },    
+          flex: 1
+        },
         { header: this.sku_idLabel,
           dataIndex: 'sku_display',
-          flex: 1 
-        },    
+          flex: 1
+        },
         { header: this.stateLabel,
           dataIndex: 'state',
-          flex: 1 
-        },    
+          flex: 1
+        },
         { header: this.supplier_costLabel,
           dataIndex: 'supplier_cost',
           align: 'right',
           renderer: Ext.util.Format.usMoney,
           flex: 1
-        },    
+        },
         { header: this.order_cost_unitsLabel,
           dataIndex: 'order_cost_units',
           align: 'right',
-          flex: 1 
-        },    
+          flex: 1
+        },
         { header: this.units_orderedLabel,
           dataIndex: 'units_ordered',
           align: 'right',
-          flex: 1 
-        },    
+          flex: 1
+        },
         { header: this.order_pack_sizeLabel,
           dataIndex: 'order_pack_size',
           align: 'right',
-          flex: 1 
+          flex: 1
         }
       ]
     });

@@ -83,33 +83,34 @@ Ext.define('Omni.view.projections.Form', {
             valueField: 'forecast_profile_id',
             itemTpl: '{display}'
           }, {
-            name: 'projection_approver_id',
+            name: 'projection_approver_user_display',
             fieldLabel: this.projection_approver_idLabel,
             allowBlank: true,
             disabled: true,
-            xtype: 'buildit-Locator',
-            store: Ext.create('Buildit.store.User', {
-              pageSize: 10
-            }),
-            displayField: 'full_name',
-            queryField: 'full_name',
-            valueField: 'user_id',
-            itemTpl: '{full_name}'
+            xtype:  'textfield'
+            // xtype: 'buildit-Locator',
+            // store: Ext.create('Buildit.store.User', {
+            //   pageSize: 10
+            // }),
+            // displayField: 'full_name',
+            // queryField: 'full_name',
+            // valueField: 'user_id',
+            // itemTpl: '{full_name}'
           }, {
-            name: 'projection_closer_id',
+            name: 'projection_closer_user_display',
             fieldLabel: this.projection_closer_idLabel,
             allowBlank: true,
             disabled: true,
-            xtype: 'buildit-Locator',
-            store: Ext.create('Buildit.store.User', {
-              pageSize: 10
-            }),
-            displayField: 'full_name',
-            queryField: 'full_name',
-            valueField: 'user_id',
-            itemTpl: '{full_name}'
+            xtype:  'textfield'
+            // xtype: 'buildit-Locator',
+            // store: Ext.create('Buildit.store.User', {
+            //   pageSize: 10
+            // }),
+            // displayField: 'full_name',
+            // queryField: 'full_name',
+            // valueField: 'user_id',
+            // itemTpl: '{full_name}'
           },
-
           {
             xtype: 'datefield',
             name: 'approval_3_date',
@@ -127,7 +128,7 @@ Ext.define('Omni.view.projections.Form', {
             name: 'plan_year',
             fieldLabel: this.plan_yearLabel,
             allowBlank: true,
-            disabled: this.record.get('state') !== 'draft',
+            disabled: (this.record.phantom != true && this.record.get('state') != 'draft'),
             category: 'PLAN_YEAR'
           },
 
@@ -151,7 +152,7 @@ Ext.define('Omni.view.projections.Form', {
     Ext.apply(this, {
       actions: [{
         xtype: 'button',
-        cls: 'submit',
+        cls: 'ship',
         tooltip: 'Forecast',
         listeners: {
           beforerender: this.prepareForecastAction,
@@ -169,7 +170,7 @@ Ext.define('Omni.view.projections.Form', {
         }
       }, {
         xtype: 'button',
-        cls: 'submit',
+        cls: 'close',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,
@@ -178,7 +179,7 @@ Ext.define('Omni.view.projections.Form', {
         }
       }, {
         xtype: 'button',
-        cls: 'submit',
+        cls: 'approve',
         tooltip: 'Approve',
         listeners: {
           beforerender: this.prepareApproveAction,
@@ -254,7 +255,6 @@ Ext.define('Omni.view.projections.Form', {
     var currentState = this.record.get('state');
     // JASON need regular expression here
     (this.record.phantom != true) && (currentState == 'projection_1' || currentState == 'projection_2' || (currentState == 'projection_3' && this.record.get('approval_3_date') != null) || (currentState == 'projection_4' && this.record.get('approval_4_date') != null)) ? action.show() : action.hide();
-
   }, // prepareAction
 
   /**
@@ -262,8 +262,8 @@ Ext.define('Omni.view.projections.Form', {
    */
   prepareApproveAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    console.log(this.record);
-    (this.record.phantom != true) && ((currentState == 'projection_3' && this.record.get('approval_3_date') == '') || (currentState == 'projection_4' && this.record.get('approval_4_date') == '')) ? action.show() : action.hide();
+    // console.log(this.record);
+    (this.record.phantom != true) && ((currentState == 'projection_3' && this.record.get('approval_3_date') == null) || (currentState == 'projection_4' && this.record.get('approval_4_date') == null)) ? action.show() : action.hide();
   }, // prepareAction
 
   /**

@@ -23,8 +23,6 @@ Ext.define('Omni.view.projection_details.Explorer', {
   },
   // EXPLORER INIT (End)
 
-
-
   // LABELS (Start) ======================================================================
   projection_detail_idLabel               : Omni.i18n.model.ProjectionDetail.projection_detail_id,
   displayLabel                            : Omni.i18n.model.ProjectionDetail.display,
@@ -77,24 +75,19 @@ Ext.define('Omni.view.projection_details.Explorer', {
           hidden       : true
         },
         {
-          header       : this.forecast_profile_idLabel,
-          dataIndex    : 'forecast_profile_display',
-          flex         : 1
-        },
-        {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
           flex         : 1,
-          editor       : {
-            xtype        : 'buildit-Locator',
-            store        : Ext.create('Omni.store.Sku',{pageSize: 10}),
-            displayField : 'display',
-            queryField   : 'display',
-            valueField   : 'sku_id',
-            itemTpl      : '{display}',
-            name         : 'sku_id',
-            allowBlank   : true
-          }
+          // editor       : {
+          //   xtype        : 'buildit-Locator',
+          //   store        : Ext.create('Omni.store.Sku',{pageSize: 10}),
+          //   displayField : 'display',
+          //   queryField   : 'display',
+          //   valueField   : 'sku_id',
+          //   itemTpl      : '{display}',
+          //   name         : 'sku_id',
+          //   allowBlank   : true
+          // }
         },
         {
           header       : this.location_idLabel,
@@ -102,45 +95,39 @@ Ext.define('Omni.view.projection_details.Explorer', {
           flex         : 1
         },
         {
-          header       : this.first_forecast_unitsLabel,
-          dataIndex    : 'first_forecast_units',
-          flex         : 1
-        },
-        {
-          header       : this.last_forecast_unitsLabel,
-          dataIndex    : 'last_forecast_units',
-          flex         : 1
-        },
-        {
-          header       : this.last_forecast_dateLabel,
-          dataIndex    : 'last_forecast_date',
-          flex         : 1,
-          editor       : {
-            xtype        : 'datefield'
-          }
-        },
-        {
           header       : this.projection_1_unitsLabel,
           dataIndex    : 'projection_1_units',
           flex         : 1,
+          editor:    {
+                      xtype: 'numberfield',
+                     },
           bulkEditable : true
         },
         {
           header       : this.projection_2_unitsLabel,
           dataIndex    : 'projection_2_units',
           flex         : 1,
+          editor:    {
+                      xtype: 'numberfield',
+                     },
           bulkEditable : true
         },
         {
           header       : this.projection_3_unitsLabel,
           dataIndex    : 'projection_3_units',
           flex         : 1,
+          editor:    {
+                      xtype: 'numberfield',
+                     },
           bulkEditable : true
         },
         {
           header       : this.projection_4_unitsLabel,
           dataIndex    : 'projection_4_units',
           flex         : 1,
+          editor:    {
+                      xtype: 'numberfield',
+                     },
           bulkEditable : true
         },
         {
@@ -158,16 +145,34 @@ Ext.define('Omni.view.projection_details.Explorer', {
           dataIndex    : 'sale_units_py2',
           flex         : 1
         },
-        {
-          header       : this.sale_units_py3Label,
-          dataIndex    : 'sale_units_py3',
-          flex         : 1
-        },
-        {
-          header       : this.average_salesLabel,
-          dataIndex    : 'average_sales',
-          flex         : 1
-        }
+        // {
+        //   header       : this.sale_units_py3Label,
+        //   dataIndex    : 'sale_units_py3',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.average_salesLabel,
+        //   dataIndex    : 'average_sales',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.first_forecast_unitsLabel,
+        //   dataIndex    : 'first_forecast_units',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.last_forecast_unitsLabel,
+        //   dataIndex    : 'last_forecast_units',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.last_forecast_dateLabel,
+        //   dataIndex    : 'last_forecast_date',
+        //   flex         : 1,
+        //   // editor       : {
+        //   //   xtype        : 'datefield'
+        //   // }
+        // }
       ]
     });
     // COLUMNS (End)

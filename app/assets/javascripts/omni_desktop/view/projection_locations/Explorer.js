@@ -15,7 +15,7 @@ Ext.define('Omni.view.projection_locations.Explorer', {
   }],
 
   inspectorConfig : {
-    // xtype    : 'omni-projection_locations-Inspector'
+    xtype    : 'omni-projection_locations-Inspector'
   },
   // EXPLORER INIT (End)
 

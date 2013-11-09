@@ -24,7 +24,7 @@ Ext.define('Omni.model.ProjectionLocation', {
     },
     {
       name       : 'approval_date',
-      type       : 'datetime'
+      type       : 'date'
     },
     {
       name       : 'state',

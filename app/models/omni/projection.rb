@@ -10,8 +10,9 @@
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates :display,                           :uniqueness => true
+  # validates :display,                           :uniqueness => true
   validates :plan_year,                         :presence => true
+  validates :forecast_profile_id,               :presence => true
   validates :department_id,                     :presence => true
 
   # VALIDATIONS (End)
@@ -44,8 +45,8 @@
   mapped_attributes do
     map :forecast_profile_display,           :to => 'forecast_profile.display'
     map :department_display,                 :to => 'department.display'
-    map :projection_approver_user_display,   :to => 'projection_approver_user.display'
-    map :projection_closer_user_display,     :to => 'projection_closer_user.display'
+    map :projection_approver_user_display,   :to => 'projection_approver_user.full_name'
+    map :projection_closer_user_display,     :to => 'projection_closer_user.full_name'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -115,11 +116,11 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def do_forecast
-    return 'invalid action for the current state' if self.state == 'complete'
+  def forecast
+    # return 'invalid action for the current state' if self.state == 'complete'
 
     # Insert or update ProjectionDetail row for every authorized SKU/Location combination (TO DO: in the Departement in the Projection) and every active selling location authorized for the SKU.
-    Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: self.projection_id).first} unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
+    Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: self.projection_id).first} #unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
 
     self.projection_details.each do |detail|
       # JASON - inventory is a two part key, how to leverage an association
@@ -143,7 +144,7 @@
 
       # update last_forecast_units with forecasted_units and  last_forecast_date to today;
       detail.last_forecast_units = forecasted_units
-      detail.last_forecast_date = Date.today
+      detail.last_forecast_date = Time.now
       detail.save
     end
 
@@ -153,29 +154,30 @@
   # STATE HANDLERS (End)
 
   # HELPERS (Start) =====================================================================
-  def do_approve
+  def approve
     # ensure current_user has privilege APPROVE_PROJECTION AND ((Projection.state = projection_3 AND Projection.approval_3_date nil) OR (Projection.state = projection_4 AND Projection.approval_4_date nil))
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
     is_approver = user.privileges.where(privilege_code: 'PROJECTION_APPROVER', is_enabled: true).first ? true : false
 
-    if  is_approver && (self.state == 'projection_3' && !self.approval_3_date) or (self.state == 'projection_4' && !self.approval_4_date)
+    if is_approver && (self.state == 'projection_3' && !self.approval_3_date) or (self.state == 'projection_4' && !self.approval_4_date)
 
       case self.state
-
       when 'projection_3'
-        self.approval_3_date = Date.today
+        self.approval_3_date = Time.now
 
       when 'projection_4'
-        self.approval_4_date = Date.today
-
+        self.approval_4_date = Time.now
       end
 
+      self.projection_approver_user_id = user.user_id
+      self.save
     end
   end
 
-  def do_close
+  def close
     # ensure current_user has privilege CLOSE_PROJECTION AND ((Projection.state in [projection_1, projection_2]) OR (Projection.state = projection_3 AND Projection.approval_3_date not nil) OR (Projection.state = projection_4 AND Projection.approval_4_date not nil))
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
+
     is_closer = user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first ? true : false
 
     if is_closer && ((self.state == 'projection_1') or (self.state == 'projection_2') or (self.state == 'projection_3' && self.approval_3_date) or (self.state == 'projection_4' && self.approval_4_date))
@@ -183,7 +185,7 @@
 
       self.projection_details.each do |pd|
         pd.send("projection_#{next_phase.to_s}_units=", pd.send("#{self.state.to_s}_units")) unless self.state == 'projection_4'
-        pd.state = 'approved'
+        pd.state = 'draft'
         pd.save
       end
 
@@ -196,6 +198,7 @@
   def do_release
     # Insert a ProjectionLocation row for every distinct location in the Projection Detail where last_forecast_date is not null
     self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) if detail.last_forecast_date} #unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
+    Omni::ProjectionLocation.reindex
   end
 
   def cascading_destroy

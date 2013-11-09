@@ -513,7 +513,7 @@ Ext.define('Omni.view.purchases.Form', {
           cls        : 'approve',
           tooltip    : 'Advanced Create',
           listeners  : {
-            beforerender  : Ext.emptyFn,
+            beforerender  : this.prepareAdvancedCreateAction,
             click         : me.onAdvancedCreateToggle,
             scope         : me
           }
@@ -539,7 +539,7 @@ Ext.define('Omni.view.purchases.Form', {
   // HANDLERS (Start) ======================================================================
 
   onAdvancedCreateToggle : function(btn, e){
-    
+
     var me               = this;
     me.advancedHidden    = !me.advancedHidden;
 
@@ -559,6 +559,26 @@ Ext.define('Omni.view.purchases.Form', {
   onApproveAction : function(action, eOpts){
     this.processEventTransition('release', 'Purchase Order was successfully approved.', 'Approval was not completed.');
   }, // onBuildAction
+
+  prepareAdvancedCreateAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    // if(this.record.phantom == true)
+
+      action.hide();
+
+  },
+
+  prepareReleaseAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    if(this.record.phantom || currentState != 'draft')
+      action.hide();
+  },
+
+  prepareApproveAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    if(this.record.phantom || currentState != 'pending_approval')
+      action.hide();
+  },
 
   processEventTransition : function(eventName, successMsg, failureMsg){
     var me = this;
@@ -594,18 +614,6 @@ Ext.define('Omni.view.purchases.Form', {
     );
 
   },
-
-  prepareReleaseAction : function(action, eOpts) {
-    var currentState = this.record.get('state');
-    if(this.record.phantom == true || currentState != 'draft')
-      action.hide();
-  },
-
-  prepareApproveAction : function(action, eOpts) {
-    var currentState = this.record.get('state');
-    if(this.record.phantom == true || currentState != 'pending_approval')
-      action.hide();
-  }
 
   // HANDLERS (End)
 

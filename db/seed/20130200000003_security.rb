@@ -23,7 +23,7 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D04USERA',
+  user_id: '811166D4D50A11E2B45820C9D04AARON',
   first_name: 'Aaron',
   last_name: 'Henderson',
   email_address: 'a',
@@ -140,7 +140,7 @@ x.password = 'demo'
 x.password_confirmation = 'demo'
 x.save
 
-x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04USERA').first
+x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04AARON').first
 x.password = 'a'
 x.password_confirmation = 'a'
 x.save
@@ -246,5 +246,16 @@ Buildit::Application.create(
 
 # APPLICATION ROLES =====================================================================
 # TO DO: OMNI POWER USER GETS OMNI ERP DESKTOP
+Buildit::ApplicationRole.create(
+  application_id: '6900AE7AC18B11E289BA20COMNIADMIN',
+  role_id:        '323244F0204011EFCFE904SUPERADMIN',
+  is_enabled:     true
+)
+
+Buildit::ApplicationRole.create(
+  application_id: '6900AE7AC18B11E289BA20COMNIADMIN',
+  role_id:        '323244F0204011EFCFE9040CCEDPOWER',
+  is_enabled:     true
+)
 
 # TO DO: SUPER ADMIN ROLE GETS ALL 3 APPLICATIONS

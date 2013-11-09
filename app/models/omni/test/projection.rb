@@ -27,7 +27,7 @@ class Omni::Test::Projection < Omni::Test::Base
     Omni::Projection.where(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1').each {|x| x.delete}
     @p=Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', display: 'test projection 1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', :forecast_profile_id =>s[:forecast_profile_id])
 
-    @p.do_forecast
+    @p.forecast
 
     actual = @p.projection_details.first.send('first_forecast_units')
     test_it(s[:scenario],s[:expected], actual)
@@ -48,14 +48,15 @@ class Omni::Test::Projection < Omni::Test::Base
     @p.state = 'projection_3'
     @p.approval_3_date=nil
     @p.save
-    @p.do_approve
-    test_it('It approves a projection if state = projection 3', Date.today, @p.approval_3_date)
+    @p.approve
+    test_it('It sets the approval date when a projection is approved', true, @p.approval_3_date?)
+    test_it('It sets the approval user when a projection is approved', true, @p.projection_approver_user_id?)
 
     @p.state = 'projection_4'
     @p.approval_4_date=nil
     @p.save
-    @p.do_approve
-    test_it('It approves a projection if state = projection 4', Date.today, @p.approval_4_date)
+    @p.approve
+    test_it('It approves a projection if state = projection 4', true, @p.approval_4_date?)
   end
 
   def self.test_close
@@ -88,7 +89,7 @@ class Omni::Test::Projection < Omni::Test::Base
     @pd.projection_4_units = s[:projection_4_units]
     @pd.save
 
-    @p.do_close
+    @p.close
     expected = s[:expected]
 
     case s[:model_name]

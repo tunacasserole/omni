@@ -3,19 +3,32 @@ class Omni::Test::Purchase < Omni::Test::Base
   def self.go
     create_base_test_data
     @@model_name = 'Purchase'
-    @@model_action = 'Event'
+    @@model_action = 'event'
 
     @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
     @pd1=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1').first
 
-    # test release, approve & cancel a purchase
     test_purchase_events
-
-    # test approve, receive, allocate & cancel a purchase detail
     test_purchase_detail_events
+    test_purchase_allocation_events
 
-    # test approve, receive, allocate & cancel a purchase detail
-    # test_purchase_allocation_events
+    @@model_action = 'request'
+    # request_scenarios.each {|s| test_request_scenario s}
+  end
+
+  def self.test_request_scenario(s)
+    @@model_action = s[:action]
+    params = {'request_type' => s[:action], 'adjustment_percent' => s[:adjustment_percent]}
+    cloned_po = @p.request(params)
+  end
+
+  def self.request_scenarios
+    x = []
+    x << {scenario: 'it creates a new purchase order by cloning an existing purchase order', expected: '', actual: '', action: 'clone', adjustment_percent: 5}
+    # x << {scenario: 'it automatically create a new purchase order based on a few parameters entered by a user.', expected: '', actual: ''}
+    # x << {scenario: 'it adds SKUs in bulk to a new or existing purchase order according to user parameters', expected: '', actual: ''}
+    # x << {scenario: 'it derives the units to order of each SKU from the BTS needs calculation.', expected: '', actual: ''}
+    # x << {scenario: '', expected: '', actual: ''}
   end
 
   def self.test_purchase_events
@@ -47,7 +60,7 @@ class Omni::Test::Purchase < Omni::Test::Base
     test_it('Cancel a purchase','cancelled',x.state)
 
     # approval scenarios 6 - 20 various approval tests
-    @@model_action = 'Approve'
+    @@model_action = 'approve'
     approval_scenarios.each {|s| test_approval_scenario s}
 
     # run 26 different allocation tests
@@ -69,7 +82,7 @@ class Omni::Test::Purchase < Omni::Test::Base
     x.approve
     test_it('Approve a purchase detail','open',x.state)
 
-    @@model_action = 'Receive'
+    @@model_action = 'receive'
     x.selling_units_approved = 100
     x.selling_units_cancelled = 10
     x.selling_units_received = 10

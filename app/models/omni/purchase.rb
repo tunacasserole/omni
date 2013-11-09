@@ -233,16 +233,6 @@ class Omni::Purchase < ActiveRecord::Base
 
   def do_release
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
-
-      # message = Buildit::Comm::Email::Message.create(
-      #     subject: "Omni notice: purchase - #{self.purchase_order_nbr} has been released.",
-      #     body: Buildit::Email::Manager.generate(self, "purchase_notice")
-      # )
-      # # email_addresses = Buildit::User.all.collect {|u| u.email_address}
-      # email_addresses = Buildit::User.where(:user_id => self.purchase_approver_1_user_id).first.email_address
-      # message.send_to email_addresses
-      # message.queue
-
   end
 
   def process_open
@@ -255,37 +245,81 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
 
-  def self.createAdvancedPO(params={})
-
-    return 'hello motto'
-
+  def request(params={})
+    @params = params
+    self.send(params['request_type'])
   end
 
-
-   def process_approve
-      case self.approval_level
-        when 1
-          self.approval_1_date = Date.today
-          self.save
-          if self.purchase_approver_2_user_id
-  #         notify approver 2
-          else
-            self.process_open
-          end
-        when 2
-          self.approval_2_date = Date.today
-          self.save
-          if self.purchase_approver_3_user_id
-  #         notify approver 3
-          else
-            self.process_open
-          end
-        when 3
-          self.approval_3_date = Date.today
-          self.save
-          self.process_open
+  def generate
+    x=Omni::Purchase.create(supplier_id: @params['supplier_id'], location_id: @params['location_id'], purchase_order_type: @params['purchase_order_type'], order_date: @params['order_date'], ordered_by_user_id: @params['ordered_by_user_id'])
+    supplier = Omni::Supplier.where(supplier_id: @params['supplier_id']).first
+    supplier.sku_suppliers.where(is_discontinued: false).each do |ss|
+      next unless Omni::Inventory.where(location_id: @params['location_id'], sku_id: @params['sku_id'], is_authorized: true).first
+      next unless ss.sku_id.style_id == @params['style_id'] if @params['style_id']
+      next unless ss.sku_id.subclass_id == @params['subclass_id'] if @params['subclass_id']
+      next unless ss.sku_id.subclass.classification_id == @params['classification_id'] if @params['classification_id']
+      next unless ss.sku_id.subclass.classification.department_id == @params['department'] if @params['department']
+      next if ss.sku_id.is_converted unless @params['include_conversions']
+      total_need_units = Omni::BtsDetail.where(sku_id: ss.sku_id).sum(:need) * (@params['adjustment_percent'] || 0) / 100
+      next unless total_need_units > 0
+      detail = Omni::PurchaseDetail.create(purchase_id: x.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id)
+      pack_size = detail.order_pack_size
+      if pack_size > 0
+        units_ordered = [1,total_need_units / pack_size].max.round
+        pack_type = detail.order_pack_type
+      else
+        units_ordered = total_need_units
+        pack_size = 1
+        pack_type = 'SELLING_UNIT'
       end
-   end
+      detail.update_attributes(units_ordered: units_ordered, order_pack_size: order_pack_size, order_pack_type: order_pack_type)
+    end
+  end
+
+  def clone
+    x=dup
+    x.update_attributes(display: nil, purchase_order_nbr: nil, state: 'draft', order_date: nil, ordered_by_user_id: nil, ship_date: nil, delivery_date: nil, cancel_not_shipped_by_date: nil,cancel_not_received_by_date: nil, approval_1_date: nil, approval_2_date: nil, approval_3_date: nil, first_receipt_date: nil, cancelled_date: nil, last_receipt_date: nil, is_destroyed: nil)
+    x.save
+    purchase_details.each do |pd|
+      # puts "location is #{location_id} and sku is #{pd.sku_id}"
+      next unless Omni::SkuSupplier.where(supplier_id: x.supplier_id, is_discontinued: false)
+      next unless Omni::Inventory.where(location_id: x.location_id, sku_id: pd.sku_id, is_authorized: true).first
+      next if pd.sku.is_converted unless @params['include_conversions']
+      units_ordered = adjust_order_units(pd.units_ordered, pd.order_pack_size)
+      Omni::PurchaseDetail.create(purchase_id: x.purchase_id, sku_id: pd.sku_id, units_ordered: units_ordered, sku_supplier_id: pd.sku_supplier_id, supplier_item_identifier: pd.supplier_item_identifier, description: pd.description, color_name: pd.color_name, size_name: pd.size_name, sku_alias: pd.sku_alias, allocation_profile_id: pd.allocation_profile_id, order_pack_size: pd.order_pack_size, order_pack_type: pd.order_pack_type, order_cost_units: pd.order_cost_units, order_multiple_type: pd.order_multiple_type, order_multiple: pd.order_multiple, supplier_cost: pd.supplier_cost, extra_cost: pd.extra_cost)
+    end
+    return Omni::Purchase.where(purchase_id: x.purchase_id).first # TODO: remove.  for testing only.
+  end
+
+  def adjust_order_units(units_ordered, order_pack_size)
+    total_selling_units = (units_ordered * order_pack_size) * (@params['adjustment_percent'] || 100) / 100
+    units_ordered = order_pack_size > 0 ? [(total_selling_units / order_pack_size).round,1].max : total_selling_units
+  end
+
+  def process_approve
+    case self.approval_level
+      when 1
+        self.approval_1_date = Date.today
+        self.save
+        if self.purchase_approver_2_user_id
+#         notify approver 2
+        else
+          self.process_open
+        end
+      when 2
+        self.approval_2_date = Date.today
+        self.save
+        if self.purchase_approver_3_user_id
+#         notify approver 3
+        else
+          self.process_open
+        end
+      when 3
+        self.approval_3_date = Date.today
+        self.save
+        self.process_open
+    end
+ end
 
   def approval_level
     # Determine current user
@@ -384,24 +418,6 @@ class Omni::Purchase < ActiveRecord::Base
         end
       end
     end
-  end
-
-  # Sends an email notification to the user when the purchase has finished running
-  def send_notice
-    message = Buildit::Comm::Email::Message.create(
-        subject: "Omni notice: purchase - #{self.display} has been released.",
-        body: Buildit::Email::Manager.generate(self, "purchase_notice"),
-    )
-    # email_addresses = Buildit::User.all.collect {|u| u.email_address}
-    email_addresses = approver_email
-    message.send_to email_addresses
-    message.queue
-  end
-
-  # Get the email address
-  def approver_email
-  # Search event table for user_id of approver
-    return 'aaron@buildit.io'
   end
 
   def print

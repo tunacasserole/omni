@@ -2,7 +2,7 @@ Ext.define('Omni.view.inventories.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-inventories-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -104,16 +104,6 @@ Ext.define('Omni.view.inventories.ExplorerContextMenu', {
       leftActions: [
 
         // LEFT ACTIONS (Start) =================================================================
-
-        /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         */
-        {
-          text: 'New',
-          cls: 'icon-new'
-        }
 
         // LEFT ACTIONS (End)
 

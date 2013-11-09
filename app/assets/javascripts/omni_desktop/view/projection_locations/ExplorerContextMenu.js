@@ -8,8 +8,7 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
 
     Ext.apply(this, {
 
-
-     leftActions: [
+            leftActions: [
 
         // LEFT ACTIONS (Start) =================================================================
 
@@ -36,8 +35,6 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
         // LEFT ACTIONS (End)
 
       ],
-
-
       rightActions: [
 
         // RIGHT ACTIONS (Start) ================================================================
@@ -129,6 +126,8 @@ Ext.define('Omni.view.projection_locations.ExplorerContextMenu', {
         // RIGHT ACTIONS (End)
 
       ],
+
+
 
     });
 

@@ -1,25 +1,13 @@
 class Omni::BtsDetail < ActiveRecord::Base
 
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
-  #self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :bts_details
   self.primary_key                = :bts_detail_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates :bts_detail_id,                        :presence      => true
@@ -28,7 +16,17 @@ class Omni::BtsDetail < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :bts_detail_id,                          :with => :guid
-  # default :is_destroyed,                           :override  =>  false,        :to    => false
+  default :is_destroyed,                           :override  =>  false,        :to    => false
+  default :need,                :override => false,  :to => 0
+  default :on_hand,             :override => false,  :to => 0
+  default :wip,                 :override => false,  :to => 0
+  default :on_order,            :override => false,  :to => 0
+  default :allocated,           :override => false,  :to => 0
+  default :transit,             :override => false,  :to => 0
+  default :ytd,                 :override => false,  :to => 0
+  default :py1,                 :override => false,  :to => 0
+  default :py2,                 :override => false,  :to => 0
+  default :py3,                 :override => false,  :to => 0
   # DEFAULTS (End)
 
 
@@ -116,8 +114,8 @@ class Omni::BtsDetail < ActiveRecord::Base
   # HELPERS (End) =======================================================================
 
   # HELPERS (Start) =====================================================================
-  def transform_and_calculate
-    puts "transforming #{self.data_source} sku #{self.sku_display}"
+  def calculate
+    puts "transforming #{source} sku #{sku_display}"
 
     case self.sku.source
       when 'Parker'
@@ -167,34 +165,35 @@ class Omni::BtsDetail < ActiveRecord::Base
         end
     end
 
+    self.projection = 0 unless self.projection
     ### TOTAL ON HAND ###
-    self.total_oh = self.on_hand + self.wip + self.allocated + self.transit
+    self.total_on_hand = self.on_hand #+ self.wip + self.allocated + self.transit
     ### STANDARD DEVIATION OF SALES TO PROJECTED ###
     mean = (self.ytd+self.py1+self.py2)/3
     tot_dev = ((self.ytd-mean)**2) + ((self.py1-mean)**2) + ((self.py2-mean)**2)
     self.projection_dev = Math.sqrt(tot_dev)
     ### STANDARD DEVIATION % ###
-    self.projection_dev_pct = self.projection_dev / self.projection unless self.projection == 0
+    self.projection_dev_pct = self.projection_dev / self.projection if self.projection > 0
     ### SMOOTHED PROJECTION ###
-    self.projection_smooth = self.projection_dev + self.projection - self.ytd
+    self.projection_smoothed = self.projection_dev + self.projection - self.ytd
     ### CONVERTED NEED ###
-    self.converted_need = self.projection_smooth - self.allocated - self.py1
+    self.converted_need = self.projection_smoothed - self.allocated - self.py1
     ### GENERIC NEED ###
     self.generic_need = 0
     ### Unusable O/H inventory ###
-    self.unuseable_oh = self.total_oh - self.complete_coverage if self.complete_coverage and self.complete_coverage > self.total_oh
+    self.unuseable_on_hand = self.total_on_hand - self.complete_coverage if self.complete_coverage and self.complete_coverage > self.total_on_hand
     ### COMPLETE COVERAGE ###
-    self.complete_coverage = self.generic_need + (self.unuseable_oh || 0)
+    self.complete_coverage = self.generic_need + (self.unuseable_on_hand || 0)
     ### USEABLE OH ###
-    if (self.complete_coverage - self.total_oh) < 0
-      self.useable_oh = self.complete_coverage
+    if (self.complete_coverage - self.total_on_hand) < 0
+      self.useable_on_hand = self.complete_coverage
     else
-      self.useable_oh = self.total_oh
+      self.useable_on_hand = self.total_on_hand
     end
     ### COMPLETE OO ###
     self.complete_oo = self.wip
     ### TRUE NEED ###
-    self.need = self.complete_coverage - self.total_oh - self.complete_coverage
+    self.need = self.complete_coverage - self.total_on_hand - self.complete_coverage
     return self
   end
   # HELPERS (End)

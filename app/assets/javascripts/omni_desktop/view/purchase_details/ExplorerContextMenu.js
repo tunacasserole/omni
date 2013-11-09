@@ -66,7 +66,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
           privileges: [],
           listeners: {
             click: {
-              fn: this.clickReceive,
+              fn: this.clickCancel,
               scope: me
             }
           }
@@ -173,7 +173,6 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
 
     this.callParent();
   },
-
 
 
   // ACTION HANDLERS (Start) ====================================================================

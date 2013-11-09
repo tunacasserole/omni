@@ -14,10 +14,9 @@ class Omni::Style < ActiveRecord::Base
   validates    :subclass_id,                     :presence    => true
   validates    :display,                         :uniqueness  => true
   validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
-  validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
-  validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
-  validates    :product_type,                    :lookup      => 'PRODUCT_TYPE',            :allow_nil => true
-
+  # validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
+  # validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
+  # validates    :product_type,                    :lookup      => 'PRODUCT_TYPE',            :allow_nil => true
   validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true
   validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
   validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true

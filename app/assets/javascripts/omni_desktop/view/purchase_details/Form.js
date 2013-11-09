@@ -149,62 +149,6 @@ Ext.define('Omni.view.purchase_details.Form', {
         }
         ,{
           xtype: 'fieldset',
-          title: 'Cost Details',
-          scheme: 'fieldset_scheme_1',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { xtype: 'numberfield',
-              name: 'supplier_cost',
-              fieldLabel: this.supplier_costLabel,
-              minValue: 0,
-              decimalPrecision: 2,
-              allowBlank: true,
-              disabled: disabled
-            }
-           ,{ xtype: 'numberfield',
-              name: 'order_cost_units',
-              fieldLabel: this.order_cost_unitsLabel,
-              minValue: 1,
-              decimalPrecision: 0,
-              allowBlank: true,
-              disabled: disabled
-            }
-           // ,{ xtype: 'buildit-Locator',
-           //    name: 'cost_id',
-           //    fieldLabel: this.cost_idLabel,
-           //    allowBlank: true,
-           //    store: Ext.create('Omni.store.Cost',{pageSize: 10}),
-           //    displayField: 'display',
-           //    queryField: 'display',
-           //    valueField: 'cost_id',
-           //    itemTpl: '{display}'
-           //  }
-//           ,{ xtype: 'textfield',
-//              name: 'invoice_cost',
-//              fieldLabel: this.invoice_costLabel,
-//              disabled: true,
-//              decimalPrecision: 2,
-//              allowBlank: true
-//            }
-           ,{ xtype: 'textfield',
-              name: 'inventory_cost',
-              fieldLabel: this.inventory_costLabel,
-              disabled: true,
-              decimalPrecision: 2,
-              allowBlank: true
-            }
-           ,{ xtype: 'textfield',
-              name: 'extra_cost',
-              fieldLabel: this.extra_costLabel,
-              allowBlank: true
-            }
-          ]
-        }
-        ,{
-          xtype: 'fieldset',
           title: 'Order Details',
           scheme: 'fieldset_scheme_1',
           collapsible: true,
@@ -258,6 +202,62 @@ Ext.define('Omni.view.purchase_details.Form', {
            ,{ xtype: 'textfield',
               name: 'order_multiple',
               fieldLabel: this.order_multipleLabel,
+              allowBlank: true
+            }
+          ]
+        }
+        ,{
+          xtype: 'fieldset',
+          title: 'Cost Details',
+          scheme: 'fieldset_scheme_1',
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { xtype: 'numberfield',
+              name: 'supplier_cost',
+              fieldLabel: this.supplier_costLabel,
+              minValue: 0,
+              decimalPrecision: 2,
+              allowBlank: true,
+              disabled: disabled
+            }
+           ,{ xtype: 'numberfield',
+              name: 'order_cost_units',
+              fieldLabel: this.order_cost_unitsLabel,
+              minValue: 1,
+              decimalPrecision: 0,
+              allowBlank: true,
+              disabled: disabled
+            }
+           // ,{ xtype: 'buildit-Locator',
+           //    name: 'cost_id',
+           //    fieldLabel: this.cost_idLabel,
+           //    allowBlank: true,
+           //    store: Ext.create('Omni.store.Cost',{pageSize: 10}),
+           //    displayField: 'display',
+           //    queryField: 'display',
+           //    valueField: 'cost_id',
+           //    itemTpl: '{display}'
+           //  }
+//           ,{ xtype: 'textfield',
+//              name: 'invoice_cost',
+//              fieldLabel: this.invoice_costLabel,
+//              disabled: true,
+//              decimalPrecision: 2,
+//              allowBlank: true
+//            }
+           ,{ xtype: 'textfield',
+              name: 'inventory_cost',
+              fieldLabel: this.inventory_costLabel,
+              disabled: true,
+              decimalPrecision: 2,
+              allowBlank: true
+            }
+           ,{ xtype: 'textfield',
+              name: 'extra_cost',
+              fieldLabel: this.extra_costLabel,
               allowBlank: true
             }
           ]
