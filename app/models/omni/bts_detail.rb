@@ -33,6 +33,7 @@ class Omni::BtsDetail < ActiveRecord::Base
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :bts,                            :class_name => 'Omni::Bts',                    :foreign_key => 'bts_id'
   belongs_to   :sku,                            :class_name => 'Omni::Sku',                    :foreign_key => 'sku_id'
+  belongs_to   :inventory,                      :class_name => 'Omni::Inventory',              :foreign_key => 'inventory_id'
   belongs_to   :location,                       :class_name => 'Omni::Location',               :foreign_key => 'location_id'
   # ASSOCIATIONS (End)
 

@@ -120,7 +120,9 @@
     # return 'invalid action for the current state' if self.state == 'complete'
 
     # Insert or update ProjectionDetail row for every authorized SKU/Location combination (TO DO: in the Departement in the Projection) and every active selling location authorized for the SKU.
-    Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: self.projection_id).first} #unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
+    # DEBUG myself = Omni::Projection.first
+    # DEBUG Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: myself.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: myself.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: myself.projection_id).first} #unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
+    Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id).first} #unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
 
     self.projection_details.each do |detail|
       # JASON - inventory is a two part key, how to leverage an association
@@ -150,6 +152,9 @@
 
     self.state = 'forecast' if self.state =='draft'
     self.save
+
+    Omni::Projection.reindex
+    Omni::ProjectionDetail.reindex
   end
   # STATE HANDLERS (End)
 

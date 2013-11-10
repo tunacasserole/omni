@@ -13,9 +13,10 @@ class Omni::Bts < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :bts_id,                           :override  =>  false,        :with  => :guid
-  # default      :display,                          :override  =>  true,        :to   => lambda{|m| "#{m.subclass_display if m.subclass} #{m.style_display} #{m.sku_display} #{m.user_display}"}
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
-  default      :plan_year,                        :override  =>  true, :to => '2014'
+  # default      :display,                            :override  =>  true,        :to   => lambda{|m| "#{m.subclass_display if m.subclass} #{m.style_display} #{m.sku_display} #{m.user_display}"}
+  default      :state,                            :override  =>  false,        :to => 'draft'
+  default      :is_destroyed,                     :override  =>  false,        :to => false
+  default      :plan_year,                        :override  =>  false,        :to => '2014'
   default      :user_id,                          :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   # DEFAULTS (End)
 
@@ -28,8 +29,8 @@ class Omni::Bts < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :bts_details,              :class_name => 'Omni::BtsDetail',    :foreign_key => 'bts_id'
-  belongs_to   :department,                      :class_name => 'Omni::Department',          :foreign_key => 'department_id'
+  has_many     :bts_details,                     :class_name => 'Omni::BtsDetail',   :foreign_key => 'bts_id'
+  belongs_to   :department,                      :class_name => 'Omni::Department',  :foreign_key => 'department_id'
   belongs_to   :user,                            :class_name => 'Buildit::User',     :foreign_key => 'user_id'
   # ASSOCIATIONS (End)
 
@@ -80,10 +81,12 @@ class Omni::Bts < ActiveRecord::Base
 
   # STATE HANDLERS (Start) ====================================================================
   def run
-    state = 'running'
-    save
-    details.each do |d|
+    self.state = 'running'
+    self.save
+    self.gen_details.each do |d|
       puts 'CALCULATING'
+      # populate sales history from inventories table
+      d.ytd
       d.calculate
     end
 
@@ -114,7 +117,7 @@ class Omni::Bts < ActiveRecord::Base
     # puts "--bts finished with #{self.bts_details.count.to_s} detail rows at #{Time.now.strftime("%H:%M:%S")}"
   end
 
-  def details
+  def gen_details
     # DEBUG: Start
     # Omni::Inventory.where(department_id: department_id, is_authorized: true).each {|i| puts "sku is #{i.sku_id} location is #{i.location_id} and bts_id is #{bts_id}"} # DEBUG
     # Omni::Inventory.where(department_id: department_id, is_authorized: true).each do |i|
@@ -122,7 +125,7 @@ class Omni::Bts < ActiveRecord::Base
     #   Omni::BtsDetail.create(bts_id: bts_id, sku_id: i.sku_id, location_id: i.location_id)
     # end
     # DEBUG: End
-    Omni::Inventory.where(department_id: department_id, is_authorized: true).each {|i| Omni::BtsDetail.create(bts_id: bts_id, sku_id: i.sku_id, location_id: i.location_id) unless Omni::BtsDetail.where(bts_id: bts_id, sku_id: i.sku_id, location_id: i.location_id).first} # ORIGINAL
+    Omni::Inventory.where(department_id: department_id, is_authorized: true).each {|i| Omni::BtsDetail.create(bts_id: bts_id, sku_id: i.sku_id, location_id: i.location_id, ) unless Omni::BtsDetail.where(bts_id: bts_id, sku_id: i.sku_id, location_id: i.location_id).first} # ORIGINAL
     Omni::BtsDetail.where(bts_id: bts_id)
   end
 

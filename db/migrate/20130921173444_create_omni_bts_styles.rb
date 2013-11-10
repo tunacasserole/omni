@@ -1,6 +1,5 @@
 class CreateOmniBtsStyles < ActiveRecord::Migration
   def change
-  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
   	unless ActiveRecord::Base.connection.tables.include?('bts_styles')
       create_table(:bts_styles, :id => false) do |t|
@@ -37,6 +36,5 @@ class CreateOmniBtsStyles < ActiveRecord::Migration
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end
-    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

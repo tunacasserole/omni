@@ -2,7 +2,7 @@ Ext.define('Omni.view.inventories.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-inventories-ExplorerContextMenu',
 
-
+  
   initComponent: function() {
     var me = this;
 
@@ -105,6 +105,7 @@ Ext.define('Omni.view.inventories.ExplorerContextMenu', {
 
         // LEFT ACTIONS (Start) =================================================================
 
+
         // LEFT ACTIONS (End)
 
       ]
@@ -136,9 +137,12 @@ Ext.define('Omni.view.inventories.ExplorerContextMenu', {
 
   clickNew: function(btn, e, eOpts){
     // TODO
+  },
+
+  clickImport: function(btn, e, eOpts){
+    // TODO
   }
 
   // ACTION HANDLERS (End)
 
 });
-

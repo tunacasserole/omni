@@ -22,27 +22,13 @@ Ext.define('Omni.view.projections.Explorer', {
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================
-  projection_idLabel:                     Omni.i18n.model.Projection.projection_id,
   forecast_profile_idLabel:               Omni.i18n.model.Projection.forecast_profile_id,
-  region_idLabel:                         Omni.i18n.model.Projection.region_id,
   location_idLabel:                       Omni.i18n.model.Projection.location_id,
   department_idLabel:                     Omni.i18n.model.Projection.department_id,
-  classification_idLabel:                 Omni.i18n.model.Projection.classification_id,
-  subclass_idLabel:                       Omni.i18n.model.Projection.subclass_id,
-  style_idLabel:                          Omni.i18n.model.Projection.style_id,
-  sku_idLabel:                            Omni.i18n.model.Projection.sku_id,
-  color_idLabel:                          Omni.i18n.model.Projection.color_id,
   stateLabel:                             Omni.i18n.model.Projection.state,
   displayLabel:                           Omni.i18n.model.Projection.display,
   descriptionLabel:                       Omni.i18n.model.Projection.description,
   plan_yearLabel:                         Omni.i18n.model.Projection.plan_year,
-  projection_typeLabel:                   Omni.i18n.model.Projection.projection_type,
-  versionLabel:                           Omni.i18n.model.Projection.version,
-  audit_updated_atLabel:                  Omni.i18n.model.Projection.audit_updated_at,
-  audit_created_atLabel:                  Omni.i18n.model.Projection.audit_created_at,
-  audit_created_byLabel:                  Omni.i18n.model.Projection.audit_created_by,
-  audit_updated_byLabel:                  Omni.i18n.model.Projection.audit_updated_by,
-  is_destroyedLabel:                      Omni.i18n.model.Projection.is_destroyed,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -59,14 +45,11 @@ Ext.define('Omni.view.projections.Explorer', {
       columns: [
         // { header: this.projection_idLabel,                 dataIndex: 'projection_id',               flex: 1 },
         { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },
-        { header: this.department_idLabel,                 dataIndex: 'department_display',               flex: 1 },
+        { header: this.department_idLabel,                 dataIndex: 'department_display',          flex: 1 },
+        { header: this.forecast_profile_idLabel,           dataIndex: 'forecast_profile_display',    flex: 1 },
         { header: this.descriptionLabel,                   dataIndex: 'description',                 flex: 1 },
-        { header: this.plan_yearLabel,                     dataIndex: 'plan_year',                   flex: 1 },
-        {
-          header      : this.forecast_profile_idLabel,
-          dataIndex   : 'forecast_profile_display',
-          flex        : 1
-        }      ]
+        { header: this.plan_yearLabel,                     dataIndex: 'plan_year',                   flex: 1 }
+      ]
     });
     // COLUMNS (End)
 
