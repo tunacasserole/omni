@@ -44,7 +44,7 @@ Ext.define('Omni.view.bts_details.Explorer', {
   generic_needLabel:                      Omni.i18n.model.BtsDetail.generic_need,
   needLabel:                              Omni.i18n.model.BtsDetail.need,
   useable_on_handLabel:                   Omni.i18n.model.BtsDetail.useable_on_hand,
-  unuseable_on_handLabel:                 Omni.i18n.model.BtsDetail.unuseable_on_hand,
+  non_sellable_unitsLabel:                 Omni.i18n.model.BtsDetail.non_sellable_units,
   total_on_handLabel:                     Omni.i18n.model.BtsDetail.total_on_hand,
   complete_ooLabel:                       Omni.i18n.model.BtsDetail.complete_oo,
   complete_coverageLabel:                 Omni.i18n.model.BtsDetail.complete_coverage,
@@ -175,8 +175,8 @@ Ext.define('Omni.view.bts_details.Explorer', {
           flex         : 1
         },
         {
-          header       : this.unuseable_on_handLabel,
-          dataIndex    : 'unuseable_on_hand',
+          header       : this.non_sellable_unitsLabel,
+          dataIndex    : 'non_sellable_units',
           flex         : 1
         },
         {

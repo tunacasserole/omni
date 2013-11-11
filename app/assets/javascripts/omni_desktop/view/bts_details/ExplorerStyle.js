@@ -5,9 +5,9 @@ Ext.define('Omni.view.bts_details.ExplorerStyle', {
 
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.BtsDetail'),
-  
+
   allowFind  :  true,
-  
+
   contextMenuConfig : {
     xtype    : 'omni-bts_details-ExplorerContextMenu'
   },
@@ -25,7 +25,7 @@ Ext.define('Omni.view.bts_details.ExplorerStyle', {
   bts_detail_idLabel:                     Omni.i18n.model.BtsDetail.bts_detail_id,
   bts_idLabel:                            Omni.i18n.model.BtsDetail.bts_id,
   sku_idLabel:                            Omni.i18n.model.BtsDetail.sku_id,
-  style_idLabel:                          Omni.i18n.model.BtsDetail.style_id,  
+  style_idLabel:                          Omni.i18n.model.BtsDetail.style_id,
   location_idLabel:                       Omni.i18n.model.BtsDetail.location_id,
   data_sourceLabel:                       Omni.i18n.model.BtsDetail.data_source,
   on_handLabel:                           Omni.i18n.model.BtsDetail.on_hand,
@@ -44,7 +44,7 @@ Ext.define('Omni.view.bts_details.ExplorerStyle', {
   generic_needLabel:                      Omni.i18n.model.BtsDetail.generic_need,
   needLabel:                              Omni.i18n.model.BtsDetail.need,
   useable_on_handLabel:                   Omni.i18n.model.BtsDetail.useable_on_hand,
-  unuseable_on_handLabel:                 Omni.i18n.model.BtsDetail.unuseable_on_hand,
+  non_sellable_unitsLabel:                 Omni.i18n.model.BtsDetail.non_sellable_units,
   total_on_handLabel:                     Omni.i18n.model.BtsDetail.total_on_hand,
   complete_ooLabel:                       Omni.i18n.model.BtsDetail.complete_oo,
   complete_coverageLabel:                 Omni.i18n.model.BtsDetail.complete_coverage,
@@ -65,12 +65,12 @@ Ext.define('Omni.view.bts_details.ExplorerStyle', {
     {
       showAll  : 'All Sources',
       items    : [
-        ['source_parker',     "PARKER"],  
-        ['source_buckhead',     "BUCKHEAD"],  
+        ['source_parker',     "PARKER"],
+        ['source_buckhead',     "BUCKHEAD"],
         ['source_grits',     "GRITS"]
       ]
     }
-  ],  
+  ],
 
   initComponent : function () {
 
@@ -169,8 +169,8 @@ Ext.define('Omni.view.bts_details.ExplorerStyle', {
           flex         : 1
         },
         {
-          header       : this.unuseable_on_handLabel,
-          dataIndex    : 'unuseable_on_hand',
+          header       : this.non_sellable_unitsLabel,
+          dataIndex    : 'non_sellable_units',
           flex         : 1
         },
         {
@@ -202,7 +202,7 @@ Ext.define('Omni.view.bts_details.ExplorerStyle', {
           header       : this.needLabel,
           dataIndex    : 'need',
           flex         : 1
-        }        
+        }
       ]
     });
     // COLUMNS (End)

@@ -182,9 +182,9 @@ class Omni::BtsDetail < ActiveRecord::Base
     ### GENERIC NEED ###
     self.generic_need = 0
     ### Unusable O/H inventory ###
-    self.unuseable_on_hand = self.total_on_hand - self.complete_coverage if self.complete_coverage and self.complete_coverage > self.total_on_hand
+    self.non_sellable_units = self.total_on_hand - self.complete_coverage if self.complete_coverage and self.complete_coverage > self.total_on_hand
     ### COMPLETE COVERAGE ###
-    self.complete_coverage = self.generic_need + (self.unuseable_on_hand || 0)
+    self.complete_coverage = self.generic_need + (self.non_sellable_units || 0)
     ### USEABLE OH ###
     if (self.complete_coverage - self.total_on_hand) < 0
       self.useable_on_hand = self.complete_coverage

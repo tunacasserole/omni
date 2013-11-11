@@ -26,7 +26,7 @@ en:
         generic_need:                      'Gen Need'
         need:                              'Need'
         useable_on_hand:                   'Useable OH'
-        unuseable_on_hand:                 'Unuseable OH'
+        non_sellable_units:                 'Unuseable OH'
         total_on_hand:                     'Total OH'
         complete_oo:                       'OO Comp'
         complete_coverage:                 'Cov Comp'

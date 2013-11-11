@@ -27,7 +27,7 @@ class CreateOmniBtsDetails < ActiveRecord::Migration
       t.column   :generic_need,                    :integer,           :null  =>  true
       t.column   :need,                            :integer,           :null  =>  true
       t.column   :useable_on_hand,                 :integer,           :null  =>  true
-      t.column   :unuseable_on_hand,               :integer,           :null  =>  true
+      t.column   :non_sellable_units,               :integer,           :null  =>  true
       t.column   :total_on_hand,                   :integer,           :null  =>  true
       t.column   :complete_oo,                     :integer,           :null  =>  true
       t.column   :complete_coverage,               :integer,           :null  =>  true

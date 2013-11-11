@@ -391,7 +391,7 @@ class Omni::Style < ActiveRecord::Base
 
 
   # FILTERS (Start) =====================================================================
-  filter :state_pending_approval,  :with => {state: {equal_to: 'pending_approval'}},     :priority => 40
+  filter :state_pending_approval,  :with => {state: {equal_to: 'pending_approval'}}, :priority => 40
   filter :state_draft,             :with => {state: {equal_to: 'draft'}},        :priority => 50
   filter :state_active,            :with => {state: {equal_to: 'active'}},       :priority => 60
   filter :state_discontinued,      :with => {state: {equal_to: 'discontinued'}}, :priority => 70
@@ -413,27 +413,18 @@ class Omni::Style < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :display
+    string   :style_id
     string   :style_nbr
+    string   :display
     string   :subclass_id
     string   :subclass_display do subclass.display if subclass end
-    # string   :product_display do product.display if product end
-    string   :initial_retail_price
-    string   :style_id
-    # string   :supplier_display do supplier.display if supplier end
     string   :conversion_type
     string   :state
 
     text     :display_fulltext,  :using => :display
-    text     :subclass_display_fulltext, :using => :subclass_display
-    # text     :display_fulltext do self.display.gsub(/(\W)/, ' ') end
-    # text     :product_display_fulltext, :using => :product_display
-    # text     :initial_retail_price_fulltext, :using => :initial_retail_price
-    # text     :supplier_display_fulltext, :using => :supplier_display
-    # text     :state_fulltext, :using => :state
-    # text     :site_display_fulltext, :using => :site_display
-    # text     :conversion_type, :using => :conversion_type
-
+    text     :subclass_display_fulltext do self.subclass.display end
+    text     :classification_display_fulltext do self.subclass.classification.display end
+    text     :department_display_fulltext do self.subclass.classification.department.display end
   end
   # INDEXING (End)
 

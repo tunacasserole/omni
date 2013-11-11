@@ -185,6 +185,16 @@ class Omni::Sku < ActiveRecord::Base
   filter :source_parker,           :with => {source: {equal_to: 'Parker'}},       :priority => 60
   filter :source_buckhead,         :with => {source: {equal_to: 'Buckhead'}}, :priority => 70
   filter :source_grits,            :with => {source: {equal_to: 'True Grits'}},     :priority => 80
+
+  filter :department_accessories,  :with => {department_display_fulltext: {equal_to: 'ACCESSORIES'}}, :priority => 10
+  filter :department_activewear,  :with => {department_display_fulltext: {equal_to: 'ACTIVEWEAR'}}, :priority => 20
+  filter :department_components,  :with => {department_display_fulltext: {equal_to: 'COMPONENTS'}}, :priority => 30
+  filter :department_footwear,  :with => {department_display_fulltext: {equal_to: 'FOOTWEAR'}}, :priority => 40
+  filter :department_girls_specialty,  :with => {department_display_fulltext: {equal_to: 'GIRLS SPECIALTY'}}, :priority => 50
+  filter :department_knit_tops,  :with => {department_display_fulltext: {equal_to: 'KNIT TOPS'}}, :priority => 60
+  filter :department_outerwear,  :with => {department_display_fulltext: {equal_to: 'OUTERWEAR'}}, :priority => 60
+  filter :department_pants_and_shorts,  :with => {department_display_fulltext: {equal_to: 'PANTS AND SHORTS'}}, :priority => 70
+  filter :department_woven_tops,  :with => {department_display_fulltext: {equal_to: 'WOVEN TOPS'}}, :priority => 80
   # FILTERS (End)
 
 
