@@ -3,8 +3,6 @@ Ext.define('Omni.view.skus.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-skus-Form',
 
-
-
   initComponent:function () {
 
     var me = this;
