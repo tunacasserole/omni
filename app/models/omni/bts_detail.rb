@@ -169,14 +169,19 @@ class Omni::BtsDetail < ActiveRecord::Base
     self.projection = 0 unless self.projection
     ### TOTAL ON HAND ###
     self.total_on_hand = self.on_hand #+ self.wip + self.allocated + self.transit
+
     ### STANDARD DEVIATION OF SALES TO PROJECTED ###
-    mean = (self.ytd+self.py1+self.py2)/3
-    tot_dev = ((self.ytd-mean)**2) + ((self.py1-mean)**2) + ((self.py2-mean)**2)
-    self.projection_dev = Math.sqrt(tot_dev)
+    mean = (self.py1+self.py2)/3
+    tot_dev = ((mean-self.py1)**2) + ((mean-self.py2)**2)
+    self.standard_dev = Math.sqrt(tot_dev)
+
     ### STANDARD DEVIATION % ###
-    self.projection_dev_pct = self.projection_dev / self.projection if self.projection > 0
+    self.standard_dev_pct = self.standard_dev / self.projection if self.projection > 0
+
+
+
     ### SMOOTHED PROJECTION ###
-    self.projection_smoothed = self.projection_dev + self.projection - self.ytd
+    self.projection_smoothed = self.standard_dev + self.projection - self.ytd
     ### CONVERTED NEED ###
     self.converted_need = self.projection_smoothed - self.allocated - self.py1
     ### GENERIC NEED ###

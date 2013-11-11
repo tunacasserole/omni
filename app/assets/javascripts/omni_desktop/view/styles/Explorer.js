@@ -26,8 +26,8 @@ Ext.define('Omni.view.styles.Explorer', {
 
       inspectorConfig: {
         xtype: 'omni-styles-Inspector'
-      },
-
+      }
+    });
 
     //   filters: [
     //     {
@@ -42,7 +42,7 @@ Ext.define('Omni.view.styles.Explorer', {
     //         ]
     //     }
     //   ],
-    // });
+
     // EXPLORER INIT (End)
 
     // LABELS (Start) ======================================================================
