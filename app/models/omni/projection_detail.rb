@@ -91,13 +91,11 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-    hook :before_update, :do_reset, 10
+  hook :before_update, :reset, 10
   # HOOKS (End)
 
-  def do_reset
-    if projection_1_units_changed?
-      # reset
-    end
+  def reset
+    self.state = 'draft' if [projection_1_units_changed?, projection_2_units_changed?, projection_3_units_changed?, projection_4_units_changed?].any?
   end
   # INDEXING (Start) ====================================================================
   searchable do

@@ -53,3 +53,4 @@ class Omni::Test::Security < Omni::Test::Base
       x.save
     end
   end
+end

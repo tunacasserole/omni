@@ -25,6 +25,8 @@ class CreateOmniSkus < ActiveRecord::Migration
         t.column   :style_id,                        :string,            :null  =>  true,    :limit   => 32
         t.column   :size_id,                         :string,            :null  =>  true,    :limit   => 32
         t.column   :subclass_id,                     :string,            :null  =>  true,    :limit   => 32
+        t.column   :classification_id,               :string,            :null  =>  true,    :limit => 32
+        t.column   :department_id,                   :string,            :null  =>  true,    :limit => 32
         t.column   :buyer_user_id,                   :string,            :null  =>  true,    :limit   => 32
         t.column   :product_type_id,                 :string,            :null  =>  true,    :limit   => 32
         t.column   :supplier_id,                     :string,            :null  =>  true,    :limit   => 32

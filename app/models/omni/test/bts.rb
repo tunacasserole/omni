@@ -1,28 +1,20 @@
 class Omni::Test::Bts < Omni::Test::Base
 
   def self.go
-    create_bts_data
-    test_bts
-  end
-
-  def self.test_bts
-    # if base data was created and relationship exists, the bts should have 3 details
-    x=Omni::Bts.where(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS').first
-    test_it('It creates one with details', 3, x.bts_details.count)
-
-    # if detail rows were succesfully destroyed, there should be no detail rows
-    x.bts_details.each {|x| x.delete}
-    test_it('it destroys all details', 0, x.bts_details.count)
-
-    # running the bts should set the state to done and create details for each inventory
-    x.run
-    test_it('It sets the state to done','done',x.state)
-    test_it('it creates a detail row for every inventory',3,x.bts_details.count)
+    @b = create_bts_data
+    @b.run
+    test_it('it creates a detail row for every inventory', 3, @b.bts_details.count)
   end
 
   def self.create_bts_data
     @@model_name = 'Bts'
     @@model_action = 'Run'
+    Omni::BtsDetail.all.each {|x| x.delete}
+    Omni::Bts.all.each {|x| x.delete}
+    Omni::Bts.create(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS', :department_id => '05A9CEBAAC5511E299E700FF58D32228', :state => 'active') unless Omni::Bts.where(:bts_id => '4D594A1C193611E3A22D20C9D047DBTS').first
+    # Omni::Department.all.each {|d| Omni::Bts.create(state: 'draft', department_id: d.department_id)}
+    # Omni::Inventory.where(department_id: '05A9CEBAAC5511E299E700FF58D32228').each {|s| Omni::BtsDetail.create(sku_id: i.sku_id, location_id: i.location_id)}
+
   end
 
 end

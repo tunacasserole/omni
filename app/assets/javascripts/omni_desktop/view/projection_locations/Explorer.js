@@ -10,12 +10,15 @@ Ext.define('Omni.view.projection_locations.Explorer', {
     xtype    : 'omni-projection_locations-ExplorerContextMenu'
   },
 
+  allowNew : false,
+  allowInspect : false,
+
   newForms : [{
     xtype    : 'omni-projection_locations-Form'
   }],
 
   inspectorConfig : {
-    // xtype    : 'omni-projection_locations-Inspector'
+    xtype    : 'omni-projection_locations-Inspector'
   },
   // EXPLORER INIT (End)
 
@@ -51,6 +54,7 @@ Ext.define('Omni.view.projection_locations.Explorer', {
         {
           header       : this.approval_dateLabel,
           dataIndex    : 'approval_date',
+          renderer      : Ext.util.Format.dateRenderer('m/d/y'),
           flex         : 1
         }
       ]

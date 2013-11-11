@@ -78,8 +78,10 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 # Exact match attributes
     string   :projection_id
     string   :location_id
+    string   :location_display
     string   :state
     string   :display
+    date     :approval_date
 
   # Partial match (contains) attributes
     text     :projection_display_fulltext, :using => :projection_display
@@ -116,7 +118,7 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 
   # STATE HANDLERS (Start) ====================================================================
   def process_approve
-    self.approval_date = Date.today
+    self.approval_date = Time.now
     self.save
   end
   # STATE HANDLERS (End) ====================================================================

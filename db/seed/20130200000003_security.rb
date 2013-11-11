@@ -15,26 +15,10 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
-  user_id: 'FB0ACB1AFAC111E2B25720XSYSDOMAIN',
-  first_name: 'System',
-  last_name: 'Administrator',
-  email_address: 'sys@domain.com',
-  sso_plugin_code: 'BUILDIT'
-)
-
-Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D04USERA',
+  user_id: '811166D4D50A11E2B45820C9D04AARON',
   first_name: 'Aaron',
   last_name: 'Henderson',
   email_address: 'a',
-  sso_plugin_code: 'BUILDIT'
-)
-
-Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820CDEMOAARON',
-  first_name: 'Aaron',
-  last_name: 'Henderson',
-  email_address: 'aaron@buildit.io',
   sso_plugin_code: 'BUILDIT'
 )
 
@@ -78,14 +62,14 @@ Buildit::User.create(
   sso_plugin_code: 'BUILDIT'
 )
 
-Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D0PXXBOB',
-  first_name: 'Bob',
-  last_name: 'Sustak',
-  email_address: 'bob.sustak@buckheaduniforms.com',
-  sso_plugin_code: 'BUILDIT',
-  api_token:  'J0ZWpblOYA'
-)
+# Buildit::User.create(
+#   user_id: '811166D4D50A11E2B45820C9D0PXXBOB',
+#   first_name: 'Bob',
+#   last_name: 'Sustak',
+#   email_address: 'bob.sustak@buckheaduniforms.com',
+#   sso_plugin_code: 'BUILDIT',
+#   api_token:  'J0ZWpblOYA'
+# )
 
 Buildit::User.create(
   user_id: '811166D4D50A11E2B45820C9D0PYYBOB',
@@ -112,13 +96,13 @@ Buildit::User.create(
   sso_plugin_code: 'BUILDIT'
 )
 
-Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D04ATTOM',
-  first_name: 'Tom',
-  last_name: 'Henderson',
-  email_address: 'thenderson@parkersu.com',
-  sso_plugin_code: 'BUILDIT'
-)
+# Buildit::User.create(
+#   user_id: '811166D4D50A11E2B45820C9D04ATTOM',
+#   first_name: 'Tom',
+#   last_name: 'Henderson',
+#   email_address: 'thenderson@parkersu.com',
+#   sso_plugin_code: 'BUILDIT'
+# )
 
 Buildit::User.create(
   user_id: '811166D4D50A11E2B45820C9D04ATTTT',
@@ -140,7 +124,7 @@ x.password = 'demo'
 x.password_confirmation = 'demo'
 x.save
 
-x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04USERA').first
+x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04AARON').first
 x.password = 'a'
 x.password_confirmation = 'a'
 x.save
@@ -148,11 +132,6 @@ x.save
 x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820C9D04ATTTT').first
 x.password = 't'
 x.password_confirmation = 't'
-x.save
-
-x = Buildit::User.where(:user_id => '811166D4D50A11E2B45820CDEMOAARON').first
-x.password = 'a'
-x.password_confirmation = 'a'
 x.save
 
 x = Buildit::User.where(:user_id => 'FB0ACB1AFAC111E2B25720SYSBUILDIT').first
@@ -246,5 +225,16 @@ Buildit::Application.create(
 
 # APPLICATION ROLES =====================================================================
 # TO DO: OMNI POWER USER GETS OMNI ERP DESKTOP
+Buildit::ApplicationRole.create(
+  application_id: '6900AE7AC18B11E289BA20COMNIADMIN',
+  role_id:        '323244F0204011EFCFE904SUPERADMIN',
+  is_enabled:     true
+)
+
+Buildit::ApplicationRole.create(
+  application_id: '6900AE7AC18B11E289BA20COMNIADMIN',
+  role_id:        '323244F0204011EFCFE9040CCEDPOWER',
+  is_enabled:     true
+)
 
 # TO DO: SUPER ADMIN ROLE GETS ALL 3 APPLICATIONS

@@ -23,17 +23,9 @@ Ext.define('Omni.view.projection_details.Explorer', {
   },
   // EXPLORER INIT (End)
 
-
-
   // LABELS (Start) ======================================================================
-  projection_detail_idLabel               : Omni.i18n.model.ProjectionDetail.projection_detail_id,
   displayLabel                            : Omni.i18n.model.ProjectionDetail.display,
   stateLabel                              : Omni.i18n.model.ProjectionDetail.state,
-  projection_idLabel                      : Omni.i18n.model.ProjectionDetail.projection_id,
-  projection_location_idLabel             : Omni.i18n.model.ProjectionDetail.projection_location_id,
-  projection_line_nbrLabel                : Omni.i18n.model.ProjectionDetail.projection_line_nbr,
-  forecast_profile_idLabel                : Omni.i18n.model.ProjectionDetail.forecast_profile_id,
-  inventory_idLabel                       : Omni.i18n.model.ProjectionDetail.inventory_id,
   sku_idLabel                             : Omni.i18n.model.ProjectionDetail.sku_id,
   location_idLabel                        : Omni.i18n.model.ProjectionDetail.location_id,
   first_forecast_unitsLabel               : Omni.i18n.model.ProjectionDetail.first_forecast_units,
@@ -47,14 +39,6 @@ Ext.define('Omni.view.projection_details.Explorer', {
   sale_units_py1Label                     : Omni.i18n.model.ProjectionDetail.sale_units_py1,
   sale_units_py2Label                     : Omni.i18n.model.ProjectionDetail.sale_units_py2,
   sale_units_py3Label                     : Omni.i18n.model.ProjectionDetail.sale_units_py3,
-  number_of_schoolsLabel                  : Omni.i18n.model.ProjectionDetail.number_of_schools,
-  average_salesLabel                      : Omni.i18n.model.ProjectionDetail.average_sales,
-  standard_deviationLabel                 : Omni.i18n.model.ProjectionDetail.standard_deviation,
-  is_destroyedLabel                       : Omni.i18n.model.ProjectionDetail.is_destroyed,
-  audit_created_byLabel                   : Omni.i18n.model.ProjectionDetail.audit_created_by,
-  audit_updated_byLabel                   : Omni.i18n.model.ProjectionDetail.audit_updated_by,
-  audit_created_atLabel                   : Omni.i18n.model.ProjectionDetail.audit_created_at,
-  audit_updated_atLabel                   : Omni.i18n.model.ProjectionDetail.audit_updated_at,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -77,33 +61,13 @@ Ext.define('Omni.view.projection_details.Explorer', {
           hidden       : true
         },
         {
-          header       : this.forecast_profile_idLabel,
-          dataIndex    : 'forecast_profile_display',
-          flex         : 1
-        },
-        {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
           flex         : 1,
-          editor       : {
-            xtype        : 'buildit-Locator',
-            store        : Ext.create('Omni.store.Sku',{pageSize: 10}),
-            displayField : 'display',
-            queryField   : 'display',
-            valueField   : 'sku_id',
-            itemTpl      : '{display}',
-            name         : 'sku_id',
-            allowBlank   : true
-          }
         },
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
-          flex         : 1
-        },
-        {
-          header       : this.first_forecast_unitsLabel,
-          dataIndex    : 'first_forecast_units',
           flex         : 1
         },
         {
@@ -112,36 +76,45 @@ Ext.define('Omni.view.projection_details.Explorer', {
           flex         : 1
         },
         {
-          header       : this.last_forecast_dateLabel,
-          dataIndex    : 'last_forecast_date',
-          flex         : 1,
-          editor       : {
-            xtype        : 'datefield'
-          }
-        },
-        {
           header       : this.projection_1_unitsLabel,
           dataIndex    : 'projection_1_units',
           flex         : 1,
-          bulkEditable : true
+          editor:    {
+            xtype: 'numberfield',
+            // disabled: this.record.get('state') !== 'projection_1'
+          },
+          listeners: {
+            beforerender: this.prepareProjection1Units,
+            // click: this.onForecastAction,
+            scope: me
+        }
         },
         {
           header       : this.projection_2_unitsLabel,
           dataIndex    : 'projection_2_units',
           flex         : 1,
-          bulkEditable : true
+          editor:    {
+            xtype: 'numberfield',
+            disabled: this.record.get('state') !== 'projection_2'
+          }
         },
         {
           header       : this.projection_3_unitsLabel,
           dataIndex    : 'projection_3_units',
           flex         : 1,
-          bulkEditable : true
+          editor:    {
+            xtype: 'numberfield',
+            disabled: this.record.get('state') !== 'projection_3'
+          }
         },
         {
           header       : this.projection_4_unitsLabel,
           dataIndex    : 'projection_4_units',
           flex         : 1,
-          bulkEditable : true
+          editor:    {
+            xtype: 'numberfield',
+            disabled: this.record.get('state') !== 'projection_4'
+          }
         },
         {
           header       : this.sale_units_ytdLabel,
@@ -158,22 +131,22 @@ Ext.define('Omni.view.projection_details.Explorer', {
           dataIndex    : 'sale_units_py2',
           flex         : 1
         },
-        {
-          header       : this.sale_units_py3Label,
-          dataIndex    : 'sale_units_py3',
-          flex         : 1
-        },
-        {
-          header       : this.average_salesLabel,
-          dataIndex    : 'average_sales',
-          flex         : 1
-        }
       ]
     });
     // COLUMNS (End)
 
 
     this.callParent();
-  }
+  },
+
+  /**
+   *
+   */
+  prepareProjection1Units: function(action, eOpts) {
+    var currentState = this.record.get('state');
+
+    this.record.get('state') === 'projection_1' ? action.show() : action.hide();
+
+  }, // prepareAction
 
 });

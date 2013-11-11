@@ -24,9 +24,9 @@ class Omni::Sku < ActiveRecord::Base
   validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
   validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
   validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true
+  validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
   validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true
   validates    :sell_unit_uom_code,              :lookup      => 'SELL_UNIT_UOM_CODE',         :allow_nil => true
-  validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
   validates    :order_uom_code,                  :lookup      => 'ORDER_UOM_CODE',             :allow_nil => true
   validates    :order_package_type,              :lookup      => 'ORDER_PACKAGE_TYPE',         :allow_nil => true
   # VALIDATIONS (End)

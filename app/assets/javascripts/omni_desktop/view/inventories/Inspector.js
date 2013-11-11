@@ -1,48 +1,46 @@
-Ext.define('Omni.view.inventories.Inspector', {
+Ext.define('Omni.view.inventories.Inspector',{
+  extend   : 'Buildit.ux.inspector.Panel',
+  alias    : 'widget.omni-inventories-Inspector',
 
-  extend:'Buildit.ux.inspector.Panel',
-  alias:'widget.omni-inventories-Inspector',
 
-  
-
-  initComponent:function () {
-
+  initComponent:function(){
     var me = this;
-
-        
-    // LABELS (Start) ======================================================================  
-    // LABELS (End)
-
+  
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
-      associativeFilter: {
-        property: 'inventory_id',
-        value:    me.record.get('inventory_id')
+      associativeFilter : {
+        property  : 'inventory_id',
+        value     : this.record.get('inventory_id')
+      },
+
+      associativeSearch : {
+        with: {
+          inventory_id : {
+            equal_to : this.record.get('inventory_id')
+          }
+        }
       }
     });
     // INSPECTOR INIT (End)
-
+  
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
-      cards: [
+      cards     : [
         {
-          title: 'Profile',
-          xtype: 'omni-inventories-Form'
+          title     : 'Profile',
+          xtype     : 'omni-inventories-Form'
         }
       ]
     });
     // CARDS (End)
-    
+
     // TITLES (Start) ======================================================================
-    Ext.apply(this, {
-      title:     'Inventory',
-      subtitle:  this.record.get('sku_display')
+    Ext.applyIf(this, {
+      title     : 'Inventory',
+      subtitle  : this.record.get('inventory_id')
     });
     // TITLES (End)
 
-
-
     this.callParent();
   }
-
 });

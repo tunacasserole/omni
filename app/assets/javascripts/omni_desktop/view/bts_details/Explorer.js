@@ -109,11 +109,11 @@ Ext.define('Omni.view.bts_details.Explorer', {
           dataIndex    : 'need',
           flex         : 1
         },
-        {
-          header       : this.style_idLabel,
-          dataIndex    : 'style_display',
-          flex         : 1
-        },        // {
+        // {
+        //   header       : this.style_idLabel,
+        //   dataIndex    : 'style_display',
+        //   flex         : 1
+        // },        // {
         {
           header       : this.on_handLabel,
           dataIndex    : 'on_hand',

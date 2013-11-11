@@ -30,27 +30,19 @@ Ext.define('Omni.view.app.Hub', {
           rows: 4,
           tiles: [{
             title: 'Projections',
-            colspan: 4,
+            colspan: 2,
             rowspan: 1,
             cls: 'bts_source',
             target: {
               xtype: 'omni-projections-Explorer'
             }
           }, {
-            title: 'Locations',
+            title: 'BTS',
             colspan: 2,
             rowspan: 1,
             cls: 'bts_source',
             target: {
-              xtype: 'omni-locations-Explorer'
-            }
-          }, {
-            title: 'Skus',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'bts_source',
-            target: {
-              xtype: 'omni-skus-Explorer'
+              xtype: 'omni-bts-Explorer'
             }
           }, {
             title: 'Inventory',
@@ -59,7 +51,15 @@ Ext.define('Omni.view.app.Hub', {
             cls: 'bts_source',
             target: {
               xtype: 'omni-inventories-Explorer'
-            },
+            }
+          }, {
+            title: 'Purchasing',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'bts_source',
+            target: {
+              xtype: 'omni-purchases-Explorer'
+            }
           }, {
             title: 'Daily Results',
             colspan: 2,
@@ -76,33 +76,16 @@ Ext.define('Omni.view.app.Hub', {
             target: {
               xtype: 'omni-period_results-Explorer'
             }
-           }, {
-              title: 'BTS Results',
-              colspan: 2,
-              rowspan: 1,
-              cls: 'bts_source',
-              target: {
-                xtype: 'omni-bts_details-Explorer'
-              }
-          }
-          ]
+          }]
         }
 
-        // Section: Supply //
+        // Section: Receiving //
 
         , {
-          title: 'Supply',
+          title: 'Receiving',
           columns: 2,
           rows: 4,
           tiles: [{
-            title: 'Purchases',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'costs',
-            target: {
-              xtype: 'omni-purchases-Explorer'
-            }
-          }, {
             title: 'Receipts',
             colspan: 2,
             rowspan: 1,
@@ -111,6 +94,14 @@ Ext.define('Omni.view.app.Hub', {
               xtype: 'omni-receipts-Explorer'
             }
           }, {
+            title: 'Allocations',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'costs',
+            target: {
+              xtype: 'omni-allocations-Explorer'
+            }
+          },   {
             title: 'Suppliers',
             colspan: 2,
             rowspan: 1,
@@ -397,39 +388,40 @@ Ext.define('Omni.view.app.Hub', {
 
         // Section: web hierarchy //
 
-        , {
-          title: 'web hierarchy',
-          columns: 2,
-          rows: 3,
-          tiles: [{
-            title: 'Category',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'product_setup',
-            target: {
-              xtype: 'omni-categories-Explorer',
-              title: ''
-            }
-          }, {
-            title: 'Product',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'product_setup',
-            target: {
-              xtype: 'omni-products-Explorer',
-              title: ''
-            }
-          }, {
-            title: 'Product Types',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'product_setup',
-            target: {
-              xtype: 'omni-product_types-Explorer',
-              title: ''
-            }
-          }, ]
-        }
+        // ,
+        // {
+        //   title: 'web hierarchy',
+        //   columns: 2,
+        //   rows: 3,
+        //   tiles: [{
+        //     title: 'Category',
+        //     colspan: 2,
+        //     rowspan: 1,
+        //     cls: 'product_setup',
+        //     target: {
+        //       xtype: 'omni-categories-Explorer',
+        //       title: ''
+        //     }
+        //   }, {
+        //     title: 'Product',
+        //     colspan: 2,
+        //     rowspan: 1,
+        //     cls: 'product_setup',
+        //     target: {
+        //       xtype: 'omni-products-Explorer',
+        //       title: ''
+        //     }
+        //   }, {
+        //     title: 'Product Types',
+        //     colspan: 2,
+        //     rowspan: 1,
+        //     cls: 'product_setup',
+        //     target: {
+        //       xtype: 'omni-product_types-Explorer',
+        //       title: ''
+        //     }
+        //   }, ]
+        // }
 
         // Section: Legacy Data //
         // ,{

@@ -64,6 +64,7 @@ class Omni::Inventory < ActiveRecord::Base
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
   belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
+  belongs_to   :department,                      :class_name => 'Omni::Department',              :foreign_key => 'department_id'
   belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',         :foreign_key => 'forecast_profile_id'
   belongs_to   :seasonal_index,                  :class_name => 'Omni::SeasonalIndex',           :foreign_key => 'seasonal_index_id'
@@ -73,10 +74,14 @@ class Omni::Inventory < ActiveRecord::Base
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :sku_display,                              :to => 'sku.display'
-    map :source,                                      :to => 'sku.source'
-    map :source_id,                                 :to => 'sku.source_id'
+    map :sku_display,                            :to => 'sku.display'
     map :location_display,                       :to => 'location.display'
+    map :department_display,                     :to => 'department.display'
+    map :supplier_display,                       :to => 'supplier.display'
+    map :forecast_profile_display,               :to => 'forecast_profile.display'
+    map :seasonal_index_display,                 :to => 'seasonal_index.display'
+    map :source,                                 :to => 'sku.source'
+    map :source_id,                              :to => 'sku.source_id'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -86,11 +91,8 @@ class Omni::Inventory < ActiveRecord::Base
   # TEMPORARY ATTRIBUTES (Start) ========================================================
   # TEMPORARY ATTRIBUTES (End)
 
-
   # SCOPES (Start) ======================================================================
-
   # SCOPES (End)
-
 
   # HOOKS (Start) =======================================================================
   def self.source_hash
@@ -108,23 +110,31 @@ class Omni::Inventory < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :location_display do location.display if location end
+    string   :sku_id
     string   :sku_display do sku.display if sku end
     string   :location_id
-    string   :sku_id
-    string   :display
-    string   :source
+    string   :location_display do location.display if location end
+    string   :department_id
+    string   :department_display do department.display if department end
+    string   :supplier_id
+    string   :supplier_display do supplier.display if supplier end
+    string   :forecast_profile_id
+    string   :forecast_profile_display do forecast_profile.display if forecast_profile end
+    string   :seasonal_forecast_id
+    string   :seasonal_forecast_display do seasonal_forecast.display if seasonal_forecast end
     string   :source_id
-    string   :on_hand_units
-    string   :supplier_on_order_units
-    string   :allocated_units
-    string   :in_transit_units
+    string   :source
+    string   :display
 
-    text     :location_display_fulltext, :using => :location_display
     text     :sku_display_fulltext, :using => :sku_display
-    text     :display_fulltext, :using => :display
+    text     :location_display_fulltext, :using => :location_display
+    text     :department_display_fulltext, :using => :department_display
+    text     :supplier_display_fulltext, :using => :supplier_display
+    text     :forecast_profile_display_fulltext, :using => :forecast_profile_display
+    text     :seasonal_forecast_display_fulltext, :using => :seasonal_forecast_display
     text     :source_fulltext, :using => :source
     text     :source_id_fulltext, :using => :source_id
+    text     :display_fulltext, :using => :display
   end
   # INDEXING (End)
 

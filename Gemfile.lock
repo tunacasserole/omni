@@ -51,6 +51,23 @@ GEM
       sunspot_rails
       uuidtools
       will_paginate (~> 3.0)
+    buildit (0.9.7-java)
+      activeresource
+      buildit_her
+      bunny (>= 0.9.0.rc1)
+      colored
+      extjs4-rails (~> 4.2)
+      jruby-ldap
+      json
+      log4r
+      rack-cors
+      rails (~> 4.0.0)
+      rest-client
+      socket.io-rails
+      state_machine
+      sunspot_rails
+      uuidtools
+      will_paginate (~> 3.0)
     buildit_comm (0.1.13)
       buildit
     buildit_her (0.3.3)
@@ -79,6 +96,7 @@ GEM
       thor (>= 0.18.1)
     hike (1.2.3)
     i18n (0.6.5)
+    jruby-ldap (0.0.2)
     json (1.8.1)
     json (1.8.1-java)
     listen (2.2.0)
