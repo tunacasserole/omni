@@ -73,16 +73,16 @@ Ext.define('Omni.view.skus.Explorer', {
         dataIndex: 'display',
         flex: 3,
         sortable: true
-      }, {
-        header: this.sourceLabel,
-        dataIndex: 'source',
-        flex: 1,
-        sortable: true
-      }, {
-        header: this.source_idLabel,
-        dataIndex: 'source_id',
-        flex: 1,
-        sortable: true
+      // }, {
+      //   header: this.sourceLabel,
+      //   dataIndex: 'source',
+      //   flex: 1,
+      //   sortable: true
+      // }, {
+      //   header: this.source_idLabel,
+      //   dataIndex: 'source_id',
+      //   flex: 1,
+      //   sortable: true
       }, {
         header: this.style_idLabel,
         dataIndex: 'style_display',

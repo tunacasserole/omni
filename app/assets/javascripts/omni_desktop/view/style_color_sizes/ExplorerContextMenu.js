@@ -2,7 +2,7 @@ Ext.define('Omni.view.style_color_sizes.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-style_color_sizes-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -105,15 +105,6 @@ Ext.define('Omni.view.style_color_sizes.ExplorerContextMenu', {
 
         // LEFT ACTIONS (Start) =================================================================
 
-        /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         */
-        {
-          text: 'New',
-          cls: 'icon-new'
-        }
 
         // LEFT ACTIONS (End)
 

@@ -26,31 +26,23 @@ Ext.define('Omni.view.app.Hub', {
 
         {
           title: 'Inventory Planning',
-          columns: 4,
+          columns: 6,
           rows: 4,
           tiles: [{
-            title: 'Projections',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'bts_source',
-            target: {
-              xtype: 'omni-projections-Explorer'
-            }
-          }, {
-            title: 'BTS',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'bts_source',
-            target: {
-              xtype: 'omni-bts-Explorer'
-            }
-          }, {
             title: 'Inventory',
             colspan: 2,
             rowspan: 1,
             cls: 'bts_source',
             target: {
               xtype: 'omni-inventories-Explorer'
+            }
+          }, {
+            title: 'Projections',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'bts_source',
+            target: {
+              xtype: 'omni-projections-Explorer'
             }
           }, {
             title: 'Purchasing',
@@ -61,43 +53,10 @@ Ext.define('Omni.view.app.Hub', {
               xtype: 'omni-purchases-Explorer'
             }
           }, {
-            title: 'Daily Results',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'bts_source',
-            target: {
-              xtype: 'omni-daily_results-Explorer'
-            }
-          }, {
-            title: 'Period Results',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'bts_source',
-            target: {
-              xtype: 'omni-period_results-Explorer'
-            }
-          }]
-        }
-
-        // Section: Receiving //
-
-        , {
-          title: 'Receiving',
-          columns: 2,
-          rows: 4,
-          tiles: [{
-            title: 'Receipts',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'costs',
-            target: {
-              xtype: 'omni-receipts-Explorer'
-            }
-          }, {
             title: 'Allocations',
             colspan: 2,
             rowspan: 1,
-            cls: 'costs',
+            cls: 'bts_source',
             target: {
               xtype: 'omni-allocations-Explorer'
             }
@@ -105,12 +64,45 @@ Ext.define('Omni.view.app.Hub', {
             title: 'Suppliers',
             colspan: 2,
             rowspan: 1,
-            cls: 'costs',
+            cls: 'bts_source',
             target: {
               xtype: 'omni-suppliers-Explorer'
             }
-          }, ]
+          // }, {
+          //   title: 'Daily Results',
+          //   colspan: 2,
+          //   rowspan: 1,
+          //   cls: 'bts_source',
+          //   target: {
+          //     xtype: 'omni-daily_results-Explorer'
+          //   }
+          // }, {
+          //   title: 'Period Results',
+          //   colspan: 2,
+          //   rowspan: 1,
+          //   cls: 'bts_source',
+          //   target: {
+          //     xtype: 'omni-period_results-Explorer'
+          //   }
+          }]
         }
+
+        // // Section: Receiving //
+
+        // , {
+        //   title: 'Receiving',
+        //   columns: 2,
+        //   rows: 4,
+        //   tiles: [{
+        //     title: 'Receipts',
+        //     colspan: 2,
+        //     rowspan: 1,
+        //     cls: 'costs',
+        //     target: {
+        //       xtype: 'omni-receipts-Explorer'
+        //     }
+        //   }, ]
+        // }
 
         // Section: Product Hierarchy //
 

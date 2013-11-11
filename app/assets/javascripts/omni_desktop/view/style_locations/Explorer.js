@@ -3,13 +3,13 @@ Ext.define('Omni.view.style_locations.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-style_locations-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -35,7 +35,7 @@ Ext.define('Omni.view.style_locations.Explorer', {
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
       style_displayLabel:    Omni.i18n.model.StyleLocation.style_display,
-      stateLabel:            Omni.i18n.model.StyleLocation.state,      
+      stateLabel:            Omni.i18n.model.StyleLocation.state,
       location_displayLabel: Omni.i18n.model.StyleLocation.location_display,
       is_authorizedLabel:    Omni.i18n.model.StyleLocation.is_authorized,
       is_taxableLabel:       Omni.i18n.model.StyleLocation.is_taxable,
@@ -47,9 +47,9 @@ Ext.define('Omni.view.style_locations.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.style_displayLabel,    dataIndex: 'style_display',    flex: 1,  sortable: true  },
-        { header: this.stateLabel,            dataIndex: 'state',            flex: 1,  sortable: true  },        
+        // { header: this.style_displayLabel,    dataIndex: 'style_display',    flex: 1,  sortable: true  },
         { header: this.location_displayLabel, dataIndex: 'location_display', flex: 1,  sortable: true  },
+        { header: this.stateLabel,            dataIndex: 'state',            flex: 1,  sortable: true  },
         { header: this.is_authorizedLabel,    dataIndex: 'is_authorized',    flex: 1,  sortable: true  },
         { header: this.is_taxableLabel,       dataIndex: 'is_taxable',       flex: 1,  sortable: true  },
         { header: this.is_special_orderLabel, dataIndex: 'is_special_order', flex: 1,  sortable: true  },

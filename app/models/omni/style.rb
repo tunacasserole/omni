@@ -12,11 +12,12 @@ class Omni::Style < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
   validates    :subclass_id,                     :presence    => true
+  validates    :size_group_id,                   :presence    => true
   validates    :display,                         :uniqueness  => true
   validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
   # validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
   # validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
-  # validates    :product_type,                    :lookup      => 'PRODUCT_TYPE',            :allow_nil => true
+  validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
   validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true
   validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
   validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true
@@ -115,20 +116,13 @@ class Omni::Style < ActiveRecord::Base
 
 
   # HELPERS (Start) =====================================================================
-  def generate_sequence_umber
-    unless self.style_number
-      self.style_number             = "T#{Buildit::Sequence.nextval('STYLE_NBR')}"
-      self.save
-    end
-  end
   # HELPERS (End) =====================================================================
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
 
   ### CALLBACKS ###
-    after_transition :on => :plan,        :do => :after_plan
-    after_transition :on => :activate,    :do => :after_activate
+    after_transition :on => :release,        :do => :after_release
     # after_transition :on => :locations,   :do => :after_locations
     after_transition :on => :build,       :do => :after_build
     after_transition :on => :discontinue, :do => :after_discontinue
@@ -137,17 +131,13 @@ class Omni::Style < ActiveRecord::Base
     after_transition :on => :activate,    :do => :after_activate
 
     ## EVENTS ###
-    event :plan do
-      transition :draft => :planning
+    event :release do
+      transition :draft => :pending_approval
     end
 
     event :approve do
-      transition :planning => :active
+      transition :pending_approval => :active
     end
-
-    # event :locations do
-    #   transition :planning => :planning
-    # end
 
     event :build do
       transition :active => :active
@@ -169,6 +159,20 @@ class Omni::Style < ActiveRecord::Base
       transition :active => :inactive
     end
 
+    state :pending_approval do
+      validates :description,        :presence    => true
+      validates :concatenated_name,  :presence    => true
+      validates :pos_name,           :presence    => true
+      validates :brand,              :presence    => true
+      validates :generic_style_id,   :presence    => true,  if: 'is_converted?'
+      validates :site_id,            :presence    => true,  if: 'is_converted?'
+      validates :add_on_sku_id,      :presence    => true,  if: 'is_converted?'
+      validates :conversion_type,    :presence    => true,  if: 'is_converted?'
+      validates :initial_retail_price, :greater_than => 0
+      validates :planning_retail_price, :greater_than => 0
+      validate :conversion
+    end
+
     state :active do
       validates  :concatenated_name, :presence  => true
       validates  :pos_name, :presence  => true
@@ -179,10 +183,13 @@ class Omni::Style < ActiveRecord::Base
   end
   # STATES (End)
 
+  def conversion
+    errors.add(:generic_style_id, 'Not a valid generic style') if is_converted and !generic_style_id.style.is_converted
+  end
 
   # STATE HANDLERS (Start) ====================================================================
-  def after_plan
-    puts '--- done with after_plan ---'
+  def after_release
+    puts '--- done with after_release ---'
     puts 'ready...'
   end
 
@@ -193,7 +200,7 @@ class Omni::Style < ActiveRecord::Base
     puts 'ready...'
   end
 
-  def gen_locations
+  def locations
   # adds a StyleLocation row for the Style and every Location where is_enabled = True (bypass any Locations that already have a StyleLocation
     puts '--- starting building locations ---'
     Omni::Location.all.each do |l|
@@ -322,6 +329,7 @@ class Omni::Style < ActiveRecord::Base
         x = Omni::Inventory.new
         x.sku_id = sku.sku_id
         x.location_id = sl.location_id
+        x.supplier_id = self.supplier_id
         x.is_authorized = sl.is_authorized
         x.is_taxable = sl.is_taxable
         x.is_special_order = sl.is_special_order
@@ -331,10 +339,10 @@ class Omni::Style < ActiveRecord::Base
         x.supplier_id = sl.supplier_id
         x.safety_stock_units = sl.safety_stock_units
         x.safety_stock_days = sl.safety_stock_days
-        x.is_override_demand_exception = sl.is_override_demand_exception
+        # x.is_override_demand_exception = sl.is_override_demand_exception
         x.smoothing_factor = sl.smoothing_factor
         x.forecast_profile_id = sl.forecast_profile_id
-        x.is_soq_override = sl.is_soq_override
+        # x.is_soq_override = sl.is_soq_override
         x.minimum_units = sl.minimum_units
         x.maximum_units = sl.maximum_units
         x.seasonal_index_id = sl.seasonal_index_id
@@ -383,7 +391,7 @@ class Omni::Style < ActiveRecord::Base
 
 
   # FILTERS (Start) =====================================================================
-  filter :state_planning,          :with => {state: {equal_to: 'planning'}},     :priority => 40
+  filter :state_pending_approval,  :with => {state: {equal_to: 'pending_approval'}},     :priority => 40
   filter :state_draft,             :with => {state: {equal_to: 'draft'}},        :priority => 50
   filter :state_active,            :with => {state: {equal_to: 'active'}},       :priority => 60
   filter :state_discontinued,      :with => {state: {equal_to: 'discontinued'}}, :priority => 70
@@ -413,13 +421,12 @@ class Omni::Style < ActiveRecord::Base
     string   :initial_retail_price
     string   :style_id
     # string   :supplier_display do supplier.display if supplier end
-    string  :conversion_type
+    string   :conversion_type
     string   :state
 
     text     :display_fulltext,  :using => :display
-    # text     :display_fulltext do self.display.gsub(/(\W)/, ' ') end
-    text     :style_nbr_fulltext, :using => :style_nbr
     text     :subclass_display_fulltext, :using => :subclass_display
+    # text     :display_fulltext do self.display.gsub(/(\W)/, ' ') end
     # text     :product_display_fulltext, :using => :product_display
     # text     :initial_retail_price_fulltext, :using => :initial_retail_price
     # text     :supplier_display_fulltext, :using => :supplier_display

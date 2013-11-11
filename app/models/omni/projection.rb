@@ -201,9 +201,8 @@
   end
 
   def do_release
-    # Insert a ProjectionLocation row for every distinct location in the Projection Detail where last_forecast_date is not null
-    self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) if detail.last_forecast_date} #unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
-    Omni::ProjectionLocation.reindex
+    # Insert a ProjectionLocation row for every distinct location in the Projection Detail
+    self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
   end
 
   def cascading_destroy

@@ -43,7 +43,9 @@ Ext.define('Omni.view.projections.Form', {
           anchor: '70%'
         },
         layout: 'anchor',
-        items: [{
+        items: [
+          // { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
+          {
             xtype: 'textfield',
             name: 'state',
             fieldLabel: this.stateLabel,
@@ -62,13 +64,13 @@ Ext.define('Omni.view.projections.Form', {
             queryField: 'display',
             valueField: 'department_id',
             itemTpl: '{display}'
-          },
-          // { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
-          {
-            xtype: 'textfield',
-            name: 'description',
-            fieldLabel: this.descriptionLabel,
-            allowBlank: true
+          }, {
+            xtype: 'buildit-Lookup',
+            name: 'plan_year',
+            fieldLabel: this.plan_yearLabel,
+            allowBlank: true,
+            disabled: (this.record.phantom != true && this.record.get('state') != 'draft'),
+            category: 'PLAN_YEAR'
           }, {
             name: 'forecast_profile_id',
             fieldLabel: this.forecast_profile_idLabel,
@@ -82,6 +84,11 @@ Ext.define('Omni.view.projections.Form', {
             queryField: 'display',
             valueField: 'forecast_profile_id',
             itemTpl: '{display}'
+          }, {
+            xtype: 'textfield',
+            name: 'description',
+            fieldLabel: this.descriptionLabel,
+            allowBlank: true
           }, {
             name: 'projection_approver_user_display',
             fieldLabel: this.projection_approver_idLabel,
@@ -123,13 +130,6 @@ Ext.define('Omni.view.projections.Form', {
             fieldLabel: this.approval_4_dateLabel,
             allowBlank: true,
             disabled: true
-          }, {
-            xtype: 'buildit-Lookup',
-            name: 'plan_year',
-            fieldLabel: this.plan_yearLabel,
-            allowBlank: true,
-            disabled: (this.record.phantom != true && this.record.get('state') != 'draft'),
-            category: 'PLAN_YEAR'
           },
 
         ]

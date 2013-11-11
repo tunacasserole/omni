@@ -12,22 +12,23 @@ class Omni::SkuPrice < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  validates    :sales_category,                  :lookup      => 'SALES_CATEGORY',             :allow_nil => true  
+  validates    :sales_category,                  :lookup      => 'SALES_CATEGORY',             :allow_nil => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :sku_price_id,                     :override  =>  false,        :with  => :guid              
+  default      :sku_price_id,                     :override  =>  false,        :with  => :guid
+  default      :sales_category,                   :override  =>  false,        :to  => 'REGULAR'
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.price_book_display} - #{m.effective_date}"}
-  default      :retail_price,                     :override  =>  false,        :to    => 0                  
-  default      :price_units,                      :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :retail_price,                     :override  =>  false,        :to    => 0
+  default      :price_units,                      :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -45,8 +46,6 @@ class Omni::SkuPrice < ActiveRecord::Base
   belongs_to   :price_book,                      :class_name => 'Omni::PriceBook',               :foreign_key => 'price_book_id'
   belongs_to   :price_change,                    :class_name => 'Omni::PriceChange',             :foreign_key => 'price_change_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
@@ -81,18 +80,18 @@ class Omni::SkuPrice < ActiveRecord::Base
     string   :sales_category do |x| Buildit::Lookup::Manager.display_for('SALES_CATEGORY', x.sales_category) end
     string   :price_change_display do price_change.display if price_change end
     string   :display
-    
+
     text     :retail_price_fulltext, :using => :retail_price
     text     :price_units_fulltext, :using => :price_units
     text     :sales_category_fulltext, :using => :sales_category
     text     :price_change_display_fulltext, :using => :price_change_display
-  end 
+  end
   # INDEXING (End)
 
   # CUSTOM HELPERS (Start) =======================================================================
   def get_price
     return Omni::SkuPrice.all.first
-  end    
+  end
   # CUSTOM HELPERS (End)
 
 end # class Omni::SkuPrice

@@ -45,10 +45,11 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
+  has_many     :notes,                            :as          => :notable
   belongs_to   :projection,                      :class_name => 'Omni::Projection',              :foreign_key => 'projection_id'
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
   belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
-  # belongs_to   :inventory,                        :class_name => 'Omni::Inventory',                :foreign_key => 'inventory_id' # JASON need two part key here
+  belongs_to   :inventory,                       :class_name => 'Omni::Inventory',               :foreign_key => 'inventory_id' # JASON need two part key here
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',         :foreign_key => 'forecast_profile_id'
   belongs_to   :projection_location,             :class_name => 'Omni::ProjectionLocation',      :foreign_key => 'projection_location_id'
   # ASSOCIATIONS (End)

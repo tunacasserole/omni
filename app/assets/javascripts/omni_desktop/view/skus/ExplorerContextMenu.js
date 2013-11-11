@@ -2,7 +2,7 @@ Ext.define('Omni.view.skus.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-skus-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -11,19 +11,6 @@ Ext.define('Omni.view.skus.ExplorerContextMenu', {
       leftActions: [
 
         // LEFT ACTIONS (Start) =================================================================
-
-        /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         */
-        {
-          text: 'New',
-          cls: 'icon-new'
-        }
-
-        // SEPARATOR
-        ,'-'
 
         /**
          * ACTIVATE
@@ -171,11 +158,11 @@ Ext.define('Omni.view.skus.ExplorerContextMenu', {
   // CUSTOM ACTION HANDLERS (Start) ====================================================================
 
   clickActivate: function(btn, e, eOpts){
-    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'activate');
+    Omni.logic.skus.ExplorerProcessSelectedItems.click(btn, 'activate');
   },
-  
+
   clickDeactivate: function(btn, e, eOpts){
-    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'deactivate');
+    Omni.logic.skus.ExplorerProcessSelectedItems.click(btn, 'deactivate');
   },
 
   // CUSTOM ACTION HANDLERS (End)

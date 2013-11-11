@@ -3,13 +3,13 @@ Ext.define('Omni.view.sku_prices.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-sku_prices-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -38,7 +38,7 @@ Ext.define('Omni.view.sku_prices.Explorer', {
       retail_priceLabel: Omni.i18n.model.SkuPrice.retail_price,
       price_unitsLabel: Omni.i18n.model.SkuPrice.price_units,
       sales_categoryLabel: Omni.i18n.model.SkuPrice.sales_category,
-      price_change_displayLabel: Omni.i18n.model.SkuPrice.price_change_display
+      price_book_displayLabel: Omni.i18n.model.SkuPrice.price_book_display
     });
     // LABELS (End)
 
@@ -49,7 +49,7 @@ Ext.define('Omni.view.sku_prices.Explorer', {
         { header: this.retail_priceLabel, dataIndex: 'retail_price',  flex: 1,  sortable: true  },
         { header: this.price_unitsLabel, dataIndex: 'price_units',  flex: 1,  sortable: true  },
         { header: this.sales_categoryLabel, dataIndex: 'sales_category',  flex: 1,  sortable: true , renderer: Buildit.util.Format.lookupRenderer('SALES_CATEGORY') },
-        { header: this.price_change_displayLabel, dataIndex: 'price_change_display',  flex: 1,  sortable: true  }
+        { header: this.price_book_displayLabel, dataIndex: 'price_book_display',  flex: 1,  sortable: true  }
       ]
     });
     // COLUMNS (End)

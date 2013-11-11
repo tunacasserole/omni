@@ -12,33 +12,33 @@ class Omni::StyleLocation < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :uniqueness  => true
-  validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true  
-  validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true  
-  validates    :location_id, uniqueness: { scope: :style_id, message: "Location already exists for this style." }  
+  validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true
+  validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
+  validates    :location_id, uniqueness: { scope: :style_id, message: "Location already exists for this style." }
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :style_location_id,                :override  =>  false,        :with  => :guid              
+  default      :style_location_id,                :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.style_display} - #{m.location_display}"}
-  default      :is_authorized,                    :override  =>  false,        :to    => false              
-  default      :is_taxable,                       :override  =>  false,        :to    => false              
-  default      :is_special_order,                 :override  =>  false,        :to    => false              
-  default      :is_discontinued,                  :override  =>  false,        :to    => false              
-  default      :safety_stock_units,               :override  =>  false,        :to    => 0                  
-  default      :safety_stock_days,                :override  =>  false,        :to    => 0                  
-  default      :is_override_demand_exception,     :override  =>  false,        :to    => false              
-  default      :smoothing_factor,                 :override  =>  false,        :to    => 0                  
-  default      :is_soq_override,                  :override  =>  false,        :to    => false              
-  default      :minimum_units,                    :override  =>  false,        :to    => 0                  
-  default      :maximum_units,                    :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :smoothing_factor,                 :override  =>  false,        :to    => 0
+  default      :safety_stock_units,               :override  =>  false,        :to    => 0
+  default      :safety_stock_days,                :override  =>  false,        :to    => 0
+  default      :minimum_units,                    :override  =>  false,        :to    => 0
+  default      :maximum_units,                    :override  =>  false,        :to    => 0
+  default      :is_authorized,                    :override  =>  false,        :to    => true
+  default      :is_taxable,                       :override  =>  false,        :to    => true
+  default      :is_special_order,                 :override  =>  false,        :to    => false
+  default      :is_discontinued,                  :override  =>  false,        :to    => false
+  default      :is_override_demand_exception,     :override  =>  false,        :to    => false
+  default      :is_soq_override,                  :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -93,7 +93,7 @@ class Omni::StyleLocation < ActiveRecord::Base
     after_transition :on => :activate,    :do => :after_activate
     after_transition :on => :deactivate,  :do => :after_deactivate
     after_transition :on => :discontinue, :do => :after_discontinue
-    after_transition :on => :drop,        :do => :after_drop    
+    after_transition :on => :drop,        :do => :after_drop
 
   ### EVENTS ###
     event :activate do
@@ -111,7 +111,7 @@ class Omni::StyleLocation < ActiveRecord::Base
     event :drop do
       transition :discontinued => :obsolete
     end
-                       
+
 
   end
   # STATES (End)
@@ -138,7 +138,7 @@ class Omni::StyleLocation < ActiveRecord::Base
   end
 
   # STATE HANDLERS (End)
-  
+
 
 
   # INDEXING (Start) ====================================================================
@@ -148,17 +148,17 @@ class Omni::StyleLocation < ActiveRecord::Base
     string   :location_display do location.display if location end
     string   :location_id
     string   :style_id
-    string   :state    
+    string   :state
     boolean  :is_authorized
     boolean  :is_taxable
     boolean  :is_special_order
     boolean  :is_discontinued
     string   :display
- 
+
     text     :style_display_fulltext, :using => :style_display
     text     :location_display_fulltext, :using => :location_display
     text     :state_fulltext, :using => :state
-  end 
+  end
   # INDEXING (End)
 
   # HELPERS (Start) =====================================================================

@@ -33,12 +33,12 @@ Ext.define('Omni.view.styles.Explorer', {
         {
           showAll   : 'All States',
           items     : [
-              ['state_draft',     "Draft"],
-              ['state_planning',   "Planning"],
-              ['state_active',     "Active"],
-              ['state_discontinued', "Discontinued"],
-              ['state_obsolete',   "Obsolete"],
-              ['state_inactive',     "Inactive"]
+              ['state_draft',            "Draft"],
+              ['state_pending_approval', "Pending Approval"],
+              ['state_active',           "Active"],
+              ['state_discontinued',      "Discontinued"],
+              ['state_obsolete',          "Obsolete"],
+              ['state_inactive',          "Inactive"]
             ]
         }
       ],

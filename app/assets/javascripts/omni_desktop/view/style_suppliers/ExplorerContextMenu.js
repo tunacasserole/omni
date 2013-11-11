@@ -2,7 +2,7 @@ Ext.define('Omni.view.style_suppliers.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-style_suppliers-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -33,8 +33,8 @@ Ext.define('Omni.view.style_suppliers.ExplorerContextMenu', {
         },
 
         /**
-         * DELETE
-         * Supports the deletion of the selected items in the explorer grid. If none
+         * EXPORT
+         * Supports the export of the selected items in the explorer grid. If none
          * are selected then no records are deleted.
          */
         {
@@ -57,8 +57,8 @@ Ext.define('Omni.view.style_suppliers.ExplorerContextMenu', {
 
 
         /**
-         * DELETE
-         * Supports the deletion of the selected items in the explorer grid. If none
+         * SELECT ALL
+         * Supports the selection of all items in the explorer grid. If none
          * are selected then no records are deleted.
          */
         {
@@ -78,8 +78,8 @@ Ext.define('Omni.view.style_suppliers.ExplorerContextMenu', {
 
 
         /**
-         * EXPORT
-         * Supports the deletion of the selected items in the explorer grid. If none
+         * DESELECT ALL
+         * Supports the deselection of all items in the explorer grid. If none
          * are selected then no records are deleted.
          */
         {
@@ -106,14 +106,45 @@ Ext.define('Omni.view.style_suppliers.ExplorerContextMenu', {
         // LEFT ACTIONS (Start) =================================================================
 
         /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * Activate
+         * Supports the activation of the selected items in the explorer grid. If none
+         * are selected then no records are activated.
          */
         {
-          text: 'New',
-          cls: 'icon-new'
+          text:'Activate',
+          cls: 'icon-settings',
+          action: 'activate',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickActivate,
+              scope: me
+            }
+          }
+        },
+
+        /**
+         * Deactivate
+         * Supports the deactivation of the selected items in the explorer grid. If none
+         * are selected then no records are deactivated.
+         */
+        {
+          text:'Deactivate',
+          cls: 'icon-settings',
+          action: 'deactivate',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickDeactivate,
+              scope: me
+            }
+          }
         }
+
 
         // LEFT ACTIONS (End)
 
@@ -127,6 +158,13 @@ Ext.define('Omni.view.style_suppliers.ExplorerContextMenu', {
 
 
   // ACTION HANDLERS (Start) ====================================================================
+
+  clickActivate: function(btn, e, eOpts){
+    Omni.logic.style_suppliers.ExplorerProcessSelectedItems.click(btn, 'activate');
+  },
+  clickDeactivate: function(btn, e, eOpts){
+    Omni.logic.style_suppliers.ExplorerProcessSelectedItems.click(btn, 'deactivate');
+  },
 
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);

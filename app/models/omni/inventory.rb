@@ -68,7 +68,7 @@ class Omni::Inventory < ActiveRecord::Base
   belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',         :foreign_key => 'forecast_profile_id'
   belongs_to   :seasonal_index,                  :class_name => 'Omni::SeasonalIndex',           :foreign_key => 'seasonal_index_id'
-  has_many     :bts_details,                     :class_name => 'Omni::BtsDetail',               :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"bts_details.location_id = '#{send(:location_id)}'"}
+  # has_many     :bts_details,                     :class_name => 'Omni::BtsDetail',               :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"bts_details.location_id = '#{send(:location_id)}'"}
   has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',        :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"projection_details.location_id = '#{send(:location_id)}'"}
   # ASSOCIATIONS (End)
 
@@ -120,8 +120,6 @@ class Omni::Inventory < ActiveRecord::Base
     string   :supplier_display do supplier.display if supplier end
     string   :forecast_profile_id
     string   :forecast_profile_display do forecast_profile.display if forecast_profile end
-    string   :seasonal_forecast_id
-    string   :seasonal_forecast_display do seasonal_forecast.display if seasonal_forecast end
     string   :source_id
     string   :source
     string   :display
@@ -131,7 +129,6 @@ class Omni::Inventory < ActiveRecord::Base
     text     :department_display_fulltext, :using => :department_display
     text     :supplier_display_fulltext, :using => :supplier_display
     text     :forecast_profile_display_fulltext, :using => :forecast_profile_display
-    text     :seasonal_forecast_display_fulltext, :using => :seasonal_forecast_display
     text     :source_fulltext, :using => :source
     text     :source_id_fulltext, :using => :source_id
     text     :display_fulltext, :using => :display

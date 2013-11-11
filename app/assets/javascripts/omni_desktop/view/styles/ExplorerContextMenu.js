@@ -55,16 +55,6 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
         // SEPARATOR
         ,'-'
 
-        /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are approved.
-         */
-        ,{
-          text: 'New',
-          cls: 'icon-new'
-        }
-
         // SEPARATOR
         ,'-'
 
@@ -160,38 +150,38 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
          * BUILD LOCATIONS
          * Supports the building of style locations for the selected style
          */
-        ,{
-          text:'Build Locations',
-          cls: 'icon-settings',
-          action: 'gen_locations',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickLocations,
-              scope: me
-            }
-          }
-        }
-        /**
-         * BUILD SKUS
-         * Supports the building of skus for the selected style
-         */
-        ,{
-          text:'Build Skus',
-          cls: 'icon-settings',
-          action: 'build',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickBuild,
-              scope: me
-            }
-          }
-        }
+        // ,{
+        //   text:'Build Locations',
+        //   cls: 'icon-settings',
+        //   action: 'gen_locations',
+        //   confirm: true,
+        //   multi: true,
+        //   privileges: [],
+        //   listeners: {
+        //     click: {
+        //       fn: this.clickLocations,
+        //       scope: me
+        //     }
+        //   }
+        // }
+        // *
+        //  * BUILD SKUS
+        //  * Supports the building of skus for the selected style
+
+        // ,{
+        //   text:'Build Skus',
+        //   cls: 'icon-settings',
+        //   action: 'build',
+        //   confirm: true,
+        //   multi: true,
+        //   privileges: [],
+        //   listeners: {
+        //     click: {
+        //       fn: this.clickBuild,
+        //       scope: me
+        //     }
+        //   }
+        // }
 
 
         // LEFT ACTIONS (End)
@@ -207,21 +197,21 @@ Ext.define('Omni.view.styles.ExplorerContextMenu', {
 
   // CUSTOM ACTION HANDLERS (Start) ====================================================================
 
-  clickPlan: function(btn, e, eOpts){
-    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'plan');
-  },
+  // clickPlan: function(btn, e, eOpts){
+  //   Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'plan');
+  // },
 
-  clickActivate: function(btn, e, eOpts){
-    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'activate');
-  },
+  // clickActivate: function(btn, e, eOpts){
+  //   Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'activate');
+  // },
 
-  clickLocations: function(btn, e, eOpts){
-    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'gen_locations');
-  },
+  // clickLocations: function(btn, e, eOpts){
+  //   Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'gen_locations');
+  // },
 
-  clickBuild: function(btn, e, eOpts){
-    Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'build');
-  },
+  // clickBuild: function(btn, e, eOpts){
+  //   Omni.logic.styles.ExplorerProcessSelectedItems.click(btn, 'build');
+  // },
 
   // CUSTOM ACTION HANDLERS (End)
 

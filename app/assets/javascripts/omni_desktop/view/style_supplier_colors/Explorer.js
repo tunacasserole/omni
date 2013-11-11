@@ -3,13 +3,13 @@ Ext.define('Omni.view.style_supplier_colors.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-style_supplier_colors-Explorer',
 
-  
+  allowNew : false,
+  allowInspect : false,
 
   initComponent:function () {
 
     var me = this;
 
-    
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 

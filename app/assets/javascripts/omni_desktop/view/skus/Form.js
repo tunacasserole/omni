@@ -91,14 +91,29 @@ Ext.define('Omni.view.skus.Form', {
             { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'sku_nbr',                        fieldLabel: this.sku_nbrLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'pos_name',                       fieldLabel: this.pos_nameLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'design_code',                    fieldLabel: this.design_codeLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'source',                         fieldLabel: this.sourceLabel,                     allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',     category:   'SOURCE' },
-            { name: 'source_id',                      fieldLabel: this.source_idLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'maintenance_level',              fieldLabel: this.maintenance_levelLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'MAINTENANCE_LEVEL' },
             { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
+            { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
+            { name: 'color_id',                       fieldLabel: this.color_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Color',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'color_id', itemTpl:'{display}' },
+            { name: 'size_id',                        fieldLabel: this.size_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Size',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'size_id', itemTpl:'{display}' }
             ]
+        },
+        {
+          xtype: 'fieldset',
+          title: 'Inventory',
+          scheme: 'fieldset_scheme_1',
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { name: 'initial_retail_price',           fieldLabel: this.initial_retail_priceLabel,       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'suggested_retail_price',         fieldLabel: this.suggested_retail_priceLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { xtype: 'textfield', name: 'first_cost',                     fieldLabel: this.first_costLabel                  , allowBlank: true },
+            { xtype: 'textfield', name: 'last_cost',                      fieldLabel: this.last_costLabel                   , allowBlank: true },
+            { xtype: 'textfield', name: 'average_cost',                   fieldLabel: this.average_costLabel                , allowBlank: true },
+            { xtype: 'textfield', name: 'on_hand_units',                  fieldLabel: this.on_hand_unitsLabel               , allowBlank: true },
+            { xtype: 'checkbox', name: 'is_updated_average_cost',        fieldLabel: this.is_updated_average_costLabel     , allowBlank: true },
+          ]
         },
         {
           xtype: 'fieldset',
@@ -112,32 +127,16 @@ Ext.define('Omni.view.skus.Form', {
             { name: 'generic_sku_id',                 fieldLabel: this.generic_sku_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',  defaultSearch: { with: {state: {equal_to: 'new'}}},
               store:      Ext.create('Omni.store.Sku',{storeId: 'GenericSkus', pageSize: 10 }),
               displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
-            { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
+            { xtype: 'textfield', name: 'conversion_cost',                     fieldLabel: this.conversion_costLabel                  , allowBlank: true },
             { name: 'site_id',                        fieldLabel: this.site_idLabel,                    allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Site',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'site_id', itemTpl:'{display}' },
             { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
-            { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,  disabled: false,    xtype: 'checkbox'         }
+            // { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
+            // { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,  disabled: false,    xtype: 'checkbox'         }
           ]
         },
-        {
+      {
           xtype: 'fieldset',
-          title: 'Style, Color and Size',
-          scheme: 'fieldset_scheme_1',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'style_color_size_id',            fieldLabel: this.style_color_size_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.StyleColorSize',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_color_size_id', itemTpl:'{display}' },
-            { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
-            { name: 'color_id',                       fieldLabel: this.color_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Color',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'color_id', itemTpl:'{display}' },
-            { name: 'color_name',                     fieldLabel: this.color_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'color_short_name',               fieldLabel: this.color_short_nameLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'size_id',                        fieldLabel: this.size_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Size',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'size_id', itemTpl:'{display}' }
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Tracking Dates',
+          title: 'Miscellaneous',
           scheme: 'fieldset_scheme_1',
           collapsible: true,
           defaultType: 'textfield',
@@ -147,36 +146,14 @@ Ext.define('Omni.view.skus.Form', {
             { name: 'effective_date',                 fieldLabel: this.effective_dateLabel,             allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'discontinued_date',              fieldLabel: this.discontinued_dateLabel,          allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'out_of_stock_date',              fieldLabel: this.out_of_stock_dateLabel,          allowBlank: true,   disabled: false,    xtype: 'datefield'        },
-            { name: 'is_enabled',                     fieldLabel: this.is_enabledLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Product Classification',
-          scheme: 'fieldset_scheme_1',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'subclass_id',                    fieldLabel: this.subclass_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Subclass',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
-            { name: 'buyer_user_id',                  fieldLabel: this.buyer_user_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 10}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}' },
-            { name: 'brand',                          fieldLabel: this.brandLabel,                      allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'BRAND' },
-            { name: 'product_type_id',                fieldLabel: this.product_type_idLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ProductType',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'product_type_id', itemTpl:'{display}' },
-            { name: 'fabric_content',                 fieldLabel: this.fabric_contentLabel,             allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'FABRIC_CONTENT' },
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Pricing',
-          scheme: 'fieldset_scheme_1',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'initial_retail_price',           fieldLabel: this.initial_retail_priceLabel,       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'suggested_retail_price',         fieldLabel: this.suggested_retail_priceLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { name: 'is_enabled',                     fieldLabel: this.is_enabledLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'pos_name',                       fieldLabel: this.pos_nameLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'color_name',                     fieldLabel: this.color_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'color_short_name',               fieldLabel: this.color_short_nameLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
+            { name: 'is_special_order',               fieldLabel: this.is_special_orderLabel,           allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_special_size',                fieldLabel: this.is_special_sizeLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
           ]
         },
         {
@@ -190,66 +167,11 @@ Ext.define('Omni.view.skus.Form', {
           items:[
             { name: 'smoothing_factor',               fieldLabel: this.smoothing_factorLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_METHOD' },
-            { name: 'replenishment_source',           fieldLabel: this.replenishment_sourceLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_SOURCE' },
             { name: 'minimum_on_hand_units',          fieldLabel: this.minimum_on_hand_unitsLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'maximum_on_hand_units',          fieldLabel: this.maximum_on_hand_unitsLabel,      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'replenishment_source',           fieldLabel: this.replenishment_sourceLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_SOURCE' },
             { name: 'pack_type',                      fieldLabel: this.pack_typeLabel,                  allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'PACK_TYPE' },
             { name: 'is_not_stocked',                 fieldLabel: this.is_not_stockedLabel,             allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Selling Unit Definition',
-          scheme: 'fieldset_scheme_1',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'sell_unit_uom_code',             fieldLabel: this.sell_unit_uom_codeLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'SELL_UNIT_UOM_CODE' },            { name: 'sell_unit_length',               fieldLabel: this.sell_unit_lengthLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sell_unit_height',               fieldLabel: this.sell_unit_heightLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sell_unit_width',                fieldLabel: this.sell_unit_widthLabel,            allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sell_unit_weight',               fieldLabel: this.sell_unit_weightLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'is_conveyable_sell_unit',        fieldLabel: this.is_conveyable_sell_unitLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_discountable',                fieldLabel: this.is_discountableLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_taxable',                     fieldLabel: this.is_taxableLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
-          ]
-        },
-        {
-          xtype: 'fieldset',
-          title: 'Ordering Information',
-          scheme: 'fieldset_scheme_1',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
-            { name: 'order_uom_code',                 fieldLabel: this.order_uom_codeLabel,             allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'ORDER_UOM_CODE' },
-            { name: 'order_package_type',             fieldLabel: this.order_package_typeLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'ORDER_PACKAGE_TYPE' },
-            { name: 'garment_pieces',                 fieldLabel: this.garment_piecesLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'is_special_order',               fieldLabel: this.is_special_orderLabel,           allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_special_size',                fieldLabel: this.is_special_sizeLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
-
-          ]
-        },
-    {
-          xtype: 'fieldset',
-          title: 'Sku Costs',
-          scheme: 'fieldset_scheme_1',
-          collapsible: true,
-          defaultType: 'textfield',
-          defaults: {anchor: '70%'},
-          layout: 'anchor',
-          items:[
-            { xtype: 'textfield', name: 'conversion_cost',                     fieldLabel: this.conversion_costLabel                  , allowBlank: true },
-            { xtype: 'textfield', name: 'first_cost',                     fieldLabel: this.first_costLabel                  , allowBlank: true },
-            { xtype: 'textfield', name: 'last_cost',                      fieldLabel: this.last_costLabel                   , allowBlank: true },
-            { xtype: 'textfield', name: 'average_cost',                   fieldLabel: this.average_costLabel                , allowBlank: true },
-            { xtype: 'textfield', name: 'on_hand_units',                  fieldLabel: this.on_hand_unitsLabel               , allowBlank: true },
-            { xtype: 'textfield', name: 'cost_pool',                      fieldLabel: this.cost_poolLabel                   , allowBlank: true },
-            { xtype: 'textfield', name: 'retail_pool',                    fieldLabel: this.retail_poolLabel                 , allowBlank: true },
-            { xtype: 'checkbox', name: 'is_updated_average_cost',        fieldLabel: this.is_updated_average_costLabel     , allowBlank: true },
           ]
         },
       ]

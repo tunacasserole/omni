@@ -97,32 +97,34 @@ Ext.define('Omni.view.inventories.Form', {
             },
             { name: 'sku_id',                         fieldLabel: this.sku_idLabel,                     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
-            { name: 'forecast_profile_id',            fieldLabel: this.forecast_profile_idLabel,       allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ForecastProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'forecast_profile_id', itemTpl:'{display}' },
-            // { name: 'department_id',                  fieldLabel: this.department_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
-            // { name: 'seasonal_index_id',             fieldLabel: this.seasonal_index_idLabel,          allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SeasonalIndex',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'seasonal_index_id', itemTpl:'{display}' },
+            {
+              xtype        : 'checkbox',
+              name         : 'is_authorized',
+              fieldLabel   : this.is_authorizedLabel,
+              allowBlank   : true
+            },
+            {
+              xtype        : 'checkbox',
+              name         : 'is_taxable',
+              fieldLabel   : this.is_taxableLabel,
+              allowBlank   : true
+            },
+            {
+              xtype        : 'checkbox',
+              name         : 'is_special_order',
+              fieldLabel   : this.is_special_orderLabel,
+              allowBlank   : true
+            },
+            {
+              xtype        : 'checkbox',
+              name         : 'is_discontinued',
+              fieldLabel   : this.is_discontinuedLabel,
+              allowBlank   : true
+            },
             {
               xtype        : 'numberfield',
               name         : 'on_hand_units',
               fieldLabel   : this.on_hand_unitsLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'numberfield',
-              name         : 'work_in_process_units',
-              fieldLabel   : this.work_in_process_unitsLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'numberfield',
-              name         : 'supplier_on_order_units',
-              fieldLabel   : this.supplier_on_order_unitsLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'numberfield',
-              name         : 'warehouse_on_order_units',
-              fieldLabel   : this.warehouse_on_order_unitsLabel,
               allowBlank   : true
             },
             {
@@ -155,6 +157,12 @@ Ext.define('Omni.view.inventories.Form', {
               fieldLabel   : this.shipping_unitsLabel,
               allowBlank   : true
             },
+           {
+              xtype        : 'numberfield',
+              name         : 'work_in_process_units',
+              fieldLabel   : this.work_in_process_unitsLabel,
+              allowBlank   : true
+            },
             {
               xtype        : 'numberfield',
               name         : 'requested_units',
@@ -169,54 +177,108 @@ Ext.define('Omni.view.inventories.Form', {
             },
             {
               xtype        : 'numberfield',
-              name         : 'cost_pool',
-              fieldLabel   : this.cost_poolLabel,
+              name         : 'supplier_on_order_units',
+              fieldLabel   : this.supplier_on_order_unitsLabel,
               allowBlank   : true
             },
             {
               xtype        : 'numberfield',
-              name         : 'retail_pool',
-              fieldLabel   : this.retail_poolLabel,
+              name         : 'warehouse_on_order_units',
+              fieldLabel   : this.warehouse_on_order_unitsLabel,
               allowBlank   : true
             },
+            // {
+            //   xtype        : 'numberfield',
+            //   name         : 'cost_pool',
+            //   fieldLabel   : this.cost_poolLabel,
+            //   allowBlank   : true
+            // },
+            // {
+            //   xtype        : 'numberfield',
+            //   name         : 'retail_pool',
+            //   fieldLabel   : this.retail_poolLabel,
+            //   allowBlank   : true
+            // },
             {
               xtype        : 'numberfield',
               name         : 'boy_units',
               fieldLabel   : this.boy_unitsLabel,
               allowBlank   : true
             },
-            {
-              xtype        : 'numberfield',
-              name         : 'boy_cost',
-              fieldLabel   : this.boy_costLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'numberfield',
-              name         : 'boy_retail',
-              fieldLabel   : this.boy_retailLabel,
-              allowBlank   : true
-            },
+            // },
+            // {
+            //   xtype        : 'numberfield',
+            //   name         : 'boy_cost',
+            //   fieldLabel   : this.boy_costLabel,
+            //   allowBlank   : true
+            // },
+            // {
+            //   xtype        : 'numberfield',
+            //   name         : 'boy_retail',
+            //   fieldLabel   : this.boy_retailLabel,
+            //   allowBlank   : true
+            // },
             {
               xtype        : 'numberfield',
               name         : 'last_inventory_units',
               fieldLabel   : this.last_inventory_unitsLabel,
               allowBlank   : true
             },
-            {
-              xtype        : 'numberfield',
-              name         : 'last_inventory_cost',
-              fieldLabel   : this.last_inventory_costLabel,
+            // {
+            //   xtype        : 'numberfield',
+            //   name         : 'last_inventory_cost',
+            //   fieldLabel   : this.last_inventory_costLabel,
+            //   allowBlank   : true
+            // },
+            // {
+            //   xtype        : 'numberfield',
+            //   name         : 'last_inventory_retail',
+            //   fieldLabel   : this.last_inventory_retailLabel,
+            //   allowBlank   : true
+            // },
+                        {
+              xtype        : 'datefield',
+              name         : 'first_receipt_date',
+              fieldLabel   : this.first_receipt_dateLabel,
               allowBlank   : true
             },
             {
-              xtype        : 'numberfield',
-              name         : 'last_inventory_retail',
-              fieldLabel   : this.last_inventory_retailLabel,
+              xtype        : 'datefield',
+              name         : 'last_receipt_date',
+              fieldLabel   : this.last_receipt_dateLabel,
               allowBlank   : true
             },
+            {
+              xtype        : 'datefield',
+              name         : 'first_sale_date',
+              fieldLabel   : this.first_sale_dateLabel,
+              allowBlank   : true
+            },
+            {
+              xtype        : 'datefield',
+              name         : 'last_sale_date',
+              fieldLabel   : this.last_sale_dateLabel,
+              allowBlank   : true
+            },
+            {
+              xtype        : 'datefield',
+              name         : 'last_inventory_date',
+              fieldLabel   : this.last_inventory_dateLabel,
+              allowBlank   : true
+            }
+          ]
+        }
+       ,{
+          xtype:        'fieldset',
+          title:        'Replenishment',
+          collapsible:  true,
+          defaultType:  'numberfield',
+          defaults:     {anchor: '70%'},
+          layout:       'anchor',
+          items:[
             { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_METHOD' },
             { name: 'replenishment_source',           fieldLabel: this.replenishment_sourceLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_SOURCE' },
+            { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
             {
               xtype        : 'numberfield',
               name         : 'safety_stock_units',
@@ -235,6 +297,7 @@ Ext.define('Omni.view.inventories.Form', {
               fieldLabel   : this.smoothing_factorLabel,
               allowBlank   : true
             },
+            { name: 'forecast_profile_id',            fieldLabel: this.forecast_profile_idLabel,       allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ForecastProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'forecast_profile_id', itemTpl:'{display}' },
             {
               xtype        : 'numberfield',
               name         : 'minimum_units',
@@ -247,6 +310,7 @@ Ext.define('Omni.view.inventories.Form', {
               fieldLabel   : this.maximum_unitsLabel,
               allowBlank   : true
             },
+            { name: 'seasonal_index_id',             fieldLabel: this.seasonal_index_idLabel,          allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SeasonalIndex',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'seasonal_index_id', itemTpl:'{display}' },
             {
               xtype        : 'numberfield',
               name         : 'forecast',
@@ -264,31 +328,7 @@ Ext.define('Omni.view.inventories.Form', {
               name         : 'standard_deviation',
               fieldLabel   : this.standard_deviationLabel,
               allowBlank   : true
-            },
-            {
-              xtype        : 'checkbox',
-              name         : 'is_authorized',
-              fieldLabel   : this.is_authorizedLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'checkbox',
-              name         : 'is_taxable',
-              fieldLabel   : this.is_taxableLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'checkbox',
-              name         : 'is_special_order',
-              fieldLabel   : this.is_special_orderLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'checkbox',
-              name         : 'is_discontinued',
-              fieldLabel   : this.is_discontinuedLabel,
-              allowBlank   : true
-            },
+            }
           ]
         }
        ,{
@@ -371,53 +411,25 @@ Ext.define('Omni.view.inventories.Form', {
               fieldLabel   : this.sale_cost_py3Label,
               allowBlank   : true
             },
-            {
-              xtype        : 'datefield',
-              name         : 'reserve_end_date',
-              fieldLabel   : this.reserve_end_dateLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'datefield',
-              name         : 'first_receipt_date',
-              fieldLabel   : this.first_receipt_dateLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'datefield',
-              name         : 'last_receipt_date',
-              fieldLabel   : this.last_receipt_dateLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'datefield',
-              name         : 'first_sale_date',
-              fieldLabel   : this.first_sale_dateLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'datefield',
-              name         : 'last_sale_date',
-              fieldLabel   : this.last_sale_dateLabel,
-              allowBlank   : true
-            },
-            {
-              xtype        : 'datefield',
-              name         : 'last_inventory_date',
-              fieldLabel   : this.last_inventory_dateLabel,
-              allowBlank   : true
-            }
+            // {
+            //   xtype        : 'datefield',
+            //   name         : 'reserve_end_date',
+            //   fieldLabel   : this.reserve_end_dateLabel,
+            //   allowBlank   : true
+            // },
+
           ]
         }
       ]
     });
     // FIELDSETS (End)
 
-
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title       : 'Inventory',
-      subtitle    : 'Edit Inventory'
+      subtitle    : 'Edit Inventory',
+      newTitle    : 'New Inventory',
+      newSubtitle : 'Complete the following inventory data'
     });
     // TITLES (End)
 
