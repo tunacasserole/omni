@@ -5,6 +5,37 @@ Buildit::Role.delete_all
 Buildit::Application.delete_all
 Buildit::ApplicationRole.delete_all
 
+# APPLICATIONS =====================================================================
+# PLATFORM CONSOLE
+Buildit::Application.create(
+  application_id:       'AC41CFBEFAC211E2BPLATFORMCONSOLE',
+  application_code:     'PLATFORM_CONSOLE',
+  application_name:     'Platform Console',
+  hub_xtype:            'buildit-app-SuperHub',
+  description:          'The Super Administrator desktop provides access to all key SDK level features under a single desktop. It is not designed to be modified by custom projects.',
+  is_enabled:           true
+)
+
+# OMNI ERP DESKTOP
+Buildit::Application.create(
+  application_id:       '6900AE7AC18B11E289BA20C9DOMNIERP',
+  application_code:     'OMNI',
+  hub_xtype:            'omni-app-Hub',
+  application_name:     'Omni ERP System',
+  description:          "The complete ERP solution for Parker School Uniforms",
+  is_enabled:           1
+  )
+
+# OMNI ERP ADMIN HUB
+Buildit::Application.create(
+  application_id:       '6900AE7AC18B11E289BA20COMNIADMIN',
+  application_code:     'OMNI_ADMIN',
+  hub_xtype:            'omni-app-AdminHub',
+  application_name:     'Omni ERP Administration',
+  description:          "The admin console for the ERP solution for Parker School Uniforms",
+  is_enabled:           1
+  )
+
 # USERS =====================================================================
 Buildit::User.create(
   user_id: 'FB0ACB1AFAC111E2B25720SYSBUILDIT',
@@ -177,62 +208,39 @@ Buildit::Role.create(
                      :role_code => 'PURCHASE_APPROVER_3',
                      :description => 'Can do third level of Purchase Order approval.'
                      )
+
 # USER ROLES =====================================================================
 # everyone is at least a power user
+# user_id = '811166D4D50A11E2B45820C9D04AARON'
+# role_id = '323244F0204011EFCFE904SUPERADMIN'
+# ur=Buildit::UserRole.create(user_id: user_id, role_id: role_id, is_enabled: true)
 Buildit::User.all.each do |u|
-  ur = u.roles.where(:role_id => '323244F0204011EFCFE9040CCEDPOWER').first
+  # puts u.user_id
+  # puts u.full_name
+  # ur = u.user_roles.where(:role_id => '323244F0204011EFCFE9040CCEDPOWER').first
+  ur = Buildit::UserRole.where(:role_id => '323244F0204011EFCFE9040CCEDPOWER', :user_id => u.user_id).first
   ur.is_enabled = true
   ur.save
 end
 
 # Tom, Aaron, Bob, Marty, and Jason are system admins
+  # ur = u.roles.where(:role_id => '323244F0204011EFCFE904SUPERADMIN').first
 Buildit::User.where("email_address in ('a','aaron@buildit.io','t','thenderson@parkersu.com','bob.sustak@buckheaduniforms.com','bob','jason@buildit.io','marty@buildit.io')").each do |u|
-  ur = u.roles.where(:role_id => '323244F0204011EFCFE904SUPERADMIN').first
+  ur = Buildit::UserRole.where(role_id: '323244F0204011EFCFE904SUPERADMIN', user_id: u.user_id).first
   ur.is_enabled = true
   ur.save
 end
 
-# APPLICATIONS =====================================================================
-# PLATFORM CONSOLE
-Buildit::Application.create(
-  application_id:       'AC41CFBEFAC211E2BPLATFORMCONSOLE',
-  application_code:     'PLATFORM_CONSOLE',
-  application_name:     'Platform Console',
-  hub_xtype:            'buildit-app-SuperHub',
-  description:          'The Super Administrator desktop provides access to all key SDK level features under a single desktop. It is not designed to be modified by custom projects.',
-  is_enabled:           true
-)
-
-# OMNI ERP DESKTOP
-Buildit::Application.create(
-  application_id:       '6900AE7AC18B11E289BA20C9DOMNIERP',
-  application_code:     'OMNI',
-  hub_xtype:            'omni-app-Hub',
-  application_name:     'Omni ERP System',
-  description:          "The complete ERP solution for Parker School Uniforms",
-  is_enabled:           1
-  )
-
-# OMNI ERP ADMIN HUB
-Buildit::Application.create(
-  application_id:       '6900AE7AC18B11E289BA20COMNIADMIN',
-  application_code:     'OMNI_ADMIN',
-  hub_xtype:            'omni-app-AdminHub',
-  application_name:     'Omni ERP Administration',
-  description:          "The admin console for the ERP solution for Parker School Uniforms",
-  is_enabled:           1
-  )
-
 # APPLICATION ROLES =====================================================================
 # TO DO: OMNI POWER USER GETS OMNI ERP DESKTOP
 Buildit::ApplicationRole.create(
-  application_id: '6900AE7AC18B11E289BA20COMNIADMIN',
+  application_id: '6900AE7AC18B11E289BA20C9DOMNIERP',
   role_id:        '323244F0204011EFCFE904SUPERADMIN',
   is_enabled:     true
 )
 
 Buildit::ApplicationRole.create(
-  application_id: '6900AE7AC18B11E289BA20COMNIADMIN',
+  application_id: '6900AE7AC18B11E289BA20C9DOMNIERP',
   role_id:        '323244F0204011EFCFE9040CCEDPOWER',
   is_enabled:     true
 )
