@@ -18,8 +18,8 @@ class Omni::Allocation < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default :allocation_id,                          :with => :guid
   default :allocation_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"ALLOCATION_NBR"
-  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.state}"}
-  default :units_to_allocate,                     :override  =>  true,        :to    => 0
+  default :display,                                :override  =>  false,        :to   => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.state}"}
+  default :units_to_allocate,                      :override  =>  true,        :to    => 0
   default :is_destroyed,                           :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -141,9 +141,11 @@ class Omni::Allocation < ActiveRecord::Base
     inventories = Omni::Inventory.where(sku_id: sku_id, is_authorized: true).to_a
     inventories.reject! {|x| locked_locations.include? x.location_id}
     inventories.each do |i|
-      unless allocation_formula =='BTS_NEED' or allocation_formula=='PURCHASE_ALLOCATION'
+      unless allocation_formula == 'PURCHASE_ALLOCATION'
+        puts "1"
         projection_detail = i.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4','complete']}).first
         next unless projection_detail
+        puts "2"
       end
       # puts "inventory id is #{i.inventory_id}"
       locked_locations.include? i.location_id ? units_needed = store_demand(allocation_formula, i) : 0
@@ -199,32 +201,35 @@ class Omni::Allocation < ActiveRecord::Base
 
   def store_demand(allocation_formula, inventory)
     puts "In store demand, allocation_formula is #{allocation_formula}"
-    projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4','complete']}).first unless allocation_formula =='BTS_NEED' or allocation_formula=='PURCHASE_ALLOCATION'
 
     case allocation_formula
 
-      when 'BTS_NEED'
-        bts_detail = inventory.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
-        units_needed =  bts_detail ? bts_detail.need : 0
+      # when 'BTS_NEED'
+      #   bts_detail = inventory.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
+      #   units_needed =  bts_detail ? bts_detail.need : 0
 
-      when /PROJECTION_\d_UNITS/, 'LAST_FORECAST_UNITS'
-        units_needed = projection_detail ? projection_detail.send(allocation_formula.downcase) : 0
+      # when /PROJECTION_\d_UNITS/, 'LAST_FORECAST_UNITS'
+      #   units_needed = projection_detail ? projection_detail.send(allocation_formula.downcase) : 0
 
-      when 'APPROVED_PROJECTION'
-        case projection_detail.projection.state
+      # when 'APPROVED_PROJECTION'
+      #   case projection_detail.projection.state
 
-          when 'forecast', 'projection_1_units'
-            units_needed = projection_detail.state == 'draft' ? projection_detail.send("last_forecast_units") : projection_detail.send("projection_1_units")
+      #     when 'forecast', 'projection_1_units'
+      #       units_needed = projection_detail.state == 'draft' ? projection_detail.send("last_forecast_units") : projection_detail.send("projection_1_units")
 
-          when /projection_\d/
-            phase = projection_detail.projection.state.byteslice(11).to_i
-            phase -= 1 if projection_detail.state == 'draft'
-            units_needed = projection_detail.send("projection_#{phase-1}_units")
+      #     when /projection_\d/
+      #       phase = projection_detail.projection.state.byteslice(11).to_i
+      #       phase -= 1 if projection_detail.state == 'draft'
+      #       units_needed = projection_detail.send("projection_#{phase-1}_units")
 
-          when 'complete'
-            units_needed = projection_detail.send("projection_4_units")
+      #     when 'complete'
+      #       units_needed = projection_detail.send("projection_4_units")
 
-        end
+      #   end
+
+      when 'PROJECTION'
+        projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4','complete']}).first unless allocation_formula =='BTS_NEED' or allocation_formula=='PURCHASE_ALLOCATION'
+        units_needed = projection_detail.total_need
 
       when 'PURCHASE_ALLOCATION'
         # This formula is only valid when allocating a Receipt.
@@ -234,8 +239,8 @@ class Omni::Allocation < ActiveRecord::Base
         units_needed = 0
 
     end
-    units_needed -= (inventory.on_hand_units + inventory.supplier_on_order_units) if ['LAST_FORECAST_UNITS','APPROVED_PROJECTION',/PROJECTION_\d_UNITS/].include? allocation_formula and units_needed > 0
-    # puts "units_needed #{units_needed}"
+    # units_needed -= (inventory.on_hand_units + inventory.supplier_on_order_units) if ['LAST_FORECAST_UNITS','APPROVED_PROJECTION',/PROJECTION_\d_UNITS/].include? allocation_formula and units_needed > 0
+    puts "units_needed #{units_needed}"
     units_needed
   end
   # HELPERS (End)

@@ -9,8 +9,7 @@ class Omni::Test::Purchase < Omni::Test::Base
     @pd1=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1').first
 
     test_purchase_events
-    test_purchase_detail_events
-    test_purchase_allocation_events
+    # test_purchase_detail_events
 
     @@model_action = 'request'
     # request_scenarios.each {|s| test_request_scenario s}
@@ -22,19 +21,10 @@ class Omni::Test::Purchase < Omni::Test::Base
     cloned_po = @p.request(params)
   end
 
-  def self.request_scenarios
-    x = []
-    x << {scenario: 'it creates a new purchase order by cloning an existing purchase order', expected: '', actual: '', action: 'clone', adjustment_percent: 5}
-    # x << {scenario: 'it automatically create a new purchase order based on a few parameters entered by a user.', expected: '', actual: ''}
-    # x << {scenario: 'it adds SKUs in bulk to a new or existing purchase order according to user parameters', expected: '', actual: ''}
-    # x << {scenario: 'it derives the units to order of each SKU from the BTS needs calculation.', expected: '', actual: ''}
-    # x << {scenario: '', expected: '', actual: ''}
-  end
-
   def self.test_purchase_events
     x=@p
     # if base data was created and relationship exists, the purchase should have 1 detail
-    test_it('Create a purchase with 1 detail', 1, x.purchase_details.count)
+    test_it('Create a purchase with details', true, x.purchase_details.count > 0)
 
     # RELEASE SHOULD SET STATE TO PENDING APPROVAL
     # puts x.state
@@ -60,10 +50,11 @@ class Omni::Test::Purchase < Omni::Test::Base
     test_it('Cancel a purchase','cancelled',x.state)
 
     # approval scenarios 6 - 20 various approval tests
-    @@model_action = 'approve'
-    approval_scenarios.each {|s| test_approval_scenario s}
+    # @@model_action = 'approve'
+    # approval_scenarios.each {|s| test_approval_scenario s}
 
     # run 26 different allocation tests
+    # TODO: Refactor to use allocation.calculate method
     # @@model_action = 'Allocation'
     # allocation_scenarios.each {|s| test_allocation_scenario s}
 
@@ -99,10 +90,10 @@ class Omni::Test::Purchase < Omni::Test::Base
     x.save
     x.cancel
     test_it('it cancels a purchase detail when state is open or partial','cancelled',x.state)
-  end
 
-  def self.test_purchase_allocation_events
-    x = @pd1.purchase_allocations.first
+    # Test allocating purchase details
+    x.allocate
+    x.purchase_allocations.first
 
     x.lock
     test_it('Lock a purchase allocation','locked',x.state)
@@ -112,12 +103,6 @@ class Omni::Test::Purchase < Omni::Test::Base
   end
 
   def self.test_approval_scenario(s)
-    pd = @pd1
-    pd.order_pack_size=10
-    pd.supplier_cost=24
-    pd.order_cost_units=12
-    pd.save
-
     p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
     p.state = 'pending_approval'
     p.purchase_approver_1_user_id = s[:approver_1]
@@ -130,57 +115,45 @@ class Omni::Test::Purchase < Omni::Test::Base
     p.approve
 
     expected =  s[:purchase_state_after] + ',' + s[:approval_1_date_after].to_s + ',' + s[:approval_2_date_after].to_s + ',' + s[:approval_3_date_after].to_s
-    actual =      p.state                            + ',' + p.approval_1_date.to_s           + ',' + p.approval_2_date.to_s            + ',' + p.approval_3_date.to_s
+    actual =  p.state                   + ',' + p.approval_1_date.to_s           + ',' + p.approval_2_date.to_s       + ',' + p.approval_3_date.to_s
 
     test_it(s[:scenario], expected, actual)
   end
 
-  def self.test_allocation_scenario(s)
-    a=Omni::AllocationProfile.where(:allocation_profile_id=>s[:allocation_profile_id]).first
-    a.percent_to_allocate = s[:percent_to_allocate]
-    a.save
+  # def self.test_allocation_scenario(s)
+  #   # puts s[:scenario]
+  #   a=Omni::AllocationProfile.where(:allocation_profile_id=>s[:allocation_profile_id]).first
+  #   a.percent_to_allocate = s[:percent_to_allocate]
+  #   a.save
 
-    if s[:allocated_units_locked_loc_1] > 0
-      Omni::PurchaseAllocation.create(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :state=>'locked', :units_allocated=>s[:allocated_units_locked_loc_1])
-      Omni::PurchaseAllocation.create(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1', :location_id=>'51892F68AC3E11E2947800FF58D32228', :state=>'locked', :units_allocated=>s[:allocated_units_locked_loc_2])
-      Omni::PurchaseAllocation.create(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1', :location_id=>'5247A038AC3E11E2947800FF58D32228', :state=>'locked', :units_allocated=>s[:allocated_units_locked_loc_3])
-    end
+  #   if s[:allocated_units_locked_loc_1] > 0
+  #     Omni::PurchaseAllocation.create(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :state=>'locked', :units_allocated=>s[:allocated_units_locked_loc_1])
+  #     Omni::PurchaseAllocation.create(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1', :location_id=>'51892F68AC3E11E2947800FF58D32228', :state=>'locked', :units_allocated=>s[:allocated_units_locked_loc_2])
+  #     Omni::PurchaseAllocation.create(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1', :location_id=>'5247A038AC3E11E2947800FF58D32228', :state=>'locked', :units_allocated=>s[:allocated_units_locked_loc_3])
+  #   end
 
-    x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
-    x.allocation_profile_id = s[:allocation_profile_id]
-    x.save
-    x.process_allocation
+  #   x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
+  #   x.allocation_profile_id = s[:allocation_profile_id]
+  #   x.order_pack_size = s[:order_pack_size]
+  #   x.save
+  #   # puts x.allocation_profile_id
+  #   # x.process_allocation
 
-    x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
+  #   x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
 
-    expected =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
-    actual = x.purchase_allocations.first.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.second.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.third.units_allocated.to_s.chop.chop
+  #   expected =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
+  #   actual = x.purchase_allocations.count > 0 ? x.purchase_allocations.first.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.second.units_allocated.to_s.chop.chop + ',' + x.purchase_allocations.third.units_allocated.to_s.chop.chop : 'No allocations created'
 
-    test_it("#{s[:scenario]}", expected, actual)
-  end
+  #   test_it("#{s[:scenario]}", expected, actual)
+  # end
 
-  def self.approval_scenarios
-    user_1 = '811166D4D50A11E2B45820C9D04AARON'
-    user_2 = '811166D4D50A11E2B45820C9D04ATTTT'
-    user_3 = 'FB0ACB1AFAC111E2B25720SYSBUILDIT'
-    now = Date.today
-    x=[]
-    x << {scenario:'Approval not authorized',        :approver_1=>user_2, :approver_2=>nil, :approver_3=>nil,       :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
-    x << {scenario:'Approval 1 already done',        :approver_1=>user_1, :approver_2=>user_2, :approver_3=>nil, :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil, :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
-    x << {scenario:'Approval 1 must be done first',:approver_1=>user_2, :approver_2=>user_1, :approver_3=>nil, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,   :purchase_details=>@pd1, :approval_1_date_after=>nil, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
-    x << {scenario:'Approval 2 already done',        :approver_1=>user_2, :approver_2=>user_1, :approver_3=>nil, :approval_1_date=>now, :approval_2_date=>now, :approval_3_date=>nil, :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>now, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',:purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
-    x << {scenario:'Approval 2 must be done first',:approver_1=>user_2, :approver_2=>user_3, :approver_3=>user_1,:approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil,:purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',:purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
-    x << {scenario:'Approval 3 already done',   :approver_1=>user_2, :approver_2=>user_3, :approver_3=>user_1,:approval_1_date=>now, :approval_2_date=>now, :approval_3_date=>now,:purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>now, :approval_3_date_after=>now, :purchase_state_after=>'pending_approval',  :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>false, :stock_ledger_row=>false}
-    x << {scenario:'Approval 1 of 1 successful', :approver_1=>user_1, :approver_2=>nil, :approver_3=>nil,             :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'open',                     :purchase_detail_state_after=>'open', :selling_units_approved_after=>100, :email_sent=>false, :stock_ledger_row=>true}
-    x << {scenario:'Approval 1 of 2 successful', :approver_1=>user_1, :approver_2=>user_2, :approver_3=>nil,       :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval',:purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
-    x << {scenario:'Approval 1 of 3 successful', :approver_1=>user_1, :approver_2=>user_2, :approver_3=>user_3, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,   :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
-    x << {scenario:'Approval 2 of 2 successful', :approver_1=>user_2, :approver_2=>user_1, :approver_3=>nil,       :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil, :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>now, :approval_3_date_after=>nil, :purchase_state_after=>'open',                   :purchase_detail_state_after=>'open', :selling_units_approved_after=>1000, :email_sent=>false, :stock_ledger_row=>true}
-    x << {scenario:'Approval 2 of 3 successful', :approver_1=>user_2, :approver_2=>user_1, :approver_3=>user_3, :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil,  :purchase_details=>@pd1, :approval_1_date_after=>now, :approval_2_date_after=>now,:approval_3_date_after=>nil,:purchase_state_after=>'pending_approval',:purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
-    x << {scenario:'Approval 3 of 3 successful', :approver_1=>user_2, :approver_2=>user_3, :approver_3=>user_1, :approval_1_date=>now, :approval_2_date=>now, :approval_3_date=>nil, :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>now, :approval_3_date_after=>now, :purchase_state_after=>'open',                   :purchase_detail_state_after=>'open', :selling_units_approved_after=>1000, :email_sent=>false, :stock_ledger_row=>true}
-    x << {scenario:'Approval 1 successful',        :approver_1=>user_1, :approver_2=>user_1, :approver_3=>user_3, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,     :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
-    x << {scenario:'Approval 1 successful',        :approver_1=>user_1, :approver_2=>user_1, :approver_3=>user_1, :approval_1_date=>nil, :approval_2_date=>nil, :approval_3_date=>nil,    :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>nil, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
-    x << {scenario:'Approval 2 successful',        :approver_1=>user_2, :approver_2=>user_1, :approver_3=>user_1, :approval_1_date=>now, :approval_2_date=>nil, :approval_3_date=>nil,  :purchase_details=>@pd2, :approval_1_date_after=>now, :approval_2_date_after=>now, :approval_3_date_after=>nil, :purchase_state_after=>'pending_approval', :purchase_detail_state_after=>'draft', :selling_units_approved_after=>0, :email_sent=>true, :stock_ledger_row=>false}
-    x
+  def self.request_scenarios
+    x = []
+    x << {scenario: 'it creates a new purchase order by cloning an existing purchase order', expected: '', actual: '', action: 'clone', adjustment_percent: 5}
+    # x << {scenario: 'it automatically create a new purchase order based on a few parameters entered by a user.', expected: '', actual: ''}
+    # x << {scenario: 'it adds SKUs in bulk to a new or existing purchase order according to user parameters', expected: '', actual: ''}
+    # x << {scenario: 'it derives the units to order of each SKU from the BTS needs calculation.', expected: '', actual: ''}
+    # x << {scenario: '', expected: '', actual: ''}
   end
 
 end

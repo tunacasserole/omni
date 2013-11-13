@@ -35,6 +35,7 @@ gem "guard"
 # Temporary fix for jquery issue
 gem "jquery-rails", "< 3.0.0"
 gem 'turbolinks'
+
 # Priceless Gems
 
 # One of the most important programming principles is "Don't reinvent the wheel!". If you're faced with a certain task you should always look around a bit for existing solutions, before rolling your own. Here's a list of some "priceless" gems (all of them Rails 3.1 compliant) that are useful in many Rails projects:

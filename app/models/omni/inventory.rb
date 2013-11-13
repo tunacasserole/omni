@@ -39,6 +39,10 @@ class Omni::Inventory < ActiveRecord::Base
   default      :last_inventory_units,             :override  =>  false,        :to    => 0
   default      :last_inventory_cost,              :override  =>  false,        :to    => 0
   default      :last_inventory_retail,            :override  =>  false,        :to    => 0
+  default      :sale_units_py1,                   :override  =>  false,        :to    => 0
+  default      :sale_units_py2,                   :override  =>  false,        :to    => 0
+  default      :sale_units_py3,                   :override  =>  false,        :to    => 0
+  default      :sale_units_ytd,                   :override  =>  false,        :to    => 0
   default      :is_authorized,                    :override  =>  false,        :to    => false
   default      :is_taxable,                       :override  =>  false,        :to    => false
   default      :is_special_order,                 :override  =>  false,        :to    => false
@@ -68,8 +72,7 @@ class Omni::Inventory < ActiveRecord::Base
   belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',         :foreign_key => 'forecast_profile_id'
   belongs_to   :seasonal_index,                  :class_name => 'Omni::SeasonalIndex',           :foreign_key => 'seasonal_index_id'
-  # has_many     :bts_details,                     :class_name => 'Omni::BtsDetail',               :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"bts_details.location_id = '#{send(:location_id)}'"}
-  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',        :foreign_key => :sku_id,           :primary_key => :sku_id,           :conditions => proc {"projection_details.location_id = '#{send(:location_id)}'"}
+  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',        :foreign_key => :inventory_id#           :primary_key => :sku_id,           :conditions => proc {"projection_details.location_id = '#{send(:location_id)}'"}
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================

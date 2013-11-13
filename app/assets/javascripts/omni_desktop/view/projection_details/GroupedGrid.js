@@ -22,7 +22,7 @@ Ext.define('omni.view.projection_details.GroupedGrid', {
 
     initComponent:function(){
         var me = this;
-      
+
         Ext.applyIf(this, {
           associativeFilter: {
             property:   'projection_id',

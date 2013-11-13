@@ -385,7 +385,6 @@ Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B42PROJECTION2', :code =
 Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B42PROJECTION3', :code => 'PROJECTION_3_UNITS', :default_text => 'Projection 3', :category => 'ALLOCATION_FORMULA', :position => 4)
 Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B42PROJECTION4', :code => 'PROJECTION_4_UNITS', :default_text => 'Projection 4', :category => 'ALLOCATION_FORMULA', :position => 5)
 Buildit::Lookup.create(:lookup_id => 'C72A35DA038911PROJECTIONFORECAST', :code => 'LAST_FORECAST_UNITS', :default_text => 'Projection Forecast', :category => 'ALLOCATION_FORMULA', :position => 6)
-Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B428CFEBTSNEED', :code => 'BTS_NEED', :default_text => 'BTS Need', :category => 'ALLOCATION_FORMULA', :position => 7)
 Buildit::Lookup.create(:lookup_id => 'C72A35DA038911PURCHASEALLOCATION', :code => 'ALLOCATED_UNITS', :default_text => 'Purchase Allocation', :category => 'ALLOCATION_FORMULA', :position => 8)
 Buildit::Lookup.create(:lookup_id => 'C72A35DA038911EAPPORTIONTOSTORES', :code => 'APPORTION_TO_STORES', :default_text => 'Apportion To Stores', :category => 'EXCESS_SUPPLY_OPTION', :position => 1)
 Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E3LEAVEINWAREHOUSE', :code => 'LEAVE_IN_WAREHOUSE', :default_text => 'Leave In Warehouse', :category => 'EXCESS_SUPPLY_OPTION', :position => 2)

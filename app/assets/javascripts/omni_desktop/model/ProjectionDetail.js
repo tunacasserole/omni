@@ -7,11 +7,7 @@ Ext.define('Omni.model.ProjectionDetail', {
       type       : 'string'
     },
     {
-      name       : 'display',
-      type       : 'string'
-    },
-    {
-      name       : 'state',
+      name       : 'projection_line_nbr',
       type       : 'string'
     },
     {
@@ -20,10 +16,6 @@ Ext.define('Omni.model.ProjectionDetail', {
     },
     {
       name       : 'projection_location_id',
-      type       : 'string'
-    },
-    {
-      name       : 'projection_line_nbr',
       type       : 'string'
     },
     {
@@ -43,14 +35,23 @@ Ext.define('Omni.model.ProjectionDetail', {
       type       : 'string'
     },
     {
+      name       : 'location_id',
+      type       : 'string'
+    },
+    {
       name       : 'sku_display',
       type       : 'string'
     },
     {
-      name       : 'location_id',
-      type       : 'string'
-    },    {
       name       : 'location_display',
+      type       : 'string'
+    },
+    {
+      name       : 'display',
+      type       : 'string'
+    },
+    {
+      name       : 'state',
       type       : 'string'
     },
     {
@@ -63,7 +64,7 @@ Ext.define('Omni.model.ProjectionDetail', {
     },
     {
       name       : 'last_forecast_date',
-      type       : 'date'
+      type       : 'datetime'
     },
     {
       name       : 'projection_1_units',
@@ -98,8 +99,60 @@ Ext.define('Omni.model.ProjectionDetail', {
       type       : 'integer'
     },
     {
-      name       : 'number_of_schools',
-      type       : 'integer'
+      name       : 'on_hand',
+      type       : 'string'
+    },
+    {
+      name       : 'on_order',
+      type       : 'string'
+    },
+    {
+      name       : 'sd_raw',
+      type       : 'string'
+    },
+    {
+      name       : 'sd_floor',
+      type       : 'string'
+    },
+    {
+      name       : 'sd_ceiling',
+      type       : 'string'
+    },
+    {
+      name       : 'sd_smooth',
+      type       : 'string'
+    },
+    {
+      name       : 'sd_percent',
+      type       : 'string'
+    },
+    {
+      name       : 'coverage_allowed',
+      type       : 'string'
+    },
+    {
+      name       : 'coverage_complete',
+      type       : 'string'
+    },
+    {
+      name       : 'custom_need',
+      type       : 'string'
+    },
+    {
+      name       : 'generic_need',
+      type       : 'string'
+    },
+    {
+      name       : 'total_need',
+      type       : 'string'
+    },
+    {
+      name       : 'usable',
+      type       : 'string'
+    },
+    {
+      name       : 'unusable',
+      type       : 'string'
     },
     {
       name       : 'average_sales',

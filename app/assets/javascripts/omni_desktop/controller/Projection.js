@@ -17,4 +17,4 @@ Buildit.defineController('Omni.controller.Projection', {
 
   }
 
-});
+}); // Buildit.defineController('Omni.controller.Projection'

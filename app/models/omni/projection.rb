@@ -35,8 +35,8 @@
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :department,                      :class_name => 'Omni::Department',          :foreign_key => 'department_id'
   belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'
-  belongs_to   :projection_approver_user,        :class_name => 'Buildit::User',            :foreign_key => 'projection_approver_user_id'
-  belongs_to   :projection_closer_user,          :class_name => 'Buildit::User',            :foreign_key => 'projection_closer_user_id'
+  belongs_to   :projection_approver_user,        :class_name => 'Buildit::User',            :foreign_key => 'projection_approver_id'
+  belongs_to   :projection_closer_user,          :class_name => 'Buildit::User',            :foreign_key => 'projection_closer_id'
   has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'projection_id'
   has_many     :projection_locations,            :class_name => 'Omni::ProjectionLocation',  :foreign_key => 'projection_id'
   # ASSOCIATIONS (End)
@@ -122,32 +122,56 @@
     # Insert or update ProjectionDetail row for every authorized SKU/Location combination (TO DO: in the Departement in the Projection) and every active selling location authorized for the SKU.
     # DEBUG myself = Omni::Projection.first
     # DEBUG Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: myself.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: myself.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: myself.projection_id).first} #unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
-    Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: self.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id).first} #unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
+    Omni::Inventory.where(is_authorized: true).each do |i|
+      # Create Projection Detail;
+      x = Omni::ProjectionDetail.where(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id)
+      # TODO: Add support for generics
+      is_generic = false
+      total_generic_need = 0
 
-    self.projection_details.each do |detail|
-      # JASON - inventory is a two part key, how to leverage an association
-      inv = Omni::Inventory.where(sku_id: detail.sku_id, location_id: detail.location_id).first
-      next unless inv
+      x.forecast_profile_id = self.forecast_profile_id
+
+      # Snapshot of current inventory
+      x.on_order = i.supplier_on_order_units
+      x.on_hand = i.on_hand_units
+
+      # Sales history
+      x.sale_units_ytd = i.sale_units_ytd
+      x.sale_units_py1 = i.sale_units_py1
+      x.sale_units_py2 = i.sale_units_py2
+      x.sale_units_py3 = i.sale_units_py3
 
       # calculate forecasted units using formula from forecast_profile;
       profile = self.forecast_profile
-      forecasted_units = (profile.sales_py1_weight * (inv.sale_units_py1||0)) +(profile.sales_py2_weight * (inv.sale_units_py2||0))+(profile.sales_py3_weight * (inv.sale_units_py3||0))
+      forecasted_units = (profile.sales_py1_weight * i.sale_units_py1) + (profile.sales_py2_weight * i.sale_units_py2) + (profile.sales_py3_weight * i.sale_units_py3)
 
-      unless detail.last_forecast_date
-        # set first_forecast_units and projection_1_units with forecasted_units if this is the first forecast
-        detail.first_forecast_units = forecasted_units
-        detail.projection_1_units = forecasted_units
-        # set historical sales data
-        detail.sale_units_ytd = inv.sale_units_ytd
-        detail.sale_units_py1 = inv.sale_units_py1
-        detail.sale_units_py2 = inv.sale_units_py2
-        detail.sale_units_py3 = inv.sale_units_py3
+      unless x.last_forecast_date
+        x.first_forecast_units = forecasted_units
+        x.projection_1_units = forecasted_units
       end
 
-      # update last_forecast_units with forecasted_units and  last_forecast_date to today;
-      detail.last_forecast_units = forecasted_units
-      detail.last_forecast_date = Time.now
-      detail.save
+      x.last_forecast_units = forecasted_units
+      x.last_forecast_date = Time.now
+
+      # Standard deviation of py1, py2 and forecasted units
+      mean = (i.sale_units_py1 + i.sale_units_py2 + forecasted_units) / 3
+      tot_dev = (mean - i.sale_units_py1)**2 + (mean - i.sale_units_py2)**2 + (mean - forecasted_units)**2
+      x.sd_raw = Math.sqrt(tot_dev)
+      x.sd_floor = forecasted_units * 0.2
+      x.sd_ceiling = forecasted_units * 0.4
+      x.sd_smooth = x.sd_raw < x.sd_floor ? x.sd_floor : x.sd_raw > x.sd_ceiling ? x.sd_ceiling : x.sd_raw
+      x.sd_percent = x.sd_smooth / forecasted_units
+
+      # Coverage and need
+      x.coverage_allowed = [forecasted_units + x.sd_smooth - i.sale_units_ytd, 0].max
+      x.custom_need = is_generic ? 0 : x.coverage_allowed - x.on_hand
+      x.generic_need = is_generic ? total_generic_need : 0
+      x.coverage_complete = x.coverage_allowed + x.generic_need
+      x.unusable = [x.on_hand - x.coverage_complete].max
+      x.usable = x.coverage_complete - x.on_hand < 1 ? x.coverage_complete : x.on_hand
+      x.total_need = x.coverage_complete - x.usable + x.on_order
+
+      x.save
     end
 
     self.state = 'forecast' if self.state =='draft'
@@ -174,7 +198,7 @@
         self.approval_4_date = Time.now
       end
 
-      self.projection_approver_user_id = user.user_id
+      self.projection_approver_id = user.user_id
       self.save
     end
   end
@@ -194,7 +218,7 @@
         pd.save
       end
 
-      self.projection_closer_user_id = user.user_id
+      self.projection_closer_id = user.user_id
       self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{next_phase}"
       self.save
     end

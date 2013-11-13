@@ -310,7 +310,7 @@ Ext.define('Omni.view.inventories.Form', {
               fieldLabel   : this.maximum_unitsLabel,
               allowBlank   : true
             },
-            { name: 'seasonal_index_id',             fieldLabel: this.seasonal_index_idLabel,          allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SeasonalIndex',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'seasonal_index_id', itemTpl:'{display}' },
+            { name: 'seasonal_index_id',             fieldLabel: this.seasonal_index_idLabel,          allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SeasonalIndex',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'seasonal_index_id', itemTpl:'{display}' },
             {
               xtype        : 'numberfield',
               name         : 'forecast',
@@ -343,25 +343,29 @@ Ext.define('Omni.view.inventories.Form', {
               xtype        : 'numberfield',
               name         : 'sale_units_ytd',
               fieldLabel   : this.sale_units_ytdLabel,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             },
             {
               xtype        : 'numberfield',
               name         : 'sale_units_py1',
               fieldLabel   : this.sale_units_py1Label,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             },
             {
               xtype        : 'numberfield',
               name         : 'sale_units_py2',
               fieldLabel   : this.sale_units_py2Label,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             },
             {
               xtype        : 'numberfield',
               name         : 'sale_units_py3',
               fieldLabel   : this.sale_units_py3Label,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             },
             {
               xtype        : 'numberfield',

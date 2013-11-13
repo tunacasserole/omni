@@ -15,7 +15,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Application:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -34,7 +34,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ApplicationRole:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -53,7 +53,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Attachment:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -91,7 +91,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Dashlet:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -110,7 +110,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Event:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -129,7 +129,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Lookup:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -148,7 +148,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Note:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -167,7 +167,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Permission:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -186,7 +186,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Privilege:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -205,7 +205,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Role:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -224,7 +224,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			User:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -243,7 +243,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			UserRole:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -262,7 +262,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Vendor:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.service'
@@ -300,7 +300,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			OutboxItem:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Buildit.comm.service'
@@ -319,7 +319,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Adjustment:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -338,7 +338,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			AdjustmentReason:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -357,7 +357,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			AllocationProfile:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -376,7 +376,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Area:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -395,7 +395,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Bin:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -414,7 +414,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			BinSku:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -433,7 +433,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Bom:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -452,7 +452,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			BomDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -471,7 +471,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Bts:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -490,7 +490,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			BtsDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -509,7 +509,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			BtsStyle:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -528,7 +528,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Category:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -547,7 +547,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Classification:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -566,7 +566,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Color:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -585,7 +585,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Company:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -604,7 +604,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Container:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -623,7 +623,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ContainerDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -642,7 +642,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Cost:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -661,7 +661,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			CostDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -680,7 +680,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Customer:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -699,7 +699,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			CustomerSite:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -718,7 +718,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			DailyResult:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -737,7 +737,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Department:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -756,7 +756,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			District:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -775,7 +775,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ForecastProfile:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -794,7 +794,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			GlAccount:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -813,7 +813,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Grade:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -832,7 +832,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			GritsBts:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -851,7 +851,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Import:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -870,7 +870,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Inventory:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -889,7 +889,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Issue:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -908,7 +908,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Label:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -927,7 +927,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Location:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -946,7 +946,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			LocationTaxAuthority:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -965,7 +965,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			LocationTaxHoliday:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -984,7 +984,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			LocationUser:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1003,7 +1003,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Log:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1022,7 +1022,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			MarkInventory:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1041,7 +1041,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			MarkOrder:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1060,7 +1060,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			MarkOrderLine:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1079,7 +1079,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			MarkTransfer:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1098,7 +1098,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			MarkTransferLine:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1117,7 +1117,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			MarkWip:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1136,7 +1136,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Order:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1155,7 +1155,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			OrderDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1174,7 +1174,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Payment:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1193,7 +1193,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Period:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1212,7 +1212,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			PeriodResult:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1231,7 +1231,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			PickTicket:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1250,7 +1250,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			PriceBook:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1269,7 +1269,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			PriceChange:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1288,7 +1288,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Product:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1307,7 +1307,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ProductType:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1326,7 +1326,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Program:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1345,7 +1345,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ProgramColor:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1364,7 +1364,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ProgramProduct:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1383,7 +1383,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ProgramStyle:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1402,7 +1402,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Project:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1421,7 +1421,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Projection:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1440,7 +1440,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ProjectionDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1459,7 +1459,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ProjectionLocation:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1478,7 +1478,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ProjectionReason:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1497,7 +1497,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Purchase:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1516,7 +1516,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			PurchaseAllocation:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1535,7 +1535,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			PurchaseDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1554,7 +1554,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Receipt:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1573,7 +1573,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ReceiptDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1592,7 +1592,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ReceiptFormat:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1611,7 +1611,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Region:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1630,7 +1630,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Rule:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1649,7 +1649,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Ruleset:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1668,7 +1668,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SeasonalIndex:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1687,7 +1687,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Shipment:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1706,7 +1706,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ShipmentDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1725,7 +1725,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ShippingRate:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1744,7 +1744,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Site:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1763,7 +1763,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SiteDonation:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1782,7 +1782,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SiteEnrollment:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1801,7 +1801,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SiteTaxAuthority:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1820,7 +1820,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Size:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1839,7 +1839,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SizeGroup:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1858,7 +1858,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SizeGroupDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1877,7 +1877,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Sku:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1896,7 +1896,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SkuAlias:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1915,7 +1915,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SkuPrice:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1934,7 +1934,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SkuPriceRequest:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1953,7 +1953,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SkuPromoPrice:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1972,7 +1972,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SkuSubstitute:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -1991,7 +1991,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SkuSupplier:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2010,7 +2010,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			StockLedgerActivity:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2029,7 +2029,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			StockLedgerActivityLog:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2048,7 +2048,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Style:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2067,7 +2067,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			StyleColor:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2086,7 +2086,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			StyleColorSize:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2105,7 +2105,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			StyleSupplierColor:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2124,7 +2124,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			StyleLocation:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2143,7 +2143,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			StyleSupplier:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2162,7 +2162,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Subclass:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2181,7 +2181,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Supplier:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2200,7 +2200,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SupplierContact:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2219,7 +2219,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SupplierRating:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2238,7 +2238,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SupplierRatingSubject:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2257,7 +2257,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			SystemOption:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2276,7 +2276,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Task:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2295,7 +2295,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			TaxAuthority:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2314,7 +2314,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			TaxAuthorityRate:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2333,7 +2333,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Tender:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2352,7 +2352,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Terminal:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2371,7 +2371,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Till:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2390,7 +2390,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			TillActivity:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2409,7 +2409,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			TillAudit:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2428,7 +2428,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			TillDetail:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2447,7 +2447,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			Transfer:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2466,7 +2466,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			TransferReason:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'
@@ -2485,7 +2485,7 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			WorkOrder:[
-				{name: 'build', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
 		namespace   :'Omni.service'

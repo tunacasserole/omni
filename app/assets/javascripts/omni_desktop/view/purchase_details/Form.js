@@ -108,6 +108,13 @@ Ext.define('Omni.view.purchase_details.Form', {
               itemTpl:'{display}',
               disabled: disabled
             }
+            ,{ xtype: 'numberfield',
+              name: 'units_ordered',
+              fieldLabel: this.units_orderedLabel,
+              minValue: 0,
+              allowBlank: false,
+              disabled: disabled
+            }
            ,{ xtype: 'textfield',
               name: 'supplier_item_identifier',
               fieldLabel: this.supplier_item_identifierLabel,
@@ -156,13 +163,6 @@ Ext.define('Omni.view.purchase_details.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { xtype: 'numberfield',
-              name: 'units_ordered',
-              fieldLabel: this.units_orderedLabel,
-              minValue: 0,
-              allowBlank: false,
-              disabled: disabled
-            }
            ,{ xtype: 'textfield',
               name: 'selling_units_approved',
               fieldLabel: this.selling_units_approvedLabel,

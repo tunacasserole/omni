@@ -307,7 +307,7 @@ class Omni::Purchase < ActiveRecord::Base
     # Determine current user
 
     current_user_id = (Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON') # aaron
-    puts "\ncurrent_user_id is #{current_user_id}"
+    # puts "\ncurrent_user_id is #{current_user_id}"
     #  Determine whether this is the final approval or if the next approver needs to be notified
     approval_level = 0
      #  Determine which approval is needed (1, 2 or 3) and whether the user is authorized to do the approval

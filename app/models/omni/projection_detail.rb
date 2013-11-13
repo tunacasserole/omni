@@ -31,6 +31,20 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   default      :sale_units_py2,                   :override  =>  false,        :to    => 0
   default      :sale_units_py3,                   :override  =>  false,        :to    => 0
   default      :sale_units_ytd,                   :override  =>  false,        :to    => 0
+  default      :on_hand,                          :override  =>  false,        :to    => 0
+  default      :on_order,                         :override  =>  false,        :to    => 0
+  default      :sd_raw,                           :override  =>  false,        :to    => 0
+  default      :sd_floor,                         :override  =>  false,        :to    => 0
+  default      :sd_ceiling,                       :override  =>  false,        :to    => 0
+  default      :sd_smooth,                        :override  =>  false,        :to    => 0
+  default      :sd_percent,                       :override  =>  false,        :to    => 0
+  default      :coverage_allowed,                 :override  =>  false,        :to    => 0
+  default      :coverage_complete,                :override  =>  false,        :to    => 0
+  default      :usable,                           :override  =>  false,        :to    => 0
+  default      :unusable,                         :override  =>  false,        :to    => 0
+  default      :custom_need,                      :override  =>  false,        :to    => 0
+  default      :generic_need,                     :override  =>  false,        :to    => 0
+  default      :total_need,                       :override  =>  false,        :to    => 0
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -73,12 +87,12 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    compute :sale_units_ytd,                     :with => :compute_sale_units_ytd
-    compute :sale_units_py1,                     :with => :compute_sale_units_py1
-    compute :sale_units_py2,                     :with => :compute_sale_units_py2
-    compute :sale_units_py3,                     :with => :compute_sale_units_py3
-    compute :average_sales,                      :with => :compute_average_sales
-    compute :standard_deviation,                 :with => :compute_standard_deviation
+    # compute :sale_units_ytd,                     :with => :compute_sale_units_ytd
+    # compute :sale_units_py1,                     :with => :compute_sale_units_py1
+    # compute :sale_units_py2,                     :with => :compute_sale_units_py2
+    # compute :sale_units_py3,                     :with => :compute_sale_units_py3
+    # compute :average_sales,                      :with => :compute_average_sales
+    # compute :standard_deviation,                 :with => :compute_standard_deviation
   end
   # COMPUTED ATTRIBUTES (End)
 

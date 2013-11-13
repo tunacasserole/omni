@@ -5,7 +5,7 @@ Ext.define('Omni.view.inventories.Inspector',{
 
   initComponent:function(){
     var me = this;
-  
+
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter : {
@@ -22,7 +22,7 @@ Ext.define('Omni.view.inventories.Inspector',{
       }
     });
     // INSPECTOR INIT (End)
-  
+
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards     : [
@@ -30,6 +30,16 @@ Ext.define('Omni.view.inventories.Inspector',{
           title     : 'Profile',
           xtype     : 'omni-inventories-Form'
         }
+        ,{
+          title: 'Allocations',
+          xtype: 'omni-allocations-Explorer',
+          defaultSearch: { with:
+             {
+               purchase_id:   {equal_to: me.record.get('purchase_id')}
+             }
+          }
+        }
+
       ]
     });
     // CARDS (End)

@@ -25,11 +25,6 @@ namespace :omni do
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
-  desc "run the BTS report"
-  task :bts, [:bts_id] => :environment do |t, args|
-    Omni::Bts::Manager.run
-  end
-
   namespace :sync do
     namespace :mark do
       desc "load Omni inventory from RMS inventory."

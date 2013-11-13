@@ -1,22 +1,21 @@
 en:
   activerecord:
     models:
-      omni/projection:  'Model'
+      omni/projection:  'Projection'
     attributes:
       omni/projection:
         projection_id:                     'Projection'
         forecast_profile_id:               'Forecast Profile'
-        projection_approver_id:            'Projection Approver'
-        projection_closer_id:              'Projection Closer'
         department_id:                     'Department'
-        sku_id:                            'Sku'
+        projection_closer_id:              'Projection Closer User'
+        projection_approver_id:            'Projection Approver User'
+        projection_type:                   'Projection Type'
+        plan_year:                         'Plan Year'
         state:                             'State'
-        display:                           'Name'
+        display:                           'Display'
         description:                       'Description'
         approval_3_date:                   'Approval 3 Date'
         approval_4_date:                   'Approval 4 Date'
-        plan_year:                         'Plan Year'
-        projection_type:                   'Projection Type'
         version:                           'Version'
         audit_updated_at:                  'Audit Updated At'
         audit_created_at:                  'Audit Created At'
