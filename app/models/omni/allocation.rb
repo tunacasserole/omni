@@ -25,10 +25,10 @@ class Omni::Allocation < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :allocation_details,     :class_name => 'Omni::AllocationDetail',    :foreign_key => 'allocation_id'
-  has_many     :inventories,           :class_name => 'Omni::Inventory',         :foreign_key => 'sku_id'
-  belongs_to   :sku,                           :class_name => 'Omni::Sku',                      :foreign_key => 'sku_id'
-  belongs_to   :location,                    :class_name => 'Omni::Location',               :foreign_key => 'location_id'
-  belongs_to   :allocation_profile,      :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
+  has_many     :inventories,            :class_name => 'Omni::Inventory',         :foreign_key => 'sku_id'
+  belongs_to   :sku,                    :class_name => 'Omni::Sku',                      :foreign_key => 'sku_id'
+  belongs_to   :location,               :class_name => 'Omni::Location',               :foreign_key => 'location_id'
+  belongs_to   :allocation_profile,     :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
   # ASSOCIATIONS (End)
 
 

@@ -475,7 +475,6 @@ Ext.define('Omni.view.purchases.Form', {
     });
     // FIELDSETS (End)
 
-
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title: 'Profile',
