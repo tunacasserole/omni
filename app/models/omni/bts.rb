@@ -69,7 +69,7 @@ class Omni::Bts < ActiveRecord::Base
   # state_machine :state, :initial => :new do
 
   # ### CALLBACKS ###
-  #   after_transition :on => :run, :do => :process_run
+  #   after_transition :on => :run, :do => :do_run
 
   # ### EVENTS ###
   #   event :run do
@@ -144,7 +144,7 @@ class Omni::Bts < ActiveRecord::Base
 end #
 
 
-  # def process_run
+  # def do_run
   #   self.state='running'
   #   self.save
   #   system("rake omni:bts[#{self.bts_id}] &")

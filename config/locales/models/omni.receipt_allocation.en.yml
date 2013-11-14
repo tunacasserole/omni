@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/receipt_allocation:  'ReceiptAllocation'
+    attributes:
+      omni/receipt_allocation:
+        receipt_allocation_id:             'Receipt Allocation'
+        receipt_allocation_nbr:            'Receipt Allocation Nbr'
+        receipt_detail_id:                 'Receipt Detail'
+        location_id:                       'Location'
+        display:                           'Display'
+        state:                             'State'
+        units_needed:                      'Units Needed'
+        units_allocated:                   'Units Allocated'
+        units_shipped:                     'Units Shipped'
+        is_destroyed:                      'Is Destroyed'

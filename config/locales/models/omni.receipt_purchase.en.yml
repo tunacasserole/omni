@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      omni/receipt_purchase:  'ReceiptPurchase'
+    attributes:
+      omni/receipt_purchase:
+        receipt_purchase_id:               'Receipt Purchase'
+        display:                           'Display'
+        receipt_id:                        'Receipt'
+        purchase_id:                       'Purchase'
+        is_destroyed:                      'Is Destroyed'

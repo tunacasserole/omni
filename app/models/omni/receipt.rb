@@ -1,36 +1,23 @@
 class Omni::Receipt < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :receipts
   self.primary_key  = :receipt_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  # supports_logical_delete
-  # supports_audit
-  # supports_revisioning
   supports_fulltext
-  supports_crud_privileges
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :uniqueness  => true
   validates    :freight_terms,                   :lookup      => 'FREIGHT_TERMS',              :allow_nil => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
   default      :receipt_id,                       :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.location_display} - Receipt: #{m.create_date}"}
   default      :receipt_nbr,                      :override  =>  false,        :with  => :sequence,         :named=>"RECEIPT_NBR"
-  
+
   default      :create_date,                                                   :with  => :now
   default      :carrier_supplier_id,                                            :to    => lambda{|m| }
 
@@ -94,7 +81,9 @@ class Omni::Receipt < ActiveRecord::Base
   ### STATES ###
     state :draft do; end
 
-    state :scheduled do; end
+    state :scheduled do
+      validate :appointment_scheduled
+    end
 
     state :processing do; end
 
@@ -106,9 +95,9 @@ class Omni::Receipt < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    after_transition :on => :start, :do => :process_start
-    after_transition :on => :accept, :do => :process_accept
-    after_transition :on => :complete, :do => :process_complete
+    after_transition :on => :start, :do => :do_start
+    after_transition :on => :accept, :do => :do_accept
+    after_transition :on => :complete, :do => :do_complete
 
 
   ### EVENTS ###
@@ -129,12 +118,27 @@ class Omni::Receipt < ActiveRecord::Base
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
-    def process_start
+    def appointment_scheduled
+      errors.add('appointment_date', 'Appointment must be updated') unless appointment_date_changed?
+    end
+
+    def upload_packing_list
+    end
+
+    def receive_all
+    end
+
+    def print_count_sheet
+
+    end
+
+
+    def do_start
       self.receipt_date = Date.today
       self.save
     end
 
-    def process_accept
+    def do_accept
     # Do complete process on each Receipt Detail
 
     # Update Receipt
@@ -142,7 +146,7 @@ class Omni::Receipt < ActiveRecord::Base
       self.accepted_by_user_id = Buildit::User.current.user_id
     end
 
-    def process_complete
+    def do_complete
       self.complete_date = Date.today
       self.completed_by_user_id = Buildit::User.current.user_id
     end

@@ -134,34 +134,34 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   bts_source - pink - 000058
+   supply - pink - 000058
 ---------------------------------------------------------------------------------------
 */
 
 /* Inspector Logo */
-.inspector .tab.bts_source .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/bts_source-26.png);
+.inspector .tab.supply .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/supply-26.png);
   background-color: #000058;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.bts_source.active .x-panel-body .logo, .inspector .tab.bts_source .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/bts_source-26.png);
+.inspector .tab.supply.active .x-panel-body .logo, .inspector .tab.supply .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/supply-26.png);
   background-color: #AF0044;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.bts_source.active .x-panel-body, .inspector .tab.bts_source.active .x-panel-body:hover, .inspector .tab.bts_source .x-panel-body:hover {
+.inspector .tab.supply.active .x-panel-body, .inspector .tab.supply.active .x-panel-body:hover, .inspector .tab.supply .x-panel-body:hover {
   background: #000058;
 }
 
 /* Tile */
-.tile.bts_source {
+.tile.supply {
   background-image: url(/assets/omni/desktop/icons/module/tile_default.png);
   background-color: #000058 !important;
 }
 
-.tile.bts_source:hover {
+.tile.supply:hover {
   background-color: #AF0044 !important;
 }
 
@@ -645,7 +645,7 @@
 /* Inspector Logo Active & Hover */
 .inspector .tab.bts.active .x-panel-body .logo, .inspector .tab.bts .x-panel-body:hover .logo {
   background-image: url(/assets/omni/desktop/icons/module/contracts.png);
-  background-color: #AF0044;  
+  background-color: #AF0044;
 }
 
 /* Inspector Tab Active & Hover */
@@ -660,7 +660,7 @@
 }
 
 .tile.bts:hover {
-	background-color: #AF0044 !important; 
+	background-color: #AF0044 !important;
 }
 
 

@@ -61,3 +61,12 @@ en:
         total_order_cost:                  'Total Order Cost'
         is_update_blank_details:           'Update Details When Blank'
         is_update_all_details:             'Update All Purchase Details'
+        is_include_conversions:            'Include converted items'
+        department_id:                     'Department'
+        classification_id:                 'Class'
+        subclass_id:                       'Subclass'
+        style_id:                          'Style'
+        adjustment_percent:                'Adjustment Percent'
+        is_use_need_units:                 'Use need units from projection'
+        mass_update_type:                  'Type of mass update to perform'
+

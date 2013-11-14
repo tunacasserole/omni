@@ -137,7 +137,7 @@ class Omni::Test::Purchase < Omni::Test::Base
   #   x.order_pack_size = s[:order_pack_size]
   #   x.save
   #   # puts x.allocation_profile_id
-  #   # x.process_allocation
+  #   # x.do_allocation
 
   #   x=Omni::PurchaseDetail.where(:purchase_detail_id => 'ABABDAAA35E011E3APURCHASEDETAIL1').first
 

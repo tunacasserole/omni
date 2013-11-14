@@ -18,14 +18,17 @@ Ext.define('Omni.view.receipt_details.Form', {
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
-      receipt_detail_idLabel:                 Omni.i18n.model.ReceiptDetail.receipt_detail_id,
+      stateLabel:                             Omni.i18n.model.ReceiptDetail.state,
       displayLabel:                           Omni.i18n.model.ReceiptDetail.display,
       receipt_idLabel:                        Omni.i18n.model.ReceiptDetail.receipt_id,
+      sku_idLabel:                            Omni.i18n.model.ReceiptDetail.sku_id,
+      sku_aliasLabel:                         Omni.i18n.model.ReceiptDetail.sku_alias,
+      allocation_profile_idLabel:             Omni.i18n.model.ReceiptDetail.allocation_profile_id,
       receipt_line_nbrLabel:                  Omni.i18n.model.ReceiptDetail.receipt_line_nbr,
       purchase_detail_idLabel:                Omni.i18n.model.ReceiptDetail.purchase_detail_id,
       received_unitsLabel:                    Omni.i18n.model.ReceiptDetail.received_units,
-      stateLabel:                             Omni.i18n.model.ReceiptDetail.state,
-      is_destroyedLabel:                      Omni.i18n.model.ReceiptDetail.is_destroyed
+      receipt_pack_sizeLabel:                 Omni.i18n.model.ReceiptDetail.receipt_pack_size,
+      receipt_pack_typeLabel:                 Omni.i18n.model.ReceiptDetail.receipt_pack_type,
     });
     // LABELS (End)
 
@@ -40,29 +43,16 @@ Ext.define('Omni.view.receipt_details.Form', {
           defaults:     {anchor: '95%'},
           layout:       'anchor',
           items:[
-          /*
-            {
-              xtype: 'buildit-Locator',
-              store: Ext.create('MyApp.store.MyModel',{pageSize: 10}),
-              displayField: 'name',
-              queryField: 'name',
-              valueField: 'value_field',
-              itemTpl:'{name}',
-              name: 'attribute_name',
-              fieldLabel: this.attribute_nameLabel,
-              allowBlank: true
-            }
-          */
-
-            // { xtype: 'textfield', name: 'receipt_detail_id',              fieldLabel: this.receipt_detail_idLabel           , allowBlank: true },
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
-            // { xtype: 'textfield', name: 'receipt_id',                     fieldLabel: this.receipt_idLabel                  , allowBlank: true },
-            { xtype: 'textfield', name: 'receipt_line_nbr',               fieldLabel: this.receipt_line_nbrLabel            , allowBlank: true },
-            // { xtype: 'textfield', name: 'purchase_detail_id',             fieldLabel: this.purchase_detail_idLabel          , allowBlank: true },
-            { xtype: 'textfield', name: 'received_units',                 fieldLabel: this.received_unitsLabel              , allowBlank: true },
             { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true, disabled: true },
-            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }
-          ]
+            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
+            { xtype: 'textfield', name: 'receipt_line_nbr',               fieldLabel: this.receipt_line_nbrLabel            , allowBlank: true },
+            { name: 'sku_id',                    fieldLabel: this.sku_idLabel, allowBlank: true,   xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
+            { name: 'allocation_profile_id',     fieldLabel: this.allocation_profile_idLabel,             allowBlank: true,   xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.AllocationProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'allocation_profile_id', itemTpl:'{display}' },
+            { xtype: 'textfield', name: 'sku_alias',                        fieldLabel: this.sku_aliasLabel                     , allowBlank: true },
+            { xtype: 'numberfield', name: 'received_units',                 fieldLabel: this.received_unitsLabel              , allowBlank: true },
+            { xtype: 'numberfield', name: 'receipt_pack_size',                 fieldLabel: this.receipt_pack_sizeLabel              , allowBlank: true },
+            { xtype: 'buildit-Lookup', name: 'receipt_pack_type',             fieldLabel: this.receipt_pack_typeLabel               , allowBlank: true,  category:   'RECEIPT_PACK_TYPE' },
+            ]
         }
       ]
     });

@@ -5,7 +5,7 @@
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  supports_audit
+  # supports_audit
   supports_fulltext
   # BEHAVIOR (End)
 

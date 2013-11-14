@@ -117,9 +117,9 @@ class Omni::Allocation < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    after_transition :on => :approve, :do => :process_approve
-    after_transition :on => :transfer, :do => :process_transfer
-    after_transition :on => :ship, :do => :process_ship
+    after_transition :on => :approve, :do => :do_approve
+    after_transition :on => :transfer, :do => :do_transfer
+    after_transition :on => :ship, :do => :do_ship
 
     event :approve do
       transition :draft => :approved
@@ -137,20 +137,20 @@ class Omni::Allocation < ActiveRecord::Base
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def process_approve
+  def do_approve
   end
 
-  def process_transfer
+  def do_transfer
   end
 
-  def process_ship
+  def do_ship
   end
 
   def calculate
     locked_units = 0
     locked_locations = {}
     purchase_detail_id = nil
-    allocations_to_create = process_calculate(self.allocation_profile, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
+    allocations_to_create = do_calculate(self.allocation_profile, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     self.allocation_details.delete_all
     allocations_to_create.each do |k,vq |
       Omni::AllocationDetail.create(allocation_id: self.allocation_id, sku_id: self.sku_id, location_idid: k, units_allocated: v)
@@ -158,7 +158,7 @@ class Omni::Allocation < ActiveRecord::Base
   end
 
   # HELPERS (Start) =====================================================================
-  def process_calculate(allocation_profile, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
+  def do_calculate(allocation_profile, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     allocation_formula = allocation_profile.allocation_formula
     temp_needs = {}
     temp_allocations = {}

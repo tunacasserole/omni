@@ -3,13 +3,13 @@ Ext.define('Omni.view.period_results.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-period_results-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       sku_idLabel:                                Omni.i18n.model.PeriodResult.sku_id,

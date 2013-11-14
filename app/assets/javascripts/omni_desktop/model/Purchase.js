@@ -61,7 +61,14 @@ Ext.define('Omni.model.Purchase', {
       { name: 'total_order_cost',            type: 'string'   },
       { name: 'is_update_all_details',       type: 'boolean'  },
       { name: 'is_update_blank_details',     type: 'boolean'  },
-
+      { name: 'is_use_need_units',           type: 'boolean'  },
+      { name: 'department_id',               type: 'string'  },
+      { name: 'classification_id',           type: 'string'  },
+      { name: 'subclass_id',                 type: 'string'  },
+      { name: 'style_id',                    type: 'string'  },
+      { name: 'adjustment_percent',          type: 'decimal'  },
+      { name: 'is_include_conversions',      type: 'boolean'  },
+      { name: 'mass_update_type',            type: 'string'  },
     ],
 
   idProperty: 'purchase_id',

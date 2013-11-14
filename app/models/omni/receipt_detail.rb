@@ -12,7 +12,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -78,7 +78,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
     # end
 
   ### CALLBACKS ###
-    # after_transition :on => :costing, :do => :process_costing
+    # after_transition :on => :costing, :do => :do_costing
 
   ### EVENTS ###
     # event :approve do

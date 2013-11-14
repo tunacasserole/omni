@@ -30,8 +30,8 @@ class Omni::Task < ActiveRecord::Base
   default :task_id,                         :with => :guid
   default :task_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"TASK_NBR"
   default :creator_id,                      :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
-  default :assignee_id,                     :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current} 
-  default :importance,                      :to => '4'                  
+  default :assignee_id,                     :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+  default :importance,                      :to => '4'
   # DEFAULTS (End)
 
 
@@ -46,19 +46,19 @@ class Omni::Task < ActiveRecord::Base
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :project_display,                        :to => 'project.display'
-    map :creator_display,                        :to => 'creator.full_name'    
+    map :creator_display,                        :to => 'creator.full_name'
     map :assignee_display,                      :to => 'assignee.full_name'
-  end  
+  end
   # MAPPED ATTRIBUTES (End)
 
-  
+
   # COMPUTED ATTRIBUTES (Start) =========================================================
-  
+
   # COMPUTED ATTRIBUTES (End)
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-  
+
   # TEMPORARY ATTRIBUTES (End)
 
 
@@ -74,14 +74,14 @@ class Omni::Task < ActiveRecord::Base
   # FILTERS (End)
 
   # SCOPES (Start) ======================================================================
-  
+
   # SCOPES (End)
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :new do
 
   ### CALLBACKS ###
-    # after_transition :on => :complete, :do => :process_complete
+    # after_transition :on => :complete, :do => :do_complete
 
   ### EVENTS ###
     event :complete do
@@ -90,11 +90,11 @@ class Omni::Task < ActiveRecord::Base
 
     event :cancel do
       transition any => :cancelled
-    end    
+    end
 
     event :test_it do
       transition any => :test
-    end    
+    end
   end
   # STATES (End)
 
@@ -122,9 +122,9 @@ class Omni::Task < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  
+
   # STATES (End)
-  
+
 
   # HELPERS (Start) =====================================================================
 

@@ -93,6 +93,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
+  StateMachine::Machine.ignore_method_conflicts = true
   state_machine :state, :initial => :draft do
 
   ### STATES ###
@@ -106,10 +107,10 @@ class Omni::AllocationDetail < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    # after_transition :on => :lock, :do => :process_lock
-    # after_transition :on => :unlock, :do => :process_unlock
-    after_transition :on => :transfer, :do => :process_transfer
-    after_transition :on => :ship, :do => :process_ship
+    # after_transition :on => :lock, :do => :do_lock
+    # after_transition :on => :unlock, :do => :do_unlock
+    after_transition :on => :transfer, :do => :do_transfer
+    after_transition :on => :ship, :do => :do_ship
 
     event :lock do
       transition :draft => :locked
@@ -132,13 +133,13 @@ class Omni::AllocationDetail < ActiveRecord::Base
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def process_approve
+  def do_approve
   end
 
-  def process_transfer
+  def do_transfer
   end
 
-  def process_ship
+  def do_ship
   end
 
 

@@ -8,10 +8,15 @@ en:
         display:                         Name
         receipt_display:                 Receipt
         receipt_id:                      Receipt
+        sku_alias:                       Sku Alias
+        sku_id:                          Sku
         receipt_line_nbr:                Receipt line number
         purchase_detail_display:         Purchase Detail
+        allocation_profile_id:           Allocation Profile
         purchase_detail_id:              Purchase Detail
         received_units:                  Received Units
+        received_pack_size:              Received Pack Size
+        received_pack_type:              Received Pack Type
         state:                           State
         is_destroyed:                    Deleted
 

@@ -37,7 +37,7 @@
   belongs_to   :allocation_profile,   :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
   belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
   belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => :sku_id
-  has_many     :inventories,        :class_name => 'Omni::Inventory',         :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
+  has_many     :inventories,          :class_name => 'Omni::Inventory',           :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
   has_many     :locations,            :class_name => 'Omni::Location',            :through     => :inventories
   # ASSOCIATIONS (End)
 
@@ -99,9 +99,9 @@
     end
 
   ### CALLBACKS ###
-    after_transition :on => :approve, :do => :process_approve
-    after_transition :on => :receive, :do => :process_receive
-    after_transition :on => :cancel, :do => :process_cancel
+    after_transition :on => :approve, :do => :do_approve
+    after_transition :on => :receive, :do => :do_receive
+    after_transition :on => :cancel, :do => :do_cancel
 
   ### EVENTS ###
     event :approve do
@@ -127,14 +127,14 @@
   end
 
   def allocate
-    process_allocation
+    do_allocation
   end
 
-  def process_receive
+  def do_receive
     errors.add('Not Ready','Feature is not yet implemented.')
   end
 
-  def process_cancel
+  def do_cancel
     # Write SLA
     open_units = self.selling_units_approved - self.selling_units_received - self.selling_units_cancelled
     # Give error because no open units cancelled
@@ -164,7 +164,7 @@
     # send_notice
   end
 
-  def process_approve
+  def do_approve
     # the Approve event writes StockLedgerActivity rows to update On Order and order history"
     sl = Omni::StockLedgerActivity.new
     sl.stockable_type = 'Omni::Purchase'
@@ -255,7 +255,7 @@
     return 'aaron@buildit.io'
   end
 
-  def process_allocate
+  def do_allocate
     # def calculate(self.allocation_profile, self.sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     Omni::Allocation.calculate(self.allocation_profile, self.sku_id, units_ordered * order_pack_size, 0, locked_locations, purchase_detail_id)
   end
@@ -279,7 +279,7 @@
   #
   # Subtract "locked units" from "selling units available" to get "allocatable units".
   #
-  # def process_allocation
+  # def do_allocation
   #   return if self.allocation_profile.nil?
 
   #   # remove any purchase allocations that are not locked. Locked is defined as having a
@@ -404,7 +404,7 @@
   #   end
 
 
-  # end # process_allocation
+  # end # do_allocation
 
 
   # HELPERS (End)

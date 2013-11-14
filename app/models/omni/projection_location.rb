@@ -107,7 +107,7 @@ class Omni::ProjectionLocation < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    after_transition :on => :approve, :do => :process_approve
+    after_transition :on => :approve, :do => :do_approve
 
   ### EVENTS ###
     event :approve do
@@ -117,7 +117,7 @@ class Omni::ProjectionLocation < ActiveRecord::Base
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def process_approve
+  def do_approve
     self.approval_date = Time.now
     self.save
   end

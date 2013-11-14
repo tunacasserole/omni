@@ -175,7 +175,7 @@ Ext.define('Omni.view.allocations.Form', {
       actions: [
         {
           xtype      : 'button',
-          cls        : 'ship',
+          cls        : 'close-event',
           tooltip    : 'Calculate',
           listeners  : {
             beforerender  : this.prepareCalculateAction,
@@ -195,7 +195,7 @@ Ext.define('Omni.view.allocations.Form', {
         },
          {
           xtype      : 'button',
-          cls        : 'ship',
+          cls        : 'close-event',
           tooltip    : 'Transfer',
           listeners  : {
             beforerender  : this.prepareTransferAction,
@@ -205,7 +205,7 @@ Ext.define('Omni.view.allocations.Form', {
         },
         {
           xtype      : 'button',
-          cls        : 'ship',
+          cls        : 'close-event',
           tooltip    : 'Ship',
           listeners  : {
             beforerender  : this.prepareShipAction,

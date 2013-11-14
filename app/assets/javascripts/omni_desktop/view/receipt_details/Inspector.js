@@ -19,6 +19,14 @@ Ext.define('Omni.view.receipt_details.Inspector',{
     Ext.apply(this, {
       cards: [
         {title: 'Profile',           xtype: 'omni-receipt_details-Form'}
+        ,{title: 'Allocations', xtype: 'omni-receipt_allocations-Explorer', module: 'contracts',
+           defaultSearch: { with:
+             {
+               receipt_detail_id:   {equal_to: me.record.get('receipt_detail_id')}
+             }
+          },
+          showBadge: true
+        }
       ]
     });
     // CARDS (End)

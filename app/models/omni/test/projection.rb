@@ -17,10 +17,10 @@ class Omni::Test::Projection < Omni::Test::Base
 
   def self.test_forecast
     @@model_action = 'Forecast'
-    self.forecasting_scenarios.each {|x| process_forecasting_scenario x}
+    self.forecasting_scenarios.each {|x| do_forecasting_scenario x}
   end
 
-  def self.process_forecasting_scenario(s)
+  def self.do_forecasting_scenario(s)
     # puts "\n" + s[:scenario]
     Omni::ProjectionDetail.where(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1').each {|x| x.delete}
     Omni::ProjectionDetail.create(:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :projection_detail_id => 'PROJ1A1C193611E3A22D20CXXPRODET1', :forecast_profile_id =>s[:forecast_profile_id], :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50)
@@ -61,10 +61,10 @@ class Omni::Test::Projection < Omni::Test::Base
 
   def self.test_close
     @@model_action = 'Close'
-    self.closing_scenarios.each {|x| process_closing_scenario x}
+    self.closing_scenarios.each {|x| do_closing_scenario x}
   end
 
-  def self.process_closing_scenario(s)
+  def self.do_closing_scenario(s)
     # puts "\n" + s[:scenario]
     # Omni::ProjectionDetail.all.each {|x| @p.delete}
     Omni::ProjectionDetail.where(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION2').each {|x| x.delete}

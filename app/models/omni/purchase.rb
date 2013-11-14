@@ -85,14 +85,12 @@ class Omni::Purchase < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
     compute :total_order_units,                  :with => :compute_total_order_units
     compute :total_order_cost,                   :with => :compute_total_order_cost
   end
   # COMPUTED ATTRIBUTES (End)`
-
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
   temporary_attributes do
@@ -134,13 +132,10 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
   # before_destroy :cascading_delete
-
   hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
   hook :before_update, :update_allocation_profiles, 30
   hook :before_destroy, :validate_state, 40
-
-  # hook :before_create, :set_defaults, 10
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
@@ -179,15 +174,15 @@ class Omni::Purchase < ActiveRecord::Base
     state :cancelled do
     end
 
-  ### CALLBACKS ###
-    # after_transition :on => :costing, :do => :process_costing
-    after_transition :on => :cancel,  :do => :process_cancel
+    ### CALLBACKS ###
+    # after_transition :on => :costing, :do => :do_costing
+    after_transition :on => :cancel,  :do => :do_cancel
     after_transition :on => :release, :do => :do_release
-    after_transition :on => :approve, :do => :process_approve
-    # after_transition :on => :open, :do => :process_open
-    after_transition :on => :print,   :do => :process_print
+    after_transition :on => :approve, :do => :do_approve
+    # after_transition :on => :open, :do => :do_open
+    after_transition :on => :print,   :do => :do_print
 
-  ### EVENTS ###
+    ### EVENTS ###
     event :release do
       transition :draft => :pending_approval
     end
@@ -205,7 +200,7 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # STATE HELPERS (Start) =====================================================================
-  def process_cancel
+  def do_cancel
     # the Cancel event writes StockLedgerActivity rows for each PurchaseDetail
     # to update On Order and order history
      self.purchase_details.each {|pd| pd.cancel}
@@ -217,68 +212,64 @@ class Omni::Purchase < ActiveRecord::Base
     # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
   end
 
-  def process_open
-       self.state = "open"
-       self.save
-       self.purchase_details.each {|pd| pd.approve}
+  def do_open
+    self.state = "open"
+    self.save
+    self.purchase_details.each {|pd| pd.approve}
   end
-
   # STATE HELPERS (End)
 
   # HELPERS (Start) =====================================================================
-
-  def request(params={})
-    @params = params
-    self.send(params['request_type'])
+  def mass_update
+    self.send(mass_update_type.downcase)
+    ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units'].each {|x| self.send("#{x}=", nil)}
+    self.save
   end
 
-  def generate
-    x=Omni::Purchase.create(supplier_id: @params['supplier_id'], location_id: @params['location_id'], purchase_order_type: @params['purchase_order_type'], order_date: @params['order_date'], ordered_by_user_id: @params['ordered_by_user_id'])
-    supplier = Omni::Supplier.where(supplier_id: @params['supplier_id']).first
-    supplier.sku_suppliers.where(is_discontinued: false).each do |ss|
-      next unless Omni::Inventory.where(location_id: @params['location_id'], sku_id: @params['sku_id'], is_authorized: true).first
-      next unless ss.sku_id.style_id == @params['style_id'] if @params['style_id']
-      next unless ss.sku_id.subclass_id == @params['subclass_id'] if @params['subclass_id']
-      next unless ss.sku_id.subclass.classification_id == @params['classification_id'] if @params['classification_id']
-      next unless ss.sku_id.subclass.classification.department_id == @params['department'] if @params['department']
-      next if ss.sku_id.is_converted unless @params['include_conversions']
-      total_need_units = Omni::BtsDetail.where(sku_id: ss.sku_id).sum(:need) * (@params['adjustment_percent'] || 0) / 100
-      next unless total_need_units > 0
-      detail = Omni::PurchaseDetail.create(purchase_id: x.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id)
-      pack_size = detail.order_pack_size
-      if pack_size > 0
-        units_ordered = [1,total_need_units / pack_size].max.round
-        pack_type = detail.order_pack_type
-      else
-        units_ordered = total_need_units
-        pack_size = 1
-        pack_type = 'SELLING_UNIT'
-      end
-      detail.update_attributes(units_ordered: units_ordered, order_pack_size: order_pack_size, order_pack_type: order_pack_type)
+  def adjust
+    self.purchase_details.each do |pd|
+      pd.units_ordered *= self.adjustment_percent / 100 if self.adjustment_percent
+      pd.save
+    end
+  end
+
+  def add
+    self.supplier.sku_suppliers.each do |ss|
+      next if Omni::PurchaseDetail.where(purchase_id: self.purchase_id, sku_id: ss.sku_id).first
+      next unless sku_meets_criteria? ss.sku
+      next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: ss.sku_id, is_authorized: true).first
+      Omni::PurchaseDetail.create(units_ordered: units_to_order(i), purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
     end
   end
 
   def clone
-    x=dup
-    x.update_attributes(display: nil, purchase_order_nbr: nil, state: 'draft', order_date: nil, ordered_by_user_id: nil, ship_date: nil, delivery_date: nil, cancel_not_shipped_by_date: nil,cancel_not_received_by_date: nil, approval_1_date: nil, approval_2_date: nil, approval_3_date: nil, first_receipt_date: nil, cancelled_date: nil, last_receipt_date: nil, is_destroyed: nil)
-    x.save
-    purchase_details.each do |pd|
-      # puts "location is #{location_id} and sku is #{pd.sku_id}"
-      next unless Omni::SkuSupplier.where(supplier_id: x.supplier_id, is_discontinued: false)
-      next unless Omni::Inventory.where(location_id: x.location_id, sku_id: pd.sku_id, is_authorized: true).first
-      next if pd.sku.is_converted unless @params['include_conversions']
-      units_ordered = adjust_order_units(pd.units_ordered, pd.order_pack_size)
-      Omni::PurchaseDetail.create(purchase_id: x.purchase_id, sku_id: pd.sku_id, units_ordered: units_ordered, sku_supplier_id: pd.sku_supplier_id, supplier_item_identifier: pd.supplier_item_identifier, description: pd.description, color_name: pd.color_name, size_name: pd.size_name, sku_alias: pd.sku_alias, allocation_profile_id: pd.allocation_profile_id, order_pack_size: pd.order_pack_size, order_pack_type: pd.order_pack_type, order_cost_units: pd.order_cost_units, order_multiple_type: pd.order_multiple_type, order_multiple: pd.order_multiple, supplier_cost: pd.supplier_cost, extra_cost: pd.extra_cost)
+    x = Omni::Purchase.create(supplier_id: self.supplier_id, location_id: self.location_id, purchase_type: self.purchase_type, purchase_source: self.purchase_source, ship_via: self.ship_via, fob_point: self.fob_point, master_purchase_id: self.master_purchase_id, carrier_supplier_id: self.carrier_supplier_id, is_special_order: self.is_special_order, estimated_lead_time_days: self.estimated_lead_time_days, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_1_location_user_id: self.purchase_approver_1_location_user_id, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_2_location_user_id: self.purchase_approver_2_location_user_id, purchase_approver_3_user_id: self.purchase_approver_3_user_id, purchase_approver_3_location_user_id: self.purchase_approver_3_location_user_id, payment_term: self.payment_term, freight_term: self.freight_term, pay_to_supplier_id: self.pay_to_supplier_id, ship_thru_supplier_id: self.ship_thru_supplier_id, supplier_address_1: self.supplier_address_1, supplier_address_2: self.supplier_address_2, supplier_address_3: self.supplier_address_3, supplier_address_4: self.supplier_address_4, supplier_city: self.supplier_city, supplier_state_code: self.supplier_state_code, supplier_zip: self.supplier_zip, supplier_country: self.supplier_country)
+    self.purchase_details.each do |pd|
+      next if Omni::PurchaseDetail.where(purchase_id: x.purchase_id, sku_id: pd.sku_id).first
+      next unless sku_meets_criteria? pd.sku
+      next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: pd.sku_id, is_authorized: true).first
+      Omni::PurchaseDetail.create(units_ordered: units_to_order(i),purchase_id: x.purchase_id, sku_id: pd.sku_id, sku_supplier_id: pd.sku_supplier_id, supplier_item_identifier: pd.supplier_item_identifier, description: pd.description, color_name: pd.color_name, size_name: pd.size_name, sku_alias: pd.sku_alias, allocation_profile_id: pd.allocation_profile_id,  order_pack_size: pd.order_pack_size, order_pack_type: pd.order_pack_type, order_cost_units: pd.order_cost_units, order_multiple_type: pd.order_multiple_type, order_multiple: pd.order_multiple, supplier_cost: pd.supplier_cost, extra_cost: pd.extra_cost)
     end
-    return Omni::Purchase.where(purchase_id: x.purchase_id).first # TODO: remove.  for testing only.
   end
 
-  def adjust_order_units(units_ordered, order_pack_size)
-    total_selling_units = (units_ordered * order_pack_size) * (@params['adjustment_percent'] || 100) / 100
-    units_ordered = order_pack_size > 0 ? [(total_selling_units / order_pack_size).round,1].max : total_selling_units
+  def units_to_order(inventory)
+    units_to_order = self.is_use_need_units && inventory ? inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).sum('current_approved_units') : 0
+    units_to_order *= self.adjustment_percent / 100 if self.adjustment_percent
+    units_to_order /= self.order_pack_size if self.order_pack_size > 1
+    [units_to_order, 1].max.round
   end
 
-  def process_approve
+  def sku_meets_criteria?(sku)
+    return false unless sku.style_id == self.style_id if self.style_id
+    return false unless sku.subclass_id == self.subclass_id if self.subclass_id
+    return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
+    return false unless sku.subclass.classification.department_id == self.department_id if self.department_id
+    return false if sku.is_converted unless self.is_include_conversions
+    return false unless Omni::SkuSupplier.where(supplier_id: self.supplier_id, sku_id: sku.sku_id, is_discontinued: false).first
+    return true
+  end
+
+  def do_approve
     case self.approval_level
       when 1
         self.approval_1_date = Date.today
@@ -286,7 +277,7 @@ class Omni::Purchase < ActiveRecord::Base
         if self.purchase_approver_2_user_id
 #         notify approver 2
         else
-          self.process_open
+          self.do_open
         end
       when 2
         self.approval_2_date = Date.today
@@ -294,12 +285,12 @@ class Omni::Purchase < ActiveRecord::Base
         if self.purchase_approver_3_user_id
 #         notify approver 3
         else
-          self.process_open
+          self.do_open
         end
       when 3
         self.approval_3_date = Date.today
         self.save
-        self.process_open
+        self.do_open
     end
  end
 
@@ -417,7 +408,7 @@ class Omni::Purchase < ActiveRecord::Base
     Omni::Purchase::Helpers.print(self)
   end
 
-  def process_print
+  def do_print
     # Create a pdf of the purchase order for printing
     p = Omni::Print.new(:source_model => 'Purchase', :source_id => self.purchase_id)
     p.save
@@ -428,3 +419,8 @@ class Omni::Purchase < ActiveRecord::Base
 
 end # class Omni::Purchase
 
+
+  # def request(params={})
+  #   @params = params
+  #   self.send(params['request_type'])
+  # end

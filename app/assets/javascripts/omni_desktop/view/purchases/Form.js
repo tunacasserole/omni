@@ -80,6 +80,14 @@ Ext.define('Omni.view.purchases.Form', {
       total_order_costLabel:                  Omni.i18n.model.Purchase.total_order_cost,
       is_update_blank_detailsLabel:           Omni.i18n.model.Purchase.is_update_blank_details,
       is_update_all_detailsLabel:             Omni.i18n.model.Purchase.is_update_all_details,
+      department_idLabel:                     Omni.i18n.model.Purchase.department_id,
+      classification_idLabel:                 Omni.i18n.model.Purchase.classification_id,
+      subclass_idLabel:                       Omni.i18n.model.Purchase.subclass_id,
+      style_idLabel:                          Omni.i18n.model.Purchase.style_id,
+      adjustment_percentLabel:                Omni.i18n.model.Purchase.adjustment_percent,
+      is_include_conversionsLabel:            Omni.i18n.model.Purchase.is_include_conversions,
+      is_use_need_unitsLabel:                 Omni.i18n.model.Purchase.is_use_need_units,
+      mass_update_typeLabel:                  Omni.i18n.model.Purchase.mass_update_type
     });
     // LABELS (End)
 
@@ -156,6 +164,7 @@ Ext.define('Omni.view.purchases.Form', {
           xtype:        'fieldset',
           title:        'Purchase Order Dates',
           collapsible:  true,
+          collapsed:     true,
           defaultType:  'textfield',
           defaults:     {anchor: '70%'},
           layout:       'anchor',
@@ -190,6 +199,7 @@ Ext.define('Omni.view.purchases.Form', {
           xtype               : 'fieldset',
           title               : 'Purchase Order Approvals',
           collapsible         : true,
+          collapsed           : true,
           defaultType         : 'textfield',
           defaults            : {anchor: '70%'},
           layout              : 'anchor',
@@ -197,15 +207,6 @@ Ext.define('Omni.view.purchases.Form', {
           items               :[
             { xtype             : 'buildit-Locator',
               store             : Ext.create('Buildit.store.User',{pageSize: 20}),
-              // store             : Ext.create('Buildit.store.User',
-                                    // {
-                                      // pageSize      : 20
-                                      //defaultearch  : {with: {is_purchase_approver_1: {equal_to:  true}}}
-                                      // filters: [{
-                                      //   property: 'is_purchase_approver_1',
-                                      //   value:  true
-                                      // }]
-                                    // }),
               displayField      : 'full_name',
               queryField        : 'full_name',
               valueField        : 'user_id',
@@ -258,6 +259,7 @@ Ext.define('Omni.view.purchases.Form', {
           xtype: 'fieldset',
           title: 'Contact Information',
           collapsible: true,
+          collapsed:     true,
           defaultType: 'textfield',
           defaults: {anchor: '70%'},
           layout: 'anchor',
@@ -316,6 +318,7 @@ Ext.define('Omni.view.purchases.Form', {
           xtype:        'fieldset',
           title:        'Logistics Information',
           collapsible:  true,
+          collapsed:     true,
           defaultType:  'textfield',
           defaults:     {anchor: '70%'},
           layout:       'anchor',
@@ -384,6 +387,7 @@ Ext.define('Omni.view.purchases.Form', {
           xtype:        'fieldset',
           title:        'Allocation Information',
           collapsible:  true,
+          collapsed:     true,
           defaultType:  'textfield',
           defaults:     {anchor: '70%'},
           layout:       'anchor',
@@ -422,6 +426,7 @@ Ext.define('Omni.view.purchases.Form', {
           xtype:        'fieldset',
           title:        'Other Information',
           collapsible:  true,
+          collapsed:     true,
           defaultType:  'textfield',
           defaults:     {anchor: '70%'},
           layout:       'anchor',
@@ -471,6 +476,43 @@ Ext.define('Omni.view.purchases.Form', {
             }
           ]
         }
+       ,{
+          xtype               : 'fieldset',
+          title               : 'Mass Update',
+          collapsible         : true,
+          collapsed           : true,
+          defaultType         : 'textfield',
+          defaults            : {anchor: '70%'},
+          layout              : 'anchor',
+          disabled            : disabled,
+          items               :[
+                         { name: 'department_id',  fieldLabel: this.department_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
+                         { name: 'classification_id',  fieldLabel: this.classification_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },
+                         { name: 'subclass_id',  fieldLabel: this.subclass_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Subclass',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
+                         { name: 'style_id',  fieldLabel: this.style_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
+            { xtype             : 'numberfield',
+              name              : 'adjustment_percent',
+              fieldLabel        : this.adjustment_percentLabel,
+              allowBlank        : true
+            },
+            { xtype             : 'checkbox',
+              name              : 'is_use_need_units',
+              fieldLabel        : this.is_use_need_unitsLabel,
+              allowBlank        : true
+            },
+            { xtype             : 'checkbox',
+              name              : 'is_include_conversions',
+              fieldLabel        : this.is_include_conversionsLabel,
+              allowBlank        : true
+            },
+            { xtype             : 'buildit-Lookup',
+              name              : 'mass_update_type',
+              fieldLabel        : this.mass_update_typeLabel,
+              allowBlank        : true,
+              category          : 'MASS_UPDATE_TYPE'
+            }
+          ]
+        }
       ]
     });
     // FIELDSETS (End)
@@ -509,7 +551,7 @@ Ext.define('Omni.view.purchases.Form', {
         },
     {
           xtype      : 'button',
-          cls        : 'ship',
+          cls        : 'close-event',
           tooltip    : 'Allocate',
           listeners  : {
             beforerender  : this.prepareAllocateAction,
@@ -529,11 +571,11 @@ Ext.define('Omni.view.purchases.Form', {
         },
         {
           xtype      : 'button',
-          cls        : 'approve',
-          tooltip    : 'Advanced Create',
+          cls        : 'duplicate',
+          tooltip    : 'Mass Update',
           listeners  : {
-            beforerender  : this.prepareAdvancedCreateAction,
-            click         : me.onAdvancedCreateToggle,
+            beforerender  : this.prepareMassupdateAction,
+            click         : me.onMassupdateAction,
             scope         : me
           }
         }
@@ -551,24 +593,24 @@ Ext.define('Omni.view.purchases.Form', {
     this.callParent();
 
 
-    me.advancedCreateWindow = Ext.create('Omni.view.purchases.AdvancedCreatePanel');
-    me.advancedHidden = true;
+    // me.advancedCreateWindow = Ext.create('Omni.view.purchases.AdvancedCreatePanel');
+    // me.advancedHidden = true;
   },
 
   // HANDLERS (Start) ======================================================================
 
-  onAdvancedCreateToggle : function(btn, e){
+  // onAdvancedCreateToggle : function(btn, e){
 
-    var me               = this;
-    me.advancedHidden    = !me.advancedHidden;
+  //   var me               = this;
+  //   me.advancedHidden    = !me.advancedHidden;
 
-    if(me.advancedHidden){
-      me.advancedCreateWindow.hide();
-    } else {
-      me.advancedCreateWindow.showBy(btn);
-    }
+  //   if(me.advancedHidden){
+  //     me.advancedCreateWindow.hide();
+  //   } else {
+  //     me.advancedCreateWindow.showBy(btn);
+  //   }
 
-  }, // onAdvancedCreateToggle
+  // }, // onAdvancedCreateToggle
 
   onReleaseAction : function(action, eOpts){
     this.processEventTransition('release', 'Purchase Order was successfully released.', 'An error occurred releasing this purchase order.');
@@ -583,15 +625,11 @@ Ext.define('Omni.view.purchases.Form', {
   }, // onBuildAction
 
   onApproveAction : function(action, eOpts){
-    this.processEventTransition('approve', 'Purchase Order was successfully approved.', 'Approval was not completed.');
+    this.processEventTransition('approve', 'Purchase Order was successfully approved.', 'An error occurred approving this purchase order.');
   }, // onBuildAction
 
-  prepareAdvancedCreateAction : function(action, eOpts) {
-    var currentState = this.record.get('state');
-    // if(this.record.phantom == true)
-
-      action.hide();
-
+  onMassupdateAction : function(action, eOpts) {
+    this.processEventTransition('mass_update', 'Purchase Order was successfully mass updated.', 'An error occurred mass updating this purchase order.');
   },
 
   prepareReleaseAction : function(action, eOpts) {
@@ -612,6 +650,11 @@ Ext.define('Omni.view.purchases.Form', {
   prepareCancelAction : function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'open' || currentState === 'partial' ? action.show() : action.hide();
+  },
+
+  prepareMassupdateAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'draft' ? action.show() : action.hide();
   },
 
   processEventTransition : function(eventName, successMsg, failureMsg){

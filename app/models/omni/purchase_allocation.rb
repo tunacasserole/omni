@@ -105,20 +105,20 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
     # state :draft do
     # end
 
-    state :locked do
-      validate :permitted_to_lock
-    end
+    # state :locked do
+    #   validate :permitted_to_lock
+    # end
 
   ### CALLBACKS ###
-    # after_transition :on => :costing, :do => :process_costing
+    # after_transition :on => :costing, :do => :do_costing
 
   ### EVENTS ###
-    event :lock do
-      transition :draft => :locked
-    end
-    event :unlock do
-      transition :locked => :draft
-    end
+    # event :lock do
+    #   transition :draft => :locked
+    # end
+    # event :unlock do
+    #   transition :locked => :draft
+    # end
 
   end
   # STATES (End)
@@ -130,7 +130,7 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
     # errors.add('state','only allocations in draft state may be locked.') unless self.state == 'draft'
   end
 
-  def process_something
+  def do_something
     # the Cancel event writes StockLedgerActivity rows for each PurchaseDetail
     # to update On Order and order history
   end

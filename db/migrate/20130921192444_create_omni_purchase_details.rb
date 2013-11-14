@@ -16,16 +16,16 @@ class CreateOmniPurchaseDetails < ActiveRecord::Migration
         t.column   :color_name,                      :string,            :null  =>  true,    :limit   => 100
         t.column   :size_name,                       :string,            :null  =>  true,    :limit   => 100
         t.column   :sku_alias,                       :string,            :null  =>  true,    :limit   => 30
-        t.column   :allocation_profile_id,                         :string,            :null  =>  true,    :limit   => 32
+        t.column   :allocation_profile_id,           :string,            :null  =>  true,    :limit   => 32
+        t.column   :order_multiple_type,             :string,            :null  =>  true,    :limit   => 100
+        t.column   :order_pack_type,                 :string,            :null  =>  true,    :limit   => 100
         t.column   :units_ordered,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :order_pack_size,                 :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
-        t.column   :order_pack_type,                 :string,            :null  =>  true,    :limit   => 100
         t.column   :order_cost_units,                :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
-        t.column   :order_multiple_type,             :string,            :null  =>  true,    :limit   => 100
         t.column   :order_multiple,                  :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
-        t.column   :selling_units_approved,                  :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
-        t.column   :selling_units_cancelled,                 :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
-        t.column   :selling_units_received,                 :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
+        t.column   :selling_units_approved,          :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
+        t.column   :selling_units_cancelled,         :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
+        t.column   :selling_units_received,          :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :supplier_cost,                   :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :invoice_cost,                    :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :inventory_cost,                  :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13

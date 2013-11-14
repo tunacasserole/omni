@@ -6,7 +6,7 @@ class Omni::Test::Base
     create_base_test_data
 
     # RUN TESTS BY MODULE
-    # Omni::Test::Purchase.go
+    Omni::Test::Purchase.go
     # Omni::Test::Allocation.go
     # Omni::Test::Bts.go
     Omni::Test::Projection.go

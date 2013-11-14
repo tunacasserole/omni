@@ -1,4 +1,7 @@
 Buildit::Lookup.delete_all
+Buildit::Lookup.create(:lookup_id => '032456XXC72911HIHI321MASSUPDATE1', :code => 'CLONE', :default_text => 'Clone', :category => 'MASS_UPDATE_TYPE', :position => 1)
+Buildit::Lookup.create(:lookup_id => '032456XXC72911HIHI322MASSUPDATE2', :code => 'ADJUST', :default_text => 'Adjust Units Ordered', :category => 'MASS_UPDATE_TYPE', :position => 2)
+Buildit::Lookup.create(:lookup_id => '032456XXC72911HIHI312MASSUPDATE3', :code => 'ADD', :default_text => 'Add Purchase Details', :category => 'MASS_UPDATE_TYPE', :position => 3)
 Buildit::Lookup.create(:lookup_id => '032456XXC72911HIHI3212313B102013', :code => '2013', :default_text => '2013', :category => 'PLAN_YEAR', :position => 1)
 Buildit::Lookup.create(:lookup_id => '032456E2972911HIHI3212313B102014', :code => '2014', :default_text => '2014', :category => 'PLAN_YEAR', :position => 2)
 Buildit::Lookup.create(:lookup_id => '032456E2OH5911HIHI3212313B102015', :code => '2015', :default_text => '2015', :category => 'PLAN_YEAR', :position => 3)

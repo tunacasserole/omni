@@ -9,6 +9,7 @@ class CreateOmniAllocationProfiles < ActiveRecord::Migration
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300
         t.column   :allocation_formula,              :string,            :null  =>  true,    :limit   => 100
         t.column   :percent_to_allocate,             :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
+        t.column   :need_adjustment_percent,         :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :excess_demand_option,            :string,            :null  =>  true,    :limit   => 100
         t.column   :excess_supply_option,            :string,            :null  =>  true,    :limit   => 100
         t.column   :rounding_option,                 :string,            :null  =>  true,    :limit   => 100

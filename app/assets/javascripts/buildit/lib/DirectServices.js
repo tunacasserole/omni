@@ -1601,6 +1601,25 @@ Ext.direct.Manager.addProvider({
 
 //
 // -----------------------------------------------------------------------
+// SERVICE: ReceiptAllocation
+// -----------------------------------------------------------------------
+//
+
+Ext.direct.Manager.addProvider({
+		type        : 'remoting',
+		url         : Buildit.lib.DirectSources.BUILDIT,
+		maxRetries  : 0,
+		actions     : {
+			ReceiptAllocation:[
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+			]
+		},
+		namespace   :'Omni.service'
+	}
+);
+
+//
+// -----------------------------------------------------------------------
 // SERVICE: ReceiptDetail
 // -----------------------------------------------------------------------
 //
@@ -1630,6 +1649,25 @@ Ext.direct.Manager.addProvider({
 		maxRetries  : 0,
 		actions     : {
 			ReceiptFormat:[
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+			]
+		},
+		namespace   :'Omni.service'
+	}
+);
+
+//
+// -----------------------------------------------------------------------
+// SERVICE: ReceiptPurchase
+// -----------------------------------------------------------------------
+//
+
+Ext.direct.Manager.addProvider({
+		type        : 'remoting',
+		url         : Buildit.lib.DirectSources.BUILDIT,
+		maxRetries  : 0,
+		actions     : {
+			ReceiptPurchase:[
 				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
 			]
 		},
