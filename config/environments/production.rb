@@ -83,5 +83,5 @@ Omni::Application.configure do
 
   # logger = Log4r::Logger.new('log4r')
   # logger.outputters = [outputter]
-  # config.log_formatter = Log4r::PatternFormatter.new(:date_pattern => "%FT%T.000Z", :pattern => "%d [%l] %m")
+  config.log_formatter = Log4r::PatternFormatter.new(:date_pattern => "%FT%T.000Z", :pattern => "%d [%l] %m")
 end
