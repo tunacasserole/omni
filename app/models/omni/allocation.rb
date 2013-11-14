@@ -12,21 +12,21 @@ class Omni::Allocation < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates :allocation_id,                        :presence      => true
-  validates :display,                                 :uniqueness    => true
+  # validates :display,                                 :uniqueness    => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default :allocation_id,                          :with => :guid
   default :allocation_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"ALLOCATION_NBR"
   default :display,                                :override  =>  false,        :to   => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.state}"}
-  default :units_to_allocate,                      :override  =>  true,        :to    => 0
+  default :units_to_allocate,                      :override  =>  false,        :to    => 0
   default :is_destroyed,                           :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :allocation_details,     :class_name => 'Omni::AllocationDetail',    :foreign_key => 'allocation_id'
-  has_many     :inventories,            :class_name => 'Omni::Inventory',         :foreign_key => 'sku_id'
-  belongs_to   :sku,                    :class_name => 'Omni::Sku',                      :foreign_key => 'sku_id'
+  belongs_to   :inventory,              :class_name => 'Omni::Inventory',         :foreign_key => 'inventory_id'
+  belongs_to   :sku,                    :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
   belongs_to   :location,               :class_name => 'Omni::Location',               :foreign_key => 'location_id'
   belongs_to   :allocation_profile,     :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
   # ASSOCIATIONS (End)
@@ -34,9 +34,18 @@ class Omni::Allocation < ActiveRecord::Base
 
     # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :sku_display,                            :to => 'sku.display'
-    map :location_display,                     :to => 'location.display'
-    map :allocation_profile_display,       :to => 'allocation_profile.display'
+    map :sku_display,                       :to => 'sku.display'
+    map :location_display,                  :to => 'location.display'
+    map :allocation_profile_display,        :to => 'allocation_profile.display'
+    map :on_hand_units,                     :to => 'inventory.on_hand_units'
+    map :in_transit_units,                  :to => 'inventory.in_transit_units'
+    map :non_sellable_units,                     :to => 'inventory.non_sellable_units'
+    map :allocated_units,                     :to => 'inventory.allocated_units'
+    map :reserved_units,                     :to => 'inventory.reserved_units'
+    map :shipping_units,                     :to => 'inventory.shipping_units'
+    map :work_in_process_units,                     :to => 'inventory.work_in_process_units'
+    map :supplier_on_order_units,                     :to => 'inventory.supplier_on_order_units'
+    map :warehouse_on_order_units,                     :to => 'inventory.warehouse_on_order_units'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -63,6 +72,16 @@ class Omni::Allocation < ActiveRecord::Base
   # SCOPES (Start) ======================================================================
 
   # SCOPES (End)
+
+  # HOOKS (Start) =======================================================================
+  hook :before_save, :set_inventory, 10
+  # HOOKS (End)
+
+  def set_inventory
+    puts "SETTING INVENTORY"
+    i=Omni::Inventory.where(sku_id: self.sku_id, location_id: self.location_id).first
+    self.inventory_id = i.inventory_id if i
+  end
 
 
   # INDEXING (Start) ====================================================================
@@ -127,9 +146,19 @@ class Omni::Allocation < ActiveRecord::Base
   def process_ship
   end
 
+  def calculate
+    locked_units = 0
+    locked_locations = {}
+    purchase_detail_id = nil
+    allocations_to_create = process_calculate(self.allocation_profile, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
+    self.allocation_details.delete_all
+    allocations_to_create.each do |k,vq |
+      Omni::AllocationDetail.create(allocation_id: self.allocation_id, sku_id: self.sku_id, location_idid: k, units_allocated: v)
+    end
+  end
 
   # HELPERS (Start) =====================================================================
-  def calculate(allocation_profile, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
+  def process_calculate(allocation_profile, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     allocation_formula = allocation_profile.allocation_formula
     temp_needs = {}
     temp_allocations = {}
@@ -137,17 +166,15 @@ class Omni::Allocation < ActiveRecord::Base
     units_needed=0
     remainder=0
     allocatable_units = (units_to_allocate * allocation_profile.percent_to_allocate / 100) - locked_units
+    # puts "allocatable_units is #{allocatable_units}"
     # error = 'No units available to allocate' if allocatable_units < 1
     inventories = Omni::Inventory.where(sku_id: sku_id, is_authorized: true).to_a
     inventories.reject! {|x| locked_locations.include? x.location_id}
     inventories.each do |i|
       unless allocation_formula == 'PURCHASE_ALLOCATION'
-        puts "1"
-        projection_detail = i.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4','complete']}).first
+        projection_detail = i.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).first
         next unless projection_detail
-        puts "2"
       end
-      # puts "inventory id is #{i.inventory_id}"
       locked_locations.include? i.location_id ? units_needed = store_demand(allocation_formula, i) : 0
       temp_needs.merge!(i.location_id => units_needed)
     end
@@ -204,31 +231,33 @@ class Omni::Allocation < ActiveRecord::Base
 
     case allocation_formula
 
-      # when 'BTS_NEED'
-      #   bts_detail = inventory.bts_details.joins(:bts).where(:bts => {state: 'active'}).first
-      #   units_needed =  bts_detail ? bts_detail.need : 0
+      when 'APPROVED_PROJECTION'
+        case projection_detail.projection.state
 
-      # when /PROJECTION_\d_UNITS/, 'LAST_FORECAST_UNITS'
-      #   units_needed = projection_detail ? projection_detail.send(allocation_formula.downcase) : 0
+          when 'draft'
+            units_needed = 0
 
-      # when 'APPROVED_PROJECTION'
-      #   case projection_detail.projection.state
+          when 'forecast', 'projection_1_units'
+            units_needed = projection_detail.state == 'draft' ? projection_detail.send('last_forecast_units') : projection_detail.send('projection_1_units')
 
-      #     when 'forecast', 'projection_1_units'
-      #       units_needed = projection_detail.state == 'draft' ? projection_detail.send("last_forecast_units") : projection_detail.send("projection_1_units")
+          when 'projection_2_units'
+            units_needed = projection_detail.state == 'draft' ? projection_detail.send('projection_1_units') : projection_detail.send('projection_2_units')
 
-      #     when /projection_\d/
-      #       phase = projection_detail.projection.state.byteslice(11).to_i
-      #       phase -= 1 if projection_detail.state == 'draft'
-      #       units_needed = projection_detail.send("projection_#{phase-1}_units")
+          when 'projection_3_units'
+            units_needed = projection_detail.state == 'draft' ? projection_detail.send('projection_2_units') : projection_detail.send('projection_3_units')
 
-      #     when 'complete'
-      #       units_needed = projection_detail.send("projection_4_units")
+          when 'projection_4_units'
+            units_needed = projection_detail.state == 'draft' ? projection_detail.send('projection_3_units') : projection_detail.send('projection_4_units')
 
-      #   end
+          when 'complete'
+            units_needed = projection_detail.send('projection_4_units')
 
-      when 'PROJECTION'
-        projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: ['forecast','projection_1','projection_2','projecion_3','projection_4','complete']}).first unless allocation_formula =='BTS_NEED' or allocation_formula=='PURCHASE_ALLOCATION'
+        end
+
+      when 'LAST_FORECAST_UNITS'
+        units_needed = projection_detail.last_forecast_units
+
+      when 'PROJECTION_NEED'
         units_needed = projection_detail.total_need
 
       when 'PURCHASE_ALLOCATION'

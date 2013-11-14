@@ -128,7 +128,7 @@
       # TODO: Add support for generics
       is_generic = false
       total_generic_need = 0
-
+      x.inventory_id = i.inventory_id
       x.forecast_profile_id = self.forecast_profile_id
 
       # Snapshot of current inventory

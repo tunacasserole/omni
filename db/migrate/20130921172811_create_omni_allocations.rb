@@ -8,6 +8,7 @@ class CreateOmniAllocations < ActiveRecord::Migration
       t.column   :allocatable_type,         :string,            :null  =>  true,   :limit   => 100
       t.column   :sku_id,                        :string,            :null  =>  true,    :limit   => 32
       t.column   :location_id,                 :string,            :null  =>  true,    :limit   => 32
+      t.column   :inventory_id,                 :string,            :null  =>  true,    :limit   => 32
       t.column   :allocation_profile_id,   :string,            :null  =>  true,    :limit   => 32
       t.column   :allocation_nbr,            :string,            :null  =>  true,   :limit   => 100
       t.column   :state,                           :string,            :null  =>  true,    :limit   => 100

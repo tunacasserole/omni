@@ -16,6 +16,15 @@ Ext.define('Omni.view.allocations.Form', {
   displayLabel                            : Omni.i18n.model.Allocation.display,
   descriptionLabel                        : Omni.i18n.model.Allocation.description,
   units_to_allocateLabel                  : Omni.i18n.model.Allocation.units_to_allocate,
+  on_hand_unitsLabel                  : Omni.i18n.model.Allocation.on_hand_units,
+  in_transit_unitsLabel                  : Omni.i18n.model.Allocation.in_transit_units,
+  non_sellable_unitsLabel                  : Omni.i18n.model.Allocation.non_sellable_units,
+  allocated_unitsLabel                  : Omni.i18n.model.Allocation.allocated_units,
+  reserved_unitsLabel                  : Omni.i18n.model.Allocation.reserved_units,
+  shipping_unitsLabel                  : Omni.i18n.model.Allocation.shipping_units,
+  work_in_process_unitsLabel                  : Omni.i18n.model.Allocation.work_in_process_units,
+  supplier_on_order_unitsLabel                  : Omni.i18n.model.Allocation.supplier_on_order_units,
+  warehouse_on_order_unitsLabel                  : Omni.i18n.model.Allocation.warehouse_on_order_units,
   is_destroyedLabel                       : Omni.i18n.model.Allocation.is_destroyed,
   // LABELS (End)
 
@@ -52,17 +61,18 @@ Ext.define('Omni.view.allocations.Form', {
               xtype        : 'textfield',
               name         : 'allocation_nbr',
               fieldLabel   : this.allocation_nbrLabel,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             },
             { name: 'sku_id',                         fieldLabel: this.sku_idLabel,                     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
             { name: 'allocation_profile_id',          fieldLabel: this.allocation_profile_idLabel,      allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.AllocationProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'allocation_profile_id', itemTpl:'{display}' },
-            {
-              xtype        : 'textfield',
-              name         : 'display',
-              fieldLabel   : this.displayLabel,
-              allowBlank   : true
-            },
+            // {
+            //   xtype        : 'textfield',
+            //   name         : 'display',
+            //   fieldLabel   : this.displayLabel,
+            //   allowBlank   : true
+            // },
             {
               xtype        : 'textfield',
               name         : 'description',
@@ -76,11 +86,82 @@ Ext.define('Omni.view.allocations.Form', {
               allowBlank   : true
             }
           ]
+        },        {
+          xtype        : 'fieldset',
+          title        : 'Inventory Information',
+          collapsible  : true,
+          defaultType  : 'textfield',
+          collapsed    : true,
+          layout       : 'anchor',
+          items        : [
+            {
+              xtype        : 'numberfield',
+              name         : 'on_hand_units',
+              fieldLabel   : this.on_hand_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'in_transit_units',
+              fieldLabel   : this.in_transit_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'non_sellable_units',
+              fieldLabel   : this.non_sellable_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'allocated_units',
+              fieldLabel   : this.allocated_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'reserved_units',
+              fieldLabel   : this.reserved_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'shipping_units',
+              fieldLabel   : this.shipping_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'work_in_process_units',
+              fieldLabel   : this.work_in_process_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'supplier_on_order_units',
+              fieldLabel   : this.supplier_on_order_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'warehouse_on_order_units',
+              fieldLabel   : this.warehouse_on_order_unitsLabel,
+              allowBlank   : true,
+              diasbled     : true
+            }
+          ]
         }
       ]
     });
     // FIELDSETS (End)
-
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
@@ -94,7 +175,7 @@ Ext.define('Omni.view.allocations.Form', {
       actions: [
         {
           xtype      : 'button',
-          cls        : 'submit',
+          cls        : 'ship',
           tooltip    : 'Calculate',
           listeners  : {
             beforerender  : this.prepareCalculateAction,
