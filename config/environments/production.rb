@@ -1,4 +1,3 @@
-require 'log4r'
 Omni::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
