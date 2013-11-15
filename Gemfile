@@ -28,14 +28,16 @@ gem "buildit"#, '0.9.7'#,      :path => 'vendor/gems/buildit'
 
 gem "buildit_comm"
 
-gem "puma"
+# gem "puma"
+
+gem 'log4r', '1.1.9'  # which is the latest version and support "datefileoutputter"
 
 gem "guard"
 
 # Temporary fix for jquery issue
 gem "jquery-rails", "< 3.0.0"
 gem 'turbolinks'
-
+gem 'thin'
 # Priceless Gems
 
 # One of the most important programming principles is "Don't reinvent the wheel!". If you're faced with a certain task you should always look around a bit for existing solutions, before rolling your own. Here's a list of some "priceless" gems (all of them Rails 3.1 compliant) that are useful in many Rails projects:
