@@ -1,10 +1,5 @@
 class Omni::ContainerDetail < ActiveRecord::Base
 
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :container_details
   self.primary_key  = :container_detail_id
@@ -12,7 +7,7 @@ class Omni::ContainerDetail < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -22,17 +17,17 @@ class Omni::ContainerDetail < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :container_detail_id,              :override  =>  false,        :with  => :guid              
+  default      :container_detail_id,              :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda {|m| "#{m.container_display} - #{m.sku_display} - #{m.container_detail_nbr}"}
   default      :container_detail_nbr,             :override  =>  false,        :with  => :sequence,         :named=>"CONTAINER_DETAIL_NBR"
-  default      :selling_units,                    :override  =>  false,        :to    => 0                  
-  default      :commited_units,                   :override  =>  false,        :to    => 0                  
-  default      :sell_units_per_pack,              :override  =>  false,        :to    => 0                  
-  default      :is_quality_hold,                  :override  =>  false,        :to    => false              
-  default      :is_duty_paid,                     :override  =>  false,        :to    => false              
-  default      :is_audited,                       :override  =>  false,        :to    => false              
-  default      :is_inspected,                     :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :selling_units,                    :override  =>  false,        :to    => 0
+  default      :commited_units,                   :override  =>  false,        :to    => 0
+  default      :sell_units_per_pack,              :override  =>  false,        :to    => 0
+  default      :is_quality_hold,                  :override  =>  false,        :to    => false
+  default      :is_duty_paid,                     :override  =>  false,        :to    => false
+  default      :is_audited,                       :override  =>  false,        :to    => false
+  default      :is_inspected,                     :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -101,7 +96,7 @@ class Omni::ContainerDetail < ActiveRecord::Base
     string   :origin_container_detail_display do origin_container_detail.display if origin_container_detail end
     boolean  :is_quality_hold
     boolean  :is_duty_paid
- 
+
     text     :container_display_fulltext, :using => :container_display
     text     :state_fulltext, :using => :state
     text     :sku_display_fulltext, :using => :sku_display
@@ -112,7 +107,7 @@ class Omni::ContainerDetail < ActiveRecord::Base
     text     :receipt_detail_display_fulltext, :using => :receipt_detail_display
     text     :pick_ticket_display_fulltext, :using => :pick_ticket_display
     text     :origin_container_detail_display_fulltext, :using => :origin_container_detail_display
-  end 
+  end
   # INDEXING (End)
 
 
