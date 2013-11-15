@@ -84,9 +84,9 @@ class Omni::ReceiptDetail < ActiveRecord::Base
       transition :draft => :hold
     end
 
-    # event :release do
-    #   transition :hold => :draft
-    # end
+    event :release do
+      transition :hold => :draft
+    end
 
   end
   # STATES (End)

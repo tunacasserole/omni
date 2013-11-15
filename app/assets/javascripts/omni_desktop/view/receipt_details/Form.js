@@ -24,7 +24,7 @@ Ext.define('Omni.view.receipt_details.Form', {
       allocation_profile_idLabel:             Omni.i18n.model.ReceiptDetail.allocation_profile_id,
       receipt_line_nbrLabel:                  Omni.i18n.model.ReceiptDetail.receipt_line_nbr,
       purchase_detail_idLabel:                Omni.i18n.model.ReceiptDetail.purchase_detail_id,
-      released_unitsLabel:                    Omni.i18n.model.ReceiptDetail.released_units,
+      received_unitsLabel:                    Omni.i18n.model.ReceiptDetail.received_units,
       receipt_pack_sizeLabel:                 Omni.i18n.model.ReceiptDetail.receipt_pack_size,
       receipt_pack_typeLabel:                 Omni.i18n.model.ReceiptDetail.receipt_pack_type,
     });
@@ -47,7 +47,7 @@ Ext.define('Omni.view.receipt_details.Form', {
             { name: 'sku_id',               fieldLabel: this.sku_idLabel, xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             { name: 'allocation_profile_id',fieldLabel: this.allocation_profile_idLabel, xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.AllocationProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'allocation_profile_id', itemTpl:'{display}' },
             { xtype: 'textfield', name: 'sku_alias',                       fieldLabel: this.sku_aliasLabel                     , allowBlank: true },
-            { xtype: 'numberfield', name: 'released_units',                fieldLabel: this.released_unitsLabel              , allowBlank: true },
+            { xtype: 'numberfield', name: 'received_units',                fieldLabel: this.received_unitsLabel              , allowBlank: true },
             { xtype: 'numberfield', name: 'receipt_pack_size',             fieldLabel: this.receipt_pack_sizeLabel              , allowBlank: true },
             { xtype: 'buildit-Lookup', name: 'receipt_pack_type',          fieldLabel: this.receipt_pack_typeLabel               , allowBlank: true,  category:   'PACK_TYPE' },
             ]
