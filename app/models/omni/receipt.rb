@@ -179,9 +179,7 @@ class Omni::Receipt < ActiveRecord::Base
       save
     end
   end
-
   # STATE HELPERS (End)
-
 
   # INDEXING (Start) ====================================================================
   searchable do
