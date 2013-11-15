@@ -155,6 +155,7 @@ class Omni::Receipt < ActiveRecord::Base
   def print_count_sheet
   # Produce a Receiving Count Sheet report that can be printed.
   # See the "Receiving Worksheet" section at the end of this sheet for a complete description of the Receiving Count Sheet content and layout.
+
   end
 
   def do_start
