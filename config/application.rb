@@ -24,8 +24,8 @@ module Omni
   class Application < Rails::Application
 
      # assign log4r's logger as rails' logger.
-    log4r_config= YAML.load_file(File.join(File.dirname(__FILE__),"log4r.yml"))
-    YamlConfigurator.decode_yaml( log4r_config['log4r_config'] )
+    # log4r_config= YAML.load_file(File.join(File.dirname(__FILE__),"log4r.yml"))
+    # YamlConfigurator.decode_yaml( log4r_config['log4r_config'] )
     config.logger = Log4r::Logger[Rails.env]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
