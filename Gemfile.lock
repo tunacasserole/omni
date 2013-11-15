@@ -196,7 +196,6 @@ DEPENDENCIES
   buildit_comm
   guard
   jquery-rails (< 3.0.0)
-  log4r (= 1.1.9)
   mysql2
   puma
   rails (= 4.0.0)

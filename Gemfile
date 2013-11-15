@@ -30,7 +30,7 @@ gem "buildit_comm"
 
 gem "puma"
 
-gem 'log4r', '1.1.9'  # which is the latest version and support "datefileoutputter"
+# gem 'log4r', '1.1.9'  # which is the latest version and support "datefileoutputter"
 
 gem "guard"
 
