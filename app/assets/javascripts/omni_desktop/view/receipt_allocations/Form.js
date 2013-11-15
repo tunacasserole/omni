@@ -17,7 +17,6 @@ Ext.define('Omni.view.receipt_allocations.Form', {
   is_destroyedLabel                       : Omni.i18n.model.ReceiptAllocation.is_destroyed,
   // LABELS (End)
 
-
   initComponent:function () {
 
     var me = this;
@@ -28,9 +27,6 @@ Ext.define('Omni.view.receipt_allocations.Form', {
       value       : this.record.get('receipt_allocation_id')
     };
     // FILTER (End)
-
-
-
 
     // FIELDSETS (Start) ====================================================================
     Ext.apply(this, {
@@ -86,7 +82,6 @@ Ext.define('Omni.view.receipt_allocations.Form', {
     });
     // FIELDSETS (End)
 
-
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title       : 'Receipt Allocation',
@@ -96,8 +91,93 @@ Ext.define('Omni.view.receipt_allocations.Form', {
     });
     // TITLES (End)
 
-    this.callParent();
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [
+       {
+          xtype      : 'button',
+          cls        : 'approve',
+          tooltip    : 'Lock',
+          listeners  : {
+            beforerender  : this.prepareLockAction,
+            click         : this.onLockAction,
+            scope         : me
+          }
+        },
+        {
+          xtype      : 'button',
+          cls        : 'reject',
+          tooltip    : 'Unlock',
+          listeners  : {
+            beforerender  : this.prepareUnlockAction,
+            click         : this.onUnlockAction,
+            scope         : me
+          }
+        },
+      ]
+    });
+    // ACTIONS (End)
 
-  }  // initComponent
+    // LISTENERS (Start) ===================================================================
+    // LISTENERS (End)
 
-}); // Ext.define('Omni.view.receipt_allocations.Form'
+  this.callParent();
+
+},
+
+  onLockAction : function(action, eOpts){
+    this.processEventTransition('lock', 'Receipt Allocation was successfully locked.', 'An error occurred locking this receipt allocation.');
+  }, // onBuildAction
+
+  onUnlockAction : function(action, eOpts){
+    this.processEventTransition('unlock', 'Receipt Allocation was successfully unlocked.', 'An error occurred unlocking this receipt allocation.');
+  }, // onBuildAction
+
+  prepareLockAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'draft' ? action.show() : action.hide();
+  },
+
+  prepareUnlockAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'locked' ? action.show() : action.hide();
+  },
+
+  processEventTransition : function(eventName, successMsg, failureMsg){
+    var me = this;
+
+    Omni.service.ReceiptAllocation.fireEvent({
+        id      : this.record.get('receipt_allocation_id'),
+        name    : eventName
+      },
+      function(result, e){
+        me.getForm().clearInvalid();
+        if(result && result.success == true){
+          Buildit.infoMsg(successMsg);
+          me.record.set(result);
+          me.loadRecord(me.record);
+          me.fireEvent('recordchanged', me, me.banner);
+          me.doLayout();
+        } else {
+          var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+          if(response.errors)
+            me.getForm().markInvalid(response.errors);
+
+          var error_message = failureMsg;
+          if(response.message)
+            error_message = response.message;
+
+          if(response.errors)
+            error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+          Buildit.errorMsg(error_message);
+        }
+      }
+    );
+
+  },
+
+  // HANDLERS (End)
+
+});

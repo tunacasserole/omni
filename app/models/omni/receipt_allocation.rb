@@ -18,9 +18,15 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
+  belongs_to   :receipt_detail,           :class_name => 'Omni::ReceiptDetail',      :foreign_key => 'receipt_detail_id'
+  belongs_to   :location,                 :class_name => 'Omni::Location',          :foreign_key => 'location_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
+  mapped_attributes do
+    map :receipt_detail_display,          :to => 'receipt_detail.display'
+    map :location_display,                :to => 'location.display'
+  end
   # MAPPED ATTRIBUTES (End)
 
   # HOOKS (Start) =======================================================================
@@ -72,7 +78,6 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
     string   :display
     string   :state
     string   :location_id
-    string   :purchase_id
 
     text     :display_fulltext,            :using => :display
   end

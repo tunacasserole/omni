@@ -90,16 +90,6 @@ Ext.define('Omni.view.allocation_details.Form', {
       actions: [
         {
           xtype      : 'button',
-          cls        : 'close-event',
-          tooltip    : 'Calculate',
-          listeners  : {
-            beforerender  : this.prepareCalculateAction,
-            click         : this.onCalculateAction,
-            scope         : me
-          }
-        },
-        {
-          xtype      : 'button',
           cls        : 'approve',
           tooltip    : 'Lock',
           listeners  : {
@@ -118,9 +108,19 @@ Ext.define('Omni.view.allocation_details.Form', {
             scope         : me
           }
         },
-         {
+        {
           xtype      : 'button',
           cls        : 'close-event',
+          tooltip    : 'Calculate',
+          listeners  : {
+            beforerender  : this.prepareCalculateAction,
+            click         : this.onCalculateAction,
+            scope         : me
+          }
+        },
+         {
+          xtype      : 'button',
+          cls        : 'duplicate',
           tooltip    : 'Transfer',
           listeners  : {
             beforerender  : this.prepareTransferAction,
