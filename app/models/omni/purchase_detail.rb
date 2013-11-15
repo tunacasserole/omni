@@ -109,29 +109,51 @@
     end
 
     event :receive do
-      transition [:open, :partial] => :partial, :if => :open_units?
-      transition [:open, :partial] => :complete, :unless => :open_units?
+      transition [:open, :partial] => same
     end
 
     event :cancel do
       transition [:open, :partial] => :cancelled
-      # transition :open => :cancelled
-      # transition :partial => :cancelled
     end
   end
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
-  def open_units?
-    selling_units_approved - selling_units_received - selling_units_cancelled > 0 ? true : false
-  end
+  # def open_units?
+  #   selling_units_approved - selling_units_received - selling_units_cancelled > 0 ? true : false
+  # end
 
   def allocate
-    do_allocation
+    do_allocate
+  end
+
+  def do_allocate
+    #  Read all existing PurchaseAllocation records for the PurchaseDetail.  If the state is draft, then delete the record.
+    #  If the state is locked, then add the units_allocated to locked_units parameter and add the location_id to the locked_locations hash.
+    locked_units = 0
+    locked_locations = []
+    purchase_allocations.each do |x|
+      case x.state
+        when 'draft'
+          x.delete
+
+        when 'locked'
+          locked_units += x.units_allocated
+          locked_locations << x.location_id
+
+      end
+    end
+
+    units_to_allocate = units_ordered * order_pack_size
+
+    allocations_to_create = Omni::Allocation.calculate(allocation_profile_id, sku_id, units_to_allocate, locked_units, locked_locations, nil)
+    allocations_to_create.each { |k,v| Omni::PurchaseAllocation.create(purchase_detail_id: purchase_detail_id, location_id: k, units_allocated: v) }
   end
 
   def do_receive
-    errors.add('Not Ready','Feature is not yet implemented.')
+    open_units = selling_units_approved - selling_units_received - selling_units_cancelled
+    state = open_units > 0 ? 'complete' : 'partial'
+    # self.save
   end
 
   def do_cancel
@@ -161,7 +183,6 @@
   end
 
   def do_release
-    # send_notice
   end
 
   def do_approve
@@ -238,27 +259,7 @@
     self.purchase_details.all.each {|x| x.destroy}
   end
 
-  # Sends an email notification to the user when the purchase has finished running
-  def send_notice
-    message = Buildit::Comm::Email::Message.create(
-        subject: "Omni notice: purchase - #{self.display} has been released.",
-        body: Buildit::Email::Manager.generate(self, "purchase_notice"),
-    )
-    # email_addresses = Buildit::User.all.collect {|u| u.email_address}
-    email_addresses = approver_email
-    message.send_to email_addresses
-    message.queue
-  end
-
-  def approver_email
-    # Search event table for user_id of approver
-    return 'aaron@buildit.io'
-  end
-
-  def do_allocate
-    # def calculate(self.allocation_profile, self.sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
-    Omni::Allocation.calculate(self.allocation_profile, self.sku_id, units_ordered * order_pack_size, 0, locked_locations, purchase_detail_id)
-  end
+end # class Omni::PurchaseDetail
   # The purpose of purchase allocation is to take the units ordered of a SKU on a
   # PurchaseDetail and figure out how they are going to be distributed out to the
   # stores after the purchase is received.  The distribution to each store is based on
@@ -279,7 +280,7 @@
   #
   # Subtract "locked units" from "selling units available" to get "allocatable units".
   #
-  # def do_allocation
+  # def do_allocate
   #   return if self.allocation_profile.nil?
 
   #   # remove any purchase allocations that are not locked. Locked is defined as having a
@@ -404,9 +405,9 @@
   #   end
 
 
-  # end # do_allocation
+  # end # do_allocate
 
 
   # HELPERS (End)
 
-end # class Omni::PurchaseDetail
+

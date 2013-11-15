@@ -9,8 +9,8 @@ class CreateOmniReceipts < ActiveRecord::Migration
       t.column   :accepted_by_user_id,             :string,            :null  =>  true,    :limit   => 32
       t.column   :completed_by_user_id,            :string,            :null  =>  true,    :limit   => 32
       t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
-      t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
-      t.column   :state,                           :string,            :null  =>  false,   :limit   => 300
+      t.column   :display,                         :string,            :null  =>  true,   :limit   => 300
+      t.column   :state,                           :string,            :null  =>  true,   :limit   => 300
       t.column   :receipt_nbr,                     :string,            :null  =>  true,    :limit   => 11
       t.column   :create_date,                     :date,              :null  =>  true
       t.column   :ship_date,                       :date,              :null  =>  true

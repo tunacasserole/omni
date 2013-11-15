@@ -12,51 +12,51 @@ class Omni::SkuSupplier < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :supplier_id, uniqueness: { scope: :sku_id, message: "Supplier already exists for this SKU." } 
-  validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true  
-  validates    :master_pack_uom_code,            :lookup      => 'MASTER_PACK_UOM_CODE',       :allow_nil => true
-  validates    :inner_pack_uom_code,             :lookup      => 'INNER_PACK_UOM_CODE',        :allow_nil => true
+  validates    :supplier_id, uniqueness: { scope: :sku_id, message: "Supplier already exists for this SKU." }
+  # validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true
+  # validates    :master_pack_uom_code,            :lookup      => 'MASTER_PACK_UOM_CODE',       :allow_nil => true
+  # validates    :inner_pack_uom_code,             :lookup      => 'INNER_PACK_UOM_CODE',        :allow_nil => true
   validates    :order_multiple_type,             :lookup      => 'ORDER_MULTIPLE_TYPE',        :allow_nil => true
   # validates    :fob_point,                       :lookup      => 'FOB_POINT',                  :allow_nil => true
-  validates    :freight_term,                    :lookup      => 'FREIGHT_TERM',               :allow_nil => true
+  # validates    :freight_term,                    :lookup      => 'FREIGHT_TERM',               :allow_nil => true
 
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :sku_supplier_id,                  :override  =>  false,        :with  => :guid              
+  default      :sku_supplier_id,                  :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.supplier_display}"}
-  default      :is_primary_supplier,              :override  =>  false,        :to    => false              
-  default      :is_manufacturer,                  :override  =>  false,        :to    => false              
-  default      :is_discontinued,                  :override  =>  false,        :to    => false              
-  default      :supplier_cost_units,              :override  =>  false,        :to    => 0                  
-  default      :supplier_cost,                    :override  =>  false,        :to    => 0                  
-  default      :master_pack_units,                :override  =>  false,        :to    => 0                  
-  default      :master_pack_length,               :override  =>  false,        :to    => 0                  
-  default      :master_pack_height,               :override  =>  false,        :to    => 0                  
-  default      :master_pack_width,                :override  =>  false,        :to    => 0                  
-  default      :master_pack_weight,               :override  =>  false,        :to    => 0                  
-  default      :inner_pack_units,                 :override  =>  false,        :to    => 0                  
-  default      :inner_pack_length,                :override  =>  false,        :to    => 0                  
-  default      :inner_pack_height,                :override  =>  false,        :to    => 0                  
-  default      :inner_pack_width,                 :override  =>  false,        :to    => 0                  
-  default      :inner_pack_weight,                :override  =>  false,        :to    => 0                  
-  default      :minimum_order_units,              :override  =>  false,        :to    => 0                  
-  default      :minimum_order_value,              :override  =>  false,        :to    => 0                  
-  default      :minimum_order_weight,             :override  =>  false,        :to    => 0                  
-  default      :minimum_order_cube,               :override  =>  false,        :to    => 0                  
-  default      :extra_cost,                       :override  =>  false,        :to    => 0                  
-  default      :is_included_extra_cost,           :override  =>  false,        :to    => false              
-  default      :is_conveyable_master_pack,        :override  =>  false,        :to    => false              
-  default      :is_conveyable_inner_pack,         :override  =>  false,        :to    => false              
-  default      :pallet_tie,                       :override  =>  false,        :to    => 0                  
-  default      :pallet_high,                      :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_primary_supplier,              :override  =>  false,        :to    => false
+  default      :is_manufacturer,                  :override  =>  false,        :to    => false
+  default      :is_discontinued,                  :override  =>  false,        :to    => false
+  default      :supplier_cost_units,              :override  =>  false,        :to    => 0
+  default      :supplier_cost,                    :override  =>  false,        :to    => 0
+  default      :master_pack_units,                :override  =>  false,        :to    => 0
+  default      :master_pack_length,               :override  =>  false,        :to    => 0
+  default      :master_pack_height,               :override  =>  false,        :to    => 0
+  default      :master_pack_width,                :override  =>  false,        :to    => 0
+  default      :master_pack_weight,               :override  =>  false,        :to    => 0
+  default      :inner_pack_units,                 :override  =>  false,        :to    => 0
+  default      :inner_pack_length,                :override  =>  false,        :to    => 0
+  default      :inner_pack_height,                :override  =>  false,        :to    => 0
+  default      :inner_pack_width,                 :override  =>  false,        :to    => 0
+  default      :inner_pack_weight,                :override  =>  false,        :to    => 0
+  default      :minimum_order_units,              :override  =>  false,        :to    => 0
+  default      :minimum_order_value,              :override  =>  false,        :to    => 0
+  default      :minimum_order_weight,             :override  =>  false,        :to    => 0
+  default      :minimum_order_cube,               :override  =>  false,        :to    => 0
+  default      :extra_cost,                       :override  =>  false,        :to    => 0
+  default      :is_included_extra_cost,           :override  =>  false,        :to    => false
+  default      :is_conveyable_master_pack,        :override  =>  false,        :to    => false
+  default      :is_conveyable_inner_pack,         :override  =>  false,        :to    => false
+  default      :pallet_tie,                       :override  =>  false,        :to    => 0
+  default      :pallet_high,                      :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -105,7 +105,7 @@ class Omni::SkuSupplier < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :sku_id    
+    string   :sku_id
     string   :supplier_id
     string   :sku_display do sku.display if sku end
     string   :supplier_display do supplier.display if supplier end
@@ -113,12 +113,12 @@ class Omni::SkuSupplier < ActiveRecord::Base
     boolean  :is_primary_supplier
     integer  :supplier_cost
     string   :display
- 
+
     text     :sku_display_fulltext, :using => :sku_display
     text     :supplier_display_fulltext, :using => :supplier_display
     text     :supplier_item_identifier_fulltext, :using => :supplier_item_identifier
     text     :supplier_cost_fulltext, :using => :supplier_cost
-  end 
+  end
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
@@ -126,7 +126,7 @@ class Omni::SkuSupplier < ActiveRecord::Base
 
   # ### CALLBACKS ###
   #   after_transition :on => :activate,       :do => :after_activate
-    
+
   #   ## EVENTS ###
   #   event :activate do
   #     transition :new => :active

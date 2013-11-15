@@ -11,7 +11,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates :supplier_id,                        :presence      => true
-  validates :display,                            :uniqueness    => true
+  # validates :display,                            :uniqueness    => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -191,6 +191,10 @@ class Omni::Purchase < ActiveRecord::Base
       transition [:open, :partial] => :cancelled
     end
 
+    event :allocate do
+      transition [:draft, :pending, :approval, :open] => same
+    end
+
     event :approve do
       transition :pending_approval => :pending_approval
     end
@@ -200,6 +204,12 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # STATE HELPERS (Start) =====================================================================
+  def allocate
+    self.purchase_details.each {|x| puts 'x.allocate'}
+  end
+
+  # Read all existing PurchaseAllocation records for the PurchaseDetail.  If the state is draft, then delete the record.
+  # If the state is locked, then add the units_allocated to locked_units parameter and add the location_id to the locked_locations hash.
   def do_cancel
     # the Cancel event writes StockLedgerActivity rows for each PurchaseDetail
     # to update On Order and order history

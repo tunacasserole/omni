@@ -89,8 +89,10 @@ Ext.define('Omni.view.receipt_allocations.Form', {
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title       : 'ReceiptAllocation',
-      subtitle    : 'Edit ReceiptAllocation'
+      title       : 'Receipt Allocation',
+      subtitle    : 'Edit Receipt Allocation',
+      newTitle:     'New Receipt Allocation',
+      newSubtitle:  'Complete the following to create a new Receipt Allocation'
     });
     // TITLES (End)
 

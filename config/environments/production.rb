@@ -78,7 +78,7 @@ Omni::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   # config.log_formatter = ::Logger::Formatter.new
-  config.log_formatter = ::Logger::PatternFormatter.new
+  # config.log_formatter = ::Logger::PatternFormatter.new
   # outputter = Log4r::FileOutputter.new('log4r', :filename => "foobar.log")
   # outputter.formatter = Log4r::PatternFormatter.new(:date_pattern => "%FT%T.000Z", :pattern => "%d [%l] %m")
 

@@ -11,7 +11,7 @@ class CreateOmniReceiptDetails < ActiveRecord::Migration
       t.column   :allocation_profile_id,           :string,            :null  =>  true,    :limit   => 32
       t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
       t.column   :sku_alias,                       :string,            :null  =>  true,    :limit   => 32
-      t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
+      t.column   :display,                         :string,            :null  =>  true,   :limit   => 300
       t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
       t.column   :received_units,                  :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
       t.column   :receipt_pack_size,               :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

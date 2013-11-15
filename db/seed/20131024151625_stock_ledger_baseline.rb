@@ -17,6 +17,7 @@ Omni::Ruleset.create(:ruleset_id => "DA5195F8A6C911E2AE1A00FF58D32228",:display 
 Omni::Ruleset.create(:ruleset_id => "DA51BD08A6C911E2AE1A00FF58D32228",:display =>"AdjustOn-HandUnits",:ruleset_code =>"AdjustOn-HandUnits",:description =>"Adjust On-Hand Units",:is_active =>"TRUE")
 Omni::Ruleset.create(:ruleset_id => "DA51BD08A6C911E2AAPPROVEPURCHASE",:display =>"ApprovePurchase",:ruleset_code =>"ApprovePurchase",:description =>"Approve Purchase",:is_active =>"TRUE")
 Omni::Ruleset.create(:ruleset_id => "DA51BD08A6C911E2AECANCELPURCHASE",:display =>"CancelPurchase",:ruleset_code =>"CancelPurchase",:description =>"Cancel Purchase",:is_active =>"TRUE")
+Omni::Ruleset.create(:ruleset_id => "XXXXXXXXXXXXXXXXXXXACCEPTRECEIPT",:display =>"AcceptReceipt",:ruleset_code =>"AcceptReceipt",:description =>"Accept Receipt",:is_active =>"TRUE")
 # Rule Definitions
 Omni::Rule.delete_all
 Omni::Rule.create(:rule_id => "2D5D31B2A6CA11E2AE1A00FF58D32228",:display =>"AdjustInventoryCost-Add to Inventory.on_hand_units with units",:ruleset_id =>"DA5195F8A6C911E2AE1900FF58D32228",:rule_type =>"SYSTEM",:input_attribute =>"units",:model_name =>"Inventory",:attribute_name =>"on_hand_units",:rule_action =>"ADD",:is_active =>"FALSE",:rule_seq =>"10")

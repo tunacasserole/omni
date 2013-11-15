@@ -116,7 +116,6 @@ Ext.define('Omni.view.receipts.Form', {
     });
     // FIELDSETS (End)
 
-
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title: 'Profile',
@@ -126,8 +125,170 @@ Ext.define('Omni.view.receipts.Form', {
     });
     // TITLES (End)
 
-    this.callParent();
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [
+        {
+          tooltip    : 'Upload',
+          cls        : 'ship',
+          xtype      : 'button',
+          listeners  : {
+            beforerender  : this.prepareUploadAction,
+            click         : this.onUploadAction,
+            scope         : me
+          }
+        },
+        {
+          tooltip    : 'Accept',
+          cls        : 'approve',
+          xtype      : 'button',
+          listeners  : {
+            beforerender  : this.prepareAcceptAction,
+            click         : this.onAcceptAction,
+            scope         : me
+          }
+        },
+        {
+          tooltip    : 'Start',
+          cls        : 'submit',
+          xtype      : 'button',
+          listeners  : {
+            beforerender  : this.prepareStartAction,
+            click         : this.onStartAction,
+            scope         : me
+          }
+        },
+         {
+          tooltip    : 'Receive',
+          cls        : 'close-event',
+          xtype      : 'button',
+          listeners  : {
+            beforerender  : this.prepareReceiveAction,
+            click         : this.onReceiveAction,
+            scope         : me
+          }
+        },
+         {
+          tooltip    : 'Complete',
+          cls        : 'close',
+          xtype      : 'button',
+          listeners  : {
+            beforerender  : this.prepareCompleteAction,
+            click         : this.onCompleteAction,
+            scope         : me
+          }
+        },
+        {
+          tooltip    : 'Print',
+          cls        : 'duplicate',
+          xtype      : 'button',
+          listeners  : {
+            beforerender  : this.preparePrintAction,
+            click         : me.onPrintAction,
+            scope         : me
+          }
+        }
 
-  }
+      ]
+    });
+    // ACTIONS (End)
+
+    // LISTENERS (Start) ===================================================================
+    // LISTENERS (End)
+
+  this.callParent();
+
+},
+
+  onUploadAction : function(action, eOpts){
+    this.processEventTransition('release', 'Packing list was successfully uploaded.', 'An error occurred uploading this packing list.');
+  }, // onBuildAction
+
+  onStartAction : function(action, eOpts){
+    this.processEventTransition('accept', 'Receipt was successfully started.', 'An error occurred starting this receipt.');
+  }, // onBuildAction
+
+  onReceiveAction : function(action, eOpts){
+    this.processEventTransition('allocate', 'Receipt was successfully received.', 'An error occurred receiving this receipt.');
+  }, // onBuildAction
+
+  onPrintAction : function(action, eOpts) {
+    this.processEventTransition('print', 'Count sheet was successfully printed.', 'An error occurred printing this receipt.');
+  },
+
+  onAcceptAction : function(action, eOpts){
+    this.processEventTransition('accept', 'Receipt was successfully accepted.', 'An error occurred accepting this receipt.');
+  }, // onBuildAction
+
+  onCompleteAction : function(action, eOpts){
+    this.processEventTransition('complete', 'Receipt was successfully completed.', 'An error occurred completing this receipt.');
+  }, // onBuildAction
+
+  prepareUploadAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+        currentState === 'draft' || currentState === 'scheduled' || currentState === 'processing' ? action.show() : action.hide();
+  },
+
+  prepareStartAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+        currentState === 'draft' || currentState === 'scheduled' ? action.show() : action.hide();
+  },
+
+  prepareReceiveAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+        currentState === 'draft' || currentState === 'scheduled' || currentState === 'processing' ? action.show() : action.hide();
+  },
+
+  preparePrintAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+        currentState === 'draft' || currentState === 'scheduled' || currentState === 'processing' ? action.show() : action.hide();
+  },
+
+  prepareAcceptAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+        currentState === 'draft' || currentState === 'scheduled' || currentState === 'processing' ? action.show() : action.hide();
+  },
+
+  prepareCompleteAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'accepted' ? action.show() : action.hide();
+  },
+
+  processEventTransition : function(eventName, successMsg, failureMsg){
+    var me = this;
+
+    Omni.service.Receipt.fireEvent({
+        id      : this.record.get('receipt_id'),
+        name    : eventName
+      },
+      function(result, e){
+        me.getForm().clearInvalid();
+        if(result && result.success == true){
+          Buildit.infoMsg(successMsg);
+          me.record.set(result);
+          me.loadRecord(me.record);
+          me.fireEvent('recordchanged', me, me.banner);
+          me.doLayout();
+        } else {
+          var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+          if(response.errors)
+            me.getForm().markInvalid(response.errors);
+
+          var error_message = failureMsg;
+          if(response.message)
+            error_message = response.message;
+
+          if(response.errors)
+            error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+          Buildit.errorMsg(error_message);
+        }
+      }
+    );
+
+  },
+
+  // HANDLERS (End)
 
 });

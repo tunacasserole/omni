@@ -9,6 +9,7 @@ class CreateOmniAllocationDetails < ActiveRecord::Migration
       t.column   :allocation_id,              :string,            :null  =>  true,    :limit   => 32
       t.column   :allocation_detail_nbr,  :string,            :null  =>  true,   :limit   => 100
       t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
+      t.column   :display,                           :string,            :null  =>  true,    :limit   => 100
       t.column   :units_needed,          :decimal,           :null  =>  true,     :precision  => 11, :scale   => 2
       t.column   :units_allocated,          :decimal,           :null  =>  true,     :precision  => 11, :scale   => 2
       t.column   :units_shipped,          :decimal,           :null  =>  true,     :precision  => 11, :scale   => 2

@@ -17,7 +17,7 @@ class Omni::Style < ActiveRecord::Base
   validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
   # validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
   # validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
-  validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
+  # validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
   validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true
   validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
   validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true
@@ -79,15 +79,9 @@ class Omni::Style < ActiveRecord::Base
   has_many     :style_suppliers,                 :class_name => 'Omni::StyleSupplier',           :foreign_key => 'style_id'
   has_many     :style_locations,                 :class_name => 'Omni::StyleLocation',           :foreign_key => 'style_id'
   has_many     :style_colors,                    :class_name => 'Omni::StyleColor',              :foreign_key => 'style_id'
-  has_many     :boms,                            :class_name => 'Omni::Bom',                     :foreign_key => 'bomable_id',       :as => :bomable
   has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
   has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'style_id'
-  has_many     :program_styles,                  :class_name => 'Omni::ProgramStyle',            :foreign_key => 'style_id'
-  has_many     :program_colors,                  :class_name => 'Omni::ProgramColor',            :foreign_key => 'style_id'
-
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do

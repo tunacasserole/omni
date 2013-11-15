@@ -88,10 +88,17 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-  before_destroy :validate_state
-  def validate_state
-    # false
-    self.state == 'draft' ?  true : false
+  hook :before_destroy, :cascading_delete,  10
+
+  def cascading_delete
+    # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
+    if ['draft', 'hold', 'locked'].include? self.state
+      self.receipt_allocations.each {|x| x.destroy}
+      self.destroy
+    else
+      errors.add('state','only records in draft or hold state may be deleted.')
+      raise ActiveRecord::Rollback
+    end
   end
   # HOOKS (End)
 
@@ -99,41 +106,26 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
   # STATES (Start) ====================================================================
   StateMachine::Machine.ignore_method_conflicts = true
 
+  # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
 
-  ### STATES ###
-    # state :draft do
-    # end
+  ## STATES ###
+    state :draft do
+    end
 
-    # state :locked do
-    #   validate :permitted_to_lock
-    # end
+  ## CALLBACKS ###
+    event :lock do
+      transition :draft => :locked
+    end
 
-  ### CALLBACKS ###
-    # after_transition :on => :costing, :do => :do_costing
-
-  ### EVENTS ###
-    # event :lock do
-    #   transition :draft => :locked
-    # end
-    # event :unlock do
-    #   transition :locked => :draft
-    # end
+    event :unlock do
+      transition :locked => :draft
+   end
 
   end
   # STATES (End)
 
-
   # STATE HELPERS (Start) =====================================================================
-  def permitted_to_lock
-    # permitted = ()
-    # errors.add('state','only allocations in draft state may be locked.') unless self.state == 'draft'
-  end
-
-  def do_something
-    # the Cancel event writes StockLedgerActivity rows for each PurchaseDetail
-    # to update On Order and order history
-  end
   # STATE HELPERS (End)
 
 

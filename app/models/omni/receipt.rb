@@ -9,12 +9,12 @@ class Omni::Receipt < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :uniqueness  => true
+  # validates    :display,                         :uniqueness  => true
   validates    :freight_terms,                   :lookup      => 'FREIGHT_TERMS',              :allow_nil => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :receipt_id,                       :override  =>  false,        :with  => :guid
+  default      :receipt_id,                                                       :with => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.location_display} - Receipt: #{m.create_date}"}
   default      :receipt_nbr,                      :override  =>  false,        :with  => :sequence,         :named=>"RECEIPT_NBR"
 
@@ -44,8 +44,8 @@ class Omni::Receipt < ActiveRecord::Base
   belongs_to   :allocation_profile,              :class_name => 'Omni::AllocationProfile',       :foreign_key => 'allocation_profile_id'
 
   has_many     :receipt_details,                 :class_name => 'Omni::ReceiptDetail',           :foreign_key => 'receipt_id'
-  has_many     :receipt_purchases,               :class_name => 'Omni::ReceptPurchase',          :foreign_key => 'receipt_id'
-  has_many     :purchases,                       :class_name => 'Omni::Purchase',                :through => :receipt_purchases
+  has_many     :receipt_purchases,               :class_name => 'Omni::ReceiptPurchase',         :foreign_key => 'receipt_id'
+  # has_many     :purchases,                       :class_name => 'Omni::Purchase',                :through => :receipt_purchases
 
   # ASSOCIATIONS (End)
 
@@ -73,6 +73,21 @@ class Omni::Receipt < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
+  hook :before_save, :appointment_scheduled?, 10
+  hook :before_destroy, :cascading_delete,  20
+
+  def cascading_delete
+    # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
+    if ['draft', 'scheduled', 'processing'].include? self.state
+      self.receipt_details.each {|x| x.receipt_allocations.delete_all}
+      self.receipt_details.delete_all
+      self.receipt_purchases.delete_all
+    else
+      errors.add('state','only receipts in draft, scheduled or processing state may be deleted.')
+      raise ActiveRecord::Rollback
+    end
+  end
+
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
@@ -82,7 +97,7 @@ class Omni::Receipt < ActiveRecord::Base
     state :draft do; end
 
     state :scheduled do
-      validate :appointment_scheduled
+      # validate :appointment_scheduled
     end
 
     state :processing do; end
@@ -94,15 +109,13 @@ class Omni::Receipt < ActiveRecord::Base
 
     end
 
-  ### CALLBACKS ###
-    after_transition :on => :start, :do => :do_start
-    after_transition :on => :accept, :do => :do_accept
-    after_transition :on => :complete, :do => :do_complete
-
-
   ### EVENTS ###
     event :start do
       transition [:draft, :scheduled] => :processing
+    end
+
+    event :receive do
+      transition [:draft, :scheduled, :processing] => same
     end
 
     event :accept do
@@ -113,50 +126,66 @@ class Omni::Receipt < ActiveRecord::Base
       transition :accepted => :complete
     end
 
-  end
+    event :print do
+      transition [:draft, :scheduled, :processing] => same
+    end
 
+  ### CALLBACKS ###
+    after_transition :on => :start, :do => :do_start
+    after_transition :on => :receipt, :do => :do_receive
+    after_transition :on => :accept, :do => :do_accept
+    after_transition :on => :complete, :do => :do_complete
+    after_transition :on => :print, :do => :print_count_sheet
+
+  end
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
-    def appointment_scheduled
-      errors.add('appointment_date', 'Appointment must be updated') unless appointment_date_changed?
-    end
+  def appointment_scheduled?
+    self.state = 'scheduled' if appointment_date_changed? && appointment_date
+  end
 
-    def upload_packing_list
-    end
+  def upload_packing_list
+  end
 
-    def receive_all
-    end
+  def do_receive
+    receipt_purchases.each {|x| x.receive}
+  end
 
-    def print_count_sheet
+  def print_count_sheet
+  # Produce a Receiving Count Sheet report that can be printed.
+  # See the "Receiving Worksheet" section at the end of this sheet for a complete description of the Receiving Count Sheet content and layout.
+  end
 
-    end
+  def do_start
+    self.start_date = Date.today
+    self.save
+  end
 
+  def do_accept
+  # Do complete process on each Receipt Detail
+    receipt_details.each {|x| x.complete}
+    self.accept_date = Date.today
+    self.accepted_by_user_id = Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON'
+    save
+  end
 
-    def do_start
-      self.receipt_date = Date.today
-      self.save
-    end
-
-    def do_accept
-    # Do complete process on each Receipt Detail
-
-    # Update Receipt
-      self.accepted_date = Date.today
-      self.accepted_by_user_id = Buildit::User.current.user_id
-    end
-
-    def do_complete
+  def do_complete
+    # Validate Receipt Details in draft or complete state (nothing in hold state)
+    unless receipt_details.any? {|x| x.state == 'hold'}
+      receipt_details.each {|x| x.complete if x.state == 'draft'}
       self.complete_date = Date.today
-      self.completed_by_user_id = Buildit::User.current.user_id
+      self.completed_by_user_id = Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON'
+      save
     end
+  end
 
   # STATE HELPERS (End)
 
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :receipt_nbr
+    string   :receipt_id
     string   :location_display do location.display if location end
     string   :carrier_supplier_display do carrier_supplier.display if carrier_supplier end
     string   :display

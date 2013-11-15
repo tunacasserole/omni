@@ -49,36 +49,12 @@ class Omni::Allocation < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-
-  # COMPUTED ATTRIBUTES (End)
-
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # FILTERS (Start) =====================================================================
-
-  # FILTERS (End)
-
-
-  # ORDERING (Start) ====================================================================
-
-  # ORDERING (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
   # HOOKS (Start) =======================================================================
   hook :before_save, :set_inventory, 10
   # HOOKS (End)
 
   def set_inventory
-    puts "SETTING INVENTORY"
+    # puts "SETTING INVENTORY"
     i=Omni::Inventory.where(sku_id: self.sku_id, location_id: self.location_id).first
     self.inventory_id = i.inventory_id if i
   end
@@ -133,6 +109,10 @@ class Omni::Allocation < ActiveRecord::Base
       transition :transfer_request => :shipped
     end
 
+    event :allocate do
+      transition :draft => same
+    end
+
   end
   # STATES (End)
 
@@ -146,43 +126,51 @@ class Omni::Allocation < ActiveRecord::Base
   def do_ship
   end
 
-  def calculate
+  def allocate
     locked_units = 0
-    locked_locations = {}
+    locked_locations = []
     purchase_detail_id = nil
-    allocations_to_create = do_calculate(self.allocation_profile, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
+    allocation_details.each do |x|
+      if x.state == 'locked'
+        locked_units += x.units_allocated
+        locked_locations << x.location_id
+      end
+    end
     self.allocation_details.delete_all
-    allocations_to_create.each do |k,vq |
-      Omni::AllocationDetail.create(allocation_id: self.allocation_id, sku_id: self.sku_id, location_idid: k, units_allocated: v)
+    allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
+    allocations_to_create.each do |k,v|
+      Omni::AllocationDetail.create(allocation_id: self.allocation_id, sku_id: self.sku_id, location_id: k, units_allocated: v)
     end
   end
 
   # HELPERS (Start) =====================================================================
-  def do_calculate(allocation_profile, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
+  def self.calculate(allocation_profile_id, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
+    # puts "in do calculate:  allocation_profile_id is #{allocation_profile_id}, sku_id is #{sku_id}, units_to_allocate is #{units_to_allocate}, locked_units is #{locked_units}, locked_locations is #{locked_locations}, purchase_detail_id is #{purchase_detail_id}"
+    allocation_profile = Omni::AllocationProfile.where(allocation_profile_id: allocation_profile_id).first
     allocation_formula = allocation_profile.allocation_formula
     temp_needs = {}
     temp_allocations = {}
-    total_units_needed=0
-    units_needed=0
-    remainder=0
+    total_units_needed = 0
+    units_needed = 0
+    remainder = 0
     allocatable_units = (units_to_allocate * allocation_profile.percent_to_allocate / 100) - locked_units
     # puts "allocatable_units is #{allocatable_units}"
     # error = 'No units available to allocate' if allocatable_units < 1
     inventories = Omni::Inventory.where(sku_id: sku_id, is_authorized: true).to_a
     inventories.reject! {|x| locked_locations.include? x.location_id}
     inventories.each do |i|
-      unless allocation_formula == 'PURCHASE_ALLOCATION'
-        projection_detail = i.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).first
-        next unless projection_detail
-      end
-      locked_locations.include? i.location_id ? units_needed = store_demand(allocation_formula, i) : 0
+      next if locked_locations.include? i.location_id
+      units_needed = store_demand(allocation_formula, i)
+      # puts "units_needed is #{units_needed}"
       temp_needs.merge!(i.location_id => units_needed)
     end
 
     total_units_needed = (temp_needs.map {|k,v| v}).sum
+    # puts "total_units_needed is #{total_units_needed}"
     remainder = allocatable_units - total_units_needed
     temp_allocations = temp_needs
-
+    # puts "remainder is #{remainder}"
+    # puts "allocation_profile.excess_supply_option is #{allocation_profile.excess_supply_option}"
     case
       when remainder == 0 # DEMAIND = SUPPLY
         temp_needs.each {|k,v| temp_allocations.merge!(k=>v.to_f)}
@@ -226,8 +214,9 @@ class Omni::Allocation < ActiveRecord::Base
     temp_allocations
   end
 
-  def store_demand(allocation_formula, inventory)
-    puts "In store demand, allocation_formula is #{allocation_formula}"
+  def self.store_demand(allocation_formula, inventory)
+    # puts "\nIn store demand, allocation_formula is #{allocation_formula}"
+    projection_detail = inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).first
 
     case allocation_formula
 
@@ -260,6 +249,9 @@ class Omni::Allocation < ActiveRecord::Base
       when 'PROJECTION_NEED'
         units_needed = projection_detail.total_need
 
+      when /PROJECTION_\d_UNITS/
+        units_needed = projection_detail.send(allocation_formula.downcase)
+
       when 'PURCHASE_ALLOCATION'
         # This formula is only valid when allocating a Receipt.
         # purchase allocation: store demand = allocated_units from the associated PurchaseAllocation.
@@ -269,7 +261,7 @@ class Omni::Allocation < ActiveRecord::Base
 
     end
     # units_needed -= (inventory.on_hand_units + inventory.supplier_on_order_units) if ['LAST_FORECAST_UNITS','APPROVED_PROJECTION',/PROJECTION_\d_UNITS/].include? allocation_formula and units_needed > 0
-    puts "units_needed #{units_needed}"
+    # puts "units_needed #{units_needed}"
     units_needed
   end
   # HELPERS (End)

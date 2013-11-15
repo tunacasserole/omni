@@ -6,7 +6,7 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  #supports_fulltext
+  # supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
@@ -17,59 +17,64 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
   default :receipt_allocation_id,                          :with => :guid
   # DEFAULTS (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
-
   # ASSOCIATIONS (End)
 
-
   # MAPPED ATTRIBUTES (Start) ===========================================================
-
   # MAPPED ATTRIBUTES (End)
 
-
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-
-  # COMPUTED ATTRIBUTES (End)
-
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # FILTERS (Start) =====================================================================
-
-  # FILTERS (End)
-
-
-  # ORDERING (Start) ====================================================================
-
-  # ORDERING (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
-
-  # INDEXING (Start) ====================================================================
-
-  # INDEXING (End)
-
-
   # HOOKS (Start) =======================================================================
+  hook :before_destroy, :cascading_delete,  10
 
-  # HOOKS (End)
+  def cascading_delete
+    # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
+    if ['draft'].include? self.state
+      self.destroy
+    else
+      errors.add('state','only records in draft state may be deleted.')
+      raise ActiveRecord::Rollback
+    end
+  end
+  # HOOKS (End)  # STATES (Start) ====================================================================
+  state_machine :state, :initial => :draft do
 
+  ## STATES ###
+    state :draft do
+    end
 
-  # STATES (Start) ====================================================================
+  ## CALLBACKS ###
 
+  ## EVENTS ###
+    event :lock do
+      transition :draft => :locked
+    end
+
+    event :unlock do
+      transition :locked => :draft
+   end
+
+  end
   # STATES (End)
 
+  # STATE HELPERS (Start) ====================================================================
+  def do_complete
+    # do :receive_purchase_detail (see PurchaseDetail actions); pass selling_units_received
+    purchase_detail.receive
+    write_stock_ledger_activity
+  end
+  # STATES (End)
 
   # HELPERS (Start) =====================================================================
-
   # HELPERS (End)
+  # INDEXING (Start) ====================================================================
+  searchable do
+    string   :receipt_detail_id
+    string   :display
+    string   :state
+    string   :location_id
+    string   :purchase_id
 
+    text     :display_fulltext,            :using => :display
+  end
+  # INDEXING (End)
 end # class Omni::ReceiptAllocation

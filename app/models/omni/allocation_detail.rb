@@ -1,40 +1,26 @@
 class Omni::AllocationDetail < ActiveRecord::Base
 
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
-  # self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :allocation_details
   self.primary_key                = :allocation_detail_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates :allocation_detail_id,                        :presence      => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
   default :allocation_detail_id,             :with => :guid
   default :sku_id,                           :to   => lambda{|m| m.allocation.sku_id}
-  default :allocation_detail_nbr,            :override  =>  false,        :with  => :sequence,         :named=>"ALLOCATION_DETAIL_NBR"
+  default :allocation_detail_nbr,            :override  =>  false,        :with  => :sequence,         :named => "ALLOCATION_DETAIL_NBR"
   default :units_needed,                     :override  =>  false,        :to    => 0
   default :units_allocated,                  :override  =>  false,        :to    => 0
   default :units_shipped,                    :override  =>  false,        :to    => 0
   # DEFAULTS (End)
-
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :allocation,                      :class_name => 'Omni::Allocation',             :foreign_key => 'allocation_id'
@@ -42,39 +28,13 @@ class Omni::AllocationDetail < ActiveRecord::Base
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                    :foreign_key => 'sku_id'
   # ASSOCIATIONS (End)
 
-
-    # MAPPED ATTRIBUTES (Start) ===========================================================
+  # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :location_display,                     :to => 'location.display'
     map :sku_display,                          :to => 'sku.display'
     map :allocation_display,                   :to => 'allocation.display'
   end
   # MAPPED ATTRIBUTES (End)
-
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-
-  # COMPUTED ATTRIBUTES (End)
-
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # FILTERS (Start) =====================================================================
-
-  # FILTERS (End)
-
-
-  # ORDERING (Start) ====================================================================
-
-  # ORDERING (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -141,8 +101,6 @@ class Omni::AllocationDetail < ActiveRecord::Base
 
   def do_ship
   end
-
-
   # HELPERS (Start) =====================================================================
 
   # HELPERS (End)

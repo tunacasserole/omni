@@ -15,8 +15,8 @@ en:
         allocation_profile_id:           Allocation Profile
         purchase_detail_id:              Purchase Detail
         received_units:                  Received Units
-        received_pack_size:              Received Pack Size
-        received_pack_type:              Received Pack Type
+        receipt_pack_size:               Receipt Pack Size
+        receipt_pack_type:               Receipt Pack Type
         state:                           State
         is_destroyed:                    Deleted
 
