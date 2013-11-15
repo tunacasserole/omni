@@ -31,8 +31,8 @@ Ext.define('Omni.view.receipt_details.Explorer', {
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
-  title:     'ReceiptDetails',
-  subtitle:  'Create and maintain ReceiptDetails',
+  title:     'Receipt Details',
+  subtitle:  'Create and maintain Receipt Details',
   // TITLES (End)
 
   initComponent : function () {

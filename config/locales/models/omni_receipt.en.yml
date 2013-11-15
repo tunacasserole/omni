@@ -7,10 +7,8 @@ en:
         receipt_id:                      Receipt
         display:                         Name
         receipt_nbr:                     Receipt Nbr
-        location_display:                Location
         location_id:                     Location
         carrier_supplier_display:        Carrier Supplier
-        carrier_supplier_id:             Carrier Supplier
         trailer_identifier:              Trailer Identifier
         create_date:                     Create Date
         ship_date:                       Ship Date
@@ -18,8 +16,8 @@ en:
         appointment_duration:            Appointment Duration
         start_date:                      Start Date
         complete_date:                   Complete Date
-        completed_by_user_display:       Completed By User
         completed_by_user_id:            Completed By
+        accepted_by_user_id:             Accepted By
         pro_number:                      Pro Number
         bill_of_lading_number:           Bill Of Lading Number
         packing_slip_number:             Packing Slip Number

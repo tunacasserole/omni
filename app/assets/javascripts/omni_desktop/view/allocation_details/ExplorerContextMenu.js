@@ -2,12 +2,119 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-allocation_details-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
     Ext.apply(this, {
 
+            leftActions: [
+
+        // LEFT ACTIONS (Start) =================================================================
+
+       /**
+         * Lock
+         * Supports performing 'Lock' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Lock',
+          cls: 'icon-settings',
+          action: 'lock',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickLock,
+              scope: me
+            }
+          }
+        },
+
+       /**
+         * Unlock
+         * Supports performing 'Unlock' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Unlock',
+          cls: 'icon-settings',
+          action: 'unlock',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickUnlock,
+              scope: me
+            }
+          }
+        },
+
+        /**
+         * Transfer
+         * Supports performing 'Transfer' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Transfer',
+          cls: 'icon-settings',
+          action: 'transfer',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickTransfer,
+              scope: me
+            }
+          }
+        },
+
+       /**
+         * Ship
+         * Supports performing 'Ship' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Ship',
+          cls: 'icon-settings',
+          action: 'ship',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickShip,
+              scope: me
+            }
+          }
+        },
+
+       /**
+         * Calculate
+         * Supports performing 'Calculate' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Calculate',
+          cls: 'icon-settings',
+          action: 'calculate',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickCalculate,
+              scope: me
+            }
+          }
+        },
+
+        // LEFT ACTIONS (End)
+
+      ],
       rightActions: [
 
         // RIGHT ACTIONS (Start) ================================================================
@@ -100,24 +207,33 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
 
       ],
 
-
-      leftActions: [
-
-        // LEFT ACTIONS (Start) =================================================================
-
-
-        // LEFT ACTIONS (End)
-
-      ]
-
     });
 
     this.callParent();
   },
 
 
-
   // ACTION HANDLERS (Start) ====================================================================
+
+  clickLock: function(btn, e, eOpts){
+    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'lock');
+  },
+
+  clickUnlock: function(btn, e, eOpts){
+    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'unlock');
+  },
+
+  clickCalculate: function(btn, e, eOpts){
+    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'calculate');
+  },
+
+  clickTransfer: function(btn, e, eOpts){
+    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'transfer');
+  },
+
+  clickship: function(btn, e, eOpts){
+    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'ship');
+  },
 
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);

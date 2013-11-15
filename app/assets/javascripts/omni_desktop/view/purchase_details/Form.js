@@ -270,11 +270,60 @@ Ext.define('Omni.view.purchase_details.Form', {
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title: 'Profile',
-      subtitle: 'Edit PurchaseDetails',
+      subtitle: 'Edit Purchase Details',
       newTitle: 'New Purchase Detail',
       newSubtitle: 'Complete the following to create a new Purchase Detail'
     });
     // TITLES (End)
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [
+        {
+          xtype      : 'button',
+          cls        : 'close-event',
+          tooltip    : 'Receive',
+          listeners  : {
+            beforerender  : this.prepareReceiveAction,
+            click         : this.onReceiveAction,
+            scope         : me
+          }
+        },
+        {
+          xtype      : 'button',
+          cls        : 'approve',
+          tooltip    : 'Approve',
+          listeners  : {
+            beforerender  : this.prepareApproveAction,
+            click         : this.onApproveAction,
+            scope         : me
+          }
+        },
+        {
+          xtype      : 'button',
+          cls        : 'close-event',
+          tooltip    : 'Allocate',
+          listeners  : {
+            beforerender  : this.prepareAllocateAction,
+            click         : this.onAllocateAction,
+            scope         : me
+          }
+        },
+         {
+          xtype      : 'button',
+          cls        : 'close',
+          tooltip    : 'Cancel',
+          listeners  : {
+            beforerender  : this.prepareCancelAction,
+            click         : this.onCancelAction,
+            scope         : me
+          }
+        }
+      ]
+    });
+    // ACTIONS (End)
+
+    // LISTENERS (Start) ===================================================================
+    // LISTENERS (End)
 
     this.callParent();
 
@@ -298,7 +347,81 @@ Ext.define('Omni.view.purchase_details.Form', {
           }
         }
      });
-     }
+     },
+
+  onReceiveAction : function(action, eOpts){
+    this.processEventTransition('receive', 'Purchase detail was successfully received.', 'An error occurred releasing this purchase detail.');
+  }, // onBuildAction
+
+  onCancelAction : function(action, eOpts){
+    this.processEventTransition('cancel', 'Purchase detail was successfully cancelled.', 'An error occurred releasing this purchase detail.');
+  }, // onBuildAction
+
+  onAllocateAction : function(action, eOpts){
+    this.processEventTransition('allocate', 'Purchase detail was successfully allocated.', 'An error occurred allocated this purchase detail.');
+  }, // onBuildAction
+
+  onApproveAction : function(action, eOpts){
+    this.processEventTransition('approve', 'Purchase detail was successfully approved.', 'An error occurred approving this purchase detail.');
+  }, // onBuildAction
+
+  prepareReceiveAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'open' || currentState === 'partial' ? action.show() : action.hide();
+  },
+
+  prepareApproveAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'draft' ? action.show() : action.hide();
+  },
+
+  prepareAllocateAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'draft' || currentState === 'open' ? action.show() : action.hide();
+  },
+
+  prepareCancelAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'open' || currentState === 'partial' ? action.show() : action.hide();
+  },
+
+  processEventTransition : function(eventName, successMsg, failureMsg){
+    var me = this;
+
+    Omni.service.PurchaseDetail.fireEvent({
+        id      : this.record.get('purchase_detail_id'),
+        name    : eventName
+      },
+      function(result, e){
+        me.getForm().clearInvalid();
+        if(result && result.success == true){
+          Buildit.infoMsg(successMsg);
+          me.record.set(result);
+          me.loadRecord(me.record);
+          me.fireEvent('recordchanged', me, me.banner);
+          me.doLayout();
+        } else {
+          var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+          if(response.errors)
+            me.getForm().markInvalid(response.errors);
+
+          var error_message = failureMsg;
+          if(response.message)
+            error_message = response.message;
+
+          if(response.errors)
+            error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+          Buildit.errorMsg(error_message);
+        }
+      }
+    );
+
+  },
+
+  // HANDLERS (End)
+
 });
 
 

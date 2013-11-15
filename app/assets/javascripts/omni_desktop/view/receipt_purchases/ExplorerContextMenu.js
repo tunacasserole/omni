@@ -2,11 +2,40 @@ Ext.define('Omni.view.receipt_purchases.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-receipt_purchases-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
     Ext.apply(this, {
+
+    leftActions: [
+
+        // LEFT ACTIONS (Start) =================================================================
+
+       /**
+         * Receive
+         * Supports performing 'Receive' on the selected items in the explorer grid.
+         * If none are selected then no records are deleted.
+         */
+        {
+          text:'Receive',
+          cls: 'icon-settings',
+          action: 'receive',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickReceive,
+              scope: me
+            }
+          }
+        },
+
+        // LEFT ACTIONS (End)
+
+      ],
+
 
       rightActions: [
 
@@ -95,20 +124,9 @@ Ext.define('Omni.view.receipt_purchases.ExplorerContextMenu', {
             }
           }
         }
-
         // RIGHT ACTIONS (End)
-
       ],
 
-
-      leftActions: [
-
-        // LEFT ACTIONS (Start) =================================================================
-
-
-        // LEFT ACTIONS (End)
-
-      ]
 
     });
 
@@ -116,8 +134,11 @@ Ext.define('Omni.view.receipt_purchases.ExplorerContextMenu', {
   },
 
 
-
   // ACTION HANDLERS (Start) ====================================================================
+
+  clickReceive: function(btn, e, eOpts){
+    Omni.logic.receipt_purchases.ExplorerProcessSelectedItems.click(btn, 'receive');
+  },
 
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);

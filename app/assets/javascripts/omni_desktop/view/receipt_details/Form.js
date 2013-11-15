@@ -81,7 +81,7 @@ Ext.define('Omni.view.receipt_details.Form', {
         },
         {
           tooltip    : 'Allocate',
-          cls        : 'approve',
+          cls        : 'close-event',
           xtype      : 'button',
           listeners  : {
             beforerender  : this.prepareAllocateAction,

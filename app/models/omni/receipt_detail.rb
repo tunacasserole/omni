@@ -92,6 +92,17 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   # STATES (End)
 
   # STATE HELPERS (Start) ====================================================================
+  def do_release
+    if receipt.state == 'accepted'
+      self.state = 'accepted'
+      purchase_detail.receive
+      write_stock_ledger_activity
+    else
+      self.state = 'complete'
+    end
+    save
+  end
+
   def do_complete
     if purchase_detail
       purchase_detail.receive
@@ -113,7 +124,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
       end
     end
 
-    units_to_allocate = received_units * purchase_detail.order_pack_size
+    units_to_allocate = received_units * (purchase_detail ? purchase_detail.order_pack_size : 1)
     # puts "units_to_allocate is #{units_to_allocate}"
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail.purchase_detail_id)
     allocations_to_create.each do |k,v|

@@ -146,7 +146,7 @@ class Omni::Allocation < ActiveRecord::Base
   # HELPERS (Start) =====================================================================
   def self.calculate(allocation_profile_id, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     # puts "in do calculate:  allocation_profile_id is #{allocation_profile_id}, sku_id is #{sku_id}, units_to_allocate is #{units_to_allocate}, locked_units is #{locked_units}, locked_locations is #{locked_locations}, purchase_detail_id is #{purchase_detail_id}"
-    allocation_profile = Omni::AllocationProfile.where(allocation_profile_id: allocation_profile_id).first
+    allocation_profile = allocation_profile_id ? Omni::AllocationProfile.where(allocation_profile_id: allocation_profile_id).first : Omni::AllocationProfile.where(allocation_profile_id: 'LASTFORECASTBYPERCENTINWAREHOUSE').first
     allocation_formula = allocation_profile.allocation_formula
     temp_needs = {}
     temp_allocations = {}

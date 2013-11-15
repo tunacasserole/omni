@@ -34,9 +34,9 @@ Ext.define('Omni.view.purchase_allocations.Explorer', {
   units_shippedLabel:                     Omni.i18n.model.PurchaseAllocation.units_shipped,
   is_destroyedLabel:                      Omni.i18n.model.PurchaseAllocation.is_destroyed,
   // LABELS (End)
-  
+
   // TITLES (Start) ======================================================================
-  title:     'PurchaseAllocations',
+  title:     'Purchase Allocations',
   subtitle:  'Create and Maintain Purchase Allocations',
   // TITLES (End)
 
@@ -47,12 +47,12 @@ Ext.define('Omni.view.purchase_allocations.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.purchase_allocation_nbrLabel,       dataIndex: 'purchase_allocation_nbr',     flex: 1 },    
-        { header: this.location_idLabel,                   dataIndex: 'location_display',            flex: 1 },    
-        { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },    
-        { header: this.units_neededLabel,                  dataIndex: 'units_needed',                flex: 1 },    
-        { header: this.units_allocatedLabel,               dataIndex: 'units_allocated',             flex: 1 },    
-        { header: this.units_shippedLabel,                 dataIndex: 'units_shipped',               flex: 1 },    
+        { header: this.purchase_allocation_nbrLabel,       dataIndex: 'purchase_allocation_nbr',     flex: 1 },
+        { header: this.location_idLabel,                   dataIndex: 'location_display',            flex: 1 },
+        { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },
+        { header: this.units_neededLabel,                  dataIndex: 'units_needed',                flex: 1 },
+        { header: this.units_allocatedLabel,               dataIndex: 'units_allocated',             flex: 1 },
+        { header: this.units_shippedLabel,                 dataIndex: 'units_shipped',               flex: 1 },
       ]
     });
     // COLUMNS (End)

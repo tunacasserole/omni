@@ -20,6 +20,7 @@
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_detail_id,                                 :with => :guid
+  default :allocation_profile_id,                              :to   => lambda{|m| m.purchase.allocation_profile_id}
   default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_LINE_NBR"
   default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
   default :sku_id,                :override  =>  false,        :to   => lambda{|m| m.sku_supplier.sku_id}
@@ -153,7 +154,7 @@
   def do_receive
     open_units = selling_units_approved - selling_units_received - selling_units_cancelled
     state = open_units > 0 ? 'complete' : 'partial'
-    # self.save
+    self.save
   end
 
   def do_cancel
