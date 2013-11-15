@@ -2,12 +2,12 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-require 'log4r'
-require 'log4r/yamlconfigurator'
-require 'log4r/outputter/datefileoutputter'
-include Log4r
+# require 'log4r'
+# require 'log4r/yamlconfigurator'
+# require 'log4r/outputter/datefileoutputter'
+# include Log4r
 
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+# Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -26,7 +26,7 @@ module Omni
      # assign log4r's logger as rails' logger.
     # log4r_config= YAML.load_file(File.join(File.dirname(__FILE__),"log4r.yml"))
     # YamlConfigurator.decode_yaml( log4r_config['log4r_config'] )
-    config.logger = Log4r::Logger[Rails.env]
+    # config.logger = Log4r::Logger[Rails.env]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -60,9 +60,9 @@ module Omni
     # config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
-    config.assets.enabled = true
+    # config.assets.enabled = true
 
-    config.assets.initialize_on_precompile = false
+    # config.assets.initialize_on_precompile = false
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
