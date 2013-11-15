@@ -30,8 +30,6 @@ gem "buildit_comm"
 
 gem "puma"
 
-gem "thin"
-
 gem "guard"
 
 # Temporary fix for jquery issue
