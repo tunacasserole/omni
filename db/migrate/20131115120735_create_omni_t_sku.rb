@@ -1,8 +1,8 @@
 class CreateOmniTSku < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	# ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless (@connection.columns('t_sku').count > 0 || @connection.columns('T_SKU').count > 0)
+  	# unless (@connection.columns('t_sku').count > 0 || @connection.columns('T_SKU').count > 0)
       create_table(:t_sku, :id => false) do |t|
         t.column   :ID,                              :string,            :null  =>  false
         t.column   :stock_nbr,                       :string,            :null  =>  false
@@ -29,7 +29,7 @@ class CreateOmniTSku < ActiveRecord::Migration
         t.column   :OMNI_SKU,                        :string,            :null  =>  true,    :limit   => 60
         t.column   :TG_SKU,                          :string,            :null  =>  true,    :limit   => 60
       end
-    end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    # end
+    # ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

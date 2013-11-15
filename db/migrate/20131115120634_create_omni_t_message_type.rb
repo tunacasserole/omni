@@ -1,8 +1,8 @@
 class CreateOmniTMessageType < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	# ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless (@connection.columns('t_message_type').count > 0 || @connection.columns('T_MESSAGE_TYPE').count > 0)
+  	# unless (@connection.columns('t_message_type').count > 0 || @connection.columns('T_MESSAGE_TYPE').count > 0)
       create_table(:t_message_type, :id => false) do |t|
         t.column   :id,                              :string,            :null  =>  true,    :limit   => 20
         t.column   :msg_nbr,                         :string,            :null  =>  false
@@ -35,7 +35,7 @@ class CreateOmniTMessageType < ActiveRecord::Migration
         t.column   :is_required_p10,                 :string,            :null  =>  true
         t.column   :is_destroyed,                    :string,            :null  =>  true
       end
-    end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    # end
+    # ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

@@ -1,8 +1,8 @@
 class CreateOmniTMoveLog < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	# ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless (@connection.columns('t_move_log').count > 0 || @connection.columns('T_MOVE_LOG').count > 0)
+  	# unless (@connection.columns('t_move_log').count > 0 || @connection.columns('T_MOVE_LOG').count > 0)
       create_table(:t_move_log, :id => false) do |t|
         t.column   :ID,                              :string,            :null  =>  true,    :limit   => 20
         t.column   :move_log_number,                 :string,            :null  =>  false
@@ -54,7 +54,7 @@ class CreateOmniTMoveLog < ActiveRecord::Migration
         t.column   :is_destroyed,                    :string,            :null  =>  true
         t.column   :user_number,                     :string,            :null  =>  true
       end
-    end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    # end
+    # ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

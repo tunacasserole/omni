@@ -1,8 +1,8 @@
 class CreateOmniTWuser < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	# ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless (@connection.columns('t_wuser').count > 0 || @connection.columns('T_WUSER').count > 0)
+  	# unless (@connection.columns('t_wuser').count > 0 || @connection.columns('T_WUSER').count > 0)
       create_table(:t_wuser, :id => false) do |t|
         t.column   :id,                              :string,            :null  =>  true,    :limit   => 20
         t.column   :user_id,                         :string,            :null  =>  false
@@ -20,7 +20,7 @@ class CreateOmniTWuser < ActiveRecord::Migration
         t.column   :temp_id_flag,                    :string,            :null  =>  true
         t.column   :display_name,                    :string,            :null  =>  true,    :limit   => 40
       end
-    end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    # end
+    # ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

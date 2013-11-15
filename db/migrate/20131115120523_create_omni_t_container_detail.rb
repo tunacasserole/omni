@@ -1,8 +1,8 @@
 class CreateOmniTContainerDetail < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	# ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless (@connection.columns('t_container_detail').count > 0 || @connection.columns('T_CONTAINER_DETAIL').count > 0)
+  	# unless (@connection.columns('t_container_detail').count > 0 || @connection.columns('T_CONTAINER_DETAIL').count > 0)
       create_table(:t_container_detail, :id => false) do |t|
         t.column   :id,                              :string,            :null  =>  true,    :limit   => 32
         t.column   :display,                         :string,            :null  =>  true,    :limit   => 20
@@ -26,7 +26,7 @@ class CreateOmniTContainerDetail < ActiveRecord::Migration
         t.column   :Recovered_Flag,                  :string,            :null  =>  true
         t.column   :is_arch_select,                  :string,            :null  =>  true
       end
-    end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    # end
+    # ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

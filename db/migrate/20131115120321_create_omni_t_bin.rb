@@ -1,8 +1,8 @@
 class CreateOmniTBin < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	# ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless (@connection.columns('t_bin').count > 0 || @connection.columns('T_BIN').count > 0)
+  	# unless (@connection.columns('t_bin').count > 0 || @connection.columns('T_BIN').count > 0)
       create_table(:t_bin, :id => false) do |t|
         t.column   :bin_id,                          :string,            :null  =>  false,   :limit   => 32
         t.column   :display,                         :string,            :null  =>  true,    :limit   => 40
@@ -24,7 +24,7 @@ class CreateOmniTBin < ActiveRecord::Migration
         t.column   :pick_zone,                       :string,            :null  =>  true,    :limit   => 20
         t.column   :cube_capacity,                   :string,            :null  =>  true
       end
-    end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    # end
+    # ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

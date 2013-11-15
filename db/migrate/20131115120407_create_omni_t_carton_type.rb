@@ -1,8 +1,8 @@
 class CreateOmniTCartonType < ActiveRecord::Migration
   def change
-  	ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+  	# ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless (@connection.columns('t_carton_type').count > 0 || @connection.columns('T_CARTON_TYPE').count > 0)
+  	# unless (@connection.columns('t_carton_type').count > 0 || @connection.columns('T_CARTON_TYPE').count > 0)
       create_table(:t_carton_type, :id => false) do |t|
         t.column   :ID,                              :string,            :null  =>  true,    :limit   => 32
         t.column   :carton_type_id,                  :string,            :null  =>  true,    :limit   => 20
@@ -16,7 +16,7 @@ class CreateOmniTCartonType < ActiveRecord::Migration
         t.column   :last_update_date,                :string,            :null  =>  true
         t.column   :last_update_user,                :string,            :null  =>  true
       end
-    end
-    ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
+    # end
+    # ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end
