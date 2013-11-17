@@ -1,4 +1,4 @@
-# # include ActionView::Helpers
+include ActionView::Helpers
 # require 'prawn'
 # class Omni::Purchase::Helpers < Omni::Purchase
 
@@ -66,20 +66,19 @@
 #       draw_text "#{number_to_currency(total_price)}", :at => [cursor - 25, cursor - 15]
 
 #       puts "STAMP"
-#       create_stamp("approved") do
-#         rotate(30, :origin => [-5, -5]) do
-#           stroke_color "FF3333"
-#           stroke_ellipse [0, 0], 29, 15
-#           stroke_color "000000"
-
-#           fill_color "993333"
-#           font("Times-Roman") do
-#             draw_text "Approved", :at => [-23, -3]
-#           end
-#           fill_color "000000"
-#         end
-#       end
-#       stamp_at "approved", [210, 210]
+create_stamp("approved") do
+ rotate(30, :origin => [-5, -5]) do
+   stroke_color "FF3333"
+   stroke_ellipse [0, 0], 29, 15
+   stroke_color "000000"
+   fill_color "993333"
+   font("Times-Roman") do
+     draw_text "Approved", :at => [-23, -3]
+   end
+   fill_color "000000"
+ end
+end
+stamp_at "approved", [210, 210]
 
 #       start_new_page(:template => po_warranty)
 

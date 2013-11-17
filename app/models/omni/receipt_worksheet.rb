@@ -1,12 +1,6 @@
 class Omni::ReceiptWorksheet < Omni::Receipt
 
   def print(receipt)
-
-    file_name = "receiving_worksheet#{Date.today}.pdf" #_#{Time.now.strftime('%H-%M-%S').chop.chop.chop}.pdf"
-    # pdf_dir = File.join(Dir.home,'sandbox','omni','db','pdf')
-    # full_file_name = File.join(pdf_dir, file_name)
-    full_file_name = file_name
-
     pdf = header receipt
 
     data = []
@@ -17,18 +11,15 @@ class Omni::ReceiptWorksheet < Omni::Receipt
       data[i+1] = [detail.purchase.purchase_nbr,' ', detail.sku.sku_nbr, detail.sku.display, selling_units, detail.receipt_pack_size, selling_units / detail.receipt_pack_size, ' ']
     end
 
-    # pdf.move_cursor_to 400
     pdf.move_down 110
 
     pdf.table(data) do |t|
       t.style(t.row(0), :background_color => '0075C9')
       t.header = true
-
     end
 
     pdf.number_pages "page <page> of <total>", { :at => [pdf.bounds.right - 150, 0], width: 150, align: :right, page_filter: (1..50), start_count_at: 1, color: "002B82" }
-
-    attach StringIO.new(pdf.render), file_name, receipt
+    attach StringIO.new(pdf.render), "receiving_worksheet#{Date.today}.pdf", receipt
   end
 
   def header(receipt)
@@ -42,7 +33,6 @@ class Omni::ReceiptWorksheet < Omni::Receipt
     pdf.draw_text "Receipt Date: #{Date.today}", at: [400, 650]
 
     pdf.draw_text "Receiving Location: #{receipt.location_display}", at: [0, 640]
-    # pdf.draw_text "Supplier Name: #{receipt.purchase.supplier.display if receipt.purchase}", at: [0, 630]
     pdf.draw_text "Carrier Name: #{receipt.carrier_supplier.display}", at: [0, 620]
     pdf.draw_text "Bill of Lading: #{receipt.bill_of_lading_number}", at: [450, 620]
     pdf
@@ -64,26 +54,15 @@ class Omni::ReceiptWorksheet < Omni::Receipt
     contentable_id:  attachment.attachment_id,
     data: file.read
     )
+
+    Buildit::Attachment.reindex
+    Buildit::Content.reindex
   end
-
-  # def reset_settings
-  #   # Text settings
-  #   # font("Helvetica", :size => 12)
-  #   self.default_leading 0
-  #   self.text_direction = :ltr
-
-  #   # Graphics settings
-  #   self.line_width = 1
-  #   self.cap_style  = :butt
-  #   self.join_style = :miter
-  #   undash
-  #   fill_color   BLACK
-  #   stroke_color BLACK
-  # end
 
 end
 
       # move_down 120
+    # pdf.draw_text "Supplier Name: #{receipt.purchase.supplier.display if receipt.purchase}", at: [0, 630]
       # table(data) do
       #   style(row(0), :background_color => '0075C9')
       #   column(0..7).width = 200

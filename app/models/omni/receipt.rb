@@ -131,12 +131,17 @@ class Omni::Receipt < ActiveRecord::Base
       transition [:draft, :scheduled, :processing] => same
     end
 
+    event :copy_units do
+      transition [:draft, :scheduled, :processing] => same
+    end
+
   ### CALLBACKS ###
     after_transition :on => :start, :do => :do_start
     after_transition :on => :receipt, :do => :do_receive
     after_transition :on => :accept, :do => :do_accept
     after_transition :on => :complete, :do => :do_complete
     after_transition :on => :print, :do => :print_count_sheet
+    after_transition :on => :copy_units, :do => :do_copy_units
 
   end
   # STATES (End)
@@ -170,6 +175,13 @@ class Omni::Receipt < ActiveRecord::Base
     # end
 
     # render text: result.to_json, status: 200
+  end
+
+  def do_copy_units
+    # Read every Receipt Detail row in Draft State.
+    # If the received units are zero, the system will update the row with the number of open units from the corresponding Purchase Detail row.
+    # If the received units are greater than zero, then the field is not changed.
+    receipt_details.where(state: 'draft').each {|x| x.received_units = x.purchase_detail.selling_units_approved - x.purchase_detail.selling_units_received - x.purchase_detail.selling_units_cancelled if x.purchase_detail and x.received_units == 0}
   end
 
   def do_receive
