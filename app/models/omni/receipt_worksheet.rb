@@ -56,7 +56,6 @@ class Omni::ReceiptWorksheet < Omni::Receipt
     )
 
     Buildit::Attachment.reindex
-    Buildit::Content.reindex
   end
 
 end
