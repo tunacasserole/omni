@@ -1,4 +1,4 @@
-require 'spreadsheet'
+# require 'spreadsheet'
 class Omni::Receipt < ActiveRecord::Base
   # METADATA (Start) ====================================================================
   self.table_name   = :receipts
@@ -151,7 +151,7 @@ class Omni::Receipt < ActiveRecord::Base
     pdf_dir = File.join(Dir.home,'sandbox','omni','db','pdf')
     full_file_name = File.join(pdf_dir, file_name)
 
-    book = Spreadsheet.open full_file_name
+    # book = Spreadsheet.open full_file_name
 
     # begin
     #   content = Buildit::Content.create(

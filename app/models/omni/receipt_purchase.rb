@@ -89,6 +89,7 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
     string   :receipt_purchase_id
     string   :display
     string   :purchase_id
+    string   :receipt_id
 
     text     :display_fulltext,            :using => :display
   end

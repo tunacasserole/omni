@@ -26,11 +26,9 @@ class Omni::ReceiptWorksheet < Omni::Receipt
 
     end
 
-    # pdf.start_new_page
     pdf.number_pages "page <page> of <total>", { :at => [pdf.bounds.right - 150, 0], width: 150, align: :right, page_filter: (1..50), start_count_at: 1, color: "002B82" }
 
-    pdf.render_file full_file_name
-    attach(File.new(full_file_name, 'r'), file_name, receipt)
+    attach StringIO.new(pdf.render), file_name, receipt
   end
 
   def header(receipt)
