@@ -2,9 +2,10 @@ class Omni::ReceiptWorksheet < Omni::Receipt
 
   def print(receipt)
 
-    file_name = "receipt_worksheet_test_#{Date.today}.pdf" #_#{Time.now.strftime('%H-%M-%S').chop.chop.chop}.pdf"
-    pdf_dir = File.join(Dir.home,'sandbox','omni','db','pdf')
-    full_file_name = File.join(pdf_dir, file_name)
+    file_name = "receiving_worksheet#{Date.today}.pdf" #_#{Time.now.strftime('%H-%M-%S').chop.chop.chop}.pdf"
+    # pdf_dir = File.join(Dir.home,'sandbox','omni','db','pdf')
+    # full_file_name = File.join(pdf_dir, file_name)
+    full_file_name = file_name
 
     pdf = header receipt
 

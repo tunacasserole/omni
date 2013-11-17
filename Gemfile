@@ -40,6 +40,8 @@ gem "jquery-rails", "< 3.0.0"
 gem "prawn"
 
 gem 'turbolinks'
+
+gem 'spreadsheet'
 # gem 'thin'
 # Priceless Gems
 
