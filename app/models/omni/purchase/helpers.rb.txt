@@ -14,7 +14,7 @@
 #     Prawn::Document.generate(file_name, :template => po_logo) do
 #       puts "GENERATING"
 #       font_size 9
-#       text "P.O. # #{po.purchase_order_nbr}", :align => :right, :styles => [:bold], :size => 26
+#       text "P.O. # #{po.purchase_nbr}", :align => :right, :styles => [:bold], :size => 26
 
 #       draw_text "SHIPPING ADDRESS",  :at => [0,670], :styles => [:bold]
 #       draw_text "6300 WEST BY NORTHWEST #100",  :at => [0, 660]
@@ -35,7 +35,7 @@
 #       draw_text "CANCEL DATE    :  ", :at => [210, 620]
 #       draw_text "SHIP VIA             :  MOST ECONOMICAL/FEASIBLE MEANS", :at => [210, 610]
 #       draw_text "TERMS                :  AS AGREED", :at => [210, 600]
-#       draw_text "CONFIRMATION :  #{po.purchase_order_nbr}", :at => [210, 590]
+#       draw_text "CONFIRMATION :  #{po.purchase_nbr}", :at => [210, 590]
 
 #       move_down 120
 #       puts "DATA"

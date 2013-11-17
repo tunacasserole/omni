@@ -5,7 +5,7 @@ class CreateOmniPurchases < ActiveRecord::Migration
     create_table(:purchases, :id => false) do |t|
     t.column   :purchase_id,                     :string,            :null  =>  false,   :limit   => 32
     t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
-    t.column   :purchase_order_nbr,              :string,            :null  =>  true,    :limit   => 11
+    t.column   :purchase_nbr,                    :string,            :null  =>  true,    :limit   => 11
     t.column   :supplier_id,                     :string,            :null  =>  true,    :limit   => 32
     t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
     t.column   :purchase_type,                   :string,            :null  =>  true,    :limit   => 32

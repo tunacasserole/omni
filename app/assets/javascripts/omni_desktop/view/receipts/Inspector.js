@@ -35,6 +35,41 @@ Ext.define('Omni.view.receipts.Inspector',{
           },
           showBadge: true
         }
+                ,{
+          title: 'Support',
+          xtype: 'buildit-CardGroup',
+          module: 'notes',
+          cards: [
+            {
+              title: 'Notes',
+              xtype: 'buildit-notes-Explorer',
+              defaultSearch: { with:
+                {
+                  notable_type: {equal_to: 'Omni::Receipt'},
+                  notable_id:   {equal_to: me.record.get('receipt_id')}
+                }
+              },
+              showBadge: true
+            }
+            ,{
+              title: 'Attachments',
+              xtype: 'buildit-attachments-Explorer',
+              defaultSearch: { with:
+                {
+                  attachable_type: {equal_to: 'Omni::Receipt'},
+                  attachable_id:   {equal_to: me.record.get('receipt_id')}
+                }
+              },
+              showBadge: true
+            }
+            ,{
+              title: 'Audit',
+              xtype: 'buildit-audits-Explorer',
+              model: 'Omni::Receipt',
+              model_id: me.record.get('receipt_id')
+            }
+          ]
+        }
       ]
     });
     // CARDS (End)

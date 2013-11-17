@@ -24,7 +24,7 @@ Ext.define('Omni.view.purchases.Explorer', {
   // LABELS (Start) ======================================================================
   purchase_idLabel:                       Omni.i18n.model.Purchase.purchase_id,
   displayLabel:                           Omni.i18n.model.Purchase.display,
-  purchase_order_nbrLabel:                Omni.i18n.model.Purchase.purchase_order_nbr,
+  purchase_nbrLabel:                      Omni.i18n.model.Purchase.purchase_nbr,
   supplier_idLabel:                       Omni.i18n.model.Purchase.supplier_id,
   location_idLabel:                       Omni.i18n.model.Purchase.location_id,
   purchase_typeLabel:                     Omni.i18n.model.Purchase.purchase_type,
@@ -57,7 +57,7 @@ Ext.define('Omni.view.purchases.Explorer', {
   purchase_approver_3_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_3_user_id,
   is_destroyedLabel:                      Omni.i18n.model.Purchase.is_destroyed,
   // LABELS (End)
-  
+
   // TITLES (Start) ======================================================================
   title:     'Purchases',
   subtitle:  'Create and maintain Purchases',
@@ -70,42 +70,42 @@ Ext.define('Omni.view.purchases.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        // { header: this.purchase_idLabel,                   dataIndex: 'purchase_id',                 flex: 1 },    
-        // { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },    
-        { header: this.purchase_order_nbrLabel,            dataIndex: 'purchase_order_nbr',          flex: 1 },    
-        { header: this.supplier_idLabel,                   dataIndex: 'supplier_display',            flex: 1 },    
-        { header: this.location_idLabel,                   dataIndex: 'location_display',            flex: 1 },    
-        // { header: this.purchase_typeLabel,                 dataIndex: 'purchase_type',               flex: 1 },    
-        // { header: this.purchase_sourceLabel,               dataIndex: 'purchase_source',             flex: 1 },    
+        // { header: this.purchase_idLabel,                   dataIndex: 'purchase_id',                 flex: 1 },
+        // { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },
+        { header: this.purchase_nbrLabel,            dataIndex: 'purchase_nbr',          flex: 1 },
+        { header: this.supplier_idLabel,                   dataIndex: 'supplier_display',            flex: 1 },
+        { header: this.location_idLabel,                   dataIndex: 'location_display',            flex: 1 },
+        // { header: this.purchase_typeLabel,                 dataIndex: 'purchase_type',               flex: 1 },
+        // { header: this.purchase_sourceLabel,               dataIndex: 'purchase_source',             flex: 1 },
         { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },
         { header: 'Total Order Cost',
           align: 'right',
           dataIndex: 'total_order_cost',
           flex: 1,
-          renderer: Ext.util.Format.usMoney 
+          renderer: Ext.util.Format.usMoney
         },
         { header: this.order_dateLabel,                    dataIndex: 'order_date',                  flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        // { header: this.ordered_by_user_idLabel,            dataIndex: 'ordered_by_user_id',          flex: 1 },    
-        { header: this.ship_dateLabel,                     dataIndex: 'ship_date',                   flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') },    
+        // { header: this.ordered_by_user_idLabel,            dataIndex: 'ordered_by_user_id',          flex: 1 },
+        { header: this.ship_dateLabel,                     dataIndex: 'ship_date',                   flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') },
         { header: this.delivery_dateLabel,                 dataIndex: 'delivery_date',               flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') }
-        // { header: this.cancel_not_shipped_by_dateLabel,    dataIndex: 'cancel_not_shipped_by_date',  flex: 1 },    
-        // { header: this.cancel_not_received_by_dateLabel,   dataIndex: 'cancel_not_received_by_date', flex: 1 },    
-        // { header: this.approval_dateLabel,                 dataIndex: 'approval_date',               flex: 1 },    
-        // { header: this.first_receipt_dateLabel,            dataIndex: 'first_receipt_date',          flex: 1 },    
-        // { header: this.cancelled_dateLabel,                dataIndex: 'cancelled_date',              flex: 1 },    
-        // { header: this.payment_termLabel,                  dataIndex: 'payment_term',                flex: 1 },    
-        // { header: this.freight_termLabel,                  dataIndex: 'freight_term',                flex: 1 },    
-        // { header: this.fob_pointLabel,                     dataIndex: 'fob_point',                   flex: 1 },    
-        // { header: this.ship_viaLabel,                      dataIndex: 'ship_via',                    flex: 1 },    
-        // { header: this.is_phone_orderLabel,                dataIndex: 'is_phone_order',              flex: 1 },    
-        // { header: this.confirmed_by_user_idLabel,          dataIndex: 'confirmed_by_user_id',        flex: 1 },    
-        // { header: this.master_purchase_idLabel,            dataIndex: 'master_purchase_id',          flex: 1 },    
-        // { header: this.carrier_supplier_idLabel,           dataIndex: 'carrier_supplier_id',         flex: 1 },    
-        // { header: this.is_special_orderLabel,              dataIndex: 'is_special_order',            flex: 1 },    
-        // { header: this.is_ship_cancelLabel,                dataIndex: 'is_ship_cancel',              flex: 1 },    
-        // { header: this.estimated_lead_time_daysLabel,      dataIndex: 'estimated_lead_time_days',    flex: 1 },    
-        // { header: this.lead_timeLabel,                     dataIndex: 'lead_time',                   flex: 1 },    
-        // { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }    
+        // { header: this.cancel_not_shipped_by_dateLabel,    dataIndex: 'cancel_not_shipped_by_date',  flex: 1 },
+        // { header: this.cancel_not_received_by_dateLabel,   dataIndex: 'cancel_not_received_by_date', flex: 1 },
+        // { header: this.approval_dateLabel,                 dataIndex: 'approval_date',               flex: 1 },
+        // { header: this.first_receipt_dateLabel,            dataIndex: 'first_receipt_date',          flex: 1 },
+        // { header: this.cancelled_dateLabel,                dataIndex: 'cancelled_date',              flex: 1 },
+        // { header: this.payment_termLabel,                  dataIndex: 'payment_term',                flex: 1 },
+        // { header: this.freight_termLabel,                  dataIndex: 'freight_term',                flex: 1 },
+        // { header: this.fob_pointLabel,                     dataIndex: 'fob_point',                   flex: 1 },
+        // { header: this.ship_viaLabel,                      dataIndex: 'ship_via',                    flex: 1 },
+        // { header: this.is_phone_orderLabel,                dataIndex: 'is_phone_order',              flex: 1 },
+        // { header: this.confirmed_by_user_idLabel,          dataIndex: 'confirmed_by_user_id',        flex: 1 },
+        // { header: this.master_purchase_idLabel,            dataIndex: 'master_purchase_id',          flex: 1 },
+        // { header: this.carrier_supplier_idLabel,           dataIndex: 'carrier_supplier_id',         flex: 1 },
+        // { header: this.is_special_orderLabel,              dataIndex: 'is_special_order',            flex: 1 },
+        // { header: this.is_ship_cancelLabel,                dataIndex: 'is_ship_cancel',              flex: 1 },
+        // { header: this.estimated_lead_time_daysLabel,      dataIndex: 'estimated_lead_time_days',    flex: 1 },
+        // { header: this.lead_timeLabel,                     dataIndex: 'lead_time',                   flex: 1 },
+        // { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }
       ]
     });
     // COLUMNS (End)

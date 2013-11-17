@@ -4,14 +4,9 @@ class Omni::Test::Receipt < Omni::Test::Base
     @@model_name = 'Receipt'
     @@model_action = 'event'
 
-    r = reset_data
-    x = r.receipt_details.first
-    x.complete
-    test_it('sets the state when a receipt is completed', 'complete', x.state)
-
-    # test_allocate
     test_events
-
+    # test_allocate
+    test_print
   end
 
   def self.test_events
@@ -94,6 +89,12 @@ class Omni::Test::Receipt < Omni::Test::Base
 
   end
 
+  def self.test_print
+    r = reset_data
+    100.times {|x| Omni::ReceiptDetail.create(received_units: x * 10, receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1', purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1', allocation_profile_id: 'XXXXLASTFORECASTBYPERCENTTOSTORE', sku_id: '285C928C0F3611E3BB7120C9D047DD15', receipt_pack_size: 1)}
+    r.print
+  end
+
   def self.reset_data
     Omni::Purchase.where(purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1').to_a.each {|x| x.delete}
     Omni::PurchaseDetail.where(:purchase_detail_id=>['ABABDAAA35E011E3APURCHASEDETAIL1']).to_a.each {|x| x.delete}
@@ -101,12 +102,13 @@ class Omni::Test::Receipt < Omni::Test::Base
     Omni::ReceiptDetail.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').to_a.each {|x| x.delete}
     Omni::ReceiptPurchase.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').to_a.each {|x| x.delete}
 
-    Omni::Purchase.create(:purchase_id => 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1',:supplier_id => 'B931D2A4AC531XXXXXXXXXXOLIVANDER', :location_id => '51579764AC3E11E2947800FF58D32228',  :allocation_profile_id => 'XXXXLASTFORECASTBYPERCENTTOSTORE', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON')
+    Omni::Purchase.create(:purchase_id => 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1',:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228',  :allocation_profile_id => 'XXXXLASTFORECASTBYPERCENTTOSTORE', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON')
 
     Omni::PurchaseDetail.create(state: 'open', purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1', allocation_profile_id: 'XXXXLASTFORECASTBYPERCENTTOSTORE', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1', sku_supplier_id: '239F5610231F11E3BE4920C9D047DD15', units_ordered: 100, order_pack_size: 1, supplier_cost: 25, order_cost_units: 1, selling_units_approved: 100)
     Omni::PurchaseDetail.where(purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1').first
 
-    Omni::Receipt.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', location_id: '51579764AC3E11E2947800FF58D32228')
+    r = Omni::Receipt.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', location_id: '51579764AC3E11E2947800FF58D32228')
+
     rp = Omni::ReceiptPurchase.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1')
     rp.receive
     # rp = Omni::ReceiptPurchase.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').first

@@ -8,7 +8,7 @@ en:
         display:                           Name
         projection_id:                     Projection
         projection_location_id:            Projection Location
-        projection_line_nbr:               Projection Line Nbr
+        projection_detail_nbr:             Projection Line Nbr
         forecast_profile_id:               Forecast Profile
         sku_id:                            Sku
         location_id:                       Location

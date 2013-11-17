@@ -12,7 +12,7 @@ class Omni::ReceiptFormat < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -22,30 +22,30 @@ class Omni::ReceiptFormat < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :receipt_format_id,                :override  =>  false,        :with  => :guid              
-  default      :icon_width,                       :override  =>  false,        :to    => 0                  
-  default      :paper_width,                      :override  =>  false,        :to    => 0                  
-  default      :is_date_in_header,                :override  =>  false,        :to    => false              
-  default      :is_time_in_header,                :override  =>  false,        :to    => false              
-  default      :is_location_name_in_header,       :override  =>  false,        :to    => false              
-  default      :is_location_number_in_header,     :override  =>  false,        :to    => false              
-  default      :is_order_number_in_header,        :override  =>  false,        :to    => false              
-  default      :is_cashier_name_in_header,        :override  =>  false,        :to    => false              
-  default      :is_cashier_number_in_header,      :override  =>  false,        :to    => false              
-  default      :is_salesperson_name_in_header,    :override  =>  false,        :to    => false              
-  default      :is_salesperson_number_in_header,  :override  =>  false,        :to    => false              
-  default      :is_customer_name_in_header,       :override  =>  false,        :to    => false              
-  default      :is_date_in_footer,                :override  =>  false,        :to    => false              
-  default      :is_time_in_footer,                :override  =>  false,        :to    => false              
-  default      :is_location_name_in_footer,       :override  =>  false,        :to    => false              
-  default      :is_location_number_in_footer,     :override  =>  false,        :to    => false              
-  default      :is_order_number_in_footer,        :override  =>  false,        :to    => false              
-  default      :is_cashier_name_in_footer,        :override  =>  false,        :to    => false              
-  default      :is_cashier_number_in_footer,      :override  =>  false,        :to    => false              
-  default      :is_salesperson_name_in_footer,    :override  =>  false,        :to    => false              
-  default      :is_salesperson_number_in_footer,  :override  =>  false,        :to    => false              
-  default      :is_customer_name_in_footer,       :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :receipt_format_id,                :override  =>  false,        :with  => :guid
+  default      :icon_width,                       :override  =>  false,        :to    => 0
+  default      :paper_width,                      :override  =>  false,        :to    => 0
+  default      :is_date_in_header,                :override  =>  false,        :to    => false
+  default      :is_time_in_header,                :override  =>  false,        :to    => false
+  default      :is_location_name_in_header,       :override  =>  false,        :to    => false
+  default      :is_location_number_in_header,     :override  =>  false,        :to    => false
+  default      :is_order_number_in_header,        :override  =>  false,        :to    => false
+  default      :is_cashier_name_in_header,        :override  =>  false,        :to    => false
+  default      :is_cashier_number_in_header,      :override  =>  false,        :to    => false
+  default      :is_salesperson_name_in_header,    :override  =>  false,        :to    => false
+  default      :is_salesperson_number_in_header,  :override  =>  false,        :to    => false
+  default      :is_customer_name_in_header,       :override  =>  false,        :to    => false
+  default      :is_date_in_footer,                :override  =>  false,        :to    => false
+  default      :is_time_in_footer,                :override  =>  false,        :to    => false
+  default      :is_location_name_in_footer,       :override  =>  false,        :to    => false
+  default      :is_location_number_in_footer,     :override  =>  false,        :to    => false
+  default      :is_order_number_in_footer,        :override  =>  false,        :to    => false
+  default      :is_cashier_name_in_footer,        :override  =>  false,        :to    => false
+  default      :is_cashier_number_in_footer,      :override  =>  false,        :to    => false
+  default      :is_salesperson_name_in_footer,    :override  =>  false,        :to    => false
+  default      :is_salesperson_number_in_footer,  :override  =>  false,        :to    => false
+  default      :is_customer_name_in_footer,       :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -89,11 +89,11 @@ class Omni::ReceiptFormat < ActiveRecord::Base
     string   :display
     string   :description
     integer  :paper_width
- 
+
     text     :display_fulltext, :using => :display
     text     :description_fulltext, :using => :description
     text     :paper_width_fulltext, :using => :paper_width
-  end 
+  end
   # INDEXING (End)
 
 

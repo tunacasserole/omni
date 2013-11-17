@@ -24,7 +24,7 @@ Ext.define('Omni.view.purchases.Form', {
     Ext.applyIf(this, {
       purchase_idLabel:                       Omni.i18n.model.Purchase.purchase_id,
       displayLabel:                           Omni.i18n.model.Purchase.display,
-      purchase_order_nbrLabel:                Omni.i18n.model.Purchase.purchase_order_nbr,
+      purchase_nbrLabel:                      Omni.i18n.model.Purchase.purchase_nbr,
       supplier_idLabel:                       Omni.i18n.model.Purchase.supplier_id,
       location_idLabel:                       Omni.i18n.model.Purchase.location_id,
       purchase_typeLabel:                     Omni.i18n.model.Purchase.purchase_type,
@@ -109,8 +109,8 @@ Ext.define('Omni.view.purchases.Form', {
           items              :[
 
             { xtype             : 'textfield',
-              name              : 'purchase_order_nbr',
-              fieldLabel        : this.purchase_order_nbrLabel,
+              name              : 'purchase_nbr',
+              fieldLabel        : this.purchase_nbrLabel,
               allowBlank        : true
             },
             { xtype             : 'buildit-Locator',

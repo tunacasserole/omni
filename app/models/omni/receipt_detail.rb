@@ -31,9 +31,11 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :receipt_allocations,             :class_name => 'Omni::ReceiptAllocation',     :foreign_key => 'receipt_detail_id'
-  belongs_to   :receipt,                         :class_name => 'Omni::Receipt',                 :foreign_key => 'receipt_id'
-  belongs_to   :purchase_detail,                 :class_name => 'Omni::PurchaseDetail',          :foreign_key => 'purchase_detail_id'
+  has_many     :receipt_allocations,             :class_name => 'Omni::ReceiptAllocation',   :foreign_key => 'receipt_detail_id'
+  belongs_to   :sku,                             :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
+  belongs_to   :receipt,                         :class_name => 'Omni::Receipt',             :foreign_key => 'receipt_id'
+  belongs_to   :purchase,                        :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
+  belongs_to   :purchase_detail,                 :class_name => 'Omni::PurchaseDetail',      :foreign_key => 'purchase_detail_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================

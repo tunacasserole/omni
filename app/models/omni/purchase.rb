@@ -16,13 +16,13 @@ class Omni::Purchase < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_id,                                                       :with => :guid
-  default :purchase_order_nbr,                   :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_ORDER_NBR"
+  default :purchase_nbr,                   :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_NBR"
   default :order_date,                                                        :with => :now
   default :is_special_order,                                                  :to   => false
   default :is_phone_order,                                                    :to   => false
   default :is_update_blank_details,                                           :to   => false
   default :is_update_all_details,                                             :to   => false
-  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_order_nbr}"}
+  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_nbr}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :payment_term,                                                      :to   => lambda{|m| m.supplier.default_payment_term}
   default :freight_term,                                                      :to   => lambda{|m| m.supplier.freight_term}
@@ -111,7 +111,7 @@ class Omni::Purchase < ActiveRecord::Base
     string   :supplier_id
     string   :display
     string   :state
-    string   :purchase_order_nbr
+    string   :purchase_nbr
     string   :supplier_display
     string   :location_display
     date     :order_date
@@ -146,7 +146,7 @@ class Omni::Purchase < ActiveRecord::Base
     end
 
     state :pending_approval do
-      validates :purchase_order_nbr,                         :presence => true
+      validates :purchase_nbr,                         :presence => true
       validates :supplier_id,                                :presence => true
       validates :location_id,                                :presence => true
       validates :purchase_type,                              :presence => true

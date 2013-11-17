@@ -187,6 +187,16 @@ Ext.define('Omni.view.receipts.Form', {
             click         : me.onPrintAction,
             scope         : me
           }
+        },
+        {
+          tooltip    : 'Copy Units',
+          cls        : 'duplicate',
+          xtype      : 'button',
+          listeners  : {
+            beforerender  : this.prepareCopyAction,
+            click         : me.onCopyAction,
+            scope         : me
+          }
         }
 
       ]
@@ -201,15 +211,15 @@ Ext.define('Omni.view.receipts.Form', {
 },
 
   onUploadAction : function(action, eOpts){
-    this.processEventTransition('release', 'Packing list was successfully uploaded.', 'An error occurred uploading this packing list.');
+    this.processEventTransition('upload', 'Packing list was successfully uploaded.', 'An error occurred uploading this packing list.');
   }, // onBuildAction
 
   onStartAction : function(action, eOpts){
-    this.processEventTransition('accept', 'Receipt was successfully started.', 'An error occurred starting this receipt.');
+    this.processEventTransition('start', 'Receipt was successfully started.', 'An error occurred starting this receipt.');
   }, // onBuildAction
 
   onReceiveAction : function(action, eOpts){
-    this.processEventTransition('allocate', 'Receipt was successfully received.', 'An error occurred receiving this receipt.');
+    this.processEventTransition('receive', 'Receipt was successfully received.', 'An error occurred receiving this receipt.');
   }, // onBuildAction
 
   onPrintAction : function(action, eOpts) {
@@ -223,6 +233,11 @@ Ext.define('Omni.view.receipts.Form', {
   onCompleteAction : function(action, eOpts){
     this.processEventTransition('complete', 'Receipt was successfully completed.', 'An error occurred completing this receipt.');
   }, // onBuildAction
+
+  onCopyAction : function(action, eOpts){
+    this.processEventTransition('copy', 'Open units on this receipt were successfully copied.', 'An error occurred copying open units on this receipt.');
+  }, // onBuildAction
+
 
   prepareUploadAction : function(action, eOpts) {
     var currentState = this.record.get('state');
@@ -247,6 +262,11 @@ Ext.define('Omni.view.receipts.Form', {
   prepareAcceptAction : function(action, eOpts) {
     var currentState = this.record.get('state');
         currentState === 'draft' || currentState === 'scheduled' || currentState === 'processing' ? action.show() : action.hide();
+  },
+
+  prepareCopyAction : function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'draft' || currentState === 'scheduled' || currentState === 'processing' ? action.show() : action.hide();
   },
 
   prepareCompleteAction : function(action, eOpts) {

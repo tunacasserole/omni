@@ -21,7 +21,7 @@ Ext.define('Omni.view.projection_details.Explorer', {
 
   // LABELS (Start) ======================================================================
   projection_detail_idLabel               : Omni.i18n.model.ProjectionDetail.projection_detail_id,
-  projection_line_nbrLabel                : Omni.i18n.model.ProjectionDetail.projection_line_nbr,
+  projection_detail_nbrLabel                : Omni.i18n.model.ProjectionDetail.projection_detail_nbr,
   projection_idLabel                      : Omni.i18n.model.ProjectionDetail.projection_id,
   projection_location_idLabel             : Omni.i18n.model.ProjectionDetail.projection_location_id,
   forecast_profile_idLabel                : Omni.i18n.model.ProjectionDetail.forecast_profile_id,

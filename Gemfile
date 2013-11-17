@@ -36,7 +36,10 @@ gem "guard"
 
 # Temporary fix for jquery issue
 gem "jquery-rails", "< 3.0.0"
-gem 'turbolinks'
+
+gem "prawn"
+
+# gem 'turbolinks'
 # gem 'thin'
 # Priceless Gems
 

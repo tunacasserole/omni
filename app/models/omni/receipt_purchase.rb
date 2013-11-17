@@ -55,7 +55,8 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
 
   def create_receipt_details
     self.purchase.purchase_details.each do |x|
-      next unless x.receipt.state == 'open' || x.receipt.state == 'partial'
+      # Omni::ReceiptDetail.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1', purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1', received_units: 0, allocation_profile_id: 'XXXXLASTFORECASTBYPERCENTTOSTORE', sku_id: '285C928C0F3611E3BB7120C9D047DD15', sku_alias: nil, receipt_pack_size: 1, receipt_pack_type: 'SELL_UNIT')
+      next unless x.state == 'open' || x.state == 'partial'
       next if Omni::ReceiptDetail.where(receipt_id: self.receipt_id, purchase_id: self.purchase_id, purchase_detail_id: x.purchase_detail_id, sku_id: x.sku_id).first
       Omni::ReceiptDetail.create(receipt_id: self.receipt_id, purchase_id: self.purchase_id, purchase_detail_id: x.purchase_detail_id, received_units: 0, allocation_profile_id: x.allocation_profile_id, sku_id: x.sku_id, sku_alias: x.sku_alias, receipt_pack_size: x.order_pack_size, receipt_pack_type: x.order_pack_type)
     end
@@ -77,7 +78,7 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
         end
       end
     else
-      errors.add('state','action only valid when receipt purchase is in draft, scheduled or processing state.')
+      errors.add('display','action only valid when receipt purchase is in draft, scheduled or processing state.')
       raise ActiveRecord::Rollback
     end
   end
@@ -87,8 +88,6 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
   searchable do
     string   :receipt_purchase_id
     string   :display
-    string   :state
-    string   :receipt_id
     string   :purchase_id
 
     text     :display_fulltext,            :using => :display

@@ -7,7 +7,7 @@ Ext.define('Omni.model.ProjectionDetail', {
       type       : 'string'
     },
     {
-      name       : 'projection_line_nbr',
+      name       : 'projection_detail_nbr',
       type       : 'string'
     },
     {

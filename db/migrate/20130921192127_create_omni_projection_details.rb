@@ -4,7 +4,7 @@ class CreateOmniProjectionDetails < ActiveRecord::Migration
     drop_table :projection_details if ActiveRecord::Base.connection.tables.include?('projection_details')
     create_table(:projection_details, :id => false) do |t|
     t.column   :projection_detail_id,            :string,            :null  =>  false,   :limit   => 32
-    t.column   :projection_line_nbr,             :string,            :null  =>  true,    :limit   => 20
+    t.column   :projection_detail_nbr,           :string,            :null  =>  true,    :limit   => 20
     t.column   :projection_id,                   :string,            :null  =>  true,    :limit   => 32
     t.column   :projection_location_id,          :string,            :null  =>  true,    :limit   => 32
     t.column   :forecast_profile_id,             :string,            :null  =>  true,    :limit   => 32

@@ -4,7 +4,7 @@ Ext.define('Omni.model.Purchase', {
   fields: [
       { name: 'purchase_id',                 type: 'string'   },
       { name: 'display',                     type: 'string'   },
-      { name: 'purchase_order_nbr',          type: 'string'   },
+      { name: 'purchase_nbr',                type: 'string'   },
       { name: 'supplier_id',                 type: 'string'   },
       { name: 'location_id',                 type: 'string'   },
       { name: 'purchase_type',               type: 'string'   },

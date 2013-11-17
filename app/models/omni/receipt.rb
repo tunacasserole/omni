@@ -42,7 +42,7 @@ class Omni::Receipt < ActiveRecord::Base
   belongs_to   :accepted_by_user,                :class_name => 'Buildit::User',                 :foreign_key => 'accepted_by_user_id'
   belongs_to   :completed_by_user,               :class_name => 'Buildit::User',                 :foreign_key => 'completed_by_user_id'
   belongs_to   :allocation_profile,              :class_name => 'Omni::AllocationProfile',       :foreign_key => 'allocation_profile_id'
-
+  has_many     :attachments,                     :class_name => 'Buildit::Attachment',           :foreign_key => 'attachable_id' , :as => :attachable
   has_many     :receipt_details,                 :class_name => 'Omni::ReceiptDetail',           :foreign_key => 'receipt_id'
   has_many     :receipt_purchases,               :class_name => 'Omni::ReceiptPurchase',         :foreign_key => 'receipt_id'
   # has_many     :purchases,                       :class_name => 'Omni::Purchase',                :through => :receipt_purchases
@@ -146,6 +146,24 @@ class Omni::Receipt < ActiveRecord::Base
   end
 
   def upload_packing_list
+    list = attachments.where(file_name: 'packing_list.xlsx').first
+    # begin
+    #   content = Buildit::Content.create(
+    #     data: params[:file].read
+    #   )
+
+    #   result = {
+    #     success:        true,
+    #     content_id:     content.content_id,
+    #     file_name:      params[:file].original_filename,
+    #     mime_type:      params[:file].content_type,
+    #     byte_size:      params[:file].size
+    #   }
+    # rescue
+    #   result = {success: false}
+    # end
+
+    # render text: result.to_json, status: 200
   end
 
   def do_receive
@@ -154,8 +172,8 @@ class Omni::Receipt < ActiveRecord::Base
 
   def print_count_sheet
   # Produce a Receiving Count Sheet report that can be printed.
-  # See the "Receiving Worksheet" section at the end of this sheet for a complete description of the Receiving Count Sheet content and layout.
-
+    x = Omni::ReceiptWorksheet.new
+    x.print self
   end
 
   def do_start

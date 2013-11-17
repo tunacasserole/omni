@@ -2,7 +2,7 @@ Ext.define('Omni.view.receipts.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-receipts-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -13,7 +13,7 @@ Ext.define('Omni.view.receipts.ExplorerContextMenu', {
         // RIGHT ACTIONS (Start) ================================================================
 
         /**
-         * DELETE
+         * delete
          * Supports the deletion of the selected items in the explorer grid. If none
          * are selected then no records are deleted.
          */
@@ -33,7 +33,7 @@ Ext.define('Omni.view.receipts.ExplorerContextMenu', {
         },
 
         /**
-         * DELETE
+         * export
          * Supports the deletion of the selected items in the explorer grid. If none
          * are selected then no records are deleted.
          */
@@ -118,6 +118,10 @@ Ext.define('Omni.view.receipts.ExplorerContextMenu', {
 
 
   // ACTION HANDLERS (Start) ====================================================================
+
+  clickPrint: function(btn, e, eOpts){
+    Omni.logic.receipts.ExplorerProcessSelectedItems.click(btn, 'print');
+  },
 
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);

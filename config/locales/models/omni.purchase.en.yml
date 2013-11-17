@@ -6,7 +6,7 @@ en:
       omni/purchase:
         purchase_id:                       'Purchase'
         display:                           'Name'
-        purchase_order_nbr:                'Purchase Order Nbr'
+        purchase_nbr:                      'Purchase Order Nbr'
         supplier_id:                       'Supplier'
         location_id:                       'Location'
         purchase_type:                     'Purchase Type'

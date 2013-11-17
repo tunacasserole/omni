@@ -5,7 +5,7 @@ en:
     attributes:
       omni/projection_detail:
         projection_detail_id:              'Projection Detail'
-        projection_line_nbr:               'Projection Line Nbr'
+        projection_detail_nbr:             'Projection Line Nbr'
         projection_id:                     'Projection'
         projection_location_id:            'Projection Location'
         forecast_profile_id:               'Forecast Profile'
