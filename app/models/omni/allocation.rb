@@ -216,9 +216,12 @@ class Omni::Allocation < ActiveRecord::Base
 
   def self.store_demand(allocation_formula, inventory)
     # puts "\nIn store demand, allocation_formula is #{allocation_formula}"
-    projection_detail = inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).first
+    # projection_detail = inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).first
+    # Retrieve most current projection starting with current year
+    projection_detail = inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).first || projection_detail = inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2013'}).first
 
-    case allocation_formula
+    if projection_detail
+      case allocation_formula
 
       when 'APPROVED_PROJECTION'
         case projection_detail.projection.state
@@ -259,6 +262,9 @@ class Omni::Allocation < ActiveRecord::Base
 
         units_needed = 0
 
+      end
+    else
+      units_needed = 0
     end
     # units_needed -= (inventory.on_hand_units + inventory.supplier_on_order_units) if ['LAST_FORECAST_UNITS','APPROVED_PROJECTION',/PROJECTION_\d_UNITS/].include? allocation_formula and units_needed > 0
     # puts "units_needed #{units_needed}"
