@@ -14,10 +14,10 @@ development:
   adapter: mysql2
   hostname: 162.243.108.76
   encoding: utf8
-  database:
+  database: rails
   pool: 5
-  username: root
-  password:
+  username: rails
+  password: EhvKBHOVKt
   socket: /tmp/mysql.sock
 
 # local omni_development
