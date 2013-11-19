@@ -16,9 +16,10 @@ test:
 
 production:
   adapter: mysql2
+  hostname: us-cdbr-east-04.cleardb.com
   encoding: utf8
-  database: omni_development
+  database: heroku_5757f6b0e28df88
   pool: 5
-  username: root
-  password:
+  username: bd050ffa31f32a
+  password: 9857bf97
   socket: /tmp/mysql.sock
