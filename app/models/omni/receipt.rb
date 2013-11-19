@@ -5,7 +5,7 @@ class Omni::Receipt < ActiveRecord::Base
   self.primary_key  = :receipt_id
   # METADATA (End)
 
-  include Omni::Print
+  # include Omni::Print
 
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
