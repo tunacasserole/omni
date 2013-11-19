@@ -14,7 +14,7 @@
 #   adapter: mysql2
 #   hostname: 162.243.108.76
 #   encoding: utf8
-#   database: omni_test
+#   database:
 #   pool: 5
 #   username: root
 #   password:
@@ -33,12 +33,12 @@ development:
 #digital ocean omni_test
 test:
   adapter: mysql2
-  hostname: 162.243.108.76
+  hostname: localhost
   encoding: utf8
-  database: omni_test
+  database: rails
   pool: 5
-  username: root
-  password:
+  username: rails
+  password: EhvKBHOVKt
   socket: /tmp/mysql.sock
 
 production:
