@@ -3,13 +3,11 @@ Ext.define('Omni.view.locations.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-locations-Form',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       descriptionLabel:                           Omni.i18n.model.Location.description,
@@ -155,8 +153,8 @@ Ext.define('Omni.view.locations.Form', {
             { name: 'close_date',                     fieldLabel: this.close_dateLabel,                 allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'parent_location_id',             fieldLabel: this.parent_location_idLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
             { name: 'district_id',                    fieldLabel: this.district_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.District',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'district_id', itemTpl:'{display}' },
-            // { name: 'price_book_id',                  fieldLabel: this.price_book_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.PriceBook',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'price_book_id', itemTpl:'{display}' },
-            // { name: 'promo_price_book_id',            fieldLabel: this.promo_price_book_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.PriceBook',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'price_book_id', itemTpl:'{display}' },
+            { name: 'price_book_id',                  fieldLabel: this.price_book_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.PriceBook',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'price_book_id', itemTpl:'{display}' },
+            { name: 'promo_price_book_id',            fieldLabel: this.promo_price_book_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.PriceBook',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'price_book_id', itemTpl:'{display}' },
             { name: 'selling_square_feet',            fieldLabel: this.selling_square_feetLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'storage_square_feet',            fieldLabel: this.storage_square_feetLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'location_url',                   fieldLabel: this.location_urlLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },

@@ -397,5 +397,5 @@ Buildit::Lookup.create(:lookup_id => 'C72A35DA038911E398B428CFE914NONE', :code =
 Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODEHU231PURCHASECMT', :code => 'CMT', :default_text => "CMT", :category => 'PURCHASE_TYPE', :position => 1)
 Buildit::Lookup.create(:lookup_id => 'IIII8902XXX8XODEHU231PURCHASEDDP', :code => 'DDP', :default_text => "DDP", :category => 'PURCHASE_TYPE', :position => 2)
 Buildit::Lookup.create(:lookup_id => 'AOEU8902XXX8XODEHUPURCHASEMANUAL', :code => 'MANUAL', :default_text => "Manual", :category => 'PURCHASE_SOURCE', :position => 1)
-Buildit::Lookup.create(:lookup_id => 'AOEU8902XXX8XODEHUWEIGHTEDDEMAND', :code => 'WEIGHTED_DEMAND', :default_text => "Weighted Sales", :category => 'FORECAST_CALCULATION', :position => 1)
+Buildit::Lookup.create(:lookup_id => 'AOEU8902XXX8XODEHUWEIGHTEDDEMAND', :code => 'SALES', :default_text => "Weighted Sales", :category => 'FORECAST_FORMULA', :position => 1)
 

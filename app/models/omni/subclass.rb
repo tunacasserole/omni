@@ -31,14 +31,14 @@ class Omni::Subclass < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :styles,                          :class_name => 'Omni::Style',                   :foreign_key => 'subclass_id'
-  has_many     :skus,                            :class_name => 'Omni::Sku',                     :through => :styles
+  # has_many     :skus,                            :class_name => 'Omni::Sku',                     :through => :styles
   belongs_to   :classification,                  :class_name => 'Omni::Classification',          :foreign_key => 'classification_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :classification_display,                 :to => 'classification.display'
-    map :department_display,                     :to => 'classification.department.display'
+    # map :department_display,                     :to => 'classification.department.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -50,7 +50,7 @@ class Omni::Subclass < ActiveRecord::Base
 
 
   # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
+  # order_search_by :display => :asc
   # ORDERING (End)
 
 
@@ -92,7 +92,7 @@ class Omni::Subclass < ActiveRecord::Base
     text     :display_fulltext, :using => :display
     text     :subclass_nbr_fulltext, :using => :subclass_nbr
     text     :classification_display_fulltext, :using => :classification_display
-    text     :department_display_fulltext, :using => :department_display
+    # text     :department_display_fulltext, :using => :department_display
       # text     :markup_percent_high_limit_fulltext, :using => :markup_percent_high_limit
       # text     :markup_percent_low_limit_fulltext, :using => :markup_percent_low_limit
   end

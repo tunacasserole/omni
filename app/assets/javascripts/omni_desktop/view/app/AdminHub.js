@@ -22,17 +22,6 @@ Ext.define('Omni.view.app.AdminHub', {
       },
       sections: [
 
-   // Section: BTS //
-
-  {
-   title: 'Back to School',
-     columns: 2,
-     rows: 3,
-     tiles: [
-       {title: 'Run BTS report', colspan: 2, rowspan: 2, cls: 'projections',  target: {xtype: 'omni-bts-Explorer'}},
-     ]
-     }
-
 
  // Section: Mark Research //
 
@@ -95,6 +84,7 @@ Ext.define('Omni.view.app.AdminHub', {
      tiles: [
        // {title: 'All Customer Orders', colspan: 2, rowspan: 1, cls: 'purchases',  target: {xtype: 'omni-orders-Explorer', title: 'Customer Orders'}},
        {title: 'All Work Orders', colspan: 2, rowspan: 1, cls: 'allocations',  target: {xtype: 'omni-work_orders-Explorer', title: 'Work Orders'}},
+       {title: 'Customers', colspan: 2, rowspan: 1, cls: 'allocations',  target: {xtype: 'omni-customers-Explorer', title: 'Customers'}},
        {title: 'All Payments', colspan: 2, rowspan: 1, cls: '_payments magenta3',  target: {xtype: 'omni-payments-Explorer', title: 'Payments'}},
        {title: 'All Gift Cards', colspan: 2, rowspan: 1, cls: '_vouchers magenta3',  target: {xtype: 'omni-vouchers-Explorer', title: 'Gift Cards'}},
        {title: 'Finalize Customer Orders', colspan: 2, rowspan: 1, cls: 'finalize_orders pink1', badge: '3',  target: {xtype: 'omni-orders-Explorer', title: 'Finalize Customer Order', defaultSearch: { with: {state: {equal_to: 'new'}} }, contextMenuConfig: {xtype: 'omni-orders-ExplorerContextMenuFinalize'}, store: Ext.create('Omni.store.Order',{storeId: 'FinalizeOrderStore'}), allowNew: false}},

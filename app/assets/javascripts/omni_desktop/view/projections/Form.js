@@ -152,7 +152,7 @@ Ext.define('Omni.view.projections.Form', {
     Ext.apply(this, {
       actions: [{
         xtype: 'button',
-        cls: 'ship',
+        iconCls: 'icon-rocket',
         tooltip: 'Forecast',
         listeners: {
           beforerender: this.prepareForecastAction,

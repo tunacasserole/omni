@@ -209,6 +209,7 @@
 .inspector .tab.skus .x-panel-body .logo {
   background-image: url(/assets/omni/desktop/icons/module/skus-26.png);
   background-color: #009999;
+
 }
 
 /* Inspector Logo Active & Hover */
@@ -217,6 +218,7 @@
   background-color: #AF0044;
 }
 
+
 /* Inspector Tab Active & Hover */
 .inspector .tab.skus.active .x-panel-body, .inspector .tab.skus.active .x-panel-body:hover, .inspector .tab.skus .x-panel-body:hover {
   background: #009999;
@@ -224,13 +226,17 @@
 
 /* Tile */
 .tile.skus {
-  background-image: url(/assets/omni/desktop/icons/module/skus-60.png);
-  background-color: #009999 !important;
+  background-color: #0075C9 !important;
 }
 
 .tile.skus:hover {
-  background-color: #AF0044 !important;
+  background-color: #005491 !important;
 }
+
+.tile.skus:before {
+  content: "\f155";
+}
+/**/
 
 
 /*

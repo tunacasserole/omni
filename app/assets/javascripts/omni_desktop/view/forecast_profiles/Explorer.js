@@ -24,9 +24,9 @@ Ext.define('Omni.view.forecast_profiles.Explorer', {
   // LABELS (Start) ======================================================================
 /*   forecast_profile_idLabel:               Omni.i18n.model.ForecastProfile.forecast_profile_id, */
   displayLabel:                           Omni.i18n.model.ForecastProfile.display,
-  sales_2012_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_2012_weight,
-  sales_2011_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_2011_weight,
-  sales_2010_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_2010_weight,
+  sales_py1_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py1_weight,
+  sales_py2_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py2_weight,
+  sales_py3_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py3_weight,
   contract_year_1_weightLabel:            Omni.i18n.model.ForecastProfile.contract_year_1_weight,
   contract_year_2_weightLabel:            Omni.i18n.model.ForecastProfile.contract_year_2_weight,
   contract_year_3_weightLabel:            Omni.i18n.model.ForecastProfile.contract_year_3_weight,
@@ -51,9 +51,9 @@ Ext.define('Omni.view.forecast_profiles.Explorer', {
 /*         { header: this.forecast_profile_idLabel,           dataIndex: 'forecast_profile_id',         flex: 1 },     */
         { header: this.displayLabel,                       dataIndex: 'display',                     flex: 2 },
         { header: this.forecast_formulaLabel,              dataIndex: 'forecast_formula',            flex: 1 },
-        { header: this.sales_2012_weightLabel,              dataIndex: 'sales_2012_weight',            flex: 1 },
-        { header: this.sales_2011_weightLabel,              dataIndex: 'sales_2011_weight',            flex: 1 },
-        { header: this.sales_2010_weightLabel,              dataIndex: 'sales_2010_weight',            flex: 1 },
+        { header: this.sales_py1_weightLabel,              dataIndex: 'sales_py1_weight',            flex: 1 },
+        { header: this.sales_py2_weightLabel,              dataIndex: 'sales_py2_weight',            flex: 1 },
+        { header: this.sales_py3_weightLabel,              dataIndex: 'sales_py3_weight',            flex: 1 },
         { header: this.contract_year_1_weightLabel,        dataIndex: 'contract_year_1_weight',      flex: 1 },
         { header: this.contract_year_2_weightLabel,        dataIndex: 'contract_year_2_weight',      flex: 1 },
         { header: this.contract_year_3_weightLabel,        dataIndex: 'contract_year_3_weight',      flex: 1 },

@@ -10,11 +10,11 @@ class Omni::Style < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :subclass_id,                     :presence    => true
-  validates    :size_group_id,                   :presence    => true
-  validates    :display,                         :uniqueness  => true
-  validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
+  # validates    :display,                         :presence    => true
+  # validates    :subclass_id,                     :presence    => true
+  # validates    :size_group_id,                   :presence    => true
+  # validates    :display,                         :uniqueness  => true
+  # validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
   # validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
   # validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
   # validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
@@ -44,7 +44,7 @@ class Omni::Style < ActiveRecord::Base
   default      :sell_unit_weight,                 :override  =>  false,        :to    => 0
   default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => false
   default      :is_discountable,                  :override  =>  false,        :to    => false
-  default      :is_taxable,                       :override  =>  false,        :to    => false
+  default      :is_taxable,                       :override  =>  false,        :to    => true
   default      :garment_pieces,                   :override  =>  false,        :to    => 0
   default      :is_special_order,                 :override  =>  false,        :to    => false
   default      :is_converted,                     :override  =>  false,        :to    => false
@@ -53,7 +53,7 @@ class Omni::Style < ActiveRecord::Base
   default      :is_converted_sewn,                :override  =>  false,        :to    => false
   default      :is_alterable,                     :override  =>  false,        :to    => false
   default      :is_usually_altered,               :override  =>  false,        :to    => false
-  default      :is_enabled,                       :override  =>  false,        :to    => false
+  default      :is_enabled,                       :override  =>  false,        :to    => true
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -417,8 +417,8 @@ class Omni::Style < ActiveRecord::Base
 
     text     :display_fulltext,  :using => :display
     text     :subclass_display_fulltext do self.subclass.display end
-    text     :classification_display_fulltext do self.subclass.classification.display end
-    text     :department_display_fulltext do self.subclass.classification.department.display end
+    text     :classification_display_fulltext do self.subclass.classification.display if self.subclass && self.subclass.classification end
+    text     :department_display_fulltext do self.subclass.classification.department.display if self.subclass && self.subclass.classification && self.subclass.classification.department end
   end
   # INDEXING (End)
 

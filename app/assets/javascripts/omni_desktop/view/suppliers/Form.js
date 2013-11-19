@@ -3,8 +3,6 @@ Ext.define('Omni.view.suppliers.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-suppliers-Form',
 
-
-
   initComponent:function () {
 
     var me = this;
@@ -207,7 +205,7 @@ Ext.define('Omni.view.suppliers.Form', {
               minValue          : 0,
               decimalPrecision  : 0,
               allowBlank        : true,
-              disabled          : disabled
+              disabled          : false
             }
            ,{ xtype             : 'numberfield',
               name              : 'safety_stock_days',
@@ -215,7 +213,7 @@ Ext.define('Omni.view.suppliers.Form', {
               minValue          : 0,
               decimalPrecision  : 0,
               allowBlank        : true,
-              disabled          : disabled
+              disabled          : false
             },
             { name: 'is_calculated_lead_time',        fieldLabel: this.is_calculated_lead_timeLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category: 'REPLENISHMENT_METHOD' },

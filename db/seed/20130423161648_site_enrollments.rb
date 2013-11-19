@@ -1,3 +1,0 @@
-Omni::SiteEnrollment.delete_all
-Omni::SiteEnrollment.create(:site_enrollment_id => "C55DDEE8AC5211E299E700FF58D32228",:display =>"Atlanta Academy for Children",:site_id =>" ",:school_year =>"2013-2014",:grade_id =>"1FE579E2A6C811E2AE1800FF58D32228",:gender =>"MALE",:school_year_start_date =>"",:school_year_end_date =>"",:enrollment =>"Current")
-Omni::SiteEnrollment.create(:site_enrollment_id => "C56706C6AC5211E299E700FF58D32228",:display =>"Our Lady of Perpetual Virgins of Dallas Girls School",:site_id =>" ",:school_year =>"2013-2014",:grade_id =>"1FE579E2A6C811E2AE1800FF58D32228",:gender =>"MALE",:school_year_start_date =>"",:school_year_end_date =>"",:enrollment =>"Current")

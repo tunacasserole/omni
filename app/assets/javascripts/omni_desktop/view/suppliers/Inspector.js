@@ -37,14 +37,14 @@ Ext.define('Omni.view.suppliers.Inspector', {
         //   },
         //   showBadge: true
         // }
-        ,{title: 'SKUs', xtype: 'omni-sku_suppliers-Explorer', module: 'contracts',
-           defaultSearch: { with:
-             {
-               supplier_id:   {equal_to: me.record.get('supplier_id ')}
-             }
-          },
-          showBadge: true
-        }
+        // ,{title: 'SKUs', xtype: 'omni-sku_suppliers-Explorer', module: 'contracts',
+        //    defaultSearch: { with:
+        //      {
+        //        supplier_id:   {equal_to: me.record.get('supplier_id ')}
+        //      }
+        //   },
+        //   showBadge: true
+        // }
         // ,{
         //   title: 'Ratings',
         //   xtype: 'omni-supplier_ratings-Explorer', module: 'projects', module: 'projects',

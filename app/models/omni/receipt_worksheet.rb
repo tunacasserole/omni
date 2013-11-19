@@ -1,5 +1,6 @@
-class Omni::ReceiptWorksheet < Omni::Receipt
+module Omni::Print
 
+  :attr_accessor
   def print(receipt)
     pdf = header receipt
 

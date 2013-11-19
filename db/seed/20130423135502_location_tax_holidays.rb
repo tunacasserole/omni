@@ -1,3 +1,0 @@
-Omni::LocationTaxHoliday.delete_all
-Omni::LocationTaxHoliday.create(:location_tax_holiday_id => "F7CCA7A6AC3E11E2947800FF58D32228",:display =>"#1 North Post Oak - Houston - 06/21/2013",:location_id =>"51713A3EAC3E11E2947800FF58D32228",:short_name =>"Test",:effective_date =>"2013-06-21",:end_date =>"2013-06-21",:description =>"",:is_tax_holiday =>"TRUE",:price_cutoff =>"100")
-Omni::LocationTaxHoliday.create(:location_tax_holiday_id => "F7D0784AAC3E11E2947800FF58D32228",:display =>"#2 Alpha - Dallas - 05/31/2013",:location_id =>"51892F68AC3E11E2947800FF58D32228",:short_name =>"Test",:effective_date =>"2013-05-31",:end_date =>"2013-05-31",:description =>"",:is_tax_holiday =>"TRUE",:price_cutoff =>"80")

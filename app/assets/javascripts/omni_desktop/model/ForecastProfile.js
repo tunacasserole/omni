@@ -4,9 +4,9 @@ Ext.define('Omni.model.ForecastProfile', {
   fields: [
       { name: 'forecast_profile_id',         type: 'string'   },
       { name: 'display',                     type: 'string'   },
-      { name: 'sales_2012_weight',            type: 'string'   },
-      { name: 'sales_2011_weight',            type: 'string'   },
-      { name: 'sales_2010_weight',            type: 'string'   },
+      { name: 'sales_py1_weight',            type: 'string'   },
+      { name: 'sales_py2_weight',            type: 'string'   },
+      { name: 'sales_py3_weight',            type: 'string'   },
       { name: 'contract_year_1_weight',      type: 'string'   },
       { name: 'contract_year_2_weight',      type: 'string'   },
       { name: 'contract_year_3_weight',      type: 'string'   },

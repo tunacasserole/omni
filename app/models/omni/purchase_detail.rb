@@ -217,9 +217,7 @@
         self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
         self.description = self.sku_supplier.description
         self.color_name = self.sku.color_name
-        size_id = Omni::Sku.where(:sku_id => self.sku_id).first.size_id
-        self.size_name = Omni::Size.where(:size_id => size_id).first.size_nbr
-        # self.size_name = self.sku.size_name
+        self.size_name = self.sku.size.display if self.sku.size
         self.order_pack_type = self.sku_supplier.pack_type
         case self.order_pack_type
           when "M"
