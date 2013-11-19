@@ -10,25 +10,25 @@
 #   socket: /tmp/mysql.sock
 
 # digital ocean omni_development
-development:
-  adapter: mysql2
-  hostname: 162.243.108.76
-  encoding: utf8
-  database: rails
-  pool: 5
-  username: rails
-  password: EhvKBHOVKt
-  socket: /tmp/mysql.sock
-
-# local omni_development
 # development:
 #   adapter: mysql2
+#   hostname: 162.243.108.76
 #   encoding: utf8
-#   database: omni_development
+#   database: rails
 #   pool: 5
-#   username: root
-#   password:
+#   username: rails
+#   password: EhvKBHOVKt
 #   socket: /tmp/mysql.sock
+
+# local omni_development
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: omni_development
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
 
 #digital ocean omni_test
 test:
