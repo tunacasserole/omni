@@ -5,8 +5,8 @@ class Omni::Test::Receipt < Omni::Test::Base
     @@model_action = 'event'
 
     test_events
-    # test_allocate
-    test_print
+    test_allocate
+    # test_print
   end
 
   def self.test_events
