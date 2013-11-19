@@ -91,7 +91,7 @@ class Omni::Test::Base
     Omni::Inventory.create(inventory_id: 'INVENTORYFORSKU1LOCATION5XXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '526058B2AC3E11E2947800FF58D32228', department_id: '05A9CEBAAC5511E299E700FF58D32228', supplier_id: 'B931D2A4AC5311E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE1', on_hand_units: 10, work_in_process_units: 20, supplier_on_order_units: 30, sale_units_py1: 100, sale_units_py2: 200, sale_units_py3: 300, sale_units_ytd: 50, is_authorized: false)
 
     Omni::Projection.all.each {|x| x.delete}
-    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', display: 'Test projection 1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE1')
+    Omni::Projection.create(projection_id: 'XXXXX1C19361XXXXXTESTPROJECTION1', display: 'Test projection 1', state: 'forecast', department_id: '05A9CEBAAC5511E299E700FF58D32228', forecast_profile_id: 'XXXXXXXXXXXXXXXXFORECASTPROFILE1', plan_year: '2013')
 
     Omni::ProjectionDetail.all.each {|x| x.delete}
     Omni::ProjectionDetail.create(:inventory_id => 'INVENTORYFORSKU1LOCATION1XXXXXXX',:projection_id => 'XXXXX1C19361XXXXXTESTPROJECTION1', :projection_detail_id => 'PROJ1A1C193611E3A22D20CXXPRODET1', :sku_id=>'285C928C0F3611E3BB7120C9D047DD15', :location_id=>'51713A3EAC3E11E2947800FF58D32228', :projection_1_units => 50, :projection_2_units => 50, :projection_3_units => 50, :projection_4_units => 50, :last_forecast_units => 50, :last_forecast_date => Date.today)

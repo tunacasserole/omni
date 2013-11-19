@@ -20,7 +20,7 @@
   # DEFAULTS (Start) ====================================================================
   default      :projection_id,                    :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{ m.department_display } - #{m.plan_year}"}
-  default      :plan_year,                        :override  =>  true,         :to    => '2014'
+  default      :plan_year,                        :override  =>  false,        :to    => '2014'
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
