@@ -20,7 +20,7 @@ Ext.define('Omni.view.forecast_profiles.Form', {
     Ext.applyIf(this, {
       forecast_profile_idLabel:               Omni.i18n.model.ForecastProfile.forecast_profile_id,
       displayLabel:                           Omni.i18n.model.ForecastProfile.display,
-      descriptionLabel:                           Omni.i18n.model.ForecastProfile.description,
+      descriptionLabel:                       Omni.i18n.model.ForecastProfile.description,
       sales_py1_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py1_weight,
       sales_py2_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py2_weight,
       sales_py3_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py3_weight,
@@ -41,7 +41,7 @@ Ext.define('Omni.view.forecast_profiles.Form', {
           layout:       'anchor',
           items:[
             { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },
-            { xtype: 'textfield', name: 'description',                        fieldLabel: this.displayLabel                     , allowBlank: false },
+            { xtype: 'textarea', name: 'description',   rows: 3,          fieldLabel: this.descriptionLabel                  , allowBlank: false },
             { xtype: 'textfield', name: 'sales_py1_weight',               fieldLabel: this.sales_py1_weightLabel            , allowBlank: true },
             { xtype: 'textfield', name: 'sales_py2_weight',               fieldLabel: this.sales_py2_weightLabel            , allowBlank: true },
             { xtype: 'textfield', name: 'sales_py3_weight',               fieldLabel: this.sales_py3_weightLabel            , allowBlank: true },

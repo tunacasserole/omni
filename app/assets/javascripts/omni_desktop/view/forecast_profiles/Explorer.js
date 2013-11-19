@@ -27,11 +27,6 @@ Ext.define('Omni.view.forecast_profiles.Explorer', {
   sales_py1_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py1_weight,
   sales_py2_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py2_weight,
   sales_py3_weightLabel:                  Omni.i18n.model.ForecastProfile.sales_py3_weight,
-  contract_year_1_weightLabel:            Omni.i18n.model.ForecastProfile.contract_year_1_weight,
-  contract_year_2_weightLabel:            Omni.i18n.model.ForecastProfile.contract_year_2_weight,
-  contract_year_3_weightLabel:            Omni.i18n.model.ForecastProfile.contract_year_3_weight,
-  contract_year_4_weightLabel:            Omni.i18n.model.ForecastProfile.contract_year_4_weight,
-  contract_year_5_weightLabel:            Omni.i18n.model.ForecastProfile.contract_year_5_weight,
   forecast_formulaLabel:                  Omni.i18n.model.ForecastProfile.forecast_formula,
 /*   is_destroyedLabel:                      Omni.i18n.model.ForecastProfile.is_destroyed, */
   // LABELS (End)
@@ -54,11 +49,6 @@ Ext.define('Omni.view.forecast_profiles.Explorer', {
         { header: this.sales_py1_weightLabel,              dataIndex: 'sales_py1_weight',            flex: 1 },
         { header: this.sales_py2_weightLabel,              dataIndex: 'sales_py2_weight',            flex: 1 },
         { header: this.sales_py3_weightLabel,              dataIndex: 'sales_py3_weight',            flex: 1 },
-        { header: this.contract_year_1_weightLabel,        dataIndex: 'contract_year_1_weight',      flex: 1 },
-        { header: this.contract_year_2_weightLabel,        dataIndex: 'contract_year_2_weight',      flex: 1 },
-        { header: this.contract_year_3_weightLabel,        dataIndex: 'contract_year_3_weight',      flex: 1 },
-        { header: this.contract_year_4_weightLabel,        dataIndex: 'contract_year_4_weight',      flex: 1 },
-        { header: this.contract_year_5_weightLabel,        dataIndex: 'contract_year_5_weight',      flex: 1 },
 /*     { header: this.is_destroyedLabel,                  dataIndex: 'is_destroyed',                flex: 1 }     */
       ]
     });

@@ -6,6 +6,7 @@ en:
       omni/forecast_profile:
         forecast_profile_id:               'Forecast Profile'
         display:                           'Name'
+        description:                       'Description'
         sales_py1_weight:                  'Sales 2012 Weight'
         sales_py2_weight:                  'Sales 2011 Weight'
         sales_py3_weight:                  'Sales 2010 Weight'

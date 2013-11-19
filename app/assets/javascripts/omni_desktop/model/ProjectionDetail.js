@@ -63,6 +63,10 @@ Ext.define('Omni.model.ProjectionDetail', {
       type       : 'integer'
     },
     {
+      name       : 'current_approved_units',
+      type       : 'integer'
+    },
+    {
       name       : 'last_forecast_date',
       type       : 'datetime'
     },

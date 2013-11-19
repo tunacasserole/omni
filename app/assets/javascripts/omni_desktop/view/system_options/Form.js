@@ -3,13 +3,13 @@ Ext.define('Omni.view.system_options.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-system_options-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.SystemOption.display,
@@ -31,8 +31,8 @@ Ext.define('Omni.view.system_options.Form', {
       overage_gl_account_idLabel:                 Omni.i18n.model.SystemOption.overage_gl_account_id,
       shortage_gl_account_idLabel:                Omni.i18n.model.SystemOption.shortage_gl_account_id,
       sales_tax_gl_account_idLabel:               Omni.i18n.model.SystemOption.sales_tax_gl_account_id,
-      purchase_approval_1_maximum_amount:         Omni.i18n.model.SystemOption.purchase_approval_1_maximum_amount,
-      purchase_approval_2_maximum_amount:         Omni.i18n.model.SystemOption.purchase_approval_2_maximum_amount,
+      purchase_approval_1_maximum_amountLabel:    Omni.i18n.model.SystemOption.purchase_approval_1_maximum_amount,
+      purchase_approval_2_maximum_amountLabel:    Omni.i18n.model.SystemOption.purchase_approval_2_maximum_amount,
       consecutive_invalid_login_attemptsLabel:    Omni.i18n.model.SystemOption.consecutive_invalid_login_attempts
     });
     // LABELS (End)

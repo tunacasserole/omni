@@ -5,6 +5,7 @@ class CreateOmniForecastProfiles < ActiveRecord::Migration
       create_table(:forecast_profiles, :id => false) do |t|
         t.column   :forecast_profile_id,             :string,            :null  =>  false,   :limit   => 32
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
+        t.column   :description,                     :string,            :null  =>  false,   :limit   => 500
         t.column   :forecast_formula,                :string,            :null  =>  true,    :limit   => 100
         t.column   :sales_py1_weight,               :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :sales_py2_weight,               :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
