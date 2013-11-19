@@ -10,7 +10,7 @@ development:
 
 production:
   solr:
-    hostname: 162.243.108.76
+    hostname: localhost
     port: 8983
     log_level: INFO
     min_memory: 512M
