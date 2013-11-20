@@ -148,7 +148,7 @@
     units_to_allocate = units_ordered * order_pack_size
 
     allocations_to_create = Omni::Allocation.calculate(allocation_profile_id, sku_id, units_to_allocate, locked_units, locked_locations, nil)
-    allocations_to_create.each { |k,v| Omni::PurchaseAllocation.create(purchase_detail_id: purchase_detail_id, location_id: k, units_allocated: v) }
+    allocations_to_create.each { |k,v| Omni::PurchaseAllocation.create(purchase_detail_id: purchase_detail_id, location_id: k, units_allocated: (v ? v : 0)) }
   end
 
   def do_receive
