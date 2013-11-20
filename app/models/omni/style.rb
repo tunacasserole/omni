@@ -178,7 +178,7 @@ class Omni::Style < ActiveRecord::Base
   # STATES (End)
 
   def conversion
-    errors.add(:generic_style_id, 'Not a valid generic style') if is_converted unless (generic_style_id.style && generic_style_id.style.is_converted)
+    errors.add(:generic_style_id, 'Not a valid generic style') if is_converted unless (generic_style && generic_style.is_converted)
   end
 
   # STATE HANDLERS (Start) ====================================================================
