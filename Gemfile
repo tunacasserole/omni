@@ -24,7 +24,7 @@ end
 
 #gem 'extjs4-rails',   :path => 'vendor/gems/extjs4-rails'
 
-gem 'buildit'#, '0.9.7'#,      :path => 'vendor/gems/buildit'
+gem 'buildit', '0.9.7'#,      :path => 'vendor/gems/buildit'
 
 gem 'buildit_comm'
 
