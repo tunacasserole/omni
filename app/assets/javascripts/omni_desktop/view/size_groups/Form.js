@@ -1,15 +1,15 @@
-Ext.define('Omni.view.size_groups.Form', {
+pExt.define('Omni.view.size_groups.Form', {
 
   extend:'Buildit.ux.Form',
   alias:'widget.omni-size_groups-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.SizeGroup.display,
@@ -52,7 +52,7 @@ Ext.define('Omni.view.size_groups.Form', {
     });
     // TITLES (End)
     this.callParent();
-    
+
   }
 
 });

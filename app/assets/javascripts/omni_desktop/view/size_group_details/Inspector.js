@@ -1,16 +1,11 @@
 Ext.define('Omni.view.size_group_details.Inspector', {
-
   extend:'Buildit.ux.inspector.Panel',
   alias:'widget.omni-size_group_details-Inspector',
 
-  
-
   initComponent:function () {
-
     var me = this;
 
-        
-    // LABELS (Start) ======================================================================  
+    // LABELS (Start) ======================================================================
     // LABELS (End)
 
     // INSPECTOR INIT (Start) ==============================================================
@@ -32,7 +27,7 @@ Ext.define('Omni.view.size_group_details.Inspector', {
       ]
     });
     // CARDS (End)
-    
+
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
       title:     'Size Group Detail',
