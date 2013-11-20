@@ -101,29 +101,20 @@ class Omni::Supplier < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :supplier_nbr
+    string   :display
     string   :supplier_name
+    string   :supplier_nbr
     string   :legacy_supplier_code
     string   :line_1
-    # string   :line_2
     string   :city
     string   :state_code
-    # string   :zip
-    # string   :phone
-    # string   :fax
-    string   :display
 
     text     :display_fulltext, :using => :display
     text     :supplier_nbr_fulltext, :using => :supplier_nbr
     text     :supplier_name_fulltext, :using => :supplier_name
     text     :legacy_supplier_code_fulltext, :using => :legacy_supplier_code
     text     :line_1_fulltext, :using => :line_1
-    # text     :line_2_fulltext, :using => :line_2
-    # text     :city_fulltext, :using => :city
     text     :state_code_fulltext, :using => :state_code
-    # text     :zip_fulltext, :using => :zip
-    # text     :phone_fulltext, :using => :phone
-    # text     :fax_fulltext, :using => :fax
   end
   # INDEXING (End)
 

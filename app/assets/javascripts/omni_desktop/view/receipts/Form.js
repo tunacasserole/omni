@@ -140,7 +140,7 @@ Ext.define('Omni.view.receipts.Form', {
         },
         {
           tooltip    : 'Accept',
-          cls        : 'approve',
+          iconCls    : 'icon-thumbs-up',
           xtype      : 'button',
           listeners  : {
             beforerender  : this.prepareAcceptAction,
@@ -180,7 +180,7 @@ Ext.define('Omni.view.receipts.Form', {
         },
         {
           tooltip    : 'Print',
-          cls        : 'duplicate',
+          iconCls    : 'icon-print',
           xtype      : 'button',
           listeners  : {
             beforerender  : this.preparePrintAction,

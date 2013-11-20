@@ -43,7 +43,6 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
       self.receipt_details.each {|x| x.receipt_allocations.delete_all}
       Omni::ReceiptDetail.where(purchase_id: self.purchase_id).each do |rd|
         rd.receipt_allocations.delete_all
-        rd.destroy
       end
     else
       errors.add('state','only receipt purchases in draft, scheduled or processing state may be deleted.')

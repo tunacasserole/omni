@@ -96,7 +96,7 @@ Ext.define('Omni.view.receipt_allocations.Form', {
       actions: [
        {
           xtype      : 'button',
-          cls        : 'approve',
+          iconCls    : 'icon-lock',
           tooltip    : 'Lock',
           listeners  : {
             beforerender  : this.prepareLockAction,
@@ -106,7 +106,7 @@ Ext.define('Omni.view.receipt_allocations.Form', {
         },
         {
           xtype      : 'button',
-          cls        : 'reject',
+          iconCls    : 'icon-unlock',
           tooltip    : 'Unlock',
           listeners  : {
             beforerender  : this.prepareUnlockAction,

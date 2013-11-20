@@ -91,7 +91,7 @@ Ext.define('Omni.view.receipt_details.Form', {
         },
         {
           tooltip    : 'Hold',
-          cls        : 'reject',
+          iconCls    : 'icon-thumbs-down',
           xtype      : 'button',
           listeners  : {
             beforerender  : this.prepareHoldAction,
@@ -101,7 +101,7 @@ Ext.define('Omni.view.receipt_details.Form', {
         },
          {
           tooltip    : 'Release',
-          cls        : 'approve',
+          iconCls    : 'icon-thumbs-up',
           xtype      : 'button',
           listeners  : {
             beforerender  : this.prepareReleaseAction,

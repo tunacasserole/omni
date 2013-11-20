@@ -280,7 +280,7 @@ Ext.define('Omni.view.purchase_details.Form', {
       actions: [
         {
           xtype      : 'button',
-          cls        : 'close-event',
+          iconCls        : 'icon-arrow-circle-down',
           tooltip    : 'Receive',
           listeners  : {
             beforerender  : this.prepareReceiveAction,
@@ -290,7 +290,7 @@ Ext.define('Omni.view.purchase_details.Form', {
         },
         {
           xtype      : 'button',
-          cls        : 'approve',
+          iconCls    : 'icon-thumbs-up',
           tooltip    : 'Approve',
           listeners  : {
             beforerender  : this.prepareApproveAction,

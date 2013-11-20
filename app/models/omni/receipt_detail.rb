@@ -52,7 +52,6 @@ class Omni::ReceiptDetail < ActiveRecord::Base
     # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
     if ['draft', 'hold'].include? self.state
       self.receipt_allocations.each {|x| x.destroy}
-      self.destroy
     else
       errors.add('state','only records in draft or hold state may be deleted.')
       raise ActiveRecord::Rollback

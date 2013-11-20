@@ -15,19 +15,19 @@ Ext.define('Omni.view.issues.Form', {
     };
     // FILTER (End)
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
-      issue_idLabel:                          Omni.i18n.model.Issue.issue_id,    
-      issue_nbrLabel:                         Omni.i18n.model.Issue.issue_nbr,    
-      stateLabel:                             Omni.i18n.model.Issue.state,    
-      displayLabel:                           Omni.i18n.model.Issue.display,    
-      descriptionLabel:                       Omni.i18n.model.Issue.description,    
-      severityLabel:                          Omni.i18n.model.Issue.severity,    
-      assignee_idLabel:                       Omni.i18n.model.Issue.assignee_id,    
-      creator_idLabel:                        Omni.i18n.model.Issue.creator_id,    
-      issue_typeLabel:                        Omni.i18n.model.Issue.issue_type,    
-      is_destroyedLabel:                      Omni.i18n.model.Issue.is_destroyed    
+      issue_idLabel:                          Omni.i18n.model.Issue.issue_id,
+      issue_nbrLabel:                         Omni.i18n.model.Issue.issue_nbr,
+      stateLabel:                             Omni.i18n.model.Issue.state,
+      displayLabel:                           Omni.i18n.model.Issue.display,
+      descriptionLabel:                       Omni.i18n.model.Issue.description,
+      severityLabel:                          Omni.i18n.model.Issue.severity,
+      assignee_idLabel:                       Omni.i18n.model.Issue.assignee_id,
+      creator_idLabel:                        Omni.i18n.model.Issue.creator_id,
+      issue_typeLabel:                        Omni.i18n.model.Issue.issue_type,
+      is_destroyedLabel:                      Omni.i18n.model.Issue.is_destroyed
     });
     // LABELS (End)
 
@@ -42,16 +42,16 @@ Ext.define('Omni.view.issues.Form', {
           defaults:     {anchor: '95%'},
           layout:       'anchor',
           items:[
-            // { xtype: 'textfield', name: 'issue_id',                       fieldLabel: this.issue_idLabel                    , allowBlank: true },    
-            { xtype: 'textfield', name: 'issue_nbr',                      fieldLabel: this.issue_nbrLabel                   , allowBlank: true, disabled: true },    
-            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true },    
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },    
-            { xtype: 'textarea', rows: 5, name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },    
-             { xtype: 'buildit-Lookup', category:   'SEVERITY',   name: 'severity', fieldLabel: this.severityLabel                    , allowBlank: true },    
+            // { xtype: 'textfield', name: 'issue_id',                       fieldLabel: this.issue_idLabel                    , allowBlank: true },
+            { xtype: 'textfield', name: 'issue_nbr',                      fieldLabel: this.issue_nbrLabel                   , allowBlank: true, disabled: true },
+            { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true },
+            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
+            { xtype: 'textarea', rows: 5, name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },
+             { xtype: 'buildit-Lookup', category:   'SEVERITY',   name: 'severity', fieldLabel: this.severityLabel                    , allowBlank: true },
             { xtype: 'textfield', name: 'assignee_id',                    fieldLabel: this.assignee_idLabel                 , allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 25}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}',initialValue: this.record.get('assignee_display'), },
-            { xtype: 'textfield', name: 'creator_id',                    fieldLabel: this.creator_idLabel                   , allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 25}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}',initialValue: this.record.get('creator_display'), },            
-            { xtype: 'buildit-Lookup', category:   'issue_type', name: 'issue_type', fieldLabel: this.issue_typeLabel                  , allowBlank: true },    
-            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }    
+            { xtype: 'textfield', name: 'creator_id',                    fieldLabel: this.creator_idLabel                   , allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 25}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}',initialValue: this.record.get('creator_display'), },
+            { xtype: 'buildit-Lookup', category:   'issue_type', name: 'issue_type', fieldLabel: this.issue_typeLabel                  , allowBlank: true },
+            // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }
           ]
         }
       ]
@@ -63,7 +63,7 @@ Ext.define('Omni.view.issues.Form', {
       actions: [
         {
           xtype      : 'button',
-          cls        : 'approve',
+          iconCls    : 'icon-thumbs-up',
           scope      : me,
           tooltip    : 'Close Issue',
           listeners  : {
@@ -74,7 +74,7 @@ Ext.define('Omni.view.issues.Form', {
         }
         ,{
           xtype      : 'button',
-          cls        : 'reject',
+          iconCls    : 'icon-thumbs-down',
           scope      : me,
           tooltip    : 'Backlog issue',
           listeners  : {
@@ -83,7 +83,7 @@ Ext.define('Omni.view.issues.Form', {
             scope         : me
           }
         }
-              
+
       ]
     });
     // ACTIONS (End)
@@ -98,7 +98,7 @@ Ext.define('Omni.view.issues.Form', {
     // TITLES (End)
 
     this.callParent();
-   
+
   },
 
   // HANDLERS (Start) ======================================================================
@@ -108,14 +108,14 @@ Ext.define('Omni.view.issues.Form', {
    */
   onCloseAction : function(action, eOpts){
     this.processEventTransition('close', 'Issue was successfully closed.', 'An error occurred closing this Issue');
-  }, // 
+  }, //
 
   /**
    *
    */
   onBacklogAction : function(action, eOpts){
     this.processEventTransition('backlog', 'Issue was successfully moved to the backlog.', 'An error occurred moving this issue to the backlog');
-  }, 
+  },
 
 
   processEventTransition : function(eventName, successMsg, failureMsg){
@@ -164,7 +164,7 @@ Ext.define('Omni.view.issues.Form', {
 
   //  *
   //  *
-   
+
   // prepareBacklogAction : function(action, eOpts) {
 
   //   var currentState = this.record.get('state');

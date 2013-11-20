@@ -7,6 +7,12 @@ Ext.define('Omni.view.suppliers.Form', {
 
     var me = this;
 
+    // FILTER (Start) =======================================================================
+    var associativeFilter = {
+      property:   'supplier_id',
+      value:      this.record.get('supplier_id')
+    };
+    // FILTER (End)
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {

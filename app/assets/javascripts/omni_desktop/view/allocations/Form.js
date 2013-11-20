@@ -185,7 +185,7 @@ Ext.define('Omni.view.allocations.Form', {
         },
         {
           xtype      : 'button',
-          cls        : 'approve',
+          iconCls    : 'icon-thumbs-up',
           tooltip    : 'Approve',
           listeners  : {
             beforerender  : this.prepareApproveAction,

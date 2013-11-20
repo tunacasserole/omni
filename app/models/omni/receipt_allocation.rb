@@ -34,9 +34,7 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
 
   def cascading_delete
     # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
-    if ['draft'].include? self.state
-      self.destroy
-    else
+    unless ['draft'].include? self.state
       errors.add('state','only records in draft state may be deleted.')
       raise ActiveRecord::Rollback
     end

@@ -1,23 +1,16 @@
 Ext.define('Omni.view.suppliers.Inspector', {
-
   extend:'Buildit.ux.inspector.Panel',
   alias:'widget.omni-suppliers-Inspector',
 
 
-
   initComponent:function () {
-
     var me = this;
-
-
-    // LABELS (Start) ======================================================================
-    // LABELS (End)
 
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter: {
         property: 'supplier_id',
-        value:    me.record.get('supplier_id')
+        value:    this.record.get('supplier_id')
       }
     });
     // INSPECTOR INIT (End)
@@ -29,18 +22,19 @@ Ext.define('Omni.view.suppliers.Inspector', {
           title: 'Profile',
           xtype: 'omni-suppliers-Form'
         }
+        ,{
+          title: 'SKUs',
+          xtype: 'omni-sku_suppliers-Explorer', module: 'contracts',
+          defaultSearch: { with:
+             {
+               supplier_id:   {equal_to: me.record.get('supplier_id')}
+             }
+          }
+       }
         // ,{title: 'Contacts', xtype: 'omni-supplier_contacts-Explorer', module: 'cfars',
         //    defaultSearch: { with:
         //      {
         //        supplier_id:   {equal_to: me.record.get('supplier_id')}
-        //      }
-        //   },
-        //   showBadge: true
-        // }
-        // ,{title: 'SKUs', xtype: 'omni-sku_suppliers-Explorer', module: 'contracts',
-        //    defaultSearch: { with:
-        //      {
-        //        supplier_id:   {equal_to: me.record.get('supplier_id ')}
         //      }
         //   },
         //   showBadge: true
