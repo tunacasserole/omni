@@ -300,7 +300,7 @@ Ext.define('Omni.view.purchase_details.Form', {
         },
         {
           xtype      : 'button',
-          cls        : 'close-event',
+          iconCls    : 'icon-sitemap',
           tooltip    : 'Allocate',
           listeners  : {
             beforerender  : this.prepareAllocateAction,

@@ -551,7 +551,7 @@ Ext.define('Omni.view.purchases.Form', {
         },
     {
           xtype      : 'button',
-          iconCls    : 'icon-share',
+          iconCls    : 'icon-sitemap',
           tooltip    : 'Allocate',
           listeners  : {
             beforerender  : this.prepareAllocateAction,
