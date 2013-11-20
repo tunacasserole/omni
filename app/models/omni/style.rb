@@ -212,7 +212,9 @@ class Omni::Style < ActiveRecord::Base
   def after_build
     puts '--- starting building skus ---'
     gen_skus
+    puts '--- gen sku suppliers ---'
     gen_sku_suppliers
+    puts '--- gen inventories ---'
     gen_inventories
     gen_sku_prices
     puts '--- done with building skus ---'

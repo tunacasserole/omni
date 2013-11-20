@@ -109,7 +109,7 @@ Ext.define('Omni.view.app.Hub', {
             title: 'Skus',
             colspan: 2,
             rowspan: 1,
-            cls: 'skus',
+            cls: 'product_hierarchy',
             target: {
               xtype: 'omni-skus-Explorer'
             }

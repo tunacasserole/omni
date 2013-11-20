@@ -221,8 +221,8 @@ class Omni::Sku < ActiveRecord::Base
     text     :display_fulltext, :using => :display
     text     :style_display_fulltext do self.style.subclass.display if style end
     text     :subclass_display_fulltext do self.style.subclass.display if style && subclass end
-    text     :classification_display_fulltext do self.style.subclass.classification.display if style && subclass && classification end
-    text     :department_display_fulltext do self.style.subclass.classification.department.display if style && subclass && classification && department end
+    text     :classification_display_fulltext do self.style.subclass.classification.display if self.style && self.style.subclass && self.style.subclass.classification end
+    text     :department_display_fulltext do self.style.subclass.classification.department.display if self.style && self.style.subclass && self.style.subclass.classification && self.style.subclass.classification.department end
     text     :source_idfulltext, :using => :source_id
     text     :source_fulltext, :using => :source
     text     :site_display_fulltext, :using => :site_display

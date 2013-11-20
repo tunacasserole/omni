@@ -28,37 +28,22 @@ Ext.define('Omni.view.skus.Explorer', {
         xtype: 'omni-skus-Inspector'
       },
 
-    //   filters: [
-    //     {
-    //       showAll   : 'All States',
-    //       items     : [
-    //           ['state_draft',            "Draft"],
-    //           ['state_pending_approval', "Pending Approval"],
-    //           ['state_active',           "Active"],
-    //           ['state_discontinued',      "Discontinued"],
-    //           ['state_obsolete',          "Obsolete"],
-    //           ['state_inactive',          "Inactive"]
-    //         ]
-    //     }
-    //   ],
-    // });
-
-     filters: [
-        {
-          showAll  : 'Departments',
-          items    : [
-            ['department_accessories',     "ACCESSORIES"],
-            ['department_activewear',      "ACTIVEWEAR"],
-            ['department_components',      "COMPONENTS"],
-            ['department_footwear',        "FOOTWEAR"],
-            ['department_girls_specialty', "GIRLS SPECIALTY"],
-            ['department_knit_tops',       "KNIT TOPS"],
-            ['department_outerwear',        "OUTERWEAR"],
-            ['department_pants_and_shorts', "PANTS AND SHORTS"],
-            ['department_woven_tops',       "WOVEN TOPS"]
-          ]
-        }
-      ],
+     // filters: [
+     //    {
+     //      showAll  : 'Departments',
+     //      items    : [
+     //        ['department_accessories',     "ACCESSORIES"],
+     //        ['department_activewear',      "ACTIVEWEAR"],
+     //        ['department_components',      "COMPONENTS"],
+     //        ['department_footwear',        "FOOTWEAR"],
+     //        ['department_girls_specialty', "GIRLS SPECIALTY"],
+     //        ['department_knit_tops',       "KNIT TOPS"],
+     //        ['department_outerwear',        "OUTERWEAR"],
+     //        ['department_pants_and_shorts', "PANTS AND SHORTS"],
+     //        ['department_woven_tops',       "WOVEN TOPS"]
+     //      ]
+     //    }
+     //  ],
     });
     // EXPLORER INIT (End)
 

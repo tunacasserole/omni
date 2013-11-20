@@ -1,14 +1,9 @@
-pExt.define('Omni.view.size_groups.Form', {
-
+Ext.define('Omni.view.size_groups.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-size_groups-Form',
 
-
-
   initComponent:function () {
-
     var me = this;
-
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
