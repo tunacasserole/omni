@@ -319,13 +319,14 @@ class Omni::Style < ActiveRecord::Base
 
   def gen_inventories
     # Add inventory rows for each Sku & all StyleLocation rows in active state
-    self.skus.each do |sku|
+    myself = self
+    myself.skus.each do |sku|
       next unless sku.state == 'active'
-      Omni::StyleLocation.where(:style_id => self.style_id).each do |sl|
+      Omni::StyleLocation.where(style_id: myself.style_id).each do |sl|
         x = Omni::Inventory.new
         x.sku_id = sku.sku_id
         x.location_id = sl.location_id
-        x.supplier_id = self.supplier_id
+        x.supplier_id = myself.supplier_id
         x.is_authorized = sl.is_authorized
         x.is_taxable = sl.is_taxable
         x.is_special_order = sl.is_special_order

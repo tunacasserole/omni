@@ -3,13 +3,13 @@ Ext.define('Omni.view.style_color_sizes.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-style_color_sizes-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       style_color_idLabel:                        Omni.i18n.model.StyleColorSize.style_color_id,
@@ -50,6 +50,14 @@ Ext.define('Omni.view.style_color_sizes.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) =======================================================================
+    Ext.applyIf(this, {
+      title:         'Style Colors Sizes',
+      subtitle:      'All of the color-size combinations available for this style',
+      newTitle:      'Style Color Sizes',
+      newSubtitle:   'new color size'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

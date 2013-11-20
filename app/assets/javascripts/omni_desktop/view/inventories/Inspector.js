@@ -1,4 +1,4 @@
-Ext.define('Omni.view.inventories.Inspector',{
+  Ext.define('Omni.view.inventories.Inspector',{
   extend   : 'Buildit.ux.inspector.Panel',
   alias    : 'widget.omni-inventories-Inspector',
 
@@ -47,7 +47,7 @@ Ext.define('Omni.view.inventories.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title     : 'Inventory',
-      subtitle  : this.record.get('inventory_id')
+      subtitle  : this.record.get('display')
     });
     // TITLES (End)
 

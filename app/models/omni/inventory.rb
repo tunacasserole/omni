@@ -1,4 +1,4 @@
-class Omni::Inventory < ActiveRecord::Base
+  class Omni::Inventory < ActiveRecord::Base
   # METADATA (Start) ====================================================================
   self.table_name   = :inventories
   self.primary_key  = :inventory_id
