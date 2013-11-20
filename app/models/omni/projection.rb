@@ -148,6 +148,7 @@
       unless x.last_forecast_date
         x.first_forecast_units = forecasted_units
         x.projection_1_units = forecasted_units
+        x.current_approved_units = forecasted_units
       end
 
       x.last_forecast_units = forecasted_units
