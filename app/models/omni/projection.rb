@@ -14,7 +14,6 @@
   validates :plan_year,                         :presence => true
   validates :forecast_profile_id,               :presence => true
   validates :department_id,                     :presence => true
-
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -122,7 +121,7 @@
     # Insert or update ProjectionDetail row for every authorized SKU/Location combination (TO DO: in the Departement in the Projection) and every active selling location authorized for the SKU.
     # DEBUG myself = Omni::Projection.first
     # DEBUG Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: myself.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: myself.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: myself.projection_id).first} #unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
-    Omni::Inventory.where(is_authorized: true).each do |i|
+    Omni::Inventory.where(is_authorized: true, department_id: self.department_id).each do |i|
       # Create Projection Detail;
       x = Omni::ProjectionDetail.where(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id)
       # TODO: Add support for generics
@@ -152,7 +151,7 @@
       end
 
       x.last_forecast_units = forecasted_units
-      x.last_forecast_date = Time.now
+      x.last_forecast_date = Date.today
 
       # Standard deviation of py1, py2 and forecasted units
       mean = (i.sale_units_py1 + i.sale_units_py2 + forecasted_units) / 3
@@ -161,7 +160,7 @@
       x.sd_floor = forecasted_units * 0.2
       x.sd_ceiling = forecasted_units * 0.4
       x.sd_smooth = x.sd_raw < x.sd_floor ? x.sd_floor : x.sd_raw > x.sd_ceiling ? x.sd_ceiling : x.sd_raw
-      x.sd_percent = x.sd_smooth / forecasted_units
+      x.sd_percent = forecasted_units > 0 ? x.sd_smooth / forecasted_units : 0
 
       # Coverage and need
       x.coverage_allowed = [forecasted_units + x.sd_smooth - i.sale_units_ytd, 0].max

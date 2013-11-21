@@ -1,8 +1,6 @@
 Ext.define('Omni.view.projections.Form', {
-
   extend: 'Buildit.ux.Form',
   alias: 'widget.omni-projections-Form',
-
 
   initComponent: function() {
 
@@ -54,7 +52,7 @@ Ext.define('Omni.view.projections.Form', {
           }, {
             name: 'department_id',
             fieldLabel: this.department_idLabel,
-            allowBlank: true,
+            allowBlank: false,
             disabled: (this.record.phantom != true && this.record.get('state') != 'draft'),
             xtype: 'buildit-Locator',
             store: Ext.create('Omni.store.Department', {
@@ -68,13 +66,13 @@ Ext.define('Omni.view.projections.Form', {
             xtype: 'buildit-Lookup',
             name: 'plan_year',
             fieldLabel: this.plan_yearLabel,
-            allowBlank: true,
+            allowBlank: false,
             disabled: (this.record.phantom != true && this.record.get('state') != 'draft'),
             category: 'PLAN_YEAR'
           }, {
             name: 'forecast_profile_id',
             fieldLabel: this.forecast_profile_idLabel,
-            allowBlank: true,
+            allowBlank: false,
             disabled: false,
             xtype: 'buildit-Locator',
             store: Ext.create('Omni.store.ForecastProfile', {
@@ -130,8 +128,7 @@ Ext.define('Omni.view.projections.Form', {
             fieldLabel: this.approval_4_dateLabel,
             allowBlank: true,
             disabled: true
-          },
-
+          }
         ]
       }]
     });

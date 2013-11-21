@@ -2,169 +2,15 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-projections-ExplorerContextMenu',
 
-
+  
   initComponent: function() {
     var me = this;
 
     Ext.apply(this, {
 
-     //  leftActions: [
-
-     //    // LEFT ACTIONS (Start) =================================================================
-
-     //    /**
-     //     * Build
-     //     * Supports performing 'Build' on the selected items in the explorer grid.
-     //     * If none are selected then no records are deleted.
-     //     */
-     //    {
-     //      text:'Build',
-     //      cls: 'icon-settings',
-     //      action: 'build',
-     //      confirm: true,
-     //      multi: true,
-     //      privileges: [],
-     //      listeners: {
-     //        click: {
-     //          fn: this.clickBuild,
-     //          scope: me
-     //        }
-     //      }
-     //    },
-
-     //    /**
-     //     * Forecast
-     //     * Supports performing 'Forecast' on the selected items in the explorer grid.
-     //     * If none are selected then no records are deleted.
-     //     */
-     //    {
-     //      text:'Forecast',
-     //      cls: 'icon-settings',
-     //      action: 'forecast',
-     //      confirm: true,
-     //      multi: true,
-     //      privileges: [],
-     //      listeners: {
-     //        click: {
-     //          fn: this.clickForecast,
-     //          scope: me
-     //        }
-     //      }
-     //    },
-
-     //    /**
-     //     * Approve
-     //     * Supports performing 'Approve' on the selected items in the explorer grid.
-     //     * If none are selected then no records are deleted.
-     //     */
-     //    {
-     //      text:'Approve',
-     //      cls: 'icon-settings',
-     //      action: 'approve',
-     //      confirm: true,
-     //      multi: true,
-     //      privileges: [],
-     //      listeners: {
-     //        click: {
-     //          fn: this.clickApprove,
-     //          scope: me
-     //        }
-     //      }
-     //    },
-
-     //    /**
-     //     * Release
-     //     * Supports performing 'Release' on the selected items in the explorer grid.
-     //     * If none are selected then no records are deleted.
-     //     */
-     //    {
-     //      text:'Release',
-     //      cls: 'icon-settings',
-     //      action: 'release',
-     //      confirm: true,
-     //      multi: true,
-     //      privileges: [],
-     //      listeners: {
-     //        click: {
-     //          fn: this.clickRelease,
-     //          scope: me
-     //        }
-     //      }
-     //    },
-
-     // // SEPARATOR
-     //    '-',
-
-     //    /**
-     //     * Close
-     //     * Supports performing 'Close' on the selected items in the explorer grid.
-     //     * If none are selected then no records are deleted.
-     //     */
-     //    {
-     //      text:'Close',
-     //      cls: 'icon-settings',
-     //      action: 'close',
-     //      confirm: true,
-     //      multi: true,
-     //      privileges: [],
-     //      listeners: {
-     //        click: {
-     //          fn: this.clickClose,
-     //          scope: me
-     //        }
-     //      }
-     //    },
-
-
-     //    // LEFT ACTIONS (End)
-
-     //  ],
-
-
-      // RIGHT ACTIONS (Start) ================================================================
       rightActions: [
 
-        /**
-         * SELECT ALL
-         * Supports the selection of all rows in the grid.
-         *
-         */
-        {
-          text:'Select All',
-          cls: 'icon-select-all',
-          action: 'select-all',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickSelectAll,
-              scope: me
-            }
-          }
-        },
-
-        /**
-         * DESELECT ALL
-         * Supports the de-selection of all rows in the grid.
-         *
-         */
-        {
-          text:'Deselect All',
-          cls: 'icon-deselect-all',
-          action: 'deselect-all',
-          confirm: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickDeselectAll,
-              scope: me
-            }
-          }
-        },
-
-        // SEPARATOR
-        '-',
+        // RIGHT ACTIONS (Start) ================================================================
 
         /**
          * DELETE
@@ -187,9 +33,9 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
         },
 
         /**
-         * EXPORT
-         * Supports the export of the selected items in the explorer grid.
-         *
+         * DELETE
+         * Supports the deletion of the selected items in the explorer grid. If none
+         * are selected then no records are deleted.
          */
         {
           text:'Export',
@@ -206,9 +52,63 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
           }
         },
 
-      ]
-     // RIGHT ACTIONS (End)
+        // SEPARATOR
+        '-',
 
+
+        /**
+         * DELETE
+         * Supports the deletion of the selected items in the explorer grid. If none
+         * are selected then no records are deleted.
+         */
+        {
+          text:'Select All',
+          cls: 'icon-select-all',
+          action: 'select-all',
+          confirm: true,
+          multi: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickSelectAll,
+              scope: me
+            }
+          }
+        },
+
+
+        /**
+         * EXPORT
+         * Supports the deletion of the selected items in the explorer grid. If none
+         * are selected then no records are deleted.
+         */
+        {
+          text:'Deselect All',
+          cls: 'icon-deselect-all',
+          action: 'deselect-all',
+          confirm: true,
+          privileges: [],
+          listeners: {
+            click: {
+              fn: this.clickDeselectAll,
+              scope: me
+            }
+          }
+        }
+
+        // RIGHT ACTIONS (End)
+
+      ],
+
+
+      leftActions: [
+
+        // LEFT ACTIONS (Start) =================================================================
+
+
+        // LEFT ACTIONS (End)
+
+      ]
 
     });
 
@@ -216,27 +116,8 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
   },
 
 
+
   // ACTION HANDLERS (Start) ====================================================================
-
-  clickBuild: function(btn, e, eOpts){
-    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'build');
-  },
-
-  clickForecast: function(btn, e, eOpts){
-    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'forecast');
-  },
-
-  clickRelease: function(btn, e, eOpts){
-    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'release');
-  },
-
-  clickApprove: function(btn, e, eOpts){
-    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'approve');
-  },
-
-  clickClose: function(btn, e, eOpts){
-    Omni.logic.projections.ExplorerProcessSelectedItems.click(btn, 'close');
-  },
 
   clickDelete: function(btn, e, eOpts){
     Buildit.logic.explorer.action.Delete.click(btn);
@@ -256,9 +137,12 @@ Ext.define('Omni.view.projections.ExplorerContextMenu', {
 
   clickNew: function(btn, e, eOpts){
     // TODO
+  },
+
+  clickImport: function(btn, e, eOpts){
+    // TODO
   }
 
   // ACTION HANDLERS (End)
 
 });
-
