@@ -12,7 +12,7 @@ class Omni::ProductType < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -22,13 +22,13 @@ class Omni::ProductType < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :product_type_id,                  :override  =>  false,        :with  => :guid              
-  default      :is_fabric,                        :override  =>  false,        :to    => false              
-  default      :is_trim,                          :override  =>  false,        :to    => false              
-  default      :is_converted,                     :override  =>  false,        :to    => false              
-  default      :is_labor,                         :override  =>  false,        :to    => false              
-  default      :is_shipping,                      :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :product_type_id,                  :override  =>  false,        :with  => :guid
+  default      :is_fabric,                        :override  =>  false,        :to    => false
+  default      :is_trim,                          :override  =>  false,        :to    => false
+  default      :is_converted,                     :override  =>  false,        :to    => false
+  default      :is_labor,                         :override  =>  false,        :to    => false
+  default      :is_shipping,                      :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -71,14 +71,9 @@ class Omni::ProductType < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :display
-    boolean  :is_fabric
-    boolean  :is_trim
-    boolean  :is_converted
-    boolean  :is_labor
-    boolean  :is_shipping
- 
+
     text     :display_fulltext, :using => :display
-  end 
+  end
   # INDEXING (End)
 
 

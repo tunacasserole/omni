@@ -1,28 +1,17 @@
 class Omni::StyleColorSize < ActiveRecord::Base
 
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :style_color_sizes
   self.primary_key  = :style_color_size_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :size_id, uniqueness: { scope: :style_color_id, message: "Size already exists for this style and color." }
   # VALIDATIONS (End)
-
 
   # DEFAULTS (Start) ====================================================================
   default      :style_color_size_id,              :override  =>  false,        :with  => :guid

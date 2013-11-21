@@ -95,12 +95,7 @@ Ext.define('Omni.view.app.Hub', {
           }]
         }
 
-        // // Section: Receiving //
-
-
         // Section: Product Hierarchy //
-
-
         , {
           title: 'product hierarchy',
           columns: 4,
@@ -368,6 +363,30 @@ Ext.define('Omni.view.app.Hub', {
             cls: 'network',
             target: {
               xtype: 'omni-tills-Explorer'
+            }
+          }]
+        }
+
+        // Section: System Admin //
+        , {
+          title: 'system administration',
+          columns: 2,
+          rows: 2,
+          tiles: [{
+            title: 'Tasks',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'product_hierarchy',
+            target: {
+              xtype: 'omni-tasks-Explorer'
+            }
+          }, {
+            title: 'Issues',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'product_hierarchy',
+            target: {
+              xtype: 'omni-issues-Explorer'
             }
           }]
         }

@@ -1,28 +1,17 @@
 class Omni::StyleColor < ActiveRecord::Base
 
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :style_colors
   self.primary_key  = :style_color_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :color_id, uniqueness: { scope: :style_id, message: "Color already exists for this style." }
   # VALIDATIONS (End)
-
 
   # DEFAULTS (Start) ====================================================================
   default      :style_color_id,                   :override  =>  false,        :with  => :guid
@@ -144,6 +133,7 @@ class Omni::StyleColor < ActiveRecord::Base
         x.style_color_id = self.style_color_id
         x.size_id = s.size_id
         x.sku_name = "#{self.display}-#{s.size_display}"
+        x.pos_name = "#{self.style.pos_name} #{self.color.concatenated_name} #{s.size.concatenated_name}".truncate 100
         x.save
       end
     end

@@ -1,22 +1,13 @@
 class Omni::StyleSupplier < ActiveRecord::Base
 
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :style_suppliers
   self.primary_key  = :style_supplier_id
   # METADATA (End)
 
-
-
-
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :supplier_id, uniqueness: { scope: :style_id, message: "Supplier already exists for this style." }
@@ -26,9 +17,7 @@ class Omni::StyleSupplier < ActiveRecord::Base
   validates    :order_multiple_type,             :lookup      => 'ORDER_MULTIPLE_TYPE',        :allow_nil => true
   # validates    :fob_point,                       :lookup      => 'FOB_POINT',                  :allow_nil => true
   validates    :freight_term,                    :lookup      => 'FREIGHT_TERM',               :allow_nil => true
-
-    # VALIDATIONS (End)
-
+  # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default      :style_supplier_id,                :override  =>  false,        :with  => :guid
@@ -36,14 +25,14 @@ class Omni::StyleSupplier < ActiveRecord::Base
   default      :is_primary_supplier,              :override  =>  false,        :to    => false
   default      :is_manufacturer,                  :override  =>  false,        :to    => false
   default      :is_discontinued,                  :override  =>  false,        :to    => false
-  default      :supplier_cost_units,              :override  =>  false,        :to    => 0
+  default      :supplier_cost_units,              :override  =>  false,        :to    => 1
   default      :supplier_cost,                    :override  =>  false,        :to    => 0
-  default      :master_pack_units,                :override  =>  false,        :to    => 0
+  default      :master_pack_units,                :override  =>  false,        :to    => 1
   default      :master_pack_length,               :override  =>  false,        :to    => 0
   default      :master_pack_height,               :override  =>  false,        :to    => 0
   default      :master_pack_width,                :override  =>  false,        :to    => 0
   default      :master_pack_weight,               :override  =>  false,        :to    => 0
-  default      :inner_pack_units,                 :override  =>  false,        :to    => 0
+  default      :inner_pack_units,                 :override  =>  false,        :to    => 1
   default      :inner_pack_length,                :override  =>  false,        :to    => 0
   default      :inner_pack_height,                :override  =>  false,        :to    => 0
   default      :inner_pack_width,                 :override  =>  false,        :to    => 0
@@ -61,7 +50,6 @@ class Omni::StyleSupplier < ActiveRecord::Base
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
-
   # REFERENCE (Start) ===================================================================
   reference do
     display_attribute  :display
@@ -70,14 +58,11 @@ class Omni::StyleSupplier < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
   has_many     :style_supplier_colors,           :class_name => 'Omni::StyleSupplierColor',      :foreign_key => 'style_supplier_id'
   belongs_to   :style,                           :class_name => 'Omni::Style',                   :foreign_key => 'style_id'
   belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
@@ -86,24 +71,14 @@ class Omni::StyleSupplier < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
   # ORDERING (End)
 
-
   # HOOKS (Start) =======================================================================
-
+  hook  :before_create,      :set_defaults,                 10
   hook  :after_create,       :add_style_supplier_colors,                 10
-
   # HOOKS (End)
-
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -140,7 +115,6 @@ class Omni::StyleSupplier < ActiveRecord::Base
   end
   # STATES (End)
 
-
   # STATE HANDLERS (Start) ====================================================================
   def after_activate
 
@@ -151,8 +125,16 @@ class Omni::StyleSupplier < ActiveRecord::Base
   end
   # STATE HANDLERS (End)
 
-
   # HELPERS (Start) =====================================================================
+
+  def set_defaults
+    puts "-- setting defaults #{supplier.description} --"
+
+    self.description = supplier.description
+    self.minimum_order_units = supplier.minimum_order_units
+    self.minimum_order_value = supplier.minimum_order_cost
+    self.origin_country = supplier.country
+  end
 
   def add_style_supplier_colors
   # System inserts a StyleSupplierColor row in active state for the added supplier and every color for the style (from StyleColor).

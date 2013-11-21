@@ -86,6 +86,7 @@ Buildit::Lookup.create(:lookup_id => '4C464CAE972911E2A3D212313B10044E', :code =
 Buildit::Lookup.create(:lookup_id => '48CC77AA972A11E2A3D212313B10044E', :code => 'PARKER SCHOOL UNIFORMS', :default_text => 'Parker School Uniforms', :category => 'LOCATION_BRAND', :position => 1)
 Buildit::Lookup.create(:lookup_id => '49DC83BA972A11E2A3D212313B10044E', :code => 'BUCKHEAD SCHOOL UNIFORMS', :default_text => 'Buckhead School Uniforms', :category => 'LOCATION_BRAND', :position => 2)
 Buildit::Lookup.create(:lookup_id => '4AFDF44A972A11E2A3D212313B10044E', :code => 'TRUE GRITS SCHOOL UNIFORMS', :default_text => 'True Grits School Uniforms', :category => 'LOCATION_BRAND', :position => 3)
+Buildit::Lookup.create(:lookup_id => '4BF6708E972A11E2A3D212XXXXXBLANK', :code => 'BLANK', :default_text => ' ', :category => 'STATE_CODE', :position => 0)
 Buildit::Lookup.create(:lookup_id => '4BF6708E972A11E2A3D212313B10044E', :code => 'AK', :default_text => 'Alaska', :category => 'STATE_CODE', :position => 1)
 Buildit::Lookup.create(:lookup_id => '4D322AF6972A11E295B122000A9D0283', :code => 'AL', :default_text => 'Alabama', :category => 'STATE_CODE', :position => 2)
 Buildit::Lookup.create(:lookup_id => '4E4F51AC972A11E2A3D212313B10044E', :code => 'AR', :default_text => 'Arkansas', :category => 'STATE_CODE', :position => 3)
