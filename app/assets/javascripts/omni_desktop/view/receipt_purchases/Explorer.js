@@ -39,31 +39,31 @@ Ext.define('Omni.view.receipt_purchases.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns      : [
-        {
-          header       : this.receipt_purchase_idLabel,
-          dataIndex    : 'receipt_purchase_id',
-          flex         : 1
-        },
+        // {
+        //   header       : this.receipt_purchase_idLabel,
+        //   dataIndex    : 'receipt_purchase_id',
+        //   flex         : 1
+        // },
         {
           header       : this.displayLabel,
           dataIndex    : 'display',
           flex         : 1
-        },
-        {
-          header       : this.receipt_idLabel,
-          dataIndex    : 'receipt_id',
-          flex         : 1
-        },
-        {
-          header       : this.purchase_idLabel,
-          dataIndex    : 'purchase_id',
-          flex         : 1
-        },
-        {
-          header       : this.is_destroyedLabel,
-          dataIndex    : 'is_destroyed',
-          flex         : 1
         }
+        // {
+        //   header       : this.receipt_idLabel,
+        //   dataIndex    : 'receipt_id',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.purchase_idLabel,
+        //   dataIndex    : 'purchase_id',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.is_destroyedLabel,
+        //   dataIndex    : 'is_destroyed',
+        //   flex         : 1
+        // }
       ]
     });
     // COLUMNS (End)

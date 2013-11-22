@@ -68,7 +68,7 @@ Ext.define('Omni.model.ProjectionDetail', {
     },
     {
       name       : 'last_forecast_date',
-      type       : 'datetime'
+      type       : 'date'
     },
     {
       name       : 'projection_1_units',

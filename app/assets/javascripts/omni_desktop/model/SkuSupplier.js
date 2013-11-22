@@ -1,6 +1,6 @@
 Ext.define('Omni.model.SkuSupplier', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================

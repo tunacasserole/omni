@@ -1,6 +1,6 @@
 Ext.define('Omni.model.Supplier', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -44,7 +44,7 @@ Ext.define('Omni.model.Supplier', {
     { name: 'minimum_cube',                         type: 'float',      defaultValue: 0                         },
     { name: 'is_ship_cancel',                       type: 'boolean',    defaultValue: false                     },
     { name: 'return_policy',                        type: 'string'      },
-    { name: 'lead_time',                            type: 'float',      defaultValue: 0                         },
+    { name: 'lead_time',                            type: 'integer',    defaultValue: 0                         },
     { name: 'safety_stock_days',                    type: 'float',      defaultValue: 0                         },
     { name: 'is_calculated_lead_time',              type: 'boolean',    defaultValue: false                     },
     { name: 'replenishment_method',                 type: 'string'      },

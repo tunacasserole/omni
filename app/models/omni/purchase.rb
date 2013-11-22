@@ -6,6 +6,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
+  supports_audit
   # supports_logical_delete
   # BEHAVIOR (End)
 
@@ -28,7 +29,7 @@ class Omni::Purchase < ActiveRecord::Base
   default :freight_term,                                                      :to   => lambda{|m| m.supplier.freight_term}
   default :ship_via,                                                          :to   => lambda{|m| m.supplier.ship_via}
   default :is_ship_cancel,                                                    :to   => lambda{|m| m.supplier.is_ship_cancel}
-  default :estimated_lead_time_days,                                          :to   => lambda{|m| m.supplier.lead_time}
+  # default :estimated_lead_time_days,                                          :to   => lambda{|m| m.supplier.lead_time} # only works as a before_create hook for some reason
   default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days.days}
   default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30.days}
   default :supplier_address_1,                                                :to   => lambda{|m| m.supplier.line_1}
@@ -132,10 +133,15 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
   # before_destroy :cascading_delete
+  hook :before_create, :set_defaults_from_supplier, 00
   hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
   hook :before_update, :update_allocation_profiles, 30
   hook :before_destroy, :validate_state, 40
+
+  def set_defaults_from_supplier
+    self.estimated_lead_time_days = supplier.lead_time # JASON - why won't the lambda work for this field?  see above
+  end
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
@@ -205,7 +211,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # STATE HELPERS (Start) =====================================================================
   def allocate
-    self.purchase_details.each {|x| puts 'x.allocate'}
+    self.purchase_details.each {|x| x.allocate}
   end
 
   # Read all existing PurchaseAllocation records for the PurchaseDetail.  If the state is draft, then delete the record.
@@ -232,6 +238,7 @@ class Omni::Purchase < ActiveRecord::Base
   # HELPERS (Start) =====================================================================
   def mass_update
     self.send(mass_update_type.downcase)
+    # Blank out mass update paramaters after completing the mass update
     ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units'].each {|x| self.send("#{x}=", nil)}
     self.save
   end

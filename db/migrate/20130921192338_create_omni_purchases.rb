@@ -33,7 +33,7 @@ class CreateOmniPurchases < ActiveRecord::Migration
     t.column   :carrier_supplier_id,             :string,            :null  =>  true,    :limit   => 32
     t.column   :is_special_order,                :boolean,           :null  =>  true
     t.column   :is_ship_cancel,                  :boolean,           :null  =>  true
-    t.column   :estimated_lead_time_days,        :integer,           :null  =>  true
+    t.column   :estimated_lead_time_days,        :integer,           :null  =>  true,    :limit   => 3
     t.column   :purchase_approver_1_user_id,     :string,            :null  =>  true,    :limit   => 32
     t.column   :purchase_approver_2_user_id,     :string,            :null  =>  true,    :limit   => 32
     t.column   :purchase_approver_3_user_id,     :string,            :null  =>  true,    :limit   => 32

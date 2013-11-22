@@ -127,7 +127,7 @@ class Omni::StyleSupplier < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
 
-  def set_defaults
+    def set_defaults
     puts "-- setting defaults #{supplier.description} --"
 
     self.description = supplier.description

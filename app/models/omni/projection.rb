@@ -65,7 +65,31 @@
   # end
 
   # HOOKS (Start) =======================================================================
-  hook        :before_destroy,                :cascading_destroy,    10
+  hook        :before_destroy,                :cascading_destroy,                10
+  hook        :before_update,                 :update_current_approved_units,    20
+
+  def update_current_approved_units
+    if self.state_changed?
+      self.projection_details.each do |x|
+        x.current_approved_units =
+          case self.state
+            when 'draft','forecast'
+              x.last_forecast_units
+            when 'projection_1'
+              x.projection_1_units
+            when 'projection_2'
+              x.projection_1_units
+            when 'projection_3'
+              x.projection_2_units
+            when 'projection_4'
+              x.projection_3_units
+            when 'complete'
+              x.projection_4_units
+          end
+        x.save
+      end
+    end
+  end
   # HOOKS (End)
 
   # INDEXING (Start) ====================================================================
@@ -147,7 +171,6 @@
       unless x.last_forecast_date
         x.first_forecast_units = forecasted_units
         x.projection_1_units = forecasted_units
-        x.current_approved_units = forecasted_units
       end
 
       x.last_forecast_units = forecasted_units

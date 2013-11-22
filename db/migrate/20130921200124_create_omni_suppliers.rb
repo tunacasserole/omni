@@ -36,7 +36,7 @@ class CreateOmniSuppliers < ActiveRecord::Migration
         t.column   :minimum_cube,                    :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :is_ship_cancel,                  :boolean,           :null  =>  true
         t.column   :return_policy,                   :string,            :null  =>  true,    :limit   => 300
-        t.column   :lead_time,                       :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
+        t.column   :lead_time,                       :integer,           :null  =>  true,    :limit   => 3
         t.column   :safety_stock_days,               :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :is_calculated_lead_time,         :boolean,           :null  =>  true
         t.column   :replenishment_method,            :string,            :null  =>  true,    :limit   => 100

@@ -152,10 +152,8 @@ Ext.define('Omni.view.purchases.Form', {
             { xtype             : 'numberfield',
               name              : 'total_order_cost',
               disabled          : true,
-              hideTrigger       : true,
-              keyNavEnabled     : false,
-              mouseWheelEnabled : false,
-              decimalPrecision  : 2,
+              xtype: 'currencyfield',
+              currencySymbol: null,
               fieldLabel        : 'Total Order Cost'
             }
           ]
@@ -486,6 +484,12 @@ Ext.define('Omni.view.purchases.Form', {
           layout              : 'anchor',
           disabled            : disabled,
           items               :[
+            { xtype             : 'buildit-Lookup',
+              name              : 'mass_update_type',
+              fieldLabel        : this.mass_update_typeLabel,
+              allowBlank        : true,
+              category          : 'MASS_UPDATE_TYPE'
+            },
                          { name: 'department_id',  fieldLabel: this.department_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
                          { name: 'classification_id',  fieldLabel: this.classification_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },
                          { name: 'subclass_id',  fieldLabel: this.subclass_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Subclass',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
@@ -504,12 +508,6 @@ Ext.define('Omni.view.purchases.Form', {
               name              : 'is_include_conversions',
               fieldLabel        : this.is_include_conversionsLabel,
               allowBlank        : true
-            },
-            { xtype             : 'buildit-Lookup',
-              name              : 'mass_update_type',
-              fieldLabel        : this.mass_update_typeLabel,
-              allowBlank        : true,
-              category          : 'MASS_UPDATE_TYPE'
             }
           ]
         }

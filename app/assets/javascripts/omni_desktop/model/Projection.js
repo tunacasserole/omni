@@ -27,15 +27,7 @@ Ext.define('Omni.model.Projection', {
       type       : 'string'
     },
     {
-      name       : 'projection_closer_display',
-      type       : 'string'
-    },
-    {
       name       : 'projection_approver_id',
-      type       : 'string'
-    },
-    {
-      name       : 'projection_approver_display',
       type       : 'string'
     },
     {
