@@ -42,7 +42,7 @@ Ext.define('Omni.view.receipt_details.Form', {
           layout:       'anchor',
           items:[
             { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true, disabled: true },
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
+            // { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
             { xtype: 'textfield', name: 'receipt_line_nbr',               fieldLabel: this.receipt_line_nbrLabel            , allowBlank: true },
             { name: 'sku_id',               fieldLabel: this.sku_idLabel, xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             { name: 'allocation_profile_id',fieldLabel: this.allocation_profile_idLabel, xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.AllocationProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'allocation_profile_id', itemTpl:'{display}' },

@@ -39,6 +39,7 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
 
   def cascading_delete
     # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
+    puts "\n\ncascading delete - receipt_purchase.rb line 42, receipt.state is #{self.receipt.state}\n\s"
     if ['draft', 'scheduled', 'processing'].include? self.receipt.state
       self.receipt_details.each {|x| x.receipt_allocations.delete_all}
       Omni::ReceiptDetail.where(purchase_id: self.purchase_id).each do |rd|
@@ -77,8 +78,8 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
         end
       end
     else
-      errors.add('display','action only valid when receipt purchase is in draft, scheduled or processing state.')
-      raise ActiveRecord::Rollback
+      errors.add('state','receipt purchase is currently in #{self.receipt.state}, action only valid when receipt is in draft, scheduled or processing state.')
+      # raise ActiveRecord::Rollback
     end
   end
   # HELPERS (End)

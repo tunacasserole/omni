@@ -3,9 +3,9 @@ class Omni::Test::Receipt < Omni::Test::Base
   def self.go
     @@model_name = 'Receipt'
     @@model_action = 'event'
-
     test_events
-    test_allocate
+    @@model_action = 'allocate'
+    # test_allocate
     # test_print
   end
 
@@ -16,7 +16,7 @@ class Omni::Test::Receipt < Omni::Test::Base
     x.save
     test_it('it sets the state when an appointment date is set', 'scheduled', x.state)
 
-    #  Start a Receipt
+    # Start a Receipt
     x = reset_data
     x.start
     test_it('it sets the state when a receipt is started', 'processing', x.state)
@@ -38,20 +38,30 @@ class Omni::Test::Receipt < Omni::Test::Base
 
     #  Create a receipt purchase
     x = reset_data
-    Omni::ReceiptPurchase.create(receipt_id: x.receipt_id, purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1')
+    # Omni::ReceiptPurchase.create(receipt_id: x.receipt_id, purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1')
     test_it('it creates a receipt detail when a receipt purchase is created', 1, x.receipt_details.count)
 
     #  Receive a receipt purchase
     x = reset_data
-    y = Omni::ReceiptPurchase.create(receipt_id: x.receipt_id, purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1')
+    # y = Omni::ReceiptPurchase.where(receipt_purchase_id: 'XXXXXXXXXXXXXXXXRECEIPTPURCHASE1').first
+    y = x.receipt_purchases.first
     y.receive
     test_it('it sets the received units equal to open units on the receipt detail when the receipt purchase is received', 100, x.receipt_details.first.received_units)
 
+    #  Copy units from purchase to receipt
+    x = reset_data
+    # y = Omni::ReceiptPurchase.create(receipt_id: x.receipt_id, purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1')
+    # Purchase state must be in open or partial
+    p = Omni::Purchase.where(purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1').first
+    p.state = 'open'
+    p.save
+    x.copy_units
+    test_it('it sets the received units equal to open purchase units for all the lines on a receipt when the copy_units method is called', 100, x.receipt_details.first.received_units)
 
     #  Complete a receipt detail
-    x = reset_data
-    x.receipt_details.first.complete
-    test_it('it writes a stock ledger activity when a receipt detail is completed', 1, Omni::StockLedgerActivity.where(stockable_type: "Omni::ReceiptDetail", stockable_id: x.receipt_details.first.receipt_detail_id).count)
+    # x = reset_data
+    # x.receipt_details.first.complete
+    # test_it('it writes a stock ledger activity when a receipt detail is completed', 1, Omni::StockLedgerActivity.where(stockable_type: "Omni::ReceiptDetail", stockable_id: x.receipt_details.first.receipt_detail_id).count)
 
 
   end
@@ -97,20 +107,22 @@ class Omni::Test::Receipt < Omni::Test::Base
 
   def self.reset_data
     Omni::Purchase.where(purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1').to_a.each {|x| x.delete}
-    Omni::PurchaseDetail.where(:purchase_detail_id=>['ABABDAAA35E011E3APURCHASEDETAIL1']).to_a.each {|x| x.delete}
-    Omni::Receipt.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').to_a.each {|x| x.delete}
-    Omni::ReceiptDetail.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').to_a.each {|x| x.delete}
-    Omni::ReceiptPurchase.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').to_a.each {|x| x.delete}
+    Omni::PurchaseDetail.where(purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1').to_a.each {|x| x.delete}
+    Omni::Receipt.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').to_a.each {|x| x.destroy}
+    Omni::ReceiptDetail.where(purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1').to_a.each {|x| x.delete}
+
+    Omni::ReceiptPurchase.where(receipt_purchase_id: 'XXXXXXXXXXXXXXXXRECEIPTPURCHASE1').to_a.each {|x| x.delete}
+    Omni::ReceiptAllocation.all.to_a.each {|x| x.delete}
 
     Omni::Purchase.create(:purchase_id => 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1',:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228',  :allocation_profile_id => 'XXXXLASTFORECASTBYPERCENTTOSTORE', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON')
 
     Omni::PurchaseDetail.create(state: 'open', purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1', allocation_profile_id: 'XXXXLASTFORECASTBYPERCENTTOSTORE', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1', sku_supplier_id: '239F5610231F11E3BE4920C9D047DD15', units_ordered: 100, order_pack_size: 1, supplier_cost: 25, order_cost_units: 1, selling_units_approved: 100)
     Omni::PurchaseDetail.where(purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1').first
 
-    r = Omni::Receipt.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', location_id: '51579764AC3E11E2947800FF58D32228')
+    Omni::Receipt.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', location_id: '51579764AC3E11E2947800FF58D32228')
+    Omni::ReceiptPurchase.create(receipt_purchase_id: 'XXXXXXXXXXXXXXXXRECEIPTPURCHASE1', receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1')
 
-    rp = Omni::ReceiptPurchase.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1')
-    rp.receive
+    # rp.receive
     # rp = Omni::ReceiptPurchase.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').first
     # rd = Omni::ReceiptDetail.where(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1').first
     # rd = rp.receipt_details.first

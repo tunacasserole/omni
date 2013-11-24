@@ -48,8 +48,8 @@ Ext.define('Omni.view.receipt_purchases.Form', {
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title       : 'Receipt PurchasePurchase',
-      subtitle    : 'Edit Receipt PurchasePurchase',
+      title       : 'Receipt Purchase',
+      subtitle    : 'Edit Receipt Purchase',
       newTitle    : 'New Receipt Purchase',
       newSubtitle: 'Complete the following to create a new Receipt Purchase'
     });

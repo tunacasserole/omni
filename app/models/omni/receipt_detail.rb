@@ -11,7 +11,6 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
   validates    :receipt_pack_type,               :lookup      => 'PACK_TYPE',       :allow_nil => true
-
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -36,11 +35,14 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   belongs_to   :receipt,                         :class_name => 'Omni::Receipt',             :foreign_key => 'receipt_id'
   belongs_to   :purchase,                        :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
   belongs_to   :purchase_detail,                 :class_name => 'Omni::PurchaseDetail',      :foreign_key => 'purchase_detail_id'
+  belongs_to   :allocation_profile,              :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :receipt_display,                        :to => 'receipt.display'
+    map :allocation_profile_display,             :to => 'allocation_profile.display'
+    map :sku_display,                            :to => 'sku.display'
     map :purchase_detail_display,                :to => 'purchase_detail.display'
   end
   # MAPPED ATTRIBUTES (End)

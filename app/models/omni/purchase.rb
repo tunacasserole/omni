@@ -23,6 +23,7 @@ class Omni::Purchase < ActiveRecord::Base
   default :is_phone_order,                                                    :to   => false
   default :is_update_blank_details,                                           :to   => false
   default :is_update_all_details,                                             :to   => false
+  # default :estimated_lead_time_days,       :override => false,                :to   => 0
   default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_nbr}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :payment_term,                                                      :to   => lambda{|m| m.supplier.default_payment_term}
@@ -30,8 +31,8 @@ class Omni::Purchase < ActiveRecord::Base
   default :ship_via,                                                          :to   => lambda{|m| m.supplier.ship_via}
   default :is_ship_cancel,                                                    :to   => lambda{|m| m.supplier.is_ship_cancel}
   # default :estimated_lead_time_days,                                          :to   => lambda{|m| m.supplier.lead_time} # only works as a before_create hook for some reason
-  default :delivery_date,                                                     :to   => lambda{|m| m.order_date + m.estimated_lead_time_days.days}
-  default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30.days}
+  # default :delivery_date,                                                     :to   => lambda{|m| m.order_date + (m.estimated_lead_time_days.days || 0 )}
+  # default :cancel_not_received_by_date,                                       :to   => lambda{|m| m.delivery_date + 30.days}
   default :supplier_address_1,                                                :to   => lambda{|m| m.supplier.line_1}
   default :supplier_address_2,                                                :to   => lambda{|m| m.supplier.line_2}
   default :supplier_address_3,                                                :to   => lambda{|m| m.supplier.line_3}
@@ -140,7 +141,9 @@ class Omni::Purchase < ActiveRecord::Base
   hook :before_destroy, :validate_state, 40
 
   def set_defaults_from_supplier
-    self.estimated_lead_time_days = supplier.lead_time # JASON - why won't the lambda work for this field?  see above
+    self.estimated_lead_time_days = supplier.lead_time || 0 # JASON - why won't the lambda work for this field?  see above
+    self.delivery_date = self.order_date + self.estimated_lead_time_days.days
+    self.cancel_not_received_by_date = self.delivery_date + 30.days
   end
   # HOOKS (End)
 

@@ -6,9 +6,9 @@ class Omni::Test::Base
 
     # RUN TESTS BY MODULE
     Omni::Test::Receipt.go
-    Omni::Test::Purchase.go
-    Omni::Test::Allocation.go
-    Omni::Test::Projection.go
+    # Omni::Test::Purchase.go
+    # Omni::Test::Allocation.go
+    # Omni::Test::Projection.go
     # END OF RUN TESTS
 
     reindex_data

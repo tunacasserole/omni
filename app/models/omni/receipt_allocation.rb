@@ -15,6 +15,7 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :receipt_allocation_id,                          :with => :guid
+  default :receipt_allocation_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"RECEIPT_ALLOCATION_NBR"
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================

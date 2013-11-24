@@ -193,8 +193,8 @@ Ext.define('Omni.view.receipts.Form', {
           cls        : 'duplicate',
           xtype      : 'button',
           listeners  : {
-            beforerender  : this.prepareCopyAction,
-            click         : me.onCopyAction,
+            beforerender  : this.prepareCopyUnitsAction,
+            click         : me.onCopyUnitsAction,
             scope         : me
           }
         }
@@ -234,8 +234,8 @@ Ext.define('Omni.view.receipts.Form', {
     this.processEventTransition('complete', 'Receipt was successfully completed.', 'An error occurred completing this receipt.');
   }, // onBuildAction
 
-  onCopyAction : function(action, eOpts){
-    this.processEventTransition('copy', 'Open units on this receipt were successfully copied.', 'An error occurred copying open units on this receipt.');
+  onCopyUnitsAction : function(action, eOpts){
+    this.processEventTransition('copy_units', 'Open units on this receipt were successfully copied.', 'An error occurred copying open units on this receipt.');
   }, // onBuildAction
 
 
@@ -264,7 +264,7 @@ Ext.define('Omni.view.receipts.Form', {
         currentState === 'draft' || currentState === 'scheduled' || currentState === 'processing' ? action.show() : action.hide();
   },
 
-  prepareCopyAction : function(action, eOpts) {
+  prepareCopyUnitsAction : function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'draft' || currentState === 'scheduled' || currentState === 'processing' ? action.show() : action.hide();
   },

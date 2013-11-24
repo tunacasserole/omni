@@ -183,8 +183,37 @@ class Omni::Receipt < ActiveRecord::Base
     # Read every Receipt Detail row in Draft State.
     # If the received units are zero, the system will update the row with the number of open units from the corresponding Purchase Detail row.
     # If the received units are greater than zero, then the field is not changed.
-    receipt_details.where(state: 'draft').each {|x| x.received_units = x.purchase_detail.selling_units_approved - x.purchase_detail.selling_units_received - x.purchase_detail.selling_units_cancelled if x.purchase_detail and x.received_units == 0}
-  end
+    puts 'do_copy_units'
+    receipt_details.where(state: 'draft').each do |x|
+      puts "receipt details state is #{x.state}"
+      if x.purchase && x.purchase_detail && x.received_units == 0
+      puts "x.received_units is #{x.received_units}"
+      puts "x.purchase.state is #{x.purchase.state}"
+
+        case x.purchase.state
+          when 'open', 'draft'
+          # o received_units = (PurchaseDetail.selling_units_approved – PurchaseDetail.selling_units_cancelled) / PurchaseDetail.order_pack_size
+          x.received_units = (x.purchase_detail.selling_units_approved - x.purchase_detail.selling_units_cancelled) / x.purchase_detail.order_pack_size
+          # o receipt_pack_size = PurchaseDetail.order_pack_size
+          x.receipt_pack_size = x.purchase_detail.order_pack_size
+          # o receipt_pack_type = PurchaseDetail.order_pack_type
+          x.receipt_pack_type = x.purchase_detail.order_pack_type
+
+          when 'partial'
+          # o received_units = (PurchaseDetail.selling_units_approved – PurchaseDetail.selling_units_cancelled – PurchaseDetail.selling_units_received) / PurchaseDetail.order_pack_size
+          x.received_units = (x.purchase_detail.selling_units_approved - x.purchase_detail.selling_units_cancelled - x.purchase_detail.selling_units_received) / x.purchase_detail.order_pack_size
+          # o receipt_pack_size = PurchaseDetail.order_pack_size
+          x.receipt_pack_size = x.purchase_detail.order_pack_size
+          # o receipt_pack_type = PurchaseDetail.order_pack_type
+          x.receipt_pack_type = x.purchase_detail.order_pack_type
+
+        end # end case
+        x.save
+
+      end # end if
+
+    end # end each
+  end # end do_copy_units
 
   def do_receive
     receipt_purchases.each {|x| x.receive}

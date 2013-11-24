@@ -5,7 +5,7 @@ Ext.define('Omni.view.receipt_purchases.Inspector',{
 
   initComponent:function(){
     var me = this;
-  
+
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter : {
@@ -22,7 +22,7 @@ Ext.define('Omni.view.receipt_purchases.Inspector',{
       }
     });
     // INSPECTOR INIT (End)
-  
+
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards     : [
@@ -37,7 +37,7 @@ Ext.define('Omni.view.receipt_purchases.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title     : 'Receipt Purchase',
-      subtitle  : this.record.get('receipt_purchase_id')
+      subtitle  : this.record.get('display')
     });
     // TITLES (End)
 
