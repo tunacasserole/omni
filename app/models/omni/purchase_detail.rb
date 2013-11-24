@@ -61,6 +61,7 @@
     string   :display
     string   :state
     string   :sku_display
+    string   :supplier_cost
     integer  :purchase_line_nbr
     integer  :units_ordered
     string   :purchase_id
@@ -219,6 +220,7 @@
         self.color_name = self.sku.color_name
         self.size_name = self.sku.size.display if self.sku.size
         self.order_pack_type = self.sku_supplier.pack_type
+        self.extra_cost = self.sku_supplier.extra_cost
         case self.order_pack_type
           when "M"
             self.order_pack_size = self.sku_supplier.master_pack_units
@@ -238,11 +240,7 @@
             self.order_multiple = 1
         end
         self.supplier_cost = self.sku_supplier.supplier_cost
-        if self.order_cost_units.is_a? Integer and self.order_cost_units > 0
-          self.inventory_cost = self.supplier_cost / self.order_cost_units
-        else
-          self.inventory_cost = 0
-        end
+        self.inventory_cost = self.order_cost_units > 0 ? self.supplier_cost / self.order_cost_units : self.inventory_cost = 0
         self.invoice_cost = self.supplier_cost
       end
     end

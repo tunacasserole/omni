@@ -218,8 +218,8 @@ Ext.define('Omni.view.purchase_details.Form', {
             { xtype: 'numberfield',
               name: 'supplier_cost',
               fieldLabel: this.supplier_costLabel,
-              // minValue: 0,
-              // decimalPrecision: 2,
+              xtype: 'currencyfield',
+              currencySymbol: null,
               allowBlank: true,
               disabled: disabled
             }
@@ -227,8 +227,8 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'order_cost_units',
               fieldLabel: this.order_cost_unitsLabel,
               // minValue: 1,
-              // decimalPrecision: 0,
-              // allowBlank: true,
+              // xtype: 'currencyfield',
+              // currencySymbol: null,
               disabled: disabled
             }
            // ,{ xtype: 'buildit-Locator',
@@ -252,13 +252,17 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'inventory_cost',
               fieldLabel: this.inventory_costLabel,
               disabled: true,
-              decimalPrecision: 2,
+              xtype: 'currencyfield',
+              currencySymbol: null,
               allowBlank: true
             }
            ,{ xtype: 'textfield',
               name: 'extra_cost',
               fieldLabel: this.extra_costLabel,
-              allowBlank: true
+              allowBlank: true,
+              xtype: 'currencyfield',
+              currencySymbol: null,
+
             }
           ]
         }

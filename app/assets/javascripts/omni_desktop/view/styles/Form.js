@@ -826,7 +826,7 @@ Ext.define('Omni.view.styles.Form', {
   prepareLocationsAction: function(action, eOpts) {
 
     var currentState = this.record.get('state');
-    currentState == 'pending_approval' ? action.show() : action.hide();
+    currentState == 'draft' || currentState == 'pending_approval' ? action.show() : action.hide();
   }, //
 
   /**
