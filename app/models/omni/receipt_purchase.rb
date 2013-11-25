@@ -58,7 +58,9 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
       # Omni::ReceiptDetail.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1', purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1', received_units: 0, allocation_profile_id: 'XXXXLASTFORECASTBYPERCENTTOSTORE', sku_id: '285C928C0F3611E3BB7120C9D047DD15', sku_alias: nil, receipt_pack_size: 1, receipt_pack_type: 'SELL_UNIT')
       next unless x.state == 'open' || x.state == 'partial'
       next if Omni::ReceiptDetail.where(receipt_id: self.receipt_id, purchase_id: self.purchase_id, purchase_detail_id: x.purchase_detail_id, sku_id: x.sku_id).first
-      Omni::ReceiptDetail.create(receipt_id: self.receipt_id, purchase_id: self.purchase_id, purchase_detail_id: x.purchase_detail_id, received_units: 0, allocation_profile_id: x.allocation_profile_id, sku_id: x.sku_id, sku_alias: x.sku_alias, receipt_pack_size: x.order_pack_size, receipt_pack_type: x.order_pack_type)
+      ap_id = receipt.allocation_profile_id
+      # puts "ap_id is #{ap_id}"
+      Omni::ReceiptDetail.create(receipt_id: self.receipt_id, purchase_id: self.purchase_id, purchase_detail_id: x.purchase_detail_id, received_units: 0, allocation_profile_id: ap_id, sku_id: x.sku_id, sku_alias: x.sku_alias, receipt_pack_size: x.order_pack_size, receipt_pack_type: x.order_pack_type)
     end
   end
   # HOOKS (End)

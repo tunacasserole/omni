@@ -282,16 +282,16 @@ Ext.define('Omni.view.purchase_details.Form', {
     // ACTIONS (Start) =====================================================================
     Ext.apply(this, {
       actions: [
-        {
-          xtype      : 'button',
-          iconCls    : 'icon-arrow-down',
-          tooltip    : 'Receive',
-          listeners  : {
-            beforerender  : this.prepareReceiveAction,
-            click         : this.onReceiveAction,
-            scope         : me
-          }
-        },
+        // {
+        //   xtype      : 'button',
+        //   iconCls    : 'icon-arrow-down',
+        //   tooltip    : 'Receive',
+        //   listeners  : {
+        //     beforerender  : this.prepareReceiveAction,
+        //     click         : this.onReceiveAction,
+        //     scope         : me
+        //   }
+        // },
         {
           xtype      : 'button',
           iconCls    : 'icon-thumbs-up',
@@ -353,9 +353,9 @@ Ext.define('Omni.view.purchase_details.Form', {
      });
      },
 
-  onReceiveAction : function(action, eOpts){
-    this.processEventTransition('receive', 'Purchase detail was successfully received.', 'An error occurred releasing this purchase detail.');
-  }, // onBuildAction
+  // onReceiveAction : function(action, eOpts){
+  //   this.processEventTransition('receive', 'Purchase detail was successfully received.', 'An error occurred releasing this purchase detail.');
+  // }, // onBuildAction
 
   onCancelAction : function(action, eOpts){
     this.processEventTransition('cancel', 'Purchase detail was successfully cancelled.', 'An error occurred releasing this purchase detail.');
@@ -369,10 +369,10 @@ Ext.define('Omni.view.purchase_details.Form', {
     this.processEventTransition('approve', 'Purchase detail was successfully approved.', 'An error occurred approving this purchase detail.');
   }, // onBuildAction
 
-  prepareReceiveAction : function(action, eOpts) {
-    var currentState = this.record.get('state');
-    currentState === 'open' || currentState === 'partial' ? action.show() : action.hide();
-  },
+  // prepareReceiveAction : function(action, eOpts) {
+  //   var currentState = this.record.get('state');
+  //   currentState === 'open' || currentState === 'partial' ? action.show() : action.hide();
+  // },
 
   prepareApproveAction : function(action, eOpts) {
     var currentState = this.record.get('state');

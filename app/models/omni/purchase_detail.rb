@@ -104,6 +104,7 @@
     after_transition :on => :approve, :do => :do_approve
     after_transition :on => :receive, :do => :do_receive
     after_transition :on => :cancel, :do => :do_cancel
+    after_transition :on => :process, :do => :do_process
 
   ### EVENTS ###
     event :approve do
@@ -112,6 +113,10 @@
 
     event :receive do
       transition [:open, :partial] => same
+    end
+
+    event :process do
+      transition [:draft, :open, :partial, :complete] => same
     end
 
     event :cancel do
@@ -185,7 +190,21 @@
     end
   end
 
-  def do_release
+  def do_process
+    # Create an Allocation record corresponding to the PurchaseDetail record.
+    inv_id = Omni::Inventory.where(sku_id: self.sku_id, location_id: self.purchase.location_id).first ? Omni::Inventory.where(sku_id: self.sku_id, location_id: self.purchase.location_id).first.inventory_id : nil
+    units_to_allocate = self.selling_units_approved - self.selling_units_received - self.selling_units_cancelled
+    a = Omni::Allocation.create(allocatable_type: "Omni::PurchaseDetail", allocatable_id: self.purchase_detail_id, sku_id: self.sku_id, location_id: self.purchase.location_id, inventory_id: inv_id, allocation_profile_id: self.allocation_profile_id, units_to_allocate: units_to_allocate )
+
+    # For each PurchaseAllocation record allocations.allocated_units > 0 for the PurchaseDetail where
+    self.purchase_allocations.where("units_allocated > ? and state = 'draft'", 0).each do |x|
+    # Create an AllocationDetail record corresponding to the PurchaseAllocation
+      Omni::AllocationDetail.create(allocation_id: a.allocation_id, sku_id: self.sku_id, location_id: self.purchase.location_id, units_needed: x.units_needed, units_allocated: x.units_allocated,  units_shipped: x.units_shipped)
+    # Update PurchaseAllocation.state to transferred
+      x.state = 'transferred'
+      x.save
+    end
+
   end
 
   def do_approve
@@ -214,7 +233,7 @@
     # default PurchaseDetail fields from Sku and SkuSupplier
     if self.new_record?
       if self.sku_supplier
-        puts "\n\n SKU IS #{self.sku_supplier.sku_id}"
+        # puts "\n\n SKU IS #{self.sku_supplier.sku_id}"
         self.sku_id = self.sku_supplier.sku_id
         self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
         self.description = self.sku_supplier.description
@@ -258,154 +277,6 @@
   end
 
 end # class Omni::PurchaseDetail
-  # The purpose of purchase allocation is to take the units ordered of a SKU on a
-  # PurchaseDetail and figure out how they are going to be distributed out to the
-  # stores after the purchase is received.  The distribution to each store is based on
-  # each store's demand.  Store demand can come from a number of different sources,
-  # such as the BTS report or Projections.
-  # The system uses Allocation Profiles to control various parts of the allocation calculations,
-  # such as the source for store demand.
-  #
-  # The Allocate action may be run multiple times for a PurchaseDetail, so it starts by
-  # deleting any existing PurchaseAllocation rows for the PurchaseDetail that are in
-  # draft state.  Purchase Allocation rows that are in locked state are not deleted.
-  #
-  # Calculate "locked units" as the total PurchaseAllocation.units_allocated from the
-  # remaining PurchaseAllocation rows that are in locked state.
-  #
-  # Calculate the "selling units available" to allocate as PurchaseDetail.order_units x
-  # PurchaseDetail.order_pack_size x AllocationProfile.percent_to_allocate/100.
-  #
-  # Subtract "locked units" from "selling units available" to get "allocatable units".
-  #
-  # def do_allocate
-  #   return if self.allocation_profile.nil?
 
-  #   # remove any purchase allocations that are not locked. Locked is defined as having a
-  #   # state equal to 'locked'
-  #   self.purchase_allocations.each {|x| x.delete}
-  #   # abort "error => purchase allocations not deleted.  expected: 0, actual: #{self.purchase_allocations.count.to_s}" unless self.purchase_allocations.count == 0
-
-  #   # determine the sum of the locked units allocated
-  #   units_locked = self.purchase_allocations.empty? ? 0 : self.purchase_allocations.sum(:units_allocated)
-
-  #   # compute the total amount available to allocate
-  #   selling_units_available = (self.units_ordered * (self.order_pack_size || 1) )* self.allocation_profile.percent_to_allocate / 100
-  #   puts "selling_units_available is #{selling_units_available}"
-  #   # derive the number of units available to allocate by removing the number of locked_units already allocated
-  #   allocatable_units       = selling_units_available - units_locked
-
-  #   # counter for the total number of units needed by each of the new purchase allocations
-  #   total_units_needed      = 0
-
-  #   temp_purchase_allocations = {}
-
-  #   # create a new PurchaseAllocation entry for each location that does not already
-  #   # have an existing one
-  #   self.inventories.each do |inventory|
-
-  #     # determine if there is aleady a purchase allocation for the current location
-  #     unless self.purchase_allocations.select(:location_id).include?(inventory.location_id)
-
-  #       allocation_profile_formula = self.allocation_profile.allocation_formula
-  #       puts allocation_profile_formula
-
-  #       case allocation_profile_formula
-
-  #         when /PROJECTION_\d_UNITS/
-  #           phase = allocation_profile_formula.downcase.chop.chop.chop.chop.chop.chop
-  #           puts "phase is #{phase}"
-  #           projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: phase}).first
-  #           units_needed =  projection_detail ? projection_detail.send(allocation_profile_formula.downcase) : 0
-  #           temp_purchase_allocations.merge!(inventory.location_id => units_needed)
-
-  #         when 'LAST_FORECAST_UNITS'
-  #           projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: 'forecast'}).first
-  #           units_needed =  projection_detail ? projection_detail.send("last_forecast_units") : 0
-  #           puts "units need is #{units_needed.to_s}"
-  #           temp_purchase_allocations.merge!(inventory.location_id => units_needed)
-
-  #         when 'APPROVED_PROJECTION'
-  #           projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
-  #           units_needed =  projection_detail ? projection.send("last_forecast_units") : 0
-  #           temp_purchase_allocations.merge!(inventory.location_id => units_needed)
-
-  #         when 'ALLOCATED_UNITS'
-  #           projection_detail = inventory.projection_details.joins(:projection).where(:projections => {state: 'active'}).first
-  #           units_needed =  projection_detail ? projection_detail.send("last_forecast_units") : 0
-  #           temp_purchase_allocations.merge!(inventory.location_id => units_needed)
-
-  #       end
-
-  #     end
-
-  #   end # self.locations.each
-
-  #   total_units_needed = (temp_purchase_allocations.map {|k,v| v}).sum
-  #   puts "total_units_needed is #{total_units_needed.to_s}"
-  #   puts "allocatable_units is #{allocatable_units.to_s}"
-  #   puts "allocation_profile.excess_supply_option is #{allocation_profile.excess_supply_option}"
-  #   if total_units_needed < allocatable_units # EXCESS SUPPLY
-
-  #     case allocation_profile.excess_supply_option
-  #     when 'APPORTION_TO_STORES'
-  #       difference = allocatable_units - total_units_needed
-  #       proportions = temp_purchase_allocations.inject({}) { |h, (k, v)| h[k] = BigDecimal.new(v)/BigDecimal.new(total_units_needed).floor; h }
-
-  #       residual = allocatable_units - (proportions.map{|k,v| v}).sum
-  #       while residual > 0
-  #         proportions.each do |k,v|
-  #           proportions[k] += 1
-  #           residual -= 1
-  #           break if residual == 0
-  #         end
-  #       end
-
-  #       temp_purchase_allocations = proportions
-  #     when 'LEAVE_IN_WAREHOUSE'
-
-  #     end
-
-
-  #   elsif total_units_needed > allocatable_units # EXCESS DEMAND
-  #   case allocation_profile.excess_demand_option
-  #     when 'APPORTION_BY_PERCENT'
-
-  #     when 'FILL_LARGEST_DEMAND'
-
-  #   end
-
-
-  #     case allocation_profile.excess_demand_option
-  #       when 'APPORTION_BY_PERCENT'
-
-  #      # for each location in hash, calculate its percent_of_demand as units_needed / total_units_needed
-  #      # multiply the percent_of_demand x allocatable_units to get the location's allocated_units
-
-  #       when 'FILL_LARGEST_DEMAND'
-
-  #      # sort location hash descending by units_needed
-  #      # start at first entry in hash and give the allocation all of its units_needed
-  #      # continue throught the hash giving each locattion all of its needed units until all allocatable_units have been allocated
-
-  #     end
-
-  #   end
-
-  #   # process the locations and their corresponding units and create
-  #   # a purchase allocation record to this purchase detail
-  #   temp_purchase_allocations.each do |location_id, units_allocated|
-  #     # puts "units_allocated: #{units_allocated.to_s}"
-  #     self.purchase_allocations.create(
-  #       location_id: location_id,
-  #       units_allocated: units_allocated
-  #     )
-  #   end
-
-
-  # end # do_allocate
-
-
-  # HELPERS (End)
 
 

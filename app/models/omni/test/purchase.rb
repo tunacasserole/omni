@@ -1,30 +1,35 @@
 class Omni::Test::Purchase < Omni::Test::Base
 
+  def self.go
+    # @pd1=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1').first
+    @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
+    @pd1 = reset_data
+    @@model_name = 'Purchase'
+    @@model_action = 'event'
+
+
+    # allocation_scenarios.each {|s| test_allocation_scenario s}
+
+    # test_allocation
+    # test_purchase_events
+    test_purchase_detail_events
+
+    # @@model_action = 'request'
+    # request_scenarios.each {|s| test_request_scenario s}
+  end
+
   def self.reset_data
     Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').to_a.each {|x| x.delete}
     Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC5311E299E700FF58D32228', :location_id => '51579764AC3E11E2947800FF58D32228',  :allocation_profile_id => '913BB680231XXXXLASTFORECASTUNITS', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON')
 
+    Omni::AllocationDetail.all.each {|x| x.delete}
+
+    Omni::PurchaseAllocation.where(purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1').to_a.each {|x| x.delete}
+    Omni::PurchaseAllocation.create(purchase_allocation_id: '45XXXX8YY386CPURCHASEALLOCATION1', purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1', location_id:'51579764AC3E11E2947800FF58D32228', units_allocated: 25)
+
     Omni::PurchaseDetail.where(:purchase_detail_id=>['ABABDAAA35E011E3APURCHASEDETAIL1']).to_a.each {|x| x.delete}
-    Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1', :allocation_profile_id => '913BB680231XXXXLASTFORECASTUNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:units_ordered=>100, :order_pack_size=>1, :supplier_cost=>25, :order_cost_units=>1)
-
-  end
-
-  def self.go
-    reset_data
-    @@model_name = 'Purchase'
-    @@model_action = 'event'
-
-    @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
-    @pd1=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1').first
-
-    allocation_scenarios.each {|s| test_allocation_scenario s}
-
-    # test_allocation
-    # test_purchase_events
-    # test_purchase_detail_events
-
-    # @@model_action = 'request'
-    # request_scenarios.each {|s| test_request_scenario s}
+    pd = Omni::PurchaseDetail.create(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1', :allocation_profile_id => '913BB680231XXXXLASTFORECASTUNITS', :purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15', :sku_supplier_id => '239F5610231F11E3BE4920C9D047DD15',:units_ordered=>100, :order_pack_size=>1, :supplier_cost=>25, :order_cost_units=>1)
+    pd
   end
 
   def self.test_allocation_scenario(s)
@@ -129,15 +134,31 @@ class Omni::Test::Purchase < Omni::Test::Base
     x.cancel
     test_it('it cancels a purchase detail when state is open or partial','cancelled',x.state)
 
+    @@model_action = 'process'
+    x = reset_data
+    Omni::Allocation.where(allocatable_type: "Omni::PurchaseDetail", allocatable_id: x.purchase_detail_id, sku_id: x.sku_id).each {|x| x.delete}
+    x.process
+    a = Omni::Allocation.where(allocatable_type: "Omni::PurchaseDetail", allocatable_id: x.purchase_detail_id, sku_id: x.sku_id)
+    test_it('it creates an Allocation record corresponding to the Purchase Detail when the purchase detail is processed',1 , a.count)
+
+    pa = x.purchase_allocations.first
+    ad = Omni::AllocationDetail.where(allocation_id: a.first.allocation_id)
+    pa = Omni::PurchaseAllocation.where(purchase_detail_id: x.purchase_detail_id)
+    test_it('it creates an Allocation Detail record corresponding to the Purchase Allocation when the purchase detail is processed', pa.count, ad.count)
+    test_it('it sets the units allocated on the allocation details to the same on purchase allocations when the purchase detail is processed', pa.first.units_allocated, ad.first.units_allocated)
+    test_it('it creates transfers corresponding to the allocation detail when the purchase detail is processed', pa.first.units_allocated, ad.first.units_allocated)
+
+#
+
     # Test allocating purchase details
-    x.allocate
-    x.purchase_allocations.first
+    # x.allocate
+    # y = x.purchase_allocations.first
+    # y = Omni::PurchaseAllocation.where(purchase_detail_id: x.purchase_detail_id).first
+    # y.lock
+    # test_it('Lock a purchase allocation','locked',x.state)
 
-    x.lock
-    test_it('Lock a purchase allocation','locked',x.state)
-
-    x.unlock
-    test_it('Unlock a purchase allocation','draft',x.state)
+    # x.unlock
+    # test_it('Unlock a purchase allocation','draft',x.state)
   end
 
   def self.test_approval_scenario(s)

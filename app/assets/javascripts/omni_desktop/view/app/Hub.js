@@ -84,6 +84,14 @@ Ext.define('Omni.view.app.Hub', {
             target: {
               xtype: 'omni-stock_ledger_activities-Explorer'
             }
+          }, {
+            title: 'Transfers',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-transfers-Explorer'
+            }
           // }, {
           //   title: 'Daily Results',
           //   colspan: 2,

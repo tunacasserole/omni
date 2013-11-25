@@ -383,7 +383,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def recompute_delivery_date
-    puts "recomputing delivery date"
+    # puts "recomputing delivery date"
     if self.order_date_changed? || self.estimated_lead_time_days_changed?
       self.delivery_date = self.order_date + self.estimated_lead_time_days.days
     end

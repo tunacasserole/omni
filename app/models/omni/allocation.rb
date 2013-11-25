@@ -93,7 +93,7 @@ class Omni::Allocation < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    after_transition :on => :approve, :do => :do_approve
+    # after_transition :on => :approve, :do => :do_approve
     after_transition :on => :transfer, :do => :do_transfer
     after_transition :on => :ship, :do => :do_ship
 
@@ -117,10 +117,11 @@ class Omni::Allocation < ActiveRecord::Base
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def do_approve
-  end
+  # def do_approve
+  # end
 
   def do_transfer
+    self.allocation_details.each {|x| x.transfer if x.allocated_units > 0}
   end
 
   def do_ship
@@ -162,6 +163,7 @@ class Omni::Allocation < ActiveRecord::Base
     inventories.each do |i|
       next if locked_locations.include? i.location_id
       units_needed = store_demand(allocation_formula, i)
+
       # puts "units_needed is #{units_needed}"
       temp_needs.merge!(i.location_id => units_needed)
     end
@@ -189,6 +191,11 @@ class Omni::Allocation < ActiveRecord::Base
           when 'LEAVE_IN_WAREHOUSE'
             # Set each Output table location's units_allocated = units_needed
             temp_needs.each {|k,v| temp_allocations.merge!(k=>v.to_f)}
+
+          when 'DIVIDE_EQUALLY'
+          # Allocate 1 unit to each unlocked location until all units are allocated (remainder < 1)
+            temp_allocations
+
         end
 
       when remainder < 0 # EXCESS DEMAND

@@ -12,7 +12,7 @@ class Omni::Rule < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -72,11 +72,12 @@ class Omni::Rule < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :ruleset_display do ruleset.display if ruleset end
-    string   :rule_type do |x| Buildit::Lookup::Manager.display_for('RULE_TYPE', x.rule_type) end
+    # string   :rule_type do |x| Buildit::Lookup::Manager.display_for('RULE_TYPE', x.rule_type) end
     string   :input_attribute
+    string   :ruleset_id
     string   :model_name
     string   :attribute_name
-    string   :rule_action do |x| Buildit::Lookup::Manager.display_for('RULE_ACTION', x.rule_action) end
+    # string   :rule_action do |x| Buildit::Lookup::Manager.display_for('RULE_ACTION', x.rule_action) end
     # boolean  :is_active
     string   :ruleset_id
     # string   :rule_seq
