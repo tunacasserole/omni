@@ -32,13 +32,13 @@ Ext.define('Omni.view.receipt_purchases.Form', {
           defaultType  : 'textfield',
           layout       : 'anchor',
           items        : [
-            {
-              xtype        : 'textfield',
-              name         : 'display',
-              fieldLabel   : this.displayLabel,
-              allowBlank   : true
-            },
-            { name: 'receipt_id', fieldLabel: this.receipt_idLabel, xtype: 'buildit-Locator',  store: Ext.create('Omni.store.Receipt',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'receipt_id', itemTpl:'{display}' },
+            // {
+            //   xtype        : 'textfield',
+            //   name         : 'display',
+            //   fieldLabel   : this.displayLabel,
+            //   allowBlank   : true
+            // },
+            // { name: 'receipt_id', fieldLabel: this.receipt_idLabel, xtype: 'buildit-Locator',  store: Ext.create('Omni.store.Receipt',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'receipt_id', itemTpl:'{display}' },
             { name: 'purchase_id', fieldLabel: this.purchase_idLabel, xtype: 'buildit-Locator', store: Ext.create('Omni.store.Purchase',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'purchase_id', itemTpl:'{display}' }
           ]
         }

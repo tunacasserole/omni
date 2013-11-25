@@ -137,23 +137,23 @@ class Omni::ReceiptDetail < ActiveRecord::Base
 
   def write_stock_ledger_activity
     retail = Omni::SkuPrice.where(sku_id: self.sku_id).first ? Omni::SkuPrice.where(sku_id: self.sku_id).first.retail_price : 0
-    ruleset_id = Omni::Ruleset.where(ruleset_code: 'accept_receipt').first ? Omni::Ruleset.where(ruleset_code: 'accept_receipt').first.ruleset_id : ''
+    ruleset_id = Omni::Ruleset.where(ruleset_code: 'AcceptReceipt').first ? Omni::Ruleset.where(ruleset_code: 'AcceptReceipt').first.ruleset_id : ''
     units = self.received_units * self.receipt_pack_size
 
     Omni::StockLedgerActivity.create(
-    stockable_type: "Omni::ReceiptDetail" ,
-    stockable_id: self.receipt_detail_id,
-    ruleset_id: ruleset_id,
-    sku_id: self.sku_id,
-    location_id: self.receipt.location_id,
-    supplier_id: self.purchase_detail.purchase.supplier_id,
-    customer_id: nil,
-    site_id: nil,
-    units: units,
-    cost: units * (self.purchase_detail.supplier_cost / self.purchase_detail.order_cost_units),
-    retail: units * retail,
-    create_date: Time.now,
-    activity_date: Time.now
+      stockable_type: "Omni::ReceiptDetail" ,
+      stockable_id: self.receipt_detail_id,
+      ruleset_id: ruleset_id,
+      sku_id: self.sku_id,
+      location_id: self.receipt.location_id,
+      supplier_id: self.purchase_detail.purchase.supplier_id,
+      customer_id: nil,
+      site_id: nil,
+      units: units,
+      cost: units * (self.purchase_detail.supplier_cost / self.purchase_detail.order_cost_units),
+      retail: units * retail,
+      create_date: Time.now,
+      activity_date: Time.now
     )
   end
 

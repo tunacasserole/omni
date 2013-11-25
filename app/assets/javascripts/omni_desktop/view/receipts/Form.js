@@ -64,19 +64,16 @@ Ext.define('Omni.view.receipts.Form', {
           layout:       'anchor',
           items:[
             { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true, disabled: true },
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
-            { xtype: 'textfield', name: 'receipt_nbr',                    fieldLabel: this.receipt_nbrLabel                 , allowBlank: true },
-            { xtype: 'buildit-Locator', name: 'location_id',              fieldLabel: this.location_idLabel                 , allowBlank: true,   disabled: false,  store: Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { xtype: 'buildit-Locator', name: 'allocation_profile_id',    fieldLabel: this.allocation_profile_idLabel       , allowBlank: true,   disabled: false,  store: Ext.create('Omni.store.AllocationProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'allocation_profile_id', itemTpl:'{display}' },
-            { xtype: 'buildit-Locator', name: 'carrier_supplier_id',      fieldLabel: this.carrier_supplier_idLabel          , allowBlank: true,   disabled: false,  store: Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
-            { xtype: 'textfield', name: 'trailer_identifier',             fieldLabel: this.trailer_identifierLabel          , allowBlank: true },
-            { xtype: 'datefield', name: 'create_date',                    fieldLabel: this.create_dateLabel                 , allowBlank: true },
-            { xtype: 'datefield', name: 'ship_date',                      fieldLabel: this.ship_dateLabel                   , allowBlank: true },
+            // { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: true },
+            { xtype: 'textfield', name: 'receipt_nbr',                    fieldLabel: this.receipt_nbrLabel                 , allowBlank: true, disabled: true },
+            { xtype: 'buildit-Locator', name: 'location_id',              fieldLabel: this.location_idLabel             , allowBlank: false,   disabled: false,  store: Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
+            { xtype: 'buildit-Locator', name: 'carrier_supplier_id',      fieldLabel: this.carrier_supplier_idLabel         , allowBlank: true,   disabled: false,  store: Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
+            { xtype: 'datefield', name: 'create_date',                    fieldLabel: this.create_dateLabel                 , allowBlank: true, disabled: true },
+            { xtype: 'datefield', name: 'ship_date',                      fieldLabel: this.ship_dateLabel                   , allowBlank: true  },
             { xtype: 'datefield', name: 'appointment_date',               fieldLabel: this.appointment_dateLabel            , allowBlank: true },
             { xtype: 'textfield', name: 'appointment_duration',           fieldLabel: this.appointment_durationLabel        , allowBlank: true },
-            { xtype: 'datefield', name: 'accept_date',                    fieldLabel: this.accept_dateLabel                 , allowBlank: true },
-            { xtype: 'datefield', name: 'start_date',                     fieldLabel: this.start_dateLabel                  , allowBlank: true },
-            { xtype: 'datefield', name: 'complete_date',                  fieldLabel: this.complete_dateLabel               , allowBlank: true },
+            { xtype: 'datefield', name: 'start_date',                     fieldLabel: this.start_dateLabel                  , allowBlank: true, disabled: true },
+            { xtype: 'datefield', name: 'accept_date',                    fieldLabel: this.accept_dateLabel                 , allowBlank: true, disabled: true },
             { xtype             : 'buildit-Locator',
               store             : Ext.create('Buildit.store.User',{pageSize: 20}),
               displayField      : 'full_name',
@@ -85,8 +82,10 @@ Ext.define('Omni.view.receipts.Form', {
               itemTpl           : '{full_name}',
               name              : 'completed_by_user_id',
               fieldLabel        : this.completed_by_user_idLabel,
-              allowBlank        : true
+              allowBlank        : true,
+              disabled          : true
             },
+            { xtype: 'datefield', name: 'complete_date',                  fieldLabel: this.complete_dateLabel               , allowBlank: true, disabled: true },
             { xtype             : 'buildit-Locator',
               store             : Ext.create('Buildit.store.User',{pageSize: 20}),
               displayField      : 'full_name',
@@ -95,8 +94,21 @@ Ext.define('Omni.view.receipts.Form', {
               itemTpl           : '{full_name}',
               name              : 'accepted_by_user_id',
               fieldLabel        : this.accepted_by_user_idLabel,
-              allowBlank        : true
+              allowBlank        : true,
+              disabled          : true
             },
+            { xtype: 'buildit-Locator', name: 'allocation_profile_id',    fieldLabel: this.allocation_profile_idLabel       , allowBlank: true,   disabled: false,  store: Ext.create('Omni.store.AllocationProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'allocation_profile_id', itemTpl:'{display}' }
+          ]
+        },
+        {
+          xtype:        'fieldset',
+          title:        'Shipment Information',
+          collapsible:  true,
+          defaultType:  'textfield',
+          defaults:     {anchor: '95%'},
+          layout:       'anchor',
+          items:[
+            { xtype: 'textfield', name: 'trailer_identifier',             fieldLabel: this.trailer_identifierLabel          , allowBlank: true },
             { xtype: 'textfield', name: 'pro_number',                     fieldLabel: this.pro_numberLabel                  , allowBlank: true },
             { xtype: 'textfield', name: 'bill_of_lading_number',          fieldLabel: this.bill_of_lading_numberLabel       , allowBlank: true },
             { xtype: 'textfield', name: 'packing_slip_number',            fieldLabel: this.packing_slip_numberLabel         , allowBlank: true },
@@ -104,12 +116,12 @@ Ext.define('Omni.view.receipts.Form', {
             { xtype: 'textfield', name: 'seal_2_number',                  fieldLabel: this.seal_2_numberLabel               , allowBlank: true },
             { xtype: 'textfield', name: 'seal_3_number',                  fieldLabel: this.seal_3_numberLabel               , allowBlank: true },
             { xtype: 'textfield', name: 'asn_number',                     fieldLabel: this.asn_numberLabel                  , allowBlank: true },
+            { xtype: 'checkbox', name: 'is_expected_asn',                 fieldLabel: this.is_expected_asnLabel             , allowBlank: true },
             { xtype: 'textfield', name: 'standard_carrier_alpha_code',    fieldLabel: this.standard_carrier_alpha_codeLabel , allowBlank: true },
             { xtype: 'textfield', name: 'ship_point',                     fieldLabel: this.ship_pointLabel                  , allowBlank: true },
             { xtype: 'textfield', name: 'ship_via',                       fieldLabel: this.ship_viaLabel                    , allowBlank: true },
             { xtype: 'buildit-Lookup', name: 'freight_terms',             fieldLabel: this.freight_termsLabel               , allowBlank: true,  category:   'FREIGHT_TERM' },
             { xtype: 'textfield', name: 'invoice_number',                 fieldLabel: this.invoice_numberLabel              , allowBlank: true },
-            { xtype: 'checkbox', name: 'is_expected_asn',                 fieldLabel: this.is_expected_asnLabel             , allowBlank: true },
           ]
         }
       ]

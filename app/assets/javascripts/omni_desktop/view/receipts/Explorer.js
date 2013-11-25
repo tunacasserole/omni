@@ -3,7 +3,7 @@ Ext.define('Omni.view.receipts.Explorer', {
   extend : 'Buildit.ux.explorer.Panel',
   alias  : 'widget.omni-receipts-Explorer',
   allowFind  : true,
-  
+
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.Receipt'),
 
@@ -68,11 +68,11 @@ Ext.define('Omni.view.receipts.Explorer', {
         //   dataIndex    : 'receipt_id',
         //   flex         : 1
         // },
-        {
-          header       : this.displayLabel,
-          dataIndex    : 'display',
-          flex         : 1
-        },
+        // {
+        //   header       : this.displayLabel,
+        //   dataIndex    : 'display',
+        //   flex         : 1
+        // },
         {
           header       : this.receipt_nbrLabel,
           dataIndex    : 'receipt_nbr',

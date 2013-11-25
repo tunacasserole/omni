@@ -47,11 +47,11 @@ Ext.define('Omni.view.receipt_details.Explorer', {
         //   dataIndex    : 'receipt_detail_id',
         //   flex         : 1
         // },
-        {
-          header       : this.displayLabel,
-          dataIndex    : 'display',
-          flex         : 1
-        },
+        // {
+        //   header       : this.displayLabel,
+        //   dataIndex    : 'display',
+        //   flex         : 1
+        // },
         {
           header       : this.sku_displayLabel,
           dataIndex    : 'sku_display',

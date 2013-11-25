@@ -1,10 +1,5 @@
 class Omni::Period < ActiveRecord::Base
 
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :periods
   self.primary_key  = :period_id
@@ -12,7 +7,7 @@ class Omni::Period < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -26,9 +21,9 @@ class Omni::Period < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :period_id,                        :override  =>  false,        :with  => :guid              
+  default      :period_id,                        :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.period_number} - #{m.year_number}"}
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -58,7 +53,6 @@ class Omni::Period < ActiveRecord::Base
 
 
   # SCOPES (Start) ======================================================================
-
   # SCOPES (End)
 
 
@@ -72,10 +66,10 @@ class Omni::Period < ActiveRecord::Base
     date     :end_date
     string   :year_number
     string   :period_number
- 
+
     text     :year_number_fulltext, :using => :year_number
     text     :period_number_fulltext, :using => :period_number
-  end 
+  end
   # INDEXING (End)
 
 
