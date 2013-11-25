@@ -133,7 +133,7 @@
     #  Read all existing PurchaseAllocation records for the PurchaseDetail.  If the state is draft, then delete the record.
     #  If the state is locked, then add the units_allocated to locked_units parameter and add the location_id to the locked_locations hash.
     locked_units = 0
-    locked_locations = ["'#{self.purchase.location_id}'"]
+    locked_locations = [self.purchase.location_id]
     purchase_allocations.each do |x|
       case x.state
         when 'draft'
@@ -146,10 +146,11 @@
       end
     end
 
+    # puts "\n\nself.purchase.location_id is #{self.purchase.location_id}\n\n"
     units_to_allocate = units_ordered * order_pack_size
 
     allocations_to_create = Omni::Allocation.calculate(allocation_profile_id, sku_id, units_to_allocate, locked_units, locked_locations, nil)
-    allocations_to_create.each { |k,v| Omni::PurchaseAllocation.create(purchase_detail_id: purchase_detail_id, location_id: k, units_allocated: (v ? v : 0)) }
+    allocations_to_create.each { |k,v| Omni::PurchaseAllocation.create(purchase_detail_id: purchase_detail_id, location_id: k, units_allocated: (v ? v : 0)) } # unless k = self.purchase.location_id }
   end
 
   def do_receive

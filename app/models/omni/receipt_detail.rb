@@ -117,7 +117,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
     #  Read all existing ReceiptAllocation records for the ReceiptDetail.  If the state is draft, then delete the record.
     #  If the state is locked, then add the units_allocated to locked_units parameter and add the location_id to the locked_locations hash.
     locked_units = 0
-    locked_locations = []
+    locked_locations = [self.purchase.location_id]
     receipt_allocations.each do |x|
       if x.state == 'draft'
         x.delete

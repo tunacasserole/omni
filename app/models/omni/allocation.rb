@@ -128,7 +128,8 @@ class Omni::Allocation < ActiveRecord::Base
 
   def allocate
     locked_units = 0
-    locked_locations = []
+    locked_locations = [self.purchase.location_id]
+
     purchase_detail_id = nil
     allocation_details.each do |x|
       if x.state == 'locked'
