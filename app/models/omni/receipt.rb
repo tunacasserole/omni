@@ -183,12 +183,12 @@ class Omni::Receipt < ActiveRecord::Base
     # Read every Receipt Detail row in Draft State.
     # If the received units are zero, the system will update the row with the number of open units from the corresponding Purchase Detail row.
     # If the received units are greater than zero, then the field is not changed.
-    puts 'do_copy_units'
+    # puts 'do_copy_units'
     receipt_details.where(state: 'draft').each do |x|
-      puts "receipt details state is #{x.state}"
+      # puts "receipt details state is #{x.state}"
       if x.purchase && x.purchase_detail && x.received_units == 0
-      puts "x.received_units is #{x.received_units}"
-      puts "x.purchase.state is #{x.purchase.state}"
+      # puts "x.received_units is #{x.received_units}"
+      # puts "x.purchase.state is #{x.purchase.state}"
 
         case x.purchase.state
           when 'open', 'draft'
@@ -246,6 +246,28 @@ class Omni::Receipt < ActiveRecord::Base
       self.completed_by_user_id = Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON'
       save
     end
+  end
+
+  def write_stock_ledger_activity
+    # retail = Omni::SkuPrice.where(sku_id: self.sku_id).first ? Omni::SkuPrice.where(sku_id: self.sku_id).first.retail_price : 0
+    ruleset_id = Omni::Ruleset.where(ruleset_code: 'AcceptReceipt').first ? Omni::Ruleset.where(ruleset_code: 'AcceptReceipt').first.ruleset_id : ''
+    units = self.received_units * self.receipt_pack_size
+
+    Omni::StockLedgerActivity.create(
+      stockable_type: "Omni::Receipt" ,
+      stockable_id: self.receipt_id,
+      ruleset_id: ruleset_id,
+      # sku_id: self.sku_id,
+      location_id: self.location_id,
+      # supplier_id: self.purchase_detail.purchase.supplier_id,
+      # customer_id: nil,
+      # site_id: nil,
+      # units: units,
+      # cost: units * (self.purchase_detail.supplier_cost / self.purchase_detail.order_cost_units),
+      # retail: units * retail,
+      create_date: Time.now,
+      activity_date: Time.now
+    )
   end
   # STATE HELPERS (End)
 

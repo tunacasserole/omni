@@ -11,7 +11,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -87,8 +87,15 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
   # hook :after_create, :validate_ruleset, 10
-  # hook :after_create, :apply_rules, 20
+  hook :after_create, :apply_rules, 20
   # hook :after_create, :set_sla_state, 30
+
+  def apply_rules
+    if self.ruleset_id == 'XXXXXXXXXXXXXXXXXXXACCEPTRECEIPT'
+      # i = Omni::Inventory.where(sku_id: self.sku_id, location_id: self.location_id).first
+      # i.on_hand_units
+    end
+  end
   # HOOKS (End)
 
 

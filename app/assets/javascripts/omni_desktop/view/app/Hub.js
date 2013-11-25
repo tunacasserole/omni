@@ -76,6 +76,14 @@ Ext.define('Omni.view.app.Hub', {
             target: {
               xtype: 'omni-suppliers-Explorer'
             }
+          }, {
+            title: 'Stock Ledger Activity',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-stock_ledger_activities-Explorer'
+            }
           // }, {
           //   title: 'Daily Results',
           //   colspan: 2,
