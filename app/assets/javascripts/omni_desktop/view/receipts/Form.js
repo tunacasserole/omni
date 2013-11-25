@@ -128,16 +128,16 @@ Ext.define('Omni.view.receipts.Form', {
     // ACTIONS (Start) =====================================================================
     Ext.apply(this, {
       actions: [
-        {
-          tooltip    : 'Upload',
-          cls        : 'ship',
-          xtype      : 'button',
-          listeners  : {
-            beforerender  : this.prepareUploadAction,
-            click         : this.onUploadAction,
-            scope         : me
-          }
-        },
+        // {
+        //   tooltip    : 'Upload',
+        //   cls        : 'ship',
+        //   xtype      : 'button',
+        //   listeners  : {
+        //     beforerender  : this.prepareUploadAction,
+        //     click         : this.onUploadAction,
+        //     scope         : me
+        //   }
+        // },
         {
           tooltip    : 'Accept',
           iconCls    : 'icon-thumbs-up',
