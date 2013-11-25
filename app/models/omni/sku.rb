@@ -63,7 +63,7 @@ class Omni::Sku < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :subclass,                        :class_name => 'Omni::Subclass',                :foreign_key => 'subclass_id'
+  # belongs_to   :subclass,                        :class_name => 'Omni::Subclass',                :foreign_key => 'subclass_id'
   belongs_to   :style,                           :class_name => 'Omni::Style',                   :foreign_key => 'style_id'
   belongs_to   :generic_sku,                     :class_name => 'Omni::Sku',                     :foreign_key => 'generic_sku_id'
   belongs_to   :add_on_sku,                      :class_name => 'Omni::Sku',                     :foreign_key => 'add_on_sku_id'
@@ -219,8 +219,8 @@ class Omni::Sku < ActiveRecord::Base
     string   :source
 
     text     :display_fulltext, :using => :display
-    text     :style_display_fulltext do self.style.subclass.display if style end
-    text     :subclass_display_fulltext do self.style.subclass.display if style && subclass end
+    text     :style_display_fulltext do self.style.subclass.display if self.style end
+    text     :subclass_display_fulltext do self.style.subclass.display if self.style && self.style.subclass end
     text     :classification_display_fulltext do self.style.subclass.classification.display if self.style && self.style.subclass && self.style.subclass.classification end
     text     :department_display_fulltext do self.style.subclass.classification.department.display if self.style && self.style.subclass && self.style.subclass.classification && self.style.subclass.classification.department end
     text     :source_idfulltext, :using => :source_id

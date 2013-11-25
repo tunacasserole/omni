@@ -133,7 +133,7 @@
     #  Read all existing PurchaseAllocation records for the PurchaseDetail.  If the state is draft, then delete the record.
     #  If the state is locked, then add the units_allocated to locked_units parameter and add the location_id to the locked_locations hash.
     locked_units = 0
-    locked_locations = []
+    locked_locations = ["'#{self.purchase.location_id}'"]
     purchase_allocations.each do |x|
       case x.state
         when 'draft'
@@ -213,7 +213,7 @@
     # default PurchaseDetail fields from Sku and SkuSupplier
     if self.new_record?
       if self.sku_supplier
-        # puts "\n\n SKU IS #{self.sku_id}"
+        puts "\n\n SKU IS #{self.sku_supplier.sku_id}"
         self.sku_id = self.sku_supplier.sku_id
         self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
         self.description = self.sku_supplier.description
