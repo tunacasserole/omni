@@ -199,7 +199,7 @@
     # For each PurchaseAllocation record allocations.allocated_units > 0 for the PurchaseDetail where
     self.purchase_allocations.where("units_allocated > ? and state = 'draft'", 0).each do |x|
     # Create an AllocationDetail record corresponding to the PurchaseAllocation
-      Omni::AllocationDetail.create(allocation_id: a.allocation_id, sku_id: self.sku_id, location_id: self.purchase.location_id, units_needed: x.units_needed, units_allocated: x.units_allocated,  units_shipped: x.units_shipped)
+      Omni::AllocationDetail.create(allocation_id: a.allocation_id, location_id: self.purchase.location_id, units_needed: x.units_needed, units_allocated: x.units_allocated,  units_shipped: x.units_shipped)
     # Update PurchaseAllocation.state to transferred
       x.state = 'transferred'
       x.save
