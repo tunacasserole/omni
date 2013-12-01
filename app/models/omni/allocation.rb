@@ -96,6 +96,7 @@ class Omni::Allocation < ActiveRecord::Base
     # after_transition :on => :approve, :do => :do_approve
     after_transition :on => :transfer, :do => :do_transfer
     after_transition :on => :ship, :do => :do_ship
+    after_transition :on => :allocate, :do => :do_allocate
 
     event :approve do
       transition :draft => :approved
@@ -127,21 +128,26 @@ class Omni::Allocation < ActiveRecord::Base
   def do_ship
   end
 
-  def allocate
+  def do_allocate
+    puts 'allocating'
     locked_units = 0
-    locked_locations = [self.purchase.location_id]
+    locked_locations = [self.location_id]
 
     purchase_detail_id = nil
     allocation_details.each do |x|
       if x.state == 'locked'
+        'locked location'
         locked_units += x.units_allocated
         locked_locations << x.location_id
       end
     end
+
     self.allocation_details.delete_all
+
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     allocations_to_create.each do |k,v|
-      Omni::AllocationDetail.create(allocation_id: self.allocation_id, sku_id: self.sku_id, location_id: k, units_allocated: v)
+
+      Omni::AllocationDetail.create(allocation_id: self.allocation_id, location_id: k, units_allocated: v)
     end
   end
 
@@ -156,24 +162,23 @@ class Omni::Allocation < ActiveRecord::Base
     units_needed = 0
     remainder = 0
     allocatable_units = (units_to_allocate * allocation_profile.percent_to_allocate / 100) - locked_units
-    # puts "allocatable_units is #{allocatable_units}"
+    puts "allocatable_units is #{allocatable_units}"
     # error = 'No units available to allocate' if allocatable_units < 1
     inventories = Omni::Inventory.where(sku_id: sku_id, is_authorized: true).to_a
     inventories.reject! {|x| locked_locations.include? x.location_id}
     inventories.each do |i|
       next if locked_locations.include? i.location_id
       units_needed = store_demand(allocation_formula, i)
-
-      # puts "units_needed is #{units_needed}"
+      puts "units_needed is #{units_needed}"
       temp_needs.merge!(i.location_id => units_needed)
     end
 
     total_units_needed = (temp_needs.map {|k,v| v}).sum
-    # puts "total_units_needed is #{total_units_needed}"
+    puts "total_units_needed is #{total_units_needed}"
     remainder = allocatable_units - total_units_needed
     temp_allocations = temp_needs
-    # puts "remainder is #{remainder}"
-    # puts "allocation_profile.excess_supply_option is #{allocation_profile.excess_supply_option}"
+    puts "remainder is #{remainder}"
+    puts "allocation_profile.excess_supply_option is #{allocation_profile.excess_supply_option}"
     case
       when remainder == 0 # DEMAIND = SUPPLY
         temp_needs.each {|k,v| temp_allocations.merge!(k=>v.to_f)}

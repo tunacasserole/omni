@@ -178,8 +178,8 @@ Ext.define('Omni.view.allocations.Form', {
           cls        : 'close-event',
           tooltip    : 'Calculate',
           listeners  : {
-            beforerender  : this.prepareCalculateAction,
-            click         : this.onCalculateAction,
+            beforerender  : this.prepareAllocateAction,
+            click         : this.onAllocateAction,
             scope         : me
           }
         },
@@ -224,8 +224,8 @@ Ext.define('Omni.view.allocations.Form', {
 
   // HANDLERS (Start) ======================================================================
 
-  onCalculateAction : function(action, eOpts){
-    this.processEventTransition('calculate', 'Allocation was successfully calculated.', 'An error occurred calculating this allocation.');
+  onAllocateAction : function(action, eOpts){
+    this.processEventTransition('allocate', 'Allocation was successfully allocated.', 'An error occurred allocated this allocation.');
   }, // onBuildAction
 
   onApproveAction : function(action, eOpts){
@@ -241,7 +241,7 @@ Ext.define('Omni.view.allocations.Form', {
   }, // onBuildAction
 
 
-  prepareCalculateAction : function(action, eOpts) {
+  prepareAllocateAction : function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'draft' ? action.show() : action.hide();
   },

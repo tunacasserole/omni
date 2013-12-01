@@ -101,7 +101,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
   def do_transfer
     tr_id = Omni::TransferReason.where(display: 'Allocation').first ? Omni::TransferReason.where(display: 'Allocation').first.transfer_reason_id : nil
     user_id = Buildit::User.current ? Buildit::User.current.user_id : nil
-    t = Omni::Transfer.create(requesting_location_id: self.location_id, fulfillment_location_id: self.allocation.location_id, sku_id: self.allocation.sku_id, transfer_reason_id: tr_id, request_units: self.allocation.units_allocated, request_date: Date.today, request_user_id: user_id)
+    t = Omni::Transfer.create(requesting_location_id: self.location_id, fulfillment_location_id: self.allocation.location_id, sku_id: self.allocation.sku_id, transfer_reason_id: tr_id, request_units: self.units_allocated, request_date: Date.today, request_user_id: user_id)
     self.transfer_id = t.transfer_id
     save
   end
