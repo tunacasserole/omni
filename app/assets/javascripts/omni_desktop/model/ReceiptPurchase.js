@@ -11,6 +11,10 @@ Ext.define('Omni.model.ReceiptPurchase', {
       type       : 'string'
     },
     {
+      name       : 'state',
+      type       : 'string'
+    },
+    {
       name       : 'receipt_id',
       type       : 'string'
     },

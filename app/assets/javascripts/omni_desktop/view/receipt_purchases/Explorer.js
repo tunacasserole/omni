@@ -2,6 +2,9 @@ Ext.define('Omni.view.receipt_purchases.Explorer', {
 
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.omni-receipt_purchases-Explorer',
+  allowFind  :  false,
+  // allowNew  :
+
 
   // EXPLORER INIT (Start) ===============================================================
   store    : Ext.create('Omni.store.ReceiptPurchase'),
@@ -24,7 +27,6 @@ Ext.define('Omni.view.receipt_purchases.Explorer', {
   displayLabel                            : Omni.i18n.model.ReceiptPurchase.display,
   receipt_idLabel                         : Omni.i18n.model.ReceiptPurchase.receipt_id,
   purchase_idLabel                        : Omni.i18n.model.ReceiptPurchase.purchase_id,
-  is_destroyedLabel                       : Omni.i18n.model.ReceiptPurchase.is_destroyed,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -35,6 +37,11 @@ Ext.define('Omni.view.receipt_purchases.Explorer', {
   initComponent : function () {
 
     var me = this;
+
+
+    // var yolo = this.record;
+
+    // console.log(yolo)
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {

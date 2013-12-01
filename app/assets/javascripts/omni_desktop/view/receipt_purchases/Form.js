@@ -15,6 +15,8 @@ Ext.define('Omni.view.receipt_purchases.Form', {
 
     var me = this;
 
+    var disabled = !this.record.phantom;
+
     // FILTER (Start) =======================================================================
     var associativeFilter = {
       property    : 'receipt_purchase_id',
@@ -39,7 +41,7 @@ Ext.define('Omni.view.receipt_purchases.Form', {
             //   allowBlank   : true
             // },
             // { name: 'receipt_id', fieldLabel: this.receipt_idLabel, xtype: 'buildit-Locator',  store: Ext.create('Omni.store.Receipt',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'receipt_id', itemTpl:'{display}' },
-            { name: 'purchase_id', fieldLabel: this.purchase_idLabel, xtype: 'buildit-Locator', store: Ext.create('Omni.store.Purchase',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'purchase_id', itemTpl:'{display}' }
+            { name: 'purchase_id', fieldLabel: this.purchase_idLabel, disabled: disabled, xtype: 'buildit-Locator', store: Ext.create('Omni.store.Purchase',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'purchase_id', itemTpl:'{display}' }
           ]
         }
       ]

@@ -12,7 +12,7 @@ class Omni::Transfer < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -25,11 +25,11 @@ class Omni::Transfer < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :transfer_id,                      :override  =>  false,        :with  => :guid              
+  default      :transfer_id,                      :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "From: #{m.fulfillment_location_display} - To: #{m.requesting_location_display} - Transfer: #{m.transfer_nbr}"}
   default      :transfer_nbr,                     :override  =>  false,        :with  => :sequence,         :named=>"TRANSFER_NBR"
-  default      :request_units,                    :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :request_units,                    :override  =>  false,        :to    => 0
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -80,6 +80,8 @@ class Omni::Transfer < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
   hook :after_create, :build_request_sla, 10
+  def build_request_sla
+  end
   # HOOKS (End)
 
 
@@ -93,14 +95,14 @@ class Omni::Transfer < ActiveRecord::Base
     string   :transfer_reason_display do transfer_reason.display if transfer_reason end
     date     :request_date
     string   :state
- 
+
     text     :state_fulltext, :using => :state
     text     :transfer_nbr_fulltext, :using => :transfer_nbr
     text     :requesting_location_display_fulltext, :using => :requesting_location_display
     text     :fulfillment_location_display_fulltext, :using => :fulfillment_location_display
     text     :sku_display_fulltext, :using => :sku_display
     text     :transfer_reason_display_fulltext, :using => :transfer_reason_display
-  end 
+  end
   # INDEXING (End)
 
 

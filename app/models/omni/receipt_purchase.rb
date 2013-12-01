@@ -28,14 +28,27 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
   mapped_attributes do
     map :receipt_display,                 :to => 'receipt.display'
     map :purchase_display,                :to => 'purchase.display'
+    map :receipt_state,                   :to => 'receipt.state'
   end
   # MAPPED ATTRIBUTES (End)
 
   # INDEXING (Start) ====================================================================
+  searchable do
+    string   :receipt_display do receipt.display if receipt end
+    string   :purchase_display do purchase.display if purchase end
+    string   :receipt_id
+  end
   # INDEXING (End)
-
   # HOOKS (Start) =======================================================================
+  hook :before_create, :validate_create,  10
   hook :before_destroy, :cascading_delete,  20
+
+  def validate_create
+    unless ['draft', 'scheduled', 'processing'].include? self.receipt.state
+      errors.add('purchase_id','receipt purchases may only be added if receipt is in draft, scheduled or processing state.')
+      raise ActiveRecord::Rollback
+    end
+  end
 
   def cascading_delete
     # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.

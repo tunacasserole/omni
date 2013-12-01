@@ -5,6 +5,10 @@ Ext.define('Omni.view.receipt_details.Form', {
 
   initComponent:function () {
 
+    var disabled = this.record.get('state') == 'complete' ? true : false;
+
+    // console.log(disabled);
+
     var me = this;
 
     // FILTER (Start) =======================================================================
@@ -39,6 +43,7 @@ Ext.define('Omni.view.receipt_details.Form', {
           collapsible:  true,
           defaultType:  'textfield',
           defaults:     {anchor: '95%'},
+          disabled:     disabled,
           layout:       'anchor',
           items:[
             { xtype: 'textfield', name: 'state',                          fieldLabel: this.stateLabel                       , allowBlank: true, disabled: true },
