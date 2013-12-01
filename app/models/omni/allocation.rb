@@ -146,9 +146,9 @@ class Omni::Allocation < ActiveRecord::Base
 
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     allocations_to_create.each do |k,v|
-
       Omni::AllocationDetail.create(allocation_id: self.allocation_id, location_id: k, units_allocated: v)
     end
+
   end
 
   # HELPERS (Start) =====================================================================

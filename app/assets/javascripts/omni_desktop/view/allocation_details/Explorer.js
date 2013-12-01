@@ -20,8 +20,6 @@ Ext.define('Omni.view.allocation_details.Explorer', {
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================
-  allocation_detail_idLabel               : Omni.i18n.model.AllocationDetail.allocation_detail_id,
-  sku_idLabel                             : Omni.i18n.model.AllocationDetail.sku_id,
   location_idLabel                        : Omni.i18n.model.AllocationDetail.location_id,
   allocation_idLabel                      : Omni.i18n.model.AllocationDetail.allocation_id,
   allocation_detail_nbrLabel              : Omni.i18n.model.AllocationDetail.allocation_detail_nbr,
@@ -29,7 +27,6 @@ Ext.define('Omni.view.allocation_details.Explorer', {
   units_neededLabel                       : Omni.i18n.model.AllocationDetail.units_needed,
   units_allocatedLabel                    : Omni.i18n.model.AllocationDetail.units_allocated,
   units_shippedLabel                      : Omni.i18n.model.AllocationDetail.units_shipped,
-  is_destroyedLabel                       : Omni.i18n.model.AllocationDetail.is_destroyed,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -44,16 +41,6 @@ Ext.define('Omni.view.allocation_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns      : [
-        // {
-        //   header       : this.allocation_detail_idLabel,
-        //   dataIndex    : 'allocation_detail_id',
-        //   flex         : 1
-        // },
-        {
-          header       : this.sku_idLabel,
-          dataIndex    : 'sku_display',
-          flex         : 1
-        },
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
