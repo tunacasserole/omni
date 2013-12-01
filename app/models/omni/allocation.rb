@@ -12,6 +12,9 @@ class Omni::Allocation < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates :allocation_id,                        :presence      => true
+  validates :allocation_profile_id,                :presence      => true
+  validates :location_id,                          :presence      => true
+  validates :sku_id,                               :presence      => true
   # validates :display,                                 :uniqueness    => true
   # VALIDATIONS (End)
 
@@ -129,7 +132,6 @@ class Omni::Allocation < ActiveRecord::Base
   end
 
   def do_allocate
-    puts 'allocating'
     locked_units = 0
     locked_locations = [self.location_id]
 
@@ -167,7 +169,7 @@ class Omni::Allocation < ActiveRecord::Base
     inventories = Omni::Inventory.where(sku_id: sku_id, is_authorized: true).to_a
     inventories.reject! {|x| locked_locations.include? x.location_id}
     inventories.each do |i|
-      next if locked_locations.include? i.location_id
+      next if locked_locations.include? i.location_id #or allocation_formula == 'DIVIDE_EQUALLY'
       units_needed = store_demand(allocation_formula, i)
       puts "units_needed is #{units_needed}"
       temp_needs.merge!(i.location_id => units_needed)
@@ -178,6 +180,7 @@ class Omni::Allocation < ActiveRecord::Base
     remainder = allocatable_units - total_units_needed
     temp_allocations = temp_needs
     puts "remainder is #{remainder}"
+    puts "temp needs count is #{temp_needs.count}"
     puts "allocation_profile.excess_supply_option is #{allocation_profile.excess_supply_option}"
     case
       when remainder == 0 # DEMAIND = SUPPLY
@@ -198,9 +201,21 @@ class Omni::Allocation < ActiveRecord::Base
             temp_needs.each {|k,v| temp_allocations.merge!(k=>v.to_f)}
 
           when 'DIVIDE_EQUALLY'
-          # Allocate 1 unit to each unlocked location until all units are allocated (remainder < 1)
-            temp_allocations
+            puts "Allocate 1 unit to each unlocked location until all units are allocated (remainder < 1)"
+            while remainder > 0 do
+              puts "in while loop"
+              temp_needs.each do |k,v|
+                puts "temp_needs[k] is #{temp_needs[k]}"
+                temp_needs[k] += 1
+                puts "remainder is #{remainder}"
+                break unless remainder > 0
+                remainder -= 1
+              end
+            end
 
+            # Set each output table location's units_allocated = units_needed
+            temp_needs.each {|k,v| puts "k is #{k} and v is #{v}"}
+            temp_needs.each {|k,v| temp_allocations.merge!(k=>v.to_f)}
         end
 
       when remainder < 0 # EXCESS DEMAND
@@ -235,6 +250,9 @@ class Omni::Allocation < ActiveRecord::Base
 
     if projection_detail
       case allocation_formula
+
+      when 'DIVIDE_EQUALLY'
+        units_needed = 0
 
       when 'APPROVED_PROJECTION'
         case projection_detail.projection.state

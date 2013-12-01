@@ -6,9 +6,9 @@ class Omni::Test::Base
 
     # RUN TESTS BY MODULE
     Omni::Test::Purchase.go
-    # Omni::Test::Receipt.go
-    # Omni::Test::Allocation.go
-    # Omni::Test::Projection.go
+    # Omni::Test::Receiptipt.go
+    Omni::Test::Allocation.go
+    Omni::Test::Projection.go
     # END OF RUN TESTS
 
     reindex_data
@@ -45,7 +45,7 @@ class Omni::Test::Base
     constants
     Omni::Test::Security.create_data unless Buildit::User.where(user_id: 'TESTUSERXXXXXXXXXXXXXXXBUYERBILL').first
 
-    # Omni::AllocationProfile.all.each {|x|x.delete}
+    Omni::AllocationProfile.all.each {|x|x.delete}
     Omni::AllocationProfile.create(:allocation_profile_id => 'XXXXLASTFORECASTBYPERCENTTOSTORE', :display => 'last forecast_units with allocate by percent to store', :allocation_formula => 'LAST_FORECAST_UNITS', :percent_to_allocate => 100,:excess_demand_option => 'APPORTION_BY_PERCENT', :excess_supply_option => 'APPORTION_TO_STORES',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => 'XXXXLASTFORECASTBYPERCENTTOSTORE').first
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231211XXXXXBTSDEMANDWHSE', :display => 'last forecast units with allocate by demand and warehouse', :allocation_formula => 'LAST_FORECAST_UNITS', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211XXXXXBTSDEMANDWHSE').first
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231211E3PROJECTION1UNITS', :display => 'projection 1 units profile', :allocation_formula => 'PROJECTION_1_UNITS', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231211E3PROJECTION1UNITS').first
@@ -56,7 +56,7 @@ class Omni::Test::Base
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231XXPURCHASEALLOCATIONS', :display => 'allocated units profile', :allocation_formula => 'PURCHASE_ALLOCATION', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231XXPURCHASEALLOCATIONS').first
     Omni::AllocationProfile.create(:allocation_profile_id => '913BB680231XXXAPPROVEDPROJECTION', :display => 'approve projection units profile', :allocation_formula => 'APPROVED_PROJECTION', :percent_to_allocate => 100,:excess_demand_option => 'FILL_LARGEST_DEMAND', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => '913BB680231XXXAPPROVEDPROJECTION').first
     Omni::AllocationProfile.create(:allocation_profile_id => 'LASTFORECASTBYPERCENTINWAREHOUSE', :display => 'last forecast_units with allocate by percent and leave in warehouse', :allocation_formula => 'LAST_FORECAST_UNITS', :percent_to_allocate => 80,:excess_demand_option => 'APPORTION_BY_PERCENT', :excess_supply_option => 'LEAVE_IN_WAREHOUSE',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => 'LASTFORECASTBYPERCENTINWAREHOUSE').first
-    Omni::AllocationProfile.create(:allocation_profile_id => 'LASTXFORECASTXXXDIVIDEEQUALLY123', :display => 'divide equally - no source needed, apportion the units equally amongst the stores', :allocation_formula => 'DIVIDE_EQUALLY', :percent_to_allocate => 100,:excess_demand_option => '', :excess_supply_option => '',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => 'LASTXFORECASTXXXDIVIDEEQUALLY123').first
+    Omni::AllocationProfile.create(:allocation_profile_id => 'LASTXFORECASTXXXDIVIDEEQUALLY123', :display => 'divide equally - no source needed, apportion the units equally amongst the stores', :allocation_formula => 'DIVIDE_EQUALLY', :percent_to_allocate => 100,:excess_demand_option => '', :excess_supply_option => 'DIVIDE_EQUALLY',:rounding_option => 'NONE') unless Omni::AllocationProfile.where(:allocation_profile_id => 'LASTXFORECASTXXXDIVIDEEQUALLY123').first
 
     # Omni::ForecastProfile.all.each {|x|x.delete}
     Omni::ForecastProfile.create(:forecast_profile_id => 'XXXXXXXXXXXXXXXXFORECASTPROFILE1', :display => '100% weighting to py1, 0% to py2 and py3', :forecast_formula => 'SALES', :sales_py1_weight => 1, :sales_py2_weight => 0, :sales_py3_weight => 0) unless Omni::ForecastProfile.where(:forecast_profile_id => 'XXXXXXXXXXXXXXXXFORECASTPROFILE1').first
