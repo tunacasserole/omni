@@ -148,8 +148,6 @@ class Omni::Allocation < ActiveRecord::Base
 
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     allocations_to_create.each do |k,v|
-      puts k
-      puts v
       Omni::AllocationDetail.create(allocation_id: self.allocation_id, location_id: k, units_allocated: v)
     end
 
@@ -203,15 +201,14 @@ class Omni::Allocation < ActiveRecord::Base
             temp_needs.each {|k,v| temp_allocations.merge!(k=>v.to_f)}
 
           when 'DIVIDE_EQUALLY'
-            puts "Allocate 1 unit to each unlocked location until all units are allocated (remainder < 1)"
+            # "Allocate 1 unit to each unlocked location until all units are allocated (remainder < 1)"
             while remainder > 0 do
-              puts "in while loop"
+                # puts "remainder is #{remainder}"
+                # puts "temp_needs[k] is #{temp_needs[k]}"
               temp_needs.each do |k,v|
-                puts "temp_needs[k] is #{temp_needs[k]}"
                 temp_needs[k] += 1
-                puts "remainder is #{remainder}"
-                break unless remainder > 0
                 remainder -= 1
+                break unless remainder > 0
               end
             end
 

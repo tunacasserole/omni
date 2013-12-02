@@ -80,8 +80,8 @@ Ext.define('Omni.view.allocation_details.Form', {
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title       : 'AllocationDetail',
-      subtitle    : 'Edit AllocationDetail'
+      title       : 'Allocation Detail',
+      subtitle    : 'Edit Allocation Detail'
     });
     // TITLES (End)
 

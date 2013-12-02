@@ -1,19 +1,12 @@
 class Omni::StockLedgerActivity < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :stock_ledger_activities
   self.primary_key  = :stock_ledger_activity_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
@@ -24,7 +17,6 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   # validates    :location_id,                     :presence    => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
   default      :stock_ledger_activity_id,         :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.activity_date}"}
@@ -34,9 +26,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # default      :stockable_id,                     :override  =>  false,        :to    => :sku_id
   # default      :stockable_type,                   :override  =>  false,        :to    => "Omni::StockLedgerActivty"
-
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -46,9 +36,8 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to      :stockable,                :polymorphic => true
+  belongs_to   :stockable,                :polymorphic => true
   belongs_to   :stockable,                       :class_name => 'Omni::PickTicket',              :foreign_key => 'stockable_id'
   belongs_to   :ruleset,                         :class_name => 'Omni::Ruleset',                 :foreign_key => 'ruleset_id'
   belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
@@ -59,8 +48,6 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   belongs_to   :stockable,                       :class_name => 'Omni::WorkOrder',               :foreign_key => 'stockable_id'
   has_many     :stock_ledger_activity_logs,      :class_name => 'Omni::StockLedgerActivityLog',  :foreign_key => 'stock_ledger_activity_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
@@ -73,17 +60,9 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
+  # ORDERING (Start) ====================================================================
+  order_search_by :activity_date => :desc
+  # ORDERING (End)
 
   # HOOKS (Start) =======================================================================
   # hook :after_create, :validate_ruleset, 10

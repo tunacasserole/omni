@@ -15,7 +15,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :allocation_detail_id,             :with => :guid
-  default :display, :override  =>  false,   :to   => lambda{|m| "#{m.allocation_detail_nbr} - #{m.allocation.allocation_nbr}"}
+  default :display, :override  =>  false,   :to   => lambda{|m| "from: #{m.allocation.location_display} - #{m.allocation.sku_display} - #{m.allocation.allocation_nbr}"}
   # default :description, :override  =>  false,   :to   => lambda{|m| "#{m.allocation_detail_nbr} - #{m.allocation.allocation_nbr} - #{m.purchase_line_nbr}"}
   # default :sku_id,                           :to   => lambda{|m| m.allocation.sku_id}
   default :allocation_detail_nbr,            :override  =>  false,        :with  => :sequence,         :named => "ALLOCATION_DETAIL_NBR"
@@ -37,6 +37,9 @@ class Omni::AllocationDetail < ActiveRecord::Base
     map :allocation_display,                   :to => 'allocation.display'
   end
   # MAPPED ATTRIBUTES (End)
+  # ORDERING (Start) ====================================================================
+  order_search_by :location_display =>:asc
+  # ORDERING (End)
 
   # INDEXING (Start) ====================================================================
   searchable do

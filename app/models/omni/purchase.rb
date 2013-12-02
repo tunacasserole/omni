@@ -133,12 +133,11 @@ class Omni::Purchase < ActiveRecord::Base
   # INDEXING (End)
 
   # HOOKS (Start) =======================================================================
-  # before_destroy :cascading_delete
   hook :before_create, :set_defaults_from_supplier, 00
   hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
   hook :before_update, :update_allocation_profiles, 30
-  hook :before_destroy, :validate_state, 40
+  hook :before_destroy, :cascading_delete, 40
 
   def set_defaults_from_supplier
     self.estimated_lead_time_days = supplier.lead_time || 0 # JASON - why won't the lambda work for this field?  see above
@@ -343,12 +342,6 @@ class Omni::Purchase < ActiveRecord::Base
     return approval_level
   end
 
-  def queue
-    # self.purchase_costs.all.each {|x| x.destroy}
-    self.purchase_allocations.all.each {|x| x.destroy}
-    self.purchase_details.all.each {|x| x.destroy}
-  end
-
   def validate_approvals
     # puts "total_order_cost is #{total_order_cost.to_s}"
     case
@@ -415,15 +408,17 @@ class Omni::Purchase < ActiveRecord::Base
     end
   end
 
-  def validate_state
-    if state == 'draft'
-      purchase_allocations.each {|x| x.destroy}
-      return true
+  def cascading_delete
+    # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
+    if ['draft'].include? self.state
+      self.purchase_details.all.each {|x| x.purchase_allocations.all.each {|x| x.destroy}}
+      self.purchase_details.all.each {|x| x.destroy}
     else
-      errors.add(:state, 'Only items in draft state may be deleted.')
-      return false
+      errors.add('state','only records in draft state may be deleted.')
+      raise ActiveRecord::Rollback
     end
   end
+  # HOOKS (End)
 
   def print
     Omni::Purchase::Helpers.print(self)
