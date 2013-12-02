@@ -107,16 +107,6 @@ Ext.define('Omni.view.allocation_details.Form', {
             scope         : me
           }
         },
-        {
-          xtype      : 'button',
-          cls        : 'close-event',
-          tooltip    : 'Calculate',
-          listeners  : {
-            beforerender  : this.prepareCalculateAction,
-            click         : this.onCalculateAction,
-            scope         : me
-          }
-        },
          {
           xtype      : 'button',
           cls        : 'duplicate',
@@ -148,10 +138,6 @@ Ext.define('Omni.view.allocation_details.Form', {
 
   // HANDLERS (Start) ======================================================================
 
-  onCalculateAction : function(action, eOpts){
-    this.processEventTransition('calculate', 'Allocation detail was successfully calculated.', 'An error occurred calculating this allocation detail.');
-  }, // onBuildAction
-
   onLockAction : function(action, eOpts){
     this.processEventTransition('lock_it', 'Allocation detail was successfully locked.', 'An error occurred locking this allocation detail.');
   }, // onBuildAction
@@ -167,12 +153,6 @@ Ext.define('Omni.view.allocation_details.Form', {
   onShipAction : function(action, eOpts){
     this.processEventTransition('ship', 'Allocation detail was successfully shipped.', 'An error occurred shipping this allocation detail.');
   }, // onBuildAction
-
-
-  prepareCalculateAction : function(action, eOpts) {
-    var currentState = this.record.get('state');
-    currentState === 'draft' ? action.show() : action.hide();
-  },
 
   prepareLockAction : function(action, eOpts) {
     var currentState = this.record.get('state');
