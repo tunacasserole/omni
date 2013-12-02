@@ -237,7 +237,7 @@
         self.sku_id = self.sku_supplier.sku_id
         self.supplier_item_identifier = self.sku_supplier.supplier_item_identifier
         self.description = self.sku_supplier.description
-        self.color_name = self.sku.color_name
+        self.color_name = self.sku.color_name || self.sku.color_display
         self.size_name = self.sku.size.display if self.sku.size
         self.order_pack_type = self.sku_supplier.pack_type
         self.extra_cost = self.sku_supplier.extra_cost
