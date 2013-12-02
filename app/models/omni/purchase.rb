@@ -277,25 +277,37 @@ class Omni::Purchase < ActiveRecord::Base
       # puts 300
       next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: ss.sku_id, is_authorized: true).first
       # puts 400
-      a=Omni::PurchaseDetail.create(units_ordered: units_to_order(i), purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
+      a=Omni::PurchaseDetail.create(units_ordered: units_to_order(i,ss), purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
     end
     # puts 500
   end
 
   def clone
-    x = Omni::Purchase.create(supplier_id: self.supplier_id, location_id: self.location_id, purchase_type: self.purchase_type, purchase_source: self.purchase_source, ship_via: self.ship_via, fob_point: self.fob_point, master_purchase_id: self.master_purchase_id, carrier_supplier_id: self.carrier_supplier_id, is_special_order: self.is_special_order, estimated_lead_time_days: self.estimated_lead_time_days, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_1_location_user_id: self.purchase_approver_1_location_user_id, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_2_location_user_id: self.purchase_approver_2_location_user_id, purchase_approver_3_user_id: self.purchase_approver_3_user_id, purchase_approver_3_location_user_id: self.purchase_approver_3_location_user_id, payment_term: self.payment_term, freight_term: self.freight_term, pay_to_supplier_id: self.pay_to_supplier_id, ship_thru_supplier_id: self.ship_thru_supplier_id, supplier_address_1: self.supplier_address_1, supplier_address_2: self.supplier_address_2, supplier_address_3: self.supplier_address_3, supplier_address_4: self.supplier_address_4, supplier_city: self.supplier_city, supplier_state_code: self.supplier_state_code, supplier_zip: self.supplier_zip, supplier_country: self.supplier_country)
+    new_purchase = Omni::Purchase.create(supplier_id: self.supplier_id, location_id: self.location_id, purchase_type: self.purchase_type, purchase_source: self.purchase_source, ship_via: self.ship_via, fob_point: self.fob_point, master_purchase_id: self.master_purchase_id, carrier_supplier_id: self.carrier_supplier_id, is_special_order: self.is_special_order, estimated_lead_time_days: self.estimated_lead_time_days, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_1_location_user_id: self.purchase_approver_1_location_user_id, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_2_location_user_id: self.purchase_approver_2_location_user_id, purchase_approver_3_user_id: self.purchase_approver_3_user_id, purchase_approver_3_location_user_id: self.purchase_approver_3_location_user_id, payment_term: self.payment_term, freight_term: self.freight_term, pay_to_supplier_id: self.pay_to_supplier_id, ship_thru_supplier_id: self.ship_thru_supplier_id, supplier_address_1: self.supplier_address_1, supplier_address_2: self.supplier_address_2, supplier_address_3: self.supplier_address_3, supplier_address_4: self.supplier_address_4, supplier_city: self.supplier_city, supplier_state_code: self.supplier_state_code, supplier_zip: self.supplier_zip, supplier_country: self.supplier_country)
     self.purchase_details.each do |pd|
       next if Omni::PurchaseDetail.where(purchase_id: x.purchase_id, sku_id: pd.sku_id).first
       next unless sku_meets_criteria? pd.sku
       next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: pd.sku_id, is_authorized: true).first
-      Omni::PurchaseDetail.create(units_ordered: units_to_order(i),purchase_id: x.purchase_id, sku_id: pd.sku_id, sku_supplier_id: pd.sku_supplier_id, supplier_item_identifier: pd.supplier_item_identifier, description: pd.description, color_name: pd.color_name, size_name: pd.size_name, sku_alias: pd.sku_alias, allocation_profile_id: pd.allocation_profile_id,  order_pack_size: pd.order_pack_size, order_pack_type: pd.order_pack_type, order_cost_units: pd.order_cost_units, order_multiple_type: pd.order_multiple_type, order_multiple: pd.order_multiple, supplier_cost: pd.supplier_cost, extra_cost: pd.extra_cost)
+      units = units_to_order(i, pd.sku_supplier)
+      pd.clone(new_purchase.purchase_id, units)
     end
   end
 
-  def units_to_order(inventory)
-    units_to_order = self.is_use_need_units && inventory ? inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).sum('current_approved_units') : 0
+  def order_pack_size(ss)
+    case ss.pack_type
+      when "M"
+        ss.master_pack_units
+      when "I"
+        ss.inner_pack_units
+      else
+        1
+    end
+  end
+
+  def units_to_order(i, ss)
+    units_to_order = self.is_use_need_units ? i.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).sum('current_approved_units') : 0
     units_to_order *= self.adjustment_percent / 100 if self.adjustment_percent
-    units_to_order /= 1 #self.order_pack_size if self.order_pack_size > 1
+    units_to_order /= self.order_pack_size(ss)
     [units_to_order, 1].max.round
   end
 
