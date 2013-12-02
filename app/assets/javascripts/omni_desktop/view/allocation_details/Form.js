@@ -3,10 +3,8 @@ Ext.define('Omni.view.allocation_details.Form', {
   extend   :'Buildit.ux.Form',
   alias    :'widget.omni-allocation_details-Form',
 
-
   // LABELS (Start) =======================================================================
   allocation_detail_idLabel               : Omni.i18n.model.AllocationDetail.allocation_detail_id,
-  sku_idLabel                             : Omni.i18n.model.AllocationDetail.sku_id,
   location_idLabel                        : Omni.i18n.model.AllocationDetail.location_id,
   allocation_idLabel                      : Omni.i18n.model.AllocationDetail.allocation_id,
   allocation_detail_nbrLabel              : Omni.i18n.model.AllocationDetail.allocation_detail_nbr,
@@ -16,7 +14,6 @@ Ext.define('Omni.view.allocation_details.Form', {
   units_shippedLabel                      : Omni.i18n.model.AllocationDetail.units_shipped,
   is_destroyedLabel                       : Omni.i18n.model.AllocationDetail.is_destroyed,
   // LABELS (End)
-
 
   initComponent:function () {
 
@@ -39,8 +36,7 @@ Ext.define('Omni.view.allocation_details.Form', {
           defaultType  : 'textfield',
           layout       : 'anchor',
           items        : [
-            { name: 'sku_id',                         fieldLabel: this.sku_idLabel,                     allowBlank: false,  disabled: true,     xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
-            { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
+            { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
             {
               xtype        : 'textfield',
               name         : 'allocation_detail_nbr',
@@ -58,19 +54,22 @@ Ext.define('Omni.view.allocation_details.Form', {
               xtype        : 'numberfield',
               name         : 'units_needed',
               fieldLabel   : this.units_neededLabel,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             },
             {
               xtype        : 'numberfield',
               name         : 'units_allocated',
               fieldLabel   : this.units_allocatedLabel,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : false
             },
             {
               xtype        : 'numberfield',
               name         : 'units_shipped',
               fieldLabel   : this.units_shippedLabel,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             }
           ]
         }
@@ -154,7 +153,7 @@ Ext.define('Omni.view.allocation_details.Form', {
   }, // onBuildAction
 
   onLockAction : function(action, eOpts){
-    this.processEventTransition('lock', 'Allocation detail was successfully locked.', 'An error occurred locking this allocation detail.');
+    this.processEventTransition('lock_it', 'Allocation detail was successfully locked.', 'An error occurred locking this allocation detail.');
   }, // onBuildAction
 
   onUnlockAction : function(action, eOpts){

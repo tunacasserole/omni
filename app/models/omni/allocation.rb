@@ -62,6 +62,9 @@ class Omni::Allocation < ActiveRecord::Base
     self.inventory_id = i.inventory_id if i
   end
 
+  # ORDERING (Start) ====================================================================
+  order_search_by :allocation_nbr =>:desc
+  # ORDERING (End)
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -141,10 +144,10 @@ class Omni::Allocation < ActiveRecord::Base
         'locked location'
         locked_units += x.units_allocated
         locked_locations << x.location_id
+      else
+        x.delete
       end
     end
-
-    self.allocation_details.delete_all
 
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     allocations_to_create.each do |k,v|

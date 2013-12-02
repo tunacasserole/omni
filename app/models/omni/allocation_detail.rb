@@ -37,6 +37,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
     map :allocation_display,                   :to => 'allocation.display'
   end
   # MAPPED ATTRIBUTES (End)
+
   # ORDERING (Start) ====================================================================
   # order_search_by :location_display =>:asc
   # ORDERING (End)
@@ -77,7 +78,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
     after_transition :on => :transfer, :do => :do_transfer
     after_transition :on => :ship, :do => :do_ship
 
-    event :lock do
+    event :lock_it do
       transition :draft => :locked
     end
 

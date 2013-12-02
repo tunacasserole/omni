@@ -20,7 +20,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
         {
           text:'Lock',
           cls: 'icon-settings',
-          action: 'lock',
+          action: 'lock_it',
           confirm: true,
           multi: true,
           privileges: [],
@@ -216,7 +216,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
   // ACTION HANDLERS (Start) ====================================================================
 
   clickLock: function(btn, e, eOpts){
-    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'lock');
+    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'lock_it');
   },
 
   clickUnlock: function(btn, e, eOpts){
