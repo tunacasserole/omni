@@ -71,47 +71,6 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
             }
           }
         },
-
-       /**
-         * Ship
-         * Supports performing 'Ship' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Ship',
-          cls: 'icon-settings',
-          action: 'ship',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickShip,
-              scope: me
-            }
-          }
-        },
-
-       /**
-         * Calculate
-         * Supports performing 'Calculate' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
-         */
-        {
-          text:'Calculate',
-          cls: 'icon-settings',
-          action: 'calculate',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickCalculate,
-              scope: me
-            }
-          }
-        },
-
         // LEFT ACTIONS (End)
 
       ],
@@ -223,16 +182,8 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
     Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'unlock');
   },
 
-  clickCalculate: function(btn, e, eOpts){
-    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'calculate');
-  },
-
   clickTransfer: function(btn, e, eOpts){
     Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'transfer');
-  },
-
-  clickship: function(btn, e, eOpts){
-    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'ship');
   },
 
   clickDelete: function(btn, e, eOpts){

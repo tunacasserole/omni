@@ -11,6 +11,18 @@ Ext.define('Omni.model.AllocationDetail', {
       type       : 'string'
     },
     {
+      name       : 'display',
+      type       : 'string'
+    },
+    {
+      name       : 'transfer_id',
+      type       : 'string'
+    },
+    {
+      name       : 'transfer_display',
+      type       : 'string'
+    },
+    {
       name       : 'sku_display',
       type       : 'string'
     },

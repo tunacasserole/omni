@@ -6,7 +6,9 @@ en:
       omni/allocation_detail:
         allocation_detail_id:              'Allocation Detail'
         sku_id:                            'Sku'
+        display:                           'Display'
         location_id:                       'Location'
+        transfer_id:                       'Transfer'
         allocation_id:                     'Allocation'
         allocation_detail_nbr:             'Allocation Detail Nbr'
         state:                             'State'

@@ -6,6 +6,7 @@ Ext.define('Omni.view.allocation_details.Form', {
   // LABELS (Start) =======================================================================
   allocation_detail_idLabel               : Omni.i18n.model.AllocationDetail.allocation_detail_id,
   location_idLabel                        : Omni.i18n.model.AllocationDetail.location_id,
+  transfer_idLabel                        : Omni.i18n.model.AllocationDetail.transfer_id,
   allocation_idLabel                      : Omni.i18n.model.AllocationDetail.allocation_id,
   allocation_detail_nbrLabel              : Omni.i18n.model.AllocationDetail.allocation_detail_nbr,
   stateLabel                              : Omni.i18n.model.AllocationDetail.state,
@@ -37,6 +38,7 @@ Ext.define('Omni.view.allocation_details.Form', {
           layout       : 'anchor',
           items        : [
             { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
+            { name: 'transfer_id',                    fieldLabel: this.transfer_idLabel,                allowBlank: false,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Transfer',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'transfer_id', itemTpl:'{display}' },
             {
               xtype        : 'textfield',
               name         : 'allocation_detail_nbr',
@@ -117,17 +119,6 @@ Ext.define('Omni.view.allocation_details.Form', {
             scope         : me
           }
         },
-        {
-          xtype      : 'button',
-          cls        : 'ship',
-          tooltip    : 'Ship',
-          listeners  : {
-            beforerender  : this.prepareShipAction,
-            click         : me.onShipAction,
-            scope         : me
-          }
-        }
-
       ]
     });
 
@@ -150,10 +141,6 @@ Ext.define('Omni.view.allocation_details.Form', {
     this.processEventTransition('transfer', 'Allocation detail was successfully transferred.', 'An error occurred transferring this allocation detail.');
   }, // onBuildAction
 
-  onShipAction : function(action, eOpts){
-    this.processEventTransition('ship', 'Allocation detail was successfully shipped.', 'An error occurred shipping this allocation detail.');
-  }, // onBuildAction
-
   prepareLockAction : function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'draft' ? action.show() : action.hide();
@@ -167,11 +154,6 @@ Ext.define('Omni.view.allocation_details.Form', {
   prepareTransferAction : function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'draft' || currentState === 'locked' ? action.show() : action.hide();
-  },
-
-  prepareShipAction : function(action, eOpts) {
-    var currentState = this.record.get('state');
-    currentState === 'transfer_request' ? action.show() : action.hide();
   },
 
   processEventTransition : function(eventName, successMsg, failureMsg){
