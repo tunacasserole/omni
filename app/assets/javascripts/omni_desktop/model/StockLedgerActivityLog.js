@@ -3,17 +3,6 @@ Ext.define('Omni.model.StockLedgerActivityLog', {
 
   // AUTO-GENERATED REGION (Start)
 
-  // VALIDATIONS (Start) =================================================================
-  // validations: [
-  //   { type: 'presence', field: 'display' },
-  //   { type: 'presence', field: 'stock_ledger_activity_id' },
-  //   { type: 'presence', field: 'activity_log_nbr' },
-  //   { type: 'presence', field: 'model_meta_id' },
-  //   { type: 'presence', field: 'attribute_meta_id' },
-  //   { type: 'presence', field: 'row_id' }
-  // ],
-  // VALIDATIONS (End)
-
   // FIELDS (Start) ======================================================================
   fields:[
     { name: 'stock_ledger_activity_log_id', type: 'string' },

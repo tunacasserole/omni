@@ -1,20 +1,12 @@
 class Omni::Rule < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :rules
   self.primary_key  = :rule_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
@@ -23,14 +15,12 @@ class Omni::Rule < ActiveRecord::Base
   validates    :rule_action,                     :lookup      => 'RULE_ACTION',                :allow_nil => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
   default      :rule_id,                          :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.ruleset_display} - #{m.rule_action} to #{m.model_name} with #{m.attribute_name}"}
   default      :is_active,                        :override  =>  false,        :to    => false
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -40,12 +30,9 @@ class Omni::Rule < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :ruleset,                         :class_name => 'Omni::Ruleset',                 :foreign_key => 'ruleset_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
@@ -53,21 +40,11 @@ class Omni::Rule < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
+  # HELPERS (Start) =======================================================================
+  # HELPERS (End)
 
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
-
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -91,7 +68,6 @@ class Omni::Rule < ActiveRecord::Base
     text     :rule_seq_fulltext, :using => :rule_seq
   end
   # INDEXING (End)
-
 
 end # class Omni::Rule
 

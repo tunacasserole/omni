@@ -66,9 +66,9 @@ class Omni::PeriodResult < ActiveRecord::Base
   default      :shipped_cost,                     :override  =>  false,        :to    => 0
   default      :shipped_retail,                   :override  =>  false,        :to    => 0
   default      :shipped_units,                    :override  =>  false,        :to    => 0
-  default      :work_in_do_cost,             :override  =>  false,        :to    => 0
-  default      :work_in_do_retail,           :override  =>  false,        :to    => 0
-  default      :work_in_do_units,            :override  =>  false,        :to    => 0
+  default      :work_in_process_cost,             :override  =>  false,        :to    => 0
+  default      :work_in_process_retail,           :override  =>  false,        :to    => 0
+  default      :work_in_process_units,            :override  =>  false,        :to    => 0
   default      :professional_discount_cost,       :override  =>  false,        :to    => 0
   default      :employee_discount_cost,           :override  =>  false,        :to    => 0
   default      :manager_discount_cost,            :override  =>  false,        :to    => 0

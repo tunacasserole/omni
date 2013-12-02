@@ -34,8 +34,6 @@ Ext.define('Omni.model.PurchaseDetail', {
       { name: 'sku_display',                 type: 'string'   },
       { name: 'sku_supplier_display',        type: 'string'   },
       { name: 'allocation_profile_display',  type: 'string'   },
-      { name: 'units_approved',              type: 'decimal'  },
-      { name: 'units_cancelled',             type: 'decimal'  },
     ],
 
   idProperty: 'purchase_detail_id',

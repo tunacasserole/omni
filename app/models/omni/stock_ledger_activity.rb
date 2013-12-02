@@ -70,10 +70,33 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   # hook :after_create, :set_sla_state, 30
 
   def apply_rules
-    if self.ruleset_id == 'XXXXXXXXXXXXXXXXXXXACCEPTRECEIPT'
-      # i = Omni::Inventory.where(sku_id: self.sku_id, location_id: self.location_id).first
-      # i.on_hand_units
+    puts "\n\n *************- ruleset: #{self.ruleset.display.yellow}, rules: #{self.ruleset.rules.count.to_s.yellow}\n\n"
+    self.ruleset.rules.select {|x| x.is_active}.each do |r|
+      puts ('RULE: ' + r.rule_action + ' ' + r.input_attribute + ' from ' + r.model_name + '.' + r.attribute_name).cyan
+      update_row = ('Omni::' + r.model_name).constantize.where(:sku_id => self.sku_id, :location_id => self.location_id).first || ('Omni::' + r.model_name).constantize.create(:sku_id => self.sku_id, :location_id => self.location_id)
+      update_row.save
+      case r.rule_action
+      when 'SUBTRACT'
+        new_value = update_row.send(r.attribute_name) - self.send(r.input_attribute)
+        # puts "*** SUBTRACTING #{self.send(r.input_attribute)} from #{update_row.send(r.attribute_name)} = #{new_value}"
+      when 'ADD'
+        new_value = update_row.send(r.attribute_name) + self.send(r.input_attribute)
+        # puts "*** ADDING #{update_row.send(r.attribute_name)} plus #{self.send(r.input_attribute)} = #{new_value}"
+      when 'DATE'
+        # puts "*** SETTING DATES ***"
+        new_value = Date.today
+      end
+      # puts "**** new value: " + new_value.to_s
+      update_row.send(r.attribute_name + '=', new_value)
+      update_row.save
+
+      row_id = 'none' || update_row.send(r.model_name.tableize.foreign_key)
+      Omni::StockLedgerActivityLog.create(:stock_ledger_activity_id => self.stock_ledger_activity_id, :model_name => r.model_name, :attribute_name => r.attribute_name, :row_id => row_id, :rule_action => r.rule_action)
+      puts "**** FINISHED SAVE ****"
     end
+    puts "**** POSTING SLA ****"
+    self.posted_date = Date.today
+    self.save
   end
   # HOOKS (End)
 

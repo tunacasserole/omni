@@ -23,6 +23,7 @@ Buildit::Sequence.create(:sequence_code => 'PRODUCT_NBR', :padding => 3, :value 
 Buildit::Sequence.create(:sequence_code => 'PROGRAM_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'PROJECTION_DETAIL_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'PURCHASE_ALLOCATION_NBR', :padding => 3, :value => 1000)
+Buildit::Sequence.create(:sequence_code => 'STOCK_LEDGER_ACTIVITY_LOG_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'PURCHASE_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'PURCHASE_DETAIL_NBR', :padding => 3, :value => 1000)
 Buildit::Sequence.create(:sequence_code => 'RECEIPT_ALLOCATION_NBR', :padding => 3, :value => 1000)

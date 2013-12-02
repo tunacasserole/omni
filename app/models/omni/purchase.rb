@@ -251,19 +251,12 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def sku_meets_criteria?(sku)
-    puts 1
     return false unless sku.style_id == self.style_id if self.style_id
-    puts 2
     return false unless sku.subclass_id == self.subclass_id if self.subclass_id
-    puts 3
     return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
-    puts 4
     return false unless sku.subclass.classification.department_id == self.department_id if self.department_id
-    puts 5
     return false if sku.is_converted unless self.is_include_conversions
-    puts 6
     return false unless Omni::SkuSupplier.where(supplier_id: self.supplier_id, sku_id: sku.sku_id, is_discontinued: false).first
-    puts 7
     return true
   end
 

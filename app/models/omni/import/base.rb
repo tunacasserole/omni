@@ -22,7 +22,7 @@ class Omni::Import::Base
 
   def self.constants
     @@project_id = Buildit::StudioProject.all(:project_code => Buildit::Framework.configuration.studio['project']).first.project_id
-    @@data_folder = File.join(Rails.root,'db','meta')
+    # @@data_folder = File.join(Rails.root,'db','meta')
     @@data_file = 'core_data table assignment, v6.xlsx'
     @@models = ActiveRecord::Base.subclasses.collect {|type| type.name}.sort
     @@poly_hash = {'stockable_id' => 'StockLedgerActivity','noteable_id' => 'Note','pickable_id' => 'PickTicket'}

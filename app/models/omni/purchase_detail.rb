@@ -159,7 +159,7 @@
   end
 
   def do_receive
-    open_units = selling_units_approved - selling_units_received - selling_units_cancelled
+    open_units = self.selling_units_approved - self.selling_units_received - self.selling_units_cancelled
     state = open_units > 0 ? 'complete' : 'partial'
     self.save
   end
