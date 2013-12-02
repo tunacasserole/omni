@@ -38,7 +38,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
   # ORDERING (Start) ====================================================================
-  order_search_by :location_display =>:asc
+  # order_search_by :location_display =>:asc
   # ORDERING (End)
 
   # INDEXING (Start) ====================================================================
