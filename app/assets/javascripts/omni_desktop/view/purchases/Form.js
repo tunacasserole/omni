@@ -493,7 +493,18 @@ Ext.define('Omni.view.purchases.Form', {
                          { name: 'department_id',  fieldLabel: this.department_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Department',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'department_id', itemTpl:'{display}' },
                          { name: 'classification_id',  fieldLabel: this.classification_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Classification',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'classification_id', itemTpl:'{display}' },
                          { name: 'subclass_id',  fieldLabel: this.subclass_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Subclass',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'subclass_id', itemTpl:'{display}' },
-                         { name: 'style_id',  fieldLabel: this.style_idLabel,  allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store: Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
+            {
+              name: 'style_id',
+              fieldLabel: this.style_idLabel,
+              xtype: 'buildit-Locator',
+              store: Ext.create('Omni.store.Style', {
+                pageSize: 25
+              }),
+              displayField: 'display',
+              queryField: 'display',
+              valueField: 'style_id',
+              itemTpl: '{display}'
+            },
             { xtype             : 'numberfield',
               name              : 'adjustment_percent',
               fieldLabel        : this.adjustment_percentLabel,

@@ -53,8 +53,8 @@ Ext.define('Omni.view.purchase_details.Explorer', {
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
-  title:     'PurchaseDetails',
-  subtitle:  'Create and maintain PurchaseDetails',
+  title:     'Purchase Details',
+  subtitle:  'Create and maintain Purchase Details',
   // TITLES (End)
 
   initComponent:function () {

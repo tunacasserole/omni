@@ -31,11 +31,11 @@
           xtype     : 'omni-inventories-Form'
         }
         ,{
-          title: 'Allocations',
-          xtype: 'omni-allocations-Explorer',
+          title: 'All Locations for this Sku',
+          xtype: 'omni-locations-Explorer',
           defaultSearch: { with:
              {
-               purchase_id:   {equal_to: me.record.get('purchase_id')}
+               location_id:   {equal_to: me.record.get('location_id')}
              }
           }
         }

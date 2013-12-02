@@ -239,10 +239,32 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def mass_update
-    self.send(mass_update_type.downcase)
-    # Blank out mass update paramaters after completing the mass update
-    ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units'].each {|x| self.send("#{x}=", nil)}
-    self.save
+    if self.mass_update_type
+      self.send(mass_update_type.downcase)
+      # Blank out mass update paramaters after completing the mass update
+      ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units'].each {|x| self.send("#{x}=", nil)}
+      self.save
+    else
+      errors.add('mass_update_type','mass update type is required for mass update')
+      raise 'mass update type is required for mass update'
+    end
+  end
+
+  def sku_meets_criteria?(sku)
+    puts 1
+    return false unless sku.style_id == self.style_id if self.style_id
+    puts 2
+    return false unless sku.subclass_id == self.subclass_id if self.subclass_id
+    puts 3
+    return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
+    puts 4
+    return false unless sku.subclass.classification.department_id == self.department_id if self.department_id
+    puts 5
+    return false if sku.is_converted unless self.is_include_conversions
+    puts 6
+    return false unless Omni::SkuSupplier.where(supplier_id: self.supplier_id, sku_id: sku.sku_id, is_discontinued: false).first
+    puts 7
+    return true
   end
 
   def adjust
@@ -253,12 +275,18 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def add
+    # puts '000'
     self.supplier.sku_suppliers.each do |ss|
+      # puts 100
       next if Omni::PurchaseDetail.where(purchase_id: self.purchase_id, sku_id: ss.sku_id).first
+      # puts 200
       next unless sku_meets_criteria? ss.sku
+      # puts 300
       next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: ss.sku_id, is_authorized: true).first
-      Omni::PurchaseDetail.create(units_ordered: units_to_order(i), purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
+      # puts 400
+      a=Omni::PurchaseDetail.create(units_ordered: units_to_order(i), purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
     end
+    # puts 500
   end
 
   def clone
@@ -274,18 +302,8 @@ class Omni::Purchase < ActiveRecord::Base
   def units_to_order(inventory)
     units_to_order = self.is_use_need_units && inventory ? inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).sum('current_approved_units') : 0
     units_to_order *= self.adjustment_percent / 100 if self.adjustment_percent
-    units_to_order /= self.order_pack_size if self.order_pack_size > 1
+    units_to_order /= 1 #self.order_pack_size if self.order_pack_size > 1
     [units_to_order, 1].max.round
-  end
-
-  def sku_meets_criteria?(sku)
-    return false unless sku.style_id == self.style_id if self.style_id
-    return false unless sku.subclass_id == self.subclass_id if self.subclass_id
-    return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
-    return false unless sku.subclass.classification.department_id == self.department_id if self.department_id
-    return false if sku.is_converted unless self.is_include_conversions
-    return false unless Omni::SkuSupplier.where(supplier_id: self.supplier_id, sku_id: sku.sku_id, is_discontinued: false).first
-    return true
   end
 
   def do_approve
