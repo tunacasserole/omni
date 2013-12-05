@@ -57,6 +57,8 @@ class CreateOmniPurchases < ActiveRecord::Migration
     t.column   :style_id,                        :string,            :null  =>  true,    :limit   => 32
     t.column   :adjustment_percent,              :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
     t.column   :mass_update_type,                :string,            :null  =>  true,    :limit   => 200
+    t.column   :is_update_all_details,           :boolean,           :null  =>  true
+    t.column   :is_update_blank_details,         :boolean,           :null  =>  true
     t.column   :is_include_conversions,          :boolean,           :null  =>  true
     t.column   :is_use_need_units,               :boolean,           :null  =>  true
     t.column   :audit_created_by,                :string,            :null  =>  true,    :limit   => 100

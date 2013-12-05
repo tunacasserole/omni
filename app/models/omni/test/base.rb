@@ -8,8 +8,8 @@ class Omni::Test::Base
     # Omni::Test::Allocation.go
     Omni::Test::Purchase.go
     # Omni::Test::Projection.go
-    Omni::Test::Receipt.go
-    Omni::Test::Transfer.go
+    # Omni::Test::Receipt.go
+    # Omni::Test::Transfer.go
     # END OF RUN TESTS
 
     reindex_data
@@ -18,7 +18,7 @@ class Omni::Test::Base
 
   def self.test_it(scenario, expected, actual)
     # FOR DEBUGGING
-    puts "scenario #{@@test_number +1}: #{@@model_name}  #{scenario}  #{expected} <=> #{actual}"
+    # puts "scenario #{@@test_number +1}: #{@@model_name}  #{scenario}  #{expected} <=> #{actual}"
     # RUN TEST BY COMPARING EXPECTED VS ACTUAL RESULTS
     success = (expected == actual)
     # OUTPUT TEST RESULTS

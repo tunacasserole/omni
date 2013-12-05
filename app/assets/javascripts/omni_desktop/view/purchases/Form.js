@@ -381,45 +381,18 @@ Ext.define('Omni.view.purchases.Form', {
             }
           ]
         }
-       ,{
-          xtype:        'fieldset',
-          title:        'Allocation Information',
-          collapsible:  true,
-          collapsed:     true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '70%'},
-          layout:       'anchor',
-          items:[
-            { xtype            : 'buildit-Locator',
-              name              : 'allocation_profile_id',
-              fieldLabel        : this.allocation_profile_idLabel,
-              allowBlank        : true,
-              store             : Ext.create('Omni.store.AllocationProfile',{pageSize: 50}),
-              displayField      : 'display',
-              queryField        : 'display',
-              valueField        : 'allocation_profile_id',
-              itemTpl           : '{display}'
-            },
-            { xtype             : 'checkbox',
-              name              : 'is_update_blank_details',
-              fieldLabel        : this.is_update_blank_detailsLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'label',
-              text              : 'This will update the Allocation Profile in each Purchase Detail where it is blank.',
-              cls               : 'instruction'
-            },
-            { xtype             : 'checkbox',
-              name              : 'is_update_all_details',
-              fieldLabel        : this.is_update_all_detailsLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'label',
-              text              : 'This will update all Purchase Details to the new Allocation Profile',
-              cls               : 'instruction'
-            }
-          ]
-        }
+       // ,{
+       //    xtype:        'fieldset',
+       //    title:        'Allocation Information',
+       //    collapsible:  true,
+       //    collapsed:     true,
+       //    defaultType:  'textfield',
+       //    defaults:     {anchor: '70%'},
+       //    layout:       'anchor',
+       //    items:[
+
+       //    ]
+       //  }
        ,{
           xtype:        'fieldset',
           title:        'Other Information',
@@ -519,6 +492,34 @@ Ext.define('Omni.view.purchases.Form', {
               name              : 'is_include_conversions',
               fieldLabel        : this.is_include_conversionsLabel,
               allowBlank        : true
+            },
+            { xtype            : 'buildit-Locator',
+              name              : 'allocation_profile_id',
+              fieldLabel        : this.allocation_profile_idLabel,
+              allowBlank        : true,
+              store             : Ext.create('Omni.store.AllocationProfile',{pageSize: 50}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'allocation_profile_id',
+              itemTpl           : '{display}'
+            },
+            { xtype             : 'checkbox',
+              name              : 'is_update_blank_details',
+              fieldLabel        : this.is_update_blank_detailsLabel,
+              allowBlank        : true
+            },
+            { xtype             : 'label',
+              text              : 'This will update the Allocation Profile in each Purchase Detail where it is blank.',
+              cls               : 'instruction'
+            },
+            { xtype             : 'checkbox',
+              name              : 'is_update_all_details',
+              fieldLabel        : this.is_update_all_detailsLabel,
+              allowBlank        : true
+            },
+            { xtype             : 'label',
+              text              : 'This will update all Purchase Details to the new Allocation Profile',
+              cls               : 'instruction'
             }
           ]
         }

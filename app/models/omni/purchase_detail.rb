@@ -32,6 +32,7 @@
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
+  has_many     :stock_ledger_activities, :class_name => 'Omni::StockLedgerActivity', :foreign_key => 'stockable_id' , :as => :stockable
   has_many     :unlocked_purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id', :conditions => ["state != 'locked'" ]
   has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
   belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
@@ -195,8 +196,8 @@
       errors.add('state', 'negative units to cancel')
     else
       sl = Omni::StockLedgerActivity.new
-      sl.stockable_type = 'Omni::Purchase'
-      sl.stockable_id = self.purchase_id
+      sl.stockable_type = 'Omni::PurchaseDetail'
+      sl.stockable_id = self.purchase_detail_id
       sl.ruleset_id = Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first.ruleset_id if Omni::Ruleset.where(:ruleset_code => 'CancelPurchase').first
       sl.sku_id = self.sku_id
       sl.location_id = self.purchase.location_id

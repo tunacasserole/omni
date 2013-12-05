@@ -2,24 +2,29 @@ class Omni::Test::Purchase < Omni::Test::Base
 
   def self.go
     # @pd1=Omni::PurchaseDetail.where(:purchase_detail_id=>'ABABDAAA35E011E3APURCHASEDETAIL1').first
-    @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
     @pd1 = reset_data
+    @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
     @@model_name = 'Purchase'
     @@model_action = 'event'
 
-
-    # allocation_scenarios.each {|s| test_allocation_scenario s}
-
-    # test_allocation
-    # test_purchase_events
+    test_purchase_events
     test_purchase_detail_events
 
-    # @@model_action = 'request'
-    # request_scenarios.each {|s| test_request_scenario s}
+    # approval scenarios - various approval tests
+    @@model_action = 'approve'
+    approval_scenarios.each {|s| test_approval_scenario s}
+
+    # run 26 different allocation tests
+    @@model_action = 'Allocation'
+    allocation_scenarios.each {|s| test_allocation_scenario s}
+
+    @@model_action = 'request'
+    request_scenarios.each {|s| test_request_scenario s}
+
   end
 
   def self.reset_data
-    Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').to_a.each {|x| x.delete}
+    Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').to_a.each {|x| x.stock_ledger_activities.delete_all; x.delete}
     Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC5311E299E700FFSUPPLIER', :location_id => '51579764AC3E11E2947800FF58D32228',  :allocation_profile_id => '913BB680231XXXXLASTFORECASTUNITS', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON')
 
     Omni::AllocationDetail.all.each {|x| x.delete}
@@ -34,6 +39,7 @@ class Omni::Test::Purchase < Omni::Test::Base
 
   def self.test_allocation_scenario(s)
     # puts s[:scenario]
+    # TODO: Refactor to use allocation.calculate method
     Omni::PurchaseAllocation.delete_all
 
     a=Omni::AllocationProfile.where(:allocation_profile_id=>s[:allocation_profile_id]).first
@@ -61,20 +67,22 @@ class Omni::Test::Purchase < Omni::Test::Base
   def self.test_request_scenario(s)
     @@model_action = s[:action]
     params = {'request_type' => s[:action], 'adjustment_percent' => s[:adjustment_percent]}
-    cloned_po = @p.request(params)
+    cloned_po = @p.clone
+    expected = true
+    actual = cloned_po ? true : false
+    test_it("#{s[:scenario]}", expected, actual)
+    cloned_po.delete
   end
 
   def self.test_purchase_events
     x=@p
     # if base data was created and relationship exists, the purchase should have 1 detail
-    test_it('Create a purchase with details', true, x.purchase_details.count > 0)
+    test_it('it create a purchase with details', true, x.purchase_details.count > 0)
 
     # RELEASE SHOULD SET STATE TO PENDING APPROVAL
     # puts x.state
     x.release
-    # puts x.errors.inspect
     x=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
-    # puts x.state
     test_it('Release a purchase requires approvals','draft',x.state)
 
     # approval scenarios 1 - 5 approve not allowed for these state
@@ -83,28 +91,51 @@ class Omni::Test::Purchase < Omni::Test::Base
       x.state = s
       x.save
       x.approve
-      test_it('Test approve transition - approve not allowed for this state',s,x.state)
+      test_it('disallows approving in this state',s,x.state)
     end
 
     # x.print
-    # test_it('Print a purchase','PRINT','NOT IMPLEMENTED YET')
+    test_it('it prints the purchase','PRINT','NOT IMPLEMENTED YET')
 
+    # cancel
+    y = x.purchase_details.first
+    y.selling_units_approved = 250
+    y.save
     x.cancel
-    test_it('Cancel a purchase','cancelled',x.state)
+    sla_count = Omni::StockLedgerActivity.where(stockable_id: y.purchase_detail_id).count
+    test_it('it cancels a purchase','cancelled',x.state)
+    test_it('it creates stock ledger activity when the purchase is cancelled',1,sla_count)
 
-    # approval scenarios 6 - 20 various approval tests
-    # @@model_action = 'approve'
-    # approval_scenarios.each {|s| test_approval_scenario s}
+    # update allocation profiles on purchase details from mass update
+    @@model_action = 'Update Allocation Profiles'
+    @p=Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').first
+    x = @p
+    x.mass_update_type = 'PROFILE'
+    x.allocation_profile_id = ''
+    x.is_update_all_details = true
+    x.save
+    y = x.purchase_details.first
+    y.allocation_profile_id = ''
+    y.save
 
-    # run 26 different allocation tests
-    # TODO: Refactor to use allocation.calculate method
-    # @@model_action = 'Allocation'
-    # allocation_scenarios.each {|s| test_allocation_scenario s}
+    x.allocation_profile_id = 'LASTXFORECASTXXXDIVIDEEQUALLY123'
+    x.save
+    x.mass_update
+    # y = x.purchase_details.first
+
+    y = Omni::PurchaseDetail.where(purchase_id: 'ABABDAAA35E011E3ABAA20C9D047DD15').first
+    test_it('it updates the allocation profiles of the purchase details when a mass update of update allocation profiles with update all details is performed', 'LASTXFORECASTXXXDIVIDEEQUALLY123', y.allocation_profile_id)
+    test_it('it updates the allocation profiles of the purchase details when a mass update of update allocation profiles with update blank details is performed', 'LASTXFORECASTXXXDIVIDEEQUALLY123', y.allocation_profile_id)
+    y.allocation_profile_id = '913BB680231211E3PROJECTION1UNITS'
+    y.save
+    test_it('it does not update the allocation profiles of the purchase details when a mass update of update allocation profiles with update blank details is performed and there is already a profile.', '913BB680231211E3PROJECTION1UNITS', y.allocation_profile_id)
 
   end
 
   def self.test_purchase_detail_events
     x=@pd1
+    @@model_action = 'Events'
+    @@model = 'PurchaseDetail'
 
     x.state = 'draft'
     x.save
@@ -148,17 +179,15 @@ class Omni::Test::Purchase < Omni::Test::Base
     test_it('it sets the units allocated on the allocation details to the same on purchase allocations when the purchase detail is processed', pa.first.units_allocated, ad.first.units_allocated)
     test_it('it creates transfers corresponding to the allocation detail when the purchase detail is processed', pa.first.units_allocated, ad.first.units_allocated)
 
-#
-
     # Test allocating purchase details
-    # x.allocate
-    # y = x.purchase_allocations.first
-    # y = Omni::PurchaseAllocation.where(purchase_detail_id: x.purchase_detail_id).first
-    # y.lock
-    # test_it('Lock a purchase allocation','locked',x.state)
-
-    # x.unlock
-    # test_it('Unlock a purchase allocation','draft',x.state)
+    x.allocate
+    y = x.purchase_allocations.first
+    test_it('it creates purchase allocations when the purchase is allocated', 1, x.purchase_allocations.count)
+    y = Omni::PurchaseAllocation.where(purchase_detail_id: x.purchase_detail_id).first
+    y.lock
+    test_it('Lock a purchase allocation','locked',x.state)
+    y.unlock
+    test_it('Unlock a purchase allocation','draft',x.state)
   end
 
   def self.test_approval_scenario(s)
@@ -181,11 +210,11 @@ class Omni::Test::Purchase < Omni::Test::Base
 
   def self.request_scenarios
     x = []
-    x << {scenario: 'it creates a new purchase order by cloning an existing purchase order', expected: '', actual: '', action: 'clone', adjustment_percent: 5}
-    # x << {scenario: 'it automatically create a new purchase order based on a few parameters entered by a user.', expected: '', actual: ''}
-    # x << {scenario: 'it adds SKUs in bulk to a new or existing purchase order according to user parameters', expected: '', actual: ''}
-    # x << {scenario: 'it derives the units to order of each SKU from the BTS needs calculation.', expected: '', actual: ''}
-    # x << {scenario: '', expected: '', actual: ''}
+    x << {scenario: 'it creates a new purchase order by cloning an existing purchase order', expected: '', actual: '99999', action: 'clone', adjustment_percent: 5}
+    x << {scenario: 'it automatically create a new purchase order based on a few parameters entered by a user.', expected: '', actual: '99999'}
+    x << {scenario: 'it adds SKUs in bulk to a new or existing purchase order according to user parameters', expected: '', actual: '99999'}
+    x << {scenario: 'it derives the units to order of each SKU from the BTS needs calculation.', expected: '', actual: '99999'}
+    x << {scenario: '', expected: '', actual: '99999'}
   end
 
 end

@@ -22,22 +22,21 @@ class Omni::Test::Allocation < Omni::Test::Base
 
       locked_locations = []
       if s[:allocated_units_locked_loc_1] > 0
-        Omni::AllocationDetail.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '51713A3EAC3E11E2947800FF58D32228', units_allocated: s[:allocated_units_locked_loc_1], state: 'locked')
+        Omni::AllocationDetail.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', location_id: '51713A3EAC3E11E2947800FF58D32228', units_allocated: s[:allocated_units_locked_loc_1], state: 'locked')
         locked_locations << '51713A3EAC3E11E2947800FF58D32228'
       end
       if s[:allocated_units_locked_loc_2] > 0
-        Omni::AllocationDetail.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '51892F68AC3E11E2947800FF58D32228', units_allocated: s[:allocated_units_locked_loc_2], state: 'locked')
+        Omni::AllocationDetail.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', location_id: '51892F68AC3E11E2947800FF58D32228', units_allocated: s[:allocated_units_locked_loc_2], state: 'locked')
         locked_locations << '51892F68AC3E11E2947800FF58D32228'
       end
       if s[:allocated_units_locked_loc_3] > 0
-        Omni::AllocationDetail.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', sku_id: '285C928C0F3611E3BB7120C9D047DD15', location_id: '5247A038AC3E11E2947800FF58D32228', units_allocated: s[:allocated_units_locked_loc_3], state: 'locked')
+        Omni::AllocationDetail.create(allocation_id: 'PRIMARYALLOCATION1XXXXXXXXXXXXXX', location_id: '5247A038AC3E11E2947800FF58D32228', units_allocated: s[:allocated_units_locked_loc_3], state: 'locked')
         locked_locations << '5247A038AC3E11E2947800FF58D32228'
       end
 
-      allocations = x.allocate
+      allocations = x.do_allocate
       expected =  s[:expected_allocation_results_loc_1].to_s + ',' + s[:expected_allocation_results_loc_2].to_s + ',' + s[:expected_allocation_results_loc_3].to_s
-      actual = (allocations['51713A3EAC3E11E2947800FF58D32228'] || s[:allocated_units_locked_loc_1].to_f).to_s.chop.chop + ',' + (allocations['51892F68AC3E11E2947800FF58D32228'] || s[:allocated_units_locked_loc_2].to_f).to_s.chop.chop + ',' + (allocations['5247A038AC3E11E2947800FF58D32228'] || s[:allocated_units_locked_loc_1].to_f).to_s.chop.chop
-
+      actual = allocations.length > 2 ? allocations[0][:units_allocated].to_s.chop.chop + ',' + allocations[1][:units_allocated].to_s.chop.chop + ',' + allocations[2][:units_allocated].to_s.chop.chop : "allocations created: #{allocations.length}"
       test_it("#{s[:scenario]}", expected, actual)
     end
 

@@ -70,9 +70,9 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   # hook :after_create, :set_sla_state, 30
 
   def apply_rules
-    puts "\n\n *************- ruleset: #{self.ruleset.display.yellow}, rules: #{self.ruleset.rules.count.to_s.yellow}\n\n"
+    # puts "\n\n *************- ruleset: #{self.ruleset.display.yellow}, rules: #{self.ruleset.rules.count.to_s.yellow}\n\n"
     self.ruleset.rules.select {|x| x.is_active}.each do |r|
-      puts ('RULE: ' + r.rule_action + ' ' + r.input_attribute + ' from ' + r.model_name + '.' + r.attribute_name).cyan
+      # puts ('RULE: ' + r.rule_action + ' ' + r.input_attribute + ' from ' + r.model_name + '.' + r.attribute_name).cyan
       if r.model_name == 'Sku'
         update_row = Omni::Sku.where(sku_id: self.sku_id).first
       else
@@ -96,9 +96,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
 
       row_id = 'none' || update_row.send(r.model_name.tableize.foreign_key)
       Omni::StockLedgerActivityLog.create(:stock_ledger_activity_id => self.stock_ledger_activity_id, :model_name => r.model_name, :attribute_name => r.attribute_name, :row_id => row_id, :rule_action => r.rule_action)
-      puts "**** FINISHED SAVE ****"
     end
-    puts "**** POSTING SLA ****"
     self.posted_date = Date.today
     self.save
   end

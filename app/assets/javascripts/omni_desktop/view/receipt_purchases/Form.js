@@ -17,6 +17,10 @@ Ext.define('Omni.view.receipt_purchases.Form', {
 
     var disabled = !this.record.phantom;
 
+    var location_id = this.association.get('location_id');
+
+    console.log(location_id);
+
     // FILTER (Start) =======================================================================
     var associativeFilter = {
       property: 'receipt_purchase_id',
@@ -52,12 +56,9 @@ Ext.define('Omni.view.receipt_purchases.Form', {
             queryField: 'display',
             valueField: 'purchase_id',
             itemTpl: '{display}',
+            emptyText: 'purchases in open or partial state and same location as receipt.',
             defaultSearch: {
-              with: {
-                state: {
-                  any_of: ['open', 'partial']
-                }
-              }
+              with: { location_id: { equal_to: location_id }, state: { any_of: ['open', 'partial'] } }
             }
           }
         ]

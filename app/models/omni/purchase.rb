@@ -48,7 +48,8 @@ class Omni::Purchase < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_details,                    :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'
-  has_many     :logs,                                :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
+  # has_many     :logs,                                :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
+  has_many     :stock_ledger_activities,             :class_name => 'Omni::StockLedgerActivity', :foreign_key => 'stockable_id' , :as => :stockable
   belongs_to   :location,                            :class_name => 'Omni::Location',          :foreign_key => 'location_id'
   belongs_to   :supplier,                            :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'
   belongs_to   :allocation_profile,                  :class_name => 'Omni::AllocationProfile', :foreign_key => 'allocation_profile_id'
@@ -136,7 +137,7 @@ class Omni::Purchase < ActiveRecord::Base
   hook :before_create, :set_defaults_from_supplier, 00
   hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
-  hook :before_update, :update_allocation_profiles, 30
+  # hook :before_update, :update_allocation_profiles, 30
   hook :before_destroy, :cascading_delete, 40
 
   def set_defaults_from_supplier
@@ -239,10 +240,11 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def mass_update
+    puts "mass_update type is #{mass_update_type}"
     if self.mass_update_type
       self.send(mass_update_type.downcase)
       # Blank out mass update paramaters after completing the mass update
-      ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units'].each {|x| self.send("#{x}=", nil)}
+        ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units', 'allocation_profile_id'].each {|x| self.send("#{x}=", nil)}
       self.save
     else
       errors.add('mass_update_type','mass update type is required for mass update')
@@ -291,7 +293,33 @@ class Omni::Purchase < ActiveRecord::Base
       units = units_to_order(i, pd.sku_supplier)
       pd.clone(new_purchase.purchase_id, units)
     end
+    Omni::Purchase.where(purchase_id: new_purchase.purchase_id).first
   end
+
+# If an Allocation Profile is set or changed, update all the Purchase Details
+  def profile
+    # puts "allocation_profile_id is #{allocation_profile_id}"
+    if self.allocation_profile_id.nil?
+      errors.add('allocation_profile_id','allocation profile is required for updating allocation profiles via mass update.')
+      raise 'allocation profile is required for updating allocation profiles via mass update'
+    else
+      # puts "self.is_update_all_details is #{self.is_update_all_details}"
+      # puts "self.is_update_blank_details is #{self.is_update_blank_details}"
+      if self.is_update_all_details
+        # puts "self.purchase_details.count is #{self.purchase_details.count}"
+        self.purchase_details.each do |pd|
+          pd.allocation_profile_id = self.allocation_profile_id
+          pd.save
+        end
+      end
+      if self.is_update_blank_details
+        self.purchase_details.where(:allocation_profile_id => nil).each do |pd|
+          pd.allocation_profile_id = self.allocation_profile_id
+          pd.save
+        end
+      end
+    end
+  end # end of profile method
 
   # def order_pack_size(ss)
   #   case ss.pack_type
@@ -408,26 +436,6 @@ class Omni::Purchase < ActiveRecord::Base
   def recompute_cancel_date
     if self.delivery_date_changed?
       self.cancel_not_received_by_date = self.delivery_date + 30.days
-    end
-  end
-
-# If an Allocation Profile is set or changed, update all the Purchase Details
-  def update_allocation_profiles
-    return if self.allocation_profile_id.nil?
-    if self.allocation_profile_id_changed?
-      if self.is_update_blank_details
-          self.purchase_details.where(:allocation_profile_id => nil).each do |pd|
-            pd.allocation_profile_id = self.allocation_profile_id
-            pd.save
-          end
-      else
-        if self.is_update_all_details
-          self.purchase_details.each do |pd|
-            pd.allocation_profile_id = self.allocation_profile_id
-            pd.save
-          end
-        end
-      end
     end
   end
 

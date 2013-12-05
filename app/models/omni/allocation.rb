@@ -150,7 +150,7 @@ class Omni::Allocation < ActiveRecord::Base
 
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, self.units_to_allocate, locked_units, locked_locations, purchase_detail_id)
     allocations_to_create.each { |x| Omni::AllocationDetail.create(allocation_id: self.allocation_id, location_id: x[:location_id], units_allocated: x[:units_allocated], units_needed: x[:units_needed]) }
-
+    allocations_to_create
   end
 
   # HELPERS (Start) =====================================================================
@@ -164,30 +164,30 @@ class Omni::Allocation < ActiveRecord::Base
     units_needed = 0
     remainder = 0
     allocatable_units = (units_to_allocate * allocation_profile.percent_to_allocate / 100) - locked_units
-    puts "allocatable_units is #{allocatable_units}"
+    # puts "allocatable_units is #{allocatable_units}"
     # error = 'No units available to allocate' if allocatable_units < 1
     inventories = Omni::Inventory.where(sku_id: sku_id, is_authorized: true).to_a
     inventories.reject! {|x| locked_locations.include? x.location_id}
     inventories.each do |i|
       next if locked_locations.include? i.location_id #or allocation_formula == 'DIVIDE_EQUALLY'
       units_needed = store_demand(allocation_formula, i)
-      puts "allocation formula is #{allocation_formula}"
-      puts "units_needed is #{units_needed}"
+      # puts "allocation formula is #{allocation_formula}"
+      # puts "units_needed is #{units_needed}"
       temp_needs.merge!(i.location_id => units_needed)
     end
 
     total_units_needed = (temp_needs.map {|k,v| v}).sum
-    puts "total_units_needed is #{total_units_needed}"
+    # puts "total_units_needed is #{total_units_needed}"
     remainder = allocatable_units - total_units_needed
     temp_allocations = temp_needs.clone
-    puts "remainder is #{remainder}"
-    puts "temp needs count is #{temp_needs.count}"
+    # puts "remainder is #{remainder}"
+    # puts "temp needs count is #{temp_needs.count}"
     case
       when remainder == 0 # DEMAIND = SUPPLY
         temp_needs.each {|k,v| temp_allocations.merge!(k=>v.to_f)}
 
       when remainder > 0 # EXCESS SUPPLY
-        puts "allocation_profile.excess_supply_option is #{allocation_profile.excess_supply_option}"
+        # puts "allocation_profile.excess_supply_option is #{allocation_profile.excess_supply_option}"
         case allocation_profile.excess_supply_option
           when 'APPORTION_TO_STORES'
             # Set each Output table location's units_allocated = units_needed
@@ -195,11 +195,11 @@ class Omni::Allocation < ActiveRecord::Base
             # Calculate remaining_units as allocatable_units minus total_units_needed
             # Split the remaining_units among the stores according to each store's allocation_percent (remaining_units * allocation_percent / 100)
             proportions = temp_needs.inject({}) { |h, (k, v)| h[k] = (total_units_needed > 0 ? BigDecimal.new(v)/BigDecimal.new(total_units_needed).floor : BigDecimal.new(1) / BigDecimal.new(temp_needs.count) ) ; h }
-            puts "\n\n temp_needs check 1\n\n"
-            temp_needs.each { |k,v| puts "k is #{k} v is #{v}" }
+            # puts "\n\n temp_needs check 1\n\n"
+            # temp_needs.each { |k,v| puts "k is #{k} v is #{v}" }
 
-            puts "\n\n proportions check 1\n\n"
-            proportions.each { |k,v| puts "k is #{k} v is #{v}" }
+            # puts "\n\n proportions check 1\n\n"
+            # proportions.each { |k,v| puts "k is #{k} v is #{v}" }
             proportions.each { |k,v| temp_allocations[k] += remainder*v}
 
 
@@ -247,11 +247,11 @@ class Omni::Allocation < ActiveRecord::Base
     end
     # temp_allocations
     allocations_to_create = []
-    puts "\n\n temp_allocations check \n\n"
-    temp_allocations.each { |k,v| puts "k is #{k} v is #{v}" }
+    # puts "\n\n temp_allocations check \n\n"
+    # temp_allocations.each { |k,v| puts "k is #{k} v is #{v}" }
 
-    puts "\n\n temp_needs check \n\n"
-    temp_needs.each { |k,v| puts "k is #{k} v is #{v}" }
+    # puts "\n\n temp_needs check \n\n"
+    # temp_needs.each { |k,v| puts "k is #{k} v is #{v}" }
 
 
     temp_allocations.each { |k,v| allocations_to_create <<   { location_id: k, units_allocated: v, units_needed: temp_needs[k] }  }
@@ -259,7 +259,7 @@ class Omni::Allocation < ActiveRecord::Base
   end
 
   def self.store_demand(allocation_formula, inventory)
-    puts "store_demaind paramaters => allocation formula is #{allocation_formula}, inventory:  sku is #{inventory.sku_id}, location is #{inventory.location_id} - #{inventory.location_display}, inventory_id is #{inventory.inventory_id}"
+    # puts "store_demaind paramaters => allocation formula is #{allocation_formula}, inventory:  sku is #{inventory.sku_id}, location is #{inventory.location_id} - #{inventory.location_display}, inventory_id is #{inventory.inventory_id}"
     # projection_detail = inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).first
     # Retrieve most current projection starting with current year
     projection_detail = inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).first || projection_detail = inventory.projection_details.joins(:projection).where(:projections => {plan_year: '2013'}).first
@@ -292,6 +292,8 @@ class Omni::Allocation < ActiveRecord::Base
           when 'complete'
             units_needed = projection_detail.send('projection_4_units')
 
+          else
+            units_needed = 0
         end
 
       when 'LAST_FORECAST_UNITS'

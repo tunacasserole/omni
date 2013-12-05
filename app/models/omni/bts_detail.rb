@@ -120,7 +120,7 @@ class Omni::BtsDetail < ActiveRecord::Base
 
     case self.sku.source
       when 'Parker'
-        puts "stock is: #{self.source}   size is: #{self.mark_size}"
+        # puts "stock is: #{self.source}   size is: #{self.mark_size}"
         # puts "--on hand--"
         self.on_hand = Omni::MarkInventory.where(:stock_nbr => self.source_id, :size => self.source_id).sum(:qoh)
         #puts "--wip--"
