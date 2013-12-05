@@ -2,7 +2,7 @@ Ext.define('Omni.view.app.HubContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-app-HubContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -13,7 +13,7 @@ Ext.define('Omni.view.app.HubContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Settings',
@@ -37,7 +37,7 @@ Ext.define('Omni.view.app.HubContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Applications',
@@ -62,8 +62,8 @@ Ext.define('Omni.view.app.HubContextMenu', {
         /**
          * NEW
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         
+         * are selected then no records are processed.
+
         {
           text: 'New',
           cls: 'icon-new'

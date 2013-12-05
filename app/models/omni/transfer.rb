@@ -1,20 +1,12 @@
 class Omni::Transfer < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
-  # METADATA (Start) ====================================================================
+# METADATA (Start) ====================================================================
   self.table_name   = :transfers
   self.primary_key  = :transfer_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :requesting_location_id,          :presence    => true
@@ -22,7 +14,6 @@ class Omni::Transfer < ActiveRecord::Base
   validates    :sku_id,                          :presence    => true
   validates    :transfer_reason_id,              :presence    => true
   # VALIDATIONS (End)
-
 
   # DEFAULTS (Start) ====================================================================
   default      :transfer_id,                      :override  =>  false,        :with  => :guid
@@ -32,7 +23,6 @@ class Omni::Transfer < ActiveRecord::Base
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
-
   # REFERENCE (Start) ===================================================================
   reference do
     display_attribute  :display
@@ -41,7 +31,6 @@ class Omni::Transfer < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :requesting_location,             :class_name => 'Omni::Location',                :foreign_key => 'requesting_location_id'
   belongs_to   :fulfillment_location,            :class_name => 'Omni::Location',                :foreign_key => 'fulfillment_location_id'
@@ -49,11 +38,10 @@ class Omni::Transfer < ActiveRecord::Base
   belongs_to   :transfer_reason,                 :class_name => 'Omni::TransferReason',          :foreign_key => 'transfer_reason_id'
   belongs_to   :request_user,                    :class_name => 'Buildit::User',                     :foreign_key => 'request_user_id'
   belongs_to   :cancel_user,                     :class_name => 'Buildit::User',                     :foreign_key => 'cancel_user_id'
-  has_many     :notes,                           :class_name => 'Buildit::Note',                     :foreign_key => 'notable_id',       :as => :notable
+  has_many     :notes,                           :class_name => 'Buildit::Note',                  :foreign_key => 'notable_id',       :as => :notable
   has_one      :pick_ticket,                     :class_name => 'Omni::PickTicket',              :foreign_key => 'pickable_id',      :as => :pickable
+  has_one      :allocation_detail,              :class_name => 'Omni::AllocationDetail',        :foreign_key => 'transfer_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
@@ -66,21 +54,21 @@ class Omni::Transfer < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
+  # ORDERING (Start) ====================================================================
+  order_search_by :transfer_nbr =>:desc
+  # ORDERING (End)
 
   # HOOKS (Start) =======================================================================
   hook :after_create, :build_request_sla, 10
+  hook :before_update, :shipping, 20
+
   def build_request_sla
+  end
+
+  def shipping
+    # This action is triggered by updating the ship_date on the Transfer that is associated with this Allocation Detail.
+    # The calling code must pass the number of units shipped as a parameter.
+    allocation_detail.do_ship(request_units) if self.ship_date_changed?
   end
   # HOOKS (End)
 
@@ -105,16 +93,6 @@ class Omni::Transfer < ActiveRecord::Base
   end
   # INDEXING (End)
 
-
-
-
-
-
-
-
-
-
-
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
 
@@ -122,7 +100,6 @@ class Omni::Transfer < ActiveRecord::Base
     after_transition :on => :approve, :do => :after_approve
     after_transition :on => :ship, :do => :after_ship
     after_transition :on => :receive, :do => :after_receive
-    after_transition :on => :cancel, :do => :after_cancel
     after_transition :on => :cancel, :do => :after_cancel
 
   ### EVENTS ###
@@ -136,8 +113,7 @@ class Omni::Transfer < ActiveRecord::Base
       transition :shipped => :complete
     end
     event :cancel do
-      transition :draft => :cancelled
-      transition :pending => :cancelled
+      transition [:draft, :pending] => :cancelled
     end
   end
   # STATES (End)

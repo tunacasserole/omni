@@ -62,6 +62,11 @@ Ext.define('Omni.view.allocations.Explorer', {
         //   flex         : 1
         // },
         {
+          header       : this.allocation_nbrLabel,
+          dataIndex    : 'allocation_nbr',
+          flex         : 1
+        },
+        {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
           flex         : 1
@@ -74,11 +79,6 @@ Ext.define('Omni.view.allocations.Explorer', {
         {
           header       : this.allocation_profile_idLabel,
           dataIndex    : 'allocation_profile_display',
-          flex         : 1
-        },
-        {
-          header       : this.allocation_nbrLabel,
-          dataIndex    : 'allocation_nbr',
           flex         : 1
         },
         {

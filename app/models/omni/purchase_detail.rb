@@ -103,6 +103,7 @@
   ### CALLBACKS ###
     after_transition :on => :approve, :do => :do_approve
     after_transition :on => :receive, :do => :do_receive
+    after_transition :on => :release, :do => :do_release
     after_transition :on => :cancel, :do => :do_cancel
     after_transition :on => :process, :do => :do_process
 
@@ -113,6 +114,10 @@
 
     event :receive do
       transition [:open, :partial] => same
+    end
+
+    event :release do
+      transition :complete => same
     end
 
     event :process do
@@ -129,6 +134,24 @@
   # def open_units?
   #   selling_units_approved - selling_units_received - selling_units_cancelled > 0 ? true : false
   # end
+
+  def do_release
+    # Create an Allocation record corresponding to the PurchaseDetail record.
+    # For each PurchaseAllocation record for the PurchaseDetail where allocated_units > 0
+    # Create an AllocationDetail record corresponding to the PurchaseAllocation
+    # Update PurchaseAllocation.state to transferred
+    # me = self
+    puts "creating allocation ==>  allocatable_id: #{self.purchase_detail_id}, allocatable_type: Omni::PurchaseDetail, location_id: #{self.purchase.location_id}, sku_id: #{self.sku_id}, :allocation_profile_id => self.allocation_profile_id, :units_to_allocate => self.units_ordered"
+    a = Omni::Allocation.create(allocatable_id: self.purchase_detail_id, allocatable_type: "Omni::PurchaseDetail", location_id: self.purchase.location_id, sku_id: self.sku_id, allocation_profile_id: self.allocation_profile_id, units_to_allocate: self.units_ordered)
+    if a
+      self.purchase_allocations.where('units_allocated > 0').each do |pa|
+        puts a.allocation_id
+        Omni::AllocationDetail.create(allocation_id: a.allocation_id, location_id: pa.location_id, units_needed: pa.units_needed, units_allocated: pa.units_allocated)
+        pa.state = 'transferred'
+        pa.save
+      end
+    end
+  end
 
   def allocate
     do_allocate
@@ -152,15 +175,15 @@
     end
 
     # puts "\n\nself.purchase.location_id is #{self.purchase.location_id}\n\n"
-    units_to_allocate = units_ordered * order_pack_size
+    units_to_allocate = self.units_ordered * self.order_pack_size
 
-    allocations_to_create = Omni::Allocation.calculate(allocation_profile_id, sku_id, units_to_allocate, locked_units, locked_locations, nil)
-    allocations_to_create.each { |k,v| Omni::PurchaseAllocation.create(purchase_detail_id: purchase_detail_id, location_id: k, units_allocated: (v ? v : 0)) } # unless k = self.purchase.location_id }
+    allocations_to_create = Omni::Allocation.calculate(allocation_profile_id, self.sku_id, units_to_allocate, locked_units, locked_locations, nil)
+    allocations_to_create.each { |x| Omni::PurchaseAllocation.create(purchase_detail_id: self.purchase_detail_id, location_id: x[:location_id], units_allocated: x[:units_allocated], units_needed: x[:units_needed]) } # unless k = self.purchase.location_id }
   end
 
   def do_receive
     open_units = self.selling_units_approved - self.selling_units_received - self.selling_units_cancelled
-    state = open_units > 0 ? 'complete' : 'partial'
+    self.state = open_units > 0 ? 'complete' : 'partial'
     self.save
   end
 

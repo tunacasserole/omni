@@ -126,11 +126,11 @@ Ext.define('Omni.view.receipt_allocations.Form', {
 },
 
   onLockAction : function(action, eOpts){
-    this.processEventTransition('lock', 'Receipt Allocation was successfully locked.', 'An error occurred locking this receipt allocation.');
+    this.processEventTransition('lock', 'Receipt Allocation was successfully locked.', 'An error occurred freezing this receipt allocation.');
   }, // onBuildAction
 
   onUnlockAction : function(action, eOpts){
-    this.processEventTransition('unlock', 'Receipt Allocation was successfully unlocked.', 'An error occurred unlocking this receipt allocation.');
+    this.processEventTransition('unlock', 'Receipt Allocation was successfully unlocked.', 'An error occurred unfreezing this receipt allocation.');
   }, // onBuildAction
 
   prepareLockAction : function(action, eOpts) {

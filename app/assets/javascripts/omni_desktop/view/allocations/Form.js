@@ -175,8 +175,8 @@ Ext.define('Omni.view.allocations.Form', {
       actions: [
         {
           xtype      : 'button',
-          cls        : 'duplicate',
-          tooltip    : 'Calculate',
+          iconCls        : 'icon-sitemap',
+          tooltip    : 'Allocate',
           listeners  : {
             beforerender  : this.prepareAllocateAction,
             click         : this.onAllocateAction,
@@ -214,7 +214,9 @@ Ext.define('Omni.view.allocations.Form', {
   // HANDLERS (Start) ======================================================================
 
   onAllocateAction : function(action, eOpts){
-    this.processEventTransition('allocate', 'Allocation was successfully allocated.', 'An error occurred allocated this allocation.');
+    // var profile = this.record.get('allocation_profile_id');
+    // console.log(profile);
+    this.processEventTransition('allocate', 'Allocation was successfully allocated.', 'An error occurred allocating this allocation.');
   }, // onBuildAction
 
   onApproveAction : function(action, eOpts){

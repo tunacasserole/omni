@@ -15,12 +15,12 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
        /**
          * Lock
          * Supports performing 'Lock' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Lock',
           cls: 'icon-settings',
-          action: 'lock_it',
+          action: 'lock',
           confirm: true,
           multi: true,
           privileges: [],
@@ -35,7 +35,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
        /**
          * Unlock
          * Supports performing 'Unlock' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Unlock',
@@ -55,7 +55,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
         /**
          * Transfer
          * Supports performing 'Transfer' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Transfer',
@@ -81,7 +81,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -101,7 +101,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Export',
@@ -125,7 +125,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Select All',
@@ -146,7 +146,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
         /**
          * EXPORT
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Deselect All',
@@ -175,7 +175,7 @@ Ext.define('Omni.view.allocation_details.ExplorerContextMenu', {
   // ACTION HANDLERS (Start) ====================================================================
 
   clickLock: function(btn, e, eOpts){
-    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'lock_it');
+    Omni.logic.allocation_details.ExplorerProcessSelectedItems.click(btn, 'lock');
   },
 
   clickUnlock: function(btn, e, eOpts){

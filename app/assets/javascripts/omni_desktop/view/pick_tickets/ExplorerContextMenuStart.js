@@ -2,7 +2,7 @@ Ext.define('Omni.view.pick_tickets.ExplorerContextMenuStart', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-pick_tickets-ExplorerContextMenuStart',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -15,7 +15,7 @@ Ext.define('Omni.view.pick_tickets.ExplorerContextMenuStart', {
         /**
          * Start
          * Supports performing 'Start' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Start',
@@ -35,7 +35,7 @@ Ext.define('Omni.view.pick_tickets.ExplorerContextMenuStart', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -55,7 +55,7 @@ Ext.define('Omni.view.pick_tickets.ExplorerContextMenuStart', {
         /**
          * EXPORT
          * Supports the export of the selected items in the explorer grid.
-         * 
+         *
          */
         {
           text:'Export',
@@ -79,7 +79,7 @@ Ext.define('Omni.view.pick_tickets.ExplorerContextMenuStart', {
         /**
          * SELECT ALL
          * Supports the selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Select All',
@@ -100,7 +100,7 @@ Ext.define('Omni.view.pick_tickets.ExplorerContextMenuStart', {
         /**
          * DESELECT ALL
          * Supports the de-selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Deselect All',
@@ -128,7 +128,7 @@ Ext.define('Omni.view.pick_tickets.ExplorerContextMenuStart', {
         /**
          * NEW
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text: 'New',

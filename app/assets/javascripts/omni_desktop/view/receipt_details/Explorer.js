@@ -22,7 +22,7 @@ Ext.define('Omni.view.receipt_details.Explorer', {
   // LABELS (Start) ======================================================================
   receipt_detail_idLabel:                 Omni.i18n.model.ReceiptDetail.receipt_detail_id,
   displayLabel:                           Omni.i18n.model.ReceiptDetail.display,
-  sku_displayLabel:                       Omni.i18n.model.ReceiptDetail.sku_display,
+  sku_idLabel:                            Omni.i18n.model.ReceiptDetail.sku_id,
   receipt_line_nbrLabel:                  Omni.i18n.model.ReceiptDetail.receipt_line_nbr,
   purchase_detail_idLabel:                Omni.i18n.model.ReceiptDetail.purchase_detail_id,
   received_unitsLabel:                    Omni.i18n.model.ReceiptDetail.received_units,
@@ -53,7 +53,7 @@ Ext.define('Omni.view.receipt_details.Explorer', {
         //   flex         : 1
         // },
         {
-          header       : this.sku_displayLabel,
+          header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
           flex         : 1
         },

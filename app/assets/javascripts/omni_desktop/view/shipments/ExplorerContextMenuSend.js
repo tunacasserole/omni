@@ -2,7 +2,7 @@ Ext.define('Omni.view.shipments.ExplorerContextMenuSend', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-shipments-ExplorerContextMenuSend',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -15,7 +15,7 @@ Ext.define('Omni.view.shipments.ExplorerContextMenuSend', {
         /**
          * Send
          * Supports performing 'Send' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Send',
@@ -35,7 +35,7 @@ Ext.define('Omni.view.shipments.ExplorerContextMenuSend', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -55,7 +55,7 @@ Ext.define('Omni.view.shipments.ExplorerContextMenuSend', {
         /**
          * EXPORT
          * Supports the export of the selected items in the explorer grid.
-         * 
+         *
          */
         {
           text:'Export',
@@ -79,7 +79,7 @@ Ext.define('Omni.view.shipments.ExplorerContextMenuSend', {
         /**
          * SELECT ALL
          * Supports the selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Select All',
@@ -100,7 +100,7 @@ Ext.define('Omni.view.shipments.ExplorerContextMenuSend', {
         /**
          * DESELECT ALL
          * Supports the de-selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Deselect All',
@@ -128,7 +128,7 @@ Ext.define('Omni.view.shipments.ExplorerContextMenuSend', {
         /**
          * NEW
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text: 'New',

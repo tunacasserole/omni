@@ -41,6 +41,8 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
     end
   end
   # HOOKS (End)  # STATES (Start) ====================================================================
+  StateMachine::Machine.ignore_method_conflicts = true
+
   state_machine :state, :initial => :draft do
 
   ## STATES ###

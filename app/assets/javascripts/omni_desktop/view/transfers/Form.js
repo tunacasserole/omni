@@ -3,13 +3,13 @@ Ext.define('Omni.view.transfers.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-transfers-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       stateLabel:                                 Omni.i18n.model.Transfer.state,
@@ -39,7 +39,7 @@ Ext.define('Omni.view.transfers.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
             { name: 'transfer_nbr',                   fieldLabel: this.transfer_nbrLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'requesting_location_id',         fieldLabel: this.requesting_location_idLabel,     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
             { name: 'fulfillment_location_id',        fieldLabel: this.fulfillment_location_idLabel,    allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },

@@ -2,7 +2,7 @@ Ext.define('Omni.view.work_orders.ExplorerContextMenuRelase', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-work_orders-ExplorerContextMenuRelase',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -15,7 +15,7 @@ Ext.define('Omni.view.work_orders.ExplorerContextMenuRelase', {
         /**
          * Relase
          * Supports performing 'Relase' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Relase',
@@ -35,7 +35,7 @@ Ext.define('Omni.view.work_orders.ExplorerContextMenuRelase', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -55,7 +55,7 @@ Ext.define('Omni.view.work_orders.ExplorerContextMenuRelase', {
         /**
          * EXPORT
          * Supports the export of the selected items in the explorer grid.
-         * 
+         *
          */
         {
           text:'Export',
@@ -79,7 +79,7 @@ Ext.define('Omni.view.work_orders.ExplorerContextMenuRelase', {
         /**
          * SELECT ALL
          * Supports the selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Select All',
@@ -100,7 +100,7 @@ Ext.define('Omni.view.work_orders.ExplorerContextMenuRelase', {
         /**
          * DESELECT ALL
          * Supports the de-selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Deselect All',
@@ -128,7 +128,7 @@ Ext.define('Omni.view.work_orders.ExplorerContextMenuRelase', {
         /**
          * NEW
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text: 'New',

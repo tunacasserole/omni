@@ -337,7 +337,7 @@ Ext.define('Omni.view.receipts.Form', {
           }
         }, {
           tooltip: 'Print',
-          iconCls: 'icon-print',
+          iconCls: 'icon-paperclip',
           xtype: 'button',
           listeners: {
             beforerender: this.preparePrintAction,

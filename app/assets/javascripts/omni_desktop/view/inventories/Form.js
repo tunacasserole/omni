@@ -23,7 +23,7 @@
     reserved_unitsLabel: Omni.i18n.model.Inventory.reserved_units,
     shipping_unitsLabel: Omni.i18n.model.Inventory.shipping_units,
     requested_unitsLabel: Omni.i18n.model.Inventory.requested_units,
-    frozen_unitsLabel: Omni.i18n.model.Inventory.frozen_units,
+    locked_unitsLabel: Omni.i18n.model.Inventory.locked_units,
     cost_poolLabel: Omni.i18n.model.Inventory.cost_pool,
     retail_poolLabel: Omni.i18n.model.Inventory.retail_pool,
     boy_unitsLabel: Omni.i18n.model.Inventory.boy_units,
@@ -188,8 +188,8 @@
               allowBlank: true
             }, {
               xtype: 'numberfield',
-              name: 'frozen_units',
-              fieldLabel: this.frozen_unitsLabel,
+              name: 'locked_units',
+              fieldLabel: this.locked_unitsLabel,
               allowBlank: true
             }, {
               xtype: 'numberfield',

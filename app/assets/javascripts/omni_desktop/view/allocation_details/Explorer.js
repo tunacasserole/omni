@@ -42,13 +42,13 @@ Ext.define('Omni.view.allocation_details.Explorer', {
     Ext.apply(this, {
       columns      : [
         {
-          header       : this.location_idLabel,
-          dataIndex    : 'location_display',
+          header       : this.allocation_detail_nbrLabel,
+          dataIndex    : 'allocation_detail_nbr',
           flex         : 1
         },
         {
-          header       : this.allocation_detail_nbrLabel,
-          dataIndex    : 'allocation_detail_nbr',
+          header       : this.location_idLabel,
+          dataIndex    : 'location_display',
           flex         : 1
         },
         {

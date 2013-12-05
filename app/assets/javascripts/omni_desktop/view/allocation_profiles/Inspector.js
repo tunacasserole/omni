@@ -26,7 +26,7 @@ Ext.define('Omni.view.allocation_profiles.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Allocation Profile',
-      subtitle:  this.record.get('allocation_profile_id')
+      subtitle:  this.record.get('display')
     });
     // TITLES (End)
 

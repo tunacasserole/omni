@@ -13,7 +13,7 @@ Ext.define('Omni.view.hubs.StandardContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Settings',
@@ -37,7 +37,7 @@ Ext.define('Omni.view.hubs.StandardContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Applications',
@@ -62,7 +62,7 @@ Ext.define('Omni.view.hubs.StandardContextMenu', {
         /**
          * NEW
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
 
         {
           text: 'New',

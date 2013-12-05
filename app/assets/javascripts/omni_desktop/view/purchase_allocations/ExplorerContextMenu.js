@@ -15,7 +15,7 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
    /**
          * Lock
          * Supports performing 'Lock' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Lock',
@@ -36,7 +36,7 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
         /**
          * Unlock
          * Supports performing 'Unlock' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Unlock',
@@ -64,7 +64,7 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -84,7 +84,7 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Export',
@@ -108,7 +108,7 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Select All',
@@ -129,7 +129,7 @@ Ext.define('Omni.view.purchase_allocations.ExplorerContextMenu', {
         /**
          * EXPORT
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Deselect All',

@@ -15,7 +15,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
        /**
          * Allocate
          * Supports performing 'Allocate' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Allocate',
@@ -35,7 +35,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
        /**
          * Receive
          * Supports performing 'Receive' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         // {
         //   text:'Receive',
@@ -55,7 +55,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
        /**
          * Cancel
          * Supports performing 'Cancel' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Cancel',
@@ -82,7 +82,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -102,7 +102,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Export',
@@ -126,7 +126,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Select All',
@@ -147,7 +147,7 @@ Ext.define('Omni.view.purchase_details.ExplorerContextMenu', {
         /**
          * EXPORT
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Deselect All',

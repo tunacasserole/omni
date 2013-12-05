@@ -63,17 +63,9 @@ class Omni::Receipt < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
+  # ORDERING (Start) ====================================================================
+  order_search_by :receipt_nbr =>:desc
+  # ORDERING (End)
 
   # HOOKS (Start) =======================================================================
   hook :before_save, :appointment_scheduled?, 10
@@ -274,6 +266,7 @@ class Omni::Receipt < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :receipt_id
+    string   :receipt_nbr
     string   :location_display do location.display if location end
     string   :carrier_supplier_display do carrier_supplier.display if carrier_supplier end
     string   :display

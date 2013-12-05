@@ -102,7 +102,7 @@ class Omni::Purchase < ActiveRecord::Base
   # TEMPORARY ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
+  order_search_by :purchase_nbr => :desc
   # ORDERING (End)
 
   # INDEXING (Start) ====================================================================
@@ -293,21 +293,21 @@ class Omni::Purchase < ActiveRecord::Base
     end
   end
 
-  def order_pack_size(ss)
-    case ss.pack_type
-      when "M"
-        ss.master_pack_units
-      when "I"
-        ss.inner_pack_units
-      else
-        1
-    end
-  end
+  # def order_pack_size(ss)
+  #   case ss.pack_type
+  #     when "M"
+  #       ss.master_pack_units
+  #     when "I"
+  #       ss.inner_pack_units
+  #     else
+  #       1
+  #   end
+  # end
 
   def units_to_order(i, ss)
     units_to_order = self.is_use_need_units ? i.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).sum('current_approved_units') : 0
     units_to_order *= self.adjustment_percent / 100 if self.adjustment_percent
-    units_to_order /= self.order_pack_size(ss)
+    units_to_order /= ss.order_pack_size
     [units_to_order, 1].max.round
   end
 

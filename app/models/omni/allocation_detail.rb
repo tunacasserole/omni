@@ -15,7 +15,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :allocation_detail_id,             :with => :guid
-  default :display, :override  =>  false,   :to   => lambda{|m| "from: #{m.allocation.location_display} - #{m.allocation.sku_display} - #{m.allocation.allocation_nbr}"}
+  default :display,                          :override  =>  false,   :to   => lambda{|m| "from: #{m.allocation.location_display} - #{m.allocation.sku_display} - #{m.allocation.allocation_nbr}"}
   # default :description, :override  =>  false,   :to   => lambda{|m| "#{m.allocation_detail_nbr} - #{m.allocation.allocation_nbr} - #{m.purchase_line_nbr}"}
   # default :sku_id,                           :to   => lambda{|m| m.allocation.sku_id}
   default :allocation_detail_nbr,            :override  =>  false,        :with  => :sequence,         :named => "ALLOCATION_DETAIL_NBR"
@@ -39,7 +39,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
-  # order_search_by :location_display =>:asc
+  # order_search_by :allocation_detail_nbr =>:desc
   # ORDERING (End)
 
   # INDEXING (Start) ====================================================================
@@ -48,6 +48,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
     string   :allocation_id
     string   :allocation_detail_id
     string   :location_id
+    string   :location_display
     string   :allocation_detail_nbr
     string   :state
     string   :display
@@ -58,7 +59,17 @@ class Omni::AllocationDetail < ActiveRecord::Base
   end
   # INDEXING (End)
 
-  # STATES (Start) ====================================================================
+  # HOOKS (Start) =======================================================================
+  # hook :before_create, :set_inventory, 10
+
+  # def set_inventory
+  #   # puts "SETTING INVENTORY"
+  #   i=Omni::Inventory.where(sku_id: self.sku_id, location_id: self.location_id).first
+  #   self.inventory_id = i.inventory_id if i
+  # end
+  # HOOKS (End)
+
+    # STATES (Start) ====================================================================
   StateMachine::Machine.ignore_method_conflicts = true
   state_machine :state, :initial => :draft do
 
@@ -67,18 +78,16 @@ class Omni::AllocationDetail < ActiveRecord::Base
 
     state :locked do; end
 
-    state :transfer_request do; end
+    state :transfer do; end
 
     state :shipped do
     end
 
   ### CALLBACKS ###
-    # after_transition :on => :lock, :do => :do_lock
-    # after_transition :on => :unlock, :do => :do_unlock
     after_transition :on => :transfer, :do => :do_transfer
     after_transition :on => :ship, :do => :do_ship
 
-    event :lock_it do
+    event :lock do
       transition :draft => :locked
     end
 
@@ -87,8 +96,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
     end
 
     event :transfer do
-      transition :draft => :transfer_request
-      transition :locked => :transfer_request
+      transition [:draft, :locked] => :transfer_request
     end
 
     event :ship do
@@ -110,7 +118,13 @@ class Omni::AllocationDetail < ActiveRecord::Base
     save
   end
 
-  def do_ship
+  def do_ship(units_shipped)
+    ship
+    self.units_shipped = units_shipped
+    save
+    # This action is triggered by updating the ship_date on the Transfer that is associated with this Allocation Detail.
+    # The calling code must pass the number of units shipped as a parameter.
+
   end
   # HELPERS (Start) =====================================================================
 

@@ -2,7 +2,7 @@ Ext.define('Omni.view.transfer_reasons.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-transfer_reasons-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -15,7 +15,7 @@ Ext.define('Omni.view.transfer_reasons.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -35,7 +35,7 @@ Ext.define('Omni.view.transfer_reasons.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Export',
@@ -59,7 +59,7 @@ Ext.define('Omni.view.transfer_reasons.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Select All',
@@ -80,7 +80,7 @@ Ext.define('Omni.view.transfer_reasons.ExplorerContextMenu', {
         /**
          * EXPORT
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Deselect All',
@@ -104,16 +104,6 @@ Ext.define('Omni.view.transfer_reasons.ExplorerContextMenu', {
       leftActions: [
 
         // LEFT ACTIONS (Start) =================================================================
-
-        /**
-         * NEW
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
-         */
-        {
-          text: 'New',
-          cls: 'icon-new'
-        }
 
         // LEFT ACTIONS (End)
 

@@ -147,7 +147,7 @@
     # DEBUG Omni::Inventory.where(is_authorized: true).each {|i| Omni::ProjectionDetail.create(projection_id: myself.projection_id, sku_id: i.sku_id, location_id: i.location_id, forecast_profile_id: myself.forecast_profile_id) unless Omni::ProjectionDetail.where(projection_id: myself.projection_id).first} #unless Omni::Inventory.where(is_authorized: true).count == self.projection_details.count
     Omni::Inventory.where(is_authorized: true, department_id: self.department_id).each do |i|
       # Create Projection Detail;
-      x = Omni::ProjectionDetail.where(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, sku_id: i.sku_id, location_id: i.location_id)
+      x = Omni::ProjectionDetail.where(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
       # TODO: Add support for generics
       is_generic = false
       total_generic_need = 0

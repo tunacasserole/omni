@@ -130,11 +130,11 @@ Ext.define('Omni.view.allocation_details.Form', {
   // HANDLERS (Start) ======================================================================
 
   onLockAction : function(action, eOpts){
-    this.processEventTransition('lock_it', 'Allocation detail was successfully locked.', 'An error occurred locking this allocation detail.');
+    this.processEventTransition('lock', 'Allocation detail was successfully locked.', 'An error occurred freezing this allocation detail.');
   }, // onBuildAction
 
   onUnlockAction : function(action, eOpts){
-    this.processEventTransition('unlock', 'Allocation detail was successfully unlocked.', 'An error occurred unlocking this allocation detail.');
+    this.processEventTransition('unlock', 'Allocation detail was successfully unlocked.', 'An error occurred unfreezing this allocation detail.');
   }, // onBuildAction
 
   onTransferAction : function(action, eOpts){

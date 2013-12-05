@@ -34,6 +34,10 @@ class Omni::Ruleset < ActiveRecord::Base
   has_many     :stock_ledger_activities,         :class_name => 'Omni::StockLedgerActivity',     :foreign_key => 'ruleset_id'
   # ASSOCIATIONS (End)
 
+  # ORDERING (Start) ====================================================================
+  order_search_by :display =>:asc
+  # ORDERING (End)
+
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
 

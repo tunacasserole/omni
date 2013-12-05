@@ -2,7 +2,7 @@ Ext.define('Omni.view.payments.ExplorerContextMenuApprove', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-payments-ExplorerContextMenuApprove',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -15,7 +15,7 @@ Ext.define('Omni.view.payments.ExplorerContextMenuApprove', {
         /**
          * Approve
          * Supports performing 'Approve' on the selected items in the explorer grid.
-         * If none are selected then no records are deleted.
+         * If none are selected then no records are processed.
          */
         {
           text:'Approve',
@@ -35,7 +35,7 @@ Ext.define('Omni.view.payments.ExplorerContextMenuApprove', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -55,7 +55,7 @@ Ext.define('Omni.view.payments.ExplorerContextMenuApprove', {
         /**
          * EXPORT
          * Supports the export of the selected items in the explorer grid.
-         * 
+         *
          */
         {
           text:'Export',
@@ -79,7 +79,7 @@ Ext.define('Omni.view.payments.ExplorerContextMenuApprove', {
         /**
          * SELECT ALL
          * Supports the selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Select All',
@@ -100,7 +100,7 @@ Ext.define('Omni.view.payments.ExplorerContextMenuApprove', {
         /**
          * DESELECT ALL
          * Supports the de-selection of all rows in the grid.
-         * 
+         *
          */
         {
           text:'Deselect All',
@@ -128,7 +128,7 @@ Ext.define('Omni.view.payments.ExplorerContextMenuApprove', {
         /**
          * NEW
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text: 'New',

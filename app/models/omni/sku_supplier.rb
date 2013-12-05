@@ -88,6 +88,15 @@ class Omni::SkuSupplier < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
+  def order_pack_size
+    case self.pack_type
+      when "M"
+        size = self.master_pack_units
+      when "I"
+        size = self.inner_pack_units
+    end
+    size > 0 ? size : 1
+  end
   # COMPUTED ATTRIBUTES (End)
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================

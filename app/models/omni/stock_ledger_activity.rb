@@ -73,7 +73,11 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
     puts "\n\n *************- ruleset: #{self.ruleset.display.yellow}, rules: #{self.ruleset.rules.count.to_s.yellow}\n\n"
     self.ruleset.rules.select {|x| x.is_active}.each do |r|
       puts ('RULE: ' + r.rule_action + ' ' + r.input_attribute + ' from ' + r.model_name + '.' + r.attribute_name).cyan
-      update_row = ('Omni::' + r.model_name).constantize.where(:sku_id => self.sku_id, :location_id => self.location_id).first || ('Omni::' + r.model_name).constantize.create(:sku_id => self.sku_id, :location_id => self.location_id)
+      if r.model_name == 'Sku'
+        update_row = Omni::Sku.where(sku_id: self.sku_id).first
+      else
+        update_row = ('Omni::' + r.model_name).constantize.where(:sku_id => self.sku_id, :location_id => self.location_id).first || ('Omni::' + r.model_name).constantize.create(:sku_id => self.sku_id, :location_id => self.location_id)
+      end
       update_row.save
       case r.rule_action
       when 'SUBTRACT'

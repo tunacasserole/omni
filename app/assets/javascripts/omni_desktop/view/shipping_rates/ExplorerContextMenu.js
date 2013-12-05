@@ -2,7 +2,7 @@ Ext.define('Omni.view.shipping_rates.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias:  'widget.omni-shipping_rates-ExplorerContextMenu',
 
-  
+
   initComponent: function() {
     var me = this;
 
@@ -15,7 +15,7 @@ Ext.define('Omni.view.shipping_rates.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Delete',
@@ -35,7 +35,7 @@ Ext.define('Omni.view.shipping_rates.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Export',
@@ -59,7 +59,7 @@ Ext.define('Omni.view.shipping_rates.ExplorerContextMenu', {
         /**
          * DELETE
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Select All',
@@ -80,7 +80,7 @@ Ext.define('Omni.view.shipping_rates.ExplorerContextMenu', {
         /**
          * EXPORT
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text:'Deselect All',
@@ -108,7 +108,7 @@ Ext.define('Omni.view.shipping_rates.ExplorerContextMenu', {
         /**
          * NEW
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are deleted.
+         * are selected then no records are processed.
          */
         {
           text: 'New',

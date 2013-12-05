@@ -40,6 +40,10 @@ class Omni::Rule < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
+  # ORDERING (Start) ====================================================================
+  order_search_by :rule_seq =>:asc
+  # ORDERING (End)
+
   # HELPERS (Start) =======================================================================
   # HELPERS (End)
 
@@ -57,7 +61,7 @@ class Omni::Rule < ActiveRecord::Base
     # string   :rule_action do |x| Buildit::Lookup::Manager.display_for('RULE_ACTION', x.rule_action) end
     # boolean  :is_active
     string   :ruleset_id
-    # string   :rule_seq
+    string   :rule_seq
 
     text     :ruleset_display_fulltext, :using => :ruleset_display
     text     :rule_type_fulltext, :using => :rule_type

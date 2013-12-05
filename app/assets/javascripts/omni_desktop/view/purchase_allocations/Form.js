@@ -134,11 +134,11 @@ Ext.define('Omni.view.purchase_allocations.Form', {
 },
 
   onLockAction : function(action, eOpts){
-    this.processEventTransition('lock', 'Purchase Allocation was successfully locked.', 'An error occurred locking this purchase allocation.');
+    this.processEventTransition('lock', 'Purchase Allocation was successfully locked.', 'An error occurred freezing this purchase allocation.');
   }, // onBuildAction
 
   onUnlockAction : function(action, eOpts){
-    this.processEventTransition('unlock', 'Purchase Allocation was successfully unlocked.', 'An error occurred unlocking this purchase allocation.');
+    this.processEventTransition('unlock', 'Purchase Allocation was successfully unlocked.', 'An error occurred unfreezing this purchase allocation.');
   }, // onBuildAction
 
   prepareLockAction : function(action, eOpts) {

@@ -21,6 +21,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   default      :projection_detail_id,             :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.projection_display} - #{m.sku_display} - #{m.location_display}"}
   default      :projection_detail_nbr,            :override  =>  false,        :with  => :sequence,         :named=>"PROJECTION_DETAIL_NBR"
+  default      :inventory_id,                     :override  =>  false,        :to    => lambda { |m| Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first.inventory_id if Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first unless m.inventory_id }
   default      :last_forecast_units,              :override  =>  false,        :to    => 0
   default      :first_forecast_units,             :override  =>  false,        :to    => 0
   default      :projection_1_units,               :override  =>  false,        :to    => 0
