@@ -1,8 +1,8 @@
 class CreateOmniStockLedgerActivities < ActiveRecord::Migration
   def change
-  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless ActiveRecord::Base.connection.tables.include?('stock_ledger_activities')
+    drop_table :stock_ledger_activities if ActiveRecord::Base.connection.tables.include?('stock_ledger_activities')
+ 	# unless ActiveRecord::Base.connection.tables.include?('stock_ledger_activities')
       create_table(:stock_ledger_activities, :id => false) do |t|
         t.column   :stock_ledger_activity_id,        :string,            :null  =>  false,   :limit   => 32
         t.column   :display,                         :string,            :null  =>  true,    :limit   => 300
@@ -17,12 +17,12 @@ class CreateOmniStockLedgerActivities < ActiveRecord::Migration
         t.column   :units,                           :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :cost,                            :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :retail,                          :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
-        t.column   :create_date,                     :date,              :null  =>  true
-        t.column   :activity_date,                   :date,              :null  =>  true
-        t.column   :posted_date,                     :date,              :null  =>  true
+        t.column   :create_date,                     :datetime,          :null  =>  true
+        t.column   :activity_date,                   :datetime,          :null  =>  true
+        t.column   :posted_date,                     :datetime,          :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
-    end
+    # end
     #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end

@@ -39,7 +39,7 @@ class Omni::Test::Projection < Omni::Test::Base
     @p.state ='forecast'
     @p.save
     @p.do_release
-    test_it('It builds projection location rows when released', 1, @p.projection_locations.count)
+    test_it('It builds projection location rows when released', 3, @p.projection_locations.count)
   end
 
   def self.test_approve

@@ -23,6 +23,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   default      :units,                            :override  =>  false,        :to    => 0
   default      :cost,                             :override  =>  false,        :to    => 0
   default      :retail,                           :override  =>  false,        :to    => 0
+  # default      :create_date,                      :override  =>  false,        :to    =>
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # default      :stockable_id,                     :override  =>  false,        :to    => :sku_id
   # default      :stockable_type,                   :override  =>  false,        :to    => "Omni::StockLedgerActivty"
@@ -66,8 +67,14 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
 
   # HOOKS (Start) =======================================================================
   # hook :after_create, :validate_ruleset, 10
+  hook :before_create, :set_dates, 10
   hook :after_create, :apply_rules, 20
   # hook :after_create, :set_sla_state, 30
+
+  def set_dates
+    self.activity_date = Time.now
+    self.create_date = Time.now
+  end
 
   def apply_rules
     # puts "\n\n *************- ruleset: #{self.ruleset.display.yellow}, rules: #{self.ruleset.rules.count.to_s.yellow}\n\n"

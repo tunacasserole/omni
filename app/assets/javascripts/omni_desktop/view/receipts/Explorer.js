@@ -96,11 +96,13 @@ Ext.define('Omni.view.receipts.Explorer', {
         {
           header       : this.create_dateLabel,
           dataIndex    : 'create_date',
+          renderer     : Ext.util.Format.dateRenderer('l, M d, Y'),
           flex         : 1
         },
         {
           header       : this.ship_dateLabel,
           dataIndex    : 'ship_date',
+          renderer     : Ext.util.Format.dateRenderer('m/d/y'),
           flex         : 1
         },
         // {

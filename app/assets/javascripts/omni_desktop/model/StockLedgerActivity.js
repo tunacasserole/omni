@@ -36,7 +36,7 @@ Ext.define('Omni.model.StockLedgerActivity', {
     { name: 'cost', type: 'float', defaultValue: 0 },
     { name: 'retail', type: 'float', defaultValue: 0 },
     { name: 'create_date', type: 'date' },
-    { name: 'activity_date', type: 'date' },
+    { name: 'activity_date', type: 'datetime' },
     { name: 'posted_date', type: 'date' },
     { name: 'is_destroyed', type: 'boolean', defaultValue: false }
   ],

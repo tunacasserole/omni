@@ -101,6 +101,21 @@ Ext.define('Omni.view.system_options.Form', {
         {
           xtype      : 'button',
           iconCls    : 'icon-thumbs-up',
+          tooltip    : 'Accept',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-certificate',
+          tooltip    : 'Approve',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-star',
+          tooltip    : 'Approve',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-check',
           tooltip    : 'Approve',
         },
         {
@@ -110,12 +125,27 @@ Ext.define('Omni.view.system_options.Form', {
         },
         {
           xtype      : 'button',
-          cls        : 'close',
+          iconCls    : 'icon-stop',
+          tooltip    : 'Cancel',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-eject',
           tooltip    : 'Cancel',
         },
         {
           xtype      : 'button',
           iconCls    : 'icon-ok-circle',
+          tooltip    : 'Complete',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-legal',
+          tooltip    : 'Complete',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-check-sign',
           tooltip    : 'Complete',
         },
         {
@@ -130,13 +160,43 @@ Ext.define('Omni.view.system_options.Form', {
         },
         {
           xtype      : 'button',
+          iconCls    : 'icon-print',
+          tooltip    : 'Print',
+        },
+        {
+          xtype      : 'button',
           iconCls    : 'icon-external-link',
+          tooltip    : 'Release',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-circle-arrow-up',
+          tooltip    : 'Release',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-cloud-upload',
           tooltip    : 'Release',
         },
         {
           xtype      : 'button',
           iconCls    : 'icon-circle-arrow-down',
           tooltip    : 'Receive',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-truck',
+          tooltip    : 'Receive',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-plane',
+          tooltip    : 'Ship',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-globe',
+          tooltip    : 'Ship',
         },
       ]
     });

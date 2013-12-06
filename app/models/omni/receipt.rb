@@ -257,8 +257,8 @@ class Omni::Receipt < ActiveRecord::Base
       # units: units,
       # cost: units * (self.purchase_detail.supplier_cost / self.purchase_detail.order_cost_units),
       # retail: units * retail,
-      create_date: Time.now,
-      activity_date: Time.now
+      # create_date: Time.now,
+      # activity_date: Time.now
     )
   end
   # STATE HELPERS (End)

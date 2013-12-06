@@ -205,8 +205,8 @@
       sl.units = open_units * -1
       sl.cost = (self.supplier_cost / (self.order_cost_units > 1 ? self.order_cost_units : 1 ))  * open_units
       sl.retail = 0
-      sl.create_date = Date.today
-      sl.activity_date = Date.today
+      # sl.create_date = Date.today
+      # sl.activity_date = Date.today
       sl.save
       # update selling units cancelled += open units
       self.selling_units_cancelled += open_units * -1
@@ -242,8 +242,8 @@
     sl.units = self.units_ordered * self.order_pack_size
     sl.cost = (self.supplier_cost / (self.order_cost_units > 1 ? self.order_cost_units : 1 )) * sl.units
     # sl.retail = 0
-    sl.create_date = Date.today
-    sl.activity_date = Date.today
+    # sl.create_date = Date.today
+    # sl.activity_date = Date.today
     sl.ruleset_id = Omni::Ruleset.where(:ruleset_code => 'ApprovePurchase').first.ruleset_id if Omni::Ruleset.where(:ruleset_code => 'ApprovePurchase').first
     sl.save
 

@@ -5,11 +5,11 @@ class Omni::Test::Base
     create_base_test_data
 
     # RUN TESTS BY MODULE
-    # Omni::Test::Allocation.go
+    Omni::Test::Allocation.go
     Omni::Test::Purchase.go
-    # Omni::Test::Projection.go
-    # Omni::Test::Receipt.go
-    # Omni::Test::Transfer.go
+    Omni::Test::Projection.go
+    Omni::Test::Receipt.go
+    Omni::Test::Transfer.go
     # END OF RUN TESTS
 
     reindex_data
@@ -115,6 +115,7 @@ class Omni::Test::Base
     Omni::Purchase.reindex
     Omni::PurchaseAllocation.reindex
     Omni::PurchaseDetail.reindex
+    Omni::StockLedgerActivity.reindex
   end
 
   def self.allocation_scenarios
