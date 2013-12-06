@@ -81,9 +81,67 @@ Ext.define('Omni.view.system_options.Form', {
       title:         'System Option',
       subtitle:      'All system options',
       newTitle:      'System Option',
-      newSubtitle:   undefined
+      newSubtitle:   'Complete the following to create a new'
     });
     // TITLES (End)
+
+   // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-sitemap',
+          tooltip    : 'Allocate',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-hand-up',
+          tooltip    : 'Accept',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-thumbs-up',
+          tooltip    : 'Approve',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-wrench',
+          tooltip    : 'Calculate',
+        },
+        {
+          xtype      : 'button',
+          cls        : 'close',
+          tooltip    : 'Cancel',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-ok-circle',
+          tooltip    : 'Complete',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-cogs',
+          tooltip    : 'Mass Update',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-paper-clip',
+          tooltip    : 'Print',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-external-link',
+          tooltip    : 'Release',
+        },
+        {
+          xtype      : 'button',
+          iconCls    : 'icon-circle-arrow-down',
+          tooltip    : 'Receive',
+        },
+      ]
+    });
+
+    // ACTIONS (End)
 
     this.callParent();
   }

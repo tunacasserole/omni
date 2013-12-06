@@ -15,8 +15,14 @@ class Omni::Test::Purchase < Omni::Test::Base
     approval_scenarios.each {|s| test_approval_scenario s}
 
     # run 26 different allocation tests
-    @@model_action = 'Allocation'
+    @@model_action = 'allocation'
     allocation_scenarios.each {|s| test_allocation_scenario s}
+    expected = 0
+    @p.purchase_details.each {|x| expected += x.purchase_allocations.count}
+
+    @@model_action = 'computed attributes'
+    test_it('it has_many allocations through purchase_details',expected, @p.purchase_allocations.count)
+    test_it('it computes the total number of allocations',expected, @p.allocations_count)
 
     @@model_action = 'request'
     request_scenarios.each {|s| test_request_scenario s}
@@ -24,10 +30,11 @@ class Omni::Test::Purchase < Omni::Test::Base
   end
 
   def self.reset_data
+    Omni::StockLedgerActivity.where(stockable_id: 'ABABDAAA35E011E3APURCHASEDETAIL1').to_a.each {|x| x.delete}
     Omni::Purchase.where(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15').to_a.each {|x| x.stock_ledger_activities.delete_all; x.delete}
     Omni::Purchase.create(:purchase_id => 'ABABDAAA35E011E3ABAA20C9D047DD15',:supplier_id => 'B931D2A4AC5311E299E700FFSUPPLIER', :location_id => '51579764AC3E11E2947800FF58D32228',  :allocation_profile_id => '913BB680231XXXXLASTFORECASTUNITS', :purchase_type => 'SAMPLE', :purchase_source => 'SAMPLE', :ordered_by_user_id => '811166D4D50A11E2B45820C9D04AARON', :payment_term =>'NET 30',:freight_term => 'COLLECT',:ship_via => 'SAMPLE', :fob_point => 'ORIGIN' , :display => 'Olivanders wands test purchase',:purchase_approver_1_user_id => '811166D4D50A11E2B45820C9D04AARON')
 
-    Omni::AllocationDetail.all.each {|x| x.delete}
+    Omni::AllocationDetail.all.to_a.each {|x| x.delete}
 
     Omni::PurchaseAllocation.where(purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1').to_a.each {|x| x.delete}
     Omni::PurchaseAllocation.create(purchase_allocation_id: '45XXXX8YY386CPURCHASEALLOCATION1', purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1', location_id:'51579764AC3E11E2947800FF58D32228', units_allocated: 25)
@@ -182,12 +189,12 @@ class Omni::Test::Purchase < Omni::Test::Base
     # Test allocating purchase details
     x.allocate
     y = x.purchase_allocations.first
-    test_it('it creates purchase allocations when the purchase is allocated', 1, x.purchase_allocations.count)
+    test_it('it creates purchase allocations when the purchase is allocated', 3, x.purchase_allocations.count)
     y = Omni::PurchaseAllocation.where(purchase_detail_id: x.purchase_detail_id).first
     y.lock
-    test_it('Lock a purchase allocation','locked',x.state)
+    test_it('Lock a purchase allocation','locked',y.state)
     y.unlock
-    test_it('Unlock a purchase allocation','draft',x.state)
+    test_it('Unlock a purchase allocation','draft',y.state)
   end
 
   def self.test_approval_scenario(s)

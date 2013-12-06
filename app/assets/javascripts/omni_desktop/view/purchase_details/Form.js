@@ -13,6 +13,10 @@ Ext.define('Omni.view.purchase_details.Form', {
       disabled = false
     };
 
+    // var supplier_id = this.association.get('supplier_id');
+    // console.log(supplier_id);
+    var association = this.association;
+    console.log(association);
     // var supplier = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false)
 
     // FILTER (Start) =======================================================================
@@ -93,19 +97,17 @@ Ext.define('Omni.view.purchase_details.Form', {
               name: 'sku_supplier_id',
               fieldLabel: this.sku_supplier_idLabel,
               allowBlank: false,
-              // store: Ext.create(
-              //   'Omni.store.SkuSupplier',
-              //   {
-              //     pageSize: 30,
-              //     filters: [{
-              //       property: 'supplier_id',
-              //       value: me.association.get('supplier_id')
-                  // }]
-              store: me.purchaseSupplierStore = Ext.create('Omni.store.SkuSupplier', {pageSize: 30}),
+              store: Ext.create('Omni.store.SkuSupplier', {
+                pageSize: 10
+              }),
               displayField: 'display',
               queryField: 'display',
               valueField: 'sku_supplier_id',
               itemTpl:'{display}',
+              emptyText: 'skus sold by the supplier for this purchase.',
+              defaultSearch: {
+                with: { supplier_id: { equal_to: supplier_id } }
+              },
               disabled: disabled
             }
             ,{ xtype: 'numberfield',
@@ -341,27 +343,27 @@ Ext.define('Omni.view.purchase_details.Form', {
 
     this.callParent();
 
-    me.purchaseSupplierStore.on('beforeload',me.setupsupplierfilter, me);
+    // me.purchaseSupplierStore.on('beforeload',me.setupsupplierfilter, me);
   },
 
-  setupsupplierfilter: function()
-     {
-      var me=this;
+  // setupsupplierfilter: function()
+  //    {
+  //     var me=this;
 
-      var purchase_id = me.association.get('purchase_id');
+  //     var purchase_id = me.association.get('purchase_id');
 
-      var purchaseStore = new Omni.store.Purchase();
-      purchaseStore.filter('purchase_id',purchase_id);
-      purchaseStore.load(function(records,operation,success){
-        var record=records[0];
-        if (record) {
-          var supplier_id = record.get('supplier_id');
-          me.purchaseSupplierStore.proxy.extraParams.search = {
-            with: {supplier_id: {equal_to: supplier_id}}
-          }
-        }
-     });
-     },
+  //     var purchaseStore = new Omni.store.Purchase();
+  //     purchaseStore.filter('purchase_id',purchase_id);
+  //     purchaseStore.load(function(records,operation,success){
+  //       var record=records[0];
+  //       if (record) {
+  //         var supplier_id = record.get('supplier_id');
+  //         me.purchaseSupplierStore.proxy.extraParams.search = {
+  //           with: {supplier_id: {equal_to: supplier_id}}
+  //         }
+  //       }
+  //    });
+  //    },
 
   onReceiveAction : function(action, eOpts){
     this.processEventTransition('receive', 'Purchase Detail was successfully received.', 'An error occurred receiving this purchase detail.');

@@ -111,10 +111,13 @@ Ext.define('Omni.view.system_options.ExplorerContextMenu', {
          * are selected then no records are processed.
          */
         {
-          text: 'New',
-          cls: 'icon-new'
+          text: 'Accept',
+          cls: 'icon-hand-up'
+        },
+        {
+          text: 'Approve',
+          cls: 'icon-thumbs-up-alt'
         }
-
         // LEFT ACTIONS (End)
 
       ]

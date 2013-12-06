@@ -48,6 +48,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_details,                    :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'
+  has_many     :purchase_allocations,                through: :purchase_details #:class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'
   # has_many     :logs,                                :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
   has_many     :stock_ledger_activities,             :class_name => 'Omni::StockLedgerActivity', :foreign_key => 'stockable_id' , :as => :stockable
   belongs_to   :location,                            :class_name => 'Omni::Location',          :foreign_key => 'location_id'
@@ -92,6 +93,7 @@ class Omni::Purchase < ActiveRecord::Base
   computed_attributes do
     compute :total_order_units,                  :with => :compute_total_order_units
     compute :total_order_cost,                   :with => :compute_total_order_cost
+    compute :allocations_count,                  :with => :compute_allocations
   end
   # COMPUTED ATTRIBUTES (End)`
 
@@ -240,7 +242,7 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def mass_update
-    puts "mass_update type is #{mass_update_type}"
+    # puts "mass_update type is #{mass_update_type}"
     if self.mass_update_type
       self.send(mass_update_type.downcase)
       # Blank out mass update paramaters after completing the mass update
@@ -408,6 +410,10 @@ class Omni::Purchase < ActiveRecord::Base
         errors.add(:purchase_approver_2_user_id, "can't be blank") unless self.purchase_approver_2_user_id
         errors.add(:purchase_approver_3_user_id, "can't be blank") unless self.purchase_approver_3_user_id
     end
+  end
+
+  def compute_allocations
+    self.purchase_allocations.count
   end
 
   def compute_total_order_units

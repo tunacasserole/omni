@@ -58,6 +58,7 @@ Ext.define('Omni.model.Purchase', {
       { name: 'supplier_display',            type: 'string'   },
       { name: 'location_display',            type: 'string'   },
       { name: 'total_order_units',           type: 'decimal'   },
+      { name: 'allocations_count',           type: 'decimal'   },
       { name: 'total_order_cost',            type: 'decimal'   },
       { name: 'is_update_all_details',       type: 'boolean'  },
       { name: 'is_update_blank_details',     type: 'boolean'  },

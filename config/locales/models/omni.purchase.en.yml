@@ -59,6 +59,7 @@ en:
         audit_updated_at:                  'Updated Date'
         total_order_units:                 'Total Order Units'
         total_order_cost:                  'Total Order Cost'
+        allocations_count:                 'Allocations Count'
         is_update_blank_details:           'Update Details When Blank'
         is_update_all_details:             'Update All Purchase Details'
         is_include_conversions:            'Include converted items'

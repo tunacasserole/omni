@@ -78,6 +78,7 @@ Ext.define('Omni.view.purchases.Form', {
       audit_updated_atLabel:                  Omni.i18n.model.Purchase.audit_updated_at,
       total_order_unitsLabel:                 Omni.i18n.model.Purchase.total_order_units,
       total_order_costLabel:                  Omni.i18n.model.Purchase.total_order_cost,
+      allocations_countLabel:                 Omni.i18n.model.Purchase.allocations_count,
       is_update_blank_detailsLabel:           Omni.i18n.model.Purchase.is_update_blank_details,
       is_update_all_detailsLabel:             Omni.i18n.model.Purchase.is_update_all_details,
       department_idLabel:                     Omni.i18n.model.Purchase.department_id,
@@ -147,14 +148,21 @@ Ext.define('Omni.view.purchases.Form', {
               keyNavEnabled     : false,
               mouseWheelEnabled : false,
               decimalPrecision  : 2,
-              fieldLabel        : 'Total Units Ordered'
+              fieldLabel        : this.total_order_unitsLabel,
             },
             { xtype             : 'numberfield',
               name              : 'total_order_cost',
               disabled          : true,
               xtype: 'currencyfield',
               currencySymbol: null,
-              fieldLabel        : 'Total Order Cost'
+              fieldLabel        : this.total_order_costLabel,
+            },
+            { xtype             : 'numberfield',
+              name              : 'allocations_count',
+              disabled          : true,
+              // xtype: 'currencyfield',
+              // currencySymbol: null,
+              fieldLabel        : this.allocations_countLabel,
             }
           ]
         }
