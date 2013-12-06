@@ -69,7 +69,7 @@ class Omni::Test::Receipt < Omni::Test::Base
     received_units = x.receipt_details.first ? x.receipt_details.first.received_units : 9999
     test_it('it sets the received units equal to open purchase units for all the lines on a receipt when the copy_units method is called', 100, received_units)
 
-    puts "Complete a receipt detail"
+    # puts "Complete a receipt detail"
     # x = reset_data
     # x.receipt_details.first.complete
     # test_it('it writes a stock ledger activity when a receipt detail is completed', 1, Omni::StockLedgerActivity.where(stockable_type: "Omni::ReceiptDetail", stockable_id: x.receipt_details.first.receipt_detail_id).count)

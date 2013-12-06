@@ -114,7 +114,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   end
 
   def do_allocate
-    puts 'allocating'
+    # puts 'allocating'
     #  Read all existing ReceiptAllocation records for the ReceiptDetail.  If the state is draft, then delete the record.
     #  If the state is locked, then add the units_allocated to locked_units parameter and add the location_id to the locked_locations hash.
     locked_units = 0
@@ -131,9 +131,9 @@ class Omni::ReceiptDetail < ActiveRecord::Base
     end
 
     units_to_allocate = self.received_units * (self.purchase_detail ? self.purchase_detail.order_pack_size : 1)
-    puts "units_to_allocate is #{units_to_allocate}"
+    # puts "units_to_allocate is #{units_to_allocate}"
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, units_to_allocate, locked_units, locked_locations, (self.purchase_detail.purchase_detail_id if self.purchase_detail) )
-    puts "allocations to create is #{allocations_to_create.length}"
+    # puts "allocations to create is #{allocations_to_create.length}"
     allocations_to_create.each { |x| Omni::ReceiptAllocation.create(receipt_detail_id: self.receipt_detail_id, location_id: x[:location_id], units_allocated: x[:units_allocated], units_needed: x[:units_needed]) } # unless k = self.purchase.location_id }
   end
 

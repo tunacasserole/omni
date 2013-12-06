@@ -8,7 +8,7 @@ class CreateOmniDailyResults < ActiveRecord::Migration
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :sku_id,                          :string,            :null  =>  false,   :limit   => 32
         t.column   :location_id,                     :string,            :null  =>  false,   :limit   => 32
-        t.column   :datetime,                        :datetime,          :null  =>  false
+        t.column   :date,                            :date,          :null  =>  false
         t.column   :adjusted_cost,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :adjusted_retail,                 :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :adjusted_units,                  :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

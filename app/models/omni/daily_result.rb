@@ -1,10 +1,4 @@
 class Omni::DailyResult < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :daily_results
   self.primary_key  = :daily_result_id
@@ -20,12 +14,12 @@ class Omni::DailyResult < ActiveRecord::Base
   validates    :display,                         :presence    => true
   validates    :sku_id,                          :presence    => true
   validates    :location_id,                     :presence    => true
-  validates   :datetime,                         :presence    => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
   default      :daily_result_id,                  :override  =>  false,        :with  => :guid
+  default      :date,                             :override  =>  false,        :with  => :now
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.date}"}
   default      :adjusted_cost,                    :override  =>  false,        :to    => 0
   default      :adjusted_retail,                  :override  =>  false,        :to    => 0

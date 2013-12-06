@@ -93,7 +93,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
       when 'ADD'
         new_value = update_row.send(r.attribute_name) + self.send(r.input_attribute)
         # puts "*** ADDING #{update_row.send(r.attribute_name)} plus #{self.send(r.input_attribute)} = #{new_value}"
-      when 'DATE'
+      when 'DATE', 'DATETIME'
         # puts "*** SETTING DATES ***"
         new_value = Date.today
       end
