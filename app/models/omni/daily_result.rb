@@ -20,7 +20,7 @@ class Omni::DailyResult < ActiveRecord::Base
   validates    :display,                         :presence    => true
   validates    :sku_id,                          :presence    => true
   validates    :location_id,                     :presence    => true
-  validates    :date,                            :presence    => true
+  validates   :datetime,                         :presence    => true
   # VALIDATIONS (End)
 
 

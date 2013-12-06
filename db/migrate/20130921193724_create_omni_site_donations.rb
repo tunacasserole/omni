@@ -7,7 +7,7 @@ class CreateOmniSiteDonations < ActiveRecord::Migration
         t.column   :site_donation_id,                :string,            :null  =>  false,   :limit   => 32
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :site_id,                         :string,            :null  =>  false,   :limit   => 32
-        t.column   :donation_date,                   :date,              :null  =>  false
+        t.column   :donation_date,                   :datetime,          :null  =>  false
         t.column   :donation_amount,                 :decimal,           :null  =>  false,   :scale   => 2,          :precision  => 11
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end

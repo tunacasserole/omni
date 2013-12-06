@@ -3,13 +3,13 @@ Ext.define('Omni.view.periods.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-periods-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -45,7 +45,13 @@ Ext.define('Omni.view.periods.Explorer', {
     Ext.apply(this, {
       columns: [
         { header: this.start_dateLabel, dataIndex: 'start_date',  flex: 1,  sortable: true , renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: true , renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        // { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: true , renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        {
+          header        : this.end_dateLabel,
+          dataIndex     : 'end_date',
+          flex          : 1,
+          renderer      : Ext.util.Format.dateRenderer('m/d/y')
+        },
         { header: this.year_numberLabel, dataIndex: 'year_number',  flex: 1,  sortable: true  },
         { header: this.period_numberLabel, dataIndex: 'period_number',  flex: 1,  sortable: true  }
       ]

@@ -7,11 +7,11 @@ class CreateOmniTransferHd < ActiveRecord::Migration
         t.column   :id,                              :integer,           :null  =>  false
         t.column   :from_outlet_nbr,                 :integer,           :null  =>  false
         t.column   :to_outlet_nbr,                   :integer,           :null  =>  false
-        t.column   :date,                            :date,              :null  =>  false
+        t.column   :datetime,                        :datetime,          :null  =>  false
         t.column   :tracking_nbr,                    :string,            :null  =>  true,    :limit   => 30
         t.column   :status_id,                       :integer,           :null  =>  false
         t.column   :user_id,                         :integer,           :null  =>  false
-        t.column   :ship_date,                       :date,              :null  =>  true
+        t.column   :ship_date,                       :datetime,          :null  =>  true
         t.column   :accepted_user_id,                :integer,           :null  =>  true
         t.column   :comment,                         :string,            :null  =>  true,    :limit   => 150
       end

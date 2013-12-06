@@ -10,9 +10,9 @@ class CreateOmniOrders < ActiveRecord::Migration
         t.column   :terminal_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :customer_order_nbr,              :string,            :null  =>  true,    :limit   => 11
         t.column   :customer_id,                     :string,            :null  =>  false,   :limit   => 32
-        t.column   :order_start_date,                :date,              :null  =>  true
-        t.column   :order_date,                      :date,              :null  =>  false
-        t.column   :price_lookup_date,               :date,              :null  =>  true
+        t.column   :order_start_date,                :datetime,          :null  =>  true
+        t.column   :order_date,                      :datetime,          :null  =>  false
+        t.column   :price_lookup_date,               :datetime,          :null  =>  true
         t.column   :user_id,                         :string,            :null  =>  true,    :limit   => 32
         t.column   :order_source,                    :string,            :null  =>  false,   :limit   => 100
         t.column   :is_tax_exempt_date,              :boolean,           :null  =>  true

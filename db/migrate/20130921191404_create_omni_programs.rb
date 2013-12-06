@@ -10,13 +10,13 @@ class CreateOmniPrograms < ActiveRecord::Migration
         t.column   :site_id,                         :string,            :null  =>  false,   :limit   => 32
         t.column   :program_name,                    :string,            :null  =>  true,    :limit   => 100
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300
-        t.column   :effective_date,                  :date,              :null  =>  true
-        t.column   :end_date,                        :date,              :null  =>  true
-        t.column   :contract_sent_date,              :date,              :null  =>  true
-        t.column   :contract_received_date,          :date,              :null  =>  true
-        t.column   :order_form_sent_date,            :date,              :null  =>  true
-        t.column   :contract_won_date,               :date,              :null  =>  true
-        t.column   :contract_lost_date,              :date,              :null  =>  true
+        t.column   :effective_date,                  :datetime,          :null  =>  true
+        t.column   :end_date,                        :datetime,          :null  =>  true
+        t.column   :contract_sent_date,              :datetime,          :null  =>  true
+        t.column   :contract_received_date,          :datetime,          :null  =>  true
+        t.column   :order_form_sent_date,            :datetime,          :null  =>  true
+        t.column   :contract_won_date,               :datetime,          :null  =>  true
+        t.column   :contract_lost_date,              :datetime,          :null  =>  true
         t.column   :is_exclusive,                    :boolean,           :null  =>  true
         t.column   :teacher_discount_percent,        :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :administrator_discount_percent,  :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

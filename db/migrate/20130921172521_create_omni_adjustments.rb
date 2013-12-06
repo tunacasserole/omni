@@ -12,11 +12,11 @@ class CreateOmniAdjustments < ActiveRecord::Migration
         t.column   :sku_id,                          :string,            :null  =>  false,   :limit   => 32
         t.column   :bin_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300
-        t.column   :request_date,                    :date,              :null  =>  true
+        t.column   :request_date,                    :datetime,          :null  =>  true
         t.column   :request_user_id,                 :string,            :null  =>  true,    :limit   => 32
-        t.column   :post_date,                       :date,              :null  =>  true
+        t.column   :post_date,                       :datetime,          :null  =>  true
         t.column   :post_user_id,                    :string,            :null  =>  true,    :limit   => 32
-        t.column   :cancel_date,                     :date,              :null  =>  true
+        t.column   :cancel_date,                     :datetime,          :null  =>  true
         t.column   :cancel_user_id,                  :string,            :null  =>  true,    :limit   => 32
         t.column   :adjustment_reason_id,            :string,            :null  =>  false,   :limit   => 32
         t.column   :adjustment_units,                :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

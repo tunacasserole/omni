@@ -25,6 +25,7 @@ Ext.define('Omni.model.PurchaseDetail', {
       { name: 'selling_units_approved',      type: 'decimal'  },
       { name: 'selling_units_received',      type: 'decimal'  },
       { name: 'selling_units_cancelled',     type: 'decimal'  },
+      { name: 'open_units',                  type: 'integer'  },
       { name: 'supplier_cost',               type: 'decimal'  },
       { name: 'invoice_cost',                type: 'decimal'  },
       { name: 'inventory_cost',              type: 'decimal'  },

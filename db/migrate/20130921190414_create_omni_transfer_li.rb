@@ -9,7 +9,7 @@ class CreateOmniTransferLi < ActiveRecord::Migration
         t.column   :stock_nbr,                       :integer,           :null  =>  false
         t.column   :size,                            :string,            :null  =>  false,   :limit   => 3
         t.column   :qty,                             :integer,           :null  =>  false
-        t.column   :date,                            :datetime,          :null  =>  false
+        t.column   :datetime,                        :datetime,          :null  =>  false
         t.column   :box_nbr,                         :string,            :null  =>  true,    :limit   => 255
         t.column   :status_id,                       :integer,           :null  =>  false
       end

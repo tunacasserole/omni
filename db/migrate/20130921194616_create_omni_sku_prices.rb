@@ -8,7 +8,7 @@ class CreateOmniSkuPrices < ActiveRecord::Migration
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :price_book_id,                   :string,            :null  =>  true,    :limit   => 32
-        t.column   :effective_date,                  :date,              :null  =>  true
+        t.column   :effective_date,                  :datetime,          :null  =>  true
         t.column   :retail_price,                    :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :price_units,                     :integer,           :null  =>  true
         t.column   :sales_category,                  :string,            :null  =>  true,    :limit   => 100

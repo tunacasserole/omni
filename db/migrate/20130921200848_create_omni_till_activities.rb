@@ -8,7 +8,7 @@ class CreateOmniTillActivities < ActiveRecord::Migration
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :till_id,                         :string,            :null  =>  true,    :limit   => 32
         t.column   :till_activity_nbr,               :string,            :null  =>  true,    :limit   => 11
-        t.column   :till_activity_date,              :date,              :null  =>  true
+        t.column   :till_activity_date,              :datetime,          :null  =>  true
         t.column   :till_activity_reason,            :string,            :null  =>  true,    :limit   => 100
         t.column   :tender_id,                       :string,            :null  =>  true,    :limit   => 32
         t.column   :activity_count,                  :integer,           :null  =>  true

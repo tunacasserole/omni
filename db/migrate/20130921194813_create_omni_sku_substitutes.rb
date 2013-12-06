@@ -9,8 +9,8 @@ class CreateOmniSkuSubstitutes < ActiveRecord::Migration
         t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :substitute_sku_id,               :string,            :null  =>  true,    :limit   => 32
         t.column   :sku_substitute_type,             :string,            :null  =>  true,    :limit   => 100
-        t.column   :effective_date,                  :date,              :null  =>  true
-        t.column   :end_date,                        :date,              :null  =>  true
+        t.column   :effective_date,                  :datetime,          :null  =>  true
+        t.column   :end_date,                        :datetime,          :null  =>  true
         t.column   :priority,                        :integer,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end

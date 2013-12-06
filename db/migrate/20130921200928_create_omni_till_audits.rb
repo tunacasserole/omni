@@ -7,13 +7,13 @@ class CreateOmniTillAudits < ActiveRecord::Migration
         t.column   :till_audit_id,                   :string,            :null  =>  false,   :limit   => 32
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :till_id,                         :string,            :null  =>  true,    :limit   => 32
-        t.column   :audit_date,                      :date,              :null  =>  true
+        t.column   :audit_date,                      :datetime,          :null  =>  true
         t.column   :tender_id,                       :string,            :null  =>  true,    :limit   => 32
         t.column   :system_count,                    :integer,           :null  =>  true
         t.column   :system_amount,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :audit_count,                     :integer,           :null  =>  true
         t.column   :audit_amount,                    :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
-        t.column   :gl_interface_date,               :date,              :null  =>  true
+        t.column   :gl_interface_date,               :datetime,          :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

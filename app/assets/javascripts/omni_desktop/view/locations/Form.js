@@ -7,7 +7,6 @@ Ext.define('Omni.view.locations.Form', {
 
     var me = this;
 
-
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       descriptionLabel:                           Omni.i18n.model.Location.description,
@@ -299,6 +298,16 @@ Ext.define('Omni.view.locations.Form', {
       ]
     });
     // FIELDSETS (End)
+
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Locations',
+      newTitle: 'New Location',
+      newSubtitle: 'Complete the following to create a new Location'
+    });
+    // TITLES (End)
+
 
 
     this.callParent();

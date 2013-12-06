@@ -14,10 +14,10 @@ class CreateOmniWorkOrders < ActiveRecord::Migration
         t.column   :supplier_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :work_order_description,          :string,            :null  =>  true,    :limit   => 300
         t.column   :work_order_type,                 :string,            :null  =>  false,   :limit   => 100
-        t.column   :release_date,                    :date,              :null  =>  true
-        t.column   :start_date,                      :date,              :null  =>  true
-        t.column   :complete_date,                   :date,              :null  =>  true
-        t.column   :target_complete_date,            :date,              :null  =>  true
+        t.column   :release_date,                    :datetime,          :null  =>  true
+        t.column   :start_date,                      :datetime,          :null  =>  true
+        t.column   :complete_date,                   :datetime,          :null  =>  true
+        t.column   :target_complete_date,            :datetime,          :null  =>  true
         t.column   :request_units,                   :integer,           :null  =>  true
         t.column   :complete_units,                  :integer,           :null  =>  true
         t.column   :is_cancelled,                    :boolean,           :null  =>  true

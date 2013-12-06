@@ -12,8 +12,8 @@ class CreateOmniBoms < ActiveRecord::Migration
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300
         t.column   :bom_type,                        :string,            :null  =>  false,   :limit   => 100
         t.column   :version,                         :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
-        t.column   :effective_date,                  :date,              :null  =>  true
-        t.column   :end_date,                        :date,              :null  =>  true
+        t.column   :effective_date,                  :datetime,          :null  =>  true
+        t.column   :end_date,                        :datetime,          :null  =>  true
         t.column   :is_primary_bom,                  :boolean,           :null  =>  true
         t.column   :labor_hours,                     :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :machine_hours,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

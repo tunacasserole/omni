@@ -1,7 +1,7 @@
 en:
   activerecord:
     models:
-      omni/location_user: 'LocationUser'
+      omni/location_user: 'Location User'
     attributes:
       omni/location_user:
         location_user_id:                User Location

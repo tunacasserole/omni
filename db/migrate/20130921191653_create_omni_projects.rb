@@ -8,7 +8,7 @@ class CreateOmniProjects < ActiveRecord::Migration
         t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
         t.column   :display,                         :string,            :null  =>  true,    :limit   => 200
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 2000
-        t.column   :release_date,                    :date,              :null  =>  true
+        t.column   :release_date,                    :datetime,          :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

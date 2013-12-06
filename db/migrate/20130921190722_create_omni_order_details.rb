@@ -13,7 +13,7 @@ class CreateOmniOrderDetails < ActiveRecord::Migration
         t.column   :grade_id,                        :string,            :null  =>  true,    :limit   => 32
         t.column   :gender,                          :string,            :null  =>  true,    :limit   => 100
         t.column   :sales_user_id,                   :string,            :null  =>  true,    :limit   => 32
-        t.column   :promised_date,                   :date,              :null  =>  true
+        t.column   :promised_date,                   :datetime,          :null  =>  true
         t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
         t.column   :serial_number,                   :string,            :null  =>  true,    :limit   => 100
         t.column   :order_units,                     :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
@@ -29,7 +29,7 @@ class CreateOmniOrderDetails < ActiveRecord::Migration
         t.column   :customer_discount_reason,        :string,            :null  =>  true,    :limit   => 100
         t.column   :customer_return_reason,          :string,            :null  =>  true,    :limit   => 100
         t.column   :customer_cancel_reason,          :string,            :null  =>  true,    :limit   => 100
-        t.column   :cancel_date,                     :date,              :null  =>  true
+        t.column   :cancel_date,                     :datetime,          :null  =>  true
         t.column   :reference_order_detail_id,       :string,            :null  =>  true,    :limit   => 32
         t.column   :is_cancelled,                    :boolean,           :null  =>  true
         t.column   :is_layaway,                      :boolean,           :null  =>  true

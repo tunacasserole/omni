@@ -30,6 +30,16 @@ development:
   password:
   socket: /tmp/mysql.sock
 
+# local omni_production
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: omni_development
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
 #digital ocean omni_test
 test:
   adapter: mysql2
@@ -41,12 +51,12 @@ test:
   password: EhvKBHOVKt
   socket: /tmp/mysql.sock
 
-production:
-  adapter: mysql2
-  hostname: us-cdbr-east-04.cleardb.com
-  encoding: utf8
-  database: heroku_5757f6b0e28df88
-  pool: 5
-  username: bd050ffa31f32a
-  password: 9857bf97
-  socket: /tmp/mysql.sock
+# production:
+#   adapter: mysql2
+#   hostname: us-cdbr-east-04.cleardb.com
+#   encoding: utf8
+#   database: heroku_5757f6b0e28df88
+#   pool: 5
+#   username: bd050ffa31f32a
+#   password: 9857bf97
+#   socket: /tmp/mysql.sock

@@ -27,7 +27,7 @@ class CreateOmniOrdersHd < ActiveRecord::Migration
         t.column   :viewed_date,                     :datetime,          :null  =>  true
         t.column   :dbman_order_nbr,                 :integer,           :null  =>  true
         t.column   :allow_partial_fill,              :integer,           :null  =>  false
-        t.column   :date_auto_fill_run,              :date,              :null  =>  true
+        t.column   :date_auto_fill_run,              :datetime,          :null  =>  true
         t.column   :temp_order_nbr,                  :string,            :null  =>  true,    :limit   => 17
         t.column   :total,                           :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 8
         t.column   :web_order,                       :integer,           :null  =>  true

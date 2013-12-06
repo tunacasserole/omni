@@ -43,12 +43,12 @@ class CreateOmniInventories < ActiveRecord::Migration
         t.column   :sale_cost_py1,           :decimal,           :null  =>  true,    :precision  => 11,    :scale   => 2
         t.column   :sale_cost_py2,           :decimal,           :null  =>  true,    :precision  => 11,    :scale   => 2
         t.column   :sale_cost_py3,           :decimal,           :null  =>  true,    :precision  => 11,    :scale   => 2
-        t.column   :reserve_end_date,                :date,              :null  =>  true
-        t.column   :first_receipt_date,              :date,              :null  =>  true
-        t.column   :last_receipt_date,               :date,              :null  =>  true
-        t.column   :first_sale_date,                 :date,              :null  =>  true
-        t.column   :last_sale_date,                  :date,              :null  =>  true
-        t.column   :last_inventory_date,             :date,              :null  =>  true
+        t.column   :reserve_end_date,                :datetime,          :null  =>  true
+        t.column   :first_receipt_date,              :datetime,          :null  =>  true
+        t.column   :last_receipt_date,               :datetime,          :null  =>  true
+        t.column   :first_sale_date,                 :datetime,          :null  =>  true
+        t.column   :last_sale_date,                  :datetime,          :null  =>  true
+        t.column   :last_inventory_date,             :datetime,          :null  =>  true
         t.column   :replenishment_method,            :string,            :null  =>  true,    :limit   => 100
         t.column   :replenishment_source,            :string,            :null  =>  true,    :limit   => 100
         t.column   :safety_stock_units,              :integer,           :null  =>  true

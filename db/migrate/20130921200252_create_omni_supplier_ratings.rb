@@ -8,7 +8,7 @@ class CreateOmniSupplierRatings < ActiveRecord::Migration
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :supplier_id,                     :string,            :null  =>  false,   :limit   => 32
         t.column   :supplier_rating_subject_id,      :string,            :null  =>  false,   :limit   => 32
-        t.column   :rating_date,                     :date,              :null  =>  true
+        t.column   :rating_date,                     :datetime,          :null  =>  true
         t.column   :rating_value,                    :integer,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end

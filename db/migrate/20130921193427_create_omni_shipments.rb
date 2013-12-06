@@ -13,10 +13,10 @@ class CreateOmniShipments < ActiveRecord::Migration
         t.column   :shippable_id,                    :string,            :null  =>  true,    :limit   => 32
         t.column   :supplier_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :tracking_number,                 :string,            :null  =>  true,    :limit   => 100
-        t.column   :create_date,                     :date,              :null  =>  false
-        t.column   :ship_date,                       :date,              :null  =>  true
-        t.column   :receipt_date,                    :date,              :null  =>  true
-        t.column   :estimated_delivery_date,         :date,              :null  =>  true
+        t.column   :create_date,                     :datetime,          :null  =>  false
+        t.column   :ship_date,                       :datetime,          :null  =>  true
+        t.column   :receipt_date,                    :datetime,          :null  =>  true
+        t.column   :estimated_delivery_date,         :datetime,          :null  =>  true
         t.column   :shipping_cost,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :ship_name,                       :string,            :null  =>  true,    :limit   => 100
         t.column   :ship_line_1,                     :string,            :null  =>  true,    :limit   => 100

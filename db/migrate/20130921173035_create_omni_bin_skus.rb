@@ -5,7 +5,7 @@ class CreateOmniBinSkus < ActiveRecord::Migration
   	unless ActiveRecord::Base.connection.tables.include?('bin_skus')
       create_table(:bin_skus, :id => false) do |t|
         t.column   :sku_alias_id,                    :string,            :null  =>  true,    :limit   => 32
-        t.column   :last_activity_date,              :date,              :null  =>  true
+        t.column   :last_activity_date,              :datetime,          :null  =>  true
         t.column   :being_received_units,            :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :on_hand_units,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :pack_type,                       :string,            :null  =>  true,    :limit   => 100

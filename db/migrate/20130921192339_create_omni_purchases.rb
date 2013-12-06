@@ -11,18 +11,18 @@ class CreateOmniPurchases < ActiveRecord::Migration
     t.column   :purchase_type,                   :string,            :null  =>  true,    :limit   => 32
     t.column   :purchase_source,                 :string,            :null  =>  true,    :limit   => 32
     t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
-    t.column   :order_date,                      :date,              :null  =>  true
+    t.column   :order_date,                      :datetime,          :null  =>  true
     t.column   :allocation_profile_id,           :string,            :null  =>  true,    :limit   => 32
     t.column   :ordered_by_user_id,              :string,            :null  =>  true,    :limit   => 32
-    t.column   :ship_date,                       :date,              :null  =>  true
-    t.column   :delivery_date,                   :date,              :null  =>  true
-    t.column   :cancel_not_shipped_by_date,      :date,              :null  =>  true
-    t.column   :cancel_not_received_by_date,     :date,              :null  =>  true
-    t.column   :approval_1_date,                 :date,              :null  =>  true
-    t.column   :approval_2_date,                 :date,              :null  =>  true
-    t.column   :approval_3_date,                 :date,              :null  =>  true
-    t.column   :first_receipt_date,              :date,              :null  =>  true
-    t.column   :cancelled_date,                  :date,              :null  =>  true
+    t.column   :ship_date,                       :datetime,          :null  =>  true
+    t.column   :delivery_date,                   :datetime,          :null  =>  true
+    t.column   :cancel_not_shipped_by_date,      :datetime,          :null  =>  true
+    t.column   :cancel_not_received_by_date,     :datetime,          :null  =>  true
+    t.column   :approval_1_date,                 :datetime,          :null  =>  true
+    t.column   :approval_2_date,                 :datetime,          :null  =>  true
+    t.column   :approval_3_date,                 :datetime,          :null  =>  true
+    t.column   :first_receipt_date,              :datetime,          :null  =>  true
+    t.column   :cancelled_date,                  :datetime,          :null  =>  true
     t.column   :payment_term,                    :string,            :null  =>  true,    :limit   => 100
     t.column   :freight_term,                    :string,            :null  =>  true,    :limit   => 100
     t.column   :ship_via,                        :string,            :null  =>  true,    :limit   => 100
@@ -37,7 +37,7 @@ class CreateOmniPurchases < ActiveRecord::Migration
     t.column   :purchase_approver_1_user_id,     :string,            :null  =>  true,    :limit   => 32
     t.column   :purchase_approver_2_user_id,     :string,            :null  =>  true,    :limit   => 32
     t.column   :purchase_approver_3_user_id,     :string,            :null  =>  true,    :limit   => 32
-    t.column   :last_receipt_date,               :date,              :null  =>  true
+    t.column   :last_receipt_date,               :datetime,          :null  =>  true
     t.column   :pay_to_supplier_id,              :string,            :null  =>  true,    :limit   => 32
     t.column   :ship_thru_supplier_id,           :string,            :null  =>  true,    :limit   => 32
     t.column   :supplier_address_1,              :string,            :null  =>  true,    :limit   => 100

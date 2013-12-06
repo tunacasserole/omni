@@ -28,8 +28,8 @@ class CreateOmniLocations < ActiveRecord::Migration
         t.column   :is_webstore,                     :boolean,           :null  =>  true
         t.column   :is_factory,                      :boolean,           :null  =>  true
         t.column   :is_warehouse,                    :boolean,           :null  =>  true
-        t.column   :open_date,                       :date,              :null  =>  true
-        t.column   :close_date,                      :date,              :null  =>  true
+        t.column   :open_date,                       :datetime,          :null  =>  true
+        t.column   :close_date,                      :datetime,          :null  =>  true
         t.column   :parent_location_id,              :string,            :null  =>  true,    :limit   => 32
         t.column   :district_id,                     :string,            :null  =>  false,   :limit   => 32
         t.column   :price_book_id,                   :string,            :null  =>  true,    :limit   => 32

@@ -24,7 +24,7 @@ class CreateOmniAreas < ActiveRecord::Migration
         t.column   :is_many_sku_per_bin,             :boolean,           :null  =>  true
         t.column   :default_cube_capacity,           :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :is_request_cube_calculation,     :boolean,           :null  =>  true
-        t.column   :last_utilization_calc_date,      :date,              :null  =>  true
+        t.column   :last_utilization_calc_date,      :datetime,          :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

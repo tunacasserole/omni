@@ -14,10 +14,10 @@ class CreateOmniPickTickets < ActiveRecord::Migration
         t.column   :work_order_id,                   :string,            :null  =>  true,    :limit   => 32
         t.column   :request_units,                   :integer,           :null  =>  true
         t.column   :complete_units,                  :integer,           :null  =>  true
-        t.column   :release_date,                    :date,              :null  =>  true
-        t.column   :start_date,                      :date,              :null  =>  true
-        t.column   :complete_date,                   :date,              :null  =>  true
-        t.column   :ship_date,                       :date,              :null  =>  true
+        t.column   :release_date,                    :datetime,          :null  =>  true
+        t.column   :start_date,                      :datetime,          :null  =>  true
+        t.column   :complete_date,                   :datetime,          :null  =>  true
+        t.column   :ship_date,                       :datetime,          :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

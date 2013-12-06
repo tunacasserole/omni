@@ -3,9 +3,9 @@ Ext.define('Omni.model.Receipt', {
 
   fields: [
       { name: 'receipt_id',                  type: 'string'   },
+      { name: 'receipt_nbr',                 type: 'string'   },
       { name: 'display',                     type: 'string'   },
       { name: 'state',                       type: 'string'   },
-      { name: 'receipt_nbr',                 type: 'string'   },
       { name: 'location_id',                 type: 'string'   },
       { name: 'location_display',            type: 'string'   },
       { name: 'carrier_supplier_id',         type: 'string'   },

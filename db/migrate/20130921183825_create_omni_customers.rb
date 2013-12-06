@@ -7,7 +7,7 @@ class CreateOmniCustomers < ActiveRecord::Migration
         t.column   :customer_id,                     :string,            :null  =>  false,   :limit   => 32
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :customer_nbr,                    :string,            :null  =>  false,   :limit   => 11
-        t.column   :registration_date,               :date,              :null  =>  true
+        t.column   :registration_date,               :datetime,          :null  =>  true
         t.column   :user_id,                         :string,            :null  =>  true,    :limit   => 32
         t.column   :name_prefix,                     :string,            :null  =>  true,    :limit   => 100
         t.column   :first_name,                      :string,            :null  =>  true,    :limit   => 100
@@ -25,7 +25,7 @@ class CreateOmniCustomers < ActiveRecord::Migration
         t.column   :is_contractor,                   :boolean,           :null  =>  true
         t.column   :contractor_nbr,                  :string,            :null  =>  true,    :limit   => 11
         t.column   :is_student,                      :boolean,           :null  =>  true
-        t.column   :birth_date,                      :date,              :null  =>  true
+        t.column   :birth_date,                      :datetime,          :null  =>  true
         t.column   :gender,                          :string,            :null  =>  true,    :limit   => 100
         t.column   :is_analyst,                      :boolean,           :null  =>  true
         t.column   :is_developer,                    :boolean,           :null  =>  true
@@ -63,8 +63,8 @@ class CreateOmniCustomers < ActiveRecord::Migration
         t.column   :customer_account_nbr,            :string,            :null  =>  true,    :limit   => 11
         t.column   :customer_account_type,           :string,            :null  =>  true,    :limit   => 100
         t.column   :customer_account_name,           :string,            :null  =>  true,    :limit   => 100
-        t.column   :account_open_date,               :date,              :null  =>  true
-        t.column   :account_close_date,              :date,              :null  =>  true
+        t.column   :account_open_date,               :datetime,          :null  =>  true
+        t.column   :account_close_date,              :datetime,          :null  =>  true
         t.column   :credit_limit,                    :integer,           :null  =>  true
         t.column   :is_on_hold,                      :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true

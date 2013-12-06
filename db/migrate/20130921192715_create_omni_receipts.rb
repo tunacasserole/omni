@@ -12,13 +12,13 @@ class CreateOmniReceipts < ActiveRecord::Migration
       t.column   :display,                         :string,            :null  =>  true,   :limit   => 300
       t.column   :state,                           :string,            :null  =>  true,   :limit   => 300
       t.column   :receipt_nbr,                     :string,            :null  =>  true,    :limit   => 11
-      t.column   :create_date,                     :date,              :null  =>  true
-      t.column   :ship_date,                       :date,              :null  =>  true
-      t.column   :appointment_date,                :date,              :null  =>  true
+      t.column   :create_date,                     :datetime,          :null  =>  true
+      t.column   :ship_date,                       :datetime,          :null  =>  true
+      t.column   :appointment_date,                :datetime,          :null  =>  true
       t.column   :appointment_duration,            :integer,           :null  =>  true
-      t.column   :start_date,                      :date,              :null  =>  true
-      t.column   :accept_date,                     :date,              :null  =>  true
-      t.column   :complete_date,                   :date,              :null  =>  true
+      t.column   :start_date,                      :datetime,          :null  =>  true
+      t.column   :accept_date,                     :datetime,          :null  =>  true
+      t.column   :complete_date,                   :datetime,          :null  =>  true
       t.column   :trailer_identifier,              :string,            :null  =>  true,    :limit   => 100
       t.column   :pro_number,                      :string,            :null  =>  true,    :limit   => 100
       t.column   :bill_of_lading_number,           :string,            :null  =>  true,    :limit   => 100

@@ -17,7 +17,8 @@ en:
         size_name:                         Size Name
         sku_alias:                         Sku Alias
         allocation_profile_id:             Allocation Profile
-        units_ordered:                     Units Ordered 
+        units_ordered:                     Units Ordered
+        open_units:                        Open Units
         order_pack_size:                   Order Pack Size
         order_pack_type:                   Order Pack Type
         order_cost_units:                  Order Cost Units

@@ -3,7 +3,6 @@ Ext.define('Omni.view.purchase_details.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-purchase_details-Form',
 
-
   initComponent:function () {
 
     var me = this;
@@ -13,10 +12,10 @@ Ext.define('Omni.view.purchase_details.Form', {
       disabled = false
     };
 
-    // var supplier_id = this.association.get('supplier_id');
+    var supplier_id = this.association.get('supplier_id');
     // console.log(supplier_id);
-    var association = this.association;
-    console.log(association);
+    // var association = this.association;
+    // console.log(association);
     // var supplier = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false)
 
     // FILTER (Start) =======================================================================
@@ -52,6 +51,7 @@ Ext.define('Omni.view.purchase_details.Form', {
       selling_units_approvedLabel:            Omni.i18n.model.PurchaseDetail.selling_units_approved,
       selling_units_receivedLabel:            Omni.i18n.model.PurchaseDetail.selling_units_received,
       selling_units_cancelledLabel:           Omni.i18n.model.PurchaseDetail.selling_units_cancelled,
+      open_unitsLabel:                        Omni.i18n.model.PurchaseDetail.open_units,
       supplier_costLabel:                     Omni.i18n.model.PurchaseDetail.supplier_cost,
       invoice_costLabel:                      Omni.i18n.model.PurchaseDetail.invoice_cost,
       inventory_costLabel:                    Omni.i18n.model.PurchaseDetail.inventory_cost,
@@ -116,6 +116,12 @@ Ext.define('Omni.view.purchase_details.Form', {
               minValue: 0,
               allowBlank: false,
               disabled: disabled
+            }
+            ,{ xtype: 'numberfield',
+              name: 'open_units',
+              fieldLabel: this.open_unitsLabel,
+              allowBlank: true,
+              disabled: true
             }
            ,{ xtype: 'textfield',
               name: 'supplier_item_identifier',

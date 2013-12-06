@@ -8,8 +8,8 @@ class CreateOmniLocationTaxHolidays < ActiveRecord::Migration
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :location_id,                     :string,            :null  =>  false,   :limit   => 32
         t.column   :short_name,                      :string,            :null  =>  false,   :limit   => 15
-        t.column   :effective_date,                  :date,              :null  =>  true
-        t.column   :end_date,                        :date,              :null  =>  true
+        t.column   :effective_date,                  :datetime,          :null  =>  true
+        t.column   :end_date,                        :datetime,          :null  =>  true
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300
         t.column   :is_tax_holiday,                  :boolean,           :null  =>  true
         t.column   :price_cutoff,                    :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

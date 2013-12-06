@@ -34,9 +34,9 @@ class CreateOmniSkus < ActiveRecord::Migration
         t.column   :color_name,                      :string,            :null  =>  true,    :limit   => 100
         t.column   :color_short_name,                :string,            :null  =>  true,    :limit   => 15
         t.column   :brand,                           :string,            :null  =>  true,    :limit   => 100
-        t.column   :effective_date,                  :date,              :null  =>  true
-        t.column   :discontinued_date,               :date,              :null  =>  true
-        t.column   :out_of_stock_date,               :date,              :null  =>  true
+        t.column   :effective_date,                  :datetime,          :null  =>  true
+        t.column   :discontinued_date,               :datetime,          :null  =>  true
+        t.column   :out_of_stock_date,               :datetime,          :null  =>  true
         t.column   :fabric_content,                  :string,            :null  =>  true,    :limit   => 100
         t.column   :initial_retail_price,            :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :suggested_retail_price,          :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

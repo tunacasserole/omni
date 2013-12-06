@@ -11,9 +11,9 @@ class CreateOmniStyles < ActiveRecord::Migration
         t.column   :short_name,                      :string,            :null  =>  true,    :limit   => 100
         t.column   :concatenated_name,               :string,            :null  =>  true,    :limit   => 100
         t.column   :pos_name,                        :string,            :null  =>  true,    :limit   => 100
-        t.column   :effective_date,                  :date,              :null  =>  true
-        t.column   :discontinued_date,               :date,              :null  =>  true
-        t.column   :out_of_stock_date,               :date,              :null  =>  true
+        t.column   :effective_date,                  :datetime,          :null  =>  true
+        t.column   :discontinued_date,               :datetime,          :null  =>  true
+        t.column   :out_of_stock_date,               :datetime,          :null  =>  true
         t.column   :subclass_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :product_id,                      :string,            :null  =>  true,    :limit   => 32
         t.column   :buyer_user_id,                   :string,            :null  =>  true,    :limit   => 32

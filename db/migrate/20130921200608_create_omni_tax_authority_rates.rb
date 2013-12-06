@@ -7,8 +7,8 @@ class CreateOmniTaxAuthorityRates < ActiveRecord::Migration
         t.column   :tax_authority_rate_id,           :string,            :null  =>  false,   :limit   => 32
         t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
         t.column   :tax_authority_id,                :string,            :null  =>  false,   :limit   => 32
-        t.column   :effective_date,                  :date,              :null  =>  true
-        t.column   :end_date,                        :date,              :null  =>  true
+        t.column   :effective_date,                  :datetime,          :null  =>  true
+        t.column   :end_date,                        :datetime,          :null  =>  true
         t.column   :tax_percent,                     :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end

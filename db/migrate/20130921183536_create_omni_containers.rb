@@ -14,14 +14,14 @@ class CreateOmniContainers < ActiveRecord::Migration
         t.column   :barcode_nbr,                     :string,            :null  =>  true,    :limit   => 100
         t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
-        t.column   :create_date,                     :date,              :null  =>  true
-        t.column   :last_update_date,                :date,              :null  =>  true
+        t.column   :create_date,                     :datetime,          :null  =>  true
+        t.column   :last_update_date,                :datetime,          :null  =>  true
         t.column   :is_located,                      :boolean,           :null  =>  true
         t.column   :is_moving,                       :boolean,           :null  =>  true
         t.column   :is_in_transit,                   :boolean,           :null  =>  true
         t.column   :bin_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :is_container_lost,               :boolean,           :null  =>  true
-        t.column   :last_verify_date,                :date,              :null  =>  true
+        t.column   :last_verify_date,                :datetime,          :null  =>  true
         t.column   :capacity,                        :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :capacity_weight,                 :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :inside_length,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

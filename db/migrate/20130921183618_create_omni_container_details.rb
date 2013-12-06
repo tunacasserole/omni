@@ -26,12 +26,12 @@ class CreateOmniContainerDetails < ActiveRecord::Migration
         t.column   :origin_container_detail_id,      :string,            :null  =>  true,    :limit   => 32
         t.column   :is_quality_hold,                 :boolean,           :null  =>  true
         t.column   :is_duty_paid,                    :boolean,           :null  =>  true
-        t.column   :last_activity_date,              :date,              :null  =>  true
-        t.column   :last_count_date,                 :date,              :null  =>  true
+        t.column   :last_activity_date,              :datetime,          :null  =>  true
+        t.column   :last_count_date,                 :datetime,          :null  =>  true
         t.column   :is_audited,                      :boolean,           :null  =>  true
         t.column   :is_inspected,                    :boolean,           :null  =>  true
-        t.column   :Inspection_date,                 :date,              :null  =>  true
-        t.column   :create_date,                     :date,              :null  =>  true
+        t.column   :Inspection_date,                 :datetime,          :null  =>  true
+        t.column   :create_date,                     :datetime,          :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

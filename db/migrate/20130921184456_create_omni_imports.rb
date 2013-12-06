@@ -15,8 +15,8 @@ class CreateOmniImports < ActiveRecord::Migration
         t.column   :model_name,                      :string,            :null  =>  true,    :limit   => 200
         t.column   :file_name,                       :string,            :null  =>  true,    :limit   => 200
         t.column   :file_path,                       :string,            :null  =>  true,    :limit   => 200
-        t.column   :start_date,                      :date,              :null  =>  true
-        t.column   :end_date,                        :date,              :null  =>  true
+        t.column   :start_date,                      :datetime,          :null  =>  true
+        t.column   :end_date,                        :datetime,          :null  =>  true
         t.column   :run_mode,                        :string,            :null  =>  true,    :limit   => 200
         t.column   :argument_hash,                   :text,              :null  =>  true
         t.column   :is_drop_data,                    :boolean,           :null  =>  true

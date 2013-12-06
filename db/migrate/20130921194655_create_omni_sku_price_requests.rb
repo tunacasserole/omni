@@ -8,13 +8,13 @@ class CreateOmniSkuPriceRequests < ActiveRecord::Migration
         t.column   :display,                         :string,            :null  =>  true,    :limit   => 300
         t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
         t.column   :user_id,                         :string,            :null  =>  true,    :limit   => 32
-        t.column   :request_date,                    :date,              :null  =>  true
+        t.column   :request_date,                    :datetime,          :null  =>  true
         t.column   :sku_id,                          :string,            :null  =>  true,    :limit   => 32
         t.column   :location_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :customer_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :site_id,                         :string,            :null  =>  true,    :limit   => 32
         t.column   :request_price_book_id,           :string,            :null  =>  true,    :limit   => 32
-        t.column   :price_date,                      :date,              :null  =>  true
+        t.column   :price_date,                      :datetime,          :null  =>  true
         t.column   :permanent_sku_retail,            :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :permanent_units,                 :integer,           :null  =>  true
         t.column   :price_book_id,                   :string,            :null  =>  true,    :limit   => 32

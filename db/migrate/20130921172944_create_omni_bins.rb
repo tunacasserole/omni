@@ -16,7 +16,7 @@ class CreateOmniBins < ActiveRecord::Migration
         t.column   :bin_code,                        :string,            :null  =>  true,    :limit   => 100
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300
         t.column   :bin_type,                        :string,            :null  =>  true,    :limit   => 100
-        t.column   :last_activity_date,              :date,              :null  =>  true
+        t.column   :last_activity_date,              :datetime,          :null  =>  true
         t.column   :is_many_sku_per_bin,             :boolean,           :null  =>  true
         t.column   :pick_sequence,                   :integer,           :null  =>  true
         t.column   :zone,                            :string,            :null  =>  true,    :limit   => 100

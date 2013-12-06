@@ -15,8 +15,8 @@ class CreateOmniTasks < ActiveRecord::Migration
         t.column   :points,                          :integer,           :null  =>  true
         t.column   :assignee_id,                     :string,            :null  =>  true,    :limit   => 32
         t.column   :creator_id,                      :string,            :null  =>  true,    :limit   => 32
-        t.column   :target_release,                  :date,              :null  =>  true
-        t.column   :actual_release,                  :date,              :null  =>  true
+        t.column   :target_release,                  :datetime,          :null  =>  true
+        t.column   :actual_release,                  :datetime,          :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

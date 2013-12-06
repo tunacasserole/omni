@@ -67,9 +67,9 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
  hook  :before_create,      :create_receipt_details,             10
 
   def create_receipt_details
-    puts "creating receipt details"
-    puts "self.purchase? is #{self.purchase.display} - #{self.purchase.purchase_id}"
-    puts "self.purchase.purchase_details.count is #{self.purchase.purchase_details.count}"
+    # puts "creating receipt details"
+    # puts "self.purchase? is #{self.purchase.display} - #{self.purchase.purchase_id}"
+    # puts "self.purchase.purchase_details.count is #{self.purchase.purchase_details.count}"
     self.purchase.purchase_details.each do |x|
       # Omni::ReceiptDetail.create(receipt_id: 'XXXXXXXXXXXXXXXXXXXXXXXXRECEIPT1', purchase_id: 'XXXXXXXXXXXXXXXXXXXXXXXPURCHASE1', purchase_detail_id: 'ABABDAAA35E011E3APURCHASEDETAIL1', received_units: 0, allocation_profile_id: 'XXXXLASTFORECASTBYPERCENTTOSTORE', sku_id: '285C928C0F3611E3BB7120C9D047DD15', sku_alias: nil, receipt_pack_size: 1, receipt_pack_type: 'SELL_UNIT')
       next unless x.state == 'open' || x.state == 'partial'

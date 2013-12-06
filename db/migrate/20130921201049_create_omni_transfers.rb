@@ -14,10 +14,10 @@ class CreateOmniTransfers < ActiveRecord::Migration
         t.column   :sku_id,                          :string,            :null  =>  false,   :limit   => 32
         t.column   :transfer_reason_id,              :string,            :null  =>  false,   :limit   => 32
         t.column   :request_units,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
-        t.column   :request_date,                    :date,              :null  =>  true
+        t.column   :request_date,                    :datetime,          :null  =>  true
         t.column   :request_user_id,                 :string,            :null  =>  true,    :limit   => 32
-        t.column   :ship_date,                       :date,              :null  =>  true
-        t.column   :cancel_date,                     :date,              :null  =>  true
+        t.column   :ship_date,                       :datetime,          :null  =>  true
+        t.column   :cancel_date,                     :datetime,          :null  =>  true
         t.column   :cancel_user_id,                  :string,            :null  =>  true,    :limit   => 32
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end

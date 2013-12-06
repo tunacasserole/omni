@@ -12,7 +12,7 @@ class CreateOmniTerminals < ActiveRecord::Migration
         t.column   :mac_address,                     :string,            :null  =>  false,   :limit   => 15
         t.column   :local_server_ip,                 :string,            :null  =>  false,   :limit   => 15
         t.column   :hq_server_url,                   :string,            :null  =>  false,   :limit   => 200
-        t.column   :override_sale_date,              :date,              :null  =>  true
+        t.column   :override_sale_date,              :datetime,          :null  =>  true
         t.column   :receipt_printer_url,             :string,            :null  =>  false,   :limit   => 200
         t.column   :receipt_printer_ip,              :string,            :null  =>  false,   :limit   => 15
         t.column   :receipt_format_id,               :string,            :null  =>  true,    :limit   => 32

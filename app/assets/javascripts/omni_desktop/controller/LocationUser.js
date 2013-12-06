@@ -17,4 +17,4 @@ Buildit.defineController('Omni.controller.LocationUser', {
 
   }
 
-});
+}); // Buildit.defineController('Omni.controller.LocationUser'

@@ -13,6 +13,7 @@
   validates :display,                         :uniqueness  => true
   validates :purchase_detail_id,              :uniqueness  => true
   validates :sku_supplier_id,                 :presence    => true
+  validates :sku_id,                          :presence    => true
   validates_numericality_of :units_ordered,              :greater_than => 0
   # validates_numericality_of :order_pack_size,            :greater_than => 0
   # validates_numericality_of :order_cost_units,           :greater_than => 0
@@ -23,7 +24,7 @@
   default :allocation_profile_id,                              :to   => lambda{|m| m.purchase.allocation_profile_id}
   default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_DETAIL_NBR"
   default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
-  default :sku_id,                :override  =>  false,        :to   => lambda{|m| m.sku_supplier.sku_id}
+  default :sku_id,                :override  =>  false,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
   default :units_ordered,                                      :to   => 0
   default :selling_units_approved,                             :to   => 0
   default :selling_units_received,                             :to   => 0
@@ -31,16 +32,16 @@
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
-  has_many     :stock_ledger_activities, :class_name => 'Omni::StockLedgerActivity', :foreign_key => 'stockable_id' , :as => :stockable
+  has_many     :purchase_allocations,          :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
+  has_many     :stock_ledger_activities,       :class_name => 'Omni::StockLedgerActivity', :foreign_key => 'stockable_id' , :as => :stockable
   has_many     :unlocked_purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id', :conditions => ["state != 'locked'" ]
-  has_many     :receipt_details,      :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
-  belongs_to   :purchase,             :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
-  belongs_to   :allocation_profile,   :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
-  belongs_to   :sku_supplier,         :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
-  belongs_to   :sku,                  :class_name => 'Omni::Sku',                 :foreign_key => :sku_id
-  has_many     :inventories,          :class_name => 'Omni::Inventory',           :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
-  has_many     :locations,            :class_name => 'Omni::Location',            :through     => :inventories
+  has_many     :receipt_details,               :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
+  belongs_to   :purchase,                      :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
+  belongs_to   :allocation_profile,            :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
+  belongs_to   :sku_supplier,                  :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
+  belongs_to   :sku,                           :class_name => 'Omni::Sku',                 :foreign_key => :sku_id
+  has_many     :inventories,                   :class_name => 'Omni::Inventory',           :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
+  has_many     :locations,                     :class_name => 'Omni::Location',            :through     => :inventories
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -51,6 +52,12 @@
     map :allocation_profile_display,    :to => 'allocation_profile.display'
   end
   # MAPPED ATTRIBUTES (End)
+
+  # COMPUTED ATTRIBUTES (Start) =========================================================
+  computed_attributes do
+    compute :open_units,                  :with => :compute_open_units
+  end
+  # COMPUTED ATTRIBUTES (End)`
 
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
@@ -132,9 +139,9 @@
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
-  # def open_units?
-  #   selling_units_approved - selling_units_received - selling_units_cancelled > 0 ? true : false
-  # end
+  def compute_open_units
+    selling_units_approved - selling_units_received - selling_units_cancelled
+  end
 
   def do_release
     # Create an Allocation record corresponding to the PurchaseDetail record.
