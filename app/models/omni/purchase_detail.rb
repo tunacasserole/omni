@@ -24,7 +24,7 @@
   default :allocation_profile_id,                              :to   => lambda{|m| m.purchase.allocation_profile_id}
   default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_DETAIL_NBR"
   default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
-  default :sku_id,                :override  =>  false,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
+  default :sku_id,                :override  =>  true,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
   default :units_ordered,                                      :to   => 0
   default :selling_units_approved,                             :to   => 0
   default :selling_units_received,                             :to   => 0
@@ -50,6 +50,7 @@
     map :sku_supplier_display,          :to => 'sku_supplier.display'
     map :purchase_display,              :to => 'purchase.display'
     map :allocation_profile_display,    :to => 'allocation_profile.display'
+    map :supplier_id,                   :to => 'purchase.supplier_id'
   end
   # MAPPED ATTRIBUTES (End)
 

@@ -42,17 +42,9 @@ class Omni::Subclass < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
   # ORDERING (Start) ====================================================================
-  # order_search_by :display => :asc
+  order_search_by :display => :asc
   # ORDERING (End)
-
 
   # HOOKS (Start) =======================================================================
   # HOOKS (End)

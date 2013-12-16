@@ -125,6 +125,10 @@ class Omni::Receipt < ActiveRecord::Base
       transition [:draft, :scheduled, :processing] => same
     end
 
+    event :upload do
+      transition [:draft, :scheduled, :processing] => same
+    end
+
     event :copy_units do
       transition [:draft, :scheduled, :processing] => same
     end
@@ -135,6 +139,7 @@ class Omni::Receipt < ActiveRecord::Base
     after_transition :on => :accept, :do => :do_accept
     after_transition :on => :complete, :do => :do_complete
     after_transition :on => :print, :do => :print_count_sheet
+    after_transition :on => :upload, :do => :upload_packing_list
     after_transition :on => :copy_units, :do => :do_copy_units
 
   end

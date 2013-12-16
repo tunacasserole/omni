@@ -149,7 +149,7 @@ Ext.define('Omni.view.projections.Form', {
     Ext.apply(this, {
       actions: [{
         xtype: 'button',
-        iconCls: 'icon-rocket',
+        iconCls: 'icon-wrench',
         tooltip: 'Forecast',
         listeners: {
           beforerender: this.prepareForecastAction,
@@ -167,7 +167,7 @@ Ext.define('Omni.view.projections.Form', {
         }
       }, {
         xtype: 'button',
-        cls: 'close',
+        iconCls: 'icon-ok',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,

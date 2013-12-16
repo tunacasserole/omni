@@ -7,16 +7,11 @@ Ext.define('Omni.view.purchase_details.Form', {
 
     var me = this;
 
-    var disabled = this.record.get('state') != 'draft' ? true : false;
-    if (this.record.phantom){
-      disabled = false
-    };
+    var disabled = this.record.get('state') === 'draft' || this.record.phantom ? false : true;
 
-    var supplier_id = this.association.get('supplier_id');
-    // console.log(supplier_id);
-    // var association = this.association;
-    // console.log(association);
-    // var supplier = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false)
+    var supplier_id = this.record.phantom ? this.association.get('supplier_id') : this.record.get('supplier_id');
+
+    // var buyer = (Buildit.context.roles.indexOf("BUYER") >= 0 ? true : false)
 
     // FILTER (Start) =======================================================================
     var associativeFilter = {

@@ -1,5 +1,10 @@
 class Omni::Sync::Base
 
+  def self.go
+    Omni::Sync::Mark.inventory
+    # Omni::Sync::MasterData.skus
+  end
+
   def self.xit
     # put "no locations found for these outlets: #{@no_locations}"
     # put "no skus found for these stock-size combos: #{@no_skus}"

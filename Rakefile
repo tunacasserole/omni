@@ -8,20 +8,28 @@ Omni::Application.load_tasks
 
 namespace :omni do
 
-  task :migrations => :environment do |t, args|
+  # task :migrations => :environment do |t, args|
 
-    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    @start_time = Time.now
-    Omni::Sync::Script.go
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
+  #   puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+  #   @start_time = Time.now
+  #   Omni::Sync::Script.go
+  #   puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
 
-  end
+  # end
 
-  desc "run automated tests for Bts, Purchase"
+  desc "run automated test suite"
   task :test => :environment do |t, args|
     # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     @start_time = Time.now
     Omni::Test::Base.go
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
+  desc "sync parker data from spreadsheets, staging tables, and other databases"
+  task :sync => :environment do |t, args|
+    # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    @start_time = Time.now
+    Omni::Sync::Base.go
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 

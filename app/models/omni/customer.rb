@@ -36,9 +36,9 @@ class Omni::Customer < ActiveRecord::Base
   default      :customer_nbr,                     :override  =>  false,        :with  => :sequence,         :named=>"CUSTOMER_NBR"
   default      :is_tax_exempt,                    :override  =>  false,        :to    => false
   default      :is_employee,                      :override  =>  false,        :to    => false
-  default      :employee_nbr,                     :override  =>  false,        :with  => :sequence,         :named=>"EMPLOYEE_NBR"
+  # default      :employee_nbr,                     :override  =>  false,        :with  => :sequence,         :named=>"EMPLOYEE_NBR"
   default      :is_contractor,                    :override  =>  false,        :to    => false
-  default      :contractor_nbr,                   :override  =>  false,        :with  => :sequence,         :named=>"CONTRACTOR_NBR"
+  # default      :contractor_nbr,                   :override  =>  false,        :with  => :sequence,         :named=>"CONTRACTOR_NBR"
   default      :is_student,                       :override  =>  false,        :to    => false
   default      :is_analyst,                       :override  =>  false,        :to    => false
   default      :is_developer,                     :override  =>  false,        :to    => false
