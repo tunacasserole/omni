@@ -93,6 +93,22 @@ Buildit::User.create(
   sso_plugin_code: 'BUILDIT'
 )
 
+Buildit::User.create(
+  user_id: '811166D4D50EUIDHDUEOJOHNSTEPHENS',
+  first_name: 'John',
+  last_name: 'Stephens',
+  email_address: 'jstephens@buckheaduniforms.com',
+  sso_plugin_code: 'BUILDIT'
+)
+
+Buildit::User.create(
+  user_id: 'AOEUID234567EUID56789IDHT87654RG',
+  first_name: 'Roy',
+  last_name: 'Garcia',
+  email_address: 'rgarcia@parkersu.com',
+  sso_plugin_code: 'BUILDIT'
+)
+
 # Buildit::User.create(
 #   user_id: '811166D4D50A11E2B45820C9D0PXXBOB',
 #   first_name: 'Bob',
@@ -232,17 +248,24 @@ Buildit::User.where("email_address in ('a','aaron@buildit.io','t','thenderson@pa
 end
 
 # APPLICATION ROLES =====================================================================
-# TO DO: OMNI POWER USER GETS OMNI ERP DESKTOP
-Buildit::ApplicationRole.create(
-  application_id: '6900AE7AC18B11E289BA20C9DOMNIERP',
-  role_id:        '323244F0204011EFCFE904SUPERADMIN',
-  is_enabled:     true
-)
+# Buildit::ApplicationRole.create(
+#   application_id: '6900AE7AC18B11E289BA20C9DOMNIERP',
+#   role_id:        '323244F0204011EFCFE904SUPERADMIN',
+#   is_enabled:     true
+# )
 
-Buildit::ApplicationRole.create(
-  application_id: '6900AE7AC18B11E289BA20C9DOMNIERP',
-  role_id:        '323244F0204011EFCFE9040CCEDPOWER',
-  is_enabled:     true
-)
+# Buildit::ApplicationRole.create(
+#   application_id: '6900AE7AC18B11E289BA20C9DOMNIERP',
+#   role_id:        '323244F0204011EFCFE9040CCEDPOWER',
+#   is_enabled:     true
+# )
 
-# TO DO: SUPER ADMIN ROLE GETS ALL 3 APPLICATIONS
+# OMNI POWER USER GETS OMNI ERP DESKTOP
+Buildit::ApplicationRole.where(role_id: '323244F0204011EFCFE9040CCEDPOWER', application_id: '6900AE7AC18B11E289BA20C9DOMNIERP').each { |x| x.is_enabled = true; x.save }
+
+# SUPER ADMIN ROLE GETS ALL APPLICATIONS
+Buildit::ApplicationRole.where(role_id: '323244F0204011EFCFE904SUPERADMIN').each { |x| x.is_enabled = true; x.save }
+
+
+
+
