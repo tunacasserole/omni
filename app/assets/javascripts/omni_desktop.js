@@ -1,4 +1,4 @@
-//= require      buildit_desktop
+//= require      buildit
 //= require_tree ./omni_desktop/logic
 //= require_tree ./omni_desktop/model
 //= require_tree ./omni_desktop/store

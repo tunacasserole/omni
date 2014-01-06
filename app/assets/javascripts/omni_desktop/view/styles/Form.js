@@ -633,7 +633,7 @@ Ext.define('Omni.view.styles.Form', {
         xtype: 'button',
         cls: 'ship',
         scope: me,
-        tooltip: 'Build locations',
+        tooltip: 'locations',
         listeners: {
           beforerender: this.prepareLocationsAction,
           click: this.onLocationsAction,
@@ -643,10 +643,10 @@ Ext.define('Omni.view.styles.Form', {
         xtype: 'button',
         cls: 'ship',
         scope: me,
-        tooltip: 'Build skus',
+        tooltip: 'skus',
         listeners: {
-          beforerender: this.prepareBuildAction,
-          click: this.onBuildAction,
+          beforerender: this.prepareSkusAction,
+          click: this.onSkusAction,
           scope: me
         }
       }, {
@@ -712,9 +712,10 @@ Ext.define('Omni.view.styles.Form', {
   /**
    *
    */
-  onBuildAction: function(action, eOpts) {
+  onSkusAction: function(action, eOpts) {
     Buildit.infoMsg('Skus are being built.  This may take a few moments');
-    this.processEventTransition('build', 'Skus were successfully built.', 'An error occurred building skus for this Style');
+    this.processEventTransition('skus', 'Skus were successfully built.', 'An error occurred building skus for this Style');
+
   }, // onBuildAction
 
   /**
@@ -832,7 +833,7 @@ Ext.define('Omni.view.styles.Form', {
   /**
    *
    */
-  prepareBuildAction: function(action, eOpts) {
+  prepareSkusAction: function(action, eOpts) {
 
     var currentState = this.record.get('state');
     currentState == 'active' ? action.show() : action.hide();

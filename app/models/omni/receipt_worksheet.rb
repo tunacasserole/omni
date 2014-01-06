@@ -50,9 +50,9 @@ class Omni::ReceiptWorksheet < Omni::Receipt
     )
 
     Buildit::Content.create(
-    contentable_type: "Buildit::Attachment",
-    contentable_id:  attachment.attachment_id,
-    data: file.read
+      contentable_type: "Buildit::Attachment",
+      contentable_id:  attachment.attachment_id,
+      data: file.read
     )
 
     Buildit::Attachment.reindex

@@ -2,6 +2,7 @@ Ext.define('Omni.view.projection_details.Explorer', {
 
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.omni-projection_details-Explorer',
+  allowNew : false,
 
   // EXPLORER INIT (Start) ===============================================================
   store    : Ext.create('Omni.store.ProjectionDetail'),

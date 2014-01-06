@@ -150,32 +150,6 @@ class Omni::Receipt < ActiveRecord::Base
     self.state = 'scheduled' if appointment_date_changed? && appointment_date
   end
 
-  def upload_packing_list
-    file_name = "packing_list.xlsx" #_#{Time.now.strftime('%H-%M-%S').chop.chop.chop}.pdf"
-    pdf_dir = File.join(Dir.home,'sandbox','omni','db','pdf')
-    full_file_name = File.join(pdf_dir, file_name)
-
-    # book = Spreadsheet.open full_file_name
-
-    # begin
-    #   content = Buildit::Content.create(
-    #     data: params[:file].read
-    #   )
-
-    #   result = {
-    #     success:        true,
-    #     content_id:     content.content_id,
-    #     file_name:      params[:file].original_filename,
-    #     mime_type:      params[:file].content_type,
-    #     byte_size:      params[:file].size
-    #   }
-    # rescue
-    #   result = {success: false}
-    # end
-
-    # render text: result.to_json, status: 200
-  end
-
   def do_copy_units
     # Read every Receipt Detail row in Draft State.
     # If the received units are zero, the system will update the row with the number of open units from the corresponding Purchase Detail row.
@@ -214,6 +188,13 @@ class Omni::Receipt < ActiveRecord::Base
 
   def do_receive
     receipt_purchases.each {|x| x.receive}
+  end
+
+  def upload
+    puts "\n\n\n\n\n\n\n\n!!!!!no longer used!!!!!!!\n\n\n\n\n"
+    # x = Omni::ReceiptPackingList.new
+    # x.upload self
+
   end
 
   def print_count_sheet

@@ -133,6 +133,7 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'location_id',
+              gotoTarget        : 'omni-locations-Inspector',
               itemTpl           : '{display}'
             },
             { xtype             : 'textfield',
@@ -355,7 +356,9 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'supplier_id',
-              itemTpl           : '{display}'
+              itemTpl           : '{display}',
+              // newTarget         : 'omni-suppliers-Form',
+              gotoTarget        : 'omni-suppliers-Inspector'
             },
             { xtype             : 'textfield',
               name              : 'estimated_lead_time_days',
@@ -380,7 +383,9 @@ Ext.define('Omni.view.purchases.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'purchase_id',
-              itemTpl           : '{display}'
+              itemTpl           : '{display}',
+              // newTarget         : 'omni-purchases-Form',
+              gotoTarget        : 'omni-purchases-Inspector'
             },
             { xtype             : 'checkbox',
               name              : 'is_special_order',

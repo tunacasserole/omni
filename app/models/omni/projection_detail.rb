@@ -163,6 +163,25 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 #  Need to calculate square root of squared_deviations to get standard deviation
     # std = 0
   end
+  def set_current_approved_units
+    # puts "setting *************"
+    self.current_approved_units =
+      case self.projection.state
+        when 'draft','forecast'
+          last_forecast_units
+        when 'projection_1'
+          projection_1_units
+        when 'projection_2'
+          projection_1_units
+        when 'projection_3'
+          projection_2_units
+        when 'projection_4'
+          projection_3_units
+        when 'complete'
+          projection_4_units
+      end
+    save
+  end
   # HELPERS (End)
 
   # STATES (Start) ====================================================================
@@ -185,7 +204,10 @@ class Omni::ProjectionDetail < ActiveRecord::Base
       errors.add('State','This action is only valid if the Projection State is Forecast, Projection 1, Projection 2, Projection 3 or Projection 4.') unless self.projection.state == 'forecast' or self.projection_state =~ /projection_\d_units/
     end
 
+    after_transition :on => :approve, :do => :set_current_approved_units
+
   end
+
   # STATES (End)
 
 end # class Omni::ProjectionDetail

@@ -1,4 +1,4 @@
-class Omni::Sync::Rms < Omni::Import::Base
+class Omni::Sync::Rms < Omni::Sync::Base
 
    def self.xit
     # put "no locations found for these outlets: #{@no_locations}"

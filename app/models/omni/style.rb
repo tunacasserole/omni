@@ -111,7 +111,7 @@ class Omni::Style < ActiveRecord::Base
   ### CALLBACKS ###
     after_transition :on => :release,        :do => :after_release
     # after_transition :on => :locations,   :do => :after_locations
-    after_transition :on => :build,       :do => :after_build
+    after_transition :on => :skus,        :do => :build_skus
     after_transition :on => :discontinue, :do => :after_discontinue
     after_transition :on => :drop,        :do => :after_drop
     after_transition :on => :deactivate,  :do => :after_deactivate
@@ -126,8 +126,9 @@ class Omni::Style < ActiveRecord::Base
       transition :pending_approval => :active
     end
 
-    event :build do
-      transition :active => :active
+    event :skus do
+      transition :active => :building
+      # transition :building => :active
     end
 
     event :discontinue do
@@ -167,8 +168,17 @@ class Omni::Style < ActiveRecord::Base
       validates  :size_group_id, :presence  => true
     end
 
+    state :building do
+      validate  :colors
+    end
+
   end
   # STATES (End)
+
+  def colors
+    # puts "\n\n validating colors count is #{self.style_colors.count.to_s}\n\n"
+    errors.add(:state, 'At least one color must be selected to generate skus') if self.style_colors.count < 1
+  end
 
   def conversion
     errors.add(:generic_style_id, 'Not a valid generic style') if is_converted unless (generic_style && generic_style.is_converted)
@@ -202,7 +212,7 @@ class Omni::Style < ActiveRecord::Base
   end
 
   ######## GENERATE SKU DATA ##############
-  def after_build
+  def build_skus
     puts '--- starting building skus ---'
     gen_skus
     puts '--- gen sku suppliers ---'
@@ -210,6 +220,8 @@ class Omni::Style < ActiveRecord::Base
     puts '--- gen inventories ---'
     gen_inventories
     gen_sku_prices
+    # self.state = 'active'
+    # save
     puts '--- done with building skus ---'
     puts 'ready...'
   end

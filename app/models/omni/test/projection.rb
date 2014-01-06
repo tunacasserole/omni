@@ -12,7 +12,7 @@ class Omni::Test::Projection < Omni::Test::Base
     test_forecast
     test_release
     test_approve
-    # test_close
+    test_close
   end
 
   def self.test_forecast

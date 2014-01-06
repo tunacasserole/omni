@@ -83,8 +83,8 @@ Ext.define('Omni.view.inventories.Explorer', {
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
-  title    : 'Inventories',
-  subtitle : 'Create and maintain Inventories',
+  title    : 'Inventory',
+  subtitle : 'View Inventory',
   // TITLES (End)
 
   initComponent : function () {
@@ -109,11 +109,11 @@ Ext.define('Omni.view.inventories.Explorer', {
         //   dataIndex    : 'department_display',
         //   flex         : 1
         // },
-        {
-          header       : this.supplier_idLabel,
-          dataIndex    : 'supplier_display',
-          flex         : 1
-        },
+        // {
+        //   header       : this.supplier_idLabel,
+        //   dataIndex    : 'supplier_display',
+        //   flex         : 1
+        // },
         // {
         //   header       : this.forecast_profile_idLabel,
         //   dataIndex    : 'forecast_profile_display',
@@ -134,31 +134,31 @@ Ext.define('Omni.view.inventories.Explorer', {
           dataIndex    : 'work_in_process_units',
           flex         : 1
         },
-        {
-          header       : this.supplier_on_order_unitsLabel,
-          dataIndex    : 'supplier_on_order_units',
-          flex         : 1
-        },
+        // {
+        //   header       : this.supplier_on_order_unitsLabel,
+        //   dataIndex    : 'supplier_on_order_units',
+        //   flex         : 1
+        // },
         // {
         //   header       : this.warehouse_on_order_unitsLabel,
         //   dataIndex    : 'warehouse_on_order_units',
         //   flex         : 1
         // },
-        // {
-        //   header       : this.in_transit_unitsLabel,
-        //   dataIndex    : 'in_transit_units',
-        //   flex         : 1
-        // },
+        {
+          header       : this.in_transit_unitsLabel,
+          dataIndex    : 'in_transit_units',
+          flex         : 1
+        },
         // {
         //   header       : this.non_sellable_unitsLabel,
         //   dataIndex    : 'non_sellable_units',
         //   flex         : 1
         // },
-        // {
-        //   header       : this.allocated_unitsLabel,
-        //   dataIndex    : 'allocated_units',
-        //   flex         : 1
-        // },
+        {
+          header       : this.allocated_unitsLabel,
+          dataIndex    : 'allocated_units',
+          flex         : 1
+        },
         // {
         //   header       : this.reserved_unitsLabel,
         //   dataIndex    : 'reserved_units',

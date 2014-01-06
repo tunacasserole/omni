@@ -13,7 +13,7 @@ Ext.define('Omni.view.projection_details.Form', {
   inventory_idLabel: Omni.i18n.model.ProjectionDetail.inventory_id,
   sku_idLabel: Omni.i18n.model.ProjectionDetail.sku_id,
   location_idLabel: Omni.i18n.model.ProjectionDetail.location_id,
-  displayLabel: Omni.i18n.model.ProjectionDetail.display,
+  // displayLabel: Omni.i18n.model.ProjectionDetail.display,
   stateLabel: Omni.i18n.model.ProjectionDetail.state,
   first_forecast_unitsLabel: Omni.i18n.model.ProjectionDetail.first_forecast_units,
   last_forecast_unitsLabel: Omni.i18n.model.ProjectionDetail.last_forecast_units,
@@ -75,6 +75,7 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'projection_detail_nbr',
           fieldLabel: this.projection_detail_nbrLabel,
           allowBlank: true,
+          disabled: true
         }, {
           xtype: 'buildit-Locator',
           store: Ext.create('Omni.store.ForecastProfile', {
@@ -99,6 +100,7 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'sku_id',
           fieldLabel: this.sku_idLabel,
           allowBlank: true,
+          disabled: true
         }, {
           xtype: 'buildit-Locator',
           store: Ext.create('Omni.store.Location', {
@@ -111,11 +113,12 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'location_id',
           fieldLabel: this.location_idLabel,
           allowBlank: true,
-        }, {
-          xtype: 'textfield',
-          name: 'display',
-          fieldLabel: this.displayLabel,
-          allowBlank: true,
+          disabled: true
+        // }, {
+        //   xtype: 'textfield',
+        //   name: 'display',
+        //   fieldLabel: this.displayLabel,
+        //   allowBlank: true,
         }, {
           xtype: 'textfield',
           name: 'state',

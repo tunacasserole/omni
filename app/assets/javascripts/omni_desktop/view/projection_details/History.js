@@ -5,8 +5,8 @@ Ext.define('Omni.view.projection_details.History', {
 
   // EXPLORER INIT (Start) ===============================================================
   allowInlineEdit : true,
-
-  allowBulkUpdate : true,
+  allowNew : false,
+  allowBulkUpdate : false,
 
   store      : Ext.create('Omni.store.ProjectionDetail'),
 
