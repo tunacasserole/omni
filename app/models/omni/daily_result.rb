@@ -11,7 +11,7 @@ class Omni::DailyResult < ActiveRecord::Base
 
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
+  # validates    :display,                         :presence    => true
   validates    :sku_id,                          :presence    => true
   validates    :location_id,                     :presence    => true
   # VALIDATIONS (End)
@@ -20,7 +20,7 @@ class Omni::DailyResult < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :daily_result_id,                  :override  =>  false,        :with  => :guid
   default      :date,                             :override  =>  false,        :with  => :now
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.date}"}
+  # default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.date}"}
   default      :adjusted_cost,                    :override  =>  false,        :to    => 0
   default      :adjusted_retail,                  :override  =>  false,        :to    => 0
   default      :adjusted_units,                   :override  =>  false,        :to    => 0
@@ -104,10 +104,10 @@ class Omni::DailyResult < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-  def self.source_hash
-    etl_hash = {}
-    ActiveRecord::Base.connection.execute("select daily_result_id, location_id, sku_id, date from daily_results").each {|x| etl_hash["#{x[1]},#{x[2]},#{x[3].to_s}"] = x[0]}
-    etl_hash
+  hook :before_create, :set_defaults, 10
+
+  def set_defaults
+    # self.display = self.sku.display + ' - ' + self.location.display
   end
   # HOOKS (End)
 
@@ -123,6 +123,12 @@ class Omni::DailyResult < ActiveRecord::Base
   end
   # INDEXING (End)
 
+
+  def self.source_hash
+    etl_hash = {}
+    ActiveRecord::Base.connection.execute("select daily_result_id, location_id, sku_id, date from daily_results").each {|x| etl_hash["#{x[1]},#{x[2]},#{x[3].to_s}"] = x[0]}
+    etl_hash
+  end
 
 
   # STATES (Start) ====================================================================

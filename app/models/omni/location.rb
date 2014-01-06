@@ -104,7 +104,7 @@ class Omni::Location < ActiveRecord::Base
 
 
   # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
+  order_search_by :location_nbr => :asc
   # ORDERING (End)
 
 
@@ -114,6 +114,7 @@ class Omni::Location < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :location_id
     string   :display
     string   :district_id
     string   :district_display

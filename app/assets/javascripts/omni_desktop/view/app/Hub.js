@@ -92,14 +92,14 @@ Ext.define('Omni.view.app.Hub', {
             target: {
               xtype: 'omni-transfers-Explorer'
             }
-          // }, {
-          //   title: 'Daily Results',
-          //   colspan: 2,
-          //   rowspan: 1,
-          //   cls: 'supply',
-          //   target: {
-          //     xtype: 'omni-daily_results-Explorer'
-          //   }
+          }, {
+            title: 'Daily Results',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-daily_results-Explorer'
+            }
           // }, {
           //   title: 'Period Results',
           //   colspan: 2,

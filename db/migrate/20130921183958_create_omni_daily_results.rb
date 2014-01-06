@@ -5,10 +5,10 @@ class CreateOmniDailyResults < ActiveRecord::Migration
   	unless ActiveRecord::Base.connection.tables.include?('daily_results')
       create_table(:daily_results, :id => false) do |t|
         t.column   :daily_result_id,                 :string,            :null  =>  false,   :limit   => 32
-        t.column   :display,                         :string,            :null  =>  false,   :limit   => 300
+        t.column   :display,                         :string,            :null  =>  true,   :limit   => 300
         t.column   :sku_id,                          :string,            :null  =>  false,   :limit   => 32
         t.column   :location_id,                     :string,            :null  =>  false,   :limit   => 32
-        t.column   :date,                            :date,          :null  =>  false
+        t.column   :date,                            :date,              :null  =>  false
         t.column   :adjusted_cost,                   :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :adjusted_retail,                 :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :adjusted_units,                  :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

@@ -88,11 +88,11 @@
           defaultType: 'numberfield',
           layout: 'anchor',
           items: [{
-            xtype: 'textfield',
-            name: 'display',
-            fieldLabel: this.displayLabel,
-            allowBlank: true
-          }, {
+          //   xtype: 'textfield',
+          //   name: 'display',
+          //   fieldLabel: this.displayLabel,
+          //   allowBlank: true
+          // }, {
             name: 'sku_id',
             fieldLabel: this.sku_idLabel,
             allowBlank: false,
@@ -104,7 +104,8 @@
             displayField: 'display',
             queryField: 'display',
             valueField: 'sku_id',
-            itemTpl: '{display}'
+            itemTpl: '{display}',
+            gotoTarget        : 'omni-skus-Inspector'
           }, {
             name: 'location_id',
             fieldLabel: this.location_idLabel,
@@ -117,7 +118,8 @@
             displayField: 'display',
             queryField: 'display',
             valueField: 'location_id',
-            itemTpl: '{display}'
+            itemTpl: '{display}',
+            gotoTarget: 'omni-locations-Inspector'
           }, {
             xtype: 'numberfield',
             name: 'on_hand_units',

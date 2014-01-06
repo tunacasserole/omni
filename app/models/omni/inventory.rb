@@ -94,6 +94,10 @@
   # TEMPORARY ATTRIBUTES (Start) ========================================================
   # TEMPORARY ATTRIBUTES (End)
 
+  # ORDERING (Start) ====================================================================
+  order_search_by :sku_display => :asc
+  # ORDERING (End)
+
   # SCOPES (Start) ======================================================================
   # SCOPES (End)
 

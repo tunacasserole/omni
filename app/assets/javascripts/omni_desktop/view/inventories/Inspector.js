@@ -47,7 +47,7 @@
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title     : 'Inventory',
-      subtitle  : this.record.get('display')
+      subtitle  : this.record.get('sku_display') + this.record.get('location_display')
     });
     // TITLES (End)
 

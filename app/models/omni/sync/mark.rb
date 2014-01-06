@@ -57,7 +57,8 @@ class Omni::Sync::Mark < Omni::Sync::Base
     # self.on_hand
     # self.wip
     # self.transit
-    self.allocated
+    # self.allocated
+    self.results
   end
 
   def self.on_hand
