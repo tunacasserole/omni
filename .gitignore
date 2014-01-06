@@ -19,7 +19,7 @@
 /solr/pids
 
 #/config/database.yml
-/tmp/*
+/tmp/cache
 *.rbc
 *.sassc
 .sass-cache
