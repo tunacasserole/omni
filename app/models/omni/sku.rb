@@ -10,7 +10,7 @@ class Omni::Sku < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :uniqueness  => true,                         :allow_nil => false
-  validates    :sku_nbr,                         :uniqueness  => true,                           :allow_nil => true
+  validates    :sku_nbr,                         :uniqueness  => true,                         :allow_nil => true
   validates    :maintenance_level,               :lookup      => 'MAINTENANCE_LEVEL',          :allow_nil => true
   validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
   validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
@@ -108,7 +108,7 @@ class Omni::Sku < ActiveRecord::Base
     # legacy_source = 'PARKER'
     to_hash = {}
     # ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| to_hash[x['source_id']] = x['sku_id']}  # JRUBY!!!
-    ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| to_hash[x[1]] = x[0]} # MRI
+    ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}' or source = 'MARK AUTO CREATE'").each {|x| to_hash[x[1]] = x[0]} # MRI
     to_hash
     # sku_array = []
     # sku_array = ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'")
@@ -148,6 +148,9 @@ class Omni::Sku < ActiveRecord::Base
       transition :active => :inactive
     end
     state :deactivate do
+      # Make sure there is no on hand or on order
+    end
+    state :autocreated do
       # Make sure there is no on hand or on order
     end
   end

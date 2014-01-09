@@ -3,13 +3,11 @@ Ext.define('Omni.view.locations.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-locations-Explorer',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -42,6 +40,7 @@ Ext.define('Omni.view.locations.Explorer', {
       state_codeLabel: Omni.i18n.model.Location.state_code,
       is_storeLabel: Omni.i18n.model.Location.is_store,
       is_warehouseLabel: Omni.i18n.model.Location.is_warehouse,
+      is_enabledLabel: Omni.i18n.model.Location.is_enabled,
       open_dateLabel: Omni.i18n.model.Location.open_date,
       district_displayLabel: Omni.i18n.model.Location.district_display
     });
@@ -52,14 +51,15 @@ Ext.define('Omni.view.locations.Explorer', {
       columns: [
         { header: this.displayLabel, dataIndex: 'display',  flex: 2,  sortable: true  },
         { header: this.location_brandLabel, dataIndex: 'location_brand',  flex: 1,  sortable: true  },
-        { header: this.district_displayLabel, dataIndex: 'district_display',  flex: 1,  sortable: true  },        
+        { header: this.district_displayLabel, dataIndex: 'district_display',  flex: 1,  sortable: true  },
         { header: this.line_1Label, dataIndex: 'line_1',  flex: 1,  sortable: true  },
         { header: this.cityLabel, dataIndex: 'city',  flex: 1,  sortable: true  },
         { header: this.state_codeLabel, dataIndex: 'state_code',  flex: 1,  sortable: true  },
         { header: this.is_storeLabel, dataIndex: 'is_store',  flex: 1,  sortable: true  },
         { header: this.is_warehouseLabel, dataIndex: 'is_warehouse',  flex: 1,  sortable: true  },
+        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: true  },
         { header: this.open_dateLabel, dataIndex: 'open_date',  flex: 1,  sortable: true , renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.location_nbrLabel, dataIndex: 'location_nbr',  flex: 1,  sortable: true  },        
+        { header: this.location_nbrLabel, dataIndex: 'location_nbr',  flex: 1,  sortable: true  },
       ]
     });
     // COLUMNS (End)

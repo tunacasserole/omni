@@ -71,8 +71,8 @@ Ext.define('Omni.view.daily_results.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'sku_id',                         fieldLabel: this.sku_idLabel,                     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
-            { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
+            { name: 'sku_id',                         fieldLabel: this.sku_idLabel,  gotoTarget: 'omni-skus-Inspector',  allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
+            { name: 'location_id',                    fieldLabel: this.location_idLabel, gotoTarget: 'omni-locations-Inspector',  allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
             { name: 'date',                           fieldLabel: this.dateLabel,                       allowBlank: false,  disabled: false,    xtype: 'datefield'        },
             { name: 'adjusted_cost',                  fieldLabel: this.adjusted_costLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'adjusted_retail',                fieldLabel: this.adjusted_retailLabel,            allowBlank: true,   disabled: false,    xtype: 'textfield'        },

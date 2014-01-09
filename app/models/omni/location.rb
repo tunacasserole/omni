@@ -1,10 +1,4 @@
 class Omni::Location < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :locations
   self.primary_key  = :location_id
@@ -21,7 +15,7 @@ class Omni::Location < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
-  validates    :district_id,                     :presence    => true
+  # validates    :district_id,                     :presence    => true
   validates    :location_nbr,                    :uniqueness  => true
   # VALIDATIONS (End)
 
@@ -150,16 +144,16 @@ class Omni::Location < ActiveRecord::Base
   #   source_hash
   # end
 
-  def self.source_hash(legacy_source)
+  def self.source_hash
     source_hash = {}
-    case legacy_source
-    when "PARKER"
-      self.where(:location_brand => 'PARKER SCHOOL UNIFORMS').each { |loc| source_hash[loc.location_nbr.to_i] = loc.location_id}
-    when 'BUCKHEAD'
-      source_hash = {1 => '54BA7E26AC3E11E2947800FF58D32228', 2 => '54DA89BEAC3E11E2947800FF58D32228', 3 => '54FFC58AAC3E11E2947800FF58D32228', 4 => '551C007EAC3E11E2947800FF58D32228', 5 => '555BC98EAC3E11E2947800FF58D32228', 6 => '55A83D00AC3E11E2947800FF58D32228', 7 => '55A83D00AC3E11E2947800FFCHAMBLEE'}
-    when 'GRITS'
-      source_hash = {'60' => '56072748AC3E11E2947800FF58D32228', '61' => '562B2A8AAC3E11E2947800FF58D32228', '62' => '564FA306AC3E11E2947800FF58D32228', '63' => '5678132CAC3E11E2947800FF58D32228', '64'=> '569FE712AC3E11E2947800FF58D32228', '65' => '56CAEF52AC3E11E2947800FF58D32228', '66' =>'56EB490AAC3E11E2947800FF58D32228'}
-    end
+    self.all.each { |loc| source_hash[loc.location_nbr.to_i] = loc.location_id}
+    # case legacy_source
+    # when "PARKER"
+    # when 'BUCKHEAD'
+    #   source_hash = {1 => '54BA7E26AC3E11E2947800FF58D32228', 2 => '54DA89BEAC3E11E2947800FF58D32228', 3 => '54FFC58AAC3E11E2947800FF58D32228', 4 => '551C007EAC3E11E2947800FF58D32228', 5 => '555BC98EAC3E11E2947800FF58D32228', 6 => '55A83D00AC3E11E2947800FF58D32228', 7 => '55A83D00AC3E11E2947800FFCHAMBLEE'}
+    # when 'GRITS'
+    #   source_hash = {'60' => '56072748AC3E11E2947800FF58D32228', '61' => '562B2A8AAC3E11E2947800FF58D32228', '62' => '564FA306AC3E11E2947800FF58D32228', '63' => '5678132CAC3E11E2947800FF58D32228', '64'=> '569FE712AC3E11E2947800FF58D32228', '65' => '56CAEF52AC3E11E2947800FF58D32228', '66' =>'56EB490AAC3E11E2947800FF58D32228'}
+    # end
     source_hash
   end
 

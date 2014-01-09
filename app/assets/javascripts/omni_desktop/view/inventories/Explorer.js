@@ -97,7 +97,7 @@ Ext.define('Omni.view.inventories.Explorer', {
         {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
-          flex         : 1
+          flex         : 3
         },
         {
           header       : this.location_idLabel,
