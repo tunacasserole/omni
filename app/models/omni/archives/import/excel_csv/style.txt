@@ -1,8 +1,8 @@
-class Omni::Import::ExcelCsv::Style < Omni::Import::Base
+  class Omni::Import::ExcelCsv::Style < Omni::Import::Base
 
   def self.import(import)
     puts "importing #{import.table_name} at #{Time.now.to_s}"
-    data_folder = File.join(Rails.root,'db')    
+    data_folder = File.join(Rails.root,'db')
     exceptions = ''
     # @data = excel_to_hash data_folder, import.file_name, import.table_name
     @data=Omni::StyleLoad.all
@@ -12,16 +12,16 @@ class Omni::Import::ExcelCsv::Style < Omni::Import::Base
       x.style_name = row.style_name
       x.description = row.description
       x.subclass_id = Omni::Subclass.where(:display => row.subclass_id).first
-      x.product_id = Omni::Product.where(:display => row.product_id).first      
+      x.product_id = Omni::Product.where(:display => row.product_id).first
       x.brand = row.brand.upcase if row.brand
-      x.product_type_id = Omni::ProductType.where(:display => row.product_type_id).first            
+      x.product_type_id = Omni::ProductType.where(:display => row.product_type_id).first
       x.fabric_content = row.fabric_content.upcase if row.fabric_content
       x.is_convertible = row.is_convertible
       x.is_converted = row.is_converted
 
       generic_style=Omni::Style.where(:display=>row.generic_style_id).first
       if generic_style
-        x.generic_style = generic_style.style_id 
+        x.generic_style = generic_style.style_id
       else
         puts "--GENERIC STYLE is not valid."
       end
@@ -39,14 +39,14 @@ class Omni::Import::ExcelCsv::Style < Omni::Import::Base
       else
         puts "--SUPPLIER is not valid"
       end
-      
+
       size_group=Omni::SizeGroup.where(:display=>row.size_group_id).first || Omni::SizeGroup.create(:display => row.size_group_id)
       if size_group
         x.size_group_id = size_group.size_group_id
       else
         puts "--SIZE GROUP is not valid"
       end
-      
+
       x.conversion_type=row.conversion_type
       x.initial_retail_price=row.initial_retail_price
 
@@ -56,15 +56,15 @@ class Omni::Import::ExcelCsv::Style < Omni::Import::Base
         puts "Omni::Style, #{x.display}, ERRORS ==> #{x.errors.full_messages.join("\n")}, #{x.inspect}"
       end
     end # end of data.each
-    
+
     puts Omni::Style.count.to_s + " rows\n"
     if @data.count > Omni::Style.count
       puts " . . . some rows did not load . . . "
     else
-      puts " . . . things appear to have worked correctly . . . "  
+      puts " . . . things appear to have worked correctly . . . "
     end
-  
+
     puts "DONE importing from file at #{Time.now.to_s}"
   end
-  
+
 end
