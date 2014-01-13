@@ -79,6 +79,7 @@ class Omni::Style < ActiveRecord::Base
   has_many     :style_suppliers,                 :class_name => 'Omni::StyleSupplier',           :foreign_key => 'style_id'
   has_many     :style_locations,                 :class_name => 'Omni::StyleLocation',           :foreign_key => 'style_id'
   has_many     :style_colors,                    :class_name => 'Omni::StyleColor',              :foreign_key => 'style_id'
+  # has_many     :style_color_sizes,               :class_name => 'Omni::StyleColorSize',          :foreign_key => 'style_id'
   has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
   has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'style_id'
   # ASSOCIATIONS (End)
@@ -127,8 +128,10 @@ class Omni::Style < ActiveRecord::Base
     end
 
     event :skus do
+      transition :building => :building
       transition :active => :building
-      # transition :building => :active
+      transition :draft => :building
+      transition :pending_approval => :building
     end
 
     event :discontinue do
@@ -169,15 +172,22 @@ class Omni::Style < ActiveRecord::Base
     end
 
     state :building do
-      validate  :colors
+      validate  :style_data
     end
 
   end
   # STATES (End)
 
-  def colors
-    # puts "\n\n validating colors count is #{self.style_colors.count.to_s}\n\n"
-    errors.add(:state, 'At least one color must be selected to generate skus') if self.style_colors.count < 1
+  def style_data
+    has_style_color_sizes = false
+    self.style_colors.each do |x|
+      has_style_color_sizes = true if x.style_color_sizes.count > 0
+    end
+
+    errors.add(:colors, ' - at least one color must be selected to generate skus.  Navigate to the Colors tab, then click the plus button in the upper right corner to add a color.  Skus are based on sizes and colors, without either, no sku will be built. Ignore this highlighted fields message - ') if self.style_colors.count < 1
+    errors.add(:style_color_sizes, ' - at least one style color size must be selected to generate skus.  Navigate to the Colors tab, then click the magnifying glass to inspect a color, then navigate to the sizes tab and click the plus sign.  Sizes should have been added automatically - did you have a size group?  Did the size group have sizes?. Ignore this highlighted fields message - ') unless has_style_color_sizes
+    errors.add(:locations, ' - at least one location must be selected to generate skus.  Navigate to the Locations tab, then click the plus button in the upper right corner to add a location.  Ignore this highlighted fields message - ') if self.style_locations.count < 1
+    errors.add(:suppliers, ' - at least one supplier must be selected to generate skus.  Navigate to the Suppliers tab, then click the plus button in the upper right corner to add a supplier.  Ignore this highlighted fields message - ') if self.style_suppliers.count < 1
   end
 
   def conversion
@@ -220,8 +230,8 @@ class Omni::Style < ActiveRecord::Base
     puts '--- gen inventories ---'
     gen_inventories
     gen_sku_prices
-    # self.state = 'active'
-    # save
+    self.state = 'active'
+    save
     puts '--- done with building skus ---'
     puts 'ready...'
   end
@@ -229,7 +239,7 @@ class Omni::Style < ActiveRecord::Base
   def gen_skus
     # Add Sku row for each StyleColorSize row in active state
     self.style_colors.each do |sc|
-      Omni::StyleColorSize.where(:style_color_id => sc.style_color_id, :state => 'active').each do |scs|
+      Omni::StyleColorSize.where(:style_color_id => sc.style_color_id).each do |scs|
         x = Omni::Sku.new
         x.display = "#{self.display}-#{scs.style_color.color_display}-#{scs.size_display}"
         x.maintenance_level = self.maintenance_level
@@ -269,19 +279,21 @@ class Omni::Style < ActiveRecord::Base
         x.garment_pieces = self.garment_pieces
         x.is_special_order = self.is_special_order
         # x.is_special_size = self.is_special_size
-        x.save
+        @created_count = 0
+        @error_count = 0
+        x.save ? @created_count += 1 : @error_count += 1
         # update style color size sku_id
         scs.sku_id = x.sku_id   # Update the StyleColorSize sku_id to the one just built
         scs.state = 'generated'
         scs.save
       end
+      puts "created count is #{@created_count} and error count is #{@error_count}"
     end
   end
 
   def gen_sku_suppliers
     # Add SkuSupplier row for each Sku & all StyleSupplier rows in active state
-    self.skus.each do |sku|
-      next unless sku.state == 'active'
+    Omni::Sku.where(style_id: self.style_id, state: 'active').each do |sku|
       Omni::StyleSupplier.where(:style_id => self.style_id).each do |ss|
         x = Omni::SkuSupplier.new
         x.sku_id = sku.sku_id
@@ -324,14 +336,26 @@ class Omni::Style < ActiveRecord::Base
 
   def gen_inventories
     # Add inventory rows for each Sku & all StyleLocation rows in active state
-    myself = self
-    myself.skus.each do |sku|
-      next unless sku.state == 'active'
-      Omni::StyleLocation.where(style_id: myself.style_id).each do |sl|
+    puts "\n Generating Inventories at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    style_locations = []; Omni::StyleLocation.where(style_id: self.style_id).each  { |loc| style_locations << loc}
+    puts "\n Finished Style Locations at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    sku_ids = []; Omni::Sku.where(style_id: self.style_id, state: 'active').each { |sku| sku_ids << sku.sku_id}
+    puts "\n Finished Sku Ids at: #{Time.now.strftime("%H:%M:%S").yellow}"
+
+    # inventories = []; Omni::Inventory.where(s: self.style_id, state: 'active').each { |sku| sku_ids << sku.sku_id}
+    # puts "\n Finished Sku Ids at: #{Time.now.strftime("%H:%M:%S").yellow}"
+
+    puts "\n\n******self.skus.count is #{self.skus.count}*****\n\n"
+
+    style_locations.each do |sl|
+    puts "\n style location is #{sl.display} at: #{Time.now.strftime("%H:%M:%S").yellow}"
+      sku_ids.each do |sku_id|
+        puts "sku id is #{sku_id} at: #{Time.now.strftime("%H:%M:%S").yellow}"
+        next if Omni::Inventory.where(sku_id: sku_id, location_id: sl.location_id).first
         x = Omni::Inventory.new
-        x.sku_id = sku.sku_id
+        x.sku_id = sku_id
         x.location_id = sl.location_id
-        x.supplier_id = myself.supplier_id
+        x.supplier_id = self.supplier_id
         x.is_authorized = sl.is_authorized
         x.is_taxable = sl.is_taxable
         x.is_special_order = sl.is_special_order
@@ -356,8 +380,7 @@ class Omni::Style < ActiveRecord::Base
   def gen_sku_prices
     # Add SkuPrice row for each Sku - Add to National Price Book using initial_retail_price from Style
     npb_id = Omni::SystemOption.first.price_book_id
-    self.skus.each do |sku|
-      next unless sku.state == 'active'
+    Omni::Sku.where(style_id: self.style_id, state: 'active').each do |sku|
       x = Omni::SkuPrice.new
       x.sku_id = sku.sku_id
       x.price_book_id = npb_id

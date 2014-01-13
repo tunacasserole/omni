@@ -204,7 +204,8 @@ Ext.define('Omni.view.styles.Form', {
               displayField: 'display',
               queryField: 'display',
               valueField: 'size_group_id',
-              itemTpl: '{display}'
+              itemTpl: '{display}',
+              gotoTarget        : 'omni-size_groups-Inspector'
             }, {
               name: 'subclass_id',
               fieldLabel: this.subclass_idLabel,
@@ -217,7 +218,8 @@ Ext.define('Omni.view.styles.Form', {
               displayField: 'display',
               queryField: 'display',
               valueField: 'subclass_id',
-              itemTpl: '{display}'
+              itemTpl: '{display}',
+              gotoTarget        : 'omni-subclasses-Inspector'
             },
             // { name: 'product_id',                     fieldLabel: this.product_idLabel,                 allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Product',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'product_id', itemTpl:'{display}' },
             {
@@ -457,7 +459,7 @@ Ext.define('Omni.view.styles.Form', {
           },
           layout: 'anchor',
           items: [{
-            name: 'supplier_id',
+            name: 'supplier_display_id',
             fieldLabel: this.supplier_idLabel,
             allowBlank: true,
             disabled: false,
@@ -468,7 +470,12 @@ Ext.define('Omni.view.styles.Form', {
             displayField: 'supplier_display',
             queryField: 'supplier_display',
             valueField: 'supplier_id',
-            itemTpl: '{supplier_display}'
+            itemTpl: '{supplier_display}',
+            gotoTarget: 'omni-suppliers-Inspector',
+          }, {
+              xtype: 'label',
+              text: 'Primary Supplier must be a valid Supplier for this style.  To add suppliers, navigate to the Suppliers tab and click the plus button.',
+              cls: 'instruction'
           }, {
             name: 'order_uom_code',
             fieldLabel: this.order_uom_codeLabel,
@@ -527,7 +534,8 @@ Ext.define('Omni.view.styles.Form', {
               displayField: 'display',
               queryField: 'display',
               valueField: 'style_id',
-              itemTpl: '{display}'
+              itemTpl: '{display}',
+              gotoTarget: 'omni-skus-Inspector'
             }, {
               name: 'add_on_sku_id',
               fieldLabel: this.add_on_sku_idLabel,
@@ -542,7 +550,8 @@ Ext.define('Omni.view.styles.Form', {
               displayField: 'display',
               queryField: 'display',
               valueField: 'sku_id',
-              itemTpl: '{display}'
+              itemTpl: '{display}',
+              gotoTarget: 'omni-skus-Inspector'
             }, {
               name: 'site_id',
               fieldLabel: this.site_idLabel,
@@ -555,7 +564,8 @@ Ext.define('Omni.view.styles.Form', {
               displayField: 'display',
               queryField: 'display',
               valueField: 'site_id',
-              itemTpl: '{display}'
+              itemTpl: '{display}',
+              gotoTarget: 'omni-sites-Inspector'
             }, {
               name: 'conversion_type',
               fieldLabel: this.conversion_typeLabel,
@@ -827,7 +837,7 @@ Ext.define('Omni.view.styles.Form', {
   prepareLocationsAction: function(action, eOpts) {
 
     var currentState = this.record.get('state');
-    currentState == 'draft' || currentState == 'pending_approval' ? action.show() : action.hide();
+    currentState == 'draft' || currentState == 'pending_approval' || currentState == 'active' ? action.show() : action.hide();
   }, //
 
   /**
@@ -836,7 +846,7 @@ Ext.define('Omni.view.styles.Form', {
   prepareSkusAction: function(action, eOpts) {
 
     var currentState = this.record.get('state');
-    currentState == 'active' ? action.show() : action.hide();
+     currentState == 'draft' || currentState == 'building' || currentState == 'pending_approval' || currentState == 'active' ? action.show() : action.hide()
   }, //
 
   /**

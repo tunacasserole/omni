@@ -126,7 +126,9 @@ class Omni::StyleColor < ActiveRecord::Base
     #  Get sizes by reading size_group_details for style.size_group_id.
     #  Add style_color_sizes row for added color and each size in the size group
     #
+    puts "\nadding style color sizes\n"
     if self.style && self.style.size_group_id
+      puts "had style and size group"
       sizes = Omni::SizeGroupDetail.where(:size_group_id => self.style.size_group_id)
       sizes.each do |s|
         x = Omni::StyleColorSize.new

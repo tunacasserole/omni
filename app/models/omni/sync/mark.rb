@@ -20,6 +20,9 @@ class Omni::Sync::Mark < Omni::Sync::Base
     puts @output
     # @no_locations.each {|x| puts x}
     # exit
+    @no_skus.each do |x|
+      Omni::Sku.create(display: x, source: 'MARK AUTO CREATE', source_id: x, state: 'autocreated') #unless Omni::Sku.where(source_id: source).first
+    end
   end
 
   def self.put(message)
@@ -28,13 +31,26 @@ class Omni::Sync::Mark < Omni::Sync::Base
     # puts "#{Time.now.strftime("%H:%M:%S").yellow}: #{message}"
   end
 
+   # fix skus
+    # @no_locations.each do |x|
+    #   Omni::Location.create(display: x) #unless Omni::Sku.where(source_id: source).first
+    # end
+    # @no_row_locations.each_with_index do |x,i|
+    #   puts i
+    #   sku_id = @ro_row_skus[i]
+    #   puts sku_id
+    #   Omni::Inventory.create(location_id: x) #unless Omni::Sku.where(source_id: source).first
+    # end
+    # @no_locations.each {|x| puts x}
+    # exit
+
   def self.inventory
     @inventories = Omni::Inventory.source_hash
-    self.on_hand
+    # self.on_hand
     # self.wip
     # self.transit
     # self.allocated
-    # self.results
+    self.results
   end
 
   def self.on_hand
