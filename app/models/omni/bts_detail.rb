@@ -6,7 +6,7 @@ class Omni::BtsDetail < ActiveRecord::Base
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext
+  # supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
@@ -76,24 +76,24 @@ class Omni::BtsDetail < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :bts_id
-    string   :sku_display
-    string   :style_display
-    string   :on_hand
-    string   :wip
-    string   :source
-    string   :source_id
-    string   :transit
-    string   :allocated
-    string   :ytd
-    string   :py1
-    string   :py2
-    string   :projection
+  # searchable do
+  #   string   :bts_id
+  #   string   :sku_display
+  #   string   :style_display
+  #   string   :on_hand
+  #   string   :wip
+  #   string   :source
+  #   string   :source_id
+  #   string   :transit
+  #   string   :allocated
+  #   string   :ytd
+  #   string   :py1
+  #   string   :py2
+  #   string   :projection
 
-    text     :sku_fulltext, :using => :sku
-    text     :style_fulltext, :using => :style_display
-  end
+  #   text     :sku_fulltext, :using => :sku
+  #   text     :style_fulltext, :using => :style_display
+  # end
   # INDEXING (End)
 
 
