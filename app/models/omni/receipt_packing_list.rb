@@ -25,7 +25,7 @@
       # A ReceiptDetail record for every Purchase Detail (SKU) in the spreadsheet (every SKU being received).  The total received units for the SKU are added up from all of the carton detail for the SKU.
       # A ReceiptCarton record for every detail row of the spreadsheet (every SKU/Carton # combination).
 
-The receipt will be added in draft state and then managed through its life cycle just like a manually created receipt.
+# The receipt will be added in draft state and then managed through its life cycle just like a manually created receipt.
 
   end
 
