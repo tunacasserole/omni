@@ -5,7 +5,7 @@ class Omni::Bts < ActiveRecord::Base
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext
+  # supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
@@ -55,14 +55,14 @@ class Omni::Bts < ActiveRecord::Base
   # HOOKS (End)
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :department_display
-    string   :display
-    string   :state
+  # searchable do
+  #   string   :department_display
+  #   string   :display
+  #   string   :state
 
-    text     :department_display_fulltext, :using => :department_display
-    text     :state_fulltext, :using => :state
-  end
+  #   text     :department_display_fulltext, :using => :department_display
+  #   text     :state_fulltext, :using => :state
+  # end
   # INDEXING (End)
 
   # # STATES (Start) ====================================================================
