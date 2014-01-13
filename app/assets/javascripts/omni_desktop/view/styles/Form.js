@@ -535,7 +535,7 @@ Ext.define('Omni.view.styles.Form', {
               queryField: 'display',
               valueField: 'style_id',
               itemTpl: '{display}',
-              gotoTarget: 'omni-skus-Inspector'
+              gotoTarget: 'omni-styles-Inspector'
             }, {
               name: 'add_on_sku_id',
               fieldLabel: this.add_on_sku_idLabel,
@@ -716,7 +716,7 @@ Ext.define('Omni.view.styles.Form', {
    *
    */
   onLocationsAction: function(action, eOpts) {
-    this.processEventTransition('locations', 'Locations were successfully built.', 'An error occurred building locations for this Style');
+    this.processEventTransition('build_locations', 'Locations were successfully built.', 'An error occurred building locations for this Style');
   }, // onLocationsAction
 
   /**
@@ -724,7 +724,7 @@ Ext.define('Omni.view.styles.Form', {
    */
   onSkusAction: function(action, eOpts) {
     Buildit.infoMsg('Skus are being built.  This may take a few moments');
-    this.processEventTransition('skus', 'Skus were successfully built.', 'An error occurred building skus for this Style');
+    this.processEventTransition('build_skus', 'Skus were successfully built.', 'An error occurred building skus for this Style');
 
   }, // onBuildAction
 

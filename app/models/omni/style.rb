@@ -79,7 +79,7 @@ class Omni::Style < ActiveRecord::Base
   has_many     :style_suppliers,                 :class_name => 'Omni::StyleSupplier',           :foreign_key => 'style_id'
   has_many     :style_locations,                 :class_name => 'Omni::StyleLocation',           :foreign_key => 'style_id'
   has_many     :style_colors,                    :class_name => 'Omni::StyleColor',              :foreign_key => 'style_id'
-  # has_many     :style_color_sizes,               :class_name => 'Omni::StyleColorSize',          :foreign_key => 'style_id'
+  has_many     :style_color_sizes,               class_name: 'Omni::StyleColorSize',          through: :style_colors
   has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
   has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'style_id'
   # ASSOCIATIONS (End)
@@ -112,7 +112,7 @@ class Omni::Style < ActiveRecord::Base
   ### CALLBACKS ###
     after_transition :on => :release,        :do => :after_release
     # after_transition :on => :locations,   :do => :after_locations
-    after_transition :on => :skus,        :do => :build_skus
+    after_transition :on => :buildi_skus, :do => :go_build_skus
     after_transition :on => :discontinue, :do => :after_discontinue
     after_transition :on => :drop,        :do => :after_drop
     after_transition :on => :deactivate,  :do => :after_deactivate
@@ -127,7 +127,7 @@ class Omni::Style < ActiveRecord::Base
       transition :pending_approval => :active
     end
 
-    event :skus do
+    event :build_skus do
       transition :building => :building
       transition :active => :building
       transition :draft => :building
@@ -172,13 +172,13 @@ class Omni::Style < ActiveRecord::Base
     end
 
     state :building do
-      validate  :style_data
+      validate  :ready_to_build_skus
     end
 
   end
   # STATES (End)
 
-  def style_data
+  def ready_to_build_skus
     has_style_color_sizes = false
     self.style_colors.each do |x|
       has_style_color_sizes = true if x.style_color_sizes.count > 0
@@ -207,7 +207,7 @@ class Omni::Style < ActiveRecord::Base
     puts 'ready...'
   end
 
-  def locations
+  def build_locations
   # adds a StyleLocation row for the Style and every Location where is_enabled = True (bypass any Locations that already have a StyleLocation
     puts '--- starting building locations ---'
     Omni::Location.all.each do |l|
@@ -222,132 +222,161 @@ class Omni::Style < ActiveRecord::Base
   end
 
   ######## GENERATE SKU DATA ##############
-  def build_skus
-    puts '--- starting building skus ---'
+  def go_build_skus
+    puts "\n start build_skus at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    puts "1"
     gen_skus
-    puts '--- gen sku suppliers ---'
-    gen_sku_suppliers
-    puts '--- gen inventories ---'
-    gen_inventories
-    gen_sku_prices
-    self.state = 'active'
-    save
-    puts '--- done with building skus ---'
-    puts 'ready...'
+    puts "2"
+    # suck_it
+    # puts "\n sku suppliers at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    # puts "\n inventories at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    # gen_inventories
+    # puts "\n sku prices at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    # gen_sku_prices
+    # self.state = 'active'
+    # save
+    # puts "\n Done building skus at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    # puts 'ready...'
+    puts "\n end build_skus at: #{Time.now.strftime("%H:%M:%S").yellow}"
+  end
+
+  def suck_it
+    puts "style info: #{self.display} sku count is #{self.skus.count} "#suppliers count is #{self.style_suppliers.count}"
   end
 
   def gen_skus
-    # Add Sku row for each StyleColorSize row in active state
-    self.style_colors.each do |sc|
-      Omni::StyleColorSize.where(:style_color_id => sc.style_color_id).each do |scs|
-        x = Omni::Sku.new
-        x.display = "#{self.display}-#{scs.style_color.color_display}-#{scs.size_display}"
-        x.maintenance_level = self.maintenance_level
-        # x.generic_sku_id = self.generic_sku_id
-        x.add_on_sku_id = self.add_on_sku_id
-        x.site_id = self.site_id
-        x.conversion_type = self.conversion_type
-        x.style_color_size_id = scs.style_color_size_id
-        x.style_id = self.style_id
-        x.color_id = scs.style_color.color_id
-        x.size_id = scs.size_id
-        x.effective_date = Time.now
-        x.subclass_id = self.subclass_id
-        x.buyer_user_id = self.buyer_user_id
-        x.brand = self.brand
-        x.product_type_id = self.product_type_id
-        x.fabric_content = self.fabric_content
-        x.initial_retail_price = self.initial_retail_price
-        x.suggested_retail_price = self.suggested_retail_price
-        x.smoothing_factor = self.smoothing_factor
-        x.replenishment_method = self.replenishment_method
-        x.minimum_on_hand_units = self.minimum_on_hand_units
-        x.maximum_on_hand_units = self.maximum_on_hand_units
-        x.pack_type = self.pack_type
-        x.replenishment_source = self.replenishment_source
-        x.is_not_stocked = self.is_not_stocked
-        x.sell_unit_uom_code = self.sell_unit_uom_code
-        x.sell_unit_length = self.sell_unit_length
-        x.sell_unit_height = self.sell_unit_height
-        x.sell_unit_width = self.sell_unit_width
-        x.sell_unit_weight = self.sell_unit_weight
-        x.is_conveyable_sell_unit = self.is_conveyable_sell_unit
-        x.is_discountable = self.is_discountable
-        x.is_taxable = self.is_taxable
-        x.order_uom_code = self.order_uom_code
-        x.order_package_type = self.order_package_type
-        x.garment_pieces = self.garment_pieces
-        x.is_special_order = self.is_special_order
-        # x.is_special_size = self.is_special_size
-        @created_count = 0
-        @error_count = 0
-        x.save ? @created_count += 1 : @error_count += 1
-        # update style color size sku_id
-        scs.sku_id = x.sku_id   # Update the StyleColorSize sku_id to the one just built
-        scs.state = 'generated'
-        scs.save
-      end
-      puts "created count is #{@created_count} and error count is #{@error_count}"
+    # Add sku row for each StyleColorSize row in active state
+    self.style_color_sizes.each do |scs|
+      sku_name = "#{self.display}-#{scs.style_color.color_display}-#{scs.size_display}"
+      puts "sku name is #{sku_name}"
+      x = Omni::Sku.where(display: sku_name).first || Omni::Sku.new(display: sku_name)
+      x.maintenance_level = self.maintenance_level
+      # x.generic_sku_id = self.generic_sku_id
+      x.add_on_sku_id = self.add_on_sku_id
+      x.site_id = self.site_id
+      x.conversion_type = self.conversion_type
+      x.style_color_size_id = scs.style_color_size_id
+      x.style_id = self.style_id
+      x.color_id = scs.style_color.color_id
+      x.size_id = scs.size_id
+      x.effective_date = Time.now
+      x.subclass_id = self.subclass_id
+      x.buyer_user_id = self.buyer_user_id
+      x.brand = self.brand
+      x.product_type_id = self.product_type_id
+      x.fabric_content = self.fabric_content
+      x.initial_retail_price = self.initial_retail_price
+      x.suggested_retail_price = self.suggested_retail_price
+      x.smoothing_factor = self.smoothing_factor
+      x.replenishment_method = self.replenishment_method
+      x.minimum_on_hand_units = self.minimum_on_hand_units
+      x.maximum_on_hand_units = self.maximum_on_hand_units
+      x.pack_type = self.pack_type
+      x.replenishment_source = self.replenishment_source
+      x.is_not_stocked = self.is_not_stocked
+      x.sell_unit_uom_code = self.sell_unit_uom_code
+      x.sell_unit_length = self.sell_unit_length
+      x.sell_unit_height = self.sell_unit_height
+      x.sell_unit_width = self.sell_unit_width
+      x.sell_unit_weight = self.sell_unit_weight
+      x.is_conveyable_sell_unit = self.is_conveyable_sell_unit
+      x.is_discountable = self.is_discountable
+      x.is_taxable = self.is_taxable
+      x.order_uom_code = self.order_uom_code
+      x.order_package_type = self.order_package_type
+      x.garment_pieces = self.garment_pieces
+      x.is_special_order = self.is_special_order
+      # x.is_special_size = self.is_special_size
+      build_suppliers x
+      build_inventory x
+            # update style color size sku_id
+      scs.sku_id = x.sku_id   # Update the StyleColorSize sku_id to the one just built
+      scs.state = 'generated'
+      scs.save
+    end
+    # puts "created count is #{@created_count} and error count is #{@error_count}"
+  end
+
+  def build_suppliers(sku)
+    # Add SkuSupplier rows to this sku for each StyleSupplier rows in active state
+    self.style_suppliers.each do |ss|
+      # x = Omni::SkuSupplier.where(sku_id: sku.sku_id, supplier_id: ss.supplier_id).first || Omni::SkuSupplier.new(sku_id: sku.sku_id, supplier_id: ss.supplier_id)
+      x = Omni::SkuSupplier.where(sku_id: sku.sku_id, supplier_id: ss.supplier_id).first || Omni::SkuSupplier.new(sku_id: sku.sku_id, supplier_id: ss.supplier_id)
+      x.sku_id = sku.sku_id
+      x.supplier_id = ss.supplier_id
+      x.is_primary_supplier = ss.is_primary_supplier
+      x.is_manufacturer = ss.is_manufacturer
+      x.is_discontinued = ss.is_discontinued
+      x.supplier_cost_units = ss.supplier_cost_units
+      x.supplier_cost = ss.supplier_cost
+      x.master_pack_units = ss.master_pack_units
+      x.master_pack_length = ss.master_pack_length
+      x.master_pack_height = ss.master_pack_height
+      x.master_pack_width = ss.master_pack_width
+      x.master_pack_weight = ss.master_pack_weight
+      x.inner_pack_units = ss.inner_pack_units
+      x.inner_pack_uom_code = ss.inner_pack_uom_code
+      x.inner_pack_length = ss.inner_pack_length
+      x.inner_pack_height = ss.inner_pack_height
+      x.inner_pack_width = ss.inner_pack_width
+      x.inner_pack_weight = ss.inner_pack_weight
+      x.pack_type = ss.pack_type
+      x.minimum_order_units = ss.minimum_order_units
+      x.minimum_order_value = ss.minimum_order_value
+      x.minimum_order_weight = ss.minimum_order_weight
+      x.minimum_order_cube = ss.minimum_order_cube
+      x.order_multiple_type = ss.order_multiple_type
+      x.extra_cost = ss.extra_cost
+      x.is_included_extra_cost = ss.is_included_extra_cost
+      x.origin_country = ss.origin_country
+      x.freight_term = ss.freight_term
+      x.is_conveyable_master_pack = ss.is_conveyable_master_pack
+      x.is_conveyable_inner_pack = ss.is_conveyable_inner_pack
+      x.pallet_tie = ss.pallet_tie
+      x.pallet_high = ss.pallet_high
+      x.save
+      puts "supplier saved"
     end
   end
 
-  def gen_sku_suppliers
-    # Add SkuSupplier row for each Sku & all StyleSupplier rows in active state
-    Omni::Sku.where(style_id: self.style_id, state: 'active').each do |sku|
-      Omni::StyleSupplier.where(:style_id => self.style_id).each do |ss|
-        x = Omni::SkuSupplier.new
-        x.sku_id = sku.sku_id
-        x.supplier_id = ss.supplier_id
-        x.is_primary_supplier = ss.is_primary_supplier
-        x.is_manufacturer = ss.is_manufacturer
-        x.is_discontinued = ss.is_discontinued
-        x.supplier_cost_units = ss.supplier_cost_units
-        x.supplier_cost = ss.supplier_cost
-        x.master_pack_units = ss.master_pack_units
-        x.master_pack_length = ss.master_pack_length
-        x.master_pack_height = ss.master_pack_height
-        x.master_pack_width = ss.master_pack_width
-        x.master_pack_weight = ss.master_pack_weight
-        x.inner_pack_units = ss.inner_pack_units
-        x.inner_pack_uom_code = ss.inner_pack_uom_code
-        x.inner_pack_length = ss.inner_pack_length
-        x.inner_pack_height = ss.inner_pack_height
-        x.inner_pack_width = ss.inner_pack_width
-        x.inner_pack_weight = ss.inner_pack_weight
-        x.pack_type = ss.pack_type
-        x.minimum_order_units = ss.minimum_order_units
-        x.minimum_order_value = ss.minimum_order_value
-        x.minimum_order_weight = ss.minimum_order_weight
-        x.minimum_order_cube = ss.minimum_order_cube
-        x.order_multiple_type = ss.order_multiple_type
-        x.extra_cost = ss.extra_cost
-        x.is_included_extra_cost = ss.is_included_extra_cost
-        x.origin_country = ss.origin_country
-        x.freight_term = ss.freight_term
-        x.is_conveyable_master_pack = ss.is_conveyable_master_pack
-        x.is_conveyable_inner_pack = ss.is_conveyable_inner_pack
-        x.pallet_tie = ss.pallet_tie
-        x.pallet_high = ss.pallet_high
-        x.save
-        puts "sku suppler row created..................................."
-      end
-    end
+  def build_inventory(sku)
+    # Add inventory rows for this sku and each StyleLocation rows in active state
+    self.style_locations.each do |sl|
+      puts "\n style location is #{sl.display} at: #{Time.now.strftime("%H:%M:%S").yellow}"
+      x = Omni::Inventory.where(sku_id: sku.sku_id, location_id: sl.location_id).first || Omni::Inventory.new(sku_id: sku.sku_id, location_id: sl.location_id)
+      x.supplier_id = self.supplier_id
+      x.is_authorized = sl.is_authorized
+      x.is_taxable = sl.is_taxable
+      x.is_special_order = sl.is_special_order
+      x.is_discontinued = sl.is_discontinued
+      x.replenishment_method = sl.replenishment_method
+      x.replenishment_source = sl.replenishment_source
+      x.supplier_id = sl.supplier_id
+      x.safety_stock_units = sl.safety_stock_units
+      x.safety_stock_days = sl.safety_stock_days
+      # x.is_override_demand_exception = sl.is_override_demand_exception
+      x.smoothing_factor = sl.smoothing_factor
+      x.forecast_profile_id = sl.forecast_profile_id
+      # x.is_soq_override = sl.is_soq_override
+      x.minimum_units = sl.minimum_units
+      x.maximum_units = sl.maximum_units
+      x.seasonal_index_id = sl.seasonal_index_id
+      x.save
+    end    #
   end
 
   def gen_inventories
-    # Add inventory rows for each Sku & all StyleLocation rows in active state
-    puts "\n Generating Inventories at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    puts "\n style locations at: #{Time.now.strftime("%H:%M:%S").yellow}"
     style_locations = []; Omni::StyleLocation.where(style_id: self.style_id).each  { |loc| style_locations << loc}
-    puts "\n Finished Style Locations at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    puts "\n sku ids at: #{Time.now.strftime("%H:%M:%S").yellow}"
     sku_ids = []; Omni::Sku.where(style_id: self.style_id, state: 'active').each { |sku| sku_ids << sku.sku_id}
-    puts "\n Finished Sku Ids at: #{Time.now.strftime("%H:%M:%S").yellow}"
 
     # inventories = []; Omni::Inventory.where(s: self.style_id, state: 'active').each { |sku| sku_ids << sku.sku_id}
     # puts "\n Finished Sku Ids at: #{Time.now.strftime("%H:%M:%S").yellow}"
 
     puts "\n\n******self.skus.count is #{self.skus.count}*****\n\n"
 
-    style_locations.each do |sl|
+    self.style_locations.each do |sl|
     puts "\n style location is #{sl.display} at: #{Time.now.strftime("%H:%M:%S").yellow}"
       sku_ids.each do |sku_id|
         puts "sku id is #{sku_id} at: #{Time.now.strftime("%H:%M:%S").yellow}"

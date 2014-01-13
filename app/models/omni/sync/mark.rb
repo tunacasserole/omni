@@ -122,7 +122,7 @@ class Omni::Sync::Mark < Omni::Sync::Base
   def self.results
     load
     self.order_hashes
-
+    i = 0
     Omni::MarkOrderLine.where('order_nbr >= ?', @last_order).find_each do |x|
       # puts x.order_nbr
       outlet_nbr = @order_to_outlet[x.order_nbr]
@@ -146,23 +146,42 @@ class Omni::Sync::Mark < Omni::Sync::Base
   end
 
   def self.to_sql(outlet_nbr, stock_nbr, size, units, date, sold)
+      # puts "START to_sql, created_count is #{@created_count}, outlet_nbr is #{outlet_nbr}, stock_nbr is #{stock_nbr}, size is #{size}, units is #{units.to_s}, date is #{date}, sold is #{sold}"
     size = size.upcase
     @source_count += 1
     location_id = @locations[outlet_nbr]
     unless location_id
+      if @no_locations.include? outlet_nbr
+        l = Omni::Location.where(display: outlet_nbr).first || Omni::Location.create(display: outlet_nbr)
+      else
+        l = Omni::Location.create(display: outlet_nbr) unless Omni::Location.where(display: outlet_nbr).first
+      end
+      if l
+        location_id = l.location_id
+      else
+        puts "no location found for: #{outlet_nbr}"
+      end
       @no_location_count += 1
-      @no_locations << outlet_nbr unless @no_locations.include? outlet_nbr
-      # puts "START to_sql, created_count is #{@created_count}, outlet_nbr is #{outlet_nbr}, stock_nbr is #{stock_nbr}, size is #{size}, units is #{units.to_s}, date is #{date}, sold is #{sold}"
-      # puts "no location found for: #{outlet_nbr}"
+      @no_locations << outlet_nbr
       # abort
     end
 
-    sku_id = @skus["#{stock_nbr.to_s}-#{size}"]
+    source = "#{stock_nbr.to_s}-#{size}"
+    sku_id = @skus[source]
     unless sku_id
+      if @no_skus.include? source
+        s = Omni::Sku.where(display: source).first || Omni::Sku.create(display: source, source: 'MARK AUTO CREATE', source_id: source, state: 'autocreated')
+      else
+        s = Omni::Sku.create(display: source, source: 'MARK AUTO CREATE', source_id: source, state: 'autocreated') unless Omni::Sku.where(source_id: source).first
+      end
+      if s
+        sku_id = s.sku_id
+      else
+        puts "no sku found for: #{source}"
+      end
+
       @no_sku_count += 1
-      @no_skus << "#{stock_nbr.to_s}-#{size}" unless @no_skus.include? "#{stock_nbr.to_s}-#{size}"
-      # puts "no sku found for: #{stock_nbr.to_s}-#{size}"
-      # abort
+      @no_skus << source
     end
 
     if sold
@@ -237,7 +256,7 @@ class Omni::Sync::Mark < Omni::Sync::Base
     end
   end
 
-  def self.skus
+  def self.fix_skus
     data = Omni::Sku.all
     data.each do |x|
       x.source_id = x.source_id.upcase

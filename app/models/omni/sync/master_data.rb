@@ -1,6 +1,6 @@
 class Omni::Sync::MasterData
 
-  def self.skus
+  def self.sync_skus
     puts "started at #{Time.now.to_s.chop.chop.chop.chop.chop}"
     skus_created = 0
     sql = "select id, sku_display, style_display, size_display, school_code, mark_sku, bu_sku, tg_sku, description, fabric_content, retail, g_c  from skus_load_staged"

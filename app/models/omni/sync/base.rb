@@ -2,7 +2,7 @@ class Omni::Sync::Base
 
   def self.go
     Omni::Sync::Mark.inventory
-    # Omni::Sync::MasterData.skus
+    # Omni::Sync::MasterData.sync_skus
   end
 
   def self.xit
