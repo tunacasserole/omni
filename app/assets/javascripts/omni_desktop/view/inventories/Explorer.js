@@ -6,6 +6,9 @@ Ext.define('Omni.view.inventories.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store    : Ext.create('Omni.store.Inventory'),
 
+  allowNew: false,
+  allowFind: true,
+
   contextMenuConfig : {
     xtype    : 'omni-inventories-ExplorerContextMenu'
   },
