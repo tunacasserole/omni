@@ -34,10 +34,11 @@ class Omni::Style < ActiveRecord::Base
   default      :initial_retail_price,             :override  =>  false,        :to    => 0
   default      :suggested_retail_price,           :override  =>  false,        :to    => 0
   default      :planning_retail_price,            :override  =>  false,        :to    => 0
+  default      :maintenance_level,                :override  =>  false,        :to    => "BOTH"
   default      :smoothing_factor,                 :override  =>  false,        :to    => 0
+  default      :garment_pieces,                   :override  =>  false,        :to    => 0
   default      :minimum_on_hand_units,            :override  =>  false,        :to    => 0
   default      :maximum_on_hand_units,            :override  =>  false,        :to    => 0
-  default      :is_not_stocked,                   :override  =>  false,        :to    => false
   default      :sell_unit_length,                 :override  =>  false,        :to    => 0
   default      :sell_unit_height,                 :override  =>  false,        :to    => 0
   default      :sell_unit_width,                  :override  =>  false,        :to    => 0
@@ -45,7 +46,7 @@ class Omni::Style < ActiveRecord::Base
   default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => false
   default      :is_discountable,                  :override  =>  false,        :to    => false
   default      :is_taxable,                       :override  =>  false,        :to    => true
-  default      :garment_pieces,                   :override  =>  false,        :to    => 0
+  default      :is_not_stocked,                   :override  =>  false,        :to    => false
   default      :is_special_order,                 :override  =>  false,        :to    => false
   default      :is_converted,                     :override  =>  false,        :to    => false
   default      :is_convertible,                   :override  =>  false,        :to    => false
@@ -435,6 +436,8 @@ class Omni::Style < ActiveRecord::Base
     string   :conversion_type
     string   :state
 
+    text     :conversion_type_fulltext,  :using => :conversion_type
+    text     :style_nbr_fulltext,  :using => :style_nbr
     text     :display_fulltext,  :using => :display
     text     :subclass_display_fulltext do self.subclass.display end
     text     :classification_display_fulltext do self.subclass.classification.display if self.subclass && self.subclass.classification end

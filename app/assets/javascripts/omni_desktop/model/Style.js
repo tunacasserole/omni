@@ -1,6 +1,6 @@
 Ext.define('Omni.model.Style', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -60,7 +60,7 @@ Ext.define('Omni.model.Style', {
     { name: 'add_on_sku_id', type: 'string' },
     { name: 'site_id', type: 'string' },
     { name: 'conversion_type', type: 'string' },
-    { name: 'maintenance_level', type: 'string' },
+    { name: 'maintenance_level', type: 'string', defaultValue : 'BOTH' },
     { name: 'is_convertible', type: 'boolean', defaultValue: false },
     { name: 'is_converted_heatset', type: 'boolean', defaultValue: false },
     { name: 'is_converted_sewn', type: 'boolean', defaultValue: false },
