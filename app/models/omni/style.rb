@@ -99,6 +99,8 @@ class Omni::Style < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
+
+
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
   # ORDERING (End)
