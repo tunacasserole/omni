@@ -3,7 +3,6 @@ Ext.define('Omni.view.sku_price_requests.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-sku_price_requests-Explorer',
 
-
     // LABELS (Start) ======================================================================
   stateLabel:                               Omni.i18n.model.SkuPriceRequest.state,
   user_displayLabel:                        Omni.i18n.model.SkuPriceRequest.user_display,
@@ -21,7 +20,7 @@ Ext.define('Omni.view.sku_price_requests.Explorer', {
 
 
     // EXPLORER CONFIG (Start) ===============================================================
-  allowFind:      true,
+  allowFind:      false,
 
   store:          Ext.create('Omni.store.SkuPriceRequest'),
 

@@ -3,17 +3,16 @@ Ext.define('Omni.view.style_color_sizes.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-style_color_sizes-Explorer',
 
-  
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
-      allowFind: true,
+      allowFind: false,
 
       store: Ext.create('Omni.store.StyleColorSize'),
 

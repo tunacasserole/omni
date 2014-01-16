@@ -98,7 +98,7 @@ Ext.define('Omni.view.styles.Form', {
       order_package_typeLabel: Omni.i18n.model.Style.order_package_type,
       garment_piecesLabel: Omni.i18n.model.Style.garment_pieces,
       is_special_orderLabel: Omni.i18n.model.Style.is_special_order,
-      // is_convertedLabel:                          Omni.i18n.model.Style.is_converted,
+      is_convertedLabel: Omni.i18n.model.Style.is_converted,
       add_on_sku_idLabel: Omni.i18n.model.Style.add_on_sku_id,
       site_idLabel: Omni.i18n.model.Style.site_id,
       conversion_typeLabel: Omni.i18n.model.Style.conversion_type,
@@ -320,6 +320,10 @@ Ext.define('Omni.view.styles.Form', {
             xtype: 'currencyfield',
             currencySymbol: null
           }, {
+              xtype: 'label',
+              text: 'Only initial price is currentley being used for pricing.',
+              cls: 'instruction'
+          }, {
             name: 'suggested_retail_price',
             fieldLabel: this.suggested_retail_priceLabel,
             allowBlank: true,
@@ -521,7 +525,7 @@ Ext.define('Omni.view.styles.Form', {
               xtype: 'buildit-Lookup',
               category: 'MAINTENANCE_LEVEL'
             },
-            // { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             {
               name: 'generic_style_id',
               fieldLabel: this.generic_style_idLabel,

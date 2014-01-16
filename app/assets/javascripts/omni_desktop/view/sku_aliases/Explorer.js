@@ -3,8 +3,6 @@ Ext.define('Omni.view.sku_aliases.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-sku_aliases-Explorer',
 
-
-
   initComponent:function () {
 
     var me = this;
@@ -13,7 +11,7 @@ Ext.define('Omni.view.sku_aliases.Explorer', {
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
-      allowFind: true,
+      allowFind: false,
 
       store: Ext.create('Omni.store.SkuAlias'),
 

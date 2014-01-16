@@ -2,14 +2,14 @@ Ext.define('Omni.view.style_suppliers.Form', {
 
   extend:'Buildit.ux.Form',
   alias:'widget.omni-style_suppliers-Form',
+  allowFind: false,
 
-  
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       style_idLabel:                              Omni.i18n.model.StyleSupplier.style_id,
@@ -62,7 +62,7 @@ Ext.define('Omni.view.style_suppliers.Form', {
           layout: 'anchor',
           items:[
             { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: true,   disabled: true,     xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}' },
-            { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
+            { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}', gotoTarget: 'omni-suppliers-Inspector'},
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             // { name: 'is_primary_supplier',            fieldLabel: this.is_primary_supplierLabel,        allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_manufacturer',                fieldLabel: this.is_manufacturerLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
@@ -130,7 +130,7 @@ Ext.define('Omni.view.style_suppliers.Form', {
             { name: 'extra_cost',                     fieldLabel: this.extra_costLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_included_extra_cost',         fieldLabel: this.is_included_extra_costLabel,     allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'origin_country',                 fieldLabel: this.origin_countryLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            // { name: 'fob_point',                      fieldLabel: this.fob_pointLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },            
+            // { name: 'fob_point',                      fieldLabel: this.fob_pointLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'freight_term',                   fieldLabel: this.freight_termLabel,               allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',  category:  'FREIGHT_TERM' }
           ]
         },

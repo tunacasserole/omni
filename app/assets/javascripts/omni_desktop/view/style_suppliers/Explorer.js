@@ -3,7 +3,6 @@ Ext.define('Omni.view.style_suppliers.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-style_suppliers-Explorer',
 
-
     // LABELS (Start) ======================================================================
   style_displayLabel:                       Omni.i18n.model.StyleSupplier.style_display,
   stateLabel:                               Omni.i18n.model.StyleSupplier.state,
@@ -19,7 +18,7 @@ Ext.define('Omni.view.style_suppliers.Explorer', {
 
 
     // EXPLORER CONFIG (Start) ===============================================================
-  allowFind:      true,
+  allowFind:      false,
 
   store:          Ext.create('Omni.store.StyleSupplier'),
 
@@ -47,7 +46,7 @@ Ext.define('Omni.view.style_suppliers.Explorer', {
     Ext.apply(this, {
       columns: [
         { header: this.style_displayLabel,                               dataIndex: 'style_display',                      flex: 1,   sortable: true  },
-        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: true  },        
+        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: true  },
         { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: true  },
         { header: this.is_primary_supplierLabel,                         dataIndex: 'is_primary_supplier',                flex: 1,   sortable: true  },
         { header: this.is_manufacturerLabel,                             dataIndex: 'is_manufacturer',                    flex: 1,   sortable: true  }

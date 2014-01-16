@@ -2,14 +2,14 @@ Ext.define('Omni.view.style_supplier_colors.Form', {
 
   extend:'Buildit.ux.Form',
   alias:'widget.omni-style_supplier_colors-Form',
+  allowFind: false,
 
-  
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       style_supplier_idLabel:                     Omni.i18n.model.StyleSupplierColor.style_supplier_id,

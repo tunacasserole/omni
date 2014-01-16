@@ -3,17 +3,16 @@ Ext.define('Omni.view.sku_promo_prices.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-sku_promo_prices-Explorer',
 
-  
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
-      allowFind: true,
+      allowFind: false,
 
       store: Ext.create('Omni.store.SkuPromoPrice'),
 

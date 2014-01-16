@@ -2,6 +2,8 @@ class Omni::Sync::Base
 
   def self.go
     Omni::Sync::Mark.inventory
+    Omni::Sync::Rms.inventory
+    Omni::Sync::Grits.inventory
     # Omni::Sync::MasterData.sync_skus
   end
 

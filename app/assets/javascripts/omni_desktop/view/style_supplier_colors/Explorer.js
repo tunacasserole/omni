@@ -3,9 +3,6 @@ Ext.define('Omni.view.style_supplier_colors.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-style_supplier_colors-Explorer',
 
-  allowNew : false,
-  allowInspect : false,
-
   initComponent:function () {
 
     var me = this;
@@ -13,7 +10,9 @@ Ext.define('Omni.view.style_supplier_colors.Explorer', {
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
-      allowFind: true,
+      allowFind: false,
+      allowNew : true,
+      allowInspect : false,
 
       store: Ext.create('Omni.store.StyleSupplierColor'),
 

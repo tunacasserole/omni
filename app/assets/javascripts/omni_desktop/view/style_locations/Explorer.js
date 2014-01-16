@@ -3,8 +3,6 @@ Ext.define('Omni.view.style_locations.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-style_locations-Explorer',
 
-
-
   initComponent:function () {
 
     var me = this;
@@ -13,7 +11,7 @@ Ext.define('Omni.view.style_locations.Explorer', {
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
-      allowFind: true,
+      allowFind: false,
 
       store: Ext.create('Omni.store.StyleLocation'),
 

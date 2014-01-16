@@ -5,7 +5,7 @@ Ext.define('Omni.view.sku_suppliers.Explorer', {
 
 
     // EXPLORER CONFIG (Start) ===============================================================
-  allowFind:      true,
+  allowFind:      false,
 
   store:          Ext.create('Omni.store.SkuSupplier'),
 

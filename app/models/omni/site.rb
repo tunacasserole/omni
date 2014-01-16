@@ -22,20 +22,20 @@ class Omni::Site < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
   validates    :display,                         :uniqueness  => true
-  validates    :school_nbr,                      :uniqueness  => true,                         :allow_nil => false 
-  validates    :site_type,                       :lookup      => 'SITE_TYPE',                  :allow_nil => true 
-  validates    :gradeset,                        :lookup      => 'GRADESET',                   :allow_nil => true  
-  validates    :site_gender,                     :lookup      => 'SITE_GENDER',                :allow_nil => true  
-  validates    :state_code,                      :lookup      => 'STATE_CODE',                 :allow_nil => true  
+  validates    :school_nbr,                      :uniqueness  => true,                         :allow_nil => false
+  validates    :site_type,                       :lookup      => 'SITE_TYPE',                  :allow_nil => true
+  validates    :gradeset,                        :lookup      => 'GRADESET',                   :allow_nil => true
+  validates    :site_gender,                     :lookup      => 'SITE_GENDER',                :allow_nil => true
+  validates    :state_code,                      :lookup      => 'STATE_CODE',                 :allow_nil => true
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :site_id,                          :override  =>  false,        :with  => :guid              
+  default      :site_id,                          :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.site_name} - #{m.school_nbr}"}
   default      :school_nbr,                       :override  =>  false,        :with  => :sequence, :named=>"SCHOOL_NBR"
-  default      :is_on_web,                        :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_on_web,                        :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -88,33 +88,34 @@ class Omni::Site < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :display
     string   :site_name
+    string   :site_nbr
     string   :location_display do location.display if location end
-    string   :gradeset do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
-    string   :site_gender do |x| Buildit::Lookup::Manager.display_for('SITE_GENDER', x.site_gender) end
-    # string   :line_1
     string   :city
     string   :state_code do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.state_code) end
+    # string   :gradeset do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
+    # string   :site_gender do |x| Buildit::Lookup::Manager.display_for('SITE_GENDER', x.site_gender) end
+    # string   :line_1
     # string   :phone
-    string   :display
- 
+
     text     :display_fulltext, :using => :display
     text     :location_display_fulltext, :using => :location_display
-    text     :gradeset_fulltext, :using => :gradeset
-    text     :site_gender_fulltext, :using => :site_gender
-    text     :line_1_fulltext, :using => :line_1
     text     :city_fulltext, :using => :city
     text     :state_code_fulltext, :using => :state_code
-    # text     :phone_fulltext, :using => :phone
     text     :display_fulltext, :using => :display
-  end 
+    # text     :gradeset_fulltext, :using => :gradeset
+    # text     :site_gender_fulltext, :using => :site_gender
+    # text     :line_1_fulltext, :using => :line_1
+    # text     :phone_fulltext, :using => :phone
+  end
   # INDEXING (End)
 
   # CUSTOM INDEXING (Start) ====================================================================
   searchable do
     string   :school_nbr
     string   :display
-  end 
+  end
   # INDEXING (End)
 
 

@@ -3,17 +3,15 @@ Ext.define('Omni.view.sku_substitutes.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-sku_substitutes-Explorer',
 
-  
 
   initComponent:function () {
 
     var me = this;
 
-    
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
-      allowFind: true,
+      allowFind: false,
 
       store: Ext.create('Omni.store.SkuSubstitute'),
 

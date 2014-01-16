@@ -14,6 +14,7 @@ Ext.define('Omni.view.daily_results.Explorer', {
     Ext.apply(this, {
 
       allowFind: true,
+      allowNew: false,
 
       store: Ext.create('Omni.store.DailyResult'),
 

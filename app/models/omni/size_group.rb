@@ -70,12 +70,9 @@ class Omni::SizeGroup < ActiveRecord::Base
     string   :display
     string   :size_group_nbr
     string   :size_group_id
-    string   :size_group_detail_id
-    string   :size_id
     string   :description
     string   :short_name
     string   :concatenated_name
-    string   :display
 
     text     :display_fulltext, :using => :display
     text     :size_group_nbr_fulltext, :using => :size_group_nbr

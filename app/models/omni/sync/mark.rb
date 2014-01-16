@@ -20,9 +20,9 @@ class Omni::Sync::Mark < Omni::Sync::Base
     puts @output
     # @no_locations.each {|x| puts x}
     # exit
-    @no_skus.each do |x|
-      Omni::Sku.create(display: x, source: 'MARK AUTO CREATE', source_id: x, state: 'autocreated') #unless Omni::Sku.where(source_id: source).first
-    end
+    # @no_skus.each do |x|
+    #   Omni::Sku.create(display: x, source: 'MARK AUTO CREATE', source_id: x, state: 'autocreated') #unless Omni::Sku.where(source_id: source).first
+    # end
   end
 
   def self.put(message)

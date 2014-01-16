@@ -79,9 +79,10 @@ class Omni::Style < ActiveRecord::Base
   has_many     :style_suppliers,                 :class_name => 'Omni::StyleSupplier',           :foreign_key => 'style_id'
   has_many     :style_locations,                 :class_name => 'Omni::StyleLocation',           :foreign_key => 'style_id'
   has_many     :style_colors,                    :class_name => 'Omni::StyleColor',              :foreign_key => 'style_id'
-  has_many     :style_color_sizes,               class_name: 'Omni::StyleColorSize',          through: :style_colors
-  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
+  has_many     :style_color_sizes,               class_name: 'Omni::StyleColorSize',             through: :style_colors
   has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'style_id'
+  has_many     :inventories,                     class_name: 'Omni::Inventory',                  through: :skus
+  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -196,20 +197,15 @@ class Omni::Style < ActiveRecord::Base
 
   # STATE HANDLERS (Start) ====================================================================
   def after_release
-    puts '--- done with after_release ---'
-    puts 'ready...'
   end
 
   def after_activate
     self.effective_date = Time.now
     # self.save
-    puts '--- done with activate ---'
-    puts 'ready...'
   end
 
   def build_locations
   # adds a StyleLocation row for the Style and every Location where is_enabled = True (bypass any Locations that already have a StyleLocation
-    puts '--- starting building locations ---'
     Omni::Location.all.each do |l|
       next unless l.is_enabled == true
       x = Omni::StyleLocation.new
@@ -217,39 +213,27 @@ class Omni::Style < ActiveRecord::Base
       x.location_id = l.location_id
       x.save
     end
-    puts '--- done with building locations ---'
-    puts 'ready...'
   end
 
   ######## GENERATE SKU DATA ##############
   def go_build_skus
-    puts "\n start build_skus at: #{Time.now.strftime("%H:%M:%S").yellow}"
-    puts "1"
+    @@generated_skus = []
     gen_skus
-    puts "2"
-    # suck_it
-    # puts "\n sku suppliers at: #{Time.now.strftime("%H:%M:%S").yellow}"
-    # puts "\n inventories at: #{Time.now.strftime("%H:%M:%S").yellow}"
-    # gen_inventories
-    # puts "\n sku prices at: #{Time.now.strftime("%H:%M:%S").yellow}"
+    # gen_suppliers
     # gen_sku_prices
-    # self.state = 'active'
-    # save
-    # puts "\n Done building skus at: #{Time.now.strftime("%H:%M:%S").yellow}"
-    # puts 'ready...'
-    puts "\n end build_skus at: #{Time.now.strftime("%H:%M:%S").yellow}"
-  end
-
-  def suck_it
-    puts "style info: #{self.display} sku count is #{self.skus.count} "#suppliers count is #{self.style_suppliers.count}"
+    self.state = 'active'
+    save
   end
 
   def gen_skus
     # Add sku row for each StyleColorSize row in active state
     self.style_color_sizes.each do |scs|
       sku_name = "#{self.display}-#{scs.style_color.color_display}-#{scs.size_display}"
-      puts "sku name is #{sku_name}"
-      x = Omni::Sku.where(display: sku_name).first || Omni::Sku.new(display: sku_name)
+      if Omni::Sku.where(display: sku_name).first
+        next
+      else
+      end
+      x = Omni::Sku.new(display: sku_name)
       x.maintenance_level = self.maintenance_level
       # x.generic_sku_id = self.generic_sku_id
       x.add_on_sku_id = self.add_on_sku_id
@@ -287,15 +271,65 @@ class Omni::Style < ActiveRecord::Base
       x.garment_pieces = self.garment_pieces
       x.is_special_order = self.is_special_order
       # x.is_special_size = self.is_special_size
-      build_suppliers x
-      build_inventory x
-            # update style color size sku_id
-      scs.sku_id = x.sku_id   # Update the StyleColorSize sku_id to the one just built
-      scs.state = 'generated'
-      scs.save
+      if x.save
+        @@generated_skus << x.sku_id
+        build_suppliers x
+        # build_inventory x
+        # Update the StyleColorSize sku_id to the one just built and the state to generated
+        scs.sku_id = x.sku_id
+        scs.state = 'generated'
+        scs.save
+      else
+      end
     end
-    # puts "created count is #{@created_count} and error count is #{@error_count}"
+
+    bulk_insert_inventory
   end
+
+  def bulk_insert_inventory
+    @updates = []
+    @inventory_ids = []
+    self.style_locations.each do |sl|
+      @@generated_skus.each do |sku_id|
+        inventory_id = Buildit::Util::Guid.generate
+        @inventory_ids << inventory_id
+        @updates.push "('#{inventory_id}','#{sl.location_id}','#{sku_id}','#{sl.supplier_id}','#{sl.replenishment_method}','#{sl.replenishment_source}','#{sl.safety_stock_units}','#{sl.safety_stock_days}','#{sl.smoothing_factor}','#{sl.forecast_profile_id}','#{sl.minimum_units}','#{sl.maximum_units}','#{sl.seasonal_index_id}','#{sl.is_authorized ? 1: 0}','#{sl.is_taxable ? 1: 0}','#{sl.is_special_order ? 1: 0}','#{sl.is_discontinued ? 1: 0}')"
+      end
+    end
+    if @updates.length > 0
+      sql = "insert into inventories (inventory_id, location_id, sku_id, supplier_id, replenishment_method, replenishment_source, safety_stock_units, safety_stock_days, smoothing_factor, forecast_profile_id, minimum_units, maximum_units, seasonal_index_id, is_authorized, is_taxable, is_special_order, is_discontinued) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE is_authorized = VALUES(is_authorized)"
+      puts "\n********#{sql}********\n"
+      ActiveRecord::Base.connection.execute sql
+    end
+    puts "indexing"
+    @inventory_ids.each {|x| i = Omni::Inventory.find(x); i.index}
+    puts "done indexing"
+  end
+
+  # def build_inventory(sku_ids)
+  #   # ACTIVERECORD
+  #   self.style_locations.each do |sl|
+  #     x = Omni::Inventory.where(sku_id: sku.sku_id, location_id: sl.location_id).first || Omni::Inventory.new(sku_id: sku.sku_id, location_id: sl.location_id)
+  #     x.supplier_id = sl.supplier_id
+  #     x.replenishment_method = sl.replenishment_method
+  #     x.replenishment_source = sl.replenishment_source
+  #     x.safety_stock_units = sl.safety_stock_units
+  #     x.safety_stock_days = sl.safety_stock_days
+  #     x.smoothing_factor = sl.smoothing_factor
+  #     x.forecast_profile_id = sl.forecast_profile_id
+  #     x.minimum_units = sl.minimum_units
+  #     x.maximum_units = sl.maximum_units
+  #     x.seasonal_index_id = sl.seasonal_index_id
+
+  #     x.is_authorized = sl.is_authorized
+  #     x.is_taxable = sl.is_taxable
+  #     x.is_special_order = sl.is_special_order
+  #     x.is_discontinued = sl.is_discontinued
+  #     # x.is_override_demand_exception = sl.is_override_demand_exception
+  #     # x.is_soq_override = sl.is_soq_override
+  #     x.save
+  #   end    #
+  # end
 
   def build_suppliers(sku)
     # Add SkuSupplier rows to this sku for each StyleSupplier rows in active state
@@ -335,74 +369,6 @@ class Omni::Style < ActiveRecord::Base
       x.pallet_tie = ss.pallet_tie
       x.pallet_high = ss.pallet_high
       x.save
-      puts "supplier saved"
-    end
-  end
-
-  def build_inventory(sku)
-    # Add inventory rows for this sku and each StyleLocation rows in active state
-    self.style_locations.each do |sl|
-      puts "\n style location is #{sl.display} at: #{Time.now.strftime("%H:%M:%S").yellow}"
-      x = Omni::Inventory.where(sku_id: sku.sku_id, location_id: sl.location_id).first || Omni::Inventory.new(sku_id: sku.sku_id, location_id: sl.location_id)
-      x.supplier_id = self.supplier_id
-      x.is_authorized = sl.is_authorized
-      x.is_taxable = sl.is_taxable
-      x.is_special_order = sl.is_special_order
-      x.is_discontinued = sl.is_discontinued
-      x.replenishment_method = sl.replenishment_method
-      x.replenishment_source = sl.replenishment_source
-      x.supplier_id = sl.supplier_id
-      x.safety_stock_units = sl.safety_stock_units
-      x.safety_stock_days = sl.safety_stock_days
-      # x.is_override_demand_exception = sl.is_override_demand_exception
-      x.smoothing_factor = sl.smoothing_factor
-      x.forecast_profile_id = sl.forecast_profile_id
-      # x.is_soq_override = sl.is_soq_override
-      x.minimum_units = sl.minimum_units
-      x.maximum_units = sl.maximum_units
-      x.seasonal_index_id = sl.seasonal_index_id
-      x.save
-    end    #
-  end
-
-  def gen_inventories
-    puts "\n style locations at: #{Time.now.strftime("%H:%M:%S").yellow}"
-    style_locations = []; Omni::StyleLocation.where(style_id: self.style_id).each  { |loc| style_locations << loc}
-    puts "\n sku ids at: #{Time.now.strftime("%H:%M:%S").yellow}"
-    sku_ids = []; Omni::Sku.where(style_id: self.style_id, state: 'active').each { |sku| sku_ids << sku.sku_id}
-
-    # inventories = []; Omni::Inventory.where(s: self.style_id, state: 'active').each { |sku| sku_ids << sku.sku_id}
-    # puts "\n Finished Sku Ids at: #{Time.now.strftime("%H:%M:%S").yellow}"
-
-    puts "\n\n******self.skus.count is #{self.skus.count}*****\n\n"
-
-    self.style_locations.each do |sl|
-    puts "\n style location is #{sl.display} at: #{Time.now.strftime("%H:%M:%S").yellow}"
-      sku_ids.each do |sku_id|
-        puts "sku id is #{sku_id} at: #{Time.now.strftime("%H:%M:%S").yellow}"
-        next if Omni::Inventory.where(sku_id: sku_id, location_id: sl.location_id).first
-        x = Omni::Inventory.new
-        x.sku_id = sku_id
-        x.location_id = sl.location_id
-        x.supplier_id = self.supplier_id
-        x.is_authorized = sl.is_authorized
-        x.is_taxable = sl.is_taxable
-        x.is_special_order = sl.is_special_order
-        x.is_discontinued = sl.is_discontinued
-        x.replenishment_method = sl.replenishment_method
-        x.replenishment_source = sl.replenishment_source
-        x.supplier_id = sl.supplier_id
-        x.safety_stock_units = sl.safety_stock_units
-        x.safety_stock_days = sl.safety_stock_days
-        # x.is_override_demand_exception = sl.is_override_demand_exception
-        x.smoothing_factor = sl.smoothing_factor
-        x.forecast_profile_id = sl.forecast_profile_id
-        # x.is_soq_override = sl.is_soq_override
-        x.minimum_units = sl.minimum_units
-        x.maximum_units = sl.maximum_units
-        x.seasonal_index_id = sl.seasonal_index_id
-        x.save
-      end
     end
   end
 
@@ -421,23 +387,15 @@ class Omni::Style < ActiveRecord::Base
   end
 
   def after_discontinue
-    puts '--- done with discontinue ---'
-    puts 'ready...'
   end
 
   def after_drop
-    puts '--- done with drop ---'
-    puts 'ready...'
   end
 
   def after_activate
-    puts '--- done with activate ---'
-    puts 'ready...'
   end
 
   def after_deactivate
-    puts '--- done with deactivate ---'
-    puts 'ready...'
   end
 
 
