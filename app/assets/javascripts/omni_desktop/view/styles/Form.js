@@ -539,7 +539,10 @@ Ext.define('Omni.view.styles.Form', {
               queryField: 'display',
               valueField: 'style_id',
               itemTpl: '{display}',
-              gotoTarget: 'omni-styles-Inspector'
+              gotoTarget: 'omni-styles-Inspector',
+              defaultSearch: {
+                with: { is_converted: { equal_to: false } }
+              },
             }, {
               name: 'add_on_sku_id',
               fieldLabel: this.add_on_sku_idLabel,

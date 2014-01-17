@@ -435,6 +435,7 @@ class Omni::Style < ActiveRecord::Base
     string   :subclass_display do subclass.display if subclass end
     string   :conversion_type
     string   :state
+    boolean   :is_converted
 
     text     :conversion_type_fulltext,  :using => :conversion_type
     text     :style_nbr_fulltext,  :using => :style_nbr

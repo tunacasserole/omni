@@ -12,6 +12,7 @@ Ext.define('Omni.view.skus.Explorer', {
     Ext.apply(this, {
 
       allowFind: true,
+      allowNew: false,
 
       store: Ext.create('Omni.store.Sku'),
 
