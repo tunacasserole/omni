@@ -34,7 +34,7 @@ Ext.define('Omni.view.grades.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      displayLabel: Omni.i18n.model.Grade.display,
+      grade_nameLabel: Omni.i18n.model.Grade.grade_name,
       gradesetLabel: Omni.i18n.model.Grade.gradeset,
       grade_orderLabel: Omni.i18n.model.Grade.grade_order
     });
@@ -43,7 +43,7 @@ Ext.define('Omni.view.grades.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true },
+        { header: this.grade_nameLabel, dataIndex: 'grade_name',  flex: 1,  sortable: true },
         { header: this.gradesetLabel, dataIndex: 'gradeset',  flex: 1,  sortable: true , renderer: Buildit.util.Format.lookupRenderer('GRADESET') },
         { header: this.grade_orderLabel, dataIndex: 'grade_order',  flex: 1,  sortable: true  }
       ]
