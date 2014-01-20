@@ -1,9 +1,17 @@
 class Omni::Sync::MasterData
 
+  def self.go
+    load_styles
+
+  end
+
+  def self.load_styles
+    # read excel
+
   def self.sync_skus
     puts "started at #{Time.now.to_s.chop.chop.chop.chop.chop}"
     skus_created = 0
-    sql = "select id, sku_display, style_display, size_display, school_code, mark_sku, bu_sku, tg_sku, description, fabric_content, retail, g_c  from skus_load_staged"
+    sql = "select id, sku_display, style_display, size_display, school_code, mark_sku, bu_sku, tg_sku, description, fabric_content, retail, g_c from skus_load_staged"
     data = ActiveRecord::Base.connection.execute sql
     data.each_with_index do |x,i|
       puts "processed #{i.to_s} rows at #{Time.now.to_s.chop.chop.chop.chop.chop}" if i.to_s.end_with? '000'

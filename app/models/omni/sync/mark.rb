@@ -115,7 +115,7 @@ class Omni::Sync::Mark < Omni::Sync::Base
       self.to_sql(outlet_nbr, x.stock_nbr, x.size, x.qty, @date, false)
     end
     sql = "insert into inventories (inventory_id, location_id, sku_id, in_transit_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE in_transit_units = VALUES(in_transit_units)"
-    ActiveRecord::Base.connection.execute sql unless @created_count == 0
+    ActiveRecord::Base.connection.execute sql unleq`  ss @created_count == 0
     xit
   end
 

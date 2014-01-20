@@ -12,7 +12,7 @@ class Omni::Grade < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -68,9 +68,15 @@ class Omni::Grade < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :gradeset do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
+    string   :short_name #do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
+    string   :grade_name #do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
+    string   :display #do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
+    string   :gradeset #do |x| Buildit::Lookup::Manager.display_for('GRADESET', x.gradeset) end
     string   :grade_order
 
+    text     :short_name_fulltext, :using => :short_name
+    text     :grade_name_fulltext, :using => :grade_name
+    text     :display_fulltext, :using => :display
     text     :gradeset_fulltext, :using => :gradeset
     text     :grade_order_fulltext, :using => :grade_order
   end
