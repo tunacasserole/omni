@@ -264,7 +264,7 @@ class Omni::Purchase < ActiveRecord::Base
     return true
   end
 
-  def adjust
+  def units
     self.purchase_details.each do |pd|
       pd.units_ordered *= self.adjustment_percent / 100 if self.adjustment_percent
       pd.save

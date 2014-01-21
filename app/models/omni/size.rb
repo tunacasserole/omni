@@ -12,7 +12,7 @@ class Omni::Size < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -20,16 +20,16 @@ class Omni::Size < ActiveRecord::Base
   validates    :display,                         :presence    => true
   validates    :size_type,                       :presence    => true
   validates    :concatenated_name,               :presence    => true
-  # validates    :size_nbr,                        :uniqueness  => true,                         :allow_nil => true  
-  validates    :size_type,                       :lookup      => 'SIZE_TYPE',                  :allow_nil => false 
+  # validates    :size_nbr,                        :uniqueness  => true,                         :allow_nil => true
+  validates    :size_type,                       :lookup      => 'SIZE_TYPE',                  :allow_nil => false
   # VALIDATIONS (End)
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :size_id,                          :override  =>  false,        :with  => :guid              
+  default      :size_id,                          :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.dimension_1}#{m.dimension_2} - #{m.size_nbr}"}
   default      :size_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"SIZE_NBR"
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -62,7 +62,7 @@ class Omni::Size < ActiveRecord::Base
 
 
   # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
+  order_search_by :grade_order => :asc
   # ORDERING (End)
 
 
@@ -79,14 +79,14 @@ class Omni::Size < ActiveRecord::Base
     string   :dimension_1
     string   :dimension_2
     string   :display
- 
+
     text     :size_nbr_fulltext, :using => :size_nbr
     text     :size_type_fulltext, :using => :size_type
     text     :short_name_fulltext, :using => :short_name
     text     :concatenated_name_fulltext, :using => :concatenated_name
     text     :dimension_1_fulltext, :using => :dimension_1
     text     :dimension_2_fulltext, :using => :dimension_2
-  end 
+  end
   # INDEXING (End)
 
 

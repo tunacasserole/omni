@@ -7,6 +7,7 @@ class Omni::Sync::MasterData
 
   def self.load_styles
     # read excel
+  end
 
   def self.sync_skus
     puts "started at #{Time.now.to_s.chop.chop.chop.chop.chop}"
