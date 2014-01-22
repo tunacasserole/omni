@@ -75,6 +75,7 @@ Ext.define('Omni.view.styles.Form', {
       product_type_idLabel: Omni.i18n.model.Style.product_type_id,
       fabric_contentLabel: Omni.i18n.model.Style.fabric_content,
       storage_codeLabel: Omni.i18n.model.Style.storage_code,
+      design_codeLabel: Omni.i18n.model.Style.design_code,
       initial_retail_priceLabel: Omni.i18n.model.Style.initial_retail_price,
       suggested_retail_priceLabel: Omni.i18n.model.Style.suggested_retail_price,
       planning_retail_priceLabel: Omni.i18n.model.Style.planning_retail_price,
@@ -543,6 +544,12 @@ Ext.define('Omni.view.styles.Form', {
               defaultSearch: {
                 with: { is_converted: { equal_to: false } }
               },
+            }, {
+              name: 'design_code',
+              fieldLabel: this.design_codeLabel,
+              allowBlank: true,
+              disabled: false,
+              xtype: 'textfield'
             }, {
               name: 'add_on_sku_id',
               fieldLabel: this.add_on_sku_idLabel,

@@ -6,12 +6,14 @@ en:
       omni/style_color:
         style_color_id:                  Style Color
         display:                         Name
-        style_display:                   Style
+        state:                           State
         style_id:                        Style
-        color_display:                   Color
+        style_display:                   Style
         color_id:                        Color
+        color_display:                   Color
         short_name:                      Short Name
         concatenated_name:               Concatenation Name
-        state:                           State        
+        fabric_content:                  Fabric Contents
+        initial_retail_price:            Initial Retail Price
         is_destroyed:                    Deleted
 

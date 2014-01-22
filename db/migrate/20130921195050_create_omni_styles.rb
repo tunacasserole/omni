@@ -21,6 +21,7 @@ class CreateOmniStyles < ActiveRecord::Migration
         t.column   :product_type_id,                 :string,            :null  =>  true,    :limit   => 32
         t.column   :fabric_content,                  :string,            :null  =>  true,    :limit   => 100
         t.column   :storage_code,                    :string,            :null  =>  true,    :limit   => 6
+        t.column   :design_code,                     :string,            :null  =>  true,    :limit   => 200
         t.column   :initial_retail_price,            :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :suggested_retail_price,          :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :planning_retail_price,           :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11

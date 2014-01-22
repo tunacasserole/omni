@@ -3,6 +3,7 @@
 Ext.define('Omni.view.app.Hub', {
   extend: 'Buildit.ux.Hub',
   alias: 'widget.omni-app-Hub',
+  extend: 'Buildit.ux.Hub',
   bodyStyle: 'background: transparent',
   cls: 'desktop',
 

@@ -1,6 +1,6 @@
 Ext.define('Omni.model.StyleColor', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -18,8 +18,10 @@ Ext.define('Omni.model.StyleColor', {
     { name: 'color_display', type: 'string' },
     { name: 'color_id', type: 'string' },
     { name: 'short_name', type: 'string' },
+    { name: 'initial_retail_price', type: 'float', defaultValue: 0 },
+    { name: 'fabric_content', type: 'string' },
     { name: 'concatenated_name', type: 'string' },
-    { name: 'state', type: 'string' },    
+    { name: 'state', type: 'string' },
     { name: 'is_destroyed', type: 'boolean', defaultValue: false }
   ],
   // FIELDS (End)

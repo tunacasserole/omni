@@ -10,6 +10,7 @@ class Omni::StyleColor < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
+  validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
   validates    :color_id, uniqueness: { scope: :style_id, message: "Color already exists for this style." }
   # VALIDATIONS (End)
 

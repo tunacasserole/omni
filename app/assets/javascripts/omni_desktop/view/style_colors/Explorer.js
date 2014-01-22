@@ -37,6 +37,8 @@ Ext.define('Omni.view.style_colors.Explorer', {
       stateLabel: Omni.i18n.model.StyleColor.state,
       color_displayLabel: Omni.i18n.model.StyleColor.color_display,
       short_nameLabel: Omni.i18n.model.StyleColor.short_name,
+      fabric_contentLabel: Omni.i18n.model.StyleColor.fabric_content,
+      initial_retail_priceLabel: Omni.i18n.model.StyleColor.initial_retail_price,
       concatenated_nameLabel: Omni.i18n.model.StyleColor.concatenated_name
     });
     // LABELS (End)
@@ -48,6 +50,8 @@ Ext.define('Omni.view.style_colors.Explorer', {
         { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: true  },
         { header: this.color_displayLabel, dataIndex: 'color_display',  flex: 1,  sortable: true  },
         { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: true  },
+        { header: this.fabric_contentLabel, dataIndex: 'fabric_content',  flex: 1,  sortable: true  },
+        { header: this.inital_retail_priceLabel, dataIndex: 'inital_retail_price',  flex: 1,  sortable: true  },
         { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: true  }
       ]
     });

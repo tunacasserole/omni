@@ -23,8 +23,9 @@ en:
         brand:                           Brand
         product_type_display:            Product Type
         product_type_id:                 Product Type
-        fabric_content:                  Fabric Contents
         storage_code:                    Storage Code
+        design_code:                     Design Code
+        fabric_content:                  Fabric Contents
         initial_retail_price:            Initial Retail Price
         suggested_retail_price:          Suggested Retail Price
         planning_retail_price:           Planning Retail Price
@@ -56,7 +57,7 @@ en:
         maintenance_level:               Maintenance Level
         is_convertible:                  Can Be Converted
         is_converted_heatset:            Heatset Logo or Patch
-        is_converted_sewn:               Sewn On Logo or Patch        
+        is_converted_sewn:               Sewn On Logo or Patch
         generic_style_display:           Generic Style
         generic_style_id:                Generic Style
         size_group_display:              Size Group

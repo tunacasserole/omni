@@ -10,11 +10,11 @@ class Omni::Style < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  # validates    :display,                         :presence    => true
-  # validates    :subclass_id,                     :presence    => true
-  # validates    :size_group_id,                   :presence    => true
-  # validates    :display,                         :uniqueness  => true
-  # validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
+  validates    :display,                         :presence    => true
+  validates    :subclass_id,                     :presence    => true
+  validates    :size_group_id,                   :presence    => true
+  validates    :display,                         :uniqueness  => true
+  validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
   # validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
   # validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
   # validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
@@ -161,7 +161,7 @@ class Omni::Style < ActiveRecord::Base
       validates :brand,              :presence    => true
       validates :generic_style_id,   :presence    => true,  if: 'is_converted?'
       validates :site_id,            :presence    => true,  if: 'is_converted?'
-      validates :add_on_sku_id,      :presence    => true,  if: 'is_converted?'
+      # validates :add_on_sku_id,      :presence    => true,  if: 'is_converted?'
       validates :conversion_type,    :presence    => true,  if: 'is_converted?'
       validates :initial_retail_price, :greater_than => 0
       validates :planning_retail_price, :greater_than => 0

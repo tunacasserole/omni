@@ -32,6 +32,7 @@ Ext.define('Omni.model.Style', {
     { name: 'product_type_id', type: 'string' },
     { name: 'fabric_content', type: 'string' },
     { name: 'storage_code', type: 'string' },
+    { name: 'design_code', type: 'string' },
     { name: 'initial_retail_price', type: 'float', defaultValue: 0 },
     { name: 'suggested_retail_price', type: 'float', defaultValue: 0 },
     { name: 'planning_retail_price', type: 'float', defaultValue: 0 },

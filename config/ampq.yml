@@ -1,0 +1,22 @@
+development:
+  host: localhost
+  username: guest
+  password: guest
+  port: 5672
+  vhost: /
+
+
+test:
+  host: localhost
+  username: guest
+  password: guest
+  port: 5672
+  vhost: /
+
+
+production:
+  host: localhost
+  username: guest
+  password: guest
+  port: 5672
+  vhost: /

@@ -10,7 +10,8 @@ Ext.define('Omni.view.inventories.Explorer', {
   allowFind: true,
 
   contextMenuConfig : {
-    xtype    : 'omni-inventories-ExplorerContextMenu'
+    // xtype    : 'omni-inventories-ExplorerContextMenu'
+    xtype    : 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{
