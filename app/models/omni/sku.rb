@@ -234,6 +234,7 @@ class Omni::Sku < ActiveRecord::Base
     text     :classification_display_fulltext do self.style.subclass.classification.display if self.style && self.style.subclass && self.style.subclass.classification end
     text     :department_display_fulltext do self.style.subclass.classification.department.display if self.style && self.style.subclass && self.style.subclass.classification && self.style.subclass.classification.department end
     text     :source_idfulltext, :using => :source_id
+    string   :state
     text     :source_fulltext, :using => :source
     text     :site_display_fulltext, :using => :site_display
     text     :color_display_fulltext, :using => :color_display

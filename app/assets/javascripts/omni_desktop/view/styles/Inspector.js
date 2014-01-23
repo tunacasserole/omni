@@ -30,22 +30,14 @@ Ext.define('Omni.view.styles.Inspector', {
           xtype: 'omni-styles-Form',
           module: 'cfars'
         }
-        // ,{title: 'Projection Details', xtype: 'omni-projection_details-Explorer', module: 'tollgates',
-        //    defaultSearch: { with:
-        //      {
-        //        style_display:   {equal_to: me.record.get('display')}
-        //      }
-        //   }
-        // }
-        ,{title: 'SKUs', xtype: 'omni-skus-Explorer', module: 'contracts',
+        ,{title: 'Colors', xtype: 'omni-style_colors-Explorer', module: 'samples',
            defaultSearch: { with:
              {
                style_id:   {equal_to: me.record.get('style_id')}
              }
-          },
-          showBadge: true
+          }
         }
-        ,{title: 'Colors', xtype: 'omni-style_colors-Explorer', module: 'samples',
+        ,{title: 'Suppliers', xtype: 'omni-style_suppliers-Explorer', module: 'contacts',
            defaultSearch: { with:
              {
                style_id:   {equal_to: me.record.get('style_id')}
@@ -59,12 +51,13 @@ Ext.define('Omni.view.styles.Inspector', {
              }
           }
         }
-        ,{title: 'Suppliers', xtype: 'omni-style_suppliers-Explorer', module: 'contacts',
+        ,{title: 'SKUs', xtype: 'omni-skus-Explorer', module: 'contracts',
            defaultSearch: { with:
              {
                style_id:   {equal_to: me.record.get('style_id')}
              }
-          }
+          },
+          showBadge: true
         }
         // ,{
         //   xtype    : 'buildit-CardGroup',
