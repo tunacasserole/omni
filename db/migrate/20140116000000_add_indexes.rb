@@ -6,13 +6,13 @@ class AddIndexes < ActiveRecord::Migration
     add_index(:classifications, [:classification_id], :unique => true) unless index_exists?(:classifications, [:classification_id], :unique => true)
     add_index(:colors, [:color_id], :unique => true) unless index_exists?(:colors, [:color_id], :unique => true)
     add_index(:companies, [:company_id], :unique => true) unless index_exists?(:companies, [:company_id], :unique => true)
-    add_index(:daily_results, [:daily_result_id], :unique => true) unless index_exists?(:daily_results, [:daily_result_id], :unique => true)
-    add_index(:daily_results, [:sku_id], :unique => false) unless index_exists?(:daily_results, [:sku_id], :unique => false)
-    add_index(:daily_results, [:location_id], :unique => false) unless index_exists?(:daily_results, [:location_id], :unique => false)
+    add_index(:departments, [:department_id], :unique => true) unless index_exists?(:departments, [:department_id], :unique => true)
+    # add_index(:daily_results, [:daily_result_id], :unique => true) unless index_exists?(:daily_results, [:daily_result_id], :unique => true)
+    # add_index(:daily_results, [:sku_id], :unique => false) unless index_exists?(:daily_results, [:sku_id], :unique => false)
+    # add_index(:daily_results, [:location_id], :unique => false) unless index_exists?(:daily_results, [:location_id], :unique => false)
     add_index(:period_results, [:period_result_id], :unique => true) unless index_exists?(:period_results, [:period_result_id], :unique => true)
     add_index(:period_results, [:sku_id], :unique => false) unless index_exists?(:period_results, [:sku_id], :unique => false)
     add_index(:period_results, [:location_id], :unique => false) unless index_exists?(:period_results, [:location_id], :unique => false)
-    add_index(:departments, [:department_id], :unique => true) unless index_exists?(:departments, [:department_id], :unique => true)
     add_index(:inventories, [:inventory_id], :unique => true) unless index_exists?(:inventories, [:inventory_id], :unique => true)
     add_index(:inventories, [:sku_id], :unique => false) unless index_exists?(:inventories, [:sku_id], :unique => false)
     add_index(:inventories, [:location_id], :unique => false) unless index_exists?(:inventories, [:location_id], :unique => false)
@@ -52,7 +52,7 @@ class AddIndexes < ActiveRecord::Migration
     add_index(:transfers, [:transfer_id], :unique => true) unless index_exists?(:transfers, [:transfer_id], :unique => true)
     add_index(:work_orders, [:work_order_id], :unique => true) unless index_exists?(:work_orders, [:work_order_id], :unique => true)
     add_index(:tills, [:till_id], :unique => true) unless index_exists?(:tills, [:till_id], :unique => true)
-    add_index(:terminals, [:terminal_id], :unique => true) unless index_exists?(:terminals, [:color_id], :unique => true)
+    add_index(:terminals, [:terminal_id], :unique => true) unless index_exists?(:terminals, [:terminal_id], :unique => true)
 
   end
 end
