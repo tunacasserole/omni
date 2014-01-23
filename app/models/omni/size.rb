@@ -80,6 +80,7 @@ class Omni::Size < ActiveRecord::Base
     string   :dimension_1
     string   :dimension_2
     string   :display
+    boolean  :is_enabled
 
     text     :size_nbr_fulltext, :using => :size_nbr
     text     :size_type_fulltext, :using => :size_type

@@ -108,6 +108,7 @@ class Omni::Supplier < ActiveRecord::Base
     string   :line_1
     string   :city
     string   :state_code
+    boolean  :is_enabled
 
     text     :display_fulltext, :using => :display
     text     :supplier_nbr_fulltext, :using => :supplier_nbr

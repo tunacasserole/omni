@@ -53,29 +53,29 @@ Ext.define('Omni.view.style_locations.Form', {
             { name: 'is_discontinued',                fieldLabel: this.is_discontinuedLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
           ]
         }
-        // ,
-        // {
-        //   xtype: 'fieldset',
-        //   title: 'Replenishment Information',
-        //   collapsible: true,
-        //   defaultType: 'textfield',
-        //   defaults: {anchor: '70%'},
-        //   layout: 'anchor',
-        //   items:[
-        //     { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_METHOD' },
-        //     { name: 'replenishment_source',           fieldLabel: this.replenishment_sourceLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_SOURCE' },
-        //     { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
-        //     { name: 'safety_stock_units',             fieldLabel: this.safety_stock_unitsLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-        //     { name: 'safety_stock_days',              fieldLabel: this.safety_stock_daysLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-        //     { name: 'is_override_demand_exception',   fieldLabel: this.is_override_demand_exceptionLabel,allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-        //     { name: 'smoothing_factor',               fieldLabel: this.smoothing_factorLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-        //     { name: 'forecast_profile_id',            fieldLabel: this.forecast_profile_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ForecastProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'forecast_profile_id', itemTpl:'{display}' },
-        //     { name: 'is_soq_override',                fieldLabel: this.is_soq_overrideLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-        //     { name: 'minimum_units',                  fieldLabel: this.minimum_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-        //     { name: 'maximum_units',                  fieldLabel: this.maximum_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-        //     { name: 'seasonal_index_id',              fieldLabel: this.seasonal_index_idLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SeasonalIndex',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'seasonal_index_id', itemTpl:'{display}' }
-        //   ]
-        // }
+        ,
+        {
+          xtype: 'fieldset',
+          title: 'Replenishment Information',
+          collapsible: true,
+          defaultType: 'textfield',
+          defaults: {anchor: '70%'},
+          layout: 'anchor',
+          items:[
+            { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
+            { name: 'forecast_profile_id',            fieldLabel: this.forecast_profile_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ForecastProfile',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'forecast_profile_id', itemTpl:'{display}' },
+            { name: 'replenishment_method',           fieldLabel: this.replenishment_methodLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_METHOD' },
+            { name: 'replenishment_source',           fieldLabel: this.replenishment_sourceLabel,       allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'REPLENISHMENT_SOURCE' },
+            { name: 'safety_stock_units',             fieldLabel: this.safety_stock_unitsLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'safety_stock_days',              fieldLabel: this.safety_stock_daysLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'smoothing_factor',               fieldLabel: this.smoothing_factorLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'minimum_units',                  fieldLabel: this.minimum_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'maximum_units',                  fieldLabel: this.maximum_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'is_override_demand_exception',   fieldLabel: this.is_override_demand_exceptionLabel,allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_soq_override',                fieldLabel: this.is_soq_overrideLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            // { name: 'seasonal_index_id',              fieldLabel: this.seasonal_index_idLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SeasonalIndex',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'seasonal_index_id', itemTpl:'{display}' }
+          ]
+        }
       ]
     });
     // FIELDSETS (End)

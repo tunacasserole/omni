@@ -27,30 +27,30 @@ class Omni::Sku < ActiveRecord::Base
   default      :sku_id,                           :override  =>  false,        :with  => :guid
   default      :sku_nbr,                          :override  =>  false,        :with  => :sequence,         :named=>"SKU_NBR"
   default      :is_converted,                     :override  =>  false,        :to    => false
-  default      :is_enabled,                       :override  =>  false,        :to    => false
   default      :initial_retail_price,             :override  =>  false,        :to    => 0
   default      :suggested_retail_price,           :override  =>  false,        :to    => 0
   default      :smoothing_factor,                 :override  =>  false,        :to    => 0
   default      :minimum_on_hand_units,            :override  =>  false,        :to    => 0
   default      :maximum_on_hand_units,            :override  =>  false,        :to    => 0
-  default      :is_not_stocked,                   :override  =>  false,        :to    => false
   default      :sell_unit_length,                 :override  =>  false,        :to    => 0
   default      :sell_unit_height,                 :override  =>  false,        :to    => 0
   default      :sell_unit_width,                  :override  =>  false,        :to    => 0
   default      :sell_unit_weight,                 :override  =>  false,        :to    => 0
-  default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => false
-  default      :is_discountable,                  :override  =>  false,        :to    => false
-  default      :is_taxable,                       :override  =>  false,        :to    => false
   default      :garment_pieces,                   :override  =>  false,        :to    => 0
-  default      :is_special_order,                 :override  =>  false,        :to    => false
-  default      :is_special_size,                  :override  =>  false,        :to    => false
   default      :first_cost,                       :override  =>  false,        :to    => 0
   default      :last_cost,                        :override  =>  false,        :to    => 0
   default      :average_cost,                     :override  =>  false,        :to    => 0
   default      :on_hand_units,                    :override  =>  false,        :to    => 0
   default      :cost_pool,                        :override  =>  false,        :to    => 0
   default      :retail_pool,                      :override  =>  false,        :to    => 0
+  default      :is_not_stocked,                   :override  =>  false,        :to    => false
+  default      :is_special_order,                 :override  =>  false,        :to    => false
+  default      :is_special_size,                  :override  =>  false,        :to    => false
   default      :is_updated_average_cost,          :override  =>  false,        :to    => false
+  default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => true
+  default      :is_taxable,                       :override  =>  false,        :to    => true
+  default      :is_discountable,                  :override  =>  false,        :to    => true
+  default      :is_enabled,                       :override  =>  false,        :to    => false
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -93,6 +93,12 @@ class Omni::Sku < ActiveRecord::Base
     map :supplier_display,                       :to => 'supplier.display'
   end
   # MAPPED ATTRIBUTES (End)
+
+  # COMPUTED ATTRIBUTES (Start) =========================================================
+  # computed_attributes do
+  #   compute :on_hand_units,                     :with => :compute_on_hand_units
+  # end
+  # COMPUTED ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
@@ -220,6 +226,7 @@ class Omni::Sku < ActiveRecord::Base
     string   :style_display do style.display if style end
     string   :source_id
     string   :source
+    boolean  :is_enabled
 
     text     :display_fulltext, :using => :display
     text     :style_display_fulltext do self.style.subclass.display if self.style end

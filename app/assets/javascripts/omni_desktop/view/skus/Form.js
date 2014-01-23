@@ -18,7 +18,6 @@ Ext.define('Omni.view.skus.Form', {
       design_codeLabel:                           Omni.i18n.model.Sku.design_code,
       stateLabel:                                 Omni.i18n.model.Sku.state,
       maintenance_levelLabel:                     Omni.i18n.model.Sku.maintenance_level,
-      is_convertedLabel:                          Omni.i18n.model.Sku.is_converted,
       generic_sku_idLabel:                        Omni.i18n.model.Sku.generic_sku_id,
       add_on_sku_idLabel:                         Omni.i18n.model.Sku.add_on_sku_id,
       site_idLabel:                               Omni.i18n.model.Sku.site_id,
@@ -46,12 +45,13 @@ Ext.define('Omni.view.skus.Form', {
       maximum_on_hand_unitsLabel:                 Omni.i18n.model.Sku.maximum_on_hand_units,
       pack_typeLabel:                             Omni.i18n.model.Sku.pack_type,
       replenishment_sourceLabel:                  Omni.i18n.model.Sku.replenishment_source,
-      is_not_stockedLabel:                        Omni.i18n.model.Sku.is_not_stocked,
       sell_unit_uom_codeLabel:                    Omni.i18n.model.Sku.sell_unit_uom_code,
       sell_unit_lengthLabel:                      Omni.i18n.model.Sku.sell_unit_length,
       sell_unit_heightLabel:                      Omni.i18n.model.Sku.sell_unit_height,
       sell_unit_widthLabel:                       Omni.i18n.model.Sku.sell_unit_width,
       sell_unit_weightLabel:                      Omni.i18n.model.Sku.sell_unit_weight,
+      is_convertedLabel:                          Omni.i18n.model.Sku.is_converted,
+      is_not_stockedLabel:                        Omni.i18n.model.Sku.is_not_stocked,
       is_conveyable_sell_unitLabel:               Omni.i18n.model.Sku.is_conveyable_sell_unit,
       is_discountableLabel:                       Omni.i18n.model.Sku.is_discountable,
       is_taxableLabel:                            Omni.i18n.model.Sku.is_taxable,
@@ -109,7 +109,7 @@ Ext.define('Omni.view.skus.Form', {
             { xtype: 'textfield', name: 'first_cost',                     fieldLabel: this.first_costLabel                  , allowBlank: true },
             { xtype: 'textfield', name: 'last_cost',                      fieldLabel: this.last_costLabel                   , allowBlank: true },
             { xtype: 'textfield', name: 'average_cost',                   fieldLabel: this.average_costLabel                , allowBlank: true },
-            { xtype: 'textfield', name: 'on_hand_units',                  fieldLabel: this.on_hand_unitsLabel               , allowBlank: true },
+            // { xtype: 'textfield', name: 'on_hand_units',                  fieldLabel: this.on_hand_unitsLabel               , allowBlank: true },
             { xtype: 'checkbox', name: 'is_updated_average_cost',        fieldLabel: this.is_updated_average_costLabel     , allowBlank: true },
           ]
         },
@@ -122,12 +122,26 @@ Ext.define('Omni.view.skus.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'generic_sku_id',                 fieldLabel: this.generic_sku_idLabel,             allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',  defaultSearch: { with: {state: {equal_to: 'new'}}},
-              store:      Ext.create('Omni.store.Sku',{storeId: 'GenericSkus', pageSize: 10 }),
-              displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
-            { xtype: 'textfield', name: 'conversion_cost',                     fieldLabel: this.conversion_costLabel                  , allowBlank: true },
-            { name: 'site_id',                        fieldLabel: this.site_idLabel,                    allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Site',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'site_id', itemTpl:'{display}' },
-            { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel,            allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
+        {
+          name: 'generic_sku_id',
+          fieldLabel: this.generic_sku_idLabel,
+          allowBlank: true,
+          disabled: false,
+          xtype: 'buildit-Locator',
+          defaultSearch: {
+            with: { is_converted: { equal_to: false } }
+          },
+          store: Ext.create('Omni.store.Sku', {
+            pageSize: 25
+          }),
+          displayField: 'display',
+          queryField: 'display',
+          valueField: 'sku_id',
+          itemTpl: '{display}'
+        },
+            { xtype: 'currencyfield', currencySymbol: null, name: 'conversion_cost',fieldLabel: this.conversion_costLabel, allowBlank: true, disabled: false },
+            { name: 'site_id',                        fieldLabel: this.site_idLabel,         allowBlank: true,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Site',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'site_id', itemTpl:'{display}' },
+            { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel, allowBlank: true,  disabled: true,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
             // { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             // { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,  disabled: false,    xtype: 'checkbox'         }
           ]

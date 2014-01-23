@@ -138,17 +138,6 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
-  storeId   : 'BRAND-lookup-Store',
-  fields    : lookupStoreFields,
-  data      : [
-    ['363BAA90972811E295B122000A9D0283','PARKER',,'BRAND','Parker School Uniforms',null,true],
-    ['32D4DAA2972811E295B122000A9D0283','BUCKHEAD',,'BRAND','Buckhead School Uniforms',null,true],
-    ['339D2BA6972811E2A3D212313B10044E','TRUE GRITS',,'BRAND','True Grits School Uniforms',null,true],
-    ['34E8D776972811E295B122000A9D0283','CHARTER',,'BRAND','Charter School Uniforms',null,true]
-  ]
-});
-
-Ext.create('Ext.data.ArrayStore', {
   storeId   : 'BRAND_TYPE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
@@ -768,6 +757,20 @@ Ext.create('Ext.data.ArrayStore', {
   fields    : lookupStoreFields,
   data      : [
     ['98A000EE204011E290E9040CCEDF842E','GENERAL',0,'ATTACHMENT_TYPE','General',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'BRAND-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['32D4DAA2972811E295B12200BUCKHEAD','BUCKHEAD',,'BRAND','Buckhead School Uniforms',null,true],
+    ['34E8D776972811E295B12200ACHARTER','CHARTER',,'BRAND','Charter School Uniforms',null,true],
+    ['32D4DAA2972811E295B122NORCOMPASS','COMPASS',,'BRAND','Compass',null,true],
+    ['32D4DAA2972811E295B122NONBRANDED','NON BRANDED',,'BRAND','Non-Branded',null,true],
+    ['363BAA90972811E295B122000XPARKER','PARKER',,'BRAND','Parker School Uniforms',null,true],
+    ['32D4DAA2972811E295B122NOREDLABEL','RED LABEL',,'BRAND','Red Label',null,true],
+    ['339D2BA6972811E2A3D212313B10044E','TRUE GRITS',,'BRAND','True Grits School Uniforms',null,true]
   ]
 });
 

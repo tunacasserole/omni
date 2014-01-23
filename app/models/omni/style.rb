@@ -43,9 +43,6 @@ class Omni::Style < ActiveRecord::Base
   default      :sell_unit_height,                 :override  =>  false,        :to    => 0
   default      :sell_unit_width,                  :override  =>  false,        :to    => 0
   default      :sell_unit_weight,                 :override  =>  false,        :to    => 0
-  default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => false
-  default      :is_discountable,                  :override  =>  false,        :to    => false
-  default      :is_taxable,                       :override  =>  false,        :to    => true
   default      :is_not_stocked,                   :override  =>  false,        :to    => false
   default      :is_special_order,                 :override  =>  false,        :to    => false
   default      :is_converted,                     :override  =>  false,        :to    => false
@@ -54,7 +51,10 @@ class Omni::Style < ActiveRecord::Base
   default      :is_converted_sewn,                :override  =>  false,        :to    => false
   default      :is_alterable,                     :override  =>  false,        :to    => false
   default      :is_usually_altered,               :override  =>  false,        :to    => false
-  default      :is_enabled,                       :override  =>  false,        :to    => true
+  default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => true
+  default      :is_discountable,                  :override  =>  false,        :to    => true
+  default      :is_taxable,                       :override  =>  false,        :to    => true
+  default      :is_enabled,                       :override  =>  false,        :to    => false
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
@@ -209,7 +209,7 @@ class Omni::Style < ActiveRecord::Base
 
   def build_locations
   # adds a StyleLocation row for the Style and every Location where is_enabled = True (bypass any Locations that already have a StyleLocation
-    Omni::Location.all.each do |l|
+    Omni::Location.where(is_enabled: true).each do |l|
       next unless l.is_enabled == true
       x = Omni::StyleLocation.new
       x.style_id = self.style_id
@@ -232,16 +232,9 @@ class Omni::Style < ActiveRecord::Base
     # Add sku row for each StyleColorSize row in active state
     self.style_color_sizes.each do |scs|
       sku_name = "#{self.display}-#{scs.style_color.color_display}-#{scs.size_display}"
-      if Omni::Sku.where(display: sku_name).first
-        next
-      else
-      end
+      next if Omni::Sku.where(display: sku_name).first
       x = Omni::Sku.new(display: sku_name)
       x.maintenance_level = self.maintenance_level
-      # x.generic_sku_id = self.generic_sku_id
-      x.add_on_sku_id = self.add_on_sku_id
-      x.site_id = self.site_id
-      x.conversion_type = self.conversion_type
       x.style_color_size_id = scs.style_color_size_id
       x.style_id = self.style_id
       x.color_id = scs.style_color.color_id
@@ -258,20 +251,26 @@ class Omni::Style < ActiveRecord::Base
       x.replenishment_method = self.replenishment_method
       x.minimum_on_hand_units = self.minimum_on_hand_units
       x.maximum_on_hand_units = self.maximum_on_hand_units
+      # x.generic_sku_id = self.generic_sku_id
+      x.add_on_sku_id = self.add_on_sku_id
+      x.design_code = self.design_code
+      x.site_id = self.site_id
+      x.conversion_type = self.conversion_type
       x.pack_type = self.pack_type
       x.replenishment_source = self.replenishment_source
-      x.is_not_stocked = self.is_not_stocked
+      x.order_uom_code = self.order_uom_code
+      x.order_package_type = self.order_package_type
+      x.garment_pieces = self.garment_pieces
       x.sell_unit_uom_code = self.sell_unit_uom_code
       x.sell_unit_length = self.sell_unit_length
       x.sell_unit_height = self.sell_unit_height
       x.sell_unit_width = self.sell_unit_width
       x.sell_unit_weight = self.sell_unit_weight
+      x.is_not_stocked = self.is_not_stocked
+      x.is_converted = self.is_converted
       x.is_conveyable_sell_unit = self.is_conveyable_sell_unit
       x.is_discountable = self.is_discountable
       x.is_taxable = self.is_taxable
-      x.order_uom_code = self.order_uom_code
-      x.order_package_type = self.order_package_type
-      x.garment_pieces = self.garment_pieces
       x.is_special_order = self.is_special_order
       # x.is_special_size = self.is_special_size
       if x.save

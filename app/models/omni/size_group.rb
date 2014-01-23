@@ -1,10 +1,4 @@
 class Omni::SizeGroup < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :size_groups
   self.primary_key  = :size_group_id
@@ -75,6 +69,7 @@ class Omni::SizeGroup < ActiveRecord::Base
     string   :description
     string   :short_name
     string   :concatenated_name
+    boolean  :is_enabled
 
     text     :display_fulltext, :using => :display
     text     :size_group_nbr_fulltext, :using => :size_group_nbr

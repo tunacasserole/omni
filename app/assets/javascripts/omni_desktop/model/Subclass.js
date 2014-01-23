@@ -1,6 +1,6 @@
 Ext.define('Omni.model.Subclass', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -18,7 +18,7 @@ Ext.define('Omni.model.Subclass', {
     { name: 'description', type: 'string' },
     { name: 'short_name', type: 'string' },
     { name: 'department_display', type: 'string' },
-    { name: 'classification_display', type: 'string' },    
+    { name: 'classification_display', type: 'string' },
     { name: 'classification_id', type: 'string' },
     { name: 'markup_percent_high_limit', type: 'float', defaultValue: 0 },
     { name: 'markup_percent_low_limit', type: 'float', defaultValue: 0 },

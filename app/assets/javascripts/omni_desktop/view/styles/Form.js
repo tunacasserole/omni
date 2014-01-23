@@ -202,6 +202,9 @@ Ext.define('Omni.view.styles.Form', {
               store: Ext.create('Omni.store.SizeGroup', {
                 pageSize: 25
               }),
+              defaultSearch: {
+                with: { is_enabled: { equal_to: true } }
+              },
               displayField: 'display',
               queryField: 'display',
               valueField: 'size_group_id',

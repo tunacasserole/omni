@@ -1,10 +1,4 @@
 class Omni::Site < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :sites
   self.primary_key  = :site_id
@@ -100,24 +94,16 @@ class Omni::Site < ActiveRecord::Base
     # string   :phone
 
     text     :display_fulltext, :using => :display
+    text     :site_name_fulltext, :using => :site_name
     text     :location_display_fulltext, :using => :location_display
     text     :city_fulltext, :using => :city
     text     :state_code_fulltext, :using => :state_code
-    text     :display_fulltext, :using => :display
     # text     :gradeset_fulltext, :using => :gradeset
     # text     :site_gender_fulltext, :using => :site_gender
     # text     :line_1_fulltext, :using => :line_1
     # text     :phone_fulltext, :using => :phone
   end
   # INDEXING (End)
-
-  # CUSTOM INDEXING (Start) ====================================================================
-  searchable do
-    string   :school_nbr
-    string   :display
-  end
-  # INDEXING (End)
-
 
 end # class Omni::Site
 

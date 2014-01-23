@@ -89,6 +89,7 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
     string   :display
     string   :size_group_id
     string   :size_id
+    boolean  :is_enabled
 
     text     :size_group_display_fulltext, :using => :size_group_display
     text     :size_display_fulltext, :using => :size_display

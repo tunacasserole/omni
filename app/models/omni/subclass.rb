@@ -38,7 +38,7 @@ class Omni::Subclass < ActiveRecord::Base
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :classification_display,                 :to => 'classification.display'
-    # map :department_display,                     :to => 'classification.department.display'
+    map :department_display,                     :to => 'classification.department.display'
   end
   # MAPPED ATTRIBUTES (End)
 
