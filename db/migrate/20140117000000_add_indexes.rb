@@ -33,7 +33,7 @@ class AddIndexes < ActiveRecord::Migration
     add_index(:regions, [:region_id], :unique => true) unless index_exists?(:regions, [:region_id], :unique => true)
     add_index(:sites, [:site_id], :unique => true) unless index_exists?(:sites, [:site_id], :unique => true)
     add_index(:sizes, [:size_id], :unique => true) unless index_exists?(:sizes, [:size_id], :unique => true)
-    add_index(:size_groups, [:size_group_id], :unique => true) unless index_exists?(:size_groups, [:size_group_id], :unique => true)
+    add_index(:size_groups, [:size_group_id], :unique => false) unless index_exists?(:size_groups, [:size_group_id], :unique => false)
     add_index(:size_group_details, [:size_group_id], :unique => false) unless index_exists?(:size_group_details, [:size_group_id], :unique => false)
     add_index(:size_group_details, [:size_group_detail_id], :unique => true) unless index_exists?(:size_group_details, [:size_group_detail_id], :unique => true)
     add_index(:stock_ledger_activities, [:stock_ledger_activity_id], :unique => true) unless index_exists?(:stock_ledger_activities, [:stock_ledger_activity_id], :unique => true)
