@@ -11,5 +11,6 @@ en:
         size_display:                    Size
         size_id:                         Size
         display_order:                   Name Order
+        is_enabled:                      Is Enabled
         is_destroyed:                    Deleted
 

@@ -15,20 +15,20 @@ Ext.define('Omni.view.colors.Form', {
     };
     // FILTER (End)
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
-      color_idLabel:                          Omni.i18n.model.Color.color_id,    
-      displayLabel:                           Omni.i18n.model.Color.display,    
-      color_nbrLabel:                         Omni.i18n.model.Color.color_nbr,    
-      descriptionLabel:                       Omni.i18n.model.Color.description,    
-      short_nameLabel:                        Omni.i18n.model.Color.short_name,    
-      concatenated_nameLabel:                 Omni.i18n.model.Color.concatenated_name,    
-      is_plaidLabel:                          Omni.i18n.model.Color.is_plaid,    
-      is_stripeLabel:                         Omni.i18n.model.Color.is_stripe,    
-      color_familyLabel:                      Omni.i18n.model.Color.color_family,    
-      is_discontinuedLabel:                   Omni.i18n.model.Color.is_discontinued,    
-      is_destroyedLabel:                      Omni.i18n.model.Color.is_destroyed    
+      color_idLabel:                          Omni.i18n.model.Color.color_id,
+      displayLabel:                           Omni.i18n.model.Color.display,
+      color_nbrLabel:                         Omni.i18n.model.Color.color_nbr,
+      descriptionLabel:                       Omni.i18n.model.Color.description,
+      short_nameLabel:                        Omni.i18n.model.Color.short_name,
+      concatenated_nameLabel:                 Omni.i18n.model.Color.concatenated_name,
+      is_plaidLabel:                          Omni.i18n.model.Color.is_plaid,
+      is_stripeLabel:                         Omni.i18n.model.Color.is_stripe,
+      color_familyLabel:                      Omni.i18n.model.Color.color_family,
+      is_enabledLabel:                        Omni.i18n.model.Color.is_enabled,
+      is_destroyedLabel:                      Omni.i18n.model.Color.is_destroyed
     });
     // LABELS (End)
 
@@ -45,29 +45,29 @@ Ext.define('Omni.view.colors.Form', {
           items:[
           /*
             {
-              xtype: 'buildit-Locator', 
-              store: Ext.create('MyApp.store.MyModel',{pageSize: 10}), 
-              displayField: 'name', 
-              queryField: 'name', 
-              valueField: 'value_field', 
+              xtype: 'buildit-Locator',
+              store: Ext.create('MyApp.store.MyModel',{pageSize: 10}),
+              displayField: 'name',
+              queryField: 'name',
+              valueField: 'value_field',
               itemTpl:'{name}',
-              name: 'attribute_name', 
-              fieldLabel: this.attribute_nameLabel, 
-              allowBlank: true 
+              name: 'attribute_name',
+              fieldLabel: this.attribute_nameLabel,
+              allowBlank: true
             }
           */
 
-            // { xtype: 'textfield', name: 'color_id',                       fieldLabel: this.color_idLabel                    , allowBlank: true },    
-            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },    
-            { xtype: 'textfield', name: 'color_nbr',                      fieldLabel: this.color_nbrLabel                   , allowBlank: true },    
-            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },    
-            { xtype: 'textfield', name: 'short_name',                     fieldLabel: this.short_nameLabel                  , allowBlank: true },    
-            { xtype: 'textfield', name: 'concatenated_name',              fieldLabel: this.concatenated_nameLabel           , allowBlank: false },    
-            { xtype: 'textfield', name: 'is_plaid',                       fieldLabel: this.is_plaidLabel                    , allowBlank: true,     xtype: 'checkbox' },    
-            { xtype: 'textfield', name: 'is_stripe',                      fieldLabel: this.is_stripeLabel                   , allowBlank: true ,    xtype: 'checkbox'},    
-            { xtype: 'buildit-Lookup', category: 'COLOR_FAMILY',   name: 'color_family',    fieldLabel: this.color_familyLabel  , allowBlank: true },    
-            { xtype: 'textfield', name: 'is_discontinued',                fieldLabel: this.is_discontinuedLabel             , allowBlank: true ,    xtype: 'checkbox'}
-            
+            // { xtype: 'textfield', name: 'color_id',                       fieldLabel: this.color_idLabel                    , allowBlank: true },
+            { xtype: 'textfield', name: 'display',                        fieldLabel: this.displayLabel                     , allowBlank: false },
+            { xtype: 'textfield', name: 'color_nbr',                      fieldLabel: this.color_nbrLabel                   , allowBlank: true },
+            { xtype: 'textfield', name: 'description',                    fieldLabel: this.descriptionLabel                 , allowBlank: true },
+            { xtype: 'textfield', name: 'short_name',                     fieldLabel: this.short_nameLabel                  , allowBlank: true },
+            { xtype: 'textfield', name: 'concatenated_name',              fieldLabel: this.concatenated_nameLabel           , allowBlank: false },
+            { xtype: 'buildit-Lookup', category: 'COLOR_FAMILY',   name: 'color_family',    fieldLabel: this.color_familyLabel  , allowBlank: true },
+            { xtype: 'textfield', name: 'is_plaid',                       fieldLabel: this.is_plaidLabel                    , allowBlank: true,     xtype: 'checkbox' },
+            { xtype: 'textfield', name: 'is_stripe',                      fieldLabel: this.is_stripeLabel                   , allowBlank: true ,    xtype: 'checkbox'},
+            { xtype: 'textfield', name: 'is_enabled',                     fieldLabel: this.is_enabledLabel                  , allowBlank: true ,    xtype: 'checkbox'}
+
           ]
         }
       ]
@@ -85,7 +85,7 @@ Ext.define('Omni.view.colors.Form', {
     // TITLES (End)
 
     this.callParent();
-    
+
   }
 
 });

@@ -1,6 +1,6 @@
 Ext.define('Omni.model.SizeGroup', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -18,6 +18,7 @@ Ext.define('Omni.model.SizeGroup', {
     { name: 'description', type: 'string' },
     { name: 'short_name', type: 'string' },
     { name: 'concatenated_name', type: 'string' },
+    { name: 'is_enabled', type: 'boolean',    defaultValue: false },
     { name: 'is_destroyed', type: 'boolean', defaultValue: false }
   ],
   // FIELDS (End)

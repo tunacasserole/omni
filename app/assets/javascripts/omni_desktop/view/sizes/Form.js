@@ -18,7 +18,8 @@ Ext.define('Omni.view.sizes.Form', {
       displayLabel: Omni.i18n.model.Size.display,
       concatenated_nameLabel: Omni.i18n.model.Size.concatenated_name,
       dimension_1Label: Omni.i18n.model.Size.dimension_1,
-      dimension_2Label: Omni.i18n.model.Size.dimension_2
+      dimension_2Label: Omni.i18n.model.Size.dimension_2,
+      is_enabledLabel: Omni.i18n.model.Size.is_enabled
     });
     // LABELS (End)
 
@@ -34,50 +35,57 @@ Ext.define('Omni.view.sizes.Form', {
         },
         layout: 'anchor',
         items: [{
-          name: 'size_nbr',
-          fieldLabel: this.size_nbrLabel,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'textfield'
-        }, {
-          name: 'description',
-          fieldLabel: this.descriptionLabel,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'textfield'
-        }, {
-          name: 'size_type',
-          fieldLabel: this.size_typeLabel,
-          allowBlank: false,
-          disabled: false,
-          xtype: 'buildit-Lookup',
-          category: 'SIZE_TYPE'
-        }, {
-          name: 'display',
-          hidden: true,
-          fieldLabel: this.displayLabel,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'textfield'
-        }, {
-          name: 'concatenated_name',
-          fieldLabel: this.concatenated_nameLabel,
-          allowBlank: false,
-          disabled: false,
-          xtype: 'textfield'
-        }, {
-          name: 'dimension_1',
-          fieldLabel: this.dimension_1Label,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'textfield'
-        }, {
-          name: 'dimension_2',
-          fieldLabel: this.dimension_2Label,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'textfield'
-        }]
+            name: 'size_nbr',
+            fieldLabel: this.size_nbrLabel,
+            allowBlank: true,
+            disabled: false,
+            xtype: 'textfield'
+          }, {
+            name: 'description',
+            fieldLabel: this.descriptionLabel,
+            allowBlank: true,
+            disabled: false,
+            xtype: 'textfield'
+          }, {
+            name: 'size_type',
+            fieldLabel: this.size_typeLabel,
+            allowBlank: false,
+            disabled: false,
+            xtype: 'buildit-Lookup',
+            category: 'SIZE_TYPE'
+          }, {
+            name: 'display',
+            hidden: true,
+            fieldLabel: this.displayLabel,
+            allowBlank: true,
+            disabled: false,
+            xtype: 'textfield'
+          }, {
+            name: 'concatenated_name',
+            fieldLabel: this.concatenated_nameLabel,
+            allowBlank: false,
+            disabled: false,
+            xtype: 'textfield'
+          }, {
+            name: 'dimension_1',
+            fieldLabel: this.dimension_1Label,
+            allowBlank: true,
+            disabled: false,
+            xtype: 'textfield'
+          }, {
+            name: 'dimension_2',
+            fieldLabel: this.dimension_2Label,
+            allowBlank: true,
+            disabled: false,
+            xtype: 'textfield'
+          }, {
+            name: 'is_enabled',
+            fieldLabel: this.is_enabledLabel,
+            allowBlank: true,
+            disabled: false,
+            xtype: 'checkbox'
+          }
+        ]
       }]
     });
     // FIELDSETS (End)

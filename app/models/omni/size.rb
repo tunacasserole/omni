@@ -29,6 +29,7 @@ class Omni::Size < ActiveRecord::Base
   default      :size_id,                          :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.dimension_1}#{m.dimension_2} - #{m.size_nbr}"}
   default      :size_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"SIZE_NBR"
+  default      :is_enabled,                       :override  =>  false,        :to    => false
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 

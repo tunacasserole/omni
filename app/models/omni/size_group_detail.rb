@@ -12,7 +12,7 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
 
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext    
+  supports_fulltext
   # BEHAVIOR (End)
 
 
@@ -24,10 +24,11 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :size_group_detail_id,             :override  =>  false,        :with  => :guid              
+  default      :size_group_detail_id,             :override  =>  false,        :with  => :guid
   default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.size_group_display} - #{m.size_display}"}
-  default      :display_order,                    :override  =>  false,        :to    => 0                  
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :display_order,                    :override  =>  false,        :to    => 0
+  default      :is_enabled,                       :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -62,12 +63,12 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
 
 
   # FILTERS (Start) =====================================================================
-  
+
   # FILTERS (End)
 
 
   # ORDERING (Start) ====================================================================
-  order_search_by :display_order => :asc  
+  order_search_by :display_order => :asc
   # ORDERING (End)
 
 
@@ -86,13 +87,13 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
     string   :size_display do size.display if size end
     string   :display_order
     string   :display
-    string   :size_group_id    
+    string   :size_group_id
     string   :size_id
- 
+
     text     :size_group_display_fulltext, :using => :size_group_display
     text     :size_display_fulltext, :using => :size_display
     text     :display_order_fulltext, :using => :display_order
-  end 
+  end
   # INDEXING (End)
 
 

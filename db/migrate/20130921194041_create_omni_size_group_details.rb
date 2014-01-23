@@ -9,6 +9,7 @@ class CreateOmniSizeGroupDetails < ActiveRecord::Migration
         t.column   :size_group_id,                   :string,            :null  =>  true,    :limit   => 32
         t.column   :size_id,                         :string,            :null  =>  true,    :limit   => 32
         t.column   :display_order,                   :integer,           :null  =>  true
+        t.column   :is_enabled,                      :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

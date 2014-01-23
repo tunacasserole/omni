@@ -13,6 +13,7 @@ class CreateOmniSizes < ActiveRecord::Migration
         t.column   :concatenated_name,               :string,            :null  =>  false,   :limit   => 6
         t.column   :dimension_1,                     :string,            :null  =>  true,    :limit   => 15
         t.column   :dimension_2,                     :string,            :null  =>  true,    :limit   => 15
+        t.column   :is_enabled,                      :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

@@ -3,13 +3,13 @@ Ext.define('Omni.view.size_groups.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-size_groups-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -38,7 +38,8 @@ Ext.define('Omni.view.size_groups.Explorer', {
       size_group_nbrLabel: Omni.i18n.model.SizeGroup.size_group_nbr,
       descriptionLabel: Omni.i18n.model.SizeGroup.description,
       short_nameLabel: Omni.i18n.model.SizeGroup.short_name,
-      concatenated_nameLabel: Omni.i18n.model.SizeGroup.concatenated_name
+      concatenated_nameLabel: Omni.i18n.model.SizeGroup.concatenated_name,
+      is_enabledLabel: Omni.i18n.model.SizeGroup.is_enabled
     });
     // LABELS (End)
 
@@ -49,7 +50,8 @@ Ext.define('Omni.view.size_groups.Explorer', {
         // { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
         { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: true  },
         { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: true  },
-        { header: this.size_group_nbrLabel, dataIndex: 'size_group_nbr',  flex: 1,  sortable: true  },        
+        { header: this.size_group_nbrLabel, dataIndex: 'size_group_nbr',  flex: 1,  sortable: true  },
+        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: true  },
       ]
     });
     // COLUMNS (End)

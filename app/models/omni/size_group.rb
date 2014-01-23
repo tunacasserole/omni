@@ -27,6 +27,7 @@ class Omni::SizeGroup < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :size_group_id,                    :override  =>  false,        :with  => :guid
   default      :size_group_nbr,                   :override  =>  false,        :with  => :sequence,         :named=>"SIZE_GROUP_NBR"
+  default      :is_enabled,                       :override  =>  false,        :to    => false
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 

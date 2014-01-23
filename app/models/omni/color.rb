@@ -1,20 +1,12 @@
 class Omni::Color < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :colors
   self.primary_key  = :color_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext  
+  supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         :presence    => true
@@ -24,12 +16,13 @@ class Omni::Color < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default      :color_id,                         :override  =>  false,        :with  => :guid              
+  default      :color_id,                         :override  =>  false,        :with  => :guid
   default      :color_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"COLOR_NBR"
-  default      :is_plaid,                         :override  =>  false,        :to    => false              
-  default      :is_stripe,                        :override  =>  false,        :to    => false              
-  default      :is_discontinued,                  :override  =>  false,        :to    => false              
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :is_plaid,                         :override  =>  false,        :to    => false
+  default      :is_stripe,                        :override  =>  false,        :to    => false
+  default      :is_discontinued,                  :override  =>  false,        :to    => false
+  default      :is_enabled,                       :override  =>  false,        :to    => false
+  default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)
 
 
@@ -50,7 +43,7 @@ class Omni::Color < ActiveRecord::Base
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   # MAPPED ATTRIBUTES (End)
-  
+
   # COMPUTED ATTRIBUTES (Start) =========================================================
   # COMPUTED ATTRIBUTES (End)
 
@@ -76,13 +69,13 @@ class Omni::Color < ActiveRecord::Base
     boolean  :is_plaid
     boolean  :is_stripe
     string   :color_family
- 
+
     text     :display_fulltext, :using => :display
     text     :color_nbr_fulltext, :using => :color_nbr
     text     :short_name_fulltext, :using => :short_name
     text     :concatenated_name_fulltext, :using => :concatenated_name
     text     :color_family_fulltext, :using => :color_family
-  end 
+  end
   # INDEXING (End)
 
 

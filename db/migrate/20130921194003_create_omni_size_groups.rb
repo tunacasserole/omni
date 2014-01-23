@@ -10,6 +10,7 @@ class CreateOmniSizeGroups < ActiveRecord::Migration
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300
         t.column   :short_name,                      :string,            :null  =>  true,    :limit   => 100
         t.column   :concatenated_name,               :string,            :null  =>  true,    :limit   => 6
+        t.column   :is_enabled,                      :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

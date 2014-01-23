@@ -1,6 +1,6 @@
 Ext.define('Omni.model.Location', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -40,6 +40,7 @@ Ext.define('Omni.model.Location', {
     { name: 'is_webstore', type: 'boolean', defaultValue: false },
     { name: 'is_factory', type: 'boolean', defaultValue: false },
     { name: 'is_warehouse', type: 'boolean', defaultValue: false },
+    { name: 'is_enabled', type: 'boolean', defaultValue: false },
     { name: 'open_date', type: 'date' },
     { name: 'close_date', type: 'date' },
     { name: 'parent_location_display', type: 'string' },
@@ -53,7 +54,6 @@ Ext.define('Omni.model.Location', {
     { name: 'selling_square_feet', type: 'float', defaultValue: 0 },
     { name: 'storage_square_feet', type: 'float', defaultValue: 0 },
     { name: 'location_url', type: 'string' },
-    { name: 'is_enabled', type: 'boolean', defaultValue: false },
     { name: 'time_zone', type: 'string' },
     { name: 'sunday_open_time', type: 'string' },
     { name: 'sunday_close_time', type: 'string' },

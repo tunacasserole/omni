@@ -1,6 +1,6 @@
 Ext.define('Omni.model.Size', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -22,6 +22,7 @@ Ext.define('Omni.model.Size', {
     { name: 'concatenated_name', type: 'string' },
     { name: 'dimension_1', type: 'string' },
     { name: 'dimension_2', type: 'string' },
+    { name: 'is_enabled', type: 'boolean',    defaultValue: false },
     { name: 'is_destroyed', type: 'boolean', defaultValue: false }
   ],
   // FIELDS (End)

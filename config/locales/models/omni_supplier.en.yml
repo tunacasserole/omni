@@ -68,6 +68,6 @@ en:
         is_agent:                        Agent
         is_outbound_shipper:             Shipper
         is_on_payment_hold:              Payment Hold
-        is_enabled:                      Supplier Active
+        is_enabled:                      Enabled
         is_destroyed:                    Deleted
 

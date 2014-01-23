@@ -76,6 +76,7 @@ class CreateOmniLocations < ActiveRecord::Migration
         t.column   :merchant_reimbursement,          :string,            :null  =>  true,    :limit   => 2
         t.column   :merchant_settle_agent,           :string,            :null  =>  true,    :limit   => 6
         t.column   :merchant_bank_aba,               :string,            :null  =>  true,    :limit   => 15
+        t.column   :is_enabled,                      :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

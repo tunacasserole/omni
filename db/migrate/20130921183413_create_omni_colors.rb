@@ -10,10 +10,10 @@ class CreateOmniColors < ActiveRecord::Migration
         t.column   :description,                     :string,            :null  =>  true,    :limit   => 300
         t.column   :short_name,                      :string,            :null  =>  true,    :limit   => 15
         t.column   :concatenated_name,               :string,            :null  =>  true,    :limit   => 100
+        t.column   :color_family,                    :string,            :null  =>  true,    :limit   => 100
         t.column   :is_plaid,                        :boolean,           :null  =>  true
         t.column   :is_stripe,                       :boolean,           :null  =>  true
-        t.column   :color_family,                    :string,            :null  =>  true,    :limit   => 100
-        t.column   :is_discontinued,                 :boolean,           :null  =>  true
+        t.column   :is_enabled,                      :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
       end
     end

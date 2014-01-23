@@ -1,6 +1,6 @@
 Ext.define('Omni.model.SizeGroupDetail', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -18,6 +18,7 @@ Ext.define('Omni.model.SizeGroupDetail', {
     { name: 'size_display', type: 'string' },
     { name: 'size_id', type: 'string' },
     { name: 'display_order', type: 'integer', defaultValue: 0 },
+    { name: 'is_enabled', type: 'boolean',   defaultValue: false },
     { name: 'is_destroyed', type: 'boolean', defaultValue: false }
   ],
   // FIELDS (End)

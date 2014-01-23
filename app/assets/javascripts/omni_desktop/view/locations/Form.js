@@ -32,6 +32,7 @@ Ext.define('Omni.view.locations.Form', {
       is_webstoreLabel:                           Omni.i18n.model.Location.is_webstore,
       is_factoryLabel:                            Omni.i18n.model.Location.is_factory,
       is_warehouseLabel:                          Omni.i18n.model.Location.is_warehouse,
+      is_enabledLabel:                            Omni.i18n.model.Location.is_enabled,
       open_dateLabel:                             Omni.i18n.model.Location.open_date,
       close_dateLabel:                            Omni.i18n.model.Location.close_date,
       parent_location_idLabel:                    Omni.i18n.model.Location.parent_location_id,
@@ -41,7 +42,6 @@ Ext.define('Omni.view.locations.Form', {
       selling_square_feetLabel:                   Omni.i18n.model.Location.selling_square_feet,
       storage_square_feetLabel:                   Omni.i18n.model.Location.storage_square_feet,
       location_urlLabel:                          Omni.i18n.model.Location.location_url,
-      is_enabledLabel:                            Omni.i18n.model.Location.is_enabled,
       time_zoneLabel:                             Omni.i18n.model.Location.time_zone,
       sunday_open_timeLabel:                      Omni.i18n.model.Location.sunday_open_time,
       sunday_close_timeLabel:                     Omni.i18n.model.Location.sunday_close_time,
@@ -148,6 +148,7 @@ Ext.define('Omni.view.locations.Form', {
             { name: 'is_webstore',                    fieldLabel: this.is_webstoreLabel,                allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_factory',                     fieldLabel: this.is_factoryLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_warehouse',                   fieldLabel: this.is_warehouseLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'is_enabled',                     fieldLabel: this.is_enabledLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'open_date',                      fieldLabel: this.open_dateLabel,                  allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'close_date',                     fieldLabel: this.close_dateLabel,                 allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'parent_location_id',             fieldLabel: this.parent_location_idLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
@@ -157,7 +158,6 @@ Ext.define('Omni.view.locations.Form', {
             { name: 'selling_square_feet',            fieldLabel: this.selling_square_feetLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'storage_square_feet',            fieldLabel: this.storage_square_feetLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'location_url',                   fieldLabel: this.location_urlLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'is_enabled',                     fieldLabel: this.is_enabledLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
           ]
         },
         {

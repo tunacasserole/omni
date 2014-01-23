@@ -28,6 +28,7 @@ en:
         is_webstore:                     Website Location
         is_factory:                      Factory Location
         is_warehouse:                    Warehouse Location
+        is_enabled:                      Enabled
         open_date:                       Open Date
         close_date:                      Close Date
         parent_location_display:         Parent Location
@@ -41,7 +42,6 @@ en:
         selling_square_feet:             Selling Square Feet
         storage_square_feet:             Storage Square Feet
         location_url:                    Website URL
-        is_enabled:                      Location Active
         time_zone:                       Time Zone
         sunday_open_time:                Sunday Open Time
         sunday_close_time:               Sunday Close Time

@@ -3,13 +3,11 @@ Ext.define('Omni.view.size_group_details.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-size_group_details-Explorer',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -36,7 +34,8 @@ Ext.define('Omni.view.size_group_details.Explorer', {
     Ext.applyIf(this, {
       size_group_displayLabel: Omni.i18n.model.SizeGroupDetail.size_group_display,
       size_displayLabel: Omni.i18n.model.SizeGroupDetail.size_display,
-      display_orderLabel: Omni.i18n.model.SizeGroupDetail.display_order
+      display_orderLabel: Omni.i18n.model.SizeGroupDetail.display_order,
+      is_enabledLabel: Omni.i18n.model.SizeGroupDetail.is_enabled
     });
     // LABELS (End)
 
@@ -45,7 +44,8 @@ Ext.define('Omni.view.size_group_details.Explorer', {
       columns: [
         { header: this.size_group_displayLabel, dataIndex: 'size_group_display',  flex: 1,  sortable: true  },
         { header: this.size_displayLabel, dataIndex: 'size_display',  flex: 1,  sortable: true  },
-        { header: this.display_orderLabel, dataIndex: 'display_order',  flex: 1,  sortable: true  }
+        { header: this.display_orderLabel, dataIndex: 'display_order',  flex: 1,  sortable: true  },
+        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: true  },
       ]
     });
     // COLUMNS (End)

@@ -3,13 +3,11 @@ Ext.define('Omni.view.sizes.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-sizes-Explorer',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -39,7 +37,8 @@ Ext.define('Omni.view.sizes.Explorer', {
       displayLabel: Omni.i18n.model.Size.display,
       concatenated_nameLabel: Omni.i18n.model.Size.concatenated_name,
       dimension_1Label: Omni.i18n.model.Size.dimension_1,
-      dimension_2Label: Omni.i18n.model.Size.dimension_2
+      dimension_2Label: Omni.i18n.model.Size.dimension_2,
+      is_enabledLabel: Omni.i18n.model.Size.is_enabled
     });
     // LABELS (End)
 
@@ -50,8 +49,9 @@ Ext.define('Omni.view.sizes.Explorer', {
         { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: true  },
         { header: this.dimension_1Label, dataIndex: 'dimension_1',  flex: 1,  sortable: true  },
         { header: this.dimension_2Label, dataIndex: 'dimension_2',  flex: 1,  sortable: true  },
-        { header: this.size_typeLabel, dataIndex: 'size_type',  flex: 1,  sortable: true , renderer: Buildit.util.Format.lookupRenderer('SIZE_TYPE') },        
+        { header: this.size_typeLabel, dataIndex: 'size_type',  flex: 1,  sortable: true , renderer: Buildit.util.Format.lookupRenderer('SIZE_TYPE') },
         { header: this.size_nbrLabel, dataIndex: 'size_nbr',  flex: 1,  sortable: true  },
+        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: true  },
       ]
     });
     // COLUMNS (End)

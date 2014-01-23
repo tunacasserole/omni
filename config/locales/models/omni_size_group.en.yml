@@ -10,5 +10,6 @@ en:
         description:                     Description
         short_name:                      Short Name
         concatenated_name:               Concatenation Name
+        is_enabled:                      Is Enabled
         is_destroyed:                    Deleted
 

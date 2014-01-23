@@ -13,5 +13,6 @@ en:
         concatenated_name:               Concatenation Name
         dimension_1:                     Size dimension 1
         dimension_2:                     Size dimension 2
+        is_enabled:                      Is Enabled
         is_destroyed:                    Deleted
 
