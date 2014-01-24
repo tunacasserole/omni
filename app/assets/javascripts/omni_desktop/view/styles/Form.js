@@ -209,7 +209,7 @@ Ext.define('Omni.view.styles.Form', {
               queryField: 'display',
               valueField: 'size_group_id',
               itemTpl: '{display}',
-              gotoTarget        : 'omni-size_groups-Inspector'
+              gotoTarget: 'omni-size_groups-Inspector'
             }, {
               name: 'subclass_id',
               fieldLabel: this.subclass_idLabel,
@@ -223,7 +223,7 @@ Ext.define('Omni.view.styles.Form', {
               queryField: 'display',
               valueField: 'subclass_id',
               itemTpl: '{display}',
-              gotoTarget        : 'omni-subclasses-Inspector'
+              gotoTarget: 'omni-subclasses-Inspector'
             },
             // { name: 'product_id',                     fieldLabel: this.product_idLabel,                 allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Product',{pageSize: 25}), displayField: 'display', queryField: 'display', valueField: 'product_id', itemTpl:'{display}' },
             {
