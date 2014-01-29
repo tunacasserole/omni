@@ -741,7 +741,7 @@ Ext.define('Omni.view.styles.Form', {
    */
   onSkusAction: function(action, eOpts) {
     Buildit.infoMsg('Skus are being built.  This may take a few moments');
-    this.processEventTransition('build_skus', 'Skus were successfully built.', 'An error occurred building skus for this Style');
+    // this.processEventTransition('build_skus', 'Skus were successfully built.', 'An error occurred building skus for this Style');
 
   }, // onBuildAction
 

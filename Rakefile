@@ -8,28 +8,21 @@ Omni::Application.load_tasks
 
 namespace :omni do
 
-  # task :migrations => :environment do |t, args|
-
-  #   puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-  #   @start_time = Time.now
-  #   Omni::Sync::Script.go
-  #   puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
-
-  # end
-
   desc "run automated test suite"
   task :test => :environment do |t, args|
     # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     @start_time = Time.now
-    Omni::Test::Base.go
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
   desc "sync parker data from spreadsheets, staging tables, and other databases"
-  task :sync => :environment do |t, args|
-    # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+  task :sync, [:model] => :environment do |t, args|
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    args.with_defaults(:model => "AllModels")
+    # puts "Hello and #{args.model}"   #
+    # puts "model is #{args[:model]}"  # both notations work
     @start_time = Time.now
-    Omni::Sync::Base.go
+    Omni::Sync::Base.go(args.model)
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
@@ -194,37 +187,37 @@ namespace :omni do
 
     [
       'omni::Customer 01',
-      'omni::CustomerNeed 02',
-      'omni::CustomerProduct 03',
+      # 'omni::CustomerNeed 02',
+      # 'omni::CustomerProduct 03',
 
-      'omni::Person 04',
-      'omni::Address 05',
-      'omni::Telephone 06',
-      'omni::EmailAddress 07',
+      # 'omni::Person 04',
+      # 'omni::Address 05',
+      # 'omni::Telephone 06',
+      # 'omni::EmailAddress 07',
 
-      'omni::Project 08',
-      'omni::TollgateTrack 09',
-      'omni::TollgateCheckpoint 10',
-      'omni::FinancialScorecard 11',
+      # 'omni::Project 08',
+      # 'omni::TollgateTrack 09',
+      # 'omni::TollgateCheckpoint 10',
+      # 'omni::FinancialScorecard 11',
 
-      'omni::Sample 12',
-      'omni::SampleApproval 13',
+      # 'omni::Sample 12',
+      # 'omni::SampleApproval 13',
 
 
-      'omni::SalesCall 14',
-      'omni::SalesCallPerson 15',
+      # 'omni::SalesCall 14',
+      # 'omni::SalesCallPerson 15',
 
-      'omni::Cfar 16',
-      'omni::CfarApproval 17',
-      'omni::CfarFollowup 18',
-      'omni::CfarNotification 19',
+      # 'omni::Cfar 16',
+      # 'omni::CfarApproval 17',
+      # 'omni::CfarFollowup 18',
+      # 'omni::CfarNotification 19',
 
-      'omni::Track 20',
-      'omni::Checkpoint 21',
-      'omni::QualityPlant 22',
-      'omni::Severity 23',
-      'omni::Probability 24',
-      'omni::Product 25'
+      # 'omni::Track 20',
+      # 'omni::Checkpoint 21',
+      # 'omni::QualityPlant 22',
+      # 'omni::Severity 23',
+      # 'omni::Probability 24',
+      # 'omni::Product 25'
 
     ].each do |doc|
       system("rails g buildit:model_spec #{doc}")

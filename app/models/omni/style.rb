@@ -116,7 +116,7 @@ class Omni::Style < ActiveRecord::Base
   ### CALLBACKS ###
     after_transition :on => :release,        :do => :after_release
     # after_transition :on => :locations,   :do => :after_locations
-    after_transition :on => :buildi_skus, :do => :go_build_skus
+    after_transition :on => :build_skus,  :do => :go_build_skus
     after_transition :on => :discontinue, :do => :after_discontinue
     after_transition :on => :drop,        :do => :after_drop
     after_transition :on => :deactivate,  :do => :after_deactivate
@@ -132,10 +132,7 @@ class Omni::Style < ActiveRecord::Base
     end
 
     event :build_skus do
-      transition :building => :building
-      transition :active => :building
-      transition :draft => :building
-      transition :pending_approval => :building
+      transition any => :building
     end
 
     event :discontinue do
@@ -183,15 +180,16 @@ class Omni::Style < ActiveRecord::Base
   # STATES (End)
 
   def ready_to_build_skus
+    puts "\n\nready_to_build_skus"
     has_style_color_sizes = false
     self.style_colors.each do |x|
       has_style_color_sizes = true if x.style_color_sizes.count > 0
     end
 
-    errors.add(:colors, ' - at least one color must be selected to generate skus.  Navigate to the Colors tab, then click the plus button in the upper right corner to add a color.  Skus are based on sizes and colors, without either, no sku will be built. Ignore this highlighted fields message - ') if self.style_colors.count < 1
-    errors.add(:style_color_sizes, ' - at least one style color size must be selected to generate skus.  Navigate to the Colors tab, then click the magnifying glass to inspect a color, then navigate to the sizes tab and click the plus sign.  Sizes should have been added automatically - did you have a size group?  Did the size group have sizes?. Ignore this highlighted fields message - ') unless has_style_color_sizes
-    errors.add(:locations, ' - at least one location must be selected to generate skus.  Navigate to the Locations tab, then click the plus button in the upper right corner to add a location.  Ignore this highlighted fields message - ') if self.style_locations.count < 1
-    errors.add(:suppliers, ' - at least one supplier must be selected to generate skus.  Navigate to the Suppliers tab, then click the plus button in the upper right corner to add a supplier.  Ignore this highlighted fields message - ') if self.style_suppliers.count < 1
+    errors.add(:colors, ' - at least one color must be selected to generate skus.  Navigate to the Colors tab, then click the plus button in the upper right corner to add a color.  Skus are based on sizes and colors, without either, no skus will be built.') if self.style_colors.count < 1
+    errors.add(:sizes, ' - at least one size must be selected to generate skus.  Navigate to the Colors tab, then click the magnifying glass to inspect a color, then navigate to the sizes tab and click the plus sign.  Sizes should have been added automatically - did you have a size group?  Did the size group have sizes?.') unless has_style_color_sizes
+    errors.add(:suppliers, ' - at least one supplier must be selected to generate skus.  Navigate to the Suppliers tab, then click the plus button in the upper right corner to add a supplier. ') if self.style_suppliers.count < 1
+    errors.add(:locations, ' - at least one location must be selected to generate skus.  Navigate to the Locations tab, then click the plus button in the upper right corner to add a location. ') if self.style_locations.count < 1
   end
 
   def conversion
@@ -220,12 +218,14 @@ class Omni::Style < ActiveRecord::Base
 
   ######## GENERATE SKU DATA ##############
   def go_build_skus
+    puts "\n\ngo_build_skus"
+    self.state = 'draft'
+    save
+    # ready_to_build_skus
     @@generated_skus = []
     gen_skus
     # gen_suppliers
     # gen_sku_prices
-    self.state = 'active'
-    save
   end
 
   def gen_skus
@@ -430,6 +430,8 @@ class Omni::Style < ActiveRecord::Base
     string   :style_id
     string   :style_nbr
     string   :display
+    string   :supplier_id
+    string   :supplier_display do supplier.display if supplier end
     string   :subclass_id
     string   :subclass_display do subclass.display if subclass end
     string   :conversion_type
@@ -440,6 +442,7 @@ class Omni::Style < ActiveRecord::Base
     text     :style_nbr_fulltext,  :using => :style_nbr
     text     :display_fulltext,  :using => :display
     text     :subclass_display_fulltext do self.subclass.display end
+    text     :supplier_display_fulltext do self.supplier.display end
     text     :classification_display_fulltext do self.subclass.classification.display if self.subclass && self.subclass.classification end
     text     :department_display_fulltext do self.subclass.classification.department.display if self.subclass && self.subclass.classification && self.subclass.classification.department end
   end

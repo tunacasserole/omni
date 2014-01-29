@@ -20,7 +20,6 @@ class Omni::Color < ActiveRecord::Base
   default      :color_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"COLOR_NBR"
   default      :is_plaid,                         :override  =>  false,        :to    => false
   default      :is_stripe,                        :override  =>  false,        :to    => false
-  default      :is_discontinued,                  :override  =>  false,        :to    => false
   default      :is_enabled,                       :override  =>  false,        :to    => false
   default      :is_destroyed,                     :override  =>  false,        :to    => false
   # DEFAULTS (End)

@@ -1,10 +1,28 @@
 class Omni::Sync::Base
 
-  def self.go
-    Omni::Sync::Mark.inventory
-    Omni::Sync::Rms.inventory
-    Omni::Sync::Grits.inventory
-    # Omni::Sync::MasterData.sync_skus
+  def self.go(model_name)
+    puts "going - #{model_name}"
+
+    model_name.downcase == 'all' ? sync_all : "Omni::Sync::#{model_name}".constantize.go
+  end
+
+  def self.sync_all
+    puts "syncing all"
+  end
+
+  def self.de_dup(model_name)
+    delete_count = 0
+    data = "Omni::#{model_name}".constantize.all
+    data.each do |x|
+      # used_count = Omni::Supplier.where(style_id: x.style_id).count
+      # next if used_count > 0
+      dup_count = "Omni::#{model_name}".constantize.where(display: x.display).count
+      next if dup_count < 2
+      delete_count += 1
+      x.delete if dup_count > 1
+    end
+
+    puts "delete_count is #{delete_count}"
   end
 
   def self.xit

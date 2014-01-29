@@ -10,7 +10,7 @@ en:
         description:                     Description
         short_name:                      Short Name
         classification_display:          Classification
-        Department_display:              Department
+        department_display:              Department
         classification_id:               Class
         markup_percent_high_limit:       Markup Pct - High Limit
         markup_percent_low_limit:        Markup Pct - Low Limit

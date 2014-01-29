@@ -9,40 +9,7 @@ class Omni::Sync::MasterData
     # read excel
   end
 
-  def self.sync_skus
-    puts "started at #{Time.now.to_s.chop.chop.chop.chop.chop}"
-    skus_created = 0
-    sql = "select id, sku_display, style_display, size_display, school_code, mark_sku, bu_sku, tg_sku, description, fabric_content, retail, g_c from skus_load_staged"
-    data = ActiveRecord::Base.connection.execute sql
-    data.each_with_index do |x,i|
-      puts "processed #{i.to_s} rows at #{Time.now.to_s.chop.chop.chop.chop.chop}" if i.to_s.end_with? '000'
-      # break if i > 2000
-      # create skus with these fields: style_id, size_id,
-      display = x[1]
-      style_id = Omni::Style.where(display: x[2]).first ? Omni::Style.where(display: x[2]).first.style_id : x[2].truncate(32)
-      size_id = Omni::Size.where(display: x[3]).first ? Omni::Size.where(display: x[3]).first.size_id : x[3].truncate(32)
-      site_id = Omni::Site.where(school_nbr: x[4]).first ? Omni::Site.where(school_nbr: x[4]).first.site_id : x[4].truncate(32)
 
-      if x[5].length > 1
-        source = 'PARKER'
-        source_id = x[5]
-      elsif x[6].length > 1
-        source = 'BUCKHEAD'
-        source_id = x[6]
-      elsif x[7].length > 1
-        source = 'TRUEGRITS'
-        source_id = x[7]
-      end
-
-      description = x[8]
-      fabric_content = x[9].length > 1 ? x[9] : 'NONE'
-      initial_retail_price = x[10].length > 1 ? x[10] : 0
-      is_converted = x[11] == 'CONVERTED_GARMENT'
-      s = Omni::Sku.create(display: display, style_id: style_id, size_id: size_id, source: source, source_id: source_id, description: description, fabric_content: fabric_content, initial_retail_price: initial_retail_price, is_converted: is_converted)
-      skus_created += 1 if s
-    end
-
-    puts "skus_created is #{skus_created}"
 
   end
 

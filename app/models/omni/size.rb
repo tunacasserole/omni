@@ -63,7 +63,7 @@ class Omni::Size < ActiveRecord::Base
 
 
   # ORDERING (Start) ====================================================================
-  order_search_by :grade_order => :asc
+  order_search_by :display => :asc
   # ORDERING (End)
 
 

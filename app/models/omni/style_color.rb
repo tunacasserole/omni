@@ -38,8 +38,6 @@ class Omni::StyleColor < ActiveRecord::Base
   has_many     :style_supplier_colors,           :class_name => 'Omni::StyleSupplierColor',      :foreign_key => 'style_color_id'
   # ASSOCIATIONS (End)
 
-
-
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
     map :style_display,                          :to => 'style.display'
@@ -47,22 +45,14 @@ class Omni::StyleColor < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
   # ORDERING (End)
 
 
   # HOOKS (Start) =======================================================================
-
-  hook  :before_create,      :validate_style_size_group,             10
-  hook  :after_create,       :add_style_color_sizes,                 10
+  # hook  :before_create,      :validate_style_size_group,             10
+  # hook  :after_create,       :add_style_color_sizes,                 10
 
   # HOOKS (End)
 

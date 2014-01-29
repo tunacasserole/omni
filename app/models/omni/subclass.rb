@@ -9,7 +9,7 @@ class Omni::Subclass < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :uniqueness    => true
+  # validates    :display,                         :uniqueness    => true
   validates    :classification_id,               :presence      => true
   # VALIDATIONS (End)
 
@@ -78,12 +78,14 @@ class Omni::Subclass < ActiveRecord::Base
     string   :subclass_nbr
     string   :classification_id
     string   :classification_display do classification.display if classification end
+    string   :department_display do department_display if department_display end
     # integer  :markup_percent_high_limit
     # integer  :markup_percent_low_limit
 
     text     :display_fulltext, :using => :display
     text     :subclass_nbr_fulltext, :using => :subclass_nbr
     text     :classification_display_fulltext, :using => :classification_display
+    text     :department_display_fulltext, :using => :department_display
     # text     :department_display_fulltext, :using => :department_display
       # text     :markup_percent_high_limit_fulltext, :using => :markup_percent_high_limit
       # text     :markup_percent_low_limit_fulltext, :using => :markup_percent_low_limit

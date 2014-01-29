@@ -84,7 +84,7 @@ class Omni::Site < ActiveRecord::Base
   searchable do
     string   :display
     string   :site_name
-    string   :site_nbr
+    string   :school_nbr
     string   :location_display do location.display if location end
     string   :city
     string   :state_code do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.state_code) end

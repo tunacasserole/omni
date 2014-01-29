@@ -9,7 +9,7 @@ class Omni::Classification < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :uniqueness    => true
+  # validates    :display,                         :uniqueness    => true
   validates    :department_id,                   :presence      => true
   # VALIDATIONS (End)
 
