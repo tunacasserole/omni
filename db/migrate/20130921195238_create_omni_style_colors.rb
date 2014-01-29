@@ -14,6 +14,7 @@ class CreateOmniStyleColors < ActiveRecord::Migration
         t.column   :fabric_content,                  :string,            :null  =>  true,    :limit   => 100
         t.column   :initial_retail_price,            :decimal,           :null  =>  true,    :scale   => 2,          :precision  => 11
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
+        t.column   :is_indexed,                      :boolean,           :null  =>  true
       end
     #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end

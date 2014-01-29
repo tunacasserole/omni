@@ -55,7 +55,7 @@ class CreateOmniSkus < ActiveRecord::Migration
         t.column   :order_package_type,              :string,            :null  =>  true,    :limit   => 100
         t.column   :garment_pieces,                  :integer,           :null  =>  true
         t.column   :stock_nbr,                       :string,            :null  =>  true,    :limit   => 100
-        t.column   :conversion_cost,                      :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
+        t.column   :conversion_cost,                 :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :first_cost,                      :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :last_cost,                       :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
         t.column   :average_cost,                    :decimal,           :null  =>  true,    :scale   => 4,          :precision  => 13
@@ -72,6 +72,7 @@ class CreateOmniSkus < ActiveRecord::Migration
         t.column   :is_special_order,                :boolean,           :null  =>  true
         t.column   :is_special_size,                 :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
+        t.column   :is_indexed,                      :boolean,           :null  =>  true
       end
   end
 end

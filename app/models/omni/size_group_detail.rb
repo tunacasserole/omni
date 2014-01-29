@@ -1,10 +1,5 @@
 class Omni::SizeGroupDetail < ActiveRecord::Base
 
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :size_group_details
   self.primary_key  = :size_group_detail_id

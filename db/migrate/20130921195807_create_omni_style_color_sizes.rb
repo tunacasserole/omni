@@ -16,6 +16,7 @@ class CreateOmniStyleColorSizes < ActiveRecord::Migration
         t.column   :is_special_order,                :boolean,           :null  =>  true
         t.column   :is_not_available,                :boolean,           :null  =>  true
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
+        t.column   :is_indexed,                      :boolean,           :null  =>  true
       end
     end
   end

@@ -61,6 +61,7 @@ class CreateOmniStyles < ActiveRecord::Migration
         t.column   :is_enabled,                      :boolean,           :null  =>  true
         t.column   :state,                           :string,            :null  =>  true,    :limit   => 100
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
+        t.column   :is_indexed,                      :boolean,           :null  =>  true
         t.column   :audit_created_by,                :string,            :null  =>  true,    :limit   => 100
         t.column   :audit_updated_by,                :string,            :null  =>  true,    :limit   => 100
         t.column   :audit_created_at,                :datetime,          :null  =>  true

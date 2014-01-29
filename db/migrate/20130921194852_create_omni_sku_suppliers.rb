@@ -44,6 +44,7 @@ class CreateOmniSkuSuppliers < ActiveRecord::Migration
         t.column   :pallet_high,                     :integer,           :null  =>  true
         t.column   :pallet_container_id,             :string,            :null  =>  true,    :limit   => 32
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
+        t.column   :is_indexed,                      :boolean,           :null  =>  true
       end
     end
     #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))

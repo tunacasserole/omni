@@ -10,6 +10,29 @@ class Omni::Sync::Base
     puts "syncing all"
   end
 
+  def self.index_all
+    puts "indexing all"
+  end
+
+  def self.index(model_name)
+    puts "-- indexing - #{model_name}"
+    rows = 0
+    if model_name.downcase == 'all'
+      index_all
+    else
+      data = "Omni::#{model_name}".constantize.where(is_indexed: [false,nil])
+      count = data.count
+      puts ".. #{count} rows to process ......................................"
+      data.find_each do |x|
+        puts ".. #{Time.now.strftime("%H:%M:%S").yellow}: #{(rows.to_f / count.to_f * 100.0).round(2).to_s}% complete.  #{(count - rows).to_s.cyan} remaining (#{rows.to_s} / #{count})" if rows.to_s.end_with? '00'
+        rows += 1
+        x.is_indexed = true
+        x.save
+        x.index
+      end
+    end
+  end
+
   def self.de_dup(model_name)
     delete_count = 0
     data = "Omni::#{model_name}".constantize.all
@@ -73,4 +96,5 @@ class Omni::Sync::Base
     @no_row = []
     @order_lines = []
   end
+
 end

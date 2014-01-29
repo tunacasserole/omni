@@ -14,6 +14,7 @@ class CreateOmniSkuPrices < ActiveRecord::Migration
         t.column   :sales_category,                  :string,            :null  =>  true,    :limit   => 100
         t.column   :price_change_id,                 :string,            :null  =>  true,    :limit   => 32
         t.column   :is_destroyed,                    :boolean,           :null  =>  true
+        t.column   :is_indexed,                      :boolean,           :null  =>  true
       end
     end
     #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
