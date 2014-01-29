@@ -23,8 +23,16 @@ class Omni::Sync::Base
       data = "Omni::#{model_name}".constantize.where(is_indexed: [false,nil])
       count = data.count
       puts ".. #{count} rows to process ......................................"
+      start = Time.now
       data.find_each do |x|
-        puts ".. #{Time.now.strftime("%H:%M:%S").yellow}: #{(rows.to_f / count.to_f * 100.0).round(2).to_s}% complete.  #{(count - rows).to_s.cyan} remaining (#{rows.to_s} / #{count})" if rows.to_s.end_with? '00'
+        if rows.to_s.end_with? '00'
+          elapsed = Time.now - start
+          pct_complete = (rows.to_f / count.to_f * 100.0).round(2)
+          total = (elapsed * 100 / pct_complete).round(0)
+          remaining = total - elapsed
+          finish = start + total
+          puts ".. #{model_name.yellow} #{Time.now.strftime("%H:%M:%S").yellow}:  (#{rows.to_s} / #{count}) #{(rows.to_f / count.to_f * 100.0).round(2).to_s}% complete.  #{(count - rows).to_s.cyan} #{'remaining'.cyan}.  proj. finish: #{(finish).strftime("%H:%M:%S").yellow} (#{(remaining / 60).round(0)} remaining minutes)"
+        end
         rows += 1
         x.is_indexed = true
         x.save
@@ -60,7 +68,7 @@ class Omni::Sync::Base
     put "omni rows created: #{@created_count}"
     put "legacy rows skipped: #{@source_count - @created_count}"
     put "***********************************"
-    put "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s"
+    put "== finished in #{(Time.now - @start).round(0).to_s.cyan}s"
     puts @output
     # @no_locations.each {|x| puts x}
     exit
@@ -74,7 +82,7 @@ class Omni::Sync::Base
 
   def self.load
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    @start_time = Time.now
+    @start = Time.now
     @date = Date.parse('1-1-1999')
     # @start_date = Date.parse('1-1-2011')
     # @end_date = Date.parse('31-12-2013')
