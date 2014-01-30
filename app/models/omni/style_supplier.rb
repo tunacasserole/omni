@@ -76,7 +76,7 @@ class Omni::StyleSupplier < ActiveRecord::Base
   # ORDERING (End)
 
   # HOOKS (Start) =======================================================================
-  hook  :before_create,      :set_defaults,                 10
+  # hook  :before_create,      :set_defaults,                 10
   hook  :after_create,       :add_style_supplier_colors,                 10
   # HOOKS (End)
 
@@ -127,13 +127,14 @@ class Omni::StyleSupplier < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
 
-    def set_defaults
-    puts "-- setting defaults #{supplier.description} --"
-
-    self.description = supplier.description
-    self.minimum_order_units = supplier.minimum_order_units
-    self.minimum_order_value = supplier.minimum_order_cost
-    self.origin_country = supplier.country
+  def set_defaults
+    # puts "-- setting defaults #{supplier.description} --"
+    if supplier
+      self.description = supplier.description
+      self.minimum_order_units = supplier.minimum_order_units
+      self.minimum_order_value = supplier.minimum_order_cost
+      self.origin_country = supplier.country
+    end
   end
 
   def add_style_supplier_colors
