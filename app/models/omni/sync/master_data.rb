@@ -11,7 +11,7 @@ class Omni::Sync::MasterData
 
 
 
-  end
+  # end
 
   # def self.styles
   #   sql = "select distinct(style_id), site_id from skus_load"
