@@ -123,6 +123,7 @@ class Omni::StyleColor < ActiveRecord::Base
       sizes = Omni::SizeGroupDetail.where(:size_group_id => self.style.size_group_id)
       sizes.each do |s|
         puts "details is #{s.size_group_detail_id} and size is #{s.size_id}"
+        next unless s.size
         x = Omni::StyleColorSize.new
         x.style_color_id = self.style_color_id
         x.size_id = s.size_id
