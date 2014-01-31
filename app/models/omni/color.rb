@@ -1,7 +1,7 @@
 class Omni::Color < ActiveRecord::Base
   # METADATA (Start) ====================================================================
   self.table_name   = :colors
-  self.primary_key  = :id
+  self.primary_key  = :color_id
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
