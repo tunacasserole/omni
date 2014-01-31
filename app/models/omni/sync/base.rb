@@ -1,7 +1,7 @@
 class Omni::Sync::Base
 
   def self.go(model_name)
-    puts "going - #{model_name}"
+    # puts "going - #{model_name}"
 
     model_name.downcase == 'all' ? sync_all : "Omni::Sync::#{model_name}".constantize.go
   end
@@ -105,4 +105,69 @@ class Omni::Sync::Base
     @order_lines = []
   end
 
+  def self.dump_to_seed(model_name)
+    # Delete previous seed files
+    table_name = model_name.tableize
+    Dir.entries("db/seed").each {|x| File.delete("db/seed/#{x}") if (x.include? table_name) && (x.length == table_name.length + 18)}
+    file_name = "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{table_name}.rb"
+    SeedDump.dump("Omni::#{model_name}".constantize, file: file_name)
+    puts "finished dumping to file #{file_name}"
+  end
+
+  def self.seq(table_name)
+    sequence_code = table_name.chop.upcase + "_NBR"
+    seq = Buildit::Sequence.where(sequence_code: sequence_code).first
+    if seq
+      seq.value = 20000
+      seq.save
+    else
+      puts "sequence entry not found for #{sequence_code}"
+    end
+  end
+
+  def self.excel_to_hash(file_name)
+    # Takes an excel file name and a tab name, and returns an array of stripped, transposed rows
+    # Sample call:  @@data = excel_to_hash File.join(Rails.root,'db/meta/model_headers.xlsx'), 'models'
+    # Access the data:  @data.first['column_name']
+    folder_name = File.join(Rails.root, 'db','import')
+    tab_name = 'sheet1'
+    puts "started reading excel from content into memory at #{Time.now.to_s.chop.chop.chop.chop.chop}"
+    rows = []
+      file = File.open(File.join(folder_name, file_name), mode = 'r')
+      excel = Roo::Excelx.new(file.path)
+      # excel.default_sheet = excel.sheets.index(tab_name) ? excel.sheets.index(tab_name) + 1 : excel.sheets[1]
+      header = excel.row(1)
+      (2..1000).each do |i|
+        # break if i > 100
+        next unless excel.row(i)[0]
+        row = Hash[[header, excel.row(i)].transpose]
+        row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
+        rows << row
+      end
+    puts "finished reading #{rows.count.to_s} rows from excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop} "
+    return rows
+  end
+
+  def self.excel_to_seed(model_name, table_name)
+
+    # delete all data for a fresh start
+    "Omni::#{model_name}".constantize.delete_all
+
+    # reset the sequence number
+    seq(table_name)
+
+    # load the excel data into a hash and map it to the database
+    excel_to_hash("#{table_name}.xlsx").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x);  puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '00'}
+
+    # write the data to a seed file
+    dump_to_seed(model_name)
+
+    # delete all data before running the seed as a test
+    "Omni::#{model_name}".constantize.delete_all
+
+    # run the seed file
+    system('rake buildit:db:seed')
+
+    # test that the correct number of rows were created
+  end
 end

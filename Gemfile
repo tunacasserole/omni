@@ -48,6 +48,7 @@ gem 'progress_bar'
 
 gem 'roo'
 
+gem 'seed_dump'
 # gem 'xlsx'
 # gem 'thin'
 # Priceless Gems
