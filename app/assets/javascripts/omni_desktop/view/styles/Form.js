@@ -202,9 +202,9 @@ Ext.define('Omni.view.styles.Form', {
               store: Ext.create('Omni.store.SizeGroup', {
                 pageSize: 25
               }),
-              defaultSearch: {
-                with: { is_enabled: { equal_to: true } }
-              },
+              // defaultSearch: {
+              //   with: { is_enabled: { equal_to: true } }
+              // },
               displayField: 'display',
               queryField: 'display',
               valueField: 'size_group_id',
@@ -741,7 +741,7 @@ Ext.define('Omni.view.styles.Form', {
    */
   onSkusAction: function(action, eOpts) {
     Buildit.infoMsg('Skus are being built.  This may take a few moments');
-    // this.processEventTransition('build_skus', 'Skus were successfully built.', 'An error occurred building skus for this Style');
+    this.processEventTransition('build_skus', 'Skus were successfully built.', 'An error occurred building skus for this Style');
 
   }, // onBuildAction
 
