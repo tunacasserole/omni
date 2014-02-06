@@ -27,7 +27,7 @@ Ext.define('Desk.view.app.Hub', {
 
         {
           title: 'My Desk',
-          columns: 6,
+          columns: 4,
           rows: 4,
           tiles: [
 
