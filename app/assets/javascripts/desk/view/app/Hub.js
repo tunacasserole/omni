@@ -59,11 +59,20 @@ Ext.define('Desk.view.app.Hub', {
             },
 
             {
-              title: 'All features',
+              title: 'Features',
               colspan: 2,
               rowspan: 1,
               target: {
                 // xtype: 'desk-features-Explorer'
+              }
+            },
+
+            {
+              title: 'Support Requests',
+              colspan: 2,
+              rowspan: 1,
+              target: {
+                xtype: 'desk-cases-Explorer'
               }
             },
 
