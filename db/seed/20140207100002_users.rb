@@ -100,12 +100,19 @@ Buildit::User.create(
   password_confirmation: 'parker'
 )
 # USER ROLES =====================================================================
+# delete admin user roles
+# Buildit::UserRole.where(:role_id => '323244F0204011EFCFE904SUPERADMIN').each do |x|
+#   next if x.user_id = '811166D4D50A11E2B45820C9D04AARON'
+#   x.delete
+# end
 # everyone is at least a power user
-Buildit::User.all.each do |u|
-  ur = Buildit::UserRole.where(:role_id => '323244F0204011EFCFE9040CCEDPOWER', :user_id => u.user_id).first
+# Buildit::User.all.each do |u|
+  ur = Buildit::UserRole.where(:role_id => '323244F0204011EFCFE9040CCEDPOWER').each
   ur.is_enabled = true
   ur.save
 end
+
+Buildit::UserRole.where(is_enabled: false).each {|x| x.delete}
 
 # OLD USERS =====================================================================
 # Buildit::User.create(
