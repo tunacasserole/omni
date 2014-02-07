@@ -1,10 +1,11 @@
 en:
   activerecord:
     models:
-      desk/project:  'Project'
+      desk/feature:  'Feature'
     attributes:
-      desk/project:
-        project_id:                        'Project'
+      desk/feature:
+        display_as:                        'Feature'
+        feature_id:                        'Feature'
         state:                             'State'
         display:                           'Display'
         description:                       'Description'

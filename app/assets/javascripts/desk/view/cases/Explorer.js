@@ -60,16 +60,16 @@ Ext.define('Desk.view.cases.Explorer', {
           flex         : 1
         },
         {
+          header       : me.summaryLabel,
+          dataIndex    : 'summary',
+          flex         : 2
+        },
+        {
           header       : me.case_typeLabel,
           dataIndex    : 'case_type',
           flex         : 2,
           renderer      : Buildit.util.Format.lookupRenderer('CASE_TYPE'),
           lkp           : 'code_int'
-        },
-        {
-          header       : me.summaryLabel,
-          dataIndex    : 'summary',
-          flex         : 2
         },
 
         // {

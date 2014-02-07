@@ -1,12 +1,12 @@
 en:
   activerecord:
     models:
-      desk/project:  'Project'
+      desk/project:  'Model'
     attributes:
       desk/project:
         project_id:                        'Project'
         state:                             'State'
-        display:                           'Display'
+        display:                           'Title'
         description:                       'Description'
         release_date:                      'Release Date'
         is_destroyed:                      'Is Destroyed'

@@ -33,7 +33,7 @@ Ext.define('Desk.view.cases.Inspector',{
 
        ,{
           xtype    : 'buildit-CardGroup',
-          title    : 'Support',
+          title    : 'Extras',
           module   : 'notes',
           cards    : [
             {

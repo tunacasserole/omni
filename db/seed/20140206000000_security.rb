@@ -10,7 +10,7 @@ Buildit::ApplicationRole.delete_all
 Buildit::Application.create(
   application_id:       'AC41CFBEFAC211E2BPLATFORMCONSOLE',
   application_code:     'PLATFORM_CONSOLE',
-  application_name:     'Platform Console',
+  application_name:     'Buildit Console',
   hub_xtype:            'buildit-app-SuperHub',
   description:          'The Super Administrator desktop provides access to all key SDK level features under a single desktop. It is not designed to be modified by custom projects.',
 )

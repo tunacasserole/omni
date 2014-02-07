@@ -1,4 +1,4 @@
-Buildit.defineController('Omni.controller.Project', {
+Buildit.defineController('Desk.controller.Project', {
   extend: 'Ext.app.Controller',
   views: [],
 
@@ -17,4 +17,4 @@ Buildit.defineController('Omni.controller.Project', {
 
   }
 
-});
+}); // Buildit.defineController('Desk.controller.Project'
