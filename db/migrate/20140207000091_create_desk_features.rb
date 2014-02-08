@@ -4,11 +4,15 @@ class CreateDeskFeatures < ActiveRecord::Migration
     drop_table :features if ActiveRecord::Base.connection.tables.include?('features')
     create_table(:features, :id => false) do |t|
       t.column   :feature_id,                      :string,            :null  =>  false,   :limit   => 32
+      t.column   :project_id,                      :string,            :null  =>  false,   :limit   => 32
+      t.column   :feature_nbr,                     :string,            :null  =>  false,   :limit   => 200
       t.column   :state,                           :string,            :null  =>  true,    :limit   => 200
       t.column   :display,                         :string,            :null  =>  true,    :limit   => 200
       t.column   :description,                     :string,            :null  =>  true,    :limit   => 2000
       t.column   :release_date,                    :datetime,          :null  =>  true
-      t.column   :is_destroyed,                    :boolean,           :null  =>  true
+      t.column   :estimated_hours,                 :decimal,     :null => true,      :default => 0,     :scale => 2,    :precision => 2
+      t.column   :actual_hours,                    :decimal,     :null => true,      :default => 0,     :scale => 2,    :precision => 2
     end
+    add_index(:features,            [:feature_id],                              :unique => true)
   end
 end
