@@ -5,7 +5,7 @@ Ext.define('Omni.model.PurchaseDetail', {
       { name: 'purchase_detail_id',          type: 'string'   },
       { name: 'display',                     type: 'string'   },
       { name: 'purchase_id',                 type: 'string'   },
-      { name: 'purchase_line_nbr',           type: 'string'   },
+      { name: 'purchase_detail_nbr',           type: 'string'   },
       { name: 'state',                       type: 'string'   },
       { name: 'sku_id',                      type: 'string'   },
       { name: 'color_name',                  type: 'string'   },

@@ -106,11 +106,7 @@ Buildit::User.create(
 #   x.delete
 # end
 # everyone is at least a power user
-# Buildit::User.all.each do |u|
-  ur = Buildit::UserRole.where(:role_id => '323244F0204011EFCFE9040CCEDPOWER').each
-  ur.is_enabled = true
-  ur.save
-end
+Buildit::UserRole.where(:role_id => '323244F0204011EFCFE9040CCEDPOWER').each {|x| x.is_enabled = true; x.save}
 
 Buildit::UserRole.where(is_enabled: false).each {|x| x.delete}
 

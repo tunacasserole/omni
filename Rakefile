@@ -8,6 +8,14 @@ Omni::Application.load_tasks
 
 namespace :omni do
 
+  desc "fix sequences"
+  task :sequences => :environment do |t, args|
+    # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    @start_time = Time.now
+    Desk::Helper::Sequence.update
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
   desc "run automated test suite"
   task :test => :environment do |t, args|
     # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "

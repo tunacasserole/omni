@@ -7,7 +7,7 @@ en:
         purchase_detail_id:                Purchase Detail
         display:                           Name
         purchase_id:                       Purchase
-        purchase_line_nbr:                 Purchase Order Line Number
+        purchase_detail_nbr:                 Purchase Order Line Number
         state:                             State
         sku_id:                            SKU
         sku_supplier_id:                   SKU

@@ -9,7 +9,7 @@ Ext.define('Omni.model.StockLedgerActivityLog', {
     { name: 'display', type: 'string' },
     { name: 'stock_ledger_activity_display', type: 'string' },
     { name: 'stock_ledger_activity_id', type: 'string' },
-    { name: 'activity_log_nbr', type: 'string' },
+    { name: 'stock_ledger_activity_log_nbr', type: 'string' },
     { name: 'model_name', type: 'string' },
     { name: 'attribute_name', type: 'string' },
     { name: 'row_display', type: 'string' },

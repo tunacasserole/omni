@@ -49,6 +49,16 @@ gem 'progress_bar'
 gem 'roo'
 
 gem 'seed_dump'
+
+
+# testing gems
+gem 'rspec-rails', group: [:development, :test] # - RSpec is a replacement for Test::MiniTest. I cannot recommend highly enough RSpec. rspec-rails provides Rails integration for RSpec.
+
+group :test do
+  gem 'factory_girl_rails' # - an alternative to fabrication. Nice and mature fixture replacement. Spiritual ancestor of fabrication.
+  gem 'guard-rspec' # - fantastic gem that monitors file changes and invokes tasks based on them. Loaded with lots of useful extension. Far superior to autotest and watchr.
+  gem 'rb-fsevent'
+end
 # gem 'xlsx'
 # gem 'thin'
 # Priceless Gems
@@ -65,17 +75,14 @@ gem 'seed_dump'
 # cucumber-rails - Cucumber is the premium tool to develop feature tests in Ruby. cucumber-rails provides Rails integration for Cucumber.
 # devise - Devise is full-featured authentication solution for Rails applications. In most cases it's preferable to use devise to unrolling your custom authentication solution.
 # fabrication - a great fixture replacement (editor's choice).
-# factory_girl - an alternative to fabrication. Nice and mature fixture replacement. Spiritual ancestor of fabrication.
 # ffaker - handy gem to generate dummy data (names, addresses, etc).
 # feedzirra - Very fast and flexible RSS/Atom feed parser.
 # friendly_id - Allows creation of human-readable URLs by using some descriptive attribute of the model instead of its id.
 # globalize3 - Globalize3 is the successor of Globalize for Rails and is targeted at ActiveRecord version 3.x. It is compatible with and builds on the new I18n API in Ruby on Rails and adds model translations to ActiveRecord.
-# guard - fantastic gem that monitors file changes and invokes tasks based on them. Loaded with lots of useful extension. Far superior to autotest and watchr.
 # haml-rails - haml-rails provides Rails integration for Haml.
 # haml - HAML is a concise templating language, considered by many (including yours truly) to be far superior to Erb.
 # kaminari - Great paginating solution.
 # machinist - Fixtures aren't fun. Machinist is.
-# rspec-rails - RSpec is a replacement for Test::MiniTest. I cannot recommend highly enough RSpec. rspec-rails provides Rails integration for RSpec.
 # sidekiq - Sidekiq is probably the easiest and most scalable way to run background jobs in your Rails app.
 # simple_form - once you've used simple_form (or formtastic) you'll never want to hear about Rails's default forms. It has a great DSL for building forms and no opinion on markup.
 # simplecov-rcov - RCov formatter for SimpleCov. Useful if you're trying to use SimpleCov with the Hudson contininous integration server.

@@ -1,8 +1,8 @@
-class Desk::Feature < ActiveRecord::Base
+class Desk::Checklist < ActiveRecord::Base
   # METADATA (Start) ====================================================================
   self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
-  self.table_name                 = :features
-  self.primary_key                = :feature_id
+  self.table_name                 = :checklists
+  self.primary_key                = :checklist_id
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
@@ -10,50 +10,41 @@ class Desk::Feature < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates :feature_id,                        :presence      => true
+  validates :checklist_id,                        :presence      => true
+  validates :display,                             :presence      => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :feature_id,                          :with => :guid
-  default :feature_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"FEATURE_NBR"
+  default :checklist_id,                          :with => :guid
+  default :checklist_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"CHECKLIST_NBR"
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :project,             :class_name => 'Desk::Project',        :foreign_key => 'project_id'
+  has_many     :tasks,                            :as => :taskable
   # ASSOCIATIONS (End)
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
 
   # MAPPED ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
-  order_search_by :feature_nbr => :desc
+  order_search_by :display => :asc
   # ORDERING (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
 
   # INDEXING (Start) ====================================================================
 
   # INDEXING (End)
 
-
   # HOOKS (Start) =======================================================================
 
   # HOOKS (End)
-
 
   # STATES (Start) ====================================================================
 
   # STATES (End)
 
-
   # HELPERS (Start) =====================================================================
 
   # HELPERS (End)
 
-end # class Desk::Feature
+end # class Desk::Checklist

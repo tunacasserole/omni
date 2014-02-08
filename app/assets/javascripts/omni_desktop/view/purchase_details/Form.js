@@ -28,7 +28,7 @@ Ext.define('Omni.view.purchase_details.Form', {
       purchase_idLabel:                       Omni.i18n.model.PurchaseDetail.purchase_id,
       displayLabel:                           Omni.i18n.model.PurchaseDetail.display,
       stateLabel:                             Omni.i18n.model.PurchaseDetail.state,
-      purchase_line_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_line_nbr,
+      purchase_detail_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_detail_nbr,
       sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,
       descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,
       supplier_item_identifierLabel:          Omni.i18n.model.PurchaseDetail.supplier_item_identifier,
@@ -77,8 +77,8 @@ Ext.define('Omni.view.purchase_details.Form', {
             }
             // { xtype: 'textfield', name: 'display', fieldLabel: this.displayLabel, allowBlank: true, disabled: true },
            ,{ xtype: 'textfield',
-              name: 'purchase_line_nbr',
-              fieldLabel: this.purchase_line_nbrLabel,
+              name: 'purchase_detail_nbr',
+              fieldLabel: this.purchase_detail_nbrLabel,
               allowBlank: true,
               disabled: true
             }

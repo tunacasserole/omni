@@ -657,8 +657,8 @@ Ext.create('Ext.data.ArrayStore', {
   storeId   : 'CASE_TYPE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
-    ['032456XXCASETYPEBUGXXXXXXXXX1234','BUG',,'CASE_TYPE','Bug fix',null,true],
-    ['03122456ENHDATAMENTXXXXXXXXX1234','DATA',,'CASE_TYPE','Data conversion or cleanup',null,true],
+    ['032456XXCASETYPEBUGXXEUEU4XX1234','BUG',,'CASE_TYPE','Bug fix',null,true],
+    ['03122456ENHDATAMENTXXXOEUIXX1234','DATA',,'CASE_TYPE','Data conversion or cleanup',null,true],
     ['03122456ENHANCEMENTXXXXXXXXX1234','ENHANCEMENT',,'CASE_TYPE','Enhancement, new feature or custom development',null,true],
     ['03122456EQUESTIONNTXXXXXXXXX1234','QUESTION',,'CASE_TYPE','Question or explanation needed',null,true]
   ]

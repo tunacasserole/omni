@@ -22,8 +22,8 @@
   # DEFAULTS (Start) ====================================================================
   default :purchase_detail_id,                                 :with => :guid
   default :allocation_profile_id,                              :to   => lambda{|m| m.purchase.allocation_profile_id}
-  default :purchase_line_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_DETAIL_NBR"
-  default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_line_nbr}"}
+  default :purchase_detail_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_DETAIL_NBR"
+  default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_detail_nbr}"}
   default :sku_id,                :override  =>  true,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
   default :units_ordered,                                      :to   => 0
   default :selling_units_approved,                             :to   => 0
@@ -71,7 +71,7 @@
     string   :state
     string   :sku_display
     string   :supplier_cost
-    integer  :purchase_line_nbr
+    integer  :purchase_detail_nbr
     integer  :units_ordered
     string   :purchase_id
     string   :sku_id

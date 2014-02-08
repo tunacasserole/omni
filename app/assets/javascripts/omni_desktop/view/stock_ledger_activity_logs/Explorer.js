@@ -34,7 +34,7 @@ Ext.define('Omni.view.stock_ledger_activity_logs.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      activity_log_nbrLabel: Omni.i18n.model.StockLedgerActivityLog.activity_log_nbr,
+      stock_ledger_activity_log_nbrLabel: Omni.i18n.model.StockLedgerActivityLog.stock_ledger_activity_log_nbr,
       model_nameLabel: Omni.i18n.model.StockLedgerActivityLog.model_name,
       attribute_nameLabel: Omni.i18n.model.StockLedgerActivityLog.attribute_name,
       row_displayLabel: Omni.i18n.model.StockLedgerActivityLog.row_display,
@@ -45,7 +45,7 @@ Ext.define('Omni.view.stock_ledger_activity_logs.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.activity_log_nbrLabel, dataIndex: 'activity_log_nbr',  flex: 1,  sortable: true  },
+        { header: this.stock_ledger_activity_log_nbrLabel, dataIndex: 'stock_ledger_activity_log_nbr',  flex: 1,  sortable: true  },
         { header: this.model_nameLabel, dataIndex: 'model_name',  flex: 1,  sortable: true  },
         { header: this.attribute_nameLabel, dataIndex: 'attribute_name',  flex: 1,  sortable: true  },
         { header: this.row_displayLabel, dataIndex: 'row_display',  flex: 1,  sortable: true  },

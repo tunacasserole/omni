@@ -27,7 +27,7 @@ Ext.define('Omni.view.purchase_details.Explorer', {
   // purchase_idLabel:                       Omni.i18n.model.PurchaseDetail.purchase_id,
   // displayLabel:                           Omni.i18n.model.PurchaseDetail.display,
   // stateLabel:                             Omni.i18n.model.PurchaseDetail.state,
-  purchase_line_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_line_nbr,
+  purchase_detail_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_detail_nbr,
   sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,
   // descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,
   // supplier_item_identifierLabel:          Omni.i18n.model.PurchaseDetail.supplier_item_identifier,
@@ -65,8 +65,8 @@ Ext.define('Omni.view.purchase_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.purchase_line_nbrLabel,
-          dataIndex: 'purchase_line_nbr',
+        { header: this.purchase_detail_nbrLabel,
+          dataIndex: 'purchase_detail_nbr',
           flex: 1
         },
         { header: this.sku_idLabel,

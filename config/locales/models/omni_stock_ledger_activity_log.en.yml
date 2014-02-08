@@ -8,7 +8,7 @@ en:
         display:                         Name
         stock_ledger_activity_display:   Stock Ledger Activity
         stock_ledger_activity_id:        Stock Ledger Activity
-        activity_log_nbr:                Activity Log Number
+        stock_ledger_activity_log_nbr:                Activity Log Number
         model_name:                      Model Name
         attribute_name:                  Attribute Name
         row_display:                     Row
