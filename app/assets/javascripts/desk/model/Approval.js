@@ -1,4 +1,4 @@
-Ext.define('Desk.model.Case', {
+Ext.define('Desk.model.Approval', {
   extend     : 'Ext.data.Model',
 
   fields     : [
@@ -7,35 +7,31 @@ Ext.define('Desk.model.Case', {
       type       : 'string'
     },
     {
-      name       : 'case_id',
+      name       : 'approval_id',
       type       : 'string'
     },
     {
-      name       : 'requestor_id',
+      name       : 'approver_id',
       type       : 'string'
     },
     {
-      name       : 'requestor_display',
+      name       : 'approver_display',
       type       : 'string'
     },
     {
-      name       : 'project_id',
+      name       : 'approvable_id',
       type       : 'string'
     },
     {
-      name       : 'project_display',
+      name       : 'approvable_type',
       type       : 'string'
     },
     {
-      name       : 'case_nbr',
+      name       : 'approval_nbr',
       type       : 'string'
     },
     {
-      name       : 'case_type',
-      type       : 'string'
-    },
-    {
-      name       : 'state',
+      name       : 'approval_type',
       type       : 'string'
     },
     {
@@ -47,20 +43,8 @@ Ext.define('Desk.model.Case', {
       type       : 'string'
     },
     {
-      name       : 'tags',
-      type       : 'string'
-    },
-    {
-      name       : 'estimated_hours',
-      type       : 'decimal'
-    },
-    {
-      name       : 'actual_hours',
-      type       : 'decimal'
-    },
-    {
-      name       : 'is_billable',
-      type       : 'boolean'
+      name       : 'approval_date',
+      type       : 'date'
     },
     {
       name       : 'audit_created_by',
@@ -81,15 +65,15 @@ Ext.define('Desk.model.Case', {
 
   ],
 
-  idProperty : 'case_id',
+  idProperty : 'approval_id',
 
   proxy      : {
     type       : 'direct',
     api        : {
-      create     : Desk.service.Case.create,
-      read       : Desk.service.Case.read,
-      update     : Desk.service.Case.update,
-      destroy    : Desk.service.Case.destroy
+      create     : Desk.service.Approval.create,
+      read       : Desk.service.Approval.read,
+      update     : Desk.service.Approval.update,
+      destroy    : Desk.service.Approval.destroy
     },
     reader     : {
       type       : 'json',
@@ -104,4 +88,4 @@ Ext.define('Desk.model.Case', {
 
   ]
 
-}); // Ext.define('Desk.model.Case'
+}); // Ext.define('Desk.model.Approval'

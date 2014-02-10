@@ -1,16 +1,19 @@
 class Desk::Task < ActiveRecord::Base
   # METADATA (Start) ====================================================================
-  self.table_name  = :tasks
+  self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
+  self.table_name                 = :tasks
+  self.primary_key                = :task_id
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
+  supports_audit
   supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
   validates :task_id,                       :presence     => true
-  validates :owner_id,                      :presence     => true
   validates :display,                       :presence     => true
+  # validates :owner_id,                      :presence     => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -20,18 +23,18 @@ class Desk::Task < ActiveRecord::Base
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to      :taskable,                :polymorphic => true
-  belongs_to      :task_owner,              :foreign_key => 'owner_id',           :class_name => 'Buildit::User'
+  belongs_to      :taskable,       :polymorphic => true
+  belongs_to      :owner,          :foreign_key => 'owner_id',           :class_name => 'Buildit::User'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :task_owner_full_name,              :to => 'task_owner.full_name'
+    map :owner_name,              :to => 'owner.full_name'
   end
   # MAPPED ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
-  order_search_by :task_due_date => :desc
+  order_search_by :task_due => :desc
   # ORDERING (End)
 
   # FILTERS (Start) =====================================================================
@@ -44,32 +47,14 @@ class Desk::Task < ActiveRecord::Base
     string    :task_id
     string    :task_number
     string    :display
-    string    :task_owner_full_name
-    date      :task_due_date
+    string    :owner_name
+    date      :task_due
     string    :state
 
     text      :display_fulltext,                      :using => :display
     text      :description_fulltext,                  :using => :description
-    text      :task_owner_full_name_fulltext,       :using => :task_owner_full_name
+    text      :owner_name_fulltext,       :using => :owner_name
   end
   # INDEXING (End)
-
-
-  # EVENTFUL (Start) ====================================================================
-  eventful(:store => 'Desk.store.Task', :inspector => 'sbna-tasks-Inspector') do
-    on :create,     :publish => lambda{|m| "#{m.taskable_type} - TITLE: #{m.display} created"},         :display => 'Task Created'
-    on :update,     :publish => lambda{|m| "#{m.taskable_type} - TITLE: #{m.display} was updated"},     :display => 'Task Updated'
-  end
-  # EVENTFUL (End)
-
-
-  # HOOKS (Start) =======================================================================
-  # hook        :before_update,                       :set_initial_dates,       10
-  # HOOKS (End)
-
-  # HELPERS (Start) =====================================================================
-  has_many     :tasks,       :class_name => 'Desk::Task',        :foreign_key => 'taskable_id'
-  # HELPERS (End)
-
 end # class Desk::Task
 

@@ -1,0 +1,20 @@
+en:
+  activerecord:
+    models:
+      desk/approval:  'Approval'
+    attributes:
+      desk/approval:
+        display_as:                        'Approval'
+        approval_id:                       'Approval'
+        approver_id:                       'Approver'
+        approvable_id:                     'Approvable'
+        approvable_type:                   'Approvable Type'
+        approval_nbr:                      'Approval Nbr'
+        approval_type:                     'Approval Type'
+        display:                           'Summary'
+        description:                       'Description'
+        approval_date:                     'Approval Date'
+        audit_created_by:                  'Audit Created By'
+        audit_updated_by:                  'Audit Updated By'
+        audit_created_at:                  'Audit Created At'
+        audit_updated_at:                  'Audit Updated At'

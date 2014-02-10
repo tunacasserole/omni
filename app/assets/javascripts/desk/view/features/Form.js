@@ -6,11 +6,15 @@ Ext.define('Desk.view.features.Form', {
 
   // LABELS (Start) =======================================================================
   feature_idLabel                         : Desk.i18n.model.Feature.feature_id,
+  project_idLabel                         : Desk.i18n.model.Feature.project_id,
+  feature_nbrLabel                        : Desk.i18n.model.Feature.feature_nbr,
+  feature_typeLabel                       : Desk.i18n.model.Feature.feature_type,
   stateLabel                              : Desk.i18n.model.Feature.state,
   displayLabel                            : Desk.i18n.model.Feature.display,
   descriptionLabel                        : Desk.i18n.model.Feature.description,
   release_dateLabel                       : Desk.i18n.model.Feature.release_date,
-  is_destroyedLabel                       : Desk.i18n.model.Feature.is_destroyed,
+  estimated_hoursLabel                    : Desk.i18n.model.Feature.estimated_hours,
+  actual_hoursLabel                       : Desk.i18n.model.Feature.actual_hours,
   // LABELS (End)
 
 
@@ -25,7 +29,7 @@ Ext.define('Desk.view.features.Form', {
     };
     // FILTER (End)
 
-    
+
 
     // FIELDSETS (Start) ====================================================================
     Ext.apply(this, {
@@ -37,14 +41,42 @@ Ext.define('Desk.view.features.Form', {
           defaultType  : 'textfield',
           layout       : 'anchor',
           items        : [
+            // {
+            //   xtype        : 'buildit-Locator',
+            //   store        : Ext.create('Desk.store.Project',{pageSize: 10}),
+            //   displayField : 'display_as',
+            //   itemTpl      : '{display_as}',
+            //   name         : 'project_id',
+            //   fieldLabel   : me.project_idLabel,
+            //   initialValue : me.record.get('display_as'),
+            //   allowBlank   : false
+            // },
+            {
+              xtype        : 'textfield',
+              name         : 'feature_nbr',
+              fieldLabel   : me.feature_nbrLabel,
+              maxLength    : 200,
+              minLength    : 0,
+              allowBlank   : true,
+              disabled     : true
+            },
             {
               xtype        : 'textfield',
               name         : 'state',
               fieldLabel   : me.stateLabel,
               maxLength    : 200,
               minLength    : 0,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             },
+            // {
+            //   xtype        : 'textfield',
+            //   name         : 'feature_type',
+            //   fieldLabel   : me.feature_typeLabel,
+            //   maxLength    : 200,
+            //   minLength    : 0,
+            //   allowBlank   : true
+            // },
             {
               xtype        : 'textfield',
               name         : 'display',
@@ -54,7 +86,7 @@ Ext.define('Desk.view.features.Form', {
               allowBlank   : true
             },
             {
-              xtype        : 'textfield',
+              xtype        : 'textarea',
               name         : 'description',
               fieldLabel   : me.descriptionLabel,
               maxLength    : 2000,
@@ -62,17 +94,26 @@ Ext.define('Desk.view.features.Form', {
               allowBlank   : true
             },
             {
-              xtype        : 'textfield',
+              xtype        : 'datefield',
               name         : 'release_date',
               fieldLabel   : me.release_dateLabel,
-              maxLength    : 100,
-              minLength    : 0,
               allowBlank   : true
             },
             {
-              xtype        : 'checkbox',
-              name         : 'is_destroyed',
-              fieldLabel   : me.is_destroyedLabel
+              xtype        : 'textfield',
+              name         : 'estimated_hours',
+              fieldLabel   : me.estimated_hoursLabel,
+              minValue     : 0,
+              maxValue     : 100,
+              allowBlank   : true
+            },
+            {
+              xtype        : 'textfield',
+              name         : 'actual_hours',
+              fieldLabel   : me.actual_hoursLabel,
+              minValue     : 0,
+              maxValue     : 100,
+              allowBlank   : true
             }
           ]
         }/*,
@@ -84,7 +125,7 @@ Ext.define('Desk.view.features.Form', {
           layout       : 'anchor',
           items        : [
           ]
-        }*/          
+        }*/
       ]
     });
     // FIELDSETS (End)
@@ -98,7 +139,7 @@ Ext.define('Desk.view.features.Form', {
     // TITLES (End)
 
     this.callParent();
-    
+
   }  // initComponent
 
 }); // Ext.define('Desk.view.features.Form'

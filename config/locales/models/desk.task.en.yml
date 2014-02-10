@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    models:
+      desk/task:  'Task'
+    attributes:
+      desk/task:
+        display_as:                        'Task'
+        task_id:                           'Task'
+        taskable_id:                       'Taskable'
+        taskable_type:                     'Taskable Type'
+        checklist_id:                      'Checklist'
+        task_nbr:                          'Task Nbr'
+        task_type:                         'Task Type'
+        state:                             'Task Summary'
+        display:                           'Name'
+        description:                       'Description'
+        task_due:                          'Task Due'
+        task_start:                        'Task Start'
+        task_end:                          'Task End'
+        owner_id:                          'Owner'
+        audit_created_by:                  'Audit Created By'
+        audit_updated_by:                  'Audit Updated By'
+        audit_created_at:                  'Audit Created At'
+        audit_updated_at:                  'Audit Updated At'

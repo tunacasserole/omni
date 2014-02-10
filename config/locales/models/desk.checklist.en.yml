@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      desk/checklist:  'Checklist'
+    attributes:
+      desk/checklist:
+        display_as:                        'Checklist'
+        checklist_id:                      'Checklist'
+        checklist_nbr:                     'Checklist Nbr'
+        checklist_type:                    'Checklist Type'
+        state:                             'State'
+        display:                           'Checklist Name'
+        description:                       'Description'

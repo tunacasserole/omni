@@ -2,6 +2,7 @@ Ext.define('Desk.view.projects.Explorer', {
 
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.desk-projects-Explorer',
+  allowFind : true,
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {
@@ -19,11 +20,14 @@ Ext.define('Desk.view.projects.Explorer', {
 
   // LABELS (Start) ======================================================================
   project_idLabel                         : Desk.i18n.model.Project.project_id,
+  project_nbrLabel                        : Desk.i18n.model.Project.project_nbr,
+  project_typeLabel                       : Desk.i18n.model.Project.project_type,
   stateLabel                              : Desk.i18n.model.Project.state,
   displayLabel                            : Desk.i18n.model.Project.display,
   descriptionLabel                        : Desk.i18n.model.Project.description,
   release_dateLabel                       : Desk.i18n.model.Project.release_date,
-  is_destroyedLabel                       : Desk.i18n.model.Project.is_destroyed,
+  estimated_daysLabel                     : Desk.i18n.model.Project.estimated_days,
+  actual_daysLabel                        : Desk.i18n.model.Project.actual_days,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -45,10 +49,15 @@ Ext.define('Desk.view.projects.Explorer', {
     Ext.apply(me, {
       columns      : [
         {
-          header       : me.stateLabel,
-          dataIndex    : 'state',
+          header       : me.project_nbrLabel,
+          dataIndex    : 'project_nbr',
           flex         : 1
         },
+        // {
+        //   header       : me.project_typeLabel,
+        //   dataIndex    : 'project_type',
+        //   flex         : 1
+        // },
         {
           header       : me.displayLabel,
           dataIndex    : 'display',
@@ -59,15 +68,24 @@ Ext.define('Desk.view.projects.Explorer', {
           dataIndex    : 'description',
           flex         : 1
         },
+        // {
+        //   header       : me.release_dateLabel,
+        //   dataIndex    : 'release_date',
+        //   flex         : 1
+        // },
         {
-          header       : me.release_dateLabel,
-          dataIndex    : 'release_date',
+          header       : me.estimated_daysLabel,
+          dataIndex    : 'estimated_days',
           flex         : 1
         },
+        // {
+        //   header       : me.actual_daysLabel,
+        //   dataIndex    : 'actual_days',
+        //   flex         : 1
+        // },
         {
-          xtype        : 'checkcolumn',
-          header       : me.is_destroyedLabel,
-          dataIndex    : 'is_destroyed',
+          header       : me.stateLabel,
+          dataIndex    : 'state',
           flex         : 1
         }
       ]

@@ -2,7 +2,7 @@ Ext.define('Desk.view.cases.Explorer', {
 
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.desk-cases-Explorer',
-  allowFind : 'true',
+  allowFind : true,
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {
@@ -20,13 +20,21 @@ Ext.define('Desk.view.cases.Explorer', {
 
   // LABELS (Start) ======================================================================
   case_idLabel                            : Desk.i18n.model.Case.case_id,
-  case_typeLabel                            : Desk.i18n.model.Case.case_type,
+  requestor_idLabel                       : Desk.i18n.model.Case.requestor_id,
+  project_idLabel                         : Desk.i18n.model.Case.project_id,
   case_nbrLabel                           : Desk.i18n.model.Case.case_nbr,
+  case_typeLabel                          : Desk.i18n.model.Case.case_type,
   stateLabel                              : Desk.i18n.model.Case.state,
-  summaryLabel                            : Desk.i18n.model.Case.summary,
-  tagsLabel                               : Desk.i18n.model.Case.tags,
+  displayLabel                            : Desk.i18n.model.Case.display,
   descriptionLabel                        : Desk.i18n.model.Case.description,
-  is_destroyedLabel                       : Desk.i18n.model.Case.is_destroyed,
+  tagsLabel                               : Desk.i18n.model.Case.tags,
+  estimated_hoursLabel                    : Desk.i18n.model.Case.estimated_hours,
+  actual_hoursLabel                       : Desk.i18n.model.Case.actual_hours,
+  is_billableLabel                        : Desk.i18n.model.Case.is_billable,
+  audit_created_byLabel                   : Desk.i18n.model.Case.audit_created_by,
+  audit_updated_byLabel                   : Desk.i18n.model.Case.audit_updated_by,
+  audit_created_atLabel                   : Desk.i18n.model.Case.audit_created_at,
+  audit_updated_atLabel                   : Desk.i18n.model.Case.audit_updated_at,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -37,7 +45,6 @@ Ext.define('Desk.view.cases.Explorer', {
   initComponent : function () {
 
     var me = this;
-
 
     // CONFIG (Start) ======================================================================
     Ext.apply(me, {
@@ -51,43 +58,54 @@ Ext.define('Desk.view.cases.Explorer', {
         {
           header       : me.case_nbrLabel,
           dataIndex    : 'case_nbr',
-          flex         : 1,
-          emptyText    : 'auto-generated on save'
-        },
-        {
-          header       : me.stateLabel,
-          dataIndex    : 'state',
           flex         : 1
-        },
-        {
-          header       : me.summaryLabel,
-          dataIndex    : 'summary',
-          flex         : 2
         },
         {
           header       : me.case_typeLabel,
           dataIndex    : 'case_type',
-          flex         : 2,
-          renderer      : Buildit.util.Format.lookupRenderer('CASE_TYPE'),
-          lkp           : 'code_int'
+          flex         : 1
         },
-
+        {
+          header       : me.displayLabel,
+          dataIndex    : 'display',
+          flex         : 1
+        },
+        // {
+        //   header       : me.descriptionLabel,
+        //   dataIndex    : 'description',
+        //   flex         : 1
+        // },
         // {
         //   header       : me.tagsLabel,
         //   dataIndex    : 'tags',
         //   flex         : 1
         // },
         {
-          header       : me.descriptionLabel,
-          dataIndex    : 'description',
-          flex         : 3
+          header       : me.estimated_hoursLabel,
+          dataIndex    : 'estimated_hours',
+          flex         : 1
+        },
+        {
+          header       : me.actual_hoursLabel,
+          dataIndex    : 'actual_hours',
+          flex         : 1
+        },
+        {
+          header       : me.stateLabel,
+          dataIndex    : 'state',
+          flex         : 1
         },
         // {
         //   xtype        : 'checkcolumn',
-        //   header       : me.is_destroyedLabel,
-        //   dataIndex    : 'is_destroyed',
+        //   header       : me.is_billableLabel,
+        //   dataIndex    : 'is_billable',
         //   flex         : 1
-        // }
+        // },
+        {
+          header       : me.project_idLabel,
+          dataIndex    : 'project_display',
+          flex         : 1
+        }
       ]
     });
     // COLUMNS (End)

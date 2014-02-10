@@ -19,11 +19,15 @@ Ext.define('Desk.view.features.Explorer', {
 
   // LABELS (Start) ======================================================================
   feature_idLabel                         : Desk.i18n.model.Feature.feature_id,
+  project_idLabel                         : Desk.i18n.model.Feature.project_id,
+  feature_nbrLabel                        : Desk.i18n.model.Feature.feature_nbr,
+  feature_typeLabel                       : Desk.i18n.model.Feature.feature_type,
   stateLabel                              : Desk.i18n.model.Feature.state,
   displayLabel                            : Desk.i18n.model.Feature.display,
   descriptionLabel                        : Desk.i18n.model.Feature.description,
   release_dateLabel                       : Desk.i18n.model.Feature.release_date,
-  is_destroyedLabel                       : Desk.i18n.model.Feature.is_destroyed,
+  estimated_hoursLabel                    : Desk.i18n.model.Feature.estimated_hours,
+  actual_hoursLabel                       : Desk.i18n.model.Feature.actual_hours,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -44,32 +48,51 @@ Ext.define('Desk.view.features.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(me, {
       columns      : [
+        // {
+        //   header       : me.project_idLabel,
+        //   dataIndex    : 'project_display',
+        //   flex         : 1
+        // },
         {
-          header       : me.stateLabel,
-          dataIndex    : 'state',
+          header       : me.feature_nbrLabel,
+          dataIndex    : 'feature_nbr',
           flex         : 1
         },
         {
           header       : me.displayLabel,
           dataIndex    : 'display',
+          flex         : 2
+        },
+        // {
+        //   header       : me.feature_typeLabel,
+        //   dataIndex    : 'feature_type',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.descriptionLabel,
+        //   dataIndex    : 'description',
+        //   flex         : 1
+        // },
+        {
+          header       : me.estimated_hoursLabel,
+          dataIndex    : 'estimated_hours',
           flex         : 1
         },
         {
-          header       : me.descriptionLabel,
-          dataIndex    : 'description',
+          header       : me.actual_hoursLabel,
+          dataIndex    : 'actual_hours',
           flex         : 1
         },
+        // {
+        //   header       : me.release_dateLabel,
+        //   dataIndex    : 'release_date',
+        //   flex         : 1
+        // },
         {
-          header       : me.release_dateLabel,
-          dataIndex    : 'release_date',
+          header       : me.stateLabel,
+          dataIndex    : 'state',
           flex         : 1
         },
-        {
-          xtype        : 'checkcolumn',
-          header       : me.is_destroyedLabel,
-          dataIndex    : 'is_destroyed',
-          flex         : 1
-        }
       ]
     });
     // COLUMNS (End)

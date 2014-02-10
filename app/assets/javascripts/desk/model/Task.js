@@ -1,4 +1,4 @@
-Ext.define('Desk.model.Case', {
+Ext.define('Desk.model.Task', {
   extend     : 'Ext.data.Model',
 
   fields     : [
@@ -7,31 +7,27 @@ Ext.define('Desk.model.Case', {
       type       : 'string'
     },
     {
-      name       : 'case_id',
+      name       : 'task_id',
       type       : 'string'
     },
     {
-      name       : 'requestor_id',
+      name       : 'taskable_id',
       type       : 'string'
     },
     {
-      name       : 'requestor_display',
+      name       : 'taskable_type',
       type       : 'string'
     },
     {
-      name       : 'project_id',
+      name       : 'checklist_id',
       type       : 'string'
     },
     {
-      name       : 'project_display',
+      name       : 'task_nbr',
       type       : 'string'
     },
     {
-      name       : 'case_nbr',
-      type       : 'string'
-    },
-    {
-      name       : 'case_type',
+      name       : 'task_type',
       type       : 'string'
     },
     {
@@ -47,20 +43,20 @@ Ext.define('Desk.model.Case', {
       type       : 'string'
     },
     {
-      name       : 'tags',
+      name       : 'task_due',
+      type       : 'date'
+    },
+    {
+      name       : 'task_start',
+      type       : 'date'
+    },
+    {
+      name       : 'task_end',
+      type       : 'date'
+    },
+    {
+      name       : 'owner_id',
       type       : 'string'
-    },
-    {
-      name       : 'estimated_hours',
-      type       : 'decimal'
-    },
-    {
-      name       : 'actual_hours',
-      type       : 'decimal'
-    },
-    {
-      name       : 'is_billable',
-      type       : 'boolean'
     },
     {
       name       : 'audit_created_by',
@@ -81,15 +77,15 @@ Ext.define('Desk.model.Case', {
 
   ],
 
-  idProperty : 'case_id',
+  idProperty : 'task_id',
 
   proxy      : {
     type       : 'direct',
     api        : {
-      create     : Desk.service.Case.create,
-      read       : Desk.service.Case.read,
-      update     : Desk.service.Case.update,
-      destroy    : Desk.service.Case.destroy
+      create     : Desk.service.Task.create,
+      read       : Desk.service.Task.read,
+      update     : Desk.service.Task.update,
+      destroy    : Desk.service.Task.destroy
     },
     reader     : {
       type       : 'json',
@@ -104,4 +100,4 @@ Ext.define('Desk.model.Case', {
 
   ]
 
-}); // Ext.define('Desk.model.Case'
+}); // Ext.define('Desk.model.Task'

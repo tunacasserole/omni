@@ -11,6 +11,22 @@ Ext.define('Desk.model.Feature', {
       type       : 'string'
     },
     {
+      name       : 'project_id',
+      type       : 'string'
+    },
+    {
+      name       : 'project_display',
+      type       : 'string'
+    },
+    {
+      name       : 'feature_nbr',
+      type       : 'string'
+    },
+    {
+      name       : 'feature_type',
+      type       : 'string'
+    },
+    {
       name       : 'state',
       type       : 'string'
     },
@@ -24,11 +40,15 @@ Ext.define('Desk.model.Feature', {
     },
     {
       name       : 'release_date',
-      type       : 'datetime'
+      type       : 'date'
     },
     {
-      name       : 'is_destroyed',
-      type       : 'boolean'
+      name       : 'estimated_hours',
+      type       : 'decimal'
+    },
+    {
+      name       : 'actual_hours',
+      type       : 'decimal'
     }
 
   ],

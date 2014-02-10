@@ -26,7 +26,7 @@ Ext.define('Desk.view.app.Hub', {
           // Section: Desk //
           {
             title: 'My Desk',
-            columns: 2,
+            columns: 4,
             rows: 4,
              tiles: [
 
@@ -37,35 +37,7 @@ Ext.define('Desk.view.app.Hub', {
                 target: {
                   xtype: 'desk-cases-Explorer'
                 }
-              }
-            ]
-          },
-
-          // Archives
-
-          {
-            title: 'The File Cabinet',
-            columns: 2,
-            rows: 4,
-            tiles: [
-              {
-                title: 'Support Requests',
-                colspan: 2,
-                rowspan: 1,
-                target: {
-                  xtype: 'desk-cases-Explorer'
-                }
               },
-
-              {
-                title: 'Features',
-                colspan: 2,
-                rowspan: 1,
-                target: {
-                  xtype: 'desk-features-Explorer'
-                }
-              },
-
               {
                 title: 'Projects',
                 colspan: 2,
@@ -73,10 +45,10 @@ Ext.define('Desk.view.app.Hub', {
                 target: {
                   xtype: 'desk-projects-Explorer'
                 }
-              }
-
+              },
             ]
-          } // end of archives
+          }
+
         ]
     });
 

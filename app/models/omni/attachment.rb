@@ -18,8 +18,8 @@ module Omni::Attachment
 
     def process_file
       # self.attachable.upload if attachable_type == 'Omni::Receipt'
-      x = Omni::ReceiptPackingList.new
-      x.upload self
+      # x = Omni::ReceiptPackingList.new
+      # x.upload self
     end
 
   end

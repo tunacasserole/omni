@@ -1,4 +1,4 @@
-Ext.define('Desk.model.Project', {
+Ext.define('Desk.model.Checklist', {
   extend     : 'Ext.data.Model',
 
   fields     : [
@@ -7,15 +7,15 @@ Ext.define('Desk.model.Project', {
       type       : 'string'
     },
     {
-      name       : 'project_id',
+      name       : 'checklist_id',
       type       : 'string'
     },
     {
-      name       : 'project_nbr',
+      name       : 'checklist_nbr',
       type       : 'string'
     },
     {
-      name       : 'project_type',
+      name       : 'checklist_type',
       type       : 'string'
     },
     {
@@ -29,31 +29,19 @@ Ext.define('Desk.model.Project', {
     {
       name       : 'description',
       type       : 'string'
-    },
-    {
-      name       : 'release_date',
-      type       : 'date'
-    },
-    {
-      name       : 'estimated_days',
-      type       : 'decimal'
-    },
-    {
-      name       : 'actual_days',
-      type       : 'decimal'
     }
 
   ],
 
-  idProperty : 'project_id',
+  idProperty : 'checklist_id',
 
   proxy      : {
     type       : 'direct',
     api        : {
-      create     : Desk.service.Project.create,
-      read       : Desk.service.Project.read,
-      update     : Desk.service.Project.update,
-      destroy    : Desk.service.Project.destroy
+      create     : Desk.service.Checklist.create,
+      read       : Desk.service.Checklist.read,
+      update     : Desk.service.Checklist.update,
+      destroy    : Desk.service.Checklist.destroy
     },
     reader     : {
       type       : 'json',
@@ -68,4 +56,4 @@ Ext.define('Desk.model.Project', {
 
   ]
 
-}); // Ext.define('Desk.model.Project'
+}); // Ext.define('Desk.model.Checklist'
