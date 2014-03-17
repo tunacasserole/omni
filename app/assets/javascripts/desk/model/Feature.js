@@ -3,7 +3,7 @@ Ext.define('Desk.model.Feature', {
 
   fields     : [
     {
-      name       : 'display_as',
+      name       : 'display',
       type       : 'string'
     },
     {

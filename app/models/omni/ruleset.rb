@@ -9,13 +9,13 @@ class Omni::Ruleset < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
+  validates    :display,                         presence: true, uniqueness: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :ruleset_id,                       :override  =>  false,        :with  => :guid
-  default      :is_active,                        :override  =>  false,        :to    => false
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :ruleset_id,                       override: false,        with: :guid
+  default      :is_active,                        override: false,        to: false
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -27,11 +27,11 @@ class Omni::Ruleset < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :system_options,                  :class_name => 'Omni::SystemOption',            :foreign_key => 'ruleset_id'
-  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
-  has_many     :rules,                           :class_name => 'Omni::Rule',                    :foreign_key => 'ruleset_id'
-  has_many     :adjustment_reasons,              :class_name => 'Omni::AdjustmentReason',        :foreign_key => 'ruleset_id'
-  has_many     :stock_ledger_activities,         :class_name => 'Omni::StockLedgerActivity',     :foreign_key => 'ruleset_id'
+  has_many     :system_options,                  class_name: 'Omni::SystemOption',            foreign_key: 'ruleset_id'
+  has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
+  has_many     :rules,                           class_name: 'Omni::Rule',                    foreign_key: 'ruleset_id'
+  has_many     :adjustment_reasons,              class_name: 'Omni::AdjustmentReason',        foreign_key: 'ruleset_id'
+  has_many     :stock_ledger_activities,         class_name: 'Omni::StockLedgerActivity',     foreign_key: 'ruleset_id'
   # ASSOCIATIONS (End)
 
   # ORDERING (Start) ====================================================================
@@ -49,9 +49,9 @@ class Omni::Ruleset < ActiveRecord::Base
     string   :ruleset_id
     boolean  :is_active
 
-    text     :display_fulltext, :using => :display
-    text     :ruleset_code_fulltext, :using => :ruleset_code
-    text     :description_fulltext, :using => :description
+    text     :display_fulltext, using: :display
+    text     :ruleset_code_fulltext, using: :ruleset_code
+    text     :description_fulltext, using: :description
   end
   # INDEXING (End)
 

@@ -4,7 +4,7 @@ en:
       desk/case:  'Case'
     attributes:
       desk/case:
-        display_as:                        'Request'
+        display:                        'Request'
         case_id:                           'Request'
         requestor_id:                      'Requestor'
         project_id:                        'Project'

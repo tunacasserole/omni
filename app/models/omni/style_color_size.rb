@@ -14,14 +14,13 @@ class Omni::StyleColorSize < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :style_color_size_id,              :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.style_color_display}-#{m.size_display}"}
-  default      :is_special_order,                 :override  =>  true,         :to    => false
-  default      :is_not_available,                 :override  =>  true,         :to    => false
-  default      :fabric_bom_adjust_percent,        :override  =>  true,         :to    => 0
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :style_color_size_id,              override: false,        with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "#{m.style_color_display}-#{m.size_display}"}
+  default      :is_special_order,                 :override  =>  true,         to: false
+  default      :is_not_available,                 :override  =>  true,         to: false
+  default      :fabric_bom_adjust_percent,        :override  =>  true,         to: 0
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -31,33 +30,23 @@ class Omni::StyleColorSize < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :style_color,                     :class_name => 'Omni::StyleColor',              :foreign_key => 'style_color_id'
-  belongs_to   :size,                            :class_name => 'Omni::Size',                    :foreign_key => 'size_id'
-  belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
-  # belongs_to   :style,                           :class_name => 'Omni::Style',                   :foreign_key => 'style_id'
-  # has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'style_color_size_id'
+  belongs_to   :style_color,                     class_name: 'Omni::StyleColor',              foreign_key: 'style_color_id'
+  belongs_to   :size,                            class_name: 'Omni::Size',                    foreign_key: 'size_id'
+  belongs_to   :sku,                             class_name: 'Omni::Sku',                     foreign_key: 'sku_id'
+  # belongs_to   :style,                           class_name: 'Omni::Style',                   foreign_key: 'style_id'
+  # has_many     :skus,                            class_name: 'Omni::Sku',                     foreign_key: 'style_color_size_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :style_color_display,                    :to => 'style_color.display'
-    map :size_display,                           :to => 'size.display'
-    map :sku_display,                            :to => 'sku.display'
-    map :style_id,                               :to => 'style_color.style_id'
-    map :color_id,                               :to => 'style_color.color_id'
+    map :style_color_display,                    to: 'style_color.display'
+    map :size_display,                           to: 'size.display'
+    map :sku_display,                            to: 'sku.display'
+    map :style_id,                               to: 'style_color.style_id'
+    map :color_id,                               to: 'style_color.color_id'
   end
   # MAPPED ATTRIBUTES (End)
-
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
 
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
@@ -69,12 +58,12 @@ class Omni::StyleColorSize < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :active do
+  state_machine :state, initial: :active do
 
   ### CALLBACKS ###
-    after_transition :on => :deactivate,  :do => :after_deactivate
-    after_transition :on => :activate,    :do => :after_activate
-    after_transition :on => :generate,    :do => :after_generate
+    after_transition on: :deactivate,  do: :after_deactivate
+    after_transition on: :activate,    do: :after_activate
+    after_transition on: :generate,    do: :after_generate
 
     ## EVENTS ###
 
@@ -131,16 +120,13 @@ class Omni::StyleColorSize < ActiveRecord::Base
     string   :display
     string   :state
 
-    text     :style_color_display_fulltext, :using => :style_color_display
-    text     :size_display_fulltext, :using => :size_display
-    text     :sku_display_fulltext, :using => :sku_display
-    text     :sku_name_fulltext, :using => :sku_name
-    text     :pos_name_fulltext, :using => :pos_name
-    text     :state_fulltext, :using => :state
+    text     :style_color_display_fulltext, using: :style_color_display
+    text     :size_display_fulltext, using: :size_display
+    text     :sku_display_fulltext, using: :sku_display
+    text     :sku_name_fulltext, using: :sku_name
+    text     :pos_name_fulltext, using: :pos_name
+    text     :state_fulltext, using: :state
 
   end
-  # INDEXING (End)
-
-
 end # class Omni::StyleColorSize
 

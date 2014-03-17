@@ -6,7 +6,6 @@ class Omni::MarkOutlet < ActiveRecord::Base
   self.primary_key                = :outlet_nbr
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
   #supports_logical_delete
   #supports_audit
@@ -14,21 +13,18 @@ class Omni::MarkOutlet < ActiveRecord::Base
   # supports_fulltext
   # BEHAVIOR (End)
 
-
   # VALIDATIONS (Start) =================================================================
   # validates :stock_nbr,                        :presence      => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  # default :stock_nbr,                          :with => :guid
+  # default :stock_nbr,                          with: :guid
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
 
   # ASSOCIATIONS (End)
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
 
@@ -68,14 +64,11 @@ class Omni::MarkOutlet < ActiveRecord::Base
   #   # string   :sku_id
   #   # string   :state
 
-  #   # text     :department_display_fulltext, :using => :department_display
-  #   # text     :display_fulltext, :using => :display
-  #   # text     :version_fulltext, :using => :version
-  #   # text     :state_fulltext, :using => :state
+  #   # text     :department_display_fulltext, using: :department_display
+  #   # text     :display_fulltext, using: :display
+  #   # text     :version_fulltext, using: :version
+  #   # text     :state_fulltext, using: :state
   # end
-  # INDEXING (End)
-
-
   # HOOKS (Start) =======================================================================
 
   # HOOKS (End)

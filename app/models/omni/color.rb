@@ -9,21 +9,19 @@ class Omni::Color < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :concatenated_name,               :presence    => true
-  # validates    :color_family,                    :presence    => true
+  validates    :display,                  presence: true, uniqueness: true
+  validates    :color_nbr,                presence: true, uniqueness: true
+  validates    :concatenated_name,        presence: true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  default      :color_id,                         :override  =>  false,        :with  => :guid
-  default      :color_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"COLOR_NBR"
-  default      :is_plaid,                         :override  =>  false,        :to    => false
-  default      :is_stripe,                        :override  =>  false,        :to    => false
-  default      :is_enabled,                       :override  =>  false,        :to    => false
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :color_id,                         override: false,        with: :guid
+  default      :color_nbr,                        override: false,        with: :sequence,         named: "COLOR_NBR"
+  default      :is_plaid,                         override: false,        to: false
+  default      :is_stripe,                        override: false,        to: false
+  default      :is_enabled,                       override: false,        to: false
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -33,22 +31,14 @@ class Omni::Color < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :notes,        :class_name => 'Buildit::Note',    :foreign_key => 'notable_id', :as => :notable
-  has_many     :skus,         :class_name => 'Omni::Sku',        :foreign_key => 'color_id'
-  has_many     :style_colors, :class_name => 'Omni::StyleColor', :foreign_key => 'color_id'
+  has_many     :notes,        class_name: 'Buildit::Note',    foreign_key: 'notable_id', as: :notable
+  has_many     :skus,         class_name: 'Omni::Sku',        foreign_key: 'color_id'
+  has_many     :style_colors, class_name: 'Omni::StyleColor', foreign_key: 'color_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   # MAPPED ATTRIBUTES (End)
-
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
 
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
@@ -69,15 +59,12 @@ class Omni::Color < ActiveRecord::Base
     boolean  :is_stripe
     string   :color_family
 
-    text     :display_fulltext, :using => :display
-    text     :color_nbr_fulltext, :using => :color_nbr
-    text     :short_name_fulltext, :using => :short_name
-    text     :concatenated_name_fulltext, :using => :concatenated_name
-    text     :color_family_fulltext, :using => :color_family
+    text     :display_fulltext, using: :display
+    text     :color_nbr_fulltext, using: :color_nbr
+    text     :short_name_fulltext, using: :short_name
+    text     :concatenated_name_fulltext, using: :concatenated_name
+    text     :color_family_fulltext, using: :color_family
   end
-  # INDEXING (End)
-
-
 
 
   # STATES (Start) ====================================================================

@@ -25,7 +25,7 @@ en:
         longitude:                       Longitude
         phone:                           Phone
         fax:                             Fax
-        supplier_url:                    Supplier\'s Web Site
+        supplier_url:                    Supplier\'s Web Account
         default_ship_thru_supplier_display: Default Ship Thru Supplier
         default_ship_thru_supplier_id:   Default Ship-Thru Supplier
         shipping_point:                  Shipping Point

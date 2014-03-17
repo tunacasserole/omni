@@ -1,17 +1,10 @@
 class Omni::AllocationProfile < ActiveRecord::Base
 
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
-  # METADATA (Start) ====================================================================
+# METADATA (Start) ====================================================================
   # self.establish_connection       Buildit::Util::Data::Connection.for 'BUILDIT'
   self.table_name                 = :allocation_profiles
   self.primary_key                = :allocation_profile_id
   # METADATA (End)
-
 
   # BEHAVIOR (Start) ====================================================================
   #supports_logical_delete
@@ -20,56 +13,51 @@ class Omni::AllocationProfile < ActiveRecord::Base
   supports_fulltext
   # BEHAVIOR (End)
 
-
   # VALIDATIONS (Start) =================================================================
-  validates :allocation_profile_id,                        :presence      => true
+  validates :allocation_profile_id,          presence: true, uniqueness: true
+  validates :display,                        presence: true, uniqueness: true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  default :allocation_profile_id,                          :with => :guid
+  default :allocation_profile_id,                          with: :guid
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
-  
+
   # ASSOCIATIONS (End)
 
-
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  
+
   # MAPPED ATTRIBUTES (End)
 
-  
+
   # COMPUTED ATTRIBUTES (Start) =========================================================
-  
+
   # COMPUTED ATTRIBUTES (End)
 
 
   # TEMPORARY ATTRIBUTES (Start) ========================================================
-  
+
   # TEMPORARY ATTRIBUTES (End)
 
 
   # FILTERS (Start) =====================================================================
-  
+
   # FILTERS (End)
 
 
   # ORDERING (Start) ====================================================================
-  
+
   # ORDERING (End)
 
 
   # SCOPES (Start) ======================================================================
-  
+
   # SCOPES (End)
 
 
   # INDEXING (Start) ====================================================================
-  
-  # INDEXING (End)
-
 
   # HOOKS (Start) =======================================================================
 
@@ -77,9 +65,9 @@ class Omni::AllocationProfile < ActiveRecord::Base
 
 
   # STATES (Start) ====================================================================
-  
+
   # STATES (End)
-  
+
 
   # HELPERS (Start) =====================================================================
 

@@ -8,8 +8,8 @@ en:
         display:                         Name
         shipment_display:                Shipment
         shipment_id:                     Shipment
-        pick_ticket_display:             Pick Ticket
-        pick_ticket_id:                  Pick Ticket
+        pick_display:             Pick Ticket
+        pick_id:                  Pick Ticket
         ship_units:                      Ship Units
         received_units:                  Received Units
         container_display:               Container

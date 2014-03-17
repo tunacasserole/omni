@@ -11,44 +11,44 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  # validates    :display,                          :uniqueness  => true
-  validates    :projection_id,                    :presence    => true
-  validates    :sku_id,                           :presence    => true
-  validates    :location_id,                      :presence    => true
+  validates    :display,                          presence: true, uniqueness: true
+  validates    :projection_detail_id,             presence: true, uniqueness: true
+  validates    :projection_id,                    presence: true
+  validates    :sku_id,                           presence: true
+  validates    :location_id,                      presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :projection_detail_id,             :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.projection_display} - #{m.sku_display} - #{m.location_display}"}
-  default      :projection_detail_nbr,            :override  =>  false,        :with  => :sequence,         :named=>"PROJECTION_DETAIL_NBR"
-  default      :inventory_id,                     :override  =>  false,        :to    => lambda { |m| Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first.inventory_id if Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first unless m.inventory_id }
-  default      :last_forecast_units,              :override  =>  false,        :to    => 0
-  default      :first_forecast_units,             :override  =>  false,        :to    => 0
-  default      :projection_1_units,               :override  =>  false,        :to    => 0
-  default      :projection_2_units,               :override  =>  false,        :to    => 0
-  default      :projection_3_units,               :override  =>  false,        :to    => 0
-  default      :projection_4_units,               :override  =>  false,        :to    => 0
-  default      :sale_units_py1,                   :override  =>  false,        :to    => 0
-  default      :sale_units_py2,                   :override  =>  false,        :to    => 0
-  default      :sale_units_py3,                   :override  =>  false,        :to    => 0
-  default      :sale_units_ytd,                   :override  =>  false,        :to    => 0
-  default      :on_hand,                          :override  =>  false,        :to    => 0
-  default      :on_order,                         :override  =>  false,        :to    => 0
-  default      :sd_raw,                           :override  =>  false,        :to    => 0
-  default      :sd_floor,                         :override  =>  false,        :to    => 0
-  default      :sd_ceiling,                       :override  =>  false,        :to    => 0
-  default      :sd_smooth,                        :override  =>  false,        :to    => 0
-  default      :sd_percent,                       :override  =>  false,        :to    => 0
-  default      :coverage_allowed,                 :override  =>  false,        :to    => 0
-  default      :coverage_complete,                :override  =>  false,        :to    => 0
-  default      :usable,                           :override  =>  false,        :to    => 0
-  default      :unusable,                         :override  =>  false,        :to    => 0
-  default      :custom_need,                      :override  =>  false,        :to    => 0
-  default      :generic_need,                     :override  =>  false,        :to    => 0
-  default      :total_need,                       :override  =>  false,        :to    => 0
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :projection_detail_id,             override: false,        with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "#{m.projection_display} - #{m.sku_display} - #{m.location_display}"}
+  default      :projection_detail_nbr,            override: false,        with: :sequence,         named: "PROJECTION_DETAIL_NBR"
+  default      :inventory_id,                     override: false,        to: lambda { |m| Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first.inventory_id if Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first unless m.inventory_id }
+  default      :last_forecast_units,              override: false,        to: 0
+  default      :first_forecast_units,             override: false,        to: 0
+  default      :projection_1_units,               override: false,        to: 0
+  default      :projection_2_units,               override: false,        to: 0
+  default      :projection_3_units,               override: false,        to: 0
+  default      :projection_4_units,               override: false,        to: 0
+  default      :sale_units_py1,                   override: false,        to: 0
+  default      :sale_units_py2,                   override: false,        to: 0
+  default      :sale_units_py3,                   override: false,        to: 0
+  default      :sale_units_ytd,                   override: false,        to: 0
+  default      :on_hand,                          override: false,        to: 0
+  default      :on_order,                         override: false,        to: 0
+  default      :sd_raw,                           override: false,        to: 0
+  default      :sd_floor,                         override: false,        to: 0
+  default      :sd_ceiling,                       override: false,        to: 0
+  default      :sd_smooth,                        override: false,        to: 0
+  default      :sd_percent,                       override: false,        to: 0
+  default      :coverage_allowed,                 override: false,        to: 0
+  default      :coverage_complete,                override: false,        to: 0
+  default      :usable,                           override: false,        to: 0
+  default      :unusable,                         override: false,        to: 0
+  default      :custom_need,                      override: false,        to: 0
+  default      :generic_need,                     override: false,        to: 0
+  default      :total_need,                       override: false,        to: 0
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -58,31 +58,29 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
   has_many     :notes,                            :as          => :notable
-  belongs_to   :projection,                      :class_name => 'Omni::Projection',              :foreign_key => 'projection_id'
-  belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
-  belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
-  belongs_to   :inventory,                       :class_name => 'Omni::Inventory',               :foreign_key => 'inventory_id' # JASON need two part key here
-  belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',         :foreign_key => 'forecast_profile_id'
-  belongs_to   :projection_location,             :class_name => 'Omni::ProjectionLocation',      :foreign_key => 'projection_location_id'
+  belongs_to   :projection,                      class_name: 'Omni::Projection',              foreign_key: 'projection_id'
+  belongs_to   :sku,                             class_name: 'Omni::Sku',                     foreign_key: 'sku_id'
+  belongs_to   :location,                        class_name: 'Omni::Location',                foreign_key: 'location_id'
+  belongs_to   :inventory,                       class_name: 'Omni::Inventory',               foreign_key: 'inventory_id' # JASON need two part key here
+  belongs_to   :forecast_profile,                class_name: 'Omni::ForecastProfile',         foreign_key: 'forecast_profile_id'
+  belongs_to   :projection_location,             class_name: 'Omni::ProjectionLocation',      foreign_key: 'projection_location_id'
   # ASSOCIATIONS (End)
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :projection_display,                     :to => 'projection.display'
-    map :sku_display,                            :to => 'sku.display'
-    map :location_display,                       :to => 'location.display'
-    map :style_id,                               :to => 'sku.style_id'
-    map :style_display,                          :to => 'sku.style_display'
-    map :color_id,                               :to => 'sku.color_id'
-    map :color_display,                          :to => 'sku.color_display'
-    map :size_id,                                :to => 'sku.size_id'
-    map :size_display,                           :to => 'sku.size_display'
-    map :forecast_profile_display,               :to => 'forecast_profile.display'
-    map :projection_location_display,            :to => 'projection_location.display'
+    map :projection_display,                     to: 'projection.display'
+    map :sku_display,                            to: 'sku.display'
+    map :location_display,                       to: 'location.display'
+    map :style_id,                               to: 'sku.style_id'
+    map :style_display,                          to: 'sku.style_display'
+    map :color_id,                               to: 'sku.color_id'
+    map :color_display,                          to: 'sku.color_display'
+    map :size_id,                                to: 'sku.size_id'
+    map :size_display,                           to: 'sku.size_display'
+    map :forecast_profile_display,               to: 'forecast_profile.display'
+    map :projection_location_display,            to: 'projection_location.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -132,12 +130,12 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     string   :style_display do sku.style.display if sku and sku.style end
     string   :size_display do sku.size.display if sku and sku.size end
     # Partial match attributes
-    text     :size_display_fulltext, :using => :size_display
-    text     :style_display_fulltext, :using => :style_display
-    text     :color_display_fulltext, :using => :color_display
-    text     :projection_display_fulltext, :using => :projection_display
-    text     :sku_display_fulltext, :using => :sku_display
-    text     :location_display_fulltext, :using => :location_display
+    text     :size_display_fulltext, using: :size_display
+    text     :style_display_fulltext, using: :style_display
+    text     :color_display_fulltext, using: :color_display
+    text     :projection_display_fulltext, using: :projection_display
+    text     :sku_display_fulltext, using: :sku_display
+    text     :location_display_fulltext, using: :location_display
   end
   # INDEXING (End)
 
@@ -185,7 +183,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   # HELPERS (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
     state :approve do
       validate  :validate_approve
@@ -193,7 +191,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
   ### EVENTS ###
     event :approve do
-      transition :draft => :approved
+      transition draft: :approved
     end
 
     event :reset do
@@ -204,7 +202,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
       errors.add('State','This action is only valid if the Projection State is Forecast, Projection 1, Projection 2, Projection 3 or Projection 4.') unless self.projection.state == 'forecast' or self.projection_state =~ /projection_\d_units/
     end
 
-    after_transition :on => :approve, :do => :set_current_approved_units
+    after_transition on: :approve, do: :set_current_approved_units
 
   end
 

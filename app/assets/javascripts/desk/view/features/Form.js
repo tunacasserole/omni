@@ -44,11 +44,11 @@ Ext.define('Desk.view.features.Form', {
             // {
             //   xtype        : 'buildit-Locator',
             //   store        : Ext.create('Desk.store.Project',{pageSize: 10}),
-            //   displayField : 'display_as',
-            //   itemTpl      : '{display_as}',
+            //   displayField : 'display',
+            //   itemTpl      : '{display}',
             //   name         : 'project_id',
             //   fieldLabel   : me.project_idLabel,
-            //   initialValue : me.record.get('display_as'),
+            //   initialValue : me.record.get('display'),
             //   allowBlank   : false
             // },
             {

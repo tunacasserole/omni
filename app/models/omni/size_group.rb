@@ -9,17 +9,15 @@ class Omni::SizeGroup < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :display,                         :uniqueness  => true
-  validates    :concatenated_name,               :presence    => true
-  validates    :size_group_nbr,                  :uniqueness  => true,                         :allow_nil => true
+  validates    :display,                         presence: true,uniqueness: true
+  validates    :concatenated_name,               presence: true,uniqueness: true,                         allow_nil: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :size_group_id,                    :override  =>  false,        :with  => :guid
-  default      :size_group_nbr,                   :override  =>  false,        :with  => :sequence,         :named=>"SIZE_GROUP_NBR"
-  default      :is_enabled,                       :override  =>  false,        :to    => false
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :size_group_id,                    override: false,        with: :guid
+  default      :size_group_nbr,                   override: false,        with: :sequence,         named: "SIZE_GROUP_NBR"
+  default      :is_enabled,                       override: false,        to: false
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -31,8 +29,8 @@ class Omni::SizeGroup < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :styles,                          :class_name => 'Omni::Style',                   :foreign_key => 'size_group_id'
-  has_many     :size_group_details,              :class_name => 'Omni::SizeGroupDetail',         :foreign_key => 'size_group_id'
+  has_many     :styles,                          class_name: 'Omni::Style',                   foreign_key: 'size_group_id'
+  has_many     :size_group_details,              class_name: 'Omni::SizeGroupDetail',         foreign_key: 'size_group_id'
   # ASSOCIATIONS (End)
 
   # ORDERING (Start) ====================================================================
@@ -52,12 +50,12 @@ class Omni::SizeGroup < ActiveRecord::Base
     string   :concatenated_name
     boolean  :is_enabled
 
-    text     :display_fulltext, :using => :display
-    text     :size_group_nbr_fulltext, :using => :size_group_nbr
-    text     :description_fulltext, :using => :description
-    text     :short_name_fulltext, :using => :short_name
-    text     :concatenated_name_fulltext, :using => :concatenated_name
-    text     :is_enabled_fulltext, :using => :is_enabled
+    text     :display_fulltext, using: :display
+    text     :size_group_nbr_fulltext, using: :size_group_nbr
+    text     :description_fulltext, using: :description
+    text     :short_name_fulltext, using: :short_name
+    text     :concatenated_name_fulltext, using: :concatenated_name
+    text     :is_enabled_fulltext, using: :is_enabled
   end
   # INDEXING (End)
 

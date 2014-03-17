@@ -10,7 +10,7 @@ en:
         location_id:                     Location
         terminal_display:                Terminal
         terminal_id:                     Terminal
-        customer_order_nbr:              Customer Order Nbr
+        order_nbr:                       Order Nbr
         customer_display:                Customer
         customer_id:                     Customer
         order_start_date:                Order Start Date

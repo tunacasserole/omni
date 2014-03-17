@@ -4,7 +4,7 @@ en:
       desk/feature:  'Feature'
     attributes:
       desk/feature:
-        display_as:                        'Feature'
+        display:                        'Feature'
         feature_id:                        'Feature'
         project_id:                        'Project'
         feature_nbr:                       'Feature Nbr'

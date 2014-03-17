@@ -10,47 +10,47 @@
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates :display,                         :uniqueness  => true
-  validates :purchase_detail_id,              :uniqueness  => true
-  validates :sku_supplier_id,                 :presence    => true
-  validates :sku_id,                          :presence    => true
+  validates :purchase_detail_id,           presence: true, uniqueness: true
+  validates :purchase_id,                  presence: true
+  validates :sku_supplier_id,              presence: true
+  validates :sku_id,                       presence: true
   validates_numericality_of :units_ordered,              :greater_than => 0
   # validates_numericality_of :order_pack_size,            :greater_than => 0
   # validates_numericality_of :order_cost_units,           :greater_than => 0
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :purchase_detail_id,                                 :with => :guid
+  default :purchase_detail_id,                                 with: :guid
   default :allocation_profile_id,                              :to   => lambda{|m| m.purchase.allocation_profile_id}
-  default :purchase_detail_nbr,     :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_DETAIL_NBR"
-  default :display,               :override  =>  false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_detail_nbr}"}
-  default :sku_id,                :override  =>  true,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
-  default :units_ordered,                                      :to   => 0
-  default :selling_units_approved,                             :to   => 0
-  default :selling_units_received,                             :to   => 0
-  default :selling_units_cancelled,                            :to   => 0
+  default :purchase_detail_nbr,     override: false,        :with => :sequence,  named: "PURCHASE_DETAIL_NBR"
+  default :display,               override: false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_detail_nbr}"}
+  default :sku_id,                :override  =>  false,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
+  default :units_ordered,                                      to: 0
+  default :selling_units_approved,                             to: 0
+  default :selling_units_received,                             to: 0
+  default :selling_units_cancelled,                            to: 0
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :purchase_allocations,          :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id'
-  has_many     :stock_ledger_activities,       :class_name => 'Omni::StockLedgerActivity', :foreign_key => 'stockable_id' , :as => :stockable
-  has_many     :unlocked_purchase_allocations, :class_name => 'Omni::PurchaseAllocation',  :foreign_key => 'purchase_detail_id', :conditions => ["state != 'locked'" ]
-  has_many     :receipt_details,               :class_name => 'Omni::ReceiptDetail',       :foreign_key => 'purchase_detail_id'
-  belongs_to   :purchase,                      :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
-  belongs_to   :allocation_profile,            :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
-  belongs_to   :sku_supplier,                  :class_name => 'Omni::SkuSupplier',         :foreign_key => 'sku_supplier_id'
-  belongs_to   :sku,                           :class_name => 'Omni::Sku',                 :foreign_key => :sku_id
-  has_many     :inventories,                   :class_name => 'Omni::Inventory',           :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
-  has_many     :locations,                     :class_name => 'Omni::Location',            :through     => :inventories
+  has_many     :purchase_allocations,          class_name: 'Omni::PurchaseAllocation',  foreign_key: 'purchase_detail_id'
+  has_many     :stock_ledger_activities,       class_name: 'Omni::StockLedgerActivity', foreign_key: 'stockable_id' , as: :stockable
+  has_many     :unlocked_purchase_allocations, class_name: 'Omni::PurchaseAllocation',  foreign_key: 'purchase_detail_id', :conditions => ["state != 'locked'" ]
+  has_many     :receipt_details,               class_name: 'Omni::ReceiptDetail',       foreign_key: 'purchase_detail_id'
+  belongs_to   :purchase,                      class_name: 'Omni::Purchase',            foreign_key: 'purchase_id'
+  belongs_to   :allocation_profile,            class_name: 'Omni::AllocationProfile',   foreign_key: 'allocation_profile_id'
+  belongs_to   :sku_supplier,                  class_name: 'Omni::SkuSupplier',         foreign_key: 'sku_supplier_id'
+  belongs_to   :sku,                           class_name: 'Omni::Sku',                 :foreign_key => :sku_id
+  has_many     :inventories,                   class_name: 'Omni::Inventory',           :foreign_key => :sku_id,              :primary_key => :sku_id,    :conditions => { is_authorized: true }
+  has_many     :locations,                     class_name: 'Omni::Location',            :through     => :inventories
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :sku_display,                   :to => 'sku.display'
-    map :sku_supplier_display,          :to => 'sku_supplier.display'
-    map :purchase_display,              :to => 'purchase.display'
-    map :allocation_profile_display,    :to => 'allocation_profile.display'
-    map :supplier_id,                   :to => 'purchase.supplier_id'
+    map :sku_display,                   to: 'sku.display'
+    map :sku_supplier_display,          to: 'sku_supplier.display'
+    map :purchase_display,              to: 'purchase.display'
+    map :allocation_profile_display,    to: 'allocation_profile.display'
+    map :supplier_id,                   to: 'purchase.supplier_id'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -78,11 +78,11 @@
     string   :sku_supplier_id
     string   :sku_supplier_display
 
-    text     :display_fulltext,            :using => :display
-    text     :state_fulltext,              :using => :state
-    text     :sku_display_fulltext,        :using => :sku_display
-    text     :sku_supplier_fulltext,       :using => :sku_supplier_display
-    text     :purchase_display_fulltext,   :using => :purchase_display
+    text     :display_fulltext,            using: :display
+    text     :state_fulltext,              using: :state
+    text     :sku_display_fulltext,        using: :sku_display
+    text     :sku_supplier_fulltext,       using: :sku_supplier_display
+    text     :purchase_display_fulltext,   using: :purchase_display
   end
   # INDEXING (End)
 
@@ -91,7 +91,7 @@
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ### STATES ###
     state :draft do
@@ -110,15 +110,15 @@
     end
 
   ### CALLBACKS ###
-    after_transition :on => :approve, :do => :do_approve
-    after_transition :on => :receive, :do => :do_receive
-    after_transition :on => :release, :do => :do_release
-    after_transition :on => :cancel, :do => :do_cancel
-    after_transition :on => :process, :do => :do_process
+    after_transition on: :approve, do: :do_approve
+    after_transition on: :receive, do: :do_receive
+    after_transition on: :release, do: :do_release
+    after_transition on: :cancel, do: :do_cancel
+    after_transition on: :process, do: :do_process
 
   ### EVENTS ###
     event :approve do
-      transition :draft => :open
+      transition draft: :open
     end
 
     event :receive do

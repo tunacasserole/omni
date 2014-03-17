@@ -847,35 +847,35 @@
 
 /*
 ---------------------------------------------------------------------------------------
-   sites
+   accounts
 ---------------------------------------------------------------------------------------
 */
 
 
 /* Inspector Logo */
-.inspector .tab.sites .x-panel-body .logo {
-  background-image: url(/assets/omni/desktop/icons/module/sites.png);
+.inspector .tab.accounts .x-panel-body .logo {
+  background-image: url(/assets/omni/desktop/icons/module/accounts.png);
   background-color: #B60D44;
 }
 
 /* Inspector Logo Active & Hover */
-.inspector .tab.sites.active .x-panel-body .logo, .inspector .tab.sites .x-panel-body:hover .logo {
-  background-image: url(/assets/omni/desktop/icons/module/sites.png);
+.inspector .tab.accounts.active .x-panel-body .logo, .inspector .tab.accounts .x-panel-body:hover .logo {
+  background-image: url(/assets/omni/desktop/icons/module/accounts.png);
   background-color: #007373;
 }
 
 /* Inspector Tab Active & Hover */
-.inspector .tab.sites.active .x-panel-body, .inspector .tab.sites.active .x-panel-body:hover, .inspector .tab.sites .x-panel-body:hover {
+.inspector .tab.accounts.active .x-panel-body, .inspector .tab.accounts.active .x-panel-body:hover, .inspector .tab.accounts .x-panel-body:hover {
   background: #B60D44;
 }
 
 /* Tile */
-.tile.sites {
-	background-image: url(/assets/omni/desktop/icons/module/sites.png);
+.tile.accounts {
+	background-image: url(/assets/omni/desktop/icons/module/accounts.png);
 	background-color: #B60D44 !important;
 }
 
-.tile.sites:hover {
+.tile.accounts:hover {
 	background-color: #007373 !important;
 }
 

@@ -1,10 +1,10 @@
 //= require      buildit
 //= require_tree ./desk
-//= require_tree ./omni_desktop/logic
-//= require_tree ./omni_desktop/model
-//= require_tree ./omni_desktop/store
-//= require_tree ./omni_desktop/view
-//= require_tree ./omni_desktop/controller
+//= require_tree ./omni/logic
+//= require_tree ./omni/model
+//= require_tree ./omni/store
+//= require_tree ./omni/view
+//= require_tree ./omni/controller
 
 Buildit.desktopApplication({
 	name:'Omni',

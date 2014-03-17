@@ -5,7 +5,7 @@ Ext.define('Desk.view.checklists.Inspector',{
 
   initComponent:function(){
     var me = this;
-  
+
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter : {
@@ -22,7 +22,7 @@ Ext.define('Desk.view.checklists.Inspector',{
       }
     });
     // INSPECTOR INIT (End)
-  
+
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards     : [
@@ -37,7 +37,7 @@ Ext.define('Desk.view.checklists.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title     : 'Checklist',
-      subtitle  : this.record.get('display_as')
+      subtitle  : this.record.get('display')
     });
     // TITLES (End)
 

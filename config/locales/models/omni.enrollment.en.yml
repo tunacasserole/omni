@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/enrollment:  'Enrollment'
+    attributes:
+      omni/enrollment:
+        display:                        'Enrollment'
+        enrollment_id:                     'Enrollment'
+        account_id:                        'Account'
+        display:                           'Display'
+        school_year:                       'School Year'
+        grade_id:                          'Grade'
+        gender:                            'Gender'
+        enrollment:                        'Enrollment'
+        school_year_start_date:            'School Year Start Date'
+        school_year_end_date:              'School Year End Date'
+        is_destroyed:                      'Is Destroyed'

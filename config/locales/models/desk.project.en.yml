@@ -4,7 +4,7 @@ en:
       desk/project:  'Project'
     attributes:
       desk/project:
-        display_as:                        'Project'
+        display:                        'Project'
         project_id:                        'Project'
         project_nbr:                       'Project Nbr'
         project_type:                      'Project Type'

@@ -12,7 +12,7 @@ en:
         supplier_id:                     Supplier
         supplier_item_identifier:        Supplier Model
         description:                     Description
-        is_primary_supplier:             Primary Supplier
+        is_primary:             Primary Supplier
         is_manufacturer:                 Manufacturer
         is_discontinued:                 Discontinued
         supplier_cost_units:             Cost Per

@@ -17,15 +17,15 @@ class Desk::Project < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :project_id,                          :with => :guid
-  default :project_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"PROJECT_NBR"
+  default :project_id,                          with: :guid
+  default :project_nbr,                         override: false,        with: :sequence,         named: "PROJECT_NBR"
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :cases,                            :class_name => 'Desk::Case',                     :foreign_key => 'project_id'
-  has_many     :features,                         :class_name => 'Desk::Feature',                  :foreign_key => 'project_id'
-  has_many     :tasks,                            :as => :taskable
-  has_many     :approvals,                        :as => :approvable
+  has_many     :cases,                            class_name: 'Desk::Case',                     foreign_key: 'project_id'
+  has_many     :features,                         class_name: 'Desk::Feature',                  foreign_key: 'project_id'
+  has_many     :tasks,                            as: :taskable
+  has_many     :approvals,                        as: :approvable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -45,11 +45,11 @@ class Desk::Project < ActiveRecord::Base
     string   :display
     string   :description
 
-    text     :project_nbr_fulltext, :using => :project_nbr
-    text     :project_type_fulltext, :using => :project_type
-    text     :state_fulltext, :using => :state
-    text     :display_fulltext, :using => :display
-    text     :description_fulltext, :using => :description
+    text     :project_nbr_fulltext, using: :project_nbr
+    text     :project_type_fulltext, using: :project_type
+    text     :state_fulltext, using: :state
+    text     :display_fulltext, using: :display
+    text     :description_fulltext, using: :description
   end
   # INDEXING (End)
 
@@ -58,11 +58,11 @@ class Desk::Project < ActiveRecord::Base
   # ORDERING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
     # CALLBACKS ------------------
-    after_transition   :draft  => :active,  :do => :notify
-    after_transition   :active => :closed,  :do => :notify
+    after_transition   :draft  => :active,  do: :notify
+    after_transition   :active => :closed,  do: :notify
 
     # EVENTS ---------------------
     event :activate do

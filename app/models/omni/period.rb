@@ -5,27 +5,24 @@ class Omni::Period < ActiveRecord::Base
   self.primary_key  = :period_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
   # BEHAVIOR (End)
 
-
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :start_date,                      :presence    => true
-  validates    :end_date,                        :presence    => true
-  validates    :year_number,                     :presence    => true
-  validates    :period_number,                   :presence    => true
+  validates    :display,                         presence: true, uniqueness: true
+  validates    :period_id,                       presence: true, uniqueness: true
+  validates    :start_date,                      presence: true
+  validates    :end_date,                        presence: true
+  validates    :year_number,                     presence: true
+  # validates    :period_number,                   presence: true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  default      :period_id,                        :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.period_number} - #{m.year_number}"}
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :period_id,                        override: false,        with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "#{m.period_number} - #{m.year_number}"}
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -35,22 +32,12 @@ class Omni::Period < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :period_results,                  :class_name => 'Omni::PeriodResult',            :foreign_key => 'period_id'
+  has_many     :period_results,                  class_name: 'Omni::PeriodResult',            foreign_key: 'period_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   # MAPPED ATTRIBUTES (End)
-
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
 
   # SCOPES (Start) ======================================================================
   # SCOPES (End)
@@ -67,12 +54,9 @@ class Omni::Period < ActiveRecord::Base
     string   :year_number
     string   :period_number
 
-    text     :year_number_fulltext, :using => :year_number
-    text     :period_number_fulltext, :using => :period_number
+    text     :year_number_fulltext, using: :year_number
+    text     :period_number_fulltext, using: :period_number
   end
-  # INDEXING (End)
-
-
 
   # STATES (Start) ====================================================================
 

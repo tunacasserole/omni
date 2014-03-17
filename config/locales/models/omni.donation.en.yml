@@ -1,23 +1,13 @@
 en:
   activerecord:
     models:
-      omni/donation:  'Model'
+      omni/donation:  'Donation'
     attributes:
       omni/donation:
+        display:                        'Donation'
         donation_id:                       'Donation'
-        OwnerId:                           'Owner'
-        IsDeleted:                         'Is Deleted'
-        Name:                              'Name'
-        CreatedDate:                       'Created Date'
-        CreatedById:                       'Created By'
-        LastModifiedDate:                  'Last Modified Date'
-        LastModifiedById:                  'Last Modified By'
-        SystemModstamp:                    'System Modstamp'
-        LastActivityDate:                  'Last Activity Date'
-        Account__c:                        'Account  C'
-        Date__c:                           'Date  C'
-        Benefit__c:                        'Benefit  C'
-        No_of_Cards__c:                    'No Of Cards  C'
-        Amount__c:                         'Amount  C'
-        Recipient__c:                      'Recipient  C'
-        Note__c:                           'Note  C'
+        display:                           'Display'
+        account_id:                        'Account'
+        donation_date:                     'Donation Date'
+        donation_amount:                   'Donation Amount'
+        is_destroyed:                      'Is Destroyed'

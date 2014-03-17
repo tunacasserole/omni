@@ -1,17 +1,17 @@
 en:
   activerecord:
     models:
-      omni/customer_site: 'CustomerSite'
+      omni/customer_account: 'CustomerAccount'
     attributes:
-      omni/customer_site:
-        customer_site_id:                Person Site
+      omni/customer_account:
+        customer_account_id:                Person Account
         display:                         Name
         customer_display:                Customer
         customer_id:                     Person
-        site_display:                    Site
-        site_id:                         Site
+        account_display:                    Account
+        account_id:                         Account
         comment:                         Comment
-        is_site_contact:                 Site Contact
+        is_contact:                 Account Contact
         is_teacher:                      Teacher
         is_administrator:                Administrator
         is_destroyed:                    Deleted

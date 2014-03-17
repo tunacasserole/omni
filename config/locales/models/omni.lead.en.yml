@@ -23,7 +23,7 @@ en:
         mobile_phone:                      'Mobile Phone'
         fax:                               'Fax'
         email:                             'Email'
-        website:                           'Website'
+        webaccount:                           'Webaccount'
         description:                       'Description'
         lead_source:                       'Lead Source'
         state:                             'State'

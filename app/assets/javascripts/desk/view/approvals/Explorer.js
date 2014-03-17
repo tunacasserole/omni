@@ -19,9 +19,9 @@ Ext.define('Desk.view.approvals.Explorer', {
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================
-  approval_idLabel                       : Desk.i18n.model.Approval.approval_id,
+  approval_idLabel                        : Desk.i18n.model.Approval.approval_id,
   approval_nbrLabel                       : Desk.i18n.model.Approval.approval_nbr,
-  approval_typeLabel                      : Desk.i18n.model.Approval.approval_type,
+  approver_idLabel                        : Desk.i18n.model.Approval.approver_id,
   displayLabel                            : Desk.i18n.model.Approval.display,
   descriptionLabel                        : Desk.i18n.model.Approval.description,
   approval_dateLabel                      : Desk.i18n.model.Approval.approval_date,

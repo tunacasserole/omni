@@ -1,17 +1,10 @@
 class Omni::MarkOrderLine < ActiveRecord::Base
 
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
-  # METADATA (Start) ====================================================================
+# METADATA (Start) ====================================================================
   # self.establish_connection       Buildit::Util::Data::Connection.for 'mark'
   self.table_name                 = :orders_li
   self.primary_key                = :lineitemid
   # METADATA (End)
-
 
   # BEHAVIOR (Start) ====================================================================
   #supports_logical_delete
@@ -20,25 +13,23 @@ class Omni::MarkOrderLine < ActiveRecord::Base
   supports_fulltext
   # BEHAVIOR (End)
 
-
   # VALIDATIONS (Start) =================================================================
   # validates :id,                        :presence      => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  # default :id,                          :with => :guid
+  # default :id,                          with: :guid
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
-  # belongs_to   :mark_order,                    :class_name => 'Omni::MarkOrder',             :foreign_key => 'order_nbr'
+  # belongs_to   :mark_order,                    class_name: 'Omni::MarkOrder',             foreign_key: 'order_nbr'
   # ASSOCIATIONS (End)
 
 
   # mapped_attributes do
-    # map :outlet_nbr,                       :to => 'mark_order.outlet_nbr'
-    # map :date_putin,                        :to => 'mark_order.date_putin'
+    # map :outlet_nbr,                       to: 'mark_order.outlet_nbr'
+    # map :date_putin,                        to: 'mark_order.date_putin'
   # end
 
 
@@ -72,12 +63,9 @@ class Omni::MarkOrderLine < ActiveRecord::Base
   #   integer   :stock_nbr
   #   string   :size
 
-  #   text     :stock_nbr, :using => :stock_nbr
-  #   text     :size, :using => :size
+  #   text     :stock_nbr, using: :stock_nbr
+  #   text     :size, using: :size
   # end
-  # INDEXING (End)
-
-
   # HOOKS (Start) =======================================================================
 
   # HOOKS (End)

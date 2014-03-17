@@ -16,8 +16,8 @@ en:
         location_id:                     Location
         customer_display:                Customer
         customer_id:                     Customer
-        site_display:                    Site
-        site_id:                         Site
+        account_display:                    Account
+        account_id:                         Account
         request_price_book_display:      Request Price Book
         request_price_book_id:           Request Price Book
         price_date:                      Price Date

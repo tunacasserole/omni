@@ -9,18 +9,21 @@ class Omni::Transfer < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :requesting_location_id,          :presence    => true
-  validates    :fulfillment_location_id,         :presence    => true
-  validates    :sku_id,                          :presence    => true
-  validates    :transfer_reason_id,              :presence    => true
+  validates    :transfer_id,                     presence: true
+  validates    :transfer_nbr,                    presence: true, uniqueness: true
+  validates    :display,                         presence: true, uniqueness: true
+  validates    :requesting_location_id,          presence: true
+  validates    :fulfillment_location_id,         presence: true
+  validates    :sku_id,                          presence: true
+  validates    :transfer_reason_id,              presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :transfer_id,                      :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "From: #{m.fulfillment_location_display} - To: #{m.requesting_location_display} - Transfer: #{m.transfer_nbr}"}
-  default      :transfer_nbr,                     :override  =>  false,        :with  => :sequence,         :named=>"TRANSFER_NBR"
-  default      :request_units,                    :override  =>  false,        :to    => 0
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :transfer_id,                      override: false,        with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "From: #{m.fulfillment_location_display} - To: #{m.requesting_location_display} - Transfer: #{m.transfer_nbr}"}
+  default      :transfer_nbr,                     override: false,        with: :sequence,         named: "TRANSFER_NBR"
+  default      :request_units,                    override: false,        to: 0
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -32,25 +35,25 @@ class Omni::Transfer < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :requesting_location,             :class_name => 'Omni::Location',                :foreign_key => 'requesting_location_id'
-  belongs_to   :fulfillment_location,            :class_name => 'Omni::Location',                :foreign_key => 'fulfillment_location_id'
-  belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
-  belongs_to   :transfer_reason,                 :class_name => 'Omni::TransferReason',          :foreign_key => 'transfer_reason_id'
-  belongs_to   :request_user,                    :class_name => 'Buildit::User',                     :foreign_key => 'request_user_id'
-  belongs_to   :cancel_user,                     :class_name => 'Buildit::User',                     :foreign_key => 'cancel_user_id'
-  has_many     :notes,                           :class_name => 'Buildit::Note',                  :foreign_key => 'notable_id',       :as => :notable
-  has_one      :pick_ticket,                     :class_name => 'Omni::PickTicket',              :foreign_key => 'pickable_id',      :as => :pickable
-  has_one      :allocation_detail,              :class_name => 'Omni::AllocationDetail',        :foreign_key => 'transfer_id'
+  belongs_to   :requesting_location,             class_name: 'Omni::Location',                foreign_key: 'requesting_location_id'
+  belongs_to   :fulfillment_location,            class_name: 'Omni::Location',                foreign_key: 'fulfillment_location_id'
+  belongs_to   :sku,                             class_name: 'Omni::Sku',                     foreign_key: 'sku_id'
+  belongs_to   :transfer_reason,                 class_name: 'Omni::TransferReason',          foreign_key: 'transfer_reason_id'
+  belongs_to   :request_user,                    class_name: 'Buildit::User',                 foreign_key: 'request_user_id'
+  belongs_to   :cancel_user,                     class_name: 'Buildit::User',                 foreign_key: 'cancel_user_id'
+  has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
+  has_many     :picks,                           class_name: 'Omni::Pick',                    foreign_key: 'pickable_id',      as: :pickable
+  has_one      :allocation_detail,               class_name: 'Omni::AllocationDetail',        foreign_key: 'transfer_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :requesting_location_display,            :to => 'requesting_location.display'
-    map :fulfillment_location_display,           :to => 'fulfillment_location.display'
-    map :sku_display,                            :to => 'sku.display'
-    map :transfer_reason_display,                :to => 'transfer_reason.display'
-    map :request_user_display,                   :to => 'request_user.full_name'
-    map :cancel_user_display,                    :to => 'cancel_user.full_name'
+    map :requesting_location_display,            to: 'requesting_location.display'
+    map :fulfillment_location_display,           to: 'fulfillment_location.display'
+    map :sku_display,                            to: 'sku.display'
+    map :transfer_reason_display,                to: 'transfer_reason.display'
+    map :request_user_display,                   to: 'request_user.full_name'
+    map :cancel_user_display,                    to: 'cancel_user.full_name'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -84,27 +87,27 @@ class Omni::Transfer < ActiveRecord::Base
     date     :request_date
     string   :state
 
-    text     :state_fulltext, :using => :state
-    text     :transfer_nbr_fulltext, :using => :transfer_nbr
-    text     :requesting_location_display_fulltext, :using => :requesting_location_display
-    text     :fulfillment_location_display_fulltext, :using => :fulfillment_location_display
-    text     :sku_display_fulltext, :using => :sku_display
-    text     :transfer_reason_display_fulltext, :using => :transfer_reason_display
+    text     :state_fulltext, using: :state
+    text     :transfer_nbr_fulltext, using: :transfer_nbr
+    text     :requesting_location_display_fulltext, using: :requesting_location_display
+    text     :fulfillment_location_display_fulltext, using: :fulfillment_location_display
+    text     :sku_display_fulltext, using: :sku_display
+    text     :transfer_reason_display_fulltext, using: :transfer_reason_display
   end
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ### CALLBACKS ###
-    after_transition :on => :approve, :do => :after_approve
-    after_transition :on => :ship, :do => :after_ship
-    after_transition :on => :receive, :do => :after_receive
-    after_transition :on => :cancel, :do => :after_cancel
+    after_transition on: :approve, do: :after_approve
+    after_transition on: :ship, do: :after_ship
+    after_transition on: :cancel, do: :after_cancel
+    # after_transition on: :receive, do: :after_receive
 
   ### EVENTS ###
     event :approve do
-      transition :draft => :pending
+      transition draft: :pending
     end
     event :ship do
       transition :pending => :shipped
@@ -115,6 +118,18 @@ class Omni::Transfer < ActiveRecord::Base
     event :cancel do
       transition [:draft, :pending] => :cancelled
     end
+  end
+
+  def after_approve
+    self.picks.create
+  end
+
+  def after_ship
+    self.ship_date = Date.today
+  end
+  def after_cancel
+    self.cancel_date = Date.today
+    self.cancel_user_id = Buildit::User.current if Buildit::User.current
   end
   # STATES (End)
 

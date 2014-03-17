@@ -4,7 +4,7 @@ en:
       desk/checklist:  'Checklist'
     attributes:
       desk/checklist:
-        display_as:                        'Checklist'
+        display:                        'Checklist'
         checklist_id:                      'Checklist'
         checklist_nbr:                     'Checklist Nbr'
         checklist_type:                    'Checklist Type'

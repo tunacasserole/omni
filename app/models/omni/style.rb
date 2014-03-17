@@ -10,52 +10,52 @@ class Omni::Style < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :subclass_id,                     :presence    => true
-  validates    :size_group_id,                   :presence    => true
-  validates    :display,                         :uniqueness  => true
-  validates    :style_nbr,                       :uniqueness  => true,                         :allow_nil => true
-  # validates    :brand,                           :lookup      => 'BRAND',                      :allow_nil => true
-  # validates    :fabric_content,                  :lookup      => 'FABRIC_CONTENT',             :allow_nil => true
-  # validates    :conversion_type,                 :lookup      => 'CONVERSION_TYPE',            :allow_nil => true
-  validates    :replenishment_method,            :lookup      => 'REPLENISHMENT_METHOD',       :allow_nil => true
-  validates    :replenishment_source,            :lookup      => 'REPLENISHMENT_SOURCE',       :allow_nil => true
-  validates    :pack_type,                       :lookup      => 'PACK_TYPE',                  :allow_nil => true
-  validates    :sell_unit_uom_code,              :lookup      => 'SELL_UNIT_UOM_CODE',         :allow_nil => true
-  validates    :order_uom_code,                  :lookup      => 'ORDER_UOM_CODE',             :allow_nil => true
-  validates    :order_package_type,              :lookup      => 'ORDER_PACKAGE_TYPE',         :allow_nil => true
-  validates    :maintenance_level,               :lookup      => 'MAINTENANCE_LEVEL',          :allow_nil => true
-  validates    :sku_name_method,                 :lookup      => 'SKU_NAME_METHOD',            :allow_nil => true
+  validates    :display,                         presence: true
+  validates    :subclass_id,                     presence: true
+  validates    :size_group_id,                   presence: true
+  validates    :display,                         uniqueness: true
+  validates    :style_nbr,                       uniqueness: true,                         allow_nil: true
+  # validates    :brand,                           lookup: 'BRAND',                      allow_nil: true
+  # validates    :fabric_content,                  lookup: 'FABRIC_CONTENT',             allow_nil: true
+  # validates    :conversion_type,                 lookup: 'CONVERSION_TYPE',            allow_nil: true
+  validates    :replenishment_method,            lookup: 'REPLENISHMENT_METHOD',       allow_nil: true
+  validates    :replenishment_source,            lookup: 'REPLENISHMENT_SOURCE',       allow_nil: true
+  validates    :pack_type,                       lookup: 'PACK_TYPE',                  allow_nil: true
+  validates    :sell_unit_uom_code,              lookup: 'SELL_UNIT_UOM_CODE',         allow_nil: true
+  validates    :order_uom_code,                  lookup: 'ORDER_UOM_CODE',             allow_nil: true
+  validates    :order_package_type,              lookup: 'ORDER_PACKAGE_TYPE',         allow_nil: true
+  validates    :maintenance_level,               lookup: 'MAINTENANCE_LEVEL',          allow_nil: true
+  validates    :sku_name_method,                 lookup: 'SKU_NAME_METHOD',            allow_nil: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :style_id,                         :override  =>  false,        :with  => :guid
-  default      :style_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"STYLE_NBR"
-  default      :initial_retail_price,             :override  =>  false,        :to    => 0
-  default      :suggested_retail_price,           :override  =>  false,        :to    => 0
-  default      :planning_retail_price,            :override  =>  false,        :to    => 0
-  default      :maintenance_level,                :override  =>  false,        :to    => "BOTH"
-  default      :smoothing_factor,                 :override  =>  false,        :to    => 0
-  default      :garment_pieces,                   :override  =>  false,        :to    => 0
-  default      :minimum_on_hand_units,            :override  =>  false,        :to    => 0
-  default      :maximum_on_hand_units,            :override  =>  false,        :to    => 0
-  default      :sell_unit_length,                 :override  =>  false,        :to    => 0
-  default      :sell_unit_height,                 :override  =>  false,        :to    => 0
-  default      :sell_unit_width,                  :override  =>  false,        :to    => 0
-  default      :sell_unit_weight,                 :override  =>  false,        :to    => 0
-  default      :is_not_stocked,                   :override  =>  false,        :to    => false
-  default      :is_special_order,                 :override  =>  false,        :to    => false
-  default      :is_converted,                     :override  =>  false,        :to    => false
-  default      :is_convertible,                   :override  =>  false,        :to    => false
-  default      :is_converted_heatset,             :override  =>  false,        :to    => false
-  default      :is_converted_sewn,                :override  =>  false,        :to    => false
-  default      :is_alterable,                     :override  =>  false,        :to    => false
-  default      :is_usually_altered,               :override  =>  false,        :to    => false
-  default      :is_conveyable_sell_unit,          :override  =>  false,        :to    => true
-  default      :is_discountable,                  :override  =>  false,        :to    => true
-  default      :is_taxable,                       :override  =>  false,        :to    => true
-  default      :is_enabled,                       :override  =>  false,        :to    => false
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :style_id,                         override: false,        with: :guid
+  default      :style_nbr,                        override: false,        with: :sequence,         named: "STYLE_NBR"
+  default      :initial_retail_price,             override: false,        to: 0
+  default      :suggested_retail_price,           override: false,        to: 0
+  default      :planning_retail_price,            override: false,        to: 0
+  default      :maintenance_level,                override: false,        :to    => "BOTH"
+  default      :smoothing_factor,                 override: false,        to: 0
+  default      :garment_pieces,                   override: false,        to: 0
+  default      :minimum_on_hand_units,            override: false,        to: 0
+  default      :maximum_on_hand_units,            override: false,        to: 0
+  default      :sell_unit_length,                 override: false,        to: 0
+  default      :sell_unit_height,                 override: false,        to: 0
+  default      :sell_unit_width,                  override: false,        to: 0
+  default      :sell_unit_weight,                 override: false,        to: 0
+  default      :is_not_stocked,                   override: false,        to: false
+  default      :is_special_order,                 override: false,        to: false
+  default      :is_converted,                     override: false,        to: false
+  default      :is_convertible,                   override: false,        to: false
+  default      :is_converted_heatset,             override: false,        to: false
+  default      :is_converted_sewn,                override: false,        to: false
+  default      :is_alterable,                     override: false,        to: false
+  default      :is_usually_altered,               override: false,        to: false
+  default      :is_conveyable_sell_unit,          override: false,        :to    => true
+  default      :is_discountable,                  override: false,        :to    => true
+  default      :is_taxable,                       override: false,        :to    => true
+  default      :is_enabled,                       override: false,        to: false
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -67,36 +67,36 @@ class Omni::Style < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :subclass,                        :class_name => 'Omni::Subclass',                :foreign_key => 'subclass_id'
-  belongs_to   :product,                         :class_name => 'Omni::Product',                 :foreign_key => 'product_id'
-  belongs_to   :buyer_user,                      :class_name => 'Buildit::User',                 :foreign_key => 'buyer_user_id'
-  belongs_to   :product_type,                    :class_name => 'Omni::ProductType',             :foreign_key => 'product_type_id'
-  belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
-  belongs_to   :generic_style,                   :class_name => 'Omni::Style',                   :foreign_key => 'generic_style_id'
-  belongs_to   :add_on_sku,                      :class_name => 'Omni::Sku',                     :foreign_key => 'add_on_sku_id'
-  belongs_to   :site,                            :class_name => 'Omni::Site',                    :foreign_key => 'site_id'
-  belongs_to   :size_group,                      :class_name => 'Omni::SizeGroup',               :foreign_key => 'size_group_id'
+  belongs_to   :subclass,                        class_name: 'Omni::Subclass',                foreign_key: 'subclass_id'
+  belongs_to   :product,                         class_name: 'Omni::Product',                 foreign_key: 'product_id'
+  belongs_to   :buyer_user,                      class_name: 'Buildit::User',                 foreign_key: 'buyer_user_id'
+  belongs_to   :product_type,                    class_name: 'Omni::ProductType',             foreign_key: 'product_type_id'
+  belongs_to   :supplier,                        class_name: 'Omni::Supplier',                foreign_key: 'supplier_id'
+  belongs_to   :generic_style,                   class_name: 'Omni::Style',                   foreign_key: 'generic_style_id'
+  belongs_to   :add_on_sku,                      class_name: 'Omni::Sku',                     foreign_key: 'add_on_sku_id'
+  belongs_to   :account,                            class_name: 'Omni::Account',                    foreign_key: 'account_id'
+  belongs_to   :size_group,                      class_name: 'Omni::SizeGroup',               foreign_key: 'size_group_id'
 #
-  has_many     :style_suppliers,                 :class_name => 'Omni::StyleSupplier',           :foreign_key => 'style_id'
-  has_many     :style_locations,                 :class_name => 'Omni::StyleLocation',           :foreign_key => 'style_id'
-  has_many     :style_colors,                    :class_name => 'Omni::StyleColor',              :foreign_key => 'style_id'
+  has_many     :style_suppliers,                 class_name: 'Omni::StyleSupplier',           foreign_key: 'style_id'
+  has_many     :style_locations,                 class_name: 'Omni::StyleLocation',           foreign_key: 'style_id'
+  has_many     :style_colors,                    class_name: 'Omni::StyleColor',              foreign_key: 'style_id'
   has_many     :style_color_sizes,               class_name: 'Omni::StyleColorSize',             through: :style_colors
-  has_many     :skus,                            :class_name => 'Omni::Sku',                     :foreign_key => 'style_id'
+  has_many     :skus,                            class_name: 'Omni::Sku',                     foreign_key: 'style_id'
   has_many     :inventories,                     class_name: 'Omni::Inventory',                  through: :skus
-  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
+  has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :subclass_display,                       :to => 'subclass.display'
-    map :product_display,                        :to => 'product.display'
-    map :buyer_user_display,                     :to => 'buyer_user.full_name'
-    map :product_type_display,                   :to => 'product_type.display'
-    map :supplier_display,                       :to => 'supplier.display'
-    map :generic_style_display,                  :to => 'generic_style.display'
-    map :size_group_display,                     :to => 'size_group.display'
-    map :site_display,                           :to => 'site.display'
-    map :add_on_sku_display,                     :to => 'add_on_sku.display'
+    map :subclass_display,                       to: 'subclass.display'
+    map :product_display,                        to: 'product.display'
+    map :buyer_user_display,                     to: 'buyer_user.full_name'
+    map :product_type_display,                   to: 'product_type.display'
+    map :supplier_display,                       to: 'supplier.display'
+    map :generic_style_display,                  to: 'generic_style.display'
+    map :size_group_display,                     to: 'size_group.display'
+    map :account_display,                           to: 'account.display'
+    map :add_on_sku_display,                     to: 'add_on_sku.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -111,20 +111,20 @@ class Omni::Style < ActiveRecord::Base
   # HELPERS (End) =====================================================================
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ### CALLBACKS ###
-    after_transition :on => :release,        :do => :after_release
-    # after_transition :on => :locations,   :do => :after_locations
-    after_transition :on => :build_skus,  :do => :go_build_skus
-    after_transition :on => :discontinue, :do => :after_discontinue
-    after_transition :on => :drop,        :do => :after_drop
-    after_transition :on => :deactivate,  :do => :after_deactivate
-    after_transition :on => :activate,    :do => :after_activate
+    after_transition on: :release,        do: :after_release
+    # after_transition on: :locations,   do: :after_locations
+    after_transition on: :build_skus,  do: :go_build_skus
+    after_transition on: :discontinue, do: :after_discontinue
+    after_transition on: :drop,        do: :after_drop
+    after_transition on: :deactivate,  do: :after_deactivate
+    after_transition on: :activate,    do: :after_activate
 
     ## EVENTS ###
     event :release do
-      transition :draft => :pending_approval
+      transition draft: :pending_approval
     end
 
     event :approve do
@@ -152,14 +152,14 @@ class Omni::Style < ActiveRecord::Base
     end
 
     state :pending_approval do
-      validates :description,        :presence    => true
-      validates :concatenated_name,  :presence    => true
-      validates :pos_name,           :presence    => true
-      validates :brand,              :presence    => true
-      validates :generic_style_id,   :presence    => true,  if: 'is_converted?'
-      validates :site_id,            :presence    => true,  if: 'is_converted?'
-      # validates :add_on_sku_id,      :presence    => true,  if: 'is_converted?'
-      validates :conversion_type,    :presence    => true,  if: 'is_converted?'
+      validates :description,        presence: true
+      validates :concatenated_name,  presence: true
+      validates :pos_name,           presence: true
+      validates :brand,              presence: true
+      validates :generic_style_id,   presence: true,  if: 'is_converted?'
+      validates :account_id,            presence: true,  if: 'is_converted?'
+      # validates :add_on_sku_id,      presence: true,  if: 'is_converted?'
+      validates :conversion_type,    presence: true,  if: 'is_converted?'
       validates :initial_retail_price, :greater_than => 0
       validates :planning_retail_price, :greater_than => 0
       validate :conversion
@@ -254,7 +254,7 @@ class Omni::Style < ActiveRecord::Base
       # x.generic_sku_id = self.generic_sku_id
       x.add_on_sku_id = self.add_on_sku_id
       x.design_code = self.design_code
-      x.site_id = self.site_id
+      x.account_id = self.account_id
       x.conversion_type = self.conversion_type
       x.pack_type = self.pack_type
       x.replenishment_source = self.replenishment_source
@@ -340,7 +340,7 @@ class Omni::Style < ActiveRecord::Base
       x = Omni::SkuSupplier.where(sku_id: sku.sku_id, supplier_id: ss.supplier_id).first || Omni::SkuSupplier.new(sku_id: sku.sku_id, supplier_id: ss.supplier_id)
       x.sku_id = sku.sku_id
       x.supplier_id = ss.supplier_id
-      x.is_primary_supplier = ss.is_primary_supplier
+      x.is_primary = ss.is_primary
       x.is_manufacturer = ss.is_manufacturer
       x.is_discontinued = ss.is_discontinued
       x.supplier_cost_units = ss.supplier_cost_units
@@ -438,17 +438,14 @@ class Omni::Style < ActiveRecord::Base
     string   :state
     boolean   :is_converted
 
-    text     :conversion_type_fulltext,  :using => :conversion_type
-    text     :style_nbr_fulltext,  :using => :style_nbr
-    text     :display_fulltext,  :using => :display
+    text     :conversion_type_fulltext,  using: :conversion_type
+    text     :style_nbr_fulltext,  using: :style_nbr
+    text     :display_fulltext,  using: :display
     text     :subclass_display_fulltext do self.subclass.display end
     text     :supplier_display_fulltext do self.supplier.display end
     text     :classification_display_fulltext do self.subclass.classification.display if self.subclass && self.subclass.classification end
     text     :department_display_fulltext do self.subclass.classification.department.display if self.subclass && self.subclass.classification && self.subclass.classification.department end
   end
-  # INDEXING (End)
-
-
 end # class Omni::Style
 
 

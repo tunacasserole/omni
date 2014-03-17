@@ -18,7 +18,7 @@ development:
         user_name: aaron@buildit.io
         password:  CrossFit
         authentication: plain
-        enable_starttls_auto: true        
+        enable_starttls_auto: true
   inbound:
     accounts:
       bigdump:
@@ -39,7 +39,7 @@ production:
         user_name: aaron@buildit.io
         password:  CrossFit
         authentication: plain
-        enable_starttls_auto: true        
+        enable_starttls_auto: true
   inbound:
     accounts:
       bigdump:

@@ -9,24 +9,25 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  # validates    :stockable_type,                  :presence    => true
-  # validates    :stockable_id,                    :presence    => true
-  # validates    :ruleset_id,                      :presence    => true
-  # validates    :sku_id,                          :presence    => true
-  # validates    :location_id,                     :presence    => true
+  validates    :stock_ledger_activity_id,        presence: true, uniqueness: true
+  validates    :display,                         presence: true, uniqueness: true
+  validates    :stockable_type,                  presence: true
+  validates    :stockable_id,                    presence: true
+  validates    :ruleset_id,                      presence: true
+  validates    :sku_id,                          presence: true
+  validates    :location_id,                     presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :stock_ledger_activity_id,         :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.activity_date}"}
-  default      :units,                            :override  =>  false,        :to    => 0
-  default      :cost,                             :override  =>  false,        :to    => 0
-  default      :retail,                           :override  =>  false,        :to    => 0
-  # default      :create_date,                      :override  =>  false,        :to    =>
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
-  # default      :stockable_id,                     :override  =>  false,        :to    => :sku_id
-  # default      :stockable_type,                   :override  =>  false,        :to    => "Omni::StockLedgerActivty"
+  default      :stock_ledger_activity_id,         override: false,        with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.activity_date}"}
+  default      :units,                            override: false,        to: 0
+  default      :cost,                             override: false,        to: 0
+  default      :retail,                           override: false,        to: 0
+  # default      :create_date,                      override: false,        :to    =>
+  default      :is_destroyed,                     override: false,        to: false
+  # default      :stockable_id,                     override: false,        :to    => :sku_id
+  # default      :stockable_type,                   override: false,        :to    => "Omni::StockLedgerActivty"
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -39,25 +40,25 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :stockable,                :polymorphic => true
-  belongs_to   :stockable,                       :class_name => 'Omni::PickTicket',              :foreign_key => 'stockable_id'
-  belongs_to   :ruleset,                         :class_name => 'Omni::Ruleset',                 :foreign_key => 'ruleset_id'
-  belongs_to   :sku,                             :class_name => 'Omni::Sku',                     :foreign_key => 'sku_id'
-  belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
-  belongs_to   :supplier,                        :class_name => 'Omni::Supplier',                :foreign_key => 'supplier_id'
-  belongs_to   :customer,                        :class_name => 'Omni::Customer',                :foreign_key => 'customer_id'
-  belongs_to   :site,                            :class_name => 'Omni::Site',                    :foreign_key => 'site_id'
-  belongs_to   :stockable,                       :class_name => 'Omni::WorkOrder',               :foreign_key => 'stockable_id'
-  has_many     :stock_ledger_activity_logs,      :class_name => 'Omni::StockLedgerActivityLog',  :foreign_key => 'stock_ledger_activity_id'
+  belongs_to   :stockable,                       class_name: 'Omni::Pick',              foreign_key: 'stockable_id'
+  belongs_to   :ruleset,                         class_name: 'Omni::Ruleset',                 foreign_key: 'ruleset_id'
+  belongs_to   :sku,                             class_name: 'Omni::Sku',                     foreign_key: 'sku_id'
+  belongs_to   :location,                        class_name: 'Omni::Location',                foreign_key: 'location_id'
+  belongs_to   :supplier,                        class_name: 'Omni::Supplier',                foreign_key: 'supplier_id'
+  belongs_to   :customer,                        class_name: 'Omni::Customer',                foreign_key: 'customer_id'
+  belongs_to   :account,                            class_name: 'Omni::Account',                    foreign_key: 'account_id'
+  belongs_to   :stockable,                       class_name: 'Omni::Job',               foreign_key: 'stockable_id'
+  has_many     :stock_ledger_activity_logs,      class_name: 'Omni::StockLedgerActivityLog',  foreign_key: 'stock_ledger_activity_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :ruleset_display,                        :to => 'ruleset.display'
-    map :sku_display,                            :to => 'sku.display'
-    map :location_display,                       :to => 'location.display'
-    map :supplier_display,                       :to => 'supplier.display'
-    map :customer_display,                       :to => 'customer.display'
-    map :site_display,                           :to => 'site.display'
+    map :ruleset_display,                        to: 'ruleset.display'
+    map :sku_display,                            to: 'sku.display'
+    map :location_display,                       to: 'location.display'
+    map :supplier_display,                       to: 'supplier.display'
+    map :customer_display,                       to: 'customer.display'
+    map :account_display,                           to: 'account.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -115,7 +116,7 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
     string   :ruleset_display do ruleset.display if ruleset end
     string   :supplier_display do supplier.display if supplier end
     string   :customer_display do customer.display if customer end
-    string   :site_display do site.display if site end
+    string   :account_display do account.display if account end
     integer  :units
     integer  :cost
     integer  :retail
@@ -123,17 +124,14 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
     string   :stockable_id
     string   :stockable_type
 
-    text     :ruleset_display_fulltext, :using => :ruleset_display
-    text     :supplier_display_fulltext, :using => :supplier_display
-    text     :customer_display_fulltext, :using => :customer_display
-    text     :site_display_fulltext, :using => :site_display
-    text     :units_fulltext, :using => :units
-    text     :cost_fulltext, :using => :cost
-    text     :retail_fulltext, :using => :retail
+    text     :ruleset_display_fulltext, using: :ruleset_display
+    text     :supplier_display_fulltext, using: :supplier_display
+    text     :customer_display_fulltext, using: :customer_display
+    text     :account_display_fulltext, using: :account_display
+    text     :units_fulltext, using: :units
+    text     :cost_fulltext, using: :cost
+    text     :retail_fulltext, using: :retail
   end
-  # INDEXING (End)
-
-
 
 end # class Omni::StockLedgerActivity
 

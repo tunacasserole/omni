@@ -10,25 +10,27 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates :receipt_purchase_id,           :presence      => true
+  validates :receipt_purchase_id,           presence: true, uniqueness: true
+  validates :receipt_id,                    presence: true
+  validates :purchase_id,                   presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :receipt_purchase_id,              :with => :guid
-  default :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.receipt_display} - Purchase: #{m.purchase_display}"}
+  default :receipt_purchase_id,              with: :guid
+  default :display,                          override: false,        to: lambda{|m| "#{m.receipt_display} - Purchase: #{m.purchase_display}"}
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :receipt,                         :class_name => 'Omni::Receipt',               :foreign_key => 'receipt_id'
-  belongs_to   :purchase,                        :class_name => 'Omni::Purchase',               :foreign_key => 'purchase_id'
-  has_many     :receipt_details,                 :class_name => 'Omni::ReceiptDetail',           :foreign_key => 'receipt_id'
+  belongs_to   :receipt,                         class_name: 'Omni::Receipt',               foreign_key: 'receipt_id'
+  belongs_to   :purchase,                        class_name: 'Omni::Purchase',               foreign_key: 'purchase_id'
+  has_many     :receipt_details,                 class_name: 'Omni::ReceiptDetail',           foreign_key: 'receipt_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :receipt_display,                 :to => 'receipt.display'
-    map :purchase_display,                :to => 'purchase.display'
-    map :receipt_state,                   :to => 'receipt.state'
+    map :receipt_display,                 to: 'receipt.display'
+    map :purchase_display,                to: 'purchase.display'
+    map :receipt_state,                   to: 'receipt.state'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -109,7 +111,7 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
     string   :purchase_id
     string   :receipt_id
 
-    text     :display_fulltext,            :using => :display
+    text     :display_fulltext,            using: :display
   end
   # INDEXING (End)
 end # class Omni::ReceiptPurchase

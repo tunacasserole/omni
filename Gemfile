@@ -24,7 +24,7 @@ end
 
 #gem 'extjs4-rails',   :path => 'vendor/gems/extjs4-rails'
 
-gem 'buildit'#, '0.9.27'#,      :path => 'vendor/gems/buildit'
+gem 'buildit', '0.9.41'#,      :path => 'vendor/gems/buildit'
 gem 'buildit_sockets' #, '0.9.27'#,      :path => 'vendor/gems/buildit'
 
 # gem 'buildit_comm'
@@ -50,14 +50,16 @@ gem 'roo'
 
 gem 'seed_dump'
 
-
 # testing gems
+gem 'parallel_tests'
 gem 'rspec-rails', group: [:development, :test] # - RSpec is a replacement for Test::MiniTest. I cannot recommend highly enough RSpec. rspec-rails provides Rails integration for RSpec.
 
 group :test do
+  gem 'zeus'
   gem 'factory_girl_rails' # - an alternative to fabrication. Nice and mature fixture replacement. Spiritual ancestor of fabrication.
   gem 'guard-rspec' # - fantastic gem that monitors file changes and invokes tasks based on them. Loaded with lots of useful extension. Far superior to autotest and watchr.
   gem 'rb-fsevent'
+  # gem 'zeus-parallel_tests'
 end
 # gem 'xlsx'
 # gem 'thin'

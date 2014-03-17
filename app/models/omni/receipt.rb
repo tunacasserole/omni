@@ -12,23 +12,22 @@ class Omni::Receipt < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  # validates    :display,                         :uniqueness  => true
-  validates    :freight_terms,                   :lookup      => 'FREIGHT_TERMS',              :allow_nil => true
+  # validates    :display,                         uniqueness: true
+  validates    :freight_terms,                   lookup: 'FREIGHT_TERMS',              allow_nil: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :receipt_id,                                                       :with => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.location_display} - Receipt: #{m.create_date}"}
-  default      :receipt_nbr,                      :override  =>  false,        :with  => :sequence,         :named=>"RECEIPT_NBR"
+  default      :receipt_id,                                                       with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "#{m.location_display} - Receipt: #{m.create_date}"}
+  default      :receipt_nbr,                      override: false,        with: :sequence,         named: "RECEIPT_NBR"
 
   default      :create_date,                                                   :with  => :now
-  default      :carrier_supplier_id,                                            :to    => lambda{|m| }
+  default      :carrier_supplier_id,                                            to: lambda{|m| }
 
-  default      :appointment_duration,             :override  =>  false,        :to    => 0
-  default      :is_expected_asn,                  :override  =>  false,        :to    => false
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :appointment_duration,             override: false,        to: 0
+  default      :is_expected_asn,                  override: false,        to: false
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -38,28 +37,26 @@ class Omni::Receipt < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
-  belongs_to   :carrier_supplier,                :class_name => 'Omni::Supplier',                :foreign_key => 'carrier_supplier_id'
-  belongs_to   :accepted_by_user,                :class_name => 'Buildit::User',                 :foreign_key => 'accepted_by_user_id'
-  belongs_to   :completed_by_user,               :class_name => 'Buildit::User',                 :foreign_key => 'completed_by_user_id'
-  belongs_to   :allocation_profile,              :class_name => 'Omni::AllocationProfile',       :foreign_key => 'allocation_profile_id'
-  has_many     :attachments,                     :class_name => 'Buildit::Attachment',           :foreign_key => 'attachable_id' , :as => :attachable
-  has_many     :receipt_details,                 :class_name => 'Omni::ReceiptDetail',           :foreign_key => 'receipt_id'
-  has_many     :receipt_purchases,               :class_name => 'Omni::ReceiptPurchase',         :foreign_key => 'receipt_id'
-  # has_many     :purchases,                       :class_name => 'Omni::Purchase',                :through => :receipt_purchases
+  belongs_to   :location,                        class_name: 'Omni::Location',                foreign_key: 'location_id'
+  belongs_to   :carrier_supplier,                class_name: 'Omni::Supplier',                foreign_key: 'carrier_supplier_id'
+  belongs_to   :accepted_by_user,                class_name: 'Buildit::User',                 foreign_key: 'accepted_by_user_id'
+  belongs_to   :completed_by_user,               class_name: 'Buildit::User',                 foreign_key: 'completed_by_user_id'
+  belongs_to   :allocation_profile,              class_name: 'Omni::AllocationProfile',       foreign_key: 'allocation_profile_id'
+  has_many     :attachments,                     class_name: 'Buildit::Attachment',           foreign_key: 'attachable_id' , as: :attachable
+  has_many     :receipt_details,                 class_name: 'Omni::ReceiptDetail',           foreign_key: 'receipt_id'
+  has_many     :receipt_purchases,               class_name: 'Omni::ReceiptPurchase',         foreign_key: 'receipt_id'
+  # has_many     :purchases,                       class_name: 'Omni::Purchase',                :through => :receipt_purchases
 
   # ASSOCIATIONS (End)
 
-
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :location_display,                       :to => 'location.display'
-    map :carrier_supplier_display,               :to => 'carrier_supplier.display'
-    map :accepted_by_user_display,               :to => 'accepted_by_user.full_name'
-    map :completed_by_user_display,              :to => 'completed_by_user.full_name'
-    map :allocation_profile_display,             :to => 'allocation_profile.display'
+    map :location_display,                       to: 'location.display'
+    map :carrier_supplier_display,               to: 'carrier_supplier.display'
+    map :accepted_by_user_display,               to: 'accepted_by_user.full_name'
+    map :completed_by_user_display,              to: 'completed_by_user.full_name'
+    map :allocation_profile_display,             to: 'allocation_profile.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -86,7 +83,7 @@ class Omni::Receipt < ActiveRecord::Base
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ### STATES ###
     state :draft do; end
@@ -134,13 +131,13 @@ class Omni::Receipt < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    after_transition :on => :start, :do => :do_start
-    after_transition :on => :receipt, :do => :do_receive
-    after_transition :on => :accept, :do => :do_accept
-    after_transition :on => :complete, :do => :do_complete
-    after_transition :on => :print, :do => :print_count_sheet
-    after_transition :on => :upload, :do => :upload_packing_list
-    after_transition :on => :copy_units, :do => :do_copy_units
+    after_transition on: :start, do: :do_start
+    after_transition on: :receipt, do: :do_receive
+    after_transition on: :accept, do: :do_accept
+    after_transition on: :complete, do: :do_complete
+    after_transition on: :print, do: :print_count_sheet
+    after_transition on: :upload, do: :upload_packing_list
+    after_transition on: :copy_units, do: :do_copy_units
 
   end
   # STATES (End)
@@ -239,7 +236,7 @@ class Omni::Receipt < ActiveRecord::Base
       location_id: self.location_id,
       # supplier_id: self.purchase_detail.purchase.supplier_id,
       # customer_id: nil,
-      # site_id: nil,
+      # account_id: nil,
       # units: units,
       # cost: units * (self.purchase_detail.supplier_cost / self.purchase_detail.order_cost_units),
       # retail: units * retail,
@@ -258,14 +255,11 @@ class Omni::Receipt < ActiveRecord::Base
     string   :display
     string   :state
 
-    text     :receipt_nbr_fulltext, :using => :receipt_nbr
-    text     :location_display_fulltext, :using => :location_display
-    text     :carrier_supplier_display_fulltext, :using => :carrier_supplier_display
-    text     :state_fulltext, :using => :state
+    text     :receipt_nbr_fulltext, using: :receipt_nbr
+    text     :location_display_fulltext, using: :location_display
+    text     :carrier_supplier_display_fulltext, using: :carrier_supplier_display
+    text     :state_fulltext, using: :state
   end
-  # INDEXING (End)
-
-
 
 end # class Omni::Receipt
 

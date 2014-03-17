@@ -1,38 +1,24 @@
 class Omni::LocationTaxAuthority < ActiveRecord::Base
-
-  # MIXINS (Start) ======================================================================
-
-  # MIXINS (End)
-
-
   # METADATA (Start) ====================================================================
   self.table_name   = :location_tax_authorities
   self.primary_key  = :location_tax_authority_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  # supports_logical_delete
-  # supports_audit
-  # supports_revisioning
   supports_fulltext
-
   # BEHAVIOR (End)
 
-
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :location_id,                     :presence    => true
-  validates    :tax_authority_id,                :presence    => true
+  validates    :display,                   presence: true, uniqueness: true
+  validates    :location_id,               presence: true
+  validates    :tax_authority_id,          presence: true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  default      :location_tax_authority_id,        :override  =>  false,        :with  => :guid              
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.location_display} - #{m.tax_authority_display}"}
-  default      :is_destroyed,                     :override  =>  false,        :to    => false              
+  default      :location_tax_authority_id,        override: false,        with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "#{m.location_display} - #{m.tax_authority_display}"}
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
-
 
   # REFERENCE (Start) ===================================================================
   reference do
@@ -42,36 +28,20 @@ class Omni::LocationTaxAuthority < ActiveRecord::Base
   end
   # REFERENCE (End)
 
-
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :location,                        :class_name => 'Omni::Location',                :foreign_key => 'location_id'
-  belongs_to   :tax_authority,                   :class_name => 'Omni::TaxAuthority',            :foreign_key => 'tax_authority_id'
+  belongs_to   :location,                        class_name: 'Omni::Location',                foreign_key: 'location_id'
+  belongs_to   :tax_authority,                   class_name: 'Omni::TaxAuthority',            foreign_key: 'tax_authority_id'
   # ASSOCIATIONS (End)
-
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :location_display,                       :to => 'location.display'
-    map :tax_authority_display,                  :to => 'tax_authority.display'
+    map :location_display,                       to: 'location.display'
+    map :tax_authority_display,                  to: 'tax_authority.display'
   end
   # MAPPED ATTRIBUTES (End)
 
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
-
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
-
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -80,14 +50,11 @@ class Omni::LocationTaxAuthority < ActiveRecord::Base
     string   :tax_authority_id
     string   :location_display do location.display if location end
     string   :tax_authority_display do tax_authority.display if tax_authority end
- 
+
     # Partial match (contains) attributes
-    text     :location_display_fulltext, :using => :location_display
-    text     :tax_authority_display_fulltext, :using => :tax_authority_display
-  end 
-  # INDEXING (End)
-
-
+    text     :location_display_fulltext, using: :location_display
+    text     :tax_authority_display_fulltext, using: :tax_authority_display
+  end
 
   # STATES (Start) ====================================================================
 

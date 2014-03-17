@@ -6,38 +6,32 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
   self.primary_key                = :purchase_allocation_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
-  #supports_logical_delete
-  #supports_audit
-  #supports_revisioning
   supports_fulltext
   # BEHAVIOR (End)
-
 
   # VALIDATIONS (Start) =================================================================
   validates :purchase_allocation_id,                        :presence      => true
   # VALIDATIONS (End)
 
-
   # DEFAULTS (Start) ====================================================================
-  default :purchase_allocation_id,                                              :with => :guid
-  default :purchase_allocation_nbr,                :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_ALLOCATION_NBR"
-  default :units_needed,                           :override  =>  false,        :to   => 0
-  default :units_allocated,                        :override  =>  false,        :to   => 0
-  default :units_shipped,                          :override  =>  false,        :to   => 0
+  default :purchase_allocation_id,                                              with: :guid
+  default :purchase_allocation_nbr,                override: false,        :with => :sequence,  named: "PURCHASE_ALLOCATION_NBR"
+  default :units_needed,                           override: false,        to: 0
+  default :units_allocated,                        override: false,        to: 0
+  default :units_shipped,                          override: false,        to: 0
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :purchase_detail,            :class_name => 'Omni::PurchaseDetail',            :foreign_key => 'purchase_detail_id'
-  belongs_to   :allocation,                 :class_name => 'Omni::Allocation',          :foreign_key => 'allocation_id'
-  belongs_to   :location,                   :class_name => 'Omni::Location',               :foreign_key => 'location_id'
+  belongs_to   :purchase_detail,            class_name: 'Omni::PurchaseDetail',            foreign_key: 'purchase_detail_id'
+  belongs_to   :allocation,                 class_name: 'Omni::Allocation',          foreign_key: 'allocation_id'
+  belongs_to   :location,                   class_name: 'Omni::Location',               foreign_key: 'location_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :location_display,                       :to => 'location.display'
+    map :location_display,                       to: 'location.display'
   end
 
   # MAPPED ATTRIBUTES (End)
@@ -54,13 +48,10 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
     string   :location_display
     string   :location_id
 
-    text     :display_fulltext,            :using => :display
-    text     :state_fulltext,              :using => :state
-    text     :location_display_fulltext,        :using => :location_display
+    text     :display_fulltext,            using: :display
+    text     :state_fulltext,              using: :state
+    text     :location_display_fulltext,        using: :location_display
   end
-
-  # INDEXING (End)
-
 
   # HOOKS (Start) =======================================================================
   hook :before_destroy, :cascading_delete,  10
@@ -79,7 +70,7 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
   StateMachine::Machine.ignore_method_conflicts = true
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ## STATES ###
     state :draft do
@@ -87,7 +78,7 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
 
   ## CALLBACKS ###
     event :lock do
-      transition :draft => :locked
+      transition draft: :locked
     end
 
     event :unlock do

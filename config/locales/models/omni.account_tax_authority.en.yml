@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      omni/account_tax_authority:  'AccountTaxAuthority'
+    attributes:
+      omni/account_tax_authority:
+        display:                        'AccountTaxAuthority'
+        account_tax_authority_id:          'Account Tax Authority'
+        display:                           'Display'
+        account_id:                        'Account'
+        tax_authority_id:                  'Tax Authority'
+        is_destroyed:                      'Is Destroyed'

@@ -13,7 +13,7 @@ en:
         top_name:                          'Top Name'
         feedback_message:                  'Feedback Message'
         return_policy:                     'Return Policy'
-        website_message:                   'Website Message'
+        webaccount_message:                   'Webaccount Message'
         promotional_message:               'Promotional Message'
         message_separator:                 'Message Separator'
         is_date_in_header:                 'Is Date In Header'

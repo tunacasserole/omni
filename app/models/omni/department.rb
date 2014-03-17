@@ -14,9 +14,9 @@ class Omni::Department < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :department_id,                    :override  =>  false,        :with  => :guid
-  default      :department_nbr,                   :override  =>  false,        :with  => :sequence,         :named=>"DEPARTMENT_NBR"
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :department_id,                    override: false,        with: :guid
+  default      :department_nbr,                   override: false,        with: :sequence,         named: "DEPARTMENT_NBR"
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -28,25 +28,18 @@ class Omni::Department < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :buyer_user,                      :class_name => 'Buildit::User',                 :foreign_key => 'buyer_user_id'
-  belongs_to   :company,                         :class_name => 'Omni::Company',                 :foreign_key => 'company_id'
-  has_many     :notes,                           :class_name => 'Buildit::Note',                 :foreign_key => 'notable_id',       :as => :notable
-  has_many     :classifications,                 :class_name => 'Omni::Classification',          :foreign_key => 'department_id'
+  belongs_to   :buyer_user,                      class_name: 'Buildit::User',                 foreign_key: 'buyer_user_id'
+  belongs_to   :company,                         class_name: 'Omni::Company',                 foreign_key: 'company_id'
+  has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
+  has_many     :classifications,                 class_name: 'Omni::Classification',          foreign_key: 'department_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :buyer_user_display,                     :to => 'buyer_user.full_name'
-    map :company_display,                        :to => 'company.display'
+    map :buyer_user_display,                     to: 'buyer_user.full_name'
+    map :company_display,                        to: 'company.display'
   end
   # MAPPED ATTRIBUTES (End)
-
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
 
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
@@ -69,14 +62,11 @@ class Omni::Department < ActiveRecord::Base
     string   :buyer_user_display do buyer_user.full_name if buyer_user end
     string   :company_display do company.display if company end
 
-    text     :display_fulltext, :using => :display
-    text     :department_nbr_fulltext, :using => :department_nbr
-    text     :buyer_user_display_fulltext, :using => :buyer_user_display
-    text     :company_display_fulltext, :using => :company_display
+    text     :display_fulltext, using: :display
+    text     :department_nbr_fulltext, using: :department_nbr
+    text     :buyer_user_display_fulltext, using: :buyer_user_display
+    text     :company_display_fulltext, using: :company_display
   end
-  # INDEXING (End)
-
-
   # HELPERS (Start) =======================================================================
   def skus
     skus = []

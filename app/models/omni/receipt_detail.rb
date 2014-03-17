@@ -9,16 +9,16 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         :presence    => true
-  validates    :receipt_pack_type,               :lookup      => 'PACK_TYPE',       :allow_nil => true
+  validates    :display,                         presence: true
+  validates    :receipt_pack_type,               lookup: 'PACK_TYPE',       allow_nil: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :receipt_detail_id,                :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{m.receipt_display} - #{m.purchase_detail_display}"}
-  default      :receipt_line_nbr,                 :override  =>  false,        :with  => :sequence,         :named=>"RECEIPT_LINE_NBR"
-  default      :received_units,                   :override  =>  false,        :to    => 0
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :receipt_detail_id,                override: false,        with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "#{m.receipt_display} - #{m.purchase_detail_display}"}
+  default      :receipt_line_nbr,                 override: false,        with: :sequence,         named: "RECEIPT_LINE_NBR"
+  default      :received_units,                   override: false,        to: 0
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -30,20 +30,20 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :receipt_allocations,             :class_name => 'Omni::ReceiptAllocation',   :foreign_key => 'receipt_detail_id'
-  belongs_to   :sku,                             :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
-  belongs_to   :receipt,                         :class_name => 'Omni::Receipt',             :foreign_key => 'receipt_id'
-  belongs_to   :purchase,                        :class_name => 'Omni::Purchase',            :foreign_key => 'purchase_id'
-  belongs_to   :purchase_detail,                 :class_name => 'Omni::PurchaseDetail',      :foreign_key => 'purchase_detail_id'
-  belongs_to   :allocation_profile,              :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
+  has_many     :receipt_allocations,             class_name: 'Omni::ReceiptAllocation',   foreign_key: 'receipt_detail_id'
+  belongs_to   :sku,                             class_name: 'Omni::Sku',                 foreign_key: 'sku_id'
+  belongs_to   :receipt,                         class_name: 'Omni::Receipt',             foreign_key: 'receipt_id'
+  belongs_to   :purchase,                        class_name: 'Omni::Purchase',            foreign_key: 'purchase_id'
+  belongs_to   :purchase_detail,                 class_name: 'Omni::PurchaseDetail',      foreign_key: 'purchase_detail_id'
+  belongs_to   :allocation_profile,              class_name: 'Omni::AllocationProfile',   foreign_key: 'allocation_profile_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :receipt_display,                        :to => 'receipt.display'
-    map :allocation_profile_display,             :to => 'allocation_profile.display'
-    map :sku_display,                            :to => 'sku.display'
-    map :purchase_detail_display,                :to => 'purchase_detail.display'
+    map :receipt_display,                        to: 'receipt.display'
+    map :allocation_profile_display,             to: 'allocation_profile.display'
+    map :sku_display,                            to: 'sku.display'
+    map :purchase_detail_display,                to: 'purchase_detail.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -62,7 +62,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ## STATES ###
     state :draft do
@@ -70,13 +70,13 @@ class Omni::ReceiptDetail < ActiveRecord::Base
     end
 
   ## CALLBACKS ###
-    after_transition :on => :complete, :do => :do_complete
-    after_transition :on => :allocate, :do => :do_allocate
-    after_transition :on => :release, :do => :do_release
+    after_transition on: :complete, do: :do_complete
+    after_transition on: :allocate, do: :do_allocate
+    after_transition on: :release, do: :do_release
 
   ## EVENTS ###
     event :complete do
-      transition :draft => :complete
+      transition draft: :complete
     end
 
     event :allocate do
@@ -84,7 +84,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
     end
 
     event :hold do
-      transition :draft => :hold
+      transition draft: :hold
     end
 
     event :release do
@@ -150,7 +150,7 @@ class Omni::ReceiptDetail < ActiveRecord::Base
       location_id: self.receipt.location_id,
       supplier_id: self.purchase_detail.purchase.supplier_id,
       customer_id: nil,
-      site_id: nil,
+      account_id: nil,
       units: units,
       cost: units * (self.purchase_detail.supplier_cost / self.purchase_detail.order_cost_units),
       retail: units * retail,
@@ -169,10 +169,10 @@ class Omni::ReceiptDetail < ActiveRecord::Base
     string   :state
     string   :receipt_id
 
-    text     :receipt_display_fulltext, :using => :receipt_display
-    text     :purchase_detail_display_fulltext, :using => :purchase_detail_display
-    text     :received_units_fulltext, :using => :received_units
-    text     :state_fulltext, :using => :state
+    text     :receipt_display_fulltext, using: :receipt_display
+    text     :purchase_detail_display_fulltext, using: :purchase_detail_display
+    text     :received_units_fulltext, using: :received_units
+    text     :state_fulltext, using: :state
   end
   # INDEXING (End)
 

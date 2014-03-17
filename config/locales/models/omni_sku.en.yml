@@ -20,8 +20,8 @@ en:
         generic_sku_id:                  Generic SKU
         add_on_sku_display:              Add On Sku
         add_on_sku_id:                   Add On SKU
-        site_display:                    Site
-        site_id:                         School
+        account_display:                    Account
+        account_id:                         School
         conversion_type:                 Conversion Type
         style_color_size_display:        Style Color Size
         style_color_size_id:             Style Color Size

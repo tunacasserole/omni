@@ -19,35 +19,35 @@ class Omni::Allocation < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :allocation_id,                          :with => :guid
-  default :allocation_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"ALLOCATION_NBR"
-  default :display,                                :override  =>  false,        :to   => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.state}"}
-  default :units_to_allocate,                      :override  =>  false,        :to    => 0
-  default :is_destroyed,                           :override  =>  false,        :to    => false
+  default :allocation_id,                          with: :guid
+  default :allocation_nbr,                         override: false,        with: :sequence,         named: "ALLOCATION_NBR"
+  default :display,                                override: false,        :to   => lambda{|m| "#{m.sku_display} - #{m.location_display} - #{m.state}"}
+  default :units_to_allocate,                      override: false,        to: 0
+  default :is_destroyed,                           override: false,        to: false
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :allocation_details,     :class_name => 'Omni::AllocationDetail',    :foreign_key => 'allocation_id'
-  belongs_to   :inventory,              :class_name => 'Omni::Inventory',         :foreign_key => 'inventory_id'
-  belongs_to   :sku,                    :class_name => 'Omni::Sku',                 :foreign_key => 'sku_id'
-  belongs_to   :location,               :class_name => 'Omni::Location',               :foreign_key => 'location_id'
-  belongs_to   :allocation_profile,     :class_name => 'Omni::AllocationProfile',   :foreign_key => 'allocation_profile_id'
+  has_many     :allocation_details,     class_name: 'Omni::AllocationDetail',    foreign_key: 'allocation_id'
+  belongs_to   :inventory,              class_name: 'Omni::Inventory',         foreign_key: 'inventory_id'
+  belongs_to   :sku,                    class_name: 'Omni::Sku',                 foreign_key: 'sku_id'
+  belongs_to   :location,               class_name: 'Omni::Location',               foreign_key: 'location_id'
+  belongs_to   :allocation_profile,     class_name: 'Omni::AllocationProfile',   foreign_key: 'allocation_profile_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :sku_display,                       :to => 'sku.display'
-    map :location_display,                  :to => 'location.display'
-    map :allocation_profile_display,        :to => 'allocation_profile.display'
-    map :on_hand_units,                     :to => 'inventory.on_hand_units'
-    map :in_transit_units,                  :to => 'inventory.in_transit_units'
-    map :non_sellable_units,                     :to => 'inventory.non_sellable_units'
-    map :allocated_units,                     :to => 'inventory.allocated_units'
-    map :reserved_units,                     :to => 'inventory.reserved_units'
-    map :shipping_units,                     :to => 'inventory.shipping_units'
-    map :work_in_process_units,                     :to => 'inventory.work_in_process_units'
-    map :supplier_on_order_units,                     :to => 'inventory.supplier_on_order_units'
-    map :warehouse_on_order_units,                     :to => 'inventory.warehouse_on_order_units'
+    map :sku_display,                       to: 'sku.display'
+    map :location_display,                  to: 'location.display'
+    map :allocation_profile_display,        to: 'allocation_profile.display'
+    map :on_hand_units,                     to: 'inventory.on_hand_units'
+    map :in_transit_units,                  to: 'inventory.in_transit_units'
+    map :non_sellable_units,                     to: 'inventory.non_sellable_units'
+    map :allocated_units,                     to: 'inventory.allocated_units'
+    map :reserved_units,                     to: 'inventory.reserved_units'
+    map :shipping_units,                     to: 'inventory.shipping_units'
+    map :work_in_process_units,                     to: 'inventory.work_in_process_units'
+    map :supplier_on_order_units,                     to: 'inventory.supplier_on_order_units'
+    map :warehouse_on_order_units,                     to: 'inventory.warehouse_on_order_units'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -77,15 +77,15 @@ class Omni::Allocation < ActiveRecord::Base
     string   :location_id
     string   :sku_id
   # Partial match (contains) attributes
-    text     :display_fulltext, :using => :display
-    text     :state_fulltext, :using => :state
-    text     :location_display_fulltext, :using => :location_display
-    text     :sku_display_fulltext, :using => :sku_display
+    text     :display_fulltext, using: :display
+    text     :state_fulltext, using: :state
+    text     :location_display_fulltext, using: :location_display
+    text     :sku_display_fulltext, using: :sku_display
   end
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ### STATES ###
     state :draft do; end
@@ -98,13 +98,13 @@ class Omni::Allocation < ActiveRecord::Base
     end
 
   ### CALLBACKS ###
-    # after_transition :on => :approve, :do => :do_approve
-    after_transition :on => :transfer, :do => :do_transfer
-    after_transition :on => :ship, :do => :do_ship
-    after_transition :on => :allocate, :do => :do_allocate
+    # after_transition on: :approve, do: :do_approve
+    after_transition on: :transfer, do: :do_transfer
+    after_transition on: :ship, do: :do_ship
+    after_transition on: :allocate, do: :do_allocate
 
     event :approve do
-      transition :draft => :approved
+      transition draft: :approved
     end
 
     event :transfer do
@@ -116,7 +116,7 @@ class Omni::Allocation < ActiveRecord::Base
     end
 
     event :allocate do
-      transition :draft => same
+      transition draft: same
     end
 
   end

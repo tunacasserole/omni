@@ -14,19 +14,19 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :receipt_allocation_id,                          :with => :guid
-  default :receipt_allocation_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"RECEIPT_ALLOCATION_NBR"
+  default :receipt_allocation_id,                          with: :guid
+  default :receipt_allocation_nbr,                        override: false,        with: :sequence,         named: "RECEIPT_ALLOCATION_NBR"
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :receipt_detail,           :class_name => 'Omni::ReceiptDetail',      :foreign_key => 'receipt_detail_id'
-  belongs_to   :location,                 :class_name => 'Omni::Location',          :foreign_key => 'location_id'
+  belongs_to   :receipt_detail,           class_name: 'Omni::ReceiptDetail',      foreign_key: 'receipt_detail_id'
+  belongs_to   :location,                 class_name: 'Omni::Location',          foreign_key: 'location_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :receipt_detail_display,          :to => 'receipt_detail.display'
-    map :location_display,                :to => 'location.display'
+    map :receipt_detail_display,          to: 'receipt_detail.display'
+    map :location_display,                to: 'location.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -43,7 +43,7 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
   # HOOKS (End)  # STATES (Start) ====================================================================
   StateMachine::Machine.ignore_method_conflicts = true
 
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ## STATES ###
     state :draft do
@@ -53,7 +53,7 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
 
   ## EVENTS ###
     event :lock do
-      transition :draft => :locked
+      transition draft: :locked
     end
 
     event :unlock do
@@ -80,7 +80,7 @@ class Omni::ReceiptAllocation < ActiveRecord::Base
     string   :state
     string   :location_id
 
-    text     :display_fulltext,            :using => :display
+    text     :display_fulltext,            using: :display
   end
   # INDEXING (End)
 end # class Omni::ReceiptAllocation

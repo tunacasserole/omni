@@ -24,12 +24,12 @@ en:
         supplier_id:                     Source Supplier
         supplier_item_identifier:        Supplier Item Identifier
         lot_identifier:                  Lot Identifier
-        work_order_display:              Work Order
-        work_order_id:                   WO Detail
+        job_display:              Work Order
+        job_id:                   WO Detail
         receipt_detail_display:          Receipt Detail
         receipt_detail_id:               Receipt Detail
-        pick_ticket_display:             Pick Ticket
-        pick_ticket_id:                  Pick Ticket
+        pick_display:             Pick Ticket
+        pick_id:                  Pick Ticket
         origin_container_detail_display: Origin Container Detail
         origin_container_detail_id:      Origin Container Detail
         is_quality_hold:                 On QC Hold

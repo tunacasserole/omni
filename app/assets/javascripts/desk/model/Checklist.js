@@ -3,7 +3,7 @@ Ext.define('Desk.model.Checklist', {
 
   fields     : [
     {
-      name       : 'display_as',
+      name       : 'display',
       type       : 'string'
     },
     {

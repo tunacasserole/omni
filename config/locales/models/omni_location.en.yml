@@ -25,7 +25,7 @@ en:
         is_owned:                        Owned by Parker
         is_store:                        Store Location
         is_temporary_store:              Temporary Location
-        is_webstore:                     Website Location
+        is_webstore:                     Webaccount Location
         is_factory:                      Factory Location
         is_warehouse:                    Warehouse Location
         is_enabled:                      Enabled
@@ -41,7 +41,7 @@ en:
         promo_price_book_id:             Promotion Price Book
         selling_square_feet:             Selling Square Feet
         storage_square_feet:             Storage Square Feet
-        location_url:                    Website URL
+        location_url:                    Webaccount URL
         time_zone:                       Time Zone
         sunday_open_time:                Sunday Open Time
         sunday_close_time:               Sunday Close Time

@@ -1,0 +1,29 @@
+en:
+  activerecord:
+    models:
+      omni/uniform_detail:  'UniformDetail'
+    attributes:
+      omni/uniform_detail:
+        display:                        'UniformDetail'
+        uniform_detail_id:                 'Uniform Detail'
+        display:                           'Display'
+        uniform_id:                        'Uniform'
+        style_id:                          'Style'
+        color_id:                          'Color'
+        style_color_id:                    'Style Color'
+        uniform_detail_nbr:                'Uniform Detail Nbr'
+        state:                             'State'
+        from_grade_id:                     'From Grade'
+        thru_grade_id:                     'Thru Grade'
+        is_required_male:                  'Is Required Male'
+        is_required_female:                'Is Required Female'
+        is_optional_male:                  'Is Optional Male'
+        is_optional_female:                'Is Optional Female'
+        is_includes_logo:                  'Is Includes Logo'
+        is_requirees_logo:                 'Is Requires Logo'
+        discount_percent:                  'Discount Percent'
+        uniform_source:                    'Uniform Source'
+        retail_price:                      'Retail Price'
+        price_units:                       'Price Units'
+        is_approved:                       'Is Approved'
+        is_destroyed:                      'Is Destroyed'

@@ -27,10 +27,18 @@ namespace :omni do
   task :index, [:model] => :environment do |t, args|
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     args.with_defaults(:model => "AllModels")
-    # puts "Hello and #{args.model}"   #
-    # puts "model is #{args[:model]}"  # both notations work
+    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
     @start_time = Time.now
     Omni::Sync::Base.index(args.model)
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
+  desc "generate seed files from existing data"
+  task :seed, [:model] => :environment do |t, args|
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
+    @start_time = Time.now
+    Omni::Sync::Base.seed(args.model)
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
@@ -38,8 +46,7 @@ namespace :omni do
   task :sync, [:model] => :environment do |t, args|
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     args.with_defaults(:model => "AllModels")
-    # puts "Hello and #{args.model}"   #
-    # puts "model is #{args[:model]}"  # both notations work
+    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
     @start_time = Time.now
     Omni::Sync::Base.go(args.model)
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"

@@ -52,7 +52,7 @@ en:
         is_special_order:                Special Order
         is_converted:                    Converted Style
         add_on_sku_id:                   Add On SKU
-        site_id:                         School
+        account_id:                         School
         conversion_type:                 Conversion Type
         maintenance_level:               Maintenance Level
         is_convertible:                  Can Be Converted

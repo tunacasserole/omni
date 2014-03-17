@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      omni/account_grade:  'AccountGrade'
+    attributes:
+      omni/account_grade:
+        display:                        'AccountGrade'
+        account_grade_id:                  'Account Grade'
+        account_id:                        'Account'
+        grade_id:                          'Grade'
+        grade_name:                        'Grade Name'
+        display:                           'Display'
+        grade_order:                       'Grade Order'
+        is_destroyed:                      'Is Destroyed'

@@ -16,12 +16,12 @@ class Desk::Checklist < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :checklist_id,                          :with => :guid
-  default :checklist_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"CHECKLIST_NBR"
+  default :checklist_id,                          with: :guid
+  default :checklist_nbr,                         override: false,        with: :sequence,         named: "CHECKLIST_NBR"
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :tasks,                            :as => :taskable
+  has_many     :tasks,                            as: :taskable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -36,11 +36,11 @@ class Desk::Checklist < ActiveRecord::Base
     string   :display
     string   :description
 
-    text     :checklist_nbr_fulltext, :using => :checklist_nbr
-    text     :checklist_type_fulltext, :using => :checklist_type
-    text     :state_fulltext, :using => :state
-    text     :display_fulltext, :using => :display
-    text     :description_fulltext, :using => :description
+    text     :checklist_nbr_fulltext, using: :checklist_nbr
+    text     :checklist_type_fulltext, using: :checklist_type
+    text     :state_fulltext, using: :state
+    text     :display_fulltext, using: :display
+    text     :description_fulltext, using: :description
   end
   # INDEXING (End)
 
@@ -49,11 +49,11 @@ class Desk::Checklist < ActiveRecord::Base
   # ORDERING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
     # CALLBACKS ------------------
-    after_transition   :draft  => :active,  :do => :notify
-    after_transition   :active => :closed,  :do => :notify
+    after_transition   :draft  => :active,  do: :notify
+    after_transition   :active => :closed,  do: :notify
 
     # EVENTS ---------------------
     event :activate do

@@ -11,20 +11,21 @@ class Omni::Purchase < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates :supplier_id,                        :presence      => true
-  # validates :display,                            :uniqueness    => true
+  validates :purchase_id,               presence: true, uniqueness: true
+  validates :display,                   presence: true, uniqueness: true
+  validates :supplier_id,               presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :purchase_id,                                                       :with => :guid
-  default :purchase_nbr,                   :override  =>  false,        :with => :sequence,  :named=>"PURCHASE_NBR"
+  default :purchase_id,                                                       with: :guid
+  default :purchase_nbr,                   override: false,        :with => :sequence,  named: "PURCHASE_NBR"
   default :order_date,                                                        :with => :now
-  default :is_special_order,                                                  :to   => false
-  default :is_phone_order,                                                    :to   => false
-  default :is_update_blank_details,                                           :to   => false
-  default :is_update_all_details,                                             :to   => false
-  # default :estimated_lead_time_days,       :override => false,                :to   => 0
-  default :display,                              :override  =>  false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_nbr}"}
+  default :is_special_order,                                                  to: false
+  default :is_phone_order,                                                    to: false
+  default :is_update_blank_details,                                           to: false
+  default :is_update_all_details,                                             to: false
+  # default :estimated_lead_time_days,       :override => false,                to: 0
+  default :display,                              override: false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_nbr}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :payment_term,                                                      :to   => lambda{|m| m.supplier.default_payment_term}
   default :freight_term,                                                      :to   => lambda{|m| m.supplier.freight_term}
@@ -47,45 +48,44 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :purchase_details,                    :class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'
-  has_many     :purchase_allocations,                through: :purchase_details #:class_name => 'Omni::PurchaseDetail',    :foreign_key => 'purchase_id'
-  # has_many     :logs,                                :class_name => 'Omni::Log',               :foreign_key => 'logable_id' , :as => :logable
-  has_many     :stock_ledger_activities,             :class_name => 'Omni::StockLedgerActivity', :foreign_key => 'stockable_id' , :as => :stockable
-  belongs_to   :location,                            :class_name => 'Omni::Location',          :foreign_key => 'location_id'
-  belongs_to   :supplier,                            :class_name => 'Omni::Supplier',          :foreign_key => 'supplier_id'
-  belongs_to   :allocation_profile,                  :class_name => 'Omni::AllocationProfile', :foreign_key => 'allocation_profile_id'
-  belongs_to   :pay_to_supplier,                     :class_name => 'Omni::Supplier',          :foreign_key => 'pay_to_supplier_id'
-  belongs_to   :ship_thru_supplier,                  :class_name => 'Omni::Supplier',          :foreign_key => 'ship_thru_supplier_id'
-  belongs_to   :ordered_by_user,                     :class_name => 'Buildit::User',           :foreign_key => 'ordered_by_user_id'
-  belongs_to   :confirmed_by_user,                   :class_name => 'Buildit::User',           :foreign_key => 'confirmed_by_user_id'
-  belongs_to   :master_purchase,                     :class_name => 'Omni::Purchase',          :foreign_key => 'master_purchase_id'
-  belongs_to   :carrier_supplier,                    :class_name => 'Omni::Supplier',          :foreign_key => 'carrier_supplier_id'
-  belongs_to   :purchase_approver_1_user,            :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_1_user_id'
-  belongs_to   :purchase_approver_2_user,            :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_2_user_id'
-  belongs_to   :purchase_approver_3_user,            :class_name => 'Buildit::User',           :foreign_key => 'purchase_approver_3_user_id'
-  belongs_to   :purchase_approver_1_location_user,   :class_name => 'Omni::LocationUser',      :foreign_key => 'purchase_approver_1_location_user_id'
-  belongs_to   :purchase_approver_2_location_user,   :class_name => 'Omni::LocationUser',      :foreign_key => 'purchase_approver_2_location_user_id'
-  belongs_to   :purchase_approver_3_location_user,   :class_name => 'Omni::LocationUser',      :foreign_key => 'purchase_approver_3_location_user_id'
+  has_many     :purchase_details,                    class_name: 'Omni::PurchaseDetail',    foreign_key: 'purchase_id'
+  has_many     :purchase_allocations,                through: :purchase_details #class_name: 'Omni::PurchaseDetail',    foreign_key: 'purchase_id'
+  # has_many     :logs,                                class_name: 'Omni::Log',               foreign_key: 'logable_id' , as: :logable
+  has_many     :stock_ledger_activities,             class_name: 'Omni::StockLedgerActivity', foreign_key: 'stockable_id' , as: :stockable
+  belongs_to   :location,                            class_name: 'Omni::Location',          foreign_key: 'location_id'
+  belongs_to   :supplier,                            class_name: 'Omni::Supplier',          foreign_key: 'supplier_id'
+  belongs_to   :allocation_profile,                  class_name: 'Omni::AllocationProfile', foreign_key: 'allocation_profile_id'
+  belongs_to   :pay_to_supplier,                     class_name: 'Omni::Supplier',          foreign_key: 'pay_to_supplier_id'
+  belongs_to   :ship_thru_supplier,                  class_name: 'Omni::Supplier',          foreign_key: 'ship_thru_supplier_id'
+  belongs_to   :ordered_by_user,                     class_name: 'Buildit::User',           foreign_key: 'ordered_by_user_id'
+  belongs_to   :confirmed_by_user,                   class_name: 'Buildit::User',           foreign_key: 'confirmed_by_user_id'
+  belongs_to   :master_purchase,                     class_name: 'Omni::Purchase',          foreign_key: 'master_purchase_id'
+  belongs_to   :carrier_supplier,                    class_name: 'Omni::Supplier',          foreign_key: 'carrier_supplier_id'
+  belongs_to   :purchase_approver_1_user,            class_name: 'Buildit::User',           foreign_key: 'purchase_approver_1_user_id'
+  belongs_to   :purchase_approver_2_user,            class_name: 'Buildit::User',           foreign_key: 'purchase_approver_2_user_id'
+  belongs_to   :purchase_approver_3_user,            class_name: 'Buildit::User',           foreign_key: 'purchase_approver_3_user_id'
+  belongs_to   :purchase_approver_1_location_user,   class_name: 'Omni::LocationUser',      foreign_key: 'purchase_approver_1_location_user_id'
+  belongs_to   :purchase_approver_2_location_user,   class_name: 'Omni::LocationUser',      foreign_key: 'purchase_approver_2_location_user_id'
+  belongs_to   :purchase_approver_3_location_user,   class_name: 'Omni::LocationUser',      foreign_key: 'purchase_approver_3_location_user_id'
   # ASSOCIATIONS (End)
-
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :ordered_by_user_display,                       :to => 'ordered_by_user.display'
-    map :confirmed_by_user_display,                     :to => 'confirmed_by_user.display'
-    map :supplier_display,                              :to => 'supplier.display'
-    map :allocation_profile_display,                    :to => 'allocation_profile.display'
-    map :pay_to_supplier_display,                       :to => 'ship_thru_supplier.display'
-    map :ship_thru_supplier_display,                    :to => 'pay_to_supplier.display'
-    map :master_purchase_display,                       :to => 'master_purchase.display'
-    map :carrier_supplier_display,                      :to => 'carrier_supplier.display'
-    map :location_display,                              :to => 'location.display'
-    map :purchase_approver_1_user_display,              :to => 'purchase_approver_1_user.display'
-    map :purchase_approver_2_user_display,              :to => 'purchase_approver_2_user.display'
-    map :purchase_approver_3_user_display,              :to => 'purchase_approver_3_user.display'
-    map :purchase_approver_1_location_user_display,     :to => 'purchase_approver_1_location_user.display'
-    map :purchase_approver_2_location_user_display,     :to => 'purchase_approver_2_location_user.display'
-    map :purchase_approver_3_location_user_display,     :to => 'purchase_approver_3_location_user.display'
+    map :ordered_by_user_display,                       to: 'ordered_by_user.display'
+    map :confirmed_by_user_display,                     to: 'confirmed_by_user.display'
+    map :supplier_display,                              to: 'supplier.display'
+    map :allocation_profile_display,                    to: 'allocation_profile.display'
+    map :pay_to_supplier_display,                       to: 'ship_thru_supplier.display'
+    map :ship_thru_supplier_display,                    to: 'pay_to_supplier.display'
+    map :master_purchase_display,                       to: 'master_purchase.display'
+    map :carrier_supplier_display,                      to: 'carrier_supplier.display'
+    map :location_display,                              to: 'location.display'
+    map :purchase_approver_1_user_display,              to: 'purchase_approver_1_user.display'
+    map :purchase_approver_2_user_display,              to: 'purchase_approver_2_user.display'
+    map :purchase_approver_3_user_display,              to: 'purchase_approver_3_user.display'
+    map :purchase_approver_1_location_user_display,     to: 'purchase_approver_1_location_user.display'
+    map :purchase_approver_2_location_user_display,     to: 'purchase_approver_2_location_user.display'
+    map :purchase_approver_3_location_user_display,     to: 'purchase_approver_3_location_user.display'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -124,14 +124,14 @@ class Omni::Purchase < ActiveRecord::Base
     date     :delivery_date
     boolean  :is_destroyed
     # Partial match (contains) attributes
-    text     :display_fulltext,            :using => :display
-    text     :state_fulltext,              :using => :state
-    text     :supplier_fulltext,           :using => :supplier_display
-    text     :location_fulltext,           :using => :location_display
-    text     :master_purchase_fulltext,    :using => :master_purchase_display
-    text     :carrier_supplier_fulltext,   :using => :carrier_supplier_display
-    text     :ship_thru_supplier_fulltext, :using => :ship_thru_supplier_display
-    text     :pay_to_supplier_fulltext,    :using => :pay_to_supplier_display
+    text     :display_fulltext,            using: :display
+    text     :state_fulltext,              using: :state
+    text     :supplier_fulltext,           using: :supplier_display
+    text     :location_fulltext,           using: :location_display
+    text     :master_purchase_fulltext,    using: :master_purchase_display
+    text     :carrier_supplier_fulltext,   using: :carrier_supplier_display
+    text     :ship_thru_supplier_fulltext, using: :ship_thru_supplier_display
+    text     :pay_to_supplier_fulltext,    using: :pay_to_supplier_display
   end
   # INDEXING (End)
 
@@ -150,7 +150,7 @@ class Omni::Purchase < ActiveRecord::Base
   # HOOKS (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
   ### STATES ###
     state :draft do
@@ -186,16 +186,27 @@ class Omni::Purchase < ActiveRecord::Base
     end
 
     ### CALLBACKS ###
-    # after_transition :on => :costing, :do => :do_costing
-    after_transition :on => :cancel,  :do => :do_cancel
-    after_transition :on => :release, :do => :do_release
-    after_transition :on => :approve, :do => :do_approve
-    # after_transition :on => :open, :do => :do_open
-    after_transition :on => :print,   :do => :do_print
+    # after_transition on: :costing, do: :do_costing
+    after_transition on: :cancel,  do: :do_cancel
+    after_transition on: :release, do: :do_release
+    after_transition on: :approve, do: :do_approve
+    # after_transition on: :open, do: :do_open
+    after_transition on: :print,   do: :do_print
 
     ### EVENTS ###
+    # event :crash do
+    #   transition all - [:parked, :stalled] => :stalled, :if => lambda {|vehicle| !vehicle.passed_inspection?}
+    # end
+
+    # event :repair do
+    #   # The first transition that matches the state and passes its conditions
+    #   # will be used
+    #   transition :stalled => :parked, :unless => :auto_shop_busy
+    #   transition :stalled => same
+    # end
+
     event :release do
-      transition :draft => :pending_approval
+      transition draft: :pending_approval # if current_user has privilege purchase_release
     end
 
     event :cancel do

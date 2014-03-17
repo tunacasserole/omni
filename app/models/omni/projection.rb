@@ -17,10 +17,10 @@
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default      :projection_id,                    :override  =>  false,        :with  => :guid
-  default      :display,                          :override  =>  false,        :to    => lambda{|m| "#{ m.department_display } - #{m.plan_year}"}
-  default      :plan_year,                        :override  =>  false,        :to    => '2014'
-  default      :is_destroyed,                     :override  =>  false,        :to    => false
+  default      :projection_id,                    override: false,        with: :guid
+  default      :display,                          override: false,        to: lambda{|m| "#{ m.department_display } - #{m.plan_year}"}
+  default      :plan_year,                        override: false,        :to    => '2014'
+  default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================
@@ -32,29 +32,22 @@
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :department,                      :class_name => 'Omni::Department',          :foreign_key => 'department_id'
-  belongs_to   :forecast_profile,                :class_name => 'Omni::ForecastProfile',     :foreign_key => 'forecast_profile_id'
-  belongs_to   :projection_approver_user,        :class_name => 'Buildit::User',            :foreign_key => 'projection_approver_id'
-  belongs_to   :projection_closer_user,          :class_name => 'Buildit::User',            :foreign_key => 'projection_closer_id'
-  has_many     :projection_details,              :class_name => 'Omni::ProjectionDetail',    :foreign_key => 'projection_id'
-  has_many     :projection_locations,            :class_name => 'Omni::ProjectionLocation',  :foreign_key => 'projection_id'
+  belongs_to   :department,                      class_name: 'Omni::Department',          foreign_key: 'department_id'
+  belongs_to   :forecast_profile,                class_name: 'Omni::ForecastProfile',     foreign_key: 'forecast_profile_id'
+  belongs_to   :projection_approver_user,        class_name: 'Buildit::User',            foreign_key: 'projection_approver_id'
+  belongs_to   :projection_closer_user,          class_name: 'Buildit::User',            foreign_key: 'projection_closer_id'
+  has_many     :projection_details,              class_name: 'Omni::ProjectionDetail',    foreign_key: 'projection_id'
+  has_many     :projection_locations,            class_name: 'Omni::ProjectionLocation',  foreign_key: 'projection_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :forecast_profile_display,           :to => 'forecast_profile.display'
-    map :department_display,                 :to => 'department.display'
-    map :projection_approver_user_display,   :to => 'projection_approver_user.full_name'
-    map :projection_closer_user_display,     :to => 'projection_closer_user.full_name'
+    map :forecast_profile_display,           to: 'forecast_profile.display'
+    map :department_display,                 to: 'department.display'
+    map :projection_approver_user_display,   to: 'projection_approver_user.full_name'
+    map :projection_closer_user_display,     to: 'projection_closer_user.full_name'
   end
   # MAPPED ATTRIBUTES (End)
-
-  # COMPUTED ATTRIBUTES (Start) =========================================================
-  # COMPUTED ATTRIBUTES (End)
-
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
   # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
   # ORDERING (End)
@@ -83,15 +76,15 @@
     string   :state
     string   :plan_year
     # Partial match (contains) attributes
-    text     :department_display_fulltext, :using => :department_display
-    text     :forecast_profile_display_fulltext, :using => :forecast_profile_display
-    text     :display_fulltext, :using => :display
-    text     :state_fulltext, :using => :state
+    text     :department_display_fulltext, using: :department_display
+    text     :forecast_profile_display_fulltext, using: :forecast_profile_display
+    text     :display_fulltext, using: :display
+    text     :state_fulltext, using: :state
   end
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, :initial => :draft do
+  state_machine :state, initial: :draft do
 
     state :projection_1 do
     end
@@ -110,7 +103,7 @@
       validates :approval_4_date,                   :presence => true
     end
 
-    after_transition :on => :release, :do => :do_release
+    after_transition on: :release, do: :do_release
 
     event :release do
       transition :forecast => :projection_1

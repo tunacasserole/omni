@@ -13,7 +13,7 @@ class Omni::MarkInventory < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :id,                          :with => :guid
+  default :id,                          with: :guid
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
@@ -30,8 +30,8 @@ class Omni::MarkInventory < ActiveRecord::Base
     integer   :stock_nbr
     string    :size
 
-    # text     :stock_nbr, :using => :stock_nbr
-    # text     :size, :using => :size
+    # text     :stock_nbr, using: :stock_nbr
+    # text     :size, using: :size
   end
   # INDEXING (End)
 
