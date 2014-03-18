@@ -24,7 +24,7 @@ class Omni::Account < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true, uniqueness: true
   validates    :account_nbr,                     presence: true, uniqueness: true
-  validates    :account_name,                    presence: true, uniqueness: true
+  validates    :account_name,                    presence: true
   validates    :account_type,                    lookup: 'ACCOUNT_TYPE',               allow_nil: true
   validates    :school_type,                     lookup: 'SCHOOL_TYPE',                allow_nil: true
   validates    :prospect_type,                   lookup: 'PROSPECT_TYPE',              allow_nil: true

@@ -10,7 +10,7 @@ describe "account" do
   end
 
   describe "uniqueness" do
-    it "account_name" do dup = build(Omni::Account, account_name: me.account_name); dup.should_not be_valid end
+    it "display" do dup = build(Omni::Account, display: me.display); dup.should_not be_valid end
     it "account_nbr" do dup = build(Omni::Account, account_nbr: me.account_nbr); dup.should_not be_valid end
   end
 
