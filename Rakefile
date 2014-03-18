@@ -42,6 +42,15 @@ namespace :omni do
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
+  desc "re sequence existing data"
+  task :re_sequence, [:model] => :environment do |t, args|
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
+    @start_time = Time.now
+    Omni::Sync::Base.re_sequence(args.model)
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
   desc "sync parker data from spreadsheets, staging tables, and other databases"
   task :sync, [:model] => :environment do |t, args|
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "

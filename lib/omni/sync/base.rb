@@ -107,12 +107,27 @@ class Omni::Sync::Base
 
   def self.dump_to_seed(model_name)
     # Delete previous seed files
-    gem_name = model_name == 'Lookup' ? 'Buildit' : 'Omni'
+    gem_name = get_gem(model_name)
     table_name = model_name.tableize
     Dir.entries("db/seed").each {|x| File.delete("db/seed/#{x}") if (x.include? table_name) && (x.length == table_name.length + 18)}
     file_name = "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{table_name}.rb"
-   SeedDump.dump("#{gem_name}::#{model_name}".constantize, file: file_name)
+    SeedDump.dump("#{gem_name}::#{model_name}".constantize, file: file_name)
     puts "finished dumping to file #{file_name}"
+  end
+
+  def self.re_sequence(model_name)
+    sequence_code = table_name.chop.upcase + "_NBR"
+    data = "Omni::#{model_name}".constantize.all.order("#{sequence_code}")
+    data.each_with_index {|x| x.send(sequence_code, i + 999)}
+
+    # # reset last_used_nbr in sequences table
+    # seq = Buildit::Sequence.where(sequence_code: sequence_code).first
+    # if seq
+    #   seq.value = new_max
+    #   seq.save
+    # else
+    #   puts "sequence entry not found for #{sequence_code}"
+    # end
   end
 
   def self.seq(table_name)
@@ -151,7 +166,7 @@ class Omni::Sync::Base
 
   def self.seed(model_name)
     # write the data to a seed file
-    gem_name = model_name == 'Lookup' ? 'Buildit' : 'Omni'
+    gem_name = get_gem(model_name)
 
     dump_to_seed(model_name)
 
@@ -176,6 +191,7 @@ class Omni::Sync::Base
 
     # optionally call seed file generator
     seed(model_name)
+
     # test that the correct number of rows were created
 
   end
@@ -194,5 +210,13 @@ class Omni::Sync::Base
 
     # test that the correct number of rows were created
 
+  end
+
+  def self.get_gem(model_name)
+    if ['Lookup','Sequence'].include? model_name
+      gem_name = 'Buildit'
+    else
+      gem_name = 'Omni'
+    end
   end
 end

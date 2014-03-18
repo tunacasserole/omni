@@ -58,23 +58,23 @@ class Omni::Grade < ActiveRecord::Base
   # STATES (End)
 
   # HELPERS (Start) ====================================================================
-  # def self.grades(from, thru)
-  #   # return the list of grades between from and thru
-  #   # Omni::Grade.where(grade_id: [from,thru])-
-  #   Omni::Grade.where('grade_order >= ? and grade_order <= ?', from.grade_order, thru.grade_order) if from && thru
-  # end
+  def self.grades(from, thru)
+    # return the list of grades between from and thru
+    # Omni::Grade.where(grade_id: [from,thru])-
+    Omni::Grade.where('grade_order >= ? and grade_order <= ?', from.grade_order, thru.grade_order) if from && thru
+  end
 
-  # def self.grades_valid(from_id, thru_id)
-  #   # ensure that the from grade is less than the thru grade
-  #   return true unless from_id && thru_id
+  def self.grades_valid(from_id, thru_id)
+    # ensure that the from grade is less than the thru grade
+    return true unless from_id && thru_id
 
-  #   from = Omni::Grade.where(grade_id: from_id).first
-  #   thru = Omni::Grade.where(grade_id: thru_id).first
+    from = Omni::Grade.where(grade_id: from_id).first
+    thru = Omni::Grade.where(grade_id: thru_id).first
 
-  #   return false unless from && thru
+    return false unless from && thru
 
-  #   return from.grade_order <= thru.grade_order
-  # end
+    return from.grade_order <= thru.grade_order
+  end
   # HELPERS (End)
 
 end # class Omni::Grade

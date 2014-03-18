@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "account" do
+  let(:me) { create(Omni::Account) }
 
   describe "requires" do
     it "account_name" do lambda{Omni::Account.create! account_name nil}.should raise_error end
@@ -9,9 +10,8 @@ describe "account" do
   end
 
   describe "uniqueness" do
-    it "account_name" do create(Omni::Account, account_name: 'test account'); dup = build(Omni::Account, account_name: 'test account'); dup.should_not be_valid end
-    it "account_nbr" do create(Omni::Account, account_nbr: 'test account'); dup = build(Omni::Account, account_nbr: 'test account'); dup.should_not be_valid end
-    it "display" do create(Omni::Account, display: 'test account'); dup = build(Omni::Account, display: 'test account'); dup.should_not be_valid end
+    it "account_name" do dup = build(Omni::Account, account_name: me.account_name); dup.should_not be_valid end
+    it "account_nbr" do dup = build(Omni::Account, account_nbr: me.account_nbr); dup.should_not be_valid end
   end
 
   describe "defaults" do
@@ -70,14 +70,14 @@ describe "account" do
   end
 
   describe "has_many" do
-    it "customers"  do me = create(Omni::Account); create(Omni::CustomerAccount, account_id: me.account_id);          me.customers.count.should eq(1) end
-    it "contacts"  do me = create(Omni::Account); create(Omni::Contact, account_id: me.account_id);            me.contacts.count.should eq(1) end
-    it "donations" do me = create(Omni::Account); create(Omni::Donation, account_id: me.account_id);           me.donations.count.should eq(1) end
-    it "enrollments" do me = create(Omni::Account); create(Omni::Enrollment, account_id: me.account_id);       me.enrollments.count.should eq(1) end
-    it "grades" do me = create(Omni::Account); create(Omni::AccountGrade, account_id: me.account_id);                 me.grades.count.should eq(1) end
-    it "tax_authorities" do me = create(Omni::Account); create(Omni::AccountTaxAuthority, account_id: me.account_id); me.tax_authorities.count.should eq(1) end
-    it "uniforms" do me = create(Omni::Account); create(Omni::Uniform, account_id: me.account_id);                            me.uniforms.count.should eq(1) end
-    it "notes" do me = create(Omni::Account); create(Buildit::Note, notable_type: 'Omni::Account',notable_id: me.account_id); me.notes.count.should eq(1) end
+    it "customers"  do create(Omni::CustomerAccount, account_id: me.account_id);          me.customers.count.should eq(1) end
+    it "contacts"  do create(Omni::Contact, account_id: me.account_id);            me.contacts.count.should eq(1) end
+    it "donations" do create(Omni::Donation, account_id: me.account_id);           me.donations.count.should eq(1) end
+    it "enrollments" do create(Omni::Enrollment, account_id: me.account_id);       me.enrollments.count.should eq(1) end
+    it "grades" do create(Omni::AccountGrade, account_id: me.account_id);                 me.grades.count.should eq(1) end
+    it "tax_authorities" do create(Omni::AccountTaxAuthority, account_id: me.account_id); me.tax_authorities.count.should eq(1) end
+    it "uniforms" do create(Omni::Uniform, account_id: me.account_id);                            me.uniforms.count.should eq(1) end
+    it "notes" do create(Buildit::Note, notable_type: 'Omni::Account',notable_id: me.account_id); me.notes.count.should eq(2) end
   end
 
   describe "state machine should" do
@@ -103,21 +103,21 @@ describe "account" do
     it "build many grades" do
       first_grade = Omni::Grade.where(grade_order: 10).first
       third_grade = Omni::Grade.where(grade_order: 30).first
-      me = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: third_grade.grade_id)
-      me.grades.count.should eq(3)
+      you = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: third_grade.grade_id)
+      you.grades.count.should eq(3)
     end
 
     it "build 1 grade" do
       first_grade = Omni::Grade.where(grade_order: 10).first
-      me = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: first_grade.grade_id)
-      me.grades.count.should eq(1)
+      you = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: first_grade.grade_id)
+      you.grades.count.should eq(1)
     end
 
     it "build 2 grades" do
       first_grade = Omni::Grade.where(grade_order: 10).first
       second_grade = Omni::Grade.where(grade_order: 20).first
-      me = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: second_grade.grade_id)
-      me.grades.count.should eq(2)
+      you = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: second_grade.grade_id)
+      you.grades.count.should eq(2)
     end
   end
 

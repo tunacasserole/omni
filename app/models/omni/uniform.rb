@@ -11,7 +11,6 @@ class Omni::Uniform < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true, uniqueness: true
   validates    :uniform_nbr,                     presence: true, uniqueness: true
-  validates    :uniform_nbr,                     presence: true
   validates    :account_id,                      presence: true
   # VALIDATIONS (End)
 

@@ -24,7 +24,7 @@ class Omni::Account < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true, uniqueness: true
   validates    :account_nbr,                     presence: true, uniqueness: true
-  validates    :account_name,                    presence: true
+  validates    :account_name,                    presence: true, uniqueness: true
   validates    :account_type,                    lookup: 'ACCOUNT_TYPE',               allow_nil: true
   validates    :school_type,                     lookup: 'SCHOOL_TYPE',                allow_nil: true
   validates    :prospect_type,                   lookup: 'PROSPECT_TYPE',              allow_nil: true
@@ -75,12 +75,14 @@ class Omni::Account < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # HOOKS (Start) =======================================================================
-  hook  :after_create,      :note,             10
-  hook  :after_update,      :note,             20
+  # hook  :after_create,      :note,             10
+  # hook  :after_update,      :note,             20
 
   def note
-    user = Buildit::User.current ? Buildit::User.current.full_name : "the system"
-    self.notes.create(detail: "state changed to #{state} by #{user} on #{Date.today.to_s}") if self.state_changed?
+    if self.state_changed?
+      user = Buildit::User.current ? Buildit::User.current.full_name : "the system"
+      self.notes.create(detail: "state changed to #{state} by #{user} on #{Date.today.to_s}")
+    end
   end
   # HOOKS (End)
 
@@ -165,11 +167,18 @@ class Omni::Account < ActiveRecord::Base
   end
 
   def sync_grades
-    # puts "\n***** syncing grades ********\n"
+    puts "\n***** syncing grades ********\n"
     if self.from_grade_id_changed? || self.thru_grade_id_changed?
       self.grades.each {|x| x.destroy}
+      puts "from_grade.grade_order is #{from_grade.grade_order}"
+      puts "thru_grade.grade_order is #{thru_grade.grade_order}"
+      puts "from_grade.grade_id is #{from_grade.grade_id}"
+      puts "thru_grade.grade_id is #{thru_grade.grade_id}"
+      grade_count = Omni::Grade.where('grade_order >= ? and grade_order <= ?', from_grade.grade_order, thru_grade.grade_order).count
+      puts "grades in grades table is: #{grade_count}"
       Omni::Grade.where('grade_order >= ? and grade_order <= ?', from_grade.grade_order, thru_grade.grade_order).each {|g| Omni::AccountGrade.create(account_id: self.account_id, grade_id: g.grade_id, grade_order: g.grade_order, grade_name: g.grade_name)} if self.from_grade && self.thru_grade
-      count = Omni::AccountGrade.whe
+      count = Omni::AccountGrade.where(account_id: self.account_id).count
+      puts "grade count is #{count}"
     end
 
   end
