@@ -8,7 +8,7 @@ en:
         display:                         Name
         order_display:                   Order
         order_id:                        Order
-        order_detail_nbr:                  Order Line Nbr
+        order_detail_nbr:                Order Detail Nbr
         sku_display:                     Sku
         sku_id:                          SKU
         sku_alias_display:               Sku Alias
@@ -31,8 +31,8 @@ en:
         is_commercial:                   Commercial
         phone:                           Phone
         email_address:                   Email Address
-        account_display:                    Account
-        account_id:                         School
+        account_display:                 Account
+        account_id:                      School
         grade_display:                   Grade
         grade_id:                        Grade
         gender:                          Gender
