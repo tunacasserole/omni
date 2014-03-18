@@ -94,7 +94,7 @@ class Omni::Shipment < ActiveRecord::Base
 
   # cancel => draft to cancelled
   def after_cancel
-    self.events.create(message: "shipment was cancelled", event_type: 'state', occurred_at: Time.now)
+    # self.events.create(message: "shipment was cancelled", event_type: 'state', occurred_at: Time.now)
   end # def after_cancel
 
   # STATE HANDLERS (End)
