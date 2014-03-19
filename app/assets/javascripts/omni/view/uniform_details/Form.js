@@ -259,7 +259,7 @@ Ext.define('Omni.view.uniform_details.Form', {
     this.callParent();
 
 
-    // me.advancedCreateWindow = Ext.create('Omni.view.purchases.AdvancedCreatePanel');
+    // me.advancedCreateWindow = Ext.create('Omni.view.uniform_details.AdvancedCreatePanel');
     // me.advancedHidden = true;
   },
 
@@ -299,8 +299,8 @@ Ext.define('Omni.view.uniform_details.Form', {
   processEventTransition : function(eventName, successMsg, failureMsg){
     var me = this;
 
-    Omni.service.Purchase.fireEvent({
-        id      : this.record.get('purchase_id'),
+    Omni.service.UniformDetail.fireEvent({
+        id      : this.record.get('uniform_detail_id'),
         name    : eventName
       },
       function(result, e){
