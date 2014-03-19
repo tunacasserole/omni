@@ -5,7 +5,7 @@ Ext.define('Omni.view.grades.Inspector',{
 
   initComponent:function(){
     var me = this;
-  
+
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter : {
@@ -22,7 +22,7 @@ Ext.define('Omni.view.grades.Inspector',{
       }
     });
     // INSPECTOR INIT (End)
-  
+
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards     : [
@@ -37,7 +37,7 @@ Ext.define('Omni.view.grades.Inspector',{
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title     : 'Grade',
-      subtitle  : this.record.get('display_as')
+      subtitle  : this.record.get('display')
     });
     // TITLES (End)
 

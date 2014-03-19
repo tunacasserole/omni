@@ -91,9 +91,10 @@ class Omni::Account < ActiveRecord::Base
 
   searchable do
     string   :account_id
-    string   :display
-    # string   :account_name
     string   :account_nbr
+    string   :account_name
+    string   :display
+    string   :state
     string   :location_display do location.display if location end
     string   :billing_city
     # string   :shipping_city
@@ -102,9 +103,9 @@ class Omni::Account < ActiveRecord::Base
 
     text     :display_fulltext, using: :display
     # text     :account_name_fulltext, using: :account_name
-    text     :account_nbr_fulltext, using: :account_nbr
+    # text     :account_nbr_fulltext, using: :account_nbr
     # text     :location_display_fulltext, using: :location_display
-    text     :billing_city_fulltext, using: :billing_city
+    # text     :billing_city_fulltext, using: :billing_city
     # text     :shipping_city _fulltext, using: :shipping_city
     # text     :billing_state_fulltext, using: :billing_state
     # text     :shipping_state_fulltext, using: :shipping_state

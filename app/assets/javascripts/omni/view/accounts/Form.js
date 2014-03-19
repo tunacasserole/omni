@@ -82,6 +82,22 @@ Ext.define('Omni.view.accounts.Form', {
           layout: 'anchor',
           items: [{
             xtype: 'textfield',
+            name: 'state',
+            fieldLabel: me.stateLabel,
+            maxLength: 200,
+            minLength: 0,
+            allowBlank: true,
+            disabled: true
+          }, {
+            xtype: 'textfield',
+            name: 'account_nbr',
+            fieldLabel: me.account_nbrLabel,
+            maxLength: 200,
+            minLength: 0,
+            allowBlank: true,
+            disabled: true,
+            xtype: 'textfield',
+          }, {
             name: 'display',
             fieldLabel: me.displayLabel,
             maxLength: 200,
@@ -108,22 +124,6 @@ Ext.define('Omni.view.accounts.Form', {
             maxLength: 200,
             minLength: 0,
             allowBlank: true
-          }, {
-            xtype: 'textfield',
-            name: 'state',
-            fieldLabel: me.stateLabel,
-            maxLength: 200,
-            minLength: 0,
-            allowBlank: true,
-            disabled: true
-          }, {
-            xtype: 'textfield',
-            name: 'account_nbr',
-            fieldLabel: me.account_nbrLabel,
-            maxLength: 200,
-            minLength: 0,
-            allowBlank: true,
-            disabled: true
           }, {
             xtype: 'buildit-Lookup',
             name: 'account_type',

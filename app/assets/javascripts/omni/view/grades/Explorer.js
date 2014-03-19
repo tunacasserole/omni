@@ -63,13 +63,13 @@ Ext.define('Omni.view.grades.Explorer', {
           header       : me.grade_orderLabel,
           dataIndex    : 'grade_order',
           flex         : 1
-        },
-        {
-          xtype        : 'checkcolumn',
-          header       : me.is_destroyedLabel,
-          dataIndex    : 'is_destroyed',
-          flex         : 1
         }
+        // {
+        //   xtype        : 'checkcolumn',
+        //   header       : me.is_destroyedLabel,
+        //   dataIndex    : 'is_destroyed',
+        //   flex         : 1
+        // }
       ]
     });
     // COLUMNS (End)

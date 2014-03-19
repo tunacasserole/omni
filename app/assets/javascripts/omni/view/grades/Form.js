@@ -25,7 +25,7 @@ Ext.define('Omni.view.grades.Form', {
     };
     // FILTER (End)
 
-    
+
 
     // FIELDSETS (Start) ====================================================================
     Ext.apply(this, {
@@ -37,14 +37,14 @@ Ext.define('Omni.view.grades.Form', {
           defaultType  : 'textfield',
           layout       : 'anchor',
           items        : [
-            {
-              xtype        : 'textfield',
-              name         : 'display',
-              fieldLabel   : me.displayLabel,
-              maxLength    : 300,
-              minLength    : 0,
-              allowBlank   : false
-            },
+            // {
+            //   xtype        : 'textfield',
+            //   name         : 'display',
+            //   fieldLabel   : me.displayLabel,
+            //   maxLength    : 300,
+            //   minLength    : 0,
+            //   allowBlank   : false
+            // },
             {
               xtype        : 'textfield',
               name         : 'grade_name',
@@ -68,12 +68,12 @@ Ext.define('Omni.view.grades.Form', {
               maxLength    : 100,
               minLength    : 0,
               allowBlank   : true
-            },
-            {
-              xtype        : 'checkbox',
-              name         : 'is_destroyed',
-              fieldLabel   : me.is_destroyedLabel
             }
+            // {
+            //   xtype        : 'checkbox',
+            //   name         : 'is_destroyed',
+            //   fieldLabel   : me.is_destroyedLabel
+            // }
           ]
         }/*,
         {
@@ -84,7 +84,7 @@ Ext.define('Omni.view.grades.Form', {
           layout       : 'anchor',
           items        : [
           ]
-        }*/          
+        }*/
       ]
     });
     // FIELDSETS (End)
@@ -98,7 +98,7 @@ Ext.define('Omni.view.grades.Form', {
     // TITLES (End)
 
     this.callParent();
-    
+
   }  // initComponent
 
 }); // Ext.define('Omni.view.grades.Form'

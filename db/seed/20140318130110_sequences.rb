@@ -1,5 +1,6 @@
 Buildit::Sequence.create!([
   {sequence_code: "ACCOUNT_NBR", prefix: nil, padding: 3, value: 2636},
+  {sequence_code: "APPROVAL_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "ADJUSTMENT_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "ALLOCATION_DETAIL_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "ALLOCATION_NBR", prefix: nil, padding: 3, value: 1000},
