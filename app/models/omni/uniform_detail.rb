@@ -125,7 +125,7 @@ class Omni::UniformDetail < ActiveRecord::Base
     set_approval
     # create Uniform Lookup for each uniform detail row by bringing in every SKU that is active for the Style and Color in the Uniform Detail record.
     # in other words, when a Style Color is added to a Uniform, the system assumes all sizes of that Style Color are valid for the Uniform.
-    grades = Omni::Grade.grades(self.from_grade,self.thru_grade)
+    grades = Omni::Grade.get_grades(self.from_grade,self.thru_grade)
     if self.style && self.style.skus.count > 0 && grades && grades.count > 0
       self.style.skus.each do |sku|
         grades.each do |g|

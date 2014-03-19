@@ -94,7 +94,8 @@ class Omni::Shipment < ActiveRecord::Base
 
   # cancel => draft to cancelled
   def after_cancel
-    # self.events.create(message: "shipment was cancelled", event_type: 'state', occurred_at: Time.now)
+    self.cancel_date = Date.today
+    self.cancel_user_id = Buildit::User.current.user_id if Buildit::User.current
   end # def after_cancel
 
   # STATE HANDLERS (End)

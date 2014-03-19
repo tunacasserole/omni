@@ -44,12 +44,18 @@ describe "shipment" do
 
   describe "state machine should" do
     it "default state to draft" do
-      me = create(Omni::Shipment)
       me.state.should eq('draft')
     end
 
-    it "on ship, set state to shipped" do
-      me = create(Omni::Shipment)
+    it "on ship to customer, set state to complete" do
+      #TODO figure out how to ship to customer
+      me.ship
+      # me.state.should eq('complete')
+      # me.ship_date.should eq(Date.today)
+    end
+
+    it "on ship to store, set state to shipped" do
+      #TODO figure out how to ship to store
       me.ship
       me.state.should eq('shipped')
       # me.ship_date.should eq(Date.today)
@@ -62,11 +68,10 @@ describe "shipment" do
     end
 
     it "on cancel, set state to cancelled" do
-      me = create(Omni::Shipment)
       me.cancel
       me.state.should eq('cancelled')
       # me.events.count.should eq(1)
-      # me.cancel_date.should eq(Date.today)
+      me.cancel_date.should eq(Date.today)
       # me.cancel_user_id.should_not be_nil
     end
   end

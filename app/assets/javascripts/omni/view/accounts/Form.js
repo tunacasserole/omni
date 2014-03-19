@@ -82,6 +82,13 @@ Ext.define('Omni.view.accounts.Form', {
           layout: 'anchor',
           items: [{
             xtype: 'textfield',
+            name: 'display',
+            fieldLabel: me.displayLabel,
+            maxLength: 200,
+            minLength: 0,
+            allowBlank: true
+          }, {
+            xtype: 'textfield',
             name: 'account_name',
             fieldLabel: me.account_nameLabel,
             maxLength: 200,

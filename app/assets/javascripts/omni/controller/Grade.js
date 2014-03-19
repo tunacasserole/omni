@@ -17,4 +17,4 @@ Buildit.defineController('Omni.controller.Grade', {
 
   }
 
-});
+}); // Buildit.defineController('Omni.controller.Grade'

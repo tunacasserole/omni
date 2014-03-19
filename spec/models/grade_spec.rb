@@ -38,7 +38,7 @@ describe "grade" do
       first_grade = create(Omni::Grade, grade_order: 10001)
       create(Omni::Grade, grade_order: 10002)
       second_grade = create(Omni::Grade, grade_order: 10003)
-      Omni::Grade.grades(first_grade,second_grade).count.should eq(3)
+      Omni::Grade.get_grades(first_grade,second_grade).count.should eq(3)
     end
   end
 

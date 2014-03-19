@@ -8,10 +8,11 @@ Ext.define('Omni.store.Grade', {
   remoteSort   : true,
 
   constructor  : function (config) {
-    var me = this;
+    var me    = this;
     me.callParent(this);
+    
     var proxy = Ext.Object.merge({}, me.getProxy());
     me.setProxy(proxy);
   } // constructor
 
-}); // Ext.define
+}); // Ext.define('Omni.store.Grade'

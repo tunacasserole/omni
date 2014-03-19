@@ -1,3 +1,5 @@
+Omni::Grade.delete_all
+
 Omni::Grade.create!([
   {grade_id: "1FE8AE3CA6C8OHEHAE1800FF58D32228", display: "Pre Pre-K", grade_name: "Pre Pre-K", short_name: "PPK", grade_order: 10, is_destroyed: false},
   {grade_id: "1FE8AE3CA6C8EIU7AE1800FF58D32228", display: "Pre-K", grade_name: "Pre-K", short_name: "PK", grade_order: 20, is_destroyed: false},
@@ -13,5 +15,5 @@ Omni::Grade.create!([
   {grade_id: "1FE6D97CA6C811E2AE1800FF58D32228", display: "9th Grade", grade_name: "9th Grade", short_name: "9", grade_order: 120, is_destroyed: false},
   {grade_id: "1FE6B26CA6C811E2AE1800FF58D32228", display: "10th Grade", grade_name: "10th Grade", short_name: "10", grade_order: 130, is_destroyed: false},
   {grade_id: "1FE66442A6C811E2AE1800FF58D32228", display: "11th Grade", grade_name: "11th Grade", short_name: "11", grade_order: 140, is_destroyed: false},
-  {grade_id: "1FE66442A6C811E2AE1800FF58D32228", display: "12th Grade", grade_name: "12th Grade", short_name: "12", grade_order: 150, is_destroyed: false}
+  {grade_id: "1FE66442A6CUUUE2AE1800FF58D32228", display: "12th Grade", grade_name: "12th Grade", short_name: "12", grade_order: 150, is_destroyed: false}
 ])

@@ -99,29 +99,29 @@ Ext.define('Omni.view.accounts.Explorer', {
         {
           header       : me.account_nameLabel,
           dataIndex    : 'account_name',
-          flex         : 1
+          flex         : 3
         },
+        // {
+        //   header       : me.account_typeLabel,
+        //   dataIndex    : 'account_type',
+        //   flex         : 1,
+        //   renderer     : Buildit.util.Format.lookupRenderer('ACCOUNT_TYPE'),
+        //   lkp          : 'code'
+        // },
         {
-          header       : me.account_typeLabel,
-          dataIndex    : 'account_type',
-          flex         : 1,
-          renderer     : Buildit.util.Format.lookupRenderer('ACCOUNT_TYPE'),
-          lkp          : 'code'
-        },
-        {
-          header       : 'City',
+          header       : me.billing_cityLabel,
           dataIndex    : 'billing_city',
-          flex         : 1
+          flex         : 2
         },
         {
-          header       : 'State',
+          header       : me.billing_stateLabel,
           dataIndex    : 'billing_state',
           flex         : 1,
           renderer     : Buildit.util.Format.lookupRenderer('STATE_CODE'),
           lkp          : 'code'
         },
         {
-          header       : 'Account Status',
+          header       : me.stateLabel,
           dataIndex    : 'state',
           flex         : 1
         }
