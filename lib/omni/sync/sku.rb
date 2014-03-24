@@ -137,7 +137,7 @@ class Omni::Sync::Sku < Omni::Sync::Base
     puts "update_suppliers_ar"
     data = Omni::Sku.all
     data.each_with_index do |x, i|
-      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '00'
+      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
       # load = Omni::SkuLoad.where(display: x.display).first
       # next unless load
       # supplier = Omni::Supplier.where(display: load.supplier_id).first

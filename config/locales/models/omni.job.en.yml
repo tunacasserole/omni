@@ -4,7 +4,7 @@ en:
       omni/job:  'Job'
     attributes:
       omni/job:
-        display:                        'Job'
+        display_as:                        'Job'
         job_id:                            'Job'
         display:                           'Display'
         jobable_id:                        'Jobable'

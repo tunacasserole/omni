@@ -19,7 +19,7 @@ class Omni::Sync::Color < Omni::Sync::Base
   # def self.create_from_sku_load
   #   data = Omni::SkuLoad.all
   #   data.each_with_index do |x, i|
-  #     puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '00'
+  #     puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
   #     color = Omni::Color.where(display: x.color_conv).first || Omni::Color.where(short_name: x.color_conv).first
   #     # color = Omni::Color.create(display: x.color_conv, concatenated_name: x.color_conv, short_name: x.color_conv) unless color
   #     next unless color

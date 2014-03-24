@@ -77,21 +77,21 @@ Ext.define('Omni.view.jobs.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(me, {
       columns      : [
-        {
-          header       : me.displayLabel,
-          dataIndex    : 'display',
-          flex         : 1
-        },
-        {
-          header       : me.jobable_idLabel,
-          dataIndex    : 'jobable_id',
-          flex         : 1
-        },
-        {
-          header       : me.jobable_typeLabel,
-          dataIndex    : 'jobable_type',
-          flex         : 1
-        },
+        // {
+        //   header       : me.displayLabel,
+        //   dataIndex    : 'display',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.jobable_idLabel,
+        //   dataIndex    : 'jobable_id',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.jobable_typeLabel,
+        //   dataIndex    : 'jobable_type',
+        //   flex         : 1
+        // },
         {
           header       : me.job_nbrLabel,
           dataIndex    : 'job_nbr',
@@ -99,49 +99,49 @@ Ext.define('Omni.view.jobs.Explorer', {
         },
         {
           header       : me.sku_idLabel,
-          dataIndex    : 'sku_id',
+          dataIndex    : 'sku_display',
           flex         : 1
         },
         {
           header       : me.production_location_idLabel,
-          dataIndex    : 'production_location_id',
+          dataIndex    : 'production_location_display',
           flex         : 1
         },
-        {
-          header       : me.supplier_idLabel,
-          dataIndex    : 'supplier_id',
-          flex         : 1
-        },
-        {
-          header       : me.job_descriptionLabel,
-          dataIndex    : 'job_description',
-          flex         : 1
-        },
+        // {
+        //   header       : me.supplier_idLabel,
+        //   dataIndex    : 'supplier_id',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.job_descriptionLabel,
+        //   dataIndex    : 'job_description',
+        //   flex         : 1
+        // },
         {
           header       : me.job_typeLabel,
           dataIndex    : 'job_type',
           flex         : 1
         },
-        {
-          header       : me.release_dateLabel,
-          dataIndex    : 'release_date',
-          flex         : 1
-        },
-        {
-          header       : me.start_dateLabel,
-          dataIndex    : 'start_date',
-          flex         : 1
-        },
-        {
-          header       : me.complete_dateLabel,
-          dataIndex    : 'complete_date',
-          flex         : 1
-        },
-        {
-          header       : me.target_complete_dateLabel,
-          dataIndex    : 'target_complete_date',
-          flex         : 1
-        },
+        // {
+        //   header       : me.release_dateLabel,
+        //   dataIndex    : 'release_date',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.start_dateLabel,
+        //   dataIndex    : 'start_date',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.complete_dateLabel,
+        //   dataIndex    : 'complete_date',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.target_complete_dateLabel,
+        //   dataIndex    : 'target_complete_date',
+        //   flex         : 1
+        // },
         {
           header       : me.request_unitsLabel,
           dataIndex    : 'request_units',
@@ -152,123 +152,123 @@ Ext.define('Omni.view.jobs.Explorer', {
           dataIndex    : 'complete_units',
           flex         : 1
         },
-        {
-          xtype        : 'checkcolumn',
-          header       : me.is_cancelledLabel,
-          dataIndex    : 'is_cancelled',
-          flex         : 1
-        },
+        // {
+        //   xtype        : 'checkcolumn',
+        //   header       : me.is_cancelledLabel,
+        //   dataIndex    : 'is_cancelled',
+        //   flex         : 1
+        // },
         {
           header       : me.stateLabel,
           dataIndex    : 'state',
           flex         : 1
-        },
-        {
-          header       : me.weightLabel,
-          dataIndex    : 'weight',
-          flex         : 1
-        },
-        {
-          header       : me.heightLabel,
-          dataIndex    : 'height',
-          flex         : 1
-        },
-        {
-          header       : me.bustLabel,
-          dataIndex    : 'bust',
-          flex         : 1
-        },
-        {
-          header       : me.waistLabel,
-          dataIndex    : 'waist',
-          flex         : 1
-        },
-        {
-          header       : me.high_hipLabel,
-          dataIndex    : 'high_hip',
-          flex         : 1
-        },
-        {
-          header       : me.hipLabel,
-          dataIndex    : 'hip',
-          flex         : 1
-        },
-        {
-          header       : me.across_shoulder_frontLabel,
-          dataIndex    : 'across_shoulder_front',
-          flex         : 1
-        },
-        {
-          header       : me.across_shoulder_backLabel,
-          dataIndex    : 'across_shoulder_back',
-          flex         : 1
-        },
-        {
-          header       : me.shoulder_lengthLabel,
-          dataIndex    : 'shoulder_length',
-          flex         : 1
-        },
-        {
-          header       : me.back_lengthLabel,
-          dataIndex    : 'back_length',
-          flex         : 1
-        },
-        {
-          header       : me.hps_to_waistLabel,
-          dataIndex    : 'hps_to_waist',
-          flex         : 1
-        },
-        {
-          header       : me.neck_circumferenceLabel,
-          dataIndex    : 'neck_circumference',
-          flex         : 1
-        },
-        {
-          header       : me.arm_circumferenceLabel,
-          dataIndex    : 'arm_circumference',
-          flex         : 1
-        },
-        {
-          header       : me.wrist_circumferenceLabel,
-          dataIndex    : 'wrist_circumference',
-          flex         : 1
-        },
-        {
-          header       : me.inseamLabel,
-          dataIndex    : 'inseam',
-          flex         : 1
-        },
-        {
-          header       : me.outseamLabel,
-          dataIndex    : 'outseam',
-          flex         : 1
-        },
-        {
-          header       : me.thighLabel,
-          dataIndex    : 'thigh',
-          flex         : 1
-        },
-        {
-          header       : me.arm_lengthLabel,
-          dataIndex    : 'arm_length',
-          flex         : 1
-        },
-        {
-          header       : me.total_riseLabel,
-          dataIndex    : 'total_rise',
-          flex         : 1
-        },
-        {
-          header       : me.head_circumferenceLabel,
-          dataIndex    : 'head_circumference',
-          flex         : 1
-        },
-        {
-          xtype        : 'checkcolumn',
-          header       : me.is_destroyedLabel,
-          dataIndex    : 'is_destroyed',
-          flex         : 1
         }
+        // {
+        //   header       : me.weightLabel,
+        //   dataIndex    : 'weight',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.heightLabel,
+        //   dataIndex    : 'height',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.bustLabel,
+        //   dataIndex    : 'bust',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.waistLabel,
+        //   dataIndex    : 'waist',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.high_hipLabel,
+        //   dataIndex    : 'high_hip',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.hipLabel,
+        //   dataIndex    : 'hip',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.across_shoulder_frontLabel,
+        //   dataIndex    : 'across_shoulder_front',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.across_shoulder_backLabel,
+        //   dataIndex    : 'across_shoulder_back',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.shoulder_lengthLabel,
+        //   dataIndex    : 'shoulder_length',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.back_lengthLabel,
+        //   dataIndex    : 'back_length',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.hps_to_waistLabel,
+        //   dataIndex    : 'hps_to_waist',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.neck_circumferenceLabel,
+        //   dataIndex    : 'neck_circumference',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.arm_circumferenceLabel,
+        //   dataIndex    : 'arm_circumference',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.wrist_circumferenceLabel,
+        //   dataIndex    : 'wrist_circumference',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.inseamLabel,
+        //   dataIndex    : 'inseam',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.outseamLabel,
+        //   dataIndex    : 'outseam',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.thighLabel,
+        //   dataIndex    : 'thigh',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.arm_lengthLabel,
+        //   dataIndex    : 'arm_length',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.total_riseLabel,
+        //   dataIndex    : 'total_rise',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.head_circumferenceLabel,
+        //   dataIndex    : 'head_circumference',
+        //   flex         : 1
+        // },
+        // {
+        //   xtype        : 'checkcolumn',
+        //   header       : me.is_destroyedLabel,
+        //   dataIndex    : 'is_destroyed',
+        //   flex         : 1
+        // }
       ]
     });
     // COLUMNS (End)

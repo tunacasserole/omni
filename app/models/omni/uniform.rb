@@ -107,6 +107,7 @@ class Omni::Uniform < ActiveRecord::Base
   def do_activate
     self.details.each {|x| x.activate}
     self.approvals.create(approvable_type: 'Omni::Uniform', display: 'uniform was approved')
+
   end
 
   def do_close

@@ -38,7 +38,7 @@ namespace :omni do
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     # puts "model is #{args[:model]} and #{args.model}"  # both notations work
     @start_time = Time.now
-    Omni::Sync::Base.seed(args.model)
+    Omni::Sync::Base.dump_to_seed(args.model)
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
@@ -53,7 +53,7 @@ namespace :omni do
 
   desc "sync parker data from spreadsheets, staging tables, and other databases"
   task :sync, [:model] => :environment do |t, args|
-    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    puts " == " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
     args.with_defaults(:model => "AllModels")
     # puts "model is #{args[:model]} and #{args.model}"  # both notations work
     @start_time = Time.now

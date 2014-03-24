@@ -1,9 +1,11 @@
 class Omni::Sync::Base
 
   def self.go(model_name)
-    # puts "going - #{model_name}"
-
     model_name.downcase == 'all' ? sync_all : "Omni::Sync::#{model_name}".constantize.go
+
+    # test that the correct number of rows were created
+    count = "Omni::#{model_name}".constantize.count
+    puts "rows synced is #{count}"
   end
 
   def self.sync_all
@@ -31,7 +33,7 @@ class Omni::Sync::Base
           total = (elapsed * 100 / pct_complete).round(0)
           remaining = total - elapsed
           finish = start + total
-          puts ".. #{model_name.yellow} #{Time.now.strftime("%H:%M:%S").yellow}:  (#{rows.to_s} / #{count}) #{(rows.to_f / count.to_f * 100.0).round(2).to_s}% complete.  #{(count - rows).to_s.cyan} #{'remaining'.cyan}.  proj. finish: #{(finish).strftime("%H:%M:%S").yellow} (#{(remaining / 60).round(0)} remaining minutes)"
+          puts ".. #{model_name.yellow} #{time_stamp}:  (#{rows.to_s} / #{count}) #{(rows.to_f / count.to_f * 100.0).round(2).to_s}% complete.  #{(count - rows).to_s.cyan} #{'remaining'.cyan}.  proj. finish: #{(finish).strftime("%H:%M:%S").yellow} (#{(remaining / 60).round(0)} remaining minutes)"
         end
         rows += 1
         x.is_indexed = true
@@ -76,8 +78,8 @@ class Omni::Sync::Base
 
   def self.put(message)
     @output = [] unless @output
-    @output << "#{Time.now.strftime("%H:%M:%S").yellow}: #{message}"
-    # puts "#{Time.now.strftime("%H:%M:%S").yellow}: #{message}"
+    @output << "#{time_stamp}: #{message}"
+    # puts "#{time_stamp}: #{message}"
   end
 
   def self.load
@@ -103,16 +105,6 @@ class Omni::Sync::Base
     @no_skus = []
     @no_row = []
     @order_lines = []
-  end
-
-  def self.dump_to_seed(model_name)
-    # Delete previous seed files
-    gem_name = get_gem(model_name)
-    table_name = model_name.tableize
-    Dir.entries("db/seed").each {|x| File.delete("db/seed/#{x}") if (x.include? table_name) && (x.length == table_name.length + 18)}
-    file_name = "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{table_name}.rb"
-    SeedDump.dump("#{gem_name}::#{model_name}".constantize, file: file_name)
-    puts "finished dumping to file #{file_name}"
   end
 
   def self.re_sequence(model_name)
@@ -145,37 +137,24 @@ class Omni::Sync::Base
     # Takes an excel file name and a tab name, and returns an array of stripped, transposed rows
     # Sample call:  @@data = excel_to_hash File.join(Rails.root,'db/meta/model_headers.xlsx'), 'models'
     # Access the data:  @data.first['column_name']
+    puts "== reading excel into memory at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     folder_name = File.join(Rails.root, 'db','import')
-    # tab_name = 'sheet1'
-    puts "started reading excel from content into memory at #{Time.now.to_s.chop.chop.chop.chop.chop}"
     rows = []
-      file = File.open(File.join(folder_name, file_name), mode = 'r')
-      excel = Roo::Excelx.new(file.path)
-      # excel.default_sheet = excel.sheets.index(tab_name) ? excel.sheets.index(tab_name) + 1 : excel.sheets[1]
-      header = excel.row(1)
-      (2..excel.last_row).each do |i|
-        # break if i > 100
-        next unless excel.row(i)[0]
-        row = Hash[[header, excel.row(i)].transpose]
-        row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
-        rows << row
-      end
-    puts "finished reading #{rows.count.to_s} rows from excel into memory at #{Time.now.to_s.chop.chop.chop.chop.chop} "
+    file = File.open(File.join(folder_name, file_name), mode = 'r')
+    excel = Roo::Excelx.new(file.path)
+    # tab_name = 'sheet1'
+    # excel.default_sheet = excel.sheets.index(tab_name) ? excel.sheets.index(tab_name) + 1 : excel.sheets[1]
+    header = excel.row(1)
+    (2..excel.last_row).each do |i|
+      # break if i > 100
+      puts "#{time_stamp}: reading row: #{i.to_s}" if i.to_s.end_with? '000'
+      next unless excel.row(i)[0]
+      row = Hash[[header, excel.row(i)].transpose]
+      row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
+      rows << row
+    end
+    puts "== finished reading #{rows.count.to_s} rows at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     return rows
-  end
-
-  def self.seed(model_name)
-    # write the data to a seed file
-    gem_name = get_gem(model_name)
-
-    dump_to_seed(model_name)
-
-    # delete all data before running the seed as a test
-    "#{gem_name}::#{model_name}".constantize.delete_all
-
-    # run the seed file
-    system('rake buildit:db:seed')
-
   end
 
   def self.excel_to_seed(model_name, table_name)
@@ -187,30 +166,28 @@ class Omni::Sync::Base
     seq(table_name)
 
     # load the excel data into a hash and map it to the database
-    excel_to_hash("#{table_name}.xlsx").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x);  puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '00'}
+    excel_to_hash("#{table_name}.xlsx").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x);  puts "#{time_stamp}: processing row: #{i.to_s}" if i.to_s.end_with? '000'}
 
     # optionally call seed file generator
-    seed(model_name)
+    # dump_to_seed(model_name)
 
     # test that the correct number of rows were created
 
   end
 
-  def self.table_to_seed(model_name, target_table_name, source_table_name)
+  # def self.table_to_seed(model_name, target_table_name, source_table_name)
 
-    # delete all data for a fresh start
-    "Omni::#{model_name}".constantize.delete_all
+  #   # delete all data for a fresh start
+  #   "Omni::#{model_name}".constantize.delete_all
 
-    # reset the sequence number
-    seq(table_name)
+  #   # reset the sequence number
+  #   seq(table_name)
 
-    # read from source table and map it to the target table
+  #   # read from source table and map it to the target table
 
-    # optionally call seed file generator
+  #   # optionally call seed file generator
 
-    # test that the correct number of rows were created
-
-  end
+  # end
 
   def self.get_gem(model_name)
     if ['Lookup','Sequence'].include? model_name
@@ -219,4 +196,49 @@ class Omni::Sync::Base
       gem_name = 'Omni'
     end
   end
+
+  def self.time_stamp
+    "== #{Time.now.strftime("%H:%M:%S").yellow}: "
+  end
+
+  def self.seed_file_name(model_name)
+    # generate seed file name
+    sleep 1
+    "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{model_name.tableize}"
+  end
+
+  def self.dump_to_seed(model_name)
+    # initialize
+    rows_to_dump = "Omni::#{model_name}".constantize.count
+    puts "#{time_stamp} starting dump of #{rows_to_dump} rows"
+    rows_per_file = 10000
+    file_count = rows_to_dump / rows_per_file + 1
+    # puts "file_count is #{file_count}"
+    gem_name = get_gem(model_name)
+
+    # delete previous seed files
+    Dir.entries("db/seed").each {|x| File.delete("db/seed/#{x}") if (x.include? model_name.tableize) } #&& (x.length == model_name.tableize.length + 18)
+
+    if rows_to_dump < rows_per_file
+      # dump rows into a single file
+      puts "#{time_stamp} dumping to file #{seed_file_name(model_name)}"
+      SeedDump.dump("#{gem_name}::#{model_name}".constantize, file: seed_file_name(model_name))
+    else
+      # split and dump rows into many files
+      (file_count).times do |i|
+        puts "#{time_stamp} dumping rows #{rows_per_file * i} - #{rows_per_file * (i+1)} to #{seed_file_name(model_name)}_#{i+1}.rb"
+        data = "Omni::#{model_name}".constantize.offset(rows_per_file * i).limit(rows_per_file).to_a
+        SeedDump.dump(data, file: "#{seed_file_name(model_name)}_#{i+1}.rb")
+      end
+    end
+
+    puts "#{time_stamp} finished dump of #{rows_to_dump} rows"
+
+    # delete all data before running the seed as a test
+    # "#{gem_name}::#{model_name}".constantize.delete_all
+
+    # run the seed file
+    # system('rake buildit:db:seed')
+  end
+
 end

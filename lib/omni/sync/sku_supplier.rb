@@ -8,7 +8,7 @@ class Omni::Sync::SkuSupplier < Omni::Sync::Base
     sql = "select id, sku_id, supplier_id from skus_load"
     data = ActiveRecord::Base.connection.execute sql
     data.each_with_index do |x,i|
-      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '00'
+      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
       # select_sql = "select count(*) from sku_suppliers where sku_id = #{x.sku_id}"
       sc = Omni::SkuSupplier.create(sku_id: x[1], supplier_id: x[2]) #unless Omni::SkuSupplier.where(sku_id: x[0], supplier_id: x[1]).first
       if sc

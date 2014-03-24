@@ -37,14 +37,22 @@ Ext.define('Omni.view.app.Hub', {
             target: {
               xtype: 'omni-accounts-Explorer'
             }
-          // }, {
-          //   title: 'Uniforms',
-          //   colspan: 2,
-          //   rowspan: 1,
-          //   cls: 'network',
-          //   target: {
-          //     xtype: 'omni-Uniforms-Explorer'
-          //   }
+          }, {
+            title: 'Jobs',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'network',
+            target: {
+              xtype: 'omni-jobs-Explorer'
+            }
+          }, {
+            title: 'Picks',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'network',
+            target: {
+              xtype: 'omni-picks-Explorer'
+            }
           }]
         },
 

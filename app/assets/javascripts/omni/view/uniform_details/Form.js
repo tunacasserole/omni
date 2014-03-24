@@ -173,11 +173,11 @@ Ext.define('Omni.view.uniform_details.Form', {
               allowBlank   : true
             },
             {
-              xtype        : 'textfield',
+              xtype        : 'buildit-Lookup',
               name         : 'uniform_source',
               fieldLabel   : me.uniform_sourceLabel,
-              maxLength    : 32,
-              minLength    : 0,
+              category     : 'UNIFORM_SOURCE',
+              lkp          : 'code',
               allowBlank   : true
             },
             {

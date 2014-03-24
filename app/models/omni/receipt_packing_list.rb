@@ -15,7 +15,7 @@
 
     # for each row of spreadsheet data, create a sku carton row
     data.each_with_index do |row,i|
-      puts "processed #{i.to_s} rows at #{Time.now.to_s.chop.chop.chop.chop.chop}" if i.to_s.end_with? '00'
+      puts "processed #{i.to_s} rows at #{Time.now.to_s.chop.chop.chop.chop.chop}" if i.to_s.end_with? '000'
       puts row['Description']
     end
 

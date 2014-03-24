@@ -12,6 +12,8 @@ class Omni::StyleSupplier < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                  presence: true, uniqueness: true
   validates    :style_supplier_id,        presence: true, uniqueness: true
+  validates    :style_id,                 presence: true
+  validates    :supplier_id,              presence: true
   validates    :supplier_id, uniqueness: { scope: :style_id, message: "Supplier already exists for this style." }
   validates    :pack_type,                       lookup: 'PACK_TYPE',                  allow_nil: true
   validates    :master_pack_uom_code,            lookup: 'MASTER_PACK_UOM_CODE',       allow_nil: true

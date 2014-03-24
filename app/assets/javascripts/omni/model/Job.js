@@ -3,7 +3,7 @@ Ext.define('Omni.model.Job', {
 
   fields     : [
     {
-      name       : 'display',
+      name       : 'display_as',
       type       : 'string'
     },
     {
