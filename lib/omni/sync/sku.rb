@@ -3,8 +3,42 @@ class Omni::Sync::Sku < Omni::Sync::Base
   def self.go
     # update_suppliers_sql
     # sync_skus
-    resync_skus_sql
+    # resync_skus_sql
+    create_from_sku_load
   end
+
+  def self.create_from_sku_load
+    sql = "select sku_display_name, sku_receipt_name, description, retail, style_id, size_id, color_id, style_color_size_id, supplier_id, account_id from skus_load where sku_id is not null"
+    data = ActiveRecord::Base.connection.execute sql
+    puts "records to process: #{data.count}"
+    data.each_with_index do |x, i|
+      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
+      map_to_db(x)
+    end
+  end
+
+  def self.map_to_db(row)
+    is_converted = row['g_c'] == 'CONVERTED GARMENT'
+
+    sku = Omni::Sku.new(
+      display: row[0],
+      pos_name: row[1],
+      description: row[2],
+      initial_retail_price: row['retail'],
+      style_id: row[],
+      color_id: row[],
+      size_id: row[],
+      style_color_size_id: row[],
+      supplier_id: row[],
+      account_id: row[],
+      fabric_content: row['FABRIC_CONTENT'],
+      is_converted: is_converted
+     )
+
+    puts "sku could not be created for #{row['sku_name'].to_s} due to: #{sku.errors.full_messages}" unless style.save
+  end
+
+
 
   def self.resync_skus_sql
     @errors = 0
@@ -81,15 +115,6 @@ class Omni::Sync::Sku < Omni::Sync::Base
 
     puts "skus_created is #{skus_created}"
   end
-
-
-
-
-
-
-
-
-
 
   def self.update_accounts
     sql = 'select id, school_code from skus'

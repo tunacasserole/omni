@@ -4,11 +4,12 @@ class Omni::Sync::SkuLoad < Omni::Sync::Base
     # puts "#{Time.now.strftime("%H:%M:%S").yellow} - starting"
     # update_style_id
     # update_color_id
+    # update_account_id_ar
     # update_supplier_id
-    update_style_supplier_id
+    # update_style_supplier_id
     # update_size_id
     # update_style_color_id
-    # update_account_id_ar
+    update_style_color_size_id
     # update_sku_id
     # update_sku_id_ar
     # update_sku_price
@@ -96,6 +97,11 @@ class Omni::Sync::SkuLoad < Omni::Sync::Base
 
   def self.update_style_color_id
     sql = "update skus_load, style_colors set skus_load.style_color_id = style_colors.style_color_id where skus_load.style_id = style_colors.style_id and skus_load.color_id = style_colors.color_id "
+    ActiveRecord::Base.connection.execute sql
+  end
+
+  def self.update_style_color_size_id
+    sql = "update skus_load, style_color_sizes set skus_load.style_color_size_id = style_color_sizes.style_color_size_id where skus_load.style_color_id = style_color_sizes.style_color_id and skus_load.style_color_id = style_color_sizes.style_color_id "
     ActiveRecord::Base.connection.execute sql
   end
 

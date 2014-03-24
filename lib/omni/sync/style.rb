@@ -2,8 +2,8 @@ class Omni::Sync::Style < Omni::Sync::Base
 
   def self.go
     # table_to_seed('Style','styles','styles_sync')
-    # excel_to_seed('Style','styles')
-    update_style_id
+    excel_to_seed('Style','styles')
+    # update_style_id
   end
 
   def self.map_to_db(row)
@@ -25,6 +25,7 @@ class Omni::Sync::Style < Omni::Sync::Base
       supplier_id: supplier_id,
       product_id: product_id,
       account_id: account_id,
+      fabric_content: row['FABRIC_CONTENT'],
       is_converted: is_converted
      )
 
