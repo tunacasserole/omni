@@ -66,7 +66,7 @@ class AddIndexes < ActiveRecord::Migration
     add_index(:tills, [:till_id], :unique => true) unless index_exists?(:tills, [:till_id], :unique => true)
     add_index(:terminals, [:terminal_id], :unique => true) unless index_exists?(:terminals, [:terminal_id], :unique => true)
     add_index(:styles, [:display], :unique => true) unless index_exists?(:styles, [:display], :unique => true)
-    add_index(:skus_load, [:style_name], :unique => false) unless index_exists?(:styles, [:style_name], :unique => false)
-    add_index(:skus_load, [:color_name], :unique => false) unless index_exists?(:styles, [:color_name], :unique => false)
+    # add_index(:skus_load, [:style_name], :unique => false) unless index_exists?(:styles, [:style_name], :unique => false)
+    # add_index(:skus_load, [:color_name], :unique => false) unless index_exists?(:styles, [:color_name], :unique => false)
   end
 end
