@@ -171,8 +171,10 @@ class Omni::Account < ActiveRecord::Base
     # puts "\n***** syncing grades ********\n"
     if self.from_grade_id_changed? || self.thru_grade_id_changed?
       self.grades.each {|x| x.destroy}
-      grade_count = Omni::Grade.where('grade_order >= ? and grade_order <= ?', from_grade.grade_order, thru_grade.grade_order).count
-      Omni::Grade.where('grade_order >= ? and grade_order <= ?', from_grade.grade_order, thru_grade.grade_order).each {|g| Omni::AccountGrade.create(account_id: self.account_id, grade_id: g.grade_id, grade_order: g.grade_order, grade_name: g.grade_name)} if self.from_grade && self.thru_grade
+      # puts "from grade is #{self.from_grade_id}"
+      # puts "thru grade is #{self.thru_grade_id}"
+      # grade_count = Omni::Grade.where('grade_order >= ? and grade_order <= ?', self.from_grade.grade_order, self.thru_grade.grade_order).count
+      Omni::Grade.where('grade_order >= ? and grade_order <= ?', self.from_grade.grade_order, self.thru_grade.grade_order).each {|g| Omni::AccountGrade.create(account_id: self.account_id, grade_id: g.grade_id, grade_order: g.grade_order, grade_name: g.grade_name)} if self.from_grade && self.thru_grade
       # count = Omni::AccountGrade.where(account_id: self.account_id).count
     end
 

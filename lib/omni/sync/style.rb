@@ -8,28 +8,36 @@ class Omni::Sync::Style < Omni::Sync::Base
 
   def self.map_to_db(row)
 
-    size_group_id = Omni::SizeGroup.where(short_name: row['size_group']).first.size_group_id if Omni::SizeGroup.where(short_name: row['size_group']).first
-    subclass_id = Omni::Subclass.where(display: row['subclass_name']).first.subclass_id if Omni::Subclass.where(display: row['subclass_name']).first
-    supplier_id = Omni::Supplier.where(display: row['supplier_name']).first.supplier_id if Omni::Supplier.where(display: row['supplier_name']).first
-    product_id = Omni::Product.where(display: row['product_name']).first.product_id if Omni::Product.where(display: row['product_name']).first
-    account_id = Omni::Account.where(display: row['account_name']).first.account_id if Omni::Account.where(display: row['account_name']).first unless row['account_name'] == 'GENERIC ITEM'
-    is_converted = row['g_c'] == 'CONVERTED GARMENT'
+    update_fabric_content(row)
 
-    style = Omni::Style.new(
-      display: row['style_name'],
-      description: row['description'],
-      pos_name: row['style_receipt_name'],
-      initial_retail_price: row['retail'],
-      size_group_id: size_group_id,
-      subclass_id: subclass_id,
-      supplier_id: supplier_id,
-      product_id: product_id,
-      account_id: account_id,
-      fabric_content: row['FABRIC_CONTENT'],
-      is_converted: is_converted
-     )
+    # size_group_id = Omni::SizeGroup.where(short_name: row['size_group']).first.size_group_id if Omni::SizeGroup.where(short_name: row['size_group']).first
+    # subclass_id = Omni::Subclass.where(display: row['subclass_name']).first.subclass_id if Omni::Subclass.where(display: row['subclass_name']).first
+    # supplier_id = Omni::Supplier.where(display: row['supplier_name']).first.supplier_id if Omni::Supplier.where(display: row['supplier_name']).first
+    # product_id = Omni::Product.where(display: row['product_name']).first.product_id if Omni::Product.where(display: row['product_name']).first
+    # account_id = Omni::Account.where(display: row['account_name']).first.account_id if Omni::Account.where(display: row['account_name']).first unless row['account_name'] == 'GENERIC ITEM'
+    # is_converted = row['g_c'] == 'CONVERTED GARMENT'
 
-    puts "style could not be created for #{row['style_name'].to_s} due to: #{style.errors.full_messages}" unless style.save
+    # style = Omni::Style.new(
+    #   display: row['style_name'],
+    #   description: row['description'],
+    #   pos_name: row['style_receipt_name'],
+    #   initial_retail_price: row['retail'],
+    #   size_group_id: size_group_id,
+    #   subclass_id: subclass_id,
+    #   supplier_id: supplier_id,
+    #   product_id: product_id,
+    #   account_id: account_id,
+    #   fabric_content: row['FABRIC_CONTENT'],
+    #   is_converted: is_converted
+    #  )
+
+    # # puts "style could not be created for #{row['style_name'].to_s} due to: #{style.errors.full_messages}" unless style.save
+  end
+
+  def self.update_fabric_content(row)
+    style = Omni::Style.where(display: row['style_name']).first
+    style.fabric_content = row['fabric_content']
+    style.save
   end
 
   def self.update_style_id

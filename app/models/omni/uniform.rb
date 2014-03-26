@@ -105,9 +105,12 @@ class Omni::Uniform < ActiveRecord::Base
 
   # STATE HELPERS (Start) =====================================================================
   def do_activate
+    # active all uniform details
     self.details.each {|x| x.activate}
+    # log an approval
     self.approvals.create(approvable_type: 'Omni::Uniform', display: 'uniform was approved')
-
+    # closing any other active uniforms to ensure only 1 active uniform per account
+    self.account.uniforms.each {|x| x.close if x.state?(:active) unless x == self}# if self.account
   end
 
   def do_close

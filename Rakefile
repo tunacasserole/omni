@@ -35,7 +35,7 @@ namespace :omni do
 
   desc "generate seed files from existing data"
   task :seed, [:model] => :environment do |t, args|
-    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
     # puts "model is #{args[:model]} and #{args.model}"  # both notations work
     @start_time = Time.now
     Omni::Sync::Base.dump_to_seed(args.model)

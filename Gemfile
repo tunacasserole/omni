@@ -51,6 +51,7 @@ gem 'roo'
 gem 'seed_dump'
 
 # testing gems
+# gem 'rack-mini-profiler'
 gem 'parallel_tests'
 gem 'rspec-rails', group: [:development, :test] # - RSpec is a replacement for Test::MiniTest. I cannot recommend highly enough RSpec. rspec-rails provides Rails integration for RSpec.
 
@@ -61,12 +62,11 @@ group :test do
   gem 'rb-fsevent'
   # gem 'zeus-parallel_tests'
 end
+
 # gem 'xlsx'
 # gem 'thin'
+
 # Priceless Gems
-
-# One of the most important programming principles is 'Don't reinvent the wheel!'. If you're faced with a certain task you should always look around a bit for existing solutions, before rolling your own. Here's a list of some 'priceless' gems (all of them Rails 3.1 compliant) that are useful in many Rails projects:
-
 # active_admin - With ActiveAdmin the creation of admin interface for your Rails app is child's play. You get a nice dashboard, CRUD UI and lots more. Very flexible and customizable.
 # better_errors - Better Errors replaces the standard Rails error page with a much better and more useful error page. It is also usable outside of Rails in any Rack app as Rack middleware.
 # bullet - The Bullet gem is designed to help you increase your application’s performance by reducing the number of queries it makes. It will watch your queries while you develop your application and notify you when you should add eager loading (N+1 queries), when you’re using eager loading that isn’t necessary and when you should use counter cache.

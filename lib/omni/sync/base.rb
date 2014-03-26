@@ -160,10 +160,10 @@ class Omni::Sync::Base
   def self.excel_to_seed(model_name, table_name)
 
     # delete all data for a fresh start
-    "Omni::#{model_name}".constantize.delete_all
+    # "Omni::#{model_name}".constantize.delete_all
 
     # reset the sequence number
-    seq(table_name)
+    # seq(table_name)
 
     # load the excel data into a hash and map it to the database
     excel_to_hash("#{table_name}.xlsx").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x);  puts "#{time_stamp}: processing row: #{i.to_s}" if i.to_s.end_with? '000'}
@@ -211,7 +211,7 @@ class Omni::Sync::Base
     # initialize
     rows_to_dump = "Omni::#{model_name}".constantize.count
     puts "#{time_stamp} starting dump of #{rows_to_dump} rows"
-    rows_per_file = 10000
+    rows_per_file = 20000
     file_count = rows_to_dump / rows_per_file + 1
     # puts "file_count is #{file_count}"
     gem_name = get_gem(model_name)

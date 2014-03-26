@@ -4,12 +4,12 @@ class Omni::Sync::SkuLoad < Omni::Sync::Base
     # puts "#{Time.now.strftime("%H:%M:%S").yellow} - starting"
     # update_style_id
     # update_color_id
-    # update_account_id_ar
     # update_supplier_id
     # update_style_supplier_id
     # update_size_id
     # update_style_color_id
-    update_style_color_size_id
+    # update_style_color_size_id
+    update_account_id_ar
     # update_sku_id
     # update_sku_id_ar
     # update_sku_price
@@ -39,18 +39,18 @@ class Omni::Sync::SkuLoad < Omni::Sync::Base
   end
 
   def self.update_account_id_ar
-    data = Omni::SkuLoad.where('account_id is null')
-    # data = Omni::SkuLoad.where('select id, style_color_id, size_id from skus_load where account_id not in (select account_id from style_color_sizes)')
+    data = Omni::SkuLoad.where("account_id is null and school_code != 'GENERIC'")
     puts "records to process: #{data.count}"
     data.each_with_index do |x, i|
       puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
-      row = Omni::Account.where(description: x.school_name.gsub!(/\s+/, "")).first #|| Omni::Account.where(display: x.school_name).first || Omni::Account.where(school_nbr: x.school_name).first
+      # row = Omni::Account.where(description: x.school_name.gsub!(/\s+/, "")).first || Omni::Account.where(display: x.school_name).first || Omni::Account.where(school_nbr: x.school_name).first
       # row = Omni::Account.where(account_name: x.school_code).first || Omni::Account.where(display: x.school_code).first || Omni::Account.where(school_nbr: x.school_code).first unless row
+      row = Omni::Account.where(school_nbr: x.school_code).first
       if row
         x.account_id = row.account_id
         x.save
       else
-        puts "couldn't find account_id for #{x.school_name} and sku is #{x.description} and id is #{x.id}"
+        puts "couldn't find account_id for school code - #{x.school_code} and sku is #{x.sku_display_name}"
         # abort
       end
     end
@@ -86,7 +86,7 @@ class Omni::Sync::SkuLoad < Omni::Sync::Base
   end
 
   def self.update_sku_id
-    sql = "update skus_load, skus set skus_load.sku_id = skus.sku_id where skus_load.sku_display = skus.display"
+    sql = "update skus_load, skus set skus_load.sku_id = skus.sku_id where skus_load.sku_display_name = skus.display"
     ActiveRecord::Base.connection.execute sql
   end
 

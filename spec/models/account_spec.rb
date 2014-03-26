@@ -30,19 +30,18 @@ describe "account" do
     end
 
     # it "prevent a first_grade that is higher than a second_grade" do
-    #   first_grade = Omni::Grade.create(grade_order: 10001)
-    #   second_grade = Omni::Grade.create(grade_order: 10002)
-    #   first_grade.grade_order.should eq(10001)
+    #   first_grade = Omni::Grade.where(short_name: '1').first
+    #   second_grade = Omni::Grade.where(short_name: '2').first
     #   me = create(Omni::Account, from_grade_id: second_grade.grade_id, thru_grade_id: first_grade.grade_id)
-    #   me.should be_valid
+    #   me.should_not be_valid
     # end
 
-    # it "allow a first_grade that is lower than a second_grade" do
-    #   first_grade = Omni::Grade.create(grade_order: 10001)
-    #   second_grade = Omni::Grade.create(grade_order: 10002)
-    #   me = build(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: second_grade.grade_id)
-    #   me.should be_valid
-    # end
+    it "allow a first_grade that is lower than a second_grade" do
+      first_grade = Omni::Grade.where(short_name: '1').first
+      second_grade = Omni::Grade.where(short_name: '2').first
+      me = build(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: second_grade.grade_id)
+      me.should be_valid
+    end
   end
 
   describe "lookups" do
@@ -101,21 +100,21 @@ describe "account" do
 
   describe "logic should" do
     it "build many grades" do
-      first_grade = Omni::Grade.where(grade_order: 10).first
-      third_grade = Omni::Grade.where(grade_order: 30).first
+      first_grade = Omni::Grade.where(short_name: 1).first
+      third_grade = Omni::Grade.where(short_name: 3).first
       you = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: third_grade.grade_id)
       you.grades.count.should eq(3)
     end
 
     it "build 1 grade" do
-      first_grade = Omni::Grade.where(grade_order: 10).first
+      first_grade = Omni::Grade.where(short_name: 1).first
       you = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: first_grade.grade_id)
       you.grades.count.should eq(1)
     end
 
     it "build 2 grades" do
-      first_grade = Omni::Grade.where(grade_order: 10).first
-      second_grade = Omni::Grade.where(grade_order: 20).first
+      first_grade = Omni::Grade.where(short_name: 1).first
+      second_grade = Omni::Grade.where(short_name: 2).first
       you = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: second_grade.grade_id)
       you.grades.count.should eq(2)
     end
@@ -123,19 +122,27 @@ describe "account" do
 
   describe "hooks should" do
     it "build grades when from or thru grade is changed" do
-      # first_grade = Omni::Grade.where(grade_order: 10).first
-      # second_grade = Omni::Grade.where(grade_order: 20).first
-      # third_grade = Omni::Grade.where(grade_order: 30).first
+      first_grade = Omni::Grade.where(short_name: 1).first
+      second_grade = Omni::Grade.where(short_name: 2).first
 
-      # me = create(Omni::Account, from_grade_id: first_grade.grade_id, thru_grade_id: third_grade.grade_id)
-      me = create(Omni::Account)
-      me.from_grade_id = me.thru_grade_id
+      me.from_grade_id = first_grade.grade_id
+      me.thru_grade_id = first_grade.grade_id
       me.save
-      # m`e.grades.count.should eq(1)
+      me.grades.count.should eq(1)
+
+      me.thru_grade_id = second_grade.grade_id
+      me.save
+      me.grades.count.should eq(2)
     end
   end
 
   describe "indexing" do
+    it "sorts" do
+    end
+
+    it "selects" do
+
+    end
 
   end
 
