@@ -19,7 +19,7 @@ Ext.define('Omni.view.uniform_details.Form', {
   is_optional_maleLabel                   : Omni.i18n.model.UniformDetail.is_optional_male,
   is_optional_femaleLabel                 : Omni.i18n.model.UniformDetail.is_optional_female,
   is_includes_logoLabel                   : Omni.i18n.model.UniformDetail.is_includes_logo,
-  discount_amountLabel             k      : Omni.i18n.model.UniformDetail.discount_amount,
+  discount_amountLabel                    : Omni.i18n.model.UniformDetail.discount_amount,
   discount_percentLabel                   : Omni.i18n.model.UniformDetail.discount_percent,
   uniform_sourceLabel                     : Omni.i18n.model.UniformDetail.uniform_source,
   retail_priceLabel                       : Omni.i18n.model.UniformDetail.retail_price,
@@ -116,7 +116,7 @@ Ext.define('Omni.view.uniform_details.Form', {
               name         : 'style_color_id',
               fieldLabel   : me.style_color_idLabel,
               gotoTarget   : 'omni-style_colors-Inspector',
-              emptyText: 'auto-populated on save'
+              emptyText: 'auto-populated on save',
               //initialValue : me.record.get('display'),
               allowBlank   : false
             },
@@ -129,7 +129,7 @@ Ext.define('Omni.view.uniform_details.Form', {
               valueField: 'grade_id',
               fieldLabel   : me.from_grade_idLabel,
               gotoTarget   : 'omni-grades-Inspector',
-              emptyText: 'auto-populated on save'
+              emptyText: 'auto-populated on save',
               //initialValue : me.record.get('from_grade_display'),
               allowBlank   : true
             },
