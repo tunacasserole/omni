@@ -140,8 +140,13 @@ describe "account" do
     it "sorts" do
     end
 
-    it "selects" do
-
+    it "selects", focus: true do
+      me.account_name = 'ATLANTA TEST CHRISTIAN ACADEMY-XX0000'
+      me.display = 'ATLANTA TEST CHRISTIAN ACADEMY-XX0000'
+      me.save
+      search_term = 'ALTLANTA'
+      # search = Omni::Account.search {fulltext search_term}
+      search = Omni::Account.search { fulltext 'ATLANTA' }
     end
 
   end

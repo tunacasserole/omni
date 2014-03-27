@@ -10,7 +10,7 @@ class Omni::Till < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true, uniqueness: true
-  validates    :till_nbr,                        presence: true, uniqueness: true
+  validates    :till_nbr,                        presence: true
   validates    :location_id,                     presence: true
   # VALIDATIONS (End)
 

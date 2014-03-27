@@ -50,7 +50,7 @@ describe "uniform" do
       me.state.should eq('active')
     end
 
-    it "close any other active uniforms on activate", focus: true do
+    it "close any other active uniforms on activate" do
       a = create(Omni::Account)
       me = create(Omni::Uniform, account_id: a.account_id)
       me.activate

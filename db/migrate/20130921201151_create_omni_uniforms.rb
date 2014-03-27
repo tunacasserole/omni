@@ -12,6 +12,7 @@ def change
     t.column   :description,                   :string,            null: true,    limit: 4000
     t.column   :state,                         :string,            null: true,   limit: 200
     t.column   :school_year,                   :string,            null: true,   limit: 200
+    t.column   :discount_percent,              :decimal,           null: true,    :scale   => 2,  :precision  => 11
     t.column   :teacher_discount_percent,      :decimal,           null: true,    :scale   => 2,  :precision  => 11
     t.column   :administrator_discount_percent,:decimal,           null: true,    :scale   => 2,  :precision  => 11
     t.column   :is_discount_in_store,          :boolean,           null: true

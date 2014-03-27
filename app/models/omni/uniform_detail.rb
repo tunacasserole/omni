@@ -17,6 +17,7 @@ class Omni::UniformDetail < ActiveRecord::Base
   validates    :style_color_id,                  presence: true
   # validates    :from_grade_id,                   presence: true
   # validates    :thru_grade_id,                   presence: true
+  validate     :check_grades
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -25,6 +26,7 @@ class Omni::UniformDetail < ActiveRecord::Base
   default      :from_grade_id,                    override: false,        to: lambda{|m| "#{m.uniform.account.from_grade_id}" if m.uniform && m.uniform.account}
   default      :thru_grade_id,                    override: false,        to: lambda{|m| "#{m.uniform.account.thru_grade_id}" if m.uniform && m.uniform.account}
   default      :display,                          override: false,        to: lambda{|m| "#{m.uniform_display} - #{m.style_color_display} - #{m.uniform_detail_nbr}"}
+  default      :discount_amount,                  override: false,        to: 0
   default      :is_destroyed,                     override: false,        to: false
   default      :is_required_male,                 override: false,        to: false
   default      :is_required_female,               override: false,        to: false
@@ -80,7 +82,7 @@ class Omni::UniformDetail < ActiveRecord::Base
     end
 
     state :active do
-      # validate  :validate_approvals
+      # validate  :check_grades
       # validates :account_nbr,              :presence => true
     end
 
@@ -159,6 +161,25 @@ class Omni::UniformDetail < ActiveRecord::Base
   def set_grades
     self.from_grade_id = self.uniform.from_grade_id unless self.from_grade_id
     self.thru_grade_id = self.uniform.thru_grade_id unless self.thru_grade_id
+  end
+
+  def check_grades
+    if self.uniform && self.uniform.account
+      if self.from_grade_id
+        is_valid = false
+        self.uniform.account.grades.each do |x|
+          is_valid = true if x.grade_id == self.from_grade_id
+        end
+        errors.add(:from_grade_id, 'from grade is not valid for this account') unless is_valid
+      end
+      if self.thru_grade_id
+        is_valid = false
+        self.uniform.account.grades.each do |x|
+          is_valid = true if x.grade_id == self.thru_grade_id
+        end
+        errors.add(:thru_grade_id, 'from grade is not valid for this account') unless is_valid
+      end
+    end
   end
 
   def set_defaults

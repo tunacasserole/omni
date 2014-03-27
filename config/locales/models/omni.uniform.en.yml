@@ -14,6 +14,7 @@ en:
         description:                       'Description'
         state:                             'State'
         school_year:                       'School Year'
+        discount_percent:                  'Discount Percent'
         teacher_discount_percent:          'Teacher Discount Percent'
         administrator_discount_percent:    'Administrator Discount Percent'
         is_discount_in_store:              'Is Discount In Store'

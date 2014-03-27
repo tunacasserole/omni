@@ -101,7 +101,7 @@ class Omni::Account < ActiveRecord::Base
     # string   :billing_state   do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.billing_state) end
     # string   :shipping_state do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.shipping_state) end
 
-    text     :display_fulltext, using: :display
+    text     :display
     # text     :account_name_fulltext, using: :account_name
     # text     :account_nbr_fulltext, using: :account_nbr
     # text     :location_display_fulltext, using: :location_display

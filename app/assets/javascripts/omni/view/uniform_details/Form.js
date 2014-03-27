@@ -19,6 +19,7 @@ Ext.define('Omni.view.uniform_details.Form', {
   is_optional_maleLabel                   : Omni.i18n.model.UniformDetail.is_optional_male,
   is_optional_femaleLabel                 : Omni.i18n.model.UniformDetail.is_optional_female,
   is_includes_logoLabel                   : Omni.i18n.model.UniformDetail.is_includes_logo,
+  discount_amountLabel             k      : Omni.i18n.model.UniformDetail.discount_amount,
   discount_percentLabel                   : Omni.i18n.model.UniformDetail.discount_percent,
   uniform_sourceLabel                     : Omni.i18n.model.UniformDetail.uniform_source,
   retail_priceLabel                       : Omni.i18n.model.UniformDetail.retail_price,
@@ -114,6 +115,7 @@ Ext.define('Omni.view.uniform_details.Form', {
               itemTpl      : '{display}',
               name         : 'style_color_id',
               fieldLabel   : me.style_color_idLabel,
+              gotoTarget   : 'omni-style_colors-Inspector',
               //initialValue : me.record.get('display'),
               allowBlank   : false
             },
@@ -125,8 +127,9 @@ Ext.define('Omni.view.uniform_details.Form', {
               name         : 'from_grade_id',
               valueField: 'grade_id',
               fieldLabel   : me.from_grade_idLabel,
+              gotoTarget   : 'omni-grades-Inspector',
               //initialValue : me.record.get('from_grade_display'),
-              allowBlank   : false
+              allowBlank   : true
             },
             {
               xtype        : 'buildit-Locator',
@@ -136,8 +139,9 @@ Ext.define('Omni.view.uniform_details.Form', {
               name         : 'thru_grade_id',
               valueField: 'grade_id',
               fieldLabel   : me.thru_grade_idLabel,
+              gotoTarget   : 'omni-grades-Inspector',
               //initialValue : me.record.get('thru_grade_display'),
-              allowBlank   : false
+              allowBlank   : true
             },
             {
               xtype        : 'checkbox',
@@ -169,6 +173,13 @@ Ext.define('Omni.view.uniform_details.Form', {
               name         : 'discount_percent',
               fieldLabel   : me.discount_percentLabel,
               maxLength    : 100,
+              minLength    : 0,
+              allowBlank   : true
+            },
+            {
+              xtype        : 'numberfield',
+              name         : 'discount_amount',
+              fieldLabel   : me.discount_amountLabel,
               minLength    : 0,
               allowBlank   : true
             },

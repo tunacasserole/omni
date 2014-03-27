@@ -22,6 +22,7 @@ en:
         is_includes_logo:                  'Is Includes Logo'
         is_requirees_logo:                 'Is Requires Logo'
         discount_percent:                  'Discount Percent'
+        discount_amount:                   'Discount Amount'
         uniform_source:                    'Uniform Source'
         retail_price:                      'Retail Price'
         price_units:                       'Price Units'

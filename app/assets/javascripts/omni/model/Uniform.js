@@ -38,6 +38,9 @@ Ext.define('Omni.model.Uniform', {
       name: 'school_year',
       type: 'string'
     }, {
+      name: 'discount_percent',
+      type: 'decimal'
+    }, {
       name: 'teacher_discount_percent',
       type: 'decimal'
     }, {

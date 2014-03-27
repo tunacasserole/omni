@@ -4,7 +4,7 @@ en:
       omni/uniform_lookup:  'UniformLookup'
     attributes:
       omni/uniform_lookup:
-        display_as:                        'UniformLookup'
+        display_as:                        'Uniform Lookup'
         uniform_lookup_id:                 'Uniform Lookup'
         display:                           'Display'
         uniform_lookup_nbr:                'Uniform Lookup Nbr'

@@ -198,8 +198,7 @@ Ext.create('Ext.data.ArrayStore', {
     ['567885829728BBB3456782313B100AAA','CUSTOMER',,'ACCOUNT_TYPE','School - Customer',null,true],
     ['912385829728HHHAHEHUH2313B100AAA','NON_CONTRACT',,'ACCOUNT_TYPE','School - Non-Contract',null,true],
     ['8345858OTETUHHH2A3D212313B100AAA','PROSPECT',,'ACCOUNT_TYPE','School - Prospect',null,true],
-    ['3857858294TUHNN2A3D212313B100AAA','CLOSED',,'ACCOUNT_TYPE','School - Closed',null,true],
-    ['123485829728XXX2A3D123456B100AAA','TG_STORE',,'ACCOUNT_TYPE','TG Retail Store',null,true]
+    ['3857858294TUHNN2A3D212313B100AAA','CLOSED',,'ACCOUNT_TYPE','School - Closed',null,true]
   ]
 });
 

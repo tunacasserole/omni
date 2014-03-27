@@ -47,6 +47,25 @@ describe "uniform_detail" do
   end
 
   describe "hooks should" do
+    it "not allow a uniform detail to have a from or thru grade that is not valid for the account" do
+      g1 = Omni::Grade.where(short_name: '1').first
+      g8 = Omni::Grade.where(short_name: '8').first
+      g12 = Omni::Grade.where(short_name: '12').first
+      a = create(Omni::Account, from_grade_id: g1.grade_id, thru_grade_id: g8.grade_id)
+      u = create(Omni::Uniform, account_id: a.account_id)
+      me = build(Omni::UniformDetail, uniform_id: u.uniform_id, from_grade_id: g12.grade_id)
+      me.should_not be_valid
+      me.from_grade_id = g8.grade_id
+      me.save
+      me.should be_valid
+      me.thru_grade_id = g12.grade_id
+      me.save
+      me.should_not be_valid
+      me.thru_grade_id = g1.grade_id
+      me.save
+      me.should be_valid
+    end
+
     it "set from_grade to account from_grade" do
       g = create(Omni::Grade)
       a = create(Omni::Account, from_grade_id: g.grade_id, thru_grade_id: g.grade_id)

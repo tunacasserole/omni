@@ -14,6 +14,7 @@ Ext.define('Omni.view.uniforms.Form', {
   descriptionLabel: Omni.i18n.model.Uniform.description,
   stateLabel: Omni.i18n.model.Uniform.state,
   school_yearLabel: Omni.i18n.model.Uniform.school_year,
+  discount_percentLabel: Omni.i18n.model.Uniform.discount_percent,
   teacher_discount_percentLabel: Omni.i18n.model.Uniform.teacher_discount_percent,
   administrator_discount_percentLabel: Omni.i18n.model.Uniform.administrator_discount_percent,
   is_discount_in_storeLabel: Omni.i18n.model.Uniform.is_discount_in_store,
@@ -94,6 +95,13 @@ Ext.define('Omni.view.uniforms.Form', {
             name: 'description',
             fieldLabel: me.descriptionLabel,
             maxLength: 4000,
+            minLength: 0,
+            allowBlank: true
+          }, {
+            xtype: 'numberfield',
+            name: 'discount_percent',
+            fieldLabel: me.discount_percentLabel,
+            maxLength: 100,
             minLength: 0,
             allowBlank: true
           }, {

@@ -91,6 +91,10 @@ Ext.define('Omni.model.UniformDetail', {
       type       : 'decimal'
     },
     {
+      name       : 'discount_amount',
+      type       : 'decimal'
+    },
+    {
       name       : 'uniform_source',
       type       : 'string'
     },

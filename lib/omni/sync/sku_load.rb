@@ -45,7 +45,7 @@ class Omni::Sync::SkuLoad < Omni::Sync::Base
       puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
       # row = Omni::Account.where(description: x.school_name.gsub!(/\s+/, "")).first || Omni::Account.where(display: x.school_name).first || Omni::Account.where(school_nbr: x.school_name).first
       # row = Omni::Account.where(account_name: x.school_code).first || Omni::Account.where(display: x.school_code).first || Omni::Account.where(school_nbr: x.school_code).first unless row
-      row = Omni::Account.where(school_nbr: x.school_code).first
+      row = Omni::Account.where(school_nbr: x.school_code).first || Omni::Account.where(school_nbr: "0#{x.school_code}").first || Omni::Account.where(school_nbr: "00#{x.school_code}").first || Omni::Account.where(school_nbr: "000#{x.school_code}").first
       if row
         x.account_id = row.account_id
         x.save

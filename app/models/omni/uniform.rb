@@ -18,6 +18,7 @@ class Omni::Uniform < ActiveRecord::Base
   default      :uniform_id,                       override: false,        with: :guid
   default      :uniform_nbr,                      override: false,        with: :sequence,         named: "UNIFORM_NBR"
   default      :display,                          override: false,        to: lambda{|m| "#{m.uniform_name} - #{m.uniform_nbr}"}
+  default      :discount_percent,                 override: false,        to: 0
   default      :teacher_discount_percent,         override: false,        to: 0
   default      :administrator_discount_percent,   override: false,        to: 0
   default      :is_discount_in_store,             override: false,        to: false
@@ -110,7 +111,7 @@ class Omni::Uniform < ActiveRecord::Base
     # log an approval
     self.approvals.create(approvable_type: 'Omni::Uniform', display: 'uniform was approved')
     # closing any other active uniforms to ensure only 1 active uniform per account
-    self.account.uniforms.each {|x| x.close if x.state?(:active) unless x == self}# if self.account
+    self.account.uniforms.each {|x| x.close if x.state?(:active) unless x == self} if self.account
   end
 
   def do_close
