@@ -116,6 +116,7 @@ Ext.define('Omni.view.uniform_details.Form', {
               name         : 'style_color_id',
               fieldLabel   : me.style_color_idLabel,
               gotoTarget   : 'omni-style_colors-Inspector',
+              emptyText: 'auto-populated on save'
               //initialValue : me.record.get('display'),
               allowBlank   : false
             },
@@ -128,6 +129,7 @@ Ext.define('Omni.view.uniform_details.Form', {
               valueField: 'grade_id',
               fieldLabel   : me.from_grade_idLabel,
               gotoTarget   : 'omni-grades-Inspector',
+              emptyText: 'auto-populated on save'
               //initialValue : me.record.get('from_grade_display'),
               allowBlank   : true
             },
