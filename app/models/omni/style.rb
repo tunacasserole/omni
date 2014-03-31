@@ -180,14 +180,14 @@ class Omni::Style < ActiveRecord::Base
   # STATES (End)
 
   def ready_to_build_skus
-    puts "\n\nready_to_build_skus"
+    # puts "\n\nready_to_build_skus"
     has_style_color_sizes = false
     self.style_colors.each do |x|
       has_style_color_sizes = true if x.style_color_sizes.count > 0
     end
-
+    # puts "has style color sizes? #{has_style_color_sizes}"
     errors.add(:colors, ' - at least one color must be selected to generate skus.  Navigate to the Colors tab, then click the plus button in the upper right corner to add a color.  Skus are based on sizes and colors, without either, no skus will be built.') if self.style_colors.count < 1
-    errors.add(:sizes, ' - at least one size must be selected to generate skus.  Navigate to the Colors tab, then click the magnifying glass to inspect a color, then navigate to the sizes tab and click the plus sign.  Sizes should have been added automatically - did you have a size group?  Did the size group have sizes?.') unless has_style_color_sizes
+    errors.add(:sizes, ' - at least one size must be selected to generate skus.  Navigate to the Sizes tab, then click the magnifying glass to inspect a color, then navigate to the sizes tab and click the plus sign.  Sizes should have been added automatically - did you have a size group?  Did the size group have sizes?.') unless has_style_color_sizes
     errors.add(:suppliers, ' - at least one supplier must be selected to generate skus.  Navigate to the Suppliers tab, then click the plus button in the upper right corner to add a supplier. ') if self.style_suppliers.count < 1
     errors.add(:locations, ' - at least one location must be selected to generate skus.  Navigate to the Locations tab, then click the plus button in the upper right corner to add a location. ') if self.style_locations.count < 1
   end
@@ -218,7 +218,7 @@ class Omni::Style < ActiveRecord::Base
 
   ######## GENERATE SKU DATA ##############
   def go_build_skus
-    puts "\n\ngo_build_skus"
+    # puts "\n\ngo_build_skus"
     self.state = 'draft'
     save
     # ready_to_build_skus
@@ -276,16 +276,18 @@ class Omni::Style < ActiveRecord::Base
       if x.save
         @@generated_skus << x.sku_id
         build_suppliers x
-        # build_inventory x
+        build_inventory x
+
         # Update the StyleColorSize sku_id to the one just built and the state to generated
         scs.sku_id = x.sku_id
         scs.state = 'generated'
         scs.save
       else
+        puts "sku not generated because of error for #{sku_name}"
       end
     end
 
-    bulk_insert_inventory
+    # bulk_insert_inventory
   end
 
   def bulk_insert_inventory
@@ -308,30 +310,34 @@ class Omni::Style < ActiveRecord::Base
     puts "done indexing"
   end
 
-  # def build_inventory(sku_ids)
-  #   # ACTIVERECORD
-  #   self.style_locations.each do |sl|
-  #     x = Omni::Inventory.where(sku_id: sku.sku_id, location_id: sl.location_id).first || Omni::Inventory.new(sku_id: sku.sku_id, location_id: sl.location_id)
-  #     x.supplier_id = sl.supplier_id
-  #     x.replenishment_method = sl.replenishment_method
-  #     x.replenishment_source = sl.replenishment_source
-  #     x.safety_stock_units = sl.safety_stock_units
-  #     x.safety_stock_days = sl.safety_stock_days
-  #     x.smoothing_factor = sl.smoothing_factor
-  #     x.forecast_profile_id = sl.forecast_profile_id
-  #     x.minimum_units = sl.minimum_units
-  #     x.maximum_units = sl.maximum_units
-  #     x.seasonal_index_id = sl.seasonal_index_id
-
-  #     x.is_authorized = sl.is_authorized
-  #     x.is_taxable = sl.is_taxable
-  #     x.is_special_order = sl.is_special_order
-  #     x.is_discontinued = sl.is_discontinued
-  #     # x.is_override_demand_exception = sl.is_override_demand_exception
-  #     # x.is_soq_override = sl.is_soq_override
-  #     x.save
-  #   end    #
-  # end
+  def build_inventory(sku)
+    # ACTIVERECORD
+    self.style_locations.each do |sl|
+      # x = Omni::Inventory.where(sku_id: sku.sku_id, location_id: sl.location_id).first || Omni::Inventory.new(sku_id: sku.sku_id, location_id: sl.location_id)
+      x = Omni::Inventory.new(sku_id: sku.sku_id, location_id: sl.location_id)
+      x.supplier_id = sl.supplier_id
+      x.replenishment_method = sl.replenishment_method
+      x.replenishment_source = sl.replenishment_source
+      x.safety_stock_units = sl.safety_stock_units
+      x.safety_stock_days = sl.safety_stock_days
+      x.smoothing_factor = sl.smoothing_factor
+      x.forecast_profile_id = sl.forecast_profile_id
+      x.minimum_units = sl.minimum_units
+      x.maximum_units = sl.maximum_units
+      x.seasonal_index_id = sl.seasonal_index_id
+      x.is_authorized = sl.is_authorized
+      x.is_taxable = sl.is_taxable
+      x.is_special_order = sl.is_special_order
+      x.is_discontinued = sl.is_discontinued
+      # x.is_override_demand_exception = sl.is_override_demand_exception
+      # x.is_soq_override = sl.is_soq_override
+      if x.save
+        # puts "inventory built for sku #{sku.display}"
+      else
+        # puts "inventory was not built for #{sl.display}"
+      end
+    end    #
+  end
 
   def build_suppliers(sku)
     # Add SkuSupplier rows to this sku for each StyleSupplier rows in active state
@@ -340,7 +346,7 @@ class Omni::Style < ActiveRecord::Base
       x = Omni::SkuSupplier.where(sku_id: sku.sku_id, supplier_id: ss.supplier_id).first || Omni::SkuSupplier.new(sku_id: sku.sku_id, supplier_id: ss.supplier_id)
       x.sku_id = sku.sku_id
       x.supplier_id = ss.supplier_id
-      x.is_primary = ss.is_primary
+      x.is_primary_supplier = ss.is_primary
       x.is_manufacturer = ss.is_manufacturer
       x.is_discontinued = ss.is_discontinued
       x.supplier_cost_units = ss.supplier_cost_units

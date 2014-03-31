@@ -76,7 +76,9 @@ class Omni::Sku < ActiveRecord::Base
   belongs_to   :supplier,                        class_name: 'Omni::Supplier',                foreign_key: 'supplier_id'
   has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
   has_many     :sku_aliases,                     class_name: 'Omni::SkuAlias',                foreign_key: 'sku_id'
-  has_many     :inventories,                     class_name: 'Omni::Inventory',               foreign_key: 'inventory_id'
+  has_many     :sku_prices,                      class_name: 'Omni::SkuPrice',                foreign_key: 'sku_id'
+  has_many     :sku_suppliers,                   class_name: 'Omni::SkuSupplier',             foreign_key: 'sku_id'
+  has_many     :inventories,                     class_name: 'Omni::Inventory',               foreign_key: 'sku_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================

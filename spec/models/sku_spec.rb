@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "sku" do
+  let(:me) { create(Omni::Sku) }
 
   describe "requires" do
     it "sku_id" do lambda{Omni::Sku.create! sku_id nil}.should raise_error end
@@ -15,8 +16,8 @@ describe "sku" do
   end
 
   describe "defaults" do
-    it "sku_id" do me = create(Omni::Sku); me.sku_id.should_not be_nil end
-    it "sku_nbr" do me = create(Omni::Sku); me.sku_nbr.should_not be_nil end
+    it "sku_id" do me.sku_id.should_not be_nil end
+    it "sku_nbr" do me.sku_nbr.should_not be_nil end
   end
 
   describe "lookups" do
@@ -29,7 +30,11 @@ describe "sku" do
   end
 
   describe "has_many" do
-    # it "notes" do me = create(Omni::Sku); c = create(Buildit::Note, notable_type: 'Omni::Sku',notable_id: me.style_id); me.notes.count.should eq(1) end
+    it "inventories" do create(Omni::Inventory, sku_id: me.sku_id); me.inventories.count.should eq(1) end
+    it "suppliers" do create(Omni::SkuSupplier, sku_id: me.sku_id); me.sku_suppliers.count.should eq(1) end
+    it "prices" do create(Omni::SkuPrice, sku_id: me.sku_id); me.sku_prices.count.should eq(1) end
+    it "aliases" do create(Omni::SkuAlias, sku_id: me.sku_id); me.sku_aliases.count.should eq(1) end
+    it "notes" do create(Buildit::Note, notable_type: 'Omni::Sku',notable_id: me.sku_id); me.notes.count.should eq(1) end
   end
 
   describe "indexing" do

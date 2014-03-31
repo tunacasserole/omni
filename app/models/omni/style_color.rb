@@ -49,8 +49,8 @@ class Omni::StyleColor < ActiveRecord::Base
 
 
   # HOOKS (Start) =======================================================================
-  # hook  :before_create,      :validate_style_size_group,             10
-  # hook  :after_create,       :add_style_color_sizes,                 10
+  hook  :before_create,      :validate_style_size_group,             10
+  hook  :after_create,       :add_style_color_sizes,                 10
 
   # HOOKS (End)
 

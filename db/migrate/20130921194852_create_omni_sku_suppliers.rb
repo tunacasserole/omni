@@ -10,9 +10,6 @@ class CreateOmniSkuSuppliers < ActiveRecord::Migration
         t.column   :supplier_id,                     :string,            null: true,    limit: 32
         t.column   :supplier_item_identifier,        :string,            null: true,    limit: 200
         t.column   :description,                     :string,            null: true,    limit: 300
-        t.column   :is_primary_supplier,             :boolean,           null: true
-        t.column   :is_manufacturer,                 :boolean,           null: true
-        t.column   :is_discontinued,                 :boolean,           null: true
         t.column   :supplier_cost_units,             :integer,           null: true
         t.column   :supplier_cost,                   :decimal,           null: true,    :scale   => 4,          :precision  => 13
         t.column   :master_pack_units,               :integer,           null: true
@@ -33,16 +30,19 @@ class CreateOmniSkuSuppliers < ActiveRecord::Migration
         t.column   :minimum_order_weight,            :decimal,           null: true,    scale: 2, precision: 11
         t.column   :minimum_order_cube,              :decimal,           null: true,    scale: 2, precision: 11
         t.column   :order_multiple_type,             :string,            null: true,    limit: 200
-        t.column   :extra_cost,                      :decimal,           null: true,    :scale   => 4,          :precision  => 13
-        t.column   :is_included_extra_cost,          :boolean,           null: true
-        t.column   :cost_id,                         :string,            null: true,    limit: 32
-        t.column   :origin_country,                  :string,            null: true,    limit: 200
-        t.column   :freight_term,                    :string,            null: true,    limit: 200
-        t.column   :is_conveyable_master_pack,       :boolean,           null: true
-        t.column   :is_conveyable_inner_pack,        :boolean,           null: true
         t.column   :pallet_tie,                      :integer,           null: true
         t.column   :pallet_high,                     :integer,           null: true
         t.column   :pallet_container_id,             :string,            null: true,    limit: 32
+        t.column   :extra_cost,                      :decimal,           null: true,    :scale   => 4,          :precision  => 13
+        t.column   :cost_id,                         :string,            null: true,    limit: 32
+        t.column   :origin_country,                  :string,            null: true,    limit: 200
+        t.column   :freight_term,                    :string,            null: true,    limit: 200
+        t.column   :is_primary_supplier,             :boolean,           null: true
+        t.column   :is_manufacturer,                 :boolean,           null: true
+        t.column   :is_discontinued,                 :boolean,           null: true
+        t.column   :is_included_extra_cost,          :boolean,           null: true
+        t.column   :is_conveyable_master_pack,       :boolean,           null: true
+        t.column   :is_conveyable_inner_pack,        :boolean,           null: true
         t.column   :is_destroyed,                    :boolean,           null: true
         t.column   :is_indexed,                      :boolean,           null: true
       end

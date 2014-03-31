@@ -90,19 +90,18 @@ class Omni::Account < ActiveRecord::Base
   order_search_by :display => :asc
 
   searchable do
-    # string   :account_id
-    # string   :account_nbr
-    # string   :account_name
+      # string   :account_id
+    string   :account_nbr
+    string   :account_name
     string   :display
-    # string   :state
-    # # string   :location_display do location.display if location end
     # string   :billing_city
-    # string   :shipping_city
     # string   :billing_state   do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.billing_state) end
+    # string   :state
+    # string   :location_display do location.display if location end
+    # string   :shipping_city
     # string   :shipping_state do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.shipping_state) end
 
-    text     :display
-    # text     :account_name_fulltext, using: :account_name
+    text     :account_name_fulltext, using: :account_name
     # text     :account_nbr_fulltext, using: :account_nbr
     # text     :location_display_fulltext, using: :location_display
     # text     :billing_city_fulltext, using: :billing_city

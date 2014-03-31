@@ -30,15 +30,25 @@ development:
   password:
   socket: /tmp/mysql.sock
 
-# local omni_production
+# local omni_test
 test:
   adapter: mysql2
   encoding: utf8
-  database: omni_development<%= ENV['TEST_ENV_NUMBER'] %>
+  database: omni_test
   pool: 5
   username: root
   password:
   socket: /tmp/mysql.sock
+
+# local omni_production
+# test:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: omni_development<%= ENV['TEST_ENV_NUMBER'] %>
+#   pool: 5
+#   username: root
+#   password:
+#   socket: /tmp/mysql.sock
 
 #digital ocean omni_test
 # test:

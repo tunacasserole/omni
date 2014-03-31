@@ -1,0 +1,1 @@
+Omni::ForecastProfile.create(:forecast_profile_id => '42608AAEE7D011E28FB520C9D0471234',:display => 'default forecast profile', :description => 'simple weighted average sales formula', :sales_py1_weight => '.80', :sales_py2_weight => '.15', :sales_py3_weight => '.05', :forecast_formula => 'SALES')
