@@ -96,14 +96,11 @@
 
   # HOOKS (Start) =======================================================================
   def self.source_hash
-     # legacy_source = 'PARKER'
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create inventory hash"
     to_hash = {}
     ActiveRecord::Base.connection.execute("select inventory_id, location_id, sku_id from inventories").each {|x| to_hash["#{x[1]},#{x[2]}"] = x[0]} # MRI
-    # ActiveRecord::Base.connection.execute("select inventory_id, location_id, sku_id from inventories").each {|x| to_hash["#{x['location_id']},#{x['sku_displayid']}"] = x['inventory_id']}  # JRUBY!!!
-    to_hash
-    # sku_id = 'FC01B0200EE811E3BB7020C9D047DD15'
-    # location_id = '540ADAA2AC3E11E2947800FF58D32228'
-    # inventory_id = @inventories["#{location_id},#{sku_id}"]
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END....create inventory hash: #{to_hash.count.to_s}"
+    return to_hash
   end
   # HOOKS (End)
 

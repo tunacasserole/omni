@@ -76,6 +76,13 @@ class Omni::SkuAlias < ActiveRecord::Base
   # end
   # # INDEXING (End)
 
+  def self.to_hash
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku alias hash"
+    to_hash = {}
+    ActiveRecord::Base.connection.execute("select sku_id, sku_alias from sku_aliases").each {|x| to_hash[x[1]] = x[0]} # MRI
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END....create sku alias hash: #{to_hash.count.to_s}"
+    return to_hash
+  end
 
 end # class Omni::SkuAlias
 
