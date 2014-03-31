@@ -16,14 +16,14 @@ class Omni::Sync::SkuAlias < Omni::Sync::Base
           abort
         end
       end
-      if x[3] && x[3].length > 1
+      if x[3] && x[3].length > 0
         row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[3])
         unless row
           puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, bu alias #{x[3]}"
           abort
         end
       end
-      if x[4] && x[4].length > 1
+      if x[4] && x[4].length > 0
         row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[4])
         unless row
           puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, tg alias #{x[4]}"

@@ -166,7 +166,8 @@ class Omni::Sync::Base
     # seq(table_name)
 
     # load the excel data into a hash and map it to the database
-    excel_to_hash("#{table_name}.xlsx").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x);  puts "#{time_stamp}: processing row: #{i.to_s}" if i.to_s.end_with? '000'}
+    excel_type = 'xlsx'
+    excel_to_hash("#{table_name}.#{excel_type}").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x);  puts "#{time_stamp}: processing row: #{i.to_s}" if i.to_s.end_with? '000'}
 
     # optionally call seed file generator
     # dump_to_seed(model_name)
