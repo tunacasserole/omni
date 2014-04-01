@@ -147,7 +147,7 @@ class Omni::Sync::Base
     header = excel.row(1)
     (2..excel.last_row).each do |i|
       # break if i > 100
-      puts "#{time_stamp}: reading row: #{i.to_s}" if i.to_s.end_with? '000'
+      clock_it(i)
       next unless excel.row(i)[0]
       row = Hash[[header, excel.row(i)].transpose]
       row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
@@ -167,7 +167,7 @@ class Omni::Sync::Base
 
     # load the excel data into a hash and map it to the database
     excel_type = 'xlsx'
-    excel_to_hash("#{table_name}.#{excel_type}").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x);  puts "#{time_stamp}: processing row: #{i.to_s}" if i.to_s.end_with? '000'}
+    excel_to_hash("#{table_name}.#{excel_type}").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x); clock_it(i)}
 
     # optionally call seed file generator
     # dump_to_seed(model_name)
@@ -198,6 +198,18 @@ class Omni::Sync::Base
     end
   end
 
+  def self.clock_it(i)
+    if i = 1
+      @start_time = Time.now
+      puts "#{time_stamp}:  read row 1"
+    end
+    if i.to_s.end_with? '000'
+      @end_time = Time.now
+      puts "#{time_stamp}: read rows: #{(i-1000).to_s} - #{i.to_s} in #{@end_time - @start_time} seconds"
+      @start_time = Time.now
+    end
+  end
+
   def self.time_stamp
     "== #{Time.now.strftime("%H:%M:%S").yellow}: "
   end
@@ -205,7 +217,7 @@ class Omni::Sync::Base
   def self.seed_file_name(model_name)
     # generate seed file name
     sleep 1
-    "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{model_name.tableize}"
+    "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{model_name.tableize}.rb"
   end
 
   def self.dump_to_seed(model_name)

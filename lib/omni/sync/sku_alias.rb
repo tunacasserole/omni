@@ -10,21 +10,21 @@ class Omni::Sync::SkuAlias < Omni::Sync::Base
     data.each_with_index do |x,i|
       puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
       if x[2] && x[2].length > 1
-        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[2])
+        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[2], alias_source: 'parker')
         unless row
           puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, mark alias #{x[2]}"
           abort
         end
       end
       if x[3] && x[3].length > 0
-        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[3])
+        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[3], alias_source: 'buckhead')
         unless row
           puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, bu alias #{x[3]}"
           abort
         end
       end
       if x[4] && x[4].length > 0
-        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[4])
+        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[4], alias_source: 'true grits')
         unless row
           puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, tg alias #{x[4]}"
           abort
