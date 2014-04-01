@@ -43,15 +43,18 @@ namespace :omni do
   end
 
   namespace :seed do
+    puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
+    @start_time = Time.now
     Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
       task_name = File.basename(filename, '.rb').intern
       task task_name => :environment do
         load(filename) if File.exist?(filename)
       end
     end
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
-    desc "re sequence existing data"
+  desc "re sequence existing data"
   task :re_sequence, [:model] => :environment do |t, args|
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     # puts "model is #{args[:model]} and #{args.model}"  # both notations work
