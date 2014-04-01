@@ -3,10 +3,10 @@ class Omni::Sync::Inventory < Omni::Sync::Base
   def self.go
     @grits_stores = {'60' => '56072748AC3E11E2947800FF58D32228', '61' => '562B2A8AAC3E11E2947800FF58D32228', '62' => '564FA306AC3E11E2947800FF58D32228', '63' => '5678132CAC3E11E2947800FF58D32228', '64'=> '569FE712AC3E11E2947800FF58D32228', '65' => '56CAEF52AC3E11E2947800FF58D32228', '66' =>'56EB490AAC3E11E2947800FF58D32228'}
     @rms_stores = {'Van Sales' => '0799CE3A7BCD11E3A0A920C9D047DD15', '41' => '54BA7E26AC3E11E2947800FF58D32228', '42' => '54DA89BEAC3E11E2947800FF58D32228', '43' => '54FFC58AAC3E11E2947800FF58D32228', '44' => '551C007EAC3E11E2947800FF58D32228', '45' => '555BC98EAC3E11E2947800FF58D32228', '46' => '55A83D00AC3E11E2947800FF58D32228', '47' => '55A83D00AC3E11E2947800FFCHAMBLEE', '  Van Sales' => ''}
+    @skus = Omni::SkuAlias.to_hash('buckhead')
     @inventories = Omni::Inventory.source_hash
 
     ['rms'].each do |source|
-      @skus = Omni::SkuAlias.to_hash(source)
       @rows_processed = 0
       @source = source
       excel_to_seed('Inventory',"#{source}_inventory")

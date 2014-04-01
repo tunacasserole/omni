@@ -1,2 +1,0 @@
-Omni::Company.delete_all
-Omni::Company.create(:company_id => '651A58C8AC3D11E2947800FF58D32228',:display => 'Parker School Uniforms',:company_nbr => '100',:description => 'Parker School Uniforms',:short_name => nil,:company_url => 'www.parkersu.com',:line_1 => '',:line_2 => nil,:line_3 => nil,:line_4 => nil,:city => '',:state_code => nil,:zip => '',:country => nil,:latitude => nil,:longitude => nil,:phone => '',:fax => nil,:beta_factor => nil,:demand_filter => nil,:tracking_signal => nil,:purchase_order_header_cost => nil,:carrying_cost_percent => nil,:is_destroyed => nil,)
