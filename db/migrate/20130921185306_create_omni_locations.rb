@@ -1,8 +1,7 @@
 class CreateOmniLocations < ActiveRecord::Migration
   def change
-  	#ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
     @connection = ActiveRecord::Base.connection
-  	unless ActiveRecord::Base.connection.tables.include?('locations')
+    drop_table :skus if ActiveRecord::Base.connection.tables.include?('skus')
       create_table(:locations, :id => false) do |t|
         t.column   :location_id,                     :string,            null: false,   limit: 32
         t.column   :display,                         :string,            null: false,   limit: 200
@@ -79,7 +78,5 @@ class CreateOmniLocations < ActiveRecord::Migration
         t.column   :is_enabled,                      :boolean,           null: true
         t.column   :is_destroyed,                    :boolean,           null: true
       end
-    end
-    #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))
   end
 end
