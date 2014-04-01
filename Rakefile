@@ -9,7 +9,7 @@ Omni::Application.load_tasks
 namespace :omni do
 
   desc "fix sequences"
-  task :   => :environment do |t, args|
+  task :sequences   => :environment do |t, args|
     # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     @start_time = Time.now
     Desk::Helper::Sequence.update
