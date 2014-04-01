@@ -28,8 +28,6 @@ capybara-*.html
 /.bundle
 /vendor/bundle
 /log/*
-/db/*.sqlite3
-/db
 /public/system/*
 /public/assets
 /coverage/
