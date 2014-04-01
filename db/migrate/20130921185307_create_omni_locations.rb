@@ -1,7 +1,7 @@
 class CreateOmniLocations < ActiveRecord::Migration
   def change
     @connection = ActiveRecord::Base.connection
-    drop_table :skus if ActiveRecord::Base.connection.tables.include?('skus')
+    drop_table :locations if ActiveRecord::Base.connection.tables.include?('locations')
       create_table(:locations, :id => false) do |t|
         t.column   :location_id,                     :string,            null: false,   limit: 32
         t.column   :display,                         :string,            null: false,   limit: 200
