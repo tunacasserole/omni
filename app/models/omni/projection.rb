@@ -177,6 +177,15 @@
     Omni::Projection.reindex
     Omni::ProjectionDetail.reindex
   end
+
+  def notify_initiator
+
+  end
+
+  def initiate_forecast
+
+  end
+
   # STATE HANDLERS (End)
 
   # HELPERS (Start) =====================================================================

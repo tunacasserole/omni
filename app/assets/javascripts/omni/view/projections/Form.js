@@ -201,7 +201,7 @@ Ext.define('Omni.view.projections.Form', {
    *
    */
   onForecastAction: function(action, eOpts) {
-    this.processEventTransition('forecast', 'Projection was successfully forecasted.', 'An error occurred processing this projection.');
+    this.processEventTransition('initiate_forecast', 'Projection was successfully forecasted.', 'An error occurred processing this projection.');
   }, // onAction
 
   /**
