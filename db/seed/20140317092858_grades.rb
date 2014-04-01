@@ -1,5 +1,5 @@
 Omni::Grade.create!([
-  {grade_id: "1FE8AE3CA6C8OHEHAE18OEUIDHTHDIU2", display: "Pre Pre Pre-K", grade_name: "Pre Pre Pre-K", short_name: "PPPK", grade_order: 100, is_destroyed: false},
+  {grade_id: "1FE8AE3CA6C8OHEHAE18OEUIDHTHDIU2", display: "Jr. Pre-K", grade_name: "Junior Pre-K", short_name: "JPK", grade_order: 100, is_destroyed: false},
   {grade_id: "1FE8AE3CA6C8OHEHAE1800FF58D32228", display: "Pre Pre-K", grade_name: "Pre Pre-K", short_name: "PPK", grade_order: 110, is_destroyed: false},
   {grade_id: "1FE8AE3CA6C8EIU7AE1800FF58D32228", display: "Pre-K", grade_name: "Pre-K", short_name: "PK", grade_order: 120, is_destroyed: false},
   {grade_id: "1FE8AE3CA6C8112UOU1800FF58D32228", display: "kindergarten", grade_name: "kindergarten", short_name: "K", grade_order: 130, is_destroyed: false},
