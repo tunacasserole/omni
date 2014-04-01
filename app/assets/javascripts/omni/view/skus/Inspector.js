@@ -47,15 +47,15 @@ Ext.define('Omni.view.skus.Inspector', {
              }
           }
         }
-        // ,{
-        //   title: 'Promotional Prices',
-        //   xtype: 'omni-sku_promo_prices-Explorer', module: 'sales_calls',
-        //   defaultSearch: { with:
-        //      {
-        //        sku_id:   {equal_to: me.record.get('sku_id')}
-        //      }
-        //   }
-        // }
+        ,{
+          title: 'Aliases',
+          xtype: 'omni-sku_aliases-Explorer', module: 'sales_calls',
+          defaultSearch: { with:
+             {
+               sku_id:   {equal_to: me.record.get('sku_id')}
+             }
+          }
+        }
         ,{
           title: 'Suppliers',
           xtype: 'omni-sku_suppliers-Explorer', module: 'samples',
