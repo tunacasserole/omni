@@ -113,7 +113,7 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def forecast
+  def forecast(user_id)
     # return 'invalid action for the current state' if self.state == 'complete'
 
     # Insert or update ProjectionDetail row for every authorized SKU/Location combination (TO DO: in the Departement in the Projection) and every active selling location authorized for the SKU.
@@ -183,7 +183,7 @@
   end
 
   def initiate_forecast
-
+    forecast(Buildit::User.current.user_id)
   end
 
   # STATE HANDLERS (End)
