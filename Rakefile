@@ -51,7 +51,9 @@ namespace :omni do
         load(filename) if File.exist?(filename)
       end
     end
-    # puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
   namespace :demo do
     puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
     @start_time = Time.now
@@ -61,7 +63,7 @@ namespace :omni do
         load(filename) if File.exist?(filename)
       end
     end
-    # puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
   desc "re sequence existing data"
