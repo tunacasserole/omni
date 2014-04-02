@@ -33,7 +33,7 @@ namespace :omni do
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
-  namespace :seed do
+  namespace :db do
     desc "dump existing data into seed files"
     task :dump, [:model] => :environment do |t, args|
       puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
@@ -44,7 +44,7 @@ namespace :omni do
     end
 
     desc "run existing seed files containing the supplied tag."
-    task :run, [:tag] => :environment do |t, args|
+    task :seed, [:tag] => :environment do |t, args|
       Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
         puts filename
         if filename.include? args.tag
@@ -57,10 +57,9 @@ namespace :omni do
     desc "run existing demo seed files containing the supplied tag."
     task :demo, [:tag] => :environment do |t, args|
       Dir[File.join(Rails.root, 'db', 'demo', '*.rb')].sort.each do |filename|
-        puts filename
         if filename.include? args.tag
-          puts "filename has tag - #{args.tag}"
-          # load(filename)
+          puts "running seed #{filename} - #{args.tag}"
+          load(filename)
         end
       end
     end
