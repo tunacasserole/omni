@@ -53,9 +53,12 @@ describe "projection" do
       subclass = create(Omni::Subclass, classification_id: cls.classification_id)
       style = create(Omni::Style, subclass_id: subclass.subclass_id)
 
-      100.times { |x| create(Omni::Location)
+      # SKUS
       100.times { |x| create(Omni::Sku, style_id: style.style_id)}
-      skus.each {|x| create(Omni::Inventory, sku_id: x.sku_id, location_id: loc.location_id)
+
+      # INVENTORY
+      Omni::Location.all { |l| skus.each {|s| create(Omni::Inventory, sku_id: s.sku_id, location_id: l.location_id)}
+      # skus.each {|x| create(Omni::Inventory, sku_id: x.sku_id, location_id: loc.location_id)
 
       me = create(Omni::Projection, department_id: dept.department_id, forecast_profile_id: prof.forecast_profile_id);
       me.forecast
