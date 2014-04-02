@@ -56,7 +56,7 @@ namespace :omni do
 
     desc "run existing demo seed files containing the supplied tag."
     task :demo, [:tag] => :environment do |t, args|
-      Dir[File.join(Rails.root, 'db', 'demo', '*.rb')].each do |filename|
+      Dir[File.join(Rails.root, 'db', 'demo', '*.rb')].sort.each do |filename|
         puts filename
         if filename.include? args.tag
           puts "filename has tag - #{args.tag}"
