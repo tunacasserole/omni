@@ -43,6 +43,7 @@ class Omni::Seed::Base
     # generate seed file name
     sleep 1
     "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{model_name.tableize}"
+
   end
 
   def self.dump_to_seed(model_name)
