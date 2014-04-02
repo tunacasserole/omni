@@ -114,7 +114,6 @@
     end
     after_transition on: :forecast, do: :do_forecast
 
-
     # RELEASE
     after_transition on: :release, do: :do_release
     event :release do
@@ -126,11 +125,11 @@
 
   # STATE HANDLERS (Start) ====================================================================
   def clock_it(i)
-    @start_time = Time.now if i == 1
-    if i.to_s.end_with? '0'
-      @end_time = Time.now
+    # @start_time = Time.now if i == 1
+    if i.to_s.end_with? '00'
+      # @end_time = Time.now
       puts "#{time_stamp} row: #{(i).to_s}" #{}" in #{@end_time - @start_time} seconds"
-      @start_time = Time.now
+      # @start_time = Time.now
     end
   end
 
@@ -142,33 +141,33 @@
   #   self.department.styles
   # end
 
-  # def forecast_by_class
-  #   self.department.classes.each do |x|
-  #     puts "dept: #{self.department.display} starting class #{x.display}"
-  #     # get inventory for that class
-  #     data = x.inventories
-  #     data.each {|i| forecast_one_row(i) }
-  #     puts "dept: #{self.department.display} finishing class #{x.display}"
-  #   end
-  # end
+  def do_forecast
+    # puts "do forecast"
+    # forecast_by_dept
+    forecast_by_class
+  end
 
   def forecast_by_dept
     puts "#{time_stamp} dept: #{self.department.display} - starting"
-    i = 0
-    self.department.inventories.each do |inv|
+    self.department.inventories.each do |inv, i|
       forecast_one_row(inv)
       clock_it(i)
-      i += 1
     end
     puts "#{time_stamp} dept: #{self.department.display} - finishing"
   end
 
-  def do_forecast
-    # puts "do forecast"
-    forecast_by_dept
+  def forecast_by_class
+    self.department.classifications.each_with_index do |klass, i|
+      puts "#{time_stamp}  class #{klass.display} with #{klass.inventories.count} inventory rows"
+      # get inventory for that class
+      klass.inventories.each_with_index {|inv, i| forecast_one_row(inv); clock_it(i) }
+      # clock_it(i)
+      # puts "#{time_stamp} finishing class #{klass.display}"
+    end
   end
 
   def forecast_one_row(i)
+    # puts "forecast_one_row"
     # Insert or update ProjectionDetail row for the give inventory row (i)
     # Create Projection Detail;
     x = Omni::ProjectionDetail.where(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)

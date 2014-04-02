@@ -77,7 +77,7 @@ namespace :omni do
     # puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   # end
 
-  end
+  # end
 
   desc "re sequence existing data"
   task :re_sequence, [:model] => :environment do |t, args|
