@@ -33,22 +33,27 @@ namespace :omni do
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
-  desc "generate seed files from existing data"
-  task :seed, [:model] => :environment do |t, args|
-    puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
-    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
-    @start_time = Time.now
-    Omni::Sync::Base.dump_to_seed(args.model)
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-  end
-
   namespace :seed do
+    desc "dump existing data into seed files"
+    task :dump, [:model] => :environment do |t, args|
+      puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
+      # puts "model is #{args[:model]} and #{args.model}"  # both notations work
+      @start_time = Time.now
+      Omni::Seed::Base.dump_to_seed(args.model)
+      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+    end
+
     # puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
     # @start_time = Time.now
     Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
+      puts "filename is #{filename}"
       task_name = File.basename(filename, '.rb').intern
+      puts "task name is #{task_name}"
       task task_name => :environment do
-        load(filename) if File.exist?(filename)
+        # if File.exist?(filename)
+          puts "... loading. the filename is #{filename}"
+          # load(filename)
+        end
       end
     end
     # puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
