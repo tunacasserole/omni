@@ -83,7 +83,7 @@ describe "style" do
       me.skus.first.sku_suppliers.count.should eq(2)
     end
 
-    it "build 2 inventories when there are 2 style_locations", focus: true do
+    it "build 2 inventories when there are 2 style_locations" do
       # setup sizes
       1.times { |x| create( Omni::SizeGroupDetail, size_group_id: size_group.size_group_id, size_id: create(Omni::Size).size_id ) }
 
