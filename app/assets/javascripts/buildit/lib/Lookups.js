@@ -452,7 +452,10 @@ Ext.create('Ext.data.ArrayStore', {
     ['8F37540A972811E295B122000A9D0283','HOME',,'EMAIL_ADDRESS_TYPE','Home',null,true],
     ['90165B5A972811E295B122000A9D0283','OTHER',,'EMAIL_ADDRESS_TYPE','Other',null,true],
     ['912AE15A972811E295B122000A9D0283','NA',,'EMAIL_ADDRESS_TYPE','Not Assigned',null,true],
-    ['92366ED4972811E295B122000A9D0283','WORK',,'EMAIL_ADDRESS_TYPE','Work',null,true]
+    ['92366ED4972811E295B122000A9D0283','WORK',,'EMAIL_ADDRESS_TYPE','Work',null,true],
+    ['942212F0204011E290E9040CCEDF84BB','TO',,'EMAIL_ADDRESS_TYPE','To',null,true],
+    ['942212F0204011E290E9040CCEDF84ED','CC',,'EMAIL_ADDRESS_TYPE','CC',null,true],
+    ['942212F0204011E290E9040CCEDF84FE','BCC',,'EMAIL_ADDRESS_TYPE','BCC',null,true]
   ]
 });
 
@@ -1139,6 +1142,24 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'ATTACHMENT_TYPE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['63991211204011E290E9040CCEDF84BB','BASIC',,'ATTACHMENT_TYPE','Basic',null,true],
+    ['98A000EE204011E290E9040CCEDF842E','GENERAL',0,'ATTACHMENT_TYPE','General',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'BOOLEAN_YES_NO-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['323244F0204011EFCFE9040CCEDF842E','true',0,'BOOLEAN_YES_NO','Yes',null,true],
+    ['323244F0204011EB2BE9040CCEDF842E','false',0,'BOOLEAN_YES_NO','No',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
   storeId   : 'CASE_TYPE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
@@ -1146,6 +1167,51 @@ Ext.create('Ext.data.ArrayStore', {
     ['03122456ENHDATAMENTXXXOEUIXX1234','DATA',,'CASE_TYPE','Data conversion or cleanup',null,true],
     ['03122456ENHANCEMENTXXXXXXXXX1234','ENHANCEMENT',,'CASE_TYPE','Enhancement, new feature or custom development',null,true],
     ['03122456EQUESTIONNTXXXXXXXXX1234','QUESTION',,'CASE_TYPE','Question or explanation needed',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'DIRECTION_CODE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['632212F0204011E290E9040CCEDF84BB','OUTBOUND',,'DIRECTION_CODE','Outbound',null,true],
+    ['632212F0204011E290E9040CCEDF84DD','INBOUND',,'DIRECTION_CODE','Inbound',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'NOTE_TYPE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['323244F0204011E290E9040CCEDF842E','0',0,'NOTE_TYPE','General',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'PRIORITY_CODE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['335212F0204011E290E9040CCEDF84BB','LOW',,'PRIORITY_CODE','Low',null,true],
+    ['335212F0204011E290E9040CCEDF84DD','NORMAL',,'PRIORITY_CODE','Normal',null,true],
+    ['335212F0204011E290E9040CCEDF84EF','HIGH',,'PRIORITY_CODE','High',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'SSO_PLUGIN_CODE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['98A212F0204011E290E9040CCEDF842E','BUILDIT',,'SSO_PLUGIN_CODE','In-App Security',null,true],
+    ['98A212F0204011E290E9040CCCCC842E','LDAP',,'SSO_PLUGIN_CODE','LDAP Authentication',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'USER_STATUS-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['98A444F0204011E290E9040CCEDF842E','0',0,'USER_STATUS','Active',null,true],
+    ['98A454F0204011E290E9040CCEDF842E','1',1,'USER_STATUS','Inactive',null,true]
   ]
 });
 

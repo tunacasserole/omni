@@ -6,7 +6,7 @@ development:
     log_level: INFO
     min_memory: 512M
     max_memory: 1G
-    path: '/solr/omni'
+    path: '/solr/omni_dev'
 
 production:
   solr:
@@ -20,6 +20,9 @@ production:
 test:
   solr:
     hostname: localhost
-    port: 8981
+    port: 8983
     log_level: WARNING
+    min_memory: 512M
+    max_memory: 1G
+    path: '/solr/omni_test'
 

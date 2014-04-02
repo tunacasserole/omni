@@ -36,11 +36,12 @@ GEM
     arel (4.0.2)
     atomic (1.1.15)
     builder (3.1.4)
-    buildit (0.9.41)
+    buildit (0.9.57)
       activeresource
       bunny (>= 0.9.0.rc1)
       colored
       extjs4-rails (~> 4.2.2)
+      font-awesome-rails
       json
       log4r
       nokogiri
@@ -78,6 +79,8 @@ GEM
       railties (>= 3.0.0)
     fattr (2.2.1)
     ffi (1.9.3)
+    font-awesome-rails (4.0.3.1)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.4)
     guard (2.4.0)
       formatador (>= 0.2.4)
@@ -248,7 +251,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  buildit (= 0.9.41)
+  buildit
   buildit_sockets
   factory_girl_rails
   guard
