@@ -36,7 +36,7 @@ describe "projection" do
 
   end
 
-  describe "forecast should", focus: true do
+  describe "forecast should" do
     it "prevent forecasting a projection without department" do
       me.department_id = nil
       me.save
@@ -53,9 +53,9 @@ describe "projection" do
       me.projection_details.count.should eq(0)
     end
 
-    it "build details" do
+    it "build details" , focus: true do
 
-      [10].each do |sku_load|
+      [3].each do |sku_load|
 
         # setup skus
         prof = create(Omni::ForecastProfile, sales_py1_weight: 0.8, sales_py2_weight: 0.15, sales_py3_weight: 0.5)

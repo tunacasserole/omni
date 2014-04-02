@@ -139,30 +139,25 @@
     end
   end
 
-  def forecast_by_style
-    # self.styles.each
-  end
-
-
   def forecast_by_dept
     puts "#{time_stamp} dept: #{self.department.display} - starting"
-    self.department.inventories.each do |i|
-      forecast_one_row(i)
+    i = 0
+    self.department.inventories.each do |inv|
+      forecast_one_row(inv)
+      clock_it(i)
+      i += 1
     end
     puts "#{time_stamp} dept: #{self.department.display} - finishing"
   end
 
-  # def self.clock_it(i)
-  #   if i == 1
-  #     @start_time = Time.now
-  #     puts "#{time_stamp}:  read row 1"
-  #   end
-  #   if i.to_s.end_with? '000'
-  #     @end_time = Time.now
-  #     puts "#{time_stamp}: read rows: #{(i-1000).to_s} - #{i.to_s} in #{@end_time - @start_time} seconds"
-  #     @start_time = Time.now
-  #   end
-  # end
+  def clock_it(i)
+    @start_time = Time.now if i == 1
+    if i.to_s.end_with? '0'
+      @end_time = Time.now
+      puts "#{time_stamp} processed rows: #{(i).to_s} - #{i.to_s}" #{}" in #{@end_time - @start_time} seconds"
+      @start_time = Time.now
+    end
+  end
 
   def time_stamp
     "== #{Time.now.strftime("%H:%M:%S").yellow}: "
@@ -224,9 +219,6 @@
     x.total_need = x.coverage_complete - x.usable + x.on_order
 
     x.save
-
-    self.state = 'forecast' if self.state =='draft'
-    self.save
 
     # Omni::Projection.reindex
     # Omni::ProjectionDetail.reindex
