@@ -125,31 +125,6 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  def self.styles
-    self.department.styles
-  end
-
-  def forecast_by_class
-    self.department.classes.each do |x|
-      puts "dept: #{self.department.display} starting class #{x.display}"
-      # get inventory for that class
-      data = x.inventories
-      data.each {|i| forecast_one_row(i) }
-      puts "dept: #{self.department.display} finishing class #{x.display}"
-    end
-  end
-
-  def forecast_by_dept
-    puts "#{time_stamp} dept: #{self.department.display} - starting"
-    i = 0
-    self.department.inventories.each do |inv|
-      forecast_one_row(inv)
-      clock_it(i)
-      i += 1
-    end
-    puts "#{time_stamp} dept: #{self.department.display} - finishing"
-  end
-
   def clock_it(i)
     @start_time = Time.now if i == 1
     if i.to_s.end_with? '0'
@@ -161,6 +136,31 @@
 
   def time_stamp
     "== #{Time.now.strftime("%H:%M:%S").yellow}: "
+  end
+
+  # def self.styles
+  #   self.department.styles
+  # end
+
+  # def forecast_by_class
+  #   self.department.classes.each do |x|
+  #     puts "dept: #{self.department.display} starting class #{x.display}"
+  #     # get inventory for that class
+  #     data = x.inventories
+  #     data.each {|i| forecast_one_row(i) }
+  #     puts "dept: #{self.department.display} finishing class #{x.display}"
+  #   end
+  # end
+
+  def forecast_by_dept
+    puts "#{time_stamp} dept: #{self.department.display} - starting"
+    i = 0
+    self.department.inventories.each do |inv|
+      forecast_one_row(inv)
+      clock_it(i)
+      i += 1
+    end
+    puts "#{time_stamp} dept: #{self.department.display} - finishing"
   end
 
   def do_forecast

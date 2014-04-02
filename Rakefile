@@ -8,31 +8,6 @@ Omni::Application.load_tasks
 
 namespace :omni do
 
-  desc "fix sequences"
-  task :sequences   => :environment do |t, args|
-    # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    @start_time = Time.now
-    Desk::Helper::Sequence.update
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-  end
-
-  desc "run automated test suite"
-  task :test => :environment do |t, args|
-    # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    @start_time = Time.now
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-  end
-
-  desc "index parker data one row at a time.  only for models that have the is_indexed attribute."
-  task :index, [:model] => :environment do |t, args|
-    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    args.with_defaults(:model => "AllModels")
-    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
-    @start_time = Time.now
-    Omni::Sync::Base.index(args.model)
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-  end
-
   namespace :db do
     desc "dump existing data into seed files"
     task :dump, [:model] => :environment do |t, args|
@@ -48,8 +23,8 @@ namespace :omni do
       Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
         puts filename
         if filename.include? args.tag
-          puts "filename has tag - #{args.tag}"
-          # load(filename)
+          puts "running seed #{filename} - #{args.tag}"
+          load(filename)
         end
       end
     end
@@ -65,6 +40,30 @@ namespace :omni do
     end
   end
 
+  desc "fix sequences"
+  task :sequences   => :environment do |t, args|
+    # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    @start_time = Time.now
+    Desk::Helper::Sequence.update
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
+  # desc "run automated test suite"
+  # task :test => :environment do |t, args|
+  #   # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+  #   @start_time = Time.now
+  #   puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  # end
+
+  desc "index parker data one row at a time.  only for models that have the is_indexed attribute."
+  task :index, [:model] => :environment do |t, args|
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    args.with_defaults(:model => "AllModels")
+    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
+    @start_time = Time.now
+    Omni::Sync::Base.index(args.model)
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
     # Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
     #   task_name = File.basename(filename, '.rb').intern
     #   puts "task name is #{task_name}"
@@ -78,16 +77,6 @@ namespace :omni do
     # puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   # end
 
-  namespace :demo do
-    # puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
-    # @start_time = Time.now
-    Dir[File.join(Rails.root, 'db', 'demo', '*.rb')].each do |filename|
-      task_name = File.basename(filename, '.rb').intern
-      task task_name => :environment do
-        load(filename) if File.exist?(filename)
-      end
-    end
-    # puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
   desc "re sequence existing data"
