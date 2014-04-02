@@ -223,7 +223,10 @@ end
   sku_id :sku
   location_id :location
  end
- factory Omni::ProjectionLocation do sequence(:display) {|n| "test #{n}"} end
+ factory Omni::ProjectionLocation do
+  projection_id :projection
+  location_id :location
+ end
  factory Omni::ProjectionReason do sequence(:display) {|n| "test #{n}"} end
  factory Omni::Purchase do
   sequence(:display)

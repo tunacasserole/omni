@@ -199,13 +199,14 @@ class Omni::Sync::Base
   end
 
   def self.clock_it(i)
-    if i = 1
+    if i == 1
       @start_time = Time.now
-      puts "#{time_stamp}:  read row 1"
+      # puts "#{time_stamp}:  read row 1"
     end
     if i.to_s.end_with? '000'
       @end_time = Time.now
-      puts "#{time_stamp}: read rows: #{(i-1000).to_s} - #{i.to_s} in #{@end_time - @start_time} seconds"
+
+      # puts "#{time_stamp}: read rows: #{(i-1000).to_s} - #{i.to_s} in #{@end_time - @start_time} seconds"
       @start_time = Time.now
     end
   end

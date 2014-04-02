@@ -14,13 +14,14 @@ class Omni::Sync::Inventory < Omni::Sync::Base
   end
 
   def self.map_to_db(row)
-    "#{@source}_map".constantize(row)
+    # "#{@source}_map".constantize(row)
+    rms_map(row)
   end
 
   def self.rms_map(row)
     inventory = Omni::Inventory.new(
       location_id: @rms_stores[row['Store ID']],
-      sku_id: @skus[row['Item ID'].chop.chop],
+      sku_id: @skus[row['Item ID']],
       on_hand_units: row["ItemQOH"] || 0,
       supplier_on_order_units: row["ItemQOO"] || 0,
      )

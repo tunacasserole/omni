@@ -80,19 +80,31 @@ class Omni::Department < ActiveRecord::Base
     skus
   end
 
+  def styles
+    styles = []
+    self.classifications.each do |classification|
+      classification.subclasses.each do |subclass|
+        subclass.styles.each {|style| styles << style}
+      end
+    end
+    styles
+  end
+
   def inventories
-    # x = []
-    # self.classifications.each do |classification|
-    #   classification.subclasses.each do |subclass|
-    #     subclass.styles.each do |style|
-    #       style.inventories.each do |i|
-    #         x << i
-    #       end
-    #     end
-    #   end
-    # end
-    # x
-    Omni::Inventory.all
+    inventory = []
+    self.classifications.each do |classification|
+      classification.subclasses.each do |subclass|
+        subclass.styles.each do |style|
+          style.skus.each do |sku|
+            sku.inventories.each do |i|
+              inventory << i
+            end
+          end
+        end
+      end
+    end
+    inventory
+    # Omni::Inventory.all
   end
   # HELPERS (End)
 

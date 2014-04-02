@@ -38,6 +38,7 @@
   belongs_to   :projection_closer_user,          class_name: 'Buildit::User',            foreign_key: 'projection_closer_id'
   has_many     :projection_details,              class_name: 'Omni::ProjectionDetail',    foreign_key: 'projection_id'
   has_many     :projection_locations,            class_name: 'Omni::ProjectionLocation',  foreign_key: 'projection_id'
+  has_many     :notes,                           class_name: 'Buildit::Note',             foreign_key: 'notable_id',       as: :notable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -103,8 +104,18 @@
       validates :approval_4_date,                   :presence => true
     end
 
-    after_transition on: :release, do: :do_release
+    # FORECAST
+    event :forecast do
+      transition :draft => :forecasting
+    end
+    state :forecasting do
+      validate  :department_id, presence: true
+      validate  :forecast_profile_id, presence: true
+    end
+    after_transition on: :forecast, do: :do_forecast
 
+    # RELEASE
+    after_transition on: :release, do: :do_release
     event :release do
       transition :forecast => :projection_1
     end
@@ -113,6 +124,7 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
+
   def initiate_forecast
 
     message     = {
@@ -169,37 +181,109 @@
         x.first_forecast_units = forecasted_units
         x.projection_1_units = forecasted_units
       end
+    end
+  end
+  
+  def clock_it(i)
+    # @start_time = Time.now if i == 1
+    if i.to_s.end_with? '00'
+      # @end_time = Time.now
+      puts "#{time_stamp} row: #{(i).to_s}" #{}" in #{@end_time - @start_time} seconds"
+      # @start_time = Time.now
+    end
+  end
+#>>>>>>> 04ee277678c2e14efc400bbeffe64df675a048b6
 
-      x.last_forecast_units = forecasted_units
-      x.last_forecast_date = Date.today
+  def time_stamp
+    "== #{Time.now.strftime("%H:%M:%S").yellow}: "
+  end
 
-      # Standard deviation of py1, py2 and forecasted units
-      mean = (i.sale_units_py1 + i.sale_units_py2 + forecasted_units) / 3
-      tot_dev = (mean - i.sale_units_py1)**2 + (mean - i.sale_units_py2)**2 + (mean - forecasted_units)**2
-      x.sd_raw = Math.sqrt(tot_dev)
-      x.sd_floor = forecasted_units * 0.2
-      x.sd_ceiling = forecasted_units * 0.4
-      x.sd_smooth = x.sd_raw < x.sd_floor ? x.sd_floor : x.sd_raw > x.sd_ceiling ? x.sd_ceiling : x.sd_raw
-      x.sd_percent = forecasted_units > 0 ? x.sd_smooth / forecasted_units : 0
+  # def self.styles
+  #   self.department.styles
+  # end
 
-      # Coverage and need
-      x.coverage_allowed = [forecasted_units + x.sd_smooth - i.sale_units_ytd, 0].max
-      x.custom_need = is_generic ? 0 : x.coverage_allowed - x.on_hand
-      x.generic_need = is_generic ? total_generic_need : 0
-      x.coverage_complete = x.coverage_allowed + x.generic_need
-      x.unusable = [x.on_hand - x.coverage_complete].max
-      x.usable = x.coverage_complete - x.on_hand < 1 ? x.coverage_complete : x.on_hand
-      x.total_need = x.coverage_complete - x.usable + x.on_order
+  def do_forecast
+    # puts "do forecast"
+    # forecast_by_dept
+    forecast_by_class
+  end
 
-      x.save
+  def forecast_by_dept
+    puts "#{time_stamp} dept: #{self.department.display} - starting"
+    self.department.inventories.each do |inv, i|
+      forecast_one_row(inv)
+      clock_it(i)
+    end
+    puts "#{time_stamp} dept: #{self.department.display} - finishing"
+  end
+
+  def forecast_by_class
+    self.department.classifications.each_with_index do |klass, i|
+      puts "#{time_stamp}  class #{klass.display} with #{klass.inventories.count} inventory rows"
+      # get inventory for that class
+      klass.inventories.each_with_index {|inv, i| forecast_one_row(inv); clock_it(i) }
+      # clock_it(i)
+      # puts "#{time_stamp} finishing class #{klass.display}"
+    end
+  end
+
+  def forecast_one_row(i)
+    # puts "forecast_one_row"
+    # Insert or update ProjectionDetail row for the give inventory row (i)
+    # Create Projection Detail;
+    x = Omni::ProjectionDetail.where(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+    # TODO: Add support for generics
+    is_generic = false
+    total_generic_need = 0
+    x.inventory_id = i.inventory_id
+    x.forecast_profile_id = self.forecast_profile_id
+
+    # Snapshot of current inventory
+    x.on_order = i.supplier_on_order_units
+    x.on_hand = i.on_hand_units
+
+    # Sales history
+    x.sale_units_ytd = i.sale_units_ytd
+    x.sale_units_py1 = i.sale_units_py1
+    x.sale_units_py2 = i.sale_units_py2
+    x.sale_units_py3 = i.sale_units_py3
+
+    # calculate forecasted units using formula from forecast_profile;
+    profile = self.forecast_profile
+    forecasted_units = (profile.sales_py1_weight * i.sale_units_py1) + (profile.sales_py2_weight * i.sale_units_py2) + (profile.sales_py3_weight * i.sale_units_py3)
+
+    unless x.last_forecast_date
+      x.first_forecast_units = forecasted_units
+      x.projection_1_units = forecasted_units
     end
 
-    self.state = 'forecast' if self.state =='draft'
-    self.save
+    x.last_forecast_units = forecasted_units
+    x.last_forecast_date = Date.today
 
-    Omni::Projection.reindex
-    Omni::ProjectionDetail.reindex
+    # Standard deviation of py1, py2 and forecasted units
+    mean = (i.sale_units_py1 + i.sale_units_py2 + forecasted_units) / 3
+    tot_dev = (mean - i.sale_units_py1)**2 + (mean - i.sale_units_py2)**2 + (mean - forecasted_units)**2
+    x.sd_raw = Math.sqrt(tot_dev)
+    x.sd_floor = forecasted_units * 0.2
+    x.sd_ceiling = forecasted_units * 0.4
+    x.sd_smooth = x.sd_raw < x.sd_floor ? x.sd_floor : x.sd_raw > x.sd_ceiling ? x.sd_ceiling : x.sd_raw
+    x.sd_percent = forecasted_units > 0 ? x.sd_smooth / forecasted_units : 0
+
+    # Coverage and need
+    x.coverage_allowed = [forecasted_units + x.sd_smooth - i.sale_units_ytd, 0].max
+    x.custom_need = is_generic ? 0 : x.coverage_allowed - x.on_hand
+    x.generic_need = is_generic ? total_generic_need : 0
+    x.coverage_complete = x.coverage_allowed + x.generic_need
+    x.unusable = [x.on_hand - x.coverage_complete].max
+    x.usable = x.coverage_complete - x.on_hand < 1 ? x.coverage_complete : x.on_hand
+    x.total_need = x.coverage_complete - x.usable + x.on_order
+
+    x.save
+
+    # Omni::Projection.reindex
+    # Omni::ProjectionDetail.reindex
   end
+
   # STATE HANDLERS (End)
 
   # HELPERS (Start) =====================================================================
