@@ -33,8 +33,10 @@ namespace :omni do
     task :demo, [:tag] => :environment do |t, args|
       Dir[File.join(Rails.root, 'db', 'demo', '*.rb')].sort.each do |filename|
         if filename.include? args.tag
-          puts "running seed #{filename} - #{args.tag}"
+          puts "== running seed #{filename} - #{args.tag}"
+          @start_time = Time.now
           load(filename)
+          puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
         end
       end
     end
