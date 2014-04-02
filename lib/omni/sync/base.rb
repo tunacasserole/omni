@@ -205,6 +205,7 @@ class Omni::Sync::Base
     end
     if i.to_s.end_with? '000'
       @end_time = Time.now
+
       # puts "#{time_stamp}: read rows: #{(i-1000).to_s} - #{i.to_s} in #{@end_time - @start_time} seconds"
       @start_time = Time.now
     end
