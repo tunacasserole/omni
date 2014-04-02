@@ -1,8 +1,8 @@
 class Omni::ProjectionsSubscriber < Buildit::Messaging::Subscriber
 
   queue       'model.forecast_requests'
-  exchange    'omni.events'
-  #routing_key 'forecast'
+  exchange    'omni.events', :direct
+  routing_key 'forecast'
   auto_start  true
 
   def self.process(delivery_info, properties, message)

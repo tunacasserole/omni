@@ -113,6 +113,29 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
+  def initiate_forecast
+
+    message     = {
+      projection_id: self.id,
+      user_id: Buildit::User.current.user_id
+    }
+
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'forecast')
+
+  end # def initiate_forecast
+
+
+  def notify_forecast_complete
+
+    # push a message to the users channel
+    Buildit::User.current.push_message("The forecast you requested for #{} is now complete.")
+
+    # send an email to the same user indicating completion
+
+  end
+
+
   def forecast
     # return 'invalid action for the current state' if self.state == 'complete'
 
