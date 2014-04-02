@@ -145,11 +145,11 @@
 
 
   def forecast_by_dept
+    puts "#{time_stamp} dept: #{self.department.display} - starting"
     self.department.inventories.each do |i|
-      puts "#{time_stamp} dept: #{self.department.display} - starting"
       forecast_one_row(i)
-      puts "#{time_stamp} dept: #{self.department.display} - finishing"
     end
+    puts "#{time_stamp} dept: #{self.department.display} - finishing"
   end
 
   # def self.clock_it(i)
@@ -169,7 +169,7 @@
   end
 
   def do_forecast
-    puts "do forecast"
+    # puts "do forecast"
     forecast_by_dept
   end
 

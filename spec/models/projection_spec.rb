@@ -45,24 +45,35 @@ describe "projection" do
       me.projection_details.count.should eq(0)
     end
 
-    it "builds details" do
-      # setup skus
-      prof = create(Omni::ForecastProfile, sales_py1_weight: 0.8, sales_py2_weight: 0.15, sales_py3_weight: 0.5)
-      dept = create(Omni::Department)
-      cls = create(Omni::Classification, department_id: dept.department_id)
-      subclass = create(Omni::Subclass, classification_id: cls.classification_id)
-      style = create(Omni::Style, subclass_id: subclass.subclass_id)
-
-      # SKUS
-      100.times { |x| create(Omni::Sku, style_id: style.style_id)}
-
-      # INVENTORY
-      Omni::Location.all { |l| skus.each {|s| create(Omni::Inventory, sku_id: s.sku_id, location_id: l.location_id)}
-      # skus.each {|x| create(Omni::Inventory, sku_id: x.sku_id, location_id: loc.location_id)
-
-      me = create(Omni::Projection, department_id: dept.department_id, forecast_profile_id: prof.forecast_profile_id);
+    it "prevent forecasting a projection without forecast_profile" do
+      me.forecast_profile_id = nil
+      me.save
       me.forecast
-      me.projection_details.count.should eq(1)
+      me.state.should eq('draft')
+      me.projection_details.count.should eq(0)
+    end
+
+    it "build details" do
+
+      [10].each do |sku_load|
+
+        # setup skus
+        prof = create(Omni::ForecastProfile, sales_py1_weight: 0.8, sales_py2_weight: 0.15, sales_py3_weight: 0.5)
+        dept = create(Omni::Department)
+        cls = create(Omni::Classification, department_id: dept.department_id)
+        subclass = create(Omni::Subclass, classification_id: cls.classification_id)
+        locations = Omni::Location.all
+        style = create(Omni::Style, subclass_id: subclass.subclass_id)
+        sku_load.times do |x|
+          sku = create(Omni::Sku, style_id: style.style_id)
+          Omni::Location.all.each { |l| create(Omni::Inventory, sku_id: sku.sku_id, location_id: l.location_id)}
+        end
+
+        # run forecast
+        me = create(Omni::Projection, department_id: dept.department_id, forecast_profile_id: prof.forecast_profile_id);
+        me.forecast
+        me.projection_details.count.should eq(locations.count * sku_load)
+      end
     end
 
   end
