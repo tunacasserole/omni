@@ -43,21 +43,28 @@ namespace :omni do
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
     end
 
-    # puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
-    # @start_time = Time.now
-    Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
-      puts "filename is #{filename}"
-      task_name = File.basename(filename, '.rb').intern
-      puts "task name is #{task_name}"
-      task task_name => :environment do
-        # if File.exist?(filename)
-          puts "... loading. the filename is #{filename}"
-          # load(filename)
+    desc "run existing seed files containing the supplied tag."
+    task :run, [:tag] => :environment do |t, args|
+      Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
+        if filename.include? args.tag
+          load(filename)
         end
       end
     end
-    # puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
+
+    # Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
+    #   task_name = File.basename(filename, '.rb').intern
+    #   puts "task name is #{task_name}"
+    #   task task_name => :environment do
+    #     # if File.exist?(filename)
+    #       puts "... loading. the filename is #{filename}"
+    #       # load(filename)
+    #     end
+    #   end
+    # end
+    # puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  # end
 
   namespace :demo do
     # puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "

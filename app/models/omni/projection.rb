@@ -154,7 +154,7 @@
     @start_time = Time.now if i == 1
     if i.to_s.end_with? '0'
       @end_time = Time.now
-      puts "#{time_stamp} processed rows: #{(i).to_s} - #{i.to_s}" #{}" in #{@end_time - @start_time} seconds"
+      puts "#{time_stamp} row: #{(i).to_s}" #{}" in #{@end_time - @start_time} seconds"
       @start_time = Time.now
     end
   end
