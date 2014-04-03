@@ -105,6 +105,7 @@ class Omni::StyleColor < ActiveRecord::Base
   # HELPERS (Start) =====================================================================
   def validate_style_size_group
 
+
   end
 
   def add_style_color_sizes
