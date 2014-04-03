@@ -1,8 +1,24 @@
 class Omni::Sync::SkuAlias < Omni::Sync::Base
 
   def self.go
-    create_from_sku_load
+    # create_from_sku_load
+    de_dup
   end
+
+  def self.de_dup
+    sql = "select sku_alias_id, count(*) from sku_aliases group by sku_alias_id order by count(*) desc"
+    data = ActiveRecord::Base.connection.execute sql
+    puts "count is #{data.count}"
+    data.each_with_index do |x,i|
+      # puts "sku_alias_id is #{x[0]}"
+      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '00'
+      break if x[1] == 1 or i > 1508
+      sku_alias = Omni::SkuAlias.where(sku_alias_id: x[0]).first
+      # puts "deleting sku_alias_id #{x[0]}"
+      sku_alias.delete
+    end
+  end
+
 
   def self.create_from_sku_load
     sql = "select id, sku_id, mark_sku, bu_sku, tg_sku from skus_load"

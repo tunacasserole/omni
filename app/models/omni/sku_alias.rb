@@ -9,7 +9,7 @@ class Omni::SkuAlias < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         presence: true
+  validates    :display,                         presence: true, uniqueness: true;
   validates    :sku_alias_type,                  lookup: 'SKU_ALIAS_TYPE',             allow_nil: true
   validates    :pack_type,                       lookup: 'PACK_TYPE',                  allow_nil: true
   validates    :sku_alias, uniqueness: { scope: :sku_id, message: "Alias already exists for this SKU." }
@@ -17,7 +17,7 @@ class Omni::SkuAlias < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :sku_alias_id,                     override: false,        with: :guid
-  default      :display,                          override: false,        to: lambda{|m| "#{m.sku_display} - #{m.sku_alias}"}
+  default      :display,                          override: false,        to: lambda{|m| "#{m.sku_display} - #{m.sku_alias} - #{m.alias_source}"}
   default      :is_primary,                       override: false,        to: false
   default      :pack_size,                        override: false,        to: 0
   default      :is_destroyed,                     override: false,        to: false
@@ -43,7 +43,7 @@ class Omni::SkuAlias < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
+  order_search_by :sku_alias => :asc
   # ORDERING (End)
 
 
@@ -54,6 +54,8 @@ class Omni::SkuAlias < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :sku_id
+    string   :sku_alias
+    # text     :sku_display_fulltext, using: :sku_display
 
     # string   :sku_alias_id
     # string   :sku_display do sku.display if sku end
@@ -64,7 +66,6 @@ class Omni::SkuAlias < ActiveRecord::Base
     # # integer  :pack_size
     # string   :display
 
-    # text     :sku_display_fulltext, using: :sku_display
     # text     :sku_alias_fulltext, using: :sku_alias
     # text     :sku_alias_type_fulltext, using: :sku_alias_type
   end

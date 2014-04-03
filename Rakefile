@@ -40,15 +40,35 @@ namespace :omni do
         end
       end
     end
+
+    desc "reindex a single model"
+    task :reindex, [:model]   => :environment do |t, args|
+      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+      @start_time = Time.now
+      system("rake sunspot:reindex[1000,Omni::#{args.model}]")
+      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+    end
+
+    desc "fix sequences"
+    task :sequences   => :environment do |t, args|
+      # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+      @start_time = Time.now
+      Desk::Helper::Sequence.update
+      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+    end
+
+    desc "re sequence existing data"
+    task :re_sequence, [:model] => :environment do |t, args|
+      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+      # puts "model is #{args[:model]} and #{args.model}"  # both notations work
+      @start_time = Time.now
+      Omni::Sync::Base.re_sequence(args.model)
+      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+    end
+
+
   end
 
-  desc "fix sequences"
-  task :sequences   => :environment do |t, args|
-    # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    @start_time = Time.now
-    Desk::Helper::Sequence.update
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-  end
 
   # desc "run automated test suite"
   # task :test => :environment do |t, args|
@@ -57,15 +77,15 @@ namespace :omni do
   #   puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   # end
 
-  desc "index parker data one row at a time.  only for models that have the is_indexed attribute."
-  task :index, [:model] => :environment do |t, args|
-    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    args.with_defaults(:model => "AllModels")
-    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
-    @start_time = Time.now
-    Omni::Sync::Base.index(args.model)
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-  end
+  # desc "index parker data one row at a time.  only for models that have the is_indexed attribute."
+  # task :index, [:model] => :environment do |t, args|
+  #   puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+  #   args.with_defaults(:model => "AllModels")
+  #   # puts "model is #{args[:model]} and #{args.model}"  # both notations work
+  #   @start_time = Time.now
+  #   Omni::Sync::Base.index(args.model)
+  #   puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  # end
     # Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
     #   task_name = File.basename(filename, '.rb').intern
     #   puts "task name is #{task_name}"
@@ -80,15 +100,6 @@ namespace :omni do
   # end
 
   # end
-
-  desc "re sequence existing data"
-  task :re_sequence, [:model] => :environment do |t, args|
-    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
-    @start_time = Time.now
-    Omni::Sync::Base.re_sequence(args.model)
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-  end
 
   desc "sync parker data from spreadsheets, staging tables, and other databases"
   task :sync, [:model] => :environment do |t, args|
