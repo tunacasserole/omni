@@ -9,7 +9,7 @@ class Omni::Sync::Inventory < Omni::Sync::Base
     ['rms'].each do |source|
       @rows_processed = 0
       @source = source
-      excel_to_seed('Inventory',"#{source}_inventory10k")
+      excel_to_seed('Inventory',"#{source}_inventory")
     end
   end
 
