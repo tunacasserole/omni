@@ -87,20 +87,20 @@ class Omni::StyleColor < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :style_display do style.display if style end
-    string   :color_display do color.display if color end
-    string   :color_id
-    string   :short_name
-    string   :concatenated_name
     string   :style_id
-    string   :state
-    string   :display
+    # string   :style_display do style.display if style end
+    # string   :color_display do color.display if color end
+    # string   :color_id
+    # string   :short_name
+    # string   :concatenated_name
+    # string   :state
+    # string   :display
 
-    text     :style_display_fulltext, using: :style_display
-    text     :color_display_fulltext, using: :color_display
-    text     :short_name_fulltext, using: :short_name
-    text     :concatenated_name_fulltext, using: :concatenated_name
-    text     :state_fulltext, using: :state
+    # text     :style_display_fulltext, using: :style_display
+    # text     :color_display_fulltext, using: :color_display
+    # text     :short_name_fulltext, using: :short_name
+    # text     :concatenated_name_fulltext, using: :concatenated_name
+    # text     :state_fulltext, using: :state
   end
   # HELPERS (Start) =====================================================================
   def validate_style_size_group

@@ -10,7 +10,7 @@ class Omni::SkuPrice < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true, uniqueness: true
-  validates    :sales_category,                  lookup: 'SALES_CATEGORY',             allow_nil: true
+  validates    :sales_category,                  lookup: 'SALES_CATEGORY',  allow_nil: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -56,24 +56,17 @@ class Omni::SkuPrice < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :sku_id
-    date     :effective_date
-    integer  :retail_price
-    integer  :price_units
-    string   :sales_category do |x| Buildit::Lookup::Manager.display_for('SALES_CATEGORY', x.sales_category) end
-    string   :price_change_display do price_change.display if price_change end
-    string   :display
+    # string   :sku_price_id
+    # string   :display
 
-    text     :retail_price_fulltext, using: :retail_price
-    text     :price_units_fulltext, using: :price_units
-    text     :sales_category_fulltext, using: :sales_category
-    text     :price_change_display_fulltext, using: :price_change_display
+    # text     :display_fulltext, using: :display
   end
   # INDEXING (End)
 
   # CUSTOM HELPERS (Start) =======================================================================
-  def get_price
-    return Omni::SkuPrice.all.first
-  end
+  # def get_price
+  #   return Omni::SkuPrice.all.first
+  # end
   # CUSTOM HELPERS (End)
 
 end # class Omni::SkuPrice

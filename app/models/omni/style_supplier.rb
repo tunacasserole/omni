@@ -86,17 +86,17 @@ class Omni::StyleSupplier < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :style_display do style.display if style end
-    string   :supplier_display do supplier.display if supplier end
-    boolean  :is_primary
-    boolean  :is_manufacturer
     string   :style_id
-    string   :display
-    string   :state
+    # string   :style_display do style.display if style end
+    # string   :supplier_display do supplier.display if supplier end
+    # boolean  :is_primary
+    # boolean  :is_manufacturer
+    # string   :display
+    # string   :state
 
-    text     :style_display_fulltext, using: :style_display
-    text     :supplier_display_fulltext, using: :supplier_display
-    text     :state_fulltext, using: :state
+    # text     :style_display_fulltext, using: :style_display
+    # text     :supplier_display_fulltext, using: :supplier_display
+    # text     :state_fulltext, using: :state
   end
   # INDEXING (End)
 

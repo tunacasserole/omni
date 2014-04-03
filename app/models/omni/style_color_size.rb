@@ -111,21 +111,21 @@ class Omni::StyleColorSize < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :style_color_display do style_color.display if style_color end
-    string   :size_display do size.display if size end
-    string   :sku_display do sku.display if sku end
-    string   :sku_name
-    string   :pos_name
     string   :style_color_id
-    string   :display
-    string   :state
+    # string   :style_color_display do style_color.display if style_color end
+    # string   :size_display do size.display if size end
+    # string   :sku_display do sku.display if sku end
+    # string   :sku_name
+    # string   :pos_name
+    # string   :display
+    # string   :state
 
-    text     :style_color_display_fulltext, using: :style_color_display
-    text     :size_display_fulltext, using: :size_display
-    text     :sku_display_fulltext, using: :sku_display
-    text     :sku_name_fulltext, using: :sku_name
-    text     :pos_name_fulltext, using: :pos_name
-    text     :state_fulltext, using: :state
+    # text     :style_color_display_fulltext, using: :style_color_display
+    # text     :size_display_fulltext, using: :size_display
+    # text     :sku_display_fulltext, using: :sku_display
+    # text     :sku_name_fulltext, using: :sku_name
+    # text     :pos_name_fulltext, using: :pos_name
+    # text     :state_fulltext, using: :state
 
   end
 end # class Omni::StyleColorSize

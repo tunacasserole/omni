@@ -53,20 +53,19 @@ class Omni::SkuAlias < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :sku_display do sku.display if sku end
-    string   :sku_alias
-    string   :sku_alias_type do |x| Buildit::Lookup::Manager.display_for('SKU_ALIAS_TYPE', x.sku_alias_type) end
-    boolean  :is_primary
-    string   :pack_type do |x| Buildit::Lookup::Manager.display_for('PACK_TYPE', x.pack_type) end
-    integer  :pack_size
     string   :sku_id
-    string   :display
+    # string   :sku_alias_id
+    # string   :sku_display do sku.display if sku end
+    # string   :sku_alias
+    # string   :sku_alias_type do |x| Buildit::Lookup::Manager.display_for('SKU_ALIAS_TYPE', x.sku_alias_type) end
+    # boolean  :is_primary
+    # string   :pack_type do |x| Buildit::Lookup::Manager.display_for('PACK_TYPE', x.pack_type) end
+    # # integer  :pack_size
+    # string   :display
 
-    text     :sku_display_fulltext, using: :sku_display
-    text     :sku_alias_fulltext, using: :sku_alias
-    text     :sku_alias_type_fulltext, using: :sku_alias_type
-    text     :pack_type_fulltext, using: :pack_type
-    text     :pack_size_fulltext, using: :pack_size
+    # text     :sku_display_fulltext, using: :sku_display
+    # text     :sku_alias_fulltext, using: :sku_alias
+    # text     :sku_alias_type_fulltext, using: :sku_alias_type
   end
   # INDEXING (End)
 

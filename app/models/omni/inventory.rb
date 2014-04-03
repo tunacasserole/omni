@@ -5,7 +5,7 @@
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext
+  # supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
@@ -106,33 +106,33 @@
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :sku_id
-    string   :sku_display do sku.display if sku end
-    string   :location_id
-    string   :location_display do location.display if location end
-    # # string   :department_id
-    # # string   :department_display do department.display if department end
-    # # string   :supplier_id
-    # # string   :supplier_display do supplier.display if supplier end
-    # string   :forecast_profile_id
-    # string   :forecast_profile_display do forecast_profile.display if forecast_profile end
-    # string   :source_id
-    # string   :source
-    # string   :display
-    string   :on_hand_units
-    string   :work_in_process_units
-    string   :in_transit_units
-    string   :allocated_units
+  # searchable do
+  #   string   :sku_id
+  #   string   :sku_display do sku.display if sku end
+  #   string   :location_id
+  #   string   :location_display do location.display if location end
+  #   # # string   :department_id
+  #   # # string   :department_display do department.display if department end
+  #   # # string   :supplier_id
+  #   # # string   :supplier_display do supplier.display if supplier end
+  #   # string   :forecast_profile_id
+  #   # string   :forecast_profile_display do forecast_profile.display if forecast_profile end
+  #   # string   :source_id
+  #   # string   :source
+  #   # string   :display
+  #   string   :on_hand_units
+  #   string   :work_in_process_units
+  #   string   :in_transit_units
+  #   string   :allocated_units
 
-    text     :sku_display_fulltext, using: :sku_display
-    text     :location_display_fulltext, using: :location_display
-    # text     :department_display_fulltext, using: :department_display
-    # text     :supplier_display_fulltext, using: :supplier_display
-    # text     :forecast_profile_display_fulltext, using: :forecast_profile_display
-    # text     :source_fulltext, using: :source
-    # text     :source_id_fulltext, using: :source_id
-  end
+  #   text     :sku_display_fulltext, using: :sku_display
+  #   text     :location_display_fulltext, using: :location_display
+  #   # text     :department_display_fulltext, using: :department_display
+  #   # text     :supplier_display_fulltext, using: :supplier_display
+  #   # text     :forecast_profile_display_fulltext, using: :forecast_profile_display
+  #   # text     :source_fulltext, using: :source
+  #   # text     :source_id_fulltext, using: :source_id
+  # end
   # STATES (Start) ====================================================================
 
   # STATES (End)

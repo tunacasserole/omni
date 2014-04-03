@@ -123,21 +123,21 @@ class Omni::StyleLocation < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :style_location_id
-    string   :style_display do style.display if style end
-    string   :location_display do location.display if location end
-    string   :location_id
     string   :style_id
-    string   :state
-    boolean  :is_authorized
-    boolean  :is_taxable
-    boolean  :is_special_order
-    boolean  :is_discontinued
-    string   :display
+    # string   :style_location_id
+    # string   :style_display do style.display if style end
+    # string   :location_display do location.display if location end
+    # string   :location_id
+    # string   :state
+    # boolean  :is_authorized
+    # boolean  :is_taxable
+    # boolean  :is_special_order
+    # boolean  :is_discontinued
+    # string   :display
 
-    text     :style_display_fulltext, using: :style_display
-    text     :location_display_fulltext, using: :location_display
-    text     :state_fulltext, using: :state
+    # text     :style_display_fulltext, using: :style_display
+    # text     :location_display_fulltext, using: :location_display
+    # text     :state_fulltext, using: :state
   end
   # INDEXING (End)
 
