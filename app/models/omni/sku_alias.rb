@@ -54,6 +54,7 @@ class Omni::SkuAlias < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :sku_id
+
     # string   :sku_alias_id
     # string   :sku_display do sku.display if sku end
     # string   :sku_alias
