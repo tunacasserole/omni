@@ -124,6 +124,7 @@ class Omni::StyleLocation < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :style_id
+
     # string   :style_location_id
     # string   :style_display do style.display if style end
     # string   :location_display do location.display if location end
