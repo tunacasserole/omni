@@ -218,6 +218,7 @@ class Omni::Sku < ActiveRecord::Base
     string   :sku_id
     # string   :style_id
     # string   :color_id
+
     string   :display
     string   :sku_nbr
     string   :account_display do account.display if account end
