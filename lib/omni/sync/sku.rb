@@ -2,7 +2,8 @@ class Omni::Sync::Sku < Omni::Sync::Base
 
   def self.go
     # update_suppliers_sql
-    update_accounts
+    # update_accounts
+    update_price_and_wac
     # sync_skus
     # resync_skus_sql
     # create_from_sku_load
@@ -189,6 +190,19 @@ class Omni::Sync::Sku < Omni::Sync::Base
       ActiveRecord::Base.connection.execute update_sql
     end
   end
+
+  def self.update_price_and_wac
+    sql = "select sku_id, retail, wac from skus_load"
+    data = ActiveRecord::Base.connection.execute sql
+    data.each_with_index do |x,i|
+      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
+      update_sql = "update skus set initial_retail_price = #{x[1][1..x[2].length]} where sku_id = '#{x[0]}'"
+      ActiveRecord::Base.connection.execute update_suppliers_sql unless x[1] == '$-   '
+      update_sql = "update skus set average_cost = #{x[2][1..x[2].length]} where sku_id = '#{x[0]}'"
+      ActiveRecord::Base.connection.execute update_sql unless x[2] == '$-   '
+    end
+  end
+end
       # if skus_load_hash[x[0]]
   #   # get account_hash
   #   account_hash = {}
@@ -211,6 +225,5 @@ class Omni::Sync::Sku < Omni::Sync::Base
   #   end
 
   # end
-end
 
 

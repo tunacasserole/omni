@@ -26,7 +26,7 @@ class Omni::Sync::Inventory < Omni::Sync::Base
       supplier_on_order_units: row["ItemQOO"] || 0,
      )
 
-    puts "inventory could not be created for #{row['Item ID'].to_s} due to: #{inventory.errors.full_messages}" unless inventory.save
+    puts "inventory could not be created for item #{row['Item ID'].to_s} and location #{row['Store ID']} due to: #{inventory.errors.full_messages}" unless inventory.save
   end
 
   def self.tg_map(row)
