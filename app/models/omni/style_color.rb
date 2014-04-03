@@ -96,6 +96,7 @@ class Omni::StyleColor < ActiveRecord::Base
     # string   :state
     # string   :display
 
+
     # text     :style_display_fulltext, using: :style_display
     # text     :color_display_fulltext, using: :color_display
     # text     :short_name_fulltext, using: :short_name
