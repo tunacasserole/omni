@@ -22,6 +22,7 @@ class Omni::SkuPrice < ActiveRecord::Base
   default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
+
   # REFERENCE (Start) ===================================================================
   reference do
     display_attribute  :display
