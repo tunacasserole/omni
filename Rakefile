@@ -113,8 +113,7 @@ namespace :omni do
         if klass.searchable?
           puts "! Indexing #{klass.name}"
           before = Time.now
-          klass.reindex(batch_size: nil)
-          # system("rake sunspot:reindex[1000,#{klass.name}]")
+          klass.count > 1000 ? system("rake sunspot:reindex[1000,#{klass.name}]") : klass.reindex(batch_size: nil)
           puts "! Indexed #{klass.name} in #{Time.now - before}s"
         end
         resumed = true
