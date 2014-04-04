@@ -9,6 +9,7 @@ Omni::Application.load_tasks
 namespace :omni do
 
   namespace :db do
+# 1234567890123456789012345678901234567890123456789012345678901234567890
     desc "dump existing data into seed files"
     task :dump, [:model] => :environment do |t, args|
       puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
@@ -52,14 +53,6 @@ namespace :omni do
       end
     end
 
-    desc "reindex a single model"
-    task :reindex, [:model]   => :environment do |t, args|
-      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-      @start_time = Time.now
-      system("rake sunspot:reindex[1000,Omni::#{args.model}]")
-      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-    end
-
     desc "fix sequences"
     task :sequences   => :environment do |t, args|
       # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
@@ -77,9 +70,66 @@ namespace :omni do
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
     end
 
+  end # end of namespace db
 
-  end
+  namespace :solr do
 
+     # started_at = Time.now
+     #  ActiveRecord::Base.descendants.sort { |x, y| x.name <=> y.name }.each do |klass|
+     #    puts "klass name is #{klass.name} and args.model is #{args.model} and resume is #{args.resume}"
+     #    next unless args.model and klass.name.end_with? args.model
+     #    if klass.searchable?
+     #      puts "! Indexing #{klass.name}"
+     #      before = Time.now
+     #      # klass.reindex(batch_size: nil)
+     #      puts "! Indexed #{klass.name} in #{Time.now - before}s"
+     #    end
+     #    break if args.model and klass.name.end_with? args.model unless args.resume
+     #  end
+     #  puts "\n\n\n! All reindexing completed in #{Time.now - started_at}s"
+
+
+    desc 'Reindexes all models, one model or continues on alphabetically from the given model'
+    task :reindex, [:model, :resume] => :environment do |t,args|
+      puts "Indexing Started\n\n"
+      Rails.application.eager_load!
+      started_at = Time.now
+      resumed = args.model ? false : true
+
+      ActiveRecord::Base.descendants.sort { |x, y| x.name <=> y.name }.each do |klass|
+        # puts "klass name is #{klass.name} and args.model is #{args.model} and resume is #{args.resume}"
+        next unless resumed || klass.name.end_with?(args.model)
+
+        if klass.searchable?
+          puts "! Indexing #{klass.name}"
+          before = Time.now
+          klass.reindex(batch_size: nil)
+          puts "! Indexed #{klass.name} in #{Time.now - before}s"
+        end
+        resumed = true if args.resume
+        break unless resumed
+      end
+
+      puts "\n\n\n! All reindexing completed in #{Time.now - started_at}s"
+
+    end
+
+  end # end of namespace solr
+
+  # namespace :solr do
+  #   desc "reindex"
+  #   task :reindex, [:model] => :environment do |t, args|
+  #     args.with_defaults(:model => 'all')
+  #     puts "Args with defaults were: #{args}"
+          # system("rake sunspot:reindex[1000,Omni::#{args.model}]")
+  #     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+  #     @start_time = Time.now
+  #     if args.model == 'all'
+  #       puts "all"
+  #     end
+  #     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  #   end
+  # end
 
   # desc "run automated test suite"
   # task :test => :environment do |t, args|
