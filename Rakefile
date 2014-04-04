@@ -18,6 +18,17 @@ namespace :omni do
       puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
     end
 
+    desc "run existing migration files containing the supplied tag."
+    task :migrate, [:tag] => :environment do |t, args|
+      Dir[File.join(Rails.root, 'db', 'migrate', '*.rb')].each do |filename|
+        puts filename
+        if filename.include? args.tag
+          puts "running migration #{filename} - #{args.tag}"
+          load(filename)
+        end
+      end
+    end
+
     desc "run existing seed files containing the supplied tag."
     task :seed, [:tag] => :environment do |t, args|
       Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|

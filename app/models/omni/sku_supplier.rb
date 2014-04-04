@@ -102,15 +102,15 @@ class Omni::SkuSupplier < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :sku_id
+    string   :sku_supplier_id
+    string   :display
 
     # string   :supplier_id
-    string   :sku_supplier_id
     # string   :sku_display do sku.display if sku end
     # string   :supplier_display do supplier.display if supplier end
     # string   :supplier_item_identifier
     # boolean  :is_primary
     # integer  :supplier_cost
-    # string   :display
 
     # text     :sku_display_fulltext, using: :sku_display
     # text     :supplier_display_fulltext, using: :supplier_display

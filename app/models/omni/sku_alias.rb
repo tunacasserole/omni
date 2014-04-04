@@ -11,6 +11,7 @@ class Omni::SkuAlias < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true, uniqueness: true;
   validates    :sku_alias_type,                  lookup: 'SKU_ALIAS_TYPE',             allow_nil: true
+  validates    :alias_source,                    lookup: 'ALIAS_SOURCE',             allow_nil: true
   validates    :pack_type,                       lookup: 'PACK_TYPE',                  allow_nil: true
   validates    :sku_alias, uniqueness: { scope: :sku_id, message: "Alias already exists for this SKU." }
   # VALIDATIONS (End)

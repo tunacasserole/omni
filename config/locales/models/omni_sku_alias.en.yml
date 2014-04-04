@@ -8,7 +8,8 @@ en:
         display:                         Name
         sku_display:                     Sku
         sku_id:                          SKU
-        sku_alias:                       Alias SKU
+        sku_alias:                       Alias
+        alias_source:                    Source
         sku_alias_type:                  Alias Type
         is_primary:                      Primary Alias
         pack_type:                       Pack Type

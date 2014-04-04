@@ -94,19 +94,20 @@ class Omni::Account < ActiveRecord::Base
     string   :account_nbr
     string   :account_name
     string   :display
-    # string   :billing_city
-    # string   :billing_state   do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.billing_state) end
+    string   :billing_city
+    string   :billing_state   do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.billing_state) end
     # string   :state
     # string   :location_display do location.display if location end
     # string   :shipping_city
     # string   :shipping_state do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.shipping_state) end
 
+    text     :account_nbr_fulltext, using: :account_nbr
     text     :account_name_fulltext, using: :account_name
-    # text     :account_nbr_fulltext, using: :account_nbr
-    # text     :location_display_fulltext, using: :location_display
-    # text     :billing_city_fulltext, using: :billing_city
-    # text     :shipping_city _fulltext, using: :shipping_city
+    text     :display_fulltext, using: :display
+    text     :billing_city_fulltext, using: :billing_city
     # text     :billing_state_fulltext, using: :billing_state
+    # text     :location_display_fulltext, using: :location_display
+    # text     :shipping_city _fulltext, using: :shipping_city
     # text     :shipping_state_fulltext, using: :shipping_state
   end
   # INDEXING (End)

@@ -436,21 +436,18 @@ class Omni::Style < ActiveRecord::Base
     string   :style_id
     string   :style_nbr
     string   :display
-    string   :supplier_id
-    string   :supplier_display do supplier.display if supplier end
-    string   :subclass_id
-    string   :subclass_display do subclass.display if subclass end
-    string   :conversion_type
-    string   :state
-    boolean   :is_converted
+    string   :subclass_display # do subclass.display if subclass end
+    # string   :supplier_id
+    # string   :supplier_display do supplier.display if supplier end
+    # string   :subclass_id
+    # string   :conversion_type
+    # string   :state
+    # boolean   :is_converted
 
-    text     :conversion_type_fulltext,  using: :conversion_type
+    # text     :conversion_type_fulltext,  using: :conversion_type
     text     :style_nbr_fulltext,  using: :style_nbr
     text     :display_fulltext,  using: :display
     text     :subclass_display_fulltext do self.subclass.display end
-    text     :supplier_display_fulltext do self.supplier.display end
-    text     :classification_display_fulltext do self.subclass.classification.display if self.subclass && self.subclass.classification end
-    text     :department_display_fulltext do self.subclass.classification.department.display if self.subclass && self.subclass.classification && self.subclass.classification.department end
   end
 end # class Omni::Style
 

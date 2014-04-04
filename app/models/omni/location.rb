@@ -81,7 +81,7 @@ class Omni::Location < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
-  order_search_by :location_nbr => :asc
+  order_search_by :display => :asc
   # ORDERING (End)
 
 
@@ -91,7 +91,7 @@ class Omni::Location < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :location_id
+    # string   :location_id
     string   :display
     string   :district_id
     string   :district_display
@@ -103,16 +103,16 @@ class Omni::Location < ActiveRecord::Base
     boolean  :is_store
     boolean  :is_warehouse
     date     :open_date
-    string   :district_display do district.display if district end
-    string   :parent_location_id
+    # string   :district_display do district.display if district end
+    # string   :parent_location_id
 
     text     :display_fulltext, using: :display
     text     :location_nbr_fulltext, using: :location_nbr
     text     :location_brand_fulltext, using: :location_brand
-    text     :line_1_fulltext, using: :line_1
+    # text     :line_1_fulltext, using: :line_1
     text     :city_fulltext, using: :city
     text     :state_code_fulltext, using: :state_code
-    text     :district_display_fulltext, using: :district_display
+    # text     :district_display_fulltext, using: :district_display
   end
   # INDEXING (End)
 

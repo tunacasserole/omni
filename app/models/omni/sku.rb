@@ -216,27 +216,26 @@ class Omni::Sku < ActiveRecord::Base
 
   searchable do
     string   :sku_id
-    # string   :style_id
-    # string   :color_id
-
     string   :display
     string   :sku_nbr
     string   :account_display do account.display if account end
-    # string   :conversion_type
     string   :color_display do color.display if color end
     string   :size_display do size.display if size end
-    string   :state
     string   :style_display do style.display if style end
+    # string   :style_id
+    # string   :color_id
+    # string   :conversion_type
+    # string   :state
     # boolean  :is_enabled
 
     text     :display_fulltext, using: :display
-    text     :style_display_fulltext do self.style.subclass.display if self.style end
-    text     :subclass_display_fulltext do self.style.subclass.display if self.style && self.style.subclass end
-    text     :classification_display_fulltext do self.style.subclass.classification.display if self.style && self.style.subclass && self.style.subclass.classification end
-    text     :department_display_fulltext do self.style.subclass.classification.department.display if self.style && self.style.subclass && self.style.subclass.classification && self.style.subclass.classification.department end
     text     :account_display_fulltext, using: :account_display
-    text     :color_display_fulltext, using: :color_display
-    text     :size_display_fulltext, using: :size_display
+    # text     :style_display_fulltext do self.style.subclass.display if self.style end
+    # text     :subclass_display_fulltext do self.style.subclass.display if self.style && self.style.subclass end
+    # text     :classification_display_fulltext do self.style.subclass.classification.display if self.style && self.style.subclass && self.style.subclass.classification end
+    # text     :department_display_fulltext do self.style.subclass.classification.department.display if self.style && self.style.subclass && self.style.subclass.classification && self.style.subclass.classification.department end
+    # text     :color_display_fulltext, using: :color_display
+    # text     :size_display_fulltext, using: :size_display
   end
   # INDEXING (End)
 

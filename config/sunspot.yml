@@ -8,15 +8,6 @@ development:
     max_memory: 1G
     path: '/solr/omni_dev'
 
-production:
-  solr:
-    hostname: localhost
-    port: 8983
-    log_level: INFO
-    min_memory: 512M
-    max_memory: 1G
-    path: '/solr/omni'
-
 test:
   solr:
     hostname: localhost
@@ -25,4 +16,13 @@ test:
     min_memory: 512M
     max_memory: 1G
     path: '/solr/omni_test'
+
+production:
+  solr:
+    hostname: localhost
+    port: 8983
+    log_level: INFO
+    min_memory: 512M
+    max_memory: 1G
+    path: '/solr/omni'
 
