@@ -108,13 +108,13 @@ namespace :omni do
       resumed = args.model ? false : true
 
       ActiveRecord::Base.descendants.sort { |x, y| x.name <=> y.name }.each do |klass|
-        next unless resumed || klass.name.end_with?(args.model)
+        next unless resumed || klass.name == "Omni::#{args.model}"
 
         if klass.searchable?
           puts "! Indexing #{klass.name}"
           before = Time.now
           # klass.reindex(batch_size: nil)
-          system("rake sunspot:reindex[1000,Omni::#{args.model}]")
+          system("rake sunspot:reindex[1000,#{klass.name}]")
           puts "! Indexed #{klass.name} in #{Time.now - before}s"
         end
         resumed = true
