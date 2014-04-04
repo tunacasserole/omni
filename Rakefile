@@ -89,15 +89,25 @@ namespace :omni do
      #  puts "\n\n\n! All reindexing completed in #{Time.now - started_at}s"
 
 
-    desc 'Reindexes all models, one model or continues on alphabetically from the given model'
-    task :reindex, [:model, :resume] => :environment do |t,args|
+    desc 'Indexes the given model'
+    task :index, [:model] => :environment do |t,args|
+      puts "Indexing Started\n\n"
+      Rails.application.eager_load!
+      started_at = Time.now
+
+      puts "! Indexing #{args.model}"
+      system("rake sunspot:reindex[1000,Omni::#{args.model}]")
+      puts "! Indexed #{args.model} in #{Time.now - started_at}s"
+    end
+
+    desc 'Reindexes all models alphabetically, optionally starting with the given model'
+    task :reindex, [:model] => :environment do |t,args|
       puts "Indexing Started\n\n"
       Rails.application.eager_load!
       started_at = Time.now
       resumed = args.model ? false : true
 
       ActiveRecord::Base.descendants.sort { |x, y| x.name <=> y.name }.each do |klass|
-        # puts "klass name is #{klass.name} and args.model is #{args.model} and resume is #{args.resume}"
         next unless resumed || klass.name.end_with?(args.model)
 
         if klass.searchable?
@@ -106,8 +116,7 @@ namespace :omni do
           klass.reindex(batch_size: nil)
           puts "! Indexed #{klass.name} in #{Time.now - before}s"
         end
-        resumed = true if args.resume
-        break unless resumed
+        resumed = true
       end
 
       puts "\n\n\n! All reindexing completed in #{Time.now - started_at}s"
@@ -121,7 +130,6 @@ namespace :omni do
   #   task :reindex, [:model] => :environment do |t, args|
   #     args.with_defaults(:model => 'all')
   #     puts "Args with defaults were: #{args}"
-          # system("rake sunspot:reindex[1000,Omni::#{args.model}]")
   #     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
   #     @start_time = Time.now
   #     if args.model == 'all'
