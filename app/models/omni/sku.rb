@@ -193,9 +193,9 @@ class Omni::Sku < ActiveRecord::Base
   filter :state_obsolete,          :with => {state: {equal_to: 'obsolete'}},     :priority => 80
   filter :state_inactive,          :with => {state: {equal_to: 'inactive'}},     :priority => 90
 
-  filter :source_parker,           :with => {source: {equal_to: 'Parker'}},       :priority => 60
-  filter :source_buckhead,         :with => {source: {equal_to: 'Buckhead'}}, :priority => 70
-  filter :source_grits,            :with => {source: {equal_to: 'True Grits'}},     :priority => 80
+  # filter :source_parker,           :with => {source: {equal_to: 'Parker'}},       :priority => 60
+  # filter :source_buckhead,         :with => {source: {equal_to: 'Buckhead'}}, :priority => 70
+  # filter :source_grits,            :with => {source: {equal_to: 'True Grits'}},     :priority => 80
 
   filter :department_accessories,  :with => {department_display_fulltext: {equal_to: 'ACCESSORIES'}}, :priority => 10
   filter :department_activewear,  :with => {department_display_fulltext: {equal_to: 'ACTIVEWEAR'}}, :priority => 20
@@ -217,11 +217,11 @@ class Omni::Sku < ActiveRecord::Base
   searchable do
     string   :sku_id
     string   :display
-    string   :sku_nbr
-    string   :account_display do account.display if account end
-    string   :color_display do color.display if color end
-    string   :size_display do size.display if size end
-    string   :style_display do style.display if style end
+    # string   :sku_nbr
+    # string   :account_display do account.display if account end
+    # string   :color_display do color.display if color end
+    # string   :size_display do size.display if size end
+    # string   :style_display do style.display if style end
     # string   :style_id
     # string   :color_id
     # string   :conversion_type

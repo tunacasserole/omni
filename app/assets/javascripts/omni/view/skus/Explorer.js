@@ -58,8 +58,6 @@ Ext.define('Omni.view.skus.Explorer', {
     conversion_typeLabel: Omni.i18n.model.Sku.conversion_type,
     color_idLabel: Omni.i18n.model.Sku.color_id,
     size_idLabel: Omni.i18n.model.Sku.size_id,
-    sourceLabel: Omni.i18n.model.Sku.source,
-    source_idLabel: Omni.i18n.model.Sku.source_id,
   });
   // LABELS (End)
 
@@ -72,16 +70,6 @@ Ext.define('Omni.view.skus.Explorer', {
         dataIndex: 'display',
         flex: 3,
         sortable: true
-      // }, {
-      //   header: this.sourceLabel,
-      //   dataIndex: 'source',
-      //   flex: 1,
-      //   sortable: true
-      // }, {
-      //   header: this.source_idLabel,
-      //   dataIndex: 'source_id',
-      //   flex: 1,
-      //   sortable: true
       }, {
         header: this.style_idLabel,
         dataIndex: 'style_display',

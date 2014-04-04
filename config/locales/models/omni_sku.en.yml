@@ -12,8 +12,6 @@ en:
         pos_name:                        Receipt Name
         design_code:                     Design Code
         state:                           State
-        source:                          Source
-        source_id:                       Source Id
         maintenance_level:               Maintenance Level
         is_converted:                    Converted SKU
         generic_sku_display:             Generic Sku

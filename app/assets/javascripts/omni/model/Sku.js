@@ -19,8 +19,6 @@ Ext.define('Omni.model.Sku', {
     { name: 'pos_name',                             type: 'string'      },
     { name: 'design_code',                          type: 'string'      },
     { name: 'state',                                type: 'string'      },
-    { name: 'source',                               type: 'string'      },
-    { name: 'source_id',                            type: 'string'      },
     { name: 'maintenance_level',                    type: 'string'      },
     { name: 'generic_sku_display',                  type: 'string'      },
     { name: 'generic_sku_id',                       type: 'string'      },

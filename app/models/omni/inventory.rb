@@ -83,8 +83,6 @@
     map :supplier_display,                       to: 'supplier.display'
     map :forecast_profile_display,               to: 'forecast_profile.display'
     map :seasonal_index_display,                 to: 'seasonal_index.display'
-    map :source,                                 to: 'sku.source'
-    map :source_id,                              to: 'sku.source_id'
   end
   # MAPPED ATTRIBUTES (End)
   # ORDERING (Start) ====================================================================

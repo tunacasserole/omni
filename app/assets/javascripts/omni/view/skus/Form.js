@@ -61,8 +61,6 @@ Ext.define('Omni.view.skus.Form', {
       garment_piecesLabel:                        Omni.i18n.model.Sku.garment_pieces,
       is_special_orderLabel:                 Omni.i18n.model.Sku.is_special_order,
       is_special_sizeLabel:                    Omni.i18n.model.Sku.is_special_size,
-      sourceLabel:                                Omni.i18n.model.Sku.source,
-      source_idLabel:                           Omni.i18n.model.Sku.source_id,
       conversion_costLabel:                 Omni.i18n.model.Sku.conversion_cost,
       first_costLabel:                            Omni.i18n.model.Sku.first_cost,
       last_costLabel:                             Omni.i18n.model.Sku.last_cost,
