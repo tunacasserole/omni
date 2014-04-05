@@ -89,11 +89,11 @@ Ext.define('Omni.view.styles.Explorer', {
                     dataIndex: 'conversion_type',
                     flex: 1,
                     sortable: true
-                }, {
-                    header: this.style_nbrLabel,
-                    dataIndex: 'style_nbr',
-                    flex: 1,
-                    sortable: true
+                // }, {
+                //     header: this.style_nbrLabel,
+                //     dataIndex: 'style_nbr',
+                //     flex: 1,
+                //     sortable: true
                 }, {
                     header: this.stateLabel,
                     dataIndex: 'state',

@@ -35,6 +35,7 @@ Ext.define('Omni.view.sku_aliases.Explorer', {
       sku_displayLabel: Omni.i18n.model.SkuAlias.sku_display,
       sku_aliasLabel: Omni.i18n.model.SkuAlias.sku_alias,
       sku_alias_typeLabel: Omni.i18n.model.SkuAlias.sku_alias_type,
+      alias_sourceLabel: Omni.i18n.model.SkuAlias.alias_source,
       is_primaryLabel: Omni.i18n.model.SkuAlias.is_primary,
       pack_typeLabel: Omni.i18n.model.SkuAlias.pack_type,
       pack_sizeLabel: Omni.i18n.model.SkuAlias.pack_size
@@ -44,12 +45,13 @@ Ext.define('Omni.view.sku_aliases.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: true  },
+        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 3,  sortable: true  },
         { header: this.sku_aliasLabel, dataIndex: 'sku_alias',  flex: 1,  sortable: true  },
-        { header: this.sku_alias_typeLabel, dataIndex: 'sku_alias_type',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('SKU_ALIAS_TYPE') },
-        { header: this.is_primaryLabel, dataIndex: 'is_primary',  flex: 1,  sortable: true  },
-        { header: this.pack_typeLabel, dataIndex: 'pack_type',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('PACK_TYPE') },
-        { header: this.pack_sizeLabel, dataIndex: 'pack_size',  flex: 1,  sortable: true  }
+        { header: this.alias_sourceLabel, dataIndex: 'alias_source',  flex: 2,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('ALIAS_SOURCE') },
+        // { header: this.sku_alias_typeLabel, dataIndex: 'sku_alias_type',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('SKU_ALIAS_TYPE') },
+        // { header: this.is_primaryLabel, dataIndex: 'is_primary',  flex: 1,  sortable: true  },
+        // { header: this.pack_typeLabel, dataIndex: 'pack_type',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('PACK_TYPE') },
+        // { header: this.pack_sizeLabel, dataIndex: 'pack_size',  flex: 1,  sortable: true  }
       ]
     });
     // COLUMNS (End)

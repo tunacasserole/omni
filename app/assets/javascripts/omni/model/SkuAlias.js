@@ -1,6 +1,6 @@
 Ext.define('Omni.model.SkuAlias', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -17,6 +17,7 @@ Ext.define('Omni.model.SkuAlias', {
     { name: 'sku_id', type: 'string' },
     { name: 'sku_alias', type: 'string' },
     { name: 'sku_alias_type', type: 'string' },
+    { name: 'alias_source', type: 'string' },
     { name: 'is_primary', type: 'boolean', defaultValue: false },
     { name: 'pack_type', type: 'string' },
     { name: 'pack_size', type: 'float', defaultValue: 0 },

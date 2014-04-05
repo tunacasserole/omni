@@ -138,11 +138,11 @@ Ext.define('Omni.view.inventories.Explorer', {
           dataIndex    : 'work_in_process_units',
           flex         : 1
         },
-        // {
-        //   header       : this.supplier_on_order_unitsLabel,
-        //   dataIndex    : 'supplier_on_order_units',
-        //   flex         : 1
-        // },
+        {
+          header       : this.supplier_on_order_unitsLabel,
+          dataIndex    : 'supplier_on_order_units',
+          flex         : 1
+        },
         // {
         //   header       : this.warehouse_on_order_unitsLabel,
         //   dataIndex    : 'warehouse_on_order_units',

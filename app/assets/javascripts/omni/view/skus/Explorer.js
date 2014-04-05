@@ -90,11 +90,11 @@ Ext.define('Omni.view.skus.Explorer', {
         dataIndex: 'size_display',
         flex: 1,
         sortable: true
-      }, {
-        header: this.sku_nbrLabel,
-        dataIndex: 'sku_nbr',
-        flex: 1,
-        sortable: true
+      // }, {
+      //   header: this.sku_nbrLabel,
+      //   dataIndex: 'sku_nbr',
+      //   flex: 1,
+      //   sortable: true
       }, {
         header: this.stateLabel,
         dataIndex: 'state',

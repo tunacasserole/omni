@@ -183,7 +183,7 @@
       end
     end
   end
-  
+
   def clock_it(i)
     # @start_time = Time.now if i == 1
     if i.to_s.end_with? '00'
@@ -218,6 +218,7 @@
   end
 
   def forecast_by_class
+    puts "forecasting by class"
     self.department.classifications.each_with_index do |klass, i|
       puts "#{time_stamp}  class #{klass.display} with #{klass.inventories.count} inventory rows"
       # get inventory for that class

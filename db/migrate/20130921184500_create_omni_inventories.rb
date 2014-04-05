@@ -31,6 +31,7 @@ class CreateOmniInventories < ActiveRecord::Migration
         t.column   :last_inventory_units,            :decimal,           null: true,    scale: 2, precision: 11
         t.column   :last_inventory_cost,             :decimal,           null: true,    :scale   => 4,          :precision  => 13
         t.column   :last_inventory_retail,           :decimal,           null: true,    :scale   => 4,          :precision  => 13
+        t.column   :projected_units,           :decimal,           null: true,    :precision  => 11,    :scale   => 2
         t.column   :sale_units_ytd,           :decimal,           null: true,    :precision  => 11,    :scale   => 2
         t.column   :sale_units_py1,           :decimal,           null: true,    :precision  => 11,    :scale   => 2
         t.column   :sale_units_py2,           :decimal,           null: true,    :precision  => 11,    :scale   => 2

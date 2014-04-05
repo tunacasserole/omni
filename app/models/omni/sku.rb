@@ -215,18 +215,16 @@ class Omni::Sku < ActiveRecord::Base
   end
 
   searchable do
-    string   :sku_id
+    # string   :sku_id
     string   :display
-    # string   :sku_nbr
-    # string   :account_display do account.display if account end
-    # string   :color_display do color.display if color end
-    # string   :size_display do size.display if size end
-    # string   :style_display do style.display if style end
+    string   :style_display do style.display if style end
+    string   :account_display do account.display if account end
+    string   :color_display do color.display if color end
+    string   :size_display do size.display if size end
+    string   :state
     # string   :style_id
     # string   :color_id
     # string   :conversion_type
-    # string   :state
-    # boolean  :is_enabled
 
     text     :display_fulltext, using: :display
     text     :account_display_fulltext, using: :account_display

@@ -96,7 +96,7 @@ class Omni::Account < ActiveRecord::Base
     string   :display
     string   :billing_city
     string   :billing_state   do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.billing_state) end
-    # string   :state
+    string   :state
     # string   :location_display do location.display if location end
     # string   :shipping_city
     # string   :shipping_state do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.shipping_state) end

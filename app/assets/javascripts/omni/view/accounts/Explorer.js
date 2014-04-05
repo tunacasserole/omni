@@ -92,8 +92,8 @@ Ext.define('Omni.view.accounts.Explorer', {
     Ext.apply(me, {
       columns      : [
         {
-          header       : me.account_nbrLabel,
-          dataIndex    : 'account_nbr',
+          header       : me.school_nbrLabel,
+          dataIndex    : 'school_nbr',
           flex         : 1
         },
         {
