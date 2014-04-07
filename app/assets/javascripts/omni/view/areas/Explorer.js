@@ -3,13 +3,13 @@ Ext.define('Omni.view.areas.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-areas-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -49,15 +49,15 @@ Ext.define('Omni.view.areas.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: true  },
-        { header: this.area_nbrLabel,                                    dataIndex: 'area_nbr',                           flex: 1,   sortable: true  },
-        { header: this.is_receivingLabel,                                dataIndex: 'is_receiving',                       flex: 1,   sortable: true  },
-        { header: this.is_pickingLabel,                                  dataIndex: 'is_picking',                         flex: 1,   sortable: true  },
-        { header: this.is_reserveLabel,                                  dataIndex: 'is_reserve',                         flex: 1,   sortable: true  },
-        { header: this.is_put_locationLabel,                             dataIndex: 'is_put_location',                    flex: 1,   sortable: true  },
-        { header: this.is_special_handlingLabel,                         dataIndex: 'is_special_handling',                flex: 1,   sortable: true  },
-        { header: this.is_quality_controlLabel,                          dataIndex: 'is_quality_control',                 flex: 1,   sortable: true  },
-        { header: this.is_quick_caseLabel,                               dataIndex: 'is_quick_case',                      flex: 1,   sortable: true  }
+        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: false  },
+        { header: this.area_nbrLabel,                                    dataIndex: 'area_nbr',                           flex: 1,   sortable: false  },
+        { header: this.is_receivingLabel,                                dataIndex: 'is_receiving',                       flex: 1,   sortable: false  },
+        { header: this.is_pickingLabel,                                  dataIndex: 'is_picking',                         flex: 1,   sortable: false  },
+        { header: this.is_reserveLabel,                                  dataIndex: 'is_reserve',                         flex: 1,   sortable: false  },
+        { header: this.is_put_locationLabel,                             dataIndex: 'is_put_location',                    flex: 1,   sortable: false  },
+        { header: this.is_special_handlingLabel,                         dataIndex: 'is_special_handling',                flex: 1,   sortable: false  },
+        { header: this.is_quality_controlLabel,                          dataIndex: 'is_quality_control',                 flex: 1,   sortable: false  },
+        { header: this.is_quick_caseLabel,                               dataIndex: 'is_quick_case',                      flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

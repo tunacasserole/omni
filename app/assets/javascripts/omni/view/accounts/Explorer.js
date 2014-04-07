@@ -97,8 +97,8 @@ Ext.define('Omni.view.accounts.Explorer', {
           flex         : 1
         },
         {
-          header       : me.account_nameLabel,
-          dataIndex    : 'account_name',
+          header       : me.displayLabel,
+          dataIndex    : 'display',
           flex         : 3
         },
         // {

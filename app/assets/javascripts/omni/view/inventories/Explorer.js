@@ -101,12 +101,14 @@ Ext.define('Omni.view.inventories.Explorer', {
         {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
-          flex         : 3
+          flex         : 3,
+          sortable     : false
         },
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         // {
         //   header       : this.department_idLabel,
@@ -131,37 +133,56 @@ Ext.define('Omni.view.inventories.Explorer', {
         {
           header       : this.on_hand_unitsLabel,
           dataIndex    : 'on_hand_units',
-          flex         : 1
-        },
-        {
-          header       : this.work_in_process_unitsLabel,
-          dataIndex    : 'work_in_process_units',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.supplier_on_order_unitsLabel,
           dataIndex    : 'supplier_on_order_units',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
-        // {
-        //   header       : this.warehouse_on_order_unitsLabel,
-        //   dataIndex    : 'warehouse_on_order_units',
-        //   flex         : 1
-        // },
+        {
+          header       : this.work_in_process_unitsLabel,
+          dataIndex    : 'work_in_process_units',
+          flex         : 1,
+          sortable     : false
+        },
         {
           header       : this.in_transit_unitsLabel,
           dataIndex    : 'in_transit_units',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
-        // {
-        //   header       : this.non_sellable_unitsLabel,
-        //   dataIndex    : 'non_sellable_units',
-        //   flex         : 1
-        // },
         {
           header       : this.allocated_unitsLabel,
           dataIndex    : 'allocated_units',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
+        },
+        {
+          header       : this.sale_units_ytdLabel,
+          dataIndex    : 'sale_units_ytd',
+          flex         : 1,
+          sortable     : false
+        },
+        {
+          header       : this.sale_units_py1Label,
+          dataIndex    : 'sale_units_py1',
+          flex         : 1,
+          sortable     : false
+        },
+        {
+          header       : this.sale_units_py2Label,
+          dataIndex    : 'sale_units_py2',
+          flex         : 1,
+          sortable     : false
+        },
+        {
+          header       : this.sale_units_py3Label,
+          dataIndex    : 'sale_units_py3',
+          flex         : 1,
+          sortable     : false
         },
         // {
         //   header       : this.reserved_unitsLabel,
@@ -221,26 +242,6 @@ Ext.define('Omni.view.inventories.Explorer', {
         // {
         //   header       : this.last_inventory_retailLabel,
         //   dataIndex    : 'last_inventory_retail',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.sale_units_ytdLabel,
-        //   dataIndex    : 'sale_units_ytd',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.sale_units_py1Label,
-        //   dataIndex    : 'sale_units_py1',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.sale_units_py2Label,
-        //   dataIndex    : 'sale_units_py2',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : this.sale_units_py3Label,
-        //   dataIndex    : 'sale_units_py3',
         //   flex         : 1
         // },
         // {

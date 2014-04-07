@@ -46,12 +46,12 @@ Ext.define('Omni.view.bom_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.bom_displayLabel, dataIndex: 'bom_display',  flex: 1,  sortable: true  },
-        { header: this.color_displayLabel, dataIndex: 'color_display',  flex: 1,  sortable: true  },
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: true  },
-        { header: this.quantityLabel, dataIndex: 'quantity',  flex: 1,  sortable: true  },
-        { header: this.waste_percentLabel, dataIndex: 'waste_percent',  flex: 1,  sortable: true  },
-        { header: this.uom_codeLabel, dataIndex: 'uom_code',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('UOM_CODE') }
+        { header: this.bom_displayLabel, dataIndex: 'bom_display',  flex: 1,  sortable: false  },
+        { header: this.color_displayLabel, dataIndex: 'color_display',  flex: 1,  sortable: false  },
+        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: false  },
+        { header: this.quantityLabel, dataIndex: 'quantity',  flex: 1,  sortable: false  },
+        { header: this.waste_percentLabel, dataIndex: 'waste_percent',  flex: 1,  sortable: false  },
+        { header: this.uom_codeLabel, dataIndex: 'uom_code',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('UOM_CODE') }
       ]
     });
     // COLUMNS (End)

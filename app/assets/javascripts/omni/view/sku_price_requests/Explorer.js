@@ -47,13 +47,13 @@ Ext.define('Omni.view.sku_price_requests.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: true  },
-        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: true  },
-        { header: this.request_dateLabel,                                dataIndex: 'request_date',                       flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: true  },
-        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: true  },
-        { header: this.customer_displayLabel,                            dataIndex: 'customer_display',                   flex: 1,   sortable: true  },
-        { header: this.account_displayLabel,                                dataIndex: 'account_display',                       flex: 1,   sortable: true  }
+        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: false  },
+        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: false  },
+        { header: this.request_dateLabel,                                dataIndex: 'request_date',                       flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: false  },
+        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: false  },
+        { header: this.customer_displayLabel,                            dataIndex: 'customer_display',                   flex: 1,   sortable: false  },
+        { header: this.account_displayLabel,                                dataIndex: 'account_display',                       flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

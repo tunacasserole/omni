@@ -30,16 +30,15 @@
           title     : 'Profile',
           xtype     : 'omni-inventories-Form'
         }
-        ,{
-          title: 'All Locations for this Sku',
-          xtype: 'omni-locations-Explorer',
-          defaultSearch: { with:
-             {
-               location_id:   {equal_to: me.record.get('location_id')}
-             }
-          }
-        }
-
+        // ,{
+        //   title: 'All Locations for this Sku',
+        //   xtype: 'omni-locations-Explorer',
+        //   defaultSearch: { with:
+        //      {
+        //        location_id:   {equal_to: me.record.get('location_id')}
+        //      }
+        //   }
+        // }
       ]
     });
     // CARDS (End)

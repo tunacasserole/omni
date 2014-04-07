@@ -46,13 +46,13 @@ Ext.define('Omni.view.style_colors.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.style_displayLabel, dataIndex: 'style_display',  flex: 1,  sortable: true  },
-        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: true  },
-        { header: this.color_displayLabel, dataIndex: 'color_display',  flex: 1,  sortable: true  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: true  },
-        { header: this.fabric_contentLabel, dataIndex: 'fabric_content',  flex: 1,  sortable: true  },
-        { header: this.inital_retail_priceLabel, dataIndex: 'inital_retail_price',  flex: 1,  sortable: true  },
-        { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: true  }
+        { header: this.style_displayLabel, dataIndex: 'style_display',  flex: 1,  sortable: false  },
+        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: false  },
+        { header: this.color_displayLabel, dataIndex: 'color_display',  flex: 1,  sortable: false  },
+        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  },
+        { header: this.fabric_contentLabel, dataIndex: 'fabric_content',  flex: 1,  sortable: false  },
+        { header: this.inital_retail_priceLabel, dataIndex: 'inital_retail_price',  flex: 1,  sortable: false  },
+        { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

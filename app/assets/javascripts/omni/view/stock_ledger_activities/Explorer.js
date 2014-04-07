@@ -45,15 +45,15 @@ Ext.define('Omni.view.stock_ledger_activities.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.ruleset_displayLabel, dataIndex: 'ruleset_display',  flex: 1,  sortable: true  },
+        { header: this.ruleset_displayLabel, dataIndex: 'ruleset_display',  flex: 1,  sortable: false  },
         // { header: 'At',        dataIndex: 'activity_date',    flex: 1, renderer:Ext.util.Format.dateRenderer('h:iA') },
         // { header: 'On',        dataIndex: 'activity_date',    flex: 2, renderer:Ext.util.Format.dateRenderer('l, M d, Y') },
-        { header: this.activity_dateLabel, dataIndex: 'activity_date',  flex: 1,  sortable: true, renderer:Ext.util.Format.dateRenderer('m/d/y H:i') },
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: true  },
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: true  },
-        { header: this.unitsLabel, dataIndex: 'units',  flex: 1,  sortable: true  },
-        { header: this.costLabel, dataIndex: 'cost',  flex: 1,  sortable: true  },
-        { header: this.retailLabel, dataIndex: 'retail',  flex: 1,  sortable: true  }
+        { header: this.activity_dateLabel, dataIndex: 'activity_date',  flex: 1,  sortable: false, renderer:Ext.util.Format.dateRenderer('m/d/y H:i') },
+        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: false  },
+        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  },
+        { header: this.unitsLabel, dataIndex: 'units',  flex: 1,  sortable: false  },
+        { header: this.costLabel, dataIndex: 'cost',  flex: 1,  sortable: false  },
+        { header: this.retailLabel, dataIndex: 'retail',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

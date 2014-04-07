@@ -44,12 +44,12 @@ Ext.define('Omni.view.sku_substitutes.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: true  },
-        { header: this.substitute_sku_displayLabel, dataIndex: 'substitute_sku_display',  flex: 1,  sortable: true  },
-        { header: this.sku_substitute_typeLabel, dataIndex: 'sku_substitute_type',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('SKU_SUBSTITUTE_TYPE') },
-        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.priorityLabel, dataIndex: 'priority',  flex: 1,  sortable: true  }
+        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: false  },
+        { header: this.substitute_sku_displayLabel, dataIndex: 'substitute_sku_display',  flex: 1,  sortable: false  },
+        { header: this.sku_substitute_typeLabel, dataIndex: 'sku_substitute_type',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('SKU_SUBSTITUTE_TYPE') },
+        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.priorityLabel, dataIndex: 'priority',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

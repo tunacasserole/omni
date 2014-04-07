@@ -3,13 +3,13 @@ Ext.define('Omni.view.tax_authorities.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-tax_authorities-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -46,12 +46,12 @@ Ext.define('Omni.view.tax_authorities.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
-        { header: this.tax_authority_typeLabel, dataIndex: 'tax_authority_type',  flex: 1,  sortable: true  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: true  },
-        { header: this.state_codeLabel, dataIndex: 'state_code',  flex: 1,  sortable: true  },
-        { header: this.filing_frequencyLabel, dataIndex: 'filing_frequency',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
+        { header: this.tax_authority_typeLabel, dataIndex: 'tax_authority_type',  flex: 1,  sortable: false  },
+        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  },
+        { header: this.state_codeLabel, dataIndex: 'state_code',  flex: 1,  sortable: false  },
+        { header: this.filing_frequencyLabel, dataIndex: 'filing_frequency',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

@@ -30,8 +30,17 @@ Ext.define('Omni.view.skus.Inspector', {
           module: 'contracts'
         }
         ,{
+          title: 'Aliases',
+          xtype: 'omni-sku_aliases-Explorer', module: 'samples',
+          defaultSearch: { with:
+             {
+               sku_id:   {equal_to: me.record.get('sku_id')}
+             }
+          }
+        }
+        ,{
           title: 'Inventory',
-          xtype: 'omni-inventories-Explorer', module: 'survey',
+          xtype: 'omni-inventories-Explorer', module: 'samples',
           defaultSearch: { with:
              {
                sku_id:   {equal_to: me.record.get('sku_id')}
@@ -40,16 +49,7 @@ Ext.define('Omni.view.skus.Inspector', {
         }
         ,{
           title: 'Prices',
-          xtype: 'omni-sku_prices-Explorer', module: 'tracks',
-          defaultSearch: { with:
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
-          }
-        }
-        ,{
-          title: 'Aliases',
-          xtype: 'omni-sku_aliases-Explorer', module: 'sales_calls',
+          xtype: 'omni-sku_prices-Explorer', module: 'samples',
           defaultSearch: { with:
              {
                sku_id:   {equal_to: me.record.get('sku_id')}

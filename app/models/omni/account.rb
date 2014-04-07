@@ -11,7 +11,7 @@ class Omni::Account < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :account_id,                       override: false,        with: :guid
   default      :account_nbr,                      override: false,        with: :sequence, named: "ACCOUNT_NBR"
-  default      :display,                          override: false,        to: lambda{|m| "#{m.account_name} - #{m.account_nbr}"}
+  default      :display,                          override: false,        to: lambda{|m| "#{m.account_name}-#{m.school_nbr}"}
   default      :billing_country,                  override: false,        :to  => "USA"
   default      :shipping_country,                 override: false,        :to  => "USA"
   default      :is_footwear_program,              override: false,        to: false

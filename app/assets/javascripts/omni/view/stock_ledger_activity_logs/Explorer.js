@@ -45,11 +45,11 @@ Ext.define('Omni.view.stock_ledger_activity_logs.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.stock_ledger_activity_log_nbrLabel, dataIndex: 'stock_ledger_activity_log_nbr',  flex: 1,  sortable: true  },
-        { header: this.model_nameLabel, dataIndex: 'model_name',  flex: 1,  sortable: true  },
-        { header: this.attribute_nameLabel, dataIndex: 'attribute_name',  flex: 1,  sortable: true  },
-        { header: this.row_displayLabel, dataIndex: 'row_display',  flex: 1,  sortable: true  },
-        { header: this.rule_actionLabel, dataIndex: 'rule_action',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('RULE_ACTION') }
+        { header: this.stock_ledger_activity_log_nbrLabel, dataIndex: 'stock_ledger_activity_log_nbr',  flex: 1,  sortable: false  },
+        { header: this.model_nameLabel, dataIndex: 'model_name',  flex: 1,  sortable: false  },
+        { header: this.attribute_nameLabel, dataIndex: 'attribute_name',  flex: 1,  sortable: false  },
+        { header: this.row_displayLabel, dataIndex: 'row_display',  flex: 1,  sortable: false  },
+        { header: this.rule_actionLabel, dataIndex: 'rule_action',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('RULE_ACTION') }
       ]
     });
     // COLUMNS (End)

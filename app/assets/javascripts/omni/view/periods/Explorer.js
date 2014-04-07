@@ -44,16 +44,16 @@ Ext.define('Omni.view.periods.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.start_dateLabel, dataIndex: 'start_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        // { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.start_dateLabel, dataIndex: 'start_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        // { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
         {
           header        : this.end_dateLabel,
           dataIndex     : 'end_date',
           flex          : 1,
           renderer      : Ext.util.Format.dateRenderer('m/d/y')
         },
-        { header: this.year_numberLabel, dataIndex: 'year_number',  flex: 1,  sortable: true  },
-        { header: this.period_numberLabel, dataIndex: 'period_number',  flex: 1,  sortable: true  }
+        { header: this.year_numberLabel, dataIndex: 'year_number',  flex: 1,  sortable: false  },
+        { header: this.period_numberLabel, dataIndex: 'period_number',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

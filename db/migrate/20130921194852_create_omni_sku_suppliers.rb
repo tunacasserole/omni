@@ -37,14 +37,13 @@ class CreateOmniSkuSuppliers < ActiveRecord::Migration
         t.column   :cost_id,                         :string,            null: true,    limit: 32
         t.column   :origin_country,                  :string,            null: true,    limit: 200
         t.column   :freight_term,                    :string,            null: true,    limit: 200
-        t.column   :is_primary_supplier,             :boolean,           null: true
+        t.column   :is_primary,                      :boolean,           null: true
         t.column   :is_manufacturer,                 :boolean,           null: true
         t.column   :is_discontinued,                 :boolean,           null: true
         t.column   :is_included_extra_cost,          :boolean,           null: true
         t.column   :is_conveyable_master_pack,       :boolean,           null: true
         t.column   :is_conveyable_inner_pack,        :boolean,           null: true
         t.column   :is_destroyed,                    :boolean,           null: true
-        t.column   :is_indexed,                      :boolean,           null: true
       end
     end
     #ActiveRecord::Base.establish_connection(Buildit::Util::Data::Connection.for('BUILDIT'))

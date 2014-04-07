@@ -102,21 +102,26 @@ class Omni::Sku < ActiveRecord::Base
   # end
   # COMPUTED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
   # HOOKS (Start) =======================================================================
     # hook  :before_create,      :get_sequence_nbr,                  10
   # HOOKS (End)
 
   # HELPERS (Start) =====================================================================
+  def self.to_hash
+    # puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku hash"
+    # legacy_source = 'PARKER'
+    # ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| to_hash[x['source_id']] = x['sku_id']}  # JRUBY!!!
+    to_hash = {}
+    ActiveRecord::Base.connection.execute("select sku_id, sku_alias from sku_aliases").each {|x| to_hash[x[1]] = x[0]} # MRI
+    to_hash
+  end
+
   def self.source_hash(legacy_source)
     # puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku hash"
     # legacy_source = 'PARKER'
     # ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| to_hash[x['source_id']] = x['sku_id']}  # JRUBY!!!
     to_hash = {}
-    ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}' or source = 'MARK AUTO CREATE'").each {|x| to_hash[x[1]] = x[0]} # MRI
+    ActiveRecord::Base.connection.execute("select sku_id, sku_alias from sku_aliases where alias_source = '#{legacy_source}'").each {|x| to_hash[x[1]] = x[0]} # MRI
     to_hash
     # sku_array = []
     # sku_array = ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'")
@@ -215,13 +220,14 @@ class Omni::Sku < ActiveRecord::Base
   end
 
   searchable do
-    # string   :sku_id
+    string   :sku_id
     string   :display
     string   :style_display do style.display if style end
     string   :account_display do account.display if account end
     string   :color_display do color.display if color end
     string   :size_display do size.display if size end
     string   :state
+    boolean  :is_converted
     # string   :style_id
     # string   :color_id
     # string   :conversion_type
@@ -235,7 +241,9 @@ class Omni::Sku < ActiveRecord::Base
     # text     :color_display_fulltext, using: :color_display
     # text     :size_display_fulltext, using: :size_display
   end
-  # INDEXING (End)
+  order_search_by :display => :asc
+  # INDEXING (End) ====================================================================
+
 
 end # class Omni::Sku
 

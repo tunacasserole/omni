@@ -49,14 +49,14 @@ Ext.define('Omni.view.orders.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: true  },
-        { header: this.terminal_displayLabel,                            dataIndex: 'terminal_display',                   flex: 1,   sortable: true  },
-        { header: this.order_nbrLabel,                          dataIndex: 'order_nbr',                 flex: 1,   sortable: true  },
-        { header: this.customer_displayLabel,                            dataIndex: 'customer_display',                   flex: 1,   sortable: true  },
-        { header: this.order_start_dateLabel,                            dataIndex: 'order_start_date',                   flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.order_dateLabel,                                  dataIndex: 'order_date',                         flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: true  },
-        { header: this.order_sourceLabel,                                dataIndex: 'order_source',                       flex: 1,   sortable: true  }
+        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: false  },
+        { header: this.terminal_displayLabel,                            dataIndex: 'terminal_display',                   flex: 1,   sortable: false  },
+        { header: this.order_nbrLabel,                          dataIndex: 'order_nbr',                 flex: 1,   sortable: false  },
+        { header: this.customer_displayLabel,                            dataIndex: 'customer_display',                   flex: 1,   sortable: false  },
+        { header: this.order_start_dateLabel,                            dataIndex: 'order_start_date',                   flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.order_dateLabel,                                  dataIndex: 'order_date',                         flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: false  },
+        { header: this.order_sourceLabel,                                dataIndex: 'order_source',                       flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

@@ -75,10 +75,6 @@ class Omni::StyleSupplier < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
   # HOOKS (Start) =======================================================================
   hook  :before_create,      :set_defaults,                 10
   hook  :after_create,       :add_style_supplier_colors,                 10
@@ -87,18 +83,21 @@ class Omni::StyleSupplier < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :style_id
+    string   :style_supplier_id
+    string   :display
 
     # string   :style_display do style.display if style end
     # string   :supplier_display do supplier.display if supplier end
     # boolean  :is_primary
     # boolean  :is_manufacturer
-    # string   :display
     # string   :state
 
     # text     :style_display_fulltext, using: :style_display
     # text     :supplier_display_fulltext, using: :supplier_display
     # text     :state_fulltext, using: :state
   end
+
+  order_search_by :display => :asc
   # INDEXING (End)
 
   # STATES (Start) ====================================================================

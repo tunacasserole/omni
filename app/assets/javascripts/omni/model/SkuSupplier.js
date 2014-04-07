@@ -18,7 +18,7 @@ Ext.define('Omni.model.SkuSupplier', {
     { name: 'supplier_id',                          type: 'string'      },
     { name: 'supplier_item_identifier',             type: 'string'      },
     { name: 'description',                          type: 'string'      },
-    { name: 'is_primary',                  type: 'boolean',    defaultValue: false                     },
+    { name: 'is_primary',                           type: 'boolean',    defaultValue: false                     },
     { name: 'is_manufacturer',                      type: 'boolean',    defaultValue: false                     },
     { name: 'is_discontinued',                      type: 'boolean',    defaultValue: false                     },
     { name: 'supplier_cost_units',                  type: 'float',      defaultValue: 0                         },

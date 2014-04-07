@@ -52,18 +52,18 @@ Ext.define('Omni.view.container_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.container_displayLabel,                           dataIndex: 'container_display',                  flex: 1,   sortable: true  },
-        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: true  },
-        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: true  },
-        { header: this.purchase_detail_displayLabel,                     dataIndex: 'purchase_detail_display',            flex: 1,   sortable: true  },
-        { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: true  },
-        { header: this.supplier_item_identifierLabel,                    dataIndex: 'supplier_item_identifier',           flex: 1,   sortable: true  },
-        { header: this.job_displayLabel,                          dataIndex: 'job_display',                 flex: 1,   sortable: true  },
-        { header: this.receipt_detail_displayLabel,                      dataIndex: 'receipt_detail_display',             flex: 1,   sortable: true  },
-        { header: this.pick_displayLabel,                         dataIndex: 'pick_display',                flex: 1,   sortable: true  },
-        { header: this.origin_container_detail_displayLabel,             dataIndex: 'origin_container_detail_display',    flex: 1,   sortable: true  },
-        { header: this.is_quality_holdLabel,                             dataIndex: 'is_quality_hold',                    flex: 1,   sortable: true  },
-        { header: this.is_duty_paidLabel,                                dataIndex: 'is_duty_paid',                       flex: 1,   sortable: true  }
+        { header: this.container_displayLabel,                           dataIndex: 'container_display',                  flex: 1,   sortable: false  },
+        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: false  },
+        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: false  },
+        { header: this.purchase_detail_displayLabel,                     dataIndex: 'purchase_detail_display',            flex: 1,   sortable: false  },
+        { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: false  },
+        { header: this.supplier_item_identifierLabel,                    dataIndex: 'supplier_item_identifier',           flex: 1,   sortable: false  },
+        { header: this.job_displayLabel,                          dataIndex: 'job_display',                 flex: 1,   sortable: false  },
+        { header: this.receipt_detail_displayLabel,                      dataIndex: 'receipt_detail_display',             flex: 1,   sortable: false  },
+        { header: this.pick_displayLabel,                         dataIndex: 'pick_display',                flex: 1,   sortable: false  },
+        { header: this.origin_container_detail_displayLabel,             dataIndex: 'origin_container_detail_display',    flex: 1,   sortable: false  },
+        { header: this.is_quality_holdLabel,                             dataIndex: 'is_quality_hold',                    flex: 1,   sortable: false  },
+        { header: this.is_duty_paidLabel,                                dataIndex: 'is_duty_paid',                       flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

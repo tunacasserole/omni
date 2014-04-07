@@ -43,11 +43,11 @@ Ext.define('Omni.view.sku_prices.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.retail_priceLabel, dataIndex: 'retail_price',  flex: 1,  sortable: true  },
-        { header: this.price_unitsLabel, dataIndex: 'price_units',  flex: 1,  sortable: true  },
-        { header: this.sales_categoryLabel, dataIndex: 'sales_category',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('SALES_CATEGORY') },
-        { header: this.price_book_displayLabel, dataIndex: 'price_book_display',  flex: 1,  sortable: true  }
+        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.retail_priceLabel, dataIndex: 'retail_price',  flex: 1,  sortable: false  },
+        { header: this.price_unitsLabel, dataIndex: 'price_units',  flex: 1,  sortable: false  },
+        { header: this.sales_categoryLabel, dataIndex: 'sales_category',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('SALES_CATEGORY') },
+        // { header: this.price_book_displayLabel, dataIndex: 'price_book_display',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

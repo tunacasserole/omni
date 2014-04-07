@@ -44,10 +44,10 @@ Ext.define('Omni.view.price_books.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
-        { header: this.price_book_typeLabel, dataIndex: 'price_book_type',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('PRICE_BOOK_TYPE') },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
+        { header: this.price_book_typeLabel, dataIndex: 'price_book_type',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('PRICE_BOOK_TYPE') },
+        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

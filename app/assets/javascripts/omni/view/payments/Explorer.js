@@ -46,11 +46,11 @@ Ext.define('Omni.view.payments.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.order_displayLabel,                               dataIndex: 'order_display',                      flex: 1,   sortable: true  },
-        { header: this.customer_displayLabel,                            dataIndex: 'customer_display',                   flex: 1,   sortable: true  },
-        { header: this.terminal_displayLabel,                            dataIndex: 'terminal_display',                   flex: 1,   sortable: true  },
-        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: true  },
-        { header: this.tender_displayLabel,                              dataIndex: 'tender_display',                     flex: 1,   sortable: true  }
+        { header: this.order_displayLabel,                               dataIndex: 'order_display',                      flex: 1,   sortable: false  },
+        { header: this.customer_displayLabel,                            dataIndex: 'customer_display',                   flex: 1,   sortable: false  },
+        { header: this.terminal_displayLabel,                            dataIndex: 'terminal_display',                   flex: 1,   sortable: false  },
+        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: false  },
+        { header: this.tender_displayLabel,                              dataIndex: 'tender_display',                     flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

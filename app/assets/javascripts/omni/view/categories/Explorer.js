@@ -43,9 +43,9 @@ Ext.define('Omni.view.categories.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.category_codeLabel,                               dataIndex: 'category_code',                      flex: 1,   sortable: true  },
-        { header: this.category_typeLabel,                               dataIndex: 'category_type',                      flex: 1,   sortable: true, renderer: Buildit.util.Format.lookupRenderer('CATEGORY_TYPE') }
+        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: false  },
+        { header: this.category_codeLabel,                               dataIndex: 'category_code',                      flex: 1,   sortable: false  },
+        { header: this.category_typeLabel,                               dataIndex: 'category_type',                      flex: 1,   sortable: false, renderer: Buildit.util.Format.lookupRenderer('CATEGORY_TYPE') }
       ]
     });
     // COLUMNS (End)

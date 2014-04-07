@@ -85,30 +85,25 @@
     map :seasonal_index_display,                 to: 'seasonal_index.display'
   end
   # MAPPED ATTRIBUTES (End)
-  # ORDERING (Start) ====================================================================
-  order_search_by :sku_display => :asc
-  # ORDERING (End)
-
-  # SCOPES (Start) ======================================================================
-  # SCOPES (End)
 
   # HOOKS (Start) =======================================================================
-  def self.source_hash
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create inventory hash"
-    to_hash = {}
-    ActiveRecord::Base.connection.execute("select inventory_id, location_id, sku_id from inventories").each {|x| to_hash["#{x[1]},#{x[2]}"] = x[0]} # MRI
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END....create inventory hash: #{to_hash.count.to_s}"
-    return to_hash
+  def self.to_hash
+    to_hash = {}; ActiveRecord::Base.connection.execute("select inventory_id, location_id, sku_id from inventories").each {|x| to_hash["#{x[1]},#{x[2]}"] = x[0]}; to_hash;
   end
   # HOOKS (End)
 
-
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :inventory_id
     string   :sku_id
     string   :sku_display do sku.display if sku end
     string   :location_id
     string   :location_display do location.display if location end
+    double   :on_hand_units
+    double   :work_in_process_units
+    double   :supplier_on_order_units
+    double   :in_transit_units
+    double   :allocated_units
     # # string   :department_id
     # # string   :department_display do department.display if department end
     # # string   :supplier_id
@@ -118,10 +113,6 @@
     # string   :source_id
     # string   :source
     # string   :display
-    # string   :on_hand_units
-    # string   :work_in_process_units
-    # string   :in_transit_units
-    # string   :allocated_units
 
     text     :sku_display_fulltext, using: :sku_display
     text     :location_display_fulltext, using: :location_display
@@ -131,6 +122,7 @@
     # text     :source_fulltext, using: :source
     # text     :source_id_fulltext, using: :source_id
   end
+  order_search_by :sku_display => :asc
   # STATES (Start) ====================================================================
 
   # STATES (End)

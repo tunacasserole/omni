@@ -5,7 +5,7 @@ class Omni::SkuSubstitute < ActiveRecord::Base
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext
+  # supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
@@ -40,15 +40,6 @@ class Omni::SkuSubstitute < ActiveRecord::Base
     map :substitute_sku_display,                 to: 'substitute_sku.display'
   end
   # MAPPED ATTRIBUTES (End)
-
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
-
-  # HOOKS (Start) =======================================================================
-  # HOOKS (End)
-
 
   # INDEXING (Start) ====================================================================
   # searchable do

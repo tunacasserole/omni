@@ -3,13 +3,13 @@ Ext.define('Omni.view.price_changes.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-price_changes-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -41,7 +41,7 @@ Ext.define('Omni.view.price_changes.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

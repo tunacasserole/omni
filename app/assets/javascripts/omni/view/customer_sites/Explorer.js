@@ -44,10 +44,10 @@ Ext.define('Omni.view.customer_accounts.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.commentLabel, dataIndex: 'comment',  flex: 1,  sortable: true  },
-        { header: this.is_contactLabel, dataIndex: 'is_contact',  flex: 1,  sortable: true  },
-        { header: this.is_teacherLabel, dataIndex: 'is_teacher',  flex: 1,  sortable: true  },
-        { header: this.is_administratorLabel, dataIndex: 'is_administrator',  flex: 1,  sortable: true  }
+        { header: this.commentLabel, dataIndex: 'comment',  flex: 1,  sortable: false  },
+        { header: this.is_contactLabel, dataIndex: 'is_contact',  flex: 1,  sortable: false  },
+        { header: this.is_teacherLabel, dataIndex: 'is_teacher',  flex: 1,  sortable: false  },
+        { header: this.is_administratorLabel, dataIndex: 'is_administrator',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

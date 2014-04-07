@@ -45,12 +45,12 @@ Ext.define('Omni.view.style_color_sizes.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.style_color_displayLabel, dataIndex: 'style_color_display',  flex: 1,  sortable: true  },
-        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: true  },
-        { header: this.size_displayLabel, dataIndex: 'size_display',  flex: 1,  sortable: true  },
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: true  },
-        { header: this.sku_nameLabel, dataIndex: 'sku_name',  flex: 1,  sortable: true  },
-        { header: this.pos_nameLabel, dataIndex: 'pos_name',  flex: 1,  sortable: true  }
+        { header: this.style_color_displayLabel, dataIndex: 'style_color_display',  flex: 1,  sortable: false  },
+        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: false  },
+        { header: this.size_displayLabel, dataIndex: 'size_display',  flex: 1,  sortable: false  },
+        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: false  },
+        { header: this.sku_nameLabel, dataIndex: 'sku_name',  flex: 1,  sortable: false  },
+        { header: this.pos_nameLabel, dataIndex: 'pos_name',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

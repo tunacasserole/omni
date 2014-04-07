@@ -9,7 +9,6 @@ Omni::Application.load_tasks
 namespace :omni do
 
   namespace :db do
-# 1234567890123456789012345678901234567890123456789012345678901234567890
     desc "dump existing data into seed files"
     task :dump, [:model] => :environment do |t, args|
       puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
@@ -22,7 +21,7 @@ namespace :omni do
     desc "run existing migration files containing the supplied tag."
     task :migrate, [:tag] => :environment do |t, args|
       Dir[File.join(Rails.root, 'db', 'migrate', '*.rb')].each do |filename|
-        puts filename
+        puts "skipping #{filename}".cyan
         if filename.include? args.tag
           puts "running migration #{filename} - #{args.tag}"
           load(filename)
@@ -33,9 +32,9 @@ namespace :omni do
     desc "run existing seed files containing the supplied tag."
     task :seed, [:tag] => :environment do |t, args|
       Dir[File.join(Rails.root, 'db', 'seed', '*.rb')].each do |filename|
-        puts filename
+        puts "skipping #{filename}".cyan
         if filename.include? args.tag
-          puts "running seed #{filename} - #{args.tag}"
+          puts "***running seed #{filename} - #{args.tag}***".yellow
           load(filename)
         end
       end
@@ -172,7 +171,7 @@ namespace :omni do
 
   desc "sync parker data from spreadsheets, staging tables, and other databases"
   task :sync, [:model] => :environment do |t, args|
-    puts " == " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
+    # puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
     args.with_defaults(:model => "AllModels")
     # puts "model is #{args[:model]} and #{args.model}"  # both notations work
     @start_time = Time.now

@@ -43,11 +43,6 @@ class Omni::StyleColor < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
-
   # HOOKS (Start) =======================================================================
   hook  :before_create,      :validate_style_size_group,             10
   hook  :after_create,       :add_style_color_sizes,                 10
@@ -89,12 +84,12 @@ class Omni::StyleColor < ActiveRecord::Base
   searchable do
     string   :style_id
     string   :color_id
+    string   :display
     # string   :style_display do style.display if style end
     # string   :color_display do color.display if color end
     # string   :short_name
     # string   :concatenated_name
     # string   :state
-    # string   :display
 
 
     # text     :style_display_fulltext, using: :style_display
@@ -103,6 +98,11 @@ class Omni::StyleColor < ActiveRecord::Base
     # text     :concatenated_name_fulltext, using: :concatenated_name
     # text     :state_fulltext, using: :state
   end
+
+  order_search_by :display => :asc
+  # INDEXING (End) ====================================================================
+
+
   # HELPERS (Start) =====================================================================
   def validate_style_size_group
 

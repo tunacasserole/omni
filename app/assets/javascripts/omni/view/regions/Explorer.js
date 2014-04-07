@@ -3,13 +3,13 @@ Ext.define('Omni.view.regions.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-regions-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -46,11 +46,11 @@ Ext.define('Omni.view.regions.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.short_nameLabel,                        dataIndex: 'short_name',                         flex: 1,   sortable: true  },
-        { header: this.displayLabel,                           dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.company_displayLabel,                   dataIndex: 'company_display',                    flex: 1,   sortable: true  },
-        { header: this.user_displayLabel,                      dataIndex: 'user_display',                       flex: 1,   sortable: true  },
-        { header: this.region_nbrLabel,                        dataIndex: 'region_nbr',                         flex: 1,   sortable: true  },
+        { header: this.short_nameLabel,                        dataIndex: 'short_name',                         flex: 1,   sortable: false  },
+        { header: this.displayLabel,                           dataIndex: 'display',                            flex: 1,   sortable: false  },
+        { header: this.company_displayLabel,                   dataIndex: 'company_display',                    flex: 1,   sortable: false  },
+        { header: this.user_displayLabel,                      dataIndex: 'user_display',                       flex: 1,   sortable: false  },
+        { header: this.region_nbrLabel,                        dataIndex: 'region_nbr',                         flex: 1,   sortable: false  },
 
       ]
     });

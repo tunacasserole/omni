@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      omni/sku_alias:  'SkuAlias'
+    attributes:
+      omni/sku_alias:
+        display_as:                        'SkuAlias'
+        sku_alias_id:                      'Sku Alias'
+        display:                           'Display'
+        sku_id:                            'Sku'
+        sku_alias:                         'Sku Alias'
+        sku_alias_type:                    'Sku Alias Type'
+        alias_source:                      'Alias Source'
+        is_primary:                        'Is Primary'
+        pack_type:                         'Pack Type'
+        pack_size:                         'Pack Size'
+        is_destroyed:                      'Is Destroyed'

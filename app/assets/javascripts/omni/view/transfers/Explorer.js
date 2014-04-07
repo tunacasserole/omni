@@ -48,13 +48,13 @@ Ext.define('Omni.view.transfers.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.transfer_nbrLabel,                                dataIndex: 'transfer_nbr',                       flex: 1,   sortable: true  },
-        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: true  },
-        { header: this.requesting_location_displayLabel,                 dataIndex: 'requesting_location_display',        flex: 1,   sortable: true  },
-        { header: this.fulfillment_location_displayLabel,                dataIndex: 'fulfillment_location_display',       flex: 1,   sortable: true  },
-        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: true  },
-        { header: this.transfer_reason_displayLabel,                     dataIndex: 'transfer_reason_display',            flex: 1,   sortable: true  },
-        { header: this.request_dateLabel,                                dataIndex: 'request_date',                       flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') }
+        { header: this.transfer_nbrLabel,                                dataIndex: 'transfer_nbr',                       flex: 1,   sortable: false  },
+        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: false  },
+        { header: this.requesting_location_displayLabel,                 dataIndex: 'requesting_location_display',        flex: 1,   sortable: false  },
+        { header: this.fulfillment_location_displayLabel,                dataIndex: 'fulfillment_location_display',       flex: 1,   sortable: false  },
+        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: false  },
+        { header: this.transfer_reason_displayLabel,                     dataIndex: 'transfer_reason_display',            flex: 1,   sortable: false  },
+        { header: this.request_dateLabel,                                dataIndex: 'request_date',                       flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') }
       ]
     });
     // COLUMNS (End)

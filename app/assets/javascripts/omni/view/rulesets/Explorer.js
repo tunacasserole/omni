@@ -3,13 +3,13 @@ Ext.define('Omni.view.rulesets.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-rulesets-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -44,10 +44,10 @@ Ext.define('Omni.view.rulesets.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.ruleset_codeLabel, dataIndex: 'ruleset_code',  flex: 1,  sortable: true  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
-        { header: this.is_activeLabel, dataIndex: 'is_active',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        { header: this.ruleset_codeLabel, dataIndex: 'ruleset_code',  flex: 1,  sortable: false  },
+        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
+        { header: this.is_activeLabel, dataIndex: 'is_active',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

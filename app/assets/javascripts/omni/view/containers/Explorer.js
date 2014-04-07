@@ -3,13 +3,13 @@ Ext.define('Omni.view.containers.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-containers-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -48,14 +48,14 @@ Ext.define('Omni.view.containers.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: true  },
-        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: true  },
-        { header: this.container_nbrLabel,                               dataIndex: 'container_nbr',                      flex: 1,   sortable: true  },
-        { header: this.descriptionLabel,                                 dataIndex: 'description',                        flex: 1,   sortable: true  },
-        { header: this.container_typeLabel,                              dataIndex: 'container_type',                     flex: 1,   sortable: true  },
-        { header: this.parent_container_displayLabel,                    dataIndex: 'parent_container_display',           flex: 1,   sortable: true  },
-        { header: this.barcode_nbrLabel,                                 dataIndex: 'barcode_nbr',                        flex: 1,   sortable: true  },
-        { header: this.bin_displayLabel,                                 dataIndex: 'bin_display',                        flex: 1,   sortable: true  }
+        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: false  },
+        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: false  },
+        { header: this.container_nbrLabel,                               dataIndex: 'container_nbr',                      flex: 1,   sortable: false  },
+        { header: this.descriptionLabel,                                 dataIndex: 'description',                        flex: 1,   sortable: false  },
+        { header: this.container_typeLabel,                              dataIndex: 'container_type',                     flex: 1,   sortable: false  },
+        { header: this.parent_container_displayLabel,                    dataIndex: 'parent_container_display',           flex: 1,   sortable: false  },
+        { header: this.barcode_nbrLabel,                                 dataIndex: 'barcode_nbr',                        flex: 1,   sortable: false  },
+        { header: this.bin_displayLabel,                                 dataIndex: 'bin_display',                        flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

@@ -3,13 +3,13 @@ Ext.define('Omni.view.tenders.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-tenders-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -47,13 +47,13 @@ Ext.define('Omni.view.tenders.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: true  },
-        { header: this.tender_typeLabel, dataIndex: 'tender_type',  flex: 1,  sortable: true  },
-        { header: this.is_update_tillLabel, dataIndex: 'is_update_till',  flex: 1,  sortable: true  },
-        { header: this.is_credit_cardLabel, dataIndex: 'is_credit_card',  flex: 1,  sortable: true  },
-        { header: this.display_orderLabel, dataIndex: 'display_order',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
+        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  },
+        { header: this.tender_typeLabel, dataIndex: 'tender_type',  flex: 1,  sortable: false  },
+        { header: this.is_update_tillLabel, dataIndex: 'is_update_till',  flex: 1,  sortable: false  },
+        { header: this.is_credit_cardLabel, dataIndex: 'is_credit_card',  flex: 1,  sortable: false  },
+        { header: this.display_orderLabel, dataIndex: 'display_order',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

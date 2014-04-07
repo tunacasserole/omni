@@ -45,11 +45,11 @@ Ext.define('Omni.view.gl_accounts.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.gl_main_accountLabel, dataIndex: 'gl_main_account',  flex: 1,  sortable: true  },
-        { header: this.gl_sub_accountLabel, dataIndex: 'gl_sub_account',  flex: 1,  sortable: true  },
-        { header: this.is_location_fillLabel, dataIndex: 'is_location_fill',  flex: 1,  sortable: true  },
-        { header: this.gl_account_typeLabel, dataIndex: 'gl_account_type',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        { header: this.gl_main_accountLabel, dataIndex: 'gl_main_account',  flex: 1,  sortable: false  },
+        { header: this.gl_sub_accountLabel, dataIndex: 'gl_sub_account',  flex: 1,  sortable: false  },
+        { header: this.is_location_fillLabel, dataIndex: 'is_location_fill',  flex: 1,  sortable: false  },
+        { header: this.gl_account_typeLabel, dataIndex: 'gl_account_type',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

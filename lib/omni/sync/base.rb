@@ -133,6 +133,28 @@ class Omni::Sync::Base
     end
   end
 
+  def self.table_to_hash(table_name, options={})
+    result = []
+
+    Omni::Util::Clock.stamp(message: "started reading table #{table_name}")
+
+    order_by =  "order by #{ options.delete(:order_by) || 'display' }"
+    # data = ActiveRecord::Base.connection.execute "select * from #{table_name} #{order_by}"
+    data = Omni::TgInventory.all(order_by)
+    Omni::Util::Clock.stamp(message: "finished reading table #{table_name}")
+
+    data.each_with_index do |row, i|
+      break if i > 10
+      Omni::Util::Clock.go(row: i, total: data.count, message: "loading hash")
+      puts row[0]
+
+    end
+
+    result
+
+  end
+
+
   def self.excel_to_hash(file_name)
     # Takes an excel file name and a tab name, and returns an array of stripped, transposed rows
     # Sample call:  @@data = excel_to_hash File.join(Rails.root,'db/meta/model_headers.xlsx'), 'models'
@@ -146,11 +168,11 @@ class Omni::Sync::Base
     # excel.default_sheet = excel.sheets.index(tab_name) ? excel.sheets.index(tab_name) + 1 : excel.sheets[1]
     header = excel.row(1)
     (2..excel.last_row).each do |i|
-      # break if i > 100
-      clock_it(i)
+      break if i > 10
+      Omni::Util::Clock.go(row: i, total: excel.last_row - 1)
       next unless excel.row(i)[0]
       row = Hash[[header, excel.row(i)].transpose]
-      row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
+      # row.each_key{|x| row[x] = row[x].to_s.strip if row[x]}
       # next if ['0','-'].include?(excel.row(i)[0])
       rows << row
     end
@@ -167,8 +189,8 @@ class Omni::Sync::Base
     # seq(table_name)
 
     # load the excel data into a hash and map it to the database
-    excel_type = 'xlsx'
-    excel_to_hash("#{table_name}.#{excel_type}").each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x); clock_it(i)}
+    data = excel_to_hash("#{table_name}.xlsx")
+    data.each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x); Omni::Util::Clock.go(row: i, total: ata.count)}
 
     # optionally call seed file generator
     # dump_to_seed(model_name)
@@ -185,20 +207,4 @@ class Omni::Sync::Base
     end
   end
 
-  def self.clock_it(i)
-    if i == 1
-      @start_time = Time.now
-      # puts "#{time_stamp}:  read row 1"
-    end
-    if i.to_s.end_with? '000'
-      @end_time = Time.now
-
-      # puts "#{time_stamp}: read rows: #{(i-1000).to_s} - #{i.to_s} in #{@end_time - @start_time} seconds"
-      @start_time = Time.now
-    end
-  end
-
-  def self.time_stamp
-    "== #{Time.now.strftime("%H:%M:%S").yellow}: "
-  end
 end

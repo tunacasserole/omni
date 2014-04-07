@@ -41,8 +41,8 @@ Ext.define('Omni.view.style_supplier_colors.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.style_supplier_displayLabel, dataIndex: 'style_supplier_display',  flex: 1,  sortable: true  },
-        { header: this.style_color_displayLabel, dataIndex: 'style_color_display',  flex: 1,  sortable: true  }
+        { header: this.style_supplier_displayLabel, dataIndex: 'style_supplier_display',  flex: 1,  sortable: false  },
+        { header: this.style_color_displayLabel, dataIndex: 'style_color_display',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

@@ -9,18 +9,19 @@ class Omni::SkuAlias < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         presence: true, uniqueness: true;
-  validates    :sku_alias_type,                  lookup: 'SKU_ALIAS_TYPE',             allow_nil: true
+  validates    :display,                         presence: true, uniqueness: true
+  validates    :sku_alias,                       presence: true#, uniqueness: { scope: :sku_id, message: "Alias already exists for this SKU." }
+  validates    :sku_id,                          presence: true
   validates    :alias_source,                    lookup: 'ALIAS_SOURCE',               allow_nil: true
+  validates    :sku_alias_type,                  lookup: 'SKU_ALIAS_TYPE',             allow_nil: true
   validates    :pack_type,                       lookup: 'PACK_TYPE',                  allow_nil: true
-  validates    :sku_alias, uniqueness: { scope: :sku_id, message: "Alias already exists for this SKU." }
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default      :sku_alias_id,                     override: false,        with: :guid
   default      :display,                          override: false,        to: lambda{|m| "#{m.sku_display} - #{m.sku_alias} - #{m.alias_source}"}
-  default      :is_primary,                       override: false,        to: false
   default      :pack_size,                        override: false,        to: 0
+  default      :is_primary,                       override: false,        to: false
   default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
@@ -43,19 +44,12 @@ class Omni::SkuAlias < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :sku_alias => :asc
-  # ORDERING (End)
-
-
-  # HOOKS (Start) =======================================================================
-  # HOOKS (End)
-
-
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :sku_alias_id
     string   :sku_id
     string   :sku_alias
+    string   :alias_source
     # text     :sku_display_fulltext, using: :sku_display
 
     # string   :sku_alias_id
@@ -70,7 +64,9 @@ class Omni::SkuAlias < ActiveRecord::Base
     # text     :sku_alias_fulltext, using: :sku_alias
     # text     :sku_alias_type_fulltext, using: :sku_alias_type
   end
-  # INDEXING (End)
+  order_search_by :sku_alias => :asc
+  # INDEXING (End) ====================================================================
+
 
   # # CUSTOM INDEXING (Start) ====================================================================
   # searchable do
@@ -79,11 +75,11 @@ class Omni::SkuAlias < ActiveRecord::Base
   # # INDEXING (End)
 
   def self.to_hash(source)
-    puts "source is #{source}"
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku alias hash"
+    # puts "source is #{source}"
+    # puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku alias hash"
     to_hash = {}
     ActiveRecord::Base.connection.execute("select sku_id, sku_alias from sku_aliases where alias_source = '#{source}'").each {|x| to_hash[x[1]] = x[0]} # MRI
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END....create sku alias hash: #{to_hash.count.to_s}"
+    # puts "#{Time.now.strftime("%H:%M:%S").yellow}: END....create sku alias hash: #{to_hash.count.to_s}"
     return to_hash
   end
 

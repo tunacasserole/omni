@@ -45,11 +45,11 @@ Ext.define('Omni.view.receipt_formats.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
-        { header: this.paper_widthLabel, dataIndex: 'paper_width',  flex: 1,  sortable: true  },
-        { header: this.icon_urlLabel, dataIndex: 'icon_url',  flex: 1,  sortable: true  },
-        { header: this.icon_widthLabel, dataIndex: 'icon_width',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
+        { header: this.paper_widthLabel, dataIndex: 'paper_width',  flex: 1,  sortable: false  },
+        { header: this.icon_urlLabel, dataIndex: 'icon_url',  flex: 1,  sortable: false  },
+        { header: this.icon_widthLabel, dataIndex: 'icon_width',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

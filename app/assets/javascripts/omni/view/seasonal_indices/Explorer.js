@@ -3,13 +3,13 @@ Ext.define('Omni.view.seasonal_indices.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-seasonal_indices-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -42,8 +42,8 @@ Ext.define('Omni.view.seasonal_indices.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.seasonal_index_nameLabel, dataIndex: 'seasonal_index_name',  flex: 1,  sortable: true  },
-        { header: this.is_destroyedLabel, dataIndex: 'is_destroyed',  flex: 1,  sortable: true  }
+        { header: this.seasonal_index_nameLabel, dataIndex: 'seasonal_index_name',  flex: 1,  sortable: false  },
+        { header: this.is_destroyedLabel, dataIndex: 'is_destroyed',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

@@ -5,9 +5,9 @@ class CreateOmniInventories < ActiveRecord::Migration
     drop_table :sku_locations if ActiveRecord::Base.connection.tables.include?('sku_locations')
     create_table(:inventories, :id => false) do |t|
         t.column   :inventory_id,                    :string,            null: false,   limit: 32
-        t.column   :sku_id,                          :string,            null: true,   limit: 32
+        t.column   :sku_id,                          :string,            null: false,   limit: 32
+        t.column   :location_id,                     :string,            null: false,   limit: 32
         t.column   :department_id,                   :string,            null: true,   limit: 32
-        t.column   :location_id,                     :string,            null: true,   limit: 32
         t.column   :supplier_id,                     :string,            null: true,    limit: 32
         t.column   :forecast_profile_id,             :string,            null: true,    limit: 32
         t.column   :seasonal_index_id,               :string,            null: true,    limit: 32

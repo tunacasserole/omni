@@ -44,10 +44,10 @@ Ext.define('Omni.view.supplier_rating_subjects.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
-        { header: this.supplier_rating_subject_typeLabel, dataIndex: 'supplier_rating_subject_type',  flex: 1,  sortable: true, renderer: Buildit.util.Format.lookupRenderer('SUPPLIER_RATING_SUBJECT_TYPE') },
-        { header: this.weighting_percentLabel, dataIndex: 'weighting_percent',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
+        { header: this.supplier_rating_subject_typeLabel, dataIndex: 'supplier_rating_subject_type',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('SUPPLIER_RATING_SUBJECT_TYPE') },
+        { header: this.weighting_percentLabel, dataIndex: 'weighting_percent',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

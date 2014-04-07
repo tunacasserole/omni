@@ -46,12 +46,12 @@ Ext.define('Omni.view.till_activities.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.till_activity_nbrLabel,                           dataIndex: 'till_activity_nbr',                  flex: 1,   sortable: true  },
-        { header: this.till_activity_dateLabel,                          dataIndex: 'till_activity_date',                 flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.till_activity_reasonLabel,                        dataIndex: 'till_activity_reason',               flex: 1,   sortable: true  },
-        { header: this.tender_displayLabel,                              dataIndex: 'tender_display',                     flex: 1,   sortable: true  },
-        { header: this.payment_displayLabel,                             dataIndex: 'payment_display',                    flex: 1,   sortable: true  },
-        { header: this.user_idLabel,                                     dataIndex: 'user_id',                            flex: 1,   sortable: true  }
+        { header: this.till_activity_nbrLabel,                           dataIndex: 'till_activity_nbr',                  flex: 1,   sortable: false  },
+        { header: this.till_activity_dateLabel,                          dataIndex: 'till_activity_date',                 flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.till_activity_reasonLabel,                        dataIndex: 'till_activity_reason',               flex: 1,   sortable: false  },
+        { header: this.tender_displayLabel,                              dataIndex: 'tender_display',                     flex: 1,   sortable: false  },
+        { header: this.payment_displayLabel,                             dataIndex: 'payment_display',                    flex: 1,   sortable: false  },
+        { header: this.user_idLabel,                                     dataIndex: 'user_id',                            flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

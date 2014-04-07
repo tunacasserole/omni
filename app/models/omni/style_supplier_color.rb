@@ -39,11 +39,6 @@ class Omni::StyleSupplierColor < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
-
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
 
@@ -58,5 +53,9 @@ class Omni::StyleSupplierColor < ActiveRecord::Base
     text     :style_supplier_display_fulltext, using: :style_supplier_display
     text     :style_color_display_fulltext, using: :style_color_display
   end
+
+  order_search_by :display => :asc
+  # INDEXING (End) ====================================================================
+
 end # class Omni::StyleSupplierColor
 

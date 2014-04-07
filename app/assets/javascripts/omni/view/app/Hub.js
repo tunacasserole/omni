@@ -151,6 +151,14 @@ Ext.define('Omni.view.app.Hub', {
           columns: 4,
           rows: 3,
           tiles: [{
+            title: 'Sku Aliases',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'product_hierarchy',
+            target: {
+              xtype: 'omni-sku_aliases-Explorer'
+            }
+          }, {
             title: 'Skus',
             colspan: 2,
             rowspan: 1,

@@ -46,12 +46,12 @@ Ext.define('Omni.view.size_groups.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        // { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: true  },
-        { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: true  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: true  },
-        { header: this.size_group_nbrLabel, dataIndex: 'size_group_nbr',  flex: 1,  sortable: true  },
-        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: true  },
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        // { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
+        { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: false  },
+        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  },
+        { header: this.size_group_nbrLabel, dataIndex: 'size_group_nbr',  flex: 1,  sortable: false  },
+        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: false  },
       ]
     });
     // COLUMNS (End)

@@ -44,10 +44,10 @@ Ext.define('Omni.view.till_audits.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.till_displayLabel, dataIndex: 'till_display',  flex: 1,  sortable: true  },
-        { header: this.audit_dateLabel, dataIndex: 'audit_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.tender_displayLabel, dataIndex: 'tender_display',  flex: 1,  sortable: true  },
-        { header: this.gl_interface_dateLabel, dataIndex: 'gl_interface_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') }
+        { header: this.till_displayLabel, dataIndex: 'till_display',  flex: 1,  sortable: false  },
+        { header: this.audit_dateLabel, dataIndex: 'audit_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.tender_displayLabel, dataIndex: 'tender_display',  flex: 1,  sortable: false  },
+        { header: this.gl_interface_dateLabel, dataIndex: 'gl_interface_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') }
       ]
     });
     // COLUMNS (End)

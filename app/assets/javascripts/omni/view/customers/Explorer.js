@@ -52,14 +52,14 @@ Ext.define('Omni.view.customers.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.customer_nbrLabel,                                dataIndex: 'customer_nbr',                       flex: 1,   sortable: true  },
-        { header: this.registration_dateLabel,                           dataIndex: 'registration_date',                  flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.line_1Label,                                      dataIndex: 'line_1',                             flex: 1,   sortable: true  },
-        { header: this.cityLabel,                                        dataIndex: 'city',                               flex: 1,   sortable: true  },
-        { header: this.state_codeLabel,                                  dataIndex: 'state_code',                         flex: 1,   sortable: true, renderer: Buildit.util.Format.lookupRenderer('STATE_CODE') },
-        { header: this.zipLabel,                                         dataIndex: 'zip',                                flex: 1,   sortable: true  },
-        { header: this.phoneLabel,                                       dataIndex: 'phone',                              flex: 1,   sortable: true  },
-        { header: this.email_addressLabel,                               dataIndex: 'email_address',                      flex: 1,   sortable: true  }
+        { header: this.customer_nbrLabel,                                dataIndex: 'customer_nbr',                       flex: 1,   sortable: false  },
+        { header: this.registration_dateLabel,                           dataIndex: 'registration_date',                  flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.line_1Label,                                      dataIndex: 'line_1',                             flex: 1,   sortable: false  },
+        { header: this.cityLabel,                                        dataIndex: 'city',                               flex: 1,   sortable: false  },
+        { header: this.state_codeLabel,                                  dataIndex: 'state_code',                         flex: 1,   sortable: false, renderer: Buildit.util.Format.lookupRenderer('STATE_CODE') },
+        { header: this.zipLabel,                                         dataIndex: 'zip',                                flex: 1,   sortable: false  },
+        { header: this.phoneLabel,                                       dataIndex: 'phone',                              flex: 1,   sortable: false  },
+        { header: this.email_addressLabel,                               dataIndex: 'email_address',                      flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

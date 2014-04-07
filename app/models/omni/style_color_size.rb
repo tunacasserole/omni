@@ -48,11 +48,6 @@ class Omni::StyleColorSize < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
-
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
 
@@ -112,12 +107,13 @@ class Omni::StyleColorSize < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :style_color_id
+    string   :style_color_size_id
+    string   :display
     # string   :style_color_display do style_color.display if style_color end
     # string   :size_display do size.display if size end
     # string   :sku_display do sku.display if sku end
     # string   :sku_name
     # string   :pos_name
-    # string   :display
     # string   :state
 
     # text     :style_color_display_fulltext, using: :style_color_display
@@ -128,5 +124,8 @@ class Omni::StyleColorSize < ActiveRecord::Base
     # text     :state_fulltext, using: :state
 
   end
+
+  order_search_by :display => :asc
+  # INDEXING (End)
 end # class Omni::StyleColorSize
 

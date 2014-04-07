@@ -58,10 +58,6 @@ class Omni::StyleLocation < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
 
   # HOOKS (Start) =======================================================================
   # HOOKS (End)
@@ -124,6 +120,8 @@ class Omni::StyleLocation < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :style_id
+    string   :style_location_id
+    string   :display
 
     # string   :style_location_id
     # string   :style_display do style.display if style end
@@ -134,12 +132,13 @@ class Omni::StyleLocation < ActiveRecord::Base
     # boolean  :is_taxable
     # boolean  :is_special_order
     # boolean  :is_discontinued
-    # string   :display
 
     # text     :style_display_fulltext, using: :style_display
     # text     :location_display_fulltext, using: :location_display
     # text     :state_fulltext, using: :state
   end
+
+  order_search_by :display => :asc
   # INDEXING (End)
 
   # HELPERS (Start) =====================================================================

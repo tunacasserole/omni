@@ -3,13 +3,13 @@ Ext.define('Omni.view.boms.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-boms-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -44,10 +44,10 @@ Ext.define('Omni.view.boms.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.bomable_typeLabel,                                dataIndex: 'bomable_type',                       flex: 1,   sortable: true  },
-        { header: this.bomable_idLabel,                                  dataIndex: 'bomable_id',                         flex: 1,   sortable: true  },
-        { header: this.bom_nbrLabel,                                     dataIndex: 'bom_nbr',                            flex: 1,   sortable: true  },
-        { header: this.descriptionLabel,                                 dataIndex: 'description',                        flex: 1,   sortable: true  }
+        { header: this.bomable_typeLabel,                                dataIndex: 'bomable_type',                       flex: 1,   sortable: false  },
+        { header: this.bomable_idLabel,                                  dataIndex: 'bomable_id',                         flex: 1,   sortable: false  },
+        { header: this.bom_nbrLabel,                                     dataIndex: 'bom_nbr',                            flex: 1,   sortable: false  },
+        { header: this.descriptionLabel,                                 dataIndex: 'description',                        flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

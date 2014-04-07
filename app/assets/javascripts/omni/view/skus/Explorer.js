@@ -69,37 +69,37 @@ Ext.define('Omni.view.skus.Explorer', {
         header: this.displayLabel,
         dataIndex: 'display',
         flex: 3,
-        sortable: true
+        sortable: false
       }, {
         header: this.style_idLabel,
         dataIndex: 'style_display',
         flex: 2,
-        sortable: true
+        sortable: false
       }, {
         header: this.account_idLabel,
         dataIndex: 'account_display',
         flex: 1,
-        sortable: true
+        sortable: false
       }, {
         header: this.color_idLabel,
         dataIndex: 'color_display',
         flex: 1,
-        sortable: true
+        sortable: false
       }, {
         header: this.size_idLabel,
         dataIndex: 'size_display',
         flex: 1,
-        sortable: true
+        sortable: false
       // }, {
       //   header: this.sku_nbrLabel,
       //   dataIndex: 'sku_nbr',
       //   flex: 1,
-      //   sortable: true
+      //   sortable: false
       }, {
         header: this.stateLabel,
         dataIndex: 'state',
         flex: 1,
-        sortable: true
+        sortable: false
       }, ]
     });
     // COLUMNS (End)

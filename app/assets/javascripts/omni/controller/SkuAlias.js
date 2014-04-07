@@ -3,7 +3,6 @@ Buildit.defineController('Omni.controller.SkuAlias', {
   views: [],
 
   handleAction: function() {
-    // TODO - Add your handler logic here
   },
 
   init: function() {
@@ -15,6 +14,7 @@ Buildit.defineController('Omni.controller.SkuAlias', {
         }
       }
     );
-  }
-});
 
+  }
+
+}); // Buildit.defineController('Omni.controller.SkuAlias'

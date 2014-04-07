@@ -99,16 +99,7 @@ class Omni::Style < ActiveRecord::Base
     map :add_on_sku_display,                     to: 'add_on_sku.display'
   end
   # MAPPED ATTRIBUTES (End)
-
-
-
-  # ORDERING (Start) ====================================================================
   order_search_by :display => :asc
-  # ORDERING (End)
-
-
-  # HELPERS (Start) =====================================================================
-  # HELPERS (End) =====================================================================
 
   # STATES (Start) ====================================================================
   state_machine :state, initial: :draft do
@@ -346,7 +337,7 @@ class Omni::Style < ActiveRecord::Base
       x = Omni::SkuSupplier.where(sku_id: sku.sku_id, supplier_id: ss.supplier_id).first || Omni::SkuSupplier.new(sku_id: sku.sku_id, supplier_id: ss.supplier_id)
       x.sku_id = sku.sku_id
       x.supplier_id = ss.supplier_id
-      x.is_primary_supplier = ss.is_primary
+      x.is_primary = ss.is_primary
       x.is_manufacturer = ss.is_manufacturer
       x.is_discontinued = ss.is_discontinued
       x.supplier_cost_units = ss.supplier_cost_units
@@ -449,6 +440,10 @@ class Omni::Style < ActiveRecord::Base
     text     :display_fulltext,  using: :display
     text     :subclass_display_fulltext do self.subclass.display end
   end
+
+  order_search_by :display => :asc
+  # INDEXING (End) ====================================================================
+
 end # class Omni::Style
 
 

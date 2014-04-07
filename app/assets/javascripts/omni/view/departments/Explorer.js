@@ -45,10 +45,10 @@ Ext.define('Omni.view.departments.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.buyer_user_displayLabel,                          dataIndex: 'buyer_user_display',                 flex: 1,   sortable: true  },
-        { header: this.company_displayLabel,                             dataIndex: 'company_display',                    flex: 1,   sortable: true  },
-        { header: this.department_nbrLabel,                              dataIndex: 'department_nbr',                     flex: 1,   sortable: true  },
+        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: false  },
+        { header: this.buyer_user_displayLabel,                          dataIndex: 'buyer_user_display',                 flex: 1,   sortable: false  },
+        { header: this.company_displayLabel,                             dataIndex: 'company_display',                    flex: 1,   sortable: false  },
+        { header: this.department_nbrLabel,                              dataIndex: 'department_nbr',                     flex: 1,   sortable: false  },
 
       ]
     });

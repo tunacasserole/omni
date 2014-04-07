@@ -105,7 +105,7 @@ Ext.define('Omni.view.accounts.Form', {
             maxLength: 200,
             minLength: 0,
             allowBlank: true,
-            disabled: true,
+            disabled: false,
             xtype: 'textfield',
           }, {
             name: 'display',

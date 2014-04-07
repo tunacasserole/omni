@@ -22,7 +22,7 @@ class Omni::SkuSupplier < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :sku_supplier_id,                  override: false,        with: :guid
   default      :display,                          override: false,        to: lambda{|m| "#{m.sku_display} - #{m.supplier_display}"}
-  default      :is_primary_supplier,              override: false,        to: false
+  default      :is_primary,                       override: false,        to: false
   default      :is_manufacturer,                  override: false,        to: false
   default      :is_discontinued,                  override: false,        to: false
   default      :supplier_cost_units,              override: false,        to: 0
@@ -86,19 +86,6 @@ class Omni::SkuSupplier < ActiveRecord::Base
   end
   # COMPUTED ATTRIBUTES (End)
 
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
-  # TEMPORARY ATTRIBUTES (End)
-
-
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
-
-  # HOOKS (Start) =======================================================================
-  # HOOKS (End)
-
-
   # INDEXING (Start) ====================================================================
   searchable do
     string   :sku_id
@@ -117,7 +104,9 @@ class Omni::SkuSupplier < ActiveRecord::Base
     # text     :supplier_item_identifier_fulltext, using: :supplier_item_identifier
     # text     :supplier_cost_fulltext, using: :supplier_cost
   end
-  # INDEXING (End)
+
+  order_search_by :display => :asc
+  # INDEXING (End) ====================================================================
 
   # STATES (Start) ====================================================================
   # state_machine :state, initial: :new do

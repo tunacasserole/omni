@@ -45,10 +45,10 @@ Ext.define('Omni.view.system_options.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.price_book_displayLabel,                          dataIndex: 'price_book_display',                 flex: 1,   sortable: true  },
-        { header: this.professional_discount_percentLabel,               dataIndex: 'professional_discount_percent',      flex: 1,   sortable: true  },
-        { header: this.employee_discount_percentLabel,                   dataIndex: 'employee_discount_percent',          flex: 1,   sortable: true  }
+        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: false  },
+        { header: this.price_book_displayLabel,                          dataIndex: 'price_book_display',                 flex: 1,   sortable: false  },
+        { header: this.professional_discount_percentLabel,               dataIndex: 'professional_discount_percent',      flex: 1,   sortable: false  },
+        { header: this.employee_discount_percentLabel,                   dataIndex: 'employee_discount_percent',          flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

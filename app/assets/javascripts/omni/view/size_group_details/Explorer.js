@@ -42,10 +42,10 @@ Ext.define('Omni.view.size_group_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.size_group_displayLabel, dataIndex: 'size_group_display',  flex: 1,  sortable: true  },
-        { header: this.size_displayLabel, dataIndex: 'size_display',  flex: 1,  sortable: true  },
-        { header: this.display_orderLabel, dataIndex: 'display_order',  flex: 1,  sortable: true  },
-        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: true  },
+        { header: this.size_group_displayLabel, dataIndex: 'size_group_display',  flex: 1,  sortable: false  },
+        { header: this.size_displayLabel, dataIndex: 'size_display',  flex: 1,  sortable: false  },
+        { header: this.display_orderLabel, dataIndex: 'display_order',  flex: 1,  sortable: false  },
+        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: false  },
       ]
     });
     // COLUMNS (End)

@@ -1,8 +1,39 @@
 class Omni::Sync::SkuAlias < Omni::Sync::Base
 
   def self.go
-    # create_from_sku_load
-    de_dup
+    create_from_sku_load
+    # de_dup
+  end
+
+  def self.create_from_sku_load
+    sql = "select id, sku_id, mark_sku, bu_sku, tg_sku from skus_load order by sku_display_name"
+    data = ActiveRecord::Base.connection.execute sql
+    puts " - got source data"
+    data.each_with_index do |x,i|
+      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
+      puts "mark_sku is #{mark_sku}"
+      if x[2] && x[2].length > 1
+        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[2], alias_source: 'PARKER')
+        unless row
+          puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, mark alias #{x[2]}"
+          abort
+        end
+      end
+      if x[3] && x[3].length > 0
+        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[3], alias_source: 'BUCKHEAD')
+        unless row
+          puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, bu alias #{x[3]}"
+          abort
+        end
+      end
+      if x[4] && x[4].length > 0
+        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[4], alias_source: 'TRUE GRITS')
+        unless row
+          puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, tg alias #{x[4]}"
+          abort
+        end
+      end
+    end
   end
 
   def self.de_dup
@@ -19,33 +50,4 @@ class Omni::Sync::SkuAlias < Omni::Sync::Base
     end
   end
 
-
-  def self.create_from_sku_load
-    sql = "select id, sku_id, mark_sku, bu_sku, tg_sku from skus_load"
-    data = ActiveRecord::Base.connection.execute sql
-    data.each_with_index do |x,i|
-      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
-      if x[2] && x[2].length > 1
-        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[2], alias_source: 'parker')
-        unless row
-          puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, mark alias #{x[2]}"
-          abort
-        end
-      end
-      if x[3] && x[3].length > 0
-        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[3], alias_source: 'buckhead')
-        unless row
-          puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, bu alias #{x[3]}"
-          abort
-        end
-      end
-      if x[4] && x[4].length > 0
-        row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[4], alias_source: 'true grits')
-        unless row
-          puts "couldn't create sku_alias row for id #{x[0]}, sku_id #{x[1]}, tg alias #{x[4]}"
-          abort
-        end
-      end
-    end
-  end
 end

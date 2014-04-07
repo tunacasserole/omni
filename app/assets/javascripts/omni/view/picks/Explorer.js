@@ -48,13 +48,13 @@ Ext.define('Omni.view.picks.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: true  },
-        { header: this.pick_nbrLabel,                             dataIndex: 'pick_nbr',                    flex: 1,   sortable: true  },
-        { header: this.pickable_idLabel,                                 dataIndex: 'pickable_id',                        flex: 1,   sortable: true  },
-        { header: this.pickable_typeLabel,                               dataIndex: 'pickable_type',                      flex: 1,   sortable: true  },
-        { header: this.fulfillment_location_displayLabel,                dataIndex: 'fulfillment_location_display',       flex: 1,   sortable: true  },
-        { header: this.job_displayLabel,                          dataIndex: 'job_display',                 flex: 1,   sortable: true  },
-        { header: this.request_unitsLabel,                               dataIndex: 'request_units',                      flex: 1,   sortable: true  }
+        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: false  },
+        { header: this.pick_nbrLabel,                             dataIndex: 'pick_nbr',                    flex: 1,   sortable: false  },
+        { header: this.pickable_idLabel,                                 dataIndex: 'pickable_id',                        flex: 1,   sortable: false  },
+        { header: this.pickable_typeLabel,                               dataIndex: 'pickable_type',                      flex: 1,   sortable: false  },
+        { header: this.fulfillment_location_displayLabel,                dataIndex: 'fulfillment_location_display',       flex: 1,   sortable: false  },
+        { header: this.job_displayLabel,                          dataIndex: 'job_display',                 flex: 1,   sortable: false  },
+        { header: this.request_unitsLabel,                               dataIndex: 'request_units',                      flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

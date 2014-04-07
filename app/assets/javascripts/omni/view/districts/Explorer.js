@@ -3,13 +3,13 @@ Ext.define('Omni.view.districts.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-districts-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -44,10 +44,10 @@ Ext.define('Omni.view.districts.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.region_displayLabel,                              dataIndex: 'region_display',                     flex: 1,   sortable: true  },
-        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: true  },
-        { header: this.district_nbrLabel,                                dataIndex: 'district_nbr',                       flex: 1,   sortable: true  },
+        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: false  },
+        { header: this.region_displayLabel,                              dataIndex: 'region_display',                     flex: 1,   sortable: false  },
+        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: false  },
+        { header: this.district_nbrLabel,                                dataIndex: 'district_nbr',                       flex: 1,   sortable: false  },
 
       ]
     });

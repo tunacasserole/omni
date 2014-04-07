@@ -44,10 +44,10 @@ Ext.define('Omni.view.tax_authority_rates.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.tax_authority_displayLabel, dataIndex: 'tax_authority_display',  flex: 1,  sortable: true  },
-        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.tax_percentLabel, dataIndex: 'tax_percent',  flex: 1,  sortable: true  }
+        { header: this.tax_authority_displayLabel, dataIndex: 'tax_authority_display',  flex: 1,  sortable: false  },
+        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.tax_percentLabel, dataIndex: 'tax_percent',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

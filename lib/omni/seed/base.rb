@@ -22,23 +22,6 @@ class Omni::Seed::Base
     end
   end
 
-  def self.clock_it(i)
-    if i == 1
-      @start_time = Time.now
-      # puts "#{time_stamp}:  read row 1"
-    end
-    if i.to_s.end_with? '000'
-      @end_time = Time.now
-
-      # puts "#{time_stamp}: read rows: #{(i-1000).to_s} - #{i.to_s} in #{@end_time - @start_time} seconds"
-      @start_time = Time.now
-    end
-  end
-
-  def self.time_stamp
-    "== #{Time.now.strftime("%H:%M:%S").yellow}: "
-  end
-
   def self.seed_file_name(model_name)
     # generate seed file name
     sleep 1
@@ -49,7 +32,7 @@ class Omni::Seed::Base
   def self.dump_to_seed(model_name)
     # initialize
     rows_to_dump = "Omni::#{model_name}".constantize.count
-    puts "#{time_stamp} starting dump of #{rows_to_dump} rows"
+    Omni::Util::Clock.stamp("starting dump of #{rows_to_dump} rows")
     rows_per_file = 20000
     file_count = rows_to_dump / rows_per_file + 1
     # puts "file_count is #{file_count}"
@@ -78,6 +61,10 @@ class Omni::Seed::Base
 
     # run the seed file
     # system('rake buildit:db:seed')
+  end
+
+  def self.time_stamp
+    "== #{Time.now.strftime("%H:%M:%S").yellow}: "
   end
 
 end

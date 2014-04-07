@@ -62,15 +62,6 @@ class Omni::SkuPriceRequest < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
-
-  # HOOKS (Start) =======================================================================
-  # HOOKS (End)
-
-
   # INDEXING (Start) ====================================================================
   searchable do
     string   :sku_id
@@ -91,6 +82,8 @@ class Omni::SkuPriceRequest < ActiveRecord::Base
     text     :customer_display_fulltext, using: :customer_display
     text     :account_display_fulltext, using: :account_display
   end
+  order_search_by :display => :asc
+  # INDEXING (End) ====================================================================
 
   # STATES (Start) ====================================================================
   state_machine :state, initial: :new do

@@ -49,14 +49,14 @@ Ext.define('Omni.view.shipments.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: true  },
-        { header: this.shipment_nbrLabel,                                dataIndex: 'shipment_nbr',                       flex: 1,   sortable: true  },
-        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: true  },
-        { header: this.shippable_typeLabel,                              dataIndex: 'shippable_type',                     flex: 1,   sortable: true  },
-        { header: this.shippable_idLabel,                                dataIndex: 'shippable_id',                       flex: 1,   sortable: true  },
-        { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: true  },
-        { header: this.tracking_numberLabel,                             dataIndex: 'tracking_number',                    flex: 1,   sortable: true  },
-        { header: this.ship_nameLabel,                                   dataIndex: 'ship_name',                          flex: 1,   sortable: true  }
+        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: false  },
+        { header: this.shipment_nbrLabel,                                dataIndex: 'shipment_nbr',                       flex: 1,   sortable: false  },
+        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: false  },
+        { header: this.shippable_typeLabel,                              dataIndex: 'shippable_type',                     flex: 1,   sortable: false  },
+        { header: this.shippable_idLabel,                                dataIndex: 'shippable_id',                       flex: 1,   sortable: false  },
+        { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: false  },
+        { header: this.tracking_numberLabel,                             dataIndex: 'tracking_number',                    flex: 1,   sortable: false  },
+        { header: this.ship_nameLabel,                                   dataIndex: 'ship_name',                          flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

@@ -44,10 +44,10 @@ Ext.define('Omni.view.supplier_ratings.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.supplier_displayLabel, dataIndex: 'supplier_display',  flex: 1,  sortable: true  },
-        { header: this.supplier_rating_subject_displayLabel, dataIndex: 'supplier_rating_subject_display',  flex: 1,  sortable: true  },
-        { header: this.rating_dateLabel, dataIndex: 'rating_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.rating_valueLabel, dataIndex: 'rating_value',  flex: 1,  sortable: true  }
+        { header: this.supplier_displayLabel, dataIndex: 'supplier_display',  flex: 1,  sortable: false  },
+        { header: this.supplier_rating_subject_displayLabel, dataIndex: 'supplier_rating_subject_display',  flex: 1,  sortable: false  },
+        { header: this.rating_dateLabel, dataIndex: 'rating_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.rating_valueLabel, dataIndex: 'rating_value',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

@@ -3,13 +3,13 @@ Ext.define('Omni.view.companies.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-companies-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -47,13 +47,13 @@ Ext.define('Omni.view.companies.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: true  },
-        { header: this.company_nbrLabel, dataIndex: 'company_nbr',  flex: 1,  sortable: true  },
-        { header: this.line_1Label, dataIndex: 'line_1',  flex: 1,  sortable: true  },
-        { header: this.cityLabel, dataIndex: 'city',  flex: 1,  sortable: true  },
-        { header: this.state_codeLabel, dataIndex: 'state_code',  flex: 1,  sortable: true  },
-        { header: this.zipLabel, dataIndex: 'zip',  flex: 1,  sortable: true  },
-        { header: this.phoneLabel, dataIndex: 'phone',  flex: 1,  sortable: true  }
+        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+        { header: this.company_nbrLabel, dataIndex: 'company_nbr',  flex: 1,  sortable: false  },
+        { header: this.line_1Label, dataIndex: 'line_1',  flex: 1,  sortable: false  },
+        { header: this.cityLabel, dataIndex: 'city',  flex: 1,  sortable: false  },
+        { header: this.state_codeLabel, dataIndex: 'state_code',  flex: 1,  sortable: false  },
+        { header: this.zipLabel, dataIndex: 'zip',  flex: 1,  sortable: false  },
+        { header: this.phoneLabel, dataIndex: 'phone',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

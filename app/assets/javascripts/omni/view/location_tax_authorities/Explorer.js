@@ -3,13 +3,13 @@ Ext.define('Omni.view.location_tax_authorities.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-location_tax_authorities-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -42,8 +42,8 @@ Ext.define('Omni.view.location_tax_authorities.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: true  },
-        { header: this.tax_authority_displayLabel, dataIndex: 'tax_authority_display',  flex: 1,  sortable: true  }
+        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  },
+        { header: this.tax_authority_displayLabel, dataIndex: 'tax_authority_display',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

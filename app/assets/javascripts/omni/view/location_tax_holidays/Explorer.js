@@ -45,11 +45,11 @@ Ext.define('Omni.view.location_tax_holidays.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: true  },
-        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.is_tax_holidayLabel, dataIndex: 'is_tax_holiday',  flex: 1,  sortable: true  },
-        { header: this.price_cutoffLabel, dataIndex: 'price_cutoff',  flex: 1,  sortable: true  }
+        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  },
+        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.is_tax_holidayLabel, dataIndex: 'is_tax_holiday',  flex: 1,  sortable: false  },
+        { header: this.price_cutoffLabel, dataIndex: 'price_cutoff',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

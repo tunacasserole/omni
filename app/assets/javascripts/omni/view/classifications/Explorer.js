@@ -3,13 +3,13 @@ Ext.define('Omni.view.classifications.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-classifications-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -43,9 +43,9 @@ Ext.define('Omni.view.classifications.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: true  },
-        { header: this.department_displayLabel,                          dataIndex: 'department_display',                 flex: 1,   sortable: true  },
-        { header: this.classification_nbrLabel,                          dataIndex: 'classification_nbr',                 flex: 1,   sortable: true  },
+        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: false  },
+        { header: this.department_displayLabel,                          dataIndex: 'department_display',                 flex: 1,   sortable: false  },
+        { header: this.classification_nbrLabel,                          dataIndex: 'classification_nbr',                 flex: 1,   sortable: false  },
 
       ]
     });

@@ -45,11 +45,11 @@ Ext.define('Omni.view.style_suppliers.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.style_displayLabel,                               dataIndex: 'style_display',                      flex: 1,   sortable: true  },
-        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: true  },
-        { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: true  },
-        { header: this.is_primaryLabel,                         dataIndex: 'is_primary',                flex: 1,   sortable: true  },
-        { header: this.is_manufacturerLabel,                             dataIndex: 'is_manufacturer',                    flex: 1,   sortable: true  }
+        { header: this.style_displayLabel,                               dataIndex: 'style_display',                      flex: 1,   sortable: false  },
+        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: false  },
+        { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: false  },
+        { header: this.is_primaryLabel,                         dataIndex: 'is_primary',                flex: 1,   sortable: false  },
+        { header: this.is_manufacturerLabel,                             dataIndex: 'is_manufacturer',                    flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

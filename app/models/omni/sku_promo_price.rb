@@ -5,7 +5,7 @@ class Omni::SkuPromoPrice < ActiveRecord::Base
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext
+  # supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
@@ -45,30 +45,25 @@ class Omni::SkuPromoPrice < ActiveRecord::Base
   end
   # MAPPED ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
-
-  # HOOKS (Start) =======================================================================
-  # HOOKS (End)
-
-
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :sku_id
-    date     :effective_date
-    date     :end_date
-    integer  :promo_units
-    integer  :promo_percent
-    integer  :promo_amount
-    integer  :promo_price
-    string   :display
+  # searchable do
+  #   string   :sku_id
+  #   date     :effective_date
+  #   date     :end_date
+  #   integer  :promo_units
+  #   integer  :promo_percent
+  #   integer  :promo_amount
+  #   integer  :promo_price
+  #   string   :display
 
-    text     :promo_units_fulltext, using: :promo_units
-    text     :promo_percent_fulltext, using: :promo_percent
-    text     :promo_amount_fulltext, using: :promo_amount
-    text     :promo_price_fulltext, using: :promo_price
-  end
+  #   text     :promo_units_fulltext, using: :promo_units
+  #   text     :promo_percent_fulltext, using: :promo_percent
+  #   text     :promo_amount_fulltext, using: :promo_amount
+  #   text     :promo_price_fulltext, using: :promo_price
+  # end
+
+  # order_search_by :display => :asc
+  # INDEXING (End) ====================================================================
+
 end # class Omni::SkuPromoPrice
 

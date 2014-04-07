@@ -219,6 +219,16 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'ALIAS_SOURCE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['56EE431E97AOEU42A3D212313B10044E','BUCKHEAD',,'ALIAS_SOURCE','Buckhead',null,true],
+    ['56EE42345678oei2A3D212313B10044E','PARKER',,'ALIAS_SOURCE','Parker',null,true],
+    ['56EE431E97AOEU4223456AOE3B10044E','TRUE GRITS',,'ALIAS_SOURCE','True Grits',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
   storeId   : 'ANNUAL_TUITION-lookup-Store',
   fields    : lookupStoreFields,
   data      : [

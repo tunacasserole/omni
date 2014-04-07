@@ -3,13 +3,13 @@ Ext.define('Omni.view.till_details.Explorer', {
   extend:'Buildit.ux.explorer.Panel',
   alias:'widget.omni-till_details-Explorer',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
 
@@ -42,8 +42,8 @@ Ext.define('Omni.view.till_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.till_displayLabel, dataIndex: 'till_display',  flex: 1,  sortable: true  },
-        { header: this.tender_displayLabel, dataIndex: 'tender_display',  flex: 1,  sortable: true  }
+        { header: this.till_displayLabel, dataIndex: 'till_display',  flex: 1,  sortable: false  },
+        { header: this.tender_displayLabel, dataIndex: 'tender_display',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

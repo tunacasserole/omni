@@ -49,14 +49,14 @@ Ext.define('Omni.view.order_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.order_detail_nbrLabel,                              dataIndex: 'order_detail_nbr',                     flex: 1,   sortable: true  },
-        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: true  },
-        { header: this.sku_alias_displayLabel,                           dataIndex: 'sku_alias_display',                  flex: 1,   sortable: true  },
-        { header: this.delivery_methodLabel,                             dataIndex: 'delivery_method',                    flex: 1,   sortable: true  },
-        { header: this.pickup_location_displayLabel,                     dataIndex: 'pickup_location_display',            flex: 1,   sortable: true  },
-        { header: this.account_displayLabel,                                dataIndex: 'account_display',                       flex: 1,   sortable: true  },
-        { header: this.grade_displayLabel,                               dataIndex: 'grade_display',                      flex: 1,   sortable: true  },
-        { header: this.genderLabel,                                      dataIndex: 'gender',                             flex: 1,   sortable: true  }
+        { header: this.order_detail_nbrLabel,                              dataIndex: 'order_detail_nbr',                     flex: 1,   sortable: false  },
+        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: false  },
+        { header: this.sku_alias_displayLabel,                           dataIndex: 'sku_alias_display',                  flex: 1,   sortable: false  },
+        { header: this.delivery_methodLabel,                             dataIndex: 'delivery_method',                    flex: 1,   sortable: false  },
+        { header: this.pickup_location_displayLabel,                     dataIndex: 'pickup_location_display',            flex: 1,   sortable: false  },
+        { header: this.account_displayLabel,                                dataIndex: 'account_display',                       flex: 1,   sortable: false  },
+        { header: this.grade_displayLabel,                               dataIndex: 'grade_display',                      flex: 1,   sortable: false  },
+        { header: this.genderLabel,                                      dataIndex: 'gender',                             flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

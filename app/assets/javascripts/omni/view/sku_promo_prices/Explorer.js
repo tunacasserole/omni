@@ -45,12 +45,12 @@ Ext.define('Omni.view.sku_promo_prices.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.promo_unitsLabel, dataIndex: 'promo_units',  flex: 1,  sortable: true  },
-        { header: this.promo_percentLabel, dataIndex: 'promo_percent',  flex: 1,  sortable: true  },
-        { header: this.promo_amountLabel, dataIndex: 'promo_amount',  flex: 1,  sortable: true  },
-        { header: this.promo_priceLabel, dataIndex: 'promo_price',  flex: 1,  sortable: true  }
+        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.promo_unitsLabel, dataIndex: 'promo_units',  flex: 1,  sortable: false  },
+        { header: this.promo_percentLabel, dataIndex: 'promo_percent',  flex: 1,  sortable: false  },
+        { header: this.promo_amountLabel, dataIndex: 'promo_amount',  flex: 1,  sortable: false  },
+        { header: this.promo_priceLabel, dataIndex: 'promo_price',  flex: 1,  sortable: false  }
       ]
     });
     // COLUMNS (End)

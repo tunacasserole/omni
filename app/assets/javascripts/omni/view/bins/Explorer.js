@@ -56,22 +56,22 @@ Ext.define('Omni.view.bins.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.area_displayLabel,                                dataIndex: 'area_display',                       flex: 1,   sortable: true  },
-        { header: this.area_short_nameLabel,                             dataIndex: 'area_short_name',                    flex: 1,   sortable: true  },
-        { header: this.aisleLabel,                                       dataIndex: 'aisle',                              flex: 1,   sortable: true  },
-        { header: this.sectionLabel,                                     dataIndex: 'section',                            flex: 1,   sortable: true  },
-        { header: this.levelLabel,                                       dataIndex: 'level',                              flex: 1,   sortable: true  },
-        { header: this.positionLabel,                                    dataIndex: 'position',                           flex: 1,   sortable: true  },
-        { header: this.bin_nbrLabel,                                     dataIndex: 'bin_nbr',                            flex: 1,   sortable: true  },
-        { header: this.bin_codeLabel,                                    dataIndex: 'bin_code',                           flex: 1,   sortable: true  },
-        { header: this.bin_typeLabel,                                    dataIndex: 'bin_type',                           flex: 1,   sortable: true  },
-        { header: this.last_activity_dateLabel,                          dataIndex: 'last_activity_date',                 flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.zoneLabel,                                        dataIndex: 'zone',                               flex: 1,   sortable: true  },
-        { header: this.pick_zoneLabel,                                   dataIndex: 'pick_zone',                          flex: 1,   sortable: true  },
-        { header: this.is_emptyLabel,                                    dataIndex: 'is_empty',                           flex: 1,   sortable: true  },
-        { header: this.is_request_label_printLabel,                      dataIndex: 'is_request_label_print',             flex: 1,   sortable: true  },
-        { header: this.bin_label_typeLabel,                              dataIndex: 'bin_label_type',                     flex: 1,   sortable: true  },
-        { header: this.is_enabledLabel,                                  dataIndex: 'is_enabled',                         flex: 1,   sortable: true  }
+        { header: this.area_displayLabel,                                dataIndex: 'area_display',                       flex: 1,   sortable: false  },
+        { header: this.area_short_nameLabel,                             dataIndex: 'area_short_name',                    flex: 1,   sortable: false  },
+        { header: this.aisleLabel,                                       dataIndex: 'aisle',                              flex: 1,   sortable: false  },
+        { header: this.sectionLabel,                                     dataIndex: 'section',                            flex: 1,   sortable: false  },
+        { header: this.levelLabel,                                       dataIndex: 'level',                              flex: 1,   sortable: false  },
+        { header: this.positionLabel,                                    dataIndex: 'position',                           flex: 1,   sortable: false  },
+        { header: this.bin_nbrLabel,                                     dataIndex: 'bin_nbr',                            flex: 1,   sortable: false  },
+        { header: this.bin_codeLabel,                                    dataIndex: 'bin_code',                           flex: 1,   sortable: false  },
+        { header: this.bin_typeLabel,                                    dataIndex: 'bin_type',                           flex: 1,   sortable: false  },
+        { header: this.last_activity_dateLabel,                          dataIndex: 'last_activity_date',                 flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.zoneLabel,                                        dataIndex: 'zone',                               flex: 1,   sortable: false  },
+        { header: this.pick_zoneLabel,                                   dataIndex: 'pick_zone',                          flex: 1,   sortable: false  },
+        { header: this.is_emptyLabel,                                    dataIndex: 'is_empty',                           flex: 1,   sortable: false  },
+        { header: this.is_request_label_printLabel,                      dataIndex: 'is_request_label_print',             flex: 1,   sortable: false  },
+        { header: this.bin_label_typeLabel,                              dataIndex: 'bin_label_type',                     flex: 1,   sortable: false  },
+        { header: this.is_enabledLabel,                                  dataIndex: 'is_enabled',                         flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)

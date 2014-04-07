@@ -53,15 +53,15 @@ Ext.define('Omni.view.adjustments.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.adjustment_nbrLabel,                              dataIndex: 'adjustment_nbr',                     flex: 1,   sortable: true  },
-        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: true  },
-        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: true  },
-        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: true  },
-        { header: this.request_dateLabel,                                dataIndex: 'request_date',                       flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.request_user_displayLabel,                        dataIndex: 'request_user_display',               flex: 1,   sortable: true  },
-        { header: this.post_dateLabel,                                   dataIndex: 'post_date',                          flex: 1,   sortable: true,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.post_user_displayLabel,                           dataIndex: 'post_user_display',                  flex: 1,   sortable: true  },
-        { header: this.adjustment_reason_displayLabel,                   dataIndex: 'adjustment_reason_display',          flex: 1,   sortable: true  }
+        { header: this.adjustment_nbrLabel,                              dataIndex: 'adjustment_nbr',                     flex: 1,   sortable: false  },
+        { header: this.stateLabel,                                       dataIndex: 'state',                              flex: 1,   sortable: false  },
+        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: false  },
+        { header: this.sku_displayLabel,                                 dataIndex: 'sku_display',                        flex: 1,   sortable: false  },
+        { header: this.request_dateLabel,                                dataIndex: 'request_date',                       flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.request_user_displayLabel,                        dataIndex: 'request_user_display',               flex: 1,   sortable: false  },
+        { header: this.post_dateLabel,                                   dataIndex: 'post_date',                          flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.post_user_displayLabel,                           dataIndex: 'post_user_display',                  flex: 1,   sortable: false  },
+        { header: this.adjustment_reason_displayLabel,                   dataIndex: 'adjustment_reason_display',          flex: 1,   sortable: false  }
       ]
     });
     // COLUMNS (End)
