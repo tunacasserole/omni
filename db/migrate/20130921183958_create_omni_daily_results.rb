@@ -10,6 +10,7 @@ class CreateOmniDailyResults < ActiveRecord::Migration
         t.column   :location_id,                     :string,            null: true,   limit: 32
         t.column   :date,                            :date,              null: true
         t.column   :year,                            :integer,           null: true
+        t.column   :net_sale_units,                  :decimal,           null: true,    scale: 2, precision: 11
         t.column   :adjusted_cost,                   :decimal,           null: true,    scale: 2, precision: 11
         t.column   :adjusted_retail,                 :decimal,           null: true,    scale: 2, precision: 11
         t.column   :adjusted_units,                  :decimal,           null: true,    scale: 2, precision: 11
@@ -27,7 +28,6 @@ class CreateOmniDailyResults < ActiveRecord::Migration
         t.column   :net_inventory_units,             :decimal,           null: true,    scale: 2, precision: 11
         t.column   :net_sale_cost,                   :decimal,           null: true,    scale: 2, precision: 11
         t.column   :net_sale_retail,                 :decimal,           null: true,    scale: 2, precision: 11
-        t.column   :net_sale_units,                  :decimal,           null: true,    scale: 2, precision: 11
         t.column   :produced_cost,                   :decimal,           null: true,    scale: 2, precision: 11
         t.column   :produced_retail,                 :decimal,           null: true,    scale: 2, precision: 11
         t.column   :produced_units,                  :decimal,           null: true,    scale: 2, precision: 11

@@ -1,6 +1,6 @@
-Ext.define('Omni.view.mark_inventories.Inspector',{
+Ext.define('Omni.view.rms_inventories.Inspector',{
   extend   : 'Buildit.ux.inspector.Panel',
-  alias    : 'widget.omni-mark_inventories-Inspector',
+  alias    : 'widget.omni-rms_inventories-Inspector',
 
 
   initComponent:function(){
@@ -28,7 +28,7 @@ Ext.define('Omni.view.mark_inventories.Inspector',{
       cards     : [
         {
           title     : 'Profile',
-          xtype     : 'omni-mark_inventories-Form'
+          xtype     : 'omni-rms_inventories-Form'
         }
       ]
     });
@@ -36,7 +36,7 @@ Ext.define('Omni.view.mark_inventories.Inspector',{
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title     : 'Mark Inventory',
+      title     : 'Rms Inventory',
       subtitle  : this.record.get('display_as')
     });
     // TITLES (End)

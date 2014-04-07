@@ -1,9 +1,9 @@
-Ext.define('Omni.store.MarkInventory', {
+Ext.define('Omni.store.TgInventory', {
   extend       : 'Ext.data.Store',
-  alias        : 'store.omni-MarkInventory',
-  model        : 'Omni.model.MarkInventory',
+  alias        : 'store.omni-TgInventory',
+  model        : 'Omni.model.TgInventory',
   autoLoad     : false,
-  storeId      : 'MarkInventoryStore',
+  storeId      : 'TgInventoryStore',
   remoteFilter : true,
   remoteSort   : true,
 
@@ -15,4 +15,4 @@ Ext.define('Omni.store.MarkInventory', {
     me.setProxy(proxy);
   } // constructor
 
-}); // Ext.define('Omni.store.MarkInventory'
+}); // Ext.define('Omni.store.TgInventory'

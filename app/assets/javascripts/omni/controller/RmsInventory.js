@@ -1,4 +1,4 @@
-Buildit.defineController('Omni.controller.MarkInventory', {
+Buildit.defineController('Omni.controller.RmsInventory', {
   extend: 'Ext.app.Controller',
   views: [],
 
@@ -17,4 +17,4 @@ Buildit.defineController('Omni.controller.MarkInventory', {
 
   }
 
-}); // Buildit.defineController('Omni.controller.MarkInventory'
+}); // Buildit.defineController('Omni.controller.RmsInventory'

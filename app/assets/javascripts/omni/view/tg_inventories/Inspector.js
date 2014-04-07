@@ -1,6 +1,6 @@
-Ext.define('Omni.view.mark_inventories.Inspector',{
+Ext.define('Omni.view.tg_inventories.Inspector',{
   extend   : 'Buildit.ux.inspector.Panel',
-  alias    : 'widget.omni-mark_inventories-Inspector',
+  alias    : 'widget.omni-tg_inventories-Inspector',
 
 
   initComponent:function(){
@@ -9,14 +9,14 @@ Ext.define('Omni.view.mark_inventories.Inspector',{
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter : {
-        property  : 'id',
-        value     : this.record.get('id')
+        property  : 'ITEM',
+        value     : this.record.get('ITEM')
       },
 
       associativeSearch : {
         with: {
-          id : {
-            equal_to : this.record.get('id')
+          ITEM : {
+            equal_to : this.record.get('ITEM')
           }
         }
       }
@@ -28,7 +28,7 @@ Ext.define('Omni.view.mark_inventories.Inspector',{
       cards     : [
         {
           title     : 'Profile',
-          xtype     : 'omni-mark_inventories-Form'
+          xtype     : 'omni-tg_inventories-Form'
         }
       ]
     });
@@ -36,7 +36,7 @@ Ext.define('Omni.view.mark_inventories.Inspector',{
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title     : 'Mark Inventory',
+      title     : 'Tg Inventory',
       subtitle  : this.record.get('display_as')
     });
     // TITLES (End)

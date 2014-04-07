@@ -1,7 +1,17 @@
 Ext.define('Omni.view.mark_inventories.Form', {
 
-  extend:'Buildit.ux.Form',
-  alias:'widget.omni-mark_inventories-Form',
+  extend   :'Buildit.ux.Form',
+  alias    :'widget.omni-mark_inventories-Form',
+
+
+  // LABELS (Start) =======================================================================
+  idLabel                                 : Omni.i18n.model.MarkInventory.id,
+  outlet_nbrLabel                         : Omni.i18n.model.MarkInventory.outlet_nbr,
+  stock_nbrLabel                          : Omni.i18n.model.MarkInventory.stock_nbr,
+  sizeLabel                               : Omni.i18n.model.MarkInventory.size,
+  qohLabel                                : Omni.i18n.model.MarkInventory.qoh,
+  drop_shipLabel                          : Omni.i18n.model.MarkInventory.drop_ship,
+  // LABELS (End)
 
 
   initComponent:function () {
@@ -10,56 +20,74 @@ Ext.define('Omni.view.mark_inventories.Form', {
 
     // FILTER (Start) =======================================================================
     var associativeFilter = {
-      property:   'id',
-      value:      this.record.get('id')
+      property    : 'id',
+      value       : this.record.get('id')
     };
     // FILTER (End)
 
     
-    // LABELS (Start) =======================================================================
-    Ext.applyIf(this, {
-      outlet_nbrLabel:                        Omni.i18n.model.MarkInventory.outlet_nbr,    
-      stock_nbrLabel:                         Omni.i18n.model.MarkInventory.stock_nbr,    
-      sizeLabel:                              Omni.i18n.model.MarkInventory.size,    
-      qohLabel:                               Omni.i18n.model.MarkInventory.qoh,    
-      drop_shipLabel:                         Omni.i18n.model.MarkInventory.drop_ship,    
-      idLabel:                                Omni.i18n.model.MarkInventory.id    
-    });
-    // LABELS (End)
 
     // FIELDSETS (Start) ====================================================================
     Ext.apply(this, {
-      items: [
+      items        : [
         {
-          xtype:        'fieldset',
-          title:        'General Information',
-          collapsible:  true,
-          defaultType:  'textfield',
-          defaults:     {anchor: '95%'},
-          layout:       'anchor',
-          items:[
-          /*
-            {
-              xtype: 'buildit-Locator', 
-              store: Ext.create('MyApp.store.MyModel',{pageSize: 10}), 
-              displayField: 'name', 
-              queryField: 'name', 
-              valueField: 'value_field', 
-              itemTpl:'{name}',
-              name: 'attribute_name', 
-              fieldLabel: this.attribute_nameLabel, 
-              allowBlank: true 
-            }
-          */
-
-            { xtype: 'textfield', name: 'outlet_nbr',                     fieldLabel: this.outlet_nbrLabel                  , allowBlank: false },    
-            { xtype: 'textfield', name: 'stock_nbr',                      fieldLabel: this.stock_nbrLabel                   , allowBlank: false },    
-            { xtype: 'textfield', name: 'size',                           fieldLabel: this.sizeLabel                        , allowBlank: false },    
-            { xtype: 'textfield', name: 'qoh',                            fieldLabel: this.qohLabel                         , allowBlank: false },    
-            { xtype: 'textfield', name: 'drop_ship',                      fieldLabel: this.drop_shipLabel                   , allowBlank: false },    
-            { xtype: 'textfield', name: 'id',                             fieldLabel: this.idLabel                          , allowBlank: false }    
+          xtype        : 'fieldset',
+          title        : 'General Information',
+          collapsible  : true,
+          defaultType  : 'textfield',
+          layout       : 'anchor',
+          items        : [
+    {
+      xtype        : 'textfield',
+      name         : 'outlet_nbr',
+      fieldLabel   : me.outlet_nbrLabel,
+      maxLength    : 100,
+      minLength    : 0,
+      allowBlank   : false
+    },
+    {
+      xtype        : 'textfield',
+      name         : 'stock_nbr',
+      fieldLabel   : me.stock_nbrLabel,
+      maxLength    : 100,
+      minLength    : 0,
+      allowBlank   : false
+    },
+    {
+      xtype        : 'textfield',
+      name         : 'size',
+      fieldLabel   : me.sizeLabel,
+      maxLength    : 3,
+      minLength    : 0,
+      allowBlank   : false
+    },
+    {
+      xtype        : 'textfield',
+      name         : 'qoh',
+      fieldLabel   : me.qohLabel,
+      maxLength    : 100,
+      minLength    : 0,
+      allowBlank   : true
+    },
+    {
+      xtype        : 'textfield',
+      name         : 'drop_ship',
+      fieldLabel   : me.drop_shipLabel,
+      maxLength    : 100,
+      minLength    : 0,
+      allowBlank   : true
+    }
           ]
-        }
+        }/*,
+        {
+          xtype        : 'fieldset',
+          title        : 'Additional Information',
+          collapsible  : true,
+          defaultType  : 'textfield',
+          layout       : 'anchor',
+          items        : [
+          ]
+        }*/          
       ]
     });
     // FIELDSETS (End)
@@ -67,15 +95,13 @@ Ext.define('Omni.view.mark_inventories.Form', {
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title: 'Profile',
-      subtitle: 'Edit MarkInventories',
-      newTitle: 'New Mark Inventory',
-      newSubtitle: 'Complete the following to create a new Mark Inventory'
+      title       : 'Mark Inventory',
+      subtitle    : 'Edit Mark Inventory'
     });
     // TITLES (End)
 
     this.callParent();
     
-  }
+  }  // initComponent
 
-});
+}); // Ext.define('Omni.view.mark_inventories.Form'

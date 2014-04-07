@@ -1,11 +1,37 @@
 class Omni::Sync::DailyResult
 
   def self.go
-    puts "---results---"
-    load
-    sum_to_year
+    # load
     # sum_to_month
-    xit
+    # xit
+    sum_to_year
+  end
+
+  def self.sum_to_year
+    # update year on daily_results
+    # ActiveRecord::Base.connection.execute "update daily_results set year = year(date)"
+
+    @inventories = Omni::Inventory.to_hash
+
+    bar = ProgressBar.new(4)
+
+    # sum results by year to update inventories ytd, py1, py2, and py3
+    { 2014 => 'ytd', 2013 => 'py1', 2012 => 'py2', 2011 => 'py3' }.each do |year, desc|
+      ActiveRecord::Base.connection.execute("select sku_id, location_id, sum(net_sale_units) from daily_results where year = #{year} group by sku_id, location_id").each do |x|
+        sku_id = x[0]
+        location_id = x[1]
+        sold = x[2]
+        inventory_id = get_id(location_id, sku_id)
+        sold_col = "sale_units_#{desc}"
+
+        if inventory_id
+          ActiveRecord::Base.connection.execute "update inventories set #{sold_col} = #{sold} where inventory_id = '#{inventory_id}'"
+        else
+          ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, #{sold_col}) values ( '#{Buildit::Util::Guid.generate}', '#{sku_id}', '#{location_id}', #{sold} )"
+        end
+      end
+      bar.increment!
+    end
   end
 
   def self.xit
@@ -110,24 +136,7 @@ class Omni::Sync::DailyResult
     end
   end
 
-  def self.sum_to_year
-    # update year on daily_results
-    ActiveRecord::Base.connection.execute "update daily_results set year = year(date)"
-
-    # sum results by year to update inventories ytd, py1, py2, and py3
-    # @daily_results = Omni::DailyResult.to_hash
-    @daily_results = Omni::DailyResult.where(year: 2011).order()
-
-
-    # @dailys = Omni::Period.where("year_number > '2010' and year_number < '2014'").order('year_number ASC').order('period_number ASC')
-    # @periods.each do |p|
-    #     # p = Omni::Period.where(:display => '2011-Period 1').first
-    #     # units = x['sold']  #JRUBY
-    #     # location_id = x['location_id'] #JRUBY
-    #     # sku_id = x['sku_id'] #JRUBY
-    #   data.each do |x|
-    #     @source_count += 1
-    #     units = x[2]
+  def self.get_id(location_id, sku_id)
+    @inventories["#{location_id},#{sku_id}"]
   end
-
 end

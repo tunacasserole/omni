@@ -1,12 +1,13 @@
 en:
   activerecord:
     models:
-      omni/mark_inventory:  'Model'
+      omni/mark_inventory:  'MarkInventory'
     attributes:
       omni/mark_inventory:
+        display_as:                        'MarkInventory'
+        id:                                'Id'
         outlet_nbr:                        'Outlet Nbr'
         stock_nbr:                         'Stock Nbr'
         size:                              'Size'
         qoh:                               'Qoh'
         drop_ship:                         'Drop Ship'
-        id:                                'Id'
