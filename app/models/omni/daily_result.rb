@@ -105,13 +105,15 @@ class Omni::DailyResult < ActiveRecord::Base
     string   :sku_display do sku.display if sku end
     string   :location_display do location.display if location end
     date     :date
+    integer  :year
+    double   :net_sale_units
 
     text     :sku_display_fulltext, using: :sku_display
     text     :location_display_fulltext, using: :location_display
   end
-  def self.source_hash
-    etl_hash = {}
-    ActiveRecord::Base.connection.execute("select daily_result_id, location_id, sku_id, date from daily_results").each {|x| etl_hash["#{x[1]},#{x[2]},#{x[3].to_s}"] = x[0]}
+
+  def self.to_hash
+    etl_hash = {}; ActiveRecord::Base.connection.execute("select daily_result_id, location_id, sku_id, date from daily_results").each {|x| etl_hash["#{x[1]},#{x[2]},#{x[3].to_s}"] = x[0]}
     etl_hash
   end
 

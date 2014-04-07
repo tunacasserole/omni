@@ -96,9 +96,9 @@ class Omni::Sync::Base
     @no_id_count = 0
     @days = 0
 
-    @locations = Omni::Location.source_hash('PARKER')
-    @skus = Omni::Sku.source_hash('PARKER')
-    @inventories = Omni::Inventory.source_hash
+    @locations = Omni::Location.to_hash('PARKER')
+    @skus = Omni::Sku.to_hash('PARKER')
+    @inventories = Omni::Inventory.to_hash
 
     @updates = []
     @no_locations = []

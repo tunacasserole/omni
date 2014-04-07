@@ -34,8 +34,8 @@ class Omni::Sync::Inventory::Buckhead < Omni::Sync::Base
     @no_location_count = 0
     @no_inventory_count = 0
     @days = 0
-    @locations = Omni::Location.source_hash('BUCKHEAD')
-    @skus = Omni::Sku.source_hash('BUCKHEAD')
+    @locations = Omni::Location.to_hash
+    @skus = Omni::Sku.to_hash('BUCKHEAD')
     @output = []
     @updates = []
     @no_locations = []
@@ -44,7 +44,7 @@ class Omni::Sync::Inventory::Buckhead < Omni::Sync::Base
   end
 
   def self.inventory
-    @inventories = Omni::Inventory.source_hash
+    @inventories = Omni::Inventory.to_hash
     self.on_hand
     # self.on_order
   end
@@ -122,7 +122,7 @@ class Omni::Sync::Inventory::Buckhead < Omni::Sync::Base
 
   def self.results
     load
-    # @daily_results = Omni::DailyResult.source_hash
+    # @daily_results = Omni::DailyResult.to_hash
     @daily_results = {}
     # backorder_sql = "select T.Time, T.StoreID, TE.ItemID, TE.Quantity from TransactionEntry TE, [Transaction] T where T.TransactionNumber = TE.TransactionNumber and TE.Quantity > 0 and T.ItemID <> '48389' and T.RecallID <> 0 and T.RecallType = 4 and T.Time >= '01/01/2011'"
     start_date = '01-01-2011'

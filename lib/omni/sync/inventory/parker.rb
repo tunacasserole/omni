@@ -31,27 +31,48 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     # puts "#{Time.now.strftime("%H:%M:%S").yellow}: #{message}"
   end
 
-   # fix skus
-    # @no_locations.each do |x|
-    #   Omni::Location.create(display: x) #unless Omni::Sku.where(source_id: source).first
-    # end
-    # @no_row_locations.each_with_index do |x,i|
-    #   puts i
-    #   sku_id = @ro_row_skus[i]
-    #   puts sku_id
-    #   Omni::Inventory.create(location_id: x) #unless Omni::Sku.where(source_id: source).first
-    # end
-    # @no_locations.each {|x| puts x}
-    # exit
-
   def self.inventory
     @inventories = Omni::Inventory.to_hash
     # self.on_hand
-    self.wip
-    self.transit
-    self.allocated
-    self.results
+    # self.wip
+    # self.transit
+    # self.allocated
+    # self.daily_results
+    self.sum_to_year
   end
+
+  def self.sum_to_year
+    puts "sum to year"
+    @period_results = Omni::PeriodResult.to_hash
+    periods = ""
+    ['2011','2012','2013'].each do |year|
+      @period_id = Omni::Period.where(:display => year).first.period_id
+      @periods = Omni::Period.where(:year_number => year).order('display')
+      @periods.each do |p|
+        periods += "'#{p.period_id}',"
+      end
+      # puts "year is #{p.display}"
+      sql = "select location_id, sku_id, sum(net_sale_units) as sold from period_results where period_id in (#{periods.chop}) group by sku_id, location_id"
+      data = ActiveRecord::Base.connection.execute sql
+      data.each do |x|
+        @source_count += 1
+        units = x[2]
+        location_id = x[0] #MRI
+        sku_id = x[1] #MRI
+        period_id = @period_id
+        row_id = @period_results["#{period_id},#{location_id},#{sku_id}"] || Buildit::Util::Guid.generate
+        @updates.push "('#{row_id}','#{period_id}','#{location_id}','#{sku_id}',#{units})"
+
+        if @created_count.to_s.end_with? '000'
+          puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
+          sql = "insert into period_results (period_result_id, period_id, location_id, sku_id, net_sale_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
+          ActiveRecord::Base.connection.execute sql
+          @updates = []
+          sql = ''
+        end
+        @created_count += 1
+      end
+    end
 
   def self.on_hand
     load
@@ -129,7 +150,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     xit
   end
 
-  def self.results
+  def self.daily_results
     load
     self.order_hashes
     bar = ProgressBar.new(Omni::MarkOrderLine)
@@ -221,7 +242,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
   end
 
   def self.order_hashes
-    @daily_results = Omni::DailyResult.source_hash
+    @daily_results = Omni::DailyResult.to_hash
     puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
     @order_to_outlet = {}
     @order_to_date = {}
@@ -250,7 +271,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     @days = 0
     @last_order = 2100000
     @last_order = Omni::MarkOrder.last_order_of_2010
-    @locations = Omni::Location.source_hash
+    @locations = Omni::Location.to_hash
     @skus = Omni::Sku.to_hash
     @updates = []
     @no_locations = []
@@ -266,17 +287,4 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     end
   end
 
-  def self.fix_skus
-    data = Omni::Sku.all
-    data.each do |x|
-      x.source_id = x.source_id.upcase
-      x.save
-    end
-    data = Omni::MarkInventory.where("qoh > 0")
-    data.each_with_index do |x,i|
-      # puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '0000'
-      source = "#{x.stock_nbr.to_s}-#{x.size.upcase.to_s}"
-      Omni::Sku.create(display: source, source: 'MARK AUTO CREATE', source_id: source, state: 'autocreated') unless Omni::Sku.where(source_id: source).first
-    end
-  end
 end

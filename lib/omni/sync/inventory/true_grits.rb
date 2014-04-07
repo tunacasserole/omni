@@ -39,8 +39,8 @@ class Omni::Sync::Grits < Omni::Sync::Base
     @days = 0
     @grits_stores = ['60','61','62','63','64','65','66']
 
-    @locations = Omni::Location.source_hash('GRITS')
-    @skus = Omni::Sku.source_hash('GRITS')
+    @locations = Omni::Location.to_hash('GRITS')
+    @skus = Omni::Sku.to_hash('GRITS')
     @period_py2 = Omni::Period.where(:display => '2011').first.period_id
     @period_py1= Omni::Period.where(:display => '2012').first.period_id
     @period_ytd = Omni::Period.where(:display => '2013').first.period_id
@@ -84,7 +84,7 @@ class Omni::Sync::Grits < Omni::Sync::Base
   end
 
   def self.inventory
-    @inventories = Omni::Inventory.source_hash
+    @inventories = Omni::Inventory.to_hash
     data = load_file('DATA.txt')
     data.each do  |x|
       @source_count += 1
@@ -117,7 +117,7 @@ class Omni::Sync::Grits < Omni::Sync::Base
   end
 
   def self.results
-    @period_results = {} #Omni::PeriodResult.source_hash
+    @period_results = {} #Omni::PeriodResult.to_hash
     data = load_file('sold.xlsx')
     data.each do  |x|
       @source_count += 1

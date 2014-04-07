@@ -1,4 +1,12 @@
-class Omni::Sync::Omni
+class Omni::Sync::DailyResult
+
+  def self.go
+    puts "---results---"
+    load
+    sum_to_year
+    # sum_to_month
+    xit
+  end
 
   def self.xit
     # put "no locations found for these outlets: #{@no_locations}"
@@ -31,21 +39,13 @@ class Omni::Sync::Omni
     @no_location_count = 0
     @no_periods = []
     @no_period_count = 0
-    # @locations = Omni::Location.source_hash('PARKER')
-    # @skus = Omni::Sku.source_hash('PARKER')
+    # @locations = Omni::Location.to_hash('PARKER')
+    # @skus = Omni::Sku.to_hash('PARKER')
     @updates = []
   end
 
-  def self.results
-    puts "---results---"
-    load
-    sum_to_month
-    sum_to_year
-    xit
-  end
-
   def self.sum_to_month
-    @period_results = Omni::PeriodResult.source_hash
+    @period_results = Omni::PeriodResult.to_hash
     @periods = Omni::Period.where("year_number > '2010' and year_number < '2014'").order('year_number ASC').order('period_number ASC')
     @periods.each do |p|
         # p = Omni::Period.where(:display => '2011-Period 1').first
@@ -76,9 +76,9 @@ class Omni::Sync::Omni
     @period_results = {}
   end
 
-  def self.sum_to_year
+  def self.sum_to_year_from_periods
     puts "sum to year"
-    @period_results = Omni::PeriodResult.source_hash
+    @period_results = Omni::PeriodResult.to_hash
     periods = ""
     ['2011','2012','2013'].each do |year|
       @period_id = Omni::Period.where(:display => year).first.period_id
@@ -109,4 +109,25 @@ class Omni::Sync::Omni
       end
     end
   end
+
+  def self.sum_to_year
+    # update year on daily_results
+    ActiveRecord::Base.connection.execute "update daily_results set year = year(date)"
+
+    # sum results by year to update inventories ytd, py1, py2, and py3
+    # @daily_results = Omni::DailyResult.to_hash
+    @daily_results = Omni::DailyResult.where(year: 2011).order()
+
+
+    # @dailys = Omni::Period.where("year_number > '2010' and year_number < '2014'").order('year_number ASC').order('period_number ASC')
+    # @periods.each do |p|
+    #     # p = Omni::Period.where(:display => '2011-Period 1').first
+    #     # units = x['sold']  #JRUBY
+    #     # location_id = x['location_id'] #JRUBY
+    #     # sku_id = x['sku_id'] #JRUBY
+    #   data.each do |x|
+    #     @source_count += 1
+    #     units = x[2]
+  end
+
 end

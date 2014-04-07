@@ -35,26 +35,22 @@ Ext.define('Omni.view.daily_results.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      dateLabel: Omni.i18n.model.DailyResult.date,
-      net_inventory_costLabel: Omni.i18n.model.DailyResult.net_inventory_cost,
-      net_inventory_unitsLabel: Omni.i18n.model.DailyResult.net_inventory_units,
-      net_sale_retailLabel: Omni.i18n.model.DailyResult.net_sale_retail,
-      net_sale_unitsLabel: Omni.i18n.model.DailyResult.net_sale_units,
       sku_idLabel: Omni.i18n.model.DailyResult.sku_id,
-      location_idLabel: Omni.i18n.model.DailyResult.location_id
+      location_idLabel: Omni.i18n.model.DailyResult.location_id,
+      dateLabel: Omni.i18n.model.DailyResult.date,
+      yearLabel: Omni.i18n.model.DailyResult.year,
+      net_sale_unitsLabel: Omni.i18n.model.DailyResult.net_sale_units,
     });
     // LABELS (End)
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.sku_idLabel, dataIndex: 'sku_display',  flex: 1,  sortable: false  },
-        { header: this.location_idLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  },
+        { header: this.sku_idLabel, dataIndex: 'sku_display',  flex: 3,  sortable: false  },
+        { header: this.location_idLabel, dataIndex: 'location_display',  flex: 2,  sortable: false  },
         { header: this.dateLabel, dataIndex: 'date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
+        { header: this.yearLabel, dataIndex: 'year',  flex: 1,  sortable: false  },
         { header: this.net_sale_unitsLabel, dataIndex: 'net_sale_units',  flex: 1,  sortable: false  },
-        { header: this.net_inventory_costLabel, dataIndex: 'net_inventory_cost',  flex: 1,  sortable: false  },
-        { header: this.net_inventory_unitsLabel, dataIndex: 'net_inventory_units',  flex: 1,  sortable: false  },
-        { header: this.net_sale_retailLabel, dataIndex: 'net_sale_retail',  flex: 1,  sortable: false  },
       ]
     });
     // COLUMNS (End)

@@ -116,7 +116,7 @@ class Omni::Sku < ActiveRecord::Base
     to_hash
   end
 
-  def self.source_hash(legacy_source)
+  def self.to_hash(legacy_source)
     # puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create sku hash"
     # legacy_source = 'PARKER'
     # ActiveRecord::Base.connection.execute("select sku_id, source_id from skus where source = '#{legacy_source}'").each {|x| to_hash[x['source_id']] = x['sku_id']}  # JRUBY!!!
