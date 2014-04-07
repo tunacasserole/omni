@@ -38,7 +38,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     # self.transit
     # self.allocated
     # self.daily_results
-    self.sum_to_year
+    # self.sum_to_year
   end
 
   def self.sum_to_year
@@ -73,6 +73,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
         @created_count += 1
       end
     end
+  end
 
   def self.on_hand
     load
