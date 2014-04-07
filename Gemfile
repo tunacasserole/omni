@@ -52,6 +52,8 @@ gem 'roo'
 
 gem 'seed_dump'
 
+gem 'quiet_assets', group: :development
+
 # testing gems
 # gem 'rack-mini-profiler'
 gem 'parallel_tests'

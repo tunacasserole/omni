@@ -50,7 +50,10 @@ class Omni::SkuAlias < ActiveRecord::Base
     string   :sku_id
     string   :sku_alias
     string   :alias_source
-    # text     :sku_display_fulltext, using: :sku_display
+    string   :sku_display
+
+    text     :sku_display_fulltext, using: :sku_display
+    text     :sku_alias_fulltext, using: :sku_alias
 
     # string   :sku_alias_id
     # string   :sku_display do sku.display if sku end
@@ -59,9 +62,7 @@ class Omni::SkuAlias < ActiveRecord::Base
     # boolean  :is_primary
     # string   :pack_type do |x| Buildit::Lookup::Manager.display_for('PACK_TYPE', x.pack_type) end
     # # integer  :pack_size
-    # string   :display
 
-    # text     :sku_alias_fulltext, using: :sku_alias
     # text     :sku_alias_type_fulltext, using: :sku_alias_type
   end
   order_search_by :sku_alias => :asc

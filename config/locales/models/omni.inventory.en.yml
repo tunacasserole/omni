@@ -22,6 +22,7 @@ en:
         reserved_units:                    'Reserved Units'
         shipping_units:                    'Shipping Units'
         requested_units:                   'Requested Units'
+        locked_units:                      'Locked Units'
         frozen_units:                      'Frozen Units'
         cost_pool:                         'Cost Pool'
         retail_pool:                       'Retail Pool'

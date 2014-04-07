@@ -54,13 +54,13 @@ Ext.define('Omni.view.sku_aliases.Explorer', {
     //   flex         : 1
     // },
     {
-      header       : me.sku_idLabel,
-      dataIndex    : 'sku_display',
+      header       : me.sku_aliasLabel,
+      dataIndex    : 'sku_alias',
       flex         : 1
     },
     {
-      header       : me.sku_aliasLabel,
-      dataIndex    : 'sku_alias',
+      header       : me.sku_idLabel,
+      dataIndex    : 'sku_display',
       flex         : 1
     },
     {

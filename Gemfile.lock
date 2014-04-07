@@ -136,6 +136,8 @@ GEM
       slop (~> 3.4)
     puma (2.8.1)
       rack (>= 1.1, < 2.0)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-cors (0.2.9)
     rack-test (0.6.2)
@@ -256,6 +258,7 @@ DEPENDENCIES
   prawn
   progress_bar
   puma
+  quiet_assets
   rails (= 4.0.0)
   rb-fsevent
   roo

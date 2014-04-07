@@ -1,10 +1,9 @@
 class Omni::Sync::Inventory < Omni::Sync::Base
 
   def self.go
-    logger.info("\ntesting***************************\n")
     @inventories = Omni::Inventory.to_hash
     # load_true_grits
-    # load_buckhead
+    load_buckhead
     # Omni::Sync::Inventory::Parker.inventory
   end
 
@@ -45,6 +44,7 @@ class Omni::Sync::Inventory < Omni::Sync::Base
     bar = ProgressBar.new(data.count)
 
     data.each_with_index do |row, i|
+      bar.increment!
 
       sku_id = @buckhead_skus[row[1]]
       next unless sku_id
@@ -52,12 +52,12 @@ class Omni::Sync::Inventory < Omni::Sync::Base
       location_id = @buckhead_stores[row[0]]
       inventory_id = get_id(location_id, sku_id)
 
-      on_hand = row[13].gsub('-','0').gsub(',','') || 0
-      on_order = row[16].gsub('-','0').gsub(',','') || 0
-      ytd = row[24].gsub('-','0').gsub(',','') || 0
-      py1 = row[23].gsub('-','0').gsub(',','') || 0
-      py2 = row[22].gsub('-','0').gsub(',','') || 0
-      py3 = row[21].gsub('-','0').gsub(',','') || 0
+      on_hand = row[13].gsub('-','0').gsub(',','').gsub('(','-').gsub(')','') || 0
+      on_order = row[16].gsub('-','0').gsub(',','').gsub('(','-').gsub(')','') || 0
+      ytd = row[24].gsub('-','0').gsub(',','').gsub('(','-').gsub(')','') || 0
+      py1 = row[23].gsub('-','0').gsub(',','').gsub('(','-').gsub(')','') || 0
+      py2 = row[22].gsub('-','0').gsub(',','').gsub('(','-').gsub(')','') || 0
+      py3 = row[21].gsub('-','0').gsub(',','').gsub('(','-').gsub(')','') || 0
 
       if inventory_id
         ActiveRecord::Base.connection.execute "update inventories set on_hand_units = #{on_hand}, supplier_on_order_units = #{on_order}, sale_units_ytd = #{ytd}, sale_units_py1 = #{py1}, sale_units_py2 = #{py2}, sale_units_py3 = #{py3} where inventory_id = '#{inventory_id}'"
@@ -65,7 +65,6 @@ class Omni::Sync::Inventory < Omni::Sync::Base
         ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, on_hand_units, supplier_on_order_units, sale_units_ytd, sale_units_py1, sale_units_py2, sale_units_py3) values ( '#{Buildit::Util::Guid.generate}', '#{sku_id}', '#{location_id}', #{on_hand}, #{on_order}, #{ytd}, #{py1}, #{py2}, #{py3} )"
       end
 
-      bar.increment!
     end
   end
 
