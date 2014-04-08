@@ -7,7 +7,7 @@ Ext.define('Omni.view.transfer_reasons.Explorer', {
   store  : Ext.create('Omni.store.TransferReason'),
 
   contextMenuConfig : {
-    xtype    : 'omni-transfer_reasons-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

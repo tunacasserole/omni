@@ -9,7 +9,7 @@ Ext.define('Omni.view.mark_transfer_lines.Explorer', {
   allowFind  :  true,
 
   contextMenuConfig : {
-    xtype    : 'omni-mark_transfer_lines-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

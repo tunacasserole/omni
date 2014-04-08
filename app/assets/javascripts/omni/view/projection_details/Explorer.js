@@ -3,13 +3,13 @@ Ext.define('Omni.view.projection_details.Explorer', {
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.omni-projection_details-Explorer',
   allowNew : false,
-  allowNew : false,
+  allowFind : true,
 
   // EXPLORER INIT (Start) ===============================================================
   store    : Ext.create('Omni.store.ProjectionDetail'),
 
   contextMenuConfig : {
-    xtype    : 'omni-projection_details-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

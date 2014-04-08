@@ -7,7 +7,7 @@ Ext.define('Omni.view.receipt_allocations.Explorer', {
   store    : Ext.create('Omni.store.ReceiptAllocation'),
 
   contextMenuConfig : {
-    xtype    : 'omni-receipt_allocations-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

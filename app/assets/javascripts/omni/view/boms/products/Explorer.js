@@ -7,7 +7,7 @@ Ext.define('Omni.view.products.Explorer', {
   store  : Ext.create('Omni.store.Product'),
 
   contextMenuConfig : {
-    xtype    : 'omni-products-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

@@ -6,10 +6,10 @@ Ext.define('Omni.view.mark_transfers.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.MarkTransfer'),
 
-  allowFind  :  true,  
+  allowFind  :  true,
 
   contextMenuConfig : {
-    xtype    : 'omni-mark_transfers-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

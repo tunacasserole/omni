@@ -7,7 +7,7 @@ Ext.define('Omni.view.gl_accounts.Explorer', {
   store  : Ext.create('Omni.store.GlAccount'),
 
   contextMenuConfig : {
-    xtype    : 'omni-gl_accounts-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

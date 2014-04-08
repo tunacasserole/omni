@@ -7,7 +7,7 @@ Ext.define('Omni.view.grades.Explorer', {
   store  : Ext.create('Omni.store.Grade'),
 
   contextMenuConfig : {
-    xtype    : 'omni-grades-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

@@ -7,7 +7,7 @@ Ext.define('Omni.view.projection_locations.Explorer', {
   store    : Ext.create('Omni.store.ProjectionLocation'),
 
   contextMenuConfig : {
-    xtype    : 'omni-projection_locations-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   allowNew : false,

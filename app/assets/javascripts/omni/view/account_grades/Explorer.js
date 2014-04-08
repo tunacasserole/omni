@@ -45,10 +45,10 @@ Ext.define('Omni.view.account_grades.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(me, {
       columns: [{
-      //   header: me.account_idLabel,
-      //   dataIndex: 'account_display',
-      //   flex: 1
-      // }, {
+        //   header: me.account_idLabel,
+        //   dataIndex: 'account_display',
+        //   flex: 1
+        // }, {
         header: me.grade_idLabel,
         dataIndex: 'grade_display',
         flex: 1
@@ -56,10 +56,10 @@ Ext.define('Omni.view.account_grades.Explorer', {
         header: me.grade_nameLabel,
         dataIndex: 'grade_name',
         flex: 1
-      // }, {
-      //   header: me.displayLabel,
-      //   dataIndex: 'display',
-      //   flex: 1
+        // }, {
+        //   header: me.displayLabel,
+        //   dataIndex: 'display',
+        //   flex: 1
       }, {
         header: me.grade_orderLabel,
         dataIndex: 'grade_order',

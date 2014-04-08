@@ -7,7 +7,7 @@ Ext.define('Omni.view.categories.Explorer', {
   store  : Ext.create('Omni.store.Category'),
 
   contextMenuConfig : {
-    xtype    : 'omni-categories-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{

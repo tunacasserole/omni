@@ -7,9 +7,9 @@ Ext.define('Omni.view.mark_wips.Explorer', {
   store  : Ext.create('Omni.store.MarkWip'),
 
   allowFind  :  true,
-    
+
   contextMenuConfig : {
-    xtype    : 'omni-mark_wips-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu'
   },
 
   newForms : [{
