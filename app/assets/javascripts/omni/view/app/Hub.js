@@ -79,6 +79,14 @@ Ext.define('Omni.view.app.Hub', {
                     xtype: 'omni-projections-Explorer'
                   }
                 }, {
+                  title: 'Projection Details',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'supply',
+                  target: {
+                    xtype: 'omni-projection_details-Explorer'
+                  }
+                }, {
                   title: 'Purchasing',
                   colspan: 2,
                   rowspan: 1,
@@ -147,28 +155,28 @@ Ext.define('Omni.view.app.Hub', {
 
             // Section: Legacy Inventory //
 
-            {
-              title: 'Legacy Inventory',
-              columns: 2,
-              rows: 4,
-              tiles: [{
-                  title: 'Mark Inventory',
-                  colspan: 2,
-                  rowspan: 1,
-                  cls: 'supply',
-                  target: {
-                    xtype: 'omni-mark_inventories-Explorer'
-                  }
-                }, {
-                  title: 'Buckhead Inventory',
-                  colspan: 2,
-                  rowspan: 1,
-                  cls: 'supply',
-                  target: {
-                    xtype: 'omni-rms_inventories-Explorer'
-                  }
-                }]
-              },
+            // {
+            //   title: 'Legacy Inventory',
+            //   columns: 2,
+            //   rows: 4,
+            //   tiles: [{
+            //       title: 'Mark Inventory',
+            //       colspan: 2,
+            //       rowspan: 1,
+            //       cls: 'supply',
+            //       target: {
+            //         xtype: 'omni-mark_inventories-Explorer'
+            //       }
+            //     }, {
+            //       title: 'Buckhead Inventory',
+            //       colspan: 2,
+            //       rowspan: 1,
+            //       cls: 'supply',
+            //       target: {
+            //         xtype: 'omni-rms_inventories-Explorer'
+            //       }
+            //     }]
+            //   },
 
               // Section: Product Hierarchy //
               ,

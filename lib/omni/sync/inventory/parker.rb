@@ -68,12 +68,12 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
 
   def self.wip
     load
-    bar = ProgressBar.new(Omni::MarkWip.where('cut_wip > 0 or cont_wip > 0 or plant_wip > 0').count)
+    # bar = ProgressBar.new(Omni::MarkWip.where('cut_wip > 0 or cont_wip > 0 or plant_wip > 0').count)
 
     ActiveRecord::Base.transaction do
       ActiveRecord::Base.connection.execute("select outlet_nbr, stock_nbr, size, sum(cut_wip), sum(cont_wip), sum(plant_wip) from mark_wip group by outlet_nbr, stock_nbr, size").each do |x|
       # Omni::MarkWip.where('cut_wip > 0 or plant_wip > 0 or cont_wip > 0').find_each do |x|
-        bar.increment!
+        # bar.increment!
         units = x[3] + x[4] + x[5]
         next unless units > 0
         self.to_sql(x[0], x[1], x[2], units, @date, false)
@@ -91,10 +91,10 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
   def self.transit
     load
     # transfer_to_outlet = Omni::MarkTransfer.outlet_hash
-    bar = ProgressBar.new(ActiveRecord::Base.connection.execute("select count(*) from transfer_li a, transfer_hd b where a.transfer_id = b.id and b.status_id = 9").first[0])
+    # bar = ProgressBar.new(ActiveRecord::Base.connection.execute("select count(*) from transfer_li a, transfer_hd b where a.transfer_id = b.id and b.status_id = 9").first[0])
     ActiveRecord::Base.connection.execute("select b.to_outlet_nbr, stock_nbr, size, sum(qty) from transfer_li a, transfer_hd b where a.transfer_id > #{49237} and a.transfer_id = b.id and b.status_id = 9 group by stock_nbr, size, b.to_outlet_nbr order by stock_nbr, size, b.to_outlet_nbr").each do |x|
     # Omni::MarkTransferLine.where("transfer_id >= ?", Omni::MarkTransfer.last_transfer_of_2010).joins(:mark_transfer).where("transfer_hd.status_id = 9").find_each do |x|
-      bar.increment!
+      # bar.increment!
       # next unless x[3] > 0
       self.to_sql(x[0], x[1], x[2], x[3], @date, false)
       if @created_count.to_s.end_with? '00'
@@ -111,9 +111,9 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
 
   def self.allocated
     load
-    bar = ProgressBar.new(ActiveRecord::Base.connection.execute("select count(*) from transfer_li a, transfer_hd b where a.transfer_id = b.id and b.status_id in (8,53)").first[0])
+    # bar = ProgressBar.new(ActiveRecord::Base.connection.execute("select count(*) from transfer_li a, transfer_hd b where a.transfer_id = b.id and b.status_id in (8,53)").first[0])
     ActiveRecord::Base.connection.execute("select b.to_outlet_nbr, stock_nbr, size, sum(qty) from transfer_li a, transfer_hd b where a.transfer_id > #{49237} and a.transfer_id = b.id and b.status_id in (8,53) group by stock_nbr, size, b.to_outlet_nbr order by stock_nbr, size, b.to_outlet_nbr").each do |x|
-      bar.increment!
+      # bar.increment!
       self.to_sql(x[0], x[1], x[2], x[3], @date, false)
     end
     sql = "insert into inventories (inventory_id, location_id, sku_id, allocated_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE allocated_units = VALUES(allocated_units)"

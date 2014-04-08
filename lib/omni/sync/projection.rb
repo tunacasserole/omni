@@ -1,64 +1,73 @@
 class Omni::Sync::Projection < Omni::Sync::Base
 
   def self.go
-    create_from_inventory
-  end
+    @profile = Omni::ForecastProfile.first
+    @year = '2014'
+    @depts = {}; Omni::Projection.where(plan_year: @year).each {|x| @depts[x.department_id] = x.projection_id}
+    @is_generic = true
 
-  def self.create_from_inventory
-    # turn projections into hash
-    projections_hash = {}
-    ActiveRecord::Base.connection.execute("select display, projection_id from projections").each {|x| projections_hash[x[0]] = x[1]}
-    puts "projections loaded to hash: #{projections_hash.count}"
+    puts "Create a projection for each department unless it already exists for this plan @year, forecast profel and department"
+    Omni::Department.all.each {|d| Omni::Projection.create(forecast_profile_id: @profile.forecast_profile_id, plan_year: @year, department_id: d.department_id) unless Omni::Projection.where(forecast_profile_id: @profile.forecast_profile_id, plan_year: @year, department_id: d.department_id).first }
 
-    # get projections_load data
-    sql = "select projection_display_name, projection_receipt_name, description, retail, style_id, color_id, size_id, style_color_size_id, supplier_id, account_id, fabric_content, design_code, g_c, id from projections_load where projection_id is null"
-    data = ActiveRecord::Base.connection.execute sql
-    puts "records to process: #{data.count}"
+    puts "create projection_detail rows if needed so that every inventory row has a projection detail rows"
+    data = ActiveRecord::Base.connection.execute("select inventory_id, sku_id, location_id, department_id from inventories where inventory_id is null or inventory_id not in (select inventory_id from projection_details a, projections b where a.projection_id = b.projection_id and b.plan_year = '#{@year}')")
+    bar = ProgressBar.new(data.count)
+    data.each do |row|
+      bar.increment!
+      ActiveRecord::Base.connection.execute("insert into projection_details (projection_detail_id, projection_id, inventory_id, sku_id, location_id, forecast_profile_id) values ( '#{Buildit::Util::Guid.generate}', '#{@depts[row[3]]}', '#{row[0]}', '#{row[1]}', '#{row[2]}', '#{@profile.forecast_profile_id}' )")
+    end
 
-    data.each_with_index do |x, i|
-      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
-      # puts "projection name is #{x[0]} - id is #{projections_hash[x[0]]}"
-      # sql = "select projection_id from projections where display = '#{x[0]}'"
-      # data = ActiveRecord::Base.connection.execute sql
-      # puts "projection_id is #{data.first[0]}"
-      # if data.first #.length == 0
-      if projections_hash[x[0]]
-        projection_id = projections_hash[x[0]]
-      else
-        projection_id = map_to_db(x)
-      end
-      sql = "update projections_load set projection_id = '#{projection_id}' where id = #{x[13]}"
-      ActiveRecord::Base.connection.execute sql
+    puts "update projection details from inventories"
+    data = ActiveRecord::Base.connection.execute("select a.inventory_id, a.sku_id, a.location_id, a.on_hand_units, a.supplier_on_order_units, a.sale_units_ytd, a.sale_units_py1, a.sale_units_py2, a.sale_units_py3, b.last_forecast_date, b.first_forecast_units, b.projection_1_units, b.current_approved_units, b.projection_detail_id from inventories a, projection_details b where a.inventory_id = b.inventory_id")
+    bar = ProgressBar.new(data.count)
+    data.each do |row|
+      bar.increment!
+      forecast row
     end
   end
 
-  def self.map_to_db(row)
-    is_converted = row[12] == 'CONVERTED GARMENT'
+  def self.forecast(i)
+    # Snapshot of current inventory
+    on_hand = i[3] || 0
+    on_order = i[4] || 0
 
-    projection = Omni::Projection.create(
-      display: row[0],
-      pos_name: row[1],
-      description: row[2],
-      initial_retail_price: row[3],
-      style_id: row[4],
-      color_id: row[5],
-      size_id: row[6],
-      style_color_size_id: row[7],
-      supplier_id: row[8],
-      account_id: row[9],
-      fabric_content: row[10],
-      design_code: row[11],
-      is_converted: is_converted
-     )
+    # Sales history
+    ytd = i[5] || 0
+    py1 = i[6] || 0
+    py2 = i[7] || 0
+    py3 = i[8] || 0
 
+    # calculate forecasted units using formula from forecast_profile;
+    forecasted_units = (@profile.sales_py1_weight * py1) + (@profile.sales_py2_weight * py2) + ((@profile.sales_py3_weight) * py3)
 
-    if projection
-      # puts "created projection #{row[0]} with id #{projection.projection_id}"
-      return projection.projection_id
-    else
-      puts "projection could not be created for #{row[0].to_s} due to: #{projection.errors.full_messages}"
-      # abort
-    end
+    # x.last_forecast_units = forecasted_units
+    # x.last_forecast_date = Date.today
+
+    # Standard deviation of py1, py2 and forecasted units
+    mean = (py1 + py2 + forecasted_units) / 3
+    tot_dev = (mean - py1)**2 + (mean - py2)**2 + (mean - forecasted_units)**2
+    sd_raw = Math.sqrt(tot_dev)
+    sd_floor = forecasted_units * 0.2
+    sd_ceiling = forecasted_units * 0.4
+    sd_smooth = sd_raw < sd_floor ? sd_floor : sd_raw > sd_ceiling ? sd_ceiling : sd_raw
+    sd_percent = forecasted_units > 0 ? sd_smooth / forecasted_units : 0
+
+    # Coverage and need
+    coverage_allowed = [forecasted_units + sd_smooth - ytd, 0].max
+    custom_need = @is_generic ? 0 : coverage_allowed - on_hand
+    generic_need = 0 #@is_generic ? total_generic_need : 0
+    coverage_complete = coverage_allowed + generic_need
+    unusable = [on_hand - coverage_complete].max
+    usable = coverage_complete - on_hand < 1 ? coverage_complete : on_hand
+    total_need = coverage_complete - usable + on_order
+
+    first_forecast_units = i[9] ? i[10] : forecasted_units
+    projection_1_units = i[9] ? i[11] : forecasted_units
+    current_approved_units = i[9] && i[12] && i[12] > 0 ? i[12] : forecasted_units
+    pd_id = i[13]
+
+    ActiveRecord::Base.connection.execute("update projection_details set on_hand = #{on_hand}, on_order = #{on_order}, sale_units_ytd = #{ytd}, sale_units_py1 = #{py1}, sale_units_py2 = #{py2}, sale_units_py3 = #{py3}, first_forecast_units = #{first_forecast_units}, last_forecast_units = #{forecasted_units}, current_approved_units = #{current_approved_units}, projection_1_units = #{projection_1_units}, last_forecast_date = now(), sd_raw = #{sd_raw}, sd_floor = #{sd_floor}, sd_ceiling = #{sd_ceiling}, sd_smooth = #{sd_smooth}, sd_percent = #{sd_percent}, coverage_allowed = #{coverage_allowed}, coverage_complete = #{coverage_complete}, custom_need = #{custom_need}, total_need = #{total_need}, unusable = #{unusable}, usable = #{usable} where projection_detail_id = '#{pd_id}'")
+
   end
 
 end

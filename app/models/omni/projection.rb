@@ -11,9 +11,9 @@
 
   # VALIDATIONS (Start) =================================================================
   # validates :display,                           :uniqueness => true
-  validates :plan_year,                         :presence => true
+  # validates :plan_year,                         :presence => true
   validates :forecast_profile_id,               :presence => true
-  validates :department_id,                     :presence => true
+  # validates :department_id,                     :presence => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================

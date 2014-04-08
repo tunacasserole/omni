@@ -3,6 +3,7 @@ Ext.define('Omni.view.projection_details.Explorer', {
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.omni-projection_details-Explorer',
   allowNew : false,
+  allowNew : false,
 
   // EXPLORER INIT (Start) ===============================================================
   store    : Ext.create('Omni.store.ProjectionDetail'),
@@ -90,77 +91,92 @@ Ext.define('Omni.view.projection_details.Explorer', {
         {
           header       : this.on_handLabel,
           dataIndex    : 'on_hand',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.on_orderLabel,
           dataIndex    : 'on_order',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.last_forecast_unitsLabel,
           dataIndex    : 'last_forecast_units',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.sd_rawLabel,
           dataIndex    : 'sd_raw',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.sd_floorLabel,
           dataIndex    : 'sd_floor',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.sd_ceilingLabel,
           dataIndex    : 'sd_ceiling',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.sd_smoothLabel,
           dataIndex    : 'sd_smooth',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.sd_percentLabel,
           dataIndex    : 'sd_percent',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.coverage_allowedLabel,
           dataIndex    : 'coverage_allowed',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.custom_needLabel,
           dataIndex    : 'custom_need',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.generic_needLabel,
           dataIndex    : 'generic_need',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.coverage_completeLabel,
           dataIndex    : 'coverage_complete',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.usableLabel,
           dataIndex    : 'usable',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.unusableLabel,
           dataIndex    : 'unusable',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.total_needLabel,
           dataIndex    : 'total_need',
-          flex         : 1
+          flex         : 1,
+          sortable     : false
         },
       ]
     });

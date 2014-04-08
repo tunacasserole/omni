@@ -11,7 +11,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                          presence: true, uniqueness: true
+  # validates    :display,                          presence: true, uniqueness: true
   validates    :projection_detail_id,             presence: true, uniqueness: true
   validates    :projection_id,                    presence: true
   validates    :sku_id,                           presence: true
@@ -98,12 +98,6 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   # TEMPORARY ATTRIBUTES (Start) ========================================================
   # TEMPORARY ATTRIBUTES (End)
 
-
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
-
-
   # HOOKS (Start) =======================================================================
   hook :before_update, :reset, 10
   # HOOKS (End)
@@ -115,28 +109,29 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   searchable do
     # Exact match attributes
     string   :projection_detail_id
-    string   :display
     string   :projection_id
-    string   :projection_location_id
-    string   :forecast_profile_id
-    string   :sku_id
-    string   :location_id
     string   :sku_display
     string   :location_display
-    string   :size_id
-    string   :color_id
-    string   :style_id
-    string   :color_display do sku.color.display if sku and sku.color end
-    string   :style_display do sku.style.display if sku and sku.style end
-    string   :size_display do sku.size.display if sku and sku.size end
+    string   :sku_id
+    string   :location_id
+    string   :display
+    # string   :projection_location_id
+    # string   :forecast_profile_id
+    # string   :size_id
+    # string   :color_id
+    # string   :style_id
+    # string   :color_display do sku.color.display if sku and sku.color end
+    # string   :style_display do sku.style.display if sku and sku.style end
+    # string   :size_display do sku.size.display if sku and sku.size end
     # Partial match attributes
-    text     :size_display_fulltext, using: :size_display
-    text     :style_display_fulltext, using: :style_display
-    text     :color_display_fulltext, using: :color_display
-    text     :projection_display_fulltext, using: :projection_display
+    # text     :size_display_fulltext, using: :size_display
+    # text     :style_display_fulltext, using: :style_display
+    # text     :color_display_fulltext, using: :color_display
+    # text     :projection_display_fulltext, using: :projection_display
     text     :sku_display_fulltext, using: :sku_display
     text     :location_display_fulltext, using: :location_display
   end
+  order_search_by :display => :asc
   # INDEXING (End)
 
   # HELPERS (Start) =====================================================================

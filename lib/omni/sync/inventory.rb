@@ -1,15 +1,73 @@
 class Omni::Sync::Inventory < Omni::Sync::Base
 
   def self.go
-    @inventories = Omni::Inventory.to_hash
+    # @inventories = Omni::Inventory.to_hash
     # load_true_grits
     # load_buckhead
     # load_parker
-    Omni::Sync::Inventory::Parker.inventory
+    # Omni::Sync::Inventory::Parker.inventory
+    self.fill_in_heirarchy
   end
 
-  def self.load_parker
-    @parker_skus = Omni::SkuAlias.to_hash('PARKER')
+  def self.fill_in_heirarchy
+
+    test_hierarchy
+
+    # fill in styles
+    # data = ActiveRecord::Base.connection.execute("select a.inventory_id, b.style_id from inventories a, skus b where a.sku_id = b.sku_id and a.style_id is null or a.style_id not in (select style_id from styles)")
+    # bar = ProgressBar.new(data.count)
+    # data.each { |row| bar.increment!; ActiveRecord::Base.connection.execute("update inventories set style_id = '#{row[1]}' where inventory_id = '#{row[0]}'") }
+
+    # fill in subclasses
+    # data = ActiveRecord::Base.connection.execute("select a.inventory_id, b.subclass_id from inventories a, styles b where (a.subclass_id is null or a.subclass_id not in (select subclass_id from subclasses)) and a.style_id = b.style_id")
+    # bar = ProgressBar.new(data.count)
+    # data.each { |row| bar.increment!; ActiveRecord::Base.connection.execute("update inventories set subclass_id = '#{row[1]}' where inventory_id = '#{row[0]}'") }
+
+    # fill in classes
+    # data = ActiveRecord::Base.connection.execute("select a.inventory_id, b.classification_id from inventories a, subclasses b where (a.classification_id is null or a.classification_id not in (select classification_id from classifications)) and a.subclass_id = b.subclass_id")
+    # bar = ProgressBar.new(data.count)
+    # data.each { |row| bar.increment!; ActiveRecord::Base.connection.execute("update inventories set classification_id = '#{row[1]}' where inventory_id = '#{row[0]}'") }
+
+    # # fill in departments
+    # data = ActiveRecord::Base.connection.execute("select a.inventory_id, b.department_id from inventories a, classifications b where (a.department_id is null or a.department_id not in (select department_id from departments)) and a.classification_id = b.classification_id")
+    # bar = ProgressBar.new(data.count)
+    # data.each { |row| bar.increment!; ActiveRecord::Base.connection.execute("update inventories set department_id = '#{row[1]}' where inventory_id = '#{row[0]}'") }
+
+  end
+
+  def self.test_hierarchy
+    # get total inventory count
+    # data = ActiveRecord::Base.connection.execute("select count(*) from inventories")
+    # puts "inventory count is #{data.first[0]}"
+
+    data = ActiveRecord::Base.connection.execute("select count(*) from skus where sku_id not in (select distinct(sku_id) from inventories)")
+    puts "skus missing inventory count is #{data.first[0]}" if data.first[0] > 0
+
+    data = ActiveRecord::Base.connection.execute("select count(*) from subclasses where classification_id is null or classification_id not in (select classification_id from classifications)")
+    puts "subclasses missing classes count is #{data.first[0]}" if data.first[0] > 0
+
+    data = ActiveRecord::Base.connection.execute("select count(*) from inventories where sku_id is null or sku_id not in (select sku_id from skus)")
+    puts "inventory missing skus count is #{data.first[0]}" if data.first[0] > 0
+
+    # find invalid or missing styles
+    data = ActiveRecord::Base.connection.execute("select count(*) from inventories where style_id is null or style_id not in (select style_id from styles)")
+    puts "inventory missing styles count is #{data.first[0]}" if data.first[0] > 0
+
+    # find invalid or missing subclasses
+    data = ActiveRecord::Base.connection.execute("select count(*) from inventories where subclass_id is null or subclass_id not in (select subclass_id from subclasses)")
+    puts "inventory missing subclasses count is #{data.first[0]}" if data.first[0] > 0
+
+    # find invalid or missing classifications
+    data = ActiveRecord::Base.connection.execute("select count(*) from inventories where classification_id is null or classification_id not in (select classification_id from classifications)")
+    puts "inventory missing classifications count is #{data.first[0]}" if data.first[0] > 0
+
+    # find invalid or missing departments
+    data = ActiveRecord::Base.connection.execute("select count(*) from inventories where department_id is null or department_id not in (select department_id from departments)")
+    puts "inventory missing departments count is #{data.first[0]}" if data.first[0] > 0
+
+    data = ActiveRecord::Base.connection.execute("select count(*) from projection_details where projection_id is null or projection_id not in (select projection_id from projections)")
+    puts "projection details missing projections count is #{data.first[0]}" if data.first[0] > 0
+
 
   end
 

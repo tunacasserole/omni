@@ -425,14 +425,15 @@ class Omni::Style < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :style_id
+    string   :subclass_id
     string   :style_nbr
     string   :display
     string   :subclass_display # do subclass.display if subclass end
+    string   :state
+    double   :initial_retail_price
     # string   :supplier_id
     # string   :supplier_display do supplier.display if supplier end
-    # string   :subclass_id
     # string   :conversion_type
-    # string   :state
     # boolean   :is_converted
 
     # text     :conversion_type_fulltext,  using: :conversion_type

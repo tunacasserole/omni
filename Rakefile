@@ -124,7 +124,17 @@ namespace :omni do
 
   end # end of namespace solr
 
-  # namespace :solr do
+  desc "index"
+  task :index, [:model] => :environment do |t, args|
+    system("rake sunspot:reindex[1000,Omni::#{args.model}]")
+  end
+
+  desc "reindex"
+  task :reindex, [:model] => :environment do |t, args|
+    system("rake omni:solr:reindex[#{args.model}]")
+  end
+
+    # namespace :solr do
   #   desc "reindex"
   #   task :reindex, [:model] => :environment do |t, args|
   #     args.with_defaults(:model => 'all')
