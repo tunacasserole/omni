@@ -1,11 +1,9 @@
 Ext.define('Omni.view.subclasses.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-subclasses-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-subclasses-Explorer',
 
-
-
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +15,12 @@ Ext.define('Omni.view.subclasses.Explorer', {
 
       store: Ext.create('Omni.store.Subclass'),
 
-      contextMenuConfig:{
-        xtype:'omni-subclasses-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-subclasses-Form',
+      newForms: [{
+        xtype: 'omni-subclasses-Form',
         windowConfig: {}
       }],
 
@@ -45,13 +43,37 @@ Ext.define('Omni.view.subclasses.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.classification_displayLabel, dataIndex: 'classification_display',  flex: 1,  sortable: false  },
-        { header: this.department_displayLabel, dataIndex: 'department_display',  flex: 1,  sortable: false  },
-        { header: this.markup_percent_high_limitLabel, dataIndex: 'markup_percent_high_limit',  flex: 1,  sortable: false  },
-        { header: this.markup_percent_low_limitLabel, dataIndex: 'markup_percent_low_limit',  flex: 1,  sortable: false  },
-        { header: this.subclass_nbrLabel, dataIndex: 'subclass_nbr',  flex: 1,  sortable: false  },
+      columns: [{
+          header: this.displayLabel,
+          dataIndex: 'display',
+          flex: 1,
+          sortable: true
+        }, {
+          header: this.classification_displayLabel,
+          dataIndex: 'classification_display',
+          flex: 1,
+          sortable: true
+        }, {
+          header: this.department_displayLabel,
+          dataIndex: 'department_display',
+          flex: 1,
+          sortable: true
+        }, {
+          header: this.markup_percent_high_limitLabel,
+          dataIndex: 'markup_percent_high_limit',
+          flex: 1,
+          sortable: true
+        }, {
+          header: this.markup_percent_low_limitLabel,
+          dataIndex: 'markup_percent_low_limit',
+          flex: 1,
+          sortable: true
+        }, {
+          header: this.subclass_nbrLabel,
+          dataIndex: 'subclass_nbr',
+          flex: 1,
+          sortable: true
+        },
 
       ]
     });
@@ -59,8 +81,8 @@ Ext.define('Omni.view.subclasses.Explorer', {
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Subclass',
-      subtitle:  'Lowest level of the Product Hierarchy'
+      title: 'Subclass',
+      subtitle: 'Lowest level of the Product Hierarchy'
     });
     // TITLES (End)
 

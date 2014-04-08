@@ -1,11 +1,11 @@
 Ext.define('Omni.view.adjustment_reasons.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-adjustment_reasons-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-adjustment_reasons-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.adjustment_reasons.Explorer', {
 
       store: Ext.create('Omni.store.AdjustmentReason'),
 
-      contextMenuConfig:{
-        xtype:'omni-adjustment_reasons-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-adjustment_reasons-Form',
+      newForms: [{
+        xtype: 'omni-adjustment_reasons-Form',
         windowConfig: {}
       }],
 
@@ -34,28 +34,43 @@ Ext.define('Omni.view.adjustment_reasons.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      displayLabel:                          Omni.i18n.model.AdjustmentReason.display,
-      descriptionLabel:                      Omni.i18n.model.AdjustmentReason.description,
-      short_nameLabel:                       Omni.i18n.model.AdjustmentReason.short_name,
-      ruleset_displayLabel:                  Omni.i18n.model.AdjustmentReason.ruleset_display
+      displayLabel: Omni.i18n.model.AdjustmentReason.display,
+      descriptionLabel: Omni.i18n.model.AdjustmentReason.description,
+      short_nameLabel: Omni.i18n.model.AdjustmentReason.short_name,
+      ruleset_displayLabel: Omni.i18n.model.AdjustmentReason.ruleset_display
     });
     // LABELS (End)
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: false  },
-        { header: this.descriptionLabel,                                 dataIndex: 'description',                        flex: 1,   sortable: false  },
-        { header: this.short_nameLabel,                                  dataIndex: 'short_name',                         flex: 1,   sortable: false  },
-        { header: this.ruleset_displayLabel,                             dataIndex: 'ruleset_display',                    flex: 1,   sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.descriptionLabel,
+        dataIndex: 'description',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.short_nameLabel,
+        dataIndex: 'short_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.ruleset_displayLabel,
+        dataIndex: 'ruleset_display',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Adjustment Reason',
-      subtitle:  'Inventory adjustment reason codes'
+      title: 'Adjustment Reason',
+      subtitle: 'Inventory adjustment reason codes'
     });
     // TITLES (End)
 

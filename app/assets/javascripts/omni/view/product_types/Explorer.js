@@ -1,11 +1,11 @@
 Ext.define('Omni.view.product_types.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-product_types-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-product_types-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.product_types.Explorer', {
 
       store: Ext.create('Omni.store.ProductType'),
 
-      contextMenuConfig:{
-        xtype:'omni-product_types-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-product_types-Form',
+      newForms: [{
+        xtype: 'omni-product_types-Form',
         windowConfig: {}
       }],
 
@@ -45,21 +45,44 @@ Ext.define('Omni.view.product_types.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.is_fabricLabel, dataIndex: 'is_fabric',  flex: 1,  sortable: false  },
-        { header: this.is_trimLabel, dataIndex: 'is_trim',  flex: 1,  sortable: false  },
-        { header: this.is_convertedLabel, dataIndex: 'is_converted',  flex: 1,  sortable: false  },
-        { header: this.is_laborLabel, dataIndex: 'is_labor',  flex: 1,  sortable: false  },
-        { header: this.is_shippingLabel, dataIndex: 'is_shipping',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_fabricLabel,
+        dataIndex: 'is_fabric',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_trimLabel,
+        dataIndex: 'is_trim',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_convertedLabel,
+        dataIndex: 'is_converted',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_laborLabel,
+        dataIndex: 'is_labor',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_shippingLabel,
+        dataIndex: 'is_shipping',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Product Type',
-      subtitle:  'Different types of products, such as fabric, trim, accessory'
+      title: 'Product Type',
+      subtitle: 'Different types of products, such as fabric, trim, accessory'
     });
     // TITLES (End)
 

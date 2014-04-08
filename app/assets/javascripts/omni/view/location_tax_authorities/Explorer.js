@@ -1,11 +1,11 @@
 Ext.define('Omni.view.location_tax_authorities.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-location_tax_authorities-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-location_tax_authorities-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.location_tax_authorities.Explorer', {
 
       store: Ext.create('Omni.store.LocationTaxAuthority'),
 
-      contextMenuConfig:{
-        xtype:'omni-location_tax_authorities-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-location_tax_authorities-Form',
+      newForms: [{
+        xtype: 'omni-location_tax_authorities-Form',
         windowConfig: {}
       }],
 
@@ -41,17 +41,24 @@ Ext.define('Omni.view.location_tax_authorities.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  },
-        { header: this.tax_authority_displayLabel, dataIndex: 'tax_authority_display',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.location_displayLabel,
+        dataIndex: 'location_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.tax_authority_displayLabel,
+        dataIndex: 'tax_authority_display',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Location Tax Authority',
-      subtitle:  'Government agencies that collect sales tax from a store'
+      title: 'Location Tax Authority',
+      subtitle: 'Government agencies that collect sales tax from a store'
     });
     // TITLES (End)
 

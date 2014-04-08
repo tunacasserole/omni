@@ -1,11 +1,11 @@
 Ext.define('Omni.view.tax_authorities.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-tax_authorities-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-tax_authorities-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.tax_authorities.Explorer', {
 
       store: Ext.create('Omni.store.TaxAuthority'),
 
-      contextMenuConfig:{
-        xtype:'omni-tax_authorities-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-tax_authorities-Form',
+      newForms: [{
+        xtype: 'omni-tax_authorities-Form',
         windowConfig: {}
       }],
 
@@ -45,21 +45,44 @@ Ext.define('Omni.view.tax_authorities.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
-        { header: this.tax_authority_typeLabel, dataIndex: 'tax_authority_type',  flex: 1,  sortable: false  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  },
-        { header: this.state_codeLabel, dataIndex: 'state_code',  flex: 1,  sortable: false  },
-        { header: this.filing_frequencyLabel, dataIndex: 'filing_frequency',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.descriptionLabel,
+        dataIndex: 'description',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.tax_authority_typeLabel,
+        dataIndex: 'tax_authority_type',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.short_nameLabel,
+        dataIndex: 'short_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.state_codeLabel,
+        dataIndex: 'state_code',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.filing_frequencyLabel,
+        dataIndex: 'filing_frequency',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Tax Authority',
-      subtitle:  'Entities for which Parker must collect and remit Sales Tax'
+      title: 'Tax Authority',
+      subtitle: 'Entities for which Parker must collect and remit Sales Tax'
     });
     // TITLES (End)
 

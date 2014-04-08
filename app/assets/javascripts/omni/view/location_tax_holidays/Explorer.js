@@ -1,11 +1,11 @@
 Ext.define('Omni.view.location_tax_holidays.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-location_tax_holidays-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-location_tax_holidays-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.location_tax_holidays.Explorer', {
 
       store: Ext.create('Omni.store.LocationTaxHoliday'),
 
-      contextMenuConfig:{
-        xtype:'omni-location_tax_holidays-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-location_tax_holidays-Form',
+      newForms: [{
+        xtype: 'omni-location_tax_holidays-Form',
         windowConfig: {}
       }],
 
@@ -44,20 +44,41 @@ Ext.define('Omni.view.location_tax_holidays.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  },
-        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.end_dateLabel, dataIndex: 'end_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.is_tax_holidayLabel, dataIndex: 'is_tax_holiday',  flex: 1,  sortable: false  },
-        { header: this.price_cutoffLabel, dataIndex: 'price_cutoff',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.location_displayLabel,
+        dataIndex: 'location_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.effective_dateLabel,
+        dataIndex: 'effective_date',
+        flex: 1,
+        sortable: false,
+        renderer: Ext.util.Format.dateRenderer('m/d/y')
+      }, {
+        header: this.end_dateLabel,
+        dataIndex: 'end_date',
+        flex: 1,
+        sortable: false,
+        renderer: Ext.util.Format.dateRenderer('m/d/y')
+      }, {
+        header: this.is_tax_holidayLabel,
+        dataIndex: 'is_tax_holiday',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.price_cutoffLabel,
+        dataIndex: 'price_cutoff',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Location Tax Holiday',
-      subtitle:  'Set up tax-free days when no sales tax is charged'
+      title: 'Location Tax Holiday',
+      subtitle: 'Set up tax-free days when no sales tax is charged'
     });
     // TITLES (End)
 

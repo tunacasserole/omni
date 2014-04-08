@@ -1,11 +1,11 @@
 Ext.define('Omni.view.tenders.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-tenders-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-tenders-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.tenders.Explorer', {
 
       store: Ext.create('Omni.store.Tender'),
 
-      contextMenuConfig:{
-        xtype:'omni-tenders-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-tenders-Form',
+      newForms: [{
+        xtype: 'omni-tenders-Form',
         windowConfig: {}
       }],
 
@@ -46,22 +46,49 @@ Ext.define('Omni.view.tenders.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  },
-        { header: this.tender_typeLabel, dataIndex: 'tender_type',  flex: 1,  sortable: false  },
-        { header: this.is_update_tillLabel, dataIndex: 'is_update_till',  flex: 1,  sortable: false  },
-        { header: this.is_credit_cardLabel, dataIndex: 'is_credit_card',  flex: 1,  sortable: false  },
-        { header: this.display_orderLabel, dataIndex: 'display_order',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.descriptionLabel,
+        dataIndex: 'description',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.short_nameLabel,
+        dataIndex: 'short_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.tender_typeLabel,
+        dataIndex: 'tender_type',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_update_tillLabel,
+        dataIndex: 'is_update_till',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_credit_cardLabel,
+        dataIndex: 'is_credit_card',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.display_orderLabel,
+        dataIndex: 'display_order',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Tender',
-      subtitle:  'A form of payment such as cash, check, etc'
+      title: 'Tender',
+      subtitle: 'A form of payment such as cash, check, etc'
     });
     // TITLES (End)
 

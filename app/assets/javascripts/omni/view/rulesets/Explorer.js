@@ -1,11 +1,11 @@
 Ext.define('Omni.view.rulesets.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-rulesets-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-rulesets-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.rulesets.Explorer', {
 
       store: Ext.create('Omni.store.Ruleset'),
 
-      contextMenuConfig:{
-        xtype:'omni-rulesets-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-rulesets-Form',
+      newForms: [{
+        xtype: 'omni-rulesets-Form',
         windowConfig: {}
       }],
 
@@ -43,19 +43,34 @@ Ext.define('Omni.view.rulesets.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.ruleset_codeLabel, dataIndex: 'ruleset_code',  flex: 1,  sortable: false  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
-        { header: this.is_activeLabel, dataIndex: 'is_active',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.ruleset_codeLabel,
+        dataIndex: 'ruleset_code',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.descriptionLabel,
+        dataIndex: 'description',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_activeLabel,
+        dataIndex: 'is_active',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Ruleset',
-      subtitle:  'Transaction updating rules'
+      title: 'Ruleset',
+      subtitle: 'Transaction updating rules'
     });
     // TITLES (End)
 

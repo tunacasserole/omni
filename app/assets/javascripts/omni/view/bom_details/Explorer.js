@@ -1,11 +1,11 @@
 Ext.define('Omni.view.bom_details.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-bom_details-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-bom_details-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.bom_details.Explorer', {
 
       store: Ext.create('Omni.store.BomDetail'),
 
-      contextMenuConfig:{
-        xtype:'omni-bom_details-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-bom_details-Form',
+      newForms: [{
+        xtype: 'omni-bom_details-Form',
         windowConfig: {}
       }],
 
@@ -45,21 +45,45 @@ Ext.define('Omni.view.bom_details.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.bom_displayLabel, dataIndex: 'bom_display',  flex: 1,  sortable: false  },
-        { header: this.color_displayLabel, dataIndex: 'color_display',  flex: 1,  sortable: false  },
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: false  },
-        { header: this.quantityLabel, dataIndex: 'quantity',  flex: 1,  sortable: false  },
-        { header: this.waste_percentLabel, dataIndex: 'waste_percent',  flex: 1,  sortable: false  },
-        { header: this.uom_codeLabel, dataIndex: 'uom_code',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('UOM_CODE') }
-      ]
+      columns: [{
+        header: this.bom_displayLabel,
+        dataIndex: 'bom_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.color_displayLabel,
+        dataIndex: 'color_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.sku_displayLabel,
+        dataIndex: 'sku_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.quantityLabel,
+        dataIndex: 'quantity',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.waste_percentLabel,
+        dataIndex: 'waste_percent',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.uom_codeLabel,
+        dataIndex: 'uom_code',
+        flex: 1,
+        sortable: false,
+        renderer: Buildit.util.Format.lookupRenderer('UOM_CODE')
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Bom Detail',
-      subtitle:  'Products and quantities needed to make each style/SKU'
+      title: 'Bom Detail',
+      subtitle: 'Products and quantities needed to make each style/SKU'
     });
     // TITLES (End)
 

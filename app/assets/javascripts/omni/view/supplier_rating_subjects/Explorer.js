@@ -1,11 +1,11 @@
 Ext.define('Omni.view.supplier_rating_subjects.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-supplier_rating_subjects-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-supplier_rating_subjects-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.supplier_rating_subjects.Explorer', {
 
       store: Ext.create('Omni.store.SupplierRatingSubject'),
 
-      contextMenuConfig:{
-        xtype:'omni-supplier_rating_subjects-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-supplier_rating_subjects-Form',
+      newForms: [{
+        xtype: 'omni-supplier_rating_subjects-Form',
         windowConfig: {}
       }],
 
@@ -43,19 +43,35 @@ Ext.define('Omni.view.supplier_rating_subjects.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
-        { header: this.supplier_rating_subject_typeLabel, dataIndex: 'supplier_rating_subject_type',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('SUPPLIER_RATING_SUBJECT_TYPE') },
-        { header: this.weighting_percentLabel, dataIndex: 'weighting_percent',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.descriptionLabel,
+        dataIndex: 'description',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.supplier_rating_subject_typeLabel,
+        dataIndex: 'supplier_rating_subject_type',
+        flex: 1,
+        sortable: false,
+        renderer: Buildit.util.Format.lookupRenderer('SUPPLIER_RATING_SUBJECT_TYPE')
+      }, {
+        header: this.weighting_percentLabel,
+        dataIndex: 'weighting_percent',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Supplier Rating Subject',
-      subtitle:  'Areas for rating suppliers, such as value, reliability'
+      title: 'Supplier Rating Subject',
+      subtitle: 'Areas for rating suppliers, such as value, reliability'
     });
     // TITLES (End)
 

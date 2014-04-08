@@ -1,11 +1,11 @@
 Ext.define('Omni.view.price_changes.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-price_changes-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-price_changes-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.price_changes.Explorer', {
 
       store: Ext.create('Omni.store.PriceChange'),
 
-      contextMenuConfig:{
-        xtype:'omni-price_changes-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-projects-Form',
+      newForms: [{
+        xtype: 'omni-projects-Form',
         windowConfig: {}
       }],
 
@@ -40,16 +40,19 @@ Ext.define('Omni.view.price_changes.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Price Change',
-      subtitle:  ''
+      title: 'Price Change',
+      subtitle: ''
     });
     // TITLES (End)
 

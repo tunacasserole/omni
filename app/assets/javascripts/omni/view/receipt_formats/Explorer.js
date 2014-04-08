@@ -1,11 +1,11 @@
 Ext.define('Omni.view.receipt_formats.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-receipt_formats-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-receipt_formats-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.receipt_formats.Explorer', {
 
       store: Ext.create('Omni.store.ReceiptFormat'),
 
-      contextMenuConfig:{
-        xtype:'omni-receipt_formats-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-receipt_formats-Form',
+      newForms: [{
+        xtype: 'omni-receipt_formats-Form',
         windowConfig: {}
       }],
 
@@ -44,20 +44,39 @@ Ext.define('Omni.view.receipt_formats.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
-        { header: this.paper_widthLabel, dataIndex: 'paper_width',  flex: 1,  sortable: false  },
-        { header: this.icon_urlLabel, dataIndex: 'icon_url',  flex: 1,  sortable: false  },
-        { header: this.icon_widthLabel, dataIndex: 'icon_width',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.descriptionLabel,
+        dataIndex: 'description',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.paper_widthLabel,
+        dataIndex: 'paper_width',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.icon_urlLabel,
+        dataIndex: 'icon_url',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.icon_widthLabel,
+        dataIndex: 'icon_width',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Receipt Format',
-      subtitle:  'Format of receipt'
+      title: 'Receipt Format',
+      subtitle: 'Format of receipt'
     });
     // TITLES (End)
 

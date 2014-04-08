@@ -1,11 +1,11 @@
 Ext.define('Omni.view.gl_accounts.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-gl_accounts-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-gl_accounts-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.gl_accounts.Explorer', {
 
       store: Ext.create('Omni.store.GlAccount'),
 
-      contextMenuConfig:{
-        xtype:'omni-gl_accounts-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-gl_accounts-Form',
+      newForms: [{
+        xtype: 'omni-gl_accounts-Form',
         windowConfig: {}
       }],
 
@@ -44,20 +44,39 @@ Ext.define('Omni.view.gl_accounts.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.gl_main_accountLabel, dataIndex: 'gl_main_account',  flex: 1,  sortable: false  },
-        { header: this.gl_sub_accountLabel, dataIndex: 'gl_sub_account',  flex: 1,  sortable: false  },
-        { header: this.is_location_fillLabel, dataIndex: 'is_location_fill',  flex: 1,  sortable: false  },
-        { header: this.gl_account_typeLabel, dataIndex: 'gl_account_type',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.gl_main_accountLabel,
+        dataIndex: 'gl_main_account',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.gl_sub_accountLabel,
+        dataIndex: 'gl_sub_account',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_location_fillLabel,
+        dataIndex: 'is_location_fill',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.gl_account_typeLabel,
+        dataIndex: 'gl_account_type',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Gl Account',
-      subtitle:  'General Ledger chart of accounts'
+      title: 'Gl Account',
+      subtitle: 'General Ledger chart of accounts'
     });
     // TITLES (End)
 

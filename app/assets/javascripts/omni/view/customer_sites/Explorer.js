@@ -1,11 +1,11 @@
 Ext.define('Omni.view.customer_accounts.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-customer_accounts-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-customer_accounts-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.customer_accounts.Explorer', {
 
       store: Ext.create('Omni.store.CustomerAccount'),
 
-      contextMenuConfig:{
-        xtype:'omni-customer_accounts-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-customer_accounts-Form',
+      newForms: [{
+        xtype: 'omni-customer_accounts-Form',
         windowConfig: {}
       }],
 
@@ -43,19 +43,34 @@ Ext.define('Omni.view.customer_accounts.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.commentLabel, dataIndex: 'comment',  flex: 1,  sortable: false  },
-        { header: this.is_contactLabel, dataIndex: 'is_contact',  flex: 1,  sortable: false  },
-        { header: this.is_teacherLabel, dataIndex: 'is_teacher',  flex: 1,  sortable: false  },
-        { header: this.is_administratorLabel, dataIndex: 'is_administrator',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.commentLabel,
+        dataIndex: 'comment',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_contactLabel,
+        dataIndex: 'is_contact',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_teacherLabel,
+        dataIndex: 'is_teacher',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_administratorLabel,
+        dataIndex: 'is_administrator',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Customer Account',
-      subtitle:  'Ties a customer to the schools their children attend'
+      title: 'Customer Account',
+      subtitle: 'Ties a customer to the schools their children attend'
     });
     // TITLES (End)
 

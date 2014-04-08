@@ -1,11 +1,11 @@
 Ext.define('Omni.view.labels.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-labels-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-labels-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.labels.Explorer', {
 
       store: Ext.create('Omni.store.Label'),
 
-      contextMenuConfig:{
-        xtype:'omni-labels-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-labels-Form',
+      newForms: [{
+        xtype: 'omni-labels-Form',
         windowConfig: {}
       }],
 
@@ -43,19 +43,35 @@ Ext.define('Omni.view.labels.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
-        { header: this.label_typeLabel, dataIndex: 'label_type',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('LABEL_TYPE') },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.descriptionLabel,
+        dataIndex: 'description',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.label_typeLabel,
+        dataIndex: 'label_type',
+        flex: 1,
+        sortable: false,
+        renderer: Buildit.util.Format.lookupRenderer('LABEL_TYPE')
+      }, {
+        header: this.short_nameLabel,
+        dataIndex: 'short_name',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Label',
-      subtitle:  'All labels, eg, price tags, care labels, carton labels'
+      title: 'Label',
+      subtitle: 'All labels, eg, price tags, care labels, carton labels'
     });
     // TITLES (End)
 

@@ -1,11 +1,11 @@
 Ext.define('Omni.view.transfer_reasons.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-transfer_reasons-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-transfer_reasons-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.transfer_reasons.Explorer', {
 
       store: Ext.create('Omni.store.TransferReason'),
 
-      contextMenuConfig:{
-        xtype:'omni-transfer_reasons-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-transfer_reasons-Form',
+      newForms: [{
+        xtype: 'omni-transfer_reasons-Form',
         windowConfig: {}
       }],
 
@@ -42,18 +42,29 @@ Ext.define('Omni.view.transfer_reasons.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
-        { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.descriptionLabel,
+        dataIndex: 'description',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.short_nameLabel,
+        dataIndex: 'short_name',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Transfer Reason',
-      subtitle:  'Transfer reason codes'
+      title: 'Transfer Reason',
+      subtitle: 'Transfer reason codes'
     });
     // TITLES (End)
 

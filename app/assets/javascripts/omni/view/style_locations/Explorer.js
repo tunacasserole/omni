@@ -1,9 +1,9 @@
 Ext.define('Omni.view.style_locations.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-style_locations-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-style_locations-Explorer',
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -15,12 +15,12 @@ Ext.define('Omni.view.style_locations.Explorer', {
 
       store: Ext.create('Omni.store.StyleLocation'),
 
-      contextMenuConfig:{
-        xtype:'omni-style_locations-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-style_locations-Form',
+      newForms: [{
+        xtype: 'omni-style_locations-Form',
         windowConfig: {}
       }],
 
@@ -32,13 +32,13 @@ Ext.define('Omni.view.style_locations.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      style_displayLabel:    Omni.i18n.model.StyleLocation.style_display,
-      stateLabel:            Omni.i18n.model.StyleLocation.state,
+      style_displayLabel: Omni.i18n.model.StyleLocation.style_display,
+      stateLabel: Omni.i18n.model.StyleLocation.state,
       location_displayLabel: Omni.i18n.model.StyleLocation.location_display,
-      is_authorizedLabel:    Omni.i18n.model.StyleLocation.is_authorized,
-      is_taxableLabel:       Omni.i18n.model.StyleLocation.is_taxable,
+      is_authorizedLabel: Omni.i18n.model.StyleLocation.is_authorized,
+      is_taxableLabel: Omni.i18n.model.StyleLocation.is_taxable,
       is_special_orderLabel: Omni.i18n.model.StyleLocation.is_special_order,
-      is_discontinuedLabel:  Omni.i18n.model.StyleLocation.is_discontinued
+      is_discontinuedLabel: Omni.i18n.model.StyleLocation.is_discontinued
     });
     // LABELS (End)
 
@@ -46,20 +46,45 @@ Ext.define('Omni.view.style_locations.Explorer', {
     Ext.apply(this, {
       columns: [
         // { header: this.style_displayLabel,    dataIndex: 'style_display',    flex: 1,  sortable: false  },
-        { header: this.location_displayLabel, dataIndex: 'location_display', flex: 1,  sortable: false  },
-        { header: this.stateLabel,            dataIndex: 'state',            flex: 1,  sortable: false  },
-        { header: this.is_authorizedLabel,    dataIndex: 'is_authorized',    flex: 1,  sortable: false  },
-        { header: this.is_taxableLabel,       dataIndex: 'is_taxable',       flex: 1,  sortable: false  },
-        { header: this.is_special_orderLabel, dataIndex: 'is_special_order', flex: 1,  sortable: false  },
-        { header: this.is_discontinuedLabel,  dataIndex: 'is_discontinued',  flex: 1,  sortable: false  }
+        {
+          header: this.location_displayLabel,
+          dataIndex: 'location_display',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.stateLabel,
+          dataIndex: 'state',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.is_authorizedLabel,
+          dataIndex: 'is_authorized',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.is_taxableLabel,
+          dataIndex: 'is_taxable',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.is_special_orderLabel,
+          dataIndex: 'is_special_order',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.is_discontinuedLabel,
+          dataIndex: 'is_discontinued',
+          flex: 1,
+          sortable: false
+        }
       ]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Style Location',
-      subtitle:  'The stores, warehouses and web accounts that stock or sell a style'
+      title: 'Style Location',
+      subtitle: 'The stores, warehouses and web accounts that stock or sell a style'
     });
     // TITLES (End)
 

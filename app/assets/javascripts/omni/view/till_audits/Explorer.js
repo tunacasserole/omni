@@ -1,11 +1,11 @@
 Ext.define('Omni.view.till_audits.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-till_audits-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-till_audits-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.till_audits.Explorer', {
 
       store: Ext.create('Omni.store.TillAudit'),
 
-      contextMenuConfig:{
-        xtype:'omni-till_audits-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-till_audits-Form',
+      newForms: [{
+        xtype: 'omni-till_audits-Form',
         windowConfig: {}
       }],
 
@@ -43,19 +43,36 @@ Ext.define('Omni.view.till_audits.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.till_displayLabel, dataIndex: 'till_display',  flex: 1,  sortable: false  },
-        { header: this.audit_dateLabel, dataIndex: 'audit_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.tender_displayLabel, dataIndex: 'tender_display',  flex: 1,  sortable: false  },
-        { header: this.gl_interface_dateLabel, dataIndex: 'gl_interface_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') }
-      ]
+      columns: [{
+        header: this.till_displayLabel,
+        dataIndex: 'till_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.audit_dateLabel,
+        dataIndex: 'audit_date',
+        flex: 1,
+        sortable: false,
+        renderer: Ext.util.Format.dateRenderer('m/d/y')
+      }, {
+        header: this.tender_displayLabel,
+        dataIndex: 'tender_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.gl_interface_dateLabel,
+        dataIndex: 'gl_interface_date',
+        flex: 1,
+        sortable: false,
+        renderer: Ext.util.Format.dateRenderer('m/d/y')
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Till Audit',
-      subtitle:  'Audits a till by comparing user counts with system counts'
+      title: 'Till Audit',
+      subtitle: 'Audits a till by comparing user counts with system counts'
     });
     // TITLES (End)
 

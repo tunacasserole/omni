@@ -1,11 +1,11 @@
 Ext.define('Omni.view.terminals.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-terminals-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-terminals-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.terminals.Explorer', {
 
       store: Ext.create('Omni.store.Terminal'),
 
-      contextMenuConfig:{
-        xtype:'omni-terminals-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-terminals-Form',
+      newForms: [{
+        xtype: 'omni-terminals-Form',
         windowConfig: {}
       }],
 
@@ -45,21 +45,45 @@ Ext.define('Omni.view.terminals.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  },
-        { header: this.terminal_nbrLabel, dataIndex: 'terminal_nbr',  flex: 1,  sortable: false  },
-        { header: this.mac_addressLabel, dataIndex: 'mac_address',  flex: 1,  sortable: false  },
-        { header: this.local_server_ipLabel, dataIndex: 'local_server_ip',  flex: 1,  sortable: false  },
-        { header: this.hq_server_urlLabel, dataIndex: 'hq_server_url',  flex: 1,  sortable: false  },
-        { header: this.override_sale_dateLabel, dataIndex: 'override_sale_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') }
-      ]
+      columns: [{
+        header: this.location_displayLabel,
+        dataIndex: 'location_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.terminal_nbrLabel,
+        dataIndex: 'terminal_nbr',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.mac_addressLabel,
+        dataIndex: 'mac_address',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.local_server_ipLabel,
+        dataIndex: 'local_server_ip',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.hq_server_urlLabel,
+        dataIndex: 'hq_server_url',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.override_sale_dateLabel,
+        dataIndex: 'override_sale_date',
+        flex: 1,
+        sortable: false,
+        renderer: Ext.util.Format.dateRenderer('m/d/y')
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Terminal',
-      subtitle:  'A POS register'
+      title: 'Terminal',
+      subtitle: 'A POS register'
     });
     // TITLES (End)
 

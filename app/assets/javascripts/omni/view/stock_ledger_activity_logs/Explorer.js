@@ -1,11 +1,11 @@
 Ext.define('Omni.view.stock_ledger_activity_logs.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-stock_ledger_activity_logs-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-stock_ledger_activity_logs-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.stock_ledger_activity_logs.Explorer', {
 
       store: Ext.create('Omni.store.StockLedgerActivityLog'),
 
-      contextMenuConfig:{
-        xtype:'omni-stock_ledger_activity_logs-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-stock_ledger_activity_logs-Form',
+      newForms: [{
+        xtype: 'omni-stock_ledger_activity_logs-Form',
         windowConfig: {}
       }],
 
@@ -44,20 +44,40 @@ Ext.define('Omni.view.stock_ledger_activity_logs.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.stock_ledger_activity_log_nbrLabel, dataIndex: 'stock_ledger_activity_log_nbr',  flex: 1,  sortable: false  },
-        { header: this.model_nameLabel, dataIndex: 'model_name',  flex: 1,  sortable: false  },
-        { header: this.attribute_nameLabel, dataIndex: 'attribute_name',  flex: 1,  sortable: false  },
-        { header: this.row_displayLabel, dataIndex: 'row_display',  flex: 1,  sortable: false  },
-        { header: this.rule_actionLabel, dataIndex: 'rule_action',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('RULE_ACTION') }
-      ]
+      columns: [{
+        header: this.stock_ledger_activity_log_nbrLabel,
+        dataIndex: 'stock_ledger_activity_log_nbr',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.model_nameLabel,
+        dataIndex: 'model_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.attribute_nameLabel,
+        dataIndex: 'attribute_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.row_displayLabel,
+        dataIndex: 'row_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.rule_actionLabel,
+        dataIndex: 'rule_action',
+        flex: 1,
+        sortable: false,
+        renderer: Buildit.util.Format.lookupRenderer('RULE_ACTION')
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Stock Ledger Activity Log',
-      subtitle:  'Audit trail of stock ledger updates'
+      title: 'Stock Ledger Activity Log',
+      subtitle: 'Audit trail of stock ledger updates'
     });
     // TITLES (End)
 

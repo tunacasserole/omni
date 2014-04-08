@@ -1,11 +1,11 @@
 Ext.define('Omni.view.till_details.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-till_details-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-till_details-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.till_details.Explorer', {
 
       store: Ext.create('Omni.store.TillDetail'),
 
-      contextMenuConfig:{
-        xtype:'omni-till_details-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-till_details-Form',
+      newForms: [{
+        xtype: 'omni-till_details-Form',
         windowConfig: {}
       }],
 
@@ -41,17 +41,24 @@ Ext.define('Omni.view.till_details.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.till_displayLabel, dataIndex: 'till_display',  flex: 1,  sortable: false  },
-        { header: this.tender_displayLabel, dataIndex: 'tender_display',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.till_displayLabel,
+        dataIndex: 'till_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.tender_displayLabel,
+        dataIndex: 'tender_display',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Till Detail',
-      subtitle:  'Current balance of each tender type in a till'
+      title: 'Till Detail',
+      subtitle: 'Current balance of each tender type in a till'
     });
     // TITLES (End)
 

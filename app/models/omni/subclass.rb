@@ -1,4 +1,4 @@
-class Omni::Subclass < ActiveRecord::Base
+  class Omni::Subclass < ActiveRecord::Base
   # METADATA (Start) ====================================================================
   self.table_name   = :subclasses
   self.primary_key  = :subclass_id

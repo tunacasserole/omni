@@ -66,39 +66,39 @@ Ext.define('Omni.view.styles.Explorer', {
                     header: this.displayLabel,
                     dataIndex: 'display',
                     flex: 2,
-                    sortable: false
+                    sortable: true
                 },
-                // { header: this.is_enabledLabel,                                  dataIndex: 'is_enabled',                         flex: 1,   sortable: false  },
+                // { header: this.is_enabledLabel,                                  dataIndex: 'is_enabled',                         flex: 1,   sortable: true  },
                 {
                     header: this.subclass_displayLabel,
                     dataIndex: 'subclass_display',
                     flex: 1,
-                    sortable: false
+                    sortable: true
                 },
-                // { header: this.product_displayLabel,                             dataIndex: 'product_display',                    flex: 1,   sortable: false  },
+                // { header: this.product_displayLabel,                             dataIndex: 'product_display',                    flex: 1,   sortable: true  },
                 {
                     header: this.initial_retail_priceLabel,
                     dataIndex: 'initial_retail_price',
                     flex: 1,
-                    sortable: false
+                    sortable: true
                 },
-                // { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: false  },
-                { header: this.account_displayLabel,                                dataIndex: 'account_display',                       flex: 1,   sortable: false  },
+                // { header: this.supplier_displayLabel,                            dataIndex: 'supplier_display',                   flex: 1,   sortable: true  },
+                { header: this.account_displayLabel,                                dataIndex: 'account_display',                       flex: 1,   sortable: true  },
                 // {
                 //     header: this.conversion_typeLabel,
                 //     dataIndex: 'conversion_type',
                 //     flex: 1,
-                //     sortable: false
+                //     sortable: true
                 // }, {
                 //     header: this.style_nbrLabel,
                 //     dataIndex: 'style_nbr',
                 //     flex: 1,
-                //     sortable: false
+                //     sortable: true
                 {
                     header: this.stateLabel,
                     dataIndex: 'state',
                     flex: 1,
-                    sortable: false
+                    sortable: true
                 }
             ]
         });

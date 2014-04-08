@@ -1,10 +1,10 @@
 Ext.define('Omni.view.style_color_sizes.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-style_color_sizes-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-style_color_sizes-Explorer',
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -16,12 +16,12 @@ Ext.define('Omni.view.style_color_sizes.Explorer', {
 
       store: Ext.create('Omni.store.StyleColorSize'),
 
-      contextMenuConfig:{
-        xtype:'omni-style_color_sizes-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-style_color_sizes-Form',
+      newForms: [{
+        xtype: 'omni-style_color_sizes-Form',
         windowConfig: {}
       }],
 
@@ -44,21 +44,44 @@ Ext.define('Omni.view.style_color_sizes.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.style_color_displayLabel, dataIndex: 'style_color_display',  flex: 1,  sortable: false  },
-        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: false  },
-        { header: this.size_displayLabel, dataIndex: 'size_display',  flex: 1,  sortable: false  },
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 1,  sortable: false  },
-        { header: this.sku_nameLabel, dataIndex: 'sku_name',  flex: 1,  sortable: false  },
-        { header: this.pos_nameLabel, dataIndex: 'pos_name',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.style_color_displayLabel,
+        dataIndex: 'style_color_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.stateLabel,
+        dataIndex: 'state',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.size_displayLabel,
+        dataIndex: 'size_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.sku_displayLabel,
+        dataIndex: 'sku_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.sku_nameLabel,
+        dataIndex: 'sku_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.pos_nameLabel,
+        dataIndex: 'pos_name',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Style Color Size',
-      subtitle:  'All of the color, size, variance combinations for a style'
+      title: 'Style Color Size',
+      subtitle: 'All of the color, size, variance combinations for a style'
     });
     // TITLES (End)
 

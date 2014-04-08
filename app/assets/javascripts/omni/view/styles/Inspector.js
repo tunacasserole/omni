@@ -35,21 +35,24 @@ Ext.define('Omni.view.styles.Inspector', {
              {
                style_id:   {equal_to: me.record.get('style_id')}
              }
-          }
+          },
+          showBadge: true
         }
         ,{title: 'Suppliers', xtype: 'omni-style_suppliers-Explorer', module: 'contacts',
            defaultSearch: { with:
              {
                style_id:   {equal_to: me.record.get('style_id')}
              }
-          }
+          },
+          showBadge: true
         }
         ,{title: 'Locations', xtype: 'omni-style_locations-Explorer', module: 'projects',
            defaultSearch: { with:
              {
                style_id:   {equal_to: me.record.get('style_id')}
              }
-          }
+          },
+          showBadge: true
         }
         ,{title: 'SKUs', xtype: 'omni-skus-Explorer', module: 'contracts',
            defaultSearch: { with:

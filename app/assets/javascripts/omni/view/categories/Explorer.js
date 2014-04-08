@@ -1,11 +1,11 @@
 Ext.define('Omni.view.categories.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-categories-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-categories-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.categories.Explorer', {
 
       store: Ext.create('Omni.store.Category'),
 
-      contextMenuConfig:{
-        xtype:'omni-categories-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-categories-Form',
+      newForms: [{
+        xtype: 'omni-categories-Form',
         windowConfig: {}
       }],
 
@@ -34,26 +34,38 @@ Ext.define('Omni.view.categories.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      displayLabel:                          Omni.i18n.model.Category.display,
-      category_codeLabel:                    Omni.i18n.model.Category.category_code,
-      category_typeLabel:                    Omni.i18n.model.Category.category_type
+      displayLabel: Omni.i18n.model.Category.display,
+      category_codeLabel: Omni.i18n.model.Category.category_code,
+      category_typeLabel: Omni.i18n.model.Category.category_type
     });
     // LABELS (End)
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: false  },
-        { header: this.category_codeLabel,                               dataIndex: 'category_code',                      flex: 1,   sortable: false  },
-        { header: this.category_typeLabel,                               dataIndex: 'category_type',                      flex: 1,   sortable: false, renderer: Buildit.util.Format.lookupRenderer('CATEGORY_TYPE') }
-      ]
+      columns: [{
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.category_codeLabel,
+        dataIndex: 'category_code',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.category_typeLabel,
+        dataIndex: 'category_type',
+        flex: 1,
+        sortable: false,
+        renderer: Buildit.util.Format.lookupRenderer('CATEGORY_TYPE')
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Category',
-      subtitle:  'First level of the Web shopping Product Hierarchy'
+      title: 'Category',
+      subtitle: 'First level of the Web shopping Product Hierarchy'
     });
     // TITLES (End)
 

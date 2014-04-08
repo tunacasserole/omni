@@ -1,11 +1,11 @@
 Ext.define('Omni.view.districts.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-districts-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-districts-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.districts.Explorer', {
 
       store: Ext.create('Omni.store.District'),
 
-      contextMenuConfig:{
-        xtype:'omni-districts-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-districts-Form',
+      newForms: [{
+        xtype: 'omni-districts-Form',
         windowConfig: {}
       }],
 
@@ -34,20 +34,36 @@ Ext.define('Omni.view.districts.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      displayLabel:                          Omni.i18n.model.District.display,
-      district_nbrLabel:                     Omni.i18n.model.District.district_nbr,
-      region_displayLabel:                   Omni.i18n.model.District.region_display,
-      user_displayLabel:                     Omni.i18n.model.District.user_display
+      displayLabel: Omni.i18n.model.District.display,
+      district_nbrLabel: Omni.i18n.model.District.district_nbr,
+      region_displayLabel: Omni.i18n.model.District.region_display,
+      user_displayLabel: Omni.i18n.model.District.user_display
     });
     // LABELS (End)
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel,                                     dataIndex: 'display',                            flex: 1,   sortable: false  },
-        { header: this.region_displayLabel,                              dataIndex: 'region_display',                     flex: 1,   sortable: false  },
-        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: false  },
-        { header: this.district_nbrLabel,                                dataIndex: 'district_nbr',                       flex: 1,   sortable: false  },
+      columns: [{
+          header: this.displayLabel,
+          dataIndex: 'display',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.region_displayLabel,
+          dataIndex: 'region_display',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.user_displayLabel,
+          dataIndex: 'user_display',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.district_nbrLabel,
+          dataIndex: 'district_nbr',
+          flex: 1,
+          sortable: false
+        },
 
       ]
     });
@@ -55,8 +71,8 @@ Ext.define('Omni.view.districts.Explorer', {
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'District',
-      subtitle:  'Third level of the Location Hierarchy'
+      title: 'District',
+      subtitle: 'Third level of the Location Hierarchy'
     });
     // TITLES (End)
 

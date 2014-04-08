@@ -1,11 +1,11 @@
 Ext.define('Omni.view.shipping_rates.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-shipping_rates-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-shipping_rates-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.shipping_rates.Explorer', {
 
       store: Ext.create('Omni.store.ShippingRate'),
 
-      contextMenuConfig:{
-        xtype:'omni-shipping_rates-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-shipping_rates-Form',
+      newForms: [{
+        xtype: 'omni-shipping_rates-Form',
         windowConfig: {}
       }],
 
@@ -43,19 +43,34 @@ Ext.define('Omni.view.shipping_rates.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.supplier_displayLabel, dataIndex: 'supplier_display',  flex: 1,  sortable: false  },
-        { header: this.shipping_chargeLabel, dataIndex: 'shipping_charge',  flex: 1,  sortable: false  },
-        { header: this.minimum_saleLabel, dataIndex: 'minimum_sale',  flex: 1,  sortable: false  },
-        { header: this.maximum_saleLabel, dataIndex: 'maximum_sale',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.supplier_displayLabel,
+        dataIndex: 'supplier_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.shipping_chargeLabel,
+        dataIndex: 'shipping_charge',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.minimum_saleLabel,
+        dataIndex: 'minimum_sale',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.maximum_saleLabel,
+        dataIndex: 'maximum_sale',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Shipping Rate',
-      subtitle:  'Rates for shipping products to customers'
+      title: 'Shipping Rate',
+      subtitle: 'Rates for shipping products to customers'
     });
     // TITLES (End)
 

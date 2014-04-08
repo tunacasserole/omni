@@ -1,11 +1,11 @@
 Ext.define('Omni.view.size_groups.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-size_groups-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-size_groups-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.size_groups.Explorer', {
 
       store: Ext.create('Omni.store.SizeGroup'),
 
-      contextMenuConfig:{
-        xtype:'omni-size_groups-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-size_groups-Form',
+      newForms: [{
+        xtype: 'omni-size_groups-Form',
         windowConfig: {}
       }],
 
@@ -45,21 +45,42 @@ Ext.define('Omni.view.size_groups.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.displayLabel, dataIndex: 'display',  flex: 1,  sortable: false  },
+      columns: [{
+          header: this.displayLabel,
+          dataIndex: 'display',
+          flex: 1,
+          sortable: false
+        },
         // { header: this.descriptionLabel, dataIndex: 'description',  flex: 1,  sortable: false  },
-        { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: false  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  },
-        { header: this.size_group_nbrLabel, dataIndex: 'size_group_nbr',  flex: 1,  sortable: false  },
-        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: false  },
+        {
+          header: this.concatenated_nameLabel,
+          dataIndex: 'concatenated_name',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.short_nameLabel,
+          dataIndex: 'short_name',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.size_group_nbrLabel,
+          dataIndex: 'size_group_nbr',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.is_enabledLabel,
+          dataIndex: 'is_enabled',
+          flex: 1,
+          sortable: false
+        },
       ]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Size Group',
-      subtitle:  'A group or family of sizes, such as Youth or Junior'
+      title: 'Size Group',
+      subtitle: 'A group or family of sizes, such as Youth or Junior'
     });
     // TITLES (End)
 

@@ -1,11 +1,11 @@
 Ext.define('Omni.view.tills.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-tills-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-tills-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.tills.Explorer', {
 
       store: Ext.create('Omni.store.Till'),
 
-      contextMenuConfig:{
-        xtype:'omni-tills-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-tills-Form',
+      newForms: [{
+        xtype: 'omni-tills-Form',
         windowConfig: {}
       }],
 
@@ -41,17 +41,24 @@ Ext.define('Omni.view.tills.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.till_nbrLabel, dataIndex: 'till_nbr',  flex: 1,  sortable: false  },
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.till_nbrLabel,
+        dataIndex: 'till_nbr',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.location_displayLabel,
+        dataIndex: 'location_display',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Till',
-      subtitle:  'Identifes every cash till (tender media receptacle)'
+      title: 'Till',
+      subtitle: 'Identifes every cash till (tender media receptacle)'
     });
     // TITLES (End)
 

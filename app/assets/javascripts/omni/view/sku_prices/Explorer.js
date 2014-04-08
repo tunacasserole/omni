@@ -1,9 +1,9 @@
 Ext.define('Omni.view.sku_prices.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-sku_prices-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-sku_prices-Explorer',
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -15,12 +15,12 @@ Ext.define('Omni.view.sku_prices.Explorer', {
 
       store: Ext.create('Omni.store.SkuPrice'),
 
-      contextMenuConfig:{
-        xtype:'omni-sku_prices-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-sku_prices-Form',
+      newForms: [{
+        xtype: 'omni-sku_prices-Form',
         windowConfig: {}
       }],
 
@@ -42,11 +42,29 @@ Ext.define('Omni.view.sku_prices.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.effective_dateLabel, dataIndex: 'effective_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.retail_priceLabel, dataIndex: 'retail_price',  flex: 1,  sortable: false  },
-        { header: this.price_unitsLabel, dataIndex: 'price_units',  flex: 1,  sortable: false  },
-        { header: this.sales_categoryLabel, dataIndex: 'sales_category',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('SALES_CATEGORY') },
+      columns: [{
+          header: this.effective_dateLabel,
+          dataIndex: 'effective_date',
+          flex: 1,
+          sortable: false,
+          renderer: Ext.util.Format.dateRenderer('m/d/y')
+        }, {
+          header: this.retail_priceLabel,
+          dataIndex: 'retail_price',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.price_unitsLabel,
+          dataIndex: 'price_units',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.sales_categoryLabel,
+          dataIndex: 'sales_category',
+          flex: 1,
+          sortable: false,
+          renderer: Buildit.util.Format.lookupRenderer('SALES_CATEGORY')
+        },
         // { header: this.price_book_displayLabel, dataIndex: 'price_book_display',  flex: 1,  sortable: false  }
       ]
     });
@@ -54,8 +72,8 @@ Ext.define('Omni.view.sku_prices.Explorer', {
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Sku Price',
-      subtitle:  'Retail permanent prices'
+      title: 'Sku Price',
+      subtitle: 'Retail permanent prices'
     });
     // TITLES (End)
 

@@ -1,10 +1,10 @@
 Ext.define('Omni.view.style_colors.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-style_colors-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-style_colors-Explorer',
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -16,12 +16,12 @@ Ext.define('Omni.view.style_colors.Explorer', {
 
       store: Ext.create('Omni.store.StyleColor'),
 
-      contextMenuConfig:{
-        xtype:'omni-style_colors-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-style_colors-Form',
+      newForms: [{
+        xtype: 'omni-style_colors-Form',
         windowConfig: {}
       }],
 
@@ -45,22 +45,49 @@ Ext.define('Omni.view.style_colors.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.style_displayLabel, dataIndex: 'style_display',  flex: 1,  sortable: false  },
-        { header: this.stateLabel, dataIndex: 'state', flex: 1,   sortable: false  },
-        { header: this.color_displayLabel, dataIndex: 'color_display',  flex: 1,  sortable: false  },
-        { header: this.short_nameLabel, dataIndex: 'short_name',  flex: 1,  sortable: false  },
-        { header: this.fabric_contentLabel, dataIndex: 'fabric_content',  flex: 1,  sortable: false  },
-        { header: this.inital_retail_priceLabel, dataIndex: 'inital_retail_price',  flex: 1,  sortable: false  },
-        { header: this.concatenated_nameLabel, dataIndex: 'concatenated_name',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.style_displayLabel,
+        dataIndex: 'style_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.stateLabel,
+        dataIndex: 'state',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.color_displayLabel,
+        dataIndex: 'color_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.short_nameLabel,
+        dataIndex: 'short_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.fabric_contentLabel,
+        dataIndex: 'fabric_content',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.inital_retail_priceLabel,
+        dataIndex: 'inital_retail_price',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.concatenated_nameLabel,
+        dataIndex: 'concatenated_name',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Style Color',
-      subtitle:  'All of the colors available for a style'
+      title: 'Style Color',
+      subtitle: 'All of the colors available for a style'
     });
     // TITLES (End)
 

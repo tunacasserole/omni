@@ -1,11 +1,11 @@
 Ext.define('Omni.view.seasonal_indices.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-seasonal_indices-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-seasonal_indices-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.seasonal_indices.Explorer', {
 
       store: Ext.create('Omni.store.SeasonalIndex'),
 
-      contextMenuConfig:{
-        xtype:'omni-seasonal_indices-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-seasonal_indexes-Form',
+      newForms: [{
+        xtype: 'omni-seasonal_indexes-Form',
         windowConfig: {}
       }],
 
@@ -41,17 +41,24 @@ Ext.define('Omni.view.seasonal_indices.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.seasonal_index_nameLabel, dataIndex: 'seasonal_index_name',  flex: 1,  sortable: false  },
-        { header: this.is_destroyedLabel, dataIndex: 'is_destroyed',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.seasonal_index_nameLabel,
+        dataIndex: 'seasonal_index_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_destroyedLabel,
+        dataIndex: 'is_destroyed',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Seasonal Index',
-      subtitle:  'Seasonal indexes for products'
+      title: 'Seasonal Index',
+      subtitle: 'Seasonal indexes for products'
     });
     // TITLES (End)
 

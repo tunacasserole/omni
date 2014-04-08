@@ -1,11 +1,11 @@
 Ext.define('Omni.view.rules.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-rules-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-rules-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.rules.Explorer', {
 
       store: Ext.create('Omni.store.Rule'),
 
-      contextMenuConfig:{
-        xtype:'omni-rules-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-rules-Form',
+      newForms: [{
+        xtype: 'omni-rules-Form',
         windowConfig: {}
       }],
 
@@ -47,23 +47,56 @@ Ext.define('Omni.view.rules.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.ruleset_displayLabel, dataIndex: 'ruleset_display',  flex: 1,  sortable: false  },
-        { header: this.rule_typeLabel, dataIndex: 'rule_type',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('RULE_TYPE') },
-        { header: this.input_attributeLabel, dataIndex: 'input_attribute',  flex: 1,  sortable: false  },
-        { header: this.model_nameLabel, dataIndex: 'model_name',  flex: 1,  sortable: false  },
-        { header: this.attribute_nameLabel, dataIndex: 'attribute_name',  flex: 1,  sortable: false  },
-        { header: this.rule_actionLabel, dataIndex: 'rule_action',  flex: 1,  sortable: false, renderer: Buildit.util.Format.lookupRenderer('RULE_ACTION') },
-        { header: this.is_activeLabel, dataIndex: 'is_active',  flex: 1,  sortable: false  },
-        { header: this.rule_seqLabel, dataIndex: 'rule_seq',  flex: 1,  sortable: false  }
-      ]
+      columns: [{
+        header: this.ruleset_displayLabel,
+        dataIndex: 'ruleset_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.rule_typeLabel,
+        dataIndex: 'rule_type',
+        flex: 1,
+        sortable: false,
+        renderer: Buildit.util.Format.lookupRenderer('RULE_TYPE')
+      }, {
+        header: this.input_attributeLabel,
+        dataIndex: 'input_attribute',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.model_nameLabel,
+        dataIndex: 'model_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.attribute_nameLabel,
+        dataIndex: 'attribute_name',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.rule_actionLabel,
+        dataIndex: 'rule_action',
+        flex: 1,
+        sortable: false,
+        renderer: Buildit.util.Format.lookupRenderer('RULE_ACTION')
+      }, {
+        header: this.is_activeLabel,
+        dataIndex: 'is_active',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.rule_seqLabel,
+        dataIndex: 'rule_seq',
+        flex: 1,
+        sortable: false
+      }]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Rule',
-      subtitle:  'Updates to be performed for each rule'
+      title: 'Rule',
+      subtitle: 'Updates to be performed for each rule'
     });
     // TITLES (End)
 

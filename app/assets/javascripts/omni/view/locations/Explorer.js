@@ -1,9 +1,9 @@
 Ext.define('Omni.view.locations.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-locations-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-locations-Explorer',
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -15,12 +15,12 @@ Ext.define('Omni.view.locations.Explorer', {
 
       store: Ext.create('Omni.store.Location'),
 
-      contextMenuConfig:{
-        xtype:'omni-locations-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-locations-Form',
+      newForms: [{
+        xtype: 'omni-locations-Form',
         windowConfig: {}
       }],
 
@@ -48,26 +48,70 @@ Ext.define('Omni.view.locations.Explorer', {
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.location_nbrLabel, dataIndex: 'location_nbr',  flex: 1,  sortable: false  },
-        { header: this.displayLabel, dataIndex: 'display',  flex: 2,  sortable: false  },
-        { header: this.location_brandLabel, dataIndex: 'location_brand',  flex: 1,  sortable: false  },
-        { header: this.district_displayLabel, dataIndex: 'district_display',  flex: 1,  sortable: false  },
-        { header: this.line_1Label, dataIndex: 'line_1',  flex: 1,  sortable: false  },
-        { header: this.cityLabel, dataIndex: 'city',  flex: 1,  sortable: false  },
-        { header: this.state_codeLabel, dataIndex: 'state_code',  flex: 1,  sortable: false  },
-        { header: this.open_dateLabel, dataIndex: 'open_date',  flex: 1,  sortable: false, renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.is_storeLabel, dataIndex: 'is_store',  flex: 1,  sortable: false  },
-        { header: this.is_warehouseLabel, dataIndex: 'is_warehouse',  flex: 1,  sortable: false  },
-        { header: this.is_enabledLabel, dataIndex: 'is_enabled',  flex: 1,  sortable: false  },
-      ]
+      columns: [{
+        header: this.location_nbrLabel,
+        dataIndex: 'location_nbr',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.displayLabel,
+        dataIndex: 'display',
+        flex: 2,
+        sortable: false
+      }, {
+        header: this.location_brandLabel,
+        dataIndex: 'location_brand',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.district_displayLabel,
+        dataIndex: 'district_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.line_1Label,
+        dataIndex: 'line_1',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.cityLabel,
+        dataIndex: 'city',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.state_codeLabel,
+        dataIndex: 'state_code',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.open_dateLabel,
+        dataIndex: 'open_date',
+        flex: 1,
+        sortable: false,
+        renderer: Ext.util.Format.dateRenderer('m/d/y')
+      }, {
+        header: this.is_storeLabel,
+        dataIndex: 'is_store',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_warehouseLabel,
+        dataIndex: 'is_warehouse',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.is_enabledLabel,
+        dataIndex: 'is_enabled',
+        flex: 1,
+        sortable: false
+      }, ]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Location',
-      subtitle:  'A facility where Products are stocked and/or sold'
+      title: 'Location',
+      subtitle: 'A facility where Products are stocked and/or sold'
     });
     // TITLES (End)
 

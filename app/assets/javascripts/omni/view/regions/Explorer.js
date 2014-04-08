@@ -1,11 +1,11 @@
 Ext.define('Omni.view.regions.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-regions-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-regions-Explorer',
 
 
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -17,12 +17,12 @@ Ext.define('Omni.view.regions.Explorer', {
 
       store: Ext.create('Omni.store.Region'),
 
-      contextMenuConfig:{
-        xtype:'omni-regions-ExplorerContextMenu',
+      contextMenuConfig: {
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
-      newForms:[{
-        xtype:'omni-regions-Form',
+      newForms: [{
+        xtype: 'omni-regions-Form',
         windowConfig: {}
       }],
 
@@ -34,23 +34,43 @@ Ext.define('Omni.view.regions.Explorer', {
 
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
-      short_nameLabel:                       Omni.i18n.model.Region.short_name,
-      displayLabel:                          Omni.i18n.model.Region.display,
-      region_nbrLabel:                       Omni.i18n.model.Region.region_nbr,
-      company_displayLabel:                  Omni.i18n.model.Region.company_display,
-      user_displayLabel:                     Omni.i18n.model.Region.user_display,
-      user_idLabel:                          Omni.i18n.model.Region.user_display
+      short_nameLabel: Omni.i18n.model.Region.short_name,
+      displayLabel: Omni.i18n.model.Region.display,
+      region_nbrLabel: Omni.i18n.model.Region.region_nbr,
+      company_displayLabel: Omni.i18n.model.Region.company_display,
+      user_displayLabel: Omni.i18n.model.Region.user_display,
+      user_idLabel: Omni.i18n.model.Region.user_display
     });
     // LABELS (End)
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
-      columns: [
-        { header: this.short_nameLabel,                        dataIndex: 'short_name',                         flex: 1,   sortable: false  },
-        { header: this.displayLabel,                           dataIndex: 'display',                            flex: 1,   sortable: false  },
-        { header: this.company_displayLabel,                   dataIndex: 'company_display',                    flex: 1,   sortable: false  },
-        { header: this.user_displayLabel,                      dataIndex: 'user_display',                       flex: 1,   sortable: false  },
-        { header: this.region_nbrLabel,                        dataIndex: 'region_nbr',                         flex: 1,   sortable: false  },
+      columns: [{
+          header: this.short_nameLabel,
+          dataIndex: 'short_name',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.displayLabel,
+          dataIndex: 'display',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.company_displayLabel,
+          dataIndex: 'company_display',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.user_displayLabel,
+          dataIndex: 'user_display',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.region_nbrLabel,
+          dataIndex: 'region_nbr',
+          flex: 1,
+          sortable: false
+        },
 
       ]
     });
@@ -58,8 +78,8 @@ Ext.define('Omni.view.regions.Explorer', {
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Region',
-      subtitle:  'Second level of the Location Hierarchy'
+      title: 'Region',
+      subtitle: 'Second level of the Location Hierarchy'
     });
     // TITLES (End)
 
