@@ -2,6 +2,8 @@ Ext.define('Omni.view.rms_inventories.Explorer', {
 
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.omni-rms_inventories-Explorer',
+  allowFind : true,
+  allowNew  : false,
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {

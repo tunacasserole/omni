@@ -3,8 +3,14 @@ class Omni::Sync::Inventory < Omni::Sync::Base
   def self.go
     @inventories = Omni::Inventory.to_hash
     # load_true_grits
-    load_buckhead
-    # Omni::Sync::Inventory::Parker.inventory
+    # load_buckhead
+    # load_parker
+    Omni::Sync::Inventory::Parker.inventory
+  end
+
+  def self.load_parker
+    @parker_skus = Omni::SkuAlias.to_hash('PARKER')
+
   end
 
   def self.load_true_grits

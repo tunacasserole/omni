@@ -6,8 +6,8 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     # put "no skus found for these stock-size combos: #{@no_skus}"
     # put "no inventory rows: #{@no_row_rows}"
     put "\n***********************************"
-    put "no sku found for these stock-sizes: #{@no_skus}"
-    put "no location found for these outlets: #{@no_locations}"
+    # put "no sku found for these stock-sizes: #{@no_skus}"
+    # put "no location found for these outlets: #{@no_locations}"
     put "no sku found for that stock-size: #{@no_sku_count}"
     put "no location found for that outlet: #{@no_location_count}"
     put "no inventory found: #{@no_id_count}"
@@ -32,52 +32,17 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
   end
 
   def self.inventory
-    @inventories = Omni::Inventory.to_hash
-    # self.on_hand
-    # self.wip
-    # self.transit
-    # self.allocated
-    # self.daily_results
-    # self.sum_to_year
-  end
-
-  def self.sum_to_year
-    puts "sum to year"
-    @period_results = Omni::PeriodResult.to_hash
-    periods = ""
-    ['2011','2012','2013'].each do |year|
-      @period_id = Omni::Period.where(:display => year).first.period_id
-      @periods = Omni::Period.where(:year_number => year).order('display')
-      @periods.each do |p|
-        periods += "'#{p.period_id}',"
-      end
-      # puts "year is #{p.display}"
-      sql = "select location_id, sku_id, sum(net_sale_units) as sold from period_results where period_id in (#{periods.chop}) group by sku_id, location_id"
-      data = ActiveRecord::Base.connection.execute sql
-      data.each do |x|
-        @source_count += 1
-        units = x[2]
-        location_id = x[0] #MRI
-        sku_id = x[1] #MRI
-        period_id = @period_id
-        row_id = @period_results["#{period_id},#{location_id},#{sku_id}"] || Buildit::Util::Guid.generate
-        @updates.push "('#{row_id}','#{period_id}','#{location_id}','#{sku_id}',#{units})"
-
-        if @created_count.to_s.end_with? '000'
-          puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{@created_count.to_s}"
-          sql = "insert into period_results (period_result_id, period_id, location_id, sku_id, net_sale_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
-          ActiveRecord::Base.connection.execute sql
-          @updates = []
-          sql = ''
-        end
-        @created_count += 1
-      end
-    end
+    self.on_hand
+    self.wip
+    self.transit
+    self.allocated
+    self.daily_results
+    self.sum_to_year
   end
 
   def self.on_hand
     load
-    bar = ProgressBar.new(Omni::MarkInventory.count)
+    bar = ProgressBar.new(Omni::MarkInventory.where('qoh > 0 and stock_nbr > 0 and size is not null').count)
 
     ActiveRecord::Base.transaction do
       Omni::MarkInventory.where('qoh > 0 and stock_nbr > 0 and size is not null').find_each do |x|
@@ -98,18 +63,20 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     sql = "insert into inventories (inventory_id, location_id, sku_id, on_hand_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE on_hand_units = VALUES(on_hand_units)"
     # puts "*********#{sql}*************"
     ActiveRecord::Base.connection.execute sql unless @created_count == 0
-    xit
+    # xit
   end
 
   def self.wip
     load
-    bar = ProgressBar.new(Omni::MarkWip.count)
+    bar = ProgressBar.new(Omni::MarkWip.where('cut_wip > 0 or cont_wip > 0 or plant_wip > 0').count)
 
     ActiveRecord::Base.transaction do
-      Omni::MarkWip.where('cut_wip > 0 or plant_wip > 0 or cont_wip > 0').find_each do |x|
+      ActiveRecord::Base.connection.execute("select outlet_nbr, stock_nbr, size, sum(cut_wip), sum(cont_wip), sum(plant_wip) from mark_wip group by outlet_nbr, stock_nbr, size").each do |x|
+      # Omni::MarkWip.where('cut_wip > 0 or plant_wip > 0 or cont_wip > 0').find_each do |x|
         bar.increment!
-        units = x.cut_wip + x.plant_wip + x.cont_wip
-        self.to_sql(x.outlet_nbr, x.stock_nbr, x.size, units, @date, false)
+        units = x[3] + x[4] + x[5]
+        next unless units > 0
+        self.to_sql(x[0], x[1], x[2], units, @date, false)
       end
     end
 
@@ -118,35 +85,38 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     # if @updates.length > 1
     #   # sql = "insert into inventories (inventory_id, work_in_process_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE work_in_process_units = VALUES(work_in_process_units)"
     # end
-    xit
-  end
-
-  def self.allocated
-    load
-    bar = ProgressBar.new(Omni::MarkWip.count)
-    transfer_to_outlet = Omni::MarkTransfer.outlet_hash
-    Omni::MarkTransferLine.where("status_id in (8,53) and transfer_id >= ?", Omni::MarkTransfer.last_transfer_of_2010).find_each do |x|
-      bar.increment!
-      outlet_nbr = transfer_to_outlet[x.transfer_id]
-      self.to_sql(outlet_nbr, x.stock_nbr, x.size, x.qty, @date, false)
-    end
-    sql = "insert into inventories (inventory_id, location_id, sku_id, allocated_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE allocated_units = VALUES(allocated_units)"
-    ActiveRecord::Base.connection.execute sql unless @created_count == 0
-    xit
+    # xit
   end
 
   def self.transit
     load
-    transfer_to_outlet = Omni::MarkTransfer.outlet_hash
-    bar = ProgressBar.new(Omni::MarkTransferLine)
-
-    Omni::MarkTransferLine.where("transfer_id >= ?", Omni::MarkTransfer.last_transfer_of_2010).joins(:mark_transfer).where("transfer_hd.status_id = 9").find_each do |x|
+    # transfer_to_outlet = Omni::MarkTransfer.outlet_hash
+    bar = ProgressBar.new(ActiveRecord::Base.connection.execute("select count(*) from transfer_li a, transfer_hd b where a.transfer_id = b.id and b.status_id = 9").first[0])
+    ActiveRecord::Base.connection.execute("select b.to_outlet_nbr, stock_nbr, size, sum(qty) from transfer_li a, transfer_hd b where a.transfer_id > #{49237} and a.transfer_id = b.id and b.status_id = 9 group by stock_nbr, size, b.to_outlet_nbr order by stock_nbr, size, b.to_outlet_nbr").each do |x|
+    # Omni::MarkTransferLine.where("transfer_id >= ?", Omni::MarkTransfer.last_transfer_of_2010).joins(:mark_transfer).where("transfer_hd.status_id = 9").find_each do |x|
       bar.increment!
-      outlet_nbr = transfer_to_outlet[x.transfer_id]
-      self.to_sql(outlet_nbr, x.stock_nbr, x.size, x.qty, @date, false)
+      # next unless x[3] > 0
+      self.to_sql(x[0], x[1], x[2], x[3], @date, false)
+      if @created_count.to_s.end_with? '00'
+        sql = "insert into inventories (inventory_id, location_id, sku_id, in_transit_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE in_transit_units = VALUES(in_transit_units)"
+        ActiveRecord::Base.connection.execute sql unless @created_count == 0
+        sql = ''
+      end
     end
-
     sql = "insert into inventories (inventory_id, location_id, sku_id, in_transit_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE in_transit_units = VALUES(in_transit_units)"
+    ActiveRecord::Base.connection.execute sql unless @created_count == 0
+
+    # xit
+  end
+
+  def self.allocated
+    load
+    bar = ProgressBar.new(ActiveRecord::Base.connection.execute("select count(*) from transfer_li a, transfer_hd b where a.transfer_id = b.id and b.status_id in (8,53)").first[0])
+    ActiveRecord::Base.connection.execute("select b.to_outlet_nbr, stock_nbr, size, sum(qty) from transfer_li a, transfer_hd b where a.transfer_id > #{49237} and a.transfer_id = b.id and b.status_id in (8,53) group by stock_nbr, size, b.to_outlet_nbr order by stock_nbr, size, b.to_outlet_nbr").each do |x|
+      bar.increment!
+      self.to_sql(x[0], x[1], x[2], x[3], @date, false)
+    end
+    sql = "insert into inventories (inventory_id, location_id, sku_id, allocated_units) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE allocated_units = VALUES(allocated_units)"
     ActiveRecord::Base.connection.execute sql unless @created_count == 0
     xit
   end
@@ -154,7 +124,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
   def self.daily_results
     load
     self.order_hashes
-    bar = ProgressBar.new(Omni::MarkOrderLine)
+    bar = ProgressBar.new(Omni::MarkOrderLine.count)
     Omni::MarkOrderLine.where('order_nbr >= ?', @last_order).find_each do |x|
       bar.increment!
       # puts x.order_nbr
@@ -200,7 +170,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     end
 
     source = "#{stock_nbr.to_s}-#{size}"
-    sku_id = @skus[source]
+    sku_id = @parker_skus[source]
     unless sku_id
       @no_sku_count += 1
       @no_skus << source
@@ -244,7 +214,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
 
   def self.order_hashes
     @daily_results = Omni::DailyResult.to_hash
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
+    # puts "#{Time.now.strftime("%H:%M:%S").yellow}: START..create order_nbr to outlet_nbr hash"
     @order_to_outlet = {}
     @order_to_date = {}
     ActiveRecord::Base.transaction do
@@ -254,7 +224,7 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
         @order_to_outlet[o.order_nbr] = o.outlet_nbr
       end
     end
-    puts "#{Time.now.strftime("%H:%M:%S").yellow}: END..create order_to_date hash: #{@order_to_date.count.to_s} and order_to_outlet hash: #{@order_to_outlet.count.to_s}"
+    puts "#{Time.now.strftime("%H:%M:%S").yellow}: order_to_date hash: #{@order_to_date.count.to_s} and order_to_outlet hash: #{@order_to_outlet.count.to_s}"
   end
 
   def self.load
@@ -273,7 +243,8 @@ class Omni::Sync::Inventory::Parker < Omni::Sync::Base
     @last_order = 2100000
     @last_order = Omni::MarkOrder.last_order_of_2010
     @locations = Omni::Location.to_hash
-    @skus = Omni::Sku.to_hash
+    @parker_skus = Omni::SkuAlias.to_hash('PARKER')
+    @inventories = Omni::Inventory.to_hash
     @updates = []
     @no_locations = []
     @no_skus = []

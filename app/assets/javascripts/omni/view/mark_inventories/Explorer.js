@@ -2,6 +2,8 @@ Ext.define('Omni.view.mark_inventories.Explorer', {
 
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.omni-mark_inventories-Explorer',
+  allowFind : true,
+  allowNew  : false,
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {
@@ -63,12 +65,12 @@ Ext.define('Omni.view.mark_inventories.Explorer', {
       header       : me.qohLabel,
       dataIndex    : 'qoh',
       flex         : 1
-    },
-    {
-      header       : me.drop_shipLabel,
-      dataIndex    : 'drop_ship',
-      flex         : 1
     }
+    // {
+    //   header       : me.drop_shipLabel,
+    //   dataIndex    : 'drop_ship',
+    //   flex         : 1
+    // }
       ]
     });
     // COLUMNS (End)
