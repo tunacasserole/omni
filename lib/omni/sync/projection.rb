@@ -30,7 +30,7 @@ class Omni::Sync::Projection < Omni::Sync::Base
     # Snapshot of current inventory
     on_hand = i[3] || 0
     on_order = i[4] || 0
-    puts on_order
+    # puts on_order
     # Sales history
     ytd = i[5] || 0
     py1 = i[6] || 0

@@ -301,8 +301,7 @@ Ext.define('Omni.view.receipts.Form', {
         },
         {
           tooltip: 'Accept',
-          iconCls: 'icon-thumbs-up',
-          xtype: 'button',
+            xtype: 'button',
           listeners: {
             beforerender: this.prepareAcceptAction,
             click: this.onAcceptAction,

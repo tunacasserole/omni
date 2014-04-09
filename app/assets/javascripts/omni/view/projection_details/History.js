@@ -28,6 +28,7 @@ Ext.define('Omni.view.projection_details.History', {
   stateLabel                              : Omni.i18n.model.ProjectionDetail.state,
   sku_idLabel                             : Omni.i18n.model.ProjectionDetail.sku_id,
   location_idLabel                        : Omni.i18n.model.ProjectionDetail.location_id,
+  on_handLabel                            : Omni.i18n.model.ProjectionDetail.on_hand,
   first_forecast_unitsLabel               : Omni.i18n.model.ProjectionDetail.first_forecast_units,
   last_forecast_unitsLabel                : Omni.i18n.model.ProjectionDetail.last_forecast_units,
   last_forecast_dateLabel                 : Omni.i18n.model.ProjectionDetail.last_forecast_date,
@@ -63,6 +64,12 @@ Ext.define('Omni.view.projection_details.History', {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
           flex         : 2,
+        },
+        {
+          header       : this.on_handLabel,
+          dataIndex    : 'on_hand',
+          flex         : 1,
+          sortable     : false
         },
         {
           header       : this.last_forecast_unitsLabel,
