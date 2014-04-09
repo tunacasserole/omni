@@ -221,6 +221,7 @@ class Omni::Sku < ActiveRecord::Base
 
   searchable do
     string   :sku_id
+    string   :style_id
     string   :display
     string   :style_display do style.display if style end
     string   :account_display do account.display if account end
@@ -234,9 +235,9 @@ class Omni::Sku < ActiveRecord::Base
 
     text     :display_fulltext, using: :display
     text     :account_display_fulltext, using: :account_display
-    text     :aliases do
-      sku_aliases.map { |x| x.sku_alias }
-    end
+    # text     :aliases do
+    #   sku_aliases.map { |x| x.sku_alias }
+    # end
     # text     :style_display_fulltext do self.style.subclass.display if self.style end
     # text     :subclass_display_fulltext do self.style.subclass.display if self.style && self.style.subclass end
     # text     :classification_display_fulltext do self.style.subclass.classification.display if self.style && self.style.subclass && self.style.subclass.classification end

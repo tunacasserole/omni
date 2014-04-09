@@ -148,17 +148,17 @@ Ext.define('Omni.view.projections.Form', {
     // ACTIONS (Start) =====================================================================
     Ext.apply(this, {
       actions: [{
+      //   xtype: 'button',
+      //   iconCls: 'icon-wrench',
+      //   tooltip: 'Forecast',
+      //   listeners: {
+      //     beforerender: this.prepareForecastAction,
+      //     click: this.onForecastAction,
+      //     scope: me
+      //   }
+      // }, {
         xtype: 'button',
-        iconCls: 'icon-wrench',
-        tooltip: 'Forecast',
-        listeners: {
-          beforerender: this.prepareForecastAction,
-          click: this.onForecastAction,
-          scope: me
-        }
-      }, {
-        xtype: 'button',
-        cls: 'submit',
+        iconCls: 'fa fa-share-square-o',
         tooltip: 'Release',
         listeners: {
           beforerender: this.prepareReleaseAction,
@@ -167,7 +167,7 @@ Ext.define('Omni.view.projections.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'icon-ok',
+        iconCls: 'fa fa-check-square-o',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,
@@ -176,7 +176,7 @@ Ext.define('Omni.view.projections.Form', {
         }
       }, {
         xtype: 'button',
-        cls: 'approve',
+        iconCls: 'fa fa-thumbs-up',
         tooltip: 'Approve',
         listeners: {
           beforerender: this.prepareApproveAction,
@@ -197,12 +197,12 @@ Ext.define('Omni.view.projections.Form', {
 
   // HANDLERS (Start) ======================================================================
 
-  /**
-   *
-   */
-  onForecastAction: function(action, eOpts) {
-    this.processEventTransition('initiate_forecast', 'Projection was successfully forecasted.', 'An error occurred processing this projection.');
-  }, // onAction
+  // /**
+  //  *
+  //  */
+  // onForecastAction: function(action, eOpts) {
+  //   this.processEventTransition('initiate_forecast', 'Projection was successfully forecasted.', 'An error occurred processing this projection.');
+  // }, // onAction
 
   /**
    *
@@ -225,15 +225,15 @@ Ext.define('Omni.view.projections.Form', {
     this.processEventTransition('approve', 'Projection was successfully approved.', 'An error occurred processing this projection.');
   }, // onAction
 
-  /**
-   *
-   */
-  prepareForecastAction: function(action, eOpts) {
-    var currentState = this.record.get('state');
+  // /**
+  //  *
+  //  */
+  // prepareForecastAction: function(action, eOpts) {
+  //   var currentState = this.record.get('state');
 
-    this.record.phantom != true && currentState != 'complete' ? action.show() : action.hide();
+  //   this.record.phantom != true && currentState != 'complete' ? action.show() : action.hide();
 
-  }, // prepareAction
+  // }, // prepareAction
 
   /**
    *
@@ -241,7 +241,7 @@ Ext.define('Omni.view.projections.Form', {
   prepareReleaseAction: function(action, eOpts) {
     var currentState = this.record.get('state');
 
-    (this.record.phantom != true && currentState == 'forecast') ? action.show() : action.hide();
+    (this.record.phantom != true && currentState == 'projection_1') ? action.show() : action.hide();
 
   }, // prepareAction
 

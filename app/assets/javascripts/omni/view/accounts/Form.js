@@ -509,8 +509,7 @@ Ext.define('Omni.view.accounts.Form', {
     Ext.apply(this, {
       actions: [{
         xtype: 'button',
-        cls: 'approve',
-        // iconCls: 'fa-thumbs-o-up',
+        iconCls: 'fa fa-caret-square-o-right',
         tooltip: 'Activate',
         listeners: {
           beforerender: this.prepareActivateAction,
@@ -519,8 +518,7 @@ Ext.define('Omni.view.accounts.Form', {
         }
       }, {
         xtype: 'button',
-        // iconCls: '  fa-thumbs-o-up',
-        cls: 'reject',
+        iconCls: 'fa fa-check-square-o',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,

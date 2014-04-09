@@ -100,7 +100,8 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'sku_id',
           fieldLabel: this.sku_idLabel,
           allowBlank: true,
-          disabled: true
+          disabled: false,
+          gotoTarget: 'omni-skus-Inspector'
         }, {
           xtype: 'buildit-Locator',
           store: Ext.create('Omni.store.Location', {
@@ -113,12 +114,13 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'location_id',
           fieldLabel: this.location_idLabel,
           allowBlank: true,
-          disabled: true
-        // }, {
-        //   xtype: 'textfield',
-        //   name: 'display',
-        //   fieldLabel: this.displayLabel,
-        //   allowBlank: true,
+          disabled: false,
+          gotoTarget: 'omni-locations-Inspector',
+          // }, {
+          //   xtype: 'textfield',
+          //   name: 'display',
+          //   fieldLabel: this.displayLabel,
+          //   allowBlank: true,
         }, {
           xtype: 'textfield',
           name: 'state',

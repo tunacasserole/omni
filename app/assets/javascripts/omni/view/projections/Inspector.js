@@ -24,22 +24,25 @@ Ext.define('Omni.view.projections.Inspector',{
              {
                projection_id:   {equal_to: me.record.get('projection_id')}
              }
-          }
+          },
+          showBadge: true
         }
         ,{title: 'Details', xtype: 'omni-projection_details-Explorer',
            defaultSearch: { with:
              {
                projection_id:   {equal_to: me.record.get('projection_id')}
              }
-          }
+          },
+          showBadge: true
         }
-        ,{title: 'Locations', xtype: 'omni-projection_locations-Explorer',
-           defaultSearch: { with:
-             {
-               projection_id:   {equal_to: me.record.get('projection_id')}
-             }
-          }
-        }
+        // ,{title: 'Locations', xtype: 'omni-projection_locations-Explorer',
+        //    defaultSearch: { with:
+        //      {
+        //        projection_id:   {equal_to: me.record.get('projection_id')}
+        //      }
+        //   },
+        //   showBadge: true
+        // }
         // ,{title: 'Location Summary', xtype: 'omni-projection_details-GroupedHeaderGrid'}
 
       ]

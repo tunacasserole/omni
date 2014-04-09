@@ -55,20 +55,14 @@ Ext.define('Omni.view.projection_details.History', {
     Ext.apply(this, {
       columns      : [
         {
-          header       : this.stateLabel,
-          dataIndex    : 'state',
-          flex         : 1,
-          hidden       : true
-        },
-        {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
-          flex         : 1,
+          flex         : 3,
         },
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
-          flex         : 1
+          flex         : 2,
         },
         {
           header       : this.last_forecast_unitsLabel,
@@ -81,7 +75,8 @@ Ext.define('Omni.view.projection_details.History', {
           flex         : 1,
           editor:    {
             xtype: 'numberfield',
-            disabled: this.record.get('state') !== 'projection_1'
+            // disabled: this.record.get('state') !== 'projection_1'
+            disabled: false
           },
         //   // listeners: {
         //   //   beforerender: this.prepareProjection1Units,
@@ -130,6 +125,12 @@ Ext.define('Omni.view.projection_details.History', {
           header       : this.sale_units_py2Label,
           dataIndex    : 'sale_units_py2',
           flex         : 1
+        },
+        {
+          header       : this.stateLabel,
+          dataIndex    : 'state',
+          flex         : 1,
+          hidden       : true
         },
       ]
     });

@@ -14,7 +14,7 @@ class Omni::Sync::Projection < Omni::Sync::Base
     bar = ProgressBar.new(data.count)
     data.each do |row|
       bar.increment!
-      ActiveRecord::Base.connection.execute("insert into projection_details (projection_detail_id, projection_id, inventory_id, sku_id, location_id, forecast_profile_id) values ( '#{Buildit::Util::Guid.generate}', '#{@depts[row[3]]}', '#{row[0]}', '#{row[1]}', '#{row[2]}', '#{@profile.forecast_profile_id}' )")
+      ActiveRecord::Base.connection.execute("insert into projection_details (projection_detail_id, projection_id, inventory_id, sku_id, location_id, forecast_profile_id, state) values ( '#{Buildit::Util::Guid.generate}', '#{@depts[row[3]]}', '#{row[0]}', '#{row[1]}', '#{row[2]}', '#{@profile.forecast_profile_id}', 'draft' )")
     end
 
     puts "update projection details from inventories"
@@ -30,7 +30,7 @@ class Omni::Sync::Projection < Omni::Sync::Base
     # Snapshot of current inventory
     on_hand = i[3] || 0
     on_order = i[4] || 0
-
+    puts on_order
     # Sales history
     ytd = i[5] || 0
     py1 = i[6] || 0
@@ -60,6 +60,7 @@ class Omni::Sync::Projection < Omni::Sync::Base
     unusable = [on_hand - coverage_complete].max
     usable = coverage_complete - on_hand < 1 ? coverage_complete : on_hand
     total_need = coverage_complete - usable + on_order
+    # total_need = 1.12 - usable + on_order
 
     first_forecast_units = i[9] ? i[10] : forecasted_units
     projection_1_units = i[9] ? i[11] : forecasted_units

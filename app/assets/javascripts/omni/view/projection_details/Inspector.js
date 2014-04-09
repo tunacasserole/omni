@@ -19,17 +19,17 @@ Ext.define('Omni.view.projection_details.Inspector',{
     Ext.apply(this, {
       cards: [
         { title: 'Profile',           xtype: 'omni-projection_details-Form'},
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer',
-          defaultSearch: { with:
-            {
-              notable_type: {equal_to: 'Omni::ProjectionDetail'},
-              notable_id:   {equal_to: me.record.get('projection_detail_id')}
-            }
-          },
-          showBadge: true
-        }
+        // {
+        //   title: 'Notes',
+        //   xtype: 'buildit-notes-Explorer',
+        //   defaultSearch: { with:
+        //     {
+        //       notable_type: {equal_to: 'Omni::ProjectionDetail'},
+        //       notable_id:   {equal_to: me.record.get('projection_detail_id')}
+        //     }
+        //   },
+        //   showBadge: true
+        // }
       ]
     });
     // CARDS (End)

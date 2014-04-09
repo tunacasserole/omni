@@ -81,12 +81,12 @@ Ext.define('Omni.view.projection_details.Explorer', {
         {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
-          flex         : 2
+          flex         : 3
         },
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
-          flex         : 1
+          flex         : 2
         },
         {
           header       : this.on_handLabel,

@@ -554,7 +554,7 @@ Ext.define('Omni.view.purchases.Form', {
       actions: [
         {
           xtype      : 'button',
-          iconCls    : 'icon-external-link',
+          iconCls: 'fa fa-share-square-o',
           tooltip    : 'Release',
           listeners  : {
             beforerender  : this.prepareReleaseAction,
@@ -564,7 +564,7 @@ Ext.define('Omni.view.purchases.Form', {
         },
         {
           xtype      : 'button',
-          iconCls    : 'icon-thumbs-up',
+          iconCls: 'fa fa-thumbs-up',
           tooltip    : 'Approve',
           listeners  : {
             beforerender  : this.prepareApproveAction,
@@ -574,7 +574,7 @@ Ext.define('Omni.view.purchases.Form', {
         },
     {
           xtype      : 'button',
-          iconCls    : 'icon-accountmap',
+          iconCls    : 'fa fa-random',
           tooltip    : 'Allocate',
           listeners  : {
             beforerender  : this.prepareAllocateAction,
@@ -584,7 +584,7 @@ Ext.define('Omni.view.purchases.Form', {
         },
          {
           xtype      : 'button',
-          cls        : 'close',
+          iconCls    : 'fa fa-times-circle-o',
           tooltip    : 'Cancel',
           listeners  : {
             beforerender  : this.prepareCancelAction,
@@ -594,7 +594,7 @@ Ext.define('Omni.view.purchases.Form', {
         },
         {
           xtype      : 'button',
-          iconCls    : 'icon-cogs',
+          iconCls    : 'fa fa-cogs',
           tooltip    : 'Mass Update',
           listeners  : {
             beforerender  : this.prepareMassupdateAction,

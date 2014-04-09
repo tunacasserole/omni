@@ -645,7 +645,7 @@ Ext.define('Omni.view.styles.Form', {
         Ext.apply(this, {
             actions: [{
                 xtype: 'button',
-                cls: 'submit',
+                iconCls: 'fa fa-share-square-o',
                 scope: me,
                 tooltip: 'Release',
                 listeners: {
@@ -655,7 +655,7 @@ Ext.define('Omni.view.styles.Form', {
                 }
             }, {
                 xtype: 'button',
-                cls: 'approve',
+                iconCls: 'fa fa-thumbs-up',
                 scope: me,
                 tooltip: 'Approve',
                 listeners: {
@@ -675,7 +675,7 @@ Ext.define('Omni.view.styles.Form', {
                 }
             }, {
                 xtype: 'button',
-                cls: 'ship',
+                iconCls: 'fa fa-tag',
                 scope: me,
                 tooltip: 'skus',
                 listeners: {
@@ -685,7 +685,7 @@ Ext.define('Omni.view.styles.Form', {
                 }
             }, {
                 xtype: 'button',
-                cls: 'approve',
+                iconCls: 'fa fa-caret-square-o-right',
                 scope: me,
                 tooltip: 'Activate',
                 listeners: {
@@ -695,7 +695,7 @@ Ext.define('Omni.view.styles.Form', {
                 }
             }, {
                 xtype: 'button',
-                cls: 'close',
+                iconCls: 'fa fa-caret-square-o-left',
                 scope: me,
                 tooltip: 'Deactivate',
                 listeners: {
