@@ -19,7 +19,7 @@ class Omni::Util::Clock
 
 
   def self.stamp(options={})
-    message  = options.delete(:message)
+    # message  = options.delete(:message)
     "== #{Time.now.strftime("%H:%M:%S").yellow} #{message}"
   end
 

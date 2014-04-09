@@ -25,14 +25,14 @@ class Omni::Seed::Base
   def self.seed_file_name(model_name)
     # generate seed file name
     sleep 1
-    "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{model_name.tableize}"
+    "db/seed/#{Time.now.to_s.chop.chop.chop.chop.gsub(/[^0-9]/, "")}_#{model_name.tableize}.rb"
 
   end
 
   def self.dump_to_seed(model_name)
     # initialize
     rows_to_dump = "Omni::#{model_name}".constantize.count
-    Omni::Util::Clock.stamp("starting dump of #{rows_to_dump} rows")
+    # Omni::Util::Clock.stamp("starting dump of #{rows_to_dump} rows")
     rows_per_file = 20000
     file_count = rows_to_dump / rows_per_file + 1
     # puts "file_count is #{file_count}"
