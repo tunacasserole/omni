@@ -9,13 +9,14 @@ class Omni::Order < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
+  validates    :order_id,                    presence: true, uniqueness: true
   validates    :order_nbr,                   presence: true, uniqueness: true
   validates    :display,                     presence: true, uniqueness: true
-  validates    :order_id,                    presence: true
   validates    :location_id,                 presence: true
   validates    :customer_id,                 presence: true
-  validates    :order_date,                  presence: true
-  validates    :order_source,                presence: true
+  validates    :order_source,                lookup: 'ORDER_SOURCE', allow_nil: true
+  # validates    :order_date,                  presence: true
+  # validates    :order_source,                presence: true
 
   # VALIDATIONS (End)
 
@@ -23,10 +24,11 @@ class Omni::Order < ActiveRecord::Base
   default      :order_id,                    override: false,        with: :guid
   default      :order_nbr,                   override: false,        with: :sequence,         named: "ORDER_NBR"
   default      :display,                     override: false,        to: lambda{|m| "#{m.order_nbr} - #{m.order_date} - #{m.location_display}"}
+  default      :order_date,                  override: false,        with: :today
+  default      :order_total,                 override: false,        to: 0
   default      :is_tax_exempt_date,          override: false,        to: false
   default      :is_tax_exempt_customer,      override: false,        to: false
   default      :is_trade_discount_order,     override: false,        to: false
-  default      :order_total,                 override: false,        to: 0
   default      :is_destroyed,                override: false,        to: false
   # DEFAULTS (End)
 
@@ -124,5 +126,8 @@ class Omni::Order < ActiveRecord::Base
 
   # STATE HANDLERS (End)
 
+  def display_as
+    display
+  end
 end # class Omni::Order
 

@@ -67,5 +67,9 @@ class Omni::Terminal < ActiveRecord::Base
     text     :local_server_ip_fulltext, using: :local_server_ip
     text     :hq_server_url_fulltext, using: :hq_server_url
   end
+
+  def display_as
+    display
+  end
 end # class Omni::Terminal
 

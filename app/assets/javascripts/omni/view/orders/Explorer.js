@@ -1,77 +1,96 @@
 Ext.define('Omni.view.orders.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-orders-Explorer',
+  extend   : 'Buildit.ux.explorer.Panel',
+  alias    : 'widget.omni-orders-Explorer',
 
+  // EXPLORER INIT (Start) ===============================================================
+  contextMenuConfig : {
+    xtype    : 'buildit-explorer-ContextMenu'
+  },
 
-    // LABELS (Start) ======================================================================
-  location_displayLabel:                    Omni.i18n.model.Order.location_display,
-  terminal_displayLabel:                    Omni.i18n.model.Order.terminal_display,
-  order_nbrLabel:                  Omni.i18n.model.Order.order_nbr,
-  customer_displayLabel:                    Omni.i18n.model.Order.customer_display,
-  order_start_dateLabel:                    Omni.i18n.model.Order.order_start_date,
-  order_dateLabel:                          Omni.i18n.model.Order.order_date,
-  user_displayLabel:                        Omni.i18n.model.Order.user_display,
-  order_sourceLabel:                        Omni.i18n.model.Order.order_source,
+  newForms : [{
+    xtype    : 'omni-orders-Form'
+  }],
+
+  inspectorConfig : {
+    xtype    : 'omni-orders-Inspector'
+  },
+  // EXPLORER INIT (End)
+
+  // LABELS (Start) ======================================================================
+  order_idLabel                           : Omni.i18n.model.Order.order_id,
+  displayLabel                            : Omni.i18n.model.Order.display,
+  location_idLabel                        : Omni.i18n.model.Order.location_id,
+  terminal_idLabel                        : Omni.i18n.model.Order.terminal_id,
+  order_nbrLabel                          : Omni.i18n.model.Order.order_nbr,
+  customer_idLabel                        : Omni.i18n.model.Order.customer_id,
+  order_start_dateLabel                   : Omni.i18n.model.Order.order_start_date,
+  order_dateLabel                         : Omni.i18n.model.Order.order_date,
+  price_lookup_dateLabel                  : Omni.i18n.model.Order.price_lookup_date,
+  user_idLabel                            : Omni.i18n.model.Order.user_id,
+  order_sourceLabel                       : Omni.i18n.model.Order.order_source,
+  is_tax_exempt_dateLabel                 : Omni.i18n.model.Order.is_tax_exempt_date,
+  is_tax_exempt_customerLabel             : Omni.i18n.model.Order.is_tax_exempt_customer,
+  is_trade_discount_orderLabel            : Omni.i18n.model.Order.is_trade_discount_order,
+  order_totalLabel                        : Omni.i18n.model.Order.order_total,
+  stateLabel                              : Omni.i18n.model.Order.state,
+  is_destroyedLabel                       : Omni.i18n.model.Order.is_destroyed,
   // LABELS (End)
 
-    // TITLES (Start) ======================================================================
-  title:     'Order',
-  subtitle:  'A customer order',
+  // TITLES (Start) ======================================================================
+  title    : 'Orders',
+  subtitle : 'Create and maintain Orders',
   // TITLES (End)
 
-
-    // EXPLORER CONFIG (Start) ===============================================================
-  allowFind:      true,
-
-  store:          Ext.create('Omni.store.Order'),
-
-  contextMenuConfig:{
-    xtype:        'omni-orders-ExplorerContextMenu',
-  },
-
-  inspectorConfig: {
-    xtype:        'omni-orders-Inspector'
-  },
-
-  newForms:[{
-    xtype:        'omni-orders-Form',
-    windowConfig: {}
-  }],
-  // EXPLORER CONFIG (End)
-
-
-  initComponent:function () {
+  initComponent : function () {
 
     var me = this;
 
+    // CONFIG (Start) ======================================================================
+    Ext.apply(me, {
+      store        : Ext.create('Omni.store.Order')
+    });
+    // CONFIG (End)
 
     // COLUMNS (Start) =====================================================================
-    Ext.apply(this, {
-      columns: [
-        { header: this.location_displayLabel,                            dataIndex: 'location_display',                   flex: 1,   sortable: false  },
-        { header: this.terminal_displayLabel,                            dataIndex: 'terminal_display',                   flex: 1,   sortable: false  },
-        { header: this.order_nbrLabel,                          dataIndex: 'order_nbr',                 flex: 1,   sortable: false  },
-        { header: this.customer_displayLabel,                            dataIndex: 'customer_display',                   flex: 1,   sortable: false  },
-        { header: this.order_start_dateLabel,                            dataIndex: 'order_start_date',                   flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.order_dateLabel,                                  dataIndex: 'order_date',                         flex: 1,   sortable: false,   renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.user_displayLabel,                                dataIndex: 'user_display',                       flex: 1,   sortable: false  },
-        { header: this.order_sourceLabel,                                dataIndex: 'order_source',                       flex: 1,   sortable: false  }
+    Ext.apply(me, {
+      columns      : [
+    {
+      header       : me.order_nbrLabel,
+      dataIndex    : 'order_nbr',
+      flex         : 1
+    },
+    {
+      header       : me.location_idLabel,
+      dataIndex    : 'location_display',
+      flex         : 1
+    },
+    {
+      header       : me.terminal_idLabel,
+      dataIndex    : 'terminal_display',
+      flex         : 1
+    },
+    {
+      header       : me.customer_idLabel,
+      dataIndex    : 'customer_display',
+      flex         : 1
+    },
+    {
+      header       : me.order_dateLabel,
+      dataIndex    : 'order_date',
+      flex         : 1
+    },
+    {
+      header       : me.order_totalLabel,
+      dataIndex    : 'order_total',
+      flex         : 1
+    }
       ]
     });
     // COLUMNS (End)
 
-    // EXPLORER PRE-INIT (Start) =============================================================
-    // EXPLORER PRE-INIT (End)
 
-
-    this.callParent();
-
-
-    // EXPLORER POST-INIT (Start) ============================================================
-
-    // EXPLORER POST-INIT (End)
-
+    me.callParent();
   }
 
 });

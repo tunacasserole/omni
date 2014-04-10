@@ -148,6 +148,9 @@ class Omni::Location < ActiveRecord::Base
     {'Van Sales' => '0799CE3A7BCD11E3A0A920C9D047DD15', '41' => '54BA7E26AC3E11E2947800FF58D32228', '42' => '54DA89BEAC3E11E2947800FF58D32228', '43' => '54FFC58AAC3E11E2947800FF58D32228', '44' => '551C007EAC3E11E2947800FF58D32228', '45' => '555BC98EAC3E11E2947800FF58D32228', '46' => '55A83D00AC3E11E2947800FF58D32228', '47' => '55A83D00AC3E11E2947800FFCHAMBLEE', '  Van Sales' => ''}
   end
 
+  def display_as
+    display
+  end
   # HELPERS (End)
 
   # STATES (Start) ====================================================================

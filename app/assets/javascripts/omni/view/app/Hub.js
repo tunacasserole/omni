@@ -6,6 +6,7 @@ Ext.define('Omni.view.app.Hub', {
     extend: 'Buildit.ux.Hub',
     bodyStyle: 'background: transparent',
     cls: 'desktop',
+      flowDirection: 'vertical',
 
     initComponent: function() {
       var me = this;
@@ -17,7 +18,7 @@ Ext.define('Omni.view.app.Hub', {
       Ext.apply(this, {
           allowSignout: true,
           title: 'Start',
-          subtitle: '',
+          subtitle: 'scroll down for more options',
           contextMenuConfig: {
             xtype: 'omni-app-HubContextMenu'
           },
@@ -27,8 +28,8 @@ Ext.define('Omni.view.app.Hub', {
 
             {
               title: 'Demand Processing',
-              columns: 2,
-              rows: 4,
+              columns: 8,
+              rows: 1,
               tiles: [{
                 title: 'Accounts',
                 colspan: 2,
@@ -60,8 +61,8 @@ Ext.define('Omni.view.app.Hub', {
 
               {
                 title: 'Inventory Planning',
-                columns: 4,
-                rows: 4,
+                columns: 8,
+                rows: 3,
                 tiles: [{
                   title: 'Inventory',
                   colspan: 2,
@@ -155,10 +156,35 @@ Ext.define('Omni.view.app.Hub', {
 
             // Section: Legacy Inventory //
 
+            {
+              title: 'Point of Sale',
+              columns: 8,
+              rows: 1,
+              tiles: [{
+                  title: 'Customers',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'company',
+                  target: {
+                    xtype: 'omni-customers-Explorer'
+                  }
+                }, {
+                  title: 'Orders',
+                  colspan: 2,
+                  rowspan: 1,
+                  cls: 'company',
+                  target: {
+                    xtype: 'omni-orders-Explorer'
+                  }
+                }]
+              },
+
+            // Section: Legacy Inventory //
+
             // {
             //   title: 'Legacy Inventory',
-            //   columns: 2,
-            //   rows: 4,
+            //   columns: 8,
+            //   rows: 2,
             //   tiles: [{
             //       title: 'Mark Inventory',
             //       colspan: 2,
@@ -182,8 +208,8 @@ Ext.define('Omni.view.app.Hub', {
               ,
               {
                 title: 'product hierarchy',
-                columns: 4,
-                rows: 3,
+                columns: 8,
+                rows: 2,
                 tiles: [{
                   title: 'Sku Aliases',
                   colspan: 2,
@@ -240,8 +266,8 @@ Ext.define('Omni.view.app.Hub', {
               ,
               {
                 title: 'product setup data',
-                columns: 4,
-                rows: 3,
+                columns: 8,
+                rows: 2,
                 tiles: [{
                   title: 'Colors',
                   colspan: 2,
@@ -300,8 +326,8 @@ Ext.define('Omni.view.app.Hub', {
               ,
               {
                 title: 'company hierarchy',
-                columns: 4,
-                rows: 3,
+                columns: 8,
+                rows: 2,
                 tiles: [{
                   title: 'Companies',
                   colspan: 2,
@@ -358,8 +384,8 @@ Ext.define('Omni.view.app.Hub', {
               ,
               {
                 title: 'company setup data',
-                columns: 6,
-                rows: 4,
+                columns: 8,
+                rows: 3,
                 tiles: [{
                   title: 'Gl Accounts',
                   colspan: 2,
@@ -466,8 +492,8 @@ Ext.define('Omni.view.app.Hub', {
               ,
               {
                 title: 'system administration',
-                columns: 2,
-                rows: 2,
+                columns: 8,
+                rows: 1,
                 tiles: [{
                   title: 'Tasks',
                   colspan: 2,
@@ -492,7 +518,7 @@ Ext.define('Omni.view.app.Hub', {
               // ,
               // {
               //   title: 'web hierarchy',
-              //   columns: 2,
+              //   columns: 8,
               //   rows: 3,
               //   tiles: [{
               //     title: 'Category',
@@ -527,8 +553,8 @@ Ext.define('Omni.view.app.Hub', {
               // Section: Legacy Data //
               // ,{
               //    title: 'Project Tracking',
-              //      columns: 2,
-              //      rows: 4,
+              //      columns: 8,
+              //      rows: 2,
               //      tiles: [
               //        {title: 'Tasks', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-tasks-Explorer'}},
               //        {title: 'Projects', colspan: 2, rowspan: 2, cls: 'project_tracking',  target: {xtype: 'omni-projects-Explorer'}}

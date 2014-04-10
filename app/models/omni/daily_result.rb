@@ -114,6 +114,8 @@ class Omni::DailyResult < ActiveRecord::Base
     etl_hash = {}; ActiveRecord::Base.connection.execute("select daily_result_id, location_id, sku_id, date from daily_results").each {|x| etl_hash["#{x[1]},#{x[2]},#{x[3].to_s}"] = x[0]}
     etl_hash
   end
+  order_search_by :sku_display => :asc
+  # INDEXING (End) ====================================================================
 
 
   # STATES (Start) ====================================================================

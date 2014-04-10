@@ -100,6 +100,8 @@ class Omni::Customer < ActiveRecord::Base
   # STATES (Start) ====================================================================
 
   # STATES (End)
-
+  def display_as
+    display
+  end
 end # class Omni::Customer
 

@@ -124,8 +124,8 @@ class Omni::Uniform < ActiveRecord::Base
     # retrieve the style display name, pos name, description, and price
     ppl = []
     self.uniform_details.each do |x|
-      pl = [x.style.display, x.style.pos_name, x.style.description, x.style.initial_retail_price]
-      puts pl.to_s
+      pl = [x.style.display, x.style.pos_name, x.style.description, x.style.initial_retail_price.to_s]
+      # puts pl.to_s
       ppl << pl
     end
     ppl

@@ -58,6 +58,13 @@ class Omni::AllocationProfile < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
+  searchable do
+    string   :display
+    text   :display, using: :display
+  end
+  order_search_by :display => :asc
+  # INDEXING (End) ====================================================================
+
 
   # HOOKS (Start) =======================================================================
 

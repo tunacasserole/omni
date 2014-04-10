@@ -2,6 +2,7 @@ Ext.define('Omni.view.allocation_profiles.Explorer', {
 
   extend : 'Buildit.ux.explorer.Panel',
   alias  : 'widget.omni-allocation_profiles-Explorer',
+  allowFind : false,
 
   // EXPLORER INIT (Start) ===============================================================
   store  : Ext.create('Omni.store.AllocationProfile'),

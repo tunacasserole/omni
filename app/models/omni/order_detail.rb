@@ -85,24 +85,16 @@ class Omni::OrderDetail < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :order_id
+    string   :order_detail_id
     string   :order_detail_nbr
     string   :sku_display do sku.display if sku end
-    string   :sku_alias_display do sku_alias.display if sku_alias end
-    string   :delivery_method
     string   :pickup_location_display do pickup_location.display if pickup_location end
     string   :account_display do account.display if account end
-    string   :grade_display do grade.display if grade end
-    string   :gender
-    string   :state
 
     text     :order_detail_nbr_fulltext, using: :order_detail_nbr
     text     :sku_display_fulltext, using: :sku_display
-    text     :sku_alias_display_fulltext, using: :sku_alias_display
-    text     :delivery_method_fulltext, using: :delivery_method
-    text     :pickup_location_display_fulltext, using: :pickup_location_display
     text     :account_display_fulltext, using: :account_display
-    text     :grade_display_fulltext, using: :grade_display
-    text     :gender_fulltext, using: :gender
   end
   # INDEXING (End)
 
