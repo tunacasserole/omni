@@ -87,14 +87,14 @@ Ext.define('Omni.view.customers.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'customer_nbr',                   fieldLabel: this.customer_nbrLabel,               allowBlank: false,  disabled: false,    xtype: 'textfield'        },
-            { name: 'registration_date',              fieldLabel: this.registration_dateLabel,          allowBlank: true,   disabled: false,    xtype: 'datefield'        },
-            { name: 'user_id',                        fieldLabel: this.user_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 10}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}' },
+            { name: 'customer_nbr',                   fieldLabel: this.customer_nbrLabel,               allowBlank: true,  disabled: true,    xtype: 'textfield'        },
             { name: 'name_prefix',                    fieldLabel: this.name_prefixLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'NAME_PREFIX' },
-            { name: 'first_name',                     fieldLabel: this.first_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'first_name',                     fieldLabel: this.first_nameLabel,                 allowBlank: false,   disabled: false,    xtype: 'textfield'        },
             { name: 'middle_name',                    fieldLabel: this.middle_nameLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'last_name',                      fieldLabel: this.last_nameLabel,                  allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'name_suffix',                    fieldLabel: this.name_suffixLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'NAME_SUFFIX' },
+            { name: 'user_id',                        fieldLabel: this.user_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Buildit.store.User',{pageSize: 10}), displayField: 'full_name', queryField: 'full_name', valueField: 'user_id', itemTpl:'{last_name}, {first_name}' },
+            { name: 'registration_date',              fieldLabel: this.registration_dateLabel,          allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'company',                        fieldLabel: this.companyLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'department',                     fieldLabel: this.departmentLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'job_title',                      fieldLabel: this.job_titleLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
@@ -111,15 +111,13 @@ Ext.define('Omni.view.customers.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
+            { name: 'gender',                         fieldLabel: this.genderLabel,                     allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'GENDER' },
             { name: 'is_employee',                    fieldLabel: this.is_employeeLabel,                allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'employee_nbr',                   fieldLabel: this.employee_nbrLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_contractor',                  fieldLabel: this.is_contractorLabel,              allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'contractor_nbr',                 fieldLabel: this.contractor_nbrLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_student',                     fieldLabel: this.is_studentLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'birth_date',                     fieldLabel: this.birth_dateLabel,                 allowBlank: true,   disabled: false,    xtype: 'datefield'        },
-            { name: 'gender',                         fieldLabel: this.genderLabel,                     allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'GENDER' },
-            { name: 'is_analyst',                     fieldLabel: this.is_analystLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'is_developer',                   fieldLabel: this.is_developerLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         }
           ]
         },
         {
