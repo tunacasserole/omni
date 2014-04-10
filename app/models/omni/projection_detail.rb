@@ -16,6 +16,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   validates    :projection_id,                    presence: true
   validates    :sku_id,                           presence: true
   validates    :location_id,                      presence: true
+  validates    :inventory_id,                     presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================

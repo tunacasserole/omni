@@ -257,21 +257,22 @@ class Omni::Purchase < ActiveRecord::Base
     if self.mass_update_type
       self.send(mass_update_type.downcase)
       # Blank out mass update paramaters after completing the mass update
-        ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units', 'allocation_profile_id'].each {|x| self.send("#{x}=", nil)}
+      # ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units', 'allocation_profile_id'].each {|x| self.send("#{x}=", nil)}
       self.save
     else
       errors.add('mass_update_type','mass update type is required for mass update')
-      raise 'mass update type is required for mass update'
+      # raise 'mass update type is required for mass update'
     end
   end
 
   def sku_meets_criteria?(sku)
-    return false unless sku.style_id == self.style_id if self.style_id
-    return false unless sku.subclass_id == self.subclass_id if self.subclass_id
-    return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
-    return false unless sku.subclass.classification.department_id == self.department_id if self.department_id
-    return false if sku.is_converted unless self.is_include_conversions
-    return false unless Omni::SkuSupplier.where(supplier_id: self.supplier_id, sku_id: sku.sku_id, is_discontinued: false).first
+    puts "sku is #{sku.display} - #{sku.sku_id}"
+    # return false unless sku.style_id == self.style_id if self.style_id
+    # return false unless sku.subclass_id == self.subclass_id if self.subclass_id
+    # return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
+    # return false unless sku.subclass.classification.department_id == self.department_id if self.department_id
+    # return false if sku.is_converted unless self.is_include_conversions
+    # return false unless Omni::SkuSupplier.where(supplier_id: self.supplier_id, sku_id: sku.sku_id, is_discontinued: false).first
     return true
   end
 
@@ -290,9 +291,9 @@ class Omni::Purchase < ActiveRecord::Base
       # puts 200
       next unless sku_meets_criteria? ss.sku
       # puts 300
-      next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: ss.sku_id, is_authorized: true).first
+      next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: ss.sku_id).first if self.location_id
       # puts 400
-      a=Omni::PurchaseDetail.create(units_ordered: units_to_order(i,ss), purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
+      Omni::PurchaseDetail.create(units_ordered: units_to_order(i,ss), purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
     end
     # puts 500
   end

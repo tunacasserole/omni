@@ -613,8 +613,7 @@ Ext.create('Ext.data.ArrayStore', {
   data      : [
     ['032456XXC72911HIHI321MASSUPDATE1','CLONE',,'MASS_UPDATE_TYPE','Clone',null,true],
     ['032456XXC72911HIHI322MASSUPDATE2','UNITS',,'MASS_UPDATE_TYPE','Adjust Units Ordered',null,true],
-    ['032456XXC72911HIHI312MASSUPDATE3','ADD',,'MASS_UPDATE_TYPE','Add Purchase Details',null,true],
-    ['032456XXC72911HIHI312MASSUPDATE4','PROFILE',,'MASS_UPDATE_TYPE','Update Allocation Profile',null,true]
+    ['032456XXC72911HIHI312MASSUPDATE3','ADD',,'MASS_UPDATE_TYPE','Add Purchase Details',null,true]
   ]
 });
 

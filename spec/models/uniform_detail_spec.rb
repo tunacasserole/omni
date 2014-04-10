@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "uniform_detail" do
+  let(:me) { create(Omni::UniformDetail) }
 
   describe "requires" do
     it "uniform_detail_id" do lambda{Omni::UniformDetail.create! uniform_detail_id nil}.should raise_error end
@@ -20,9 +21,9 @@ describe "uniform_detail" do
   end
 
   describe "default should" do
-    it "uniform_detail_id" do me = create(Omni::UniformDetail); me.uniform_detail_id.should_not be_nil end
-    it "uniform_detail_nbr" do me = create(Omni::UniformDetail); me.uniform_detail_nbr.should_not be_nil end
-    it "display" do me = create(Omni::UniformDetail); me.display.should eq("#{me.uniform_display} - #{me.style_color_display} - #{me.uniform_detail_nbr}") end
+    it "uniform_detail_id" do me.uniform_detail_id.should_not be_nil end
+    it "uniform_detail_nbr" do me.uniform_detail_nbr.should_not be_nil end
+    it "display" do me.display.should eq("#{me.uniform_display} - #{me.style_color_display} - #{me.uniform_detail_nbr}") end
   end
 
   describe "lookups" do
@@ -39,7 +40,7 @@ describe "uniform_detail" do
   end
 
   describe "has_many" do
-    # it "notes" do me = create(Omni::UniformDetail); c = create(Buildit::Note, notable_type: 'Omni::UniformDetail',notable_id: me.style_id); me.notes.count.should eq(1) end
+    # it "notes" do c = create(Buildit::Note, notable_type: 'Omni::UniformDetail',notable_id: me.style_id); me.notes.count.should eq(1) end
   end
 
   describe "indexing" do
@@ -143,14 +144,14 @@ describe "uniform_detail" do
       u = create(Omni::Uniform)
       me = create(Omni::UniformDetail, uniform_id: u.uniform_id, from_grade_id: g.grade_id, thru_grade_id: g.grade_id, style_color_id: sc.style_color_id)
       me.activate
-      u.lookups.count.should eq(1)
+      u.uniform_lookups.count.should eq(1)
     end
 
     it "remove lookups on close" do
       u = create(Omni::Uniform)
       me = create(Omni::UniformDetail, uniform_id: u.uniform_id)
       me.close
-      u.lookups.count.should eq(0)
+      u.uniform_lookups.count.should eq(0)
     end
 
   end
@@ -160,7 +161,7 @@ describe "uniform_detail" do
       u = create(Omni::Uniform)
       me = create(Omni::UniformDetail, uniform_id: u.uniform_id)
       me.close
-      u.lookups.count.should eq(0)
+      u.uniform_lookups.count.should eq(0)
     end
   end
 

@@ -3729,6 +3729,7 @@ ActiveRecord::Schema.define(version: 20140221155100) do
     t.string  "description",                    limit: 4000
     t.string  "state",                          limit: 200
     t.string  "school_year",                    limit: 200
+    t.decimal "discount_percent",                    precision: 11, scale: 2
     t.decimal "teacher_discount_percent",                    precision: 11, scale: 2
     t.decimal "administrator_discount_percent",              precision: 11, scale: 2
     t.boolean "is_discount_in_store"

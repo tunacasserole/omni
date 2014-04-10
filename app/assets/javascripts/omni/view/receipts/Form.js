@@ -127,22 +127,20 @@ Ext.define('Omni.view.receipts.Form', {
           }, {
             xtype: 'label',
             text: 'length of appointment in minutes.',
-            cls: 'instruction'
+            iconCls: 'instruction'
           }, {
             xtype: 'datefield',
             name: 'start_date',
             fieldLabel: this.start_dateLabel,
             allowBlank: true,
             disabled: true
-          },
-          {
+          }, {
             xtype: 'datefield',
             name: 'accept_date',
             fieldLabel: this.accept_dateLabel,
             allowBlank: true,
             disabled: true
-          },
-          {
+          }, {
             xtype: 'buildit-Locator',
             store: Ext.create('Buildit.store.User', {
               pageSize: 20
@@ -155,15 +153,13 @@ Ext.define('Omni.view.receipts.Form', {
             fieldLabel: this.completed_by_user_idLabel,
             allowBlank: true,
             disabled: true
-          },
-          {
+          }, {
             xtype: 'datefield',
             name: 'complete_date',
             fieldLabel: this.complete_dateLabel,
             allowBlank: true,
             disabled: true
-          },
-          {
+          }, {
             xtype: 'buildit-Locator',
             store: Ext.create('Buildit.store.User', {
               pageSize: 20
@@ -176,8 +172,7 @@ Ext.define('Omni.view.receipts.Form', {
             fieldLabel: this.accepted_by_user_idLabel,
             allowBlank: true,
             disabled: true
-          },
-          {
+          }, {
             xtype: 'buildit-Locator',
             name: 'allocation_profile_id',
             fieldLabel: this.allocation_profile_idLabel,
@@ -191,7 +186,7 @@ Ext.define('Omni.view.receipts.Form', {
             valueField: 'allocation_profile_id',
             itemTpl: '{display}'
           }
-          ]
+        ]
       }, {
         xtype: 'fieldset',
         title: 'Shipment Information',
@@ -288,20 +283,19 @@ Ext.define('Omni.view.receipts.Form', {
 
     // ACTIONS (Start) =====================================================================
     Ext.apply(this, {
-      actions: [
-        {
-          tooltip    : 'Upload',
-          iconCls    : 'icon-upload-alt',
-          xtype      : 'button',
-          listeners  : {
-            beforerender  : this.prepareUploadAction,
-            click         : this.onUploadAction,
-            scope         : me
+      actions: [{
+          tooltip: 'Upload',
+          iconCls: 'fa fa-cloud-upload',
+          xtype: 'button',
+          listeners: {
+            beforerender: this.prepareUploadAction,
+            click: this.onUploadAction,
+            scope: me
           }
-        },
-        {
+        }, {
           tooltip: 'Accept',
-            xtype: 'button',
+          iconCls: 'fa fa-arrow-circle-o-down',
+          xtype: 'button',
           listeners: {
             beforerender: this.prepareAcceptAction,
             click: this.onAcceptAction,
@@ -309,7 +303,7 @@ Ext.define('Omni.view.receipts.Form', {
           }
         }, {
           tooltip: 'Start',
-          cls: 'submit',
+          iconCls: 'fa fa-caret-square-o-right',
           xtype: 'button',
           listeners: {
             beforerender: this.prepareStartAction,
@@ -318,7 +312,7 @@ Ext.define('Omni.view.receipts.Form', {
           }
         }, {
           tooltip: 'Receive',
-          cls: 'close-event',
+          iconCls: 'fa fa-arrow-circle-down',
           xtype: 'button',
           listeners: {
             beforerender: this.prepareReceiveAction,
@@ -327,7 +321,7 @@ Ext.define('Omni.view.receipts.Form', {
           }
         }, {
           tooltip: 'Complete',
-          cls: 'close',
+          iconCls: 'fa fa-times-circle-o',
           xtype: 'button',
           listeners: {
             beforerender: this.prepareCompleteAction,
@@ -336,7 +330,7 @@ Ext.define('Omni.view.receipts.Form', {
           }
         }, {
           tooltip: 'Print',
-          iconCls: 'icon-paperclip',
+          iconCls: 'fa fa-print',
           xtype: 'button',
           listeners: {
             beforerender: this.preparePrintAction,
@@ -345,7 +339,7 @@ Ext.define('Omni.view.receipts.Form', {
           }
         }, {
           tooltip: 'Copy Units',
-          cls: 'duplicate',
+          iconCls: 'fa fa-files-o',
           xtype: 'button',
           listeners: {
             beforerender: this.prepareCopyUnitsAction,

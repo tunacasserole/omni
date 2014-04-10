@@ -36,8 +36,8 @@ class Omni::Uniform < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :details,                class_name: 'Omni::UniformDetail',          foreign_key: 'uniform_id'#, :dependent => :delete_all
-  has_many     :lookups,                class_name: 'Omni::UniformLookup',          foreign_key: 'uniform_id'#, :dependent => :delete_all
+  has_many     :uniform_details,                class_name: 'Omni::UniformDetail',          foreign_key: 'uniform_id'#, :dependent => :delete_all
+  has_many     :uniform_lookups,                class_name: 'Omni::UniformLookup',          foreign_key: 'uniform_id'#, :dependent => :delete_all
   belongs_to   :account,                class_name: 'Omni::Account',                foreign_key: 'account_id'
   has_many     :approvals,              class_name: 'Desk::Approval',               foreign_key: 'approvable_id'
   has_many     :notes,                  class_name: 'Buildit::Note',                foreign_key: 'notable_id'
@@ -106,8 +106,8 @@ class Omni::Uniform < ActiveRecord::Base
 
   # STATE HELPERS (Start) =====================================================================
   def do_activate
-    # active all uniform details
-    self.details.each {|x| x.activate}
+    # active all uniform uniform_details
+    self.uniform_details.each {|x| x.activate}
     # log an approval
     self.approvals.create(approvable_type: 'Omni::Uniform', display: 'uniform was approved')
     # closing any other active uniforms to ensure only 1 active uniform per account
@@ -115,9 +115,22 @@ class Omni::Uniform < ActiveRecord::Base
   end
 
   def do_close
-    self.details.each {|x| x.close}
+    self.uniform_details.each {|x| x.close}
   end
   # STATES HELPERS (End)
+
+  # HELPERS (Start) =====================================================================
+  def ppl
+    # retrieve the style display name, pos name, description, and price
+    ppl = []
+    self.uniform_details.each do |x|
+      pl = [x.style.display, x.style.pos_name, x.style.description, x.style.initial_retail_price]
+      puts pl.to_s
+      ppl << pl
+    end
+    ppl
+  end
+  # HELPERS (End)
 
 end # class Omni::Uniform
 

@@ -15,7 +15,7 @@ class Omni::Contract < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :contract_id,            override: false,        with: :guid
-  default      :contract_nbr,           override: false,        with: :sequence, named: "ACCOUNT_NBR"
+  default      :contract_nbr,           override: false,        with: :sequence, named: "CONTRACT_NBR"
   default      :display,                override: false,        to: lambda{|m| "#{m.account_display}, Contract: #{m.contract_nbr} - #{m.effective_date}"}
   default      :rep_user_id,            override: false,        to: lambda{|m| m.account.rep_user_id if m.account}
   default      :is_exclusive,           override: false,        to: false

@@ -167,7 +167,7 @@ Ext.define('Omni.view.projections.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'fa fa-check-square-o',
+        iconCls: 'fa fa-times-circle-o',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,

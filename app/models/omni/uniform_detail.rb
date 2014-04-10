@@ -26,7 +26,7 @@ class Omni::UniformDetail < ActiveRecord::Base
   default      :from_grade_id,                    override: false,        to: lambda{|m| "#{m.uniform.account.from_grade_id}" if m.uniform && m.uniform.account}
   default      :thru_grade_id,                    override: false,        to: lambda{|m| "#{m.uniform.account.thru_grade_id}" if m.uniform && m.uniform.account}
   default      :display,                          override: false,        to: lambda{|m| "#{m.uniform_display} - #{m.style_color_display} - #{m.uniform_detail_nbr}"}
-  default      :discount_amount,                  override: false,        to: 0
+  # default      :discount_amount,                  override: false,        to: 0
   default      :is_destroyed,                     override: false,        to: false
   default      :is_required_male,                 override: false,        to: false
   default      :is_required_female,               override: false,        to: false

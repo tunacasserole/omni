@@ -142,18 +142,18 @@ Ext.define('Omni.view.projection_details.Explorer', {
           flex         : 1,
           sortable     : false
         },
-        {
-          header       : this.custom_needLabel,
-          dataIndex    : 'custom_need',
-          flex         : 1,
-          sortable     : false
-        },
-        {
-          header       : this.generic_needLabel,
-          dataIndex    : 'generic_need',
-          flex         : 1,
-          sortable     : false
-        },
+        // {
+        //   header       : this.custom_needLabel,
+        //   dataIndex    : 'custom_need',
+        //   flex         : 1,
+        //   sortable     : false
+        // },
+        // {
+        //   header       : this.generic_needLabel,
+        //   dataIndex    : 'generic_need',
+        //   flex         : 1,
+        //   sortable     : false
+        // },
         {
           header       : this.coverage_completeLabel,
           dataIndex    : 'coverage_complete',

@@ -64,6 +64,8 @@ group :test do
   gem 'factory_girl_rails' # - an alternative to fabrication. Nice and mature fixture replacement. Spiritual ancestor of fabrication.
   gem 'guard-rspec' # - fantastic gem that monitors file changes and invokes tasks based on them. Loaded with lots of useful extension. Far superior to autotest and watchr.
   gem 'rb-fsevent'
+  # gem 'minitest'
+  # gem 'turn'
   # gem 'zeus-parallel_tests'
 end
 

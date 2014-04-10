@@ -36,7 +36,8 @@ Ext.define('Omni.view.skus.Inspector', {
              {
                sku_id:   {equal_to: me.record.get('sku_id')}
              }
-          }
+          },
+          showBadge: true
         }
         ,{
           title: 'Inventory',
@@ -45,7 +46,8 @@ Ext.define('Omni.view.skus.Inspector', {
              {
                sku_id:   {equal_to: me.record.get('sku_id')}
              }
-          }
+          },
+          showBadge: true
         }
         ,{
           title: 'Prices',
@@ -54,7 +56,8 @@ Ext.define('Omni.view.skus.Inspector', {
              {
                sku_id:   {equal_to: me.record.get('sku_id')}
              }
-          }
+          },
+          showBadge: true
         }
         ,{
           title: 'Suppliers',
@@ -63,7 +66,8 @@ Ext.define('Omni.view.skus.Inspector', {
              {
                sku_id:   {equal_to: me.record.get('sku_id')}
              }
-          }
+          },
+          showBadge: true
         }
         // ,{
         //   title: 'BOMs',

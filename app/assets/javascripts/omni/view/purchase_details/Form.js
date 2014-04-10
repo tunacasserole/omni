@@ -151,7 +151,8 @@ Ext.define('Omni.view.purchase_details.Form', {
               displayField      : 'display',
               queryField        : 'display',
               valueField        : 'allocation_profile_id',
-              itemTpl           : '{display}'
+              itemTpl           : '{display}',
+              gotoTarget        : 'omni-allocation_profiles-inspector'
             }
 
             // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }
@@ -287,7 +288,7 @@ Ext.define('Omni.view.purchase_details.Form', {
       actions: [
         {
           xtype      : 'button',
-          iconCls    : 'icon-arrow-down',
+          iconCls: 'fa fa-arrow-circle-down',
           tooltip    : 'Receive Allocation',
           listeners  : {
             beforerender  : this.prepareReceiveAction,
@@ -297,7 +298,7 @@ Ext.define('Omni.view.purchase_details.Form', {
         },
         {
           xtype      : 'button',
-          iconCls    : 'icon-arrow-up',
+          iconCls: 'fa fa-share-square-o',
           tooltip    : 'Release Allocation',
           listeners  : {
             beforerender  : this.prepareReleaseAction,
@@ -307,7 +308,7 @@ Ext.define('Omni.view.purchase_details.Form', {
         },
         {
           xtype      : 'button',
-          iconCls    : 'icon-thumbs-up',
+          iconCls    : 'fa fa thumbs-up',
           tooltip    : 'Approve',
           listeners  : {
             beforerender  : this.prepareApproveAction,
@@ -317,7 +318,7 @@ Ext.define('Omni.view.purchase_details.Form', {
         },
         {
           xtype      : 'button',
-          iconCls    : 'icon-accountmap',
+          iconCls: 'fa fa-random',
           tooltip    : 'Allocate',
           listeners  : {
             beforerender  : this.prepareAllocateAction,
@@ -327,7 +328,7 @@ Ext.define('Omni.view.purchase_details.Form', {
         },
          {
           xtype      : 'button',
-          cls        : 'close',
+          iconCls: 'fa fa-times-circle-o',
           tooltip    : 'Cancel',
           listeners  : {
             beforerender  : this.prepareCancelAction,

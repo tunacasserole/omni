@@ -53,39 +53,36 @@ describe "projection" do
       me.projection_details.count.should eq(0)
     end
 
-    it "build details for test data", focus: true do
-      puts "== #{Time.now.strftime("%H:%M:%S").yellow}: setting up data"
-      n = 2 # target is 10
-      skus_per_style = 2 # target is 10
-      prof = create(Omni::ForecastProfile, sales_py1_weight: 0.8, sales_py2_weight: 0.15, sales_py3_weight: 0.5)
-      dept = create(Omni::Department)
-      n.times {|i| create(Omni::Classification, department_id: dept.department_id) }
-      dept.classifications.each do |k|
-        n.times {|i| create(Omni::Subclass, classification_id: k.classification_id) }
-        k.subclasses.each do |subclass|
-          n.times {|i| create(Omni::Style, subclass_id: subclass.subclass_id) }
-          subclass.styles.each do |style|
-            skus_per_style.times { |i| create(Omni::Sku, style_id: style.style_id) }
-            style.skus.each do |sku|
-              Omni::Location.all.each { |l| create(Omni::Inventory, sku_id: sku.sku_id, location_id: l.location_id)}
-              # puts " - created sku with inventories"
-            end
-          end
-        end
-      end
+    # it "build details for test data" do
+    #   # puts "== #{Time.now.strftime("%H:%M:%S").yellow}: setting up data"
+    #   n = 1 # target is 10
+    #   skus_per_style = 1 # target is 10
+    #   prof = create(Omni::ForecastProfile, sales_py1_weight: 0.8, sales_py2_weight: 0.15, sales_py3_weight: 0.5)
+    #   dept = create(Omni::Department)
+    #   n.times {|i| create(Omni::Classification, department_id: dept.department_id) }
+    #   dept.classifications.each do |k|
+    #     n.times {|i| create(Omni::Subclass, classification_id: k.classification_id) }
+    #     k.subclasses.each do |subclass|
+    #       n.times {|i| create(Omni::Style, subclass_id: subclass.subclass_id) }
+    #       subclass.styles.each do |style|
+    #         skus_per_style.times { |i| create(Omni::Sku, style_id: style.style_id) }
+    #         style.skus.each do |sku|
+    #           Omni::Location.all.each { |l| create(Omni::Inventory, sku_id: sku.sku_id, location_id: l.location_id)}
+    #           # puts " - created sku with inventories"
+    #         end
+    #       end
+    #     end
+    #   end
 
-      # dept = Omni::Department.where(department_id: dept.department_id).first
-      # run forecast
+    #   # puts "== #{Time.now.strftime("%H:%M:%S").yellow}: starting forecasting #{dept.skus.count} skus with #{dept.inventories.count} inventory rows"
+    #   me = create(Omni::Projection, department_id: dept.department_id, forecast_profile_id: prof.forecast_profile_id);
+    #   me.forecast
+    #   # puts "== #{Time.now.strftime("%H:%M:%S").yellow}: finished forecasting #{dept.skus.count} skus with #{dept.inventories.count} inventory rows"
 
-      puts "== #{Time.now.strftime("%H:%M:%S").yellow}: starting forecasting #{dept.skus.count} skus with #{dept.inventories.count} inventory rows"
-      me = create(Omni::Projection, department_id: dept.department_id, forecast_profile_id: prof.forecast_profile_id);
-      me.forecast
-      puts "== #{Time.now.strftime("%H:%M:%S").yellow}: finished forecasting #{dept.skus.count} skus with #{dept.inventories.count} inventory rows"
+    #   me.projection_details.count.should eq(Omni::Location.count * n * n * n * skus_per_style)
+    # end
 
-      me.projection_details.count.should eq(Omni::Location.count * n * n * n * skus_per_style)
-    end
-
-    # it "build details for seeded data", focus: true do
+    # it "build details for seeded data" do
 
     #   [3].each do |sku_load|
 

@@ -52,23 +52,6 @@ namespace :omni do
       end
     end
 
-    desc "fix sequences"
-    task :sequences   => :environment do |t, args|
-      # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-      @start_time = Time.now
-      Desk::Helper::Sequence.update
-      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-    end
-
-    desc "re sequence existing data"
-    task :re_sequence, [:model] => :environment do |t, args|
-      puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
-      # puts "model is #{args[:model]} and #{args.model}"  # both notations work
-      @start_time = Time.now
-      Omni::Sync::Base.re_sequence(args.model)
-      puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
-    end
-
   end # end of namespace db
 
   namespace :solr do
@@ -123,6 +106,23 @@ namespace :omni do
     end
 
   end # end of namespace solr
+
+  desc "fix all sequences"
+  task :resequence   => :environment do |t, args|
+    # puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    @start_time = Time.now
+    Omni::Util::Sequence.update
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
+  desc "re sequence existing model"
+  task :sequence, [:model] => :environment do |t, args|
+    puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
+    # puts "model is #{args[:model]} and #{args.model}"  # both notations work
+    @start_time = Time.now
+    Omni::Sync::Base.re_sequence(args.model)
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
 
   desc "index"
   task :index, [:model] => :environment do |t, args|
@@ -233,6 +233,12 @@ namespace :omni do
         Omni::Sync::Omni.bts
       end
     end
+  end
+
+  desc "Setup test database - drops, loads schema, migrates and seeds the test db"
+  task :prepare => :environment do
+    system("rake buildit:db:rebuild RAILS_ENV='test'")
+    system("rake omni:resequence RAILS_ENV='test'")
   end
 
   desc "Drops all unused tables from the source"

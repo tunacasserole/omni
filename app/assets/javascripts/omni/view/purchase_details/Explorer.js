@@ -26,7 +26,7 @@ Ext.define('Omni.view.purchase_details.Explorer', {
   // purchase_displayLabel:                  Omni.i18n.model.PurchaseDetail.purchase_display,
   // purchase_idLabel:                       Omni.i18n.model.PurchaseDetail.purchase_id,
   // displayLabel:                           Omni.i18n.model.PurchaseDetail.display,
-  // stateLabel:                             Omni.i18n.model.PurchaseDetail.state,
+  stateLabel:                             Omni.i18n.model.PurchaseDetail.state,
   purchase_detail_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_detail_nbr,
   sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,
   // descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,
@@ -65,14 +65,6 @@ Ext.define('Omni.view.purchase_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [
-        { header: this.purchase_detail_nbrLabel,
-          dataIndex: 'purchase_detail_nbr',
-          flex: 1
-        },
-        { header: this.sku_idLabel,
-          dataIndex: 'sku_display',
-          flex: 1
-        },
         { header: this.stateLabel,
           dataIndex: 'state',
           flex: 1
@@ -102,7 +94,15 @@ Ext.define('Omni.view.purchase_details.Explorer', {
           dataIndex: 'order_pack_size',
           align: 'right',
           flex: 1
-        }
+        },
+        { header: this.purchase_detail_nbrLabel,
+          dataIndex: 'purchase_detail_nbr',
+          flex: 1
+        },
+        { header: this.sku_idLabel,
+          dataIndex: 'sku_display',
+          flex: 3
+        },
       ]
     });
     // COLUMNS (End)

@@ -24,6 +24,7 @@ end
 FactoryGirl.define do
  factory Omni::Account do
   sequence(:account_name) {|n| "test #{n}"}
+  sequence(:school_nbr) {|n| "TEST #{n}"}
  end
  factory Omni::AccountGrade do
   account_id :account
@@ -159,8 +160,7 @@ FactoryGirl.define do
   label_type ['PRICE','SHELF','PARKER_ID'].sample
 end
  factory Omni::Location do
-  sequence(:display)
-
+  sequence(:display) {|n| "test #{n}"}
  end
  factory Omni::LocationUser do
   # sequence(:display) {|n| "test #{n}"}
@@ -222,6 +222,7 @@ end
   projection_id :projection
   sku_id :sku
   location_id :location
+  inventory_id :inventory
  end
  factory Omni::ProjectionLocation do
   projection_id :projection
@@ -303,6 +304,7 @@ end
  factory Omni::SkuAlias do
   sequence(:display)
   sku_id :sku
+  sequence(:sku_alias)
  end
  factory Omni::SkuPrice do
   sequence(:display)
@@ -430,6 +432,7 @@ end
  factory Omni::Uniform do
   sequence(:display)
   account_id :account
+  discount_percent 10
  end
  factory Omni::UniformDetail do
   uniform_id :uniform

@@ -76,8 +76,8 @@ class Omni::Account < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # HOOKS (Start) =======================================================================
-  hook  :after_create,      :note,             10
-  hook  :after_update,      :note,             20
+  # hook  :after_create,      :note,             10
+  # hook  :after_update,      :note,             20
 
   def note
     if self.state_changed?

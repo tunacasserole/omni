@@ -81,6 +81,8 @@ class Omni::SkuSupplier < ActiveRecord::Base
         size = self.master_pack_units
       when "I"
         size = self.inner_pack_units
+      else
+        size = 1
     end
     size > 0 ? size : 1
   end
@@ -89,6 +91,7 @@ class Omni::SkuSupplier < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :sku_id
+    string   :supplier_id
     string   :sku_supplier_id
     string   :display
 

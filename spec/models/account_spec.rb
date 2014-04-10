@@ -15,11 +15,11 @@ describe "account" do
   end
 
   describe "defaults" do
-    it "account_id" do me = create(Omni::Account); me.account_id.should_not be_nil end
-    it "account_nbr" do  me = create(Omni::Account); me.account_nbr.should_not be_nil end
-    it "display" do me = create(Omni::Account); me.display.should eq("#{me.account_name} - #{me.account_nbr}") end
-    it "billing country to USA" do me = create(Omni::Account); me.billing_country.should eq('USA') end
-    it "shipping country to USA" do me = create(Omni::Account); me.shipping_country.should eq('USA') end
+    it "account_id" do me.account_id.should_not be_nil end
+    it "account_nbr" do  me.account_nbr.should_not be_nil end
+    it "display" do me.display.should eq("#{me.account_name}-#{me.school_nbr}") end
+    it "billing country to USA" do me.billing_country.should eq('USA') end
+    it "shipping country to USA" do me.shipping_country.should eq('USA') end
   end
 
   describe "validation should" do
@@ -76,7 +76,7 @@ describe "account" do
     it "grades" do create(Omni::AccountGrade, account_id: me.account_id);                 me.grades.count.should eq(1) end
     it "tax_authorities" do create(Omni::AccountTaxAuthority, account_id: me.account_id); me.tax_authorities.count.should eq(1) end
     it "uniforms" do create(Omni::Uniform, account_id: me.account_id);                            me.uniforms.count.should eq(1) end
-    it "notes" do create(Buildit::Note, notable_type: 'Omni::Account',notable_id: me.account_id); me.notes.count.should eq(2) end
+    it "notes" do create(Buildit::Note, notable_type: 'Omni::Account',notable_id: me.account_id); me.notes.count.should eq(1) end
   end
 
   describe "state machine should" do

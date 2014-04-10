@@ -29,10 +29,10 @@ describe "uniform" do
   end
 
   describe "has_many" do
-    it "details" do create(Omni::UniformDetail, uniform_id: me.uniform_id); me.details.count.should eq(1) end
-    it "lookups" do
+    it "uniform_details" do create(Omni::UniformDetail, uniform_id: me.uniform_id); me.uniform_details.count.should eq(1) end
+    it "uniform_lookups" do
       create(Omni::UniformLookup, uniform_id: me.uniform_id)
-      me.lookups.count.should eq(1)
+      me.uniform_lookups.count.should eq(1)
     end
   end
 
@@ -74,23 +74,32 @@ describe "uniform" do
     it "activate details on activate" do
       create(Omni::UniformDetail, uniform_id: me.uniform_id)
       me.activate
-      me.details.first.state.should eq('active')
+      me.uniform_details.first.state.should eq('active')
     end
 
     it "close details on close" do
       create(Omni::UniformDetail, uniform_id: me.uniform_id)
       me.close
-      me.details.first.state.should eq('closed')
+      me.uniform_details.first.state.should eq('closed')
     end
   end
 
-  describe "delete" do
-    # it "should delete details" do
-    #      #   create(Omni::UniformDetail, uniform_id: me.uniform_id)
-    #   me.delete
-    #   count = Omni::UniformDetail.where(uniform_id: me.uniform_id).count
-    #   count.should eq(0)
-    # end
+  describe "PPL", focus: true do
+    it "should return a product price list for the uniform" do
+
+      5.times do |i|
+        # setup styles and uniform details
+        c = create(Omni::Color)
+        # size = create(Omni::Size)
+        s = create(Omni::Style, description: 'Test Style', initial_retail_price: 999.99, pos_name: 'test pos name')
+        sc = create(Omni::StyleColor, style_id: s.style_id, color_id: c.color_id)
+        # scs = create(Omni::StyleColorSize, style_color_id: sc.style_color_id, size_id: size.size_id)
+        create(Omni::UniformDetail, uniform_id: me.uniform_id, style_id: s.style_id, color_id: c.color_id, style_color_id: sc.style_color_id)
+      end
+      # count = Omni::UniformDetail.where(uniform_id: me.uniform_id).count
+      me.uniform_details.count.should eq(5)
+      me.ppl.count.should eq(5)
+    end
 
     # it "should delete lookups" do
     #      #   create(Omni::UniformLookup, uniform_id: me.uniform_id)

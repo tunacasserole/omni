@@ -5,7 +5,7 @@ class Omni::MarkInventory < ActiveRecord::Base
   # METADATA (End)
 
   # BEHAVIOR (Start) ====================================================================
-  supports_fulltext
+  # supports_fulltext
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
@@ -26,14 +26,14 @@ class Omni::MarkInventory < ActiveRecord::Base
   # ORDERING (End)
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    integer   :stock_nbr
-    string    :size
-    integer   :qoh
+  # searchable do
+  #   integer   :stock_nbr
+  #   string    :size
+  #   integer   :qoh
 
-    text     :stock_nbr, using: :stock_nbr
-    text     :size, using: :size
-  end
+  #   text     :stock_nbr, using: :stock_nbr
+  #   text     :size, using: :size
+  # end
   # INDEXING (End)
 
   # HOOKS (Start) =======================================================================

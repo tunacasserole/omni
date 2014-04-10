@@ -10,7 +10,7 @@ class Omni::Label < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true, uniqueness: true
-  validates    :label_type,                      lookup: 'LABEL_TYPE',                 :allow_nil => false
+  validates    :label_type,                      lookup: 'LABEL_TYPE', allow_nil: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================

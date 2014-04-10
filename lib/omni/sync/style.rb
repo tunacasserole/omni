@@ -56,10 +56,10 @@ class Omni::Sync::Style < Omni::Sync::Base
   end
 end
 
-    data = Omni::Style.all
-    data.each_with_index do |x, i|
-      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
-      style_id = Omni::SkuLoad.where(style_id)
+    # data = Omni::Style.all
+    # data.each_with_index do |x, i|
+    #   puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
+    #   style_id = Omni::SkuLoad.where(style_id)
 
 
 

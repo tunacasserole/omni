@@ -82,6 +82,7 @@ Ext.define('Omni.view.sku_suppliers.Form', {
           displayField: 'display',
           queryField: 'display',
           valueField: 'sku_id',
+          gotoTarget: 'omni-skus-Inspector',
           itemTpl: '{display}'
         }, {
           name: 'supplier_id',
@@ -95,7 +96,8 @@ Ext.define('Omni.view.sku_suppliers.Form', {
           displayField: 'display',
           queryField: 'display',
           valueField: 'supplier_id',
-          itemTpl: '{display}'
+          itemTpl: '{display}',
+          gotoTarget: 'omni-suppliers-Inspector',
         }, {
           name: 'supplier_item_identifier',
           fieldLabel: this.supplier_item_identifierLabel,

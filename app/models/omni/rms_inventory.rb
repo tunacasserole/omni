@@ -69,14 +69,14 @@ class Omni::RmsInventory < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  searchable do
-    string   :id
-    string   :Store_ID
-    string   :Item_ID
+  # searchable do
+  #   string   :id
+  #   string   :Store_ID
+  #   string   :Item_ID
 
-    text     :Store_ID, using: :Store_ID
-    text     :Item_ID, using: :Item_ID
-  end
+  #   text     :Store_ID, using: :Store_ID
+  #   text     :Item_ID, using: :Item_ID
+  # end
   # INDEXING (End)
 
 

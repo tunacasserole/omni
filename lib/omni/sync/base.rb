@@ -107,32 +107,6 @@ class Omni::Sync::Base
     @order_lines = []
   end
 
-  def self.re_sequence(model_name)
-    sequence_code = table_name.chop.upcase + "_NBR"
-    data = "Omni::#{model_name}".constantize.all.order("#{sequence_code}")
-    data.each_with_index {|x| x.send(sequence_code, i + 999)}
-
-    # # reset last_used_nbr in sequences table
-    # seq = Buildit::Sequence.where(sequence_code: sequence_code).first
-    # if seq
-    #   seq.value = new_max
-    #   seq.save
-    # else
-    #   puts "sequence entry not found for #{sequence_code}"
-    # end
-  end
-
-  def self.seq(table_name)
-    sequence_code = table_name.chop.upcase + "_NBR"
-    seq = Buildit::Sequence.where(sequence_code: sequence_code).first
-    if seq
-      seq.value = 1000
-      seq.save
-    else
-      puts "sequence entry not found for #{sequence_code}"
-    end
-  end
-
   def self.table_to_hash(table_name, options={})
     result = []
 
