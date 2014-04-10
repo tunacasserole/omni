@@ -78,9 +78,7 @@ class Omni::DailyResult < ActiveRecord::Base
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :sku_display,                              to: 'sku.display'
-    map :source,                                      to: 'sku.source'
-    map :source_id,                                 to: 'sku.source_id'
+    map :sku_display,                            to: 'sku.display'
     map :location_display,                       to: 'location.display'
   end
   # MAPPED ATTRIBUTES (End)
