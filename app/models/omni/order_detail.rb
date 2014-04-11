@@ -11,14 +11,18 @@ class Omni::OrderDetail < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :order_detail_nbr,            presence: true, uniqueness: true
-  validates    :display,                     presence: true, uniqueness: true
+  # validates    :display,                     presence: true, uniqueness: true
   validates    :sku_id,                      presence: true
   validates    :delivery_method,             presence: true
+  validates    :price_type,                  lookup: 'PRICE_TYPE', allow_nil: true
+  validates    :customer_discount_reason,    lookup: 'CUSTOMER_DISCOUNT_REASON', allow_nil: true
+  validates    :customer_return_reason,      lookup: 'CUSTOMER_RETURN_REASON', allow_nil: true
+
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default      :order_detail_id,                  override: false,        with: :guid
-  default      :display,                          override: false,        to: lambda{|m| "#{m.order_display} - #{m.sku_display}"}
+  default      :display,                          override: false,        to: lambda{|m| "#{m.order_display} - #{m.order_detail_nbr} - #{m.sku_display}"}
   default      :order_detail_nbr,                 override: false,        with: :sequence,  named: "ORDER_DETAIL_NBR"
   default      :is_residential,                   override: false,        to: false
   default      :is_commercial,                    override: false,        to: false
@@ -88,6 +92,7 @@ class Omni::OrderDetail < ActiveRecord::Base
     string   :order_id
     string   :order_detail_id
     string   :order_detail_nbr
+    string   :sku_id
     string   :sku_display do sku.display if sku end
     string   :pickup_location_display do pickup_location.display if pickup_location end
     string   :account_display do account.display if account end

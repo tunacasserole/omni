@@ -23,7 +23,7 @@ Ext.define('Omni.view.system_options.Explorer', {
   store:          Ext.create('Omni.store.SystemOption'),
 
   contextMenuConfig:{
-    xtype:        'omni-system_options-ExplorerContextMenu',
+    xtype:        'buildit-explorer-ContextMenu',
   },
 
   inspectorConfig: {

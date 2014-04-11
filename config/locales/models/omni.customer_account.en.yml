@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/customer_account:  'CustomerAccount'
+    attributes:
+      omni/customer_account:
+        display_as:                        'CustomerAccount'
+        customer_account_id:               'Customer Account'
+        display:                           'Display'
+        customer_id:                       'Customer'
+        account_id:                        'Account'
+        comment:                           'Comment'
+        is_contact:                        'Is Contact'
+        is_teacher:                        'Is Teacher'
+        is_administrator:                  'Is Administrator'
+        is_destroyed:                      'Is Destroyed'

@@ -34,7 +34,7 @@ Ext.define('Omni.view.orders.Inspector', {
         module: 'samples',
         defaultSearch: {
           with: {
-            style_id: {
+            order_id: {
               equal_to: me.record.get('order_id')
             }
           }

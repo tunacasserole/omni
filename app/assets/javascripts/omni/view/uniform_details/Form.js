@@ -241,7 +241,7 @@ Ext.define('Omni.view.uniform_details.Form', {
     Ext.apply(this, {
       actions: [{
         xtype: 'button',
-        cls: 'approve',
+        iconCls: 'fa fa-thumbs-up',
         // iconCls: 'fa-thumbs-o-up',
         tooltip: 'Activate',
         listeners: {
@@ -251,8 +251,7 @@ Ext.define('Omni.view.uniform_details.Form', {
         }
       }, {
         xtype: 'button',
-        // iconCls: '  fa-thumbs-o-up',
-        cls: 'reject',
+        iconCls: 'fa fa-times-circle-o',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,

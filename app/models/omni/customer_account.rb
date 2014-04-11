@@ -45,12 +45,10 @@ class Omni::CustomerAccount < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :comment
-    boolean  :is_contact
-    boolean  :is_teacher
-    boolean  :is_administrator
-
-    text     :comment_fulltext, using: :comment
+    string :customer_id
+    string :account_id
+    string :customer_account_id
+    string :comment
   end
 
   # STATES (Start) ====================================================================

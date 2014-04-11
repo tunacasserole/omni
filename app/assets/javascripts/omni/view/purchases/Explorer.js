@@ -1,7 +1,7 @@
 Ext.define('Omni.view.purchases.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-purchases-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-purchases-Explorer',
 
   // EXPLORER INIT (Start) ===============================================================
   allowFind: true,
@@ -9,10 +9,10 @@ Ext.define('Omni.view.purchases.Explorer', {
   store: Ext.create('Omni.store.Purchase'),
 
   contextMenuConfig: {
-    xtype: 'omni-purchases-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu',
   },
 
-  newForms:[{
+  newForms: [{
     xtype: 'omni-purchases-Form'
   }],
 
@@ -22,48 +22,48 @@ Ext.define('Omni.view.purchases.Explorer', {
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================
-  purchase_idLabel:                       Omni.i18n.model.Purchase.purchase_id,
-  displayLabel:                           Omni.i18n.model.Purchase.display,
-  purchase_nbrLabel:                      Omni.i18n.model.Purchase.purchase_nbr,
-  supplier_idLabel:                       Omni.i18n.model.Purchase.supplier_id,
-  location_idLabel:                       Omni.i18n.model.Purchase.location_id,
-  purchase_typeLabel:                     Omni.i18n.model.Purchase.purchase_type,
-  purchase_sourceLabel:                   Omni.i18n.model.Purchase.purchase_source,
-  stateLabel:                             Omni.i18n.model.Purchase.state,
-  order_dateLabel:                        Omni.i18n.model.Purchase.order_date,
-  ordered_by_user_idLabel:                Omni.i18n.model.Purchase.ordered_by_user_id,
-  ship_dateLabel:                         Omni.i18n.model.Purchase.ship_date,
-  delivery_dateLabel:                     Omni.i18n.model.Purchase.delivery_date,
-  cancel_not_shipped_by_dateLabel:        Omni.i18n.model.Purchase.cancel_not_shipped_by_date,
-  cancel_not_received_by_dateLabel:       Omni.i18n.model.Purchase.cancel_not_received_by_date,
-  approval_1_dateLabel:                   Omni.i18n.model.Purchase.approval_1_date,
-  approval_2_dateLabel:                   Omni.i18n.model.Purchase.approval_2_date,
-  approval_3_dateLabel:                   Omni.i18n.model.Purchase.approval_3_date,
-  first_receipt_dateLabel:                Omni.i18n.model.Purchase.first_receipt_date,
-  cancelled_dateLabel:                    Omni.i18n.model.Purchase.cancelled_date,
-  payment_termLabel:                      Omni.i18n.model.Purchase.payment_term,
-  freight_termLabel:                      Omni.i18n.model.Purchase.freight_term,
-  fob_pointLabel:                         Omni.i18n.model.Purchase.fob_point,
-  ship_viaLabel:                          Omni.i18n.model.Purchase.ship_via,
-  is_phone_orderLabel:                    Omni.i18n.model.Purchase.is_phone_order,
-  confirmed_by_user_idLabel:              Omni.i18n.model.Purchase.confirmed_by_user_id,
-  master_purchase_idLabel:                Omni.i18n.model.Purchase.master_purchase_id,
-  carrier_supplier_idLabel:               Omni.i18n.model.Purchase.carrier_supplier_id,
-  is_special_orderLabel:                  Omni.i18n.model.Purchase.is_special_order,
-  is_ship_cancelLabel:                    Omni.i18n.model.Purchase.is_ship_cancel,
-  estimated_lead_time_daysLabel:          Omni.i18n.model.Purchase.estimated_lead_time_days,
-  purchase_approver_1_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_1_user_id,
-  purchase_approver_2_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_2_user_id,
-  purchase_approver_3_user_idLabel:       Omni.i18n.model.Purchase.purchase_approver_3_user_id,
-  is_destroyedLabel:                      Omni.i18n.model.Purchase.is_destroyed,
+  purchase_idLabel: Omni.i18n.model.Purchase.purchase_id,
+  displayLabel: Omni.i18n.model.Purchase.display,
+  purchase_nbrLabel: Omni.i18n.model.Purchase.purchase_nbr,
+  supplier_idLabel: Omni.i18n.model.Purchase.supplier_id,
+  location_idLabel: Omni.i18n.model.Purchase.location_id,
+  purchase_typeLabel: Omni.i18n.model.Purchase.purchase_type,
+  purchase_sourceLabel: Omni.i18n.model.Purchase.purchase_source,
+  stateLabel: Omni.i18n.model.Purchase.state,
+  order_dateLabel: Omni.i18n.model.Purchase.order_date,
+  ordered_by_user_idLabel: Omni.i18n.model.Purchase.ordered_by_user_id,
+  ship_dateLabel: Omni.i18n.model.Purchase.ship_date,
+  delivery_dateLabel: Omni.i18n.model.Purchase.delivery_date,
+  cancel_not_shipped_by_dateLabel: Omni.i18n.model.Purchase.cancel_not_shipped_by_date,
+  cancel_not_received_by_dateLabel: Omni.i18n.model.Purchase.cancel_not_received_by_date,
+  approval_1_dateLabel: Omni.i18n.model.Purchase.approval_1_date,
+  approval_2_dateLabel: Omni.i18n.model.Purchase.approval_2_date,
+  approval_3_dateLabel: Omni.i18n.model.Purchase.approval_3_date,
+  first_receipt_dateLabel: Omni.i18n.model.Purchase.first_receipt_date,
+  cancelled_dateLabel: Omni.i18n.model.Purchase.cancelled_date,
+  payment_termLabel: Omni.i18n.model.Purchase.payment_term,
+  freight_termLabel: Omni.i18n.model.Purchase.freight_term,
+  fob_pointLabel: Omni.i18n.model.Purchase.fob_point,
+  ship_viaLabel: Omni.i18n.model.Purchase.ship_via,
+  is_phone_orderLabel: Omni.i18n.model.Purchase.is_phone_order,
+  confirmed_by_user_idLabel: Omni.i18n.model.Purchase.confirmed_by_user_id,
+  master_purchase_idLabel: Omni.i18n.model.Purchase.master_purchase_id,
+  carrier_supplier_idLabel: Omni.i18n.model.Purchase.carrier_supplier_id,
+  is_special_orderLabel: Omni.i18n.model.Purchase.is_special_order,
+  is_ship_cancelLabel: Omni.i18n.model.Purchase.is_ship_cancel,
+  estimated_lead_time_daysLabel: Omni.i18n.model.Purchase.estimated_lead_time_days,
+  purchase_approver_1_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_user_id,
+  purchase_approver_2_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_2_user_id,
+  purchase_approver_3_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_3_user_id,
+  is_destroyedLabel: Omni.i18n.model.Purchase.is_destroyed,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
-  title:     'Purchases',
-  subtitle:  'Create and maintain Purchases',
+  title: 'Purchases',
+  subtitle: 'Create and maintain Purchases',
   // TITLES (End)
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -72,22 +72,49 @@ Ext.define('Omni.view.purchases.Explorer', {
       columns: [
         // { header: this.purchase_idLabel,                   dataIndex: 'purchase_id',                 flex: 1 },
         // { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },
-        { header: this.purchase_nbrLabel,            dataIndex: 'purchase_nbr',          flex: 1 },
-        { header: this.supplier_idLabel,                   dataIndex: 'supplier_display',            flex: 2 },
-        { header: this.location_idLabel,                   dataIndex: 'location_display',            flex: 2 },
+        {
+          header: this.purchase_nbrLabel,
+          dataIndex: 'purchase_nbr',
+          flex: 1
+        }, {
+          header: this.supplier_idLabel,
+          dataIndex: 'supplier_display',
+          flex: 2
+        }, {
+          header: this.location_idLabel,
+          dataIndex: 'location_display',
+          flex: 2
+        },
         // { header: this.purchase_typeLabel,                 dataIndex: 'purchase_type',               flex: 1 },
         // { header: this.purchase_sourceLabel,               dataIndex: 'purchase_source',             flex: 1 },
-        { header: 'Total Order Cost',
+        {
+          header: 'Total Order Cost',
           align: 'right',
           dataIndex: 'total_order_cost',
           flex: 1,
           renderer: Ext.util.Format.usMoney
+        }, {
+          header: this.order_dateLabel,
+          dataIndex: 'order_date',
+          flex: 1,
+          renderer: Ext.util.Format.dateRenderer('m/d/y')
         },
-        { header: this.order_dateLabel,                    dataIndex: 'order_date',                  flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') },
         // { header: this.ordered_by_user_idLabel,            dataIndex: 'ordered_by_user_id',          flex: 1 },
-        { header: this.ship_dateLabel,                     dataIndex: 'ship_date',                   flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.delivery_dateLabel,                 dataIndex: 'delivery_date',               flex: 1,  renderer: Ext.util.Format.dateRenderer('m/d/y') },
-        { header: this.stateLabel,                         dataIndex: 'state',                       flex: 1 },
+        {
+          header: this.ship_dateLabel,
+          dataIndex: 'ship_date',
+          flex: 1,
+          renderer: Ext.util.Format.dateRenderer('m/d/y')
+        }, {
+          header: this.delivery_dateLabel,
+          dataIndex: 'delivery_date',
+          flex: 1,
+          renderer: Ext.util.Format.dateRenderer('m/d/y')
+        }, {
+          header: this.stateLabel,
+          dataIndex: 'state',
+          flex: 1
+        },
         // { header: this.cancel_not_shipped_by_dateLabel,    dataIndex: 'cancel_not_shipped_by_date',  flex: 1 },
         // { header: this.cancel_not_received_by_dateLabel,   dataIndex: 'cancel_not_received_by_date', flex: 1 },
         // { header: this.approval_dateLabel,                 dataIndex: 'approval_date',               flex: 1 },

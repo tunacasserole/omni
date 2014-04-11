@@ -3,12 +3,9 @@ Ext.define('Omni.view.order_details.Form', {
   extend: 'Buildit.ux.Form',
   alias: 'widget.omni-order_details-Form',
 
-
-
   initComponent: function() {
 
     var me = this;
-
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
@@ -97,7 +94,8 @@ Ext.define('Omni.view.order_details.Form', {
             displayField: 'display',
             queryField: 'display',
             valueField: 'sku_id',
-            itemTpl: '{display}'
+            itemTpl: '{display}',
+            gotoTarget: 'omni-skus-Inspector'
           },
           // { name: 'sku_alias_id',                   fieldLabel: this.sku_alias_idLabel,               allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.SkuAlias',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_alias_id', itemTpl:'{display}' },
           {
@@ -110,7 +108,7 @@ Ext.define('Omni.view.order_details.Form', {
           }, {
             name: 'pickup_location_id',
             fieldLabel: this.pickup_location_idLabel,
-            allowBlank: true,
+            allowBlank: false,
             disabled: false,
             xtype: 'buildit-Locator',
             store: Ext.create('Omni.store.Location', {
@@ -119,7 +117,8 @@ Ext.define('Omni.view.order_details.Form', {
             displayField: 'display',
             queryField: 'display',
             valueField: 'location_id',
-            itemTpl: '{display}'
+            itemTpl: '{display}',
+            gotoTarget: 'omni-locations-Inspector'
           }, {
             name: 'ship_to_name',
             fieldLabel: this.ship_to_nameLabel,
@@ -138,7 +137,8 @@ Ext.define('Omni.view.order_details.Form', {
             displayField: 'display',
             queryField: 'display',
             valueField: 'account_id',
-            itemTpl: '{display}'
+            itemTpl: '{display}',
+            gotoTarget: 'omni-accounts-Inspector'
           }, {
             name: 'grade_id',
             fieldLabel: this.grade_idLabel,
@@ -157,7 +157,8 @@ Ext.define('Omni.view.order_details.Form', {
             fieldLabel: this.genderLabel,
             allowBlank: true,
             disabled: false,
-            xtype: 'textfield'
+            xtype: 'buildit-Lookup',
+            category: 'GENDER'
           }, {
             name: 'sales_user_id',
             fieldLabel: this.sales_user_idLabel,
@@ -223,7 +224,8 @@ Ext.define('Omni.view.order_details.Form', {
           fieldLabel: this.ship_state_codeLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'buildit-Lookup',
+          category: 'SHIP_STATE_CODE'
         }, {
           name: 'ship_zip',
           fieldLabel: this.ship_zipLabel,
@@ -303,19 +305,21 @@ Ext.define('Omni.view.order_details.Form', {
           fieldLabel: this.order_unitsLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'numberfield'
         }, {
           name: 'retail_price',
           fieldLabel: this.retail_priceLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'currencyfield',
+          currencySymbol: null,
         }, {
           name: 'sale_price',
           fieldLabel: this.sale_priceLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'currencyfield',
+          currencySymbol: null,
         }]
       }, {
         xtype: 'fieldset',
@@ -337,7 +341,8 @@ Ext.define('Omni.view.order_details.Form', {
           fieldLabel: this.price_typeLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'buildit-Lookup',
+          category: 'PRICE_TYPE'
         }, {
           name: 'is_taxable_product',
           fieldLabel: this.is_taxable_productLabel,
@@ -355,25 +360,29 @@ Ext.define('Omni.view.order_details.Form', {
           fieldLabel: this.shipping_amountLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'currencyfield',
+          currencySymbol: null
         }, {
           name: 'discount_percent',
           fieldLabel: this.discount_percentLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'currencyfield',
+          currencySymbol: null
         }, {
           name: 'discount_amount',
           fieldLabel: this.discount_amountLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'currencyfield',
+          currencySymbol: null
         }, {
           name: 'customer_discount_reason',
           fieldLabel: this.customer_discount_reasonLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'buildit-Lookup',
+          category: 'CUSTOMER_DISCOUNT_REASON'
         }]
       }, {
         xtype: 'fieldset',
@@ -389,13 +398,15 @@ Ext.define('Omni.view.order_details.Form', {
           fieldLabel: this.customer_return_reasonLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'buildit-Lookup',
+          category: 'CUSTOMER_RETURN_REASON'
         }, {
           name: 'customer_cancel_reason',
           fieldLabel: this.customer_cancel_reasonLabel,
           allowBlank: true,
           disabled: false,
-          xtype: 'textfield'
+          xtype: 'buildit-Lookup',
+          category: 'CUSTOMER_CANCEL_REASON'
         }, {
           name: 'cancel_date',
           fieldLabel: this.cancel_dateLabel,
@@ -450,8 +461,6 @@ Ext.define('Omni.view.order_details.Form', {
       newSubtitle: undefined
     });
     // TITLES (End)
-
-
 
     this.callParent();
   }

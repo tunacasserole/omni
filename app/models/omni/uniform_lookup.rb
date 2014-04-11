@@ -56,7 +56,7 @@ class Omni::UniformLookup < ActiveRecord::Base
   mapped_attributes do
     map :uniform_display,                  to: 'uniform.display'
     map :account_display,                  to: 'account.display'
-    map :contract_display,                  to: 'contract.display'
+    # map :contract_display,                  to: 'contract.display'
     map :category_display,                  to: 'category.display'
     map :product_display,                  to: 'product.display'
     map :style_display,                    to: 'style.display'

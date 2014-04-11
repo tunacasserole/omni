@@ -3,12 +3,9 @@ Ext.define('Omni.view.payments.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-payments-Form',
 
-
-
   initComponent:function () {
 
     var me = this;
-
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
@@ -49,14 +46,14 @@ Ext.define('Omni.view.payments.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'payment_nbr',                    fieldLabel: this.payment_nbrLabel,                allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'payment_nbr',                    fieldLabel: this.payment_nbrLabel,                allowBlank: true,  disabled: true,    xtype: 'textfield'        },
+            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
             { name: 'order_id',                       fieldLabel: this.order_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Order',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'order_id', itemTpl:'{display}' },
             { name: 'customer_id',                    fieldLabel: this.customer_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Customer',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'customer_id', itemTpl:'{display}' },
             { name: 'terminal_id',                    fieldLabel: this.terminal_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Terminal',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'terminal_id', itemTpl:'{display}' },
             { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
             { name: 'tender_id',                      fieldLabel: this.tender_idLabel,                  allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Tender',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'tender_id', itemTpl:'{display}' },
             { name: 'voucher_id',                     fieldLabel: this.voucher_idLabel,                 allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Voucher',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'voucher_id', itemTpl:'{display}' },
-            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        }
           ]
         },
         {
@@ -76,7 +73,7 @@ Ext.define('Omni.view.payments.Form', {
             { name: 'ccv_code',                       fieldLabel: this.ccv_codeLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'serial_number',                  fieldLabel: this.serial_numberLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'routing_number',                 fieldLabel: this.routing_numberLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'state_code',                     fieldLabel: this.state_codeLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'state_code',                     fieldLabel: this.state_codeLabel,                 allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup', category: 'STATE_CODE' },
             { name: 'license_number',                 fieldLabel: this.license_numberLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'birth_date',                     fieldLabel: this.birth_dateLabel,                 allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'is_prior_authorized_capture',    fieldLabel: this.is_prior_authorized_captureLabel,allowBlank: true,   disabled: false,    xtype: 'checkbox'         },

@@ -525,28 +525,28 @@ Ext.define('Omni.view.app.Hub', {
         }
 
         // Section: System Admin //
-        , {
-          title: 'system administration',
-          columns: 8,
-          rows: 1,
-          tiles: [{
-            title: 'Tasks',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'product_hierarchy',
-            target: {
-              xtype: 'omni-tasks-Explorer'
-            }
-          }, {
-            title: 'Issues',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'product_hierarchy',
-            target: {
-              xtype: 'omni-issues-Explorer'
-            }
-          }]
-        }
+        // , {
+        //   title: 'system administration',
+        //   columns: 8,
+        //   rows: 1,
+        //   tiles: [{
+          //   title: 'Tasks',
+          //   colspan: 2,
+          //   rowspan: 1,
+          //   cls: 'product_hierarchy',
+          //   target: {
+          //     xtype: 'omni-tasks-Explorer'
+          //   }
+          // }, {
+            // title: 'Issues',
+            // colspan: 2,
+            // rowspan: 1,
+            // cls: 'product_hierarchy',
+            // target: {
+            //   xtype: 'omni-issues-Explorer'
+            // }
+          // }]
+        // }
 
         // Section: web hierarchy //
 

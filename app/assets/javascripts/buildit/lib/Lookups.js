@@ -81,65 +81,6 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
-  storeId   : 'STATE_CODE-lookup-Store',
-  fields    : lookupStoreFields,
-  data      : [
-    ['6267CDFE972A11E2A3D212313B10044E','MA',,'STATE_CODE','Massachusetts',null,true],
-    ['4BF6708E972A11E2A3D212313B10044E','AK',,'STATE_CODE','Alaska',null,true],
-    ['4BF6708E972A11E2A3D212XXXXXBLANK','BLANK',,'STATE_CODE',' ',null,true],
-    ['5769C448972A11E295B122000A9D0283','GA',,'STATE_CODE','Georgia',null,true],
-    ['63B80EE4972A11E2A3D212313B10044E','MD',,'STATE_CODE','Maryland',null,true],
-    ['6DE265A4972A11E2A3D212313B10044E','NE',,'STATE_CODE','Nebraska',null,true],
-    ['6F0E6568972A11E2A3D212313B10044E','NH',,'STATE_CODE','New Hampshire',null,true],
-    ['799D84D2972A11E2A3D212313B10044E','SC',,'STATE_CODE','South Carolina',null,true],
-    ['8426D0D4972A11E295B122000A9D0283','WY',,'STATE_CODE','Wyoming',null,true],
-    ['4D322AF6972A11E295B122000A9D0283','AL',,'STATE_CODE','Alabama',null,true],
-    ['561B4EF4972A11E295B122000A9D0283','FL',,'STATE_CODE','Florida',null,true],
-    ['586D90AE972A11E295B122000A9D0283','HI',,'STATE_CODE','Hawaii',null,true],
-    ['64B97C42972A11E295B122000A9D0283','ME',,'STATE_CODE','Maine',null,true],
-    ['7019AEEA972A11E2A3D212313B10044E','NJ',,'STATE_CODE','New Jersey',null,true],
-    ['78BCD09A972A11E2A3D212313B10044E','RI',,'STATE_CODE','Rhode Island',null,true],
-    ['7AB3BB84972A11E2A3D212313B10044E','SD',,'STATE_CODE','South Dakota',null,true],
-    ['4E4F51AC972A11E2A3D212313B10044E','AR',,'STATE_CODE','Arkansas',null,true],
-    ['59586854972A11E295B122000A9D0283','IA',,'STATE_CODE','Iowa',null,true],
-    ['65C993CE972A11E2A3D212313B10044E','MI',,'STATE_CODE','Michigan',null,true],
-    ['711A752C972A11E295B122000A9D0283','NM',,'STATE_CODE','New Mexico',null,true],
-    ['7BF34B86972A11E2A3D212313B10044E','TN',,'STATE_CODE','Tennessee',null,true],
-    ['8310DD2A972A11E295B122000A9D0283','WV',,'STATE_CODE','West Virginia',null,true],
-    ['4F8CE2A0972A11E295B122000A9D0283','AZ',,'STATE_CODE','Arizona',null,true],
-    ['5A69BEAA972A11E2A3D212313B10044E','ID',,'STATE_CODE','Idaho',null,true],
-    ['66FE17A6972A11E295B122000A9D0283','MN',,'STATE_CODE','Minnesota',null,true],
-    ['72314904972A11E295B122000A9D0283','NV',,'STATE_CODE','Nevada',null,true],
-    ['7D8BDEEA972A11E295B122000A9D0283','TX',,'STATE_CODE','Texas',null,true],
-    ['50621C0E972A11E295B122000A9D0283','CA',,'STATE_CODE','California',null,true],
-    ['5B8E3CD4972A11E295B122000A9D0283','IL',,'STATE_CODE','Illinois',null,true],
-    ['67DB8258972A11E2A3D212313B10044E','MO',,'STATE_CODE','Missouri',null,true],
-    ['73439414972A11E295B122000A9D0283','NY',,'STATE_CODE','New York',null,true],
-    ['7E85AB14972A11E295B122000A9D0283','UT',,'STATE_CODE','Utah',null,true],
-    ['5163F2B2972A11E295B122000A9D0283','CO',,'STATE_CODE','Colorado',null,true],
-    ['5CEBC074972A11E295B122000A9D0283','IN',,'STATE_CODE','Indiana',null,true],
-    ['69109906972A11E2A3D212313B10044E','MS',,'STATE_CODE','Mississippi',null,true],
-    ['74101F16972A11E2A3D212313B10044E','OH',,'STATE_CODE','Ohio',null,true],
-    ['7F6E035A972A11E2A3D212313B10044E','VA',,'STATE_CODE','Virginia',null,true],
-    ['52E27B68972A11E2A3D212313B10044E','CT',,'STATE_CODE','Connecticut',null,true],
-    ['5DDE13C4972A11E2A3D212313B10044E','KS',,'STATE_CODE','Kansas',null,true],
-    ['6A2505FC972A11E2A3D212313B10044E','MT',,'STATE_CODE','Montana',null,true],
-    ['74EF965A972A11E2A3D212313B10044E','OK',,'STATE_CODE','Oklahoma',null,true],
-    ['80333116972A11E2A3D212313B10044E','VT',,'STATE_CODE','Vermont',null,true],
-    ['54049120972A11E2A3D212313B10044E','DC',,'STATE_CODE','District of Columbia',null,true],
-    ['5F0B70E8972A11E295B122000A9D0283','KY',,'STATE_CODE','Kentucky',null,true],
-    ['6B1E6714972A11E2A3D212313B10044E','NC',,'STATE_CODE','North Carolina',null,true],
-    ['762B1E90972A11E295B122000A9D0283','OR',,'STATE_CODE','Oregon',null,true],
-    ['8154E4C2972A11E2A3D212313B10044E','WA',,'STATE_CODE','Washington',null,true],
-    ['55331BD4972A11E295B122000A9D0283','DE',,'STATE_CODE','Delaware',null,true],
-    ['608ED9E6972A11E2A3D212313B10044E','LA',,'STATE_CODE','Louisiana',null,true],
-    ['6CF5E60C972A11E2A3D212313B10044E','ND',,'STATE_CODE','North Dakota',null,true],
-    ['77696992972A11E2A3D212313B10044E','PA',,'STATE_CODE','Pennsylvania',null,true],
-    ['822B15EC972A11E2A3D212313B10044E','WI',,'STATE_CODE','Wisconsin',null,true]
-  ]
-});
-
-Ext.create('Ext.data.ArrayStore', {
   storeId   : 'TENDER_TYPE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
@@ -399,16 +340,6 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
-  storeId   : 'CUSTOMER_ACCOUNT_TYPE-lookup-Store',
-  fields    : lookupStoreFields,
-  data      : [
-    ['78A9DCB2972811E2A3D212313B10044E','NONE',,'CUSTOMER_ACCOUNT_TYPE','None',null,true],
-    ['799ED74E972811E295B122000A9D0283','CONSUMER',,'CUSTOMER_ACCOUNT_TYPE','Consumer',null,true],
-    ['7AB89ACA972811E295B122000A9D0283','SCHOOL',,'CUSTOMER_ACCOUNT_TYPE','School',null,true]
-  ]
-});
-
-Ext.create('Ext.data.ArrayStore', {
   storeId   : 'CUSTOMER_CANCEL_REASON-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
@@ -462,7 +393,10 @@ Ext.create('Ext.data.ArrayStore', {
     ['8F37540A972811E295B122000A9D0283','HOME',,'EMAIL_ADDRESS_TYPE','Home',null,true],
     ['90165B5A972811E295B122000A9D0283','OTHER',,'EMAIL_ADDRESS_TYPE','Other',null,true],
     ['912AE15A972811E295B122000A9D0283','NA',,'EMAIL_ADDRESS_TYPE','Not Assigned',null,true],
-    ['92366ED4972811E295B122000A9D0283','WORK',,'EMAIL_ADDRESS_TYPE','Work',null,true]
+    ['92366ED4972811E295B122000A9D0283','WORK',,'EMAIL_ADDRESS_TYPE','Work',null,true],
+    ['942212F0204011E290E9040CCEDF84BB','TO',,'EMAIL_ADDRESS_TYPE','To',null,true],
+    ['942212F0204011E290E9040CCEDF84ED','CC',,'EMAIL_ADDRESS_TYPE','CC',null,true],
+    ['942212F0204011E290E9040CCEDF84FE','BCC',,'EMAIL_ADDRESS_TYPE','BCC',null,true]
   ]
 });
 
@@ -1014,6 +948,64 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'STATE_CODE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['4BF6708E972A11E2A3D212313B10044E','AK',,'STATE_CODE','Alaska',null,true],
+    ['4D322AF6972A11E295B122000A9D0283','AL',,'STATE_CODE','Alabama',null,true],
+    ['4E4F51AC972A11E2A3D212313B10044E','AR',,'STATE_CODE','Arkansas',null,true],
+    ['4F8CE2A0972A11E295B122000A9D0283','AZ',,'STATE_CODE','Arizona',null,true],
+    ['50621C0E972A11E295B122000A9D0283','CA',,'STATE_CODE','California',null,true],
+    ['5163F2B2972A11E295B122000A9D0283','CO',,'STATE_CODE','Colorado',null,true],
+    ['52E27B68972A11E2A3D212313B10044E','CT',,'STATE_CODE','Connecticut',null,true],
+    ['54049120972A11E2A3D212313B10044E','DC',,'STATE_CODE','District of Columbia',null,true],
+    ['55331BD4972A11E295B122000A9D0283','DE',,'STATE_CODE','Delaware',null,true],
+    ['561B4EF4972A11E295B122000A9D0283','FL',,'STATE_CODE','Florida',null,true],
+    ['5769C448972A11E295B122000A9D0283','GA',,'STATE_CODE','Georgia',null,true],
+    ['586D90AE972A11E295B122000A9D0283','HI',,'STATE_CODE','Hawaii',null,true],
+    ['59586854972A11E295B122000A9D0283','IA',,'STATE_CODE','Iowa',null,true],
+    ['5A69BEAA972A11E2A3D212313B10044E','ID',,'STATE_CODE','Idaho',null,true],
+    ['5B8E3CD4972A11E295B122000A9D0283','IL',,'STATE_CODE','Illinois',null,true],
+    ['5CEBC074972A11E295B122000A9D0283','IN',,'STATE_CODE','Indiana',null,true],
+    ['5DDE13C4972A11E2A3D212313B10044E','KS',,'STATE_CODE','Kansas',null,true],
+    ['5F0B70E8972A11E295B122000A9D0283','KY',,'STATE_CODE','Kentucky',null,true],
+    ['608ED9E6972A11E2A3D212313B10044E','LA',,'STATE_CODE','Louisiana',null,true],
+    ['6267CDFE972A11E2A3D212313B10044E','MA',,'STATE_CODE','Massachusetts',null,true],
+    ['63B80EE4972A11E2A3D212313B10044E','MD',,'STATE_CODE','Maryland',null,true],
+    ['64B97C42972A11E295B122000A9D0283','ME',,'STATE_CODE','Maine',null,true],
+    ['65C993CE972A11E2A3D212313B10044E','MI',,'STATE_CODE','Michigan',null,true],
+    ['66FE17A6972A11E295B122000A9D0283','MN',,'STATE_CODE','Minnesota',null,true],
+    ['67DB8258972A11E2A3D212313B10044E','MO',,'STATE_CODE','Missouri',null,true],
+    ['69109906972A11E2A3D212313B10044E','MS',,'STATE_CODE','Mississippi',null,true],
+    ['6A2505FC972A11E2A3D212313B10044E','MT',,'STATE_CODE','Montana',null,true],
+    ['6B1E6714972A11E2A3D212313B10044E','NC',,'STATE_CODE','North Carolina',null,true],
+    ['6CF5E60C972A11E2A3D212313B10044E','ND',,'STATE_CODE','North Dakota',null,true],
+    ['6DE265A4972A11E2A3D212313B10044E','NE',,'STATE_CODE','Nebraska',null,true],
+    ['6F0E6568972A11E2A3D212313B10044E','NH',,'STATE_CODE','New Hampshire',null,true],
+    ['7019AEEA972A11E2A3D212313B10044E','NJ',,'STATE_CODE','New Jersey',null,true],
+    ['711A752C972A11E295B122000A9D0283','NM',,'STATE_CODE','New Mexico',null,true],
+    ['72314904972A11E295B122000A9D0283','NV',,'STATE_CODE','Nevada',null,true],
+    ['73439414972A11E295B122000A9D0283','NY',,'STATE_CODE','New York',null,true],
+    ['74101F16972A11E2A3D212313B10044E','OH',,'STATE_CODE','Ohio',null,true],
+    ['74EF965A972A11E2A3D212313B10044E','OK',,'STATE_CODE','Oklahoma',null,true],
+    ['762B1E90972A11E295B122000A9D0283','OR',,'STATE_CODE','Oregon',null,true],
+    ['77696992972A11E2A3D212313B10044E','PA',,'STATE_CODE','Pennsylvania',null,true],
+    ['78BCD09A972A11E2A3D212313B10044E','RI',,'STATE_CODE','Rhode Island',null,true],
+    ['799D84D2972A11E2A3D212313B10044E','SC',,'STATE_CODE','South Carolina',null,true],
+    ['7AB3BB84972A11E2A3D212313B10044E','SD',,'STATE_CODE','South Dakota',null,true],
+    ['7BF34B86972A11E2A3D212313B10044E','TN',,'STATE_CODE','Tennessee',null,true],
+    ['7D8BDEEA972A11E295B122000A9D0283','TX',,'STATE_CODE','Texas',null,true],
+    ['7E85AB14972A11E295B122000A9D0283','UT',,'STATE_CODE','Utah',null,true],
+    ['7F6E035A972A11E2A3D212313B10044E','VA',,'STATE_CODE','Virginia',null,true],
+    ['80333116972A11E2A3D212313B10044E','VT',,'STATE_CODE','Vermont',null,true],
+    ['8154E4C2972A11E2A3D212313B10044E','WA',,'STATE_CODE','Washington',null,true],
+    ['822B15EC972A11E2A3D212313B10044E','WI',,'STATE_CODE','Wisconsin',null,true],
+    ['8310DD2A972A11E295B122000A9D0283','WV',,'STATE_CODE','West Virginia',null,true],
+    ['8426D0D4972A11E295B122000A9D0283','WY',,'STATE_CODE','Wyoming',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
   storeId   : 'STATE_TYPE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
@@ -1140,10 +1132,37 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'CUSTOMER_ACCOUNT_TYPE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['799ED74E972811E295B122000A9D0283','CONSUMER',,'CUSTOMER_ACCOUNT_TYPE','Consumer',null,true],
+    ['7AB89ACA972811E295B122000A9D0283','SCHOOL',,'CUSTOMER_ACCOUNT_TYPE','School',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
   storeId   : 'COST_SOURCE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
     ['AOEU8902XXX8XODEHU2312XXPURCCOST','SAMPLE',,'COST_SOURCE','Sample',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'ATTACHMENT_TYPE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['63991211204011E290E9040CCEDF84BB','BASIC',,'ATTACHMENT_TYPE','Basic',null,true],
+    ['98A000EE204011E290E9040CCEDF842E','GENERAL',0,'ATTACHMENT_TYPE','General',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'BOOLEAN_YES_NO-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['323244F0204011EFCFE9040CCEDF842E','true',0,'BOOLEAN_YES_NO','Yes',null,true],
+    ['323244F0204011EB2BE9040CCEDF842E','false',0,'BOOLEAN_YES_NO','No',null,true]
   ]
 });
 
@@ -1155,6 +1174,51 @@ Ext.create('Ext.data.ArrayStore', {
     ['03122456ENHDATAMENTXXXOEUIXX1234','DATA',,'CASE_TYPE','Data conversion or cleanup',null,true],
     ['03122456ENHANCEMENTXXXXXXXXX1234','ENHANCEMENT',,'CASE_TYPE','Enhancement, new feature or custom development',null,true],
     ['03122456EQUESTIONNTXXXXXXXXX1234','QUESTION',,'CASE_TYPE','Question or explanation needed',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'DIRECTION_CODE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['632212F0204011E290E9040CCEDF84BB','OUTBOUND',,'DIRECTION_CODE','Outbound',null,true],
+    ['632212F0204011E290E9040CCEDF84DD','INBOUND',,'DIRECTION_CODE','Inbound',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'NOTE_TYPE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['323244F0204011E290E9040CCEDF842E','0',0,'NOTE_TYPE','General',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'PRIORITY_CODE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['335212F0204011E290E9040CCEDF84BB','LOW',,'PRIORITY_CODE','Low',null,true],
+    ['335212F0204011E290E9040CCEDF84DD','NORMAL',,'PRIORITY_CODE','Normal',null,true],
+    ['335212F0204011E290E9040CCEDF84EF','HIGH',,'PRIORITY_CODE','High',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'USER_STATUS-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['98A444F0204011E290E9040CCEDF842E','0',0,'USER_STATUS','Active',null,true],
+    ['98A454F0204011E290E9040CCEDF842E','1',1,'USER_STATUS','Inactive',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'SSO_PLUGIN_CODE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['98A212F0204011E290E9040CCCCC842E','LDAP',,'SSO_PLUGIN_CODE','LDAP Authentication',null,true],
+    ['98A212F0204011E290E9040CED2C842E','SENTRY',,'SSO_PLUGIN_CODE','Sentry Remote LDAP',null,true]
   ]
 });
 

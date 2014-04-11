@@ -69,6 +69,12 @@ class Omni::Payment < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :payment_id
+    string   :order_id
+    string   :customer_id
+    string   :terminal_id
+    string   :location_id
+    string   :voucher_id
     string   :order_display do order.display if order end
     string   :customer_display do customer.display if customer end
     string   :terminal_display do terminal.display if terminal end

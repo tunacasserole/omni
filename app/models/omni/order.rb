@@ -69,9 +69,14 @@ class Omni::Order < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :order_id
+    string   :location_id
+    string   :terminal_id
+    string   :customer_id
+    string   :order_nbr
+
     string   :location_display do location.display if location end
     string   :terminal_display do terminal.display if terminal end
-    string   :order_nbr
     string   :customer_display do customer.display if customer end
     date     :order_start_date
     date     :order_date

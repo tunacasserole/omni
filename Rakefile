@@ -10,10 +10,7 @@ namespace :omni do
 
   desc "dump existing data into seed files"
   task :dump, [:model] => :environment do |t, args|
-    puts "== " << Time.now.strftime("%H:%M:%S").yellow << " starting ============ "
-    @start_time = Time.now
-    Omni::Seed::Base.dump_to_seed(args.model)
-    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+    Omni::Util::Seed.go(args.model)
   end
 
   desc "run existing migration files containing the supplied tag."
@@ -57,13 +54,6 @@ namespace :omni do
     system("rake omni:resequence RAILS_ENV='test'")
   end
 
-  desc ""
-  task :prepare => :environment do
-    # system("rake buildit:db:rebuild RAILS_ENV='test'")
-    system("rake buildit:db:migrate RAILS_ENV='test'")
-    system("rake omni:resequence RAILS_ENV='test'")
-  end
-
   desc 'Indexes the given model'
   task :index, [:model] => :environment do |t,args|
     puts "Indexing Started\n\n"
@@ -71,7 +61,7 @@ namespace :omni do
     started_at = Time.now
 
     puts "! Indexing #{args.model}"
-    system("rake sunspot:reindex[1000,Omni::#{args.model}]")
+    system("rake sunspot:reindex[1000,#{Omni::Util::Gem.full_model_name(args.model)}]") unless ['Lookup','Sequence'].include? args.model
     puts "! Indexed #{args.model} in #{Time.now - started_at}s"
   end
 
@@ -82,11 +72,11 @@ namespace :omni do
     started_at = Time.now
 
     ActiveRecord::Base.descendants.sort { |x, y| x.name <=> y.name }.each do |klass|
-      args.model && klass.name != "Omni::#{args.model}" ? next : args.model = nil
+      args.model && klass.name != Omni::Util::Gem.full_model_name(args.model) ? next : args.model = nil
 
       if klass.searchable?
         puts "! Indexing #{klass.name}"
-        klass.count > 1000 ? system("rake sunspot:reindex[1000,#{klass.name}]") : klass.reindex(batch_size: nil)
+        klass.count > 5000 ? system("rake sunspot:reindex[1000,#{klass.name}]") : klass.reindex(batch_size: nil)
       end
     end
 
@@ -94,7 +84,7 @@ namespace :omni do
 
   end
 
-  desc "re sequence existing model"
+  desc "update sequences table for current model"
   task :sequence, [:model] => :environment do |t, args|
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     @start_time = Time.now

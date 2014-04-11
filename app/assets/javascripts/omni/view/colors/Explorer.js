@@ -1,7 +1,7 @@
 Ext.define('Omni.view.colors.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-colors-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-colors-Explorer',
 
   // EXPLORER INIT (Start) ===============================================================
   allowFind: true,
@@ -9,10 +9,10 @@ Ext.define('Omni.view.colors.Explorer', {
   store: Ext.create('Omni.store.Color'),
 
   contextMenuConfig: {
-    xtype: 'omni-colors-ExplorerContextMenu'
+    xtype: 'buildit-explorer-ContextMenu',
   },
 
-  newForms:[{
+  newForms: [{
     xtype: 'omni-colors-Form'
   }],
 
@@ -23,24 +23,24 @@ Ext.define('Omni.view.colors.Explorer', {
 
   // LABELS (Start) ======================================================================
   // color_idLabel:                          Omni.i18n.model.Color.color_id,
-  displayLabel:                           Omni.i18n.model.Color.display,
-  color_nbrLabel:                         Omni.i18n.model.Color.color_nbr,
-  descriptionLabel:                       Omni.i18n.model.Color.description,
-  short_nameLabel:                        Omni.i18n.model.Color.short_name,
-  concatenated_nameLabel:                 Omni.i18n.model.Color.concatenated_name,
-  color_familyLabel:                      Omni.i18n.model.Color.color_family,
-  is_plaidLabel:                          Omni.i18n.model.Color.is_plaid,
-  is_stripeLabel:                         Omni.i18n.model.Color.is_stripe,
-  is_enabledLabel:                        Omni.i18n.model.Color.is_enabled,
+  displayLabel: Omni.i18n.model.Color.display,
+  color_nbrLabel: Omni.i18n.model.Color.color_nbr,
+  descriptionLabel: Omni.i18n.model.Color.description,
+  short_nameLabel: Omni.i18n.model.Color.short_name,
+  concatenated_nameLabel: Omni.i18n.model.Color.concatenated_name,
+  color_familyLabel: Omni.i18n.model.Color.color_family,
+  is_plaidLabel: Omni.i18n.model.Color.is_plaid,
+  is_stripeLabel: Omni.i18n.model.Color.is_stripe,
+  is_enabledLabel: Omni.i18n.model.Color.is_enabled,
   // is_destroyedLabel:                      Omni.i18n.model.Color.is_destroyed,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
-  title:     'Colors',
-  subtitle:  'Create and maintain Colors',
+  title: 'Colors',
+  subtitle: 'Create and maintain Colors',
   // TITLES (End)
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -48,14 +48,39 @@ Ext.define('Omni.view.colors.Explorer', {
     Ext.apply(this, {
       columns: [
         // { header: this.color_idLabel,                      dataIndex: 'color_id',                    flex: 1 },
-        { header: this.color_nbrLabel,                     dataIndex: 'color_nbr',                   flex: 1 },
-        { header: this.displayLabel,                       dataIndex: 'display',                     flex: 1 },
-        { header: this.short_nameLabel,                    dataIndex: 'short_name',                  flex: 1 },
-        { header: this.concatenated_nameLabel,             dataIndex: 'concatenated_name',           flex: 1 },
-        { header: this.color_familyLabel,                  dataIndex: 'color_family',                flex: 1 },
-        { header: this.is_plaidLabel,                      dataIndex: 'is_plaid',                    flex: 1 },
-        { header: this.is_stripeLabel,                     dataIndex: 'is_stripe',                   flex: 1 },
-        { header: this.is_enabledLabel,                    dataIndex: 'is_enabled',                  flex: 1 },
+        {
+          header: this.color_nbrLabel,
+          dataIndex: 'color_nbr',
+          flex: 1
+        }, {
+          header: this.displayLabel,
+          dataIndex: 'display',
+          flex: 1
+        }, {
+          header: this.short_nameLabel,
+          dataIndex: 'short_name',
+          flex: 1
+        }, {
+          header: this.concatenated_nameLabel,
+          dataIndex: 'concatenated_name',
+          flex: 1
+        }, {
+          header: this.color_familyLabel,
+          dataIndex: 'color_family',
+          flex: 1
+        }, {
+          header: this.is_plaidLabel,
+          dataIndex: 'is_plaid',
+          flex: 1
+        }, {
+          header: this.is_stripeLabel,
+          dataIndex: 'is_stripe',
+          flex: 1
+        }, {
+          header: this.is_enabledLabel,
+          dataIndex: 'is_enabled',
+          flex: 1
+        },
       ]
     });
     // COLUMNS (End)

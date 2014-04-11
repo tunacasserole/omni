@@ -12,12 +12,12 @@ Ext.define('Omni.view.skus.Explorer', {
     Ext.apply(this, {
 
       allowFind: true,
-      allowNew: false,
+      allowNew: true,
 
       store: Ext.create('Omni.store.Sku'),
 
       contextMenuConfig: {
-        xtype: 'omni-skus-ExplorerContextMenu',
+        xtype: 'buildit-explorer-ContextMenu'
       },
 
       newForms: [{
@@ -29,37 +29,37 @@ Ext.define('Omni.view.skus.Explorer', {
         xtype: 'omni-skus-Inspector'
       },
 
-     // filters: [
-     //    {
-     //      showAll  : 'Departments',
-     //      items    : [
-     //        ['department_accessories',     "ACCESSORIES"],
-     //        ['department_activewear',      "ACTIVEWEAR"],
-     //        ['department_components',      "COMPONENTS"],
-     //        ['department_footwear',        "FOOTWEAR"],
-     //        ['department_girls_specialty', "GIRLS SPECIALTY"],
-     //        ['department_knit_tops',       "KNIT TOPS"],
-     //        ['department_outerwear',        "OUTERWEAR"],
-     //        ['department_pants_and_shorts', "PANTS AND SHORTS"],
-     //        ['department_woven_tops',       "WOVEN TOPS"]
-     //      ]
-     //    }
-     //  ],
+      // filters: [
+      //    {
+      //      showAll  : 'Departments',
+      //      items    : [
+      //        ['department_accessories',     "ACCESSORIES"],
+      //        ['department_activewear',      "ACTIVEWEAR"],
+      //        ['department_components',      "COMPONENTS"],
+      //        ['department_footwear',        "FOOTWEAR"],
+      //        ['department_girls_specialty', "GIRLS SPECIALTY"],
+      //        ['department_knit_tops',       "KNIT TOPS"],
+      //        ['department_outerwear',        "OUTERWEAR"],
+      //        ['department_pants_and_shorts', "PANTS AND SHORTS"],
+      //        ['department_woven_tops',       "WOVEN TOPS"]
+      //      ]
+      //    }
+      //  ],
     });
     // EXPLORER INIT (End)
 
-  // LABELS (Start) ======================================================================
-  Ext.applyIf(this, {
-    displayLabel: Omni.i18n.model.Sku.display,
-    sku_nbrLabel: Omni.i18n.model.Sku.sku_nbr,
-    stateLabel: Omni.i18n.model.Sku.state,
-    account_idLabel: Omni.i18n.model.Sku.account_id,
-    style_idLabel: Omni.i18n.model.Sku.style_id,
-    conversion_typeLabel: Omni.i18n.model.Sku.conversion_type,
-    color_idLabel: Omni.i18n.model.Sku.color_id,
-    size_idLabel: Omni.i18n.model.Sku.size_id,
-  });
-  // LABELS (End)
+    // LABELS (Start) ======================================================================
+    Ext.applyIf(this, {
+      displayLabel: Omni.i18n.model.Sku.display,
+      sku_nbrLabel: Omni.i18n.model.Sku.sku_nbr,
+      stateLabel: Omni.i18n.model.Sku.state,
+      account_idLabel: Omni.i18n.model.Sku.account_id,
+      style_idLabel: Omni.i18n.model.Sku.style_id,
+      conversion_typeLabel: Omni.i18n.model.Sku.conversion_type,
+      color_idLabel: Omni.i18n.model.Sku.color_id,
+      size_idLabel: Omni.i18n.model.Sku.size_id,
+    });
+    // LABELS (End)
 
 
 
@@ -90,11 +90,11 @@ Ext.define('Omni.view.skus.Explorer', {
         dataIndex: 'size_display',
         flex: 1,
         sortable: false
-      // }, {
-      //   header: this.sku_nbrLabel,
-      //   dataIndex: 'sku_nbr',
-      //   flex: 1,
-      //   sortable: false
+        // }, {
+        //   header: this.sku_nbrLabel,
+        //   dataIndex: 'sku_nbr',
+        //   flex: 1,
+        //   sortable: false
       }, {
         header: this.stateLabel,
         dataIndex: 'state',
@@ -104,12 +104,12 @@ Ext.define('Omni.view.skus.Explorer', {
     });
     // COLUMNS (End)
 
-  // TITLES (Start) ======================================================================
-  Ext.apply(this, {
-    title: 'Sku',
-    subtitle: 'A Product that is stocked and/or sold',
-  });
-  // TITLES (End)
+    // TITLES (Start) ======================================================================
+    Ext.apply(this, {
+      title: 'Sku',
+      subtitle: 'A Product that is stocked and/or sold',
+    });
+    // TITLES (End)
 
 
     this.callParent();

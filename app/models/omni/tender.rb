@@ -71,6 +71,8 @@ class Omni::Tender < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :tender_id
+
     string   :display
     string   :description
     string   :short_name

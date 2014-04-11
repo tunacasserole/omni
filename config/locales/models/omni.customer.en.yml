@@ -1,0 +1,70 @@
+en:
+  activerecord:
+    models:
+      omni/customer: 'Customer'
+    attributes:
+      omni/customer:
+        customer_id:                     Customer
+        display:                         Name
+        customer_nbr:                    Customer Nbr
+        registration_date:               Registration Date
+        user_display:                    User
+        user_id:                         User
+        name_prefix:                     Name Prefix
+        first_name:                      First Name
+        middle_name:                     Middle Name
+        last_name:                       Last Name
+        name_suffix:                     Name Suffix
+        company:                         Company
+        department:                      Department
+        job_title:                       Job Title
+        is_tax_exempt:                   Tax Exempt
+        tax_exempt_state:                Tax Exempt State
+        tax_exempt_certificate:          Tax Exempt Certificate
+        is_employee:                     Employee
+        employee_nbr:                    Employee Nbr
+        is_contractor:                   Contractor
+        contractor_nbr:                  Contractor Nbr
+        is_student:                      Student
+        birth_date:                      Birth Date
+        gender:                          Gender
+        line_1:                          Line 1
+        line_2:                          Line 2
+        line_3:                          Line 3
+        line_4:                          Line 4
+        city:                            City
+        state_code:                      State Code
+        zip:                             Zip
+        country:                         Country
+        latitude:                        Latitude
+        longitude:                       Longitude
+        is_validated:                    Validated
+        is_residential:                  Residential
+        is_commercial:                   Commercial
+        is_do_not_mail_to:               Do Not Mail
+        ship_line_1:                     Line 1
+        ship_line_2:                     Line 2
+        ship_line_3:                     Line 3
+        ship_line_4:                     Line 4
+        ship_city:                       City
+        ship_state_code:                 State Code
+        ship_zip:                        Zip
+        ship_country:                    Country
+        ship_latitude:                   Latitude
+        ship_longitude:                  Longitude
+        phone:                           Phone
+        phone_extension:                 Phone Extension
+        is_do_not_call:                  Do Not Call
+        fax:                             Fax
+        email_address:                   Email Address
+        is_verified:                     Verified
+        is_do_not_email:                 Do Not Email
+        customer_account_nbr:            Customer Account
+        customer_account_type:           Customer Account Type
+        customer_account_name:           Customer Name
+        account_open_date:               Account Open Date
+        account_close_date:              Account Close Date
+        credit_limit:                    Credit Limit
+        is_on_hold:                      On Hold
+        is_destroyed:                    Deleted
+

@@ -9,8 +9,8 @@ class Omni::Voucher < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  # validates    :voucher_nbr,                     presence: true, uniqueness: true
-  # validates    :display,                         presence: true, uniqueness: true
+  validates    :voucher_nbr,                     presence: true, uniqueness: true
+  validates    :display,                         presence: true, uniqueness: true
   validates    :customer_id,                     presence: true
   # VALIDATIONS (End)
 
@@ -42,6 +42,8 @@ class Omni::Voucher < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :voucher_id
+    string   :customer_id
     string   :customer_display do customer.display if customer end
     string   :voucher_nbr
 
@@ -80,6 +82,8 @@ class Omni::Voucher < ActiveRecord::Base
   end # def after_use
 
   # STATE HANDLERS (End)
-
+  def display_as
+    display
+  end
 end # class Omni::OrderDetail
 

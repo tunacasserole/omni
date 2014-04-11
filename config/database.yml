@@ -31,6 +31,16 @@ development:
   wait_timeout: 300
   #socket: /tmp/mysql.sock
 
+# production:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: omni_development
+#   pool: 100
+#   username: root
+#   password:
+#   wait_timeout: 300
+#   #socket: /tmp/mysql.sock
+
 # local omni_test
 test:
   adapter: mysql2

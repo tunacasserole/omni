@@ -1,56 +1,46 @@
-Ext.define('Omni.view.shipments.Inspector', {
+Ext.define('Omni.view.shipments.Inspector',{
+  extend   : 'Buildit.ux.inspector.Panel',
+  alias    : 'widget.omni-shipments-Inspector',
 
-  extend:'Buildit.ux.inspector.Panel',
-  alias:'widget.omni-shipments-Inspector',
 
-  
-
-  initComponent:function () {
-
+  initComponent:function(){
     var me = this;
-
-        
-    // LABELS (Start) ======================================================================  
-    // LABELS (End)
-
+  
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
-      associativeFilter: {
-        property: 'shipment_id',
-        value:    me.record.get('shipment_id')
+      associativeFilter : {
+        property  : 'shipment_id',
+        value     : this.record.get('shipment_id')
+      },
+
+      associativeSearch : {
+        with: {
+          shipment_id : {
+            equal_to : this.record.get('shipment_id')
+          }
+        }
       }
     });
     // INSPECTOR INIT (End)
-
+  
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
-      cards: [
+      cards     : [
         {
-          title: 'Profile',
-          xtype: 'omni-shipments-Form'
-        },
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        },
-        {
-          title: 'Details',
-          xtype: 'omni-shipment_details-Explorer'
+          title     : 'Profile',
+          xtype     : 'omni-shipments-Form'
         }
       ]
     });
     // CARDS (End)
-    
+
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title:     'Shipment',
-      subtitle:  this.record.get('display')
+      title     : 'Shipment',
+      subtitle  : this.record.get('display_as')
     });
     // TITLES (End)
 
-
-
     this.callParent();
   }
-
 });

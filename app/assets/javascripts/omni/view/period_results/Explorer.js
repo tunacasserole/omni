@@ -1,18 +1,18 @@
 Ext.define('Omni.view.period_results.Explorer', {
 
-  extend:'Buildit.ux.explorer.Panel',
-  alias:'widget.omni-period_results-Explorer',
+  extend: 'Buildit.ux.explorer.Panel',
+  alias: 'widget.omni-period_results-Explorer',
 
   allowFind: true,
 
   store: Ext.create('Omni.store.PeriodResult'),
 
-  contextMenuConfig:{
-    xtype:'omni-period_results-ExplorerContextMenu',
+  contextMenuConfig: {
+    xtype: 'buildit-explorer-ContextMenu',
   },
 
-  newForms:[{
-    xtype:'omni-period_results-Form',
+  newForms: [{
+    xtype: 'omni-period_results-Form',
     windowConfig: {}
   }],
 
@@ -20,36 +20,33 @@ Ext.define('Omni.view.period_results.Explorer', {
     xtype: 'omni-period_results-Inspector'
   },
 
-  filters: [
-    {
-      showAll  : 'All Years',
-      items    : [
-        ['year_2010',     "2010"],
-        ['year_2011',     "2011"],
-        ['year_2012',     "2012"],
-        ['year_2013',     "2013"],
-      ]
-    },
-     {
-      showAll  : 'All Periods',
-      items    : [
-        ['p1',       "1"],
-        ['p2',       "2"],
-        ['p3',       "3"],
-        ['p4',       "4"],
-        ['p5',       "5"],
-        ['p6',       "6"],
-        ['p7',       "7"],
-        ['p8',       "8"],
-        ['p9',       "9"],
-        ['p10',       "10"],
-        ['p11',       "11"],
-        ['p12',       "12"],
-      ]
-    }
-  ],
+  filters: [{
+    showAll: 'All Years',
+    items: [
+      ['year_2010', "2010"],
+      ['year_2011', "2011"],
+      ['year_2012', "2012"],
+      ['year_2013', "2013"],
+    ]
+  }, {
+    showAll: 'All Periods',
+    items: [
+      ['p1', "1"],
+      ['p2', "2"],
+      ['p3', "3"],
+      ['p4', "4"],
+      ['p5', "5"],
+      ['p6', "6"],
+      ['p7', "7"],
+      ['p8', "8"],
+      ['p9', "9"],
+      ['p10', "10"],
+      ['p11', "11"],
+      ['p12', "12"],
+    ]
+  }],
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -81,19 +78,37 @@ Ext.define('Omni.view.period_results.Explorer', {
         // { header: this.net_sale_retailLabel, dataIndex: 'net_sale_retail',  flex: 1,  sortable: false  },
         // { header: this.net_inventory_costLabel, dataIndex: 'net_inventory_cost',  flex: 1,  sortable: false  },
         // { header: this.net_inventory_unitsLabel, dataIndex: 'net_inventory_units',  flex: 1,  sortable: false  },
-        { header: this.sku_displayLabel, dataIndex: 'sku_display',  flex: 2,  sortable: false  },
-        { header: this.location_displayLabel, dataIndex: 'location_display',  flex: 1,  sortable: false  },
-        { header: this.period_displayLabel, dataIndex: 'period_display',  flex: 1,  sortable: false  },
+        {
+          header: this.sku_displayLabel,
+          dataIndex: 'sku_display',
+          flex: 2,
+          sortable: false
+        }, {
+          header: this.location_displayLabel,
+          dataIndex: 'location_display',
+          flex: 1,
+          sortable: false
+        }, {
+          header: this.period_displayLabel,
+          dataIndex: 'period_display',
+          flex: 1,
+          sortable: false
+        },
         // { header: this.year_numberLabel, dataIndex: 'year_number',  flex: 1,  sortable: false  },
-        { header: this.net_sale_unitsLabel, dataIndex: 'net_sale_units',  flex: 1,  sortable: false  },
+        {
+          header: this.net_sale_unitsLabel,
+          dataIndex: 'net_sale_units',
+          flex: 1,
+          sortable: false
+        },
       ]
     });
     // COLUMNS (End)
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Period Result',
-      subtitle:  'Period (Monthly) sales and transaction totals'
+      title: 'Period Result',
+      subtitle: 'Period (Monthly) sales and transaction totals'
     });
     // TITLES (End)
 

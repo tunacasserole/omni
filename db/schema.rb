@@ -813,8 +813,6 @@ ActiveRecord::Schema.define(version: 20140221155100) do
     t.boolean  "is_student"
     t.datetime "birth_date"
     t.string   "gender",                 limit: 200
-    t.boolean  "is_analyst"
-    t.boolean  "is_developer"
     t.string   "line_1",                 limit: 200
     t.string   "line_2",                 limit: 200
     t.string   "line_3",                 limit: 200

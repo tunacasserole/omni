@@ -3,13 +3,13 @@ Ext.define('Omni.view.shipments.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-shipments-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       stateLabel:                                 Omni.i18n.model.Shipment.state,

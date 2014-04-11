@@ -16,6 +16,7 @@ class Omni::Customer < ActiveRecord::Base
   validates    :name_suffix,              lookup: 'NAME_SUFFIX',                allow_nil: true
   validates    :gender,                   lookup: 'GENDER',                     allow_nil: true
   validates    :state_code,               lookup: 'STATE_CODE',                 allow_nil: true
+  validates    :tax_exempt_state,         lookup: 'STATE_CODE',                 allow_nil: true
   validates    :ship_state_code,          lookup: 'STATE_CODE',                 allow_nil: true
   validates    :customer_account_type,    lookup: 'CUSTOMER_ACCOUNT_TYPE',      allow_nil: true
   # VALIDATIONS (End)
@@ -23,7 +24,7 @@ class Omni::Customer < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :customer_id,                      override: false,        with: :guid
   default      :customer_nbr,                     override: false,        with: :sequence,         named: "CUSTOMER_NBR"
-  default      :display,                          override: false,        to: lambda{|m| "#{m.last_name}, #{m.first_name} - #{m.customer_nbr}"}
+  default      :display,                          override: false,        to: lambda{|m| "#{m.first_name} #{m.last_name}"}
   default      :customer_account_nbr,             override: false,        with: :sequence,         named: "CUSTOMER_ACCOUNT_NBR"
   default      :country,                          override: false,        :to  => "USA"
   default      :ship_country,                     override: false,        :to  => "USA"
@@ -34,8 +35,6 @@ class Omni::Customer < ActiveRecord::Base
   default      :is_employee,                      override: false,        to: false
   default      :is_contractor,                    override: false,        to: false
   default      :is_student,                       override: false,        to: false
-  default      :is_analyst,                       override: false,        to: false
-  default      :is_developer,                     override: false,        to: false
   default      :is_validated,                     override: false,        to: false
   default      :is_residential,                   override: false,        to: false
   default      :is_commercial,                    override: false,        to: false
@@ -74,6 +73,7 @@ class Omni::Customer < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :customer_id
     string   :customer_nbr
     string   :display
     string   :first_name
