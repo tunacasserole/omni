@@ -154,11 +154,11 @@ Ext.define('Omni.view.uniforms.Form', {
     });
     // TITLES (End)
 
-    // ACTIONS (Start) =====================================================================
+      // ACTIONS (Start) =====================================================================
     Ext.apply(this, {
       actions: [{
         xtype: 'button',
-        cls: 'approve',
+        iconCls: 'fa fa-thumbs-up',
         // iconCls: 'fa-thumbs-o-up',
         tooltip: 'Activate',
         listeners: {
@@ -168,8 +168,7 @@ Ext.define('Omni.view.uniforms.Form', {
         }
       }, {
         xtype: 'button',
-        // iconCls: '  fa-thumbs-o-up',
-        cls: 'reject',
+        iconCls: 'fa fa-times-circle-o',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,
@@ -180,6 +179,7 @@ Ext.define('Omni.view.uniforms.Form', {
     });
 
     // ACTIONS (End)
+
 
     // LISTENERS (Start) ===================================================================
 

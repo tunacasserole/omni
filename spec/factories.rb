@@ -25,6 +25,7 @@ FactoryGirl.define do
  factory Omni::Account do
   sequence(:account_name) {|n| "test #{n}"}
   sequence(:school_nbr) {|n| "TEST #{n}"}
+
  end
  factory Omni::AccountGrade do
   account_id :account
@@ -132,9 +133,11 @@ FactoryGirl.define do
  end
  factory Omni::Enrollment do
   account_id :account
-  school_year ['2013','2014','2015'].sample
+  # school_year ['2013','2014','2015'].sample
+  school_year '2014'
   grade_id :grade
-  gender ['MALE','FEMALE'].sample
+  # gender ['MALE','FEMALE'].sample
+  gender 'MALE'
   enrollment [0,1,10,100,1000,10000].sample
  end
  factory Omni::ForecastProfile do
@@ -151,8 +154,10 @@ FactoryGirl.define do
   location_id :location
  end
  factory Omni::Job do
+  association :order_detail, factory: Omni::OrderDetail
+  jobable_type 'Omni::OrderDetail'
   sequence(:display)
-  production_location_id :location
+  # production_location_id :location
   job_type ['CONVERSION (HEAT APPLY)','CONVERSION (SEWN)','ALTERATION','SPECIAL CUT'].sample
  end
  factory Omni::Label do
@@ -189,12 +194,15 @@ end
   end
  end
  factory Omni::OrderDetail do
+  association :order, factory: Omni::Order
   sequence(:display)
-  order_id :order
+  # order_id :order
   sku_id :sku
   delivery_method ['SEND','TAKE','PICKUP'].sample
  end
  factory Omni::Payment do
+  tender_id Omni::Tender.all.map { |x| x.tender_id }.sample
+  terminal_id Omni::Terminal.first
   # sequence(:display) {|n| "test #{n}"}
  end
  factory Omni::PeriodResult do sequence(:display) {|n| "test #{n}"} end
@@ -400,6 +408,7 @@ end
  end
  factory Omni::Terminal do
   # sequence(:display) {|n| "test #{n}"}
+  till_id Omni::Till.first.till_id
   location_id :location
   mac_address '123'
   local_server_ip '123'

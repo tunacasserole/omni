@@ -164,95 +164,6 @@ Ext.define('Omni.view.app.Hub', {
 
         // Section: Legacy Inventory //
 
-        {
-          title: 'Point of Sale',
-          columns: 8,
-          rows: 3,
-          tiles: [{
-            title: 'Customers',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-customers-Explorer'
-            }
-          }, {
-            title: 'Orders',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-orders-Explorer'
-            }
-          }, {
-            title: 'Payments',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-payments-Explorer'
-            }
-          }, {
-            title: 'Shipments',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-shipments-Explorer'
-            }
-          }, {
-            title: 'Transfers',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-transfers-Explorer'
-            }
-          }, {
-            title: 'Vouchers',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-vouchers-Explorer'
-            }
-          }, {
-            title: 'Receipt Formats',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-receipt_formats-Explorer'
-            }
-          }, {
-            title: 'Tenders',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-tenders-Explorer'
-            }
-          }, {
-            title: 'Terminals',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-terminals-Explorer'
-            }
-          }, {
-            title: 'Tills',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'company',
-            target: {
-              xtype: 'omni-tills-Explorer'
-            }
-          }]
-        },
-
-        // Section: Legacy Inventory //
-
         // {
         //   title: 'Legacy Inventory',
         //   columns: 8,
@@ -390,8 +301,105 @@ Ext.define('Omni.view.app.Hub', {
             }
           }]
         }
-        // Section: Company Hierarchy //
 
+        // Section: POS //
+
+        , {
+          title: 'Point of Sale',
+          columns: 8,
+          rows: 3,
+          tiles: [{
+            title: 'Customers',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-customers-Explorer'
+            }
+          }, {
+            title: 'Orders',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-orders-Explorer'
+            }
+          }, {
+            title: 'Payments',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-payments-Explorer'
+            }
+          }, {
+            title: 'Shipments',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-shipments-Explorer'
+            }
+          }, {
+            title: 'Transfers',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-transfers-Explorer'
+            }
+          }, {
+            title: 'Vouchers',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-vouchers-Explorer'
+            }
+          }, {
+            title: 'Receipt Formats',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-receipt_formats-Explorer'
+            }
+          }, {
+            title: 'Tenders',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-tenders-Explorer'
+            }
+          }, {
+            title: 'Terminals',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-terminals-Explorer'
+            }
+          }, {
+            title: 'Tills',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-tills-Explorer'
+            }
+          }, {
+            title: 'Tax Authorities',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-tax_authorities-Explorer'
+            }
+          }]
+        },
+
+        // Section: Company Hierarchy //
 
         , {
           title: 'company hierarchy',
@@ -530,22 +538,22 @@ Ext.define('Omni.view.app.Hub', {
         //   columns: 8,
         //   rows: 1,
         //   tiles: [{
-          //   title: 'Tasks',
-          //   colspan: 2,
-          //   rowspan: 1,
-          //   cls: 'product_hierarchy',
-          //   target: {
-          //     xtype: 'omni-tasks-Explorer'
-          //   }
-          // }, {
-            // title: 'Issues',
-            // colspan: 2,
-            // rowspan: 1,
-            // cls: 'product_hierarchy',
-            // target: {
-            //   xtype: 'omni-issues-Explorer'
-            // }
-          // }]
+        //   title: 'Tasks',
+        //   colspan: 2,
+        //   rowspan: 1,
+        //   cls: 'product_hierarchy',
+        //   target: {
+        //     xtype: 'omni-tasks-Explorer'
+        //   }
+        // }, {
+        // title: 'Issues',
+        // colspan: 2,
+        // rowspan: 1,
+        // cls: 'product_hierarchy',
+        // target: {
+        //   xtype: 'omni-issues-Explorer'
+        // }
+        // }]
         // }
 
         // Section: web hierarchy //

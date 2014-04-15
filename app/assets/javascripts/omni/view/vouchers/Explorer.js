@@ -79,16 +79,16 @@ Ext.define('Omni.view.vouchers.Explorer', {
       dataIndex    : 'current_balance',
       flex         : 1
     },
-    {
-      header       : me.issue_dateLabel,
-      dataIndex    : 'issue_date',
-      flex         : 1
-    },
-    {
-      header       : me.expiration_dateLabel,
-      dataIndex    : 'expiration_date',
-      flex         : 1
-    },
+    // {
+    //   header       : me.issue_dateLabel,
+    //   dataIndex    : 'issue_date',
+    //   flex         : 1
+    // },
+    // {
+    //   header       : me.expiration_dateLabel,
+    //   dataIndex    : 'expiration_date',
+    //   flex         : 1
+    // },
     {
       header       : me.stateLabel,
       dataIndex    : 'state',

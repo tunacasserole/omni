@@ -3,13 +3,10 @@ Ext.define('Omni.view.bin_skus.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-bin_skus-Form',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-    
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       bin_idLabel:                                Omni.i18n.model.BinSku.bin_id,

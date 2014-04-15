@@ -3,7 +3,6 @@ Ext.define('Omni.view.jobs.Form', {
   extend: 'Buildit.ux.Form',
   alias: 'widget.omni-jobs-Form',
 
-
   // LABELS (Start) =======================================================================
   job_idLabel: Omni.i18n.model.Job.job_id,
   displayLabel: Omni.i18n.model.Job.display,
@@ -46,7 +45,6 @@ Ext.define('Omni.view.jobs.Form', {
   is_destroyedLabel: Omni.i18n.model.Job.is_destroyed,
   // LABELS (End)
 
-
   initComponent: function() {
 
     var me = this;
@@ -58,8 +56,6 @@ Ext.define('Omni.view.jobs.Form', {
     };
     // FILTER (End)
 
-
-
     // FIELDSETS (Start) ====================================================================
     Ext.apply(this, {
       items: [{
@@ -69,14 +65,14 @@ Ext.define('Omni.view.jobs.Form', {
         defaultType: 'textfield',
         layout: 'anchor',
         items: [{
-          xtype: 'textfield',
-          name: 'display',
-          fieldLabel: me.displayLabel,
-          maxLength: 300,
-          minLength: 0,
-          allowBlank: true,
-          disabled: true
-        }, {
+        //   xtype: 'textfield',
+        //   name: 'display',
+        //   fieldLabel: me.displayLabel,
+        //   maxLength: 300,
+        //   minLength: 0,
+        //   allowBlank: true,
+        //   disabled: true
+        // }, {
           xtype: 'textfield',
           name: 'job_nbr',
           fieldLabel: me.job_nbrLabel,
@@ -93,38 +89,47 @@ Ext.define('Omni.view.jobs.Form', {
           allowBlank: true,
           disabled: true
         }, {
+          name: 'sku_id',
+          fieldLabel: this.sku_idLabel,
+          allowBlank: false,
+          disabled: false,
           xtype: 'buildit-Locator',
           store: Ext.create('Omni.store.Sku', {
-            pageSize: 10
+            pageSize: 25
           }),
           displayField: 'display',
+          queryField: 'display',
+          valueField: 'sku_id',
           itemTpl: '{display}',
-          name: 'sku_id',
-          fieldLabel: me.sku_idLabel,
-          initialValue: me.record.get('display'),
-          allowBlank: true
+          gotoTarget: 'omni-skus-Inspector'
         }, {
+          name: 'production_location_id',
+          fieldLabel: this.production_location_idLabel,
+          allowBlank: false,
+          disabled: false,
           xtype: 'buildit-Locator',
           store: Ext.create('Omni.store.Location', {
-            pageSize: 10
+            pageSize: 25
           }),
           displayField: 'display',
+          queryField: 'display',
+          valueField: 'location_id',
           itemTpl: '{display}',
-          name: 'production_location_id',
-          fieldLabel: me.production_location_idLabel,
-          initialValue: me.record.get('display'),
-          allowBlank: false
+          gotoTarget: 'omni-locations-Inspector'
         }, {
+          name: 'supplier_id',
+          fieldLabel: this.supplier_idLabel,
+          allowBlank: false,
+          disabled: false,
           xtype: 'buildit-Locator',
           store: Ext.create('Omni.store.Supplier', {
-            pageSize: 10
+            pageSize: 25
           }),
           displayField: 'display',
+          queryField: 'display',
+          valueField: 'supplier_id',
           itemTpl: '{display}',
-          name: 'supplier_id',
-          fieldLabel: me.supplier_idLabel,
-          initialValue: me.record.get('display'),
-          allowBlank: true
+          gotoTarget: 'omni-suppliers-Inspector'
         }, {
           xtype: 'textarea',
           name: 'job_description',
@@ -133,7 +138,8 @@ Ext.define('Omni.view.jobs.Form', {
           minLength: 0,
           allowBlank: true
         }, {
-          xtype: 'textfield',
+          xtype: 'buildit-Lookup',
+          category: 'JOB_TYPE',
           name: 'job_type',
           fieldLabel: me.job_typeLabel,
           maxLength: 200,
@@ -161,32 +167,24 @@ Ext.define('Omni.view.jobs.Form', {
         defaultType: 'textfield',
         layout: 'anchor',
         items: [{
-          xtype: 'textfield',
+          xtype: 'datefield',
           name: 'release_date',
           fieldLabel: me.release_dateLabel,
-          maxLength: 100,
-          minLength: 0,
           allowBlank: true
         }, {
-          xtype: 'textfield',
+          xtype: 'datefield',
           name: 'start_date',
           fieldLabel: me.start_dateLabel,
-          maxLength: 100,
-          minLength: 0,
           allowBlank: true
         }, {
-          xtype: 'textfield',
+          xtype: 'datefield',
           name: 'complete_date',
           fieldLabel: me.complete_dateLabel,
-          maxLength: 100,
-          minLength: 0,
           allowBlank: true
         }, {
-          xtype: 'textfield',
+          xtype: 'datefield',
           name: 'target_complete_date',
           fieldLabel: me.target_complete_dateLabel,
-          maxLength: 100,
-          minLength: 0,
           allowBlank: true
         }]
       }, {

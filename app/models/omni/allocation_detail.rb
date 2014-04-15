@@ -10,16 +10,17 @@ class Omni::AllocationDetail < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates :allocation_id,                  presence: true, uniqueness: true
   validates :allocation_detail_id,           presence: true, uniqueness: true
+  validates :allocation_detail_nbr,           presence: true, uniqueness: true
+  validates :allocation_id,                  presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default :allocation_detail_id,             with: :guid
-  default :display,                          override: false,   :to   => lambda{|m| "from: #{m.allocation.location_display} - #{m.allocation.sku_display} - #{m.allocation.allocation_nbr}"}
+  default :allocation_detail_nbr,            override: false,        with: :sequence,         :named => "ALLOCATION_DETAIL_NBR"
+  # default :display,                          override: false,   :to   => lambda{|m| "from: #{m.allocation.location_display} - #{m.allocation.sku_display} - #{m.allocation.allocation_nbr}"}
   # default :description, override: false,   :to   => lambda{|m| "#{m.allocation_detail_nbr} - #{m.allocation.allocation_nbr} - #{m.purchase_detail_nbr}"}
   # default :sku_id,                           :to   => lambda{|m| m.allocation.sku_id}
-  default :allocation_detail_nbr,            override: false,        with: :sequence,         :named => "ALLOCATION_DETAIL_NBR"
   default :units_needed,                     override: false,        to: 0
   default :units_allocated,                  override: false,        to: 0
   default :units_shipped,                    override: false,        to: 0
@@ -48,6 +49,7 @@ class Omni::AllocationDetail < ActiveRecord::Base
   # Exact match attributes
     string   :allocation_id
     string   :allocation_detail_id
+    string   :transfer_id
     string   :location_id
     string   :location_display
     string   :allocation_detail_nbr

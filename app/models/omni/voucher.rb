@@ -10,14 +10,20 @@ class Omni::Voucher < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :voucher_nbr,                     presence: true, uniqueness: true
-  validates    :display,                         presence: true, uniqueness: true
+  # validates    :display,                         presence: true, uniqueness: true
   validates    :customer_id,                     presence: true
+  validates    :expiration_date,                 presence: true
+  validates    :initial_balance,                 presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default      :voucher_id,                       override: false,        with: :guid
   default      :voucher_nbr,                      override: false,        with: :sequence,    named: "VOUCHER_NBR"
   default      :display,                          override: false,        to: lambda{|m| "#{m.voucher_type} - #{m.voucher_nbr}"}
+  default      :current_balance,                  override: false,        to: lambda { |m| m.initial_balance }
+  default      :initial_balance,                  override: false,        to: 0
+  default      :expiration_date,                  override: false,        to: lambda { |m| Date.today + 12.months }
+  default      :issue_date,                       override: false,        with: :today
   default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 
@@ -50,6 +56,7 @@ class Omni::Voucher < ActiveRecord::Base
     text     :customer_display_fulltext, using: :customer_display
     text     :voucher_nbr_fulltext, using: :voucher_nbr
   end
+  order_search_by voucher_nbr: :desc
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
@@ -57,7 +64,7 @@ class Omni::Voucher < ActiveRecord::Base
 
   ### CALLBACKS ###
     after_transition on: :verify, do: :after_verify
-    after_transition on: :use, do: :after_use
+    after_transition on: :use, do: :charge
 
   ### EVENTS ###
     event :verify do
@@ -78,12 +85,22 @@ class Omni::Voucher < ActiveRecord::Base
 
 
   # use => draft to used
-  def after_use
+  def charge(amount)
+    self.current_balance -= amount
+    save
   end # def after_use
 
   # STATE HANDLERS (End)
   def display_as
     display
   end
+
+  # def verify_voucher
+  #   errors.add(:voucher_id, 'voucher expired') if expiration_date < Date.yesterday
+  #   errors.add(:voucher_id, 'voucher expired') if state == 'expired'
+  #   errors.add(:voucher_id, 'no remaining balance on voucher') if state == 'complete'
+  #   errors.add(:voucher_id, 'no remaining balance on voucher') if current_balance < 0.01
+  # end
+
 end # class Omni::OrderDetail
 

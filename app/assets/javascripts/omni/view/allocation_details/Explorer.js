@@ -49,10 +49,6 @@ Ext.define('Omni.view.allocation_details.Explorer', {
         dataIndex: 'location_display',
         flex: 1
       }, {
-        header: this.stateLabel,
-        dataIndex: 'state',
-        flex: 1
-      }, {
         header: this.units_neededLabel,
         dataIndex: 'units_needed',
         flex: 1
@@ -63,6 +59,10 @@ Ext.define('Omni.view.allocation_details.Explorer', {
       }, {
         header: this.units_shippedLabel,
         dataIndex: 'units_shipped',
+        flex: 1
+      }, {
+        header: this.stateLabel,
+        dataIndex: 'state',
         flex: 1
       }]
     });

@@ -3,13 +3,13 @@ Ext.define('Omni.view.tax_authorities.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-tax_authorities-Form',
 
-  
+
 
   initComponent:function () {
 
     var me = this;
 
-    
+
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.TaxAuthority.display,
@@ -34,9 +34,9 @@ Ext.define('Omni.view.tax_authorities.Form', {
           layout: 'anchor',
           items:[
             { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: true,     xtype: 'textfield'        },
-            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'tax_authority_type',             fieldLabel: this.tax_authority_typeLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textarea'        },
+            { name: 'tax_authority_type',             fieldLabel: this.tax_authority_typeLabel,         allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup', category: 'TAX_AUTHORITY_TYPE' },
+            { name: 'short_name',                     fieldLabel: this.short_nameLabel,                 allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup', category: 'STATE_CODE' },
             { name: 'state_code',                     fieldLabel: this.state_codeLabel,                 allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'filing_frequency',               fieldLabel: this.filing_frequencyLabel,           allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_tax_when_no_presence',        fieldLabel: this.is_tax_when_no_presenceLabel,    allowBlank: true,   disabled: false,    xtype: 'checkbox'         }

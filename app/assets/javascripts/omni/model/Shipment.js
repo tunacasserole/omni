@@ -1,6 +1,6 @@
 Ext.define('Omni.model.Shipment', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -14,6 +14,7 @@ Ext.define('Omni.model.Shipment', {
   fields:[
     { name: 'shipment_id',                          type: 'string'      },
     { name: 'display',                              type: 'string'      },
+    { name: 'display_as',                           type: 'string'      },
     { name: 'state',                                type: 'string'      },
     { name: 'shipment_nbr',                         type: 'string'      },
     { name: 'location_display',                     type: 'string'      },

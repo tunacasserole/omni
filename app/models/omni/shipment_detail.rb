@@ -9,9 +9,10 @@ class Omni::ShipmentDetail < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         presence: true, uniqueness: true
-  validates    :shipment_id,                     presence: true
-  validates    :pick_id,                         presence: true
+  # validates    :shipment_detail_id,              presence: true, uniqueness: true
+  # validates    :display,                         presence: true, uniqueness: true
+  # validates    :shipment_id,                     presence: true
+  # validates    :pick_id,                         presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -46,15 +47,22 @@ class Omni::ShipmentDetail < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :shipment_id
+    string   :shipment_detail_id
+    string   :pick_id
     string   :shipment_display do shipment.display if shipment end
     string   :pick_display do pick.display if pick end
-    integer  :ship_units
-    string   :container_display do container.display if container end
+    # integer  :ship_units
+    # string   :container_display do container.display if container end
 
-    text     :shipment_display_fulltext, using: :shipment_display
-    text     :pick_display_fulltext, using: :pick_display
-    text     :ship_units_fulltext, using: :ship_units
-    text     :container_display_fulltext, using: :container_display
+    # text     :shipment_display_fulltext, using: :shipment_display
+    # text     :pick_display_fulltext, using: :pick_display
+    # text     :ship_units_fulltext, using: :ship_units
+    # text     :container_display_fulltext, using: :container_display
+  end
+
+  def display_as
+    display
   end
 end # class Omni::ShipmentDetail
 

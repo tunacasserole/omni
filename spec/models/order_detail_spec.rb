@@ -13,7 +13,7 @@ describe "order_detail" do
   end
 
   describe "checks uniqueness of" do
-    it "display" do dup = build(Omni::OrderDetail, display: me.display); dup.should_not be_valid end
+    # it "display" do dup = build(Omni::OrderDetail, display: me.display); dup.should_not be_valid end
     it "order_detail_nbr" do dup = build(Omni::OrderDetail, order_detail_nbr: me.order_detail_nbr); dup.should_not be_valid end
   end
 
@@ -47,10 +47,10 @@ describe "order_detail" do
   describe "has_many" do
     it "notes" do create(Buildit::Note, notable_type: 'Omni::OrderDetail',notable_id: me.order_detail_id); me.notes.count.should eq(1) end
     it "picks" do create(Omni::Pick, pickable_type: 'Omni::OrderDetail',pickable_id: me.order_detail_id); me.picks.should_not be_nil end
+    it "jobs" do create(Omni::Job, jobable_type: 'Omni::OrderDetail',jobable_id: me.order_detail_id, job_nbr: 999); me.jobs.count.should eq(1) end
   end
 
   describe "has_one" do
-    it "job" do create(Omni::Job, jobable_type: 'Omni::OrderDetail',jobable_id: me.order_detail_id, job_nbr: 999); me.job.should_not be_nil end
   end
 
   describe "indexing" do
@@ -70,12 +70,12 @@ describe "order_detail" do
     end
 
     it "cancel" do
-      create(Omni::Pick, pickable_id: me.order_detail_id, pickable_type: 'Omni::OrderDetail')
-      create(Omni::Job, jobable_id: me.order_detail_id, jobable_type: 'Omni::OrderDetail')
+      create(Omni::Pick, pickable_type: 'Omni::OrderDetail', pickable_id:  me.order_detail_id)
+      create(Omni::Job, jobable_type: 'Omni::OrderDetail', jobable_id: me.order_detail_id)
       me.cancel
       me.state.should eq('cancelled')
-      me.picks.first.state.should eq('cancelled') #if me.picks.first
-      me.job.state.should eq('cancelled') #if me.job
+      me.picks.first.state.should eq('cancelled')
+      me.jobs.first.state.should eq('cancelled')
     end
 
   end

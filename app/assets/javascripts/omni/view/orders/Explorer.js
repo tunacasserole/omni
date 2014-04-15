@@ -76,11 +76,6 @@ Ext.define('Omni.view.orders.Explorer', {
       flex         : 1
     },
     {
-      header       : me.order_dateLabel,
-      dataIndex    : 'order_date',
-      flex         : 1
-    },
-    {
       header       : me.order_totalLabel,
       dataIndex    : 'order_total',
       flex         : 1

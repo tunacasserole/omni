@@ -13,6 +13,7 @@ Ext.define('Omni.model.Payment', {
   fields:[
     { name: 'payment_id',                           type: 'string'      },
     { name: 'display',                              type: 'string'      },
+    { name: 'display_as',                           type: 'string'      },
     { name: 'payment_nbr',                          type: 'string'      },
     { name: 'order_display',                        type: 'string'      },
     { name: 'order_id',                             type: 'string'      },

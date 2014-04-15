@@ -182,6 +182,42 @@ Ext.define('Omni.view.order_details.Form', {
         ]
       }, {
         xtype: 'fieldset',
+        title: 'Order Details',
+        collapsible: true,
+        defaultType: 'textfield',
+        defaults: {
+          anchor: '70%'
+        },
+        layout: 'anchor',
+        items: [{
+          name: 'serial_number',
+          fieldLabel: this.serial_numberLabel,
+          allowBlank: true,
+          disabled: false,
+          xtype: 'textfield'
+        }, {
+          name: 'order_units',
+          fieldLabel: this.order_unitsLabel,
+          allowBlank: true,
+          disabled: false,
+          xtype: 'numberfield'
+        }, {
+          name: 'retail_price',
+          fieldLabel: this.retail_priceLabel,
+          allowBlank: true,
+          disabled: false,
+          xtype: 'currencyfield',
+          currencySymbol: null,
+        }, {
+          name: 'sale_price',
+          fieldLabel: this.sale_priceLabel,
+          allowBlank: true,
+          disabled: false,
+          xtype: 'currencyfield',
+          currencySymbol: null,
+        }]
+      }, {
+        xtype: 'fieldset',
         title: 'Billing Address',
         collapsible: true,
         defaultType: 'textfield',
@@ -284,42 +320,6 @@ Ext.define('Omni.view.order_details.Form', {
           allowBlank: true,
           disabled: false,
           xtype: 'textfield'
-        }]
-      }, {
-        xtype: 'fieldset',
-        title: 'Order Details',
-        collapsible: true,
-        defaultType: 'textfield',
-        defaults: {
-          anchor: '70%'
-        },
-        layout: 'anchor',
-        items: [{
-          name: 'serial_number',
-          fieldLabel: this.serial_numberLabel,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'textfield'
-        }, {
-          name: 'order_units',
-          fieldLabel: this.order_unitsLabel,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'numberfield'
-        }, {
-          name: 'retail_price',
-          fieldLabel: this.retail_priceLabel,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'currencyfield',
-          currencySymbol: null,
-        }, {
-          name: 'sale_price',
-          fieldLabel: this.sale_priceLabel,
-          allowBlank: true,
-          disabled: false,
-          xtype: 'currencyfield',
-          currencySymbol: null,
         }]
       }, {
         xtype: 'fieldset',

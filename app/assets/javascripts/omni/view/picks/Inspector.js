@@ -33,27 +33,47 @@ Ext.define('Omni.view.picks.Inspector', {
         {
           title: 'Profile',
           xtype: 'omni-picks-Form'
-        },
-        {
-          title: 'Order Detail',
-          xtype: 'omni-order_details-Explorer'
-        },
-        {title: 'Notes',             xtype: 'buildit-notes-Explorer',
-          defaultSearch: { with:
-            {
-              notable_type: {equal_to: 'Omni::Pick'},
-              notable_id:   {equal_to: me.record.get('pick_id')}
+      // }, {
+      //   title: 'Details',
+      //   xtype: 'omni-order_details-Explorer',
+      //   module: 'contracts',
+      //   defaultSearch: {
+      //     with: {
+      //       customer_id: {
+      //         equal_to: me.record.get('customer_id')
+      //       }
+      //     }
+      //   },
+      //   showBadge: true
+        }, {
+          title: 'Notes',
+          xtype: 'buildit-notes-Explorer',
+          defaultSearch: {
+            with: {
+              notable_type: {
+                equal_to: 'Omni::Pick'
+              },
+              notable_id: {
+                equal_to: me.record.get('pick_id')
+              }
             }
-          }
-        },
-        {title: 'Attachments',             xtype: 'buildit-attachments-Explorer',
-          defaultSearch: { with:
-            {
-              attachable_type: {equal_to: 'Omni::Pick'},
-              attachable_id:   {equal_to: me.record.get('pick_id')}
+          },
+          showBadge: true
+        }, {
+          title: 'Attachments',
+          xtype: 'buildit-attachments-Explorer',
+          defaultSearch: {
+            with: {
+              attachable_type: {
+                equal_to: 'Omni::Pick'
+              },
+              attachable_id: {
+                equal_to: me.record.get('pick_id')
+              }
             }
-          }
-        },
+          },
+          showBadge: true
+        }
       ]
     });
     // CARDS (End)

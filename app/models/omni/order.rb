@@ -42,6 +42,7 @@ class Omni::Order < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   has_many     :order_details,                   class_name: 'Omni::OrderDetail',             foreign_key: 'order_id'
+  has_many     :payments,                        class_name: 'Omni::Payment',                 foreign_key: 'order_id'
   belongs_to   :location,                        class_name: 'Omni::Location',                foreign_key: 'location_id'
   belongs_to   :terminal,                        class_name: 'Omni::Terminal',                foreign_key: 'terminal_id'
   belongs_to   :customer,                        class_name: 'Omni::Customer',                foreign_key: 'customer_id'
@@ -57,6 +58,16 @@ class Omni::Order < ActiveRecord::Base
     map :user_display,                           to: 'user.full_name'
   end
   # MAPPED ATTRIBUTES (End)
+
+  # COMPUTED ATTRIBUTES (Start) =========================================================
+  computed_attributes do
+    compute :order_total, with: :compute_order_total
+  end
+
+  def compute_order_total
+    total = 0; order_details.each { |x| total += x.order_units * x.retail_price }; return total
+  end
+  # COMPUTED ATTRIBUTES (End)
 
   # HOOKS (Start) =======================================================================
   # hook :before_update, :set_order_date, 10
@@ -91,6 +102,7 @@ class Omni::Order < ActiveRecord::Base
     text     :user_display_fulltext, using: :user_display
     text     :order_source_fulltext, using: :order_source
   end
+  order_search_by order_nbr: :desc
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
@@ -102,7 +114,7 @@ class Omni::Order < ActiveRecord::Base
 
   ### EVENTS ###
     event :finalize do
-      transition draft: :final
+      transition draft: :complete
     end
     event :abandon do
       transition draft: :abandoned

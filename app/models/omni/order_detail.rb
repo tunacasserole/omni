@@ -59,7 +59,7 @@ class Omni::OrderDetail < ActiveRecord::Base
   belongs_to   :reference_order_detail,          class_name: 'Omni::OrderDetail',             foreign_key: 'reference_order_detail_id'
   has_many     :notes,                           class_name: 'Buildit::Note',                     foreign_key: 'notable_id',       as: :notable
   has_many     :picks,                           class_name: 'Omni::Pick',              foreign_key: 'pickable_id',      as: :pickable
-  has_one      :job,                             class_name: 'Omni::Job',               foreign_key: 'jobable_id',      as: :jobable
+  has_many      :jobs,                            class_name: 'Omni::Job',               foreign_key: 'jobable_id',      as: :jobable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -101,6 +101,7 @@ class Omni::OrderDetail < ActiveRecord::Base
     text     :sku_display_fulltext, using: :sku_display
     text     :account_display_fulltext, using: :account_display
   end
+  order_search_by order_detail_nbr: :asc
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
@@ -132,7 +133,7 @@ class Omni::OrderDetail < ActiveRecord::Base
   # cancel => draft to cancelled
   def after_cancel
     self.picks.first.cancel if self.picks.first
-    self.job.cancel if self.job
+    self.jobs.first.cancel if self.jobs.first
   end # def after_cancel
 
   # STATE HANDLERS (End)

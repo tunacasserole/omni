@@ -52,5 +52,14 @@ class Omni::Till < ActiveRecord::Base
     text     :location_display_fulltext, using: :location_display
     text     :till_nbr_fulltext, using: :till_nbr
   end
+
+  # HOOKS (Start) =======================================================================
+  hook :after_create,      :create_till_details,     10
+
+  def create_till_details
+    Omni::Tender.all.each { |x| self.till_details.create( till_id: till_id, tender_id: x.tender_id ) }
+  end
+  # HOOKS (End)
+
 end # class Omni::Till
 

@@ -40,6 +40,18 @@ Ext.define('Omni.view.orders.Inspector', {
           }
         },
         showBadge: true
+      }, {
+        title: 'Payments',
+        xtype: 'omni-payments-Explorer',
+        module: 'samples',
+        defaultSearch: {
+          with: {
+            order_id: {
+              equal_to: me.record.get('order_id')
+            }
+          }
+        },
+        showBadge: true
       }]
     });
     // CARDS (End)

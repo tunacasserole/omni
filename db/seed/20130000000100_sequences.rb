@@ -32,6 +32,7 @@ Buildit::Sequence.create!([
   {sequence_code: "RECEIPT_LINE_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "RECEIPT_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "REGION_NBR", prefix: nil, padding: 3, value: 1000},
+  {sequence_code: "SHIPMENT_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "SIZE_GROUP_NBR", prefix: nil, padding: 3, value: 1203},
   {sequence_code: "SIZE_NBR", prefix: nil, padding: 3, value: 2381},
   {sequence_code: "SKU_NBR", prefix: nil, padding: 3, value: 1000},

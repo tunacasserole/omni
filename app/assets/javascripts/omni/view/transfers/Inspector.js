@@ -3,14 +3,11 @@ Ext.define('Omni.view.transfers.Inspector', {
   extend:'Buildit.ux.inspector.Panel',
   alias:'widget.omni-transfers-Inspector',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-        
-    // LABELS (Start) ======================================================================  
+    // LABELS (Start) ======================================================================
     // LABELS (End)
 
     // INSPECTOR INIT (Start) ==============================================================
@@ -24,27 +21,45 @@ Ext.define('Omni.view.transfers.Inspector', {
 
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
-      cards: [
-        {
-          title: 'Profile',
-          xtype: 'omni-transfers-Form'
+      cards: [{
+        title: 'Profile',
+        xtype: 'omni-transfers-Form'
+      }, {
+        title: 'Allocation Details',
+        xtype: 'omni-allocation_details-Explorer',
+        module: 'samples',
+        defaultSearch: {
+          with: {
+            transfer_id: {
+              equal_to: me.record.get('transfer_id')
+            }
+          }
         },
-        {
-          title: 'Notes',
-          xtype: 'buildit-notes-Explorer'
-        }
-      ]
+        showBadge: true
+    }, {
+        title: 'Notes',
+        xtype: 'buildit-notes-Explorer',
+        defaultSearch: {
+          with: {
+            notable_type: {
+              equal_to: 'Omni::Transfer'
+            },
+            notable_id: {
+              equal_to: me.record.get('transfer_id')
+            }
+          }
+        },
+        showBadge: true
+      }]
     });
     // CARDS (End)
-    
+
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title:     'Transfer',
       subtitle:  this.record.get('display')
     });
     // TITLES (End)
-
-
 
     this.callParent();
   }

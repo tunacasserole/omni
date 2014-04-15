@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "job" do
-  let(:me) { create(Omni::Job, jobable_type: 'Omni::OrderDetail', jobable_id: '123') }
+  let(:me) { create(Omni::Job, jobable_id: create(Omni::OrderDetail, order_id: create(Omni::Order).order_id).order_detail_id) }
 
   describe "requires" do
     it "job_id" do lambda{Omni::Job.create! job_id nil}.should raise_error end
@@ -37,6 +37,7 @@ describe "job" do
     it "production_location" do me.production_location_id = create(Omni::Location).location_id; me.production_location.should_not be_nil end
     it "supplier" do me.supplier_id = create(Omni::Supplier).supplier_id; me.supplier.should_not be_nil end
     it "sku" do me.sku_id = create(Omni::Sku).sku_id; me.sku.should_not be_nil end
+    it "order_detail" do me.jobable_id = create(Omni::OrderDetail).order_detail_id; me.order_detail.should_not be_nil end
   end
 
   describe "has_many" do
@@ -51,7 +52,7 @@ describe "job" do
 
   end
 
-  describe "state machine:" do
+  describe "state machine should " do
     it "create" do
       o = create(Omni::OrderDetail)
       p = create(Omni::Pick, pickable_type: 'Omni::OrderDetail', pickable_id: o.order_detail_id)
@@ -89,4 +90,25 @@ describe "job" do
     end
   end
 
+  describe "logic should", focus: true do
+    it "default production location to main warehouse" do
+      me.production_location_id = nil
+      me.job_type = ['CONVERSION (SEWN)','SPECIAL CUT'].sample
+      me.save
+      me.production_location_id.should eq(Omni::Location.main_warehouse.location_id)
+    end
+
+    it "default production location to order location" do
+      me.production_location_id = nil
+      me.job_type = ['CONVERSION (HEAT APPLY)','ALTERATION'].sample
+      me.save
+      me.production_location_id.should eq(me.order_detail.order.location_id)
+    end
+  end
 end
+
+
+
+
+
+

@@ -9,9 +9,9 @@ class Omni::Shipment < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :shipment_nbr,                     presence: true, uniqueness: true
-  validates    :display,                          presence: true, uniqueness: true
-  validates    :shipment_id,                     presence: true
+  validates    :shipment_id,                     presence: true, uniqueness: true
+  validates    :shipment_nbr,                    presence: true, uniqueness: true
+  validates    :display,                         presence: true, uniqueness: true
   validates    :location_id,                     presence: true
   validates    :create_date,                     presence: true
   # VALIDATIONS (End)
@@ -20,6 +20,7 @@ class Omni::Shipment < ActiveRecord::Base
   default      :shipment_id,                      override: false,        with: :guid
   default      :shipment_nbr,                     override: false,        with: :sequence,         named: "SHIPMENT_NBR"
   default      :display,                          override: false,        to: lambda{|m| "Ship To: #{m.ship_name} - Created: #{m.create_date}"}
+  default      :create_date,                      override: false,        with: :now
   default      :shipping_cost,                    override: false,        to: 0
   default      :is_residential,                   override: false,        to: false
   default      :is_commercial,                    override: false,        to: false
@@ -38,7 +39,6 @@ class Omni::Shipment < ActiveRecord::Base
   belongs_to   :location,                        class_name: 'Omni::Location',                foreign_key: 'location_id'
   belongs_to   :supplier,                        class_name: 'Omni::Supplier',                foreign_key: 'supplier_id'
   has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
-  has_many     :events,                          class_name: 'Buildit::Event',                 foreign_key: 'eventable_id',    as: :eventable
   has_many     :shipment_details,                class_name: 'Omni::Shipment',                foreign_key: 'shipment_id'
   # ASSOCIATIONS (End)
 
@@ -102,27 +102,34 @@ class Omni::Shipment < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :state
+    string   :shipment_id
     string   :shipment_nbr
-    string   :location_display do location.display if location end
-    string   :shippable_type
-    string   :shippable_id
-    string   :supplier_display do supplier.display if supplier end
     string   :tracking_number
     string   :ship_name
-    string   :shippable_id
-    string   :shippable_type
-    string   :state
+    # string   :location_id
+    # string   :supplier_id
+    # string   :state
+    # string   :location_display do location.display if location end
+    # string   :shippable_type
+    # string   :shippable_id
+    # string   :supplier_display do supplier.display if supplier end
+    # string   :shippable_id
+    # string   :shippable_type
+    # string   :state
 
-    text     :state_fulltext, using: :state
-    text     :shipment_nbr_fulltext, using: :shipment_nbr
-    text     :location_display_fulltext, using: :location_display
-    text     :shippable_type_fulltext, using: :shippable_type
-    text     :shippable_id_fulltext, using: :shippable_id
-    text     :supplier_display_fulltext, using: :supplier_display
-    text     :tracking_number_fulltext, using: :tracking_number
+    # text     :state_fulltext, using: :state
     text     :ship_name_fulltext, using: :ship_name
+    text     :shipment_nbr_fulltext, using: :shipment_nbr
+    # text     :location_display_fulltext, using: :location_display
+    # text     :supplier_display_fulltext, using: :supplier_display
+    # text     :tracking_number_fulltext, using: :tracking_number
+    # text     :shippable_type_fulltext, using: :shippable_type
+    # text     :shippable_id_fulltext, using: :shippable_id
   end
+  order_search_by shipment_nbr: :desc
 
+  def display_as
+    display
+  end
 end # class Omni::Shipment
 

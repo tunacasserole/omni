@@ -39,6 +39,18 @@ Ext.define('Omni.model.Job', {
       type       : 'string'
     },
     {
+      name       : 'sku_display',
+      type       : 'string'
+    },
+    {
+      name       : 'production_location_display',
+      type       : 'string'
+    },
+    {
+      name       : 'supplier_display',
+      type       : 'string'
+    },
+    {
       name       : 'job_description',
       type       : 'string'
     },

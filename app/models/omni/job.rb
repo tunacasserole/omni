@@ -12,9 +12,9 @@ class Omni::Job < ActiveRecord::Base
   validates    :display,                  presence: true, uniqueness: true
   validates    :job_nbr,                  presence: true, uniqueness: true
   validates    :job_id,                   presence: true
-  validates    :jobable_id,               presence: true
-  validates    :jobable_type,             presence: true
-  validates    :job_type,                 presence: true
+  # validates    :jobable_id,               presence: true
+  # validates    :jobable_type,             presence: true
+  validates    :job_type,                 lookup: 'JOB_TYPE', allow_nil: true
   validates    :production_location_id,   presence: true
   # VALIDATIONS (End)
 
@@ -22,6 +22,7 @@ class Omni::Job < ActiveRecord::Base
   default      :job_id,                           override: false,        with: :guid
   default      :job_nbr,                          override: false,        with: :sequence,         named: "JOB_NBR"
   default      :display,                          override: false,        to: lambda{|m| "job: #{m.job_nbr}"}
+  default      :production_location_id,           override: false,        to: lambda{|m|  ['CONVERSION (HEAT APPLY)','ALTERATION'].include?(m.job_type) ? m.order_detail.order.location_id : Omni::Location.main_warehouse.location_id}
   default      :request_units,                    override: false,        to: 0
   default      :complete_units,                   override: false,        to: 0
   default      :weight,                           override: false,        to: 0
@@ -60,6 +61,7 @@ class Omni::Job < ActiveRecord::Base
   belongs_to   :production_location,             class_name: 'Omni::Location',                foreign_key: 'production_location_id'
   belongs_to   :supplier,                        class_name: 'Omni::Supplier',                foreign_key: 'supplier_id'
   belongs_to   :sku,                             class_name: 'Omni::Sku',                     foreign_key: 'sku_id'
+  belongs_to   :order_detail,                    class_name: 'Omni::OrderDetail',             foreign_key: 'jobable_id'
   has_many     :stock_ledger_activities,         class_name: 'Omni::StockLedgerActivity',     foreign_key: 'stockable_id', as: :stockable
   has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',  as: :notable
   has_many     :picks,                           class_name: 'Omni::Pick',                    foreign_key: 'pickable_id', as: :pickable
@@ -99,6 +101,7 @@ class Omni::Job < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :job_id
     string   :jobable_id
     string   :jobable_type
     string   :state

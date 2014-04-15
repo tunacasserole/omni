@@ -58,7 +58,7 @@ Ext.define('Omni.view.receipt_formats.Form', {
           layout: 'anchor',
           items:[
             { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textarea'        },
             { name: 'icon_url',                       fieldLabel: this.icon_urlLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'icon_width',                     fieldLabel: this.icon_widthLabel,                 allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'paper_width',                    fieldLabel: this.paper_widthLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },

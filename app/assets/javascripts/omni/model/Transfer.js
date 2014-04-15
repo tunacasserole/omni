@@ -1,6 +1,6 @@
 Ext.define('Omni.model.Transfer', {
   extend: 'Ext.data.Model',
-  
+
   // AUTO-GENERATED REGION (Start)
 
   // VALIDATIONS (Start) =================================================================
@@ -16,6 +16,7 @@ Ext.define('Omni.model.Transfer', {
   fields:[
     { name: 'transfer_id',                          type: 'string'      },
     { name: 'display',                              type: 'string'      },
+    { name: 'display_as',                           type: 'string'      },
     { name: 'state',                                type: 'string'      },
     { name: 'transfer_nbr',                         type: 'string'      },
     { name: 'requesting_location_display',          type: 'string'      },

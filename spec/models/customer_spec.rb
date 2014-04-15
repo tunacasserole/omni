@@ -17,7 +17,7 @@ describe "customer" do
   describe "defaults" do
     it "customer_id" do me = create(Omni::Customer); me.customer_id.should_not be_nil end
     it "customer_nbr" do  me = create(Omni::Customer); me.customer_nbr.should_not be_nil end
-    it "display" do me = create(Omni::Customer); me.display.should eq("#{me.last_name}, #{me.first_name} - #{me.customer_nbr}") end
+    it "display" do me = create(Omni::Customer); me.display.should eq("#{me.last_name} #{me.first_name} #{me.customer_nbr}") end
     it "country" do me = create(Omni::Customer); me.country.should eq('USA') end
     it "ship_country" do me = create(Omni::Customer); me.ship_country.should eq('USA') end
   end

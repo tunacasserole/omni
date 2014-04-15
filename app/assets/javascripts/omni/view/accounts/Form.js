@@ -518,7 +518,7 @@ Ext.define('Omni.view.accounts.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'fa fa-check-square-o',
+        iconCls: 'fa fa-times-circle-o',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,

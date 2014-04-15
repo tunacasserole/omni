@@ -13,6 +13,8 @@ Ext.define('Omni.view.order_details.Explorer', {
   account_displayLabel: Omni.i18n.model.OrderDetail.account_display,
   grade_displayLabel: Omni.i18n.model.OrderDetail.grade_display,
   genderLabel: Omni.i18n.model.OrderDetail.gender,
+  order_unitsLabel: Omni.i18n.model.OrderDetail.order_units,
+  retail_priceLabel: Omni.i18n.model.OrderDetail.retail_price,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -56,7 +58,7 @@ Ext.define('Omni.view.order_details.Explorer', {
       }, {
         header: this.sku_displayLabel,
         dataIndex: 'sku_display',
-        flex: 1,
+        flex: 3,
         sortable: false
       }, {
         header: this.delivery_methodLabel,
@@ -66,6 +68,16 @@ Ext.define('Omni.view.order_details.Explorer', {
       }, {
         header: this.pickup_location_displayLabel,
         dataIndex: 'pickup_location_display',
+        flex: 2,
+        sortable: false
+      }, {
+        header: this.order_unitsLabel,
+        dataIndex: 'order_units',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.retail_priceLabel,
+        dataIndex: 'retail_price',
         flex: 1,
         sortable: false
       }, ]

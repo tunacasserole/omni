@@ -60,16 +60,21 @@ class Omni::Pick < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :pick_id
+    string   :pickable_id
+    string   :pickable_type
     string   :display
     string   :pick_nbr
     string   :fulfillment_location_display
     string   :job_display
     string   :state
 
-    text     :state_fulltext, using: :state
     text     :display_fulltext, using: :display
+    text     :pick_nbr_fulltext, using: :pick_nbr
+    text     :job_display_fulltext, using: :job_display
+    text     :fulfillment_location_display_fulltext, using: :fulfillment_location_display
   end
-
+  order_search_by pick_nbr: :desc
   # INDEXING (End)
 
   # STATES (Start) ====================================================================

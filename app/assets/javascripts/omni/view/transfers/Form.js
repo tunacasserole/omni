@@ -3,12 +3,9 @@ Ext.define('Omni.view.transfers.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-transfers-Form',
 
-
-
   initComponent:function () {
 
     var me = this;
-
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
@@ -39,14 +36,14 @@ Ext.define('Omni.view.transfers.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
+            { name: 'transfer_nbr',                   fieldLabel: this.transfer_nbrLabel,               allowBlank: true,   disabled: true,    xtype: 'textfield'        },
             { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
-            { name: 'transfer_nbr',                   fieldLabel: this.transfer_nbrLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'requesting_location_id',         fieldLabel: this.requesting_location_idLabel,     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { name: 'fulfillment_location_id',        fieldLabel: this.fulfillment_location_idLabel,    allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sku_id',                         fieldLabel: this.sku_idLabel,                     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
-            { name: 'transfer_reason_id',             fieldLabel: this.transfer_reason_idLabel,         allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.TransferReason',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'transfer_reason_id', itemTpl:'{display}' },
-            { name: 'request_units',                  fieldLabel: this.request_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { name: 'sku_id',                         fieldLabel: this.sku_idLabel,                     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}', gotoTarget: 'omni-skus-Inspector' },
+            { name: 'requesting_location_id',         fieldLabel: this.requesting_location_idLabel,     allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}', gotoTarget: 'omni-locations-Inspector' },
+            { name: 'fulfillment_location_id',        fieldLabel: this.fulfillment_location_idLabel,    allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}', gotoTarget: 'omni-locations-Inspector' },
+            { name: 'transfer_reason_id',             fieldLabel: this.transfer_reason_idLabel,         allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.TransferReason',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'transfer_reason_id', itemTpl:'{display}', gotoTarget: 'omni-transfers_reasons-Inspector' },
+            { name: 'request_units',                  fieldLabel: this.request_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'numberfield'        },
+            { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textarea'        },
           ]
         },
         {

@@ -50,16 +50,16 @@ Ext.define('Omni.view.customer_accounts.Explorer', {
     {
       header       : me.displayLabel,
       dataIndex    : 'display',
-      flex         : 1
+      flex         : 3
     },
-    {
-      header       : me.customer_idLabel,
-      dataIndex    : 'customer_id',
-      flex         : 1
-    },
+    // {
+    //   header       : me.customer_idLabel,
+    //   dataIndex    : 'customer_id',
+    //   flex         : 1
+    // },
     {
       header       : me.account_idLabel,
-      dataIndex    : 'account_id',
+      dataIndex    : 'account_display',
       flex         : 1
     },
     {
@@ -67,30 +67,30 @@ Ext.define('Omni.view.customer_accounts.Explorer', {
       dataIndex    : 'comment',
       flex         : 1
     },
-    {
-      xtype        : 'checkcolumn',
-      header       : me.is_contactLabel,
-      dataIndex    : 'is_contact',
-      flex         : 1
-    },
-    {
-      xtype        : 'checkcolumn',
-      header       : me.is_teacherLabel,
-      dataIndex    : 'is_teacher',
-      flex         : 1
-    },
-    {
-      xtype        : 'checkcolumn',
-      header       : me.is_administratorLabel,
-      dataIndex    : 'is_administrator',
-      flex         : 1
-    },
-    {
-      xtype        : 'checkcolumn',
-      header       : me.is_destroyedLabel,
-      dataIndex    : 'is_destroyed',
-      flex         : 1
-    }
+    // {
+    //   xtype        : 'checkcolumn',
+    //   header       : me.is_contactLabel,
+    //   dataIndex    : 'is_contact',
+    //   flex         : 1
+    // },
+    // {
+    //   xtype        : 'checkcolumn',
+    //   header       : me.is_teacherLabel,
+    //   dataIndex    : 'is_teacher',
+    //   flex         : 1
+    // },
+    // {
+    //   xtype        : 'checkcolumn',
+    //   header       : me.is_administratorLabel,
+    //   dataIndex    : 'is_administrator',
+    //   flex         : 1
+    // },
+    // {
+    //   xtype        : 'checkcolumn',
+    //   header       : me.is_destroyedLabel,
+    //   dataIndex    : 'is_destroyed',
+    //   flex         : 1
+    // }
       ]
     });
     // COLUMNS (End)

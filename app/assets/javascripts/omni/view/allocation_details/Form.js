@@ -37,13 +37,12 @@ Ext.define('Omni.view.allocation_details.Form', {
           defaultType  : 'textfield',
           layout       : 'anchor',
           items        : [
-            { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { name: 'transfer_id',                    fieldLabel: this.transfer_idLabel,                allowBlank: false,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Transfer',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'transfer_id', itemTpl:'{display}' },
             {
               xtype        : 'textfield',
               name         : 'allocation_detail_nbr',
               fieldLabel   : this.allocation_detail_nbrLabel,
-              allowBlank   : true
+              allowBlank   : true,
+              disabled     : true
             },
             {
               xtype        : 'textfield',
@@ -52,6 +51,8 @@ Ext.define('Omni.view.allocation_details.Form', {
               allowBlank   : true,
               disabled     : true
             },
+            { name: 'location_id', fieldLabel: this.location_idLabel, allowBlank: false,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}', gotoTarget: 'omni-locations-Inspector' },
+            { name: 'transfer_id',   fieldLabel: this.transfer_idLabel, allowBlank: false,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Transfer',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'transfer_id', itemTpl:'{display}', gotoTarget: 'omni-transfers-Inspector' },
             {
               xtype        : 'numberfield',
               name         : 'units_needed',

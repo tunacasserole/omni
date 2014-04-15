@@ -3,17 +3,15 @@ Ext.define('Omni.view.terminals.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-terminals-Form',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-    
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       location_idLabel:                           Omni.i18n.model.Terminal.location_id,
       terminal_nbrLabel:                          Omni.i18n.model.Terminal.terminal_nbr,
+      till_idLabel:                               Omni.i18n.model.Terminal.till_id,
       mac_addressLabel:                           Omni.i18n.model.Terminal.mac_address,
       local_server_ipLabel:                       Omni.i18n.model.Terminal.local_server_ip,
       hq_server_urlLabel:                         Omni.i18n.model.Terminal.hq_server_url,
@@ -40,15 +38,16 @@ Ext.define('Omni.view.terminals.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
-            { name: 'terminal_nbr',                   fieldLabel: this.terminal_nbrLabel,               allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'terminal_nbr',                   fieldLabel: this.terminal_nbrLabel,               allowBlank: false,  disabled: true,    xtype: 'textfield'        },
+            { name: 'location_id',                    fieldLabel: this.location_idLabel,                allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}', gotoTarget: 'omni-locations-Inspector' },
+            { name: 'till_id',                        fieldLabel: this.till_idLabel,                    allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Till',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'till_id', itemTpl:'{display}', gotoTarget: 'omni-tills-Inspector' },
             { name: 'mac_address',                    fieldLabel: this.mac_addressLabel,                allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'local_server_ip',                fieldLabel: this.local_server_ipLabel,            allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'hq_server_url',                  fieldLabel: this.hq_server_urlLabel,              allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'override_sale_date',             fieldLabel: this.override_sale_dateLabel,         allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'receipt_printer_url',            fieldLabel: this.receipt_printer_urlLabel,        allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'receipt_printer_ip',             fieldLabel: this.receipt_printer_ipLabel,         allowBlank: false,  disabled: false,    xtype: 'textfield'        },
-            { name: 'receipt_format_id',              fieldLabel: this.receipt_format_idLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ReceiptFormat',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'receipt_format_id', itemTpl:'{display}' },
+            { name: 'receipt_format_id',              fieldLabel: this.receipt_format_idLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ReceiptFormat',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'receipt_format_id', itemTpl:'{display}', gotoTarget: 'omni-receipt_formats-Inspector' },
             { name: 'tag_printer_url',                fieldLabel: this.tag_printer_urlLabel,            allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'tag_printer_ip',                 fieldLabel: this.tag_printer_ipLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'pin_pad_port',                   fieldLabel: this.pin_pad_portLabel,               allowBlank: true,   disabled: false,    xtype: 'textfield'        },

@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "till" do
+  let(:me) { create(Omni::Till) }
 
   describe "requires" do
     it "till_id" do lambda{Omni::Till.create! till_id nil}.should raise_error end
@@ -15,9 +16,9 @@ describe "till" do
   end
 
   describe "defaults" do
-    it "till_id" do me = create(Omni::Till); me.till_id.should_not be_nil end
-    it "till_nbr" do me = create(Omni::Till); me.till_nbr.should_not be_nil end
-    it "display" do me = create(Omni::Till); me.display.should eq("#{me.location_display} - Till: #{me.till_nbr}") end
+    it "till_id" do me.till_id.should_not be_nil end
+    it "till_nbr" do me.till_nbr.should_not be_nil end
+    it "display" do me.display.should eq("#{me.location_display} - Till: #{me.till_nbr}") end
   end
 
   describe "lookups" do
@@ -30,14 +31,19 @@ describe "till" do
   end
 
   describe "has_many" do
-    it "till_activities" do me = create(Omni::Till); c = create(Omni::TillActivity, till_id: me.till_id); me.till_activities.count.should eq(1) end
-    it "till_audits" do me = create(Omni::Till); c = create(Omni::TillAudit, till_id: me.till_id); me.till_audits.count.should eq(1) end
-    it "till_details" do me = create(Omni::Till); c = create(Omni::TillDetail, till_id: me.till_id); me.till_details.count.should eq(1) end
-    it "terminals" do me = create(Omni::Till); c = create(Omni::Terminal, till_id: me.till_id); me.terminals.count.should eq(1) end
+    it "till_activities" do create(Omni::TillActivity, till_id: me.till_id); me.till_activities.count.should eq(1) end
+    it "till_audits" do create(Omni::TillAudit, till_id: me.till_id); me.till_audits.count.should eq(1) end
+    it "terminals" do create(Omni::Terminal, till_id: me.till_id); me.terminals.count.should eq(1) end
   end
 
   describe "indexing" do
 
+  end
+
+  describe "hooks should " do
+    it "creates till details for every tender type" do
+      me.till_details.count.should eq(Omni::Tender.count)
+    end
   end
 
 

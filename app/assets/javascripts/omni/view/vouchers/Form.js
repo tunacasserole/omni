@@ -3,7 +3,6 @@ Ext.define('Omni.view.vouchers.Form', {
     extend: 'Buildit.ux.Form',
     alias: 'widget.omni-vouchers-Form',
 
-
     // LABELS (Start) =======================================================================
     voucher_idLabel: Omni.i18n.model.Voucher.voucher_id,
     displayLabel: Omni.i18n.model.Voucher.display,
@@ -18,7 +17,6 @@ Ext.define('Omni.view.vouchers.Form', {
     is_destroyedLabel: Omni.i18n.model.Voucher.is_destroyed,
     // LABELS (End)
 
-
     initComponent: function() {
 
       var me = this;
@@ -29,8 +27,6 @@ Ext.define('Omni.view.vouchers.Form', {
         value: this.record.get('voucher_id')
       };
       // FILTER (End)
-
-
 
       // FIELDSETS (Start) ====================================================================
       Ext.apply(this, {
@@ -57,24 +53,27 @@ Ext.define('Omni.view.vouchers.Form', {
                 disabled: true
               },
               {
-                xtype: 'buildit-Locator',
-                store: Ext.create('Omni.store.Customer', {
-                  pageSize: 10
-                }),
-                displayField: 'display_as',
-                itemTpl: '{display_as}',
-                name: 'customer_id',
-                fieldLabel: me.customer_idLabel,
-                initialValue: me.record.get('display_as'),
-                allowBlank: false,
-                gotoTarget: 'omni-customers-Inspector'
-              },
-              {
                 xtype: 'textfield',
                 name: 'voucher_nbr',
                 fieldLabel: me.voucher_nbrLabel,
                 allowBlank: true,
                 disabled: true
+              },
+
+              {
+                name: 'customer_id',
+                fieldLabel: me.customer_idLabel,
+                allowBlank: false,
+                xtype: 'buildit-Locator',
+                store: Ext.create('Omni.store.Customer', {
+                  pageSize: 10
+                }),
+                displayField: 'display',
+                queryField: 'display',
+                valueField: 'display',
+                itemTpl: '{display}',
+                initialValue: me.record.get('display'),
+                gotoTarget: 'omni-customers-Inspector'
               },
               {
                 xtype: 'buildit-Lookup',

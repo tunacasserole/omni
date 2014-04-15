@@ -45,12 +45,12 @@ Ext.define('Omni.view.tills.Explorer', {
         header: this.till_nbrLabel,
         dataIndex: 'till_nbr',
         flex: 1,
-        sortable: false
+        sortable: true
       }, {
         header: this.location_displayLabel,
         dataIndex: 'location_display',
         flex: 1,
-        sortable: false
+        sortable: true
       }]
     });
     // COLUMNS (End)

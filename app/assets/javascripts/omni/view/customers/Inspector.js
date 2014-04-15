@@ -3,12 +3,9 @@ Ext.define('Omni.view.customers.Inspector', {
   extend: 'Buildit.ux.inspector.Panel',
   alias: 'widget.omni-customers-Inspector',
 
-
-
   initComponent: function() {
 
     var me = this;
-
 
     // LABELS (Start) ======================================================================
     // LABELS (End)

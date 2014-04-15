@@ -65,43 +65,53 @@ Ext.define('Omni.view.orders.Form', {
               xtype: 'textfield',
               name: 'state',
               fieldLabel: me.stateLabel,
-              allowBlank: true
-            }, {
-              xtype: 'buildit-Locator',
-              store: Ext.create('Omni.store.Location', {
-                pageSize: 10
-              }),
-              displayField: 'display',
-              itemTpl: '{display}',
-              name: 'location_id',
-              fieldLabel: me.location_idLabel,
-              initialValue: me.record.get('display'),
-              allowBlank: false,
-              gotoTarget: 'omni-locations-Inspector'
-            }, {
-              xtype: 'buildit-Locator',
-              store: Ext.create('Omni.store.Terminal', {
-                pageSize: 10
-              }),
-              displayField: 'display',
-              itemTpl: '{display}',
-              name: 'terminal_id',
-              fieldLabel: me.terminal_idLabel,
-              initialValue: me.record.get('display'),
               allowBlank: true,
-              gotoTarget: 'omni-terminals-Inspector'
+              disabled: true
+
             }, {
               xtype: 'buildit-Locator',
               store: Ext.create('Omni.store.Customer', {
                 pageSize: 10
               }),
               displayField: 'display',
+              queryField: 'display',
               itemTpl: '{display}',
               name: 'customer_id',
               fieldLabel: me.customer_idLabel,
-              initialValue: me.record.get('display'),
+              // valueField: customer_id,
               allowBlank: false,
+              disabled: false,
               gotoTarget: 'omni-customers-Inspector'
+
+            }, {
+              name: 'location_id',
+              fieldLabel: this.location_idLabel,
+              allowBlank: false,
+              disabled: false,
+              xtype: 'buildit-Locator',
+              store: Ext.create('Omni.store.Location', {
+                pageSize: 25
+              }),
+              displayField: 'display',
+              queryField: 'display',
+              valueField: 'location_id',
+              itemTpl: '{display}',
+              gotoTarget: 'omni-locations-Inspector'
+
+            }, {
+              name: 'terminal_id',
+              xtype: 'buildit-Locator',
+              fieldLabel: me.terminal_idLabel,
+              store: Ext.create('Omni.store.Terminal', {
+                pageSize: 10
+              }),
+              displayField: 'display',
+              queryField: 'display',
+              itemTpl: '{display}',
+              valueField: 'terminal_id',
+              allowBlank: true,
+              gotoTarget: 'omni-terminals-Inspector'
+
             }, {
               xtype: 'datefield',
               name: 'order_start_date',

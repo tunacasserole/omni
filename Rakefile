@@ -50,8 +50,9 @@ namespace :omni do
   desc "Setup test database - drops, loads schema, migrates and seeds the test db"
   task :prepare => :environment do
     # system("rake buildit:db:rebuild RAILS_ENV='test'")
-    system("rake buildit:db:migrate RAILS_ENV='test'")
-    system("rake omni:resequence RAILS_ENV='test'")
+    system("rake buildit:db:migrate RAILS_ENV=test")
+    system("rake buildit:db:seed RAILS_ENV=test")
+    system("rake omni:resequence RAILS_ENV=test")
   end
 
   desc 'Indexes the given model'

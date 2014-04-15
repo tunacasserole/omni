@@ -16,6 +16,7 @@ class Omni::TillActivity < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :till_activity_id,                 override: false,        with: :guid
   default      :till_activity_nbr,                override: false,        with: :sequence,         named: "TILL_ACTIVITY_NBR"
+  default      :till_activity_date,               override: false,        with: :today
   default      :display,                          override: false,        to: lambda{|m| "#{m.till_display} - #{m.till_activity_date}"}
   default      :activity_count,                   override: false,        to: 0
   default      :activity_amount,                  override: false,        to: 0
@@ -34,7 +35,7 @@ class Omni::TillActivity < ActiveRecord::Base
   belongs_to   :till,                            class_name: 'Omni::Till',                    foreign_key: 'till_id'
   belongs_to   :tender,                          class_name: 'Omni::Tender',                  foreign_key: 'tender_id'
   belongs_to   :payment,                         class_name: 'Omni::Payment',                 foreign_key: 'payment_id'
-  belongs_to   :user,                            class_name: 'Buildit::User',                     foreign_key: 'user_id'
+  belongs_to   :user,                            class_name: 'Buildit::User',                 foreign_key: 'user_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -48,6 +49,7 @@ class Omni::TillActivity < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :till_id
     string   :till_activity_nbr
     date     :till_activity_date
     string   :till_activity_reason

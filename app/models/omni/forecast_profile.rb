@@ -14,7 +14,7 @@ class Omni::ForecastProfile < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :forecast_profile_id, presence: true, uniqueness: true
   validates    :display,             presence: true, uniqueness: true
-  validates    :forecast_formula,    lookup: 'FORECAST_FORMULA', :allow_nil => false
+  validates    :forecast_formula,    lookup: 'FORECAST_FORMULA', :allow_nil => true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================

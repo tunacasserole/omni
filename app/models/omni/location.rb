@@ -151,7 +151,10 @@ class Omni::Location < ActiveRecord::Base
   def display_as
     display
   end
-  # HELPERS (End)
+
+  def self.main_warehouse
+    Omni::Location.where(location_id: '51579764AC3E11E2947800FF58D32228').first
+  end# HELPERS (End)
 
   # STATES (Start) ====================================================================
 

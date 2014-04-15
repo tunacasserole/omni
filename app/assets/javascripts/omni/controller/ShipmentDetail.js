@@ -3,7 +3,6 @@ Buildit.defineController('Omni.controller.ShipmentDetail', {
   views: [],
 
   handleAction: function() {
-    // TODO - Add your handler logic here
   },
 
   init: function() {
@@ -15,6 +14,7 @@ Buildit.defineController('Omni.controller.ShipmentDetail', {
         }
       }
     );
-  }
-});
 
+  }
+
+}); // Buildit.defineController('Omni.controller.ShipmentDetail'

@@ -94,6 +94,8 @@ class Omni::Transfer < ActiveRecord::Base
     text     :sku_display_fulltext, using: :sku_display
     text     :transfer_reason_display_fulltext, using: :transfer_reason_display
   end
+  order_search_by transfer_nbr: :desc
+
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
@@ -132,6 +134,8 @@ class Omni::Transfer < ActiveRecord::Base
     self.cancel_user_id = Buildit::User.current if Buildit::User.current
   end
   # STATES (End)
-
+  def display_as
+    display
+  end
 end # class Omni::Transfer
 
