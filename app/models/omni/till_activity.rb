@@ -49,6 +49,7 @@ class Omni::TillActivity < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :tender_id
     string   :till_id
     string   :till_activity_nbr
     date     :till_activity_date

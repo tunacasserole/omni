@@ -8,7 +8,8 @@ Ext.define('Omni.view.payments.Explorer', {
   order_displayLabel: Omni.i18n.model.Payment.order_display,
   customer_displayLabel: Omni.i18n.model.Payment.customer_display,
   location_displayLabel: Omni.i18n.model.Payment.location_display,
-  payment_amount_displayLabel: Omni.i18n.model.Payment.payment_amount_display,
+  stateLabelLabel: Omni.i18n.model.Payment.stateLabel,
+  payment_amountLabelLabel: Omni.i18n.model.Payment.payment_amountLabel,
   terminal_displayLabel: Omni.i18n.model.Payment.terminal_display,
   tender_displayLabel: Omni.i18n.model.Payment.tender_display,
   // LABELS (End)
@@ -62,8 +63,8 @@ Ext.define('Omni.view.payments.Explorer', {
         flex: 1,
         sortable: false
       }, {
-        header: this.payment_amount_displayLabel,
-        dataIndex: 'payment_amount_display',
+        header: this.payment_amountLabel,
+        dataIndex: 'payment_amount',
         flex: 1,
         sortable: false
       }, {
@@ -74,6 +75,11 @@ Ext.define('Omni.view.payments.Explorer', {
       }, {
         header: this.tender_displayLabel,
         dataIndex: 'tender_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.stateLabel,
+        dataIndex: 'state',
         flex: 1,
         sortable: false
       }]

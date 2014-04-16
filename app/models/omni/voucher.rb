@@ -64,14 +64,10 @@ class Omni::Voucher < ActiveRecord::Base
 
   ### CALLBACKS ###
     after_transition on: :verify, do: :after_verify
-    after_transition on: :use, do: :charge
 
   ### EVENTS ###
     event :verify do
       transition draft: :same
-    end
-    event :use do
-      transition draft: :complete
     end
   end
   # STATES (End)
@@ -87,6 +83,7 @@ class Omni::Voucher < ActiveRecord::Base
   # use => draft to used
   def charge(amount)
     self.current_balance -= amount
+    self.state = 'complete' if self.current_balance < 0.01
     save
   end # def after_use
 

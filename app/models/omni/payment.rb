@@ -68,6 +68,7 @@ class Omni::Payment < ActiveRecord::Base
     string   :payment_nbr
     string   :order_id
     string   :customer_id
+    string   :tender_id
     string   :terminal_id
     string   :location_id
     string   :voucher_id

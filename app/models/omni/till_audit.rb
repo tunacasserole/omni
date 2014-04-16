@@ -46,6 +46,7 @@ class Omni::TillAudit < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :till_id
+    string   :tender_id
     string   :till_display do till.display if till end
     date     :audit_date
     string   :tender_display do tender.display if tender end

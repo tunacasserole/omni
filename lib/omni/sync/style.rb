@@ -4,12 +4,11 @@ class Omni::Sync::Style < Omni::Sync::Base
     # table_to_seed('Style','styles','styles_sync')
     # excel_to_seed('Style','styles')
     # update_style_id
-    update_fields
+    # update_retail_price
   end
 
-  def self.update_fields
+  def self.update_retail_price
     ActiveRecord::Base.connection.execute("select style_id from styles").each_with_index do |x,i|
-      clock_it(i)
       initial_retail_price = ActiveRecord::Base.connection.execute("select initial_retail_price from skus where style_id = '#{x[0]}' limit 1").first[0]
       ActiveRecord::Base.connection.execute("update styles set initial_retail_price = #{initial_retail_price} where style_id = '#{x[0]}'")
     end

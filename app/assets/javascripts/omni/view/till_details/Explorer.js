@@ -35,7 +35,9 @@ Ext.define('Omni.view.till_details.Explorer', {
     // LABELS (Start) ======================================================================
     Ext.applyIf(this, {
       till_displayLabel: Omni.i18n.model.TillDetail.till_display,
-      tender_displayLabel: Omni.i18n.model.TillDetail.tender_display
+      tender_displayLabel: Omni.i18n.model.TillDetail.tender_display,
+      tender_amountLabel: Omni.i18n.model.TillDetail.tender_amount,
+      tender_countLabel: Omni.i18n.model.TillDetail.tender_count
     });
     // LABELS (End)
 
@@ -49,6 +51,16 @@ Ext.define('Omni.view.till_details.Explorer', {
       }, {
         header: this.tender_displayLabel,
         dataIndex: 'tender_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.tender_amountLabel,
+        dataIndex: 'tender_amount',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.tender_countLabel,
+        dataIndex: 'tender_count',
         flex: 1,
         sortable: false
       }]
