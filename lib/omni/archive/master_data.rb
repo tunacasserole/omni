@@ -1,4 +1,4 @@
-# class Omni::Sync::MasterData
+# class Omni::Data::Sync::MasterData
 
 #   def self.go
 #     load_styles

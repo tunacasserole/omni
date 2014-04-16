@@ -34,7 +34,7 @@ class Omni::Util::Excel
 
     # load the excel data into a hash and map it to the database
     data = excel_to_hash("#{table_name}.xlsx")
-    data.each_with_index {|x,i| "Omni::Sync::#{model_name}".constantize.map_to_db(x); Omni::Util::Clock.go(row: i, total: ata.count)}
+    data.each_with_index {|x,i| "Omni::Data::Sync::#{model_name}".constantize.map_to_db(x); Omni::Util::Clock.go(row: i, total: ata.count)}
 
     # optionally call seed file generator
     # dump_to_seed(model_name)

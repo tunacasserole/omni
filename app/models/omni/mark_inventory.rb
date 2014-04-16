@@ -1,6 +1,6 @@
 class Omni::MarkInventory < ActiveRecord::Base
   # METADATA (Start) ====================================================================
-  self.table_name                 = :mark_inventory
+  self.table_name                 = :inventory
   self.primary_key                = :id
   # METADATA (End)
 

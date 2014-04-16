@@ -71,25 +71,40 @@ namespace :omni do
     puts "\nIndexing Started\n\n"
     Rails.application.eager_load!
     started_at = Time.now
+    slow_classes = []
 
     ActiveRecord::Base.descendants.sort { |x, y| x.name <=> y.name }.each do |klass|
       args.model && klass.name != Omni::Util::Gem.full_model_name(args.model) ? next : args.model = nil
 
       if klass.searchable?
-        puts "! Indexing #{klass.name}"
-        klass.count > 5000 ? system("rake sunspot:reindex[1000,#{klass.name}]") : klass.reindex(batch_size: nil)
+        if klass.count < 20000
+          puts "! Indexing #{klass.name}"
+          klass.reindex(batch_size: nil)
+        else
+          slow_classes << klass.name
+        end
       end
+
+    end
+
+    puts "! Remaining classes to index"
+    slow_classes.each do |k|
+      puts "- #{k}"
+    end
+    slow_classes.each do |k|
+      puts "! Indexing #{k}"
+      system("rake sunspot:reindex[1000,#{k}]")
     end
 
     puts "\n\n! All reindexing completed in #{(Time.now - started_at).to_i}s"
-
   end
+
 
   desc "update sequences table for current model"
   task :sequence, [:model] => :environment do |t, args|
     puts "== starting at " << Time.now.strftime("%H:%M:%S").yellow << " ============ "
     @start_time = Time.now
-    Omni::Sync::Base.re_sequence(args.model)
+    Omni::Data::Sync::Base.re_sequence(args.model)
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
@@ -104,7 +119,15 @@ namespace :omni do
   task :sync, [:model] => :environment do |t, args|
     args.with_defaults(:model => "AllModels")
     @start_time = Time.now
-    Omni::Sync::Base.go(args.model)
+    Omni::Data::Sync::Base.go(args.model)
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
+  desc "fix data via sql and activerecord updates"
+  task :fix, [:model] => :environment do |t, args|
+    args.with_defaults(:model => "AllModels")
+    @start_time = Time.now
+    Omni::Data::Fix::Base.go(args.model)
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
