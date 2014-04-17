@@ -12,6 +12,9 @@ class Omni::Customer < ActiveRecord::Base
   validates    :display,                  presence: true, uniqueness: true
   validates    :customer_nbr,             presence: true, uniqueness: true
   validates    :last_name,                presence: true
+  validates    :phone_type_1,             lookup: 'PHONE_TYPE',                 allow_nil: true
+  validates    :phone_type_2,             lookup: 'PHONE_TYPE',                 allow_nil: true
+  validates    :phone_type_3,             lookup: 'PHONE_TYPE',                 allow_nil: true
   validates    :name_prefix,              lookup: 'NAME_PREFIX',                allow_nil: true
   validates    :name_suffix,              lookup: 'NAME_SUFFIX',                allow_nil: true
   validates    :gender,                   lookup: 'GENDER',                     allow_nil: true

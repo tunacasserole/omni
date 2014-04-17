@@ -3,8 +3,6 @@ Ext.define('Omni.view.customers.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-customers-Form',
 
-
-
   initComponent:function () {
 
     var me = this;
@@ -57,10 +55,15 @@ Ext.define('Omni.view.customers.Form', {
       ship_countryLabel:                          Omni.i18n.model.Customer.ship_country,
       ship_latitudeLabel:                         Omni.i18n.model.Customer.ship_latitude,
       ship_longitudeLabel:                        Omni.i18n.model.Customer.ship_longitude,
-      phoneLabel:                                 Omni.i18n.model.Customer.phone,
-      phone_extensionLabel:                       Omni.i18n.model.Customer.phone_extension,
+      phone_1Label:                               Omni.i18n.model.Customer.phone_1,
+      phone_type_1Label:                          Omni.i18n.model.Customer.phone_type_1,
+      phone_2Label:                               Omni.i18n.model.Customer.phone_2,
+      phone_type_2Label:                          Omni.i18n.model.Customer.phone_type_2,
+      phone_3Label:                               Omni.i18n.model.Customer.phone_3,
+      phone_type_3Label:                          Omni.i18n.model.Customer.phone_type_3,
+      // fax_1Label:                                 Omni.i18n.model.Customer.fax_1,
+      // fax_2Label:                                 Omni.i18n.model.Customer.fax_2,
       is_do_not_callLabel:                        Omni.i18n.model.Customer.is_do_not_call,
-      faxLabel:                                   Omni.i18n.model.Customer.fax,
       email_addressLabel:                         Omni.i18n.model.Customer.email_address,
       is_verifiedLabel:                           Omni.i18n.model.Customer.is_verified,
       is_do_not_emailLabel:                       Omni.i18n.model.Customer.is_do_not_email,
@@ -170,10 +173,15 @@ Ext.define('Omni.view.customers.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'phone',                          fieldLabel: this.phoneLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'phone_extension',                fieldLabel: this.phone_extensionLabel,            allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'phone_1',                        fieldLabel: this.phone_1Label,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'phone_type_1',                   fieldLabel: this.phone_type_1Label,               allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'PHONE_TYPE' },
+            { name: 'phone_2',                        fieldLabel: this.phone_2Label,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'phone_type_2',                   fieldLabel: this.phone_type_2Label,               allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'PHONE_TYPE' },
+            { name: 'phone_3',                        fieldLabel: this.phone_3Label,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'phone_type_3',                   fieldLabel: this.phone_type_3Label,               allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'PHONE_TYPE' },
+            // { name: 'fax_1',                          fieldLabel: this.fax_1Label,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            // { name: 'fax_2',                          fieldLabel: this.fax_2Label,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_do_not_call',                 fieldLabel: this.is_do_not_callLabel,             allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
-            { name: 'fax',                            fieldLabel: this.faxLabel,                        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'email_address',                  fieldLabel: this.email_addressLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_verified',                    fieldLabel: this.is_verifiedLabel,                allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_do_not_email',                fieldLabel: this.is_do_not_emailLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         }

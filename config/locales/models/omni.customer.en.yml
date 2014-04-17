@@ -52,10 +52,15 @@ en:
         ship_country:                    Country
         ship_latitude:                   Latitude
         ship_longitude:                  Longitude
-        phone:                           Phone
-        phone_extension:                 Phone Extension
+        phone_1:                         Phone 1
+        phone_type_1:                    Phone 1 Type
+        phone_2:                         Phone 2
+        phone_type_2:                    Phone 2 Type
+        phone_3:                         Phone 3
+        phone_type_3:                    Phone 3 Type
+        # fax_1:                           Fax 1
+        # fax_2:                           Fax 2
         is_do_not_call:                  Do Not Call
-        fax:                             Fax
         email_address:                   Email Address
         is_verified:                     Verified
         is_do_not_email:                 Do Not Email
