@@ -110,7 +110,7 @@ class Omni::Adjustment < ActiveRecord::Base
 
   # approve => draft to complete
   def after_approve
-
+    Omni::StockLedgerActivity.create(stockable_type: 'Omni::Adjustment', stockable_id: self.adjustment_id, ruleset_id: 'DA51BD08A6C911E2AE1A00FF58D32228', location_id: self.location_id, sku_id: self.sku_id, units: self.adjustment_units)
   end # def after_approve
 
 

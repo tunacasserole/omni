@@ -123,7 +123,7 @@ class Omni::Transfer < ActiveRecord::Base
   end
 
   def after_approve
-    self.picks.create
+    picks.create
   end
 
   def after_ship

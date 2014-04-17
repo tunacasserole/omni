@@ -45,6 +45,7 @@ describe "transfer" do
       me.state.should eq('draft')
     end
     it "approve" do
+      me.picks.first.should be_nil
       me.approve
       me.state.should eq('pending')
       me.picks.first.should_not be_nil

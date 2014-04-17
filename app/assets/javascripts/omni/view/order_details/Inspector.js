@@ -44,18 +44,22 @@ Ext.define('Omni.view.order_details.Inspector', {
             },
             showBadge: true
           },
-          // {
-          //   title: 'Pick Ticket',
-          //   xtype: 'omni-picks-Explorer'
-          // },
-          // {
-          //   title: 'Work Order',
-          //   xtype: 'omni-jobs-Explorer'
-          // },
-          // {
-          //   title: 'SKU Detail',
-          //   xtype: 'omni-skus-Explorer'
-          // },
+          {
+            title: 'Jobs',
+            xtype: 'omni-jobs-Explorer',
+            module: 'samples',
+            defaultSearch: {
+              with: {
+                jobable_type: {
+                  equal_to: 'Omni::OrderDetail'
+                },
+                jobable_id: {
+                  equal_to: me.record.get('order_detail_id')
+                }
+              }
+            },
+            showBadge: true
+          },
           // {
           //   title: 'Shipment Detail',
           //   xtype: 'omni-shipment_details-Explorer'

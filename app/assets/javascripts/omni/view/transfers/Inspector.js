@@ -37,6 +37,20 @@ Ext.define('Omni.view.transfers.Inspector', {
         },
         showBadge: true
     }, {
+        title: 'Picks',
+        xtype: 'omni-picks-Explorer',
+        defaultSearch: {
+          with: {
+            pickable_type: {
+              equal_to: 'Omni::Transfer'
+            },
+            pickable_id: {
+              equal_to: me.record.get('transfer_id')
+            }
+          }
+        },
+        showBadge: true
+    }, {
         title: 'Notes',
         xtype: 'buildit-notes-Explorer',
         defaultSearch: {

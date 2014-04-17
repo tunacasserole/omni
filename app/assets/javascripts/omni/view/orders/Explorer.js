@@ -79,6 +79,11 @@ Ext.define('Omni.view.orders.Explorer', {
       header       : me.order_totalLabel,
       dataIndex    : 'order_total',
       flex         : 1
+    },
+    {
+      header       : me.stateLabel,
+      dataIndex    : 'state',
+      flex         : 1
     }
       ]
     });

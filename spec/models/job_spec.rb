@@ -90,7 +90,7 @@ describe "job" do
     end
   end
 
-  describe "logic should", focus: true do
+  describe "logic should" do
     it "default production location to main warehouse" do
       me.production_location_id = nil
       me.job_type = ['CONVERSION (SEWN)','SPECIAL CUT'].sample
@@ -102,6 +102,16 @@ describe "job" do
       me.job_type = ['CONVERSION (HEAT APPLY)','ALTERATION'].sample
       me.save
       me.production_location_id.should eq(me.order_detail.order.location_id)
+    end
+    it "auto release job if delivery method is 'take' and job type is heat set conversion" do
+      me.order_detail.send("delivery_method=", 'TAKE')
+      me.send("job_type=", 'CONVERSION (HEAT APPLY)')
+      me.state.should eq('pending')
+    end
+    it "add picks for components if job is for conversion or custom size" do
+      me.order_detail.send("delivery_method=", 'TAKE')
+      me.send("job_type=", ['CONVERSION (SEWN)','SPECIAL CUT'].sample)
+      me.state.should eq('pending')
     end
   end
 end

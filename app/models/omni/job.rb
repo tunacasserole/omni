@@ -22,6 +22,9 @@ class Omni::Job < ActiveRecord::Base
   default      :job_id,                           override: false,        with: :guid
   default      :job_nbr,                          override: false,        with: :sequence,         named: "JOB_NBR"
   default      :display,                          override: false,        to: lambda{|m| "job: #{m.job_nbr}"}
+  default      :create_date,                      override: false,        with: :today
+  default      :activity_date,                    override: false,        with: :today
+  default      :posted_date,                      override: false,        with: :today
   default      :request_units,                    override: false,        to: 0
   default      :complete_units,                   override: false,        to: 0
   default      :weight,                           override: false,        to: 0
@@ -78,6 +81,12 @@ class Omni::Job < ActiveRecord::Base
   # HOOKS (Start) =======================================================================
   hook  :before_create,     :set_request_units,             10
   hook  :after_create,      :update_pick,             20
+  hook  :after_create,      :release_job,             30
+
+  def  release_job
+    # auto release job if delivery method is 'take' and job type is heat set conversion
+    self.release if jobable_type == "Omni::OrderDetail" && self.order_detail && self.order_detail.delivery_method == 'TAKE' && self.job_type == 'CONVERSION (HEAT APPLY)'
+  end
 
   def  set_request_units
     if jobable_type == "Omni::OrderDetail"
@@ -131,19 +140,17 @@ class Omni::Job < ActiveRecord::Base
     after_transition on: :release, do: :after_release
 
   ### EVENTS ###
-    event :cancel do
-      transition [:draft,:pending] => :cancelled
+    event :release do
+      transition draft: :pending
+    end
+    event :start do
+      transition [:draft,:pending] => :open
     end
     event :complete do
       transition :open => :complete
     end
-    event :release do
-    end
-    event :start do
-      transition :pending => :open
-    end
-    event :release do
-      transition draft: :pending
+    event :cancel do
+      transition [:draft,:pending] => :cancelled
     end
   end
   # STATES (End)
@@ -152,7 +159,7 @@ class Omni::Job < ActiveRecord::Base
 
   # start => pending to open
   def after_start
-
+    Omni::StockLedgerActivity.create(stockable_type: 'Omni::Job', stockable_id: self.job_id, location_id: self.production_location_id, sku_id: self.sku_id, units: request_units, ruleset_id: 'DA50F9B8A6C911E2AE1900FF58D32228')
   end # def after_start
 
 
@@ -171,7 +178,7 @@ class Omni::Job < ActiveRecord::Base
 
   # release => draft to pending
   def after_release
-    self.release_date = Date.today
+    self.send('release_date=', Date.today)
     if ['CONVERSION (HEAT APPLY)','CONVERSION (SEWN)','ALTERATION','SPECIAL CUT'].include? self.job_type
     # add picks for components if conversion or custom site
     end
