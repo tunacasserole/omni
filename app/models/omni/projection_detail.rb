@@ -202,6 +202,10 @@ class Omni::ProjectionDetail < ActiveRecord::Base
       transition draft: :approved
     end
 
+    event :p1 do
+      transition draft: :projection_1
+    end
+
     event :reset do
       transition [:draft, :approved] => :draft
     end

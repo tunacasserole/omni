@@ -61,7 +61,8 @@ Ext.define('Omni.view.projections.Form', {
             displayField: 'display',
             queryField: 'display',
             valueField: 'department_id',
-            itemTpl: '{display}'
+            itemTpl: '{display}',
+            gotoTarget: 'omni-departments-Inspector'
           }, {
             xtype: 'buildit-Lookup',
             name: 'plan_year',
@@ -81,7 +82,8 @@ Ext.define('Omni.view.projections.Form', {
             displayField: 'display',
             queryField: 'display',
             valueField: 'forecast_profile_id',
-            itemTpl: '{display}'
+            itemTpl: '{display}',
+            gotoTarget: 'omni-forecast_profiles-Inspector'
           }, {
             xtype: 'textfield',
             name: 'description',
