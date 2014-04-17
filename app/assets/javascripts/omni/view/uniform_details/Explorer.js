@@ -85,33 +85,33 @@ Ext.define('Omni.view.uniform_details.Explorer', {
           flex         : 1
         },
         {
+          xtype        : 'checkcolumn',
+          header       : me.is_required_maleLabel,
+          dataIndex    : 'is_required_male',
+          flex         : 1
+        },
+        {
+          xtype        : 'checkcolumn',
+          header       : me.is_required_femaleLabel,
+          dataIndex    : 'is_required_female',
+          flex         : 1
+        },
+        {
+          xtype        : 'checkcolumn',
+          header       : me.is_optional_maleLabel,
+          dataIndex    : 'is_optional_male',
+          flex         : 1
+        },
+        {
+          header       : me.is_optional_femaleLabel,
+          dataIndex    : 'is_optional_female',
+          flex         : 1
+        },
+        {
           header       : me.stateLabel,
           dataIndex    : 'state',
           flex         : 1
         }
-        // {
-        //   xtype        : 'checkcolumn',
-        //   header       : me.is_required_maleLabel,
-        //   dataIndex    : 'is_required_male',
-        //   flex         : 1
-        // },
-        // {
-        //   xtype        : 'checkcolumn',
-        //   header       : me.is_required_femaleLabel,
-        //   dataIndex    : 'is_required_female',
-        //   flex         : 1
-        // },
-        // {
-        //   xtype        : 'checkcolumn',
-        //   header       : me.is_optional_maleLabel,
-        //   dataIndex    : 'is_optional_male',
-        //   flex         : 1
-        // },
-        // {
-        //   header       : me.is_optional_femaleLabel,
-        //   dataIndex    : 'is_optional_female',
-        //   flex         : 1
-        // },
         // {
         //   header       : me.is_includes_logoLabel,
         //   dataIndex    : 'is_includes_logo',
@@ -143,12 +143,6 @@ Ext.define('Omni.view.uniform_details.Explorer', {
         //   dataIndex    : 'is_approved',
         //   flex         : 1
         // },
-        // {
-        //   xtype        : 'checkcolumn',
-        //   header       : me.is_destroyedLabel,
-        //   dataIndex    : 'is_destroyed',
-        //   flex         : 1
-        // }
       ]
     });
     // COLUMNS (End)
