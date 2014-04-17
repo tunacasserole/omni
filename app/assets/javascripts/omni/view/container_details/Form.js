@@ -3,12 +3,9 @@ Ext.define('Omni.view.container_details.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-container_details-Form',
 
-
-
   initComponent:function () {
 
     var me = this;
-
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
@@ -52,9 +49,9 @@ Ext.define('Omni.view.container_details.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'container_detail_nbr',           fieldLabel: this.container_detail_nbrLabel,       allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'container_id',                   fieldLabel: this.container_idLabel,               allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Container',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'container_id', itemTpl:'{display}' },
-            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'container_detail_nbr',           fieldLabel: this.container_detail_nbrLabel,       allowBlank: true,   disabled: true,    xtype: 'textfield'        },
+            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
+            // { name: 'container_id',                   fieldLabel: this.container_idLabel,               allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Container',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'container_id', itemTpl:'{display}' },
             { name: 'sku_id',                         fieldLabel: this.sku_idLabel,                     allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             { name: 'last_activity_date',             fieldLabel: this.last_activity_dateLabel,         allowBlank: true,   disabled: false,    xtype: 'datefield'        },
             { name: 'create_date',                    fieldLabel: this.create_dateLabel,                allowBlank: true,   disabled: false,    xtype: 'datefield'        }
@@ -70,7 +67,7 @@ Ext.define('Omni.view.container_details.Form', {
           items:[
             { name: 'selling_units',                  fieldLabel: this.selling_unitsLabel,              allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'commited_units',                 fieldLabel: this.commited_unitsLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'pack_type',                      fieldLabel: this.pack_typeLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'pack_type',                      fieldLabel: this.pack_typeLabel,                  allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup', category: 'PACK_TYPE'        },
             { name: 'sell_units_per_pack',            fieldLabel: this.sell_units_per_packLabel,        allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_quality_hold',                fieldLabel: this.is_quality_holdLabel,            allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'is_duty_paid',                   fieldLabel: this.is_duty_paidLabel,               allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
@@ -94,7 +91,7 @@ Ext.define('Omni.view.container_details.Form', {
             { name: 'supplier_id',                    fieldLabel: this.supplier_idLabel,                allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Supplier',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'supplier_id', itemTpl:'{display}' },
             { name: 'supplier_item_identifier',       fieldLabel: this.supplier_item_identifierLabel,   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'lot_identifier',                 fieldLabel: this.lot_identifierLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'job_id',                  fieldLabel: this.job_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Job',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'job_id', itemTpl:'{display}' },
+            { name: 'job_id',                         fieldLabel: this.job_idLabel,              allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Job',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'job_id', itemTpl:'{display}' },
             { name: 'receipt_detail_id',              fieldLabel: this.receipt_detail_idLabel,          allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.ReceiptDetail',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'receipt_detail_id', itemTpl:'{display}' }
           ]
         },
@@ -114,6 +111,14 @@ Ext.define('Omni.view.container_details.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Container Details',
+      newTitle: 'New Container Detail',
+      newSubtitle: 'Complete the following to create a new container detail.'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

@@ -5,7 +5,7 @@ class CreateOmniContainerDetails < ActiveRecord::Migration
   	unless ActiveRecord::Base.connection.tables.include?('container_details')
       create_table(:container_details, :id => false) do |t|
         t.column   :container_detail_id,             :string,            null: false,   limit: 32
-        t.column   :display,                         :string,            null: false,   limit: 300
+        t.column   :display,                         :string,            null: true,   limit: 300
         t.column   :container_detail_nbr,            :string,            null: true,    limit: 200
         t.column   :container_id,                    :string,            null: true,    limit: 32
         t.column   :state,                           :string,            null: true,    limit: 200
@@ -30,7 +30,7 @@ class CreateOmniContainerDetails < ActiveRecord::Migration
         t.column   :last_count_date,                 :datetime,          null: true
         t.column   :is_audited,                      :boolean,           null: true
         t.column   :is_inspected,                    :boolean,           null: true
-        t.column   :Inspection_date,                 :datetime,          null: true
+        t.column   :inspection_date,                 :datetime,          null: true
         t.column   :create_date,                     :datetime,          null: true
         t.column   :is_destroyed,                    :boolean,           null: true
       end

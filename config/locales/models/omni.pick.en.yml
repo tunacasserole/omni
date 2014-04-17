@@ -4,12 +4,12 @@ en:
       omni/pick: 'Pick'
     attributes:
       omni/pick:
-        pick_id:                  Pick Ticket
+        pick_id:                  Pick
         display:                         Name
-        state:                           Pick Ticket State
-        pick_nbr:                 Pick Ticket Nbr
-        pickable_id:                     Pick Ticket Owner
-        pickable_type:                   Pick Ticket Type
+        state:                           Pick State
+        pick_nbr:                 Pick Nbr
+        pickable_id:                     Pick Owner
+        pickable_type:                   Pick Type
         fulfillment_location_display:    Fulfillment Location
         fulfillment_location_id:         Location
         job_display:              Job

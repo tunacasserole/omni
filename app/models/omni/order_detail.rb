@@ -127,7 +127,7 @@ class Omni::OrderDetail < ActiveRecord::Base
   def after_finalize
     f_loc = optimize_location
 
-    # Add Pick Ticket
+    # Add Pick
     Omni::Pick.create(pickable_type: 'Omni::OrderDetail', pickable_id: order_detail_id, fulfillment_location_id: f_loc)
   end # def after_finalize
 
@@ -138,7 +138,7 @@ class Omni::OrderDetail < ActiveRecord::Base
     return self.order.location if self.delivery_method == 'TAKE'
 
     # if pick has a job, default to the job production location
-    return self.picks.first.job.production_location if self.picks.first.job
+    return self.picks.first.job.production_location if self.picks.first && self.picks.first.job
 
     # primary store for the school
     # There is no primary school or primary store for generics.

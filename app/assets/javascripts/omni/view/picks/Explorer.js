@@ -15,7 +15,7 @@ Ext.define('Omni.view.picks.Explorer', {
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
-  title: 'Pick Ticket',
+  title: 'Pick',
   subtitle: 'An order to pick a product for shipment to a customer',
   // TITLES (End)
 

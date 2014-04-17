@@ -84,7 +84,7 @@ describe "uniform" do
     end
   end
 
-  describe "PPL", focus: true do
+  describe "PPL" do
     it "should return a product price list for the uniform" do
 
       5.times do |i|

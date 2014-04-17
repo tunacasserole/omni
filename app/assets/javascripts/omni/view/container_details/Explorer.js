@@ -3,12 +3,9 @@ Ext.define('Omni.view.container_details.Explorer', {
   extend: 'Buildit.ux.explorer.Panel',
   alias: 'widget.omni-container_details-Explorer',
 
-
-
   initComponent: function() {
 
     var me = this;
-
 
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
@@ -52,26 +49,21 @@ Ext.define('Omni.view.container_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [{
-        header: this.container_displayLabel,
-        dataIndex: 'container_display',
-        flex: 1,
-        sortable: false
-      }, {
-        header: this.stateLabel,
-        dataIndex: 'state',
-        flex: 1,
-        sortable: false
-      }, {
         header: this.sku_displayLabel,
         dataIndex: 'sku_display',
         flex: 1,
         sortable: false
       }, {
-        header: this.purchase_detail_displayLabel,
-        dataIndex: 'purchase_detail_display',
-        flex: 1,
-        sortable: false
-      }, {
+      //   header: this.container_displayLabel,
+      //   dataIndex: 'container_display',
+      //   flex: 1,
+      //   sortable: false
+      // }, {
+      //   header: this.purchase_detail_displayLabel,
+      //   dataIndex: 'purchase_detail_display',
+      //   flex: 1,
+      //   sortable: false
+      // }, {
         header: this.supplier_displayLabel,
         dataIndex: 'supplier_display',
         flex: 1,
@@ -102,15 +94,20 @@ Ext.define('Omni.view.container_details.Explorer', {
         flex: 1,
         sortable: false
       }, {
-        header: this.is_quality_holdLabel,
-        dataIndex: 'is_quality_hold',
+        header: this.stateLabel,
+        dataIndex: 'state',
         flex: 1,
         sortable: false
-      }, {
-        header: this.is_duty_paidLabel,
-        dataIndex: 'is_duty_paid',
-        flex: 1,
-        sortable: false
+      // }, {
+      //   header: this.is_quality_holdLabel,
+      //   dataIndex: 'is_quality_hold',
+      //   flex: 1,
+      //   sortable: false
+      // }, {
+      //   header: this.is_duty_paidLabel,
+      //   dataIndex: 'is_duty_paid',
+      //   flex: 1,
+      //   sortable: false
       }]
     });
     // COLUMNS (End)

@@ -22,9 +22,6 @@ class Omni::Job < ActiveRecord::Base
   default      :job_id,                           override: false,        with: :guid
   default      :job_nbr,                          override: false,        with: :sequence,         named: "JOB_NBR"
   default      :display,                          override: false,        to: lambda{|m| "job: #{m.job_nbr}"}
-  default      :create_date,                      override: false,        with: :today
-  default      :activity_date,                    override: false,        with: :today
-  default      :posted_date,                      override: false,        with: :today
   default      :request_units,                    override: false,        to: 0
   default      :complete_units,                   override: false,        to: 0
   default      :weight,                           override: false,        to: 0
@@ -79,13 +76,13 @@ class Omni::Job < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # HOOKS (Start) =======================================================================
-  hook  :before_create,     :set_request_units,             10
+  hook  :before_create,     :set_request_units,       10
   hook  :after_create,      :update_pick,             20
-  hook  :after_create,      :release_job,             30
+  hook  :before_update,     :release_job,             30
 
   def  release_job
-    # auto release job if delivery method is 'take' and job type is heat set conversion
-    self.release if jobable_type == "Omni::OrderDetail" && self.order_detail && self.order_detail.delivery_method == 'TAKE' && self.job_type == 'CONVERSION (HEAT APPLY)'
+    # puts "auto release job if delivery method is 'take' and job type is heat set conversion"
+    self.state = 'pending' if jobable_type == "Omni::OrderDetail" && self.order_detail && self.order_detail.delivery_method == 'TAKE' && self.job_type == 'CONVERSION (HEAT APPLY)'
   end
 
   def  set_request_units

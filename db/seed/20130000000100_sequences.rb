@@ -11,6 +11,7 @@ Buildit::Sequence.create!([
   {sequence_code: "COLOR_NBR", prefix: nil, padding: 3, value: 1512},
   {sequence_code: "COMPANY_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "CONTAINER_NBR", prefix: nil, padding: 3, value: 1000},
+  {sequence_code: "CONTAINER_DETAIL_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "CONTRACT_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "CUSTOMER_ACCOUNT_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "CUSTOMER_NBR", prefix: nil, padding: 3, value: 1000},

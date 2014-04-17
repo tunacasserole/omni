@@ -3,12 +3,9 @@ Ext.define('Omni.view.containers.Explorer', {
   extend: 'Buildit.ux.explorer.Panel',
   alias: 'widget.omni-containers-Explorer',
 
-
-
   initComponent: function() {
 
     var me = this;
-
 
     // EXPLORER INIT (Start) ===============================================================
     Ext.apply(this, {
@@ -48,18 +45,13 @@ Ext.define('Omni.view.containers.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [{
-        header: this.location_displayLabel,
-        dataIndex: 'location_display',
-        flex: 1,
-        sortable: false
-      }, {
-        header: this.stateLabel,
-        dataIndex: 'state',
-        flex: 1,
-        sortable: false
-      }, {
         header: this.container_nbrLabel,
         dataIndex: 'container_nbr',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.location_displayLabel,
+        dataIndex: 'location_display',
         flex: 1,
         sortable: false
       }, {
@@ -85,6 +77,11 @@ Ext.define('Omni.view.containers.Explorer', {
       }, {
         header: this.bin_displayLabel,
         dataIndex: 'bin_display',
+        flex: 1,
+        sortable: false
+      }, {
+        header: this.stateLabel,
+        dataIndex: 'state',
         flex: 1,
         sortable: false
       }]

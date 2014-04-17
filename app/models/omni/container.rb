@@ -9,17 +9,18 @@ class Omni::Container < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
+  validates    :container_nbr,                   presence: true, uniqueness: true
+  validates    :container_id,                    presence: true, uniqueness: true
   validates    :display,                         presence: true
-  validates    :container_nbr,                   presence: true
-  validates    :container_nbr,                   uniqueness: true,                         :allow_nil => false
+  validates    :container_type,                  lookup: 'CONTAINER_TYPE',   allow_nil: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default      :container_id,                     override: false,        with: :guid
-  default      :display,                          override: false,        to: lambda {|m| "#{m.container_type} - #{m.description} - #{m.container_nbr}"}
   default      :container_nbr,                    override: false,        with: :sequence,         named: "CONTAINER_NBR"
-  default      :is_labeled,                       override: false,        to: false
   default      :barcode_nbr,                      override: false,        with: :sequence,         named: "BARCODE_NBR"
+  default      :display,                          override: false,        to: lambda {|m| "#{m.container_type} - #{m.description} - #{m.container_nbr}"}
+  default      :is_labeled,                       override: false,        to: false
   default      :is_located,                       override: false,        to: false
   default      :is_moving,                        override: false,        to: false
   default      :is_in_transit,                    override: false,        to: false

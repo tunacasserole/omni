@@ -1,4 +1,4 @@
-class Omni::ShipmentDetail < ActiveRecord::Base
+  class Omni::ShipmentDetail < ActiveRecord::Base
 # METADATA (Start) ====================================================================
   self.table_name   = :shipment_details
   self.primary_key  = :shipment_detail_id
@@ -9,9 +9,9 @@ class Omni::ShipmentDetail < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  # validates    :shipment_detail_id,              presence: true, uniqueness: true
-  # validates    :display,                         presence: true, uniqueness: true
-  # validates    :shipment_id,                     presence: true
+  validates    :shipment_detail_id,              presence: true, uniqueness: true
+  validates    :display,                         presence: true, uniqueness: true
+  validates    :shipment_id,                     presence: true
   # validates    :pick_id,                         presence: true
   # VALIDATIONS (End)
 

@@ -349,6 +349,14 @@ Ext.define('Omni.view.app.Hub', {
               xtype: 'omni-transfers-Explorer'
             }
           }, {
+            title: 'Containers',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-containers-Explorer'
+            }
+          }, {
             title: 'Vouchers',
             colspan: 2,
             rowspan: 1,

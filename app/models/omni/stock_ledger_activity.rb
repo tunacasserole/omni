@@ -24,7 +24,9 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
   default      :units,                            override: false,        to: 0
   default      :cost,                             override: false,        to: 0
   default      :retail,                           override: false,        to: 0
-  # default      :create_date,                      override: false,        :to    =>
+  default      :create_date,                      override: false,        with: :today
+  default      :activity_date,                    override: false,        with: :today
+  default      :posted_date,                      override: false,        with: :today
   default      :is_destroyed,                     override: false,        to: false
   # default      :stockable_id,                     override: false,        :to    => :sku_id
   # default      :stockable_type,                   override: false,        :to    => "Omni::StockLedgerActivty"

@@ -124,9 +124,9 @@ Ext.define('Omni.view.picks.Form', {
 
     // TITLES (Start) =======================================================================
     Ext.applyIf(this, {
-      title: 'Pick Ticket',
+      title: 'Pick',
       subtitle: 'An order to pick a product for shipment to a customer',
-      newTitle: 'Pick Ticket',
+      newTitle: 'Pick',
       newSubtitle: undefined
     });
     // TITLES (End)

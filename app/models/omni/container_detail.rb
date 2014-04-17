@@ -11,6 +11,7 @@ class Omni::ContainerDetail < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true
+  validates    :pack_type,                       lookup: 'PACK_TYPE',   allow_nil: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -61,6 +62,8 @@ class Omni::ContainerDetail < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :container_id
+    string   :container_detail_id
     string   :container_display do container.display if container end
     string   :state
     string   :sku_display do sku.display if sku end
@@ -75,7 +78,6 @@ class Omni::ContainerDetail < ActiveRecord::Base
     boolean  :is_duty_paid
 
     text     :container_display_fulltext, using: :container_display
-    text     :state_fulltext, using: :state
     text     :sku_display_fulltext, using: :sku_display
     text     :purchase_detail_display_fulltext, using: :purchase_detail_display
     text     :supplier_display_fulltext, using: :supplier_display

@@ -47,32 +47,60 @@ describe "shipment" do
       me.state.should eq('draft')
     end
 
-    it "on ship to customer, set state to complete" do
-      #TODO figure out how to ship to customer
+    # SHIP METHOD (formerly send)
+    it "on ship update ship_date" do
       me.ship
-      # me.state.should eq('complete')
-      # me.ship_date.should eq(Date.today)
+      me.ship_date.should eq(Date.today)
+    end
+
+    it "on ship to customer, set state to complete" do
+      me.ship
+      me.state.should eq('complete')
+    end
+
+    it "on ship to customer, update receipt date to current date" do
+      me.ship
+      me.receipt_date.should eq(Date.today)
     end
 
     it "on ship to store, set state to shipped" do
-      #TODO figure out how to ship to store
       me.ship
       me.state.should eq('shipped')
-      # me.ship_date.should eq(Date.today)
     end
 
-    it "on receive, set state to complete" do
+    it "on ship to store, write SLA - SendShipToStore" do
+      me.ship
+    end
+
+    # RECEIVE METHOD
+    it "on receive a shipment to a store where state is shipped, update receipt_date" do
+      me = create(Omni::Shipment, state: 'shipped')
+      me.receive
+      me.receipt_date.should eq(Date.today)
+    end
+
+    it "on receive a shipment to a store where state is shipped, update state to complete" do
       me = create(Omni::Shipment, state: 'shipped')
       me.receive
       me.state.should eq('complete')
     end
 
-    it "on cancel, set state to cancelled" do
+    it "on receive a shipment to a store where state is shipped, write SLA - ReceiveShip  " do
+      me = create(Omni::Shipment, state: 'shipped')
+      me.receive
+      me.state.should eq('complete')
+    end
+
+    # CANCEL METHOD
+    it "on cancel, if shipment state is new, set state to cancelled" do
       me.cancel
       me.state.should eq('cancelled')
-      # me.events.count.should eq(1)
+    end
+
+    it "on cancel, if shipment state is new, update cancel date and cancel user" do
+      me.cancel
       me.cancel_date.should eq(Date.today)
-      # me.cancel_user_id.should_not be_nil
+      me.cancel_user_id.should_not be_nil
     end
   end
 

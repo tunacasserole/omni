@@ -1,6 +1,6 @@
 Omni::Ruleset.delete_all
-Omni::Ruleset.create(:ruleset_id => "DA4F9A1EA6C911E2AE1900FF58D32228",:display =>"StartWhsePick",:ruleset_code =>"StartWhsePick",:description =>"Start a Pick Ticket where the fulfillment location is a warehouse",:is_active =>"TRUE")
-Omni::Ruleset.create(:ruleset_id => "DA4FE83EA6C911E2AE1900FF58D32228",:display =>"CompleteWhsePick",:ruleset_code =>"CompleteWhsePick",:description =>"Complete a Pick Ticket where the fulfillment location is a warehouse",:is_active =>"TRUE")
+Omni::Ruleset.create(:ruleset_id => "DA4F9A1EA6C911E2AE1900FF58D32228",:display =>"StartWhsePick",:ruleset_code =>"StartWhsePick",:description =>"Start a Pick where the fulfillment location is a warehouse",:is_active =>"TRUE")
+Omni::Ruleset.create(:ruleset_id => "DA4FE83EA6C911E2AE1900FF58D32228",:display =>"CompleteWhsePick",:ruleset_code =>"CompleteWhsePick",:description =>"Complete a Pick where the fulfillment location is a warehouse",:is_active =>"TRUE")
 Omni::Ruleset.create(:ruleset_id => "DA500F4EA6C911E2AE1900FF58D32228",:display =>"LoadWhseShip",:ruleset_code =>"LoadWhseShip",:description =>"Load a warehouse shipment into a trailer",:is_active =>"TRUE")
 Omni::Ruleset.create(:ruleset_id => "DA50365EA6C911E2AE1900FF58D32228",:display =>"SendShipment",:ruleset_code =>"SendShipment",:description =>"Send a shipment from a store or warehouse",:is_active =>"TRUE")
 Omni::Ruleset.create(:ruleset_id => "DA505D78A6C911E2AE1900FF58D32228",:display =>"RegularSale",:ruleset_code =>"RegularSale",:description =>"Record a regular price sale",:is_active =>"TRUE")

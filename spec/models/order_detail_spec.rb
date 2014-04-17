@@ -59,7 +59,7 @@ describe "order_detail" do
 
   describe "logic" do
 
-    it "set the fulfillment location on the pick", focus: true do
+    it "set the fulfillment location on the pick" do
       me.finalize
       me.picks.first.fulfillment_location_id.should_not be_nil
     end

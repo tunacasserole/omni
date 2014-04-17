@@ -16,8 +16,8 @@ class Omni::Enrollment < ActiveRecord::Base
   validates    :grade_id,                        presence: true
   validates    :gender,                          presence: true
   validates    :enrollment,                      presence: true
-  validates    :school_year,                     lookup: 'PLAN_YEAR',:allow_nil => false
-  validates    :gender,                          lookup: 'GENDER',:allow_nil => false
+  validates    :school_year,                     lookup: 'PLAN_YEAR',allow_nil: false
+  validates    :gender,                          lookup: 'GENDER',allow_nil: false
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================

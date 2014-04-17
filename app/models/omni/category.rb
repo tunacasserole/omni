@@ -11,7 +11,7 @@ class Omni::Category < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true
   validates    :category_code,                   presence: true
-  validates    :category_code,                   uniqueness: true,                         :allow_nil => false
+  validates    :category_code,                   uniqueness: true,                         allow_nil: false
   validates    :category_type,                   lookup: 'CATEGORY_TYPE',              allow_nil: true
   # VALIDATIONS (End)
 

@@ -3,19 +3,17 @@ Ext.define('Omni.view.containers.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-containers-Form',
 
-  
-
   initComponent:function () {
 
     var me = this;
 
-    
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       container_nbrLabel:                         Omni.i18n.model.Container.container_nbr,
       descriptionLabel:                           Omni.i18n.model.Container.description,
       container_typeLabel:                        Omni.i18n.model.Container.container_type,
       parent_container_idLabel:                   Omni.i18n.model.Container.parent_container_id,
+      location_idLabel:                           Omni.i18n.model.Container.location_id,
       is_labeledLabel:                            Omni.i18n.model.Container.is_labeled,
       barcode_nbrLabel:                           Omni.i18n.model.Container.barcode_nbr,
       stateLabel:                                 Omni.i18n.model.Container.state,
@@ -56,15 +54,16 @@ Ext.define('Omni.view.containers.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'container_nbr',                  fieldLabel: this.container_nbrLabel,              allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'container_nbr',                  fieldLabel: this.container_nbrLabel,              allowBlank: true,  disabled: true,    xtype: 'textfield'        },
+            // { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'container_type',                 fieldLabel: this.container_typeLabel,             allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'parent_container_id',            fieldLabel: this.parent_container_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Container',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'container_id', itemTpl:'{display}' },
-            { name: 'is_labeled',                     fieldLabel: this.is_labeledLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
+            { name: 'container_type',                 fieldLabel: this.container_typeLabel,             allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup', category: 'CONTAINER_TYPE'        },
+            { name: 'location_id',                    fieldLabel: this.location_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator', store:      Ext.create('Omni.store.Location',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'location_id', itemTpl:'{display}' },
+            { name: 'parent_container_id',            fieldLabel: this.parent_container_idLabel,        allowBlank: true,   disabled: false,    xtype: 'buildit-Locator', store:      Ext.create('Omni.store.Container',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'container_id', itemTpl:'{display}' },
             { name: 'barcode_nbr',                    fieldLabel: this.barcode_nbrLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'create_date',                    fieldLabel: this.create_dateLabel,                allowBlank: true,   disabled: false,    xtype: 'datefield'        },
-            { name: 'last_update_date',               fieldLabel: this.last_update_dateLabel,           allowBlank: true,   disabled: false,    xtype: 'datefield'        }
+            { name: 'last_update_date',               fieldLabel: this.last_update_dateLabel,           allowBlank: true,   disabled: false,    xtype: 'datefield'        },
+            { name: 'is_labeled',                     fieldLabel: this.is_labeledLabel,                 allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
           ]
         },
         {
@@ -112,6 +111,14 @@ Ext.define('Omni.view.containers.Form', {
     });
     // FIELDSETS (End)
 
+    // TITLES (Start) ======================================================================
+    Ext.applyIf(this, {
+      title: 'Profile',
+      subtitle: 'Edit Containers',
+      newTitle: 'New Container',
+      newSubtitle: 'Complete the following to create a new containers.'
+    });
+    // TITLES (End)
 
     this.callParent();
   }

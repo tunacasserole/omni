@@ -11,7 +11,7 @@ class Omni::Bom < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :display,                         presence: true, uniqueness: true
   validates    :bom_nbr,                         uniqueness: true,                         allow_nil: true
-  validates    :bom_type,                        lookup: 'BOM_TYPE',                   :allow_nil => false
+  validates    :bom_type,                        lookup: 'BOM_TYPE',                   allow_nil: false
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
