@@ -79,7 +79,7 @@ Ext.define('Omni.view.receipt_purchases.Form', {
     Ext.apply(this, {
       actions: [{
         tooltip: 'Receive',
-        cls: 'close-event',
+        iconCls: 'fa fa-arrow-circle-down',
         xtype: 'button',
         listeners: {
           beforerender: this.prepareReceiveAction,

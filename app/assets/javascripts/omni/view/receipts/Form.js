@@ -321,7 +321,7 @@ Ext.define('Omni.view.receipts.Form', {
           }
         }, {
           tooltip: 'Complete',
-          iconCls: 'fa fa-times-circle-o',
+          iconCls: 'fa fa-pencil-square-o',
           xtype: 'button',
           listeners: {
             beforerender: this.prepareCompleteAction,

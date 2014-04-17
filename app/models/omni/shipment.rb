@@ -63,7 +63,7 @@ class Omni::Shipment < ActiveRecord::Base
   ### CALLBACKS ###
     after_transition on: :cancel, do: :after_cancel
     after_transition on: :receive, do: :after_receive
-    after_transition on: :send, do: :after_send
+    after_transition on: :ship, do: :after_ship
 
   ### EVENTS ###
     event :cancel do
@@ -80,22 +80,27 @@ class Omni::Shipment < ActiveRecord::Base
 
   # STATE HANDLERS (Start) ====================================================================
 
-  # send => draft to shipped
-  def after_send
+  # ship => draft to shipped
+  def after_ship
+    self.ship_date = Date.today
+    self.save
+    # if ship to customer, set state to complete on ship and receipt date to today
 
-  end # def after_send
+  end # def after_ship
 
 
   # receive => shipped to complete
   def after_receive
-
+    self.receipt_date = Date.today
+    self.save
   end # def after_receive
 
 
   # cancel => draft to cancelled
   def after_cancel
     self.cancel_date = Date.today
-    self.cancel_user_id = Buildit::User.current.user_id if Buildit::User.current
+    self.cancel_user_id = Buildit::User.current ? Buildit::User.current.user_id : Buildit::User.first.user_id
+    self.save
   end # def after_cancel
 
   # STATE HANDLERS (End)
@@ -104,27 +109,21 @@ class Omni::Shipment < ActiveRecord::Base
   searchable do
     string   :shipment_id
     string   :shipment_nbr
+    string   :shippable_id
+    string   :shippable_type
     string   :tracking_number
     string   :ship_name
     # string   :location_id
     # string   :supplier_id
-    # string   :state
     # string   :location_display do location.display if location end
-    # string   :shippable_type
-    # string   :shippable_id
     # string   :supplier_display do supplier.display if supplier end
-    # string   :shippable_id
-    # string   :shippable_type
     # string   :state
 
-    # text     :state_fulltext, using: :state
     text     :ship_name_fulltext, using: :ship_name
     text     :shipment_nbr_fulltext, using: :shipment_nbr
     # text     :location_display_fulltext, using: :location_display
     # text     :supplier_display_fulltext, using: :supplier_display
     # text     :tracking_number_fulltext, using: :tracking_number
-    # text     :shippable_type_fulltext, using: :shippable_type
-    # text     :shippable_id_fulltext, using: :shippable_id
   end
   order_search_by shipment_nbr: :desc
 

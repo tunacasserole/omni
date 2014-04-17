@@ -250,9 +250,130 @@ Ext.define('Omni.view.shipments.Form', {
     });
     // TITLES (End)
 
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [{
+        xtype: 'button',
+        iconCls: 'fa fa-plane',
+        tooltip: 'Ship',
+        listeners: {
+          beforerender: this.prepareShipAction,
+          click: this.onShipAction,
+          scope: me
+        }
+      }, {
+        xtype: 'button',
+        iconCls: 'fa fa-arrow-circle-down',
+        tooltip: 'Receive',
+        listeners: {
+          beforerender: this.prepareReceiveAction,
+          click: this.onReceiveAction,
+          scope: me
+        }
+      }, {
+        xtype: 'button',
+        iconCls: 'fa fa-times-circle-o',
+        tooltip: 'Cancel',
+        listeners: {
+          beforerender: this.prepareCancelAction,
+          click: this.onCancelAction,
+          scope: me
+        }
+      }]
+    });
 
+    // ACTIONS (End)
+
+    // LISTENERS (Start) ===================================================================
+    // LISTENERS (End)
 
     this.callParent();
-  }
 
+  }, // initComponent
+
+  // HANDLERS (Start) ======================================================================
+
+  /**
+   *
+   */
+  onShipAction: function(action, eOpts) {
+    this.processEventTransition('ship', 'Shipment was successfully shipped.', 'An error occurred shipping this shipment.');
+  }, // onAction
+
+  /**
+   *
+   */
+  onReceiveAction: function(action, eOpts) {
+    this.processEventTransition('receive', 'Shipment was successfully received.', 'An error occurred receiving this shipment.');
+  }, // onAction
+
+  /**
+   *
+   */
+  onCancelAction: function(action, eOpts) {
+    this.processEventTransition('cancel', 'Shipment was successfully cancelled.', 'An error occurred cancelling this shipment.');
+  }, // onAction
+
+  /**
+   *
+   */
+  prepareShipAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    (this.record.phantom != true) && (currentState == 'draft') ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  prepareReceiveAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    (this.record.phantom != true) && (currentState == 'draft') ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  prepareCancelAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    (this.record.phantom != true) && (currentState == 'draft') ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  processEventTransition: function(eventName, successMsg, failureMsg) {
+    var me = this;
+
+    Omni.service.Shipment.fireEvent({
+        id: this.record.get('shipment_id'),
+        name: eventName
+      },
+      function(result, e) {
+        me.getForm().clearInvalid();
+        if (result && result.success == true) {
+          Buildit.infoMsg(successMsg);
+          me.record.set(result);
+          me.loadRecord(me.record);
+          me.fireEvent('recordchanged', me, me.banner);
+          me.doLayout();
+        } else {
+          var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+          if (response.errors)
+            me.getForm().markInvalid(response.errors);
+
+          var error_message = failureMsg;
+          if (response.message)
+            error_message = response.message;
+
+          if (response.errors)
+            error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+          Buildit.errorMsg(error_message);
+        }
+      }
+    );
+
+  }, // processEventTransition
+  // HANDLERS (End)
 });

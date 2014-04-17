@@ -195,9 +195,9 @@ end
  end
  factory Omni::OrderDetail do
   association :order, factory: Omni::Order
-  sequence(:display)
+  association :sku, factory: Omni::Sku
+  # sequence(:display)
   # order_id :order
-  sku_id :sku
   delivery_method ['SEND','TAKE','PICKUP'].sample
  end
  factory Omni::Payment do

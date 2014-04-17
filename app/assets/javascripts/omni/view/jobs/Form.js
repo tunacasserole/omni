@@ -65,14 +65,14 @@ Ext.define('Omni.view.jobs.Form', {
         defaultType: 'textfield',
         layout: 'anchor',
         items: [{
-        //   xtype: 'textfield',
-        //   name: 'display',
-        //   fieldLabel: me.displayLabel,
-        //   maxLength: 300,
-        //   minLength: 0,
-        //   allowBlank: true,
-        //   disabled: true
-        // }, {
+          //   xtype: 'textfield',
+          //   name: 'display',
+          //   fieldLabel: me.displayLabel,
+          //   maxLength: 300,
+          //   minLength: 0,
+          //   allowBlank: true,
+          //   disabled: true
+          // }, {
           xtype: 'textfield',
           name: 'job_nbr',
           fieldLabel: me.job_nbrLabel,
@@ -345,16 +345,163 @@ Ext.define('Omni.view.jobs.Form', {
     });
     // FIELDSETS (End)
 
-
-    // TITLES (Start) ======================================================================
+    // TITLES (Start) =======================================================================
     Ext.applyIf(this, {
       title: 'Job',
-      subtitle: 'Edit Job'
+      subtitle: 'An order to job a product for shipment to a customer',
+      newTitle: 'Job',
+      newSubtitle: undefined
     });
     // TITLES (End)
 
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [{
+        tooltip: 'Release',
+        xtype: 'button',
+        iconCls: 'fa fa-share-square-o',
+        listeners: {
+          beforerender: this.prepareReleaseAction,
+          click: this.onReleaseAction,
+          scope: me
+        }
+      }, {
+        tooltip: 'Start',
+        iconCls: 'fa fa-caret-square-o-right',
+        xtype: 'button',
+        listeners: {
+          beforerender: this.prepareStartAction,
+          click: this.onStartAction,
+          scope: me
+        }
+      }, {
+        tooltip: 'Complete',
+        iconCls: 'fa fa-pencil-square-o',
+        xtype: 'button',
+        listeners: {
+          beforerender: this.prepareCompleteAction,
+          click: this.onCompleteAction,
+          scope: me
+        }
+      }, {
+        tooltip: 'Cancel',
+        xtype: 'button',
+        iconCls: 'fa fa-times-circle-o',
+        listeners: {
+          beforerender: this.prepareCancelAction,
+          click: this.onCancelAction,
+          scope: me
+        }
+      }]
+    });
+
+    // ACTIONS (End)
+
+    // LISTENERS (Start) ===================================================================
+    // LISTENERS (End)
+
     this.callParent();
 
-  } // initComponent
+  }, // initComponent
 
-}); // Ext.define('Omni.view.jobs.Form'
+  // HANDLERS (Start) ======================================================================
+
+  /**
+   *
+   */
+  onReleaseAction: function(action, eOpts) {
+    this.processEventTransition('release', 'Job was successfully released.', 'An error occurred releasing this job.');
+  }, // onAction
+
+  /**
+   *
+   */
+  onStartAction: function(action, eOpts) {
+    this.processEventTransition('start', 'Job was successfully started.', 'An error occurred starting this job.');
+  }, // onAction
+
+  /**
+   *
+   */
+  onCompleteAction: function(action, eOpts) {
+    this.processEventTransition('complete', 'Job was successfully completed.', 'An error occurred completing this job.');
+  }, // onAction
+
+  /**
+   *
+   */
+  onCancelAction: function(action, eOpts) {
+    this.processEventTransition('cancel', 'Job was successfully cancelled.', 'An error occurred cancelling this job.');
+  }, // onAction
+
+  /**
+   *
+   */
+  prepareReleaseAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    (this.record.phantom != true) && (currentState == 'draft') ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  prepareStartAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    (this.record.phantom != true) && (currentState == 'pending') ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  prepareCompleteAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    (this.record.phantom != true) && (currentState == 'open') ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  prepareCancelAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    (this.record.phantom != true) && ((currentState == 'draft') || (currentState == 'pending')) ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  processEventTransition: function(eventName, successMsg, failureMsg) {
+    var me = this;
+
+    Omni.service.Job.fireEvent({
+        id: this.record.get('job_id'),
+        name: eventName
+      },
+      function(result, e) {
+        me.getForm().clearInvalid();
+        if (result && result.success == true) {
+          Buildit.infoMsg(successMsg);
+          me.record.set(result);
+          me.loadRecord(me.record);
+          me.fireEvent('recordchanged', me, me.banner);
+          me.doLayout();
+        } else {
+          var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+          if (response.errors)
+            me.getForm().markInvalid(response.errors);
+
+          var error_message = failureMsg;
+          if (response.message)
+            error_message = response.message;
+
+          if (response.errors)
+            error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+          Buildit.errorMsg(error_message);
+        }
+      }
+    );
+
+  }, // processEventTransition
+  // HANDLERS (End)
+});

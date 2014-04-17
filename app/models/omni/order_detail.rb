@@ -144,6 +144,8 @@ class Omni::OrderDetail < ActiveRecord::Base
     # There is no primary school or primary store for generics.
     # For converted SKUs, the primary school is the account_id on the skus record.  The primary store is the location_id on the accounts record.
     primary_store = self.sku.account ? self.sku.account.location : self.order.location
+    puts "self.sku.account_id is #{self.sku.account_id}"
+    puts "self.sku.account.location_id is #{self.sku.account.location_id}"
     # primary_store = Omni::Location.where(location_id: '51713A3EAC3E11E2947800FF58D32228').first
 
     # build array of locations, starting with the primary store, in a specific order to search for on hand

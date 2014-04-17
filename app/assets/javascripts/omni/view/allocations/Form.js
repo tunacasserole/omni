@@ -216,7 +216,7 @@ Ext.define('Omni.view.allocations.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'fa fa-times-circle-o',
+        iconCls: 'fa fa-plane',
         tooltip: 'Transfer',
         listeners: {
           beforerender: this.prepareTransferAction,

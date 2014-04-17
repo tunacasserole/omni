@@ -1,7 +1,7 @@
-Ext.define('Omni.view.order_details.Form', {
+Ext.define('Omni.view.order_detail_details.Form', {
 
   extend: 'Buildit.ux.Form',
-  alias: 'widget.omni-order_details-Form',
+  alias: 'widget.omni-order_detail_details-Form',
 
   initComponent: function() {
 
@@ -9,51 +9,51 @@ Ext.define('Omni.view.order_details.Form', {
 
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
-      order_idLabel: Omni.i18n.model.OrderDetail.order_id,
-      order_detail_nbrLabel: Omni.i18n.model.OrderDetail.order_detail_nbr,
-      sku_idLabel: Omni.i18n.model.OrderDetail.sku_id,
-      sku_alias_idLabel: Omni.i18n.model.OrderDetail.sku_alias_id,
-      delivery_methodLabel: Omni.i18n.model.OrderDetail.delivery_method,
-      pickup_location_idLabel: Omni.i18n.model.OrderDetail.pickup_location_id,
-      ship_to_nameLabel: Omni.i18n.model.OrderDetail.ship_to_name,
-      account_idLabel: Omni.i18n.model.OrderDetail.account_id,
-      grade_idLabel: Omni.i18n.model.OrderDetail.grade_id,
-      genderLabel: Omni.i18n.model.OrderDetail.gender,
-      sales_user_idLabel: Omni.i18n.model.OrderDetail.sales_user_id,
-      promised_dateLabel: Omni.i18n.model.OrderDetail.promised_date,
-      stateLabel: Omni.i18n.model.OrderDetail.state,
-      ship_line_1Label: Omni.i18n.model.OrderDetail.ship_line_1,
-      ship_line_2Label: Omni.i18n.model.OrderDetail.ship_line_2,
-      ship_line_3Label: Omni.i18n.model.OrderDetail.ship_line_3,
-      ship_line_4Label: Omni.i18n.model.OrderDetail.ship_line_4,
-      ship_cityLabel: Omni.i18n.model.OrderDetail.ship_city,
-      ship_state_codeLabel: Omni.i18n.model.OrderDetail.ship_state_code,
-      ship_zipLabel: Omni.i18n.model.OrderDetail.ship_zip,
-      ship_countryLabel: Omni.i18n.model.OrderDetail.ship_country,
-      ship_latitudeLabel: Omni.i18n.model.OrderDetail.ship_latitude,
-      ship_longitudeLabel: Omni.i18n.model.OrderDetail.ship_longitude,
-      is_residentialLabel: Omni.i18n.model.OrderDetail.is_residential,
-      is_commercialLabel: Omni.i18n.model.OrderDetail.is_commercial,
-      phoneLabel: Omni.i18n.model.OrderDetail.phone,
-      email_addressLabel: Omni.i18n.model.OrderDetail.email_address,
-      serial_numberLabel: Omni.i18n.model.OrderDetail.serial_number,
-      order_unitsLabel: Omni.i18n.model.OrderDetail.order_units,
-      retail_priceLabel: Omni.i18n.model.OrderDetail.retail_price,
-      sale_priceLabel: Omni.i18n.model.OrderDetail.sale_price,
-      sales_tax_rateLabel: Omni.i18n.model.OrderDetail.sales_tax_rate,
-      price_typeLabel: Omni.i18n.model.OrderDetail.price_type,
-      is_taxable_productLabel: Omni.i18n.model.OrderDetail.is_taxable_product,
-      is_tax_chargedLabel: Omni.i18n.model.OrderDetail.is_tax_charged,
-      shipping_amountLabel: Omni.i18n.model.OrderDetail.shipping_amount,
-      discount_percentLabel: Omni.i18n.model.OrderDetail.discount_percent,
-      discount_amountLabel: Omni.i18n.model.OrderDetail.discount_amount,
-      customer_discount_reasonLabel: Omni.i18n.model.OrderDetail.customer_discount_reason,
-      customer_return_reasonLabel: Omni.i18n.model.OrderDetail.customer_return_reason,
-      customer_cancel_reasonLabel: Omni.i18n.model.OrderDetail.customer_cancel_reason,
-      cancel_dateLabel: Omni.i18n.model.OrderDetail.cancel_date,
-      reference_order_detail_idLabel: Omni.i18n.model.OrderDetail.reference_order_detail_id,
-      is_cancelledLabel: Omni.i18n.model.OrderDetail.is_cancelled,
-      is_layawayLabel: Omni.i18n.model.OrderDetail.is_layaway
+      order_detail_idLabel: Omni.i18n.model.OrderDetailDetail.order_detail_id,
+      order_detail_detail_nbrLabel: Omni.i18n.model.OrderDetailDetail.order_detail_detail_nbr,
+      sku_idLabel: Omni.i18n.model.OrderDetailDetail.sku_id,
+      sku_alias_idLabel: Omni.i18n.model.OrderDetailDetail.sku_alias_id,
+      delivery_methodLabel: Omni.i18n.model.OrderDetailDetail.delivery_method,
+      pickup_location_idLabel: Omni.i18n.model.OrderDetailDetail.pickup_location_id,
+      ship_to_nameLabel: Omni.i18n.model.OrderDetailDetail.ship_to_name,
+      account_idLabel: Omni.i18n.model.OrderDetailDetail.account_id,
+      grade_idLabel: Omni.i18n.model.OrderDetailDetail.grade_id,
+      genderLabel: Omni.i18n.model.OrderDetailDetail.gender,
+      sales_user_idLabel: Omni.i18n.model.OrderDetailDetail.sales_user_id,
+      promised_dateLabel: Omni.i18n.model.OrderDetailDetail.promised_date,
+      stateLabel: Omni.i18n.model.OrderDetailDetail.state,
+      ship_line_1Label: Omni.i18n.model.OrderDetailDetail.ship_line_1,
+      ship_line_2Label: Omni.i18n.model.OrderDetailDetail.ship_line_2,
+      ship_line_3Label: Omni.i18n.model.OrderDetailDetail.ship_line_3,
+      ship_line_4Label: Omni.i18n.model.OrderDetailDetail.ship_line_4,
+      ship_cityLabel: Omni.i18n.model.OrderDetailDetail.ship_city,
+      ship_state_codeLabel: Omni.i18n.model.OrderDetailDetail.ship_state_code,
+      ship_zipLabel: Omni.i18n.model.OrderDetailDetail.ship_zip,
+      ship_countryLabel: Omni.i18n.model.OrderDetailDetail.ship_country,
+      ship_latitudeLabel: Omni.i18n.model.OrderDetailDetail.ship_latitude,
+      ship_longitudeLabel: Omni.i18n.model.OrderDetailDetail.ship_longitude,
+      is_residentialLabel: Omni.i18n.model.OrderDetailDetail.is_residential,
+      is_commercialLabel: Omni.i18n.model.OrderDetailDetail.is_commercial,
+      phoneLabel: Omni.i18n.model.OrderDetailDetail.phone,
+      email_addressLabel: Omni.i18n.model.OrderDetailDetail.email_address,
+      serial_numberLabel: Omni.i18n.model.OrderDetailDetail.serial_number,
+      order_detail_unitsLabel: Omni.i18n.model.OrderDetailDetail.order_detail_units,
+      retail_priceLabel: Omni.i18n.model.OrderDetailDetail.retail_price,
+      sale_priceLabel: Omni.i18n.model.OrderDetailDetail.sale_price,
+      sales_tax_rateLabel: Omni.i18n.model.OrderDetailDetail.sales_tax_rate,
+      price_typeLabel: Omni.i18n.model.OrderDetailDetail.price_type,
+      is_taxable_productLabel: Omni.i18n.model.OrderDetailDetail.is_taxable_product,
+      is_tax_chargedLabel: Omni.i18n.model.OrderDetailDetail.is_tax_charged,
+      shipping_amountLabel: Omni.i18n.model.OrderDetailDetail.shipping_amount,
+      discount_percentLabel: Omni.i18n.model.OrderDetailDetail.discount_percent,
+      discount_amountLabel: Omni.i18n.model.OrderDetailDetail.discount_amount,
+      customer_discount_reasonLabel: Omni.i18n.model.OrderDetailDetail.customer_discount_reason,
+      customer_return_reasonLabel: Omni.i18n.model.OrderDetailDetail.customer_return_reason,
+      customer_cancel_reasonLabel: Omni.i18n.model.OrderDetailDetail.customer_cancel_reason,
+      cancel_dateLabel: Omni.i18n.model.OrderDetailDetail.cancel_date,
+      reference_order_detail_detail_idLabel: Omni.i18n.model.OrderDetailDetail.reference_order_detail_detail_id,
+      is_cancelledLabel: Omni.i18n.model.OrderDetailDetail.is_cancelled,
+      is_layawayLabel: Omni.i18n.model.OrderDetailDetail.is_layaway
     });
     // LABELS (End)
 
@@ -69,10 +69,10 @@ Ext.define('Omni.view.order_details.Form', {
         },
         layout: 'anchor',
         items: [
-          // { name: 'order_id',                       fieldLabel: this.order_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Order',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'order_id', itemTpl:'{display}' },
+          // { name: 'order_detail_id',                       fieldLabel: this.order_detail_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.OrderDetail',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'order_detail_id', itemTpl:'{display}' },
           {
-            name: 'order_detail_nbr',
-            fieldLabel: this.order_detail_nbrLabel,
+            name: 'order_detail_detail_nbr',
+            fieldLabel: this.order_detail_detail_nbrLabel,
             allowBlank: true,
             disabled: true,
             xtype: 'textfield'
@@ -182,7 +182,7 @@ Ext.define('Omni.view.order_details.Form', {
         ]
       }, {
         xtype: 'fieldset',
-        title: 'Order Details',
+        title: 'OrderDetail Details',
         collapsible: true,
         defaultType: 'textfield',
         defaults: {
@@ -196,8 +196,8 @@ Ext.define('Omni.view.order_details.Form', {
           disabled: false,
           xtype: 'textfield'
         }, {
-          name: 'order_units',
-          fieldLabel: this.order_unitsLabel,
+          name: 'order_detail_units',
+          fieldLabel: this.order_detail_unitsLabel,
           allowBlank: true,
           disabled: false,
           xtype: 'numberfield'
@@ -414,17 +414,17 @@ Ext.define('Omni.view.order_details.Form', {
           disabled: false,
           xtype: 'datefield'
         }, {
-          name: 'reference_order_detail_id',
-          fieldLabel: this.reference_order_detail_idLabel,
+          name: 'reference_order_detail_detail_id',
+          fieldLabel: this.reference_order_detail_detail_idLabel,
           allowBlank: true,
           disabled: false,
           xtype: 'buildit-Locator',
-          store: Ext.create('Omni.store.OrderDetail', {
+          store: Ext.create('Omni.store.OrderDetailDetail', {
             pageSize: 10
           }),
           displayField: 'display',
           queryField: 'display',
-          valueField: 'order_detail_id',
+          valueField: 'order_detail_detail_id',
           itemTpl: '{display}'
         }, {
           name: 'is_cancelled',
@@ -455,14 +455,89 @@ Ext.define('Omni.view.order_details.Form', {
 
     // TITLES (Start) =======================================================================
     Ext.applyIf(this, {
-      title: 'Order Detail',
-      subtitle: 'Each product on a customer order',
-      newTitle: 'Order Detail',
+      title: 'OrderDetail Detail',
+      subtitle: 'Each product on a customer order_detail',
+      newTitle: 'OrderDetail Detail',
       newSubtitle: undefined
     });
     // TITLES (End)
 
-    this.callParent();
-  }
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [{
+        xtype: 'button',
+        iconCls: 'fa fa-pencil-square-o',
+        tooltip: 'Finalize',
+        listeners: {
+          beforerender: this.prepareFinalizeAction,
+          click: this.onFinalizeAction,
+          scope: me
+        }
+      }]
+    });
 
+    // ACTIONS (End)
+
+    // LISTENERS (Start) ===================================================================
+    // LISTENERS (End)
+
+    this.callParent();
+
+  }, // initComponent
+
+  // HANDLERS (Start) ======================================================================
+
+  /**
+   *
+   */
+  onFinalizeAction: function(action, eOpts) {
+    this.processEventTransition('finalize', 'Order detail was successfully finalized.', 'An error occurred finalizing this order detail.');
+  }, // onAction
+
+  /**
+   *
+   */
+  prepareFinalizeAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    (this.record.phantom != true) && (currentState == 'draft') ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  processEventTransition: function(eventName, successMsg, failureMsg) {
+    var me = this;
+
+    Omni.service.OrderDetail.fireEvent({
+        id: this.record.get('order_detail_id'),
+        name: eventName
+      },
+      function(result, e) {
+        me.getForm().clearInvalid();
+        if (result && result.success == true) {
+          Buildit.infoMsg(successMsg);
+          me.record.set(result);
+          me.loadRecord(me.record);
+          me.fireEvent('recordchanged', me, me.banner);
+          me.doLayout();
+        } else {
+          var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+          if (response.errors)
+            me.getForm().markInvalid(response.errors);
+
+          var error_message = failureMsg;
+          if (response.message)
+            error_message = response.message;
+
+          if (response.errors)
+            error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+          Buildit.errorMsg(error_message);
+        }
+      }
+    );
+
+  }, // processEventTransition
+  // HANDLERS (End)
 });

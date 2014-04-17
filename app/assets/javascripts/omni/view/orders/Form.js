@@ -181,7 +181,6 @@ Ext.define('Omni.view.orders.Form', {
     });
     // FIELDSETS (End)
 
-
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title: 'Order',
