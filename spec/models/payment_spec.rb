@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "payment" do
-  let(:me) { create( Omni::Payment, payment_amount: 15.50 ) }
+  let(:me) { create( Omni::Payment, payment_amount: 15.50, order_id: create( Omni::Order ).order_id, tender_id: Omni::Tender.cash ) }
 
   describe "requires" do
     it "payment_id" do lambda{Omni::Payment.create! payment_id nil}.should raise_error end
@@ -47,24 +47,24 @@ describe "payment" do
     end
 
     # APPROVE
-    it "on approve set state to complete" do
-      me.approve
+    it "on charge set state to complete" do
+      me.charge
       me.state.should eq('complete')
     end
 
-    it "on approve update till" do
-      me.approve
+    it "on charge update till" do
+      me.charge
       me.terminal.till.till_details.where(tender_id: me.tender_id).first.tender_amount.should eq(me.payment_amount)
     end
 
-    it "on approve update voucher" do
-      me.approve
+    it "on charge update voucher" do
+      me.charge
       # ?
     end
 
     # DECLINE
-    it "on decline set state to cancelled" do
-      me.decline
+    it "on cancel set state to cancelled" do
+      me.cancel
       me.state.should eq('cancelled')
     end
 

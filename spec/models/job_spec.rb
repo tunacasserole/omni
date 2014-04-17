@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "job" do
-  let(:me) { create(Omni::Job, jobable_id: create(Omni::OrderDetail, order_id: create(Omni::Order).order_id).order_detail_id) }
+  let(:me) { create(Omni::Job, jobable_type: 'Omni::OrderDetail', jobable_id: create(Omni::OrderDetail, order_id: create(Omni::Order).order_id).order_detail_id) }
 
   describe "requires" do
     it "job_id" do lambda{Omni::Job.create! job_id nil}.should raise_error end
@@ -95,9 +95,8 @@ describe "job" do
       me.production_location_id = nil
       me.job_type = ['CONVERSION (SEWN)','SPECIAL CUT'].sample
       me.save
-      me.production_location_id.should eq(Omni::Location.main_warehouse.location_id)
+      me.production_location_id.should eq(Omni::Location.main_warehouse)
     end
-
     it "default production location to order location" do
       me.production_location_id = nil
       me.job_type = ['CONVERSION (HEAT APPLY)','ALTERATION'].sample

@@ -68,17 +68,17 @@ describe "order" do
     end
 
     context "finalize" do
-      it "set state to final" do
+      it "set state to complete" do
         me.finalize
-        me.state.should eq('final')
+        me.state.should eq('complete')
         me.order_date.should eq(Date.today)
       end
       it "order details" do
         me = create(:order_with_details)
         me.finalize
-        me.state.should eq('final')
+        me.state.should eq('complete')
         me.order_details.count.should eq(5)
-        # me.order_details.first.state.should eq('final')
+        # me.order_details.first.state.should eq('complete')
       end
     end
 

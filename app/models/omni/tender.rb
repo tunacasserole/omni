@@ -87,5 +87,9 @@ class Omni::Tender < ActiveRecord::Base
     text     :tender_type_fulltext, using: :tender_type
     text     :display_order_fulltext, using: :display_order
   end
+
+  def self.cash
+    '31D1E0FEA6C911E2AE1900FF58D32228'
+  end
 end # class Omni::Tender
 

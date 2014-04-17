@@ -189,8 +189,83 @@ Ext.define('Omni.view.orders.Form', {
     });
     // TITLES (End)
 
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [{
+        xtype: 'button',
+        iconCls: 'fa fa-pencil-square-o',
+        tooltip: 'Finalize',
+        listeners: {
+          beforerender: this.prepareFinalizeAction,
+          click: this.onFinalizeAction,
+          scope: me
+        }
+      }]
+    });
+
+    // ACTIONS (End)
+
+    // LISTENERS (Start) ===================================================================
+    // LISTENERS (End)
+
     this.callParent();
 
-  } // initComponent
+  }, // initComponent
 
-}); // Ext.define('Omni.view.orders.Form'
+  // HANDLERS (Start) ======================================================================
+
+  /**
+   *
+   */
+  onFinalizeAction: function(action, eOpts) {
+    this.processEventTransition('finalize', 'Order was successfully finalized.', 'An error occurred finalizing this order.');
+  }, // onAction
+
+  /**
+   *
+   */
+  prepareFinalizeAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    // console.log(this.record);
+    (this.record.phantom != true) && (currentState == 'draft') ? action.show() : action.hide();
+  }, // prepareAction
+
+  /**
+   *
+   */
+  processEventTransition: function(eventName, successMsg, failureMsg) {
+    var me = this;
+
+    Omni.service.Order.fireEvent({
+        id: this.record.get('order_id'),
+        name: eventName
+      },
+      function(result, e) {
+        me.getForm().clearInvalid();
+        if (result && result.success == true) {
+          Buildit.infoMsg(successMsg);
+          me.record.set(result);
+          me.loadRecord(me.record);
+          me.fireEvent('recordchanged', me, me.banner);
+          me.doLayout();
+        } else {
+          var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+          if (response.errors)
+            me.getForm().markInvalid(response.errors);
+
+          var error_message = failureMsg;
+          if (response.message)
+            error_message = response.message;
+
+          if (response.errors)
+            error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+          Buildit.errorMsg(error_message);
+        }
+      }
+    );
+
+  }, // processEventTransition
+  // HANDLERS (End)
+});

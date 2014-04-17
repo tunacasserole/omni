@@ -93,7 +93,7 @@ namespace :omni do
     end
     slow_classes.each do |k|
       puts "! Indexing #{k}"
-      system("rake sunspot:reindex[1000,#{k}]")
+      system("rake sunspot:reindex[,#{k}]")
     end
 
     puts "\n\n! All reindexing completed in #{(Time.now - started_at).to_i}s"

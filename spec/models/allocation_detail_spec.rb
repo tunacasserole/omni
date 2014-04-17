@@ -2,26 +2,20 @@ require 'spec_helper'
 
 describe "allocation_detail" do
 
+  let(:me) { create(Omni::AllocationDetail) }
+
   describe "requires" do
     it "allocation_detail_id" do lambda{Omni::AllocationDetail.create! allocation_detail_id nil}.should raise_error end
     it "display" do lambda{Omni::AllocationDetail.create! display nil}.should raise_error end
   end
 
   describe "checks uniqueness of" do
-    it "display" do
-      a = create(Omni::Allocation)
-      create(Omni::AllocationDetail, display: 'dup_test', allocation_id: a.allocation_id)
-      dup = build(Omni::AllocationDetail, display: 'dup_test', allocation_id: a.allocation_id)
-      dup.should_not be_valid
-    end
+    it "allocation_detail_nbr" do build(Omni::AllocationDetail, allocation_detail_nbr: me.allocation_detail_nbr).should_not be_valid end
   end
 
   describe "defaults" do
-    it "allocation_detail_id" do
-      me = create(Omni::AllocationDetail, allocation_id: create(Omni::Allocation).allocation_id)
-      me.allocation_detail_id.should_not be_nil
-    end
-    # it "is_primary to true" do me = create(Omni::AllocationDetail); me.is_primary.should be_true end
+    it "allocation_detail_id" do me.allocation_detail_id.should_not be_nil end
+    it "allocation_detail_nbr" do me.allocation_detail_nbr.should_not be_nil end
   end
 
   describe "lookups" do

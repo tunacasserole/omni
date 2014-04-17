@@ -33,7 +33,7 @@ GEM
     amq-protocol (1.9.2)
     arel (4.0.2)
     builder (3.1.4)
-    buildit (0.9.66)
+    buildit (0.9.70)
       activeresource
       bunny (>= 0.9.0.rc1)
       colored
@@ -53,7 +53,7 @@ GEM
       will_paginate (~> 3.0)
     buildit_sockets (0.1.6)
       buildit
-    bunny (1.2.0)
+    bunny (1.2.1)
       amq-protocol (>= 1.9.2)
     celluloid (0.15.2)
       timers (~> 1.1.0)
@@ -114,7 +114,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.9.2)
     mysql2 (0.3.15)
-    net-ldap (0.6.0)
+    net-ldap (0.6.1)
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -158,7 +158,7 @@ GEM
       activesupport (= 4.0.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.2.2)
+    rake (10.3.0)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
@@ -247,7 +247,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  buildit (= 0.9.66)
+  buildit
   buildit_sockets
   factory_girl_rails
   guard

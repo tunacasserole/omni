@@ -184,9 +184,18 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     state :approve do
       validate  :validate_approve
     end
-    # state :projection_1 do
+    state :projection_1 do
       # validate  :validate_approve
-    # end
+    end
+    state :projection_2 do
+      # validate  :validate_approve
+    end
+    state :projection_3 do
+      # validate  :validate_approve
+    end
+    state :projection_4 do
+      # validate  :validate_approve
+    end
 
   ### EVENTS ###
     event :approve do

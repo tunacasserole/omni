@@ -9,8 +9,8 @@ class Omni::Sku < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         uniqueness: true,                         :allow_nil => false
-  validates    :sku_nbr,                         uniqueness: true,                         allow_nil: true
+  validates    :display,                         uniqueness: true,                         allow_nil: false
+  validates    :sku_nbr,                         uniqueness: true,                         allow_nil: false
   validates    :maintenance_level,               lookup: 'MAINTENANCE_LEVEL',          allow_nil: true
   validates    :conversion_type,                 lookup: 'CONVERSION_TYPE',            allow_nil: true
   validates    :brand,                           lookup: 'BRAND',                      allow_nil: true

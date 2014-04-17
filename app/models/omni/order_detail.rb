@@ -113,7 +113,7 @@ class Omni::OrderDetail < ActiveRecord::Base
 
   ### EVENTS ###
     event :finalize do
-      transition draft: :final
+      transition draft: :complete
     end
     event :cancel do
       transition draft: :cancelled
@@ -123,12 +123,73 @@ class Omni::OrderDetail < ActiveRecord::Base
 
   # STATE HANDLERS (Start) ====================================================================
 
-  # finalize => draft to final
+  # finalize => draft to complete
   def after_finalize
+    f_loc = optimize_location
+
     # Add Pick Ticket
-    self.picks.create
+    Omni::Pick.create(pickable_type: 'Omni::OrderDetail', pickable_id: order_detail_id, fulfillment_location_id: f_loc)
   end # def after_finalize
 
+
+  def optimize_location
+
+    # if delivery method is 'take', the user is picking it up from the store, so the pick location is the same as the order
+    return self.order.location if self.delivery_method == 'TAKE'
+
+    # if pick has a job, default to the job production location
+    return self.picks.first.job.production_location if self.picks.first.job
+
+    # primary store for the school
+    primary_store = self.sku.account ? self.sku.account.location : self.order.location
+    # primary_store = Omni::Location.where(location_id: '51713A3EAC3E11E2947800FF58D32228').first
+
+    # build array of locations, starting with the primary store, in a specific order to search for on hand
+    locations = [primary_store]
+
+    # secondary store for the school
+    # TODO - how to get secondary school ?
+
+    # other stores in same district as primary store
+    primary_store.district.locations.where(is_store: true).each { |l| locations << l unless locations.include?(l) }
+
+    # a warehouse in same district
+    primary_store.district.locations.where(is_warehouse: true).each { |l| locations << l unless locations.include?(l) }
+
+    # another store in same region
+    primary_store.district.region.districts.each { |d| d.locations.where(is_store: true).each { |l| locations << l unless locations.include?(l) } }
+
+    # a warehouse in same region
+    primary_store.district.region.districts.each { |d| d.locations.where(is_warehouse: true).each { |l| locations << l unless locations.include?(l) } }
+
+    # any warehouse
+    Omni::Location.where(is_warehouse: true).each { |l| locations << l unless locations.include?(l) }
+
+    # any store
+    Omni::Location.where(is_store: true).each { |l| locations << l unless locations.include?(l) }
+
+    # search locations in this order for the first location with inventory (on_hand + on_order - (projection - sales))
+    locations.each do |l|
+      data = ActiveRecord::Base.connection.execute("select sku_id, location_id, on_hand_units + supplier_on_order_units - projected_units + sale_units_ytd from inventories where sku_id = '#{self.sku_id}' and location_id = '#{l}")
+      return l if data.first[2] > 0
+    end
+
+    # if no location available, default to:
+    puts "no on hand found"
+
+    # a.for a store order default to the order location
+    return order.location_id if order_source == 'POS'
+
+    if order_source == 'WEB'
+      # b.for a web order converted item (and auto-create job) - the main warehouse(#0)
+      if sku.is_converted
+        return Omni::Location.main_warehouse
+      else
+      # c.for a web order generic item - the primary store for the school
+        return primary_store
+      end
+    end
+  end # def optimize_location
 
   # cancel => draft to cancelled
   def after_cancel

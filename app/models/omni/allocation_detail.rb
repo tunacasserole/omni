@@ -20,7 +20,6 @@ class Omni::AllocationDetail < ActiveRecord::Base
   default :allocation_detail_nbr,            override: false,        with: :sequence,         :named => "ALLOCATION_DETAIL_NBR"
   # default :display,                          override: false,   :to   => lambda{|m| "from: #{m.allocation.location_display} - #{m.allocation.sku_display} - #{m.allocation.allocation_nbr}"}
   # default :description, override: false,   :to   => lambda{|m| "#{m.allocation_detail_nbr} - #{m.allocation.allocation_nbr} - #{m.purchase_detail_nbr}"}
-  # default :sku_id,                           :to   => lambda{|m| m.allocation.sku_id}
   default :units_needed,                     override: false,        to: 0
   default :units_allocated,                  override: false,        to: 0
   default :units_shipped,                    override: false,        to: 0

@@ -94,15 +94,15 @@ class Omni::Payment < ActiveRecord::Base
   ### CALLBACKS ###
     after_transition on: :charge, do: :do_charge
     # after_transition on: :approve, do: :after_approve
-    # after_transition on: :decline, do: :after_decline
+    # after_transition on: :cancel, do: :after_cancel
 
   ### EVENTS ###
     # event :approve do
     #   transition draft: :complete
     # end
-    # event :decline do
-    #   transition draft: :cancelled
-    # end
+    event :cancel do
+      transition draft: :cancelled
+    end
     event :charge do
       transition draft: :complete
     end
@@ -121,12 +121,12 @@ class Omni::Payment < ActiveRecord::Base
 
       order.finalize if order.payments.sum('payment_amount') >= order.order_total
 
-      # update till
+      # puts "update till"
       if tender.is_update_till
         till_detail = Omni::TillDetail.first
         till_detail.tender_count += 1
-        puts "tender_amount = #{till_detail.tender_amount}"
-        puts "payment amount is #{payment_amount}"
+        # puts "tender_amount = #{till_detail.tender_amount}"
+        # puts "payment amount is #{payment_amount}"
         # till_detail = Omni::TillDetail.where(tender_id: tender_id, till_id: terminal.till_id).first
         till_detail.tender_amount += payment_amount
         till_detail.save
@@ -135,6 +135,8 @@ class Omni::Payment < ActiveRecord::Base
       # insert till activity
       user_id = ( Buildit::User.current ? Buildit::User.current.user_id : Buildit::User.first.user_id )
       Omni::TillActivity.create(payment_id: payment_id, till_id: terminal.till_id, tender_id: tender_id, activity_count: 1, activity_amount: payment_amount, user_id: user_id)
+    else
+      # puts "errors found"
     end
 
   end
@@ -184,10 +186,10 @@ class Omni::Payment < ActiveRecord::Base
   end # def after_approve
 
 
-  # decline => draft to declined
-  def after_decline
+  # cancel => draft to canceld
+  def after_cancel
 
-  end # def after_decline
+  end # def after_cancel
 
   # STATE HANDLERS (End)
 end # class Omni::Payment

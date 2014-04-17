@@ -142,24 +142,24 @@ Ext.define('Omni.view.inventories.Explorer', {
           flex         : 1,
           sortable     : true
         },
-        {
-          header       : this.work_in_process_unitsLabel,
-          dataIndex    : 'work_in_process_units',
-          flex         : 1,
-          sortable     : true
-        },
-        {
-          header       : this.in_transit_unitsLabel,
-          dataIndex    : 'in_transit_units',
-          flex         : 1,
-          sortable     : true
-        },
-        {
-          header       : this.allocated_unitsLabel,
-          dataIndex    : 'allocated_units',
-          flex         : 1,
-          sortable     : true
-        },
+        // {
+        //   header       : this.work_in_process_unitsLabel,
+        //   dataIndex    : 'work_in_process_units',
+        //   flex         : 1,
+        //   sortable     : true
+        // },
+        // {
+        //   header       : this.in_transit_unitsLabel,
+        //   dataIndex    : 'in_transit_units',
+        //   flex         : 1,
+        //   sortable     : true
+        // },
+        // {
+        //   header       : this.allocated_unitsLabel,
+        //   dataIndex    : 'allocated_units',
+        //   flex         : 1,
+        //   sortable     : true
+        // },
         {
           header       : this.sale_units_ytdLabel,
           dataIndex    : 'sale_units_ytd',

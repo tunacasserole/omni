@@ -57,6 +57,14 @@ describe "order_detail" do
 
   end
 
+  describe "logic" do
+
+    it "set the fulfillment location on the pick", focus: true do
+      me.finalize
+      me.picks.first.fulfillment_location_id.should_not be_nil
+    end
+  end
+
   describe "state machine should" do
 
     it "default state to draft" do
@@ -65,7 +73,7 @@ describe "order_detail" do
 
     it "finalize" do
       me.finalize
-      me.state.should eq('final')
+      me.state.should eq('complete')
       me.picks.first.should_not be_nil
     end
 

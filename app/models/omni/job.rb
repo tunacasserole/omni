@@ -22,7 +22,6 @@ class Omni::Job < ActiveRecord::Base
   default      :job_id,                           override: false,        with: :guid
   default      :job_nbr,                          override: false,        with: :sequence,         named: "JOB_NBR"
   default      :display,                          override: false,        to: lambda{|m| "job: #{m.job_nbr}"}
-  default      :production_location_id,           override: false,        to: lambda{|m|  ['CONVERSION (HEAT APPLY)','ALTERATION'].include?(m.job_type) ? m.order_detail.order.location_id : Omni::Location.main_warehouse.location_id}
   default      :request_units,                    override: false,        to: 0
   default      :complete_units,                   override: false,        to: 0
   default      :weight,                           override: false,        to: 0
@@ -46,6 +45,7 @@ class Omni::Job < ActiveRecord::Base
   default      :total_rise,                       override: false,        to: 0
   default      :head_circumference,               override: false,        to: 0
   default      :is_destroyed,                     override: false,        to: false
+  default      :production_location_id,           override: false,        to: lambda{|m| ((m.jobable_type == 'Omni::OrderDetail') && (['CONVERSION (HEAT APPLY)','ALTERATION'].include?(m.job_type))) ? m.order_detail.order.location_id : Omni::Location.main_warehouse }
   # DEFAULTS (End)
 
   # REFERENCE (Start) ===================================================================

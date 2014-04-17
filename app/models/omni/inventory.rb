@@ -100,10 +100,10 @@
     string   :location_id
     string   :location_display do location.display if location end
     double   :on_hand_units
-    double   :work_in_process_units
     double   :supplier_on_order_units
-    double   :in_transit_units
-    double   :allocated_units
+    # double   :work_in_process_units
+    # double   :in_transit_units
+    # double   :allocated_units
     # # string   :department_id
     # # string   :department_display do department.display if department end
     # # string   :supplier_id

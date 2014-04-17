@@ -28,19 +28,22 @@ Ext.define('Omni.view.order_details.Inspector', {
               title: 'Profile',
               xtype: 'omni-order_details-Form'
             },
-          // {
-          //   title: 'Details',
-          //   xtype: 'omni-order_details-Explorer',
-          //   module: 'samples',
-          //   defaultSearch: {
-          //     with: {
-          //       order_id: {
-          //         equal_to: me.record.get('order_id')
-          //       }
-          //     }
-          //   },
-          //   showBadge: true
-          // },
+          {
+            title: 'Picks',
+            xtype: 'omni-picks-Explorer',
+            module: 'samples',
+            defaultSearch: {
+              with: {
+                pickable_type: {
+                  equal_to: 'Omni::OrderDetail'
+                },
+                pickable_id: {
+                  equal_to: me.record.get('order_detail_id')
+                }
+              }
+            },
+            showBadge: true
+          },
           // {
           //   title: 'Pick Ticket',
           //   xtype: 'omni-picks-Explorer'
