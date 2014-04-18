@@ -1,0 +1,5 @@
+//= require      ../sencha/bootstrap
+//= require buildit-classic
+//= require_tree ./omni
+
+/*.inspector .tab.customers .x-panel-body*/
