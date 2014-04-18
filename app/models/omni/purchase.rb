@@ -104,10 +104,6 @@ class Omni::Purchase < ActiveRecord::Base
   end
   # TEMPORARY ATTRIBUTES (End)
 
-  # ORDERING (Start) ====================================================================
-  order_search_by :purchase_nbr => :desc
-  # ORDERING (End)
-
   # INDEXING (Start) ====================================================================
   searchable do
     # Exact match attributes
@@ -119,20 +115,16 @@ class Omni::Purchase < ActiveRecord::Base
     string   :purchase_nbr
     string   :supplier_display
     string   :location_display
-    date     :order_date
-    date     :ship_date
-    date     :delivery_date
-    boolean  :is_destroyed
+    # date     :order_date
+    # date     :ship_date
+    # date     :delivery_date
+    # boolean  :is_destroyed
     # Partial match (contains) attributes
     text     :display_fulltext,            using: :display
-    text     :state_fulltext,              using: :state
     text     :supplier_fulltext,           using: :supplier_display
     text     :location_fulltext,           using: :location_display
-    text     :master_purchase_fulltext,    using: :master_purchase_display
-    text     :carrier_supplier_fulltext,   using: :carrier_supplier_display
-    text     :ship_thru_supplier_fulltext, using: :ship_thru_supplier_display
-    text     :pay_to_supplier_fulltext,    using: :pay_to_supplier_display
   end
+  order_search_by :purchase_nbr => :desc
   # INDEXING (End)
 
   # HOOKS (Start) =======================================================================

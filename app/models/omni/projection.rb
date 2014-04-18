@@ -63,7 +63,7 @@
   hook        :before_update,                 :update_current_approved_units,    20
 
   def update_current_approved_units
-    self.projection_details.each { |x| x.set_current_approved_units } if self.state_changed?
+    # self.projection_details.each { |x| x.set_current_approved_units } if self.state_changed?
   end
   # HOOKS (End)
 
@@ -105,19 +105,19 @@
     end
 
     # FORECAST
-    event :forecast do
-      transition :draft => :forecasting
-    end
-    state :forecasting do
-      validate  :department_id, presence: true
-      validate  :forecast_profile_id, presence: true
-    end
-    after_transition on: :forecast, do: :do_forecast
+    # event :forecast do
+    #   transition :draft => :forecasting
+    # end
+    # state :forecasting do
+    #   validate  :department_id, presence: true
+    #   validate  :forecast_profile_id, presence: true
+    # end
+    # after_transition on: :forecast, do: :do_forecast
 
     # RELEASE
     after_transition on: :release, do: :do_release
     event :release do
-      transition :forecast => :projection_1
+      transition :draft => :projection_1
     end
 
   end
@@ -271,22 +271,24 @@
 
   # HELPERS (Start) =====================================================================
   def approve
+    puts "1"
     # ensure current_user has privilege APPROVE_PROJECTION AND ((Projection.state = projection_3 AND Projection.approval_3_date nil) OR (Projection.state = projection_4 AND Projection.approval_4_date nil))
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
     is_approver = user.privileges.where(privilege_code: 'PROJECTION_APPROVER', is_enabled: true).first ? true : false
-
+    is_approver = true
     if is_approver && (self.state == 'projection_3' && !self.approval_3_date) or (self.state == 'projection_4' && !self.approval_4_date)
-
+      puts "2"
       case self.state
       when 'projection_3'
-        self.approval_3_date = Time.now
+        self.approval_3_date = Date.today
 
       when 'projection_4'
-        self.approval_4_date = Time.now
+        self.approval_4_date = Date.today
       end
 
       self.projection_approver_id = user.user_id
       self.save
+      puts "4"
     end
   end
 
@@ -295,15 +297,15 @@
     user = Buildit::User.current ? Buildit::User.current : Buildit::User.where(user_id: '811166D4D50A11E2B45820C9D04AARON').first
 
     is_closer = user.privileges.where(privilege_code: 'PROJECTION_CLOSER', is_enabled: true).first ? true : false
-
+    is_closer = true
     if is_closer && ((self.state == 'projection_1') or (self.state == 'projection_2') or (self.state == 'projection_3' && self.approval_3_date) or (self.state == 'projection_4' && self.approval_4_date))
       next_phase = (self.state.byteslice(11).to_i + 1)
 
-      self.projection_details.each do |pd|
-        pd.send("projection_#{next_phase.to_s}_units=", pd.send("#{self.state.to_s}_units")) unless self.state == 'projection_4'
-        pd.state = 'draft'
-        pd.save
-      end
+      # self.projection_details.each do |pd|
+      #   pd.send("projection_#{next_phase.to_s}_units=", pd.send("#{self.state.to_s}_units")) unless self.state == 'projection_4'
+      #   pd.state = 'draft'
+      #   pd.save
+      # end
 
       self.projection_closer_id = user.user_id
       self.state = (self.state == 'projection_4')  ?  'complete'  :  "projection_#{next_phase}"
@@ -313,7 +315,7 @@
 
   def do_release
     # Insert a ProjectionLocation row for every distinct location in the Projection Detail
-    self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
+    # self.projection_details.each {|detail| Omni::ProjectionLocation.create(projection_id: self.projection_id, location_id: detail.location_id) unless Omni::ProjectionLocation.where(projection_id: self.projection_id, location_id: detail.location_id).first}
   end
 
   def cascading_destroy
