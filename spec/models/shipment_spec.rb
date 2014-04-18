@@ -53,15 +53,15 @@ describe "shipment" do
       me.ship_date.should eq(Date.today)
     end
 
-    it "on ship to customer, set state to complete" do
-      me.ship
-      me.state.should eq('complete')
-    end
+    # it "on ship to customer, set state to complete" do
+    #   me.ship
+    #   me.state.should eq('complete')
+    # end
 
-    it "on ship to customer, update receipt date to current date" do
-      me.ship
-      me.receipt_date.should eq(Date.today)
-    end
+    # it "on ship to customer, update receipt date to current date" do
+    #   me.ship
+    #   me.receipt_date.should eq(Date.today)
+    # end
 
     it "on ship to store, set state to shipped" do
       me.ship

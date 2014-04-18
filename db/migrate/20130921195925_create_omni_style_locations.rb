@@ -5,7 +5,7 @@ class CreateOmniStyleLocations < ActiveRecord::Migration
   	unless ActiveRecord::Base.connection.tables.include?('style_locations')
       create_table(:style_locations, :id => false) do |t|
         t.column   :style_location_id,               :string,            null: false,   limit: 32
-        t.column   :display,                         :string,            null: false,   limit: 300
+        t.column   :display,                         :string,            null: true,   limit: 300
         t.column   :state,                           :string,            null: true,    limit: 200
         t.column   :style_id,                        :string,            null: true,    limit: 32
         t.column   :location_id,                     :string,            null: true,    limit: 32

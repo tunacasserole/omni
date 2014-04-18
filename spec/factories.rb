@@ -308,7 +308,10 @@ end
   size_id :size
   size_group_id :size_group
  end
- factory Omni::Sku do sequence(:display) {|n| "test #{n}"} end
+ factory Omni::Sku do
+  sequence(:display) {|n| "test #{n}"}
+  association :account, factory: Omni::Account
+end
  factory Omni::SkuAlias do
   sequence(:display)
   sku_id :sku

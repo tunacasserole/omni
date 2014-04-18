@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Hierarchy
+class Omni::Data::Fix::Hierarchy
 
   def self.go(model_name)
 

@@ -327,7 +327,7 @@ Ext.define('Omni.view.shipments.Form', {
    */
   prepareReceiveAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    (this.record.phantom != true) && (currentState == 'draft') ? action.show() : action.hide();
+    (this.record.phantom != true) && (currentState == 'draft') || (currentState == 'shipped') ? action.show() : action.hide();
   }, // prepareAction
 
   /**

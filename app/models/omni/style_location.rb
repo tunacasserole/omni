@@ -9,7 +9,7 @@ class Omni::StyleLocation < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         uniqueness: true
+  # validates    :display,                         uniqueness: true
   validates    :replenishment_method,            lookup: 'REPLENISHMENT_METHOD',       allow_nil: true
   validates    :replenishment_source,            lookup: 'REPLENISHMENT_SOURCE',       allow_nil: true
   validates    :location_id, uniqueness: { scope: :style_id, message: "Location already exists for this style." }

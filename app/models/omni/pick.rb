@@ -139,7 +139,7 @@ class Omni::Pick < ActiveRecord::Base
     def after_ship
       self.ship_date = Date.today
       write_sla 'LoadWhseShip', self.fulfillment_location_id if self.fulfillment_location.is_warehouse
-      self.ship_to_customer = true if pickable_type =='Omni::OrderDetail' and ['SEND','TAKE'].inclued? pickable.delivery_method
+      self.ship_to_customer = true if pickable_type =='Omni::OrderDetail' && pickable && ['SEND','TAKE'].include?(pickable.delivery_method)
 
       if pickable_type == 'Omni::OrderDetail'
         write_sla 'SendShipment', fulfillment_location_id
