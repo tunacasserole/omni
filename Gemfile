@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 source 'http://tunacasserole:horizon@gems.buildit.io'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.3'
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
@@ -25,7 +25,7 @@ end
 #gem 'extjs4-rails',   :path => 'vendor/gems/extjs4-rails'
 
 
-gem 'buildit'#, '0.9.66'   #     :path => 'vendor/gems/buildit'
+gem 'buildit'#,     :path => 'vendor/gems/buildit'
 
 gem 'buildit_sockets' #, '0.9.27'#,      :path => 'vendor/gems/buildit'
 
