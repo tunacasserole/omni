@@ -9,9 +9,9 @@ class Omni::Customer < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                  presence: true, uniqueness: true
   validates    :customer_nbr,             presence: true, uniqueness: true
   validates    :last_name,                presence: true
+  validates    :display,                  presence: true
   validates    :phone_type_1,             lookup: 'PHONE_TYPE',                 allow_nil: true
   validates    :phone_type_2,             lookup: 'PHONE_TYPE',                 allow_nil: true
   validates    :phone_type_3,             lookup: 'PHONE_TYPE',                 allow_nil: true
@@ -81,24 +81,22 @@ class Omni::Customer < ActiveRecord::Base
     string   :display
     string   :first_name
     string   :last_name
-    date     :registration_date
     string   :line_1
     string   :city
     string   :state_code do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.state_code) end
     string   :zip
-    string   :phone
     string   :email_address
 
-    # text     :customer_nbr_fulltext, using: :customer_nbr
+    text     :customer_nbr_fulltext, using: :customer_nbr
+    text     :display_fulltext, using: :display
     text     :line_1_fulltext, using: :line_1
     text     :city_fulltext, using: :city
     text     :first_name_fulltext, using: :first_name
     text     :last_name_fulltext, using: :last_name
-    text     :display_fulltext, using: :display
+    text     :email_address_fulltext, using: :email_address
     # text     :state_code_fulltext, using: :state_code
     # text     :zip_fulltext, using: :zip
-    # text     :phone_fulltext, using: :phone
-    text     :email_address_fulltext, using: :email_address
+    text     :phone_1_fulltext, using: :phone_1
   end
   # STATES (Start) ====================================================================
 

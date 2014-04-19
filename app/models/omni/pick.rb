@@ -116,9 +116,11 @@ class Omni::Pick < ActiveRecord::Base
 
     def write_sla(ruleset, location_id)
       ruleset_id = Omni::Ruleset.where(:ruleset_code => ruleset).first.ruleset_id
-      sku_id = self.pickable.sku_id
-      #location_id = location.location_id
-      Omni::StockLedgerActivity.create(:stockable_type => 'Omni::Pick', :stockable_id => self.pickable_id, :ruleset_id => ruleset_id, :sku_id => sku_id, :location_id => location_id)
+      if self.pickable
+        sku_id = self.pickable.sku_id
+        # location_id = location.location_id
+        Omni::StockLedgerActivity.create(:stockable_type => 'Omni::Pick', :stockable_id => self.pickable_id, :ruleset_id => ruleset_id, :sku_id => sku_id, :location_id => location_id)
+      end
     end
 
     def after_release
@@ -139,23 +141,25 @@ class Omni::Pick < ActiveRecord::Base
     def after_ship
       self.ship_date = Date.today
       write_sla 'LoadWhseShip', self.fulfillment_location_id if self.fulfillment_location.is_warehouse
-      self.ship_to_customer = true if pickable_type =='Omni::OrderDetail' && pickable && ['SEND','TAKE'].include?(pickable.delivery_method)
 
-      if pickable_type == 'Omni::OrderDetail'
-        write_sla 'SendShipment', fulfillment_location_id
-        write_sla 'RegularSale', fulfillment_location_id if ship_to_customer and pickable.price_type == 'REGULAR'
-        write_sla 'PromoSale', fulfillment_location_id if ship_to_customer and pickable.price_type == 'PROMOTIONAL'
-        write_sla 'ClearanceSale', fulfillment_location_id if ship_to_customer and pickable.price_type == 'CLEARANCE'
-        write_sla 'ShipWorkComPick', fulfillment_location_id if job.state == 'complete'
+      if pickable
+        ship_to_customer = ( pickable_type =='Omni::OrderDetail' && pickable && ['SEND','TAKE'].include?(pickable.delivery_method) )
+
+        if pickable_type == 'Omni::OrderDetail'
+          write_sla 'SendShipment', fulfillment_location_id
+          write_sla 'RegularSale', fulfillment_location_id if ship_to_customer and pickable.price_type == 'REGULAR'
+          write_sla 'PromoSale', fulfillment_location_id if ship_to_customer and pickable.price_type == 'PROMOTIONAL'
+          write_sla 'ClearanceSale', fulfillment_location_id if ship_to_customer and pickable.price_type == 'CLEARANCE'
+          write_sla 'ShipWorkComPick', fulfillment_location_id if job.state == 'complete'
+        end
+
+        if pickable_type == 'Omni::Transfer'
+          pickable.ship_date = Date.today
+          pickable.state = 'shipped'
+          pickable.save
+          write_sla 'SendShipment', pickable.fulfillment_location_id
+        end
       end
-
-      if pickable_type == 'Omni::Transfer'
-        pickable.ship_date = Date.today
-        pickable.state = 'shipped'
-        pickable.save
-        write_sla 'SendShipment', pickable.fulfillment_location_id
-      end
-
     end
 
     def after_cancel

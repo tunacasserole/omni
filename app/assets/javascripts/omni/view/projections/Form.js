@@ -243,7 +243,7 @@ Ext.define('Omni.view.projections.Form', {
   prepareReleaseAction: function(action, eOpts) {
     var currentState = this.record.get('state');
 
-    (this.record.phantom != true && currentState == 'projection_1') ? action.show() : action.hide();
+    (this.record.phantom != true) && (currentState == 'draft') ? action.show() : action.hide();
 
   }, // prepareAction
 
@@ -253,7 +253,7 @@ Ext.define('Omni.view.projections.Form', {
   prepareCloseAction: function(action, eOpts) {
     var currentState = this.record.get('state');
     // JASON need regular expression here
-    (this.record.phantom != true) && (currentState == 'projection_1' || currentState == 'projection_2' || (currentState == 'projection_3' && this.record.get('approval_3_date') != null) || (currentState == 'projection_4' && this.record.get('approval_4_date') != null)) ? action.show() : action.hide();
+    (this.record.phantom != true) && (currentState == 'projection_1' || currentState == 'projection_2' || (currentState == 'projection_3' && this.record.get('approval_3_date') != '') || (currentState == 'projection_4' && this.record.get('approval_4_date') != '')) ? action.show() : action.hide();
   }, // prepareAction
 
   /**
@@ -262,7 +262,7 @@ Ext.define('Omni.view.projections.Form', {
   prepareApproveAction: function(action, eOpts) {
     var currentState = this.record.get('state');
     // console.log(this.record);
-    (this.record.phantom != true) && ((currentState == 'projection_3' && this.record.get('approval_3_date') == null) || (currentState == 'projection_4' && this.record.get('approval_4_date') == null)) ? action.show() : action.hide();
+    (this.record.phantom != true) && ((currentState == 'projection_3' && this.record.get('approval_3_date') == '') || (currentState == 'projection_4' && this.record.get('approval_4_date') == '')) ? action.show() : action.hide();
   }, // prepareAction
 
   /**
@@ -270,7 +270,6 @@ Ext.define('Omni.view.projections.Form', {
    */
   processEventTransition: function(eventName, successMsg, failureMsg) {
     var me = this;
-
     Omni.service.Projection.fireEvent({
         id: this.record.get('projection_id'),
         name: eventName
