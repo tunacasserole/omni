@@ -2,6 +2,7 @@ Ext.define('Omni.view.uniform_details.Form', {
 
   extend   :'Buildit.ux.Form',
   alias    :'widget.omni-uniform_details-Form',
+  backOnNew: true,
 
   // LABELS (Start) =======================================================================
   uniform_detail_idLabel                  : Omni.i18n.model.UniformDetail.uniform_detail_id,

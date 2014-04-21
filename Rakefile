@@ -119,7 +119,7 @@ namespace :omni do
   task :sync, [:model] => :environment do |t, args|
     args.with_defaults(:model => "AllModels")
     @start_time = Time.now
-    Omni::Data::Sync::Base.go(args.model)
+    "Omni::Data::Sync::#{args.model}".constantize.go
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 

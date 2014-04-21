@@ -24,6 +24,14 @@ class Omni::Data::Sync::Projection < Omni::Data::Sync::Base
       bar.increment!
       forecast row
     end
+
+    puts "create projection_locations from projection details"
+    data = ActiveRecord::Base.connection.execute("select projection_id, location_id from projection_details group by projection_id, location_id")
+    bar = ProgressBar.new(data.count)
+    data.each do |row|
+      bar.increment!
+      Omni::ProjectionLocation.create(projection_id: row[0], location_id: row[1])
+    end
   end
 
   def self.forecast(i)

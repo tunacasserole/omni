@@ -2,6 +2,7 @@ Ext.define('Omni.view.purchase_details.Form', {
 
   extend:'Buildit.ux.Form',
   alias:'widget.omni-purchase_details-Form',
+  backOnNew: true,
 
   initComponent:function () {
 

@@ -292,6 +292,23 @@ Ext.define('Omni.view.app.Hub', {
               title: ''
             }
           }, {
+            title: 'Categories',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'product_setup',
+            target: {
+              xtype: 'omni-categories-Explorer'
+            }
+          }, {
+            title: 'Products',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'product_setup',
+            target: {
+              xtype: 'omni-productsq-Explorer',
+              title: ''
+            }
+          }, {
             title: 'Allocation Profiles',
             colspan: 2,
             rowspan: 1,
@@ -301,9 +318,7 @@ Ext.define('Omni.view.app.Hub', {
             }
           }]
         }
-
         // Section: POS //
-
         , {
           title: 'Point of Sale',
           columns: 8,

@@ -85,7 +85,7 @@ Ext.define('Omni.view.projections.Form', {
             itemTpl: '{display}',
             gotoTarget: 'omni-forecast_profiles-Inspector'
           }, {
-            xtype: 'textfield',
+            xtype: 'textarea',
             name: 'description',
             fieldLabel: this.descriptionLabel,
             allowBlank: true
