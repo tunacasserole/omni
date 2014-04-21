@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Till < Omni::Data::Sync::Base
+class Omni::Data::Sync::Till
 
   def self.go
     # create a till detail row for every tender type for every till in the system

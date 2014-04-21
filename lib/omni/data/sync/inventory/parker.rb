@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Inventory::Parker < Omni::Data::Sync::Base
+class Omni::Data::Sync::Inventory::Parker
 
   def self.xit
     # put "no locations found for these outlets: #{@no_locations}"

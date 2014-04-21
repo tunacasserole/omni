@@ -1,4 +1,4 @@
-class Omni::Data::Sync::SizeGroup < Omni::Data::Sync::Base
+class Omni::Data::Sync::SizeGroup
 
   def self.go
     excel_to_seed('SizeGroup','size_groups')

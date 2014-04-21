@@ -1,4 +1,4 @@
-class Omni::Data::Sync::StyleColorSize < Omni::Data::Sync::Base
+class Omni::Data::Sync::StyleColorSize
 
   def self.go
     create_from_sku_load

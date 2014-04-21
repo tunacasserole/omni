@@ -1,4 +1,4 @@
-class Omni::Data::Sync::SkuAlias < Omni::Data::Sync::Base
+class Omni::Data::Sync::SkuAlias
 
   def self.go
     create_from_sku_load

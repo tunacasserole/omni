@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Projection < Omni::Data::Sync::Base
+class Omni::Data::Sync::Projection
 
   def self.go
     @profile = Omni::ForecastProfile.first

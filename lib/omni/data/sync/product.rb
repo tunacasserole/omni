@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Product < Omni::Data::Sync::Base
+class Omni::Data::Sync::Product
 
   def self.go
     excel_to_seed('Product','products')

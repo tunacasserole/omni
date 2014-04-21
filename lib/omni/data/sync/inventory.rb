@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Inventory < Omni::Data::Sync::Base
+class Omni::Data::Sync::Inventory
 
   def self.go
     # @inventories = Omni::Inventory.to_hash

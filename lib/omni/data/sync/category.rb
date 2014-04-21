@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Category < Omni::Data::Sync::Base
+class Omni::Data::Sync::Category
 
   def self.go
     excel_to_seed('Category','categories')

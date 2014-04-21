@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Style < Omni::Data::Sync::Base
+class Omni::Data::Sync::Style
 
   def self.go
     # table_to_seed('Style','styles','styles_sync')

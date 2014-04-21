@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Inventory::Buckhead < Omni::Data::Sync::Base
+class Omni::Data::Sync::Inventory::Buckhead
 
    def self.xit
     # put "no locations found for these outlets: #{@no_locations}"

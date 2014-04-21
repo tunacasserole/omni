@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Sku < Omni::Data::Sync::Base
+class Omni::Data::Sync::Sku
 
   def self.go
     # update_suppliers_sql

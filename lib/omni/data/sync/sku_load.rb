@@ -1,4 +1,4 @@
-class Omni::Data::Sync::SkuLoad < Omni::Data::Sync::Base
+class Omni::Data::Sync::SkuLoad
 
   def self.go
     # puts "#{Time.now.strftime("%H:%M:%S").yellow} - starting"

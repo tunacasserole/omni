@@ -1,7 +1,7 @@
 
 # require 'roo'
 
-class Omni::Data::Sync::Grits < Omni::Data::Sync::Base
+class Omni::Data::Sync::Grits
 
   def self.xit
     # put "no locations found for these outlets: #{@no_locations}"

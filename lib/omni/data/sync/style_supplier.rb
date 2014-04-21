@@ -1,4 +1,4 @@
-class Omni::Data::Sync::StyleSupplier < Omni::Data::Sync::Base
+class Omni::Data::Sync::StyleSupplier
 
   def self.go
     # create_style_suppliers_from_sku_load_sql

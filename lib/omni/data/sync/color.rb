@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Color < Omni::Data::Sync::Base
+class Omni::Data::Sync::Color
 
   def self.go
     excel_to_seed('Color','colors')

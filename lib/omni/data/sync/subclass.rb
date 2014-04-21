@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Subclass < Omni::Data::Sync::Base
+class Omni::Data::Sync::Subclass
 
   def self.go
     update_classes

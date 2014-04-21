@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Weekly < Omni::Data::Sync::Base
+class Omni::Data::Sync::Weekly
 
   def self.go
    # Omni::Data::Sync::Inventory::Parker.inventory

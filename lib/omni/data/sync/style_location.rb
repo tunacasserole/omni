@@ -1,4 +1,4 @@
-class Omni::Data::Sync::StyleLocation < Omni::Data::Sync::Base
+class Omni::Data::Sync::StyleLocation
 
   def self.go
     create_style_locations_from_sku_load

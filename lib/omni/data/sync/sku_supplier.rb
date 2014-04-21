@@ -1,4 +1,4 @@
-class Omni::Data::Sync::SkuSupplier < Omni::Data::Sync::Base
+class Omni::Data::Sync::SkuSupplier
 
   def self.go
     create_from_sku_load

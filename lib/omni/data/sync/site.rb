@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Account < Omni::Data::Sync::Base
+class Omni::Data::Sync::Account
 
   def self.go
     # de_dup

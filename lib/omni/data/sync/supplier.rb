@@ -1,4 +1,4 @@
-class Omni::Data::Sync::Supplier < Omni::Data::Sync::Base
+class Omni::Data::Sync::Supplier
 
   def self.go
     excel_to_seed('Supplier','suppliers')

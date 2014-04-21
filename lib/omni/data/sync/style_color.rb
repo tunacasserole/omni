@@ -1,4 +1,4 @@
-class Omni::Data::Sync::StyleColor < Omni::Data::Sync::Base
+class Omni::Data::Sync::StyleColor
 
   def self.go
     # styles
