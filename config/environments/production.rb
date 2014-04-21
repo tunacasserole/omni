@@ -27,7 +27,7 @@ Omni::Application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true # to fix heroku issues
+  config.assets.compile = false # to fix heroku issues
   # Heroku also requires this to be false
   config.assets.initialize_on_precompile = false
 
