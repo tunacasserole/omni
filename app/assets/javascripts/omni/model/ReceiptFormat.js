@@ -20,7 +20,7 @@ Ext.define('Omni.model.ReceiptFormat', {
     { name: 'top_name', type: 'string' },
     { name: 'feedback_message', type: 'string' },
     { name: 'return_policy', type: 'string' },
-    { name: 'webaccount_message', type: 'string' },
+    { name: 'website_message', type: 'string' },
     { name: 'promotional_message', type: 'string' },
     { name: 'message_separator', type: 'string' },
     { name: 'is_date_in_header', type: 'boolean', defaultValue: false },

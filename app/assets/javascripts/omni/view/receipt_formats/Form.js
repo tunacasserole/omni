@@ -20,7 +20,7 @@ Ext.define('Omni.view.receipt_formats.Form', {
       top_nameLabel:                              Omni.i18n.model.ReceiptFormat.top_name,
       feedback_messageLabel:                      Omni.i18n.model.ReceiptFormat.feedback_message,
       return_policyLabel:                         Omni.i18n.model.ReceiptFormat.return_policy,
-      webaccount_messageLabel:                    Omni.i18n.model.ReceiptFormat.webaccount_message,
+      website_messageLabel:                    Omni.i18n.model.ReceiptFormat.website_message,
       promotional_messageLabel:                   Omni.i18n.model.ReceiptFormat.promotional_message,
       message_separatorLabel:                     Omni.i18n.model.ReceiptFormat.message_separator,
       is_date_in_headerLabel:                     Omni.i18n.model.ReceiptFormat.is_date_in_header,
@@ -65,7 +65,7 @@ Ext.define('Omni.view.receipt_formats.Form', {
             { name: 'top_name',                       fieldLabel: this.top_nameLabel,                   allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'feedback_message',               fieldLabel: this.feedback_messageLabel,           allowBlank: true,   disabled: false,    xtype: 'textarea'         },
             { name: 'return_policy',                  fieldLabel: this.return_policyLabel,              allowBlank: true,   disabled: false,    xtype: 'textarea'         },
-            { name: 'webaccount_message',             fieldLabel: this.webaccount_messageLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'website_message',             fieldLabel: this.website_messageLabel,         allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'promotional_message',            fieldLabel: this.promotional_messageLabel,        allowBlank: true,   disabled: false,    xtype: 'textarea'         },
             { name: 'message_separator',              fieldLabel: this.message_separatorLabel,          allowBlank: true,   disabled: false,    xtype: 'textfield'        }
           ]
