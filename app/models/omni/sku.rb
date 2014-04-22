@@ -217,6 +217,7 @@ class Omni::Sku < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   def department
 
+
   end
 
   searchable do
