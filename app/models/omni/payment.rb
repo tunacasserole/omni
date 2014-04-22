@@ -123,7 +123,8 @@ class Omni::Payment < ActiveRecord::Base
 
       # puts "update till"
       if tender.is_update_till
-        till_detail = Omni::TillDetail.first
+        till = Omni::Till.where(location_id: self.location_id).first || Omni::Till.first
+        till_detail = Omni::TillDetail.first || Omni::TillDetail.create(till_id: till.till_id, tender_id: self.tender_id)
         till_detail.tender_count += 1
         # puts "tender_amount = #{till_detail.tender_amount}"
         # puts "payment amount is #{payment_amount}"

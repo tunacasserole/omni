@@ -186,7 +186,7 @@ end
  factory Omni::Order do
   # sequence(:display) {|n| "test #{n}"}
   # association :location, factory: Omni::Location
-  location_id Omni::Location.first.location_id
+  location_id :location_id
   customer_id :customer
   order_date Date.today
   order_source ['POS','WEB','EMAIL','PHONE','MAIL','EVENT'].sample
@@ -436,7 +436,7 @@ end
  end
  factory Omni::Terminal do
   # sequence(:display) {|n| "test #{n}"}
-  till_id Omni::Till.first.till_id
+  till_id :till_id
   location_id :location
   mac_address '123'
   local_server_ip '123'

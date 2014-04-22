@@ -56,7 +56,6 @@ gem 'quiet_assets', group: :development
 
 # testing gems
 # gem 'rack-mini-profiler'
-gem 'parallel_tests'
 gem 'rspec-rails', group: [:development, :test] # - RSpec is a replacement for Test::MiniTest. I cannot recommend highly enough RSpec. rspec-rails provides Rails integration for RSpec.
 
 group :test do
@@ -65,7 +64,9 @@ group :test do
   gem 'guard-rspec' # - fantastic gem that monitors file changes and invokes tasks based on them. Loaded with lots of useful extension. Far superior to autotest and watchr.
   gem 'rb-fsevent'
   # gem 'minitest'
+  # gem 'capybara'
   # gem 'turn'
+  # gem 'parallel_tests'
   # gem 'zeus-parallel_tests'
 end
 

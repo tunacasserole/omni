@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "payment" do
+  let(:till) { create( Omni::Till) }
+  let(:till_detail) { create( Omni::TillDetail) }
   let(:me) { create( Omni::Payment, payment_amount: 15.50, order_id: create( Omni::Order ).order_id, tender_id: Omni::Tender.cash ) }
 
   describe "requires" do

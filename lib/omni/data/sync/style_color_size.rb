@@ -1,7 +1,21 @@
 class Omni::Data::Sync::StyleColorSize
 
   def self.go
-    create_from_sku_load
+    # create_from_sku_load
+    update_skus
+  end
+
+  def self.update_skus
+    data = ActiveRecord::Base.connection.execute "select a.sku_id, a.size_id, b.style_color_id from skus a, style_colors b where a.size_id is not null and a.style_color_size_id is null and a.style_id = b.style_id and a.color_id = b.color_id"
+    bar = ProgressBar.new(data.count)
+    puts "records to process: #{data.count}"
+    data.each do |x|
+      bar.increment!
+      # puts "sku is #{x[0]}  style_color is #{x[2]}  size is #{x[1]}"
+      scs = ActiveRecord::Base.connection.execute "select style_color_size_id from style_color_sizes where style_color_id = '#{x[2]}' and size_id = '#{x[1]}'"
+      ActiveRecord::Base.connection.execute "update skus set style_color_size_id = '#{scs.first[0]}' where sku_id = '#{x[0]}'"
+      ActiveRecord::Base.connection.execute "update style_color_sizes set sku_id = '#{x[0]}' where style_color_size_id = '#{scs.first[0]}'"
+    end
   end
 
   def self.create_from_sku_load
