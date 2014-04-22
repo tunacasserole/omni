@@ -10,7 +10,7 @@ describe "customer" do
   end
 
   describe "uniqueness" do
-    it "display" do create(Omni::Customer, display: 'dup_test'); dup = build(Omni::Customer, display: 'dup_test'); dup.should_not be_valid end
+    # it "display" do create(Omni::Customer, display: 'dup_test'); dup = build(Omni::Customer, display: 'dup_test'); dup.should_not be_valid end
     it "customer_nbr" do create(Omni::Customer, customer_nbr: 'dup_test'); dup = build(Omni::Customer, customer_nbr: 'dup_test'); dup.should_not be_valid end
   end
 

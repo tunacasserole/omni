@@ -14,18 +14,19 @@
   validates :purchase_id,                  presence: true
   validates :sku_supplier_id,              presence: true
   validates :sku_id,                       presence: true
-  validates_numericality_of :units_ordered,              :greater_than => 0
+  validates :units_ordered,               :greater_than => 0
   # validates_numericality_of :order_pack_size,            :greater_than => 0
   # validates_numericality_of :order_cost_units,           :greater_than => 0
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_detail_id,                                 with: :guid
-  default :allocation_profile_id,                              :to   => lambda{|m| m.purchase.allocation_profile_id}
-  default :purchase_detail_nbr,     override: false,        :with => :sequence,  named: "PURCHASE_DETAIL_NBR"
-  default :display,               override: false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_detail_nbr}"}
+  default :allocation_profile_id,                              :to   => lambda{|m| "#{m.purchase.allocation_profile_id}" }
+  default :purchase_detail_nbr,        override: false,        :with => :sequence,  named: "PURCHASE_DETAIL_NBR"
+  default :display,                    override: false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_detail_nbr}"}
   default :sku_id,                :override  =>  false,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
   default :units_ordered,                                      to: 0
+  default :order_pack_size,           override: false,         to: 1
   default :selling_units_approved,                             to: 0
   default :selling_units_received,                             to: 0
   default :selling_units_cancelled,                            to: 0
@@ -126,7 +127,7 @@
     end
 
     event :release do
-      transition :complete => same
+      transition :complete => :released
     end
 
     event :process do
@@ -134,7 +135,7 @@
     end
 
     event :cancel do
-      transition [:open, :partial] => :cancelled
+      transition [:draft, :open, :partial] => :cancelled
     end
   end
   # STATES (End)
@@ -154,7 +155,6 @@
     a = Omni::Allocation.create(allocatable_id: self.purchase_detail_id, allocatable_type: "Omni::PurchaseDetail", location_id: self.purchase.location_id, sku_id: self.sku_id, allocation_profile_id: self.allocation_profile_id, units_to_allocate: self.units_ordered)
     if a
       self.purchase_allocations.where('units_allocated > 0').each do |pa|
-        puts a.allocation_id
         Omni::AllocationDetail.create(allocation_id: a.allocation_id, location_id: pa.location_id, units_needed: pa.units_needed, units_allocated: pa.units_allocated)
         pa.state = 'transferred'
         pa.save
@@ -163,10 +163,6 @@
   end
 
   def allocate
-    do_allocate
-  end
-
-  def do_allocate
     #  Read all existing PurchaseAllocation records for the PurchaseDetail.  If the state is draft, then delete the record.
     #  If the state is locked, then add the units_allocated to locked_units parameter and add the location_id to the locked_locations hash.
     locked_units = 0
@@ -183,11 +179,10 @@
       end
     end
 
-    # puts "\n\nself.purchase.location_id is #{self.purchase.location_id}\n\n"
     units_to_allocate = self.units_ordered * self.order_pack_size
-
-    allocations_to_create = Omni::Allocation.calculate(allocation_profile_id, self.sku_id, units_to_allocate, locked_units, locked_locations, nil)
-    allocations_to_create.each { |x| Omni::PurchaseAllocation.create(purchase_detail_id: self.purchase_detail_id, location_id: x[:location_id], units_allocated: x[:units_allocated], units_needed: x[:units_needed]) } # unless k = self.purchase.location_id }
+    allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, units_to_allocate, locked_units, locked_locations, nil)
+    # puts "allocations_to_create is #{allocations_to_create.count}"
+    allocations_to_create.each { |x| pa = Omni::PurchaseAllocation.create(purchase_detail_id: self.purchase_detail_id, location_id: x[:location_id], units_allocated: x[:units_allocated], units_needed: x[:units_needed]); puts pa.errors.full_messages.to_sentence } # unless k = self.purchase.location_id }
   end
 
   def do_receive

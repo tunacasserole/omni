@@ -9,8 +9,8 @@ class Omni::Sku < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         uniqueness: true,                         allow_nil: false
-  validates    :sku_nbr,                         uniqueness: true,                         allow_nil: false
+  validates    :sku_nbr,                         uniqueness: true
+  validates    :display,                         uniqueness: true
   validates    :maintenance_level,               lookup: 'MAINTENANCE_LEVEL',          allow_nil: true
   validates    :conversion_type,                 lookup: 'CONVERSION_TYPE',            allow_nil: true
   validates    :brand,                           lookup: 'BRAND',                      allow_nil: true
@@ -227,8 +227,8 @@ class Omni::Sku < ActiveRecord::Base
     string   :account_display do account.display if account end
     string   :color_display do color.display if color end
     string   :size_display do size.display if size end
-    string   :state
-    boolean  :is_converted
+    # string   :state
+    # boolean  :is_converted
     # string   :style_id
     # string   :color_id
     # string   :conversion_type

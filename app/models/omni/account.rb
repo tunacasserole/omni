@@ -123,7 +123,7 @@ class Omni::Account < ActiveRecord::Base
 
     state :active do
       # validate  :validate_approvals
-      # validates :account_nbr,              :presence => true
+      # validates :account_nbr,              presence: true
     end
 
     state :closed do

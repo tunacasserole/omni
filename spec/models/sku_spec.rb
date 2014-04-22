@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "sku" do
-  let(:me) { create(Omni::Sku) }
+  let(:me) { create( Omni::Sku, display: 'sku spec test' ) }
 
   describe "requires" do
     it "sku_id" do lambda{Omni::Sku.create! sku_id nil}.should raise_error end
@@ -11,8 +11,8 @@ describe "sku" do
   end
 
   describe "checks uniqueness of" do
-    it "display" do create(Omni::Sku, display: 'dup_test'); dup = build(Omni::Sku, display: 'dup_test'); dup.should_not be_valid end
-    it "sku_nbr" do create(Omni::Sku, sku_nbr: 'dup_test'); dup = build(Omni::Sku, sku_nbr: 'dup_test'); dup.should_not be_valid end
+    it "display" do build(Omni::Sku, display: me.display).should_not be_valid end
+    it "sku_nbr" do build(Omni::Sku, sku_nbr: me.sku_nbr).should_not be_valid end
   end
 
   describe "defaults" do

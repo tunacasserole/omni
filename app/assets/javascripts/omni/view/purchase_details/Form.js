@@ -29,7 +29,7 @@ Ext.define('Omni.view.purchase_details.Form', {
       purchase_idLabel:                       Omni.i18n.model.PurchaseDetail.purchase_id,
       displayLabel:                           Omni.i18n.model.PurchaseDetail.display,
       stateLabel:                             Omni.i18n.model.PurchaseDetail.state,
-      purchase_detail_nbrLabel:                 Omni.i18n.model.PurchaseDetail.purchase_detail_nbr,
+      purchase_detail_nbrLabel:               Omni.i18n.model.PurchaseDetail.purchase_detail_nbr,
       sku_idLabel:                            Omni.i18n.model.PurchaseDetail.sku_id,
       descriptionLabel:                       Omni.i18n.model.PurchaseDetail.description,
       supplier_item_identifierLabel:          Omni.i18n.model.PurchaseDetail.supplier_item_identifier,
@@ -39,6 +39,7 @@ Ext.define('Omni.view.purchase_details.Form', {
       sku_aliasLabel:                         Omni.i18n.model.PurchaseDetail.sku_alias,
       allocation_profile_idLabel:             Omni.i18n.model.PurchaseDetail.allocation_profile_id,
       units_orderedLabel:                     Omni.i18n.model.PurchaseDetail.units_ordered,
+      open_unitsLabel:                        Omni.i18n.model.PurchaseDetail.open_units,
       order_pack_sizeLabel:                   Omni.i18n.model.PurchaseDetail.order_pack_size,
       order_pack_typeLabel:                   Omni.i18n.model.PurchaseDetail.order_pack_type,
       order_cost_unitsLabel:                  Omni.i18n.model.PurchaseDetail.order_cost_units,
@@ -309,7 +310,7 @@ Ext.define('Omni.view.purchase_details.Form', {
         },
         {
           xtype      : 'button',
-          iconCls    : 'fa fa thumbs-up',
+          iconCls    : 'fa fa-thumbs-up',
           tooltip    : 'Approve',
           listeners  : {
             beforerender  : this.prepareApproveAction,
@@ -410,7 +411,7 @@ Ext.define('Omni.view.purchase_details.Form', {
 
   prepareCancelAction : function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'open' || currentState === 'partial' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'open' || currentState === 'partial' ? action.show() : action.hide();
   },
 
   processEventTransition : function(eventName, successMsg, failureMsg){

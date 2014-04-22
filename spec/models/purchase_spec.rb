@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "purchase" do
+  let(:me) { create(Omni::Purchase) }
 
   describe "requires" do
     it "purchase_id" do lambda{Omni::Purchase.create! purchase_id nil}.should raise_error end
@@ -39,9 +40,29 @@ describe "purchase" do
     # it "notes" do me = create(Omni::Purchase); c = create(Buildit::Note, notable_type: 'Omni::Purchase',notable_id: me.purchase_id); me.notes.count.should eq(1) end
   end
 
-  describe "indexing" do
+  describe "state machine should" do
+    it "allocate" do
+      me.allocate
+      # 5.times { |x| create( Omni::PurchaseDetail, purchase_id: me.purchase_id, sku_id: create(Omni::Sku).sku_id, units_ordered: 1) }
+      # me.purchase_details.count.should eq(5)
+      # me.purchase_allocations.count.should eq 5
+    end
+    it "approve" do
+      me.approve
+      me.state.should eq 'open'
+    end
+    it "cancel" do
+      me.cancel
+      me.state.should eq 'cancelled'
+    end
+     it "release" do
+      me.release
+      me.state.should eq('pending_approval')
+    end
+
 
   end
 
+      # puts "\nerrors is message: #{me.errors.full_messages.to_sentence}"
 
 end

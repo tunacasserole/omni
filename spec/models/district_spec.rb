@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "district" do
+  let(:me) { create( Omni::District) }
 
   describe "requires" do
     it "district_id" do lambda{Omni::District.create! district_id nil}.should raise_error end
@@ -12,7 +13,7 @@ describe "district" do
   end
 
   describe "defaults" do
-    it "district_id" do me = create(Omni::District); me.district_id.should_not be_nil end
+    it "district_id" do me.district_id.should_not be_nil end
     # it "is_primary to true" do me = create(Omni::District); me.is_primary.should be_true end
   end
 

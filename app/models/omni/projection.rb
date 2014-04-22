@@ -11,9 +11,9 @@
 
   # VALIDATIONS (Start) =================================================================
   # validates :display,                           :uniqueness => true
-  # validates :plan_year,                         :presence => true
-  validates :forecast_profile_id,               :presence => true
-  # validates :department_id,                     :presence => true
+  # validates :plan_year,                         presence: true
+  validates :forecast_profile_id,               presence: true
+  # validates :department_id,                     presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -97,11 +97,11 @@
     end
 
     state :projection_4 do
-      validates :approval_3_date,                   :presence => true
+      validates :approval_3_date,                   presence: true
     end
 
     state :complete do
-      validates :approval_4_date,                   :presence => true
+      validates :approval_4_date,                   presence: true
     end
 
     # FORECAST
@@ -211,7 +211,7 @@
   def forecast_by_class
     puts "forecasting by class"
     self.department.classifications.each_with_index do |klass, i|
-      puts "#{time_stamp}  class #{klass.display} with #{klass.inventories.count} inventory rows"
+      # puts "#{time_stamp}  class #{klass.display} with #{klass.inventories.count} inventory rows"
       # get inventory for that classrow"
       x = Omni::ProjectionDetail.where(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
       # TODO: Add support for generics

@@ -83,7 +83,7 @@ class Omni::UniformDetail < ActiveRecord::Base
 
     state :active do
       # validate  :check_grades
-      # validates :account_nbr,              :presence => true
+      # validates :account_nbr,              presence: true
     end
 
     state :closed do

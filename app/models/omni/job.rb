@@ -9,9 +9,9 @@ class Omni::Job < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                  presence: true, uniqueness: true
-  validates    :job_nbr,                  presence: true, uniqueness: true
+  # validates    :display,                  presence: true, uniqueness: true
   validates    :job_id,                   presence: true
+  validates    :job_nbr,                  presence: true, uniqueness: true
   # validates    :jobable_id,               presence: true
   # validates    :jobable_type,             presence: true
   validates    :job_type,                 lookup: 'JOB_TYPE', allow_nil: true
@@ -21,7 +21,7 @@ class Omni::Job < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :job_id,                           override: false,        with: :guid
   default      :job_nbr,                          override: false,        with: :sequence,         named: "JOB_NBR"
-  default      :display,                          override: false,        to: lambda{|m| "job: #{m.job_nbr}"}
+  # default      :display,                          override: false,        to: lambda{|m| "job: #{m.job_nbr}"}
   default      :request_units,                    override: false,        to: 0
   default      :complete_units,                   override: false,        to: 0
   default      :weight,                           override: false,        to: 0
@@ -96,9 +96,15 @@ class Omni::Job < ActiveRecord::Base
     if jobable_type == "Omni::OrderDetail"
       parent = Omni::OrderDetail.where(order_detail_id: self.jobable_id).first
       pick = parent.picks.first if parent
+      # puts "pick is #{pick.pick_id}"
+
       if parent and pick
+        # puts "parent is #{parent.order_detail_id}"
+        # puts "updating pick with job #{self.job_id}"
         pick.job_id = self.job_id
         pick.save
+        # puts "job-pick.job_id is #{pick.job_id}"
+        # puts "pick.error count is #{pick.errors.count}"
       end
     end
   end

@@ -143,9 +143,12 @@ class Omni::OrderDetail < ActiveRecord::Base
     # primary store for the school
     # There is no primary school or primary store for generics.
     # For converted SKUs, the primary school is the account_id on the skus record.  The primary store is the location_id on the accounts record.
-    primary_store = self.sku.account ? self.sku.account.location : self.order.location
-    puts "self.sku.account_id is #{self.sku.account_id}"
-    puts "self.sku.account.location_id is #{self.sku.account.location_id}"
+    primary_store = self.sku.account && self.sku.account.location ? self.sku.account.location : self.order.location
+    # puts "self.order.location id is #{self.order.location_id}"
+    # puts "self.sku.account_id is #{self.sku.account_id}"
+    # puts "self.sku.account.location_id is #{self.sku.account.location_id}"
+    # puts "primary_store is #{primary_store.location_id}"
+    # puts "primary_store.district_id is #{primary_store.district_id}"
     # primary_store = Omni::Location.where(location_id: '51713A3EAC3E11E2947800FF58D32228').first
 
     # build array of locations, starting with the primary store, in a specific order to search for on hand
@@ -174,17 +177,19 @@ class Omni::OrderDetail < ActiveRecord::Base
 
     # search locations in this order for the first location with inventory (on_hand + on_order - (projection - sales))
     locations.each do |l|
-      data = ActiveRecord::Base.connection.execute("select sku_id, location_id, on_hand_units + supplier_on_order_units - projected_units + sale_units_ytd from inventories where sku_id = '#{self.sku_id}' and location_id = '#{l}")
-      return l if data.first[2] > 0
+      data = ActiveRecord::Base.connection.execute("select sku_id, location_id, on_hand_units + supplier_on_order_units - projected_units + sale_units_ytd from inventories where sku_id = '#{self.sku_id}' and location_id = '#{l.location_id}'")
+      return l if data.first && data.first[2] > 0
     end
 
     # if no location available, default to:
-    puts "no on hand found"
+    # puts "no on hand found"
 
     # a.for a store order default to the order location
-    return order.location_id if order_source == 'POS'
+    case order.order_source
+      when 'POS'
+        return order.location_id
 
-    if order_source == 'WEB'
+      when 'WEB'
       # b.for a web order converted item (and auto-create job) - the main warehouse(#0)
       if sku.is_converted
         return Omni::Location.main_warehouse
@@ -197,8 +202,11 @@ class Omni::OrderDetail < ActiveRecord::Base
 
   # cancel => draft to cancelled
   def after_cancel
+    # puts "\n cancelling order detail \n"
     self.picks.first.cancel if self.picks.first
-    self.jobs.first.cancel if self.jobs.first
+    if self.jobs.first
+      self.jobs.first.cancel
+    end
   end # def after_cancel
 
   # STATE HANDLERS (End)

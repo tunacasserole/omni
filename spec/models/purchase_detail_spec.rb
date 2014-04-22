@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "purchase_detail" do
+  let(:sku) { create( Omni::Sku, display: 'purchase detail test' ) }
+  let(:me) { create( Omni::PurchaseDetail, units_ordered: 1, sku_id: sku.sku_id ) }
 
   describe "requires" do
     it "purchase_id" do lambda{Omni::PurchaseDetail.create! purchase_detail_id nil}.should raise_error end
@@ -38,6 +40,36 @@ describe "purchase_detail" do
   end
 
   describe "indexing" do
+
+  end
+
+  describe "state machine should" do
+    it "allocate" do
+      # create projection details so there are units_needed
+      p = create(Omni::Projection)
+      l = Omni::Location.first.location_id
+      create(Omni::Inventory, sku_id: me.sku_id, location_id: l, is_authorized: true)
+      # create(Omni::Inventory, sku_id: me.sku_id, location_id: Omni::Location.last, is_authorized: true)
+      create(Omni::ProjectionDetail, projection_id: p.projection_id, sku_id: me.sku_id, location_id: l, projection_1_units: 1)
+      me.allocate
+      me.purchase_allocations.count.should eq 1
+    end
+    it "approve" do
+      me.approve
+      me.state.should eq 'open'
+    end
+    it "cancel" do
+      me.cancel
+      # puts "\nerrors is message: #{me.errors.full_messages.to_sentence}"
+      me.state.should eq 'cancelled'
+    end
+     it "release" do
+      me.release
+      me.approve
+      me.receive
+      me.state.should eq('complete')
+    end
+
 
   end
 

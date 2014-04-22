@@ -5,7 +5,7 @@ en:
     attributes:
       omni/sku:
         sku_id:                          SKU
-        display:                         Name
+        display:                         Sku Name
         sku_nbr:                         SKU Number
         description:                     SKU Description
         short_name:                      Short Name
@@ -18,8 +18,8 @@ en:
         generic_sku_id:                  Generic SKU
         add_on_sku_display:              Add On Sku
         add_on_sku_id:                   Add On SKU
-        account_display:                    Account
-        account_id:                         School
+        account_display:                 Account
+        account_id:                      School
         conversion_type:                 Conversion Type
         style_color_size_display:        Style Color Size
         style_color_size_id:             Style Color Size

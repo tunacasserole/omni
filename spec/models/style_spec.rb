@@ -101,32 +101,32 @@ describe "style" do
       me.skus.first.inventories.count.should eq(2)
     end
 
-    it "build 5 skus when there are 1 sizes and 5 colors", slow: true do
-      # puts "== #{Time.now.strftime("%H:%M:%S").yellow}: "
-      # setup sizes
-      1.times { |x| create( Omni::SizeGroupDetail, size_group_id: size_group.size_group_id, size_id: create(Omni::Size).size_id ) }
-      me.size_group_id = size_group.size_group_id
-      me.save
-      me.size_group.size_group_details.count.should eq(1)
+    # it "build 5 skus when there are 1 sizes and 5 colors", slow: true do
+    #   # puts "== #{Time.now.strftime("%H:%M:%S").yellow}: "
+    #   # setup sizes
+    #   1.times { |x| create( Omni::SizeGroupDetail, size_group_id: size_group.size_group_id, size_id: create(Omni::Size).size_id ) }
+    #   me.size_group_id = size_group.size_group_id
+    #   me.save
+    #   me.size_group.size_group_details.count.should eq(1)
 
-      # setup colors
-      5.times { |x| create( Omni::StyleColor, style_id: me.style_id, color_id: create(Omni::Color).color_id ) }
-      me.style_colors.count.should eq(5)
-      me.style_color_sizes.count.should eq(5)
+    #   # setup colors
+    #   5.times { |x| create( Omni::StyleColor, style_id: me.style_id, color_id: create(Omni::Color).color_id ) }
+    #   me.style_colors.count.should eq(5)
+    #   me.style_color_sizes.count.should eq(5)
 
-      # setup suppliers
-      1.times { |x| create(Omni::StyleSupplier, style_id: me.style_id, supplier_id: create(Omni::Supplier).supplier_id) }
+    #   # setup suppliers
+    #   1.times { |x| create(Omni::StyleSupplier, style_id: me.style_id, supplier_id: create(Omni::Supplier).supplier_id) }
 
-      # setup locations
-      2.times { |x| create(Omni::StyleLocation, style_id: me.style_id, location_id: create(Omni::Location).location_id) }
+    #   # setup locations
+    #   2.times { |x| create(Omni::StyleLocation, style_id: me.style_id, location_id: create(Omni::Location).location_id) }
 
-      # build skus
-      me.build_skus
+    #   # build skus
+    #   me.build_skus
 
-      me.skus.count.should eq(5)
-      me.skus.first.inventories.count.should eq(2)
-      # puts "== #{Time.now.strftime("%H:%M:%S").yellow}: "
-    end
+    #   me.skus.count.should eq(5)
+    #   me.skus.first.inventories.count.should eq(2)
+    #   # puts "== #{Time.now.strftime("%H:%M:%S").yellow}: "
+    # end
 
   end
 

@@ -2608,25 +2608,6 @@ Ext.direct.Manager.addProvider({
 
 //
 // -----------------------------------------------------------------------
-// SERVICE: Authorization
-// -----------------------------------------------------------------------
-//
-
-Ext.direct.Manager.addProvider({
-		type        : 'remoting',
-		url         : Buildit.lib.DirectSources.BUILDIT,
-		maxRetries  : 0,
-		actions     : {
-			Authorization:[
-				{name: 'can', len: 2},{name: 'getPermissions', len: 0},{name: 'grant', len: 3},{name: 'revoke', len: 3}
-			]
-		},
-		namespace   :'Buildit.service'
-	}
-);
-
-//
-// -----------------------------------------------------------------------
 // SERVICE: Search
 // -----------------------------------------------------------------------
 //

@@ -77,7 +77,9 @@ class Omni::AllocationProfile < ActiveRecord::Base
 
 
   # HELPERS (Start) =====================================================================
-
+  def self.default_profile
+    Omni::AllocationProfile.find_by_allocation_profile_id('8A0B7946BF8311E3BF5320C9D047DD15').allocation_profile_id
+  end
   # HELPERS (End)
 
 end # class Omni::AllocationProfile

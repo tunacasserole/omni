@@ -12,8 +12,11 @@ class Omni::Purchase < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates :purchase_id,               presence: true, uniqueness: true
+  validates :purchase_nbr,              presence: true, uniqueness: true
   validates :display,                   presence: true, uniqueness: true
+  validates :allocation_profile_id,     presence: true
   validates :supplier_id,               presence: true
+  validates :location_id,               presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -27,6 +30,7 @@ class Omni::Purchase < ActiveRecord::Base
   # default :estimated_lead_time_days,       :override => false,                to: 0
   default :display,                              override: false,        :to   => lambda{|m| "#{m.supplier_display} - Order Number: #{m.purchase_nbr}"}
   default :ordered_by_user_id,                                                :to   => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+  default :allocation_profile_id,                                             :to   => lambda{|m| Omni::AllocationProfile.default_profile }
   default :payment_term,                                                      :to   => lambda{|m| m.supplier.default_payment_term}
   default :freight_term,                                                      :to   => lambda{|m| m.supplier.freight_term}
   default :ship_via,                                                          :to   => lambda{|m| m.supplier.ship_via}
@@ -149,18 +153,16 @@ class Omni::Purchase < ActiveRecord::Base
     end
 
     state :pending_approval do
-      validates :purchase_nbr,                         :presence => true
-      validates :supplier_id,                                :presence => true
-      validates :location_id,                                :presence => true
-      validates :purchase_type,                              :presence => true
-      validates :purchase_source,                            :presence => true
-      validates :ordered_by_user_id,                         :presence => true
-      validates :order_date,                                 :presence => true
-      validates :delivery_date,                              :presence => true
-      validates :payment_term,                               :presence => true
-      validates :freight_term,                               :presence => true
-      validates :ship_via,                                   :presence => true
-      validates :fob_point,                                  :presence => true
+      validates :location_id,                                presence: true
+      validates :purchase_type,                              presence: true
+      validates :purchase_source,                            presence: true
+      validates :ordered_by_user_id,                         presence: true
+      validates :order_date,                                 presence: true
+      validates :delivery_date,                              presence: true
+      validates :payment_term,                               presence: true
+      validates :freight_term,                               presence: true
+      validates :ship_via,                                   presence: true
+      validates :fob_point,                                  presence: true
       validate  :validate_approvals
     end
 
@@ -182,8 +184,8 @@ class Omni::Purchase < ActiveRecord::Base
     after_transition on: :cancel,  do: :do_cancel
     after_transition on: :release, do: :do_release
     after_transition on: :approve, do: :do_approve
-    # after_transition on: :open, do: :do_open
     after_transition on: :print,   do: :do_print
+    # after_transition on: :open, do: :do_open
 
     ### EVENTS ###
     # event :crash do
@@ -202,16 +204,16 @@ class Omni::Purchase < ActiveRecord::Base
     end
 
     event :cancel do
-      transition [:open, :partial] => :cancelled
+      transition [:draft, :pending_approval, :open, :partial] => :cancelled
     end
 
-    event :allocate do
-      transition [:draft, :pending, :approval, :open] => same
-    end
+    # event :allocate do
+    #   transition [:draft, :pending, :approval, :open] => same
+    # end
 
-    event :approve do
-      transition :pending_approval => :pending_approval
-    end
+    # event :approve do
+    #   transition :pending_approval => :pending_approval
+    # end
 
   end
   # STATES (End)
@@ -258,7 +260,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def sku_meets_criteria?(sku)
-    puts "sku is #{sku.display} - #{sku.sku_id}"
+    # puts "sku is #{sku.display} - #{sku.sku_id}"
     # return false unless sku.style_id == self.style_id if self.style_id
     # return false unless sku.subclass_id == self.subclass_id if self.subclass_id
     # return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
@@ -345,7 +347,7 @@ class Omni::Purchase < ActiveRecord::Base
     [units_to_order, 1].max.round
   end
 
-  def do_approve
+  def approve
     case self.approval_level
       when 1
         self.approval_1_date = Date.today

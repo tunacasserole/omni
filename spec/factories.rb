@@ -25,7 +25,8 @@ FactoryGirl.define do
  factory Omni::Account do
   sequence(:account_name) {|n| "test #{n}"}
   sequence(:school_nbr) {|n| "TEST #{n}"}
-
+  association :location, factory: Omni::Location
+  # location_id :location_id
  end
  factory Omni::AccountGrade do
   account_id :account
@@ -154,9 +155,10 @@ FactoryGirl.define do
   location_id :location
  end
  factory Omni::Job do
-  association :order_detail, factory: Omni::OrderDetail
+  # association :order_detail, factory: Omni::OrderDetail
+  jobable_id :order_detail_id
   jobable_type 'Omni::OrderDetail'
-  sequence(:display)
+  # sequence(:display)
   # production_location_id :location
   job_type ['CONVERSION (HEAT APPLY)','CONVERSION (SEWN)','ALTERATION','SPECIAL CUT'].sample
  end
@@ -183,19 +185,22 @@ end
  end
  factory Omni::Order do
   # sequence(:display) {|n| "test #{n}"}
-  location_id :location
+  # association :location, factory: Omni::Location
+  location_id Omni::Location.first.location_id
   customer_id :customer
   order_date Date.today
   order_source ['POS','WEB','EMAIL','PHONE','MAIL','EVENT'].sample
-  factory :order_with_details do
-    after(:create) do |order, evaluator|
-      create_list(Omni::OrderDetail, 5, order: order)
-    end
-  end
+  # factory :order_with_details do
+  #   after(:create) do |order, evaluator|
+  #     create_list( Omni::OrderDetail, 5, order: order )
+  #   end
+  # end
  end
  factory Omni::OrderDetail do
-  association :order, factory: Omni::Order
-  association :sku, factory: Omni::Sku
+  # association :order, factory: Omni::Order
+  order_id :order_id
+  sku_id :sku_id
+  # association :sku, factory: Omni::Sku
   # sequence(:display)
   # order_id :order
   delivery_method ['SEND','TAKE','PICKUP'].sample
@@ -239,19 +244,32 @@ end
  factory Omni::ProjectionReason do sequence(:display) {|n| "test #{n}"} end
  factory Omni::Purchase do
   sequence(:display)
-  supplier_id :supplier
-  allocation_profile_id :allocation_profile
+  association :supplier, factory: Omni::Supplier
+  association :location, factory: Omni::Location
+  association :ordered_by_user, factory: Buildit::User
+  allocation_profile_id '913BB680231211E3PROJECTION1UNITS'
+  purchase_approver_1_user_id Buildit::User.find_by_user_id('811166D4D50A11E2B45820C9D04AARON').user_id
+  purchase_source 'MANUAL'
+  purchase_type ['CMT','DDP'].sample
+  order_date Date.today
+  delivery_date Date.today + 3.days
+  payment_term ['NET','NET_30','NET_60','2%_10,_NET_30'].sample
+  freight_term ['PREPAID','COLLECT'].sample
+  sequence(:ship_via)
+  fob_point ['ORIGIN','DESTINATION'].sample
  end
  factory Omni::PurchaseAllocation do
   purchase_detail_id :purchase_detail
   sequence(:display)
 end
  factory Omni::PurchaseDetail do
-  purchase_id :purchase
-  allocation_profile_id :allocation_profile
-  sku_supplier_id :sku_supplier
-  sku_id :sku
+  association :purchase, factory: Omni::Purchase
+  association :sku_supplier, factory: Omni::SkuSupplier
+  # association :sku, factory: Omni::Sku
+  sku_id :sku_id
+  # sku_id Omni::Sku.all.map { |x| x.sku_id }.sample
   sequence(:units_ordered) {|n| n}
+  # allocation_profile_id Omni::AllocationProfile.all.map { |x| x.allocation_profile_id }.sample
 end
  factory Omni::Receipt do sequence(:display) {|n| "test #{n}"} end
  factory Omni::ReceiptDetail do
@@ -310,7 +328,12 @@ end
  end
  factory Omni::Sku do
   sequence(:display) {|n| "test #{n}"}
-  association :account, factory: Omni::Account
+  color_id :color_id
+  size_id :size_id
+  # association :color, factory: Omni::Color
+  # association :size, factory: Omni::Size
+  # association :account, factory: Omni::Account
+  # account_id :account_id
 end
  factory Omni::SkuAlias do
   sequence(:display)
@@ -335,7 +358,8 @@ end
  end
  factory Omni::SkuSupplier do
   sequence(:display)
-  sku_id :sku
+  association :sku, factory: Omni::Sku
+  association :supplier, factory: Omni::Supplier
  end
  factory Omni::StockLedgerActivity do
   sequence(:display)
@@ -377,6 +401,7 @@ end
  end
  factory Omni::Supplier do
   sequence(:supplier_name) {|n| "test supplier #{n}"}
+
  end
  factory Omni::SupplierContact do
   supplier_id :supplier

@@ -16,7 +16,7 @@
     # for each row of spreadsheet data, create a sku carton row
     data.each_with_index do |row,i|
       puts "processed #{i.to_s} rows at #{Time.now.to_s.chop.chop.chop.chop.chop}" if i.to_s.end_with? '000'
-      puts row['Description']
+      # puts row['Description']
     end
 
     # The Packing List Upload feature will take an Excel spreadsheet as input and create receiving detail records from it.

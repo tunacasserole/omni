@@ -41,7 +41,6 @@ class Omni::Color < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
   # ORDERING (End)
 
 
@@ -65,6 +64,7 @@ class Omni::Color < ActiveRecord::Base
     text     :concatenated_name_fulltext, using: :concatenated_name
     text     :color_family_fulltext, using: :color_family
   end
+  order_search_by :display => :asc
 
 
   # STATES (Start) ====================================================================

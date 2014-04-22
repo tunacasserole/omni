@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "adjustment" do
+  let(:me) { create( Omni::Adjustment ) }
 
   describe "requires" do
     it "adjustment_id" do lambda{Omni::Adjustment.create! adjustment_id nil}.should raise_error end

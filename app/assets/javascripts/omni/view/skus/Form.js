@@ -85,7 +85,7 @@ Ext.define('Omni.view.skus.Form', {
           layout: 'anchor',
           items:[
             { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sku_nbr',                        fieldLabel: this.sku_nbrLabel,                    allowBlank: true,   disabled: true,    xtype: 'textfield'        },
+            { name: 'sku_nbr',                        fieldLabel: this.sku_nbrLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}', gotoTarget: 'omni-styles-inspector' },

@@ -293,7 +293,7 @@ class Omni::Style < ActiveRecord::Base
     end
     if @updates.length > 0
       sql = "insert into inventories (inventory_id, location_id, sku_id, supplier_id, replenishment_method, replenishment_source, safety_stock_units, safety_stock_days, smoothing_factor, forecast_profile_id, minimum_units, maximum_units, seasonal_index_id, is_authorized, is_taxable, is_special_order, is_discontinued) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE is_authorized = VALUES(is_authorized)"
-      puts "\n********#{sql}********\n"
+      # puts "\n********#{sql}********\n"
       ActiveRecord::Base.connection.execute sql
     end
     puts "indexing"

@@ -69,7 +69,7 @@ class Desk::Checklist < ActiveRecord::Base
     end
 
     state :active do
-      # validates  :product_codes,                           :presence => true
+      # validates  :product_codes,                           presence: true
       # validate   :one_active_contract
     end
 
