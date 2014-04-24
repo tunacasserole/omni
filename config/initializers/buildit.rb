@@ -14,10 +14,10 @@ Buildit::Framework.configure do
   config.server_context.sockets  = {host: '/', port: 3001}
 
   # AMPQ Connection Details
-  #config.ampq_connection         = {host: 'localhost', vhost: '/', port: 5672, username: 'guest', password: 'guest'}
+  config.ampq_connection         = {host: 'localhost', vhost: '/', port: 5672, username: 'guest', password: 'guest'}
 
   # SSO Settings
-  #config.sso_settings            = {user_identifier: 'email_address', default_plugin: 'buildit'}
+  config.sso_settings            = {user_identifier: 'email_address', default_plugin: 'buildit'}
 
 end # Buildit::Framework.configure
 

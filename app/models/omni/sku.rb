@@ -223,6 +223,7 @@ class Omni::Sku < ActiveRecord::Base
   searchable do
     string   :sku_id
     string   :generic_sku_id
+    string   :style_color_size_id
     string   :style_id
     string   :display
     string   :style_display do style.display if style end
