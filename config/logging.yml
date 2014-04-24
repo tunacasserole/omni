@@ -25,7 +25,7 @@ development:
     tenanted: true
     buffer:   100
   log_file:
-    formatter: Log4r::BasicFormatte
+    formatter: Log4r::BasicFormatter
     enabled:  true
     name:     development.log
     maxsize:  10
