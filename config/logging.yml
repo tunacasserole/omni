@@ -14,17 +14,18 @@ production:
   console:
     enabled:  false
     format:   '[%5l] %d %30c | %.100m [%t]'
-  messaging:  
+  messaging:
     enabled:  false
     queue:    production_queue_name
 development:
   log_level:  INFO
   trace_on:   true
-  repository: 
+  repository:
     enabled:  true
     tenanted: true
     buffer:   100
   log_file:
+    formatter: Log4r::BasicFormatte
     enabled:  true
     name:     development.log
     maxsize:  10
@@ -32,13 +33,13 @@ development:
   console:
     enabled:  true
     format:   '[%5l] %d %30c | %.100m [%t]'
-  messaging:  
+  messaging:
     enabled:  false
     queue:    development_queue_name
 test:
   log_level:  DEBUG
   trace_on:   true
-  repository: 
+  repository:
     enabled:  true
     tenanted: true
     buffer:   100
@@ -50,7 +51,7 @@ test:
   console:
     enabled:  false
     format:   '[%5l] %d %30c | %.100m [%t]'
-  messaging:  
+  messaging:
     enabled:  false
     queue:    test_queue_name
 scrutiny:
