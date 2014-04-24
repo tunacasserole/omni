@@ -7,4 +7,8 @@ class Omni::ProductType::Service
     config.model = Omni::ProductType
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ProductType::Service

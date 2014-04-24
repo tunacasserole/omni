@@ -193,5 +193,9 @@ class Omni::Payment < ActiveRecord::Base
   end # def after_cancel
 
   # STATE HANDLERS (End)
+
+  def display_as
+    self.display
+  end
 end # class Omni::Payment
 

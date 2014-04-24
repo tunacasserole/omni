@@ -7,4 +7,8 @@ class Omni::Transfer::Service
     config.model = Omni::Transfer
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Transfer::Service

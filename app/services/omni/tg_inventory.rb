@@ -10,4 +10,8 @@ class Omni::TgInventory::Service
     config.model = Omni::TgInventory
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::TgInventory

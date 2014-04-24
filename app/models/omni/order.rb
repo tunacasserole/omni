@@ -146,5 +146,9 @@ class Omni::Order < ActiveRecord::Base
   def display_as
     display
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::Order
 

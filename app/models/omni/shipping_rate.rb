@@ -53,5 +53,9 @@ class Omni::ShippingRate < ActiveRecord::Base
     text     :minimum_sale_fulltext, using: :minimum_sale
     text     :maximum_sale_fulltext, using: :maximum_sale
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::ShippingRate
 

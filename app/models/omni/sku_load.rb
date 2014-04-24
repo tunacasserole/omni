@@ -4,5 +4,9 @@ class Omni::SkuLoad < ActiveRecord::Base
   self.primary_key  = :id
   # METADATA (End)
 
+
+  def display_as
+    # self.display
+  end
 end # class Omni::Sku
 

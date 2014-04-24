@@ -7,4 +7,8 @@ class Omni::PriceBook::Service
     config.model = Omni::PriceBook
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::PriceBook::Service

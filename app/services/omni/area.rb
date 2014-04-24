@@ -7,4 +7,8 @@ class Omni::Area::Service
     config.model = Omni::Area
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Area::Service

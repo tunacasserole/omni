@@ -206,5 +206,13 @@ class Omni::UniformDetail < ActiveRecord::Base
   hook :before_update, :set_defaults, 10
   # HOOKS (End)
 
+  def display_as
+    self.display
+  end
+
+
+  def display_as
+    self.display
+  end
 end # class Omni::UniformDetail
 

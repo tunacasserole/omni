@@ -7,4 +7,8 @@ class Omni::AllocationDetail::Service
     config.model = Omni::AllocationDetail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::AllocationDetail::Service

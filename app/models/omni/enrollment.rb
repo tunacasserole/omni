@@ -62,5 +62,14 @@ class Omni::Enrollment < ActiveRecord::Base
     text     :gender_fulltext, using: :gender
     text     :enrollment_fulltext, using: :enrollment
   end
+
+  def display_as
+    self.display
+  end
+
+
+  def display_as
+    self.display
+  end
 end # class Omni::Enrollment
 

@@ -7,4 +7,8 @@ class Omni::LocationTaxAuthority::Service
     config.model = Omni::LocationTaxAuthority
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::LocationTaxAuthority::Service

@@ -10,4 +10,8 @@ class Omni::PurchaseAllocation::Service
     config.model = Omni::PurchaseAllocation
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::PurchaseAllocation

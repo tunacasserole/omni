@@ -7,4 +7,8 @@ class Omni::Order::Service
     config.model = Omni::Order
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Order::Service

@@ -7,4 +7,8 @@ class Omni::Uniform::Service
     config.model = Omni::Uniform
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Uniform::Service

@@ -7,4 +7,8 @@ class Omni::BinSku::Service
     config.model = Omni::BinSku
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::BinSku::Service

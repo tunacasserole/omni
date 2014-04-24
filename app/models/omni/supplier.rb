@@ -106,5 +106,9 @@ class Omni::Supplier < ActiveRecord::Base
   end
   # INDEXING (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Supplier
 

@@ -7,4 +7,8 @@ class Omni::Region::Service
     config.model = Omni::Region
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Region::Service

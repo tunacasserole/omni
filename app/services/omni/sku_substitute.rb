@@ -7,4 +7,8 @@ class Omni::SkuSubstitute::Service
     config.model = Omni::SkuSubstitute
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SkuSubstitute::Service

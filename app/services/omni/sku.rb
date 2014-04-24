@@ -7,4 +7,8 @@ class Omni::Sku::Service
     config.model = Omni::Sku
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Sku::Service

@@ -65,5 +65,9 @@ class Omni::SkuPromoPrice < ActiveRecord::Base
   # order_search_by :display => :asc
   # INDEXING (End) ====================================================================
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SkuPromoPrice
 

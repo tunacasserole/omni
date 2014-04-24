@@ -123,5 +123,9 @@ class Omni::Adjustment < ActiveRecord::Base
 
 
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Adjustment
 

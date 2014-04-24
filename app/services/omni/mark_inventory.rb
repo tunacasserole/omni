@@ -10,4 +10,8 @@ class Omni::MarkInventory::Service
     config.model = Omni::MarkInventory
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::MarkInventory

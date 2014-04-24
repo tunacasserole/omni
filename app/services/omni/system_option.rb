@@ -7,4 +7,8 @@ class Omni::SystemOption::Service
     config.model = Omni::SystemOption
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SystemOption::Service

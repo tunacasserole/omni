@@ -51,5 +51,9 @@ class Omni::ForecastProfile < ActiveRecord::Base
 
   # STATES (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ForecastProfile
 

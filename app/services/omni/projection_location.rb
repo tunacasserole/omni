@@ -10,4 +10,8 @@ class Omni::ProjectionLocation::Service
     config.model = Omni::ProjectionLocation
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ProjectionLocation

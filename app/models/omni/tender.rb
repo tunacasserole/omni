@@ -91,5 +91,9 @@ class Omni::Tender < ActiveRecord::Base
   def self.cash
     '31D1E0FEA6C911E2AE1900FF58D32228'
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::Tender
 

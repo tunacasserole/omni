@@ -56,5 +56,9 @@ class Omni::TaxAuthority < ActiveRecord::Base
     text     :state_code_fulltext, using: :state_code
     text     :filing_frequency_fulltext, using: :filing_frequency
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::TaxAuthority
 

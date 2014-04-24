@@ -83,4 +83,8 @@ class Omni::Cost < ActiveRecord::Base
 
   # HELPERS (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Cost

@@ -7,4 +7,8 @@ class Omni::Pick::Service
     config.model = Omni::Pick
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Pick::Service

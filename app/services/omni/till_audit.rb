@@ -7,4 +7,8 @@ class Omni::TillAudit::Service
     config.model = Omni::TillAudit
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::TillAudit::Service

@@ -55,5 +55,9 @@ class Omni::AccountGrade < ActiveRecord::Base
   end
   # INDEXING (End) ====================================================================
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::AccountGrade
 

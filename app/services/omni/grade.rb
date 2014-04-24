@@ -7,4 +7,8 @@ class Omni::Grade::Service
     config.model = Omni::Grade
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Grade::Service

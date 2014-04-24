@@ -10,4 +10,8 @@ class Omni::ReceiptPurchase::Service
     config.model = Omni::ReceiptPurchase
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ReceiptPurchase::Service

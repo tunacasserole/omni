@@ -7,4 +7,8 @@ class Omni::TillActivity::Service
     config.model = Omni::TillActivity
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::TillActivity::Service

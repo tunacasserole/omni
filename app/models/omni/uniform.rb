@@ -132,5 +132,8 @@ class Omni::Uniform < ActiveRecord::Base
   end
   # HELPERS (End)
 
+  def display_as
+    self.display
+  end
 end # class Omni::Uniform
 

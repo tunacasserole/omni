@@ -99,5 +99,13 @@ class Omni::Voucher < ActiveRecord::Base
   #   errors.add(:voucher_id, 'no remaining balance on voucher') if current_balance < 0.01
   # end
 
+  def display_as
+    self.display
+  end
+
+
+  def display_as
+    self.display
+  end
 end # class Omni::OrderDetail
 

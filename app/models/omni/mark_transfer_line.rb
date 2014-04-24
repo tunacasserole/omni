@@ -74,5 +74,4 @@ class Omni::MarkTransferLine < ActiveRecord::Base
   # HELPERS (Start) =====================================================================
 
   # HELPERS (End)
-
 end # class Omni::MarkTransferLine

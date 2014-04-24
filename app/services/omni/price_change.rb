@@ -7,4 +7,8 @@ class Omni::PriceChange::Service
     config.model = Omni::PriceChange
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::PriceChange::Service

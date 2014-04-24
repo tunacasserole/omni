@@ -7,4 +7,8 @@ class Omni::ForecastProfile::Service
     config.model = Omni::ForecastProfile
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ForecastProfile::Service

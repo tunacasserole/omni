@@ -7,4 +7,8 @@ class Omni::TillDetail::Service
     config.model = Omni::TillDetail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::TillDetail::Service

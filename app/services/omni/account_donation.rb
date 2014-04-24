@@ -7,4 +7,8 @@ class Omni::Donation::Service
     config.model = Omni::Donation
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Donation::Service

@@ -44,4 +44,8 @@ class Omni::TgInventory < ActiveRecord::Base
   # HELPERS (Start) =====================================================================
   # HELPERS (End)
 
+
+  def display_as
+    # self.display
+  end
 end # class Omni::TgInventory

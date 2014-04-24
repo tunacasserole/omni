@@ -90,5 +90,4 @@ class Omni::MarkTransfer < ActiveRecord::Base
   end
 
   # HELPERS (End)
-
 end # class Omni::MarkTransfer

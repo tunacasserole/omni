@@ -7,4 +7,8 @@ class Omni::Enrollment::Service
     config.model = Omni::Enrollment
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Enrollment::Service

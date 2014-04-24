@@ -7,4 +7,8 @@ class Omni::Size::Service
     config.model = Omni::Size
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Size::Service

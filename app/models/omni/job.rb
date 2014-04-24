@@ -188,5 +188,9 @@ class Omni::Job < ActiveRecord::Base
   end # def after_release
 
   # STATE HANDLERS (End)
+
+  def display_as
+    self.display
+  end
 end # class Omni::Job
 

@@ -68,5 +68,6 @@ class Omni::Color < ActiveRecord::Base
   def display_as
     self.display
   end
+
 end # class Omni::Color
 

@@ -7,4 +7,8 @@ class Omni::StyleColor::Service
     config.model = Omni::StyleColor
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::StyleColor::Service

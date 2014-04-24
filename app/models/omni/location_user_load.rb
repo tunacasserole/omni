@@ -5,5 +5,9 @@ class Omni::LocationUserLoad < ActiveRecord::Base
   # METADATA (End)
 
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::LocationUser
 

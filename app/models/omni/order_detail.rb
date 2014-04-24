@@ -211,5 +211,9 @@ class Omni::OrderDetail < ActiveRecord::Base
 
   # STATE HANDLERS (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::OrderDetail
 

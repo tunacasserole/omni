@@ -7,4 +7,8 @@ class Omni::Purchase::Service
     config.model = Omni::Purchase
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Purchase::Service

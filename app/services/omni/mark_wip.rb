@@ -10,4 +10,8 @@ class Omni::MarkWip::Service
     config.model = Omni::MarkWip
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::MarkWip

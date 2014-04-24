@@ -7,4 +7,8 @@ class Omni::BomDetail::Service
     config.model = Omni::BomDetail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::BomDetail::Service

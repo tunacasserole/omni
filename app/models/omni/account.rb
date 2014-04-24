@@ -188,6 +188,12 @@ class Omni::Account < ActiveRecord::Base
   hook :before_create, :sync_grades, 10
   hook :before_update, :sync_grades, 20
   # HOOKS (End)
+  def display_as
+    self.display
+  end
 
+  def display_as
+    self.display
+  end
 end # class Omni::Account
 

@@ -55,5 +55,9 @@ class Omni::TillAudit < ActiveRecord::Base
     text     :till_display_fulltext, using: :till_display
     text     :tender_display_fulltext, using: :tender_display
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::TillAudit
 

@@ -29,6 +29,7 @@ development:
   username: root
   password:
   wait_timeout: 300
+  # reconnect: true
   #socket: /tmp/mysql.sock
 
 production:
@@ -39,6 +40,7 @@ production:
   username: root
   password:
   wait_timeout: 300
+  # reconnect: true
   #socket: /tmp/mysql.sock
 
 # local omni_test
@@ -50,6 +52,7 @@ test:
   username: root
   password:
   wait_timeout: 300
+  # reconnect: true
   #socket: /tmp/mysql.sock
 
 # local omni_production

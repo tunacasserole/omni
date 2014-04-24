@@ -309,6 +309,10 @@
     self.purchase_details.all.each {|x| x.destroy}
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::PurchaseDetail
 
 

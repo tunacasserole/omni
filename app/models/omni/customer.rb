@@ -104,5 +104,6 @@ class Omni::Customer < ActiveRecord::Base
   def display_as
     display
   end
+
 end # class Omni::Customer
 

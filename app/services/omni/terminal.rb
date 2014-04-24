@@ -7,4 +7,8 @@ class Omni::Terminal::Service
     config.model = Omni::Terminal
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Terminal::Service

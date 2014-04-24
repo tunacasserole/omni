@@ -251,5 +251,9 @@ class Omni::Sku < ActiveRecord::Base
   # INDEXING (End) ====================================================================
 
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Sku
 

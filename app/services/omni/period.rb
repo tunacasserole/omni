@@ -7,4 +7,8 @@ class Omni::Period::Service
     config.model = Omni::Period
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Period::Service

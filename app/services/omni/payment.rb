@@ -7,4 +7,8 @@ class Omni::Payment::Service
     config.model = Omni::Payment
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Payment::Service

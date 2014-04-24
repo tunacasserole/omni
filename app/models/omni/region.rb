@@ -80,5 +80,9 @@ class Omni::Region < ActiveRecord::Base
     text     :company_display_fulltext, using: :company_display
     text     :user_display_fulltext, using: :user_display
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::Region
 

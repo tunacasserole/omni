@@ -10,4 +10,8 @@ class Omni::MarkTransferLine::Service
     config.model = Omni::MarkTransferLine
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::MarkTransferLine

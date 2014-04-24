@@ -7,4 +7,8 @@ class Omni::Inventory::Service
     config.model = Omni::Inventory
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Inventory::Service

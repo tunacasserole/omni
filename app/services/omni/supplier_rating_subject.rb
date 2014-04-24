@@ -7,4 +7,8 @@ class Omni::SupplierRatingSubject::Service
     config.model = Omni::SupplierRatingSubject
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SupplierRatingSubject::Service

@@ -7,4 +7,8 @@ class Omni::SkuPrice::Service
     config.model = Omni::SkuPrice
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SkuPrice::Service

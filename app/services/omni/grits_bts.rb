@@ -10,4 +10,8 @@ class Omni::GritsBts::Service
     config.model = Omni::GritsBts
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::GritsBt

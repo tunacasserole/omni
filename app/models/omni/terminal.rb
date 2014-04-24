@@ -71,5 +71,6 @@ class Omni::Terminal < ActiveRecord::Base
   def display_as
     display
   end
+
 end # class Omni::Terminal
 

@@ -65,5 +65,9 @@ class Omni::ReceiptFormat < ActiveRecord::Base
     text     :description_fulltext, using: :description
     text     :paper_width_fulltext, using: :paper_width
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::ReceiptFormat
 

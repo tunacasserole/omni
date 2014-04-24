@@ -7,4 +7,8 @@ class Omni::Contact::Service
     config.model = Omni::Contact
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Contact::Service

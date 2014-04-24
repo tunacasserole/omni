@@ -42,5 +42,9 @@ class Omni::SeasonalIndex < ActiveRecord::Base
 
     text     :seasonal_index_name_fulltext, using: :seasonal_index_name
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::SeasonalIndex
 

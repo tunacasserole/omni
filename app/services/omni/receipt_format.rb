@@ -7,4 +7,8 @@ class Omni::ReceiptFormat::Service
     config.model = Omni::ReceiptFormat
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ReceiptFormat::Service

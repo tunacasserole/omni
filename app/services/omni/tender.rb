@@ -7,4 +7,8 @@ class Omni::Tender::Service
     config.model = Omni::Tender
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Tender::Service

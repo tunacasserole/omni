@@ -90,5 +90,9 @@
       # text     :markup_percent_high_limit_fulltext, using: :markup_percent_high_limit
       # text     :markup_percent_low_limit_fulltext, using: :markup_percent_low_limit
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::Subclass
 

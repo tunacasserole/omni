@@ -7,4 +7,8 @@ class Omni::StockLedgerActivity::Service
     config.model = Omni::StockLedgerActivity
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::StockLedgerActivity::Service

@@ -7,4 +7,8 @@ class Omni::Rule::Service
     config.model = Omni::Rule
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Rule::Service

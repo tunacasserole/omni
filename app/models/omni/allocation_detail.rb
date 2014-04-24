@@ -132,4 +132,8 @@ class Omni::AllocationDetail < ActiveRecord::Base
 
   # HELPERS (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::AllocationProfile

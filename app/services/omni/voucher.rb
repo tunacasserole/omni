@@ -7,4 +7,8 @@ class Omni::Voucher::Service
     config.model = Omni::Voucher
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Voucher::Service

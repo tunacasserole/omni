@@ -48,5 +48,9 @@ class Omni::TaxAuthorityRate < ActiveRecord::Base
     text     :tax_authority_display_fulltext, using: :tax_authority_display
     text     :tax_percent_fulltext, using: :tax_percent
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::TaxAuthorityRate
 

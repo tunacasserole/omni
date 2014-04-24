@@ -7,4 +7,8 @@ class Omni::UniformDetail::Service
     config.model = Omni::UniformDetail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::UniformDetail::Service

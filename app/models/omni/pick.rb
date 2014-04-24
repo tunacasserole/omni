@@ -177,5 +177,9 @@ class Omni::Pick < ActiveRecord::Base
   filter :state_open,             :with => {state: {equal_to: 'open'}},       :priority => 60
   # FILTERS (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Pick
 

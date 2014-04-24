@@ -7,4 +7,8 @@ class Omni::ShipmentDetail::Service
     config.model = Omni::ShipmentDetail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ShipmentDetail::Service

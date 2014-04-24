@@ -120,5 +120,9 @@ class Omni::Contract < ActiveRecord::Base
 
   end
   # STATES HELPERS (End)
+
+  def display_as
+    self.display
+  end
 end # class Omni::Contract
 

@@ -47,5 +47,9 @@ class Omni::SupplierRatingSubject < ActiveRecord::Base
     text     :supplier_rating_subject_type_fulltext, using: :supplier_rating_subject_type
     text     :weighting_percent_fulltext, using: :weighting_percent
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::SupplierRatingSubject
 

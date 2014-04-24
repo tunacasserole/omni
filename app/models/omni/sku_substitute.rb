@@ -57,5 +57,9 @@ class Omni::SkuSubstitute < ActiveRecord::Base
   #   text     :sku_substitute_type_fulltext, using: :sku_substitute_type
   #   text     :priority_fulltext, using: :priority
   # end
+
+  def display_as
+    self.display
+  end
 end # class Omni::SkuSubstitute
 

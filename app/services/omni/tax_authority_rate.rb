@@ -7,4 +7,8 @@ class Omni::TaxAuthorityRate::Service
     config.model = Omni::TaxAuthorityRate
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::TaxAuthorityRate::Service

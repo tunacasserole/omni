@@ -61,5 +61,9 @@ class Omni::Till < ActiveRecord::Base
   end
   # HOOKS (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Till
 

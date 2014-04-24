@@ -7,4 +7,8 @@ class Omni::Subclass::Service
     config.model = Omni::Subclass
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Subclass::Service

@@ -7,4 +7,8 @@ class Omni::AdjustmentReason::Service
     config.model = Omni::AdjustmentReason
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::AdjustmentReason::Service

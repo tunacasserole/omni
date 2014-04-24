@@ -10,4 +10,8 @@ class Omni::AllocationProfile::Service
     config.model = Omni::AllocationProfile
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::AllocationProfile

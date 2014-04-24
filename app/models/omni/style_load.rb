@@ -4,5 +4,5 @@ class Omni::StyleLoad < ActiveRecord::Base
   self.primary_key  = :id
   # METADATA (End)
 
-end # class Omni::Sku
+end # class Omni::StyleLoad
 

@@ -135,5 +135,9 @@ class Omni::StockLedgerActivity < ActiveRecord::Base
     text     :retail_fulltext, using: :retail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::StockLedgerActivity
 

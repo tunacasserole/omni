@@ -64,5 +64,9 @@ class Omni::TillActivity < ActiveRecord::Base
     text     :payment_display_fulltext, using: :payment_display
     text     :user_display_fulltext, using: :user_display
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::TillActivity
 

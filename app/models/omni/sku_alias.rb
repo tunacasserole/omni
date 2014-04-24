@@ -84,5 +84,9 @@ class Omni::SkuAlias < ActiveRecord::Base
     return to_hash
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SkuAlias
 

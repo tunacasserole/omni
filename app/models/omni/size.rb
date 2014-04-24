@@ -69,5 +69,9 @@ class Omni::Size < ActiveRecord::Base
     text     :dimension_1_fulltext, using: :dimension_1
     text     :dimension_2_fulltext, using: :dimension_2
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::Size
 

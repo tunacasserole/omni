@@ -61,5 +61,9 @@ class Omni::SupplierContact < ActiveRecord::Base
     text     :phone_fulltext, using: :phone
     text     :email_address_fulltext, using: :email_address
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::SupplierContact
 

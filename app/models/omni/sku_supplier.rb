@@ -141,5 +141,9 @@ class Omni::SkuSupplier < ActiveRecord::Base
   #   puts 'ready...'
   # end
   # STATE HANDLERS (End)
+
+  def display_as
+    self.display
+  end
 end # class Omni::SkuSupplier
 

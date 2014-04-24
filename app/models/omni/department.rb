@@ -111,6 +111,12 @@ class Omni::Department < ActiveRecord::Base
   # STATES (Start) ====================================================================
 
   # STATES (End)
+  def display_as
+    self.display
+  end
 
+  def display_as
+    self.display
+  end
 end # class Omni::Department
 

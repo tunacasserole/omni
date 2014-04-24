@@ -7,4 +7,8 @@ class Omni::LocationUser::Service
     config.model = Omni::LocationUser
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::LocationUser::Service

@@ -7,4 +7,8 @@ class Omni::SeasonalIndex::Service
     config.model = Omni::SeasonalIndex
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SeasonalIndex::Service

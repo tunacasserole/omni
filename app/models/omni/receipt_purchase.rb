@@ -114,4 +114,8 @@ class Omni::ReceiptPurchase < ActiveRecord::Base
     text     :display_fulltext,            using: :display
   end
   # INDEXING (End)
+
+  def display_as
+    self.display
+  end
 end # class Omni::ReceiptPurchase

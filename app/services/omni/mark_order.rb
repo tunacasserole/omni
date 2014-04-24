@@ -10,4 +10,8 @@ class Omni::MarkOrder::Service
     config.model = Omni::MarkOrder
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::MarkOrder

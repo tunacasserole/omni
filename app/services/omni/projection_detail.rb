@@ -7,4 +7,8 @@ class Omni::ProjectionDetail::Service
     config.model = Omni::ProjectionDetail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ProjectionDetail::Service

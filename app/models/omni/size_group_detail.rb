@@ -67,5 +67,9 @@ class Omni::SizeGroupDetail < ActiveRecord::Base
     text     :size_display_fulltext, using: :size_display
     text     :display_order_fulltext, using: :display_order
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::SizeGroupDetail
 

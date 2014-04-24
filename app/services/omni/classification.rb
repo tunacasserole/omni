@@ -7,4 +7,8 @@ class Omni::Classification::Service
     config.model = Omni::Classification
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Classification::Service

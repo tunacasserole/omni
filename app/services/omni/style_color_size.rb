@@ -7,4 +7,8 @@ class Omni::StyleColorSize::Service
     config.model = Omni::StyleColorSize
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::StyleColorSize::Service

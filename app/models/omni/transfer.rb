@@ -134,8 +134,9 @@ class Omni::Transfer < ActiveRecord::Base
     self.cancel_user_id = Buildit::User.current if Buildit::User.current
   end
   # STATES (End)
+
   def display_as
-    display
+    self.display
   end
 end # class Omni::Transfer
 

@@ -7,4 +7,8 @@ class Omni::ReceiptDetail::Service
     config.model = Omni::ReceiptDetail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ReceiptDetail::Service

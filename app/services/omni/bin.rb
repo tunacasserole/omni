@@ -7,4 +7,8 @@ class Omni::Bin::Service
     config.model = Omni::Bin
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Bin::Service

@@ -319,6 +319,10 @@
   end
   # HELPERS (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Projection
 
 # self.projection_details.each do |det|

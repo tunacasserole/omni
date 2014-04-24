@@ -7,4 +7,8 @@ class Omni::SupplierContact::Service
     config.model = Omni::SupplierContact
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SupplierContact::Service

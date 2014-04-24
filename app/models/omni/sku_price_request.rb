@@ -120,5 +120,9 @@ class Omni::SkuPriceRequest < ActiveRecord::Base
   end # def after_price
 
   # STATE HANDLERS (End)
+
+  def display_as
+    self.display
+  end
 end # class Omni::SkuPriceRequest
 

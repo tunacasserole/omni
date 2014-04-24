@@ -7,4 +7,8 @@ class Omni::LocationTaxHoliday::Service
     config.model = Omni::LocationTaxHoliday
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::LocationTaxHoliday::Service

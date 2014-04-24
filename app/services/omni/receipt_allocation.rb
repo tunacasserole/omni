@@ -10,4 +10,8 @@ class Omni::ReceiptAllocation::Service
     config.model = Omni::ReceiptAllocation
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ReceiptAllocation::Service

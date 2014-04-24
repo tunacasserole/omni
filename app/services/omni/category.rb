@@ -7,4 +7,8 @@ class Omni::Category::Service
     config.model = Omni::Category
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Category::Service

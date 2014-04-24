@@ -261,5 +261,9 @@ class Omni::Receipt < ActiveRecord::Base
     text     :state_fulltext, using: :state
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Receipt
 

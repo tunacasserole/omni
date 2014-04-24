@@ -92,5 +92,9 @@ class Omni::ContainerDetail < ActiveRecord::Base
 
   # STATES (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ContainerDetail
 

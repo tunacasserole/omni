@@ -7,4 +7,8 @@ class Omni::UniformLookup::Service
     config.model = Omni::UniformLookup
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::UniformLookup::Service

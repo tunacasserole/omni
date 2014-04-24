@@ -10,4 +10,8 @@ class Omni::CostDetail::Service
     config.model = Omni::CostDetail
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::CostDetail

@@ -79,5 +79,13 @@ class Omni::UniformLookup < ActiveRecord::Base
 
   # STATES (End)
 
+  def display_as
+    self.display
+  end
+
+
+  def display_as
+    self.display
+  end
 end # class Omni::UniformLookup
 

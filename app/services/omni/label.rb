@@ -7,4 +7,8 @@ class Omni::Label::Service
     config.model = Omni::Label
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Label::Service

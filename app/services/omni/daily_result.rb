@@ -7,4 +7,8 @@ class Omni::DailyResult::Service
     config.model = Omni::DailyResult
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::DailyResult::Service

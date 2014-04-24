@@ -7,4 +7,8 @@ class Omni::SkuAlias::Service
     config.model = Omni::SkuAlias
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SkuAlias::Service

@@ -52,5 +52,9 @@ class Omni::SupplierRating < ActiveRecord::Base
     text     :supplier_rating_subject_display_fulltext, using: :supplier_rating_subject_display
     text     :rating_value_fulltext, using: :rating_value
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::SupplierRating
 

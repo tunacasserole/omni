@@ -54,5 +54,9 @@ class Omni::AccountTaxAuthority < ActiveRecord::Base
     # text     :tax_authority_display_fulltext, using: :tax_authority_display
   end
   # INDEXING (End) ====================================================================
+
+  def display_as
+    self.display
+  end
 end # class Omni::AccountTaxAuthority
 

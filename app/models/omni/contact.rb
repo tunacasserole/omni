@@ -50,5 +50,9 @@ class Omni::Contact < ActiveRecord::Base
     text     :account_display_fulltext, using: :account_display
   end
   # INDEXING (End) ====================================================================
+
+  def display_as
+    self.display
+  end
 end # class Omni::Contact
 

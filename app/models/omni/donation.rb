@@ -46,5 +46,13 @@ class Omni::Donation < ActiveRecord::Base
     text     :account_display_fulltext, using: :account_display
     text     :display_fulltext, using: :display
   end
+
+  def display_as
+    self.display
+  end
+
+  def display_as
+    self.display
+  end
 end # class Omni::Donation
 

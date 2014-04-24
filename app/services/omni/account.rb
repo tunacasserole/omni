@@ -7,4 +7,8 @@ class Omni::Account::Service
     config.model = Omni::Account
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Account::Service

@@ -7,4 +7,8 @@ class Omni::Container::Service
     config.model = Omni::Container
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::Container::Service

@@ -53,5 +53,9 @@ class Omni::StockLedgerActivityLog < ActiveRecord::Base
     text     :attribute_name_fulltext, using: :attribute_name
     text     :rule_action_fulltext, using: :rule_action
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::StockLedgerActivityLog
 

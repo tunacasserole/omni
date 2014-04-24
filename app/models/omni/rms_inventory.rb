@@ -96,4 +96,8 @@ class Omni::RmsInventory < ActiveRecord::Base
   end
   # HELPERS (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::RmsInventory

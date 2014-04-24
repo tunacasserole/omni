@@ -176,5 +176,9 @@ class Omni::ReceiptDetail < ActiveRecord::Base
   end
   # INDEXING (End)
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::ReceiptDetail
 

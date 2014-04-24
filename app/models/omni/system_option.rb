@@ -80,5 +80,9 @@ class Omni::SystemOption < ActiveRecord::Base
     text     :employee_discount_percent_fulltext, using: :employee_discount_percent
   end
 
+
+  def display_as
+    self.display
+  end
 end # class Omni::SystemOption
 

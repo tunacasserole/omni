@@ -41,5 +41,9 @@ class Omni::ProjectionReason < ActiveRecord::Base
     text     :description_fulltext, using: :description
     text     :short_name_fulltext, using: :short_name
   end
+
+  def display_as
+    self.display
+  end
 end # class Omni::ProjectionReason
 
