@@ -33,10 +33,11 @@ GEM
     amq-protocol (1.9.2)
     arel (4.0.2)
     builder (3.1.4)
-    buildit (0.9.104)
+    buildit (0.9.66)
       activeresource
       bunny (>= 0.9.0.rc1)
       colored
+      extjs4-rails (~> 4.2.2)
       font-awesome-rails
       json
       log4r
@@ -71,6 +72,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
+    extjs4-rails (4.2.2.1144)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.4.1)
@@ -235,14 +237,14 @@ GEM
       json (>= 1.8.0)
     uuidtools (2.1.4)
     will_paginate (3.0.5)
-    zeus (0.15.0)
+    zeus (0.15.1)
       method_source (>= 0.6.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  buildit
+  buildit (= 0.9.66)
   buildit_sockets
   factory_girl_rails
   guard
