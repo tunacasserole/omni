@@ -425,6 +425,7 @@ class Omni::Style < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :style_id
+    string   :product_id
     string   :subclass_id
     string   :style_nbr
     string   :display

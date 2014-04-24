@@ -54,22 +54,19 @@ class Omni::Color < ActiveRecord::Base
     string   :color_nbr
     string   :short_name
     string   :concatenated_name
-    boolean  :is_plaid
-    boolean  :is_stripe
-    string   :color_family
 
     text     :display_fulltext, using: :display
     text     :color_nbr_fulltext, using: :color_nbr
     text     :short_name_fulltext, using: :short_name
     text     :concatenated_name_fulltext, using: :concatenated_name
-    text     :color_family_fulltext, using: :color_family
   end
   order_search_by :display => :asc
-
 
   # STATES (Start) ====================================================================
 
   # STATES (End)
-
+  def display_as
+    self.display
+  end
 end # class Omni::Color
 

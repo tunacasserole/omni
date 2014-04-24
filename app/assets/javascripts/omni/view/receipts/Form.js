@@ -372,7 +372,7 @@ Ext.define('Omni.view.receipts.Form', {
   }, // onBuildAction
 
   onPrintAction: function(action, eOpts) {
-    this.processEventTransition('print', 'Count sheet was successfully printed.', 'An error occurred printing this receipt.');
+    this.processEventTransition('print_count_sheet', 'Count sheet was successfully printed.', 'An error occurred printing this receipt.');
   },
 
   onAcceptAction: function(action, eOpts) {

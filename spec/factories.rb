@@ -49,7 +49,7 @@ FactoryGirl.define do
  end
  factory Omni::Allocation do
   sequence(:display)
-  allocation_profile_id :allocation_profile
+  allocation_profile_id '913BB680231211E3PROJECTION1UNITS'
   location_id :location
   sku_id :sku
  end
@@ -264,9 +264,13 @@ end
 end
  factory Omni::PurchaseDetail do
   association :purchase, factory: Omni::Purchase
-  association :sku_supplier, factory: Omni::SkuSupplier
+  # association :sku_supplier, factory: Omni::SkuSupplier
   # association :sku, factory: Omni::Sku
-  sku_id :sku_id
+  sku_supplier_id :sku_supplier
+  sku_id :sku
+  order_cost_units 1
+  order_pack_size 1
+  supplier_cost 9.99
   # sku_id Omni::Sku.all.map { |x| x.sku_id }.sample
   sequence(:units_ordered) {|n| n}
   # allocation_profile_id Omni::AllocationProfile.all.map { |x| x.allocation_profile_id }.sample

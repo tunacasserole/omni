@@ -2,10 +2,10 @@ Ext.define('Omni.model.Grade', {
   extend     : 'Ext.data.Model',
 
   fields     : [
-    {
-      name       : 'display_as',
-      type       : 'string'
-    },
+    // {
+    //   name       : 'display_as',
+    //   type       : 'string'
+    // },
     {
       name       : 'grade_id',
       type       : 'string'

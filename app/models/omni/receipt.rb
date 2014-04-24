@@ -118,9 +118,9 @@ class Omni::Receipt < ActiveRecord::Base
       transition :accepted => :complete
     end
 
-    event :print do
-      transition [:draft, :scheduled, :processing] => same
-    end
+    # event :print do
+    #   transition [:draft, :scheduled, :processing] => same
+    # end
 
     event :upload do
       transition [:draft, :scheduled, :processing] => same
@@ -135,7 +135,7 @@ class Omni::Receipt < ActiveRecord::Base
     after_transition on: :receipt, do: :do_receive
     after_transition on: :accept, do: :do_accept
     after_transition on: :complete, do: :do_complete
-    after_transition on: :print, do: :print_count_sheet
+    # after_transition on: :print, do: :print_count_sheet
     after_transition on: :upload, do: :upload_packing_list
     after_transition on: :copy_units, do: :do_copy_units
 
@@ -197,7 +197,7 @@ class Omni::Receipt < ActiveRecord::Base
   def print_count_sheet
   # Produce a Receiving Count Sheet report that can be printed.
     x = Omni::ReceiptWorksheet.new
-    x.print self
+    x.print_receipt self
   end
 
   def do_start

@@ -15,7 +15,7 @@ Ext.define('Omni.model.Customer', {
   fields:[
     { name: 'customer_id',                          type: 'string'      },
     { name: 'display',                              type: 'string'      },
-    { name: 'display_as',                           type: 'string'      },
+    // { name: 'display_as',                           type: 'string'      },
     { name: 'customer_nbr',                         type: 'string'      },
     { name: 'registration_date',                    type: 'date'        },
     { name: 'user_display',                         type: 'string'      },

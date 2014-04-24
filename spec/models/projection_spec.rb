@@ -32,8 +32,31 @@ describe "projection" do
     it "notes" do create(Buildit::Note, notable_type: 'Omni::Projection',notable_id: me.projection_id); me.notes.count.should eq(1) end
   end
 
-  describe "indexing" do
+  describe "state machine should" do
+    it "closes the details when a projection is closed" do
+      p = Omni::Projection.first
+      p.state = 'projection_1'
+      p.save
 
+      pd = p.projection_details.first
+      pd.state = 'projection_1'
+      pd.projection_1_units = 99
+      pd.save
+      p.close
+
+      pd = p.projection_details.first
+      pd.state.should eq 'draft'
+      pd.projection_2_units.should eq 99
+    end
+
+    it "sets the approval date when a projection is approved" do
+      p = Omni::Projection.first
+      p.state = 'projection_3'
+      p.approval_3_date = nil
+      p.save
+      p.approve
+      p.approval_3_date.should_not be_nil
+    end
   end
 
   describe "forecast should" do

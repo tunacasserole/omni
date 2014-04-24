@@ -6,7 +6,7 @@ en:
       omni/account:
         display:                        'Account'
         account_id:                        'Account'
-        display:                           'Account Name'
+        display:                           'Display Name'
         account_name:                      'Account Name'
         description:                       'Description'
         short_name:                        'Short Name'

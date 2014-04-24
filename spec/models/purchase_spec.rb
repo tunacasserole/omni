@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "purchase" do
   let(:me) { create(Omni::Purchase) }
+  # let(:detail) {  }
 
   describe "requires" do
     it "purchase_id" do lambda{Omni::Purchase.create! purchase_id nil}.should raise_error end
@@ -37,16 +38,46 @@ describe "purchase" do
   end
 
   describe "has_many" do
-    # it "notes" do me = create(Omni::Purchase); c = create(Buildit::Note, notable_type: 'Omni::Purchase',notable_id: me.purchase_id); me.notes.count.should eq(1) end
+    it "purchase_details" do create(Omni::PurchaseDetail, purchase_id: me.purchase_id); me.purchase_details.count.should eq(1) end
+    it "purchase_allocations" do
+      pd = create(Omni::PurchaseDetail, purchase_id: me.purchase_id)
+      create(Omni::PurchaseAllocation, purchase_detail_id: pd.purchase_detail_id)
+      me.purchase_allocations.count.should eq(1)
+    end
+    it "notes" do create(Buildit::Note, notable_type: 'Omni::Purchase', notable_id: me.purchase_id); me.notes.count.should eq(1) end
   end
 
   describe "state machine should" do
-    it "allocate" do
-      me.allocate
-      # 5.times { |x| create( Omni::PurchaseDetail, purchase_id: me.purchase_id, sku_id: create(Omni::Sku).sku_id, units_ordered: 1) }
-      # me.purchase_details.count.should eq(5)
-      # me.purchase_allocations.count.should eq 5
+
+    it "bulk_allocate" do
+
+      p = create(Omni::Projection)
+      l = Omni::Location.first.location_id
+
+      load = 1000
+      bar = ProgressBar.new(load)
+
+      load.times do |l|
+        bar.increment!
+
+        sku = create(Omni::Sku)
+
+        # create purchase details so there are allocatable units
+        create( Omni::PurchaseDetail, purchase_id: me.purchase_id, sku_id: sku.sku_id, units_ordered: 1 )
+
+        # create projection details so there are units_needed
+        create(Omni::ProjectionDetail, projection_id: p.projection_id, sku_id: sku.sku_id, location_id: l, projection_1_units: 1)
+
+        # create inventory
+        create(Omni::Inventory, sku_id: sku.sku_id, location_id: l, is_authorized: true)
+      end
+
+      # me.allocate
+      # me.purchase_details.first.inventories.count.should_not be_nil
+      # me.purchase_details.first.purchase_allocations.count.should eq(1)
+      # me.purchase_allocations.first.should_not be_nil
     end
+
     it "approve" do
       me.approve
       me.state.should eq 'open'

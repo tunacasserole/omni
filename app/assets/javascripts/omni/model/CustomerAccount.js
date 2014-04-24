@@ -2,9 +2,9 @@ Ext.define('Omni.model.CustomerAccount', {
   extend: 'Ext.data.Model',
 
   fields: [{
-      name: 'display_as',
-      type: 'string'
-    }, {
+    //   name: 'display_as',
+    //   type: 'string'
+    // }, {
       name: 'customer_account_id',
       type: 'string'
     }, {

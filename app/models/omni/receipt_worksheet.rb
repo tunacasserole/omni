@@ -1,6 +1,6 @@
 class Omni::ReceiptWorksheet < Omni::Receipt
 
-  def print(receipt)
+  def print_receipt(receipt)
     pdf = header receipt
 
     data = []

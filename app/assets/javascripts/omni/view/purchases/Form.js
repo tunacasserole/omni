@@ -132,7 +132,7 @@ Ext.define('Omni.view.purchases.Form', {
               xtype: 'buildit-Locator',
               name: 'location_id',
               fieldLabel: this.location_idLabel,
-              allowBlank: true,
+              allowBlank: false,
               store: Ext.create('Omni.store.Location', {
                 pageSize: 50
               }),

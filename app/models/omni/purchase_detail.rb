@@ -25,7 +25,7 @@
   default :purchase_detail_nbr,        override: false,        :with => :sequence,  named: "PURCHASE_DETAIL_NBR"
   default :display,                    override: false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_detail_nbr}"}
   default :sku_id,                :override  =>  false,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
-  default :units_ordered,                                      to: 0
+  default :units_ordered,                                      to: 1
   default :order_pack_size,           override: false,         to: 1
   default :selling_units_approved,                             to: 0
   default :selling_units_received,                             to: 0
@@ -181,8 +181,10 @@
 
     units_to_allocate = self.units_ordered * self.order_pack_size
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, units_to_allocate, locked_units, locked_locations, nil)
-    # puts "allocations_to_create is #{allocations_to_create.count}"
     allocations_to_create.each { |x| pa = Omni::PurchaseAllocation.create(purchase_detail_id: self.purchase_detail_id, location_id: x[:location_id], units_allocated: x[:units_allocated], units_needed: x[:units_needed] ) } # unless k = self.purchase.location_id }
+    # ; puts "errors is #{pa.errors.full_messages.to_sentence}"
+    # puts "allocations_to_create is #{allocations_to_create.count}"
+    # puts "created allocations #{self.purchase_allocations.count}"
   end
 
   def do_receive

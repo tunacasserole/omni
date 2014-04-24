@@ -54,6 +54,7 @@ class Omni::Purchase < ActiveRecord::Base
   # ASSOCIATIONS (Start) ================================================================
   has_many     :purchase_details,                    class_name: 'Omni::PurchaseDetail',    foreign_key: 'purchase_id'
   has_many     :purchase_allocations,                through: :purchase_details #class_name: 'Omni::PurchaseDetail',    foreign_key: 'purchase_id'
+  has_many     :notes,                               class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
   # has_many     :logs,                                class_name: 'Omni::Log',               foreign_key: 'logable_id' , as: :logable
   has_many     :stock_ledger_activities,             class_name: 'Omni::StockLedgerActivity', foreign_key: 'stockable_id' , as: :stockable
   belongs_to   :location,                            class_name: 'Omni::Location',          foreign_key: 'location_id'
@@ -184,7 +185,7 @@ class Omni::Purchase < ActiveRecord::Base
     after_transition on: :cancel,  do: :do_cancel
     after_transition on: :release, do: :do_release
     after_transition on: :approve, do: :do_approve
-    after_transition on: :print,   do: :do_print
+    # after_transition on: :print,   do: :do_print
     # after_transition on: :open, do: :do_open
 
     ### EVENTS ###
@@ -221,11 +222,9 @@ class Omni::Purchase < ActiveRecord::Base
 
   # STATE HELPERS (Start) =====================================================================
   def allocate
-    self.purchase_details.each {|x| x.allocate}
+    self.purchase_details.each {|x| x.allocate }
   end
 
-  # Read all existing PurchaseAllocation records for the PurchaseDetail.  If the state is draft, then delete the record.
-  # If the state is locked, then add the units_allocated to locked_units parameter and add the location_id to the locked_locations hash.
   def do_cancel
     # the Cancel event writes StockLedgerActivity rows for each PurchaseDetail
     # to update On Order and order history
@@ -463,15 +462,12 @@ class Omni::Purchase < ActiveRecord::Base
   end
   # HOOKS (End)
 
-  def print
-    Omni::Purchase::Helpers.print(self)
-  end
-
-  def do_print
+  def print_purchase
     # Create a pdf of the purchase order for printing
-    p = Omni::Print.new(:source_model => 'Purchase', :source_id => self.purchase_id)
-    p.save
-    p.print
+    # p = Omni::Print.new(:source_model => 'Purchase', :source_id => self.purchase_id)
+    # p.save
+    # p.print
+    # Omni::Purchase::Helpers.print(self)
   end
 
   # HELPERS (End)

@@ -155,7 +155,7 @@ class Omni::Allocation < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def self.calculate(allocation_profile_id, sku_id, units_to_allocate, locked_units, locked_locations, purchase_detail_id)
-    # puts "in do calculate:  allocation_profile_id is #{allocation_profile_id}, sku_id is #{sku_id}, units_to_allocate is #{units_to_allocate}, locked_units is #{locked_units}, locked_locations is #{locked_locations}, purchase_detail_id is #{purchase_detail_id}"
+    ##puts "\nin do calculate:  allocation_profile_id is #{allocation_profile_id}, sku_id is #{sku_id}, units_to_allocate is #{units_to_allocate}, locked_units is #{locked_units}, locked_locations is #{locked_locations}, purchase_detail_id is #{purchase_detail_id}"
     profile = Omni::AllocationProfile.where(allocation_profile_id: allocation_profile_id || '8A0B7946BF8311E3BF5320C9D047DD15').first
     formula = profile.allocation_formula
     temp_needs = {}
@@ -249,12 +249,11 @@ class Omni::Allocation < ActiveRecord::Base
     end
     # temp_allocations
     allocations_to_create = []
-    ##puts "\n\n temp_allocations check \n\n"
+    # puts "\n\n temp_allocations check \n\n"
     # temp_allocations.each { |k,v| puts "k is #{k} v is #{v}" }
 
-    ##puts "\n\n temp_needs check \n\n"
+    # puts "\n\n temp_needs check \n\n"
     # temp_needs.each { |k,v| puts "k is #{k} v is #{v}" }
-
 
     temp_allocations.each { |k,v| allocations_to_create <<   { location_id: k, units_allocated: v, units_needed: temp_needs[k] }  }
     allocations_to_create

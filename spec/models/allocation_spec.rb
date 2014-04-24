@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe "allocation" do
+  let(:me) { create( Omni::Allocation ) }
 
   describe "requires" do
     it "allocation_id" do lambda{Omni::Allocation.create! allocation_id nil}.should raise_error end
@@ -29,8 +30,11 @@ describe "allocation" do
     # it "notes" do me = create(Omni::Allocation); c = create(Buildit::Note, notable_type: 'Omni::Allocation',notable_id: me.allocation_id); me.notes.count.should eq(1) end
   end
 
-  describe "indexing" do
-
+  describe "state machine should" do
+    it "allocate" do
+      me.allocate
+      me.state.should eq 'draft'
+    end
   end
 
 

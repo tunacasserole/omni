@@ -5,7 +5,7 @@ Ext.define('Omni.view.colors.Inspector',{
 
   initComponent:function(){
     var me = this;
-  
+
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
       associativeFilter: {
@@ -14,20 +14,20 @@ Ext.define('Omni.view.colors.Inspector',{
       }
     });
     // INSPECTOR INIT (End)
-  
+
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
       cards: [
-        { 
+        {
           title:  'Profile',
           xtype:  'omni-colors-Form',
           module: 'cfars'
         }
        // ,{
-       //    title: 'Styles', 
-       //    xtype: 'omni-style_colors-Explorer', 
+       //    title: 'Styles',
+       //    xtype: 'omni-style_colors-Explorer',
        //    module: 'contracts',
-       //    defaultSearch: { with: 
+       //    defaultSearch: { with:
        //       {
        //         color_id:   {equal_to: me.record.get('color_id')}
        //       }
@@ -35,16 +35,16 @@ Ext.define('Omni.view.colors.Inspector',{
        //    showBadge: true
        //  }
        // ,{
-       //    title: 'SKUs', 
-       //    xtype: 'omni-skus-Explorer', 
+       //    title: 'SKUs',
+       //    xtype: 'omni-skus-Explorer',
        //    module: 'contracts',
-       //    defaultSearch: { with: 
+       //    defaultSearch: { with:
        //       {
        //         color_id:   {equal_to: me.record.get('color_id')}
        //       }
        //    },
        //    showBadge: true
-       //  }        
+       //  }
      ]
     });
     // CARDS (End)

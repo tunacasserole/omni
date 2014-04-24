@@ -49,7 +49,6 @@ describe "purchase_detail" do
       p = create(Omni::Projection)
       l = Omni::Location.first.location_id
       create(Omni::Inventory, sku_id: me.sku_id, location_id: l, is_authorized: true)
-      # create(Omni::Inventory, sku_id: me.sku_id, location_id: Omni::Location.last, is_authorized: true)
       create(Omni::ProjectionDetail, projection_id: p.projection_id, sku_id: me.sku_id, location_id: l, projection_1_units: 1)
       me.allocate
       me.purchase_allocations.count.should eq 1
