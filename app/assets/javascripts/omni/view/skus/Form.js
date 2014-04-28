@@ -138,7 +138,7 @@ Ext.define('Omni.view.skus.Form', {
           itemTpl: '{display}'
         },
             { xtype: 'currencyfield', currencySymbol: null, name: 'conversion_cost',fieldLabel: this.conversion_costLabel, allowBlank: true, disabled: false },
-            { name: 'account_id',                        fieldLabel: this.account_idLabel,         allowBlank: true,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Account',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'account_id', itemTpl:'{display}', gotoTarget: 'omni-accounts-inspector' },
+            { name: 'account_id',                       fieldLabel: this.account_idLabel,         allowBlank: true,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Account',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'account_id', itemTpl:'{display}', gotoTarget: 'omni-accounts-inspector' },
             { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel, allowBlank: true,  disabled: true,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
             // { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             // { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,  disabled: false,    xtype: 'checkbox'         }
