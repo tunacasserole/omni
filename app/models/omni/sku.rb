@@ -225,6 +225,7 @@ class Omni::Sku < ActiveRecord::Base
     string   :generic_sku_id
     string   :style_color_size_id
     string   :style_id
+    string   :color_id
     string   :display
     string   :style_display do style.display if style end
     string   :account_display do account.display if account end
@@ -233,7 +234,6 @@ class Omni::Sku < ActiveRecord::Base
     # string   :state
     # boolean  :is_converted
     # string   :style_id
-    # string   :color_id
     # string   :conversion_type
 
     text     :display_fulltext, using: :display
