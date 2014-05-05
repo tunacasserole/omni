@@ -70,7 +70,23 @@ class Omni::UniformLookup < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :display
+    string :account_id
+    string :category_id
+    string :product_id
+    string :style_id
+    string :color_id
+    string :size_id
+    string :sku_id
+    string :grade_id
+    string :display
+
+    boolean :is_required_male
+    boolean :is_required_female
+    boolean :is_optional_male
+    boolean :is_optional_female
+    boolean :is_includes_logo
+    boolean :is_requires_logo
+    boolean :is_approved
 
     text     :display_fulltext, using: :display
   end

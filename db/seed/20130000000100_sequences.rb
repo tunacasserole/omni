@@ -46,6 +46,7 @@ Buildit::Sequence.create!([
   {sequence_code: "TILL_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "TRANSFER_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "UNIFORM_DETAIL_NBR", prefix: nil, padding: 3, value: 1000},
+  {sequence_code: "UNIFORM_LOOKUP_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "UNIFORM_NBR", prefix: nil, padding: 3, value: 1000},
   {sequence_code: "VOUCHER_NBR", prefix: nil, padding: 3, value: 1000}
 ])
