@@ -9,7 +9,7 @@ class Omni::UniformDetail < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :uniform_detail_id,               presence: true
+  validates    :uniform_detail_id,               presence: true, uniqueness: true
   validates    :uniform_detail_nbr,              presence: true, uniqueness: true
   validates    :display,                         presence: true, uniqueness: true
   # validates    :style_id,                        presence: true
@@ -82,6 +82,7 @@ class Omni::UniformDetail < ActiveRecord::Base
     end
 
     state :active do
+      validate  :check_style_color
       # validate  :check_grades
       # validates :account_nbr,              presence: true
     end
@@ -142,6 +143,10 @@ class Omni::UniformDetail < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def check_style_color
+    errors.add(:style_color_id, 'Style color already exists for this from and thru grade') if uniform.uniform_details.where(style_color_id: self.style_color_id, from_grade_id: self.from_grade_id, thru_grade_id: self.thru_grade_id).count
   end
 
   def set_style_color
@@ -205,11 +210,6 @@ class Omni::UniformDetail < ActiveRecord::Base
   hook :before_create, :set_defaults, 10
   hook :before_update, :set_defaults, 10
   # HOOKS (End)
-
-  def display_as
-    self.display
-  end
-
 
   def display_as
     self.display

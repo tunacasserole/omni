@@ -8,9 +8,52 @@ Ext.define('Omni.view.projection_details.ExplorerContextMenu', {
     hideApprove = false;
 
     // if (me.explorer.allowBookmarking && !Ext.isDefined(me.explorer.association)) {
-      // hideApprove = false;
+    // hideApprove = false;
     // }
     Ext.apply(this, {
+
+      leftActions: [
+
+        // LEFT ACTIONS (Start) =================================================================
+
+        /**
+         * APPROVE
+         * Approve a projection detail row.
+         *
+         */
+        {
+          iconCls: 'fa fa-thumbs-up',
+          tooltip: 'Approve row',
+          action: 'approve',
+          hidden: hideApprove,
+          listeners: {
+            click: {
+              fn: this.clickApprove,
+              scope: me
+            }
+          }
+        },
+
+
+        /**
+         * FORECAST
+         * Forecast a projection detail row.
+         *
+         */
+        // {
+        //   iconCls: 'fa fa-cogs',
+        //   tooltip: 'Forecast row',
+        //   action: 'forecast',
+        //   listeners: {
+        //     click: {
+        //       fn: this.clickForecast,
+        //       scope: me
+        //     }
+        //   }
+        // }
+        // LEFT ACTIONS (End)
+
+      ],
 
       rightActions: [
 
@@ -101,33 +144,6 @@ Ext.define('Omni.view.projection_details.ExplorerContextMenu', {
 
         // RIGHT ACTIONS (End)
 
-      ],
-
-
-      leftActions: [
-
-        // LEFT ACTIONS (Start) =================================================================
-
-        /**
-         * APPROVE
-         * Approve a projection detail row.
-         *
-         */
-        {
-          iconCls: 'icon-bookmark',
-          tooltip: 'Approve row',
-          action: 'approve',
-          hidden: hideApprove,
-          listeners: {
-            click: {
-              fn: Ext.emptyFn,
-              scope: me
-            }
-          }
-        }
-
-        // LEFT ACTIONS (End)
-
       ]
 
     });
@@ -138,6 +154,13 @@ Ext.define('Omni.view.projection_details.ExplorerContextMenu', {
 
 
   // ACTION HANDLERS (Start) ====================================================================
+  clickApprove: function(btn, e, eOpts){
+    Omni.logic.projection_details.ExplorerProcessSelectedItems.click(btn, 'approve');
+  },
+
+  clickForecast: function(btn, e, eOpts){
+    Omni.logic.projection_details.ExplorerProcessSelectedItems.click(btn, 'forecast');
+  },
 
   clickDelete: function(btn, e, eOpts) {
     Buildit.logic.explorer.action.Delete.click(btn);

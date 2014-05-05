@@ -49,34 +49,34 @@ describe "purchase" do
 
   describe "state machine should" do
 
-    it "bulk_allocate" do
+    # it "bulk_allocate" do
 
-      p = create(Omni::Projection)
-      l = Omni::Location.first.location_id
+    #   p = create(Omni::Projection)
+    #   l = Omni::Location.first.location_id
 
-      load = 1000
-      bar = ProgressBar.new(load)
+    #   load = 1000
+    #   bar = ProgressBar.new(load)
 
-      load.times do |l|
-        bar.increment!
+    #   load.times do |l|
+    #     bar.increment!
 
-        sku = create(Omni::Sku)
+    #     sku = create(Omni::Sku)
 
-        # create purchase details so there are allocatable units
-        create( Omni::PurchaseDetail, purchase_id: me.purchase_id, sku_id: sku.sku_id, units_ordered: 1 )
+    #     # create purchase details so there are allocatable units
+    #     create( Omni::PurchaseDetail, purchase_id: me.purchase_id, sku_id: sku.sku_id, units_ordered: 1 )
 
-        # create projection details so there are units_needed
-        create(Omni::ProjectionDetail, projection_id: p.projection_id, sku_id: sku.sku_id, location_id: l, projection_1_units: 1)
+    #     # create projection details so there are units_needed
+    #     create(Omni::ProjectionDetail, projection_id: p.projection_id, sku_id: sku.sku_id, location_id: l, projection_1_units: 1)
 
-        # create inventory
-        create(Omni::Inventory, sku_id: sku.sku_id, location_id: l, is_authorized: true)
-      end
+    #     # create inventory
+    #     create(Omni::Inventory, sku_id: sku.sku_id, location_id: l, is_authorized: true)
+    #   end
 
-      # me.allocate
-      # me.purchase_details.first.inventories.count.should_not be_nil
-      # me.purchase_details.first.purchase_allocations.count.should eq(1)
-      # me.purchase_allocations.first.should_not be_nil
-    end
+    #   # me.allocate
+    #   # me.purchase_details.first.inventories.count.should_not be_nil
+    #   # me.purchase_details.first.purchase_allocations.count.should eq(1)
+    #   # me.purchase_allocations.first.should_not be_nil
+    # end
 
     it "approve" do
       me.approve
