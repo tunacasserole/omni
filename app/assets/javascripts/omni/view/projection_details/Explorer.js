@@ -85,6 +85,26 @@ Ext.define('Omni.view.projection_details.Explorer', {
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
+          flex         : 2
+        },
+     {
+          header       : this.sale_units_ytdLabel,
+          dataIndex    : 'sale_units_ytd',
+          flex         : 1
+        },
+        {
+          header       : this.sale_units_py1Label,
+          dataIndex    : 'sale_units_py1',
+          flex         : 1
+        },
+        {
+          header       : this.sale_units_py2Label,
+          dataIndex    : 'sale_units_py2',
+          flex         : 1
+        },
+        {
+          header       : this.sale_units_py3Label,
+          dataIndex    : 'sale_units_py3',
           flex         : 1
         },
         {

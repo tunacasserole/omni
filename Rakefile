@@ -9,7 +9,7 @@ Omni::Application.load_tasks
 namespace :omni do
 
   desc "dump existing data into seed files"
-  task :prod, [:model] => :environment do |t, args|
+  task :prod => :environment do |t, args|
     system 'rake assets:precompile'
     system 'rake buildit:assets:repair'
     system 'bundle exec puma -p 9292 -e production'

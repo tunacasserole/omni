@@ -11,7 +11,7 @@ Ext.define('Omni.view.projection_details.History', {
   store      : Ext.create('Omni.store.ProjectionDetail'),
 
   contextMenuConfig : {
-    xtype: 'buildit-explorer-ContextMenu'
+    xtype    : 'omni-projection_details-ExplorerContextMenu'
   },
 
   newForms : [{
