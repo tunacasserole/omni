@@ -167,6 +167,8 @@ class Omni::Data::Sync::Inventory::Parker
     end
     sql = "insert into daily_results (daily_result_id, location_id, sku_id, net_sale_units, date) VALUES #{@updates.join(", ")} ON DUPLICATE KEY UPDATE net_sale_units = VALUES(net_sale_units)"
     ActiveRecord::Base.connection.execute sql unless @created_count == 0
+    ActiveRecord::Base.connection.execute "update daily_results set year = year(date)"
+
     xit
   end
 

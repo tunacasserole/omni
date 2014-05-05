@@ -107,6 +107,7 @@ Ext.define('Omni.view.accounts.Form', {
                         allowBlank: true,
                         disabled: false,
                         xtype: 'textfield',
+                        emptyText: 'format is 2 characters for state, followed by a unique number.  this is NOT system generated.'
                     }, {
                         name: 'display',
                         fieldLabel: me.displayLabel,
@@ -114,7 +115,7 @@ Ext.define('Omni.view.accounts.Form', {
                         minLength: 0,
                         allowBlank: true,
                         disabled: false,
-                        emptyText: 'auto-generated on save'
+                        emptyText: 'auto-generated on save as account name + school nbr '
                     }, {
                         xtype: 'textfield',
                         name: 'account_name',

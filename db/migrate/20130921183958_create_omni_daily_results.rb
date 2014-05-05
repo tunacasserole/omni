@@ -8,6 +8,7 @@ class CreateOmniDailyResults < ActiveRecord::Migration
         t.column   :display,                         :string,            null: true,   limit: 300
         t.column   :sku_id,                          :string,            null: true,   limit: 32
         t.column   :location_id,                     :string,            null: true,   limit: 32
+        t.column   :inventory_id,                    :string,            null: true,   limit: 32
         t.column   :date,                            :date,              null: true
         t.column   :year,                            :integer,           null: true
         t.column   :net_sale_units,                  :decimal,           null: true,    scale: 2, precision: 11

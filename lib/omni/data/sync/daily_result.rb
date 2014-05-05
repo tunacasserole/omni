@@ -1,39 +1,49 @@
 class Omni::Data::Sync::DailyResult
 
   def self.go
+    # update_inventories
+    # create_inventories
+    sum_to_year
     # load
     # sum_to_month
     # xit
-    sum_to_year
   end
 
   def self.sum_to_year
-    # update year on daily_results
-    # ActiveRecord::Base.connection.execute "update daily_results set year = year(date)"
-
-    @inventories = Omni::Inventory.to_hash
-
-    bar = ProgressBar.new(4)
-
     # sum results by year to update inventories ytd, py1, py2, and py3
     { 2014 => 'ytd', 2013 => 'py1', 2012 => 'py2', 2011 => 'py3' }.each do |year, desc|
-      ActiveRecord::Base.connection.execute("select sku_id, location_id, sum(net_sale_units) from daily_results where year = #{year} group by sku_id, location_id").each do |x|
-        sku_id = x[0]
-        location_id = x[1]
-        sold = x[2]
-        inventory_id = get_id(location_id, sku_id)
-        sold_col = "sale_units_#{desc}"
+      sold_col = "sale_units_#{desc}"
 
-        if inventory_id
-          # puts "update inventories set #{sold_col} = #{sold} where inventory_id = '#{inventory_id}'"
-          ActiveRecord::Base.connection.execute "update inventories set #{sold_col} = #{sold} where inventory_id = '#{inventory_id}'"
-        else
-          # puts "no inventory"
-          ActiveRecord::Base.connection.execute "insert into inventories (inventory_id, sku_id, location_id, #{sold_col}) values ( '#{Buildit::Util::Guid.generate}', '#{sku_id}', '#{location_id}', #{sold} )"
-        end
+      data = ActiveRecord::Base.connection.execute("select inventory_id, sum(net_sale_units) from daily_results where year = #{year} group by inventory_id")
+      bar = ProgressBar.new(data.count)
+
+      data.each do |x|
+        ActiveRecord::Base.connection.execute "update inventories set #{sold_col} = #{x[1]} where inventory_id = '#{x[0]}'"
+        bar.increment!
       end
-      bar.increment!
     end
+  end
+
+  def self.update_inventories
+    puts "update inventory row on daily_result"
+    data = ActiveRecord::Base.connection.execute("select sku_id, location_id from daily_results where inventory_id is null or inventory_id not in (select inventory_id from inventories) group by sku_id, location_id")
+    bar = ProgressBar.new(data.count)
+    data.each do |row|
+      bar.increment!
+      inventory = ActiveRecord::Base.connection.execute( "select inventory_id from inventories where sku_id = '#{row[0]}' and location_id = '#{row[1]}' ")
+      ActiveRecord::Base.connection.execute("update daily_results set inventory_id = '#{inventory.first[0]}' where sku_id = '#{row[0]}' and location_id = '#{row[1]}' ")
+    end
+  end
+
+  def self.create_inventories
+    puts "create inventory rows if needed so that every daily_result row has an inventory row"
+    data = ActiveRecord::Base.connection.execute("select sku_id, location_id from daily_results where inventory_id is null or inventory_id not in (select inventory_id from inventories)")
+    bar = ProgressBar.new(data.count)
+    data.each do |row|
+      bar.increment!
+      ActiveRecord::Base.connection.execute("insert into inventories (inventory_id, sku_id, location_id) values ( '#{Buildit::Util::Guid.generate}', '#{row[0]}', '#{row[1]}')")
+    end
+
   end
 
   def self.xit

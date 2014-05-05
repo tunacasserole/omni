@@ -6,7 +6,7 @@ class Omni::Data::Sync::Projection
     @depts = {}; Omni::Projection.where(plan_year: @year).each {|x| @depts[x.department_id] = x.projection_id}
     @is_generic = true
 
-    puts "Create a projection for each department unless it already exists for this plan @year, forecast profel and department"
+    puts "Create a projection for each department unless it already exists for this plan, @year, forecast profile, and department"
     Omni::Department.all.each {|d| Omni::Projection.create(forecast_profile_id: @profile.forecast_profile_id, plan_year: @year, department_id: d.department_id) unless Omni::Projection.where(forecast_profile_id: @profile.forecast_profile_id, plan_year: @year, department_id: d.department_id).first }
 
     puts "create projection_detail rows if needed so that every inventory row has a projection detail rows"
