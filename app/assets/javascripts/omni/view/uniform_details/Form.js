@@ -499,7 +499,7 @@ Ext.define('Omni.view.uniform_details.Form', {
   }, // onBuildAction
 
   onCloseAction: function(action, eOpts) {
-    this.processEventTransition('close', 'Uniform Detail was successfully close.', 'An error occurred closing this uniform detail.');
+    this.processEventTransition('close', 'Uniform Detail was successfully closed.', 'An error occurred closing this uniform detail.');
   }, // onBuildAction
 
   prepareActivateAction: function(action, eOpts) {

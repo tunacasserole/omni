@@ -70,6 +70,7 @@ class Omni::UniformLookup < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string :uniform_detail_id
     string :account_id
     string :category_id
     string :product_id
@@ -88,18 +89,12 @@ class Omni::UniformLookup < ActiveRecord::Base
     boolean :is_requires_logo
     boolean :is_approved
 
-    text     :display_fulltext, using: :display
+    text :display_fulltext, using: :display
   end
 
   # STATES (Start) ====================================================================
 
   # STATES (End)
-
-  def display_as
-    self.display
-  end
-
-
   def display_as
     self.display
   end

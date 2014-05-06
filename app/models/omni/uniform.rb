@@ -93,7 +93,7 @@ class Omni::Uniform < ActiveRecord::Base
     # end
 
     event :activate do
-      transition draft: :active # if current_user has privilege purchase_release
+      transition draft: :active
     end
 
     event :close do
@@ -106,7 +106,7 @@ class Omni::Uniform < ActiveRecord::Base
 
   # STATE HELPERS (Start) =====================================================================
   def do_activate
-    # active all uniform uniform_details
+    # puts "active all uniform uniform_details"
     self.uniform_details.each {|x| x.activate}
     # log an approval
     self.approvals.create(approvable_type: 'Omni::Uniform', display: 'uniform was approved')

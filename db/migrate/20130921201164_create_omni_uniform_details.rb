@@ -20,10 +20,10 @@ class CreateOmniUniformDetails < ActiveRecord::Migration
       t.column   :is_includes_logo,              :boolean,           null: true
       t.column   :is_requires_logo,              :boolean,           null: true
       t.column   :uniform_source,                :string,            null: true,   limit: 200
-      t.column   :discount_amount,               :decimal,           null: true,    :scale   => 2,  :precision  => 11
-      t.column   :discount_percent,              :decimal,           null: true,    :scale   => 2,  :precision  => 11
-      t.column   :retail_price,                  :decimal,           null: true,    :scale   => 2,  :precision  => 11
-      t.column   :price_units,                   :decimal,           null: true,    :scale   => 2,  :precision  => 11
+      t.column   :discount_amount,               :decimal,           null: true,    scale: 2, precision: 11
+      t.column   :discount_percent,              :decimal,           null: true,    scale: 2, precision: 11
+      t.column   :retail_price,                  :decimal,           null: true,    scale: 2, precision: 11
+      t.column   :price_units,                   :decimal,           null: true,    scale: 2, precision: 11
       t.column   :is_approved,                   :boolean,           null: true
       t.column   :is_destroyed,                  :boolean,           null: true
     end

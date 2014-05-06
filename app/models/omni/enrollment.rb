@@ -66,10 +66,5 @@ class Omni::Enrollment < ActiveRecord::Base
   def display_as
     self.display
   end
-
-
-  def display_as
-    self.display
-  end
 end # class Omni::Enrollment
 

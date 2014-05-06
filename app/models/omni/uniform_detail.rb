@@ -11,13 +11,14 @@ class Omni::UniformDetail < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates    :uniform_detail_id,               presence: true, uniqueness: true
   validates    :uniform_detail_nbr,              presence: true, uniqueness: true
-  validates    :display,                         presence: true, uniqueness: true
+  # validates    :display,                         presence: true, uniqueness: true
   # validates    :style_id,                        presence: true
   # validates    :color_id,                        presence: true
   validates    :style_color_id,                  presence: true
   # validates    :from_grade_id,                   presence: true
   # validates    :thru_grade_id,                   presence: true
   validate     :check_grades
+  # validate     :check_style_color
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -45,7 +46,7 @@ class Omni::UniformDetail < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :lookups,                          class_name: 'Omni::UniformLookup',      foreign_key: 'uniform_id'#, :dependent => :delete_all
+  has_many     :uniform_lookups,                  class_name: 'Omni::UniformLookup',      foreign_key: 'uniform_detail_id'#, :dependent => :delete_all
   belongs_to   :uniform,                          class_name: 'Omni::Uniform',            foreign_key: 'uniform_id'
   belongs_to   :style,                            class_name: 'Omni::Style',              foreign_key: 'style_id'
   belongs_to   :color,                            class_name: 'Omni::Color',              foreign_key: 'color_id'
@@ -83,8 +84,7 @@ class Omni::UniformDetail < ActiveRecord::Base
 
     state :active do
       validate  :check_style_color
-      # validate  :check_grades
-      # validates :account_nbr,              presence: true
+      validate  :check_grades
     end
 
     state :closed do
@@ -138,7 +138,8 @@ class Omni::UniformDetail < ActiveRecord::Base
           l.size_id = sku.size_id
           l.sku_id = sku.sku_id
           l.grade_id = g.grade_id
-          l.save
+
+          puts l.errors.full_messages.to_sentence unless l.save
           # TODO: populate mark_uniform_key, mark_stock_number, mark_grades, price_adjustment_1, price_adjustment_2,
         end
       end
@@ -146,7 +147,7 @@ class Omni::UniformDetail < ActiveRecord::Base
   end
 
   def check_style_color
-    errors.add(:style_color_id, 'Style color already exists for this from and thru grade') if uniform.uniform_details.where(style_color_id: self.style_color_id, from_grade_id: self.from_grade_id, thru_grade_id: self.thru_grade_id).count
+    errors.add(:style_color_id, 'Style color already exists for this from and thru grade') if uniform.uniform_details.where(style_color_id: self.style_color_id, from_grade_id: self.from_grade_id, thru_grade_id: self.thru_grade_id).count > 1
   end
 
   def set_style_color
@@ -195,12 +196,18 @@ class Omni::UniformDetail < ActiveRecord::Base
   end
 
   def do_close
-    # remove lookups
+    # remove lookups on close
+    destroy_lookups
+  end
+
+  def destroy_lookups
+    puts "\n** remove lookups on close or destroy ** \n"
+    self.uniform_lookups.each { |x| x.destroy }
   end
 
   def new_lookup
     # puts "creating uniform lookup"
-    Omni::UniformLookup.new(uniform_id: self.uniform_id, account_id: self.uniform.account_id, contract_id: self.uniform.contract_id, date_created: Date.today, style_id: self.style_id, color_id: self.color_id, is_required_male: self.is_required_male, is_required_female: self.is_required_female,  is_optional_male: self.is_optional_male, is_optional_female: self.is_optional_female, is_includes_logo: self.is_includes_logo, is_requires_logo: self.is_requires_logo, discount_percent: self.discount_percent, uniform_source: self.uniform_source)
+    Omni::UniformLookup.new(uniform_id: self.uniform_id, uniform_detail_id: self.uniform_detail_id, account_id: self.uniform.account_id, contract_id: self.uniform.contract_id, date_created: Date.today, style_id: self.style_id, color_id: self.color_id, is_required_male: self.is_required_male, is_required_female: self.is_required_female,  is_optional_male: self.is_optional_male, is_optional_female: self.is_optional_female, is_includes_logo: self.is_includes_logo, is_requires_logo: self.is_requires_logo, discount_percent: self.discount_percent, uniform_source: self.uniform_source)
   end
 
 
@@ -209,6 +216,7 @@ class Omni::UniformDetail < ActiveRecord::Base
     # HOOKS (Start) =======================================================================
   hook :before_create, :set_defaults, 10
   hook :before_update, :set_defaults, 10
+  hook :before_destroy, :destroy_lookups, 10
   # HOOKS (End)
 
   def display_as

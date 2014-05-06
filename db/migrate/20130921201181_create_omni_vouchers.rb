@@ -8,8 +8,8 @@ class CreateOmniVouchers < ActiveRecord::Migration
       t.column   :customer_id,                   :string,            null: true,   limit: 32
       t.column   :voucher_nbr,                   :string,            null: true,   limit: 200
       t.column   :voucher_type,                  :string,            null: true,    limit: 200
-      t.column   :initial_balance,               :decimal,           null: true,    :scale   => 2,  :precision  => 11
-      t.column   :current_balance,               :decimal,           null: true,    :scale   => 2,  :precision  => 11
+      t.column   :initial_balance,               :decimal,           null: true,    scale: 2, precision: 11
+      t.column   :current_balance,               :decimal,           null: true,    scale: 2, precision: 11
       t.column   :issue_date,                    :datetime,          null: true
       t.column   :expiration_date,               :datetime,          null: true
       t.column   :state,                         :string,            null: true,   limit: 200

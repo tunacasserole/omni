@@ -160,6 +160,7 @@ describe "uniform_detail" do
     it "remove lookups on delete" do
       u = create(Omni::Uniform)
       me = create(Omni::UniformDetail, uniform_id: u.uniform_id)
+      me.activate
       me.close
       u.uniform_lookups.count.should eq(0)
     end

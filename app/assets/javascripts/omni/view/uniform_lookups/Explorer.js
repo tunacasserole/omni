@@ -2,6 +2,8 @@ Ext.define('Omni.view.uniform_lookups.Explorer', {
 
   extend   : 'Buildit.ux.explorer.Panel',
   alias    : 'widget.omni-uniform_lookups-Explorer',
+  allowFind : false,
+  allowNew  : false,
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {
@@ -78,31 +80,31 @@ Ext.define('Omni.view.uniform_lookups.Explorer', {
           dataIndex    : 'uniform_lookup_nbr',
           flex         : 1
         },
-        {
-          header       : me.uniform_idLabel,
-          dataIndex    : 'uniform_id',
-          flex         : 1
-        },
-        {
-          header       : me.account_idLabel,
-          dataIndex    : 'account_id',
-          flex         : 1
-        },
-        {
-          header       : me.contract_idLabel,
-          dataIndex    : 'contract_id',
-          flex         : 1
-        },
-        {
-          header       : me.category_idLabel,
-          dataIndex    : 'category_id',
-          flex         : 1
-        },
-        {
-          header       : me.product_idLabel,
-          dataIndex    : 'product_id',
-          flex         : 1
-        },
+        // // {
+        // //   header       : me.uniform_idLabel,
+        // //   dataIndex    : 'uniform_id',
+        // //   flex         : 1
+        // // },
+        // {
+        //   header       : me.account_idLabel,
+        //   dataIndex    : 'account_id',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.contract_idLabel,
+        //   dataIndex    : 'contract_id',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.category_idLabel,
+        //   dataIndex    : 'category_id',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.product_idLabel,
+        //   dataIndex    : 'product_id',
+        //   flex         : 1
+        // },
         {
           header       : me.style_idLabel,
           dataIndex    : 'style_id',
@@ -128,11 +130,11 @@ Ext.define('Omni.view.uniform_lookups.Explorer', {
           dataIndex    : 'grade_id',
           flex         : 1
         },
-        {
-          header       : me.stateLabel,
-          dataIndex    : 'state',
-          flex         : 1
-        },
+        // {
+        //   header       : me.stateLabel,
+        //   dataIndex    : 'state',
+        //   flex         : 1
+        // },
         {
           header       : me.date_createdLabel,
           dataIndex    : 'date_created',
@@ -171,53 +173,53 @@ Ext.define('Omni.view.uniform_lookups.Explorer', {
           dataIndex    : 'is_requires_logo',
           flex         : 1
         },
-        {
-          header       : me.discount_percentLabel,
-          dataIndex    : 'discount_percent',
-          flex         : 1
-        },
-        {
-          header       : me.mark_uniform_keyLabel,
-          dataIndex    : 'mark_uniform_key',
-          flex         : 1
-        },
-        {
-          header       : me.mark_stock_numberLabel,
-          dataIndex    : 'mark_stock_number',
-          flex         : 1
-        },
-        {
-          header       : me.mark_gradesLabel,
-          dataIndex    : 'mark_grades',
-          flex         : 1
-        },
-        {
-          header       : me.price_adjustment_1Label,
-          dataIndex    : 'price_adjustment_1',
-          flex         : 1
-        },
-        {
-          header       : me.price_adjustment_2Label,
-          dataIndex    : 'price_adjustment_2',
-          flex         : 1
-        },
-        {
-          header       : me.uniform_sourceLabel,
-          dataIndex    : 'uniform_source',
-          flex         : 1
-        },
-        {
-          xtype        : 'checkcolumn',
-          header       : me.is_approvedLabel,
-          dataIndex    : 'is_approved',
-          flex         : 1
-        },
-        {
-          xtype        : 'checkcolumn',
-          header       : me.is_destroyedLabel,
-          dataIndex    : 'is_destroyed',
-          flex         : 1
-        }
+        // {
+        //   header       : me.discount_percentLabel,
+        //   dataIndex    : 'discount_percent',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.mark_uniform_keyLabel,
+        //   dataIndex    : 'mark_uniform_key',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.mark_stock_numberLabel,
+        //   dataIndex    : 'mark_stock_number',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.mark_gradesLabel,
+        //   dataIndex    : 'mark_grades',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.price_adjustment_1Label,
+        //   dataIndex    : 'price_adjustment_1',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.price_adjustment_2Label,
+        //   dataIndex    : 'price_adjustment_2',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.uniform_sourceLabel,
+        //   dataIndex    : 'uniform_source',
+        //   flex         : 1
+        // },
+        // {
+        //   xtype        : 'checkcolumn',
+        //   header       : me.is_approvedLabel,
+        //   dataIndex    : 'is_approved',
+        //   flex         : 1
+        // },
+        // {
+        //   xtype        : 'checkcolumn',
+        //   header       : me.is_destroyedLabel,
+        //   dataIndex    : 'is_destroyed',
+        //   flex         : 1
+        // }
       ]
     });
     // COLUMNS (End)

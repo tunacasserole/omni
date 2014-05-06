@@ -102,10 +102,5 @@ class Omni::Voucher < ActiveRecord::Base
   def display_as
     self.display
   end
-
-
-  def display_as
-    self.display
-  end
-end # class Omni::OrderDetail
+end # class Omni::Voucher
 

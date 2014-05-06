@@ -1,22 +1,22 @@
-Ext.define('Omni.view.uniform_details.Inspector',{
-  extend   : 'Buildit.ux.inspector.Panel',
-  alias    : 'widget.omni-uniform_details-Inspector',
+Ext.define('Omni.view.uniform_details.Inspector', {
+  extend: 'Buildit.ux.inspector.Panel',
+  alias: 'widget.omni-uniform_details-Inspector',
 
 
-  initComponent:function(){
+  initComponent: function() {
     var me = this;
 
     // INSPECTOR INIT (Start) ==============================================================
     Ext.applyIf(this, {
-      associativeFilter : {
-        property  : 'uniform_detail_id',
-        value     : this.record.get('uniform_detail_id')
+      associativeFilter: {
+        property: 'uniform_detail_id',
+        value: this.record.get('uniform_detail_id')
       },
 
-      associativeSearch : {
+      associativeSearch: {
         with: {
-          uniform_detail_id : {
-            equal_to : this.record.get('uniform_detail_id')
+          uniform_detail_id: {
+            equal_to: this.record.get('uniform_detail_id')
           }
         }
       }
@@ -25,19 +25,28 @@ Ext.define('Omni.view.uniform_details.Inspector',{
 
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
-      cards     : [
-        {
-          title     : 'Profile',
-          xtype     : 'omni-uniform_details-Form'
-        }
-      ]
+      cards: [{
+        title: 'Profile',
+        xtype: 'omni-uniform_details-Form'
+      }, {
+        title: 'Lookups',
+        xtype: 'omni-uniform_lookups-Explorer',
+        defaultSearch: {
+          with: {
+            uniform_detail_id: {
+              equal_to: me.record.get('uniform_detail_id')
+            }
+          }
+        },
+        showBadge: true
+      }]
     });
     // CARDS (End)
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title     : 'Uniform Detail',
-      subtitle  : this.record.get('display')
+      title: 'Uniform Detail',
+      subtitle: this.record.get('display')
     });
     // TITLES (End)
 
