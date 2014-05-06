@@ -6,15 +6,22 @@ class Omni::Data::Sync::Projection
     @depts = {}; Omni::Projection.where(plan_year: @year).each {|x| @depts[x.department_id] = x.projection_id}
     @is_generic = true
 
-    puts "Create a projection for each department unless it already exists for this plan, @year, forecast profile, and department"
+    puts "create a projection for each department unless it already exists for this plan, @year, forecast profile, and department"
     Omni::Department.all.each {|d| Omni::Projection.create(forecast_profile_id: @profile.forecast_profile_id, plan_year: @year, department_id: d.department_id) unless Omni::Projection.where(forecast_profile_id: @profile.forecast_profile_id, plan_year: @year, department_id: d.department_id).first }
 
+    puts "create sku hash"
+    sku_hash = {}; ActiveRecord::Base.connection.execute("select sku_id, department_id from skus").each {|x| sku_hash[x[0]] = x[1]}
+
     puts "create projection_detail rows if needed so that every inventory row has a projection detail rows"
-    data = ActiveRecord::Base.connection.execute("select inventory_id, sku_id, location_id, department_id from inventories where inventory_id is null or inventory_id not in (select inventory_id from projection_details a, projections b where a.projection_id = b.projection_id and b.plan_year = '#{@year}')")
+    data = ActiveRecord::Base.connection.execute("select inventory_id, sku_id, location_id from inventories where inventory_id is null or inventory_id not in (select inventory_id from projection_details a, projections b where a.projection_id = b.projection_id and b.plan_year = '#{@year}')")
     bar = ProgressBar.new(data.count)
     data.each do |row|
       bar.increment!
-      ActiveRecord::Base.connection.execute("insert into projection_details (projection_detail_id, projection_id, inventory_id, sku_id, location_id, forecast_profile_id, state) values ( '#{Buildit::Util::Guid.generate}', '#{@depts[row[3]]}', '#{row[0]}', '#{row[1]}', '#{row[2]}', '#{@profile.forecast_profile_id}', 'draft' )")
+      department_id = sku_hash[row[1]]
+      projection_id = @depts[department_id]
+      # puts "no projection_id found for #{@depts[department_id]} - department_id is #{department_id}" unless projection_id
+      # puts "no department found for sku_id: #{row[1]}" unless department_id
+      ActiveRecord::Base.connection.execute("insert into projection_details (projection_detail_id, projection_id, inventory_id, sku_id, location_id, forecast_profile_id, state) values ( '#{Buildit::Util::Guid.generate}', '#{projection_id}', '#{row[0]}', '#{row[1]}', '#{row[2]}', '#{@profile.forecast_profile_id}', 'draft' )")
     end
 
     puts "update projection details from inventories"

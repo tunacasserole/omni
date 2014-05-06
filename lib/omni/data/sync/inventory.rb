@@ -2,10 +2,10 @@ class Omni::Data::Sync::Inventory
 
   def self.go
     # @inventories = Omni::Inventory.to_hash
-    # load_true_grits
+    load_true_grits
     # load_buckhead
     # load_parker
-    Omni::Data::Sync::Inventory::Parker.inventory
+    # Omni::Data::Sync::Inventory::Parker.inventory
   end
 
   def self.load_parker
@@ -51,6 +51,7 @@ class Omni::Data::Sync::Inventory
   def self.load_true_grits
     @grits_stores = {'60' => '56072748AC3E11E2947800FF58D32228', '61' => '562B2A8AAC3E11E2947800FF58D32228', '62' => '564FA306AC3E11E2947800FF58D32228', '63' => '5678132CAC3E11E2947800FF58D32228', '64'=> '569FE712AC3E11E2947800FF58D32228', '65' => '56CAEF52AC3E11E2947800FF58D32228', '66' =>'56EB490AAC3E11E2947800FF58D32228'}
     @grits_skus = Omni::SkuAlias.to_hash('TRUE GRITS')
+    @inventories = Omni::Inventory.to_hash
 
     data = Omni::TgInventory.all
     bar = ProgressBar.new(data.count)
@@ -60,10 +61,10 @@ class Omni::Data::Sync::Inventory
       next unless sku_id
 
       @grits_stores.each do |k,v|
-        on_hand = row.send("#{k} O/H") || 0
-        on_order = row.send("#{k} O/O") || 0
-        ytd = row.send("#{k} SOLD") || 0
-        proj = row.send("#{k} PROJ") || 0
+        on_hand = row.send("OH_#{k}") || 0
+        on_order = row.send("OO_#{k}") || 0
+        ytd = row.send("SOLD_#{k}") || 0
+        proj = row.send("PROJ_#{k}") || 0
 
         inventory_id = get_id(v,sku_id)
         if inventory_id

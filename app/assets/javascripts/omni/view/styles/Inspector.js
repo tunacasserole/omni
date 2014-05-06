@@ -1,9 +1,9 @@
 Ext.define('Omni.view.styles.Inspector', {
 
-  extend:'Buildit.ux.inspector.Panel',
-  alias:'widget.omni-styles-Inspector',
+  extend: 'Buildit.ux.inspector.Panel',
+  alias: 'widget.omni-styles-Inspector',
 
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
 
@@ -14,54 +14,90 @@ Ext.define('Omni.view.styles.Inspector', {
     Ext.applyIf(this, {
       associativeFilter: {
         property: 'style_id',
-        value:    me.record.get('style_id')
+        value: me.record.get('style_id')
       },
 
-      seeker: {with:{stock_nbr: {equal_to: me.record.get('display').substring(0,4)}}}
+      seeker: {
+        with: {
+          stock_nbr: {
+            equal_to: me.record.get('display').substring(0, 4)
+          }
+        }
+      }
       //stock_nbr:   {equal_to: me.record.get('display').substring(0,4)}
     });
     // INSPECTOR INIT (End)
 
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
-      cards: [
-        {
+      cards: [{
           title: 'Profile',
           xtype: 'omni-styles-Form',
           module: 'cfars'
-        }
-        ,{title: 'Colors', xtype: 'omni-style_colors-Explorer', module: 'samples',
-           defaultSearch: { with:
-             {
-               style_id:   {equal_to: me.record.get('style_id')}
-             }
+        }, {
+          title: 'Colors',
+          xtype: 'omni-style_colors-Explorer',
+          module: 'samples',
+          defaultSearch: {
+            with: {
+              style_id: {
+                equal_to: me.record.get('style_id')
+              }
+            }
           },
           showBadge: true
-        }
-        ,{title: 'Suppliers', xtype: 'omni-style_suppliers-Explorer', module: 'contacts',
-           defaultSearch: { with:
-             {
-               style_id:   {equal_to: me.record.get('style_id')}
-             }
+        }, {
+          title: 'Suppliers',
+          xtype: 'omni-style_suppliers-Explorer',
+          module: 'contacts',
+          defaultSearch: {
+            with: {
+              style_id: {
+                equal_to: me.record.get('style_id')
+              }
+            }
           },
           showBadge: true
-        }
-        ,{title: 'Locations', xtype: 'omni-style_locations-Explorer', module: 'projects',
-           defaultSearch: { with:
-             {
-               style_id:   {equal_to: me.record.get('style_id')}
-             }
+        }, {
+          title: 'Locations',
+          xtype: 'omni-style_locations-Explorer',
+          module: 'projects',
+          defaultSearch: {
+            with: {
+              style_id: {
+                equal_to: me.record.get('style_id')
+              }
+            }
           },
           showBadge: true
-        }
-        ,{title: 'SKUs', xtype: 'omni-skus-Explorer', module: 'contracts',
-           defaultSearch: { with:
-             {
-               style_id:   {equal_to: me.record.get('style_id')}
-             }
+        }, {
+          title: 'SKUs',
+          xtype: 'omni-skus-Explorer',
+          module: 'contracts',
+          defaultSearch: {
+            with: {
+              style_id: {
+                equal_to: me.record.get('style_id')
+              }
+            }
           },
           showBadge: true
-        }
+        }, {
+          title: 'Attachments',
+          xtype: 'buildit-attachments-Explorer',
+          defaultSearch: {
+            with: {
+              attachable_type: {
+                equal_to: 'Omni::Style'
+              },
+              attachable_id: {
+                equal_to: me.record.get('style_id')
+              }
+            }
+          },
+          showBadge: true
+        },
+
         // ,{
         //   xtype    : 'buildit-CardGroup',
         //   title    : 'Support',
@@ -136,8 +172,8 @@ Ext.define('Omni.view.styles.Inspector', {
 
     // TITLES (Start) ======================================================================
     Ext.apply(this, {
-      title:     'Style',
-      subtitle:  this.record.get('display')
+      title: 'Style',
+      subtitle: this.record.get('display')
     });
     // TITLES (End)
 

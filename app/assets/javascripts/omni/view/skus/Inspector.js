@@ -1,14 +1,11 @@
 Ext.define('Omni.view.skus.Inspector', {
 
-  extend:'Buildit.ux.inspector.Panel',
-  alias:'widget.omni-skus-Inspector',
+  extend: 'Buildit.ux.inspector.Panel',
+  alias: 'widget.omni-skus-Inspector',
 
-
-
-  initComponent:function () {
+  initComponent: function() {
 
     var me = this;
-
 
     // LABELS (Start) ======================================================================
     // LABELS (End)
@@ -17,58 +14,79 @@ Ext.define('Omni.view.skus.Inspector', {
     Ext.applyIf(this, {
       associativeFilter: {
         property: 'sku_id',
-        value:    me.record.get('sku_id')
+        value: me.record.get('sku_id')
       }
     });
     // INSPECTOR INIT (End)
     // CARDS (Start) =======================================================================
     Ext.apply(this, {
-      cards: [
-        {
+      cards: [{
           title: 'Profile',
           xtype: 'omni-skus-Form',
           module: 'contracts'
-        }
-        ,{
+        }, {
           title: 'Aliases',
-          xtype: 'omni-sku_aliases-Explorer', module: 'samples',
-          defaultSearch: { with:
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
+          xtype: 'omni-sku_aliases-Explorer',
+          module: 'samples',
+          defaultSearch: {
+            with: {
+              sku_id: {
+                equal_to: me.record.get('sku_id')
+              }
+            }
           },
           showBadge: true
-        }
-        ,{
+        }, {
           title: 'Inventory',
-          xtype: 'omni-inventories-Explorer', module: 'samples',
-          defaultSearch: { with:
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
+          xtype: 'omni-inventories-Explorer',
+          module: 'samples',
+          defaultSearch: {
+            with: {
+              sku_id: {
+                equal_to: me.record.get('sku_id')
+              }
+            }
           },
           showBadge: true
-        }
-        ,{
+        }, {
           title: 'Prices',
-          xtype: 'omni-sku_prices-Explorer', module: 'samples',
-          defaultSearch: { with:
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
+          xtype: 'omni-sku_prices-Explorer',
+          module: 'samples',
+          defaultSearch: {
+            with: {
+              sku_id: {
+                equal_to: me.record.get('sku_id')
+              }
+            }
           },
           showBadge: true
-        }
-        ,{
+        }, {
           title: 'Suppliers',
-          xtype: 'omni-sku_suppliers-Explorer', module: 'samples',
-          defaultSearch: { with:
-             {
-               sku_id:   {equal_to: me.record.get('sku_id')}
-             }
+          xtype: 'omni-sku_suppliers-Explorer',
+          module: 'samples',
+          defaultSearch: {
+            with: {
+              sku_id: {
+                equal_to: me.record.get('sku_id')
+              }
+            }
           },
           showBadge: true
-        }
+        }, {
+          title: 'Attachments',
+          xtype: 'buildit-attachments-Explorer',
+          defaultSearch: {
+            with: {
+              attachable_type: {
+                equal_to: 'Omni::Sku'
+              },
+              attachable_id: {
+                equal_to: me.record.get('sku_id')
+              }
+            }
+          },
+          showBadge: true
+        },
         // ,{
         //   title: 'BOMs',
         //   xtype: 'omni-boms-Explorer', module: 'monthly_reports', module: 'contacts',
@@ -111,17 +129,6 @@ Ext.define('Omni.view.skus.Inspector', {
         //       showBadge: true
         //     },
         //     {
-        //       title: 'Attachments',
-        //       xtype: 'buildit-attachments-Explorer',
-        //       defaultSearch: { with:
-        //         {
-        //           attachable_type: {equal_to: 'Omni::Sku'},
-        //           attachable_id:   {equal_to: me.record.get('sku_id')}
-        //         }
-        //       },
-        //       showBadge: true
-        //     },
-        //     {
         //       title:      'Audit',
         //       xtype:      'buildit-audits-Explorer',
         //       model:      'Omni::Sku',
@@ -135,8 +142,8 @@ Ext.define('Omni.view.skus.Inspector', {
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title:     'Sku',
-      subtitle:  this.record.get('display')
+      title: 'Sku',
+      subtitle: this.record.get('display')
     });
     // TITLES (End)
 

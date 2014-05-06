@@ -39,7 +39,21 @@ Ext.define('Omni.view.subclasses.Inspector', {
             }
           },
           showBadge: true
-        }
+        }, {
+          title: 'Attachments',
+          xtype: 'buildit-attachments-Explorer',
+          defaultSearch: {
+            with: {
+              attachable_type: {
+                equal_to: 'Omni::Subclass'
+              },
+              attachable_id: {
+                equal_to: me.record.get('subclass_id')
+              }
+            }
+          },
+          showBadge: true
+        },
 
       ]
     });
