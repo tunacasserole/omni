@@ -9,16 +9,15 @@ class Omni::UniformDetail < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
+  validate     :checks
   validates    :uniform_detail_id,               presence: true, uniqueness: true
   validates    :uniform_detail_nbr,              presence: true, uniqueness: true
+  validates    :style_color_id,                  presence: true
   # validates    :display,                         presence: true, uniqueness: true
   # validates    :style_id,                        presence: true
   # validates    :color_id,                        presence: true
-  validates    :style_color_id,                  presence: true
   # validates    :from_grade_id,                   presence: true
   # validates    :thru_grade_id,                   presence: true
-  validate     :check_grades
-  # validate     :check_style_color
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
@@ -83,8 +82,7 @@ class Omni::UniformDetail < ActiveRecord::Base
     end
 
     state :active do
-      validate  :check_style_color
-      validate  :check_grades
+      # validate  :checks
     end
 
     state :closed do
@@ -122,55 +120,12 @@ class Omni::UniformDetail < ActiveRecord::Base
   end
   # STATES (End)
 
- # def initiate_forecast
-
-  #   message     = {
-  #     projection_id: self.id,
-  #     user_id: Buildit::User.current.user_id
-  #   }
-
-  #   # publish the above message to the omni.events exchange
-  #   Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'forecast')
-
-  # end # def initiate_forecast
-
-
-  # def notify_forecast_complete
-
-  #   # push a message to the users channel
-  #   Buildit::User.current.push_message("The forecast you requested for #{} is now complete.")
-
-  #   # send an email to the same user indicating completion
-
-  # end
-
   # STATE HELPERS (Start) =====================================================================
   def do_activate
     # puts "activating a uniform detail"
     # set_approval
     # initiate_lookups
     build_lookups
-  end
-
-  def initiate_lookups
-    message     = {
-      uniform_detail_id: self.id,
-      user_id: Buildit::User.current.user_id
-    }
-
-    puts "publish the message to the omni.events exchange"
-    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'build_lookups')
-
-    notify_lookups_complete
-  end
-
-  def notify_lookups_complete
-
-    # push a message to the users channel
-    Buildit::User.current.push_message("The uniform details you requested for #{self.display} are now done activating.")
-
-    # send an email to the same user indicating completion
-
   end
 
   def build_lookups
@@ -194,63 +149,58 @@ class Omni::UniformDetail < ActiveRecord::Base
     end
   end
 
-  def check_style_color
-    if uniform.uniform_details.where(style_color_id: self.style_color_id, from_grade_id: self.from_grade_id, thru_grade_id: self.thru_grade_id).count > 1
-      puts "error in check_style_color"
-      errors.add(:style_color_id, 'Style color already exists for this from and thru grade')
-    end
-  end
+  def checks
+    puts "\nchecks\n"
+  #   puts "checking style color"
+  #   from_grade_id = self.from_grade_id || self.uniform.from_grade_id
+  #   thru_grade_id = self.thru_grade_id || self.uniform.thru_grade_id
+  #   puts "from_grade_id is #{from_grade_id}"
+  #   puts "thru_grade_id is #{thru_grade_id}"
+  #   if uniform.uniform_details.where(style_color_id: self.style_color_id, from_grade_id: from_grade_id, thru_grade_id: thru_grade_id).count > 1
+  #     puts "error in check_style_color"
+  #     errors.add(:style_color_id, 'Style color already exists for this from and thru grade')
+  #   else
+  #     puts "a ok"
+  #   end
 
-  def set_style_color
-    self.style_id = self.style_color.style_id if self.style_color
-    self.color_id = self.style_color.color_id if self.style_color
-  end
-
-  def set_state
-    self.state = 'draft' unless self.state_changed?
+  #   puts "checking grades\n"
+  #   if self.uniform && self.uniform.account
+  #     if self.from_grade_id
+  #       is_valid = false
+  #       self.uniform.account.grades.each do |x|
+  #         is_valid = true if x.grade_id == self.from_grade_id
+  #       end
+  #       puts "error in from grade. self.from_grade_id = #{self.from_grade_id}" unless is_valid
+  #       errors.add(:from_grade_id, 'from grade is not valid for this account') unless is_valid
+  #     end
+  #     if self.thru_grade_id
+  #       is_valid = false
+  #       self.uniform.account.grades.each do |x|
+  #         is_valid = true if x.grade_id == self.thru_grade_id
+  #       end
+  #       puts "error in thru grade. self.thru_grade_id = #{self.thru_grade_id}" unless is_valid
+  #       errors.add(:thru_grade_id, 'from grade is not valid for this account') unless is_valid
+  #     end
+  #   end
+    puts "end of checks"
   end
 
   def set_approval
+    puts "set approval"
     # current_user = Buildit::User.current ? Buildit::User.current : Buildit::User.first
     # a=Desk::Approval.create(approvable_type: "Omni::UniformDetail", approvable_id: self.uniform_detail_id)
   end
 
-  def set_grades
-    self.from_grade_id = self.uniform.from_grade_id unless self.from_grade_id
-    self.thru_grade_id = self.uniform.thru_grade_id unless self.thru_grade_id
-  end
-
-  def check_grades
-    if self.uniform && self.uniform.account
-      if self.from_grade_id
-        is_valid = false
-        self.uniform.account.grades.each do |x|
-          is_valid = true if x.grade_id == self.from_grade_id
-        end
-        # puts "error in from grade. self.from_grade_id = #{self.from_grade_id}" unless is_valid
-        errors.add(:from_grade_id, 'from grade is not valid for this account') unless is_valid
-      end
-      if self.thru_grade_id
-        is_valid = false
-        self.uniform.account.grades.each do |x|
-          is_valid = true if x.grade_id == self.thru_grade_id
-        end
-        # puts "error in thru grade. self.thru_grade_id = #{self.thru_grade_id}" unless is_valid
-        errors.add(:thru_grade_id, 'from grade is not valid for this account') unless is_valid
-      end
-    end
-  end
-
   def set_defaults
-    # puts "setting defaults*********\n"
-    set_style_color
-    set_state
-    # set_grades
+    puts "setting defaults*********\n"
+    self.style_id = self.style_color.style_id if self.style_color
+    self.color_id = self.style_color.color_id if self.style_color
+    self.state = 'draft' unless self.state_changed?
   end
 
   def do_close
-    # remove lookups on close
-    destroy_lookups
+    puts "remove lookups on close"
+    # destroy_lookups
   end
 
   def destroy_lookups
@@ -259,7 +209,7 @@ class Omni::UniformDetail < ActiveRecord::Base
   end
 
   def new_lookup
-    # puts "creating uniform lookup"
+    puts "creating uniform lookup"
     Omni::UniformLookup.new(uniform_id: self.uniform_id, uniform_detail_id: self.uniform_detail_id, account_id: self.uniform.account_id, contract_id: self.uniform.contract_id, date_created: Date.today, style_id: self.style_id, color_id: self.color_id, is_required_male: self.is_required_male, is_required_female: self.is_required_female,  is_optional_male: self.is_optional_male, is_optional_female: self.is_optional_female, is_includes_logo: self.is_includes_logo, is_requires_logo: self.is_requires_logo, discount_percent: self.discount_percent, uniform_source: self.uniform_source)
   end
 

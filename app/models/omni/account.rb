@@ -25,6 +25,8 @@ class Omni::Account < ActiveRecord::Base
   validates    :display,                         presence: true, uniqueness: true
   validates    :account_nbr,                     presence: true, uniqueness: true
   # validates    :school_nbr,                      presence: true, uniqueness: true
+  validates    :from_grade_id,                   presence: true
+  validates    :thru_grade_id,                   presence: true
   validates    :account_name,                    presence: true
   validates    :account_type,                    lookup: 'ACCOUNT_TYPE',               allow_nil: true
   validates    :school_type,                     lookup: 'SCHOOL_TYPE',                allow_nil: true
@@ -106,6 +108,7 @@ class Omni::Account < ActiveRecord::Base
     text     :account_nbr_fulltext, using: :account_nbr
     text     :account_name_fulltext, using: :account_name
     text     :display_fulltext, using: :display
+    text     :school_nbr_fulltext, using: :school_nbr
     text     :billing_city_fulltext, using: :billing_city
     # text     :billing_state_fulltext, using: :billing_state
     # text     :location_display_fulltext, using: :location_display

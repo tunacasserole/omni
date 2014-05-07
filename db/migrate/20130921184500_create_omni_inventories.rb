@@ -13,7 +13,7 @@ class CreateOmniInventories < ActiveRecord::Migration
         t.column   :department_id,                   :string,            null: true,    limit: 32
         t.column   :supplier_id,                     :string,            null: true,    limit: 32
         t.column   :projection_id,                   :string,            null: true,    limit: 32
-        t.column   :forecast_profile_id,             :string,            null: true,    limit: 32
+        t.column   :projection_detail_id,            :string,            null: true,    limit: 32
         t.column   :forecast_profile_id,             :string,            null: true,    limit: 32
         t.column   :seasonal_index_id,               :string,            null: true,    limit: 32
         t.column   :display,                         :string,            null: true,    limit: 300

@@ -305,7 +305,7 @@ Ext.define('Omni.view.app.Hub', {
             rowspan: 1,
             cls: 'product_setup',
             target: {
-              xtype: 'omni-productsq-Explorer',
+              xtype: 'omni-products-Explorer',
               title: ''
             }
           }, {

@@ -328,18 +328,6 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
-  storeId   : 'CONVERSION_TYPE-lookup-Store',
-  fields    : lookupStoreFields,
-  data      : [
-    ['73CA0BA4972811E2A3D212313B10NONE','NONE',,'CONVERSION_TYPE','None',null,true],
-    ['73CA0BA4972811E2A3D212313B10044E','EMBLEM',,'CONVERSION_TYPE','Emblem',null,true],
-    ['755A65A4972811E295B122000A9D0283','LOCAL_MONOGRAM',,'CONVERSION_TYPE','Local Monogram',null,true],
-    ['7679E5AE972811E295B122000A9D0283','MONOGRAM',,'CONVERSION_TYPE','Monogram',null,true],
-    ['77880CFA972811E2A3D212313B10044E','SILKSCREEN',,'CONVERSION_TYPE','Silkscreen',null,true]
-  ]
-});
-
-Ext.create('Ext.data.ArrayStore', {
   storeId   : 'CUSTOMER_CANCEL_REASON-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
@@ -1120,6 +1108,17 @@ Ext.create('Ext.data.ArrayStore', {
     ['ACB6895A972911E2A3D212313B10044E','CONVERSION_(SEWN)',,'WORK_ORDER_TYPE','Conversion (Sewn)',null,true],
     ['AD9D939A972911E295B122000A9D0283','ALTERATION',,'WORK_ORDER_TYPE','Alteration',null,true],
     ['AF2EBE50972911E2A3D212313B10044E','SPECIAL_CUT',,'WORK_ORDER_TYPE','Special Cut',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'CONVERSION_TYPE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['73CA0BA4972811E2A3D212313B10044E','HEAT_APPLIED',,'CONVERSION_TYPE','Heat Applied',null,true],
+    ['755A65A4972811E295B122000A9D0283','EMBROIDERED',,'CONVERSION_TYPE','Embroidered',null,true],
+    ['7679E5AE972811E295B122000A9D0283','SEWN',,'CONVERSION_TYPE','Sewn',null,true],
+    ['77880CFA972811E2A3D212313B10044E','SILKSCREEN',,'CONVERSION_TYPE','Silkscreen',null,true]
   ]
 });
 

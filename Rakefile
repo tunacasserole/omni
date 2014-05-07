@@ -138,6 +138,15 @@ namespace :omni do
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end
 
+  desc "verify data integrity"
+  task :test_data => :environment do |t, args|
+    args.with_defaults(:model => "AllModels")
+    @start_time = Time.now
+    t = Omni::Data::Test.new
+    t.execute
+    puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
+  end
+
 end
 
 # COPIED AS AN EXAMPLE OF DEPLOYMENT TASKS
