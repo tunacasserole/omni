@@ -16,7 +16,7 @@ class Omni::Data::Test
 
     inventory
 
-    projection
+    # projection
 
   end
 
@@ -44,8 +44,22 @@ class Omni::Data::Test
   end
 
   def inventory
-    count = ActiveRecord::Base.connection.execute("select count(*) from inventories where sku_id is null or sku_id not in (select sku_id from skus)")
-    puts "inventory with missing or invalid sku count is #{count.first[0]}" if count.first[0] > 0
+    puts "rms inventory"
+    expected_count = ActiveRecord::Base.connection.execute("select count(*) from rms_inventory").first[0]
+    puts "rms expected count is #{expected_count}"
+
+    puts "tg inventory"
+    expected_count = ActiveRecord::Base.connection.execute("select count(*) from tg_inventory").first[0] * 7
+    puts "tg expected count is #{expected_count}"
+
+    puts "mark inventory"
+    expected_count = ActiveRecord::Base.connection.execute("select count(*) from mark_inventory").first[0]
+    puts "mark expected count is #{expected_count}"
+
+
+
+    # count = ActiveRecord::Base.connection.execute("select count(*) from inventories where sku_id is null or sku_id not in (select sku_id from skus)")
+    # puts "inventory with missing or invalid sku count is #{count.first[0]}" if count.first[0] > 0
   end
 
   def projection

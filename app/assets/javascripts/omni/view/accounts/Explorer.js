@@ -96,8 +96,8 @@ Ext.define('Omni.view.accounts.Explorer', {
                     dataIndex: 'school_nbr',
                     flex: 1
                 }, {
-                    header: me.displayLabel,
-                    dataIndex: 'display',
+                    header: me.account_nameLabel,
+                    dataIndex: 'account_name',
                     flex: 3
                 },
                 // {
