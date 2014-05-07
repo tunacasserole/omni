@@ -2,58 +2,17 @@ class Omni::Data::Sync::SkuLoad
 
   def self.go
     # puts "#{Time.now.strftime("%H:%M:%S").yellow} - starting"
+    update_sku_id
     # update_style_id
     # update_color_id
     # update_supplier_id
-    # update_style_supplier_id
     # update_size_id
+    # update_account_id_ar
+    # update_style_supplier_id
     # update_style_color_id
     # update_style_color_size_id
-    update_account_id_ar
-    # update_sku_id
-    # update_sku_id_ar
     # update_sku_price
     puts "#{Time.now.strftime("%H:%M:%S").yellow} - ending"
-  end
-
-  def self.update_sku_id_ar
-    data = Omni::SkuLoad.where('sku_id is null')
-    # data = Omni::SkuLoad.where('select id, style_color_id, size_id from skus_load where sku_id not in (select sku_id from style_color_sizes)')
-    puts "records to process: #{data.count}"
-    data.each_with_index do |x, i|
-      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
-      # row = Omni::Sku.where(display: x.sku_display).first
-      sku_sql = "select sku_id from skus where display = '#{x.sku_display}'"
-      sku = ActiveRecord::Base.connection.execute sku_sql
-
-      #|| Omni::Sku.where(display: x.school_name).first || Omni::Sku.where(school_nbr: x.school_name).first
-      # row = Omni::Sku.where(sku_name: x.school_code).first || Omni::Sku.where(display: x.school_code).first || Omni::Sku.where(school_nbr: x.school_code).first unless row
-      if sku.first
-        x.sku_id = sku.first[0]
-        x.save
-      else
-        puts "couldn't find sku_id for #{x.sku_display} and sku is #{x.description} and id is #{x.id}"
-        # abort
-      end
-    end
-  end
-
-  def self.update_account_id_ar
-    data = Omni::SkuLoad.where("account_id is null and school_code != 'GENERIC'")
-    puts "records to process: #{data.count}"
-    data.each_with_index do |x, i|
-      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
-      # row = Omni::Account.where(description: x.school_name.gsub!(/\s+/, "")).first || Omni::Account.where(display: x.school_name).first || Omni::Account.where(school_nbr: x.school_name).first
-      # row = Omni::Account.where(account_name: x.school_code).first || Omni::Account.where(display: x.school_code).first || Omni::Account.where(school_nbr: x.school_code).first unless row
-      row = Omni::Account.where(school_nbr: x.school_code).first || Omni::Account.where(school_nbr: "0#{x.school_code}").first || Omni::Account.where(school_nbr: "00#{x.school_code}").first || Omni::Account.where(school_nbr: "000#{x.school_code}").first
-      if row
-        x.account_id = row.account_id
-        x.save
-      else
-        puts "couldn't find account_id for school code - #{x.school_code} and sku is #{x.sku_display_name}"
-        # abort
-      end
-    end
   end
 
   def self.update_supplier_id
@@ -86,8 +45,19 @@ class Omni::Data::Sync::SkuLoad
   end
 
   def self.update_sku_id
-    sql = "update skus_load, skus set skus_load.sku_id = skus.sku_id where skus_load.sku_display_name = skus.display"
-    ActiveRecord::Base.connection.execute sql
+    # ActiveRecord::Base.connection.execute "update skus_load, skus set skus_load.sku_id = skus.sku_id where skus_load.sku_name = skus.display"
+
+    sku_hash = {}; ActiveRecord::Base.connection.execute("select sku_id, display from skus").each { |x| sku_hash[x[1]] = x[0] }
+
+    data = ActiveRecord::Base.connection.execute "select id, sku_name from skus_load where sku_id is null or sku_id = '' or sku_id not in (select sku_id from skus)"
+    bar = ProgressBar.new(data.count)
+
+    data.each do |x|
+      bar.increment!
+      sku_id = sku_hash[x[1]]
+      ActiveRecord::Base.connection.execute "update skus_load set sku_id = '#{sku_id}' where id = #{x[0]}"
+    end
+
   end
 
   def self.update_size_id

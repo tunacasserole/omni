@@ -122,11 +122,59 @@ class Omni::UniformDetail < ActiveRecord::Base
   end
   # STATES (End)
 
+ # def initiate_forecast
+
+  #   message     = {
+  #     projection_id: self.id,
+  #     user_id: Buildit::User.current.user_id
+  #   }
+
+  #   # publish the above message to the omni.events exchange
+  #   Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'forecast')
+
+  # end # def initiate_forecast
+
+
+  # def notify_forecast_complete
+
+  #   # push a message to the users channel
+  #   Buildit::User.current.push_message("The forecast you requested for #{} is now complete.")
+
+  #   # send an email to the same user indicating completion
+
+  # end
 
   # STATE HELPERS (Start) =====================================================================
   def do_activate
-    set_approval
-    # create Uniform Lookup for each uniform detail row by bringing in every SKU that is active for the Style and Color in the Uniform Detail record.
+    # puts "activating a uniform detail"
+    # set_approval
+    # initiate_lookups
+    build_lookups
+  end
+
+  def initiate_lookups
+    message     = {
+      uniform_detail_id: self.id,
+      user_id: Buildit::User.current.user_id
+    }
+
+    puts "publish the message to the omni.events exchange"
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'build_lookups')
+
+    notify_lookups_complete
+  end
+
+  def notify_lookups_complete
+
+    # push a message to the users channel
+    Buildit::User.current.push_message("The uniform details you requested for #{self.display} are now done activating.")
+
+    # send an email to the same user indicating completion
+
+  end
+
+  def build_lookups
+    # puts "create uniform lookup for each uniform detail row by bringing in every SKU that is active for the Style and Color in the Uniform Detail record."
     # in other words, when a Style Color is added to a Uniform, the system assumes all sizes of that Style Color are valid for the Uniform.
     grades = Omni::Grade.get_grades(self.from_grade,self.thru_grade)
     if self.style && self.style.skus.count > 0 && grades && grades.count > 0
@@ -140,14 +188,17 @@ class Omni::UniformDetail < ActiveRecord::Base
           l.grade_id = g.grade_id
 
           puts l.errors.full_messages.to_sentence unless l.save
-          # TODO: populate mark_uniform_key, mark_stock_number, mark_grades, price_adjustment_1, price_adjustment_2,
+          # TODO: populate mark_uniform_key, mark_stock_number, mark_grades, price_adjustment_1, price_adjustment_2
         end
       end
     end
   end
 
   def check_style_color
-    errors.add(:style_color_id, 'Style color already exists for this from and thru grade') if uniform.uniform_details.where(style_color_id: self.style_color_id, from_grade_id: self.from_grade_id, thru_grade_id: self.thru_grade_id).count > 1
+    if uniform.uniform_details.where(style_color_id: self.style_color_id, from_grade_id: self.from_grade_id, thru_grade_id: self.thru_grade_id).count > 1
+      puts "error in check_style_color"
+      errors.add(:style_color_id, 'Style color already exists for this from and thru grade')
+    end
   end
 
   def set_style_color
@@ -176,6 +227,7 @@ class Omni::UniformDetail < ActiveRecord::Base
         self.uniform.account.grades.each do |x|
           is_valid = true if x.grade_id == self.from_grade_id
         end
+        # puts "error in from grade. self.from_grade_id = #{self.from_grade_id}" unless is_valid
         errors.add(:from_grade_id, 'from grade is not valid for this account') unless is_valid
       end
       if self.thru_grade_id
@@ -183,6 +235,7 @@ class Omni::UniformDetail < ActiveRecord::Base
         self.uniform.account.grades.each do |x|
           is_valid = true if x.grade_id == self.thru_grade_id
         end
+        # puts "error in thru grade. self.thru_grade_id = #{self.thru_grade_id}" unless is_valid
         errors.add(:thru_grade_id, 'from grade is not valid for this account') unless is_valid
       end
     end
@@ -216,7 +269,7 @@ class Omni::UniformDetail < ActiveRecord::Base
     # HOOKS (Start) =======================================================================
   hook :before_create, :set_defaults, 10
   hook :before_update, :set_defaults, 10
-  hook :before_destroy, :destroy_lookups, 10
+  # hook :before_destroy, :destroy_lookups, 10
   # HOOKS (End)
 
   def display_as

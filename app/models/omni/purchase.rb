@@ -374,7 +374,7 @@ class Omni::Purchase < ActiveRecord::Base
   def approval_level
     # Determine current user
 
-    current_user_id = (Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON') # aaron
+    current_user_id = Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON' # aaron
     # puts "\ncurrent_user_id is #{current_user_id}"
     #  Determine whether this is the final approval or if the next approver needs to be notified
     approval_level = 0
@@ -389,9 +389,9 @@ class Omni::Purchase < ActiveRecord::Base
        else
           if !self.approval_3_date
             errors.add("user", "may not authorize this purchase3") unless current_user_id == self.purchase_approver_3_user_id
-             approval_level = 3
+            approval_level = 3
           else
-             errors.add("purchase", "cannot be approved") unless current_user_id == self.purchase_approver_3_user_id
+            errors.add("purchase", "cannot be approved") unless current_user_id == self.purchase_approver_3_user_id
           end
        end
     end
@@ -423,7 +423,6 @@ class Omni::Purchase < ActiveRecord::Base
 
   def compute_total_order_units
     self.purchase_details.sum('units_ordered * order_pack_size') if self.purchase_details
-
   end
 
   def compute_total_order_cost

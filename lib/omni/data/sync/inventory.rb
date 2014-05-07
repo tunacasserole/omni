@@ -2,10 +2,10 @@ class Omni::Data::Sync::Inventory
 
   def self.go
     # @inventories = Omni::Inventory.to_hash
-    load_true_grits
+    # load_true_grits
     # load_buckhead
     # load_parker
-    # Omni::Data::Sync::Inventory::Parker.inventory
+    Omni::Data::Sync::Inventory::Parker.inventory
   end
 
   def self.load_parker

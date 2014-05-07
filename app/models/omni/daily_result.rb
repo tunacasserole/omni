@@ -100,6 +100,7 @@ class Omni::DailyResult < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :sku_id
     string   :sku_display do sku.display if sku end
     string   :location_display do location.display if location end
     date     :date

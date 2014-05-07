@@ -107,7 +107,7 @@ Ext.define('Omni.view.inventories.Explorer', {
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
-          flex         : 1,
+          flex         : 2,
           sortable     : true
         },
         // {

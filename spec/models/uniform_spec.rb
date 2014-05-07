@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "uniform" do
-  let(:me) { create(Omni::Uniform) }
+  let(:me) { create(Omni::Uniform, from_grade_id) }
 
   describe "requires" do
     it "uniform_id" do lambda{Omni::Uniform.create! uniform_id nil}.should raise_error end
@@ -100,6 +100,37 @@ describe "uniform" do
       me.uniform_details.count.should eq(5)
       me.ppl.count.should eq(5)
     end
+  end
+
+  it "should insert 10000 lookups in 30 seconds", focus: true do
+    load = 100
+    f = Omni::Grade.where( grade_order: Omni::Grade.minimum(:grade_order) ).first
+    l = Omni::Grade.where( grade_order: Omni::Grade.maximum(:grade_order) ).first
+    a = create(Omni::Account, from_grade_id: f.grade_id, thru_grade_id: l.grade_id)
+    Omni::Grade.all.each { |g| create(Omni::AccountGrade, account_id: a.account_id, grade_id: g.grade_id, grade_order: g.grade_order, grade_name: g.grade_name) }
+    u = create(Omni::Uniform, account_id: a.account_id)
+
+    bar = ProgressBar.new(load)
+    load.times do |i|
+      bar.increment!
+      s = create(Omni::Style, description: 'Test Style', initial_retail_price: 999.99, pos_name: 'test pos name')
+      size = create(Omni::Size, display: "test #{i}")
+      c = create(Omni::Color)
+      sc = create(Omni::StyleColor, style_id: s.style_id, color_id: c.color_id)
+      scs = create( Omni::StyleColorSize, style_color_id: sc.style_color_id, size_id: size.size_id )
+      sku = create( Omni::Sku, style_id: s.style_id )
+      scs.sku_id = sku.sku_id
+      scs.save
+
+      ud = create(Omni::UniformDetail, uniform_id: u.uniform_id, style_id: s.style_id, color_id: c.color_id, style_color_id: sc.style_color_id, from_grade_id: f.grade_id, thru_grade_id: l.grade_id )
+      ud.should be_valid
+      ud.state.should eq('draft')
+    end
+
+    u.activate
+    u.uniform_lookups.count.should eq(16 * load)
+  end
+
 
     # it "should delete lookups" do
     #      #   create(Omni::UniformLookup, uniform_id: me.uniform_id)
@@ -107,7 +138,5 @@ describe "uniform" do
     #   count = Omni::UniformLookup.where(uniform_id: me.uniform_id).count
     #   count.should eq(0)
     # end
-
-  end
 
 end

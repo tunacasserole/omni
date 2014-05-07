@@ -6,12 +6,11 @@ class Omni::Data::Sync::SkuAlias
   end
 
   def self.create_from_sku_load
-    sql = "select id, sku_id, mark_sku, bu_sku, tg_sku from skus_load order by sku_display_name"
-    data = ActiveRecord::Base.connection.execute sql
-    puts " - got source data"
+    data = ActiveRecord::Base.connection.execute "select id, sku_id, mark_sku, bu_sku, tg_sku from skus_load order by sku_name"
+    bar = ProgressBar.new(data.count)
     data.each_with_index do |x,i|
-      puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
-      puts "mark_sku is #{mark_sku}"
+      bar.increment!
+      # puts "#{Time.now.strftime("%H:%M:%S").yellow}: processing row: #{i.to_s}" if i.to_s.end_with? '000'
       if x[2] && x[2].length > 1
         row = Omni::SkuAlias.create(sku_id: x[1], sku_alias: x[2], alias_source: 'PARKER')
         unless row

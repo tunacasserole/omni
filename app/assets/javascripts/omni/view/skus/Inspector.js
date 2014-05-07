@@ -48,6 +48,17 @@ Ext.define('Omni.view.skus.Inspector', {
             }
           },
           showBadge: true
+        // }, {
+        //   title: 'Legacy Sales History',
+        //   xtype: 'omni-daily_results-Explorer',
+        //   defaultSearch: {
+        //     with: {
+        //       sku_id: {
+        //         equal_to: me.record.get('sku_id')
+        //       }
+        //     }
+        //   },
+        //   showBadge: true
         }, {
           title: 'Prices',
           xtype: 'omni-sku_prices-Explorer',

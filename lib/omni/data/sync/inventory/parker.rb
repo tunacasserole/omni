@@ -32,8 +32,8 @@ class Omni::Data::Sync::Inventory::Parker
   end
 
   def self.inventory
-    self.on_hand
-    # self.wip
+    # self.on_hand
+    self.wip
     # self.transit
     # self.allocated
     # self.daily_results
@@ -91,6 +91,7 @@ class Omni::Data::Sync::Inventory::Parker
   def self.wip
     load
     # bar = ProgressBar.new(Omni::MarkWip.where('cut_wip > 0 or cont_wip > 0 or plant_wip > 0').count)
+    ActiveRecord::Base.connection.execute("update inventories set work_in_process_units = 0")
 
     ActiveRecord::Base.transaction do
       ActiveRecord::Base.connection.execute("select outlet_nbr, stock_nbr, size, sum(cut_wip), sum(cont_wip), sum(plant_wip) from mark_wip group by outlet_nbr, stock_nbr, size").each do |x|
