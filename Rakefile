@@ -139,10 +139,10 @@ namespace :omni do
   end
 
   desc "verify data integrity"
-  task :test_data => :environment do |t, args|
+  task :test_data, [:model]  => :environment do |t, args|
     args.with_defaults(:model => "AllModels")
     @start_time = Time.now
-    t = Omni::Data::Test.new
+    t = "Omni::Data::Test::#{args.model}".constantize.new
     t.execute
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
   end

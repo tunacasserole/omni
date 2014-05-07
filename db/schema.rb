@@ -2677,7 +2677,7 @@ ActiveRecord::Schema.define(version: 20140221155100) do
     t.string  "supplier_id",               limit: 32
     t.string  "supplier_item_identifier",  limit: 200
     t.string  "description",               limit: 300
-    t.boolean "is_primary_supplier"
+    t.boolean "is_primary"
     t.boolean "is_manufacturer"
     t.boolean "is_discontinued"
     t.integer "supplier_cost_units"

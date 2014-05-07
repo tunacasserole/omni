@@ -337,7 +337,7 @@ class Omni::Style < ActiveRecord::Base
       x = Omni::SkuSupplier.where(sku_id: sku.sku_id, supplier_id: ss.supplier_id).first || Omni::SkuSupplier.new(sku_id: sku.sku_id, supplier_id: ss.supplier_id)
       x.sku_id = sku.sku_id
       x.supplier_id = ss.supplier_id
-      x.is_primary_supplier = ss.is_primary
+      x.is_primary = ss.is_primary
       x.is_manufacturer = ss.is_manufacturer
       x.is_discontinued = ss.is_discontinued
       x.supplier_cost_units = ss.supplier_cost_units
