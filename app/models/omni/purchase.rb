@@ -383,6 +383,7 @@ class Omni::Purchase < ActiveRecord::Base
     end
   end
 
+
   def cascading_delete
     # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
     if ['draft'].include? self.state
