@@ -3,7 +3,7 @@ class Omni::Util::Seed
   def self.go(m)
     @model_name = m
     @full_model_name = Omni::Util::Gem.full_model_name(m)
-
+    puts "model is #{@full_model_name}"
     dump_to_seed
   end
 

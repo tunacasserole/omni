@@ -53,9 +53,9 @@ Ext.define('Omni.view.purchases.Form', {
       is_special_orderLabel: Omni.i18n.model.Purchase.is_special_order,
       is_ship_cancelLabel: Omni.i18n.model.Purchase.is_ship_cancel,
       estimated_lead_time_daysLabel: Omni.i18n.model.Purchase.estimated_lead_time_days,
-      purchase_approver_1_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_user_id,
-      purchase_approver_2_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_2_user_id,
-      purchase_approver_3_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_3_user_id,
+      // purchase_approver_1_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_user_id,
+      // purchase_approver_2_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_2_user_id,
+      // purchase_approver_3_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_3_user_id,
       last_receipt_dateLabel: Omni.i18n.model.Purchase.last_receipt_date,
       pay_to_supplier_idLabel: Omni.i18n.model.Purchase.pay_to_supplier_id,
       ship_thru_supplier_idLabel: Omni.i18n.model.Purchase.ship_thru_supplier_id,
@@ -68,9 +68,9 @@ Ext.define('Omni.view.purchases.Form', {
       supplier_zipLabel: Omni.i18n.model.Purchase.supplier_zip,
       supplier_countryLabel: Omni.i18n.model.Purchase.supplier_country,
       is_destroyedLabel: Omni.i18n.model.Purchase.is_destroyed,
-      purchase_approver_1_location_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_location_user_id,
-      purchase_approver_2_location_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_location_user_id,
-      purchase_approver_3_location_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_location_user_id,
+      // purchase_approver_1_location_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_location_user_id,
+      // purchase_approver_2_location_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_location_user_id,
+      // purchase_approver_3_location_user_idLabel: Omni.i18n.model.Purchase.purchase_approver_1_location_user_id,
       audit_created_byLabel: Omni.i18n.model.Purchase.audit_created_by,
       audit_updated_byLabel: Omni.i18n.model.Purchase.audit_updated_by,
       audit_created_atLabel: Omni.i18n.model.Purchase.audit_created_at,
@@ -234,72 +234,72 @@ Ext.define('Omni.view.purchases.Form', {
               disabled: true
             },
           ]
-        }, {
-          xtype: 'fieldset',
-          title: 'Purchase Order Approvals',
-          collapsible: true,
-          collapsed: true,
-          defaultType: 'textfield',
-          defaults: {
-            anchor: '70%'
-          },
-          layout: 'anchor',
-          disabled: disabled,
-          items: [{
-            xtype: 'buildit-Locator',
-            store: Ext.create('Buildit.store.User', {
-              pageSize: 20
-            }),
-            displayField: 'full_name',
-            queryField: 'full_name',
-            valueField: 'user_id',
-            itemTpl: '{full_name}',
-            name: 'purchase_approver_1_user_id',
-            fieldLabel: this.purchase_approver_1_user_idLabel,
-            allowBlank: true
-          }, {
-            xtype: 'datefield',
-            name: 'approval_1_date',
-            fieldLabel: this.approval_1_dateLabel,
-            disabled: true,
-            allowBlank: false
-          }, {
-            xtype: 'buildit-Locator',
-            store: Ext.create('Buildit.store.User', {
-              pageSize: 20
-            }),
-            displayField: 'full_name',
-            queryField: 'full_name',
-            valueField: 'user_id',
-            itemTpl: '{full_name}',
-            name: 'purchase_approver_2_user_id',
-            fieldLabel: this.purchase_approver_2_user_idLabel,
-            allowBlank: true
-          }, {
-            xtype: 'datefield',
-            name: 'approval_2_date',
-            fieldLabel: this.approval_2_dateLabel,
-            disabled: true,
-            allowBlank: false
-          }, {
-            xtype: 'buildit-Locator',
-            store: Ext.create('Buildit.store.User', {
-              pageSize: 20
-            }),
-            displayField: 'full_name',
-            queryField: 'full_name',
-            valueField: 'user_id',
-            itemTpl: '{full_name}',
-            name: 'purchase_approver_3_user_id',
-            fieldLabel: this.purchase_approver_3_user_idLabel,
-            allowBlank: true
-          }, {
-            xtype: 'datefield',
-            name: 'approval_3_date',
-            fieldLabel: this.approval_3_dateLabel,
-            disabled: true,
-            allowBlank: false
-          }]
+        // }, {
+        //   xtype: 'fieldset',
+        //   title: 'Purchase Order Approvals',
+        //   collapsible: true,
+        //   collapsed: true,
+        //   defaultType: 'textfield',
+        //   defaults: {
+        //     anchor: '70%'
+        //   },
+        //   layout: 'anchor',
+        //   disabled: disabled,
+        //   items: [{
+        //     xtype: 'buildit-Locator',
+        //     store: Ext.create('Buildit.store.User', {
+        //       pageSize: 20
+        //     }),
+        //     displayField: 'full_name',
+        //     queryField: 'full_name',
+        //     valueField: 'user_id',
+        //     itemTpl: '{full_name}',
+        //     name: 'purchase_approver_1_user_id',
+        //     fieldLabel: this.purchase_approver_1_user_idLabel,
+        //     allowBlank: true
+        //   }, {
+        //     xtype: 'datefield',
+        //     name: 'approval_1_date',
+        //     fieldLabel: this.approval_1_dateLabel,
+        //     disabled: true,
+        //     allowBlank: false
+        //   }, {
+        //     xtype: 'buildit-Locator',
+        //     store: Ext.create('Buildit.store.User', {
+        //       pageSize: 20
+        //     }),
+        //     displayField: 'full_name',
+        //     queryField: 'full_name',
+        //     valueField: 'user_id',
+        //     itemTpl: '{full_name}',
+        //     name: 'purchase_approver_2_user_id',
+        //     fieldLabel: this.purchase_approver_2_user_idLabel,
+        //     allowBlank: true
+        //   }, {
+        //     xtype: 'datefield',
+        //     name: 'approval_2_date',
+        //     fieldLabel: this.approval_2_dateLabel,
+        //     disabled: true,
+        //     allowBlank: false
+        //   }, {
+        //     xtype: 'buildit-Locator',
+        //     store: Ext.create('Buildit.store.User', {
+        //       pageSize: 20
+        //     }),
+        //     displayField: 'full_name',
+        //     queryField: 'full_name',
+        //     valueField: 'user_id',
+        //     itemTpl: '{full_name}',
+        //     name: 'purchase_approver_3_user_id',
+        //     fieldLabel: this.purchase_approver_3_user_idLabel,
+        //     allowBlank: true
+        //   }, {
+        //     xtype: 'datefield',
+        //     name: 'approval_3_date',
+        //     fieldLabel: this.approval_3_dateLabel,
+        //     disabled: true,
+        //     allowBlank: false
+        //   }]
         }, {
           xtype: 'fieldset',
           title: 'Contact Information',
@@ -667,11 +667,11 @@ Ext.define('Omni.view.purchases.Form', {
           }
         }, {
           xtype: 'button',
-          iconCls: 'fa fa-thumbs-up',
-          tooltip: 'Approve',
+          iconCls: 'fa fa-caret-square-o-right',
+          tooltip: 'Activate',
           listeners: {
-            beforerender: this.prepareApproveAction,
-            click: this.onApproveAction,
+            beforerender: this.prepareActivateAction,
+            click: this.onActivateAction,
             scope: me
           }
         }, {
@@ -747,8 +747,8 @@ Ext.define('Omni.view.purchases.Form', {
     this.processEventTransition('allocate', 'Purchase Order was successfully allocated.', 'An error occurred allocated this purchase order.');
   }, // onBuildAction
 
-  onApproveAction: function(action, eOpts) {
-    this.processEventTransition('approve', 'Purchase Order was successfully approved.', 'An error occurred approving this purchase order.');
+  onActivateAction: function(action, eOpts) {
+    this.processEventTransition('activate', 'Purchase Order was successfully activated.', 'An error occurred activating this purchase order.');
   }, // onBuildAction
 
   onMassupdateAction: function(action, eOpts) {
@@ -760,7 +760,7 @@ Ext.define('Omni.view.purchases.Form', {
     currentState === 'draft' ? action.show() : action.hide();
   },
 
-  prepareApproveAction: function(action, eOpts) {
+  prepareActivateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'pending_approval' ? action.show() : action.hide();
   },

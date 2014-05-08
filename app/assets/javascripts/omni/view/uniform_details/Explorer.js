@@ -62,46 +62,53 @@ Ext.define('Omni.view.uniform_details.Explorer', {
             columns: [{
                     header: me.uniform_detail_nbrLabel,
                     dataIndex: 'uniform_detail_nbr',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
                     header: me.style_idLabel,
                     dataIndex: 'style_display',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
                     header: me.color_idLabel,
                     dataIndex: 'color_display',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
                     header: me.from_grade_idLabel,
                     dataIndex: 'from_grade_display',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
                     header: me.thru_grade_idLabel,
                     dataIndex: 'thru_grade_display',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
-                    xtype: 'checkcolumn',
                     header: me.is_required_maleLabel,
                     dataIndex: 'is_required_male',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
-                    xtype: 'checkcolumn',
                     header: me.is_required_femaleLabel,
                     dataIndex: 'is_required_female',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
-                    xtype: 'checkcolumn',
                     header: me.is_optional_maleLabel,
                     dataIndex: 'is_optional_male',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
                     header: me.is_optional_femaleLabel,
                     dataIndex: 'is_optional_female',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }, {
                     header: me.stateLabel,
                     dataIndex: 'state',
-                    flex: 1
+                    flex: 1,
+                    sortable: false
                 }
                 // {
                 //   header       : me.is_includes_logoLabel,

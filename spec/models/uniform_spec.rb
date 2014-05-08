@@ -102,7 +102,7 @@ describe "uniform" do
     end
   end
 
-  it "should insert 10000 lookups in 30 seconds", focus: true do
+  it "should insert 10000 lookups in 30 seconds" do
     load = 100
     f = Omni::Grade.where( grade_order: Omni::Grade.minimum(:grade_order) ).first
     l = Omni::Grade.where( grade_order: Omni::Grade.maximum(:grade_order) ).first

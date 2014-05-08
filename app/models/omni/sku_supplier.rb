@@ -22,7 +22,7 @@ class Omni::SkuSupplier < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :sku_supplier_id,                  override: false,        with: :guid
   default      :display,                          override: false,        to: lambda{|m| "#{m.sku_display} - #{m.supplier_display}"}
-  default      :is_primary,              override: false,        to: false
+  default      :is_primary,                       override: false,        to: false
   default      :is_manufacturer,                  override: false,        to: false
   default      :is_discontinued,                  override: false,        to: false
   default      :supplier_cost_units,              override: false,        to: 0

@@ -55,6 +55,7 @@ class Omni::Purchase < ActiveRecord::Base
   has_many     :purchase_details,                    class_name: 'Omni::PurchaseDetail',    foreign_key: 'purchase_id'
   has_many     :purchase_allocations,                through: :purchase_details #class_name: 'Omni::PurchaseDetail',    foreign_key: 'purchase_id'
   has_many     :notes,                               class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
+  has_many     :approvals,                           class_name: 'Desk::Approval',               foreign_key: 'approvable_id'
   # has_many     :logs,                                class_name: 'Omni::Log',               foreign_key: 'logable_id' , as: :logable
   has_many     :stock_ledger_activities,             class_name: 'Omni::StockLedgerActivity', foreign_key: 'stockable_id' , as: :stockable
   belongs_to   :location,                            class_name: 'Omni::Location',          foreign_key: 'location_id'
@@ -164,11 +165,10 @@ class Omni::Purchase < ActiveRecord::Base
       validates :freight_term,                               presence: true
       validates :ship_via,                                   presence: true
       validates :fob_point,                                  presence: true
-      validate  :validate_approvals
     end
 
     state :open do
-      # validate  :validate_approve
+      validate  :approved
     end
 
     state :partial do
@@ -181,39 +181,30 @@ class Omni::Purchase < ActiveRecord::Base
     end
 
     ### CALLBACKS ###
-    # after_transition on: :costing, do: :do_costing
+    # after_transition on: :release, do: :do_release
+    after_transition on: :activate, do: :do_activate
     after_transition on: :cancel,  do: :do_cancel
-    after_transition on: :release, do: :do_release
-    after_transition on: :approve, do: :do_approve
-    # after_transition on: :print,   do: :do_print
-    # after_transition on: :open, do: :do_open
+
 
     ### EVENTS ###
-    # event :crash do
-    #   transition all - [:parked, :stalled] => :stalled, :if => lambda {|vehicle| !vehicle.passed_inspection?}
-    # end
-
-    # event :repair do
-    #   # The first transition that matches the state and passes its conditions
-    #   # will be used
-    #   transition :stalled => :parked, :unless => :auto_shop_busy
-    #   transition :stalled => same
-    # end
-
     event :release do
-      transition draft: :pending_approval # if current_user has privilege purchase_release
+      transition draft: :pending_approval
+    end
+
+    event :activate do
+      # transition :pending_approval => :open, :if => :approved
+      transition :pending_approval => :open
     end
 
     event :cancel do
       transition [:draft, :pending_approval, :open, :partial] => :cancelled
     end
 
-    # event :allocate do
-    #   transition [:draft, :pending, :approval, :open] => same
-    # end
-
-    # event :approve do
-    #   transition :pending_approval => :pending_approval
+    # event :repair do
+    #   # The first transition that matches the state and passes its conditions will be used
+    #   transition :stalled => same
+    #   transition :stalled => :parked, :unless => :auto_shop_busy
+    #   transition all - [:parked, :stalled] => :stalled, :if => lambda {|vehicle| !vehicle.passed_inspection?}
     # end
 
   end
@@ -226,21 +217,13 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def do_cancel
-    # the Cancel event writes StockLedgerActivity rows for each PurchaseDetail
-    # to update On Order and order history
      self.purchase_details.each {|pd| pd.cancel}
-     self.cancelled_date = Date.today
-     self.save
+     self.send('cancelled_date=', 'Date.today')
   end
 
-  def do_release
-    # the Release event validates that the correct number of PO Approvers has been entered and sends a notification to the first approver
-  end
-
-  def do_open
-    self.state = "open"
-    self.save
-    self.purchase_details.each {|pd| pd.approve}
+  def do_activate
+    # activate purchase details
+    self.purchase_details.each {|pd| pd.activate}
   end
   # STATE HELPERS (End)
 
@@ -346,75 +329,26 @@ class Omni::Purchase < ActiveRecord::Base
     [units_to_order, 1].max.round
   end
 
-  def approve
-    case self.approval_level
-      when 1
-        self.approval_1_date = Date.today
-        self.save
-        if self.purchase_approver_2_user_id
-#         notify approver 2
-        else
-          self.do_open
-        end
-      when 2
-        self.approval_2_date = Date.today
-        self.save
-        if self.purchase_approver_3_user_id
-#         notify approver 3
-        else
-          self.do_open
-        end
-      when 3
-        self.approval_3_date = Date.today
-        self.save
-        self.do_open
-    end
- end
-
-  def approval_level
-    # Determine current user
-
-    current_user_id = Buildit::User.current ? Buildit::User.current.user_id : '811166D4D50A11E2B45820C9D04AARON' # aaron
-    # puts "\ncurrent_user_id is #{current_user_id}"
-    #  Determine whether this is the final approval or if the next approver needs to be notified
-    approval_level = 0
-     #  Determine which approval is needed (1, 2 or 3) and whether the user is authorized to do the approval
-    if !self.approval_1_date
-       errors.add("user", "may not authorize this purchase1") unless current_user_id == self.purchase_approver_1_user_id
-       approval_level = 1
-    else
-       if !self.approval_2_date
-          errors.add("user", "may not authorize this purchase2") unless current_user_id == self.purchase_approver_2_user_id
-          approval_level = 2
-       else
-          if !self.approval_3_date
-            errors.add("user", "may not authorize this purchase3") unless current_user_id == self.purchase_approver_3_user_id
-            approval_level = 3
-          else
-            errors.add("purchase", "cannot be approved") unless current_user_id == self.purchase_approver_3_user_id
-          end
-       end
-    end
-    # puts "errors count is #{errors.count}"
-    approval_level = 0 if errors.count > 0
-    return approval_level
-  end
-
-  def validate_approvals
+  def approved
     # puts "total_order_cost is #{total_order_cost.to_s}"
+    # puts "approvals count is #{self.approvals.count}"
+    o = Omni::PurchaseOption.first
     case
-      when total_order_cost < Omni::SystemOption.first.purchase_approval_1_maximum_amount
-        errors.add(:purchase_approver_1_user_id, "can't be blank") unless self.purchase_approver_1_user_id
+      when total_order_cost < o.approver_1_limit
+        errors.add(:approvals, "Missing approval from #{o.approver_1_display} for order cost of $#{total_order_cost.to_s}") unless approvals.find_by_approver_id(o.approver_1_id)
 
-      when total_order_cost < Omni::SystemOption.first.purchase_approval_2_maximum_amount
-        errors.add(:purchase_approver_1_user_id, "can't be blank") unless self.purchase_approver_1_user_id
-        errors.add(:purchase_approver_2_user_id, "can't be blank") unless self.purchase_approver_2_user_id
+      when total_order_cost < o.approver_2_limit
+        errors.add(:approvals, "Missing approval from #{o.approver_1_display} for order cost of $#{total_order_cost.to_s}") unless approvals.find_by_approver_id(o.approver_1_id)
+        errors.add(:approvals, "Missing approval from #{o.approver_2_display} for order cost of $#{total_order_cost.to_s}") unless approvals.find_by_approver_id(o.approver_2_id)
 
-      when total_order_cost >= Omni::SystemOption.first.purchase_approval_2_maximum_amount
-        errors.add(:purchase_approver_1_user_id, "can't be blank") unless self.purchase_approver_1_user_id
-        errors.add(:purchase_approver_2_user_id, "can't be blank") unless self.purchase_approver_2_user_id
-        errors.add(:purchase_approver_3_user_id, "can't be blank") unless self.purchase_approver_3_user_id
+      when total_order_cost >= o.approver_2_limit
+        errors.add(:approvals, "Missing approval from #{o.approver_1_display} for order cost of $#{total_order_cost.to_s}") unless approvals.find_by_approver_id(o.approver_1_id)
+        errors.add(:approvals, "Missing approval from #{o.approver_2_display} for order cost of $#{total_order_cost.to_s}") unless approvals.find_by_approver_id(o.approver_2_id)
+        errors.add(:approvals, "Missing approval from #{o.approver_3_display} for order cost of $#{total_order_cost.to_s}") unless approvals.find_by_approver_id(o.approver_3_id)
     end
+    # puts "\nerrors are #{errors.full_messages.to_sentence}"
+    # return false
+    # return errors.count == 0
   end
 
   def compute_allocations
@@ -452,8 +386,8 @@ class Omni::Purchase < ActiveRecord::Base
   def cascading_delete
     # Delete all associated child rows in ReceiptDetail, ReceiptPurchase and ReceiptAllocation.
     if ['draft'].include? self.state
-      self.purchase_details.all.each {|x| x.purchase_allocations.all.each {|x| x.destroy}}
-      self.purchase_details.all.each {|x| x.destroy}
+      purchase_details.all.each { |x| x.purchase_allocations.all.each  { |y| y.destroy } }
+      purchase_details.all.each { |x| x.destroy }
     else
       errors.add('state','only records in draft state may be deleted.')
       raise ActiveRecord::Rollback
@@ -469,16 +403,8 @@ class Omni::Purchase < ActiveRecord::Base
     # Omni::Purchase::Helpers.print(self)
   end
 
-  # HELPERS (End)
-
-
   def display_as
     self.display
   end
+  # HELPERS (End)
 end # class Omni::Purchase
-
-
-  # def request(params={})
-  #   @params = params
-  #   self.send(params['request_type'])
-  # end

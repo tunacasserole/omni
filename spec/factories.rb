@@ -1,4 +1,9 @@
 FactoryGirl.define do
+ factory Desk::Approval do
+  approvable_type 'Omni::Purchase'
+  approver_id '811166D4D50A11E2B45820C9D04AARON'
+  sequence(:display) {|n| "it was approved #{n}"}
+ end
  factory Buildit::Note do
   sequence(:detail) {|n| "test #{n}"}
  end

@@ -75,7 +75,7 @@ describe "projection" do
       me.state.should eq('draft')
       me.projection_details.count.should eq(0)
     end
-
+  end
     # it "build details for test data" do
     #   # puts "== #{Time.now.strftime("%H:%M:%S").yellow}: setting up data"
     #   n = 1 # target is 10
@@ -122,7 +122,16 @@ describe "projection" do
     # end
 
 
+  it "data" do
+    i_count = ActiveRecord::Base.connection.execute("select count(*) from inventories").first[0]
+    p_count = ActiveRecord::Base.connection.execute("select count(*) from projection_details").first[0]
+    # i_count.should eq(p_count)
 
+    count = ActiveRecord::Base.connection.execute("select count(*) from projection_details where projection_id is null or projection_id not in (select projection_id from projections)")
+    puts "projection details with invalid projection count is #{count.first[0]}"
+
+    count = ActiveRecord::Base.connection.execute("select count(*) from projection_details where inventory_id is null or inventory_id not in (select inventory_id from inventories)")
+    puts "projection details with invalid inventory count is #{count.first[0]}"
   end
 
 

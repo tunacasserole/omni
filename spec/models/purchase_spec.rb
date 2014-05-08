@@ -49,6 +49,37 @@ describe "purchase" do
 
   describe "state machine should" do
 
+     it "release" do
+      me.release
+      me.state.should eq('pending_approval')
+    end
+
+    it "activate", focus: true do
+      me.release
+      me.state.should eq('pending_approval')
+
+      me.activate
+      me.state.should eq 'pending_approval'
+
+      create(Desk::Approval, approvable_id: me.purchase_id, approver_id: '811166D4D50A11E2B45820C9D04AARON')
+      me.approvals.count.should eq 1
+
+      me.activate
+      me.state.should eq 'open'
+
+    end
+
+    it "cancel" do
+      me.cancel
+      me.state.should eq 'cancelled'
+    end
+
+
+  end
+
+      # puts "\nerrors is message: #{me.errors.full_messages.to_sentence}"
+
+end
     # it "bulk_allocate" do
 
     #   p = create(Omni::Projection)
@@ -77,23 +108,3 @@ describe "purchase" do
     #   # me.purchase_details.first.purchase_allocations.count.should eq(1)
     #   # me.purchase_allocations.first.should_not be_nil
     # end
-
-    it "approve" do
-      me.approve
-      me.state.should eq 'open'
-    end
-    it "cancel" do
-      me.cancel
-      me.state.should eq 'cancelled'
-    end
-     it "release" do
-      me.release
-      me.state.should eq('pending_approval')
-    end
-
-
-  end
-
-      # puts "\nerrors is message: #{me.errors.full_messages.to_sentence}"
-
-end

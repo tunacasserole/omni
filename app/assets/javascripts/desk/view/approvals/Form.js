@@ -2,6 +2,7 @@ Ext.define('Desk.view.approvals.Form', {
 
     extend: 'Buildit.ux.Form',
     alias: 'widget.desk-approvals-Form',
+    backOnNew: true,
 
     // LABELS (Start) =======================================================================
     approval_idLabel: Desk.i18n.model.Approval.approval_id,

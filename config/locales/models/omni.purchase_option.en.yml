@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      omni/purchase_option:  'Purchase Options'
+    attributes:
+      omni/purchase_option:
+        display_as:                        'Purchase Options'
+        purchase_option_id:                'Purchase Options'
+        display:                           'Description'
+        approver_1_id:                     'Approver 1'
+        approver_2_id:                     'Approver 2'
+        approver_3_id:                     'Approver 3'
+        approver_1_limit:                  'Approver 1 Limit'
+        approver_2_limit:                  'Approver 2 Limit'
+        approver_3_limit:                  'Approver 3 Limit'
+        is_destroyed:                      'Is Destroyed'

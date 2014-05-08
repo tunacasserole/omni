@@ -53,8 +53,8 @@ describe "purchase_detail" do
       me.allocate
       me.purchase_allocations.count.should eq 1
     end
-    it "approve" do
-      me.approve
+    it "activate" do
+      me.activate
       me.state.should eq 'open'
     end
     it "cancel" do
@@ -64,7 +64,7 @@ describe "purchase_detail" do
     end
      it "release" do
       me.release
-      me.approve
+      me.activate
       me.receive
       me.state.should eq('complete')
     end

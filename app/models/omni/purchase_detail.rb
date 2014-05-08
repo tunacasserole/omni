@@ -111,14 +111,14 @@
     end
 
   ### CALLBACKS ###
-    after_transition on: :approve, do: :do_approve
+    after_transition on: :activate, do: :do_activate
     after_transition on: :receive, do: :do_receive
     after_transition on: :release, do: :do_release
     after_transition on: :cancel, do: :do_cancel
     after_transition on: :process, do: :do_process
 
   ### EVENTS ###
-    event :approve do
+    event :activate do
       transition draft: :open
     end
 
@@ -194,7 +194,7 @@
   end
 
   def do_cancel
-    # Write SLA
+    # the Cancel event writes StockLedgerActivity rows for each PurchaseDetail to update On Order and order history
     open_units = self.selling_units_approved - self.selling_units_received - self.selling_units_cancelled
     # Give error because no open units cancelled
     if open_units < 0
@@ -236,8 +236,8 @@
 
   end
 
-  def do_approve
-    # the Approve event writes StockLedgerActivity rows to update On Order and order history"
+  def do_activate
+    # the activate event writes StockLedgerActivity rows to update On Order and order history"
     sl = Omni::StockLedgerActivity.new
     sl.stockable_type = 'Omni::Purchase'
     sl.stockable_id = self.purchase_id

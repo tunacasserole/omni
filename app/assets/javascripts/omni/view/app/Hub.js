@@ -484,7 +484,7 @@ Ext.define('Omni.view.app.Hub', {
         , {
           title: 'company setup data',
           columns: 8,
-          rows: 2,
+          rows: 3,
           tiles: [{
             title: 'Gl Accounts',
             colspan: 2,
@@ -551,6 +551,14 @@ Ext.define('Omni.view.app.Hub', {
             cls: 'network',
             target: {
               xtype: 'omni-system_options-Explorer'
+            }
+          }, {
+            title: 'Purchase Options',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'network',
+            target: {
+              xtype: 'omni-purchase_options-Explorer'
             }
           }]
         }
