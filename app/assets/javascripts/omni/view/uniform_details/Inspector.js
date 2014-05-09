@@ -28,17 +28,17 @@ Ext.define('Omni.view.uniform_details.Inspector', {
       cards: [{
         title: 'Profile',
         xtype: 'omni-uniform_details-Form'
-      }, {
-        title: 'Lookups',
-        xtype: 'omni-uniform_lookups-Explorer',
-        defaultSearch: {
-          with: {
-            uniform_detail_id: {
-              equal_to: me.record.get('uniform_detail_id')
-            }
-          }
-        },
-        showBadge: true
+      // }, {
+      //   title: 'Lookups',
+      //   xtype: 'omni-uniform_lookups-Explorer',
+      //   defaultSearch: {
+      //     with: {
+      //       uniform_detail_id: {
+      //         equal_to: me.record.get('uniform_detail_id')
+      //       }
+      //     }
+      //   },
+      //   showBadge: true
       }]
     });
     // CARDS (End)

@@ -47,6 +47,7 @@ class Omni::Category < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :category_id
     string   :display
     string   :category_code
     string   :category_type do |x| Buildit::Lookup::Manager.display_for('CATEGORY_TYPE', x.category_type) end
