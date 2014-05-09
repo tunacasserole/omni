@@ -143,6 +143,7 @@ Ext.define('Desk.view.cases.Form', {
           ]
         }/*,
         {
+
           xtype        : 'fieldset',
           title        : 'Additional Information',
           collapsible  : true,

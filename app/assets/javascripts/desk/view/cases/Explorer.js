@@ -9,6 +9,7 @@ Ext.define('Desk.view.cases.Explorer', {
     xtype    : 'buildit-explorer-ContextMenu'
   },
 
+
   newForms : [{
     xtype    : 'desk-cases-Form'
   }],
