@@ -80,16 +80,16 @@ Ext.define('Desk.view.cases.Explorer', {
         //   dataIndex    : 'tags',
         //   flex         : 1
         // },
-        {
-          header       : me.estimated_hoursLabel,
-          dataIndex    : 'estimated_hours',
-          flex         : 1
-        },
-        {
-          header       : me.actual_hoursLabel,
-          dataIndex    : 'actual_hours',
-          flex         : 1
-        },
+        // {
+        //   header       : me.estimated_hoursLabel,
+        //   dataIndex    : 'estimated_hours',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : me.actual_hoursLabel,
+        //   dataIndex    : 'actual_hours',
+        //   flex         : 1
+        // },
         {
           header       : me.stateLabel,
           dataIndex    : 'state',

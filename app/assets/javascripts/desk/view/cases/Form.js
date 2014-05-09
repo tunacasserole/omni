@@ -49,8 +49,9 @@ Ext.define('Desk.view.cases.Form', {
           items        : [
             {
               xtype        : 'textfield',
-              name         : 'state',
-              fieldLabel   : me.stateLabel,
+              name         : 'case_nbr',
+              fieldLabel   : me.case_nbrLabel,
+              emptyText    : 'auto-generated on save',
               maxLength    : 200,
               minLength    : 0,
               allowBlank   : true,
@@ -58,9 +59,8 @@ Ext.define('Desk.view.cases.Form', {
             },
             {
               xtype        : 'textfield',
-              name         : 'case_nbr',
-              fieldLabel   : me.case_nbrLabel,
-              emptyText    : 'auto-generated on save',
+              name         : 'state',
+              fieldLabel   : me.stateLabel,
               maxLength    : 200,
               minLength    : 0,
               allowBlank   : true,
@@ -107,22 +107,22 @@ Ext.define('Desk.view.cases.Form', {
             //   minLength    : 0,
             //   allowBlank   : true
             // },
-            {
-              xtype        : 'numberfield',
-              name         : 'estimated_hours',
-              fieldLabel   : me.estimated_hoursLabel,
-              allowBlank   : true,
-              minValue     : 0,
-              maxValue     : 100
-            },
-            {
-              xtype        : 'numberfield',
-              name         : 'actual_hours',
-              fieldLabel   : me.actual_hoursLabel,
-              allowBlank   : true,
-                minValue     : 0,
-                maxValue     : 100
-            },
+            // {
+            //   xtype        : 'numberfield',
+            //   name         : 'estimated_hours',
+            //   fieldLabel   : me.estimated_hoursLabel,
+            //   allowBlank   : true,
+            //   minValue     : 0,
+            //   maxValue     : 100
+            // },
+            // {
+            //   xtype        : 'numberfield',
+            //   name         : 'actual_hours',
+            //   fieldLabel   : me.actual_hoursLabel,
+            //   allowBlank   : true,
+            //     minValue     : 0,
+            //     maxValue     : 100
+            // },
             {
               xtype        : 'checkbox',
               name         : 'is_billable',
