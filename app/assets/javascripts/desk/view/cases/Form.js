@@ -29,6 +29,7 @@ Ext.define('Desk.view.cases.Form', {
   initComponent: function() {
 
     var me = this;
+    var project_id = this.record.get('project_id') || '054D5954D9FA11E3A45D20C9D047DD15';
 
     // FILTER (Start) =======================================================================
     var associativeFilter = {
@@ -108,11 +109,8 @@ Ext.define('Desk.view.cases.Form', {
             allowBlank: true,
             defaultSearch: {
               with: {
-                teamable_type: {
-                  equal_to: 'Desk::Project'
-                },
                 teamable_id: {
-                  equal_to: me.record.get('project_id')
+                  equal_to: project_id
                 }
               }
             }

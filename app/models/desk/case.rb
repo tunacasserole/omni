@@ -13,7 +13,7 @@ class Desk::Case < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates :case_id,                        presence: true, uniqueness: true
   validates :display,                        presence: true
-  validates :project_id,                     presence: true
+  # validates :project_id,                     presence: true
   validates :case_type,                      lookup: 'CASE_TYPE',       allow_nil: true
   validates :case_size,                      lookup: 'CASE_SIZE',       allow_nil: true
   validates :case_urgency,                   lookup: 'CASE_URGENCY',    allow_nil: true
@@ -156,7 +156,8 @@ class Desk::Case < ActiveRecord::Base
   # Sends an email notification to the requestor and owner of the case
   def notify
     # Determine target address
-    email_addresses = [self.owner,self.requestor].collect { |u| u.email_address  }
+
+    email_addresses = [self.owner,self.requestor].collect { |u| u.email_address if u }
     email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes
     if email_addresses.count > 0
       message = Buildit::Comm::Email::Message.create(

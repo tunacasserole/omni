@@ -19,7 +19,7 @@ class Desk::Team < ActiveRecord::Base
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to      :teamable,       :polymorphic => true
+  # belongs_to      :teamable,       :polymorphic => true
   belongs_to      :user,            class_name: 'Buildit::User',           foreign_key: 'user_id'
   # ASSOCIATIONS (End)
 

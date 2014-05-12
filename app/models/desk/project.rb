@@ -11,9 +11,9 @@ class Desk::Project < ActiveRecord::Base
   # BEHAVIOR (End)
 
     # VALIDATIONS (Start) =================================================================
-  validates :project_id,                     presence: true
-  validates :display,                        presence: true
-  validates :display,                        uniqueness: true
+  validates :project_id,                     presence: true, uniqueness: true
+  validates :display,                        presence: true, uniqueness: true
+  validates :owner_id,                       presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================

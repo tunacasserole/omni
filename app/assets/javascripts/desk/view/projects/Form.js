@@ -70,7 +70,7 @@ Ext.define('Desk.view.projects.Form', {
               itemTpl: '{full_name}',
               name: 'owner_id',
               fieldLabel: this.owner_idLabel,
-              allowBlank: true
+              allowBlank: false
             }, {
               xtype: 'textarea',
               name: 'description',

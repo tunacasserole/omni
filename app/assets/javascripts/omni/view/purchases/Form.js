@@ -1,3 +1,4 @@
+
 Ext.define('Omni.view.purchases.Form', {
 
   extend: 'Buildit.ux.Form',
