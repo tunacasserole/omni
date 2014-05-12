@@ -13,8 +13,6 @@ Ext.define('Omni.view.app.Hub', {
 
     // this.socket   = Buildit.lib.SocketManager.get('STANDARD');
     // this.socket.on('newEvents', this.handleNewEvents, me);
-
-
     Ext.apply(this, {
       allowSignout: true,
       title: 'Start',
