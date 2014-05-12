@@ -58,12 +58,12 @@ Ext.define('Desk.view.guides.Explorer', {
     {
       header       : me.guide_nameLabel,
       dataIndex    : 'guide_name',
-      flex         : 1
+      flex         : 3
     },
     {
       header       : me.descriptionLabel,
       dataIndex    : 'description',
-      flex         : 1
+      flex         : 5
     }
     // {
     //   header       : me.guide_locationLabel,
