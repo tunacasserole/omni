@@ -44,13 +44,13 @@ Ext.define('Desk.view.app.Hub', {
               target: {
                 xtype: 'desk-projects-Explorer'
               }
-              // }, {
-              //   title: 'Teams',
-              //   colspan: 2,
-              //   rowspan: 1,
-              //   target: {
-              //     xtype: 'desk-teams-Explorer'
-              //   }
+              }, {
+                title: 'Help',
+                colspan: 2,
+                rowspan: 1,
+                target: {
+                  xtype: 'desk-guides-Explorer'
+                }
             }
           ]
         }

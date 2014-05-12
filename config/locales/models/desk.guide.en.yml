@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      desk/guide:  'Guide'
+    attributes:
+      desk/guide:
+        display_as:                        'Guide'
+        guide_id:                          'Guide'
+        owner_id:                          'Owner'
+        guide_nbr:                         'Guide Nbr'
+        guide_name:                        'Guide Name'
+        description:                       'Description'
+        guide_location:                    'Guide Location'
+        gem_name:                          'Gem Name'
