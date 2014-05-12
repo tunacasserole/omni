@@ -25,6 +25,8 @@ Ext.define('Desk.view.cases.Explorer', {
   project_idLabel: Desk.i18n.model.Case.project_id,
   case_nbrLabel: Desk.i18n.model.Case.case_nbr,
   case_typeLabel: Desk.i18n.model.Case.case_type,
+  case_sizeLabel: Desk.i18n.model.Case.case_size,
+  case_urgencyLabel: Desk.i18n.model.Case.case_urgency,
   stateLabel: Desk.i18n.model.Case.state,
   displayLabel: Desk.i18n.model.Case.display,
   descriptionLabel: Desk.i18n.model.Case.description,
@@ -60,6 +62,10 @@ Ext.define('Desk.view.cases.Explorer', {
           dataIndex: 'case_type',
           flex: 2
         }, {
+          header: me.case_urgencyLabel,
+          dataIndex: 'case_urgency',
+          flex: 2
+        }, {
           header: me.displayLabel,
           dataIndex: 'display',
           flex: 4
@@ -75,6 +81,10 @@ Ext.define('Desk.view.cases.Explorer', {
           header: me.project_idLabel,
           dataIndex: 'project_display',
           flex: 2
+        }, {
+          header: me.case_sizeLabel,
+          dataIndex: 'case_size',
+          flex: 1
         }, {
           header: me.stateLabel,
           dataIndex: 'state',

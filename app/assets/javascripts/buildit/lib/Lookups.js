@@ -1,13 +1,5 @@
 var lookupStoreFields = ['lookup_id', 'code', 'code_int', 'category', 'default_text', 'depends_on', 'is_enabled'];
 Ext.create('Ext.data.ArrayStore', {
-  storeId   : '-lookup-Store',
-  fields    : lookupStoreFields,
-  data      : [
-    ['','',,'','',null,true]
-  ]
-});
-
-Ext.create('Ext.data.ArrayStore', {
   storeId   : 'ALLOCATION_FORMULA-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
@@ -1177,11 +1169,11 @@ Ext.create('Ext.data.ArrayStore', {
   storeId   : 'CASE_SIZE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
-    ['0SNXBMWMBEOEE73MENTXXXXXXXXX1234','XS',,'CASE_SIZE','Extra Small',null,true],
-    ['1SNTHEO654ODE73MENTXXXXXXXXX1234','S',,'CASE_SIZE','Small',null,true],
-    ['3312226EDEO6E73MENTXXXXXXXXX1234','M',,'CASE_SIZE','Medium',null,true],
-    ['43122456ENODE73MENTXXXXXXXXX1234','L',,'CASE_SIZE','Large',null,true],
-    ['53122456ENHANCEMENTXXXXXXXXX1234','XL',,'CASE_SIZE','Extra Large',null,true]
+    ['0SNXBMWMBEOEE73MENTXXXXXXXXX1234','EXTRA SMALL',,'CASE_SIZE','Extra Small',null,true],
+    ['1SNTHEO654ODE73MENTXXXXXXXXX1234','SMALL',,'CASE_SIZE','Small',null,true],
+    ['3312226EDEO6E73MENTXXXXXXXXX1234','MEDIUM',,'CASE_SIZE','Medium',null,true],
+    ['43122456ENODE73MENTXXXXXXXXX1234','LARGE',,'CASE_SIZE','Large',null,true],
+    ['53122456ENHANCEMENTXXXXXXXXX1234','EXTRA LARGE',,'CASE_SIZE','Extra Large',null,true]
   ]
 });
 
@@ -1193,6 +1185,17 @@ Ext.create('Ext.data.ArrayStore', {
     ['03122456ENHDATAMENTXXXOEUIXX1234','DATA',,'CASE_TYPE','Data conversion or cleanup',null,true],
     ['03122456ENHANCEHETETXXXXXXXX1234','ENHANCEMENT',,'CASE_TYPE','Enhancement, new feature or custom development',null,true],
     ['03122456EQUESTIONNTXXXXXXXXX1234','QUESTION',,'CASE_TYPE','Question or explanation needed',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'CASE_URGENCY-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['0SNXBMRCGOEURCGM1NTXXXXXXXXX1234','LOW',,'CASE_URGENCY','Low',null,true],
+    ['0SNXBMRCGOEURCGM2DIUMEXXXXXX1234','STANDARD',,'CASE_URGENCY','Standard',null,true],
+    ['0SNXBMRCGOEURCGMLARGEEXXXXXX1234','HIGH',,'CASE_URGENCY','High',null,true],
+    ['0SNXBMRCGOEURCGMPARGEEXXXXXX1234','SHOWSTOPPER',,'CASE_URGENCY','Show Stopper',null,true]
   ]
 });
 

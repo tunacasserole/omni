@@ -1,3 +1,10 @@
-<h1>
-Case <%= case_nbr %> requires your attention.
-</h1>
+
+<h1>Omni Case <%= case_nbr %></h1>
+<p> Summary: <%= display %>
+<p> Description: <%= description %>
+<p> Date: <%= audit_created_at.strftime("%m/%d/%Y") %> </p>
+<br>
+<p> Case updated to: <%= state %> </p>
+<br>
+<p> Owner: <%= owner_display %>
+<p> Requestor: <%= requestor_display %>

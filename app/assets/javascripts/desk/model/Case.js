@@ -23,7 +23,10 @@ Ext.define('Desk.model.Case', {
     name: 'case_size',
     type: 'string'
   }, {
-    name: 'case_detail',
+    name: 'case_urgency',
+    type: 'string'
+  }, {
+    name: 'details',
     type: 'string'
   }, {
     name: 'state',

@@ -47,7 +47,7 @@ class Desk::Team < ActiveRecord::Base
   #   text     :project_display_fulltext, :using => :project_display
   #   text     :requestor_display_fulltext, :using => :requestor_display
   end
-  order_search_by :user_display => :desc
+  order_search_by :user_display => :asc
 
   # # STATES (Start) ====================================================================
   # state_machine :state, :initial => :draft do

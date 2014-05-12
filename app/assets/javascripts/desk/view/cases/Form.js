@@ -11,7 +11,8 @@ Ext.define('Desk.view.cases.Form', {
   case_nbrLabel: Desk.i18n.model.Case.case_nbr,
   case_typeLabel: Desk.i18n.model.Case.case_type,
   case_sizeLabel: Desk.i18n.model.Case.case_size,
-  case_detailLabel: Desk.i18n.model.Case.case_detail,
+  case_urgencyLabel: Desk.i18n.model.Case.case_urgency,
+  detailsLabel: Desk.i18n.model.Case.details,
   stateLabel: Desk.i18n.model.Case.state,
   displayLabel: Desk.i18n.model.Case.display,
   descriptionLabel: Desk.i18n.model.Case.description,
@@ -95,16 +96,37 @@ Ext.define('Desk.view.cases.Form', {
             allowBlank: true
           }, {
             xtype: 'buildit-Locator',
-            store: Ext.create('Buildit.store.User', {
+            store: Ext.create('Desk.store.Team', {
               pageSize: 20
             }),
-            displayField: 'full_name',
-            queryField: 'full_name',
+            displayField: 'user_display',
+            queryField: 'user_display',
             valueField: 'user_id',
-            itemTpl: '{full_name}',
+            itemTpl: '{user_display}',
             name: 'owner_id',
             fieldLabel: this.owner_idLabel,
-            allowBlank: true
+            allowBlank: true,
+            defaultSearch: {
+              with: {
+                teamable_type: {
+                  equal_to: 'Desk::Project'
+                },
+                teamable_id: {
+                  equal_to: me.record.get('project_id')
+                }
+              }
+            }
+            // xtype: 'buildit-Locator',
+            // store: Ext.create('Buildit.store.User', {
+            //   pageSize: 20
+            // }),
+            // displayField: 'full_name',
+            // queryField: 'full_name',
+            // valueField: 'user_id',
+            // itemTpl: '{full_name}',
+            // name: 'owner_id',
+            // fieldLabel: this.owner_idLabel,
+            // allowBlank: true
           }, {
             xtype: 'buildit-Lookup',
             name: 'case_type',
@@ -114,13 +136,13 @@ Ext.define('Desk.view.cases.Form', {
             allowBlank: true,
             category: 'CASE_TYPE'
           }, {
-            xtype: 'buildit-Lookup',
-            name: 'case_size',
-            fieldLabel: me.case_sizeLabel,
-            maxLength: 200,
+            xtype: 'textarea',
+            name: 'details',
+            fieldLabel: me.detailsLabel,
+            maxLength: 4000,
             minLength: 0,
             allowBlank: true,
-            category: 'CASE_SIZE'
+            disabled: true
           }, {
             xtype: 'textarea',
             name: 'description',
@@ -129,17 +151,21 @@ Ext.define('Desk.view.cases.Form', {
             minLength: 0,
             allowBlank: true
           }, {
-            xtype: 'textarea',
-            name: 'case_detail',
-            fieldLabel: me.case_detailLabel,
-            maxLength: 4000,
+            xtype: 'buildit-Lookup',
+            name: 'case_urgency',
+            fieldLabel: me.case_urgencyLabel,
+            maxLength: 200,
             minLength: 0,
             allowBlank: true,
-            disabled: true
-            // }, {
-            //   xtype: 'checkbox',
-            //   name: 'is_approved',
-            //   fieldLabel: me.is_approvedLabel
+            category: 'CASE_URGENCY'
+          }, {
+            xtype: 'buildit-Lookup',
+            name: 'case_size',
+            fieldLabel: me.case_sizeLabel,
+            maxLength: 200,
+            minLength: 0,
+            allowBlank: true,
+            category: 'CASE_SIZE'
           }, {
             xtype: 'textfield',
             name: 'audit_created_by_name',
@@ -185,6 +211,15 @@ Ext.define('Desk.view.cases.Form', {
     Ext.apply(this, {
       actions: [{
         xtype: 'button',
+        iconCls: 'fa fa-thumb-tack',
+        tooltip: 'Backlog',
+        listeners: {
+          beforerender: this.prepareBacklogAction,
+          click: this.onBacklogAction,
+          scope: me
+        }
+      }, {
+        xtype: 'button',
         iconCls: 'fa fa-caret-square-o-right',
         tooltip: 'Activate',
         listeners: {
@@ -195,7 +230,7 @@ Ext.define('Desk.view.cases.Form', {
       }, {
         xtype: 'button',
         iconCls: 'fa fa-hand-o-right',
-        tooltip: 'Retest It',
+        tooltip: 'Review',
         listeners: {
           beforerender: this.prepareReviewAction,
           click: this.onReviewAction,
@@ -239,6 +274,10 @@ Ext.define('Desk.view.cases.Form', {
     this.processEventTransition('activate', 'activate was succesfull.', 'activate encountered an error.');
   }, // onBuildAction
 
+  onBacklogAction: function(action, eOpts) {
+    this.processEventTransition('backlog', 'backlog was succesfull.', 'backlog encountered an error.');
+  }, // onBuildAction
+
   onReviewAction: function(action, eOpts) {
     this.processEventTransition('review', 'review was succesfull', 'review encountered an error.');
   }, // onBuildAction
@@ -253,12 +292,17 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareActivateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'draft' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'backlog' ? action.show() : action.hide();
   },
 
   prepareReviewAction: function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'active' ? action.show() : action.hide();
+  },
+
+  prepareBacklogAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'draft' || currentState === 'active' ? action.show() : action.hide();
   },
 
   prepareRejectAction: function(action, eOpts) {

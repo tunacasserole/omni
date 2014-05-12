@@ -16,6 +16,7 @@ class Desk::Case < ActiveRecord::Base
   validates :project_id,                     presence: true
   validates :case_type,                      lookup: 'CASE_TYPE',       allow_nil: true
   validates :case_size,                      lookup: 'CASE_SIZE',       allow_nil: true
+  validates :case_urgency,                   lookup: 'CASE_URGENCY',    allow_nil: true
 
   # VALIDATIONS (End)
 
@@ -25,6 +26,9 @@ class Desk::Case < ActiveRecord::Base
   default :project_id,                       :to => lambda{ |m| Desk::Project.omni_project.project_id }
   default :requestor_id,                     :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   default :owner_id,                         :to => lambda{ |m| m.project.owner_id if m.project }
+  default :details,                          :to => "select a request type for further instructions"
+  default :case_urgency,                     :to => 'STANDARD'
+  default :case_type,                        :to => 'QUESTION'
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
@@ -49,6 +53,8 @@ class Desk::Case < ActiveRecord::Base
     string   :project_id
     string   :case_nbr
     string   :case_type
+    string   :case_size
+    string   :case_urgency
     string   :state
     string   :display
     string   :description
@@ -58,6 +64,8 @@ class Desk::Case < ActiveRecord::Base
 
     text     :case_nbr_fulltext, :using => :case_nbr
     text     :case_type_fulltext, :using => :case_type
+    text     :case_urgency_fulltext, :using => :case_urgency
+    text     :case_size_fulltext, :using => :case_size
     text     :state_fulltext, :using => :state
     text     :display_fulltext, :using => :display
     text     :description_fulltext, :using => :description
@@ -79,7 +87,11 @@ class Desk::Case < ActiveRecord::Base
 
     # EVENTS ---------------------
     event :activate do
-      transition [:draft,:review]  => :active
+      transition [:backlog,:draft,:review]  => :active
+    end
+
+    event :backlog do
+      transition [:draft,:active]  => :backlog
     end
 
     event :review do
@@ -96,6 +108,9 @@ class Desk::Case < ActiveRecord::Base
 
 
     # STATES ---------------------
+    state :backlog do
+    end
+
     state :draft do
     end
 
@@ -116,16 +131,16 @@ class Desk::Case < ActiveRecord::Base
     # STATE HELPERS ---------------------
   def set_detail
     if self.case_type_changed?
-      self.case_detail =
+      self.details =
         case self.case_type
         when 'BUG'
-          'steps to reproduce: ....    expected results: ....      actual results: ....  '
+          '... please include steps to reproduce, expected results, and actual results in the description field for all bug reports. '
         when 'ENHANCEMENT'
-          '... please list as much detail about the enhancement as possible ...'
+          '... please list as much detail about the enhancement as possible in the description field for all enhancement requests.'
         when 'QUESTION'
-          '... please give as much detail about your question as possible ...'
+          '... please give as much detail about your question as possible in the description field for any question you may have.'
         when 'DATA'
-          '... expected data: ...      actual data: ....'
+          '... please include a description of the exact data you expected to see as well as what you actually saw for all data related issues.'
         end
     end
   end
@@ -143,17 +158,16 @@ class Desk::Case < ActiveRecord::Base
     # Determine target address
     email_addresses = [self.owner,self.requestor].collect { |u| u.email_address  }
     email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes
-
     if email_addresses.count > 0
       message = Buildit::Comm::Email::Message.create(
           subject: "OMNI notice: CASE #: #{case_nbr} has activity",
           body: Buildit::Email::Manager.generate(self, "case_notice"),
       )
 
+      email_addresses.each { |x| puts x}
       message.send_to email_addresses
       message.queue
-
-      # Buildit::Comm::Email::OutboundService.process
+      Buildit::Comm::Email::OutboundService.process
     end
   end # def notify
 

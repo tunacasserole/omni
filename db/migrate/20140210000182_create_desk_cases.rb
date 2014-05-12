@@ -10,7 +10,8 @@ class CreateDeskCases < ActiveRecord::Migration
       t.column   :case_nbr,                        :string,            :null  =>  true,   :limit   => 200
       t.column   :case_type,                       :string,            :null  =>  true,   :limit   => 200
       t.column   :case_size,                       :string,            :null  =>  true,   :limit   => 200
-      t.column   :case_detail,                     :string,            :null  =>  true,   :limit   => 4000
+      t.column   :case_urgency,                    :string,            :null  =>  true,   :limit   => 200
+      t.column   :details,                         :string,            :null  =>  true,   :limit   => 4000
       t.column   :state,                           :string,            :null  =>  true,   :limit   => 200
       t.column   :display,                         :string,            :null  =>  true,   :limit   => 200
       t.column   :description,                     :string,            :null  =>  true,   :limit   => 4000
