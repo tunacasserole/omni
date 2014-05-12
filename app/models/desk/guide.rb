@@ -81,6 +81,7 @@ class Desk::Guide < ActiveRecord::Base
     string   :guide_id
     string   :owner_id
     string   :guide_name
+    string   :guide_nbr
     string   :description
     string   :guide_location
 
