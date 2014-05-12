@@ -4,14 +4,14 @@ en:
       desk/approval:  'Approval'
     attributes:
       desk/approval:
-        display:                           'Approval'
+        display_as:                        'Approval'
         approval_id:                       'Approval'
         approver_id:                       'Approver'
         approvable_id:                     'Approvable'
         approvable_type:                   'Approvable Type'
         approval_nbr:                      'Approval Nbr'
         approval_type:                     'Approval Type'
-        display:                           'Comments'
+        display:                           'Approval Detail'
         description:                       'Description'
         approval_date:                     'Approval Date'
         audit_created_by:                  'Audit Created By'

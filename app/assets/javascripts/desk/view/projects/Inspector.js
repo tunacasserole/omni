@@ -29,11 +29,25 @@ Ext.define('Desk.view.projects.Inspector', {
         title: 'Profile',
         xtype: 'desk-projects-Form'
       }, {
-        title: 'Features',
-        xtype: 'desk-features-Explorer',
+        title: 'Cases',
+        xtype: 'desk-cases-Explorer',
         defaultSearch: {
           with: {
             project_id: {
+              equal_to: me.record.get('project_id')
+            }
+          }
+        },
+        showBadge: true
+      }, {
+        title: 'Team',
+        xtype: 'desk-teams-Explorer',
+        defaultSearch: {
+          with: {
+            teamable_type: {
+              equal_to: 'Desk::Project'
+            },
+            teamable_id: {
               equal_to: me.record.get('project_id')
             }
           }
@@ -81,11 +95,6 @@ Ext.define('Desk.view.projects.Inspector', {
           }
         },
         showBadge: true
-      }, {
-        title: 'Audit',
-        xtype: 'buildit-audits-Explorer',
-        model: 'Desk::Project',
-        model_id: me.record.get('project_id')
       }]
     });
     // CARDS (End)

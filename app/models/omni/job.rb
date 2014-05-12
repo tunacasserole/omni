@@ -181,7 +181,7 @@ class Omni::Job < ActiveRecord::Base
 
   # release => draft to pending
   def after_release
-    self.send('release_date=', Date.today)
+    self.send('target_date=', Date.today)
     if ['CONVERSION (HEAT APPLY)','CONVERSION (SEWN)','ALTERATION','SPECIAL CUT'].include? self.job_type
     # add picks for components if conversion or custom site
     end

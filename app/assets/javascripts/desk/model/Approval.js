@@ -3,7 +3,7 @@ Ext.define('Desk.model.Approval', {
 
   fields     : [
     {
-      name       : 'display',
+      name       : 'display_as',
       type       : 'string'
     },
     {

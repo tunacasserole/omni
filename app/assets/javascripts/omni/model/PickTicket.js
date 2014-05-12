@@ -22,7 +22,7 @@ Ext.define('Omni.model.Pick', {
     { name: 'job_id',                        type: 'string'      },
     { name: 'request_units',                        type: 'float',      defaultValue: 0                         },
     { name: 'complete_units',                       type: 'float',      defaultValue: 0                         },
-    { name: 'release_date',                         type: 'date'        },
+    { name: 'target_date',                         type: 'date'        },
     { name: 'start_date',                           type: 'date'        },
     { name: 'complete_date',                        type: 'date'        },
     { name: 'ship_date',                            type: 'date'        },

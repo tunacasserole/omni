@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      desk/team:  'Team Member'
+    attributes:
+      desk/team:
+        display_as:                        'Team Member'
+        team_id:                           'Team'
+        teamable_id:                       'Teamable'
+        teamable_type:                     'Teamable Type'
+        user_id:                           'Team Member'

@@ -120,11 +120,11 @@ Ext.define('Desk.view.tasks.Form', {
             {
               xtype        : 'buildit-Locator',
               store        : Ext.create('Buildit.store.User',{pageSize: 10}),
-              displayField : 'display',
-              itemTpl      : '{display}',
+              displayField : 'display_as',
+              itemTpl      : '{display_as}',
               name         : 'owner_id',
               fieldLabel   : me.owner_idLabel,
-              //initialValue : me.record.get('display'),
+              initialValue : me.record.get('display_as'),
               allowBlank   : true
             }
           ]

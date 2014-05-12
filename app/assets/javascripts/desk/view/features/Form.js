@@ -12,7 +12,7 @@ Ext.define('Desk.view.features.Form', {
   stateLabel                              : Desk.i18n.model.Feature.state,
   displayLabel                            : Desk.i18n.model.Feature.display,
   descriptionLabel                        : Desk.i18n.model.Feature.description,
-  release_dateLabel                       : Desk.i18n.model.Feature.release_date,
+  target_dateLabel                       : Desk.i18n.model.Feature.target_date,
   estimated_hoursLabel                    : Desk.i18n.model.Feature.estimated_hours,
   actual_hoursLabel                       : Desk.i18n.model.Feature.actual_hours,
   // LABELS (End)
@@ -44,11 +44,11 @@ Ext.define('Desk.view.features.Form', {
             // {
             //   xtype        : 'buildit-Locator',
             //   store        : Ext.create('Desk.store.Project',{pageSize: 10}),
-            //   displayField : 'display',
-            //   itemTpl      : '{display}',
+            //   displayField : 'display_as',
+            //   itemTpl      : '{display_as}',
             //   name         : 'project_id',
             //   fieldLabel   : me.project_idLabel,
-            //   initialValue : me.record.get('display'),
+            //   initialValue : me.record.get('display_as'),
             //   allowBlank   : false
             // },
             {
@@ -95,8 +95,8 @@ Ext.define('Desk.view.features.Form', {
             },
             {
               xtype        : 'datefield',
-              name         : 'release_date',
-              fieldLabel   : me.release_dateLabel,
+              name         : 'target_date',
+              fieldLabel   : me.target_dateLabel,
               allowBlank   : true
             },
             {

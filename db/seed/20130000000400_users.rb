@@ -10,6 +10,16 @@ Buildit::User.create(
 )
 
 Buildit::User.create(
+  user_id: '811166D4D50A11E2B45820C9D04ALARA',
+  first_name: 'Lara',
+  last_name: 'Marshall',
+  email_address: 'larabmarshall@gmail.com',
+  sso_plugin_code: 'BUILDIT',
+  password: 'lara',
+  password_confirmation: 'lara'
+)
+
+Buildit::User.create(
   user_id: '811166D4D50A11E2B45820C9D04AAJIM',
   first_name: 'Jim',
   last_name: 'Mullady',

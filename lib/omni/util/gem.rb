@@ -2,9 +2,9 @@ class Omni::Util::Gem
 
   def self.get_gem(model_name)
     case
-    when ['Lookup','Sequence'].include?(model_name)
+    when ['Lookup','Sequence','User','UserRole','Note'].include?(model_name)
       'Buildit'
-    when ['Approval'].include?(model_name)
+    when ['Approval','Case','Checklist','Feature','Project','Task','Team'].include?(model_name)
       'Desk'
     else
       'Omni'

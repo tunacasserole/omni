@@ -25,7 +25,7 @@ Ext.define('Desk.view.features.Explorer', {
   stateLabel                              : Desk.i18n.model.Feature.state,
   displayLabel                            : Desk.i18n.model.Feature.display,
   descriptionLabel                        : Desk.i18n.model.Feature.description,
-  release_dateLabel                       : Desk.i18n.model.Feature.release_date,
+  target_dateLabel                       : Desk.i18n.model.Feature.target_date,
   estimated_hoursLabel                    : Desk.i18n.model.Feature.estimated_hours,
   actual_hoursLabel                       : Desk.i18n.model.Feature.actual_hours,
   // LABELS (End)
@@ -84,8 +84,8 @@ Ext.define('Desk.view.features.Explorer', {
           flex         : 1
         },
         // {
-        //   header       : me.release_dateLabel,
-        //   dataIndex    : 'release_date',
+        //   header       : me.target_dateLabel,
+        //   dataIndex    : 'target_date',
         //   flex         : 1
         // },
         {

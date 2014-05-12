@@ -17,19 +17,19 @@ class Desk::Task < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :task_id,                         with: :guid
+  default :task_id,                         :with => :guid
   default :owner_id,                        :to => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
-  default :task_nbr,                        override: false,        with: :sequence,         named: "TASK_NBR"
+  default :task_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"TASK_NBR"
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to      :taskable,       :polymorphic => true
-  belongs_to      :owner,          foreign_key: 'owner_id',           class_name: 'Buildit::User'
+  belongs_to      :owner,          :foreign_key => 'owner_id',           :class_name => 'Buildit::User'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :owner_name,              to: 'owner.full_name'
+    map :owner_name,              :to => 'owner.full_name'
   end
   # MAPPED ATTRIBUTES (End)
 
@@ -51,9 +51,9 @@ class Desk::Task < ActiveRecord::Base
     date      :task_due
     string    :state
 
-    text      :display_fulltext,                      using: :display
-    text      :description_fulltext,                  using: :description
-    text      :owner_name_fulltext,       using: :owner_name
+    text      :display_fulltext,                      :using => :display
+    text      :description_fulltext,                  :using => :description
+    text      :owner_name_fulltext,       :using => :owner_name
   end
   # INDEXING (End)
 end # class Desk::Task

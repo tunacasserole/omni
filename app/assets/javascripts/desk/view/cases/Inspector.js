@@ -90,7 +90,7 @@ Ext.define('Desk.view.cases.Inspector', {
 
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
-      title: 'Case',
+      title: 'Request',
       subtitle: this.record.get('display')
     });
     // TITLES (End)

@@ -19,9 +19,9 @@ Ext.define('Desk.view.approvals.Explorer', {
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================
-  approval_idLabel                        : Desk.i18n.model.Approval.approval_id,
+  approval_idLabel                       : Desk.i18n.model.Approval.approval_id,
   approval_nbrLabel                       : Desk.i18n.model.Approval.approval_nbr,
-  approver_idLabel                        : Desk.i18n.model.Approval.approver_id,
+  approval_typeLabel                      : Desk.i18n.model.Approval.approval_type,
   displayLabel                            : Desk.i18n.model.Approval.display,
   descriptionLabel                        : Desk.i18n.model.Approval.description,
   approval_dateLabel                      : Desk.i18n.model.Approval.approval_date,
@@ -45,11 +45,11 @@ Ext.define('Desk.view.approvals.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(me, {
       columns      : [
-        {
-          header       : me.approval_nbrLabel,
-          dataIndex    : 'approval_nbr',
-          flex         : 1
-        },
+        // {
+        //   header       : me.approval_nbrLabel,
+        //   dataIndex    : 'approval_nbr',
+        //   flex         : 1
+        // },
         {
           header       : me.approver_idLabel,
           dataIndex    : 'approver_display',

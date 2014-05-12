@@ -3,11 +3,19 @@ Ext.define('Desk.model.Project', {
 
   fields     : [
     {
-      name       : 'display',
+      name       : 'display_as',
       type       : 'string'
     },
     {
       name       : 'project_id',
+      type       : 'string'
+    },
+    {
+      name       : 'owner_id',
+      type       : 'string'
+    },
+    {
+      name       : 'owner_display',
       type       : 'string'
     },
     {
@@ -31,17 +39,17 @@ Ext.define('Desk.model.Project', {
       type       : 'string'
     },
     {
-      name       : 'release_date',
+      name       : 'target_date',
       type       : 'date'
     },
-    {
-      name       : 'estimated_days',
-      type       : 'decimal'
-    },
-    {
-      name       : 'actual_days',
-      type       : 'decimal'
-    }
+    // {
+    //   name       : 'estimated_days',
+    //   type       : 'decimal'
+    // },
+    // {
+    //   name       : 'actual_days',
+    //   type       : 'decimal'
+    // }
 
   ],
 

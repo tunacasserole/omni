@@ -15,7 +15,7 @@ en:
         supplier_id:                       'Supplier'
         job_description:                   'Job Description'
         job_type:                          'Job Type'
-        release_date:                      'Release Date'
+        target_date:                      'Release Date'
         start_date:                        'Start Date'
         complete_date:                     'Complete Date'
         target_complete_date:              'Target Complete Date'

@@ -4,7 +4,7 @@ en:
       desk/task:  'Task'
     attributes:
       desk/task:
-        display:                        'Task'
+        display_as:                        'Task'
         task_id:                           'Task'
         taskable_id:                       'Taskable'
         taskable_type:                     'Taskable Type'

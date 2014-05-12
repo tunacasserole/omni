@@ -4,7 +4,7 @@ en:
       desk/feature:  'Feature'
     attributes:
       desk/feature:
-        display:                        'Feature'
+        display_as:                        'Feature'
         feature_id:                        'Feature'
         project_id:                        'Project'
         feature_nbr:                       'Feature Nbr'
@@ -12,6 +12,6 @@ en:
         state:                             'State'
         display:                           'Feature Name'
         description:                       'Description'
-        release_date:                      'Release Date'
+        target_date:                      'Release Date'
         estimated_hours:                   'Estimated Hours'
         actual_hours:                      'Actual Hours'

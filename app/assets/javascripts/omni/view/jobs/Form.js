@@ -14,7 +14,7 @@ Ext.define('Omni.view.jobs.Form', {
   supplier_idLabel: Omni.i18n.model.Job.supplier_id,
   job_descriptionLabel: Omni.i18n.model.Job.job_description,
   job_typeLabel: Omni.i18n.model.Job.job_type,
-  release_dateLabel: Omni.i18n.model.Job.release_date,
+  target_dateLabel: Omni.i18n.model.Job.target_date,
   start_dateLabel: Omni.i18n.model.Job.start_date,
   complete_dateLabel: Omni.i18n.model.Job.complete_date,
   target_complete_dateLabel: Omni.i18n.model.Job.target_complete_date,
@@ -168,8 +168,8 @@ Ext.define('Omni.view.jobs.Form', {
         layout: 'anchor',
         items: [{
           xtype: 'datefield',
-          name: 'release_date',
-          fieldLabel: me.release_dateLabel,
+          name: 'target_date',
+          fieldLabel: me.target_dateLabel,
           allowBlank: true
         }, {
           xtype: 'datefield',

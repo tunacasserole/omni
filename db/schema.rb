@@ -425,7 +425,7 @@ ActiveRecord::Schema.define(version: 20140221155100) do
     t.string   "tags",             limit: 200
     t.decimal  "estimated_hours",               precision: 11, scale: 4, default: 0.0
     t.decimal  "actual_hours",                  precision: 11, scale: 4, default: 0.0
-    t.boolean  "is_billable"
+    t.boolean  "is_approved"
     t.string   "audit_created_by", limit: 100
     t.string   "audit_updated_by", limit: 100
     t.datetime "audit_created_at"

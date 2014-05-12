@@ -1,6 +1,18 @@
 development:
   outbound:
     accounts:
+      omnitest:
+        delivery_method: smtp
+        from:      aaron@buildit.io
+        reply_to:  aaron@buildit.io
+        smtp_settings:
+          address:   smtp.gmail.com
+          port:      587
+          domain:    gmail.com
+          user_name: aaron@buildit.io
+          password:  CrossFit
+          authentication: plain
+          enable_starttls_auto: true
       # omnitest:
       #   address:   smtp.gmail.com
       #   default:   true
@@ -10,15 +22,15 @@ development:
       #   password:  TunaCasserole2013
       #   authentication: plain
       #   enable_starttls_auto: true
-      omnitest:
-        address:   smtp.gmail.com
-        default:   true
-        port:      587
-        domain:    gmail.com
-        user_name: aaron@buildit.io
-        password:  CrossFit
-        authentication: plain
-        enable_starttls_auto: true
+      # omnitest:
+      #   address:   smtp.gmail.com
+      #   default:   true
+      #   port:      587
+      #   domain:    gmail.com
+      #   user_name: aaron@buildit.io
+      #   password:  CrossFit
+      #   authentication: plain
+      #   enable_starttls_auto: true
   inbound:
     accounts:
       bigdump:

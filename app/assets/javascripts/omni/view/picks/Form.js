@@ -15,7 +15,7 @@ Ext.define('Omni.view.picks.Form', {
       job_idLabel: Omni.i18n.model.Pick.job_id,
       request_unitsLabel: Omni.i18n.model.Pick.request_units,
       complete_unitsLabel: Omni.i18n.model.Pick.complete_units,
-      release_dateLabel: Omni.i18n.model.Pick.release_date,
+      target_dateLabel: Omni.i18n.model.Pick.target_date,
       start_dateLabel: Omni.i18n.model.Pick.start_date,
       complete_dateLabel: Omni.i18n.model.Pick.complete_date,
       ship_dateLabel: Omni.i18n.model.Pick.ship_date
@@ -94,8 +94,8 @@ Ext.define('Omni.view.picks.Form', {
         },
         layout: 'anchor',
         items: [{
-          name: 'release_date',
-          fieldLabel: this.release_dateLabel,
+          name: 'target_date',
+          fieldLabel: this.target_dateLabel,
           allowBlank: true,
           disabled: false,
           xtype: 'datefield'

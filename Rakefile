@@ -69,7 +69,7 @@ namespace :omni do
     started_at = Time.now
 
     puts "! Indexing #{args.model}"
-    system("rake sunspot:reindex[1000,#{Omni::Util::Gem.full_model_name(args.model)}]") unless ['Lookup','Sequence'].include? args.model
+    system("rake sunspot:reindex[1000,#{Omni::Util::Gem.full_model_name(args.model)}]")
     puts "! Indexed #{args.model} in #{Time.now - started_at}s"
   end
 

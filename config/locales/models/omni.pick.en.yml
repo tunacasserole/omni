@@ -16,7 +16,7 @@ en:
         job_id:                   Job
         request_units:                   Requested Units
         complete_units:                  Pick Units
-        release_date:                    Release Date
+        target_date:                    Release Date
         start_date:                      Start Date
         complete_date:                   Complete Date
         ship_date:                       Ship Date

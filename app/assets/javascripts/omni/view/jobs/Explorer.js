@@ -28,7 +28,7 @@ Ext.define('Omni.view.jobs.Explorer', {
   supplier_idLabel                        : Omni.i18n.model.Job.supplier_id,
   job_descriptionLabel                    : Omni.i18n.model.Job.job_description,
   job_typeLabel                           : Omni.i18n.model.Job.job_type,
-  release_dateLabel                       : Omni.i18n.model.Job.release_date,
+  target_dateLabel                       : Omni.i18n.model.Job.target_date,
   start_dateLabel                         : Omni.i18n.model.Job.start_date,
   complete_dateLabel                      : Omni.i18n.model.Job.complete_date,
   target_complete_dateLabel               : Omni.i18n.model.Job.target_complete_date,
@@ -123,8 +123,8 @@ Ext.define('Omni.view.jobs.Explorer', {
           flex         : 1
         },
         // {
-        //   header       : me.release_dateLabel,
-        //   dataIndex    : 'release_date',
+        //   header       : me.target_dateLabel,
+        //   dataIndex    : 'target_date',
         //   flex         : 1
         // },
         // {

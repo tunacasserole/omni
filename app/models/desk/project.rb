@@ -17,19 +17,20 @@ class Desk::Project < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :project_id,                          with: :guid
-  default :project_nbr,                         override: false,        with: :sequence,         named: "PROJECT_NBR"
+  default :project_id,                          :with => :guid
+  default :project_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"PROJECT_NBR"
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :cases,                            class_name: 'Desk::Case',                     foreign_key: 'project_id'
-  has_many     :features,                         class_name: 'Desk::Feature',                  foreign_key: 'project_id'
-  has_many     :tasks,                            as: :taskable
-  has_many     :approvals,                        as: :approvable
+  belongs_to   :owner,                            :class_name => 'Buildit::User',        :foreign_key => 'owner_id'
+  has_many     :cases,                            :class_name => 'Desk::Case',                     :foreign_key => 'project_id'
+  has_many     :features,                         :class_name => 'Desk::Feature',                  :foreign_key => 'project_id'
+  has_many     :tasks,                            :as => :taskable
+  has_many     :approvals,                        :as => :approvable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-
+  map :owner_display,            :to => 'owner.full_name'
   # MAPPED ATTRIBUTES (End)
 
   # HOOKS (Start) =======================================================================
@@ -45,11 +46,11 @@ class Desk::Project < ActiveRecord::Base
     string   :display
     string   :description
 
-    text     :project_nbr_fulltext, using: :project_nbr
-    text     :project_type_fulltext, using: :project_type
-    text     :state_fulltext, using: :state
-    text     :display_fulltext, using: :display
-    text     :description_fulltext, using: :description
+    text     :project_nbr_fulltext, :using => :project_nbr
+    text     :project_type_fulltext, :using => :project_type
+    text     :state_fulltext, :using => :state
+    text     :display_fulltext, :using => :display
+    text     :description_fulltext, :using => :description
   end
   # INDEXING (End)
 
@@ -58,11 +59,11 @@ class Desk::Project < ActiveRecord::Base
   # ORDERING (End)
 
   # STATES (Start) ====================================================================
-  state_machine :state, initial: :draft do
+  state_machine :state, :initial => :draft do
 
     # CALLBACKS ------------------
-    after_transition   :draft  => :active,  do: :notify
-    after_transition   :active => :closed,  do: :notify
+    # after_transition   :draft  => :active,  :do => :notify
+    # after_transition   :active => :closed,  :do => :notify
 
     # EVENTS ---------------------
     event :activate do
@@ -78,7 +79,7 @@ class Desk::Project < ActiveRecord::Base
     end
 
     state :active do
-      # validates  :product_codes,                           presence: true
+      # validates  :product_codes,                           :presence => true
       # validate   :one_active_contract
     end
 
@@ -90,11 +91,17 @@ class Desk::Project < ActiveRecord::Base
     def notify
       puts 'notify someone'
     end
+
+    def display_as
+      self.display
+    end
   end
   # STATES (End)
 
   # HELPERS (Start) =====================================================================
-
+    def self.omni_project
+      Desk::Project.find_by_project_nbr '1001'
+    end
   # HELPERS (End)
 
 end # class Desk::Project

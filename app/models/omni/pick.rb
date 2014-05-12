@@ -125,7 +125,7 @@ class Omni::Pick < ActiveRecord::Base
 
     def after_release
       #puts "after_release"
-      self.release_date = Date.today
+      self.target_date = Date.today
     end
 
     def after_start

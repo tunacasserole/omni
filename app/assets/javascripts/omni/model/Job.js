@@ -59,7 +59,7 @@ Ext.define('Omni.model.Job', {
       type       : 'string'
     },
     {
-      name       : 'release_date',
+      name       : 'target_date',
       type       : 'datetime'
     },
     {

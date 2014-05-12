@@ -4,13 +4,12 @@ en:
       desk/project:  'Project'
     attributes:
       desk/project:
-        display:                        'Project'
+        display_as:                        'Project'
         project_id:                        'Project'
+        owner_id:                          'Owner'
         project_nbr:                       'Project Nbr'
         project_type:                      'Project Type'
         state:                             'State'
         display:                           'Project Name'
         description:                       'Description'
-        release_date:                      'Release Date'
-        estimated_days:                    'Estimated Days'
-        actual_days:                       'Actual Days'
+        target_date:                       'Target Date'
