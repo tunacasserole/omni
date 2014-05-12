@@ -32,8 +32,8 @@ class Desk::Guide < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :guide_id,                          :with           => :guid
-  default :guide_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"GUIDE_NBR"
   default :owner_id,                          :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :guide_nbr,                         :override  =>  false,        :with  => :sequence,   :named=>"GUIDE_NBR"
   # DEFAULTS (End)
 
 
