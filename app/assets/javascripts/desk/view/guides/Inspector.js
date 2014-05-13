@@ -28,7 +28,7 @@ Ext.define('Desk.view.guides.Inspector', {
           cards: [{
               title: 'Profile',
               xtype: 'desk-guides-Form'
-            }
+            },
             title: 'Notes',
             xtype: 'buildit-notes-Explorer',
             defaultSearch: {
