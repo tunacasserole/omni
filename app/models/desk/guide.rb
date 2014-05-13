@@ -34,8 +34,8 @@ class Desk::Guide < ActiveRecord::Base
   default :guide_id,                          :with           => :guid
   default :owner_id,                          :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   default :guide_nbr,                         :override  =>  false,        :with  => :sequence,   :named=>"GUIDE_NBR"
-  default :guideable_type,                    to: 'Omni::Project'
-  default :guideable_id,                      to: lambda { |m| Desk::Project.omni_project.project_id }
+  default :guideable_type,                    to: 'Desk::Project'
+  default :guideable_id,                      :override => false, to: lambda { |m| Desk::Project.omni_project.project_id unless m.guideable_id}
   # DEFAULTS (End)
 
 

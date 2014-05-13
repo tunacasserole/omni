@@ -29,7 +29,7 @@ Ext.define('Desk.view.guides.Explorer', {
 
   // TITLES (Start) ======================================================================
   title: 'Guides',
-  subtitle: 'Create and maintain Guides',
+  subtitle: 'Work with Help Guides',
   // TITLES (End)
 
   initComponent: function() {

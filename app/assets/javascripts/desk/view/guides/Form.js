@@ -2,7 +2,7 @@ Ext.define('Desk.view.guides.Form', {
 
   extend: 'Buildit.ux.Form',
   alias: 'widget.desk-guides-Form',
-
+  backOnNew: true,
 
   // LABELS (Start) =======================================================================
   guide_idLabel: Desk.i18n.model.Guide.guide_id,

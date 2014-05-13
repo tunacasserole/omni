@@ -38,19 +38,19 @@ Ext.define('Desk.view.projects.Form', {
           layout: 'anchor',
           items: [{
               xtype: 'textfield',
-              name: 'state',
-              fieldLabel: me.stateLabel,
+              name: 'project_nbr',
+              fieldLabel: me.project_nbrLabel,
               maxLength: 200,
               minLength: 0,
               allowBlank: true,
               disabled: true
             }, {
               xtype: 'textfield',
-              name: 'project_nbr',
-              fieldLabel: me.project_nbrLabel,
+              name: 'state',
+              fieldLabel: me.stateLabel,
               maxLength: 200,
               minLength: 0,
-              allowBlank: false,
+              allowBlank: true,
               disabled: true
             }, {
               xtype: 'textfield',
