@@ -34,6 +34,8 @@ class Desk::Guide < ActiveRecord::Base
   default :guide_id,                          :with           => :guid
   default :owner_id,                          :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   default :guide_nbr,                         :override  =>  false,        :with  => :sequence,   :named=>"GUIDE_NBR"
+  default :guideable_type,                    to: 'Omni::Project'
+  default :guideable_id,                      to: lambda { |m| Desk::Project.omni_project.project_id }
   # DEFAULTS (End)
 
 
@@ -79,6 +81,8 @@ class Desk::Guide < ActiveRecord::Base
   # INDEXING (Start) ====================================================================
   searchable do
     string   :guide_id
+    string   :guideable_id
+    string   :guideable_type
     string   :owner_id
     string   :guide_name
     string   :guide_nbr
@@ -90,7 +94,7 @@ class Desk::Guide < ActiveRecord::Base
     text     :description_text,                  :using   => :description,                  :boost => 1.0
     text     :guide_location_text,               :using   => :guide_location,               :boost => 1.0
   end
-  order_search_by :guide_name => :asc
+  order_search_by :guide_nbr => :desc
   # INDEXING (End)
 
 

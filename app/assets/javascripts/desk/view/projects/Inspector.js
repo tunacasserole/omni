@@ -54,6 +54,34 @@ Ext.define('Desk.view.projects.Inspector', {
         },
         showBadge: true
       }, {
+        title: 'Help',
+        xtype: 'desk-guides-Explorer',
+        defaultSearch: {
+          with: {
+            guideable_type: {
+              equal_to: 'Desk::Project'
+            },
+            guideable_id: {
+              equal_to: me.record.get('project_id')
+            }
+          }
+        },
+        showBadge: true
+      }, {
+        title: 'Approvals',
+        xtype: 'desk-approvals-Explorer',
+        defaultSearch: {
+          with: {
+            approvable_type: {
+              equal_to: 'Desk::Project'
+            },
+            approvable_id: {
+              equal_to: me.record.get('project_id')
+            }
+          }
+        },
+        showBadge: true
+      }, {
         title: 'Notes',
         xtype: 'buildit-notes-Explorer',
         defaultSearch: {
@@ -76,20 +104,6 @@ Ext.define('Desk.view.projects.Inspector', {
               equal_to: 'Desk::Project'
             },
             attachable_id: {
-              equal_to: me.record.get('project_id')
-            }
-          }
-        },
-        showBadge: true
-      }, {
-        title: 'Approvals',
-        xtype: 'desk-approvals-Explorer',
-        defaultSearch: {
-          with: {
-            approvable_type: {
-              equal_to: 'Desk::Project'
-            },
-            approvable_id: {
               equal_to: me.record.get('project_id')
             }
           }

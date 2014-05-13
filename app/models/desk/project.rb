@@ -19,6 +19,7 @@ class Desk::Project < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default :project_id,                          :with => :guid
   default :project_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"PROJECT_NBR"
+  default :owner_id,                            :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
@@ -100,7 +101,7 @@ class Desk::Project < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
     def self.omni_project
-      Desk::Project.find_by_project_nbr '1001'
+      Desk::Project.find_by_project_nbr '1'
       # || Desk::Project.create! ( project_id: "054D5954D9FA11E3A45D20C9D047DD15", project_nbr: "1001", project_type: nil, owner_id: "811166D4D50A11E2B45820C9D04AARON", state: "draft", display: "Omni System", description: "Defects, enhancements, requests, and questions related to Omni.", target_date: "2014-09-30 00:00:00" )
     end
   # HELPERS (End)

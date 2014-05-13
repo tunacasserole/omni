@@ -13,7 +13,9 @@ class Desk::Case < ActiveRecord::Base
   # VALIDATIONS (Start) =================================================================
   validates :case_id,                        presence: true, uniqueness: true
   validates :display,                        presence: true
-  # validates :project_id,                     presence: true
+  validates :project_id,                     presence: true
+  validates :requestor_id,                   presence: true
+  validates :owner_id,                       presence: true
   validates :case_type,                      lookup: 'CASE_TYPE',       allow_nil: true
   validates :case_size,                      lookup: 'CASE_SIZE',       allow_nil: true
   validates :case_urgency,                   lookup: 'CASE_URGENCY',    allow_nil: true

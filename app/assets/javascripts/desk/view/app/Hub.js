@@ -32,6 +32,7 @@ Ext.define('Desk.view.app.Hub', {
 
             {
               title: 'Support Requests',
+              cls: 'applications',
               colspan: 2,
               rowspan: 1,
               target: {
@@ -39,6 +40,7 @@ Ext.define('Desk.view.app.Hub', {
               }
             }, {
               title: 'Projects',
+              cls: 'roles',
               colspan: 2,
               rowspan: 1,
               target: {
@@ -46,6 +48,7 @@ Ext.define('Desk.view.app.Hub', {
               }
               }, {
                 title: 'Help',
+                cls: 'users',
                 colspan: 2,
                 rowspan: 1,
                 target: {

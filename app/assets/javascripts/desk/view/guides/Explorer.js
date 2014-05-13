@@ -61,9 +61,8 @@ Ext.define('Desk.view.guides.Explorer', {
         }, {
           header: me.guide_locationLabel,
           dataIndex: 'guide_location',
-          flex: 200,
+          flex: 2,
           renderer: this.formatURL
-
         }, {
           header: me.descriptionLabel,
           dataIndex: 'description',
@@ -83,9 +82,13 @@ Ext.define('Desk.view.guides.Explorer', {
 
   formatURL: function(value) {
     myURL = '';
-    if (value !== '') {
-      myURL = '<a href="' + value + '" target="_blank">' + 'View Guide' + '</a>';
+    // console.log(value.substring(0,3))
+    if (value !== '' && value.substring(0, 4) === 'http') {
+      myURL = '<a href="' + value + '" target="_blank">' + 'view guide' + '</a>';
+    } else {
+      myURL = value;
     }
+    console.log(myURL)
     return myURL;
   }
 
