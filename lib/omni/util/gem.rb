@@ -4,7 +4,7 @@ class Omni::Util::Gem
     case
     when ['Lookup','Sequence','User','UserRole','Note'].include?(model_name)
       'Buildit'
-    when ['Approval','Case','Checklist','Feature','Project','Task','Team'].include?(model_name)
+    when ['Approval','Case','Checklist','Feature','Guide','Project','Task','Team'].include?(model_name)
       'Desk'
     else
       'Omni'

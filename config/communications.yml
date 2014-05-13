@@ -3,8 +3,8 @@ development:
     accounts:
       omnitest:
         delivery_method: smtp
-        from:      aaron@buildit.io
-        reply_to:  aaron@buildit.io
+        from:      do-not-reply@parkersu.com
+        reply_to:      do-not-reply@parkersu.com
         smtp_settings:
           address:   smtp.gmail.com
           port:      587
@@ -43,7 +43,9 @@ development:
 production:
   outbound:
     accounts:
-      omnitest:
+      omniprod:
+        from:      do-not-reply@parkersu.com
+        reply_to:  do-not-reply@parkersu.com
         address:   smtp.gmail.com
         default:   true
         port:      587

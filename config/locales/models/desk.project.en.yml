@@ -7,6 +7,7 @@ en:
         display_as:                        'Project'
         project_id:                        'Project'
         owner_id:                          'Owner'
+        reviewer_id:                       'Reviewer'
         project_nbr:                       'Project Nbr'
         project_type:                      'Project Type'
         state:                             'State'

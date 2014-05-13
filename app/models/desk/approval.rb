@@ -55,19 +55,23 @@ class Desk::Approval < ActiveRecord::Base
   # INDEXING (End)
 
     # STATES (Start) ====================================================================
-  state_machine :state, :initial => :active do
+  state_machine :state, :initial => :draft do
 
     # CALLBACKS ------------------
-    after_transition   :draft  => :active,  :do => :notify
-    after_transition   :active => :closed,  :do => :notify
+    after_transition   :draft  => :request, :do => :notify
+    # after_transition   :request  => :final
 
     # EVENTS ---------------------
-    event :activate do
-      transition :draft   => :active
+    event :request do
+      transition :draft   => :request
     end
 
-    event :close do
-      transition :active   => :closed
+    event :finalize do
+      transition :request   => :final
+    end
+
+    event :reject do
+      transition :request   => :draft
     end
 
 
@@ -75,21 +79,36 @@ class Desk::Approval < ActiveRecord::Base
     state :draft do
     end
 
-    state :active do
-      # validates  :product_codes,                           :presence => true
-      # validate   :one_active_contract
+    state :request do
     end
 
-    state :closed do
-
-    end
-
-    # STATE HELPERS ---------------------
-    def notify
-      puts 'notify someone'
+    state :final do
     end
   end
-  # STATES (End)
 
-end # class Desk::Approval
+  # HELPERS (Start) =====================================================================
+  # # Sends an email notification to the approver and owner of the case
+  def notify
+    # Determine target address
 
+    email_addresses = [self.approver].collect { |u| u.email_address if u }
+    email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes
+    if email_addresses.count > 0
+      message = Buildit::Comm::Email::Message.create(
+          subject: "OMNI notice: your approval has been requested for #{self.approvable.display_as}",
+          body: Buildit::Email::Manager.generate(self, "approval_notice"),
+      )
+
+      email_addresses.each { |x| puts x}
+      message.send_to email_addresses
+      message.queue
+      Buildit::Comm::Email::OutboundService.process
+    end
+  end # def notify
+
+  def display_as
+    self.display
+  end
+  # HELPERS (End)
+
+end # class Desk::Case

@@ -7,6 +7,7 @@ class CreateDeskProjects < ActiveRecord::Migration
       t.column   :project_nbr,                     :string,            :null  =>  true,    :limit   => 200
       t.column   :project_type,                    :string,            :null  =>  true,    :limit   => 200
       t.column   :owner_id,                        :string,            :null  =>  true,   :limit   => 32
+      t.column   :reviewer_id,                     :string,            :null  =>  true,   :limit   => 32
       t.column   :state,                           :string,            :null  =>  true,    :limit   => 200
       t.column   :display,                         :string,            :null  =>  true,    :limit   => 200
       t.column   :description,                     :string,            :null  =>  true,    :limit   => 2000

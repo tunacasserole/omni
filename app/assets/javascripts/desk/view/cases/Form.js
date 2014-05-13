@@ -205,9 +205,9 @@ Ext.define('Desk.view.cases.Form', {
     // TITLES (Start) ======================================================================
     Ext.applyIf(this, {
       title: 'Profile',
-      subtitle: 'Edit Cases',
-      newTitle: 'New Case',
-      newSubtitle: 'Complete the following to create a new Case'
+      subtitle: 'Edit Requests',
+      newTitle: 'New Request',
+      newSubtitle: 'Complete the following to create a new Support Request'
     });
     // TITLES (End)
 
@@ -233,7 +233,7 @@ Ext.define('Desk.view.cases.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'fa fa-hand-o-right',
+        iconCls: 'fa fa-hand-o-left',
         tooltip: 'Review',
         listeners: {
           beforerender: this.prepareReviewAction,

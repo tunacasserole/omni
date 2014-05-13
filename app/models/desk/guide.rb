@@ -36,11 +36,14 @@ class Desk::Guide < ActiveRecord::Base
   default :guide_nbr,                         :override  =>  false,        :with  => :sequence,   :named=>"GUIDE_NBR"
   default :guideable_type,                    to: 'Desk::Project'
   default :guideable_id,                      :override => false, to: lambda { |m| Desk::Project.omni_project.project_id unless m.guideable_id}
+  default :reviewer_id,                       :to => lambda{ |m| m.guideable.reviewer_id if m.guideable_type == 'Desk::Project' }
   # DEFAULTS (End)
 
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to  :owner,                            :class_name     => 'Buildit::User',              :foreign_key    => :owner_id
+  belongs_to  :reviewer,                         :class_name     => 'Buildit::User',              :foreign_key    => :reviewer_id
+  belongs_to  :guideable,       :polymorphic => true
   has_many    :notes,                             :as             => :notable
   has_many    :attachments,                       :as             => :attachable
   # ASSOCIATIONS (End)
@@ -57,26 +60,54 @@ class Desk::Guide < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (End)
 
+  # STATES (Start) ====================================================================
+  state_machine :state, :initial => :draft do
 
-  # TEMPORARY ATTRIBUTES (Start) ========================================================
+    # CALLBACKS ------------------
+    after_transition :draft => :review, :do => :request_approval
 
-  # TEMPORARY ATTRIBUTES (End)
+    # EVENTS ---------------------
+    event :activate do
+      transition [:review]  => :active
+    end
+
+    event :backlog do
+      transition [:draft]  => :backlog
+    end
+
+    event :review do
+      transition [:draft,:active,:backlog] => :review
+    end
+
+    event :reject do
+      transition [:review,:active] => :draft
+    end
+
+    event :close do
+      transition [:draft,:backlog,:active,:review]  => :closed
+    end
 
 
-  # FILTERS (Start) =====================================================================
+    # STATES ---------------------
+    state :backlog do
+    end
 
-  # FILTERS (End)
+    state :draft do
+    end
 
+    state :active do
+    end
 
-  # ORDERING (Start) ====================================================================
+    state :review do
+    end
 
-  # ORDERING (End)
+    state :reject do
+    end
 
+    state :closed do
 
-  # SCOPES (Start) ======================================================================
-
-  # SCOPES (End)
-
+    end
+  end
 
   # INDEXING (Start) ====================================================================
   searchable do
@@ -103,11 +134,11 @@ class Desk::Guide < ActiveRecord::Base
   # HOOKS (End)
 
 
-  # STATES (Start) ====================================================================
-  # STATES (End)
-
-
   # HELPERS (Start) =====================================================================
+  def request_approval
+    a = Desk::Approval.create(approvable_type: 'Desk::Guide', approvable_id: self.guide_id, approver_id: self.reviewer_id, display: 'Your approval has been requested for activation.')
+  end
+
   def display_as
     self.guide_name
   end

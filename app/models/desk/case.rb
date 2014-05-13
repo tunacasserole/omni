@@ -76,11 +76,8 @@ class Desk::Case < ActiveRecord::Base
     text     :requestor_display_fulltext, :using => :requestor_display
     text     :owner_display_fulltext, :using => :owner_display
   end
-  # INDEXING (End)
-
-  # ORDERING (Start) ====================================================================
   order_search_by :case_nbr => :desc
-  # ORDERING (End)
+  # INDEXING (End)
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
@@ -90,7 +87,7 @@ class Desk::Case < ActiveRecord::Base
 
     # EVENTS ---------------------
     event :activate do
-      transition [:backlog,:draft,:review]  => :active
+      transition any  => :active
     end
 
     event :backlog do
@@ -131,7 +128,6 @@ class Desk::Case < ActiveRecord::Base
     end
   end
 
-    # STATE HELPERS ---------------------
   def set_detail
     if self.case_type_changed?
       self.details =
@@ -152,7 +148,7 @@ class Desk::Case < ActiveRecord::Base
   # HOOKS (Start) =======================================================================
   hook :before_update, :set_detail, 10
   hook :before_create, :set_detail, 20
-  hook :before_create, :notify, 30
+  hook :before_create, :notify, 40
   # HOOKS (End)
 
   # HELPERS (Start) =====================================================================

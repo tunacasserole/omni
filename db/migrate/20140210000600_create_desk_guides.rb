@@ -7,6 +7,7 @@ class CreateDeskGuides < ActiveRecord::Migration
       t.column   :guideable_id,                  :string,            :null  =>  false,   :limit   => 32
       t.column   :guideable_type,                :string,            :null  =>  false,   :limit   => 200
       t.column   :owner_id,                      :string,            :null  =>  true,   :limit   => 32
+      t.column   :reviewer_id,                   :string,            :null  =>  true,   :limit   => 32
       t.column   :guide_nbr,                     :string,            :null  =>  true,   :limit   => 200
       t.column   :guide_name,                    :string,            :null  =>  true,   :limit   => 200
       t.column   :description,                   :string,            :null  =>  true,   :limit   => 4000

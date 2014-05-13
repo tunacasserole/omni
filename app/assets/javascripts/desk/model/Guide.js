@@ -8,6 +8,12 @@ Ext.define('Desk.model.Guide', {
         name: 'owner_id',
         type: 'string'
     }, {
+        name: 'reviewer_id',
+        type: 'string'
+    }, {
+        name: 'state',
+        type: 'string'
+    }, {
         name: 'guideable_id',
         type: 'string'
     }, {

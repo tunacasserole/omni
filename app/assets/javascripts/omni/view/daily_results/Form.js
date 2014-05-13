@@ -3,8 +3,6 @@ Ext.define('Omni.view.daily_results.Form', {
   extend:'Buildit.ux.Form',
   alias:'widget.omni-daily_results-Form',
 
-
-
   initComponent:function () {
 
     var me = this;

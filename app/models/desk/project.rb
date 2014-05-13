@@ -14,18 +14,21 @@ class Desk::Project < ActiveRecord::Base
   validates :project_id,                     presence: true, uniqueness: true
   validates :display,                        presence: true, uniqueness: true
   validates :owner_id,                       presence: true
+  validates :reviewer_id,                    presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default :project_id,                          :with => :guid
   default :project_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"PROJECT_NBR"
   default :owner_id,                            :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :reviewer_id,                         :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :owner,                            :class_name => 'Buildit::User',        :foreign_key => 'owner_id'
-  has_many     :cases,                            :class_name => 'Desk::Case',                     :foreign_key => 'project_id'
-  has_many     :features,                         :class_name => 'Desk::Feature',                  :foreign_key => 'project_id'
+  belongs_to   :reviewer,                         :class_name => 'Buildit::User',        :foreign_key => 'reviewer_id'
+  has_many     :teams,                            :as => :teamable
+  has_many     :guides,                           :as => :guideable
   has_many     :tasks,                            :as => :taskable
   has_many     :approvals,                        :as => :approvable
   # ASSOCIATIONS (End)
@@ -53,11 +56,8 @@ class Desk::Project < ActiveRecord::Base
     text     :display_fulltext, :using => :display
     text     :description_fulltext, :using => :description
   end
+  order_search_by :project_nbr => :desc
   # INDEXING (End)
-
-  # ORDERING (Start) ====================================================================
-  order_search_by :display => :asc
-  # ORDERING (End)
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do

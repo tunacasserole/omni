@@ -29,6 +29,20 @@ Ext.define('Desk.view.guides.Inspector', {
         title: 'Profile',
         xtype: 'desk-guides-Form'
       }, {
+        title: 'Approvals',
+        xtype: 'desk-approvals-Explorer',
+        defaultSearch: {
+          with: {
+            approvable_type: {
+              equal_to: 'Desk::Guide'
+            },
+            approvable_id: {
+              equal_to: me.record.get('guide_id')
+            }
+          }
+        },
+        showBadge: true
+      }, {
         title: 'Notes',
         xtype: 'buildit-notes-Explorer',
         defaultSearch: {

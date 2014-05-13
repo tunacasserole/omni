@@ -25,6 +25,7 @@ Ext.define('Desk.view.guides.Explorer', {
   descriptionLabel: Desk.i18n.model.Guide.description,
   guide_locationLabel: Desk.i18n.model.Guide.guide_location,
   gem_nameLabel: Desk.i18n.model.Guide.gem_name,
+  stateLabel: Desk.i18n.model.Guide.state,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -55,24 +56,23 @@ Ext.define('Desk.view.guides.Explorer', {
           dataIndex: 'guide_nbr',
           flex: 1
         }, {
-          header: me.guide_nameLabel,
-          dataIndex: 'guide_name',
-          flex: 2
-        }, {
           header: me.guide_locationLabel,
           dataIndex: 'guide_location',
           flex: 2,
           renderer: this.formatURL
         }, {
+          header: me.guide_nameLabel,
+          dataIndex: 'guide_name',
+          flex: 2
+        }, {
           header: me.descriptionLabel,
           dataIndex: 'description',
-          flex: 4
-        },
-        // {
-        //   header       : me.gem_nameLabel,
-        //   dataIndex    : 'gem_name',
-        //   flex         : 1
-        // }
+          flex: 3
+        }, {
+          header: me.stateLabel,
+          dataIndex: 'state',
+          flex: 1
+        }
       ]
     });
     // COLUMNS (End)

@@ -10,6 +10,7 @@ Ext.define('Desk.view.projects.Form', {
   stateLabel: Desk.i18n.model.Project.state,
   displayLabel: Desk.i18n.model.Project.display,
   owner_idLabel: Desk.i18n.model.Project.owner_id,
+  reviewer_idLabel: Desk.i18n.model.Project.reviewer_id,
   descriptionLabel: Desk.i18n.model.Project.description,
   target_dateLabel: Desk.i18n.model.Project.target_date,
   // LABELS (End)
@@ -64,12 +65,24 @@ Ext.define('Desk.view.projects.Form', {
               store: Ext.create('Buildit.store.User', {
                 pageSize: 20
               }),
+              name: 'owner_id',
+              valueField: 'user_id',
               displayField: 'full_name',
               queryField: 'full_name',
-              valueField: 'user_id',
               itemTpl: '{full_name}',
-              name: 'owner_id',
               fieldLabel: this.owner_idLabel,
+              allowBlank: false,
+            }, {
+              xtype: 'buildit-Locator',
+              store: Ext.create('Buildit.store.User', {
+                pageSize: 20
+              }),
+              name: 'reviewer_id',
+              valueField: 'user_id',
+              displayField: 'full_name',
+              queryField: 'full_name',
+              itemTpl: '{full_name}',
+              fieldLabel: this.reviewer_idLabel,
               allowBlank: false
             }, {
               xtype: 'textarea',

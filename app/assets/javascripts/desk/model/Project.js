@@ -15,6 +15,10 @@ Ext.define('Desk.model.Project', {
       type       : 'string'
     },
     {
+      name       : 'reviewer_id',
+      type       : 'string'
+    },
+    {
       name       : 'owner_display',
       type       : 'string'
     },
