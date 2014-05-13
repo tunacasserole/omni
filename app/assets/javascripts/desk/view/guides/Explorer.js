@@ -61,7 +61,7 @@ Ext.define('Desk.view.guides.Explorer', {
         }, {
           header: me.guide_locationLabel,
           dataIndex: 'guide_location',
-          flex: 3,
+          flex: 200,
           renderer: this.formatURL
         }, {
           header: me.descriptionLabel,
@@ -83,7 +83,7 @@ Ext.define('Desk.view.guides.Explorer', {
   formatURL: function(value) {
     myURL = '';
     if (value !== '') {
-      myURL = '<a href="' + value + '" target="_blank">' + value + '</a>';
+      myURL = '<a href="' + value + '" target="_blank">' + 'View Guide' + '</a>';
     }
     return myURL;
   }

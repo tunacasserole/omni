@@ -82,7 +82,8 @@ Ext.define('Desk.view.cases.Form', {
             itemTpl: '{display}',
             name: 'project_id',
             fieldLabel: me.project_idLabel,
-            allowBlank: true
+            allowBlank: true,
+            emptyText: 'auto-populated'
           }, {
             xtype: 'buildit-Locator',
             store: Ext.create('Buildit.store.User', {
@@ -94,7 +95,8 @@ Ext.define('Desk.view.cases.Form', {
             itemTpl: '{full_name}',
             name: 'requestor_id',
             fieldLabel: this.requestor_idLabel,
-            allowBlank: true
+            allowBlank: true,
+            emptyText: 'auto-populated'
           }, {
             xtype: 'buildit-Locator',
             store: Ext.create('Desk.store.Team', {
@@ -113,7 +115,8 @@ Ext.define('Desk.view.cases.Form', {
                   equal_to: project_id
                 }
               }
-            }
+            },
+            emptyText: 'auto-populated'
             // xtype: 'buildit-Locator',
             // store: Ext.create('Buildit.store.User', {
             //   pageSize: 20
@@ -132,7 +135,8 @@ Ext.define('Desk.view.cases.Form', {
             maxLength: 200,
             minLength: 0,
             allowBlank: true,
-            category: 'CASE_TYPE'
+            category: 'CASE_TYPE',
+            emptyText: 'auto-populated'
           }, {
             xtype: 'textarea',
             name: 'details',
@@ -140,7 +144,7 @@ Ext.define('Desk.view.cases.Form', {
             maxLength: 4000,
             minLength: 0,
             allowBlank: true,
-            disabled: true
+            disabled: true,
           }, {
             xtype: 'textarea',
             name: 'description',
@@ -155,7 +159,8 @@ Ext.define('Desk.view.cases.Form', {
             maxLength: 200,
             minLength: 0,
             allowBlank: true,
-            category: 'CASE_URGENCY'
+            category: 'CASE_URGENCY',
+            emptyText: 'auto-populated',
           }, {
             xtype: 'buildit-Lookup',
             name: 'case_size',
@@ -163,6 +168,7 @@ Ext.define('Desk.view.cases.Form', {
             maxLength: 200,
             minLength: 0,
             allowBlank: true,
+            emptyText: 'auto-populated',
             category: 'CASE_SIZE'
           }, {
             xtype: 'textfield',
@@ -310,7 +316,7 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareCloseAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'review' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'backlog' || currentState === 'active' || currentState === 'review' ? action.show() : action.hide();
   },
 
   processEventTransition: function(eventName, successMsg, failureMsg) {

@@ -29,6 +29,7 @@ class Desk::Case < ActiveRecord::Base
   default :details,                          :to => "select a request type for further instructions"
   default :case_urgency,                     :to => 'STANDARD'
   default :case_type,                        :to => 'QUESTION'
+  default :case_size,                        :to => 'EXTRA SMALL'
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
@@ -99,11 +100,11 @@ class Desk::Case < ActiveRecord::Base
     end
 
     event :reject do
-      transition [:review, :closed] => :active
+      transition [:review,:closed] => :active
     end
 
     event :close do
-      transition [:active,:review]  => :closed
+      transition [:draft,:backlog,:active,:review]  => :closed
     end
 
 

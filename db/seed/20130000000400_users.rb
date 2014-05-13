@@ -1,13 +1,4 @@
 # USERS =====================================================================
-Buildit::User.create(
-  user_id: '811166D4D50A11E2B45820C9D04ATTTT',
-  first_name: 'Tom',
-  last_name: 'Henderson',
-  email_address: 't',
-  sso_plugin_code: 'BUILDIT',
-  password: 't',
-  password_confirmation: 't'
-)
 
 Buildit::User.create(
   user_id: '811166D4D50A11E2B45820C9D04ALARA',
