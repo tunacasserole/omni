@@ -63,6 +63,7 @@ Ext.define('Desk.view.guides.Explorer', {
           dataIndex: 'guide_location',
           flex: 200,
           renderer: this.formatURL
+
         }, {
           header: me.descriptionLabel,
           dataIndex: 'description',
