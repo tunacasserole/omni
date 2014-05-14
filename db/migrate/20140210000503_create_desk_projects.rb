@@ -11,6 +11,7 @@ class CreateDeskProjects < ActiveRecord::Migration
       t.column   :state,                           :string,            :null  =>  true,    :limit   => 200
       t.column   :display,                         :string,            :null  =>  true,    :limit   => 200
       t.column   :description,                     :string,            :null  =>  true,    :limit   => 2000
+      t.column   :is_private,                     :boolean,            :null  =>  true
       t.column   :target_date,                    :datetime,          :null  =>  true
     end
     add_index(:projects,            [:project_id],                              :unique => true)

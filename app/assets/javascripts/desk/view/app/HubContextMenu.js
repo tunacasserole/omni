@@ -1,95 +1,67 @@
 Ext.define('Desk.view.app.HubContextMenu', {
-  extend: 'Buildit.ux.ContextMenu',
-  alias:  'widget.desk-app-HubContextMenu',
+    extend: 'Buildit.ux.ContextMenu',
+    alias: 'widget.omni-app-HubContextMenu',
 
 
-  initComponent: function() {
-    var me = this;
+    initComponent: function() {
+        var me = this;
 
-    Ext.apply(this, {
+        Ext.apply(this, {
 
-      rightActions: [
+            rightActions: [
 
-        /**
-         * DELETE
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are processed.
-         */
-        {
-          text:'Settings',
-          cls: 'icon-settings',
-          action: 'settings',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickExport,
-              scope: me
-            }
-          }
-        },
+                /**
+                 * SETTINGS
+                 * Supports the deletion of the selected items in the explorer grid. If none
+                 * are selected then no records are deleted.
+                 */
+                {
+                    xtype: 'buildit-SettingsButton',
+                    target: {
+                        xtype: 'omni-settings-Inspector'
+                    }
+                },
 
-        // SEPARATOR
-        '-',
+                /**
+                 * APPLICATIONS
+                 * Supports the deletion of the selected items in the explorer grid. If none
+                 * are selected then no records are deleted.
+                 */
+                {
+                    iconCls: 'fa fa-desktop',
+                    tooltip: 'Change application',
+                    action: 'applications',
+                    confirm: true,
+                    multi: true,
+                    privileges: [],
+                    listeners: {
+                        click: {
+                            fn: Ext.emptyFn,
+                            scope: me
+                        }
+                    }
+                }
 
-
-        /**
-         * DELETE
-         * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are processed.
-         */
-        {
-          text:'Applications',
-          cls: 'icon-applications',
-          action: 'applications',
-          confirm: true,
-          multi: true,
-          privileges: [],
-          listeners: {
-            click: {
-              fn: this.clickSelectAll,
-              scope: me
-            }
-          }
-        }
-
-      ],
+            ],
 
 
-      leftActions: [
+            leftActions: [
 
-        /**
+                /**
          * NEW
          * Supports the deletion of the selected items in the explorer grid. If none
-         * are selected then no records are processed.
+         * are selected then no records are deleted.
 
         {
           text: 'New',
           cls: 'icon-new'
         }
         */
-      ]
+            ]
 
-    });
+        });
 
-    this.callParent();
-  },
-
-  clickDelete: function(btn, e, eOpts){
-    Buildit.logic.explorer.action.Delete.click(btn);
-  },
-
-  clickExport: function(btn, e, eOpts){
-    Buildit.logic.explorer.action.Export.click(btn);
-  },
-
-  clickSelectAll: function(btn, e, eOpts){
-    Buildit.logic.explorer.action.SelectAll.click(btn);
-  },
-
-  clickDeselectAll: function(btn, e, eOpts){
-    Buildit.logic.explorer.action.DeselectAll.click(btn);
-  }
+        this.callParent();
+    }
 
 });

@@ -15,7 +15,7 @@ class Desk::Team < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :team_id,                     :with => :guid
-  default :user_id,                     :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :user_id,                     to: lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
@@ -24,7 +24,7 @@ class Desk::Team < ActiveRecord::Base
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  map :user_display,            :to => 'user.full_name'
+  map :user_display,            to: 'user.full_name'
   # MAPPED ATTRIBUTES (End)
 
   # INDEXING (Start) ====================================================================

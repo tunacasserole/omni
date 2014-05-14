@@ -228,7 +228,8 @@ Ext.define('Desk.view.cases.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'fa fa-caret-square-o-right',
+        // iconCls: 'fa fa-play-circle-o',
+        iconCls: 'fa fa-toggle-right',
         tooltip: 'Activate',
         listeners: {
           beforerender: this.prepareActivateAction,
@@ -326,7 +327,7 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareActivateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'draft' || currentState === 'backlog' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'backlog' || currentState === 'ready_to_activate' ? action.show() : action.hide();
   },
 
   prepareReviewAction: function(action, eOpts) {
@@ -351,7 +352,7 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareCloseAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'ready_to_close' || currentState === 'backlog' || currentState === 'active' || currentState === 'review' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'ready_to_close' || currentState === 'backlog' || currentState === 'active' ? action.show() : action.hide();
   },
 
   prepareNotifyAction: function(action, eOpts) {

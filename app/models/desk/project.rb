@@ -20,21 +20,22 @@ class Desk::Project < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default :project_id,                          :with => :guid
   default :project_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"PROJECT_NBR"
-  default :owner_id,                            :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
-  default :reviewer_id,                         :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :owner_id,                            to: lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :reviewer_id,                         to: lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :is_private,                          to: true
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to   :owner,                            :class_name => 'Buildit::User',        :foreign_key => 'owner_id'
   belongs_to   :reviewer,                         :class_name => 'Buildit::User',        :foreign_key => 'reviewer_id'
-  has_many     :teams,                            :as => :teamable
-  has_many     :guides,                           :as => :guideable
-  has_many     :tasks,                            :as => :taskable
-  has_many     :approvals,                        :as => :approvable
+  has_many     :teams,                            as: :teamable
+  has_many     :guides,                           as: :guideable
+  has_many     :tasks,                            as: :taskable
+  has_many     :approvals,                        as: :approvable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  map :owner_display,            :to => 'owner.full_name'
+  map :owner_display,            to: 'owner.full_name'
   # MAPPED ATTRIBUTES (End)
 
   # HOOKS (Start) =======================================================================

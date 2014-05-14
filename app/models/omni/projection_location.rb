@@ -21,7 +21,7 @@ class Omni::ProjectionLocation < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :projection_location_id,                          with: :guid
-  default :display,                    override: false,:to => lambda{|m| "#{m.projection_display} - #{m.location_display}"}
+  default :display,                    override: false,to: lambda{|m| "#{m.projection_display} - #{m.location_display}"}
   # DEFAULTS (End)
 
 

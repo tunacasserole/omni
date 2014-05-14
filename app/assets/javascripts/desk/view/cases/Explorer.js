@@ -58,17 +58,17 @@ Ext.define('Desk.view.cases.Explorer', {
           dataIndex: 'case_nbr',
           flex: 1
         }, {
-          header: me.case_typeLabel,
-          dataIndex: 'case_type',
-          flex: 2
-        }, {
-          header: me.case_urgencyLabel,
-          dataIndex: 'case_urgency',
-          flex: 2
-        }, {
           header: me.displayLabel,
           dataIndex: 'display',
           flex: 4
+          }, {
+            header: me.case_urgencyLabel,
+            dataIndex: 'case_urgency',
+            flex: 2
+        }, {
+          header: me.case_typeLabel,
+          dataIndex: 'case_type',
+          flex: 2
         }, {
           header: me.owner_idLabel,
           dataIndex: 'owner_display',
@@ -77,18 +77,18 @@ Ext.define('Desk.view.cases.Explorer', {
           header: me.requestor_idLabel,
           dataIndex: 'requestor_display',
           flex: 2
-        }, {
-          header: me.project_idLabel,
-          dataIndex: 'project_display',
-          flex: 2
         // }, {
         //   header: me.case_sizeLabel,
         //   dataIndex: 'case_size',
         //   flex: 1
         }, {
+          header: me.project_idLabel,
+          dataIndex: 'project_display',
+          flex: 2
+        }, {
           header: me.stateLabel,
           dataIndex: 'state',
-          flex: 1
+          flex: 2
         }
         // {
         //   xtype        : 'checkcolumn',

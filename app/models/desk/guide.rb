@@ -32,11 +32,11 @@ class Desk::Guide < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :guide_id,                          :with           => :guid
-  default :owner_id,                          :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :owner_id,                          to: lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   default :guide_nbr,                         :override  =>  false,        :with  => :sequence,   :named=>"GUIDE_NBR"
   default :guideable_type,                    to: 'Desk::Project'
   default :guideable_id,                      :override => false, to: lambda { |m| Desk::Project.omni_project.project_id unless m.guideable_id}
-  default :reviewer_id,                       :to => lambda{ |m| m.guideable.reviewer_id if m.guideable_type == 'Desk::Project' }
+  default :reviewer_id,                       to: lambda{ |m| m.guideable.reviewer_id if m.guideable_type == 'Desk::Project' }
   # DEFAULTS (End)
 
 

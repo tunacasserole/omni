@@ -25,21 +25,21 @@ class Desk::Case < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default :case_id,                          :with => :guid
   default :case_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"CASE_NBR"
-  default :project_id,                       :to => lambda{ |m| Desk::Project.omni_project.project_id }
-  default :owner_id,                         :to => lambda{ |m| m.project.owner_id if m.project }
-  default :requestor_id,                     :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
-  default :reviewer_id,                      :to => lambda{ |m| m.project.reviewer_id if m.project }
-  default :details,                          :to => "select a request type for further instructions"
-  default :case_urgency,                     :to => 'STANDARD'
-  default :case_type,                        :to => 'QUESTION'
-  default :case_size,                        :to => 'EXTRA SMALL'
+  default :project_id,                       to: lambda{ |m| Desk::Project.omni_project.project_id }
+  default :owner_id,                         to: lambda{ |m| m.project.owner_id if m.project }
+  default :requestor_id,                     to: lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :reviewer_id,                      to: lambda{ |m| m.project.reviewer_id if m.project }
+  default :details,                          to: "select a request type for further instructions"
+  default :case_urgency,                     to: 'STANDARD'
+  default :case_type,                        to: 'QUESTION'
+  default :case_size,                        to: 'EXTRA SMALL'
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :tasks,                :as => :taskable
-  has_many     :approvals,            :as => :approvable
-  has_many     :notes,                :as => :notable
-  has_many     :teams,                :as => :teamable
+  has_many     :tasks,                as: :taskable
+  has_many     :approvals,            as: :approvable
+  has_many     :notes,                as: :notable
+  has_many     :teams,                as: :teamable
   belongs_to   :project,              :class_name => 'Desk::Project',        :foreign_key => 'project_id'
   belongs_to   :owner,                :class_name => 'Buildit::User',        :foreign_key => 'owner_id'
   belongs_to   :requestor,            :class_name => 'Buildit::User',        :foreign_key => 'requestor_id'
@@ -47,10 +47,10 @@ class Desk::Case < ActiveRecord::Base
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  map :owner_display,            :to => 'owner.full_name'
-  map :requestor_display,            :to => 'requestor.full_name'
-  map :reviewer_display,            :to => 'reviewer.full_name'
-  map :project_display,            :to => 'project.display'
+  map :owner_display,            to: 'owner.full_name'
+  map :requestor_display,            to: 'requestor.full_name'
+  map :reviewer_display,            to: 'reviewer.full_name'
+  map :project_display,            to: 'project.display'
   # MAPPED ATTRIBUTES (End)
 
   # INDEXING (Start) ====================================================================
@@ -94,6 +94,7 @@ class Desk::Case < ActiveRecord::Base
     event :activate do
       transition :backlog  => :draft
       transition :draft  => :active
+      transition :ready_to_activate  => :active
     end
 
     event :backlog do
@@ -113,7 +114,7 @@ class Desk::Case < ActiveRecord::Base
 
     event :approve do
       transition :ready_to_close => :closed
-      transition :ready_to_activate => :active
+      transition :ready_to_activate => :approved_to_activate
     end
 
     event :close do

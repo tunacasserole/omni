@@ -17,7 +17,7 @@ class Desk::Approval < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :approval_id,                         :with => :guid
-  default :approver_id,                         :to => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+  default :approver_id,                         to: lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :approval_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"TASK_NBR"
   default :approval_date,                       :override  =>  false,        :with  => :today
   # DEFAULTS (End)
@@ -29,7 +29,7 @@ class Desk::Approval < ActiveRecord::Base
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :approver_display,              :to => 'approver.full_name'
+    map :approver_display,              to: 'approver.full_name'
   end
   # MAPPED ATTRIBUTES (End)
 

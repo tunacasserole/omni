@@ -21,7 +21,7 @@ class Desk::Checklist < ActiveRecord::Base
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :tasks,                            :as => :taskable
+  has_many     :tasks,                            as: :taskable
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================

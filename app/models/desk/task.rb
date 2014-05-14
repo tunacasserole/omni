@@ -18,7 +18,7 @@ class Desk::Task < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :task_id,                         :with => :guid
-  default :owner_id,                        :to => lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
+  default :owner_id,                        to: lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :task_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"TASK_NBR"
   # DEFAULTS (End)
 
@@ -29,7 +29,7 @@ class Desk::Task < ActiveRecord::Base
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   mapped_attributes do
-    map :owner_name,              :to => 'owner.full_name'
+    map :owner_name,              to: 'owner.full_name'
   end
   # MAPPED ATTRIBUTES (End)
 

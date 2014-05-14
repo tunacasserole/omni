@@ -46,10 +46,10 @@ Ext.define('Desk.model.Project', {
       name       : 'target_date',
       type       : 'date'
     },
-    // {
-    //   name       : 'estimated_days',
-    //   type       : 'decimal'
-    // },
+    {
+      name       : 'is_private',
+      type       : 'decimal'
+    },
     // {
     //   name       : 'actual_days',
     //   type       : 'decimal'

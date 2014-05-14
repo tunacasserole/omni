@@ -13,6 +13,7 @@ Ext.define('Desk.view.projects.Form', {
   reviewer_idLabel: Desk.i18n.model.Project.reviewer_id,
   descriptionLabel: Desk.i18n.model.Project.description,
   target_dateLabel: Desk.i18n.model.Project.target_date,
+  is_privateLabel: Desk.i18n.model.Project.is_private,
   // LABELS (End)
 
 
@@ -95,6 +96,11 @@ Ext.define('Desk.view.projects.Form', {
               xtype: 'datefield',
               name: 'target_date',
               fieldLabel: me.target_dateLabel,
+              allowBlank: true
+            }, {
+              xtype: 'checkbox',
+              name: 'is_private',
+              fieldLabel: me.is_privateLabel,
               allowBlank: true
             }
             // {

@@ -29,6 +29,20 @@ Ext.define('Desk.view.cases.Inspector', {
         title: 'Profile',
         xtype: 'desk-cases-Form'
       }, {
+        title: 'Help',
+        xtype: 'desk-guides-Explorer',
+        defaultSearch: {
+          with: {
+            guideable_type: {
+              equal_to: 'Desk::Case'
+            },
+            guideable_id: {
+              equal_to: me.record.get('case_id')
+            }
+          }
+        },
+        showBadge: true
+      }, {
         title: 'Approvals',
         xtype: 'desk-approvals-Explorer',
         defaultSearch: {
@@ -43,20 +57,6 @@ Ext.define('Desk.view.cases.Inspector', {
         },
         showBadge: true
       }, {
-        //   title: 'Tasks',
-        //   xtype: 'desk-tasks-Explorer',
-        //   defaultSearch: {
-        //     with: {
-        //       taskable_type: {
-        //         equal_to: 'Desk::Case'
-        //       },
-        //       taskable_id: {
-        //         equal_to: me.record.get('case_id')
-        //       }
-        //     }
-        //   },
-        //   showBadge: true
-        // }, {
         title: 'Notes',
         xtype: 'buildit-notes-Explorer',
         defaultSearch: {

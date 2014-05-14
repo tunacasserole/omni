@@ -14,3 +14,4 @@ en:
         display:                           'Project Name'
         description:                       'Description'
         target_date:                       'Target Date'
+        is_private:                        'Private Project'
