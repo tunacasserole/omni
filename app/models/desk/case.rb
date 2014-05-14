@@ -83,27 +83,36 @@ class Desk::Case < ActiveRecord::Base
   state_machine :state, :initial => :draft do
 
     # CALLBACKS ------------------
-    after_transition  any => any, :do => :notify
+    after_transition  [:ready_to_activate,:ready_to_close] => any, do: :do_approve
 
     # EVENTS ---------------------
     event :activate do
-      transition any  => :active
+      transition :backlog  => :draft
+      transition :draft  => :active
     end
 
     event :backlog do
       transition [:draft,:active]  => :backlog
+      transition :backlog  => :draft
     end
 
     event :review do
-      transition :active => :review
+      transition :draft => :ready_to_activate
+      transition :active => :ready_to_close
     end
 
     event :reject do
-      transition [:review,:closed] => :active
+      transition :ready_to_close => :active
+      transition :ready_to_activate => :draft
+    end
+
+    event :approve do
+      transition :ready_to_close => :closed
+      transition :ready_to_activate => :active
     end
 
     event :close do
-      transition [:draft,:backlog,:active,:review]  => :closed
+      transition [:draft,:backlog,:active,:ready_to_close]  => :closed
     end
 
 
@@ -117,14 +126,13 @@ class Desk::Case < ActiveRecord::Base
     state :active do
     end
 
-    state :review do
+    state :ready_to_close do
     end
 
-    state :reject do
+    state :ready_to_activate do
     end
 
     state :closed do
-
     end
   end
 
@@ -171,7 +179,11 @@ class Desk::Case < ActiveRecord::Base
     end
   end # def notify
 
-
+  def do_approve
+    approver = Buildit::User.current if Buildit::User.current
+    approval_comment = "approval given by #{approver.full_name}"
+    a = approvals.create(approver_id: approver.user_id, display: approval_comment)
+  end
   # HELPERS (End)
 
 end # class Desk::Case

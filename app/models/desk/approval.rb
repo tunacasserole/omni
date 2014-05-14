@@ -58,7 +58,7 @@ class Desk::Approval < ActiveRecord::Base
   state_machine :state, :initial => :draft do
 
     # CALLBACKS ------------------
-    after_transition   :draft  => :request, :do => :notify
+    # after_transition   :draft  => :request
     # after_transition   :request  => :final
 
     # EVENTS ---------------------

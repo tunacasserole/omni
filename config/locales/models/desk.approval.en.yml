@@ -11,6 +11,7 @@ en:
         approvable_type:                   'Approvable Type'
         approval_nbr:                      'Approval Nbr'
         approval_type:                     'Approval Type'
+        state:                             'State'
         display:                           'Approval Detail'
         description:                       'Description'
         approval_date:                     'Approval Date'

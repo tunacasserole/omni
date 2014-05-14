@@ -233,7 +233,7 @@ Ext.define('Desk.view.cases.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'fa fa-hand-o-left',
+        iconCls: 'fa fa-gavel',
         tooltip: 'Review',
         listeners: {
           beforerender: this.prepareReviewAction,
@@ -252,10 +252,28 @@ Ext.define('Desk.view.cases.Form', {
       }, {
         xtype: 'button',
         iconCls: 'fa fa-thumbs-o-up',
+        tooltip: 'Approve',
+        listeners: {
+          beforerender: this.prepareApproveAction,
+          click: this.onApproveAction,
+          scope: me
+        }
+      }, {
+        xtype: 'button',
+        iconCls: 'fa fa-times-circle-o',
         tooltip: 'Close',
         listeners: {
           beforerender: this.prepareCloseAction,
           click: this.onCloseAction,
+          scope: me
+        }
+      }, {
+        xtype: 'button',
+        iconCls: 'fa fa-envelope-o',
+        tooltip: 'Notify',
+        listeners: {
+          beforerender: this.prepareNotifyAction,
+          click: this.onNotifyAction,
           scope: me
         }
       }]
@@ -275,23 +293,31 @@ Ext.define('Desk.view.cases.Form', {
   // HANDLERS (Start) ======================================================================
 
   onActivateAction: function(action, eOpts) {
-    this.processEventTransition('activate', 'activate was succesfull.', 'activate encountered an error.');
+    this.processEventTransition('activate', 'request was activated.', 'activate encountered an error.');
+  }, // onBuildAction
+
+  onApproveAction: function(action, eOpts) {
+    this.processEventTransition('approve', 'request was approved.', 'approve encountered an error.');
   }, // onBuildAction
 
   onBacklogAction: function(action, eOpts) {
-    this.processEventTransition('backlog', 'backlog was succesfull.', 'backlog encountered an error.');
+    this.processEventTransition('backlog', 'request was moved to the backlog.', 'backlog encountered an error.');
   }, // onBuildAction
 
   onReviewAction: function(action, eOpts) {
-    this.processEventTransition('review', 'review was succesfull', 'review encountered an error.');
+    this.processEventTransition('review', 'request was submitted for review', 'review encountered an error.');
   }, // onBuildAction
 
   onRejectAction: function(action, eOpts) {
-    this.processEventTransition('reject', 'reject was succesfull', 'reject encountered an error.');
+    this.processEventTransition('reject', 'request was rejected', 'reject encountered an error.');
   }, // onBuildAction
 
   onCloseAction: function(action, eOpts) {
-    this.processEventTransition('close', 'close was succesfull', 'close encountered an error.');
+    this.processEventTransition('close', 'request was closed', 'close encountered an error.');
+  }, // onBuildAction
+
+  onNotifyAction: function(action, eOpts) {
+    this.processEventTransition('notify', 'notification was sent', 'notify encountered an error.');
   }, // onBuildAction
 
   prepareActivateAction: function(action, eOpts) {
@@ -301,7 +327,7 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareReviewAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'active' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'active' ? action.show() : action.hide();
   },
 
   prepareBacklogAction: function(action, eOpts) {
@@ -311,12 +337,22 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareRejectAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'review' ? action.show() : action.hide();
+    currentState === 'ready_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
+  },
+
+  prepareApproveAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'ready_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
   },
 
   prepareCloseAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'draft' || currentState === 'backlog' || currentState === 'active' || currentState === 'review' ? action.show() : action.hide();
+    currentState === 'ready_to_close' || currentState === 'backlog' || currentState === 'active' || currentState === 'review' ? action.show() : action.hide();
+  },
+
+  prepareNotifyAction: function(action, eOpts) {
+    // var currentState = this.record.get('state');
+    // currentState === 'draft' || currentState === 'backlog' ? action.show() : action.hide();
   },
 
   processEventTransition: function(eventName, successMsg, failureMsg) {

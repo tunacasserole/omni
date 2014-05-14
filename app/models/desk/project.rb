@@ -89,10 +89,6 @@ class Desk::Project < ActiveRecord::Base
     end
 
     # STATE HELPERS ---------------------
-    def notify
-      puts 'notify someone'
-    end
-
     def display_as
       self.display
     end

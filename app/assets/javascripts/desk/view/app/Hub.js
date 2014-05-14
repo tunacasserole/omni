@@ -46,14 +46,16 @@ Ext.define('Desk.view.app.Hub', {
               target: {
                 xtype: 'desk-projects-Explorer'
               }
-              }, {
-                title: 'Help',
-                cls: 'users',
-                colspan: 2,
-                rowspan: 1,
-                target: {
-                  xtype: 'desk-guides-Explorer'
-                }
+            }, {
+              title: 'Help',
+
+              cls: 'users',
+              // iconCls: 'fa fa-envelope-o',
+              colspan: 2,
+              rowspan: 1,
+              target: {
+                xtype: 'desk-guides-Explorer'
+              }
             }
           ]
         }

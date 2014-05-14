@@ -1,0 +1,360 @@
+/*
+---------------------------------------------------------------------------------------
+   ATTACHMENTS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.attachments .x-panel-body .logo {
+  background-image: url(/assets/buildit/desktop/icons/module/attachments.png);
+  background-color: #22B7FF;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.attachments.active .x-panel-body .logo, .inspector .tab.attachments .x-panel-body:hover .logo {
+  background-image: url(/assets/buildit/desktop/icons/module/attachments.png);
+  background-color: #0B618A;
+}
+
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.attachments.active .x-panel-body, .inspector .tab.attachments.active .x-panel-body:hover, .inspector .tab.attachments .x-panel-body:hover {
+  background-color: #22B7FF;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   NOTES
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.notes .x-panel-body .logo {
+  background-image: url(/assets/buildit/desktop/icons/module/notes.png);
+  background-color: #22B7FF;
+}
+
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.notes.active .x-panel-body .logo, .inspector .tab.notes .x-panel-body:hover .logo {
+  background-image: url(/assets/buildit/desktop/icons/module/notes.png);
+  background-color: #0B618A;
+}
+
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.notes.active .x-panel-body, .inspector .tab.notes.active .x-panel-body:hover, .inspector .tab.notes .x-panel-body:hover {
+  background-color: #22B7FF;
+}
+
+/* Inspector Subtab */
+.inspector .subtab.notes .x-panel-body {
+  background-color: #0B618A;
+}
+
+/* Inspector Subtab Logo Active & Hover */
+.inspector .subtab.notes.active .x-panel-body .logo, .inspector .subtab.notes .x-panel-body:hover .logo {
+  background-color: #22B7FF;
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   AUDIT
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.audit .x-panel-body .logo {
+  background-image: url(/assets/buildit/desktop/icons/module/audit.png);
+  background-color: #22B7FF;
+}
+
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.audit.active .x-panel-body .logo, .inspector .tab.audit .x-panel-body:hover .logo {
+  background-image: url(/assets/buildit/desktop/icons/module/audit.png);
+  background-color: #0B618A;
+}
+
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.audit.active .x-panel-body, .inspector .tab.audit.active .x-panel-body:hover, .inspector .tab.audit .x-panel-body:hover {
+  background-color: #22B7FF;
+}
+
+
+
+/*
+---------------------------------------------------------------------------------------
+   HELP
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.users .x-panel-body .logo {
+  background-color: #3498db;
+}
+
+.inspector .tab.users .x-panel-body .logo:before {
+  content: "\f007";
+  padding-top: 8px;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.users.active .x-panel-body .logo, .inspector .tab.users .x-panel-body:hover .logo {
+  background-color: #2980b9;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.users.active .x-panel-body, .inspector .tab.users.active .x-panel-body:hover, .inspector .tab.users .x-panel-body:hover {
+  background-color: #3498db;
+}
+
+/* Tile */
+.tile.users {
+  background-color: #3498db !important;
+}
+
+.tile.users:hover {
+  background-color: #2980b9 !important;
+}
+
+.tile.users:before {
+  content: "\f007";
+}
+
+
+
+/*
+---------------------------------------------------------------------------------------
+   ROLES
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.roles .x-panel-body .logo {
+  background-color: #e67e22;
+}
+
+.inspector .tab.roles .x-panel-body .logo:before {
+  content: "\f0e3";
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.roles.active .x-panel-body .logo, .inspector .tab.roles .x-panel-body:hover .logo {
+  background-color: #d35400;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.roles.active .x-panel-body, .inspector .tab.roles.active .x-panel-body:hover, .inspector .tab.roles .x-panel-body:hover {
+  background-color: #e67e22;
+}
+
+/* Tile */
+.tile.roles {
+  background-color: #e67e22 !important;
+}
+
+.tile.roles:hover {
+  background-color: #d35400 !important;
+}
+
+.tile.roles:before {
+  content: "\f0e3";
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   APPLICATIONS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.applications .x-panel-body .logo {
+  background-color: #2ecc71;
+}
+
+.inspector .tab.applications .x-panel-body .logo:before {
+  content: "\f022";
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.applications.active .x-panel-body .logo, .inspector .tab.applications .x-panel-body:hover .logo {
+  background-color: #27ae60;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.applications.active .x-panel-body, .inspector .tab.applications.active .x-panel-body:hover, .inspector .tab.applications .x-panel-body:hover {
+  background-color: #2ecc71;
+}
+
+
+/* Tile */
+.tile.applications {
+  background-color: #2ecc71 !important;
+}
+
+.tile.applications:before {
+  content: "\f022";
+}
+
+.tile.applications:hover {
+  background-color: #27ae60 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   DEFAULT
+---------------------------------------------------------------------------------------
+*/
+
+/* Inspector Logo */
+.inspector .tab.default .x-panel-body .logo:before {
+  content: "\f0c9";
+}
+
+.inspector .tab.default .x-panel-body .logo {
+  background-color: #374E65;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.default.active .x-panel-body .logo, .inspector .tab.default .x-panel-body:hover .logo {
+  background-color: #34495e;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.default.active .x-panel-body, .inspector .tab.default.active .x-panel-body:hover, .inspector .tab.default .x-panel-body:hover {
+  background-color: #374E65;
+}
+
+
+
+/* Inspector Subtab Logo */
+.inspector .subtab .x-panel-body .logo {
+  background-image: url(/assets/buildit/desktop/icons/module/bullet.png);
+}
+
+/* Inspector Subtab Logo Active & Hover */
+.inspector .subtab.active .x-panel-body .logo, .inspector .subtab .x-panel-body:hover .logo {
+  background-color: #374E65;
+  border-radius: 50%;
+}
+
+/* Inspector Subtab */
+.inspector .subtab .x-panel-body {
+  background-color: #34495E;
+}
+
+
+
+/* Tile */
+.tile {
+  background-color: #34495e !important;
+}
+
+.tile:hover {
+  background-color: #2c3e50 !important;
+}
+
+/*
+---------------------------------------------------------------------------------------
+   SUPPORT
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.support .x-panel-body .logo {
+  background-color: #3498db;
+}
+
+.inspector .tab.support .x-panel-body .logo:before {
+  content: "\f129";
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.support.active .x-panel-body .logo, .inspector .tab.support .x-panel-body:hover .logo {
+  background-color: #2980b9;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.support.active .x-panel-body, .inspector .tab.support.active .x-panel-body:hover, .inspector .tab.support .x-panel-body:hover {
+  background-color: #3498db;
+}
+
+/* Inspector Subtab */
+.inspector .subtab.support .x-panel-body {
+  background-color: #2980b9;
+}
+
+/* Inspector Subtab Logo Active & Hover */
+.inspector .subtab.support.active .x-panel-body .logo, .inspector .subtab.support .x-panel-body:hover .logo {
+  background-color: #3498db;
+}
+
+
+/* Tile */
+.tile.support {
+  background-color: #3498db !important;
+}
+
+.tile.support:hover {
+  background-color: #2980b9 !important;
+}
+
+.tile.support:before {
+  content: "\f155";
+}
+
+
+/*
+---------------------------------------------------------------------------------------
+   BOOKMARKS
+---------------------------------------------------------------------------------------
+*/
+
+
+/* Inspector Logo */
+.inspector .tab.bookmarks .x-panel-body .logo {
+  background-color: #3498db;
+}
+
+.inspector .tab.bookmarks .x-panel-body .logo:before {
+  content: "\f02e";
+  padding-top: 8px;
+}
+
+/* Inspector Logo Active & Hover */
+.inspector .tab.bookmarks.active .x-panel-body .logo, .inspector .tab.bookmarks .x-panel-body:hover .logo {
+  background-color: #2980b9;
+}
+
+/* Inspector Tab Active & Hover */
+.inspector .tab.bookmarks.active .x-panel-body, .inspector .tab.bookmarks.active .x-panel-body:hover, .inspector .tab.bookmarks .x-panel-body:hover {
+  background-color: #3498db;
+}
+
+/* Tile */
+.tile.bookmarks {
+  background-color: #3498db !important;
+}
+
+.tile.bookmarks:hover {
+  background-color: #2980b9 !important;
+}
+
+.tile.bookmarks:before {
+  content: "\f02e";
+}
+
+
+
