@@ -5,8 +5,9 @@ Ext.define('Desk.view.cases.Form', {
 
   // LABELS (Start) =======================================================================
   case_idLabel: Desk.i18n.model.Case.case_id,
-  requestor_idLabel: Desk.i18n.model.Case.requestor_id,
   owner_idLabel: Desk.i18n.model.Case.owner_id,
+  requestor_idLabel: Desk.i18n.model.Case.requestor_id,
+  reviewer_idLabel: Desk.i18n.model.Case.reviewer_id,
   project_idLabel: Desk.i18n.model.Case.project_id,
   case_nbrLabel: Desk.i18n.model.Case.case_nbr,
   case_typeLabel: Desk.i18n.model.Case.case_type,
@@ -85,50 +86,6 @@ Ext.define('Desk.view.cases.Form', {
             allowBlank: true,
             emptyText: 'auto-populated'
           }, {
-            xtype: 'buildit-Locator',
-            store: Ext.create('Buildit.store.User', {
-              pageSize: 20
-            }),
-            displayField: 'full_name',
-            queryField: 'full_name',
-            valueField: 'user_id',
-            itemTpl: '{full_name}',
-            name: 'requestor_id',
-            fieldLabel: this.requestor_idLabel,
-            allowBlank: true,
-            emptyText: 'auto-populated'
-          }, {
-            xtype: 'buildit-Locator',
-            store: Ext.create('Desk.store.Team', {
-              pageSize: 20
-            }),
-            displayField: 'user_display',
-            queryField: 'user_display',
-            valueField: 'user_id',
-            itemTpl: '{user_display}',
-            name: 'owner_id',
-            fieldLabel: this.owner_idLabel,
-            allowBlank: true,
-            defaultSearch: {
-              with: {
-                teamable_id: {
-                  equal_to: project_id
-                }
-              }
-            },
-            emptyText: 'auto-populated'
-            // xtype: 'buildit-Locator',
-            // store: Ext.create('Buildit.store.User', {
-            //   pageSize: 20
-            // }),
-            // displayField: 'full_name',
-            // queryField: 'full_name',
-            // valueField: 'user_id',
-            // itemTpl: '{full_name}',
-            // name: 'owner_id',
-            // fieldLabel: this.owner_idLabel,
-            // allowBlank: true
-          }, {
             xtype: 'buildit-Lookup',
             name: 'case_type',
             fieldLabel: me.case_typeLabel,
@@ -151,7 +108,8 @@ Ext.define('Desk.view.cases.Form', {
             fieldLabel: me.descriptionLabel,
             maxLength: 4000,
             minLength: 0,
-            allowBlank: true
+            allowBlank: true,
+            rows: 10
           }, {
             xtype: 'buildit-Lookup',
             name: 'case_urgency',
@@ -170,6 +128,52 @@ Ext.define('Desk.view.cases.Form', {
             allowBlank: true,
             emptyText: 'auto-populated',
             category: 'CASE_SIZE'
+          }, {
+            xtype: 'buildit-Locator',
+            store: Ext.create('Buildit.store.User', {
+              pageSize: 20
+            }),
+            displayField: 'full_name',
+            queryField: 'full_name',
+            valueField: 'user_id',
+            itemTpl: '{full_name}',
+            name: 'requestor_id',
+            fieldLabel: this.requestor_idLabel,
+            allowBlank: true,
+            emptyText: 'auto-populated'
+          }, {
+            xtype: 'buildit-Locator',
+            store: Ext.create('Buildit.store.User', {
+              pageSize: 20
+            }),
+            displayField: 'full_name',
+            queryField: 'full_name',
+            valueField: 'user_id',
+            itemTpl: '{full_name}',
+            name: 'reviewer_id',
+            fieldLabel: this.reviewer_idLabel,
+            allowBlank: true,
+            emptyText: 'auto-populated'
+          }, {
+            xtype: 'buildit-Locator',
+            store: Ext.create('Desk.store.Team', {
+              pageSize: 20
+            }),
+            displayField: 'user_display',
+            queryField: 'user_display',
+            valueField: 'user_id',
+            itemTpl: '{user_display}',
+            name: 'owner_id',
+            fieldLabel: this.owner_idLabel,
+            allowBlank: true,
+            defaultSearch: {
+              with: {
+                teamable_id: {
+                  equal_to: project_id
+                }
+              }
+            },
+            emptyText: 'auto-populated'
           }, {
             xtype: 'textfield',
             name: 'audit_created_by_name',

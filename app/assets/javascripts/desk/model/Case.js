@@ -8,6 +8,9 @@ Ext.define('Desk.model.Case', {
     name: 'requestor_id',
     type: 'string'
   }, {
+    name: 'reviewer_id',
+    type: 'string'
+  }, {
     name: 'owner_id',
     type: 'string'
   }, {
@@ -64,6 +67,9 @@ Ext.define('Desk.model.Case', {
     type: 'string'
   }, {
     name: 'requestor_display',
+    type: 'string'
+  }, {
+    name: 'reviewer_display',
     type: 'string'
   }, {
     name: 'project_display',

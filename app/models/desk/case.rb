@@ -14,20 +14,21 @@ class Desk::Case < ActiveRecord::Base
   validates :case_id,                        presence: true, uniqueness: true
   validates :display,                        presence: true
   validates :project_id,                     presence: true
-  validates :requestor_id,                   presence: true
   validates :owner_id,                       presence: true
+  validates :requestor_id,                   presence: true
+  validates :reviewer_id,                    presence: true
   validates :case_type,                      lookup: 'CASE_TYPE',       allow_nil: true
   validates :case_size,                      lookup: 'CASE_SIZE',       allow_nil: true
   validates :case_urgency,                   lookup: 'CASE_URGENCY',    allow_nil: true
-
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
   default :case_id,                          :with => :guid
   default :case_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"CASE_NBR"
   default :project_id,                       :to => lambda{ |m| Desk::Project.omni_project.project_id }
-  default :requestor_id,                     :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   default :owner_id,                         :to => lambda{ |m| m.project.owner_id if m.project }
+  default :requestor_id,                     :to => lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
+  default :reviewer_id,                      :to => lambda{ |m| m.project.reviewer_id if m.project }
   default :details,                          :to => "select a request type for further instructions"
   default :case_urgency,                     :to => 'STANDARD'
   default :case_type,                        :to => 'QUESTION'
@@ -40,13 +41,15 @@ class Desk::Case < ActiveRecord::Base
   has_many     :notes,                :as => :notable
   has_many     :teams,                :as => :teamable
   belongs_to   :project,              :class_name => 'Desk::Project',        :foreign_key => 'project_id'
-  belongs_to   :requestor,            :class_name => 'Buildit::User',        :foreign_key => 'requestor_id'
   belongs_to   :owner,                :class_name => 'Buildit::User',        :foreign_key => 'owner_id'
+  belongs_to   :requestor,            :class_name => 'Buildit::User',        :foreign_key => 'requestor_id'
+  belongs_to   :reviewer,            :class_name => 'Buildit::User',        :foreign_key => 'reviewer_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
-  map :requestor_display,            :to => 'requestor.full_name'
   map :owner_display,            :to => 'owner.full_name'
+  map :requestor_display,            :to => 'requestor.full_name'
+  map :reviewer_display,            :to => 'reviewer.full_name'
   map :project_display,            :to => 'project.display'
   # MAPPED ATTRIBUTES (End)
 
@@ -62,8 +65,9 @@ class Desk::Case < ActiveRecord::Base
     string   :display
     string   :description
     string   :project_display
-    string   :requestor_display
     string   :owner_display
+    string   :requestor_display
+    string   :reviewer_display
 
     text     :case_nbr_fulltext, :using => :case_nbr
     text     :case_type_fulltext, :using => :case_type
@@ -73,8 +77,9 @@ class Desk::Case < ActiveRecord::Base
     text     :display_fulltext, :using => :display
     text     :description_fulltext, :using => :description
     text     :project_display_fulltext, :using => :project_display
-    text     :requestor_display_fulltext, :using => :requestor_display
     text     :owner_display_fulltext, :using => :owner_display
+    text     :requestor_display_fulltext, :using => :requestor_display
+    text     :reviewer_display_fulltext, :using => :reviewer_display
   end
   order_search_by :case_nbr => :desc
   # INDEXING (End)
@@ -163,8 +168,7 @@ class Desk::Case < ActiveRecord::Base
   # Sends an email notification to the requestor and owner of the case
   def notify
     # Determine target address
-
-    email_addresses = [self.owner,self.requestor].collect { |u| u.email_address if u }
+    email_addresses = [self.owner,self.requestor,self.reviewer].collect { |u| u.email_address if u }
     email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes
     if email_addresses.count > 0
       message = Buildit::Comm::Email::Message.create(
@@ -172,10 +176,10 @@ class Desk::Case < ActiveRecord::Base
           body: Buildit::Email::Manager.generate(self, "case_notice"),
       )
 
-      email_addresses.each { |x| puts x}
       message.send_to email_addresses
       message.queue
       Buildit::Comm::Email::OutboundService.process
+      email_addresses.each { |x| puts x}
     end
   end # def notify
 

@@ -81,10 +81,10 @@ Ext.define('Desk.view.cases.Explorer', {
           header: me.project_idLabel,
           dataIndex: 'project_display',
           flex: 2
-        }, {
-          header: me.case_sizeLabel,
-          dataIndex: 'case_size',
-          flex: 1
+        // }, {
+        //   header: me.case_sizeLabel,
+        //   dataIndex: 'case_size',
+        //   flex: 1
         }, {
           header: me.stateLabel,
           dataIndex: 'state',

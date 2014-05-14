@@ -7,6 +7,7 @@ en:
         display_as:                        'Request'
         case_id:                           'Request'
         requestor_id:                      'Requestor'
+        reviewer_id:                       'Reviewer'
         owner_id:                          'Owner'
         project_id:                        'Project'
         case_nbr:                          'Request Nbr'
