@@ -344,12 +344,12 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareRejectAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'review_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
+    currentState === 'approve_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
   },
 
   prepareApproveAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'review_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
+    currentState === 'approve_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
   },
 
   prepareCloseAction: function(action, eOpts) {
