@@ -88,13 +88,13 @@ class Desk::Case < ActiveRecord::Base
   state_machine :state, :initial => :draft do
 
     # CALLBACKS ------------------
-    after_transition  [:ready_to_activate,:ready_to_close] => any, do: :do_approve
+    after_transition  [:review_to_activate,:ready_to_close] => any, do: :do_approve
 
     # EVENTS ---------------------
     event :activate do
       transition :backlog  => :draft
       transition :draft  => :active
-      transition :ready_to_activate  => :active
+      transition :approved_to_activate  => :active
     end
 
     event :backlog do
@@ -103,18 +103,18 @@ class Desk::Case < ActiveRecord::Base
     end
 
     event :review do
-      transition :draft => :ready_to_activate
+      transition :draft => :review_to_activate
       transition :active => :ready_to_close
     end
 
     event :reject do
       transition :ready_to_close => :active
-      transition :ready_to_activate => :draft
+      transition :review_to_activate => :draft
     end
 
     event :approve do
       transition :ready_to_close => :closed
-      transition :ready_to_activate => :approved_to_activate
+      transition :review_to_activate => :approved_to_activate
     end
 
     event :close do
@@ -135,7 +135,7 @@ class Desk::Case < ActiveRecord::Base
     state :ready_to_close do
     end
 
-    state :ready_to_activate do
+    state :review_to_activate do
     end
 
     state :closed do

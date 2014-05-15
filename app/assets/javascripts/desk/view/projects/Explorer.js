@@ -57,7 +57,7 @@ Ext.define('Desk.view.projects.Explorer', {
         }, {
           header: me.displayLabel,
           dataIndex: 'display',
-          flex: 3
+          flex: 2
         }, {
           header: me.owner_idLabel,
           dataIndex: 'owner_display',

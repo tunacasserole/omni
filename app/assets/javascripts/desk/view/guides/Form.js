@@ -144,7 +144,7 @@ Ext.define('Desk.view.guides.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'fa fa-hand-o-left',
+        iconCls: 'fa fa-gavel',
         tooltip: 'Review',
         listeners: {
           beforerender: this.prepareReviewAction,
@@ -163,6 +163,15 @@ Ext.define('Desk.view.guides.Form', {
       }, {
         xtype: 'button',
         iconCls: 'fa fa-thumbs-o-up',
+        tooltip: 'Approve',
+        listeners: {
+          beforerender: this.prepareApproveAction,
+          click: this.onApproveAction,
+          scope: me
+        }
+      }, {
+        xtype: 'button',
+        iconCls: 'fa fa-toggle-right',
         tooltip: 'Activate',
         listeners: {
           beforerender: this.prepareActivateAction,
@@ -195,33 +204,42 @@ Ext.define('Desk.view.guides.Form', {
   // HANDLERS (Start) ======================================================================
 
   onActivateAction: function(action, eOpts) {
-    this.processEventTransition('activate', 'activate was succesfull.', 'activate encountered an error.');
+    this.processEventTransition('activate', 'guide promoted to next state.', 'activate encountered an error.');
+  }, // onBuildAction
+
+  onApproveAction: function(action, eOpts) {
+    this.processEventTransition('approve', 'guide is approved for activation.', 'approve encountered an error.');
   }, // onBuildAction
 
   onBacklogAction: function(action, eOpts) {
-    this.processEventTransition('backlog', 'backlog was succesfull.', 'backlog encountered an error.');
+    this.processEventTransition('backlog', 'guide was backlogged.', 'backlog encountered an error.');
   }, // onBuildAction
 
   onReviewAction: function(action, eOpts) {
-    this.processEventTransition('review', 'review was succesfull', 'review encountered an error.');
+    this.processEventTransition('review', 'guide was submitted for review.', 'review encountered an error.');
   }, // onBuildAction
 
   onRejectAction: function(action, eOpts) {
-    this.processEventTransition('reject', 'reject was succesfull', 'reject encountered an error.');
+    this.processEventTransition('reject', 'guide was rejected.', 'reject encountered an error.');
   }, // onBuildAction
 
   onCloseAction: function(action, eOpts) {
-    this.processEventTransition('close', 'close was succesfull', 'close encountered an error.');
+    this.processEventTransition('close', 'guide was retired.', 'retire encountered an error.');
   }, // onBuildAction
+
+  prepareApproveAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    currentState === 'review_to_activate' ? action.show() : action.hide();
+  },
 
   prepareActivateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'review' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'backlog' || currentState === 'review_to_activate' ? action.show() : action.hide();
   },
 
   prepareReviewAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'draft' || currentState === 'active' || currentState === 'backlog' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'active' ? action.show() : action.hide();
   },
 
   prepareBacklogAction: function(action, eOpts) {
@@ -231,7 +249,7 @@ Ext.define('Desk.view.guides.Form', {
 
   prepareRejectAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'review' ? action.show() : action.hide();
+    currentState === 'review_to_activate' ? action.show() : action.hide();
   },
 
   prepareCloseAction: function(action, eOpts) {

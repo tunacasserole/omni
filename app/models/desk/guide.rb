@@ -64,27 +64,34 @@ class Desk::Guide < ActiveRecord::Base
   state_machine :state, :initial => :draft do
 
     # CALLBACKS ------------------
-    after_transition :draft => :review, :do => :request_approval
+    after_transition draft: :review, do: :request_approval
 
     # EVENTS ---------------------
     event :activate do
-      transition [:review]  => :active
+      transition approved_to_activate: :active
+      transition draft:  :active
+      transition backlog:  :draft
     end
 
     event :backlog do
-      transition [:draft]  => :backlog
+      transition draft:  :backlog
+    end
+
+    event :approve do
+      transition review_to_activate: :active
     end
 
     event :review do
-      transition [:draft,:active,:backlog] => :review
+      transition draft: :review_to_activate
+      transition active: :draft
     end
 
     event :reject do
-      transition [:review,:active] => :draft
+      transition review_to_activate: :draft
     end
 
     event :close do
-      transition [:draft,:backlog,:active,:review]  => :closed
+      transition [:draft,:backlog,:active,:review] => :closed
     end
 
 

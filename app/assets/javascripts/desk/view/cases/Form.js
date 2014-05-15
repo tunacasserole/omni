@@ -84,6 +84,8 @@ Ext.define('Desk.view.cases.Form', {
             name: 'project_id',
             fieldLabel: me.project_idLabel,
             allowBlank: true,
+            gotoTarget: 'omni-projects-Inspector',
+
             emptyText: 'auto-populated'
           }, {
             xtype: 'buildit-Lookup',
@@ -298,7 +300,7 @@ Ext.define('Desk.view.cases.Form', {
   // HANDLERS (Start) ======================================================================
 
   onActivateAction: function(action, eOpts) {
-    this.processEventTransition('activate', 'request was activated.', 'activate encountered an error.');
+    this.processEventTransition('activate', 'request was promoted to the next state.', 'activate encountered an error.');
   }, // onBuildAction
 
   onApproveAction: function(action, eOpts) {
@@ -327,7 +329,7 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareActivateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'draft' || currentState === 'backlog' || currentState === 'ready_to_activate' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'backlog' || currentState === 'approved_to_activate' ? action.show() : action.hide();
   },
 
   prepareReviewAction: function(action, eOpts) {
@@ -342,12 +344,12 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareRejectAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'ready_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
+    currentState === 'review_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
   },
 
   prepareApproveAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'ready_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
+    currentState === 'review_to_activate' || currentState === 'ready_to_close' ? action.show() : action.hide();
   },
 
   prepareCloseAction: function(action, eOpts) {
