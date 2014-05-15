@@ -138,7 +138,7 @@ class Omni::Purchase < ActiveRecord::Base
   hook :before_update, :recompute_delivery_date, 10
   hook :before_update, :recompute_cancel_date, 20
   # hook :before_update, :update_allocation_profiles, 30
-  hook :before_destroy, :cascading_delete, 40
+  # hook :before_destroy, :cascading_delete, 40
 
   def set_defaults_from_supplier
     self.estimated_lead_time_days = supplier.lead_time || 0 # JASON - why won't the lambda work for this field?  see above
@@ -286,8 +286,10 @@ class Omni::Purchase < ActiveRecord::Base
   #   Omni::Purchase.where(purchase_id: new_purchase.purchase_id).first
   # end
 
-  def copy
+  def duplicate
+    # myself  = Omni::Purchase.first
     new_purchase = self.clone
+    new_purchase.save
     self.purchase_details.each do |pd|
       new_purchase_detail = pd.clone
       new_purchase_detail.purchase_id = new_purchase.purchase_id

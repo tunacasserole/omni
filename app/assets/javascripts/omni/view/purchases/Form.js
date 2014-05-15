@@ -765,7 +765,7 @@ Ext.define('Omni.view.purchases.Form', {
   },
 
   onCloneAction: function(action, eOpts) {
-    this.processEventTransition('copy', 'purchase was cloned, look for a new purchase in clone_state.', 'An error occurred mass updating this purchase order.');
+    this.processEventTransition('duplicate', 'purchase was cloned,Purchase Order clone request was successfully submitted.  This may take several minutes to complete. Look for a new purchase in draft state.', 'An error occurred mass updating this purchase order.');
   },
 
   prepareReleaseAction: function(action, eOpts) {
