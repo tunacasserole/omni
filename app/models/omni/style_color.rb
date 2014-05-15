@@ -82,6 +82,7 @@ class Omni::StyleColor < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :style_color_id
     string   :style_id
     string   :color_id
     string   :display

@@ -53,6 +53,7 @@ class Omni::Size < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :size_id
     string   :size_nbr
     string   :size_type do |x| Buildit::Lookup::Manager.display_for('SIZE_TYPE', x.size_type) end
     string   :short_name

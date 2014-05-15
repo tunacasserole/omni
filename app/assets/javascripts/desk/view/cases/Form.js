@@ -230,16 +230,6 @@ Ext.define('Desk.view.cases.Form', {
         }
       }, {
         xtype: 'button',
-        // iconCls: 'fa fa-play-circle-o',
-        iconCls: 'fa fa-toggle-right',
-        tooltip: 'Activate',
-        listeners: {
-          beforerender: this.prepareActivateAction,
-          click: this.onActivateAction,
-          scope: me
-        }
-      }, {
-        xtype: 'button',
         iconCls: 'fa fa-gavel',
         tooltip: 'Review',
         listeners: {
@@ -263,6 +253,16 @@ Ext.define('Desk.view.cases.Form', {
         listeners: {
           beforerender: this.prepareApproveAction,
           click: this.onApproveAction,
+          scope: me
+        }
+      }, {
+        xtype: 'button',
+        // iconCls: 'fa fa-play-circle-o',
+        iconCls: 'fa fa-toggle-right',
+        tooltip: 'Activate',
+        listeners: {
+          beforerender: this.prepareActivateAction,
+          click: this.onActivateAction,
           scope: me
         }
       }, {

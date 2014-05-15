@@ -51,6 +51,7 @@ class Omni::Product < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :product_id
     string   :display
     string   :product_nbr
     string   :category_id

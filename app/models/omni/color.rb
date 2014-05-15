@@ -50,6 +50,7 @@ class Omni::Color < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
+    string   :color_id
     string   :display
     string   :color_nbr
     string   :short_name
