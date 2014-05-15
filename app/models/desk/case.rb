@@ -88,7 +88,7 @@ class Desk::Case < ActiveRecord::Base
   state_machine :state, :initial => :draft do
 
     # CALLBACKS ------------------
-    after_transition  [:approve_to_activate,:ready_to_close] => any, do: :do_approve
+    after_transition  [:approval_needed,:ready_to_close] => any, do: :do_approve
 
     # EVENTS ---------------------
     event :activate do
@@ -103,18 +103,18 @@ class Desk::Case < ActiveRecord::Base
     end
 
     event :review do
-      transition :draft => :approve_to_activate
+      transition :draft => :approval_needed
       transition :active => :ready_to_close
     end
 
     event :reject do
       transition :ready_to_close => :active
-      transition :approve_to_activate => :draft
+      transition :approval_needed => :draft
     end
 
     event :approve do
       transition :ready_to_close => :closed
-      transition :approve_to_activate => :approved_to_activate
+      transition :approval_needed => :approved_to_activate
     end
 
     event :close do
@@ -135,7 +135,7 @@ class Desk::Case < ActiveRecord::Base
     state :ready_to_close do
     end
 
-    state :approve_to_activate do
+    state :approval_needed do
     end
 
     state :closed do

@@ -78,16 +78,16 @@ class Desk::Guide < ActiveRecord::Base
     end
 
     event :approve do
-      transition approve_to_activate: :active
+      transition approval_needed: :active
     end
 
     event :review do
-      transition draft: :approve_to_activate
+      transition draft: :approval_needed
       transition active: :draft
     end
 
     event :reject do
-      transition approve_to_activate: :draft
+      transition approval_needed: :draft
     end
 
     event :close do
