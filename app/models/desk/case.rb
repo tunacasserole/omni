@@ -54,14 +54,15 @@ class Desk::Case < ActiveRecord::Base
   # MAPPED ATTRIBUTES (End)
 
   # INDEXING (Start) ====================================================================
+    # string   :billing_state   do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.billing_state) end
   searchable do
     string   :case_id
     string   :project_id
     string   :case_nbr
-    string   :case_type
-    string   :case_size
-    string   :case_urgency
-    string   :state
+    string   :case_type do |x| x.case_type.downcase end
+    string   :case_size do |x| Buildit::Lookup::Manager.display_for('CASE_SIZE', x.case_size) end
+    string   :case_urgency do |x| Buildit::Lookup::Manager.display_for('CASE_URGENCY', x.case_urgency) end
+    string   :state do |x| x.state.gsub('_',' ') end
     string   :display
     string   :description
     string   :project_display
@@ -88,7 +89,7 @@ class Desk::Case < ActiveRecord::Base
   state_machine :state, :initial => :draft do
 
     # CALLBACKS ------------------
-    after_transition  [:approval_needed,:ready_to_close] => any, do: :do_approve
+    after_transition  [:needs_approval,:ready_to_close] => any, do: :do_approve
 
     # EVENTS ---------------------
     event :activate do
@@ -103,18 +104,18 @@ class Desk::Case < ActiveRecord::Base
     end
 
     event :review do
-      transition :draft => :approval_needed
+      transition :draft => :needs_approval
       transition :active => :ready_to_close
     end
 
     event :reject do
       transition :ready_to_close => :active
-      transition :approval_needed => :draft
+      transition :needs_approval => :draft
     end
 
     event :approve do
       transition :ready_to_close => :closed
-      transition :approval_needed => :approved_to_activate
+      transition :needs_approval => :approved_to_activate
     end
 
     event :close do
@@ -135,7 +136,7 @@ class Desk::Case < ActiveRecord::Base
     state :ready_to_close do
     end
 
-    state :approval_needed do
+    state :needs_approval do
     end
 
     state :closed do

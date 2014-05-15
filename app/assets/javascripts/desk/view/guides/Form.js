@@ -229,12 +229,12 @@ Ext.define('Desk.view.guides.Form', {
 
   prepareApproveAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'approval_needed' ? action.show() : action.hide();
+    currentState === 'needs_approval' ? action.show() : action.hide();
   },
 
   prepareActivateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'draft' || currentState === 'backlog' || currentState === 'approval_needed' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'backlog' || currentState === 'needs_approval' ? action.show() : action.hide();
   },
 
   prepareReviewAction: function(action, eOpts) {
@@ -249,7 +249,7 @@ Ext.define('Desk.view.guides.Form', {
 
   prepareRejectAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'approval_needed' ? action.show() : action.hide();
+    currentState === 'needs_approval' ? action.show() : action.hide();
   },
 
   prepareCloseAction: function(action, eOpts) {

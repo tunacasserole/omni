@@ -295,9 +295,9 @@
     end
   end
 
-  def clone(new_purchase_id, units_to_order)
-      Omni::PurchaseDetail.create(units_ordered: units_to_order, purchase_id: new_purchase_id, sku_id: self.sku_id, sku_supplier_id: self.sku_supplier_id, supplier_item_identifier: self.supplier_item_identifier, description: self.description, color_name: self.color_name, size_name: self.size_name, sku_alias: self.sku_alias, allocation_profile_id: self.allocation_profile_id,  order_pack_size: self.order_pack_size, order_pack_type: self.order_pack_type, order_cost_units: self.order_cost_units, order_multiple_type: self.order_multiple_type, order_multiple: self.order_multiple, supplier_cost: self.supplier_cost, extra_cost: self.extra_cost)
-  end
+  # def clone(new_purchase_id, units_to_order)
+  #     Omni::PurchaseDetail.create(units_ordered: units_to_order, purchase_id: new_purchase_id, sku_id: self.sku_id, sku_supplier_id: self.sku_supplier_id, supplier_item_identifier: self.supplier_item_identifier, description: self.description, color_name: self.color_name, size_name: self.size_name, sku_alias: self.sku_alias, allocation_profile_id: self.allocation_profile_id,  order_pack_size: self.order_pack_size, order_pack_type: self.order_pack_type, order_cost_units: self.order_cost_units, order_multiple_type: self.order_multiple_type, order_multiple: self.order_multiple, supplier_cost: self.supplier_cost, extra_cost: self.extra_cost)
+  # end
 
   def reset
     self.purchase_allocations.all(:state => 'planning').each {|x| x.destroy}

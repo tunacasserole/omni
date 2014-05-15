@@ -58,8 +58,8 @@ class Omni::Customer < ActiveRecord::Base
   # REFERENCE (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  has_many     :vouchers,                        class_name: 'Omni::Voucher',                 foreign_key: 'customer_id'
   belongs_to   :user,                            class_name: 'Buildit::User',                 foreign_key: 'user_id'
+  has_many     :vouchers,                        class_name: 'Omni::Voucher',                 foreign_key: 'customer_id'
   has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
   has_many     :shipments,                       class_name: 'Omni::Shipment',                foreign_key: 'shippable_id',     as: :shippable
   has_many     :customer_accounts,               class_name: 'Omni::CustomerAccount',         foreign_key: 'customer_id'

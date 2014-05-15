@@ -1,4 +1,3 @@
-
 Ext.define('Omni.view.purchases.Form', {
 
   extend: 'Buildit.ux.Form',
@@ -235,72 +234,72 @@ Ext.define('Omni.view.purchases.Form', {
               disabled: true
             },
           ]
-        // }, {
-        //   xtype: 'fieldset',
-        //   title: 'Purchase Order Approvals',
-        //   collapsible: true,
-        //   collapsed: true,
-        //   defaultType: 'textfield',
-        //   defaults: {
-        //     anchor: '70%'
-        //   },
-        //   layout: 'anchor',
-        //   disabled: disabled,
-        //   items: [{
-        //     xtype: 'buildit-Locator',
-        //     store: Ext.create('Buildit.store.User', {
-        //       pageSize: 20
-        //     }),
-        //     displayField: 'full_name',
-        //     queryField: 'full_name',
-        //     valueField: 'user_id',
-        //     itemTpl: '{full_name}',
-        //     name: 'purchase_approver_1_user_id',
-        //     fieldLabel: this.purchase_approver_1_user_idLabel,
-        //     allowBlank: true
-        //   }, {
-        //     xtype: 'datefield',
-        //     name: 'approval_1_date',
-        //     fieldLabel: this.approval_1_dateLabel,
-        //     disabled: true,
-        //     allowBlank: false
-        //   }, {
-        //     xtype: 'buildit-Locator',
-        //     store: Ext.create('Buildit.store.User', {
-        //       pageSize: 20
-        //     }),
-        //     displayField: 'full_name',
-        //     queryField: 'full_name',
-        //     valueField: 'user_id',
-        //     itemTpl: '{full_name}',
-        //     name: 'purchase_approver_2_user_id',
-        //     fieldLabel: this.purchase_approver_2_user_idLabel,
-        //     allowBlank: true
-        //   }, {
-        //     xtype: 'datefield',
-        //     name: 'approval_2_date',
-        //     fieldLabel: this.approval_2_dateLabel,
-        //     disabled: true,
-        //     allowBlank: false
-        //   }, {
-        //     xtype: 'buildit-Locator',
-        //     store: Ext.create('Buildit.store.User', {
-        //       pageSize: 20
-        //     }),
-        //     displayField: 'full_name',
-        //     queryField: 'full_name',
-        //     valueField: 'user_id',
-        //     itemTpl: '{full_name}',
-        //     name: 'purchase_approver_3_user_id',
-        //     fieldLabel: this.purchase_approver_3_user_idLabel,
-        //     allowBlank: true
-        //   }, {
-        //     xtype: 'datefield',
-        //     name: 'approval_3_date',
-        //     fieldLabel: this.approval_3_dateLabel,
-        //     disabled: true,
-        //     allowBlank: false
-        //   }]
+          // }, {
+          //   xtype: 'fieldset',
+          //   title: 'Purchase Order Approvals',
+          //   collapsible: true,
+          //   collapsed: true,
+          //   defaultType: 'textfield',
+          //   defaults: {
+          //     anchor: '70%'
+          //   },
+          //   layout: 'anchor',
+          //   disabled: disabled,
+          //   items: [{
+          //     xtype: 'buildit-Locator',
+          //     store: Ext.create('Buildit.store.User', {
+          //       pageSize: 20
+          //     }),
+          //     displayField: 'full_name',
+          //     queryField: 'full_name',
+          //     valueField: 'user_id',
+          //     itemTpl: '{full_name}',
+          //     name: 'purchase_approver_1_user_id',
+          //     fieldLabel: this.purchase_approver_1_user_idLabel,
+          //     allowBlank: true
+          //   }, {
+          //     xtype: 'datefield',
+          //     name: 'approval_1_date',
+          //     fieldLabel: this.approval_1_dateLabel,
+          //     disabled: true,
+          //     allowBlank: false
+          //   }, {
+          //     xtype: 'buildit-Locator',
+          //     store: Ext.create('Buildit.store.User', {
+          //       pageSize: 20
+          //     }),
+          //     displayField: 'full_name',
+          //     queryField: 'full_name',
+          //     valueField: 'user_id',
+          //     itemTpl: '{full_name}',
+          //     name: 'purchase_approver_2_user_id',
+          //     fieldLabel: this.purchase_approver_2_user_idLabel,
+          //     allowBlank: true
+          //   }, {
+          //     xtype: 'datefield',
+          //     name: 'approval_2_date',
+          //     fieldLabel: this.approval_2_dateLabel,
+          //     disabled: true,
+          //     allowBlank: false
+          //   }, {
+          //     xtype: 'buildit-Locator',
+          //     store: Ext.create('Buildit.store.User', {
+          //       pageSize: 20
+          //     }),
+          //     displayField: 'full_name',
+          //     queryField: 'full_name',
+          //     valueField: 'user_id',
+          //     itemTpl: '{full_name}',
+          //     name: 'purchase_approver_3_user_id',
+          //     fieldLabel: this.purchase_approver_3_user_idLabel,
+          //     allowBlank: true
+          //   }, {
+          //     xtype: 'datefield',
+          //     name: 'approval_3_date',
+          //     fieldLabel: this.approval_3_dateLabel,
+          //     disabled: true,
+          //     allowBlank: false
+          //   }]
         }, {
           xtype: 'fieldset',
           title: 'Contact Information',
@@ -542,60 +541,60 @@ Ext.define('Omni.view.purchases.Form', {
             allowBlank: true,
             category: 'MASS_UPDATE_TYPE'
           }, {
-          //   xtype: 'label',
-          //   text: 'Insert Mass Update instructions',
-          //   cls: 'instruction'
-          // }, {
-          //   name: 'department_id',
-          //   fieldLabel: this.department_idLabel,
-          //   allowBlank: true,
-          //   disabled: false,
-          //   xtype: 'buildit-Locator',
-          //   store: Ext.create('Omni.store.Department', {
-          //     pageSize: 10
-          //   }),
-          //   displayField: 'display',
-          //   queryField: 'display',
-          //   valueField: 'department_id',
-          //   itemTpl: '{display}'
-          // }, {
-          //   name: 'classification_id',
-          //   fieldLabel: this.classification_idLabel,
-          //   allowBlank: true,
-          //   disabled: false,
-          //   xtype: 'buildit-Locator',
-          //   store: Ext.create('Omni.store.Classification', {
-          //     pageSize: 10
-          //   }),
-          //   displayField: 'display',
-          //   queryField: 'display',
-          //   valueField: 'classification_id',
-          //   itemTpl: '{display}'
-          // }, {
-          //   name: 'subclass_id',
-          //   fieldLabel: this.subclass_idLabel,
-          //   allowBlank: true,
-          //   disabled: false,
-          //   xtype: 'buildit-Locator',
-          //   store: Ext.create('Omni.store.Subclass', {
-          //     pageSize: 10
-          //   }),
-          //   displayField: 'display',
-          //   queryField: 'display',
-          //   valueField: 'subclass_id',
-          //   itemTpl: '{display}'
-          // }, {
-          //   name: 'style_id',
-          //   fieldLabel: this.style_idLabel,
-          //   xtype: 'buildit-Locator',
-          //   store: Ext.create('Omni.store.Style', {
-          //     pageSize: 25
-          //   }),
-          //   displayField: 'display',
-          //   queryField: 'display',
-          //   valueField: 'style_id',
-          //   itemTpl: '{display}'
-          // }, {
+            //   xtype: 'label',
+            //   text: 'Insert Mass Update instructions',
+            //   cls: 'instruction'
+            // }, {
+            //   name: 'department_id',
+            //   fieldLabel: this.department_idLabel,
+            //   allowBlank: true,
+            //   disabled: false,
+            //   xtype: 'buildit-Locator',
+            //   store: Ext.create('Omni.store.Department', {
+            //     pageSize: 10
+            //   }),
+            //   displayField: 'display',
+            //   queryField: 'display',
+            //   valueField: 'department_id',
+            //   itemTpl: '{display}'
+            // }, {
+            //   name: 'classification_id',
+            //   fieldLabel: this.classification_idLabel,
+            //   allowBlank: true,
+            //   disabled: false,
+            //   xtype: 'buildit-Locator',
+            //   store: Ext.create('Omni.store.Classification', {
+            //     pageSize: 10
+            //   }),
+            //   displayField: 'display',
+            //   queryField: 'display',
+            //   valueField: 'classification_id',
+            //   itemTpl: '{display}'
+            // }, {
+            //   name: 'subclass_id',
+            //   fieldLabel: this.subclass_idLabel,
+            //   allowBlank: true,
+            //   disabled: false,
+            //   xtype: 'buildit-Locator',
+            //   store: Ext.create('Omni.store.Subclass', {
+            //     pageSize: 10
+            //   }),
+            //   displayField: 'display',
+            //   queryField: 'display',
+            //   valueField: 'subclass_id',
+            //   itemTpl: '{display}'
+            // }, {
+            //   name: 'style_id',
+            //   fieldLabel: this.style_idLabel,
+            //   xtype: 'buildit-Locator',
+            //   store: Ext.create('Omni.store.Style', {
+            //     pageSize: 25
+            //   }),
+            //   displayField: 'display',
+            //   queryField: 'display',
+            //   valueField: 'style_id',
+            //   itemTpl: '{display}'
+            // }, {
             xtype: 'numberfield',
             name: 'adjustment_percent',
             fieldLabel: this.adjustment_percentLabel,
@@ -605,12 +604,12 @@ Ext.define('Omni.view.purchases.Form', {
             name: 'is_use_need_units',
             fieldLabel: this.is_use_need_unitsLabel,
             allowBlank: true
-          // }, {
-          //   xtype: 'checkbox',
-          //   name: 'is_include_conversions',
-          //   fieldLabel: this.is_include_conversionsLabel,
-          //   allowBlank: true
-          // }, {
+            // }, {
+            //   xtype: 'checkbox',
+            //   name: 'is_include_conversions',
+            //   fieldLabel: this.is_include_conversionsLabel,
+            //   allowBlank: true
+            // }, {
             // xtype: 'buildit-Locator',
             // name: 'allocation_profile_id',
             // fieldLabel: this.allocation_profile_idLabel,
@@ -622,24 +621,24 @@ Ext.define('Omni.view.purchases.Form', {
             // queryField: 'display',
             // valueField: 'allocation_profile_id',
             // itemTpl: '{display}'
-          // }, {
-          //   xtype: 'label',
-          //   text: 'This will update the Allocation Profile in each Purchase Detail.',
-          //   cls: 'instruction'
-          // }, {
-          //   xtype: 'checkbox',
-          //   name: 'is_update_blank_details',
-          //   fieldLabel: this.is_update_blank_detailsLabel,
-          //   allowBlank: true
-          // }, {
-          //   xtype: 'checkbox',
-          //   name: 'is_update_all_details',
-          //   fieldLabel: this.is_update_all_detailsLabel,
-          //   allowBlank: true
-          // }, {
-          //   xtype: 'label',
-          //   text: 'This will update all Purchase Details to the new Allocation Profile',
-          //   cls: 'instruction'
+            // }, {
+            //   xtype: 'label',
+            //   text: 'This will update the Allocation Profile in each Purchase Detail.',
+            //   cls: 'instruction'
+            // }, {
+            //   xtype: 'checkbox',
+            //   name: 'is_update_blank_details',
+            //   fieldLabel: this.is_update_blank_detailsLabel,
+            //   allowBlank: true
+            // }, {
+            //   xtype: 'checkbox',
+            //   name: 'is_update_all_details',
+            //   fieldLabel: this.is_update_all_detailsLabel,
+            //   allowBlank: true
+            // }, {
+            //   xtype: 'label',
+            //   text: 'This will update all Purchase Details to the new Allocation Profile',
+            //   cls: 'instruction'
           }]
         }
       ]
@@ -702,6 +701,15 @@ Ext.define('Omni.view.purchases.Form', {
             click: me.onMassupdateAction,
             scope: me
           }
+        }, {
+          xtype: 'button',
+          iconCls: 'fa fa-copy',
+          tooltip: 'Clone',
+          listeners: {
+            beforerender: this.prepareCloneAction,
+            click: me.onCloneAction,
+            scope: me
+          }
         }
 
       ]
@@ -756,6 +764,10 @@ Ext.define('Omni.view.purchases.Form', {
     this.processEventTransition('mass_update', 'Purchase Order was successfully mass updated.', 'An error occurred mass updating this purchase order.');
   },
 
+  onCloneAction: function(action, eOpts) {
+    this.processEventTransition('copy', 'purchase was cloned, look for a new purchase in clone_state.', 'An error occurred mass updating this purchase order.');
+  },
+
   prepareReleaseAction: function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'draft' ? action.show() : action.hide();
@@ -779,6 +791,10 @@ Ext.define('Omni.view.purchases.Form', {
   prepareMassupdateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
     currentState === 'draft' ? action.show() : action.hide();
+  },
+
+  prepareCloneAction: function(action, eOpts) {
+    action.show();
   },
 
   processEventTransition: function(eventName, successMsg, failureMsg) {

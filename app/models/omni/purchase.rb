@@ -274,16 +274,25 @@ class Omni::Purchase < ActiveRecord::Base
     # puts 500
   end
 
-  def clone
-    new_purchase = Omni::Purchase.create(supplier_id: self.supplier_id, location_id: self.location_id, purchase_type: self.purchase_type, purchase_source: self.purchase_source, ship_via: self.ship_via, fob_point: self.fob_point, master_purchase_id: self.master_purchase_id, carrier_supplier_id: self.carrier_supplier_id, is_special_order: self.is_special_order, estimated_lead_time_days: self.estimated_lead_time_days, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_1_location_user_id: self.purchase_approver_1_location_user_id, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_2_location_user_id: self.purchase_approver_2_location_user_id, purchase_approver_3_user_id: self.purchase_approver_3_user_id, purchase_approver_3_location_user_id: self.purchase_approver_3_location_user_id, payment_term: self.payment_term, freight_term: self.freight_term, pay_to_supplier_id: self.pay_to_supplier_id, ship_thru_supplier_id: self.ship_thru_supplier_id, supplier_address_1: self.supplier_address_1, supplier_address_2: self.supplier_address_2, supplier_address_3: self.supplier_address_3, supplier_address_4: self.supplier_address_4, supplier_city: self.supplier_city, supplier_state_code: self.supplier_state_code, supplier_zip: self.supplier_zip, supplier_country: self.supplier_country)
+  # def copy_old
+  #   new_purchase = Omni::Purchase.create(supplier_id: self.supplier_id, location_id: self.location_id, purchase_type: self.purchase_type, purchase_source: self.purchase_source, ship_via: self.ship_via, fob_point: self.fob_point, master_purchase_id: self.master_purchase_id, carrier_supplier_id: self.carrier_supplier_id, is_special_order: self.is_special_order, estimated_lead_time_days: self.estimated_lead_time_days, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_1_location_user_id: self.purchase_approver_1_location_user_id, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_2_location_user_id: self.purchase_approver_2_location_user_id, purchase_approver_3_user_id: self.purchase_approver_3_user_id, purchase_approver_3_location_user_id: self.purchase_approver_3_location_user_id, payment_term: self.payment_term, freight_term: self.freight_term, pay_to_supplier_id: self.pay_to_supplier_id, ship_thru_supplier_id: self.ship_thru_supplier_id, supplier_address_1: self.supplier_address_1, supplier_address_2: self.supplier_address_2, supplier_address_3: self.supplier_address_3, supplier_address_4: self.supplier_address_4, supplier_city: self.supplier_city, supplier_state_code: self.supplier_state_code, supplier_zip: self.supplier_zip, supplier_country: self.supplier_country)
+  #   self.purchase_details.each do |pd|
+  #     next if Omni::PurchaseDetail.where(purchase_id: self.purchase_id, sku_id: pd.sku_id).first
+  #     next unless sku_meets_criteria? pd.sku
+  #     next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: pd.sku_id, is_authorized: true).first
+  #     units = units_to_order(i, pd.sku_supplier)
+  #     pd.copy(new_purchase.purchase_id, units)
+  #   end
+  #   Omni::Purchase.where(purchase_id: new_purchase.purchase_id).first
+  # end
+
+  def copy
+    new_purchase = self.clone
     self.purchase_details.each do |pd|
-      next if Omni::PurchaseDetail.where(purchase_id: self.purchase_id, sku_id: pd.sku_id).first
-      next unless sku_meets_criteria? pd.sku
-      next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: pd.sku_id, is_authorized: true).first
-      units = units_to_order(i, pd.sku_supplier)
-      pd.clone(new_purchase.purchase_id, units)
+      new_purchase_detail = pd.clone
+      new_purchase_detail.purchase_id = new_purchase.purchase_id
+      new_purchase_detail.save
     end
-    Omni::Purchase.where(purchase_id: new_purchase.purchase_id).first
   end
 
 # If an Allocation Profile is set or changed, update all the Purchase Details
