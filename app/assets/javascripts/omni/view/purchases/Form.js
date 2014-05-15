@@ -794,7 +794,7 @@ Ext.define('Omni.view.purchases.Form', {
   },
 
   prepareCloneAction: function(action, eOpts) {
-    action.show();
+    this.record.phantom != true ? action.show() : action.hide();
   },
 
   processEventTransition: function(eventName, successMsg, failureMsg) {
