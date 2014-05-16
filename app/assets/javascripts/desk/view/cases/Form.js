@@ -84,7 +84,7 @@ Ext.define('Desk.view.cases.Form', {
             name: 'project_id',
             fieldLabel: me.project_idLabel,
             allowBlank: true,
-            gotoTarget: 'omni-projects-Inspector',
+            gotoTarget: 'desk-projects-Inspector',
 
             emptyText: 'auto-populated'
           }, {

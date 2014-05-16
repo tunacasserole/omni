@@ -21,6 +21,7 @@ Ext.define('Desk.view.cases.Explorer', {
   // LABELS (Start) ======================================================================
   case_idLabel: Desk.i18n.model.Case.case_id,
   requestor_idLabel: Desk.i18n.model.Case.requestor_id,
+  reviewer_idLabel: Desk.i18n.model.Case.reviewer_id,
   owner_idLabel: Desk.i18n.model.Case.owner_id,
   project_idLabel: Desk.i18n.model.Case.project_id,
   case_nbrLabel: Desk.i18n.model.Case.case_nbr,
@@ -76,7 +77,7 @@ Ext.define('Desk.view.cases.Explorer', {
           dataIndex: 'owner_display',
           flex: 2
         }, {
-          header: me.requestor_idLabel,
+          header: me.reviewer_idLabel,
           dataIndex: 'reviewer_display',
           flex: 2
         }, {
@@ -86,7 +87,7 @@ Ext.define('Desk.view.cases.Explorer', {
         }, {
           header: me.project_idLabel,
           dataIndex: 'project_display',
-          flex: 2
+          flex: 1
         }, {
           header: me.stateLabel,
           dataIndex: 'state',
