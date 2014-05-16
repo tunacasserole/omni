@@ -61,26 +61,28 @@ Ext.define('Desk.view.cases.Explorer', {
           header: me.displayLabel,
           dataIndex: 'display',
           flex: 4
-          }, {
-            header: me.case_urgencyLabel,
-            dataIndex: 'case_urgency',
-            flex: 2
+        }, {
+          header: me.case_urgencyLabel,
+          dataIndex: 'case_urgency',
+          flex: 2,
+          renderer: Buildit.util.Format.lookupRenderer('CASE_URGENCY'),
         }, {
           header: me.case_typeLabel,
           dataIndex: 'case_type',
-          flex: 2
+          flex: 2,
+          renderer: this.formatType
         }, {
           header: me.owner_idLabel,
           dataIndex: 'owner_display',
           flex: 2
         }, {
           header: me.requestor_idLabel,
+          dataIndex: 'reviewer_display',
+          flex: 2
+        }, {
+          header: me.requestor_idLabel,
           dataIndex: 'requestor_display',
           flex: 2
-        // }, {
-        //   header: me.case_sizeLabel,
-        //   dataIndex: 'case_size',
-        //   flex: 1
         }, {
           header: me.project_idLabel,
           dataIndex: 'project_display',
@@ -88,8 +90,13 @@ Ext.define('Desk.view.cases.Explorer', {
         }, {
           header: me.stateLabel,
           dataIndex: 'state',
-          flex: 2
+          flex: 2,
+          renderer: this.formatState
         }
+          // }, {
+          //   header: me.case_sizeLabel,
+          //   dataIndex: 'case_size',
+          //   flex: 1
         // {
         //   xtype        : 'checkcolumn',
         //   header       : me.is_approvedLabel,
@@ -102,6 +109,14 @@ Ext.define('Desk.view.cases.Explorer', {
 
 
     me.callParent();
+  },
+
+  formatState: function(value) {
+    return value.charAt(0).toUpperCase() + value.slice(1).replace(/_/g,' ');
+  },
+
+  formatType: function(value) {
+    return value.charAt(0) + value.slice(1).toLowerCase();
   }
 
 });

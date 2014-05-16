@@ -1,9 +1,8 @@
-# require "bunny"
-
-class Omni::Bunny::Send
+# class Omni::Bunny::Send
   # to run - Omni::Bunny:Send.go
 
-  def go
+  # def go
+    require 'bunny'
     conn = Bunny.new
     conn.start
 
@@ -17,5 +16,5 @@ class Omni::Bunny::Send
 
     conn.close
 
-  end
-end
+  # end
+# end

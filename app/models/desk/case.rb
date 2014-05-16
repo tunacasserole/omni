@@ -32,7 +32,7 @@ class Desk::Case < ActiveRecord::Base
   default :details,                          to: "select a request type for further instructions"
   default :case_urgency,                     to: 'STANDARD'
   default :case_type,                        to: 'QUESTION'
-  default :case_size,                        to: 'EXTRA SMALL'
+  default :case_size,                        to: 'SMALL'
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
@@ -82,7 +82,7 @@ class Desk::Case < ActiveRecord::Base
     text     :requestor_display_fulltext, :using => :requestor_display
     text     :reviewer_display_fulltext, :using => :reviewer_display
   end
-  order_search_by :case_nbr => :desc
+  order_search_by :case_nbr => :asc
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
@@ -155,6 +155,8 @@ class Desk::Case < ActiveRecord::Base
           '... please give as much detail about your question as possible in the description field for any question you may have.'
         when 'DATA'
           '... please include a description of the exact data you expected to see as well as what you actually saw for all data related issues.'
+        else
+          '... please add a detailed description.'
         end
     end
   end

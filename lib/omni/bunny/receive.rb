@@ -1,23 +1,24 @@
-# require "bunny"
+require "bunny"
 
-class Omni::Bunny::Receive
+# class Omni::Bunny::Receive
   # to run - Omni::Bunny:Send.go
 
-  def go
-    conn = Bunny.new
+  # def go
+    conn = Bunny.new(:automatically_recover => false)
     conn.start
 
-    # Next we create a channel, which is where most of the API for getting things done resides
     ch   = conn.create_channel
+    q    = ch.queue("hello")
 
-#  puts " [*] Waiting for messages in #{q.name}. To exit press CTRL+C"
-# q.subscribe(:block => true) do |delivery_info, properties, body|
-#   puts " [x] Received #{body}"
+    begin
+      puts " [*] Waiting for messages. To exit press CTRL+C"
+      q.subscribe(:block => true) do |delivery_info, properties, body|
+        puts " [x] Received #{body}"
+      end
+    rescue Interrupt => _
+      conn.close
 
-#   # cancel the consumer to exit
-#   delivery_info.consumer.cancel
+      exit(0)
+    end
+  # end
 # end
-    conn.close
-
-  end
-end
