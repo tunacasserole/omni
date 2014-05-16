@@ -11,7 +11,8 @@ class Omni::ProjectionsSubscriber < Buildit::Messaging::Subscriber
       user_id  = msg[:user_id]
 
       projection = Omni::Projection.find(msg[:projection_id])
-      projection.forecast(user_id)
+      #projection.forecast(user_id)
+      puts "\n***** forecasting *****\n"
 
     rescue Exception => e
       logger.error (e.message || "").red

@@ -124,18 +124,19 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
+  # p = Omni::Projection.frst
+  # p.initiate_forecast
+  def initiate_forecast
 
-  # def initiate_forecast
+    message     = {
+      projection_id: self.id,
+      user_id: Omni::Util::User.id
+    }
 
-  #   message     = {
-  #     projection_id: self.id,
-  #     user_id: Buildit::User.current.user_id
-  #   }
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'forecast')
 
-  #   # publish the above message to the omni.events exchange
-  #   Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'forecast')
-
-  # end # def initiate_forecast
+  end # def initiate_forecast
 
 
   # def notify_forecast_complete
