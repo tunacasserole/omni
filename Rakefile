@@ -69,13 +69,22 @@ namespace :omni do
 
   desc 'Indexes the given model'
   task :index, [:model] => :environment do |t,args|
-    puts "Indexing Started\n\n"
+
     Rails.application.eager_load!
     started_at = Time.now
 
     puts "! Indexing #{args.model}"
     system("rake sunspot:reindex[1000,#{Omni::Util::Gem.full_model_name(args.model)}]")
     puts "! Indexed #{args.model} in #{Time.now - started_at}s"
+
+    # message     = {
+    #   model_name: args.model,
+    # }
+
+    # # publish the above message to the omni.events exchange
+    # Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'search')
+    # Omni::SearchSubscriber.start!
+
   end
 
   desc 'Reindexes all models alphabetically, optionally starting with the given model'

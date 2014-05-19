@@ -124,12 +124,12 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  # p = Omni::Projection.frst
+  # p = Omni::Projection.first
   # p.initiate_forecast
   def initiate_forecast
 
     message     = {
-      projection_id: self.id,
+      projection_id: 'self.id',
       user_id: Omni::Util::User.id
     }
 
