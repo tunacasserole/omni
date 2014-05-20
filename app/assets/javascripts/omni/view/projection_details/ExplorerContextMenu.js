@@ -40,17 +40,17 @@ Ext.define('Omni.view.projection_details.ExplorerContextMenu', {
          * Forecast a projection detail row.
          *
          */
-        // {
-        //   iconCls: 'fa fa-cogs',
-        //   tooltip: 'Forecast row',
-        //   action: 'forecast',
-        //   listeners: {
-        //     click: {
-        //       fn: this.clickForecast,
-        //       scope: me
-        //     }
-        //   }
-        // }
+        {
+          iconCls: 'fa fa-cogs',
+          tooltip: 'Forecast row',
+          action: 'forecast',
+          listeners: {
+            click: {
+              fn: this.clickForecast,
+              scope: me
+            }
+          }
+        }
         // LEFT ACTIONS (End)
 
       ],
@@ -70,7 +70,7 @@ Ext.define('Omni.view.projection_details.ExplorerContextMenu', {
           action: 'delete',
           confirm: true,
           multi: true,
-          hidden: !me.allowDelete,
+          // hidden: !me.allowDelete,
           privileges: [],
           listeners: {
             click: {
@@ -91,7 +91,7 @@ Ext.define('Omni.view.projection_details.ExplorerContextMenu', {
           action: 'export',
           confirm: true,
           multi: true,
-          hidden: !me.allowExport,
+          // hidden: !me.allowExport,
           privileges: [],
           listeners: {
             click: {
@@ -159,7 +159,7 @@ Ext.define('Omni.view.projection_details.ExplorerContextMenu', {
   },
 
   clickForecast: function(btn, e, eOpts){
-    Omni.logic.projection_details.ExplorerProcessSelectedItems.click(btn, 'forecast');
+    Omni.logic.projection_details.ExplorerProcessSelectedItems.click(btn, 'forecast_q');
   },
 
   clickDelete: function(btn, e, eOpts) {

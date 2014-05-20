@@ -138,8 +138,8 @@ Ext.define('Omni.view.skus.Form', {
           itemTpl: '{display}'
         },
             { xtype: 'currencyfield', currencySymbol: null, name: 'conversion_cost',fieldLabel: this.conversion_costLabel, allowBlank: true, disabled: false },
-            { name: 'account_id',                       fieldLabel: this.account_idLabel,         allowBlank: true,  disabled: true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Account',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'account_id', itemTpl:'{display}', gotoTarget: 'omni-accounts-inspector' },
-            { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel, allowBlank: true,  disabled: true,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
+            { name: 'account_id',                       fieldLabel: this.account_idLabel,         allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Account',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'account_id', itemTpl:'{display}', gotoTarget: 'omni-accounts-inspector' },
+            { name: 'conversion_type',                fieldLabel: this.conversion_typeLabel, allowBlank: true,  disabled: false,    xtype: 'buildit-Lookup',      category:   'CONVERSION_TYPE' },
             // { name: 'add_on_sku_id',                  fieldLabel: this.add_on_sku_idLabel,              allowBlank: true,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Sku',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'sku_id', itemTpl:'{display}' },
             // { name: 'is_converted',                   fieldLabel: this.is_convertedLabel,               allowBlank: true,  disabled: false,    xtype: 'checkbox'         }
           ]
@@ -197,7 +197,94 @@ Ext.define('Omni.view.skus.Form', {
     });
     // TITLES (End)
 
-    this.callParent();
-  }
+        // ACTIONS (Start) =====================================================================
+        Ext.apply(this, {
+            actions: [{
+                xtype: 'button',
+                iconCls: 'fa fa-cogs',
+                tooltip: 'Project',
+                listeners: {
+                    beforerender: this.prepareProjectAction,
+                    click: this.onProjectAction,
+                    scope: me
+                }
+            }, {
+                xtype: 'button',
+                iconCls: 'fa fa-times-circle-o',
+                tooltip: 'Close',
+                listeners: {
+                    beforerender: this.prepareCloseAction,
+                    click: this.onCloseAction,
+                    scope: me
+                }
+            }]
+        });
+
+        // ACTIONS (End)
+
+        // LISTENERS (Start) ===================================================================
+
+        // LISTENERS (End)
+
+
+        this.callParent();
+
+    },
+
+    // HANDLERS (Start) ======================================================================
+
+    onProjectAction: function(action, eOpts) {
+        this.processEventTransition('project_q', 'Projections are running, this may take a while.', 'An error occurred projecting this account.');
+    }, // onBuildAction
+
+    onCloseAction: function(action, eOpts) {
+        this.processEventTransition('close', 'Account was successfully closed.', 'An error occurred closing this account.');
+    }, // onBuildAction
+
+    prepareProjectAction: function(action, eOpts) {
+        this.record.phantom != true ? action.show() : action.hide();
+    },
+
+    prepareCloseAction: function(action, eOpts) {
+        var currentState = this.record.get('state');
+        currentState === 'active' ? action.show() : action.hide();
+    },
+
+    processEventTransition: function(eventName, successMsg, failureMsg) {
+        var me = this;
+
+        Omni.service.Sku.fireEvent({
+                id: this.record.get('sku_id'),
+                name: eventName
+            },
+            function(result, e) {
+                me.getForm().clearInvalid();
+                if (result && result.success == true) {
+                    Buildit.infoMsg(successMsg);
+                    me.record.set(result);
+                    me.loadRecord(me.record);
+                    me.fireEvent('recordchanged', me, me.banner);
+                    me.doLayout();
+                } else {
+                    var response = Ext.JSON.decode(e.xhr.responseText).result;
+
+                    if (response.errors)
+                        me.getForm().markInvalid(response.errors);
+
+                    var error_message = failureMsg;
+                    if (response.message)
+                        error_message = response.message;
+
+                    if (response.errors)
+                        error_message = error_message + '. Please fix the highlighted fields and try again.'
+
+                    Buildit.errorMsg(error_message);
+                }
+            }
+        );
+
+    },
+
+    // HANDLERS (End)
 
 });

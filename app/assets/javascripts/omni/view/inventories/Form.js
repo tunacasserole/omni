@@ -152,7 +152,7 @@
           collapsible: true,
           defaultType: 'numberfield',
           layout: 'anchor',
-          disabled: true,
+          disabled: false,
           items: [{
               xtype: 'numberfield',
               name: 'in_transit_units',
@@ -388,7 +388,6 @@
           title: 'Sales History',
           collapsible: true,
           defaultType: 'numberfield',
-          disabled: true,
           defaults: {
             anchor: '70%'
           },

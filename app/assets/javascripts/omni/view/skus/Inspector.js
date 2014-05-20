@@ -25,8 +25,8 @@ Ext.define('Omni.view.skus.Inspector', {
           xtype: 'omni-skus-Form',
           module: 'contracts'
         }, {
-          title: 'Aliases',
-          xtype: 'omni-sku_aliases-Explorer',
+          title: 'Projections',
+          xtype: 'omni-projection_details-Explorer',
           module: 'samples',
           defaultSearch: {
             with: {
@@ -48,17 +48,29 @@ Ext.define('Omni.view.skus.Inspector', {
             }
           },
           showBadge: true
-        // }, {
-        //   title: 'Legacy Sales History',
-        //   xtype: 'omni-daily_results-Explorer',
-        //   defaultSearch: {
-        //     with: {
-        //       sku_id: {
-        //         equal_to: me.record.get('sku_id')
-        //       }
-        //     }
-        //   },
-        //   showBadge: true
+          // }, {
+          //   title: 'Legacy Sales History',
+          //   xtype: 'omni-daily_results-Explorer',
+          //   defaultSearch: {
+          //     with: {
+          //       sku_id: {
+          //         equal_to: me.record.get('sku_id')
+          //       }
+          //     }
+          //   },
+          //   showBadge: true
+        }, {
+          title: 'Aliases',
+          xtype: 'omni-sku_aliases-Explorer',
+          module: 'samples',
+          defaultSearch: {
+            with: {
+              sku_id: {
+                equal_to: me.record.get('sku_id')
+              }
+            }
+          },
+          showBadge: true
         }, {
           title: 'Prices',
           xtype: 'omni-sku_prices-Explorer',

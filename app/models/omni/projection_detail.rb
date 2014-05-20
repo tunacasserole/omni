@@ -115,7 +115,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     string   :location_display
     string   :sku_id
     string   :location_id
-    string   :display
+    # string   :display
     # string   :projection_location_id
     # string   :forecast_profile_id
     # string   :size_id
@@ -220,9 +220,78 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
   # STATES (End)
 
-
   def display_as
     self.display
   end
+
+  def forecast_q
+
+    message     = {
+      projection_detail_id: self.id,
+      user_id: Omni::Util::User.id,
+      method_name: 'reforecast'
+    }
+
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'projection_detail')
+
+  end # def initiate_forecast
+
+  def reforecast
+    puts "re-forecasting a detail"
+    # initialize variables
+    total_generic_need = 0
+    is_generic = !self.sku.is_converted
+
+    # Snapshot of current inventory
+    i = self.inventory
+    self.forecast_profile_id = self.projection.forecast_profile_id
+
+    self.on_order = i.supplier_on_order_units
+    self.on_hand = i.on_hand_units
+
+    # Sales history
+    self.sale_units_ytd = i.sale_units_ytd
+    self.sale_units_py1 = i.sale_units_py1
+    self.sale_units_py2 = i.sale_units_py2
+    self.sale_units_py3 = i.sale_units_py3
+
+    # calculate forecasted units using formula from forecast_profile;
+    profile = self.forecast_profile
+    forecasted_units = (profile.sales_py1_weight * i.sale_units_py1) + (profile.sales_py2_weight * i.sale_units_py2) + (profile.sales_py3_weight * i.sale_units_py3)
+
+    # calculate forecasted units
+    unless self.last_forecast_date
+      self.first_forecast_units = forecasted_units
+      self.projection_1_units = forecasted_units
+    end
+
+    self.last_forecast_units = forecasted_units
+    self.last_forecast_date = Date.today
+
+    # Standard deviation of py1, py2 and forecasted units
+    mean = (i.sale_units_py1 + i.sale_units_py2 + forecasted_units) / 3
+    tot_dev = (mean - i.sale_units_py1)**2 + (mean - i.sale_units_py2)**2 + (mean - forecasted_units)**2
+    self.sd_raw = Math.sqrt(tot_dev)
+    self.sd_floor = forecasted_units * 0.2
+    self.sd_ceiling = forecasted_units * 0.4
+    self.sd_smooth = self.sd_raw < self.sd_floor ? self.sd_floor : self.sd_raw > self.sd_ceiling ? self.sd_ceiling : self.sd_raw
+    self.sd_percent = forecasted_units > 0 ? self.sd_smooth / forecasted_units : 0
+
+    # Coverage and need
+    self.coverage_allowed = [forecasted_units + self.sd_smooth - i.sale_units_ytd, 0].max
+    self.custom_need = is_generic ? 0 : self.coverage_allowed - self.on_hand
+    self.generic_need = is_generic ? total_generic_need : 0
+    self.coverage_complete = self.coverage_allowed + self.generic_need
+    self.unusable = [self.on_hand - self.coverage_complete].max
+    self.usable = self.coverage_complete - self.on_hand < 1 ? self.coverage_complete : self.on_hand
+    self.total_need = self.coverage_complete - self.usable + self.on_order
+
+    self.save
+
+    # Omni::Projection.reindex
+    # Omni::ProjectionDetail.reindex
+  end
+
 end # class Omni::ProjectionDetail
 

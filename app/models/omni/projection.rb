@@ -126,20 +126,21 @@
   # STATE HANDLERS (Start) ====================================================================
   # p = Omni::Projection.first
   # p.initiate_forecast
-  def initiate_forecast
+  def forecast_q
 
     message     = {
-      projection_id: 'self.id',
-      user_id: Omni::Util::User.id
+      projection_id: self.id,
+      user_id: Omni::Util::User.id,
+      method_name: 'forecast'
     }
 
     # publish the above message to the omni.events exchange
-    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'forecast')
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'projection')
 
   end # def initiate_forecast
 
 
-  # def notify_forecast_complete
+  # def notify
 
   #   # push a message to the users channel
   #   Buildit::User.current.push_message("The forecast you requested for #{} is now complete.")
@@ -207,64 +208,7 @@
   #   puts "#{time_stamp} dept: #{self.department.display} - finishing"
   # end
 
-  # def forecast_by_class
-  #   puts "forecasting by class"
-  #   self.department.classifications.each_with_index do |klass, i|
-  #     # puts "#{time_stamp}  class #{klass.display} with #{klass.inventories.count} inventory rows"
-  #     # get inventory for that classrow"
-  #     x = Omni::ProjectionDetail.where(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
-  #     # TODO: Add support for generics
-  #     is_generic = false
-  #     total_generic_need = 0
-  #     x.inventory_id = i.inventory_id
-  #     x.forecast_profile_id = self.forecast_profile_id
 
-  #     # Snapshot of current inventory
-  #     x.on_order = i.supplier_on_order_units
-  #     x.on_hand = i.on_hand_units
-
-  #     # Sales history
-  #     x.sale_units_ytd = i.sale_units_ytd
-  #     x.sale_units_py1 = i.sale_units_py1
-  #     x.sale_units_py2 = i.sale_units_py2
-  #     x.sale_units_py3 = i.sale_units_py3
-
-  #     # calculate forecasted units using formula from forecast_profile;
-  #     profile = self.forecast_profile
-  #     forecasted_units = (profile.sales_py1_weight * i.sale_units_py1) + (profile.sales_py2_weight * i.sale_units_py2) + (profile.sales_py3_weight * i.sale_units_py3)
-
-  #     unless x.last_forecast_date
-  #       x.first_forecast_units = forecasted_units
-  #       x.projection_1_units = forecasted_units
-  #     end
-
-  #     x.last_forecast_units = forecasted_units
-  #     x.last_forecast_date = Date.today
-
-  #     # Standard deviation of py1, py2 and forecasted units
-  #     mean = (i.sale_units_py1 + i.sale_units_py2 + forecasted_units) / 3
-  #     tot_dev = (mean - i.sale_units_py1)**2 + (mean - i.sale_units_py2)**2 + (mean - forecasted_units)**2
-  #     x.sd_raw = Math.sqrt(tot_dev)
-  #     x.sd_floor = forecasted_units * 0.2
-  #     x.sd_ceiling = forecasted_units * 0.4
-  #     x.sd_smooth = x.sd_raw < x.sd_floor ? x.sd_floor : x.sd_raw > x.sd_ceiling ? x.sd_ceiling : x.sd_raw
-  #     x.sd_percent = forecasted_units > 0 ? x.sd_smooth / forecasted_units : 0
-
-  #     # Coverage and need
-  #     x.coverage_allowed = [forecasted_units + x.sd_smooth - i.sale_units_ytd, 0].max
-  #     x.custom_need = is_generic ? 0 : x.coverage_allowed - x.on_hand
-  #     x.generic_need = is_generic ? total_generic_need : 0
-  #     x.coverage_complete = x.coverage_allowed + x.generic_need
-  #     x.unusable = [x.on_hand - x.coverage_complete].max
-  #     x.usable = x.coverage_complete - x.on_hand < 1 ? x.coverage_complete : x.on_hand
-  #     x.total_need = x.coverage_complete - x.usable + x.on_order
-
-  #     x.save
-  #   end
-
-  #   # Omni::Projection.reindex
-  #   # Omni::ProjectionDetail.reindex
-  # end
 
   # STATE HANDLERS (End)
 

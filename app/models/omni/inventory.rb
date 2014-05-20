@@ -72,6 +72,7 @@
   belongs_to   :supplier,                        class_name: 'Omni::Supplier',                foreign_key: 'supplier_id'
   belongs_to   :forecast_profile,                class_name: 'Omni::ForecastProfile',         foreign_key: 'forecast_profile_id'
   belongs_to   :seasonal_index,                  class_name: 'Omni::SeasonalIndex',           foreign_key: 'seasonal_index_id'
+  # belongs_to   :projection_detail,               class_name: 'Omni::ProjectionDetail',        foreign_key: 'projection_detail_id'
   has_many     :projection_details,              class_name: 'Omni::ProjectionDetail',        :foreign_key => :inventory_id#           :primary_key => :sku_id,           :conditions => proc {"projection_details.location_id = '#{send(:location_id)}'"}
   # ASSOCIATIONS (End)
 
@@ -122,11 +123,18 @@
     # text     :source_fulltext, using: :source
     # text     :source_id_fulltext, using: :source_id
   end
-  order_search_by :sku_display => :asc
+  order_search_by :sku_display => :asc, :location_display => :asc
   # STATES (Start) ====================================================================
 
-  # STATES (End)
+  def project
+        # Create Projection Detail;
+    x = Omni::ProjectionDetail.where(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id).first || Omni::ProjectionDetail.create(projection_id: self.projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+  end
 
+  def projection_id
+    # self.projection
+  end
+  # STATES (End)
 
   def display_as
     self.display

@@ -251,10 +251,44 @@ class Omni::Sku < ActiveRecord::Base
   order_search_by :display => :asc
   # INDEXING (End) ====================================================================
 
-
-
   def display_as
     self.display
   end
+
+  def project_q
+    message     = {
+      sku_id: self.id,
+      user_id: Omni::Util::User.id,
+      method_name: 'project'
+    }
+
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'sku')
+  end # def initiate_forecast
+
+  def project
+    # Delete current projection details where inventory is gone
+    # Omni::ProjectionDetail.where(sku_id: self.sku_id).each { |x| x.destroy }
+    # find or create projection details, update from latestinventory
+    self.inventories.each do |i|
+      pd = Omni::ProjectionDetail.find_by_inventory_id(i.inventory_id) || Omni::ProjectionDetail.new(projection_id: projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+      # pd.sale_units_ytd = i.sale_units_ytd
+      # pd.sale_units_py1 = i.sale_units_py1
+      # pd.sale_units_py2 = i.sale_units_py2
+      # pd.sale_units_py3 = i.sale_units_py3
+      # pd.on_hand = i.on_hand_units
+      # pd.on_order = i.supplier_on_order_units
+      pd.save
+      pd.reforecast
+    end
+
+    Sunspot.commit_if_dirty
+  end
+
+  def projection_id
+    Omni::Projection.find_by_department_id(self.department_id)
+  end
+
+
 end # class Omni::Sku
 

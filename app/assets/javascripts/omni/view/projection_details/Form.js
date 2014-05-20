@@ -75,7 +75,6 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'projection_detail_nbr',
           fieldLabel: this.projection_detail_nbrLabel,
           allowBlank: true,
-          disabled: true
         }, {
           xtype: 'buildit-Locator',
           store: Ext.create('Omni.store.ForecastProfile', {
@@ -126,7 +125,6 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'state',
           fieldLabel: this.stateLabel,
           allowBlank: true,
-          disabled: true,
         }]
       }, {
         xtype: 'fieldset',
@@ -139,49 +137,41 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'first_forecast_units',
           fieldLabel: this.first_forecast_unitsLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'last_forecast_units',
           fieldLabel: this.last_forecast_unitsLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'current_approved_units',
           fieldLabel: this.current_approved_unitsLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'datefield',
           name: 'last_forecast_date',
           fieldLabel: this.last_forecast_dateLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'projection_1_units',
           fieldLabel: this.projection_1_unitsLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'projection_2_units',
           fieldLabel: this.projection_2_unitsLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'projection_3_units',
           fieldLabel: this.projection_3_unitsLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'projection_4_units',
           fieldLabel: this.projection_4_unitsLabel,
           allowBlank: true,
-          disabled: true,
         }]
       }, {
         xtype: 'fieldset',
@@ -194,121 +184,101 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'sale_units_ytd',
           fieldLabel: this.sale_units_ytdLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'sale_units_py1',
           fieldLabel: this.sale_units_py1Label,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'sale_units_py2',
           fieldLabel: this.sale_units_py2Label,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'sale_units_py3',
           fieldLabel: this.sale_units_py3Label,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'on_hand',
           fieldLabel: this.on_handLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'on_order',
           fieldLabel: this.on_orderLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'sd_raw',
           fieldLabel: this.sd_rawLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'sd_floor',
           fieldLabel: this.sd_floorLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'sd_ceiling',
           fieldLabel: this.sd_ceilingLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'sd_smooth',
           fieldLabel: this.sd_smoothLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'sd_percent',
           fieldLabel: this.sd_percentLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'coverage_allowed',
           fieldLabel: this.coverage_allowedLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'coverage_complete',
           fieldLabel: this.coverage_completeLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'custom_need',
           fieldLabel: this.custom_needLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'generic_need',
           fieldLabel: this.generic_needLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'total_need',
           fieldLabel: this.total_needLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'usable',
           fieldLabel: this.usableLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'unusable',
           fieldLabel: this.unusableLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'average_sales',
           fieldLabel: this.average_salesLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'numberfield',
           name: 'standard_deviation',
           fieldLabel: this.standard_deviationLabel,
           allowBlank: true,
-          disabled: true,
         }, {
           xtype: 'textfield',
           name: 'audit_created_by',

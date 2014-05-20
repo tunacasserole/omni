@@ -73,6 +73,7 @@ Ext.define('Omni.view.projection_details.Explorer', {
   initComponent : function () {
 
     var me = this;
+    var my_state = this.record.get('state');
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
@@ -80,12 +81,12 @@ Ext.define('Omni.view.projection_details.Explorer', {
         {
           header       : this.sku_idLabel,
           dataIndex    : 'sku_display',
-          flex         : 2
+          flex         : 1
         },
         {
           header       : this.location_idLabel,
           dataIndex    : 'location_display',
-          flex         : 2
+          flex         : 1
         },
      {
           header       : this.sale_units_ytdLabel,
@@ -117,12 +118,12 @@ Ext.define('Omni.view.projection_details.Explorer', {
           dataIndex    : 'on_order',
           flex         : 1
         },
-        {
-          header       : this.last_forecast_unitsLabel,
-          dataIndex    : 'last_forecast_units',
-          flex         : 1
-        },
-        {
+      // {
+      //   header       : this.last_forecast_unitsLabel,
+      //   dataIndex    : 'last_forecast_units',
+      //   flex         : 1
+      // },
+      {
           header       : this.sd_rawLabel,
           dataIndex    : 'sd_raw',
           flex         : 1
@@ -147,41 +148,82 @@ Ext.define('Omni.view.projection_details.Explorer', {
           dataIndex    : 'sd_percent',
           flex         : 1
         },
-        {
-          header       : this.coverage_allowedLabel,
-          dataIndex    : 'coverage_allowed',
+                {
+          header       : this.last_forecast_unitsLabel,
+          dataIndex    : 'last_forecast_units',
           flex         : 1
         },
         {
-          header       : this.custom_needLabel,
-          dataIndex    : 'custom_need',
-          flex         : 1
+          header       : this.projection_1_unitsLabel,
+          dataIndex    : 'projection_1_units',
+          flex         : 1,
+          editor:    {
+            xtype: 'numberfield',
+            disabled: my_state !== 'projection_1'
+          },
         },
         {
-          header       : this.generic_needLabel,
-          dataIndex    : 'generic_need',
-          flex         : 1
+          header       : this.projection_2_unitsLabel,
+          dataIndex    : 'projection_2_units',
+          flex         : 1,
+          editor:    {
+            xtype: 'numberfield',
+            disabled: my_state !== 'projection_2'
+          }
         },
         {
-          header       : this.coverage_completeLabel,
-          dataIndex    : 'coverage_complete',
-          flex         : 1
+          header       : this.projection_3_unitsLabel,
+          dataIndex    : 'projection_3_units',
+          flex         : 1,
+          editor:    {
+            xtype: 'numberfield',
+            disabled: my_state !== 'projection_3'
+          }
         },
         {
-          header       : this.usableLabel,
-          dataIndex    : 'usable',
-          flex         : 1
+          header       : this.projection_4_unitsLabel,
+          dataIndex    : 'projection_4_units',
+          flex         : 1,
+          editor:    {
+            xtype: 'numberfield',
+            disabled: my_state !== 'projection_4'
+          }
         },
-        {
-          header       : this.unusableLabel,
-          dataIndex    : 'unusable',
-          flex         : 1
-        },
-        {
-          header       : this.total_needLabel,
-          dataIndex    : 'total_need',
-          flex         : 1
-        },
+        // {
+        //   header       : this.coverage_allowedLabel,
+        //   dataIndex    : 'coverage_allowed',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.custom_needLabel,
+        //   dataIndex    : 'custom_need',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.generic_needLabel,
+        //   dataIndex    : 'generic_need',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.coverage_completeLabel,
+        //   dataIndex    : 'coverage_complete',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.usableLabel,
+        //   dataIndex    : 'usable',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.unusableLabel,
+        //   dataIndex    : 'unusable',
+        //   flex         : 1
+        // },
+        // {
+        //   header       : this.total_needLabel,
+        //   dataIndex    : 'total_need',
+        //   flex         : 1
+        // },
       ]
     });
     // COLUMNS (End)

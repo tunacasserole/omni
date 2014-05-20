@@ -1,18 +1,18 @@
-class Omni::ProjectionsSubscriber < Buildit::Messaging::Subscriber
+class Omni::SkusSubscriber < Buildit::Messaging::Subscriber
 
-  queue       'model.projection_requests'
+  queue       'model.sku_requests'
   exchange    'omni.events', :direct
-  routing_key 'projection'
+  routing_key 'sku'
   auto_start  true
 
   def self.process(delivery_info, properties, message)
     begin
-      puts "projections subscriber"
+      puts "skus subscriber"
       msg      = JSON.parse(message)
       # user_id  = msg['user_id']
       method_name   = msg['method_name']
 
-      data = Omni::Projection.find(msg['projection_id'])
+      data = Omni::Sku.find(msg['sku_id'])
       data.send method_name.to_sym
 
     rescue Exception => e
@@ -20,4 +20,4 @@ class Omni::ProjectionsSubscriber < Buildit::Messaging::Subscriber
     end
   end
 
-end # class Omni::ProjectionsSubscriber
+end # class Omni::SkusSubscriber
