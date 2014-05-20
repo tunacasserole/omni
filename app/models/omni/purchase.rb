@@ -264,22 +264,16 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def add
-    # puts '000'
     self.supplier.sku_suppliers.each do |ss|
-      # puts 100
       next if Omni::PurchaseDetail.where(purchase_id: self.purchase_id, sku_id: ss.sku_id).first
-      # puts 200
-      next unless sku_meets_criteria? ss.sku
-      # puts 300
-      next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: ss.sku_id).first if self.location_id
-      # puts 400
-      Omni::PurchaseDetail.create(units_ordered: units_to_order(i,ss), purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
+      i = Omni::Inventory.where(location_id: self.location_id, sku_id: ss.sku_id).first if self.location_id
+      units = i ? units_to_order(i,ss) : 1
+      pd = Omni::PurchaseDetail.create(units_ordered: units, purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
+      puts pd.errors.full_messages.to_sentence
     end
-    # puts 500
+    Sunspot.commit_if_dirty
   end
 
-  # next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: pd.sku_id, is_authorized: true).first
-  # units = units_to_order(i, pd.sku_supplier)
 
   def duplicate
     new_purchase = Omni::Purchase.create(supplier_id: self.supplier_id, location_id: self.location_id, purchase_type: self.purchase_type, purchase_source: self.purchase_source, ship_via: self.ship_via, fob_point: self.fob_point, master_purchase_id: self.master_purchase_id, carrier_supplier_id: self.carrier_supplier_id, is_special_order: self.is_special_order, estimated_lead_time_days: self.estimated_lead_time_days, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_1_location_user_id: self.purchase_approver_1_location_user_id, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_2_location_user_id: self.purchase_approver_2_location_user_id, purchase_approver_3_user_id: self.purchase_approver_3_user_id, purchase_approver_3_location_user_id: self.purchase_approver_3_location_user_id, payment_term: self.payment_term, freight_term: self.freight_term, pay_to_supplier_id: self.pay_to_supplier_id, ship_thru_supplier_id: self.ship_thru_supplier_id, supplier_address_1: self.supplier_address_1, supplier_address_2: self.supplier_address_2, supplier_address_3: self.supplier_address_3, supplier_address_4: self.supplier_address_4, supplier_city: self.supplier_city, supplier_state_code: self.supplier_state_code, supplier_zip: self.supplier_zip, supplier_country: self.supplier_country)
@@ -301,6 +295,13 @@ class Omni::Purchase < ActiveRecord::Base
 
     # publish the above message to the omni.events exchange
     Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'purchase')
+  end
+
+  def units_to_order(i, ss)
+    units_to_order = self.is_use_need_units ? i.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).sum('current_approved_units') : 1
+    units_to_order *= self.adjustment_percent / 100 if self.adjustment_percent
+    units_to_order /= ss.order_pack_size
+    [units_to_order, 1].max.round
   end
 
   def notify
@@ -342,13 +343,6 @@ class Omni::Purchase < ActiveRecord::Base
   #       1
   #   end
   # end
-
-  def units_to_order(i, ss)
-    units_to_order = self.is_use_need_units ? i.projection_details.joins(:projection).where(:projections => {plan_year: '2014'}).sum('current_approved_units') : 0
-    units_to_order *= self.adjustment_percent / 100 if self.adjustment_percent
-    units_to_order /= ss.order_pack_size
-    [units_to_order, 1].max.round
-  end
 
   def approved
     # puts "total_order_cost is #{total_order_cost.to_s}"

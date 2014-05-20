@@ -65,9 +65,13 @@ Ext.define('Omni.view.purchase_details.Explorer', {
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
       columns: [{
-        header: this.stateLabel,
-        dataIndex: 'state',
+        header: this.purchase_detail_nbrLabel,
+        dataIndex: 'purchase_detail_nbr',
         flex: 1
+      }, {
+        header: this.sku_idLabel,
+        dataIndex: 'sku_display',
+        flex: 3
       }, {
         header: this.supplier_costLabel,
         dataIndex: 'supplier_cost',
@@ -95,14 +99,10 @@ Ext.define('Omni.view.purchase_details.Explorer', {
         align: 'right',
         flex: 1
       }, {
-        header: this.purchase_detail_nbrLabel,
-        dataIndex: 'purchase_detail_nbr',
+        header: this.stateLabel,
+        dataIndex: 'state',
         flex: 1
-      }, {
-        header: this.sku_idLabel,
-        dataIndex: 'sku_display',
-        flex: 3
-      }, ]
+      }]
     });
     // COLUMNS (End)
 
