@@ -495,7 +495,7 @@ Ext.define('Omni.view.uniform_details.Form', {
   // }, // onAdvancedCreateToggle
 
   onActivateAction: function(action, eOpts) {
-    this.processEventTransition('activate', 'Uniform Detail was successfully activated.', 'An error occurred activating this uniform detail.');
+    this.processEventTransition('activate_q', 'Uniform Detail was successfully activated.', 'An error occurred activating this uniform detail.');
   }, // onBuildAction
 
   onCloseAction: function(action, eOpts) {

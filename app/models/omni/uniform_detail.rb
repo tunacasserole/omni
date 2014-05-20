@@ -90,7 +90,7 @@ class Omni::UniformDetail < ActiveRecord::Base
     end
 
     ### CALLBACKS ###
-    after_transition on: :activate, do: :do_activate
+    after_transition on: :activate, do: :build_lookups
     after_transition on: :close, do: :do_close
 
     ### EVENTS ###
@@ -121,15 +121,13 @@ class Omni::UniformDetail < ActiveRecord::Base
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
-  def do_activate
-    # puts "activating a uniform detail"
-    # set_approval
-    # initiate_lookups
-    build_lookups
+  def activate_q
+    message     = { method_name: 'activate', uniform_detail_id: self.id, user_id: Omni::Util::User.id }
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'uniform_detail')
   end
 
   def build_lookups
-    # puts "create uniform lookup for each uniform detail row by bringing in every SKU that is active for the Style and Color in the Uniform Detail record."
+    puts "create uniform lookup for each uniform detail row by bringing in every SKU that is active for the Style and Color in the Uniform Detail record."
     # in other words, when a Style Color is added to a Uniform, the system assumes all sizes of that Style Color are valid for the Uniform.
     grades = Omni::Grade.get_grades(self.from_grade,self.thru_grade)
     if self.style && self.style.skus.count > 0 && grades && grades.count > 0
@@ -147,6 +145,8 @@ class Omni::UniformDetail < ActiveRecord::Base
         end
       end
     end
+    Sunspot.commit_if_dirty
+    puts "end of build_lookups"
   end
 
   def checks
