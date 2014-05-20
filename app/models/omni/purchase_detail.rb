@@ -79,6 +79,7 @@
     string   :sku_id
     string   :sku_supplier_id
     string   :sku_supplier_display
+    boolean  :is_destroyed
 
     text     :display_fulltext,            using: :display
     text     :state_fulltext,              using: :state
