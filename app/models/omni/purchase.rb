@@ -234,8 +234,6 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def mass_update_q
-    self.notes.create(detail: "mass_update type is #{mass_update_type}")
-    puts ""
     if self.mass_update_type
       message     = { method_name: 'mass_update', purchase_id: self.id, user_id: Omni::Util::User.id }
     else
@@ -255,14 +253,13 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def add
-    puts "addsing"
+    self.notes.create(detail: "automatically added purchase details.")
     self.supplier.sku_suppliers.each do |ss|
       next if Omni::PurchaseDetail.where(purchase_id: self.purchase_id, sku_id: ss.sku_id).first
       i = Omni::Inventory.where(location_id: self.location_id, sku_id: ss.sku_id).first if self.location_id
       units = i ? units_to_order(i,ss) : 1
-      puts "creating detail with units of #{units.to_s}"
       pd = Omni::PurchaseDetail.create(units_ordered: units, purchase_id: self.purchase_id, sku_id: ss.sku_id, sku_supplier_id: ss.sku_supplier_id, supplier_item_identifier: ss.supplier_item_identifier)
-      puts pd.errors.full_messages.to_sentence
+      self.notes.create(detail: pd.errors.full_messages.to_sentence)
     end
     Sunspot.commit_if_dirty
   end
