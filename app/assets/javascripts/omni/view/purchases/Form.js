@@ -761,7 +761,7 @@ Ext.define('Omni.view.purchases.Form', {
   }, // onBuildAction
 
   onMassupdateAction: function(action, eOpts) {
-    this.processEventTransition('mass_update_q', 'Purchase Order was successfully mass updated.', 'An error occurred mass updating this purchase order.');
+    this.processEventTransition('mass_update_q', 'Purchase is being mass updated, this may take a while.', 'An error occurred mass updating this purchase order.');
   },
 
   onCloneAction: function(action, eOpts) {
