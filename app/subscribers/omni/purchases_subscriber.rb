@@ -7,10 +7,11 @@ class Omni::PurchasesSubscriber < Buildit::Messaging::Subscriber
 
   def self.process(delivery_info, properties, message)
     begin
-
+      puts "purchases subscriber"
       msg      = JSON.parse(message)
       user_id  = msg['user_id']
       method_name   = msg['method_name']
+
 
       data = Omni::Purchase.find(msg['purchase_id'])
       data.send("q_#{method_name}".to_sym)
