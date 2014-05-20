@@ -7,6 +7,7 @@
 
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
+  supports_logical_delete
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
