@@ -229,11 +229,13 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def mass_update
-    self.send(mass_update_type.downcase)
+    self.notes.create(detail: "really mass updating")
+    self.send(self.mass_update_type.downcase)
   end
 
   def mass_update_q
-    puts "mass_update type is #{mass_update_type}"
+    self.notes.create(detail: "mass_update type is #{mass_update_type}")
+    puts ""
     if self.mass_update_type
       message     = { method_name: 'mass_update', purchase_id: self.id, user_id: Omni::Util::User.id }
     else
@@ -244,19 +246,8 @@ class Omni::Purchase < ActiveRecord::Base
     Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'purchase')
   end
 
-  def sku_meets_criteria?(sku)
-    # puts "sku is #{sku.display} - #{sku.sku_id}"
-    # return false unless sku.style_id == self.style_id if self.style_id
-    # return false unless sku.subclass_id == self.subclass_id if self.subclass_id
-    # return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
-    # return false unless sku.subclass.classification.department_id == self.department_id if self.department_id
-    # return false if sku.is_converted unless self.is_include_conversions
-    # return false unless Omni::SkuSupplier.where(supplier_id: self.supplier_id, sku_id: sku.sku_id, is_discontinued: false).first
-    return true
-  end
-
   def units
-    puts "unitsing"
+    self.notes.create(detail: "adjusted units by #{self.adjustment_percent}")
     self.purchase_details.each do |pd|
       pd.units_ordered *= self.adjustment_percent / 100 if self.adjustment_percent
       pd.save
@@ -308,6 +299,17 @@ class Omni::Purchase < ActiveRecord::Base
 
   def notify
 
+  end
+
+  def sku_meets_criteria?(sku)
+    # puts "sku is #{sku.display} - #{sku.sku_id}"
+    # return false unless sku.style_id == self.style_id if self.style_id
+    # return false unless sku.subclass_id == self.subclass_id if self.subclass_id
+    # return false unless sku.subclass.classification_id == self.classification_id if self.classification_id
+    # return false unless sku.subclass.classification.department_id == self.department_id if self.department_id
+    # return false if sku.is_converted unless self.is_include_conversions
+    # return false unless Omni::SkuSupplier.where(supplier_id: self.supplier_id, sku_id: sku.sku_id, is_discontinued: false).first
+    return true
   end
 
 # If an Allocation Profile is set or changed, update all the Purchase Details
