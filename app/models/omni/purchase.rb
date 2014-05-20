@@ -229,16 +229,19 @@ class Omni::Purchase < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def mass_update
-    # puts "mass_update type is #{mass_update_type}"
+    self.send(mass_update_type.downcase)
+  end
+
+  def mass_update_q
+    puts "mass_update type is #{mass_update_type}"
     if self.mass_update_type
-      self.send(mass_update_type.downcase)
-      # Blank out mass update paramaters after completing the mass update
-      # ['department_id', 'classification_id', 'subclass_id', 'style_id', 'is_include_conversions', 'mass_update_type', 'adjustment_percent', 'is_use_need_units', 'allocation_profile_id'].each {|x| self.send("#{x}=", nil)}
-      self.save
+      message     = { method_name: 'mass_update', purchase_id: self.id, user_id: Omni::Util::User.id }
     else
       errors.add('mass_update_type','mass update type is required for mass update')
-      # raise 'mass update type is required for mass update'
     end
+
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'purchase')
   end
 
   def sku_meets_criteria?(sku)
@@ -253,6 +256,7 @@ class Omni::Purchase < ActiveRecord::Base
   end
 
   def units
+    puts "unitsing"
     self.purchase_details.each do |pd|
       pd.units_ordered *= self.adjustment_percent / 100 if self.adjustment_percent
       pd.save
@@ -274,39 +278,21 @@ class Omni::Purchase < ActiveRecord::Base
     # puts 500
   end
 
-  # def copy_old
-  #   new_purchase = Omni::Purchase.create(supplier_id: self.supplier_id, location_id: self.location_id, purchase_type: self.purchase_type, purchase_source: self.purchase_source, ship_via: self.ship_via, fob_point: self.fob_point, master_purchase_id: self.master_purchase_id, carrier_supplier_id: self.carrier_supplier_id, is_special_order: self.is_special_order, estimated_lead_time_days: self.estimated_lead_time_days, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_1_location_user_id: self.purchase_approver_1_location_user_id, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_2_location_user_id: self.purchase_approver_2_location_user_id, purchase_approver_3_user_id: self.purchase_approver_3_user_id, purchase_approver_3_location_user_id: self.purchase_approver_3_location_user_id, payment_term: self.payment_term, freight_term: self.freight_term, pay_to_supplier_id: self.pay_to_supplier_id, ship_thru_supplier_id: self.ship_thru_supplier_id, supplier_address_1: self.supplier_address_1, supplier_address_2: self.supplier_address_2, supplier_address_3: self.supplier_address_3, supplier_address_4: self.supplier_address_4, supplier_city: self.supplier_city, supplier_state_code: self.supplier_state_code, supplier_zip: self.supplier_zip, supplier_country: self.supplier_country)
-  #   self.purchase_details.each do |pd|
-  #     next if Omni::PurchaseDetail.where(purchase_id: self.purchase_id, sku_id: pd.sku_id).first
-  #     next unless sku_meets_criteria? pd.sku
-  #     next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: pd.sku_id, is_authorized: true).first
-  #     units = units_to_order(i, pd.sku_supplier)
-  #     pd.copy(new_purchase.purchase_id, units)
-  #   end
-  #   Omni::Purchase.where(purchase_id: new_purchase.purchase_id).first
-  # end
-      # next if Omni::PurchaseDetail.where(purchase_id: self.purchase_id, sku_id: pd.sku_id).first
-      # next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: pd.sku_id, is_authorized: true).first
-      # units = units_to_order(i, pd.sku_supplier)
+  # next unless i = Omni::Inventory.where(location_id: self.location_id, sku_id: pd.sku_id, is_authorized: true).first
+  # units = units_to_order(i, pd.sku_supplier)
 
-  def q_duplicate
-    puts "q_duplicating"
+  def duplicate
     new_purchase = Omni::Purchase.create(supplier_id: self.supplier_id, location_id: self.location_id, purchase_type: self.purchase_type, purchase_source: self.purchase_source, ship_via: self.ship_via, fob_point: self.fob_point, master_purchase_id: self.master_purchase_id, carrier_supplier_id: self.carrier_supplier_id, is_special_order: self.is_special_order, estimated_lead_time_days: self.estimated_lead_time_days, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_1_location_user_id: self.purchase_approver_1_location_user_id, purchase_approver_1_user_id: self.purchase_approver_1_user_id, purchase_approver_2_location_user_id: self.purchase_approver_2_location_user_id, purchase_approver_3_user_id: self.purchase_approver_3_user_id, purchase_approver_3_location_user_id: self.purchase_approver_3_location_user_id, payment_term: self.payment_term, freight_term: self.freight_term, pay_to_supplier_id: self.pay_to_supplier_id, ship_thru_supplier_id: self.ship_thru_supplier_id, supplier_address_1: self.supplier_address_1, supplier_address_2: self.supplier_address_2, supplier_address_3: self.supplier_address_3, supplier_address_4: self.supplier_address_4, supplier_city: self.supplier_city, supplier_state_code: self.supplier_state_code, supplier_zip: self.supplier_zip, supplier_country: self.supplier_country)
     new_purchase.notes.create(detail: "cloned from purchase number #{self.purchase_nbr}")
     self.purchase_details.each do |pd|
-      pd.duplicate(new_purchase.purchase_id)
+      new_detail = pd.duplicate(new_purchase.purchase_id)
+      puts new_detail.errors.full_messages.to_sentence if new_detail.errors.count > 1
     end
     Sunspot.commit_if_dirty
-    notify
-    me_too
+    # notify
   end
 
-  def notify
-
-  end
-
-  def duplicate
-    puts "duplicate"
+  def duplicate_q
     message     = {
       purchase_id: self.id,
       user_id: Omni::Util::User.id,
@@ -315,6 +301,10 @@ class Omni::Purchase < ActiveRecord::Base
 
     # publish the above message to the omni.events exchange
     Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'purchase')
+  end
+
+  def notify
+
   end
 
 # If an Allocation Profile is set or changed, update all the Purchase Details

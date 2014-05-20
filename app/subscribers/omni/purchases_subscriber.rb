@@ -9,12 +9,11 @@ class Omni::PurchasesSubscriber < Buildit::Messaging::Subscriber
     begin
       puts "purchases subscriber"
       msg      = JSON.parse(message)
-      user_id  = msg['user_id']
+      # user_id  = msg['user_id']
       method_name   = msg['method_name']
 
-
       data = Omni::Purchase.find(msg['purchase_id'])
-      data.send("q_#{method_name}".to_sym)
+      data.send method_name.to_sym
 
     rescue Exception => e
       logger.error (e.message || "").red

@@ -530,16 +530,6 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
-  storeId   : 'MASS_UPDATE_TYPE-lookup-Store',
-  fields    : lookupStoreFields,
-  data      : [
-    ['032456XXC72911HIHI321MASSUPDATE1','CLONE',,'MASS_UPDATE_TYPE','Clone',null,true],
-    ['032456XXC72911HIHI322MASSUPDATE2','UNITS',,'MASS_UPDATE_TYPE','Adjust Units Ordered',null,true],
-    ['032456XXC72911HIHI312MASSUPDATE3','ADD',,'MASS_UPDATE_TYPE','Add Purchase Details',null,true]
-  ]
-});
-
-Ext.create('Ext.data.ArrayStore', {
   storeId   : 'MASTER_PACK_UOM_CODE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
@@ -1140,10 +1130,31 @@ Ext.create('Ext.data.ArrayStore', {
 });
 
 Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'MASS_UPDATE_TYPE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['032456XXC72911HIHI322MASSUPDATE2','UNITS',,'MASS_UPDATE_TYPE','Adjust Units Ordered',null,true],
+    ['032456XXC72911HIHI312MASSUPDATE3','ADD',,'MASS_UPDATE_TYPE','Add Purchase Details',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
   storeId   : 'COST_SOURCE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
     ['AOEU8902XXX8XODEHU2312XXPURCCOST','SAMPLE',,'COST_SOURCE','Sample',null,true]
+  ]
+});
+
+Ext.create('Ext.data.ArrayStore', {
+  storeId   : 'CASE_TYPE-lookup-Store',
+  fields    : lookupStoreFields,
+  data      : [
+    ['032456XXCASETYPEBUGXXEUEU4XX1234','OTHER',,'CASE_TYPE','request',null,true],
+    ['032456XXCASETYPEBUGXXEUEU4ONNNON','BUG',,'CASE_TYPE','Bug fix',null,true],
+    ['03122456ENHDATAMENTXXXOEUIXX1234','DATA',,'CASE_TYPE','Data conversion or cleanup',null,true],
+    ['03122456ENHANCEHETETXXXXXXXX1234','ENHANCEMENT',,'CASE_TYPE','Enhancement, new feature or custom development',null,true],
+    ['03122456EQUESTIONNTXXXXXXXXX1234','QUESTION',,'CASE_TYPE','Question or explanation needed',null,true]
   ]
 });
 
@@ -1174,17 +1185,6 @@ Ext.create('Ext.data.ArrayStore', {
     ['3312226EDEO6E73MENTXXXXXXXXX1234','MEDIUM',,'CASE_SIZE','Medium',null,true],
     ['43122456ENODE73MENTXXXXXXXXX1234','LARGE',,'CASE_SIZE','Large',null,true],
     ['53122456ENHANCEMENTXXXXXXXXX1234','EXTRA LARGE',,'CASE_SIZE','Extra Large',null,true]
-  ]
-});
-
-Ext.create('Ext.data.ArrayStore', {
-  storeId   : 'CASE_TYPE-lookup-Store',
-  fields    : lookupStoreFields,
-  data      : [
-    ['032456XXCASETYPEBUGXXEUEU4XX1234','BUG',,'CASE_TYPE','Bug fix',null,true],
-    ['03122456ENHDATAMENTXXXOEUIXX1234','DATA',,'CASE_TYPE','Data conversion or cleanup',null,true],
-    ['03122456ENHANCEHETETXXXXXXXX1234','ENHANCEMENT',,'CASE_TYPE','Enhancement, new feature or custom development',null,true],
-    ['03122456EQUESTIONNTXXXXXXXXX1234','QUESTION',,'CASE_TYPE','Question or explanation needed',null,true]
   ]
 });
 
