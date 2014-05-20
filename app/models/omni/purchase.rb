@@ -298,6 +298,7 @@ class Omni::Purchase < ActiveRecord::Base
     end
     Sunspot.commit_if_dirty
     notify
+    me_too
   end
 
   def notify
