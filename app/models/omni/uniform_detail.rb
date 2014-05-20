@@ -207,11 +207,11 @@ class Omni::UniformDetail < ActiveRecord::Base
 
   def do_close
     puts "remove lookups on close"
-    # destroy_lookups
+    destroy_lookups
   end
 
   def destroy_lookups
-    # puts "\n** remove lookups on close or destroy ** \n"
+    puts "\n** remove lookups on close or destroy ** \n"
     self.uniform_lookups.each { |x| x.destroy }
   end
 
