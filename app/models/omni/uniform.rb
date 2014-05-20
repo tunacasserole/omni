@@ -60,6 +60,7 @@ class Omni::Uniform < ActiveRecord::Base
     text     :display_fulltext, using: :display
     text     :uniform_nbr_fulltext, using: :uniform_nbr
   end
+  order_search_by :display => :asc
 
  # STATES (Start) ====================================================================
   state_machine :state, initial: :draft do
@@ -106,9 +107,19 @@ class Omni::Uniform < ActiveRecord::Base
 
 
   # STATE HELPERS (Start) =====================================================================
+  def activate_q
+    message     = { method_name: 'activate', uniform_id: self.id, user_id: Omni::Util::User.id }
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'uniform')
+  end
+
+  def close_q
+    message     = { method_name: 'close', uniform_id: self.id, user_id: Omni::Util::User.id }
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'uniform')
+  end
+
   def do_activate
     # puts "active all uniform uniform_details"
-    self.uniform_details.each { |x| x.activate }
+    self.uniform_details.each { |x| x.activate_q }
     # log an approval
     self.approvals.create(approvable_type: 'Omni::Uniform', display: 'uniform was approved')
     # closing any other active uniforms to ensure only 1 active uniform per account

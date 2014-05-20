@@ -8,7 +8,7 @@ class Omni::ProjectionsSubscriber < Buildit::Messaging::Subscriber
   def self.process(delivery_info, properties, message)
     begin
       msg      = JSON.parse(message)
-      user_id  = msg[:user_id]
+      user_id  = msg['user_id']
 
       # projection = Omni::Projection.find(msg[:projection_id])
       #projection.forecast(user_id)

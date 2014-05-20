@@ -18,7 +18,7 @@ class Omni::SearchSubscriber < Buildit::Messaging::Subscriber
       # puts "! Indexed #{model_name} in #{Time.now - started_at}s"
 
       # puts "msg[model_name] is #{msg[model_name]}"
-      # user_id  = msg[:user_id]
+      # user_id  = msg['user_id']
       # model_name  = msg[:model_name]
 
     rescue Exception => e

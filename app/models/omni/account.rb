@@ -90,7 +90,6 @@ class Omni::Account < ActiveRecord::Base
   # HOOKS (End)
 
   # INDEXING (Start) ====================================================================
-  order_search_by :display => :asc
 
   searchable do
       # string   :account_id
@@ -115,6 +114,7 @@ class Omni::Account < ActiveRecord::Base
     # text     :shipping_city _fulltext, using: :shipping_city
     # text     :shipping_state_fulltext, using: :shipping_state
   end
+  order_search_by :display => :asc
   # INDEXING (End)
 
   # STATES (Start) ====================================================================

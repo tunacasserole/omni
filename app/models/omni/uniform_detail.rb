@@ -67,12 +67,19 @@ class Omni::UniformDetail < ActiveRecord::Base
 
   # INDEXING (Start) ====================================================================
   searchable do
-    string   :display
+    string   :uniform_detail_id
     string   :uniform_id
+    string   :style_display
+    string   :color_display
+    string   :from_grade_display
+    string   :thru_grade_display
 
-    text     :display_fulltext, using: :display
+    text     :style_display_fulltext, using: :style_display
+    text     :color_display_fulltext, using: :color_display
+    text     :from_grade_display_fulltext, using: :from_grade_display
+    text     :thru_grade_display_fulltext, using: :thru_grade_display
   end
-
+  order_search_by :style_display => :asc, :color_display => :asc, :from_grade_display => :asc, :thru_grade_display => :asc
 
  # STATES (Start) ====================================================================
   state_machine :state, initial: :draft do
@@ -150,7 +157,7 @@ class Omni::UniformDetail < ActiveRecord::Base
   end
 
   def checks
-    puts "\nchecks\n"
+    # puts "\nchecks\n"
   #   puts "checking style color"
   #   from_grade_id = self.from_grade_id || self.uniform.from_grade_id
   #   thru_grade_id = self.thru_grade_id || self.uniform.thru_grade_id
@@ -182,17 +189,17 @@ class Omni::UniformDetail < ActiveRecord::Base
   #       errors.add(:thru_grade_id, 'from grade is not valid for this account') unless is_valid
   #     end
   #   end
-    puts "end of checks"
+    # puts "end of checks"
   end
 
   def set_approval
-    puts "set approval"
+    # puts "set approval"
     # current_user = Buildit::User.current ? Buildit::User.current : Buildit::User.first
     # a=Desk::Approval.create(approvable_type: "Omni::UniformDetail", approvable_id: self.uniform_detail_id)
   end
 
   def set_defaults
-    puts "setting defaults*********\n"
+    # puts "setting defaults*********\n"
     self.style_id = self.style_color.style_id if self.style_color
     self.color_id = self.style_color.color_id if self.style_color
     self.state = 'draft' unless self.state_changed?
@@ -204,12 +211,12 @@ class Omni::UniformDetail < ActiveRecord::Base
   end
 
   def destroy_lookups
-    puts "\n** remove lookups on close or destroy ** \n"
+    # puts "\n** remove lookups on close or destroy ** \n"
     self.uniform_lookups.each { |x| x.destroy }
   end
 
   def new_lookup
-    puts "creating uniform lookup"
+    # puts "creating uniform lookup"
     Omni::UniformLookup.new(uniform_id: self.uniform_id, uniform_detail_id: self.uniform_detail_id, account_id: self.uniform.account_id, contract_id: self.uniform.contract_id, date_created: Date.today, style_id: self.style_id, color_id: self.color_id, is_required_male: self.is_required_male, is_required_female: self.is_required_female,  is_optional_male: self.is_optional_male, is_optional_female: self.is_optional_female, is_includes_logo: self.is_includes_logo, is_requires_logo: self.is_requires_logo, discount_percent: self.discount_percent, uniform_source: self.uniform_source)
   end
 

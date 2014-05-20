@@ -209,11 +209,11 @@ Ext.define('Omni.view.uniforms.Form', {
   // }, // onAdvancedCreateToggle
 
   onActivateAction: function(action, eOpts) {
-    this.processEventTransition('activate', 'Uniform was successfully activated.', 'An error occurred activating this uniform.');
+    this.processEventTransition('activate_q', 'Uniform activation was submitted, this may take a while.', 'An error occurred activating this uniform.');
   }, // onBuildAction
 
   onCloseAction: function(action, eOpts) {
-    this.processEventTransition('close', 'Uniform was successfully closed.', 'An error occurred closing this uniform.');
+    this.processEventTransition('close_q', 'Uniform close was submitted.', 'An error occurred closing this uniform.');
   }, // onBuildAction
 
   prepareActivateAction: function(action, eOpts) {

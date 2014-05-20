@@ -9,8 +9,8 @@ class Omni::UniformsSubscriber < Buildit::Messaging::Subscriber
     begin
       msg      = JSON.parse(message)
 
-      uniform = Omni::Uniform.find(msg[:uniform_id])
-      uniform.build_lookups
+      data = Omni::Uniform.find(msg['uniform_id'])
+      data.send msg['method_name'].to_sym
 
     rescue Exception => e
       logger.error (e.message || "").red
