@@ -267,20 +267,32 @@ class Omni::Sku < ActiveRecord::Base
   end # def initiate_forecast
 
   def forecast
-    puts "\n sku is forecasting"
     # Delete current projection details where inventory is gone
     # Omni::ProjectionDetail.where(sku_id: self.sku_id).each { |x| x.destroy }
     # find or create projection details, update from latestinventory
+    self.notes.create(detail: "\n sku is forecasting #{self.inventories.count} locations")
     self.inventories.each do |i|
-      pd = Omni::ProjectionDetail.where(inventory_id: i.inventory_id).first || Omni::ProjectionDetail.new(projection_id: projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+      pd = Omni::ProjectionDetail.where(inventory_id: i.inventory_id).first
+      self.notes.create(detail: "found a purchase detail for #{i.inventory_id}") if pd
+
+      unless pd
+        pd = Omni::ProjectionDetail.new(projection_id: projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+        self.notes.create(detail: "created a new purchase detail for #{i.inventory_id}") if pd
+      end
+
+      unless pd
+        self.notes.create(detail: "couldn't find or create a pd")
+      end
       # pd.sale_units_ytd = i.sale_units_ytd
       # pd.sale_units_py1 = i.sale_units_py1
       # pd.sale_units_py2 = i.sale_units_py2
       # pd.sale_units_py3 = i.sale_units_py3
       # pd.on_hand = i.on_hand_units
       # pd.on_order = i.supplier_on_order_units
-      pd.save
-      pd.forecast_q
+      self.notes.create(detail: "errors are #{pd.errors.full_messages.to_sentence}") unless pd.save
+      # pd.save
+      # pd.forecast_q
+
     end
 
     Sunspot.commit_if_dirty
