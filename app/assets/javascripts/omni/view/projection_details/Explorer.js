@@ -73,7 +73,7 @@ Ext.define('Omni.view.projection_details.Explorer', {
   initComponent: function() {
 
     var me = this;
-    var my_state = this.record.get('state');
+    // var my_state = this.record.get('state');
 
     // COLUMNS (Start) =====================================================================
     Ext.apply(this, {
@@ -160,7 +160,8 @@ Ext.define('Omni.view.projection_details.Explorer', {
           sortable: false,
           editor: {
             xtype: 'numberfield',
-            disabled: my_state !== 'projection_1'
+            disabled: this.record.get('state') !== 'projection_1'
+            // disabled: my_state !== 'projection_1'
           },
         }, {
           header: this.projection_2_unitsLabel,
@@ -169,7 +170,8 @@ Ext.define('Omni.view.projection_details.Explorer', {
           sortable: false,
           editor: {
             xtype: 'numberfield',
-            disabled: my_state !== 'projection_2'
+            disabled: this.record.get('state') !== 'projection_2'
+            // disabled: my_state !== 'projection_2'
           }
         }, {
           header: this.projection_3_unitsLabel,
@@ -178,7 +180,8 @@ Ext.define('Omni.view.projection_details.Explorer', {
           sortable: false,
           editor: {
             xtype: 'numberfield',
-            disabled: my_state !== 'projection_3'
+            disabled: this.record.get('state') !== 'projection_3'
+            // disabled: my_state !== 'projection_3'
           }
         }, {
           header: this.projection_4_unitsLabel,
@@ -187,7 +190,8 @@ Ext.define('Omni.view.projection_details.Explorer', {
           sortable: false,
           editor: {
             xtype: 'numberfield',
-            disabled: my_state !== 'projection_4'
+            disabled: this.record.get('state') !== 'projection_4'
+            // disabled: my_state !== 'projection_4'
           }
         },
         // {

@@ -70,22 +70,22 @@ Ext.define('Omni.view.app.Hub', {
               xtype: 'omni-inventories-Explorer'
             }
           }, {
-            title: 'Projections',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'supply',
-            target: {
-              xtype: 'omni-projections-Explorer'
-            }
-          }, {
-            title: 'Projection Details',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'supply',
-            target: {
-              xtype: 'omni-projection_details-Explorer'
-            }
-          }, {
+            //   title: 'Projections',
+            //   colspan: 2,
+            //   rowspan: 1,
+            //   cls: 'supply',
+            //   target: {
+            //     xtype: 'omni-projections-Explorer'
+            //   }
+            // }, {
+            //   title: 'Projection Details',
+            //   colspan: 2,
+            //   rowspan: 1,
+            //   cls: 'supply',
+            //   target: {
+            //     xtype: 'omni-projection_details-Explorer'
+            //   }
+            // }, {
             title: 'Purchasing',
             colspan: 2,
             rowspan: 1,
@@ -191,14 +191,6 @@ Ext.define('Omni.view.app.Hub', {
           columns: 8,
           rows: 2,
           tiles: [{
-            title: 'Sku Aliases',
-            colspan: 2,
-            rowspan: 1,
-            cls: 'product_hierarchy',
-            target: {
-              xtype: 'omni-sku_aliases-Explorer'
-            }
-          }, {
             title: 'Skus',
             colspan: 2,
             rowspan: 1,
@@ -237,6 +229,14 @@ Ext.define('Omni.view.app.Hub', {
             cls: 'product_hierarchy',
             target: {
               xtype: 'omni-departments-Explorer'
+            }
+          }, {
+            title: 'Sku Aliases',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'product_hierarchy',
+            target: {
+              xtype: 'omni-sku_aliases-Explorer'
             }
           }]
         }
