@@ -22,7 +22,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :projection_detail_id,             override: false,        with: :guid
   default      :display,                          override: false,        to: lambda{|m| "#{m.projection_display} - #{m.sku_display} - #{m.location_display}"}
-  default      :projection_detail_nbr,            override: false,        with: :sequence,         named: "PROJECTION_DETAIL_NBR"
+  # default      :projection_detail_nbr,            override: false,        with: :sequence,         named: "PROJECTION_DETAIL_NBR"
   default      :inventory_id,                     override: false,        to: lambda { |m| Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first.inventory_id if Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first unless m.inventory_id }
   default      :last_forecast_units,              override: false,        to: 0
   default      :first_forecast_units,             override: false,        to: 0
@@ -132,7 +132,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     text     :sku_display_fulltext, using: :sku_display
     text     :location_display_fulltext, using: :location_display
   end
-  order_search_by sku_display: :asc, location_display: :asc
+  order_search_by sku_display: :asc, location_display: :ascu
   # INDEXING (End)
 
   # HELPERS (Start) =====================================================================
