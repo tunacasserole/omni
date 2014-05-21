@@ -108,15 +108,26 @@ Ext.define('Omni.view.uniform_details.Form', {
               disabled: true
             }, {
               xtype: 'buildit-Locator',
+              store: Ext.create('Omni.store.Color', {
+                pageSize: 10
+              }),
+              displayField: 'display',
+              itemTpl: '{display}',
+              name: 'color_id',
+              fieldLabel: me.color_idLabel,
+              gotoTarget: 'omni-colors-Inspector',
+              allowBlank: true
+            }, {
+              xtype: 'buildit-Locator',
               store: Ext.create('Omni.store.StyleColor', {
                 pageSize: 10
               }),
               displayField: 'display',
               itemTpl: '{display}',
               name: 'style_color_id',
+              valueField: 'style_color_id',
               fieldLabel: me.style_color_idLabel,
               gotoTarget: 'omni-style_colors-Inspector',
-              //initialValue : me.record.get('display'),
               allowBlank: false
             }, {
               xtype: 'buildit-Locator',
