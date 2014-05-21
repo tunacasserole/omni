@@ -7,7 +7,7 @@ class Omni::SkusSubscriber < Buildit::Messaging::Subscriber
 
   def self.process(delivery_info, properties, message)
     begin
-      puts "\nskus subscriber"
+      # puts "\nskus subscriber"
       msg      = JSON.parse(message)
       # user_id  = msg['user_id']
       method_name   = msg['method_name']
