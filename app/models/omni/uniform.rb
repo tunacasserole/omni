@@ -118,7 +118,9 @@ class Omni::Uniform < ActiveRecord::Base
   end
 
   def do_activate
-    # puts "active all uniform uniform_details"
+    # delete all uniform_lookups for account
+    Omni::UniformLookup.where(account_id: self.account_id).each { |x| x.destroy }
+    # active all uniform uniform_details"
     self.uniform_details.each { |x| x.activate_q }
     # log an approval
     self.approvals.create(approvable_type: 'Omni::Uniform', display: 'uniform was approved')
