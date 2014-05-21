@@ -255,18 +255,18 @@ class Omni::Sku < ActiveRecord::Base
     self.display
   end
 
-  def project_q
+  def forecast_q
     message     = {
       sku_id: self.id,
       user_id: Omni::Util::User.id,
-      method_name: 'project'
+      method_name: 'forecast'
     }
 
     # publish the above message to the omni.events exchange
     Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'sku')
   end # def initiate_forecast
 
-  def project
+  def forecast
     # Delete current projection details where inventory is gone
     # Omni::ProjectionDetail.where(sku_id: self.sku_id).each { |x| x.destroy }
     # find or create projection details, update from latestinventory
@@ -279,7 +279,7 @@ class Omni::Sku < ActiveRecord::Base
       # pd.on_hand = i.on_hand_units
       # pd.on_order = i.supplier_on_order_units
       pd.save
-      pd.reforecast
+      pd.forecast_q
     end
 
     Sunspot.commit_if_dirty

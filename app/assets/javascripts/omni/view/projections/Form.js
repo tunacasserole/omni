@@ -150,15 +150,15 @@ Ext.define('Omni.view.projections.Form', {
     // ACTIONS (Start) =====================================================================
     Ext.apply(this, {
       actions: [{
-      //   xtype: 'button',
-      //   iconCls: 'icon-wrench',
-      //   tooltip: 'Forecast',
-      //   listeners: {
-      //     beforerender: this.prepareForecastAction,
-      //     click: this.onForecastAction,
-      //     scope: me
-      //   }
-      // }, {
+        xtype: 'button',
+        iconCls: 'fa fa-cogs',
+        tooltip: 'Forecast',
+        listeners: {
+          beforerender: this.prepareForecastAction,
+          click: this.onForecastAction,
+          scope: me
+        }
+      }, {
         xtype: 'button',
         iconCls: 'fa fa-share-square-o',
         tooltip: 'Release',
@@ -202,9 +202,9 @@ Ext.define('Omni.view.projections.Form', {
   // /**
   //  *
   //  */
-  // onForecastAction: function(action, eOpts) {
-  //   this.processEventTransition('initiate_forecast', 'Projection was successfully forecasted.', 'An error occurred processing this projection.');
-  // }, // onAction
+  onForecastAction: function(action, eOpts) {
+    this.processEventTransition('forecast_q', 'Forecast was submitted, this may take a while.', 'An error occurred forecasting this projection.');
+  }, // onAction
 
   /**
    *
@@ -230,12 +230,11 @@ Ext.define('Omni.view.projections.Form', {
   // /**
   //  *
   //  */
-  // prepareForecastAction: function(action, eOpts) {
-  //   var currentState = this.record.get('state');
+  prepareForecastAction: function(action, eOpts) {
+    var currentState = this.record.get('state');
+    this.record.phantom != true && currentState != 'complete' ? action.show() : action.hide();
 
-  //   this.record.phantom != true && currentState != 'complete' ? action.show() : action.hide();
-
-  // }, // prepareAction
+  }, // prepareAction
 
   /**
    *

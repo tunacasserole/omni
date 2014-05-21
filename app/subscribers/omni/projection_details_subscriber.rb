@@ -7,7 +7,7 @@ class Omni::ProjectionDetailsSubscriber < Buildit::Messaging::Subscriber
 
   def self.process(delivery_info, properties, message)
     begin
-      puts "projection_details subscriber"
+      # puts "projection_details subscriber"
       msg      = JSON.parse(message)
       # user_id  = msg['user_id']
       method_name   = msg['method_name']

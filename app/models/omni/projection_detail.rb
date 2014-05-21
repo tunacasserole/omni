@@ -229,7 +229,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     message     = {
       projection_detail_id: self.id,
       user_id: Omni::Util::User.id,
-      method_name: 'reforecast'
+      method_name: 'forecast'
     }
 
     # publish the above message to the omni.events exchange
@@ -237,8 +237,8 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
   end # def initiate_forecast
 
-  def reforecast
-    puts "re-forecasting a detail"
+  def forecast
+    # puts "re-forecasting a detail"
     # initialize variables
     total_generic_need = 0
     is_generic = !self.sku.is_converted
@@ -251,14 +251,20 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     self.on_hand = i.on_hand_units
 
     # Sales history
-    self.sale_units_ytd = i.sale_units_ytd
-    self.sale_units_py1 = i.sale_units_py1
-    self.sale_units_py2 = i.sale_units_py2
-    self.sale_units_py3 = i.sale_units_py3
+    ytd = i.sale_units_ytd || 0
+    py1 = i.sale_units_py1 || 0
+    py2 = i.sale_units_py2 || 0
+    py3 = i.sale_units_py3 || 0
+
+    self.sale_units_ytd = ytd
+    self.sale_units_py1 = py1
+    self.sale_units_py2 = py2
+    self.sale_units_py3 = py3
 
     # calculate forecasted units using formula from forecast_profile;
     profile = self.forecast_profile
-    forecasted_units = (profile.sales_py1_weight * i.sale_units_py1) + (profile.sales_py2_weight * i.sale_units_py2) + (profile.sales_py3_weight * i.sale_units_py3)
+    forecasted_units = ( profile.sales_py1_weight * py1 ) + ( profile.sales_py2_weight * py2 ) + ( profile.sales_py3_weight * py3 )
+    # forecasted_units = forecast_units
 
     # calculate forecasted units
     unless self.last_forecast_date
@@ -268,10 +274,9 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
     self.last_forecast_units = forecasted_units
     self.last_forecast_date = Date.today
-
     # Standard deviation of py1, py2 and forecasted units
-    mean = (i.sale_units_py1 + i.sale_units_py2 + forecasted_units) / 3
-    tot_dev = (mean - i.sale_units_py1)**2 + (mean - i.sale_units_py2)**2 + (mean - forecasted_units)**2
+    mean = ( py1 + py2 + forecasted_units ) / 3
+    tot_dev = (mean - py1 )**2 + (mean - py2)**2 + (mean - forecasted_units)**2
     self.sd_raw = Math.sqrt(tot_dev)
     self.sd_floor = forecasted_units * 0.2
     self.sd_ceiling = forecasted_units * 0.4
@@ -289,9 +294,9 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
     self.save
 
-    # Omni::Projection.reindex
-    # Omni::ProjectionDetail.reindex
+    Sunspot.commit_if_dirty
   end
+
 
 end # class Omni::ProjectionDetail
 

@@ -7,7 +7,6 @@ Ext.define('Omni.view.skus.Form', {
 
     var me = this;
 
-
     // LABELS (Start) =======================================================================
     Ext.applyIf(this, {
       displayLabel:                               Omni.i18n.model.Sku.display,
@@ -197,29 +196,28 @@ Ext.define('Omni.view.skus.Form', {
     });
     // TITLES (End)
 
-        // ACTIONS (Start) =====================================================================
-        Ext.apply(this, {
-            actions: [{
-                xtype: 'button',
-                iconCls: 'fa fa-cogs',
-                tooltip: 'Project',
-                listeners: {
-                    beforerender: this.prepareProjectAction,
-                    click: this.onProjectAction,
-                    scope: me
-                }
-            }, {
-                xtype: 'button',
-                iconCls: 'fa fa-times-circle-o',
-                tooltip: 'Close',
-                listeners: {
-                    beforerender: this.prepareCloseAction,
-                    click: this.onCloseAction,
-                    scope: me
-                }
-            }]
-        });
-
+    // ACTIONS (Start) =====================================================================
+    Ext.apply(this, {
+      actions: [{
+        xtype: 'button',
+        iconCls: 'fa fa-cogs',
+        tooltip: 'Forecast',
+        listeners: {
+          beforerender: this.prepareForecastAction,
+          click: this.onForecastAction,
+          scope: me
+        }
+        // }, {
+        // xtype: 'button',
+        // iconCls: 'fa fa-times-circle-o',
+        // tooltip: 'Close',
+        // listeners: {
+        //     beforerender: this.prepareCloseAction,
+        //     click: this.onCloseAction,
+        //     scope: me
+        // }
+      }]
+    });
         // ACTIONS (End)
 
         // LISTENERS (Start) ===================================================================
@@ -231,24 +229,25 @@ Ext.define('Omni.view.skus.Form', {
 
     },
 
+
     // HANDLERS (Start) ======================================================================
 
-    onProjectAction: function(action, eOpts) {
-        this.processEventTransition('project_q', 'Projections are running, this may take a while.', 'An error occurred projecting this account.');
+    onForecastAction: function(action, eOpts) {
+        this.processEventTransition('forecast_q', 'Sku is being forecasted, this may take a while.', 'An error occurred forecasting this sku.');
     }, // onBuildAction
 
-    onCloseAction: function(action, eOpts) {
-        this.processEventTransition('close', 'Account was successfully closed.', 'An error occurred closing this account.');
-    }, // onBuildAction
+    // onCloseAction: function(action, eOpts) {
+    //     this.processEventTransition('close', 'Account was successfully closed.', 'An error occurred closing this sku.');
+    // }, // onBuildAction
 
-    prepareProjectAction: function(action, eOpts) {
+    prepareForecastAction: function(action, eOpts) {
         this.record.phantom != true ? action.show() : action.hide();
     },
 
-    prepareCloseAction: function(action, eOpts) {
-        var currentState = this.record.get('state');
-        currentState === 'active' ? action.show() : action.hide();
-    },
+    // prepareCloseAction: function(action, eOpts) {
+    //     var currentState = this.record.get('state');
+    //     currentState === 'active' ? action.show() : action.hide();
+    // },
 
     processEventTransition: function(eventName, successMsg, failureMsg) {
         var me = this;

@@ -19,14 +19,6 @@ Ext.define('Omni.view.projections.Inspector',{
     Ext.apply(this, {
       cards: [
         {title: 'Profile',           xtype: 'omni-projections-Form'}
-        ,{title: 'History', xtype: 'omni-projection_details-History',
-           defaultSearch: { with:
-             {
-               projection_id:   {equal_to: me.record.get('projection_id')}
-             }
-          },
-          showBadge: true
-        }
         ,{title: 'Details', xtype: 'omni-projection_details-Explorer',
            defaultSearch: { with:
              {
@@ -35,6 +27,14 @@ Ext.define('Omni.view.projections.Inspector',{
           },
           showBadge: true
         }
+        // ,{title: 'History', xtype: 'omni-projection_details-History',
+        //    defaultSearch: { with:
+        //      {
+        //        projection_id:   {equal_to: me.record.get('projection_id')}
+        //      }
+        //   },
+        //   showBadge: true
+        // }
         // ,{title: 'Locations', xtype: 'omni-projection_locations-Explorer',
         //    defaultSearch: { with:
         //      {
