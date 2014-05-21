@@ -267,11 +267,12 @@ class Omni::Sku < ActiveRecord::Base
   end # def initiate_forecast
 
   def forecast
+    puts "\n sku is forecasting"
     # Delete current projection details where inventory is gone
     # Omni::ProjectionDetail.where(sku_id: self.sku_id).each { |x| x.destroy }
     # find or create projection details, update from latestinventory
     self.inventories.each do |i|
-      pd = Omni::ProjectionDetail.find_by_inventory_id(i.inventory_id) || Omni::ProjectionDetail.new(projection_id: projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+      pd = Omni::ProjectionDetail.where(inventory_id: i.inventory_id).first || Omni::ProjectionDetail.new(projection_id: projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
       # pd.sale_units_ytd = i.sale_units_ytd
       # pd.sale_units_py1 = i.sale_units_py1
       # pd.sale_units_py2 = i.sale_units_py2
