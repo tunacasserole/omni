@@ -132,7 +132,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
     text     :sku_display_fulltext, using: :sku_display
     text     :location_display_fulltext, using: :location_display
   end
-  order_search_by :sku_display => :asc
+  order_search_by sku_display: :asc, location_display: :asc
   # INDEXING (End)
 
   # HELPERS (Start) =====================================================================
