@@ -1,3 +1,4 @@
+Buildit::Lookup.delete_all
 Buildit::Lookup.create!([
   {lookup_id: "8038CE1AAOEUIDH495B122000A9D0283", code: "VOUCHER", category: "TENDER_TYPE", default_text: "Voucher", position: 0, is_enabled: true, is_destroyed: false, revision_number: 4, code_int: nil, depends_on: nil, audit_created_by: "UNKNOWN", audit_updated_by: nil, audit_created_at: "2014-05-16 18:52:26", audit_updated_at: nil, audit_created_by_name: "UNKNOWN", audit_updated_by_name: nil},
   {lookup_id: "935DXXXXX72811YYY2D212313B10044E", code: "100%_ACRYLIC", category: "FABRIC_CONTENT", default_text: "100% Acrylic", position: 0, is_enabled: true, is_destroyed: false, revision_number: 4, code_int: nil, depends_on: nil, audit_created_by: "UNKNOWN", audit_updated_by: nil, audit_created_at: "2014-05-16 18:52:26", audit_updated_at: nil, audit_created_by_name: "UNKNOWN", audit_updated_by_name: nil},
