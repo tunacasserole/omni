@@ -113,11 +113,11 @@ class Omni::UniformDetail < ActiveRecord::Base
     # end
 
     event :review do
-      transition :active => :draft # if current_user has privilege purchase_release
+      transition :active => :draft
     end
 
     event :activate do
-      transition draft: :active # if current_user has privilege purchase_release
+      transition [:draft, :active, :closed] => :active
     end
 
     event :close do

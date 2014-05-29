@@ -136,6 +136,26 @@ Ext.define('Desk.view.cases.Form', {
             }
           }, {
             xtype: 'buildit-Locator',
+            store: Ext.create('Desk.store.Team', {
+              pageSize: 20
+            }),
+            displayField: 'user_display',
+            queryField: 'user_display',
+            valueField: 'user_id',
+            itemTpl: '{user_display}',
+            name: 'owner_id',
+            fieldLabel: this.owner_idLabel,
+            allowBlank: true,
+            defaultSearch: {
+              with: {
+                teamable_id: {
+                  equal_to: project_id
+                }
+              }
+            },
+            emptyText: 'auto-populated'
+          }, {
+            xtype: 'buildit-Locator',
             store: Ext.create('Buildit.store.User', {
               pageSize: 20
             }),
@@ -159,26 +179,6 @@ Ext.define('Desk.view.cases.Form', {
             name: 'reviewer_id',
             fieldLabel: this.reviewer_idLabel,
             allowBlank: true,
-            emptyText: 'auto-populated'
-          }, {
-            xtype: 'buildit-Locator',
-            store: Ext.create('Desk.store.Team', {
-              pageSize: 20
-            }),
-            displayField: 'user_display',
-            queryField: 'user_display',
-            valueField: 'user_id',
-            itemTpl: '{user_display}',
-            name: 'owner_id',
-            fieldLabel: this.owner_idLabel,
-            allowBlank: true,
-            defaultSearch: {
-              with: {
-                teamable_id: {
-                  equal_to: project_id
-                }
-              }
-            },
             emptyText: 'auto-populated'
           }, {
             xtype: 'textfield',

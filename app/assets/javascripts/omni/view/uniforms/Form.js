@@ -218,7 +218,7 @@ Ext.define('Omni.view.uniforms.Form', {
 
   prepareActivateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'draft' ? action.show() : action.hide();
+    Ext.Array.contains(['draft', 'active', 'closed'], currentState) ? action.show() : action.hide();
   },
 
   prepareCloseAction: function(action, eOpts) {

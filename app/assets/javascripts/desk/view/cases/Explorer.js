@@ -59,6 +59,11 @@ Ext.define('Desk.view.cases.Explorer', {
           dataIndex: 'case_nbr',
           flex: 1
         }, {
+          header: me.stateLabel,
+          dataIndex: 'state',
+          flex: 2,
+          renderer: this.formatState
+        }, {
           header: me.displayLabel,
           dataIndex: 'display',
           flex: 4
@@ -67,6 +72,11 @@ Ext.define('Desk.view.cases.Explorer', {
           dataIndex: 'case_urgency',
           flex: 2,
           renderer: Buildit.util.Format.lookupRenderer('CASE_URGENCY'),
+        }, {
+          header: me.case_sizeLabel,
+          dataIndex: 'case_size',
+          flex: 2,
+          renderer: this.formatSize
         }, {
           header: me.case_typeLabel,
           dataIndex: 'case_type',
@@ -88,11 +98,6 @@ Ext.define('Desk.view.cases.Explorer', {
           header: me.project_idLabel,
           dataIndex: 'project_display',
           flex: 1
-        }, {
-          header: me.stateLabel,
-          dataIndex: 'state',
-          flex: 2,
-          renderer: this.formatState
         }
           // }, {
           //   header: me.case_sizeLabel,
@@ -114,6 +119,10 @@ Ext.define('Desk.view.cases.Explorer', {
 
   formatState: function(value) {
     return value.charAt(0).toUpperCase() + value.slice(1).replace(/_/g,' ');
+  },
+
+  formatSize: function(value) {
+    return value.charAt(0) + value.slice(1).toLowerCase();
   },
 
   formatType: function(value) {
