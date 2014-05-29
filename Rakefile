@@ -20,11 +20,6 @@ namespace :omni do
     Omni::Util::Seed.go(args.model)
   end
 
-  desc "test bunny tutorials"
-  task :dump, [:model] => :environment do |t, args|
-    Omni::Bunny::Send.go(args.model)
-  end
-
   desc "run existing migration files containing the supplied tag."
   task :migrate, [:tag] => :environment do |t, args|
     Dir[File.join(Rails.root, 'db', 'migrate', '*.rb')].each do |filename|

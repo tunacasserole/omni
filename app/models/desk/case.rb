@@ -32,7 +32,7 @@ class Desk::Case < ActiveRecord::Base
   default :details,                          to: "select a request type for further instructions"
   default :case_urgency,                     to: 'STANDARD'
   default :case_type,                        to: 'QUESTION'
-  default :case_size,                        to: 'SMALL'
+  # default :case_size,                        to: 'SMALL'
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================

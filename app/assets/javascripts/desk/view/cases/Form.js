@@ -129,7 +129,11 @@ Ext.define('Desk.view.cases.Form', {
             minLength: 0,
             allowBlank: true,
             emptyText: 'auto-populated',
-            category: 'CASE_SIZE'
+            category: 'CASE_SIZE',,
+            listeners: {
+              render: me.preRenderSize,
+              scope: me
+            }
           }, {
             xtype: 'buildit-Locator',
             store: Ext.create('Buildit.store.User', {
@@ -299,6 +303,19 @@ Ext.define('Desk.view.cases.Form', {
 
   // HANDLERS (Start) ======================================================================
 
+  preRenderSize: function(field, eOpts) {
+    var isOwner = Buildit.context.user.user_id === this.record.get('owner_id');
+    isOwner ? field.enable() : field.disable();
+
+    // if rendering during NEW ...  need to detect the current user
+    // if (this.record.phantom) {
+    //   field.disable()
+    // } else {
+    //   // render based on 'owner_id' && who's logged in
+    // }
+
+  }, // preRenderDistributor
+
   onActivateAction: function(action, eOpts) {
     this.processEventTransition('activate', 'request was promoted to the next state.', 'activate encountered an error.');
   }, // onBuildAction
@@ -358,8 +375,7 @@ Ext.define('Desk.view.cases.Form', {
   },
 
   prepareNotifyAction: function(action, eOpts) {
-    // var currentState = this.record.get('state');
-    // currentState === 'draft' || currentState === 'backlog' ? action.show() : action.hide();
+    this.record.phantom != true ? action.show() : action.hide();
   },
 
   processEventTransition: function(eventName, successMsg, failureMsg) {
