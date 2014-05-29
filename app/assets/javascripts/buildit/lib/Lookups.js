@@ -1180,11 +1180,11 @@ Ext.create('Ext.data.ArrayStore', {
   storeId   : 'CASE_SIZE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
-    ['0SNXBMWMBEOEE73MENTXXXXXXXXX1234','EXTRA SMALL',,'CASE_SIZE','Extra Small (up to 2 hours)',null,true],
-    ['1SNTHEO654ODE73MENTXXXXXXXXX1234','SMALL',,'CASE_SIZE','Small (up to a day)',null,true],
+    ['0SNXBMWMBEOEE73MENTXXXXXXXXX1234','EXTRA SMALL',,'CASE_SIZE','Extra Small (up to 4 hours)',null,true],
+    ['1SNTHEO654ODE73MENTXXXXXXXXX1234','SMALL',,'CASE_SIZE','Small (up to 2 days)',null,true],
     ['3312226EDEO6E73MENTXXXXXXXXX1234','MEDIUM',,'CASE_SIZE','Medium (up to a week)',null,true],
-    ['43122456ENODE73MENTXXXXXXXXX1234','LARGE',,'CASE_SIZE','Large (up to 3 weeks)',null,true],
-    ['53122456ENHANCEMENTXXXXXXXXX1234','EXTRA LARGE',,'CASE_SIZE','Extra Large (up to 6 weeks)',null,true]
+    ['43122456ENODE73MENTXXXXXXXXX1234','LARGE',,'CASE_SIZE','Large (up to 2 weeks)',null,true],
+    ['53122456ENHANCEMENTXXXXXXXXX1234','EXTRA LARGE',,'CASE_SIZE','Extra Large (up to a month)',null,true]
   ]
 });
 
