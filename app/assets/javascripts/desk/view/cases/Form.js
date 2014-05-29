@@ -129,7 +129,7 @@ Ext.define('Desk.view.cases.Form', {
             minLength: 0,
             allowBlank: true,
             emptyText: 'auto-populated',
-            category: 'CASE_SIZE',,
+            category: 'CASE_SIZE',
             listeners: {
               render: me.preRenderSize,
               scope: me
