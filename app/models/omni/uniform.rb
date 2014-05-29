@@ -95,7 +95,7 @@ class Omni::Uniform < ActiveRecord::Base
     # end
 
     event :activate do
-      transition draft: :active
+      transition [:draft, :active, :closed] => :active
     end
 
     event :close do
