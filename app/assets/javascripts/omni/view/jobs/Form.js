@@ -367,7 +367,7 @@ Ext.define('Omni.view.jobs.Form', {
         }
       }, {
         tooltip: 'Start',
-        iconCls: 'fa fa-caret-square-o-right',
+        iconCls: 'fa fa-magic',
         xtype: 'button',
         listeners: {
           beforerender: this.prepareStartAction,

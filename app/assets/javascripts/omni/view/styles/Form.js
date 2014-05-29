@@ -699,7 +699,7 @@ Ext.define('Omni.view.styles.Form', {
                 }
             }, {
                 xtype: 'button',
-                iconCls: 'fa fa-caret-square-o-right',
+                iconCls: 'fa fa-magic',
                 scope: me,
                 tooltip: 'Activate',
                 listeners: {

@@ -317,7 +317,7 @@ Ext.define('Omni.view.purchase_details.Form', {
         }
       }, {
         xtype: 'button',
-        iconCls: 'fa fa-caret-square-o-right',
+        iconCls: 'fa fa-magic',
         // iconCls    : 'fa fa-thumbs-up',
         tooltip: 'Activate',
         listeners: {

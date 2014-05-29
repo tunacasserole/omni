@@ -667,7 +667,7 @@ Ext.define('Omni.view.purchases.Form', {
           }
         }, {
           xtype: 'button',
-          iconCls: 'fa fa-caret-square-o-right',
+          iconCls: 'fa fa-magic',
           tooltip: 'Activate',
           listeners: {
             beforerender: this.prepareActivateAction,

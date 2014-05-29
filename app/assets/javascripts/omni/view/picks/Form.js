@@ -144,7 +144,7 @@ Ext.define('Omni.view.picks.Form', {
         }
       }, {
         tooltip: 'Start',
-        iconCls: 'fa fa-caret-square-o-right',
+        iconCls: 'fa fa-magic',
         xtype: 'button',
         listeners: {
           beforerender: this.prepareStartAction,

@@ -149,7 +149,7 @@ Ext.define('Desk.view.projects.Form', {
     Ext.apply(this, {
       actions: [{
           xtype: 'button',
-          iconCls: 'fa fa-caret-square-o-right',
+          iconCls: 'fa fa-magic',
           tooltip: 'Activate',
           listeners: {
             beforerender: this.prepareActivateAction,
