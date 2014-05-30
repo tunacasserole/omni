@@ -38,7 +38,7 @@ class Desk::Case < ActiveRecord::Base
   # ASSOCIATIONS (Start) ================================================================
   has_many     :tasks,                as: :taskable
   has_many     :approvals,            as: :approvable
-  has_many     :notes,                as: :notable
+  has_many     :notes,                as: :notable, class_name: 'Buildit::Note', foreign_key: 'notable_id'
   has_many     :teams,                as: :teamable
   belongs_to   :project,              class_name: 'Desk::Project',        foreign_key: 'project_id'
   belongs_to   :owner,                class_name: 'Buildit::User',        foreign_key: 'owner_id'
@@ -55,6 +55,7 @@ class Desk::Case < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
+    # compute :note_history,                  to: lambda{ |m| m.notes.first.detail}
     # compute :backlog_time,                with: :compute_backlog_time
     # compute :response_time,               with: :compute_response_time
     # compute :resolve_time,                with: :compute_resolve_time
@@ -181,7 +182,7 @@ class Desk::Case < ActiveRecord::Base
   def notify
     # Determine target address
     email_addresses = [self.owner,self.requestor,self.reviewer].collect { |u| u.email_address if u }
-    email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes
+    # email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes
     if email_addresses.count > 0
       message = Buildit::Comm::Email::Message.create(
           subject: "OMNI notice: CASE #: #{case_nbr} has activity",
