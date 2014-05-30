@@ -29,7 +29,7 @@ class Omni::RmsInventory < ActiveRecord::Base
 
 
   # DEFAULTS (Start) ====================================================================
-  default :id,                          :with => :guid
+  default :id,                          with: :guid
   # DEFAULTS (End)
 
 

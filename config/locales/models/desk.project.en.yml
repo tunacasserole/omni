@@ -14,4 +14,7 @@ en:
         display:                           'Project Name'
         description:                       'Description'
         target_date:                       'Target Date'
+        backlog_count:                     'Backlogged'
+        open_count:                        'Open'
+        closed_count:                      'Closed'
         is_private:                        'Private Project'

@@ -16,7 +16,7 @@ class Desk::Approval < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :approval_id,                         :with => :guid
+  default :approval_id,                         with: :guid
   default :approver_id,                         to: lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
   default :approval_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"TASK_NBR"
   default :approval_date,                       :override  =>  false,        :with  => :today
@@ -24,7 +24,7 @@ class Desk::Approval < ActiveRecord::Base
 
   # ASSOCIATIONS (Start) ================================================================
   belongs_to      :approvable,       :polymorphic => true
-  belongs_to      :approver,         :foreign_key => 'approver_id',           :class_name => 'Buildit::User'
+  belongs_to      :approver,         foreign_key: 'approver_id',           class_name: 'Buildit::User'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -48,9 +48,9 @@ class Desk::Approval < ActiveRecord::Base
     date      :approval_date
     string    :state
 
-    text      :display_fulltext,             :using => :display
-    text      :description_fulltext,         :using => :description
-    text      :approver_display_fulltext,    :using => :approver_display
+    text      :display_fulltext,             using: :display
+    text      :description_fulltext,         using: :description
+    text      :approver_display_fulltext,    using: :approver_display
   end
   # INDEXING (End)
 

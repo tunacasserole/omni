@@ -21,8 +21,8 @@ class Omni::Purchase < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_id,                                                       with: :guid
-  default :purchase_nbr,                   override: false,        :with => :sequence,  named: "PURCHASE_NBR"
-  default :order_date,                                                        :with => :now
+  default :purchase_nbr,                   override: false,        with: :sequence,  named: "PURCHASE_NBR"
+  default :order_date,                                                        with: :now
   default :is_special_order,                                                  to: false
   default :is_phone_order,                                                    to: false
   default :is_update_blank_details,                                           to: false
@@ -97,9 +97,9 @@ class Omni::Purchase < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    compute :total_order_units,                  :with => :compute_total_order_units
-    compute :total_order_cost,                   :with => :compute_total_order_cost
-    compute :allocations_count,                  :with => :compute_allocations
+    compute :total_order_units,                  with: :compute_total_order_units
+    compute :total_order_cost,                   with: :compute_total_order_cost
+    compute :allocations_count,                  with: :compute_allocations
   end
   # COMPUTED ATTRIBUTES (End)`
 

@@ -402,12 +402,12 @@ class Omni::Style < ActiveRecord::Base
 
 
   # FILTERS (Start) =====================================================================
-  filter :state_pending_approval,  :with => {state: {equal_to: 'pending_approval'}}, :priority => 40
-  filter :state_draft,             :with => {state: {equal_to: 'draft'}},        :priority => 50
-  filter :state_active,            :with => {state: {equal_to: 'active'}},       :priority => 60
-  filter :state_discontinued,      :with => {state: {equal_to: 'discontinued'}}, :priority => 70
-  filter :state_obsolete,          :with => {state: {equal_to: 'obsolete'}},     :priority => 80
-  filter :state_inactive,          :with => {state: {equal_to: 'inactive'}},     :priority => 90
+  filter :state_pending_approval,  with:{state: {equal_to: 'pending_approval'}}, :priority => 40
+  filter :state_draft,             with:{state: {equal_to: 'draft'}},        :priority => 50
+  filter :state_active,            with:{state: {equal_to: 'active'}},       :priority => 60
+  filter :state_discontinued,      with:{state: {equal_to: 'discontinued'}}, :priority => 70
+  filter :state_obsolete,          with:{state: {equal_to: 'obsolete'}},     :priority => 80
+  filter :state_inactive,          with:{state: {equal_to: 'inactive'}},     :priority => 90
   # FILTERS (End)
 
   # HELPERS (Start) =======================================================================

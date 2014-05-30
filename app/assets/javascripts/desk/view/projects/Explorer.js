@@ -29,6 +29,9 @@ Ext.define('Desk.view.projects.Explorer', {
   target_dateLabel: Desk.i18n.model.Project.target_date,
   estimated_daysLabel: Desk.i18n.model.Project.estimated_days,
   actual_daysLabel: Desk.i18n.model.Project.actual_days,
+  backlog_countLabel: Desk.i18n.model.Project.backlog_count,
+  open_countLabel: Desk.i18n.model.Project.open_count,
+  closed_countLabel: Desk.i18n.model.Project.closed_count,
   // LABELS (End)
 
   // TITLES (Start) ======================================================================
@@ -63,21 +66,31 @@ Ext.define('Desk.view.projects.Explorer', {
           dataIndex: 'owner_display',
           flex: 2
         },
-        // {
-        //   header       : me.descriptionLabel,
-        //   dataIndex    : 'description',
-        //   flex         : 1
-        // },
+        {
+          header       : me.backlog_countLabel,
+          dataIndex    : 'backlog_count',
+          flex         : 1
+        },
+        {
+          header       : me.open_countLabel,
+          dataIndex    : 'open_count',
+          flex         : 1
+        },
+        {
+          header       : me.closed_countLabel,
+          dataIndex    : 'closed_count',
+          flex         : 1
+        }
         // {
         //   header       : me.target_dateLabel,
         //   dataIndex    : 'target_date',
         //   flex         : 1
         // },
-        {
-          header: me.stateLabel,
-          dataIndex: 'state',
-          flex: 1
-        }
+        // {
+        //   header: me.stateLabel,
+        //   dataIndex: 'state',
+        //   flex: 1
+        // }
       ]
     });
     // COLUMNS (End)

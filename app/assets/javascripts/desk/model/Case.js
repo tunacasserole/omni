@@ -77,6 +77,15 @@ Ext.define('Desk.model.Case', {
   }, {
     name: 'display_as',
     type: 'string'
+  }, {
+    name: 'project_display',
+    type: 'string'
+  }, {
+    name: 'project_display',
+    type: 'string'
+  }, {
+    name: 'project_display',
+    type: 'string'
   }],
 
   idProperty: 'case_id',

@@ -18,7 +18,7 @@ class Desk::Project < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :project_id,                          :with => :guid
+  default :project_id,                          with: :guid
   default :project_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"PROJECT_NBR"
   default :owner_id,                            to: lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   default :reviewer_id,                         to: lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
@@ -26,8 +26,9 @@ class Desk::Project < ActiveRecord::Base
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :owner,                            :class_name => 'Buildit::User',        :foreign_key => 'owner_id'
-  belongs_to   :reviewer,                         :class_name => 'Buildit::User',        :foreign_key => 'reviewer_id'
+  belongs_to   :owner,                            class_name: 'Buildit::User',        foreign_key: 'owner_id'
+  belongs_to   :reviewer,                         class_name: 'Buildit::User',        foreign_key: 'reviewer_id'
+  has_many     :cases,                            class_name: 'Desk::Case',           foreign_key: 'project_id'
   has_many     :teams,                            as: :teamable
   has_many     :guides,                           as: :guideable
   has_many     :tasks,                            as: :taskable
@@ -37,6 +38,18 @@ class Desk::Project < ActiveRecord::Base
   # MAPPED ATTRIBUTES (Start) ===========================================================
   map :owner_display,            to: 'owner.full_name'
   # MAPPED ATTRIBUTES (End)
+
+  # COMPUTED ATTRIBUTES (Start) =========================================================
+  computed_attributes do
+    compute :backlog_count,               to: lambda {|m| m.cases.where(state: 'backlog').count }
+    compute :open_count,                 to: lambda {|m| m.cases.where(state: ['draft','active','needs_approval','active','ready_to_close','approved_to_activate']).count }
+    compute :closed_count,               to: lambda {|m| m.cases.where(state: 'closed').count }
+    # compute :weekly_open_count,           with: :compute_weekly_open_count
+    # compute :backlog_time,                with: :compute_backlog_time
+    # compute :response_time,               with: :compute_response_time
+    # compute :resolve_time,                with: :compute_resolve_time
+  end
+  # COMPUTED ATTRIBUTES (End)
 
   # HOOKS (Start) =======================================================================
 
@@ -51,11 +64,11 @@ class Desk::Project < ActiveRecord::Base
     string   :display
     string   :description
 
-    text     :project_nbr_fulltext, :using => :project_nbr
-    text     :project_type_fulltext, :using => :project_type
-    text     :state_fulltext, :using => :state
-    text     :display_fulltext, :using => :display
-    text     :description_fulltext, :using => :description
+    text     :project_nbr_fulltext, using: :project_nbr
+    text     :project_type_fulltext, using: :project_type
+    text     :state_fulltext, using: :state
+    text     :display_fulltext, using: :display
+    text     :description_fulltext, using: :description
   end
   order_search_by :project_nbr => :desc
   # INDEXING (End)

@@ -87,12 +87,12 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    # compute :sale_units_ytd,                     :with => :compute_sale_units_ytd
-    # compute :sale_units_py1,                     :with => :compute_sale_units_py1
-    # compute :sale_units_py2,                     :with => :compute_sale_units_py2
-    # compute :sale_units_py3,                     :with => :compute_sale_units_py3
-    # compute :average_sales,                      :with => :compute_average_sales
-    # compute :standard_deviation,                 :with => :compute_standard_deviation
+    # compute :sale_units_ytd,                     with: :compute_sale_units_ytd
+    # compute :sale_units_py1,                     with: :compute_sale_units_py1
+    # compute :sale_units_py2,                     with: :compute_sale_units_py2
+    # compute :sale_units_py3,                     with: :compute_sale_units_py3
+    # compute :average_sales,                      with: :compute_average_sales
+    # compute :standard_deviation,                 with: :compute_standard_deviation
   end
   # COMPUTED ATTRIBUTES (End)
 

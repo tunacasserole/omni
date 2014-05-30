@@ -101,9 +101,9 @@ class Omni::StyleColorSize < ActiveRecord::Base
 
 
   # FILTERS (Start) =====================================================================
-  filter :state_active,            :with => {state: {equal_to: 'active'}},       :priority => 60
-  filter :state_discontinued,      :with => {state: {equal_to: 'discontinued'}}, :priority => 70
-  filter :state_generated,         :with => {state: {equal_to: 'generated'}},    :priority => 80
+  filter :state_active,            with:{state: {equal_to: 'active'}},       :priority => 60
+  filter :state_discontinued,      with:{state: {equal_to: 'discontinued'}}, :priority => 70
+  filter :state_generated,         with:{state: {equal_to: 'generated'}},    :priority => 80
   # FILTERS (End)
 
   # INDEXING (Start) ====================================================================

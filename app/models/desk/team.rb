@@ -14,7 +14,7 @@ class Desk::Team < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :team_id,                     :with => :guid
+  default :team_id,                     with: :guid
   default :user_id,                     to: lambda{ |m| Buildit::User.current.user_id if Buildit::User.current}
   # DEFAULTS (End)
 
@@ -39,13 +39,13 @@ class Desk::Team < ActiveRecord::Base
   #   string   :description
   #   string   :project_display
 
-  #   text     :team_nbr_fulltext, :using => :team_nbr
-  #   text     :team_type_fulltext, :using => :team_type
-  #   text     :state_fulltext, :using => :state
-  #   text     :display_fulltext, :using => :display
-  #   text     :description_fulltext, :using => :description
-  #   text     :project_display_fulltext, :using => :project_display
-  #   text     :requestor_display_fulltext, :using => :requestor_display
+  #   text     :team_nbr_fulltext, using: :team_nbr
+  #   text     :team_type_fulltext, using: :team_type
+  #   text     :state_fulltext, using: :state
+  #   text     :display_fulltext, using: :display
+  #   text     :description_fulltext, using: :description
+  #   text     :project_display_fulltext, using: :project_display
+  #   text     :requestor_display_fulltext, using: :requestor_display
   end
   order_search_by :user_display => :asc
 

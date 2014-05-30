@@ -16,7 +16,7 @@ class Omni::PurchaseAllocation < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default :purchase_allocation_id,                                              with: :guid
-  default :purchase_allocation_nbr,                override: false,        :with => :sequence,  named: "PURCHASE_ALLOCATION_NBR"
+  default :purchase_allocation_nbr,                override: false,        with: :sequence,  named: "PURCHASE_ALLOCATION_NBR"
   default :units_needed,                           override: false,        to: 0
   default :units_allocated,                        override: false,        to: 0
   default :units_shipped,                          override: false,        to: 0

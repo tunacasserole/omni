@@ -16,7 +16,7 @@ class Desk::Checklist < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :checklist_id,                          :with => :guid
+  default :checklist_id,                          with: :guid
   default :checklist_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"CHECKLIST_NBR"
   # DEFAULTS (End)
 
@@ -36,11 +36,11 @@ class Desk::Checklist < ActiveRecord::Base
     string   :display
     string   :description
 
-    text     :checklist_nbr_fulltext, :using => :checklist_nbr
-    text     :checklist_type_fulltext, :using => :checklist_type
-    text     :state_fulltext, :using => :state
-    text     :display_fulltext, :using => :display
-    text     :description_fulltext, :using => :description
+    text     :checklist_nbr_fulltext, using: :checklist_nbr
+    text     :checklist_type_fulltext, using: :checklist_type
+    text     :state_fulltext, using: :state
+    text     :display_fulltext, using: :display
+    text     :description_fulltext, using: :description
   end
   # INDEXING (End)
 

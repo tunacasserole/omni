@@ -23,7 +23,7 @@
   # DEFAULTS (Start) ====================================================================
   default :purchase_detail_id,                                 with: :guid
   default :allocation_profile_id,                              :to   => lambda{|m| "#{m.purchase.allocation_profile_id}" }
-  default :purchase_detail_nbr,        override: false,        :with => :sequence,  named: "PURCHASE_DETAIL_NBR"
+  default :purchase_detail_nbr,        override: false,        with: :sequence,  named: "PURCHASE_DETAIL_NBR"
   default :display,                    override: false,        :to   => lambda{|m| "#{m.purchase_display} - #{m.purchase_detail_nbr}"}
   default :sku_id,                :override  =>  false,        :to   => lambda{|m| m.sku_supplier.sku_id if m.sku_supplier}
   default :units_ordered,                                      to: 1
@@ -58,7 +58,7 @@
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    compute :open_units,                  :with => :compute_open_units
+    compute :open_units,                  with: :compute_open_units
   end
   # COMPUTED ATTRIBUTES (End)`
 

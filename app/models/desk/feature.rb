@@ -15,12 +15,12 @@ class Desk::Feature < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :feature_id,                          :with => :guid
+  default :feature_id,                          with: :guid
   default :feature_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"FEATURE_NBR"
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
-  belongs_to   :project,             :class_name => 'Desk::Project',        :foreign_key => 'project_id'
+  belongs_to   :project,             class_name: 'Desk::Project',        foreign_key: 'project_id'
   # ASSOCIATIONS (End)
 
 
@@ -38,11 +38,11 @@ class Desk::Feature < ActiveRecord::Base
     string   :display
     string   :description
 
-    text     :feature_nbr_fulltext, :using => :feature_nbr
-    text     :feature_type_fulltext, :using => :feature_type
-    text     :state_fulltext, :using => :state
-    text     :display_fulltext, :using => :display
-    text     :description_fulltext, :using => :description
+    text     :feature_nbr_fulltext, using: :feature_nbr
+    text     :feature_type_fulltext, using: :feature_type
+    text     :state_fulltext, using: :state
+    text     :display_fulltext, using: :display
+    text     :description_fulltext, using: :description
   end
   # INDEXING (End)
 

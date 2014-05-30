@@ -50,10 +50,18 @@ Ext.define('Desk.model.Project', {
       name       : 'is_private',
       type       : 'decimal'
     },
-    // {
-    //   name       : 'actual_days',
-    //   type       : 'decimal'
-    // }
+    {
+      name       : 'backlog_count',
+      type       : 'integer'
+    },
+    {
+      name       : 'open_count',
+      type       : 'integer'
+    },
+    {
+      name       : 'closed_count',
+      type       : 'integer'
+    }
 
   ],
 

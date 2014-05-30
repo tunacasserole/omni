@@ -23,7 +23,7 @@ class Desk::Case < ActiveRecord::Base
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================
-  default :case_id,                          :with => :guid
+  default :case_id,                          with: :guid
   default :case_nbr,                         :override  =>  false,        :with  => :sequence,         :named=>"CASE_NBR"
   default :project_id,                       to: lambda{ |m| Desk::Project.omni_project.project_id }
   default :owner_id,                         to: lambda{ |m| m.project.owner_id if m.project }
@@ -40,10 +40,10 @@ class Desk::Case < ActiveRecord::Base
   has_many     :approvals,            as: :approvable
   has_many     :notes,                as: :notable
   has_many     :teams,                as: :teamable
-  belongs_to   :project,              :class_name => 'Desk::Project',        :foreign_key => 'project_id'
-  belongs_to   :owner,                :class_name => 'Buildit::User',        :foreign_key => 'owner_id'
-  belongs_to   :requestor,            :class_name => 'Buildit::User',        :foreign_key => 'requestor_id'
-  belongs_to   :reviewer,            :class_name => 'Buildit::User',        :foreign_key => 'reviewer_id'
+  belongs_to   :project,              class_name: 'Desk::Project',        foreign_key: 'project_id'
+  belongs_to   :owner,                class_name: 'Buildit::User',        foreign_key: 'owner_id'
+  belongs_to   :requestor,            class_name: 'Buildit::User',        foreign_key: 'requestor_id'
+  belongs_to   :reviewer,            class_name: 'Buildit::User',        foreign_key: 'reviewer_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
@@ -52,6 +52,14 @@ class Desk::Case < ActiveRecord::Base
   map :reviewer_display,            to: 'reviewer.full_name'
   map :project_display,            to: 'project.display'
   # MAPPED ATTRIBUTES (End)
+
+  # COMPUTED ATTRIBUTES (Start) =========================================================
+  computed_attributes do
+    # compute :backlog_time,                with: :compute_backlog_time
+    # compute :response_time,               with: :compute_response_time
+    # compute :resolve_time,                with: :compute_resolve_time
+  end
+  # COMPUTED ATTRIBUTES (End)
 
   # INDEXING (Start) ====================================================================
     # string   :billing_state   do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.billing_state) end
@@ -70,17 +78,17 @@ class Desk::Case < ActiveRecord::Base
     string   :requestor_display
     string   :reviewer_display
 
-    text     :case_nbr_fulltext, :using => :case_nbr
-    text     :case_type_fulltext, :using => :case_type
-    text     :case_urgency_fulltext, :using => :case_urgency
-    text     :case_size_fulltext, :using => :case_size
-    text     :state_fulltext, :using => :state
-    text     :display_fulltext, :using => :display
-    text     :description_fulltext, :using => :description
-    text     :project_display_fulltext, :using => :project_display
-    text     :owner_display_fulltext, :using => :owner_display
-    text     :requestor_display_fulltext, :using => :requestor_display
-    text     :reviewer_display_fulltext, :using => :reviewer_display
+    text     :case_nbr_fulltext, using: :case_nbr
+    text     :case_type_fulltext, using: :case_type
+    text     :case_urgency_fulltext, using: :case_urgency
+    text     :case_size_fulltext, using: :case_size
+    text     :state_fulltext, using: :state
+    text     :display_fulltext, using: :display
+    text     :description_fulltext, using: :description
+    text     :project_display_fulltext, using: :project_display
+    text     :owner_display_fulltext, using: :owner_display
+    text     :requestor_display_fulltext, using: :requestor_display
+    text     :reviewer_display_fulltext, using: :reviewer_display
   end
   order_search_by :case_nbr => :asc
   # INDEXING (End)
