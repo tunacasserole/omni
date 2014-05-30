@@ -3,10 +3,11 @@ Ext.define('Desk.view.cases.Explorer', {
   extend: 'Buildit.ux.explorer.Panel',
   alias: 'widget.desk-cases-Explorer',
   allowFind: true,
+  allowDelete: false,
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu'
+    xtype: 'omni-app-ExplorerContextMenu'
   },
 
   newForms: [{
