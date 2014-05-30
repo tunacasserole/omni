@@ -97,8 +97,8 @@ class Omni::UniformDetail < ActiveRecord::Base
     end
 
     ### CALLBACKS ###
-    after_transition on: :activate, do: :build_lookups
-    after_transition on: :close, do: :do_close
+    after_transition on: :activate, do: :activate_q
+    after_transition on: :close, do: :close_q
 
     ### EVENTS ###
     # event :crash do
@@ -129,7 +129,18 @@ class Omni::UniformDetail < ActiveRecord::Base
 
   # STATE HELPERS (Start) =====================================================================
   def activate_q
-    message     = { method_name: 'activate', uniform_detail_id: self.id, user_id: Omni::Util::User.id }
+    self.send('state=','active')
+    puts "sending state to active"
+    message     = { method_name: 'destroy_lookups', uniform_detail_id: self.id, user_id: Omni::Util::User.id }
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'uniform_detail')
+
+    message     = { method_name: 'build_lookups', uniform_detail_id: self.id, user_id: Omni::Util::User.id }
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'uniform_detail')
+  end
+
+  def close_q
+    self.send('state=','closed')
+    message     = { method_name: 'destroy_lookups', uniform_detail_id: self.id, user_id: Omni::Util::User.id }
     Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'uniform_detail')
   end
 
@@ -145,7 +156,7 @@ class Omni::UniformDetail < ActiveRecord::Base
           l.product_id = self.style.product_id
           l.category_id = self.style.product.category_id if self.style.product
           l.size_id = scs.size_id
-          l.scs_id = scs.sku_id
+          l.sku_id = scs.sku_id
           l.grade_id = g.grade_id
 
           puts l.errors.full_messages.to_sentence unless l.save
@@ -154,7 +165,38 @@ class Omni::UniformDetail < ActiveRecord::Base
       end
     end
     Sunspot.commit_if_dirty
-    puts "end of build_lookups"
+  end
+
+
+  def set_defaults
+    # puts "setting defaults*********\n"
+    self.style_id = self.style_color.style_id if self.style_color
+    self.color_id = self.style_color.color_id if self.style_color
+    # self.state = 'draft' unless self.state_changed?
+  end
+
+  def destroy_lookups
+    puts "\n** remove lookups on close or destroy ** \n"
+    self.uniform_lookups.each { |x| x.destroy }
+    Sunspot.commit_if_dirty
+  end
+
+  def new_lookup
+    # puts "creating uniform lookup"
+    Omni::UniformLookup.new(uniform_id: self.uniform_id, uniform_detail_id: self.uniform_detail_id, account_id: self.uniform.account_id, contract_id: self.uniform.contract_id, date_created: Date.today, style_id: self.style_id, color_id: self.color_id, is_required_male: self.is_required_male, is_required_female: self.is_required_female,  is_optional_male: self.is_optional_male, is_optional_female: self.is_optional_female, is_includes_logo: self.is_includes_logo, is_requires_logo: self.is_requires_logo, discount_percent: self.discount_percent, uniform_source: self.uniform_source)
+  end
+
+
+  # STATES HELPERS (End)
+
+    # HOOKS (Start) =======================================================================
+  hook :before_create, :set_defaults, 10
+  hook :before_update, :set_defaults, 10
+  # hook :before_destroy, :destroy_lookups, 10
+  # HOOKS (End)
+
+  def display_as
+    self.display
   end
 
   def checks
@@ -197,41 +239,6 @@ class Omni::UniformDetail < ActiveRecord::Base
     # puts "set approval"
     # current_user = Buildit::User.current ? Buildit::User.current : Buildit::User.first
     # a=Desk::Approval.create(approvable_type: "Omni::UniformDetail", approvable_id: self.uniform_detail_id)
-  end
-
-  def set_defaults
-    # puts "setting defaults*********\n"
-    self.style_id = self.style_color.style_id if self.style_color
-    self.color_id = self.style_color.color_id if self.style_color
-    self.state = 'draft' unless self.state_changed?
-  end
-
-  def do_close
-    puts "remove lookups on close"
-    destroy_lookups
-  end
-
-  def destroy_lookups
-    puts "\n** remove lookups on close or destroy ** \n"
-    self.uniform_lookups.each { |x| x.destroy }
-  end
-
-  def new_lookup
-    # puts "creating uniform lookup"
-    Omni::UniformLookup.new(uniform_id: self.uniform_id, uniform_detail_id: self.uniform_detail_id, account_id: self.uniform.account_id, contract_id: self.uniform.contract_id, date_created: Date.today, style_id: self.style_id, color_id: self.color_id, is_required_male: self.is_required_male, is_required_female: self.is_required_female,  is_optional_male: self.is_optional_male, is_optional_female: self.is_optional_female, is_includes_logo: self.is_includes_logo, is_requires_logo: self.is_requires_logo, discount_percent: self.discount_percent, uniform_source: self.uniform_source)
-  end
-
-
-  # STATES HELPERS (End)
-
-    # HOOKS (Start) =======================================================================
-  hook :before_create, :set_defaults, 10
-  hook :before_update, :set_defaults, 10
-  # hook :before_destroy, :destroy_lookups, 10
-  # HOOKS (End)
-
-  def display_as
-    self.display
   end
 end # class Omni::UniformDetail
 

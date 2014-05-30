@@ -79,8 +79,8 @@ class Omni::Uniform < ActiveRecord::Base
     end
 
     ### CALLBACKS ###
-    after_transition on: :activate, do: :do_activate
-    after_transition on: :close, do: :do_close
+    after_transition on: :activate, do: :activate_q
+    after_transition on: :close, do: :close_q
 
     ### EVENTS ###
     # event :crash do
@@ -108,20 +108,22 @@ class Omni::Uniform < ActiveRecord::Base
 
   # STATE HELPERS (Start) =====================================================================
   def activate_q
-    message     = { method_name: 'activate', uniform_id: self.id, user_id: Omni::Util::User.id }
+    self.send('state=','active')
+    message     = { method_name: 'do_activate', uniform_id: self.id, user_id: Omni::Util::User.id }
     Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'uniform')
   end
 
   def close_q
-    message     = { method_name: 'close', uniform_id: self.id, user_id: Omni::Util::User.id }
+    self.send('state=','closed')
+    message     = { method_name: 'do_close', uniform_id: self.id, user_id: Omni::Util::User.id }
     Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'uniform')
   end
 
   def do_activate
-    # delete all uniform_lookups for account
+    # # delete all uniform_lookups for account
     Omni::UniformLookup.where(account_id: self.account_id).each { |x| x.destroy }
     # active all uniform uniform_details"
-    self.uniform_details.each { |x| x.activate_q }
+    self.uniform_details.each { |x| x.activate }
     # log an approval
     self.approvals.create(approvable_type: 'Omni::Uniform', display: 'uniform was approved')
     # closing any other active uniforms to ensure only 1 active uniform per account

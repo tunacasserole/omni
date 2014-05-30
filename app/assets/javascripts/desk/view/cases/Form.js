@@ -262,7 +262,7 @@ Ext.define('Desk.view.cases.Form', {
       }, {
         xtype: 'button',
         // iconCls: 'fa fa-play-circle-o',
-        iconCls: 'fa fa-toggle-right',
+        iconCls: 'fa fa-magic',
         tooltip: 'Activate',
         listeners: {
           beforerender: this.prepareActivateAction,
