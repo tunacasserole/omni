@@ -182,7 +182,7 @@ class Desk::Case < ActiveRecord::Base
   def notify
     # Determine target address
     email_addresses = [self.owner,self.requestor,self.reviewer].collect { |u| u.email_address if u }
-    # email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes
+    email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes
     if email_addresses.count > 0
       message = Buildit::Comm::Email::Message.create(
           subject: "OMNI notice: CASE #: #{case_nbr} has activity",
