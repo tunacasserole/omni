@@ -138,13 +138,14 @@ class Omni::UniformDetail < ActiveRecord::Base
     # in other words, when a Style Color is added to a Uniform, the system assumes all sizes of that Style Color are valid for the Uniform.
     grades = Omni::Grade.get_grades(self.from_grade,self.thru_grade)
     if self.style && self.style.skus.count > 0 && grades && grades.count > 0
-      self.style.skus.each do |sku|
+      self.style_color.style_color_sizes.each do |scs|
+        next unless scs.size_id && scs.sku_id
         grades.each do |g|
           l = new_lookup
           l.product_id = self.style.product_id
           l.category_id = self.style.product.category_id if self.style.product
-          l.size_id = sku.size_id
-          l.sku_id = sku.sku_id
+          l.size_id = scs.size_id
+          l.scs_id = scs.sku_id
           l.grade_id = g.grade_id
 
           puts l.errors.full_messages.to_sentence unless l.save

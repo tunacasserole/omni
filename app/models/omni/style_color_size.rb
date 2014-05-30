@@ -11,6 +11,8 @@ class Omni::StyleColorSize < ActiveRecord::Base
 
   # VALIDATIONS (Start) =================================================================
   validates    :size_id, uniqueness: { scope: :style_color_id, message: "Size already exists for this style and color." }
+  validates    :style_color_id, presence: true
+  validates    :size_id, presence: true
   # VALIDATIONS (End)
 
   # DEFAULTS (Start) ====================================================================

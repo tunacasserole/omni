@@ -70,6 +70,7 @@ Ext.define('Omni.view.uniform_details.Form', {
             //   initialValue : me.record.get('display'),
             //   allowBlank   : true
             // },
+
             // {
             //   xtype        : 'buildit-Locator',
             //   store        : Ext.create('Omni.store.Style',{pageSize: 10}),
