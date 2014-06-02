@@ -9,6 +9,7 @@ class Desk::Case < ActiveRecord::Base
   supports_audit
   supports_fulltext
   supports_bookmarks
+  supports_global_search
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================

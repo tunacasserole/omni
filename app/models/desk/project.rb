@@ -8,6 +8,7 @@ class Desk::Project < ActiveRecord::Base
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
   supports_audit
+  supports_global_search
   # BEHAVIOR (End)
 
     # VALIDATIONS (Start) =================================================================
@@ -103,9 +104,6 @@ class Desk::Project < ActiveRecord::Base
     end
 
     # STATE HELPERS ---------------------
-    def display_as
-      self.display
-    end
   end
   # STATES (End)
 
@@ -113,6 +111,9 @@ class Desk::Project < ActiveRecord::Base
     def self.omni_project
       Desk::Project.find_by_project_nbr '1'
       # || Desk::Project.create! ( project_id: "054D5954D9FA11E3A45D20C9D047DD15", project_nbr: "1001", project_type: nil, owner_id: "811166D4D50A11E2B45820C9D04AARON", state: "draft", display: "Omni System", description: "Defects, enhancements, requests, and questions related to Omni.", target_date: "2014-09-30 00:00:00" )
+    end
+    def display_as
+      self.display
     end
   # HELPERS (End)
 

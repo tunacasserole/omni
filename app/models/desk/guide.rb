@@ -7,6 +7,7 @@ class Desk::Guide < ActiveRecord::Base
 
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
+  supports_global_search
   # BEHAVIOR (End)
 
   # ATTRIBUTES (Start) ==================================================================
@@ -143,7 +144,7 @@ class Desk::Guide < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def request_approval
-    a = Desk::Approval.create(approvable_type: 'Desk::Guide', approvable_id: self.guide_id, approver_id: self.reviewer_id, display: 'Your approval has been requested for activation.')
+    Desk::Approval.create(approvable_type: 'Desk::Guide', approvable_id: self.guide_id, approver_id: self.reviewer_id, display: 'Your approval has been requested for activation.')
   end
 
   def display_as
