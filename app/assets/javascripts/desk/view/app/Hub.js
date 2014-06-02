@@ -1,6 +1,5 @@
 //= require ./HubContextMenu
 
-
 Ext.define('Desk.view.app.Hub', {
     extend: 'Buildit.ux.Hub',
     alias: 'widget.desk-app-Hub',
