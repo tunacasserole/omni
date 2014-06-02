@@ -62,9 +62,9 @@ class Desk::Case < ActiveRecord::Base
   # COMPUTED ATTRIBUTES (End)
 
   # FILTERS (Start) =====================================================================
-  filter :role_requestor,             :with => {requestor_id: {equal_to: "'#{Omni::Util::User.id}'" } },  priority: 10
-  filter :role_owner,                 :with => {owner_id:  {equal_to: "'#{Omni::Util::User.id}'" } },  priority: 20
-  filter :role_reviewer,              :with => {reviewer_id: {equal_to: "'#{Omni::Util::User.id}'" } },  priority: 30
+  filter :role_requestor,             :with => {requestor_id: {equal_to: Omni::Util::User.id } },  priority: 10
+  filter :role_owner,                 :with => {owner_id:     {equal_to: Omni::Util::User.id } },  priority: 20
+  filter :role_reviewer,              :with => {reviewer_id:  {equal_to: Omni::Util::User.id } },  priority: 30
   # filter :role_follower,              :with => {following: {equal_to: true        }},         priority: 10
 
   filter :urgency_showstopper,        :with => {case_urgency: {equal_to: 'SHOWSTOPPER'}},   priority: 10
