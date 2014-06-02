@@ -234,7 +234,11 @@ class Desk::Case < ActiveRecord::Base
   def do_approve
     approver = Buildit::User.current if Buildit::User.current
     approval_comment = "approval given by #{approver.full_name}"
-    a = approvals.create(approver_id: approver.user_id, display: approval_comment)
+    approvals.create(approver_id: approver.user_id, display: approval_comment)
+  end
+
+  def display_as
+    display
   end
   # HELPERS (End)
 
