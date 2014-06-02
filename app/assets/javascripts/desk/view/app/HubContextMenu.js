@@ -1,6 +1,6 @@
 Ext.define('Desk.view.app.HubContextMenu', {
     extend: 'Buildit.ux.ContextMenu',
-    alias: 'widget.omni-app-HubContextMenu',
+    alias: 'widget.desk-app-HubContextMenu',
 
 
     initComponent: function() {
@@ -18,7 +18,7 @@ Ext.define('Desk.view.app.HubContextMenu', {
                 {
                     xtype: 'buildit-SettingsButton',
                     target: {
-                        xtype: 'omni-settings-Inspector'
+                        xtype: 'desk-settings-Inspector'
                     }
                 },
 

@@ -2,6 +2,8 @@ Ext.define('Desk.view.cases.Form', {
 
   extend: 'Buildit.ux.Form',
   alias: 'widget.desk-cases-Form',
+  allowBookmarking: true,
+
 
   // LABELS (Start) =======================================================================
   case_idLabel: Desk.i18n.model.Case.case_id,

@@ -19,12 +19,28 @@ Ext.define('Desk.view.cases.Explorer', {
   },
 
   filters: [{
+    showAll: 'Roles',
+    items: [
+      ['role_requestor', "I'm the requestor"],
+      ['role_owner', "I'm the owner"],
+      ['role_reviewer', "I'm the reviewer"],
+      // ['role_follower',            "I'm following it"],
+    ]
+  }, {
     showAll: 'Kind of Request',
     items: [
       ['type_bug', "Bugs"],
       ['type_question', "Questions"],
       ['type_data', "Data"],
       ['type_enhancement', "Enhancements"],
+    ]
+  }, {
+    showAll: 'Urgency',
+    items: [
+      ['urgency_showstopper', "Showstopper"],
+      ['urgency_high', "High"],
+      ['urgency_standard', "Standard"],
+      ['urgency_low', "Low"]
     ]
   }, {
     showAll: 'State',
@@ -36,22 +52,6 @@ Ext.define('Desk.view.cases.Explorer', {
       ['state_active', "Active"],
       ['state_ready_to_close', "Ready to Close"],
       ['state_closed', "Closed"],
-    ]
-  }, {
-    showAll: 'Roles',
-    items: [
-      ['role_requestor', "I'm the requestor"],
-      ['role_owner', "I'm the owner"],
-      ['role_reviewer', "I'm the reviewer"],
-      // ['role_follower',            "I'm following it"],
-    ]
-  }, {
-    showAll: 'Urgency',
-    items: [
-      ['urgency_showstopper', "Showstopper"],
-      ['urgency_high', "High"],
-      ['urgency_standard', "Standard"],
-      ['urgency_low', "Low"]
     ]
   }, {
     showAll: 'Size',

@@ -8,6 +8,7 @@ class Desk::Case < ActiveRecord::Base
   # BEHAVIOR (Start) ====================================================================
   supports_audit
   supports_fulltext
+  supports_bookmarks
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
