@@ -18,7 +18,7 @@ Ext.define('Omni.view.rules.Explorer', {
       store: Ext.create('Omni.store.Rule'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

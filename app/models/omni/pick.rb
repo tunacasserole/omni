@@ -169,12 +169,12 @@ class Omni::Pick < ActiveRecord::Base
 
 
   # FILTERS (Start) =====================================================================
-  filter :state_cancelled,        with:{state: {equal_to: 'cancelled'}},  :priority => 90
-  filter :state_draft,            with:{state: {equal_to: 'draft'}},      :priority => 40
-  filter :state_complete,         with:{state: {equal_to: 'complete'}},   :priority => 70
-  filter :state_pending,          with:{state: {equal_to: 'pending'}},    :priority => 50
-  filter :state_shipped,          with:{state: {equal_to: 'shipped'}},    :priority => 80
-  filter :state_open,             with:{state: {equal_to: 'open'}},       :priority => 60
+  filter :state_cancelled,        with:{state: {equal_to: 'cancelled'}},  priority: 90
+  filter :state_draft,            with:{state: {equal_to: 'draft'}},      priority: 40
+  filter :state_complete,         with:{state: {equal_to: 'complete'}},   priority: 70
+  filter :state_pending,          with:{state: {equal_to: 'pending'}},    priority: 50
+  filter :state_shipped,          with:{state: {equal_to: 'shipped'}},    priority: 80
+  filter :state_open,             with:{state: {equal_to: 'open'}},       priority: 60
   # FILTERS (End)
 
 

@@ -26,7 +26,7 @@ Ext.define('Omni.view.transfers.Explorer', {
   store:          Ext.create('Omni.store.Transfer'),
 
   contextMenuConfig:{
-    xtype    : 'buildit-explorer-ContextMenu'
+    xtype    : 'omni-app-ExplorerContextMenu'
   },
 
   inspectorConfig: {

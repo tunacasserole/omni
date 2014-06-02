@@ -18,7 +18,7 @@ Ext.define('Omni.view.size_groups.Explorer', {
       store: Ext.create('Omni.store.SizeGroup'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

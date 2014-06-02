@@ -10,7 +10,7 @@ Ext.define('Omni.view.adjustments.Explorer', {
   store:          Ext.create('Omni.store.Adjustment'),
 
   contextMenuConfig:{
-    xtype:        'buildit-explorer-ContextMenu',
+    xtype:        'omni-app-ExplorerContextMenu',
   },
 
   inspectorConfig: {

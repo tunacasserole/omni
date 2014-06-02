@@ -18,7 +18,7 @@ Ext.define('Omni.view.tills.Explorer', {
       store: Ext.create('Omni.store.Till'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

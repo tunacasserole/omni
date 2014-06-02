@@ -9,7 +9,7 @@ Ext.define('Omni.view.purchase_allocations.Explorer', {
   store: Ext.create('Omni.store.PurchaseAllocation'),
 
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu',
+    xtype: 'omni-app-ExplorerContextMenu',
   },
 
   newForms: [{

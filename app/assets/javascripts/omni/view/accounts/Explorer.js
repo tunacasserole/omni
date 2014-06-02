@@ -6,7 +6,7 @@ Ext.define('Omni.view.accounts.Explorer', {
     // EXPLORER INIT (Start) ===============================================================
     allowFind: true,
     contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
     },
 
     newForms: [{

@@ -18,7 +18,7 @@ Ext.define('Omni.view.location_tax_holidays.Explorer', {
       store: Ext.create('Omni.store.LocationTaxHoliday'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

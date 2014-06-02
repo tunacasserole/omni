@@ -9,7 +9,7 @@ Ext.define('Omni.view.forecast_profiles.Explorer', {
   store: Ext.create('Omni.store.ForecastProfile'),
 
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu',
+    xtype: 'omni-app-ExplorerContextMenu',
   },
 
   newForms: [{

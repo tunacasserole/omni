@@ -18,7 +18,7 @@ Ext.define('Omni.view.shipping_rates.Explorer', {
       store: Ext.create('Omni.store.ShippingRate'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

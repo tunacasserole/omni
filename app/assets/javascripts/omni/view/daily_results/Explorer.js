@@ -19,7 +19,7 @@ Ext.define('Omni.view.daily_results.Explorer', {
       store: Ext.create('Omni.store.DailyResult'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

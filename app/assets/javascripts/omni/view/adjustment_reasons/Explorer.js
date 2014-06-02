@@ -18,7 +18,7 @@ Ext.define('Omni.view.adjustment_reasons.Explorer', {
       store: Ext.create('Omni.store.AdjustmentReason'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

@@ -18,7 +18,7 @@ Ext.define('Omni.view.labels.Explorer', {
       store: Ext.create('Omni.store.Label'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

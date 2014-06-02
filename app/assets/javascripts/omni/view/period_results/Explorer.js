@@ -8,7 +8,7 @@ Ext.define('Omni.view.period_results.Explorer', {
   store: Ext.create('Omni.store.PeriodResult'),
 
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu',
+    xtype: 'omni-app-ExplorerContextMenu',
   },
 
   newForms: [{

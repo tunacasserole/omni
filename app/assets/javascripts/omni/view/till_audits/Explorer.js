@@ -18,7 +18,7 @@ Ext.define('Omni.view.till_audits.Explorer', {
       store: Ext.create('Omni.store.TillAudit'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

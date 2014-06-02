@@ -18,7 +18,7 @@ Ext.define('Omni.view.seasonal_indices.Explorer', {
       store: Ext.create('Omni.store.SeasonalIndex'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

@@ -16,7 +16,7 @@ Ext.define('Omni.view.stock_ledger_activities.Explorer', {
       store: Ext.create('Omni.store.StockLedgerActivity'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

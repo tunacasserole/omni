@@ -26,7 +26,7 @@ Ext.define('Omni.view.picks.Explorer', {
   store: Ext.create('Omni.store.Pick'),
 
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu',
+    xtype: 'omni-app-ExplorerContextMenu',
   },
 
   inspectorConfig: {

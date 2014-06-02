@@ -6,7 +6,7 @@ Ext.define('Omni.view.account_tax_authorities.Explorer', {
   // EXPLORER INIT (Start) ===============================================================
   allowInspect: false,
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu'
+    xtype: 'omni-app-ExplorerContextMenu'
   },
 
   newForms: [{

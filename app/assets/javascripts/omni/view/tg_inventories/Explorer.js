@@ -5,7 +5,7 @@ Ext.define('Omni.view.tg_inventories.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {
-    xtype    : 'buildit-explorer-ContextMenu'
+    xtype    : 'omni-app-ExplorerContextMenu'
   },
 
   newForms : [{

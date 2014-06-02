@@ -18,7 +18,7 @@ Ext.define('Omni.view.price_books.Explorer', {
       store: Ext.create('Omni.store.PriceBook'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

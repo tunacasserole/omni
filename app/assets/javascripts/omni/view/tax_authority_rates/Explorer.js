@@ -18,7 +18,7 @@ Ext.define('Omni.view.tax_authority_rates.Explorer', {
       store: Ext.create('Omni.store.TaxAuthorityRate'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

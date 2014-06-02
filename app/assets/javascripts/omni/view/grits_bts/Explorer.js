@@ -9,7 +9,7 @@ Ext.define('Omni.view.grits_bts.Explorer', {
   allowFind  :  true,
 
   contextMenuConfig : {
-    xtype: 'buildit-explorer-ContextMenu'
+    xtype: 'omni-app-ExplorerContextMenu'
   },
 
   newForms : [{

@@ -18,7 +18,7 @@ Ext.define('Omni.view.supplier_ratings.Explorer', {
       store: Ext.create('Omni.store.SupplierRating'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

@@ -6,7 +6,7 @@ Ext.define('Omni.view.uniform_details.Explorer', {
 
     // EXPLORER INIT (Start) ===============================================================
     contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
     },
 
     newForms: [{

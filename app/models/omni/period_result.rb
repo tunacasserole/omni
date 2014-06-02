@@ -141,11 +141,11 @@ class Omni::PeriodResult < ActiveRecord::Base
   # ORDERING (End)
 
   # FILTERS (Start) =====================================================================
-  filter :year_2010,            with:{year_number: {equal_to: '2010'}},       :priority => 10
-  filter :year_2011,            with:{year_number: {equal_to: '2011'}},       :priority => 20
-  filter :year_2012,            with:{year_number: {equal_to: '2012'}},       :priority => 30
-  filter :year_2013,            with:{year_number: {equal_to: '2013'}},       :priority => 40
-  filter :p1,             with:{period_number: {equal_to: '1'}},        :priority => 10
+  filter :year_2010,            with:{year_number: {equal_to: '2010'}},       priority: 10
+  filter :year_2011,            with:{year_number: {equal_to: '2011'}},       priority: 20
+  filter :year_2012,            with:{year_number: {equal_to: '2012'}},       priority: 30
+  filter :year_2013,            with:{year_number: {equal_to: '2013'}},       priority: 40
+  filter :p1,             with:{period_number: {equal_to: '1'}},        priority: 10
   # FILTERS (End)
 
 

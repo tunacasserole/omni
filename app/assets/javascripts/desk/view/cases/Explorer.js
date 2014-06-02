@@ -17,6 +17,53 @@ Ext.define('Desk.view.cases.Explorer', {
   inspectorConfig: {
     xtype: 'desk-cases-Inspector'
   },
+
+  filters: [{
+    showAll: 'Kind of Request',
+    items: [
+      ['type_bug', "Bugs"],
+      ['type_question', "Questions"],
+      ['type_data', "Data"],
+      ['type_enhancement', "Enhancements"],
+    ]
+  }, {
+    showAll: 'State',
+    items: [
+      ['state_backlog', "Backlog"],
+      ['state_draft', "Draft"],
+      ['state_needs_approval', "Needs Approval"],
+      ['state_approved_to_activate', "Approved to Activate"],
+      ['state_active', "Active"],
+      ['state_ready_to_close', "Ready to Close"],
+      ['state_closed', "Closed"],
+    ]
+  }, {
+    showAll: 'Roles',
+    items: [
+      ['role_requestor', "I'm the requestor"],
+      ['role_owner', "I'm the owner"],
+      ['role_reviewer', "I'm the reviewer"],
+      // ['role_follower',            "I'm following it"],
+    ]
+  }, {
+    showAll: 'Urgency',
+    items: [
+      ['urgency_showstopper', "Showstopper"],
+      ['urgency_high', "High"],
+      ['urgency_standard', "Standard"],
+      ['urgency_low', "Low"]
+    ]
+  }, {
+    showAll: 'Size',
+    items: [
+      ['size_extra_small', "Extra Small"],
+      ['size_small', "Small"],
+      ['size_medium', "Medium"],
+      ['size_large', "Large"],
+      ['size_extra_large', "Extra Large"]
+    ]
+  }],
+
   // EXPLORER INIT (End)
 
   // LABELS (Start) ======================================================================
@@ -100,10 +147,10 @@ Ext.define('Desk.view.cases.Explorer', {
           dataIndex: 'project_display',
           flex: 1
         }
-          // }, {
-          //   header: me.case_sizeLabel,
-          //   dataIndex: 'case_size',
-          //   flex: 1
+        // }, {
+        //   header: me.case_sizeLabel,
+        //   dataIndex: 'case_size',
+        //   flex: 1
         // {
         //   xtype        : 'checkcolumn',
         //   header       : me.is_approvedLabel,
@@ -119,11 +166,11 @@ Ext.define('Desk.view.cases.Explorer', {
   },
 
   formatState: function(value) {
-    return value.charAt(0).toUpperCase() + value.slice(1).replace(/_/g,' ');
+    return value.charAt(0).toUpperCase() + value.slice(1).replace(/_/g, ' ');
   },
 
   formatSize: function(value) {
-    return value.charAt(0) + value.slice(1).toLowerCase();
+    return value.charAt(0) + value.slice(1).toLowerCase().replace(/_/g, ' ');
   },
 
   formatType: function(value) {

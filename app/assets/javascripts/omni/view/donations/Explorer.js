@@ -5,7 +5,7 @@ Ext.define('Omni.view.donations.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu'
+    xtype: 'omni-app-ExplorerContextMenu'
   },
 
   newForms: [{

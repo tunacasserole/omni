@@ -18,7 +18,7 @@ Ext.define('Omni.view.classifications.Explorer', {
       store: Ext.create('Omni.store.Classification'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

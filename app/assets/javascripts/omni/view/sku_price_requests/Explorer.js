@@ -25,7 +25,7 @@ Ext.define('Omni.view.sku_price_requests.Explorer', {
   store:          Ext.create('Omni.store.SkuPriceRequest'),
 
   contextMenuConfig:{
-    xtype:        'buildit-explorer-ContextMenu',
+    xtype:        'omni-app-ExplorerContextMenu',
   },
 
   inspectorConfig: {

@@ -29,7 +29,7 @@ Ext.define('Omni.view.order_details.Explorer', {
   store: Ext.create('Omni.store.OrderDetail'),
 
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu',
+    xtype: 'omni-app-ExplorerContextMenu',
   },
 
   inspectorConfig: {

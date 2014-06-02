@@ -18,7 +18,7 @@ Ext.define('Omni.view.tenders.Explorer', {
       store: Ext.create('Omni.store.Tender'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

@@ -16,7 +16,7 @@ Ext.define('Omni.view.style_locations.Explorer', {
       store: Ext.create('Omni.store.StyleLocation'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

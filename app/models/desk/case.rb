@@ -55,12 +55,43 @@ class Desk::Case < ActiveRecord::Base
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    # compute :note_history,                  to: lambda{ |m| m.notes.first.detail}
     # compute :backlog_time,                with: :compute_backlog_time
     # compute :response_time,               with: :compute_response_time
     # compute :resolve_time,                with: :compute_resolve_time
   end
   # COMPUTED ATTRIBUTES (End)
+
+  # FILTERS (Start) =====================================================================
+  filter :role_requestor,             :with => {requestor_id: {equal_to: "'#{Omni::Util::User.id}'" } },  priority: 10
+  filter :role_owner,                 :with => {owner_id:  {equal_to: "'#{Omni::Util::User.id}'" } },  priority: 20
+  filter :role_reviewer,              :with => {reviewer_id: {equal_to: "'#{Omni::Util::User.id}'" } },  priority: 30
+  # filter :role_follower,              :with => {following: {equal_to: true        }},         priority: 10
+
+  filter :urgency_showstopper,        :with => {case_urgency: {equal_to: 'SHOWSTOPPER'}},   priority: 10
+  filter :urgency_high,               :with => {case_urgency: {equal_to: 'HIGH'}       },   priority: 20
+  filter :urgency_standard,           :with => {case_urgency: {equal_to: 'STANDARD'}   },   priority: 30
+  filter :urgency_low,                :with => {case_urgency: {equal_to: 'LOW'        }},   priority: 40
+
+  filter :type_bug,                :with => {case_type: {equal_to: 'BUG'        }},         priority: 10
+  filter :type_question,           :with => {case_type: {equal_to: 'QUESTION'}   },         priority: 20
+  filter :type_data,               :with => {case_type: {equal_to: 'DATA'}       },         priority: 30
+  filter :type_enhancement,        :with => {case_type: {equal_to: 'ENHANCEMENT'}},         priority: 40
+
+  filter :size_extra_small,          :with => {case_size: {equal_to: 'EXTRA_SMALL'}   },    priority: 10
+  filter :size_small,                :with => {case_size: {equal_to: 'SMALL'        }},     priority: 20
+  filter :size_medium,               :with => {case_size: {equal_to: 'MEDIUM'}       },     priority: 30
+  filter :size_large,                :with => {case_size: {equal_to: 'LARGE'}       },      priority: 30
+  filter :size_extra_large,          :with => {case_size: {equal_to: 'EXTRA_LARGE'}},       priority: 40
+
+  filter :state_draft,                :with => {state: {equal_to: 'draft'}},                priority: 20
+  filter :state_backlog,              :with => {state: {equal_to: 'backlog'}},              priority: 25
+  filter :state_active,               :with => {state: {equal_to: 'active'}},               priority: 30
+  filter :state_needs_approval,       :with => {state: {equal_to: 'needs approval'}},       priority: 40
+  filter :state_approved_to_activate, :with => {state: {equal_to: 'approved to activate'}}, priority: 50
+  filter :state_ready_to_close,       :with => {state: {equal_to: 'ready to close'}},       priority: 60
+  filter :state_closed,               :with => {state: {equal_to: 'closed'}},               priority: 70
+  # FILTERS (End)
+
 
   # INDEXING (Start) ====================================================================
     # string   :billing_state   do |x| Buildit::Lookup::Manager.display_for('STATE_CODE', x.billing_state) end
@@ -68,15 +99,18 @@ class Desk::Case < ActiveRecord::Base
     string   :case_id
     string   :project_id
     string   :case_nbr
-    string   :case_type do |x| x.case_type.downcase end
-    string   :case_size do |x| Buildit::Lookup::Manager.display_for('CASE_SIZE', x.case_size) end
-    string   :case_urgency do |x| Buildit::Lookup::Manager.display_for('CASE_URGENCY', x.case_urgency) end
+    string   :case_type
+    string   :case_size
+    string   :case_urgency
     string   :state do |x| x.state.gsub('_',' ') end
     string   :display
     string   :description
     string   :project_display
+    string   :owner_id
     string   :owner_display
+    string   :requestor_id
     string   :requestor_display
+    string   :reviewer_id
     string   :reviewer_display
 
     text     :case_nbr_fulltext, using: :case_nbr

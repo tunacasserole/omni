@@ -1180,11 +1180,11 @@ Ext.create('Ext.data.ArrayStore', {
   storeId   : 'CASE_SIZE-lookup-Store',
   fields    : lookupStoreFields,
   data      : [
-    ['0SNXBMWMBEOEE73MENTXXXXXXXXX1234','EXTRA SMALL',,'CASE_SIZE','Extra Small (up to 4 hours)',null,true],
-    ['1SNTHEO654ODE73MENTXXXXXXXXX1234','SMALL',,'CASE_SIZE','Small (up to 2 days)',null,true],
+    ['3111226EDEO6E73MENTXXXXXXXXX1234','EXTRA_SMALL',,'CASE_SIZE','Extra Small (up to 4 hours)',null,true],
+    ['3222226EDEO6E73MENTXXXXXXXXX1234','SMALL',,'CASE_SIZE','Small (up to 2 days)',null,true],
     ['3312226EDEO6E73MENTXXXXXXXXX1234','MEDIUM',,'CASE_SIZE','Medium (up to a week)',null,true],
     ['43122456ENODE73MENTXXXXXXXXX1234','LARGE',,'CASE_SIZE','Large (up to 2 weeks)',null,true],
-    ['53122456ENHANCEMENTXXXXXXXXX1234','EXTRA LARGE',,'CASE_SIZE','Extra Large (up to a month)',null,true]
+    ['53122456ENHANCEMENTXXXXXXXXX1234','EXTRA_LARGE',,'CASE_SIZE','Extra Large (up to a month)',null,true]
   ]
 });
 
@@ -1195,7 +1195,7 @@ Ext.create('Ext.data.ArrayStore', {
     ['0SNXBMRCGOEURCGM1NTXXXXXXXXX1234','LOW',,'CASE_URGENCY','Low',null,true],
     ['0SNXBMRCGOEURCGM2DIUMEXXXXXX1234','STANDARD',,'CASE_URGENCY','Standard',null,true],
     ['0SNXBMRCGOEURCGMLARGEEXXXXXX1234','HIGH',,'CASE_URGENCY','High',null,true],
-    ['0SNXBMRCGOEURCGMPARGEEXXXXXX1234','SHOW STOPPER',,'CASE_URGENCY','Show Stopper',null,true]
+    ['0SNXBMRCGOEURCGMPARGEEXXXXXX1234','SHOWSTOPPER',,'CASE_URGENCY','Showstopper',null,true]
   ]
 });
 

@@ -10,7 +10,7 @@ Ext.define('Omni.view.sku_suppliers.Explorer', {
   store:          Ext.create('Omni.store.SkuSupplier'),
 
   contextMenuConfig:{
-    xtype:        'buildit-explorer-ContextMenu',
+    xtype:        'omni-app-ExplorerContextMenu',
   },
 
   inspectorConfig: {

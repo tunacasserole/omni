@@ -26,7 +26,7 @@ Ext.define('Omni.view.payments.Explorer', {
   store: Ext.create('Omni.store.Payment'),
 
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu',
+    xtype: 'omni-app-ExplorerContextMenu',
   },
 
   inspectorConfig: {

@@ -18,7 +18,7 @@ Ext.define('Omni.view.location_tax_authorities.Explorer', {
       store: Ext.create('Omni.store.LocationTaxAuthority'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

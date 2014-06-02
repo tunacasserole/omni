@@ -7,7 +7,7 @@ Ext.define('Omni.view.uniform_lookups.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig: {
-    xtype: 'buildit-explorer-ContextMenu'
+    xtype: 'omni-app-ExplorerContextMenu'
   },
 
   newForms: [{

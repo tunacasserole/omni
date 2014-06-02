@@ -5,7 +5,7 @@ Ext.define('Omni.view.contacts.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {
-    xtype    : 'buildit-explorer-ContextMenu'
+    xtype    : 'omni-app-ExplorerContextMenu'
   },
 
   newForms : [{

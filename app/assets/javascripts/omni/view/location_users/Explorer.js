@@ -7,7 +7,7 @@ Ext.define('Omni.view.location_users.Explorer', {
   store    : Ext.create('Omni.store.LocationUser'),
 
   contextMenuConfig : {
-    xtype: 'buildit-explorer-ContextMenu'
+    xtype: 'omni-app-ExplorerContextMenu'
   },
 
   newForms : [{

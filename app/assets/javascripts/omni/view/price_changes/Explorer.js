@@ -18,7 +18,7 @@ Ext.define('Omni.view.price_changes.Explorer', {
       store: Ext.create('Omni.store.PriceChange'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

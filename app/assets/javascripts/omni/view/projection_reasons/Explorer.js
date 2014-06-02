@@ -18,7 +18,7 @@ Ext.define('Omni.view.projection_reasons.Explorer', {
       store: Ext.create('Omni.store.ProjectionReason'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

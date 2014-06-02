@@ -5,7 +5,7 @@ Ext.define('Omni.view.sku_aliases.Explorer', {
   allowFind : true,
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {
-    xtype    : 'buildit-explorer-ContextMenu'
+    xtype    : 'omni-app-ExplorerContextMenu'
   },
 
   newForms : [{

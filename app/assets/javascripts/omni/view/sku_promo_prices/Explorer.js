@@ -17,7 +17,7 @@ Ext.define('Omni.view.sku_promo_prices.Explorer', {
       store: Ext.create('Omni.store.SkuPromoPrice'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

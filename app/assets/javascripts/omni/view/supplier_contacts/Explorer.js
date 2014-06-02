@@ -18,7 +18,7 @@ Ext.define('Omni.view.supplier_contacts.Explorer', {
       store: Ext.create('Omni.store.SupplierContact'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

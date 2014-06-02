@@ -1,5 +1,3 @@
-require 'progress_bar'
-
 class Omni::Util::User
 
   def self.id(options={})

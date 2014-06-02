@@ -17,7 +17,7 @@ Ext.define('Omni.view.skus.Explorer', {
       store: Ext.create('Omni.store.Sku'),
 
       contextMenuConfig: {
-        xtype: 'buildit-explorer-ContextMenu'
+        xtype: 'omni-app-ExplorerContextMenu'
       },
 
       newForms: [{

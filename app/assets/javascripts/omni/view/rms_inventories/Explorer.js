@@ -7,7 +7,7 @@ Ext.define('Omni.view.rms_inventories.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig : {
-    xtype    : 'buildit-explorer-ContextMenu'
+    xtype    : 'omni-app-ExplorerContextMenu'
   },
 
   newForms : [{
