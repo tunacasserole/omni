@@ -21,8 +21,8 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :projection_detail_id,             override: false,        with: :guid
-  default      :display,                          override: false,        to: lambda{|m| "#{m.projection_display} - #{m.sku_display} - #{m.location_display}"}
-  # default      :projection_detail_nbr,            override: false,        with: :sequence,         named: "PROJECTION_DETAIL_NBR"
+  # default      :forecast_profile_id,              override: false,        to: lambda { |m| m.projection.forecast_profile_id }
+  default      :display,                          override: false,        to: lambda { |m| "#{m.projection_display} - #{m.sku_display} - #{m.location_display}"}
   default      :inventory_id,                     override: false,        to: lambda { |m| Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first.inventory_id if Omni::Inventory.where(sku_id: m.sku_id, location_id: m.location_id).first unless m.inventory_id }
   default      :last_forecast_units,              override: false,        to: 0
   default      :first_forecast_units,             override: false,        to: 0
@@ -64,7 +64,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
   belongs_to   :projection,                      class_name: 'Omni::Projection',              foreign_key: 'projection_id'
   belongs_to   :sku,                             class_name: 'Omni::Sku',                     foreign_key: 'sku_id'
   belongs_to   :location,                        class_name: 'Omni::Location',                foreign_key: 'location_id'
-  belongs_to   :inventory,                       class_name: 'Omni::Inventory',               foreign_key: 'inventory_id' # JASON need two part key here
+  belongs_to   :inventory,                       class_name: 'Omni::Inventory',               foreign_key: 'inventory_id'
   belongs_to   :forecast_profile,                class_name: 'Omni::ForecastProfile',         foreign_key: 'forecast_profile_id'
   belongs_to   :projection_location,             class_name: 'Omni::ProjectionLocation',      foreign_key: 'projection_location_id'
   # ASSOCIATIONS (End)
@@ -245,7 +245,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
     # Snapshot of current inventory
     i = self.inventory
-    self.forecast_profile_id = self.projection.forecast_profile_id
+    self.forecast_profile_id = self.projection.forecast_profile_id unless self.forecast_profile_id
 
     self.on_order = i.supplier_on_order_units
     self.on_hand = i.on_hand_units
@@ -263,7 +263,7 @@ class Omni::ProjectionDetail < ActiveRecord::Base
 
     # calculate forecasted units using formula from forecast_profile;
     profile = self.forecast_profile
-    forecasted_units = ( profile.sales_py1_weight * py1 ) + ( profile.sales_py2_weight * py2 ) + ( profile.sales_py3_weight * py3 )
+    forecasted_units = ( profile.sales_py1_weight * py1 ) + ( profile.sales_py2_weight * py2 ) + ( profile.sales_py3_weight * py3  )
     # forecasted_units = forecast_units
 
     # calculate forecasted units

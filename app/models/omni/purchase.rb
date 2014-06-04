@@ -212,6 +212,18 @@ class Omni::Purchase < ActiveRecord::Base
 
 
   # STATE HELPERS (Start) =====================================================================
+  def allocate_q
+    message     = {
+      row_id: self.id,
+      user_id: Omni::Util::User.id,
+      method_name: 'allocate'
+    }
+
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'purchase')
+
+  end # def allocate_q
+
   def allocate
     self.purchase_details.each {|x| x.allocate }
   end

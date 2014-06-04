@@ -163,7 +163,7 @@ Ext.define('Omni.view.purchase_details.Form', {
             queryField: 'display',
             valueField: 'allocation_profile_id',
             itemTpl: '{display}',
-            gotoTarget: 'omni-allocation_profiles-inspector'
+            gotoTarget: 'omni-allocation_profiles-Inspector'
           }
 
           // { xtype: 'textfield', name: 'is_destroyed',                   fieldLabel: this.is_destroyedLabel                , allowBlank: true }
@@ -387,7 +387,7 @@ Ext.define('Omni.view.purchase_details.Form', {
   }, // onBuildAction
 
   onAllocateAction: function(action, eOpts) {
-    this.processEventTransition('allocate', 'Purchase detail was successfully allocated.', 'An error occurred allocated this purchase detail.');
+    this.processEventTransition('allocate_q', 'allocation was submitted, this may take a while..', 'An error occurred allocating this purchase detail.');
   }, // onBuildAction
 
   onActivateAction: function(action, eOpts) {

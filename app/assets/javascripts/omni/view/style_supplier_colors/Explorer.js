@@ -17,7 +17,7 @@ Ext.define('Omni.view.style_supplier_colors.Explorer', {
       store: Ext.create('Omni.store.StyleSupplierColor'),
 
       contextMenuConfig: {
-        xtype: 'omni-app-ExplorerContextMenu'
+        xtype: 'buildit-Explorer-ContextMenu'
       },
 
       newForms: [{

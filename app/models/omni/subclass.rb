@@ -94,5 +94,22 @@
   def display_as
     self.display
   end
-end # class Omni::Subclass
 
+  def forecast_q
+    message     = {
+      row_id: self.id,
+      user_id: Omni::Util::User.id,
+      method_name: 'forecast'
+    }
+
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'subclass')
+  end # def initiate_forecast
+
+  def forecast
+    puts "forecasting a subclass"
+    self.styles.each { |st| st.skus.each { |sku| sku.forecast } }
+    Sunspot.commit_if_dirty
+  end
+
+end # class Omni::Subclass

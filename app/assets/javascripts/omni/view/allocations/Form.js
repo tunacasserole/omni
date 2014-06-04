@@ -73,7 +73,7 @@ Ext.define('Omni.view.allocations.Form', {
             queryField: 'display',
             valueField: 'sku_id',
             itemTpl: '{display}',
-            gotoTarget: 'omni-skus-inspector'
+            gotoTarget: 'omni-skus-Inspector'
           }, {
             name: 'location_id',
             fieldLabel: this.location_idLabel,
@@ -87,7 +87,7 @@ Ext.define('Omni.view.allocations.Form', {
             queryField: 'display',
             valueField: 'location_id',
             itemTpl: '{display}',
-            gotoTarget: 'omni-locations-inspector'
+            gotoTarget: 'omni-locations-Inspector'
           }, {
             name: 'allocation_profile_id',
             fieldLabel: this.allocation_profile_idLabel,
@@ -101,7 +101,7 @@ Ext.define('Omni.view.allocations.Form', {
             queryField: 'display',
             valueField: 'allocation_profile_id',
             itemTpl: '{display}',
-            gotoTarget: 'omni-allocation_profiles-inspector'
+            gotoTarget: 'omni-allocation_profiles-Inspector'
           },
           // {
           //   xtype        : 'textfield',

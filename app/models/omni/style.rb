@@ -73,16 +73,17 @@ class Omni::Style < ActiveRecord::Base
   belongs_to   :product_type,                    class_name: 'Omni::ProductType',             foreign_key: 'product_type_id'
   belongs_to   :supplier,                        class_name: 'Omni::Supplier',                foreign_key: 'supplier_id'
   belongs_to   :generic_style,                   class_name: 'Omni::Style',                   foreign_key: 'generic_style_id'
+  belongs_to   :forecast_profile,                class_name: 'Omni::ForecastProfile',         foreign_key: 'forecast_profile_id'
   belongs_to   :add_on_sku,                      class_name: 'Omni::Sku',                     foreign_key: 'add_on_sku_id'
-  belongs_to   :account,                            class_name: 'Omni::Account',                    foreign_key: 'account_id'
+  belongs_to   :account,                         class_name: 'Omni::Account',                 foreign_key: 'account_id'
   belongs_to   :size_group,                      class_name: 'Omni::SizeGroup',               foreign_key: 'size_group_id'
 #
   has_many     :style_suppliers,                 class_name: 'Omni::StyleSupplier',           foreign_key: 'style_id'
   has_many     :style_locations,                 class_name: 'Omni::StyleLocation',           foreign_key: 'style_id'
   has_many     :style_colors,                    class_name: 'Omni::StyleColor',              foreign_key: 'style_id'
-  has_many     :style_color_sizes,               class_name: 'Omni::StyleColorSize',             through: :style_colors
+  has_many     :style_color_sizes,               class_name: 'Omni::StyleColorSize',          through: :style_colors
   has_many     :skus,                            class_name: 'Omni::Sku',                     foreign_key: 'style_id'
-  has_many     :inventories,                     class_name: 'Omni::Inventory',                  through: :skus
+  has_many     :inventories,                     class_name: 'Omni::Inventory',               through: :skus
   has_many     :notes,                           class_name: 'Buildit::Note',                 foreign_key: 'notable_id',       as: :notable
   # ASSOCIATIONS (End)
 
@@ -439,6 +440,7 @@ class Omni::Style < ActiveRecord::Base
 
     # text     :conversion_type_fulltext,  using: :conversion_type
     text     :style_nbr_fulltext,  using: :style_nbr
+    # text(:display, as: :display_nostem)
     text     :display_fulltext,  using: :display
     text     :subclass_display_fulltext do self.subclass.display end
   end
@@ -450,6 +452,24 @@ class Omni::Style < ActiveRecord::Base
   def display_as
     self.display
   end
+
+  def forecast_q
+    # self.department_id = department_id unless self.department_id
+    message     = {
+      row_id: self.id,
+      user_id: Omni::Util::User.id,
+      method_name: 'forecast'
+    }
+
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'style')
+  end # def initiate_forecast
+
+  def forecast
+    self.skus.each { |x| x.forecast_q }
+    Sunspot.commit_if_dirty
+  end
+
 end # class Omni::Style
 
 

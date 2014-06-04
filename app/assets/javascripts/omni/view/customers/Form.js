@@ -31,6 +31,8 @@ Ext.define('Omni.view.customers.Form', {
       is_studentLabel:                            Omni.i18n.model.Customer.is_student,
       birth_dateLabel:                            Omni.i18n.model.Customer.birth_date,
       genderLabel:                                Omni.i18n.model.Customer.gender,
+      termsLabel:                                 Omni.i18n.model.Customer.terms,
+      detailsLabel:                               Omni.i18n.model.Customer.details,
       line_1Label:                                Omni.i18n.model.Customer.line_1,
       line_2Label:                                Omni.i18n.model.Customer.line_2,
       line_3Label:                                Omni.i18n.model.Customer.line_3,
@@ -101,7 +103,9 @@ Ext.define('Omni.view.customers.Form', {
             { name: 'job_title',                      fieldLabel: this.job_titleLabel,                  allowBlank: true,   disabled: false,    xtype: 'textfield'        },
             { name: 'is_tax_exempt',                  fieldLabel: this.is_tax_exemptLabel,              allowBlank: true,   disabled: false,    xtype: 'checkbox'         },
             { name: 'tax_exempt_state',               fieldLabel: this.tax_exempt_stateLabel,           allowBlank: true,   disabled: false,    xtype: 'buildit-Lookup',      category:   'STATE_CODE' },
-            { name: 'tax_exempt_certificate',         fieldLabel: this.tax_exempt_certificateLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        }
+            { name: 'tax_exempt_certificate',         fieldLabel: this.tax_exempt_certificateLabel,     allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'terms',                          fieldLabel: this.termsLabel,                      allowBlank: false,  disabled: false,    xtype: 'textfield'        },
+            { name: 'details',                        fieldLabel: this.detailsLabel,                    allowBlank: false,  disabled: false,    xtype: 'textfield'        },
           ]
         },
         {

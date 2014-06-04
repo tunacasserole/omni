@@ -53,6 +53,9 @@ class Omni::Data::Fix::Hierarchy
     data = ActiveRecord::Base.connection.execute("select count(*) from skus where style_id not in (select style_id from styles)")
     puts "skus with missing or invalid styles count is #{data.first[0]}" if data.first[0] > 0
 
+    data = ActiveRecord::Base.connection.execute("delete from style_colors where color_id not in (select color_id from colors)")
+    puts "styles with missing or invalid style_colors count is #{data.first[0]}" if data.first[0] > 0
+
     data = ActiveRecord::Base.connection.execute("select count(*) from subclasses where classification_id is null or classification_id not in (select classification_id from classifications)")
     puts "subclasses with missing or invalid class count is #{data.first[0]}" if data.first[0] > 0
 

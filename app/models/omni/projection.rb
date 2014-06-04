@@ -124,10 +124,7 @@
   # STATES (End)
 
   # STATE HANDLERS (Start) ====================================================================
-  # p = Omni::Projection.first
-  # p.initiate_forecast
   def forecast_q
-    # puts "forecast_q"
     message     = {
       projection_id: self.id,
       user_id: Omni::Util::User.id,
@@ -140,23 +137,28 @@
   end # def initiate_forecast
 
   def forecast
-    puts "forecasting projection.  details count is #{self.projection_details.count}"
-    # Omni::Sku.where(department_id: self.department_id).each { |x| x.forecast_q }
-    sql = "select i.inventory_id, i.sku_id, i.location_id from inventories i, skus s where i.sku_id = s.sku_id and s.department_id = '#{self.department_id}' and i.inventory_id not in ( select inventory_id from projection_details where projection_id = '#{self.projection_id}' )"
-    data = ActiveRecord::Base.connection.execute sql
-    puts "projection_details to create: #{data.count}"
-    bar1 = ProgressBar.new(data.count)
-    data.each_with_index do |x,i|
-      bar1.increment!
-      Omni::ProjectionDetail.create(projection_id: self.projection_id, inventory_id: x[0], sku_id: x[1], location_id: x[2], forecast_profile_id: self.forecast_profile_id)
-      # ActiveRecord::Base.connection.execute("insert into projection_details (projection_detail_id, projection_id, inventory_id, sku_id, location_id, forecast_profile_id, state) values ( '#{Buildit::Util::Guid.generate}', '#{self.projection_id}', '#{x[0]}', '#{x[1]}', '#{x[2]}', '#{self.forecast_profile_id}', 'draft' )")
-    end
-    puts "done creating projection_details"
+    self.department.classifications.each { |c| c.subclasses.each { |s| s.forecast_q } }
     Sunspot.commit_if_dirty
-
-    bar2 = ProgressBar.new(self.projection_details.count)
-    self.projection_details.each { |x| bar2.increment!; x.forecast_q }
   end
+
+  # def forecast_old
+  #   puts "forecasting projection.  details count is #{self.projection_details.count}"
+  #   # Omni::Sku.where(department_id: self.department_id).each { |x| x.forecast_q }
+  #   sql = "select i.inventory_id, i.sku_id, i.location_id from inventories i, skus s where i.sku_id = s.sku_id and s.department_id = '#{self.department_id}' and i.inventory_id not in ( select inventory_id from projection_details where projection_id = '#{self.projection_id}' )"
+  #   data = ActiveRecord::Base.connection.execute sql
+  #   puts "projection_details to create: #{data.count}"
+  #   bar1 = ProgressBar.new(data.count)
+  #   data.each_with_index do |x,i|
+  #     bar1.increment!
+  #     Omni::ProjectionDetail.create(projection_id: self.projection_id, inventory_id: x[0], sku_id: x[1], location_id: x[2], forecast_profile_id: self.forecast_profile_id)
+  #     # ActiveRecord::Base.connection.execute("insert into projection_details (projection_detail_id, projection_id, inventory_id, sku_id, location_id, forecast_profile_id, state) values ( '#{Buildit::Util::Guid.generate}', '#{self.projection_id}', '#{x[0]}', '#{x[1]}', '#{x[2]}', '#{self.forecast_profile_id}', 'draft' )")
+  #   end
+  #   puts "done creating projection_details"
+  #   Sunspot.commit_if_dirty
+
+  #   bar2 = ProgressBar.new(self.projection_details.count)
+  #   self.projection_details.each { |x| bar2.increment!; x.forecast_q }
+  # end
   # def notify
 
   #   # push a message to the users channel

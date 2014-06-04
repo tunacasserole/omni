@@ -27,7 +27,8 @@ en:
         contractor_nbr:                  Contractor Nbr
         is_student:                      Student
         birth_date:                      Birth Date
-        gender:                          Gender
+        terms:                           Terms
+        details:                         Details
         line_1:                          Line 1
         line_2:                          Line 2
         line_3:                          Line 3

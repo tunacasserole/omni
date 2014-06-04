@@ -753,7 +753,7 @@ Ext.define('Omni.view.purchases.Form', {
   }, // onBuildAction
 
   onAllocateAction: function(action, eOpts) {
-    this.processEventTransition('allocate', 'Purchase Order was successfully allocated.', 'An error occurred allocated this purchase order.');
+    this.processEventTransition('allocate_q', 'Purchase is being allocated, this may take a while.', 'An error occurred allocating this purchase order.');
   }, // onBuildAction
 
   onActivateAction: function(action, eOpts) {

@@ -87,6 +87,7 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'forecast_profile_id',
           fieldLabel: this.forecast_profile_idLabel,
           allowBlank: true,
+          gotoTarget: 'omni-forecast_profiles-Inspector'
         }, {
           xtype: 'buildit-Locator',
           store: Ext.create('Omni.store.Sku', {
@@ -125,6 +126,7 @@ Ext.define('Omni.view.projection_details.Form', {
           name: 'state',
           fieldLabel: this.stateLabel,
           allowBlank: true,
+          disabled: true
         }]
       }, {
         xtype: 'fieldset',

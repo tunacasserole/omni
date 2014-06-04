@@ -219,10 +219,10 @@ class Omni::Sku < ActiveRecord::Base
 
 
   # INDEXING (Start) ====================================================================
-  def department
+  # def department
 
 
-  end
+  # end
 
   searchable do
     string   :sku_id
@@ -274,17 +274,27 @@ class Omni::Sku < ActiveRecord::Base
   def forecast
     # Delete current projection details where inventory is gone
     # Omni::ProjectionDetail.where(sku_id: self.sku_id).each { |x| x.destroy }
+
     # find or create projection details, update from latestinventory
     self.inventories.each do |i|
-      pd = Omni::ProjectionDetail.where(inventory_id: i.inventory_id).first || Omni::ProjectionDetail.create(projection_id: projection_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+      pd = Omni::ProjectionDetail.where(inventory_id: i.inventory_id).first
+      if pd
+        pd.update_attribute(:forecast_profile_id, style.forecast_profile_id)
+      else
+        pd = Omni::ProjectionDetail.create(projection_id: projection.projection_id, forecast_profile_id: profile.forecast_profile_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+      end
       pd.forecast_q
     end
 
     Sunspot.commit_if_dirty
   end
 
-  def projection_id
-    Omni::Projection.find_by_department_id(self.department_id).projection_id
+  def projection
+    Omni::Projection.find_by_department_id(self.department_id)
+  end
+
+  def profile
+    style.forecast_profile || projection.forecast_profile
   end
 
 

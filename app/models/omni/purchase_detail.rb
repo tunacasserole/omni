@@ -143,6 +143,19 @@
   # STATES (End)
 
   # STATE HELPERS (Start) =====================================================================
+  def allocate_q
+    message     = {
+      row_id: self.id,
+      user_id: Omni::Util::User.id,
+      method_name: 'allocate'
+    }
+
+    # publish the above message to the omni.events exchange
+    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'purchase_detail')
+
+  end # def allocate_q
+
+
   def compute_open_units
     selling_units_approved - selling_units_received - selling_units_cancelled
   end
@@ -183,10 +196,10 @@
 
     units_to_allocate = self.units_ordered * self.order_pack_size
     allocations_to_create = Omni::Allocation.calculate(self.allocation_profile_id, self.sku_id, units_to_allocate, locked_units, locked_locations, nil)
-    allocations_to_create.each { |x| pa = Omni::PurchaseAllocation.create(purchase_detail_id: self.purchase_detail_id, location_id: x[:location_id], units_allocated: x[:units_allocated], units_needed: x[:units_needed] ) } # unless k = self.purchase.location_id }
-    # ; puts "errors is #{pa.errors.full_messages.to_sentence}"
-    # puts "allocations_to_create is #{allocations_to_create.count}"
-    # puts "created allocations #{self.purchase_allocations.count}"
+    allocations_to_create.each { |x| pa = Omni::PurchaseAllocation.create(purchase_detail_id: self.purchase_detail_id, location_id: x[:location_id], units_allocated: x[:units_allocated], units_needed: x[:units_needed] ); puts "errors is #{pa.errors.full_messages.to_sentence}" } # unless k = self.purchase.location_id }
+
+    puts "allocations_to_create is #{allocations_to_create.count}"
+    puts "created allocations #{self.purchase_allocations.count}"
   end
 
   def do_receive

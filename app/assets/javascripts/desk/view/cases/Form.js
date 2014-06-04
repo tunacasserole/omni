@@ -348,7 +348,7 @@ Ext.define('Desk.view.cases.Form', {
 
   prepareActivateAction: function(action, eOpts) {
     var currentState = this.record.get('state');
-    currentState === 'draft' || currentState === 'backlog' || currentState === 'approved_to_activate' ? action.show() : action.hide();
+    currentState === 'draft' || currentState === 'backlog' || currentState === 'approved_to_activate' || currentState === 'closed' ? action.show() : action.hide();
   },
 
   prepareReviewAction: function(action, eOpts) {

@@ -47,17 +47,8 @@ Ext.define('Omni.view.purchase_allocations.Form', {
             { xtype             : 'textfield',
               name              : 'purchase_allocation_nbr',
               fieldLabel        : this.purchase_allocation_nbrLabel,
-              allowBlank        : true
-            },
-            { xtype             : 'buildit-Locator',
-              name              : 'location_id',
-              fieldLabel        : this.location_idLabel,
               allowBlank        : true,
-              store             : Ext.create('Omni.store.Location',{pageSize: 50}),
-              displayField      : 'display',
-              queryField        : 'display',
-              valueField        : 'location_id',
-              itemTpl           : '{display}'
+              disabled          : true
             },
             { xtype             : 'textfield',
               name              : 'state',
@@ -65,17 +56,27 @@ Ext.define('Omni.view.purchase_allocations.Form', {
               allowBlank        : true,
               disabled          : true
             },
+            { xtype             : 'buildit-Locator',
+              name              : 'location_id',
+              fieldLabel        : this.location_idLabel,
+              allowBlank        : false,
+              store             : Ext.create('Omni.store.Location',{pageSize: 50}),
+              displayField      : 'display',
+              queryField        : 'display',
+              valueField        : 'location_id',
+              itemTpl           : '{display}'
+            },
             { xtype             : 'textfield',
               name              : 'units_needed',
               fieldLabel        : this.units_neededLabel,
-              disabled          : true,
+              disabled          : false,
               allowBlank        : true
             },
             { xtype             : 'numberfield',
               name              : 'units_allocated',
               fieldLabel        : this.units_allocatedLabel,
               minValue          : 0,
-              allowBlank        : false
+              allowBlank        : true
             },
             { xtype             : 'textfield',
               name              : 'units_shipped',

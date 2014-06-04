@@ -77,6 +77,7 @@ Ext.define('Omni.view.styles.Form', {
             storage_codeLabel: Omni.i18n.model.Style.storage_code,
             design_codeLabel: Omni.i18n.model.Style.design_code,
             initial_retail_priceLabel: Omni.i18n.model.Style.initial_retail_price,
+            forecast_profile_idLabel: Omni.i18n.model.Style.forecast_profile_id,
             suggested_retail_priceLabel: Omni.i18n.model.Style.suggested_retail_price,
             planning_retail_priceLabel: Omni.i18n.model.Style.planning_retail_price,
             smoothing_factorLabel: Omni.i18n.model.Style.smoothing_factor,
@@ -365,6 +366,18 @@ Ext.define('Omni.view.styles.Form', {
                     },
                     layout: 'anchor',
                     items: [{
+                        name: 'forecast_profile_id',
+                        fieldLabel: this.forecast_profile_idLabel,
+                        xtype: 'buildit-Locator',
+                        store: Ext.create('Omni.store.ForecastProfile', {
+                            pageSize: 25
+                        }),
+                        displayField: 'display',
+                        queryField: 'display',
+                        valueField: 'forecast_profile_id',
+                        itemTpl: '{display}',
+                        gotoTarget: 'omni-forecast_profiles-Inspector'
+                    }, {
                         name: 'smoothing_factor',
                         fieldLabel: this.smoothing_factorLabel,
                         allowBlank: true,
@@ -709,7 +722,16 @@ Ext.define('Omni.view.styles.Form', {
                 }
             }, {
                 xtype: 'button',
-                iconCls: 'fa fa-caret-square-o-left',
+                iconCls: 'fa fa-cogs',
+                tooltip: 'Forecast',
+                listeners: {
+                    beforerender: this.prepareForecastAction,
+                    click: this.onForecastAction,
+                    scope: me
+                }
+            }, {
+                xtype: 'button',
+                iconCls: 'fa fa-times-circle-o',
                 scope: me,
                 tooltip: 'Deactivate',
                 listeners: {
@@ -779,6 +801,14 @@ Ext.define('Omni.view.styles.Form', {
     onDeactivateAction: function(action, eOpts) {
         this.processEventTransition('deactivate', 'Style was successfully deactivated.', 'An error occurred deactivating this Style');
     }, // onActivateAction
+
+    onForecastAction: function(action, eOpts) {
+        this.processEventTransition('forecast_q', 'Style is being forecasted, this may take a while.', 'An error occurred forecasting this Style.');
+    }, // onBuildAction
+
+    prepareForecastAction: function(action, eOpts) {
+        this.record.phantom != true ? action.show() : action.hide();
+    },
 
 
     // onDuplicateAction : function(action, eOpts){

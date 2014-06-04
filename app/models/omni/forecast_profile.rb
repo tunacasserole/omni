@@ -19,9 +19,9 @@ class Omni::ForecastProfile < ActiveRecord::Base
 
   # DEFAULTS (Start) ====================================================================
   default      :forecast_profile_id,              override: false,        with: :guid
-  # default      :sales_py1_weight,                 :override  =>  true,         to: 0
-  # default      :sales_py2_weight,                 :override  =>  true,         to: 0
-  # default      :sales_py3_weight,                 :override  =>  true,         to: 0
+  default      :sales_py1_weight,                 :override  =>  true,         to: 0
+  default      :sales_py2_weight,                 :override  =>  true,         to: 0
+  default      :sales_py3_weight,                 :override  =>  true,         to: 0
   default      :is_destroyed,                     override: false,        to: false
   # DEFAULTS (End)
 

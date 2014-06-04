@@ -66,13 +66,13 @@ Ext.define('Desk.view.app.Hub', {
               tiles: [{
                   xtype: 'buildit-SearchTile',
                   colspan: 2
-                },
-                //{ colspan: 2, rowspan: 1, title: 'Add', cls: 'add', listeners: { clicked: me.launchAddWindow, scope: me  }},
-                {
-                  colspan: 2,
-                  rowspan: 1,
-                  xtype: 'buildit-following_entries-Tile'
                 }
+                //{ colspan: 2, rowspan: 1, title: 'Add', cls: 'add', listeners: { clicked: me.launchAddWindow, scope: me  }},
+                // {
+                //   colspan: 2,
+                //   rowspan: 1,
+                //   xtype: 'buildit-following_entries-Tile'
+                // }
               ]
             }
 

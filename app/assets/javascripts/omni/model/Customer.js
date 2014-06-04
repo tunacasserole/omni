@@ -38,6 +38,8 @@ Ext.define('Omni.model.Customer', {
     { name: 'is_student',                           type: 'boolean',    defaultValue: false                     },
     { name: 'birth_date',                           type: 'date'        },
     { name: 'gender',                               type: 'string'      },
+    { name: 'terms',                                type: 'string'      },
+    { name: 'details',                              type: 'string'      },
     { name: 'line_1',                               type: 'string'      },
     { name: 'line_2',                               type: 'string'      },
     { name: 'line_3',                               type: 'string'      },

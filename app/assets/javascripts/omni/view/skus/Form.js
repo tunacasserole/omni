@@ -83,11 +83,12 @@ Ext.define('Omni.view.skus.Form', {
           defaults: {anchor: '70%'},
           layout: 'anchor',
           items:[
-            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'sku_nbr',                        fieldLabel: this.sku_nbrLabel,                    allowBlank: true,   disabled: false,    xtype: 'textfield'        },
+            { name: 'sku_nbr',                        fieldLabel: this.sku_nbrLabel,                    allowBlank: true,   disabled: true,    xtype: 'textfield'        },
+            { name: 'state',                          fieldLabel: this.stateLabel,                      allowBlank: true,   disabled: true,    xtype: 'textfield'        },
             { name: 'display',                        fieldLabel: this.displayLabel,                    allowBlank: false,  disabled: false,    xtype: 'textfield'        },
             { name: 'description',                    fieldLabel: this.descriptionLabel,                allowBlank: true,   disabled: false,    xtype: 'textfield'        },
-            { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: false,  disabled: this.record.phantom != true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}', gotoTarget: 'omni-styles-Inspector' },
+            // { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: false,  disabled: this.record.phantom != true,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}', gotoTarget: 'omni-styles-Inspector' },
+            { name: 'style_id',                       fieldLabel: this.style_idLabel,                   allowBlank: false,  disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Style',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'style_id', itemTpl:'{display}', gotoTarget: 'omni-styles-Inspector' },
             { name: 'color_id',                       fieldLabel: this.color_idLabel,                   allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Color',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'color_id', itemTpl:'{display}', gotoTarget: 'omni-colors-Inspector' },
             { name: 'size_id',                        fieldLabel: this.size_idLabel,                    allowBlank: true,   disabled: false,    xtype: 'buildit-Locator',     store:      Ext.create('Omni.store.Size',{pageSize: 10}), displayField: 'display', queryField: 'display', valueField: 'size_id', itemTpl:'{display}', gotoTarget: 'omni-sizes-Inspector' }
             ]
@@ -236,18 +237,9 @@ Ext.define('Omni.view.skus.Form', {
         this.processEventTransition('forecast_q', 'Sku is being forecasted, this may take a while.', 'An error occurred forecasting this sku.');
     }, // onBuildAction
 
-    // onCloseAction: function(action, eOpts) {
-    //     this.processEventTransition('close', 'Account was successfully closed.', 'An error occurred closing this sku.');
-    // }, // onBuildAction
-
     prepareForecastAction: function(action, eOpts) {
         this.record.phantom != true ? action.show() : action.hide();
     },
-
-    // prepareCloseAction: function(action, eOpts) {
-    //     var currentState = this.record.get('state');
-    //     currentState === 'active' ? action.show() : action.hide();
-    // },
 
     processEventTransition: function(eventName, successMsg, failureMsg) {
         var me = this;

@@ -28,6 +28,7 @@ class CreateOmniCustomers < ActiveRecord::Migration
       t.column   :birth_date,                      :datetime,          null: true
       t.column   :gender,                          :string,            null: true,    limit: 200
       t.column   :terms,                           :string,            null: true,    limit: 4000
+      t.column   :details,                         :string,            null: true,    limit: 4000
       t.column   :line_1,                          :string,            null: true,    limit: 200
       t.column   :line_2,                          :string,            null: true,    limit: 200
       t.column   :line_3,                          :string,            null: true,    limit: 200

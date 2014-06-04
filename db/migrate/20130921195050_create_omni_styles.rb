@@ -20,6 +20,7 @@ class CreateOmniStyles < ActiveRecord::Migration
         t.column   :buyer_user_id,                   :string,            null: true,    limit: 32
         t.column   :brand,                           :string,            null: true,    limit: 200
         t.column   :product_type_id,                 :string,            null: true,    limit: 32
+        t.column   :forecast_profile_id,             :string,            null: true,    limit: 32
         t.column   :fabric_content,                  :string,            null: true,    limit: 200
         t.column   :storage_code,                    :string,            null: true,    limit: 200
         t.column   :design_code,                     :string,            null: true,    limit: 200

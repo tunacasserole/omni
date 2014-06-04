@@ -29,6 +29,7 @@ Ext.define('Omni.model.Style', {
     { name: 'buyer_user_id', type: 'string' },
     { name: 'brand', type: 'string' },
     { name: 'product_type_display', type: 'string' },
+    { name: 'forecast_profile_id', type: 'string' },
     { name: 'product_type_id', type: 'string' },
     { name: 'fabric_content', type: 'string' },
     { name: 'storage_code', type: 'string' },

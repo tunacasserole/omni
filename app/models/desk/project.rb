@@ -43,8 +43,13 @@ class Desk::Project < ActiveRecord::Base
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
     compute :backlog_count,               to: lambda {|m| m.cases.where(state: 'backlog').count }
-    compute :open_count,                 to: lambda {|m| m.cases.where(state: ['draft','active','needs_approval','active','ready_to_close','approved_to_activate']).count }
-    compute :closed_count,               to: lambda {|m| m.cases.where(state: 'closed').count }
+    compute :draft_count,                 to: lambda {|m| m.cases.where(state: 'draft').count }
+    compute :needs_approval_count,        to: lambda {|m| m.cases.where(state: 'needs_approval').count }
+    compute :approved_to_activate_count,  to: lambda {|m| m.cases.where(state: 'approved_to_activate').count }
+    compute :active_count,                to: lambda {|m| m.cases.where(state: 'active').count }
+    compute :ready_to_close_count,        to: lambda {|m| m.cases.where(state: 'ready_to_close').count }
+    compute :closed_count,                to: lambda {|m| m.cases.where(state: 'closed').count }
+    # compute :open_count,                 to: lambda {|m| m.cases.where(state: ['draft','active','needs_approval','active','ready_to_close','approved_to_activate']).count }
     # compute :weekly_open_count,           with: :compute_weekly_open_count
     # compute :backlog_time,                with: :compute_backlog_time
     # compute :response_time,               with: :compute_response_time

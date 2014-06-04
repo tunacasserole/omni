@@ -27,6 +27,7 @@ en:
         design_code:                     Design Code
         fabric_content:                  Fabric Contents
         initial_retail_price:            Initial Retail Price
+        forecast_profile_id:             Forecast Profile
         suggested_retail_price:          Suggested Retail Price
         planning_retail_price:           Planning Retail Price
         smoothing_factor:                Smoothing Factor

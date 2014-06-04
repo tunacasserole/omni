@@ -70,14 +70,14 @@ Ext.define('Omni.view.app.Hub', {
               xtype: 'omni-inventories-Explorer'
             }
           }, {
-            //   title: 'Projections',
-            //   colspan: 2,
-            //   rowspan: 1,
-            //   cls: 'supply',
-            //   target: {
-            //     xtype: 'omni-projections-Explorer'
-            //   }
-            // }, {
+            title: 'Projections',
+            colspan: 2,
+            rowspan: 1,
+            cls: 'supply',
+            target: {
+              xtype: 'omni-projections-Explorer'
+            }
+          }, {
             //   title: 'Projection Details',
             //   colspan: 2,
             //   rowspan: 1,
