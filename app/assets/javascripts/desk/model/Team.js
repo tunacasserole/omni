@@ -17,6 +17,27 @@ Ext.define('Desk.model.Team', {
         name: 'user_display',
         type: 'string'
     }, {
+        name: 'backlog_count',
+        type: 'integer'
+    }, {
+        name: 'draft_count',
+        type: 'integer'
+    }, {
+        name: 'needs_approval_count',
+        type: 'integer'
+    }, {
+        name: 'approved_to_activate_count',
+        type: 'integer'
+    }, {
+        name: 'active_count',
+        type: 'integer'
+    }, {
+        name: 'ready_to_close_count',
+        type: 'integer'
+    }, {
+        name: 'closed_count',
+        type: 'integer'
+    }, {
         name: 'display_as',
         type: 'string'
     }],
