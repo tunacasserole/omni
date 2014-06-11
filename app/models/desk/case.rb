@@ -5,6 +5,7 @@ class Desk::Case < ActiveRecord::Base
   self.primary_key                = :case_id
   # METADATA (End)
 
+
   # BEHAVIOR (Start) ====================================================================
   supports_audit
   supports_fulltext
@@ -236,6 +237,7 @@ class Desk::Case < ActiveRecord::Base
     approver = Buildit::User.current if Buildit::User.current
     approval_comment = "approval given by #{approver.full_name}"
     approvals.create(approver_id: approver.user_id, display: approval_comment)
+    update_attribute(:is_approved, true) if state == 'needs_approval' || state == 'approved_to_activate'
   end
 
   def display_as

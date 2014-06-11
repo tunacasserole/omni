@@ -1,5 +1,6 @@
 Ext.define('Desk.view.projects.Explorer', {
 
+
   extend: 'Buildit.ux.explorer.Panel',
   alias: 'widget.desk-projects-Explorer',
   allowFind: true,

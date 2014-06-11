@@ -1,9 +1,9 @@
 Ext.define('Desk.view.cases.Explorer', {
 
+
   extend: 'Buildit.ux.explorer.Panel',
   alias: 'widget.desk-cases-Explorer',
   allowFind: true,
-  allowDelete: false,
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig: {
@@ -79,6 +79,7 @@ Ext.define('Desk.view.cases.Explorer', {
   stateLabel: Desk.i18n.model.Case.state,
   displayLabel: Desk.i18n.model.Case.display,
   descriptionLabel: Desk.i18n.model.Case.description,
+  is_approvedLabel: Desk.i18n.model.Case.is_approved,
   audit_created_byLabel: Desk.i18n.model.Case.audit_created_by,
   audit_updated_byLabel: Desk.i18n.model.Case.audit_updated_by,
   audit_created_atLabel: Desk.i18n.model.Case.audit_created_at,
@@ -143,11 +144,14 @@ Ext.define('Desk.view.cases.Explorer', {
           dataIndex: 'requestor_display',
           flex: 2
         }, {
+          header: me.is_approvedLabel,
+          dataIndex: 'is_approved',
+          flex: 1
+        }, {
           header: me.project_idLabel,
           dataIndex: 'project_display',
           flex: 1
         }
-        // }, {
         //   header: me.case_sizeLabel,
         //   dataIndex: 'case_size',
         //   flex: 1

@@ -2,7 +2,6 @@ Ext.define('Desk.view.projects.Inspector', {
   extend: 'Buildit.ux.inspector.Panel',
   alias: 'widget.desk-projects-Inspector',
 
-
   initComponent: function() {
     var me = this;
 

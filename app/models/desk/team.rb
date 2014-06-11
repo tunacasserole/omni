@@ -5,6 +5,7 @@ class Desk::Team < ActiveRecord::Base
   self.primary_key                = :team_id
   # METADATA (End)
 
+
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
   # BEHAVIOR (End)

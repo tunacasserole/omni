@@ -5,6 +5,7 @@ class Desk::Project < ActiveRecord::Base
   self.primary_key                = :project_id
   # METADATA (End)
 
+
   # BEHAVIOR (Start) ====================================================================
   supports_fulltext
   supports_audit

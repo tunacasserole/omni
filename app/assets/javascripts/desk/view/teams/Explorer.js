@@ -5,6 +5,7 @@ Ext.define('Desk.view.teams.Explorer', {
   allowFind: false,
   allowInspect: false,
 
+
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig: {
     xtype: 'omni-app-ExplorerContextMenu'

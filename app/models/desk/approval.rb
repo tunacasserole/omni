@@ -18,7 +18,7 @@ class Desk::Approval < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default :approval_id,                         with: :guid
   default :approver_id,                         to: lambda{|m| Buildit::User.current.user_id if Buildit::User.current}
-  default :approval_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"TASK_NBR"
+  default :approval_nbr,                        :override  =>  false,        :with  => :sequence,         :named=>"APPROVAL_NBR"
   default :approval_date,                       :override  =>  false,        :with  => :today
   # DEFAULTS (End)
 

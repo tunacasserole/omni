@@ -4,7 +4,6 @@ Ext.define('Desk.view.cases.Form', {
   alias: 'widget.desk-cases-Form',
   allowBookmarking: true,
 
-
   // LABELS (Start) =======================================================================
   case_idLabel: Desk.i18n.model.Case.case_id,
   owner_idLabel: Desk.i18n.model.Case.owner_id,
@@ -182,6 +181,12 @@ Ext.define('Desk.view.cases.Form', {
             fieldLabel: this.reviewer_idLabel,
             allowBlank: true,
             emptyText: 'auto-populated'
+          }, {
+            name: 'is_approved',
+            fieldLabel: this.is_approvedLabel,
+            allowBlank: true,
+            disabled: true,
+            xtype: 'checkbox'
           }, {
             xtype: 'textfield',
             name: 'audit_created_by_name',

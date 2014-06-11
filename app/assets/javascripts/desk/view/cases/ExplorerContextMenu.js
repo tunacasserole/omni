@@ -2,7 +2,6 @@ Ext.define('Desk.view.app.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
   alias: 'widget.omni-app-ExplorerContextMenu',
 
-
   initComponent: function() {
     var me = this;
     hideApprove = false;
