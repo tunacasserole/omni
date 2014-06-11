@@ -260,30 +260,35 @@ class Omni::Sku < ActiveRecord::Base
   end
 
   def forecast_q
-    # self.department_id = department_id unless self.department_id
-    message     = {
-      sku_id: self.id,
-      user_id: Omni::Util::User.id,
-      method_name: 'forecast'
-    }
-
-    # publish the above message to the omni.events exchange
-    Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'sku')
+    if discontinued
+      errors.add(:discontinued_date, 'cannot forecast discontinued skus')
+    else
+      message     = {
+        sku_id: self.id,
+        user_id: Omni::Util::User.id,
+        method_name: 'forecast'
+      }
+      # publish the above message to the omni.events exchange
+      Buildit::Messaging::Publisher.push('omni.events', message.to_json, :routing_key => 'sku')
+    end
   end # def initiate_forecast
 
   def forecast
+
     # Delete current projection details where inventory is gone
     # Omni::ProjectionDetail.where(sku_id: self.sku_id).each { |x| x.destroy }
 
     # find or create projection details, update from latestinventory
-    self.inventories.each do |i|
-      pd = Omni::ProjectionDetail.where(inventory_id: i.inventory_id).first
-      if pd
-        pd.update_attribute(:forecast_profile_id, style.forecast_profile_id)
-      else
-        pd = Omni::ProjectionDetail.create(projection_id: projection.projection_id, forecast_profile_id: profile.forecast_profile_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+    unless discontinued
+      self.inventories.each do |i|
+        pd = Omni::ProjectionDetail.where(inventory_id: i.inventory_id).first
+        if pd
+          pd.update_attribute(:forecast_profile_id, style.forecast_profile_id)
+        else
+          pd = Omni::ProjectionDetail.create(projection_id: projection.projection_id, forecast_profile_id: profile.forecast_profile_id, inventory_id: i.inventory_id, sku_id: i.sku_id, location_id: i.location_id)
+        end
+        pd.forecast_q
       end
-      pd.forecast_q
     end
 
     Sunspot.commit_if_dirty
@@ -295,6 +300,10 @@ class Omni::Sku < ActiveRecord::Base
 
   def profile
     style.forecast_profile || projection.forecast_profile
+  end
+
+  def discontinued
+    self.discontinued_date && Date.today > self.discontinued_date
   end
 
 

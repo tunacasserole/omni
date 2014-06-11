@@ -33,6 +33,6 @@ end
 # Concurrent web server for greater performance
 gem "puma"
 gem 'quiet_assets'
-
+gem 'progress_bar'
 # Buildit framework related gems
 gem 'buildit'

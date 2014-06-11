@@ -115,6 +115,7 @@ class Desk::Case < ActiveRecord::Base
     string   :requestor_display
     string   :reviewer_id
     string   :reviewer_display
+    boolean  :is_approved
 
     text     :case_nbr_fulltext, using: :case_nbr
     text     :case_type_fulltext, using: :case_type

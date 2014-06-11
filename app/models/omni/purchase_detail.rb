@@ -101,6 +101,7 @@
     end
 
     state :open do
+      validate :check_active_sku
     end
 
     state :partial do
@@ -311,7 +312,6 @@
   end
 
   def duplicate(new_purchase_id)
-
     Omni::PurchaseDetail.create(purchase_id: new_purchase_id, units_ordered: self.units_ordered, sku_id: self.sku_id, sku_supplier_id: self.sku_supplier_id, supplier_item_identifier: self.supplier_item_identifier, description: self.description, color_name: self.color_name, size_name: self.size_name, sku_alias: self.sku_alias, allocation_profile_id: self.allocation_profile_id,  order_pack_size: self.order_pack_size, order_pack_type: self.order_pack_type, order_cost_units: self.order_cost_units, order_multiple_type: self.order_multiple_type, order_multiple: self.order_multiple, supplier_cost: self.supplier_cost, extra_cost: self.extra_cost)
   end
 
@@ -325,6 +325,14 @@
     self.purchase_details.all.each {|x| x.destroy}
   end
 
+  def check_active_sku
+    if self.sku.discontinued
+      errors.add(:sku_id, 'cannot purchase discontinued skus')
+      return false
+    else
+      return true
+    end
+  end
 
   def display_as
     self.display
