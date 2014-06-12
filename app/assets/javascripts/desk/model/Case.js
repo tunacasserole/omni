@@ -41,6 +41,9 @@ Ext.define('Desk.model.Case', {
     name: 'description',
     type: 'string'
   }, {
+    name: 'resolution',
+    type: 'string'
+  }, {
     name: 'is_approved',
     type: 'boolean',
     useNull: true
@@ -75,16 +78,16 @@ Ext.define('Desk.model.Case', {
     name: 'project_display',
     type: 'string'
   }, {
+    name: 'project_display',
+    type: 'string'
+  }, {
+    name: 'response_time',
+    type: 'decimal'
+  }, {
+    name: 'resolve_time',
+    type: 'decimal'
+  }, {
     name: 'display_as',
-    type: 'string'
-  }, {
-    name: 'project_display',
-    type: 'string'
-  }, {
-    name: 'project_display',
-    type: 'string'
-  }, {
-    name: 'project_display',
     type: 'string'
   }],
 

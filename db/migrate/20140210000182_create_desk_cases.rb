@@ -16,6 +16,7 @@ class CreateDeskCases < ActiveRecord::Migration
       t.column   :state,                           :string,            :null  =>  true,   :limit   => 200
       t.column   :display,                         :string,            :null  =>  true,   :limit   => 200
       t.column   :description,                     :string,            :null  =>  true,   :limit   => 4000
+      t.column   :resolution,                     :string,            :null  =>  true,   :limit   => 4000
       t.column   :is_approved,                     :boolean,           :null  =>  true
     end
     add_index(:cases,            [:case_id],                              :unique => true)

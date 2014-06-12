@@ -5,7 +5,6 @@ class Desk::Case < ActiveRecord::Base
   self.primary_key                = :case_id
   # METADATA (End)
 
-
   # BEHAVIOR (Start) ====================================================================
   supports_audit
   supports_fulltext
@@ -39,28 +38,28 @@ class Desk::Case < ActiveRecord::Base
   # DEFAULTS (End)
 
   # ASSOCIATIONS (Start) ================================================================
+  has_many     :state_changes,    as: :stateable, class_name: 'Desk::StateChange', foreign_key: 'stateable_id'
+  has_many     :notes,                as: :notable, class_name: 'Buildit::Note', foreign_key: 'notable_id'
   has_many     :tasks,                as: :taskable
   has_many     :approvals,            as: :approvable
-  has_many     :notes,                as: :notable, class_name: 'Buildit::Note', foreign_key: 'notable_id'
   has_many     :teams,                as: :teamable
   belongs_to   :project,              class_name: 'Desk::Project',        foreign_key: 'project_id'
   belongs_to   :owner,                class_name: 'Buildit::User',        foreign_key: 'owner_id'
   belongs_to   :requestor,            class_name: 'Buildit::User',        foreign_key: 'requestor_id'
-  belongs_to   :reviewer,            class_name: 'Buildit::User',        foreign_key: 'reviewer_id'
+  belongs_to   :reviewer,             class_name: 'Buildit::User',        foreign_key: 'reviewer_id'
   # ASSOCIATIONS (End)
 
   # MAPPED ATTRIBUTES (Start) ===========================================================
   map :owner_display,            to: 'owner.full_name'
-  map :requestor_display,            to: 'requestor.full_name'
-  map :reviewer_display,            to: 'reviewer.full_name'
-  map :project_display,            to: 'project.display'
+  map :requestor_display,        to: 'requestor.full_name'
+  map :reviewer_display,         to: 'reviewer.full_name'
+  map :project_display,          to: 'project.display'
   # MAPPED ATTRIBUTES (End)
 
   # COMPUTED ATTRIBUTES (Start) =========================================================
   computed_attributes do
-    # compute :backlog_time,                with: :compute_backlog_time
-    # compute :response_time,               with: :compute_response_time
-    # compute :resolve_time,                with: :compute_resolve_time
+    compute :response_time,               with: :compute_response_time
+    compute :resolve_time,                with: :compute_resolve_time
   end
   # COMPUTED ATTRIBUTES (End)
 
@@ -68,7 +67,8 @@ class Desk::Case < ActiveRecord::Base
   filter :role_requestor,             :with => {requestor_id: {equal_to: Omni::Util::User.id } },  priority: 10
   filter :role_owner,                 :with => {owner_id:     {equal_to: Omni::Util::User.id } },  priority: 20
   filter :role_reviewer,              :with => {reviewer_id:  {equal_to: Omni::Util::User.id } },  priority: 30
-  # filter :role_follower,              :with => {following: {equal_to: true        }},         priority: 10
+
+  filter :is_approved,                 :with => {is_approved: {equal_to: true        }},         priority: 10
 
   filter :urgency_showstopper,        :with => {case_urgency: {equal_to: 'SHOWSTOPPER'}},   priority: 10
   filter :urgency_high,               :with => {case_urgency: {equal_to: 'HIGH'}       },   priority: 20
@@ -134,15 +134,14 @@ class Desk::Case < ActiveRecord::Base
 
   # STATES (Start) ====================================================================
   state_machine :state, :initial => :draft do
-
+    # after_transition any => any, do: :log_transition
     # CALLBACKS ------------------
     after_transition  [:needs_approval,:ready_to_close] => any, do: :do_approve
 
     # EVENTS ---------------------
     event :activate do
       transition :backlog  => :draft
-      transition :draft  => :active
-      transition :approved_to_activate  => :active
+      transition [:draft,:approved_to_activate, :closed]  => :active
     end
 
     event :backlog do
@@ -189,6 +188,38 @@ class Desk::Case < ActiveRecord::Base
     state :closed do
     end
   end
+  # STATES (End)
+
+  # EVENTFUL (Start) ====================================================================
+  eventful do
+    on :create,     :publish => lambda{|m| "PROJECT# #{m.project_number} created"},         :title => 'Technical Report Created'
+    on :update,     :publish => lambda{|m| "PROJECT# #{m.project_number} was updated"},     :title => 'Technical Report Updated'
+  end
+  # EVENTFUL (End)
+
+  # HOOKS (Start) =======================================================================
+  hook :before_update, :save_hooks, 10
+  hook :before_create, :save_hooks, 20
+  # HOOKS (End)
+
+  # HELPERS (Start) =====================================================================
+  def compute_response_time
+    (state_changes.any? ? ( state_changes.minimum('created_at') - audit_created_at ) / 86400 : 0).round(2)
+  end
+
+  def compute_resolve_time
+    (( closed? && state_changes.any? ) ? ( state_changes.maximum('created_at') - audit_created_at ) / 86400 : 0).round(2)
+  end
+
+  def save_hooks
+    set_detail
+    add_to_team
+    state_changes.create(from: state_was, to: state, event: 'state_change')
+  end
+
+  def add_to_team
+    [self.owner,self.requestor,self.reviewer].each { |u| teams.create( user_id: u.user_id ) unless u.nil? || teams.find_by_user_id(u.user_id) }
+  end
 
   def set_detail
     if self.case_type_changed?
@@ -207,17 +238,9 @@ class Desk::Case < ActiveRecord::Base
         end
     end
   end
-  # STATES (End)
 
-  # HOOKS (Start) =======================================================================
-  hook :before_update, :set_detail, 10
-  hook :before_create, :set_detail, 20
-  hook :before_create, :notify, 40
-  # HOOKS (End)
-
-  # HELPERS (Start) =====================================================================
-  # Sends an email notification to the requestor and owner of the case
   def notify
+    # Sends an email notification to the requestor and owner of the case
     # Determine target address
     email_addresses = [self.owner,self.requestor,self.reviewer].collect { |u| u.email_address if u }
     email_addresses.reject! { |e| e == Buildit::User.current.email_address } # do not notify user who made the changes

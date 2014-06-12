@@ -42,6 +42,20 @@ Ext.define('Desk.view.cases.Inspector', {
         },
         showBadge: true
       }, {
+        title: 'Team',
+        xtype: 'desk-teams-Explorer',
+        defaultSearch: {
+          with: {
+            teamable_type: {
+              equal_to: 'Desk::Case'
+            },
+            teamable_id: {
+              equal_to: me.record.get('case_id')
+            }
+          }
+        },
+        showBadge: true
+      }, {
         title: 'Help',
         xtype: 'desk-guides-Explorer',
         defaultSearch: {

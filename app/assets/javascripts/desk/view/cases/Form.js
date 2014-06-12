@@ -18,7 +18,10 @@ Ext.define('Desk.view.cases.Form', {
   stateLabel: Desk.i18n.model.Case.state,
   displayLabel: Desk.i18n.model.Case.display,
   descriptionLabel: Desk.i18n.model.Case.description,
+  resolutionLabel: Desk.i18n.model.Case.resolution,
   is_approvedLabel: Desk.i18n.model.Case.is_approved,
+  response_timeLabel: Desk.i18n.model.Case.response_time,
+  resolve_timeLabel: Desk.i18n.model.Case.resolve_time,
   audit_created_byLabel: Desk.i18n.model.Case.audit_created_by,
   audit_created_by_nameLabel: Desk.i18n.model.Case.audit_created_by_name,
   audit_updated_byLabel: Desk.i18n.model.Case.audit_updated_by,
@@ -112,6 +115,14 @@ Ext.define('Desk.view.cases.Form', {
             maxLength: 4000,
             minLength: 0,
             allowBlank: true,
+            rows: 15
+          }, {
+            xtype: 'textarea',
+            name: 'resolution',
+            fieldLabel: me.resolutionLabel,
+            maxLength: 4000,
+            minLength: 0,
+            allowBlank: true,
             rows: 10
           }, {
             xtype: 'buildit-Lookup',
@@ -132,7 +143,7 @@ Ext.define('Desk.view.cases.Form', {
             emptyText: 'auto-populated',
             category: 'CASE_SIZE',
             listeners: {
-              render: me.preRenderSize,
+              render: me.enabledOwner,
               scope: me
             }
           }, {
@@ -187,6 +198,24 @@ Ext.define('Desk.view.cases.Form', {
             allowBlank: true,
             disabled: true,
             xtype: 'checkbox'
+          }, {
+            name: 'response_time',
+            fieldLabel: this.response_timeLabel,
+            disabled: true,
+            xtype: 'textfield',
+            listeners: {
+              render: me.visibleOwner,
+              scope: me
+            }
+          }, {
+            name: 'resolve_time',
+            fieldLabel: this.resolve_timeLabel,
+            disabled: true,
+            xtype: 'textfield',
+            listeners: {
+              render: me.visibleOwner,
+              scope: me
+            }
           }, {
             xtype: 'textfield',
             name: 'audit_created_by_name',
@@ -310,7 +339,12 @@ Ext.define('Desk.view.cases.Form', {
 
   // HANDLERS (Start) ======================================================================
 
-  preRenderSize: function(field, eOpts) {
+  visibleOwner: function(field, eOpts) {
+    var isOwner = Buildit.context.user.user_id === this.record.get('owner_id');
+    isOwner ? field.disable() : field.hide();
+  },
+
+  enabledOwner: function(field, eOpts) {
     var isOwner = Buildit.context.user.user_id === this.record.get('owner_id');
     isOwner ? field.enable() : field.disable();
 

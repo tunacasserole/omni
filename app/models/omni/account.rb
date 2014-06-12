@@ -195,8 +195,5 @@ class Omni::Account < ActiveRecord::Base
     self.display
   end
 
-  def display_as
-    self.display
-  end
 end # class Omni::Account
 

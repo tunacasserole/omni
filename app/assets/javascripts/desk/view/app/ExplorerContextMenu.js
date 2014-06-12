@@ -1,6 +1,6 @@
 Ext.define('Desk.view.app.ExplorerContextMenu', {
   extend: 'Buildit.ux.ContextMenu',
-  alias: 'widget.omni-app-ExplorerContextMenu',
+  alias: 'widget.desk-app-ExplorerContextMenu',
 
 
   initComponent: function() {

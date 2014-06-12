@@ -1,0 +1,86 @@
+-WEEKLY LOAD-
+
+Process 1 source at a time
+
+1. true grits
+- read Sean’s export, tg_inventory - excel_to_seed
+- find or create the Omni inventory row
+- inventory map
+     sku_id (lookup in sku_aliases) =  ITEM
+     location_id (lookup in locations) =60-66
+     on_hand_units  = O/H
+     supplier_on_order_units  = O/O
+     sale_units_ytd =   SOLD
+     projected_units =   PROJ
+
+2. buckhead
+- read Bob’s export into the rms_inventory table
+- find or create the Omni inventory row
+- inventory map
+     sku_id (lookup in sku_aliases) = Item ID
+     location_id (lookup in locations) = Store ID
+     on_hand_units = ItemQOH
+     supplier_on_order_units = ItemQOO
+     sale_units_ytd = Total Sold 2014
+     sale_units_py1 = Total Sold 2013
+     sale_units_py2 = Total Sold 2012
+     sale_units_py3 = Total Sold 2011
+
+3. mark
+- read mark inventory table
+- find or create the Omni inventory row
+- inventory map
+     sku_id = stock_nbr - size
+     location_id = outlet_nbr
+     on_hand_units = qoh
+     wip_vw. (cut_wip + plant_wip + cont_wip) =   wip
+     transfer_line.qty (status = 9) =   in_transit
+     allocated = transfer_line.qty (status in 8,53)
+
+- read orders_hd, orders_li
+- find or create the daily_results row
+- daily_results map
+     sku_id = orders_li.stock_nbr - size
+     location_id = orders_hd.outlet_nbr
+     net_sale_units = orders_li.qty_ordered
+     date = orders_hd.date_putin
+
+- for each inventory row, update sales info with summarized daily_results
+- inventory map
+     sale_units_ytd = summarize from daily_results
+     sale_units_py1 = summarize from daily_results
+     sale_units_py2 = summarize from daily_results
+     sale_units_py3 = summarize from daily_results
+
+
+*Technical Notes
+
+MARK
+Activate vpn via tunnelblick
+1. Using Sequel Pro, export the following tables from the NDB db to local and to production:
+     inventory
+     orders_hd
+     orders_li
+     transfer_hd
+     transfer_li
+     mark_wip = vw_wip - truncate mark_wip data in Omni, extract as csv from NDB, import into Omni
+
+2. Add id column to inventory table w auto increment.
+3. Copy inventory and daily results from local to production
+
+RMS
+Activate vpn via mac preferences, network
+
+TG
+Place exports under import folder
+
+
+DEMOS
+
+1. Searching Accounts, Skus, Styles
+2. Inventory
+
+
+
+
+

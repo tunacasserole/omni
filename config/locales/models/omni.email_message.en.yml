@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      desk/email_message:  'EmailMessage'
+    attributes:
+      desk/email_message:
+        display_as:                        'EmailMessage'
+        email_message_id:                  'Email Message'
+        to:                                'To'
+        cc:                                'Cc'
+        subject:                           'Subject'
+        body:                              'Body'
+        state:                             'State'
+        sent_date:                         'Sent Date'

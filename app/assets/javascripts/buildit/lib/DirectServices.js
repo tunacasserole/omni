@@ -328,6 +328,25 @@ Ext.direct.Manager.addProvider({
 
 //
 // -----------------------------------------------------------------------
+// SERVICE: EmailMessage
+// -----------------------------------------------------------------------
+//
+
+Ext.direct.Manager.addProvider({
+		type        : 'remoting',
+		url         : Buildit.lib.DirectSources.BUILDIT,
+		maxRetries  : 0,
+		actions     : {
+			EmailMessage:[
+				{name: 'build', len: 1},{name: 'bulkUpdate', len: 1},{name: 'callClassMethod', len: 1},{name: 'callInstanceMethod', len: 1},{name: 'create', len: 1},{name: 'destroy', len: 1},{name: 'fireEvent', len: 1},{name: 'read', len: 1},{name: 'update', len: 1}
+			]
+		},
+		namespace   :'Desk.service'
+	}
+);
+
+//
+// -----------------------------------------------------------------------
 // SERVICE: Feature
 // -----------------------------------------------------------------------
 //

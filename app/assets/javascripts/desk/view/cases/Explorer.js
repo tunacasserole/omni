@@ -7,7 +7,7 @@ Ext.define('Desk.view.cases.Explorer', {
 
   // EXPLORER INIT (Start) ===============================================================
   contextMenuConfig: {
-    xtype: 'omni-app-ExplorerContextMenu'
+    xtype: 'desk-app-ExplorerContextMenu'
   },
 
   newForms: [{
@@ -52,6 +52,11 @@ Ext.define('Desk.view.cases.Explorer', {
       ['state_active', "Active"],
       ['state_ready_to_close', "Ready to Close"],
       ['state_closed', "Closed"],
+    ]
+  }, {
+    showAll: 'Approval',
+    items: [
+      ['is_approved', "Approved"],
     ]
   }, {
     showAll: 'Size',

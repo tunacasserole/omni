@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+# gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -27,12 +27,14 @@ end
 gem 'activerecord-session_store'
 
 group :development do
-  gem 'byebug'
+  # gem 'byebug'
 end
 
 # Concurrent web server for greater performance
 gem "puma"
 gem 'quiet_assets'
 gem 'progress_bar'
+gem 'state_machine-audit_trail'
+
 # Buildit framework related gems
 gem 'buildit'
