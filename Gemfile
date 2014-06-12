@@ -34,7 +34,6 @@ end
 gem "puma"
 gem 'quiet_assets'
 gem 'progress_bar'
-gem 'state_machine-audit_trail'
 
 # Buildit framework related gems
 gem 'buildit'
