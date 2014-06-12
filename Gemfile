@@ -24,7 +24,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'activerecord-session_store'
+# gem 'activerecord-session_store'
 
 group :development do
   # gem 'byebug'
@@ -33,7 +33,10 @@ end
 # Concurrent web server for greater performance
 gem "puma"
 gem 'quiet_assets'
+
+# Omni dependencies
 gem 'progress_bar'
+gem 'seed_dump'
 
 # Buildit framework related gems
 gem 'buildit'
