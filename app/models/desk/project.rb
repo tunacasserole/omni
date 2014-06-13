@@ -118,6 +118,21 @@ class Desk::Project < ActiveRecord::Base
   end
   # STATES (End)
 
+
+  # HOOKS (Start) =======================================================================
+  hook :before_update, :save_hooks, 10
+  hook :after_create, :save_hooks, 20
+  # HOOKS (End)
+
+  # HELPERS (Start) =====================================================================
+  def save_hooks
+    add_to_team
+  end
+
+  def add_to_team
+    [self.owner,self.reviewer].each { |u| teams.create( user_id: u.user_id ) unless teams.find_by_user_id(u.user_id) }
+  end
+
   # HELPERS (Start) =====================================================================
     def self.omni_project
       Desk::Project.find_by_project_nbr '1'
