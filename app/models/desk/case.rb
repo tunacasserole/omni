@@ -133,7 +133,7 @@ class Desk::Case < ActiveRecord::Base
     text     :requestor_display_fulltext, using: :requestor_display
     text     :reviewer_display_fulltext, using: :reviewer_display
   end
-  order_search_by :case_nbr => :asc
+  order_search_by :case_nbr => :desc
   # INDEXING (End)
 
   # STATES (Start) ====================================================================
@@ -202,8 +202,8 @@ class Desk::Case < ActiveRecord::Base
   # EVENTFUL (End)
 
   # HOOKS (Start) =======================================================================
-  hook :before_update, :save_hooks, 10
-  hook :before_create, :save_hooks, 20
+  hook :after_create, :save_hooks, 10
+  hook :before_update, :save_hooks, 20
   # HOOKS (End)
 
   # HELPERS (Start) =====================================================================
