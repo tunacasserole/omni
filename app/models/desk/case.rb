@@ -204,11 +204,11 @@ class Desk::Case < ActiveRecord::Base
 
   # HELPERS (Start) =====================================================================
   def compute_response_time
-    (state_changes.any? ? ( state_changes.minimum('created_at') - audit_created_at ) / 86400 : 0).round(2)
+    ( state_changes.any? ? ( state_changes.minimum('created_at') - audit_created_at ) / 86400 : 0 ).round(2)
   end
 
   def compute_resolve_time
-    (( closed? && state_changes.any? ) ? ( state_changes.maximum('created_at') - audit_created_at ) / 86400 : 0).round(2)
+    ( ( closed? && state_changes.any? ) ? ( state_changes.maximum('created_at') - audit_created_at ) / 86400 : 0 ).round(2)
   end
 
   def save_hooks
