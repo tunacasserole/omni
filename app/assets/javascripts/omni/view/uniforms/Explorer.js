@@ -21,7 +21,6 @@ Ext.define('Omni.view.uniforms.Explorer', {
   uniform_idLabel: Omni.i18n.model.Uniform.uniform_id,
   account_idLabel: Omni.i18n.model.Uniform.account_id,
   contract_idLabel: Omni.i18n.model.Uniform.contract_id,
-  displayLabel: Omni.i18n.model.Uniform.display,
   uniform_nbrLabel: Omni.i18n.model.Uniform.uniform_nbr,
   uniform_nameLabel: Omni.i18n.model.Uniform.uniform_name,
   descriptionLabel: Omni.i18n.model.Uniform.description,
@@ -37,7 +36,7 @@ Ext.define('Omni.view.uniforms.Explorer', {
 
   // TITLES (Start) ======================================================================
   title: 'Uniforms',
-  subtitle: 'Create and maintain Uniforms',
+  subtitle: 'Work with Uniforms',
   // TITLES (End)
 
   initComponent: function() {

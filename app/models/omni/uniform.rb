@@ -9,7 +9,7 @@ class Omni::Uniform < ActiveRecord::Base
   # BEHAVIOR (End)
 
   # VALIDATIONS (Start) =================================================================
-  validates    :display,                         presence: true, uniqueness: true
+  # validates    :display,                         presence: true, uniqueness: true
   validates    :uniform_nbr,                     presence: true, uniqueness: true
   validates    :account_id,                      presence: true
   validates    :school_year,                     presence: true
@@ -18,7 +18,6 @@ class Omni::Uniform < ActiveRecord::Base
   # DEFAULTS (Start) ====================================================================
   default      :uniform_id,                       override: false,        with: :guid
   default      :uniform_nbr,                      override: false,        with: :sequence,         named: "UNIFORM_NBR"
-  default      :display,                          override: false,        to: lambda{|m| "#{m.uniform_name} - #{m.uniform_nbr}"}
   default      :discount_percent,                 override: false,        to: 0
   default      :teacher_discount_percent,         override: false,        to: 0
   default      :administrator_discount_percent,   override: false,        to: 0
@@ -30,9 +29,9 @@ class Omni::Uniform < ActiveRecord::Base
 
   # REFERENCE (Start) ===================================================================
   reference do
-    display_attribute  :display
-    query_attribute    :display
-    item_template      '{display}'
+    display_attribute  :display_as
+    query_attribute    :display_as
+    item_template      '{display_as}'
   end
   # REFERENCE (End)
 
@@ -149,7 +148,7 @@ class Omni::Uniform < ActiveRecord::Base
   # HELPERS (End)
 
   def display_as
-    self.display
+    self.uniform_name
   end
 end # class Omni::Uniform
 

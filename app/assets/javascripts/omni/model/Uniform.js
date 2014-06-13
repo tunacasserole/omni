@@ -20,7 +20,7 @@ Ext.define('Omni.model.Uniform', {
     //   name: 'contract_display',
     //   type: 'string'
     }, {
-      name: 'display',
+      name: 'display_as',
       type: 'string'
     }, {
       name: 'uniform_nbr',

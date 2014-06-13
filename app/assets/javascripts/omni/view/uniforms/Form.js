@@ -8,7 +8,6 @@ Ext.define('Omni.view.uniforms.Form', {
   uniform_idLabel: Omni.i18n.model.Uniform.uniform_id,
   account_idLabel: Omni.i18n.model.Uniform.account_id,
   contract_idLabel: Omni.i18n.model.Uniform.contract_id,
-  displayLabel: Omni.i18n.model.Uniform.display,
   uniform_nbrLabel: Omni.i18n.model.Uniform.uniform_nbr,
   uniform_nameLabel: Omni.i18n.model.Uniform.uniform_name,
   descriptionLabel: Omni.i18n.model.Uniform.description,
@@ -53,14 +52,6 @@ Ext.define('Omni.view.uniforms.Form', {
             //   maxLength: 32,
             //   minLength: 0,
             //   allowBlank: true
-            // }, {
-            //   xtype: 'textfield',
-            //   name: 'display',
-            //   fieldLabel: me.displayLabel,
-            //   maxLength: 200,
-            //   minLength: 0,
-            //   allowBlank: false
-            // }, {
             xtype: 'textfield',
             name: 'uniform_nbr',
             fieldLabel: me.uniform_nbrLabel,
