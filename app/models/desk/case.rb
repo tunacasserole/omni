@@ -117,6 +117,10 @@ class Desk::Case < ActiveRecord::Base
     string   :reviewer_display
     boolean  :is_approved
 
+    text     :team_members do
+      teams.map { |x| x.user_id }
+    end
+
     text     :case_nbr_fulltext, using: :case_nbr
     text     :case_type_fulltext, using: :case_type
     text     :case_urgency_fulltext, using: :case_urgency

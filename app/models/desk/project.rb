@@ -66,10 +66,15 @@ class Desk::Project < ActiveRecord::Base
   searchable do
     string   :project_id
     string   :project_nbr
+    string   :owner_id
     string   :project_type
     string   :state
     string   :display
     string   :description
+
+    text     :team_members do
+      teams.map { |x| x.user_id }
+    end
 
     text     :project_nbr_fulltext, using: :project_nbr
     text     :project_type_fulltext, using: :project_type

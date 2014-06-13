@@ -81,6 +81,9 @@ Ext.define('Desk.view.cases.Form', {
             store: Ext.create('Desk.store.Project', {
               pageSize: 10
             }),
+            defaultSearch: {
+              criteria: Buildit.context.user.user_id
+            },
             displayField: 'display',
             queryField: 'display',
             valueField: 'project_id',
@@ -89,7 +92,6 @@ Ext.define('Desk.view.cases.Form', {
             fieldLabel: me.project_idLabel,
             allowBlank: true,
             gotoTarget: 'desk-projects-Inspector',
-
             emptyText: 'auto-populated'
           }, {
             xtype: 'buildit-Lookup',

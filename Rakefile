@@ -133,7 +133,6 @@ namespace :omni do
 
   desc "sync parker data from spreadsheets, staging tables, and other databases"
   task :sync, [:model] => :environment do |t, args|
-    args.with_defaults(:model => "AllModels")
     @start_time = Time.now
     "Omni::Data::Sync::#{args.model}".constantize.go
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"
@@ -141,7 +140,6 @@ namespace :omni do
 
   desc "fix data via sql and activerecord updates"
   task :fix, [:model] => :environment do |t, args|
-    args.with_defaults(:model => "AllModels")
     @start_time = Time.now
     Omni::Data::Fix::Base.go(args.model)
     puts "== finished in #{(Time.now - @start_time).round(0).to_s.cyan}s\n"

@@ -9,7 +9,6 @@ Ext.define('Desk.view.app.Hub', {
 
   initComponent: function() {
     var me = this;
-
     // this.socket   = Buildit.lib.SocketManager.get('STANDARD');
     // this.socket.on('newEvents', this.handleNewEvents, me);
 
@@ -36,7 +35,10 @@ Ext.define('Desk.view.app.Hub', {
               colspan: 2,
               rowspan: 1,
               target: {
-                xtype: 'desk-cases-Explorer'
+                xtype: 'desk-cases-Explorer',
+                defaultSearch: {
+                  criteria: Buildit.context.user.user_id
+                }
               }
             }, {
               title: 'Projects',
@@ -44,17 +46,20 @@ Ext.define('Desk.view.app.Hub', {
               colspan: 2,
               rowspan: 1,
               target: {
-                xtype: 'desk-projects-Explorer'
+                xtype: 'desk-projects-Explorer',
+                defaultSearch: {
+                  criteria: Buildit.context.user.user_id
+                }
               }
             }, {
-            //   title: 'Email Messages',
-            //   cls: 'roles',
-            //   colspan: 2,
-            //   rowspan: 1,
-            //   target: {
-            //     xtype: 'desk-email_messages-Explorer'
-            //   }
-            // }, {
+              //   title: 'Email Messages',
+              //   cls: 'roles',
+              //   colspan: 2,
+              //   rowspan: 1,
+              //   target: {
+              //     xtype: 'desk-email_messages-Explorer'
+              //   }
+              // }, {
               title: 'Help',
               cls: 'users',
               // iconCls: 'fa fa-envelope-o',
